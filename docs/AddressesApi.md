@@ -1,0 +1,328 @@
+# iiko_cloud_client.AddressesApi
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**api1_cities_post**](AddressesApi.md#api1_cities_post) | **POST** /api/1/cities | Cities.
+[**api1_regions_post**](AddressesApi.md#api1_regions_post) | **POST** /api/1/regions | Regions.
+[**api1_streets_by_city_post**](AddressesApi.md#api1_streets_by_city_post) | **POST** /api/1/streets/by_city | Streets by city.
+[**api1_streets_by_id_post**](AddressesApi.md#api1_streets_by_id_post) | **POST** /api/1/streets/by_id | Streets by id or by classifierId.
+
+
+# **api1_cities_post**
+> TransportAddressCitiesResponse api1_cities_post(authorization, timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+
+Cities.
+
+
+
+ > Restriction group: `Data: geo`.
+
+### Example
+
+
+```python
+import iiko_cloud_client
+from iiko_cloud_client.models.transport_address_cities_request import TransportAddressCitiesRequest
+from iiko_cloud_client.models.transport_address_cities_response import TransportAddressCitiesResponse
+from iiko_cloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iiko_cloud_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+async with iiko_cloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    transport_address_cities_request = iiko_cloud_client.TransportAddressCitiesRequest() # TransportAddressCitiesRequest |  (optional)
+
+    try:
+        # Cities.
+        api_response = await api_instance.api1_cities_post(authorization, timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+        print("The response of AddressesApi->api1_cities_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AddressesApi->api1_cities_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **transport_address_cities_request** | [**TransportAddressCitiesRequest**](TransportAddressCitiesRequest.md)|  | [optional] 
+
+### Return type
+
+[**TransportAddressCitiesResponse**](TransportAddressCitiesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api1_regions_post**
+> TransportAddressRegionsResponse api1_regions_post(authorization, timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+
+Regions.
+
+
+
+ > Restriction group: `Data: geo`.
+
+### Example
+
+
+```python
+import iiko_cloud_client
+from iiko_cloud_client.models.transport_address_regions_request import TransportAddressRegionsRequest
+from iiko_cloud_client.models.transport_address_regions_response import TransportAddressRegionsResponse
+from iiko_cloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iiko_cloud_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+async with iiko_cloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    transport_address_regions_request = iiko_cloud_client.TransportAddressRegionsRequest() # TransportAddressRegionsRequest |  (optional)
+
+    try:
+        # Regions.
+        api_response = await api_instance.api1_regions_post(authorization, timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+        print("The response of AddressesApi->api1_regions_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AddressesApi->api1_regions_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **transport_address_regions_request** | [**TransportAddressRegionsRequest**](TransportAddressRegionsRequest.md)|  | [optional] 
+
+### Return type
+
+[**TransportAddressRegionsResponse**](TransportAddressRegionsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api1_streets_by_city_post**
+> TransportAddressStreetsResponse api1_streets_by_city_post(authorization, timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+
+Streets by city.
+
+
+
+ > Restriction group: `Data: geo`.
+
+### Example
+
+
+```python
+import iiko_cloud_client
+from iiko_cloud_client.models.transport_address_streets_by_city_request import TransportAddressStreetsByCityRequest
+from iiko_cloud_client.models.transport_address_streets_response import TransportAddressStreetsResponse
+from iiko_cloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iiko_cloud_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+async with iiko_cloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    transport_address_streets_by_city_request = iiko_cloud_client.TransportAddressStreetsByCityRequest() # TransportAddressStreetsByCityRequest |  (optional)
+
+    try:
+        # Streets by city.
+        api_response = await api_instance.api1_streets_by_city_post(authorization, timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+        print("The response of AddressesApi->api1_streets_by_city_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AddressesApi->api1_streets_by_city_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **transport_address_streets_by_city_request** | [**TransportAddressStreetsByCityRequest**](TransportAddressStreetsByCityRequest.md)|  | [optional] 
+
+### Return type
+
+[**TransportAddressStreetsResponse**](TransportAddressStreetsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api1_streets_by_id_post**
+> TransportAddressStreetsByIdResponse api1_streets_by_id_post(authorization, timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+
+Streets by id or by classifierId.
+
+
+
+ > Restriction group: `Data: geo`.
+
+### Example
+
+
+```python
+import iiko_cloud_client
+from iiko_cloud_client.models.transport_address_streets_by_id_request import TransportAddressStreetsByIdRequest
+from iiko_cloud_client.models.transport_address_streets_by_id_response import TransportAddressStreetsByIdResponse
+from iiko_cloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iiko_cloud_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+async with iiko_cloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    transport_address_streets_by_id_request = iiko_cloud_client.TransportAddressStreetsByIdRequest() # TransportAddressStreetsByIdRequest |  (optional)
+
+    try:
+        # Streets by id or by classifierId.
+        api_response = await api_instance.api1_streets_by_id_post(authorization, timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+        print("The response of AddressesApi->api1_streets_by_id_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AddressesApi->api1_streets_by_id_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **transport_address_streets_by_id_request** | [**TransportAddressStreetsByIdRequest**](TransportAddressStreetsByIdRequest.md)|  | [optional] 
+
+### Return type
+
+[**TransportAddressStreetsByIdResponse**](TransportAddressStreetsByIdResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

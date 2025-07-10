@@ -1,0 +1,33 @@
+# TransportEmployeesOpenPersonalSessionRequest
+
+Open personal session request.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**terminal_group_id** | **str** | Delivery group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**employee_id** | **str** | Employee ID. | 
+**role_id** | **str** | Employee role ID.                Must be null if the restaurant doesn&#39;t use roles, otherwise not-null role must be specified. | [optional] 
+
+## Example
+
+```python
+from iiko_cloud_client.models.transport_employees_open_personal_session_request import TransportEmployeesOpenPersonalSessionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TransportEmployeesOpenPersonalSessionRequest from a JSON string
+transport_employees_open_personal_session_request_instance = TransportEmployeesOpenPersonalSessionRequest.from_json(json)
+# print the JSON string representation of the object
+print(TransportEmployeesOpenPersonalSessionRequest.to_json())
+
+# convert the object into a dict
+transport_employees_open_personal_session_request_dict = transport_employees_open_personal_session_request_instance.to_dict()
+# create an instance of TransportEmployeesOpenPersonalSessionRequest from a dict
+transport_employees_open_personal_session_request_from_dict = TransportEmployeesOpenPersonalSessionRequest.from_dict(transport_employees_open_personal_session_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
