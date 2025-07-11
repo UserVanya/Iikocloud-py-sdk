@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_child_modifier_info import TransportNomenclatureChildModifierInfo
+from iikocloud_client.models.transport_nomenclature_child_modifier_info import TransportNomenclatureChildModifierInfo
 
 class TestTransportNomenclatureChildModifierInfo(unittest.TestCase):
     """TransportNomenclatureChildModifierInfo unit test stubs"""

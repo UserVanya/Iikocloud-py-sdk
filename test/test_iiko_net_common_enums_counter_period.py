@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.iiko_net_common_enums_counter_period import IikoNetCommonEnumsCounterPeriod
+from iikocloud_client.models.iiko_net_common_enums_counter_period import IikoNetCommonEnumsCounterPeriod
 
 class TestIikoNetCommonEnumsCounterPeriod(unittest.TestCase):
     """IikoNetCommonEnumsCounterPeriod unit test stubs"""

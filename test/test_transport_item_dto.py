@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_item_dto import TransportItemDto
+from iikocloud_client.models.transport_item_dto import TransportItemDto
 
 class TestTransportItemDto(unittest.TestCase):
     """TransportItemDto unit test stubs"""
@@ -36,35 +36,35 @@ class TestTransportItemDto(unittest.TestCase):
         if include_optional:
             return TransportItemDto(
                 item_sizes = [
-                    iiko_cloud_client.models.transport_item_size_dto_schema.TransportItemSizeDtoSchema(
+                    iikocloud_client.models.transport_item_size_dto_schema.TransportItemSizeDtoSchema(
                         prices = [
-                            iiko_cloud_client.models.transport_price_dto_schema.TransportPriceDtoSchema(
+                            iikocloud_client.models.transport_price_dto_schema.TransportPriceDtoSchema(
                                 organization_id = '', 
                                 price = 20.5, )
                             ], 
                         item_modifier_groups = [
-                            iiko_cloud_client.models.transport_modifier_group_dto_schema.TransportModifierGroupDtoSchema(
+                            iikocloud_client.models.transport_modifier_group_dto_schema.TransportModifierGroupDtoSchema(
                                 items = [
-                                    iiko_cloud_client.models.transport_modifier_item_dto_schema.TransportModifierItemDtoSchema(
+                                    iikocloud_client.models.transport_modifier_item_dto_schema.TransportModifierItemDtoSchema(
                                         sku = '', 
                                         name = '', 
                                         description = '', 
                                         button_image = '', 
-                                        restrictions = iiko_cloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
+                                        restrictions = iikocloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
                                             min_quantity = 56, 
                                             max_quantity = 56, 
                                             free_quantity = 56, 
                                             by_default = 56, ), 
                                         allergen_groups = [
-                                            iiko_cloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
+                                            iikocloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
                                                 id = '', 
                                                 code = '', 
                                                 name = '', )
                                             ], 
-                                        nutrition_per_hundred_grams = iiko_cloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
+                                        nutrition_per_hundred_grams = iikocloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
                                         portion_weight_grams = 0, 
                                         tags = [
-                                            iiko_cloud_client.models.tag_dto_schema.TagDtoSchema(
+                                            iikocloud_client.models.tag_dto_schema.TagDtoSchema(
                                                 id = '', 
                                                 name = '', )
                                             ], 
@@ -72,7 +72,7 @@ class TestTransportItemDto(unittest.TestCase):
                                     ], 
                                 name = '', 
                                 description = '', 
-                                restrictions = iiko_cloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
+                                restrictions = iikocloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
                                     min_quantity = 56, 
                                     max_quantity = 56, 
                                     free_quantity = 56, 
@@ -88,7 +88,7 @@ class TestTransportItemDto(unittest.TestCase):
                         is_default = True, 
                         portion_weight_grams = 0, 
                         size_id = '', 
-                        nutrition_per_hundred_grams = iiko_cloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
+                        nutrition_per_hundred_grams = iikocloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
                         button_image_url = 'https://102922.selcdn.ru/ecomm/someimage.png', 
                         button_image_cropped_url = [
                             'https://102922.selcdn.ru/ecomm/someimage.png'
@@ -98,14 +98,14 @@ class TestTransportItemDto(unittest.TestCase):
                 name = 'Chicken Parmegiano',
                 description = 'Delicate taste, juicy chicken fillet, mushrooms, Cheddar cheese and Mozzarella cheese, oregano, Parmegiano sauce',
                 allergen_groups = [
-                    iiko_cloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
+                    iikocloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
                         id = '', 
                         code = '', 
                         name = '', )
                     ],
                 item_id = '',
                 modifier_schema_id = '',
-                tax_category = iiko_cloud_client.models.tax_category_dto_schema.TaxCategoryDtoSchema(
+                tax_category = iikocloud_client.models.tax_category_dto_schema.TaxCategoryDtoSchema(
                     id = '', 
                     name = '', 
                     percentage = 1.337, ),

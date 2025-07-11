@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_address import TransportDeliveriesRequestCreateOrderAddress
+from iikocloud_client.models.transport_deliveries_request_create_order_address import TransportDeliveriesRequestCreateOrderAddress
 
 class TestTransportDeliveriesRequestCreateOrderAddress(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderAddress unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
+from iikocloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
 
 class TestNetNotificationSmsSendingPossibilityResponse(unittest.TestCase):
     """NetNotificationSmsSendingPossibilityResponse unit test stubs"""

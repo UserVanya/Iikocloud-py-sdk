@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.report_api import ReportApi
+from iikocloud_client.api.report_api import ReportApi
 
 
 class TestReportApi(unittest.IsolatedAsyncioTestCase):

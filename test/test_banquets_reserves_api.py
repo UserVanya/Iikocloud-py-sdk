@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.banquets_reserves_api import BanquetsReservesApi
+from iikocloud_client.api.banquets_reserves_api import BanquetsReservesApi
 
 
 class TestBanquetsReservesApi(unittest.IsolatedAsyncioTestCase):

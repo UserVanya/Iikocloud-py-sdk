@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_warning_info import NetLoyaltyResultWarningInfo
+from iikocloud_client.models.net_loyalty_result_warning_info import NetLoyaltyResultWarningInfo
 
 class TestNetLoyaltyResultWarningInfo(unittest.TestCase):
     """NetLoyaltyResultWarningInfo unit test stubs"""

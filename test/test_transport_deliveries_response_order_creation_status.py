@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_creation_status import TransportDeliveriesResponseOrderCreationStatus
+from iikocloud_client.models.transport_deliveries_response_order_creation_status import TransportDeliveriesResponseOrderCreationStatus
 
 class TestTransportDeliveriesResponseOrderCreationStatus(unittest.TestCase):
     """TransportDeliveriesResponseOrderCreationStatus unit test stubs"""

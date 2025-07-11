@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_combo_item_information import TransportDeliveriesResponseOrderComboItemInformation
+from iikocloud_client.models.transport_deliveries_response_order_combo_item_information import TransportDeliveriesResponseOrderComboItemInformation
 
 class TestTransportDeliveriesResponseOrderComboItemInformation(unittest.TestCase):
     """TransportDeliveriesResponseOrderComboItemInformation unit test stubs"""

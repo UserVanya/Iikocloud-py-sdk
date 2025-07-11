@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_organization_settings import TransportOrganizationsOrganizationSettings
+from iikocloud_client.models.transport_organizations_organization_settings import TransportOrganizationsOrganizationSettings
 
 class TestTransportOrganizationsOrganizationSettings(unittest.TestCase):
     """TransportOrganizationsOrganizationSettings unit test stubs"""
@@ -65,7 +65,7 @@ class TestTransportOrganizationsOrganizationSettings(unittest.TestCase):
                 use_business_hours_and_mapping = True,
                 currency_iso_name = '',
                 external_data = [
-                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                         key = '', 
                         value = '', )
                     ]

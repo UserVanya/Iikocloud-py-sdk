@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_integration_web_hooks_filters_table_order_web_hook_filter import TransportIntegrationWebHooksFiltersTableOrderWebHookFilter
+from iikocloud_client.models.transport_integration_web_hooks_filters_table_order_web_hook_filter import TransportIntegrationWebHooksFiltersTableOrderWebHookFilter
 
 class TestTransportIntegrationWebHooksFiltersTableOrderWebHookFilter(unittest.TestCase):
     """TransportIntegrationWebHooksFiltersTableOrderWebHookFilter unit test stubs"""

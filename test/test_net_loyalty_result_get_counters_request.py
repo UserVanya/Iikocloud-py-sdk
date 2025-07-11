@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_get_counters_request import NetLoyaltyResultGetCountersRequest
+from iikocloud_client.models.net_loyalty_result_get_counters_request import NetLoyaltyResultGetCountersRequest
 
 class TestNetLoyaltyResultGetCountersRequest(unittest.TestCase):
     """NetLoyaltyResultGetCountersRequest unit test stubs"""

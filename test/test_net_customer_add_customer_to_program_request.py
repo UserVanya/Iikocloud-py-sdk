@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
+from iikocloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
 
 class TestNetCustomerAddCustomerToProgramRequest(unittest.TestCase):
     """NetCustomerAddCustomerToProgramRequest unit test stubs"""

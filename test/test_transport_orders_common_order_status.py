@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_orders_common_order_status import TransportOrdersCommonOrderStatus
+from iikocloud_client.models.transport_orders_common_order_status import TransportOrdersCommonOrderStatus
 
 class TestTransportOrdersCommonOrderStatus(unittest.TestCase):
     """TransportOrdersCommonOrderStatus unit test stubs"""

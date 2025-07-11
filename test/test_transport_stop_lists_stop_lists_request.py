@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_stop_lists_request import TransportStopListsStopListsRequest
+from iikocloud_client.models.transport_stop_lists_stop_lists_request import TransportStopListsStopListsRequest
 
 class TestTransportStopListsStopListsRequest(unittest.TestCase):
     """TransportStopListsStopListsRequest unit test stubs"""

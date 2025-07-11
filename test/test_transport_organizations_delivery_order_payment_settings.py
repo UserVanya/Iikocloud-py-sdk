@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_delivery_order_payment_settings import TransportOrganizationsDeliveryOrderPaymentSettings
+from iikocloud_client.models.transport_organizations_delivery_order_payment_settings import TransportOrganizationsDeliveryOrderPaymentSettings
 
 class TestTransportOrganizationsDeliveryOrderPaymentSettings(unittest.TestCase):
     """TransportOrganizationsDeliveryOrderPaymentSettings unit test stubs"""

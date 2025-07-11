@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_order_sort_property import TransportDeliveriesRequestOrderSortProperty
+from iikocloud_client.models.transport_deliveries_request_order_sort_property import TransportDeliveriesRequestOrderSortProperty
 
 class TestTransportDeliveriesRequestOrderSortProperty(unittest.TestCase):
     """TransportDeliveriesRequestOrderSortProperty unit test stubs"""

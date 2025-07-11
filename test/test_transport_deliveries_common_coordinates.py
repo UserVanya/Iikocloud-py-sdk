@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_coordinates import TransportDeliveriesCommonCoordinates
+from iikocloud_client.models.transport_deliveries_common_coordinates import TransportDeliveriesCommonCoordinates
 
 class TestTransportDeliveriesCommonCoordinates(unittest.TestCase):
     """TransportDeliveriesCommonCoordinates unit test stubs"""

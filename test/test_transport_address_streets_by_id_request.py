@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_streets_by_id_request import TransportAddressStreetsByIdRequest
+from iikocloud_client.models.transport_address_streets_by_id_request import TransportAddressStreetsByIdRequest
 
 class TestTransportAddressStreetsByIdRequest(unittest.TestCase):
     """TransportAddressStreetsByIdRequest unit test stubs"""

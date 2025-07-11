@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_customer_info_by_id_request import NetCustomerGetCustomerInfoByIdRequest
+from iikocloud_client.models.net_customer_get_customer_info_by_id_request import NetCustomerGetCustomerInfoByIdRequest
 
 class TestNetCustomerGetCustomerInfoByIdRequest(unittest.TestCase):
     """NetCustomerGetCustomerInfoByIdRequest unit test stubs"""

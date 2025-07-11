@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_remove_products_from_stop_list_request import TransportStopListsRemoveProductsFromStopListRequest
+from iikocloud_client.models.transport_stop_lists_remove_products_from_stop_list_request import TransportStopListsRemoveProductsFromStopListRequest
 
 class TestTransportStopListsRemoveProductsFromStopListRequest(unittest.TestCase):
     """TransportStopListsRemoveProductsFromStopListRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportStopListsRemoveProductsFromStopListRequest(unittest.TestCase)
                 organization_id = '',
                 terminal_group_id = '',
                 items = [
-                    iiko_cloud_client.models.stop_lists_remove_products_from_stop_list_item_schema.StopListsRemoveProductsFromStopListItemSchema(
+                    iikocloud_client.models.stop_lists_remove_products_from_stop_list_item_schema.StopListsRemoveProductsFromStopListItemSchema(
                         product_id = '', 
                         size_id = '', )
                     ]
@@ -48,7 +48,7 @@ class TestTransportStopListsRemoveProductsFromStopListRequest(unittest.TestCase)
                 organization_id = '',
                 terminal_group_id = '',
                 items = [
-                    iiko_cloud_client.models.stop_lists_remove_products_from_stop_list_item_schema.StopListsRemoveProductsFromStopListItemSchema(
+                    iikocloud_client.models.stop_lists_remove_products_from_stop_list_item_schema.StopListsRemoveProductsFromStopListItemSchema(
                         product_id = '', 
                         size_id = '', )
                     ],

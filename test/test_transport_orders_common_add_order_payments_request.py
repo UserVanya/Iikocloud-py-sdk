@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_orders_common_add_order_payments_request import TransportOrdersCommonAddOrderPaymentsRequest
+from iikocloud_client.models.transport_orders_common_add_order_payments_request import TransportOrdersCommonAddOrderPaymentsRequest
 
 class TestTransportOrdersCommonAddOrderPaymentsRequest(unittest.TestCase):
     """TransportOrdersCommonAddOrderPaymentsRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportOrdersCommonAddOrderPaymentsRequest(unittest.TestCase):
             return TransportOrdersCommonAddOrderPaymentsRequest(
                 order_id = '',
                 tips = [
-                    iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                    iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                         payment_type_kind = '', 
                         tips_type_id = '', 
                         sum = 0, 
@@ -49,7 +49,7 @@ class TestTransportOrdersCommonAddOrderPaymentsRequest(unittest.TestCase):
                     ],
                 organization_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 
@@ -64,7 +64,7 @@ class TestTransportOrdersCommonAddOrderPaymentsRequest(unittest.TestCase):
                 order_id = '',
                 organization_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 

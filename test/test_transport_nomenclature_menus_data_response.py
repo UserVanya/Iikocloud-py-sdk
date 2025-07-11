@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_menus_data_response import TransportNomenclatureMenusDataResponse
+from iikocloud_client.models.transport_nomenclature_menus_data_response import TransportNomenclatureMenusDataResponse
 
 class TestTransportNomenclatureMenusDataResponse(unittest.TestCase):
     """TransportNomenclatureMenusDataResponse unit test stubs"""
@@ -37,12 +37,12 @@ class TestTransportNomenclatureMenusDataResponse(unittest.TestCase):
             return TransportNomenclatureMenusDataResponse(
                 correlation_id = '',
                 external_menus = [
-                    iiko_cloud_client.models.nomenclature_external_menu_schema.NomenclatureExternalMenuSchema(
+                    iikocloud_client.models.nomenclature_external_menu_schema.NomenclatureExternalMenuSchema(
                         id = '', 
                         name = '', )
                     ],
                 price_categories = [
-                    iiko_cloud_client.models.nomenclature_price_category_schema.NomenclaturePriceCategorySchema(
+                    iikocloud_client.models.nomenclature_price_category_schema.NomenclaturePriceCategorySchema(
                         id = '', 
                         name = '', )
                     ]

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.modifier_restrictions_dto import ModifierRestrictionsDto
+from iikocloud_client.models.modifier_restrictions_dto import ModifierRestrictionsDto
 
 class TestModifierRestrictionsDto(unittest.TestCase):
     """ModifierRestrictionsDto unit test stubs"""

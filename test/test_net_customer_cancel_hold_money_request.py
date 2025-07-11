@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_cancel_hold_money_request import NetCustomerCancelHoldMoneyRequest
+from iikocloud_client.models.net_customer_cancel_hold_money_request import NetCustomerCancelHoldMoneyRequest
 
 class TestNetCustomerCancelHoldMoneyRequest(unittest.TestCase):
     """NetCustomerCancelHoldMoneyRequest unit test stubs"""

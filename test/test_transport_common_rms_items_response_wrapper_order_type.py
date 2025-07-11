@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_order_type import TransportCommonRmsItemsResponseWrapperOrderType
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_order_type import TransportCommonRmsItemsResponseWrapperOrderType
 
 class TestTransportCommonRmsItemsResponseWrapperOrderType(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperOrderType unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCommonRmsItemsResponseWrapperOrderType(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperOrderType(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
+                    iikocloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
                         id = '', 
                         name = '', 
                         order_service_type = null, 
@@ -50,7 +50,7 @@ class TestTransportCommonRmsItemsResponseWrapperOrderType(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperOrderType(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
+                    iikocloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
                         id = '', 
                         name = '', 
                         order_service_type = null, 

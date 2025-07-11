@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_customer_info_by_phone_request import NetCustomerGetCustomerInfoByPhoneRequest
+from iikocloud_client.models.net_customer_get_customer_info_by_phone_request import NetCustomerGetCustomerInfoByPhoneRequest
 
 class TestNetCustomerGetCustomerInfoByPhoneRequest(unittest.TestCase):
     """NetCustomerGetCustomerInfoByPhoneRequest unit test stubs"""

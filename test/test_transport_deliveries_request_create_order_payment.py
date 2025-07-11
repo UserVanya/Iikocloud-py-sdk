@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_payment import TransportDeliveriesRequestCreateOrderPayment
+from iikocloud_client.models.transport_deliveries_request_create_order_payment import TransportDeliveriesRequestCreateOrderPayment
 
 class TestTransportDeliveriesRequestCreateOrderPayment(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderPayment unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportDeliveriesRequestCreateOrderPayment(unittest.TestCase):
                 sum = 0,
                 payment_type_id = '',
                 is_processed_externally = True,
-                payment_additional_data = iiko_cloud_client.models.common_payment_additional_data_schema.CommonPaymentAdditionalDataSchema(
+                payment_additional_data = iikocloud_client.models.common_payment_additional_data_schema.CommonPaymentAdditionalDataSchema(
                     type = '', ),
                 is_fiscalized_externally = True,
                 is_prepay = True

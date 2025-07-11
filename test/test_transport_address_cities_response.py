@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_cities_response import TransportAddressCitiesResponse
+from iikocloud_client.models.transport_address_cities_response import TransportAddressCitiesResponse
 
 class TestTransportAddressCitiesResponse(unittest.TestCase):
     """TransportAddressCitiesResponse unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportAddressCitiesResponse(unittest.TestCase):
             return TransportAddressCitiesResponse(
                 correlation_id = '',
                 cities = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_city_schema.RmsItemsResponseWrapperCitySchema(
+                    iikocloud_client.models.rms_items_response_wrapper_city_schema.RmsItemsResponseWrapperCitySchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.address_city_schema.AddressCitySchema(
+                            iikocloud_client.models.address_city_schema.AddressCitySchema(
                                 id = '', 
                                 name = '', 
                                 external_revision = 56, 
@@ -54,10 +54,10 @@ class TestTransportAddressCitiesResponse(unittest.TestCase):
             return TransportAddressCitiesResponse(
                 correlation_id = '',
                 cities = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_city_schema.RmsItemsResponseWrapperCitySchema(
+                    iikocloud_client.models.rms_items_response_wrapper_city_schema.RmsItemsResponseWrapperCitySchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.address_city_schema.AddressCitySchema(
+                            iikocloud_client.models.address_city_schema.AddressCitySchema(
                                 id = '', 
                                 name = '', 
                                 external_revision = 56, 

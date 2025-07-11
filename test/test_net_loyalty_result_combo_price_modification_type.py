@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_combo_price_modification_type import NetLoyaltyResultComboPriceModificationType
+from iikocloud_client.models.net_loyalty_result_combo_price_modification_type import NetLoyaltyResultComboPriceModificationType
 
 class TestNetLoyaltyResultComboPriceModificationType(unittest.TestCase):
     """NetLoyaltyResultComboPriceModificationType unit test stubs"""

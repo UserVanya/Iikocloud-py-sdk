@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_workload_response import TransportReservesGetRestaurantSectionsWorkloadResponse
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload_response import TransportReservesGetRestaurantSectionsWorkloadResponse
 
 class TestTransportReservesGetRestaurantSectionsWorkloadResponse(unittest.TestCase):
     """TransportReservesGetRestaurantSectionsWorkloadResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportReservesGetRestaurantSectionsWorkloadResponse(unittest.TestCa
             return TransportReservesGetRestaurantSectionsWorkloadResponse(
                 correlation_id = '',
                 reserves = [
-                    iiko_cloud_client.models.reserves_reserve_in_workload_schema.ReservesReserveInWorkloadSchema(
+                    iikocloud_client.models.reserves_reserve_in_workload_schema.ReservesReserveInWorkloadSchema(
                         id = '', 
                         table_ids = [
                             ''
@@ -51,7 +51,7 @@ class TestTransportReservesGetRestaurantSectionsWorkloadResponse(unittest.TestCa
             return TransportReservesGetRestaurantSectionsWorkloadResponse(
                 correlation_id = '',
                 reserves = [
-                    iiko_cloud_client.models.reserves_reserve_in_workload_schema.ReservesReserveInWorkloadSchema(
+                    iikocloud_client.models.reserves_reserve_in_workload_schema.ReservesReserveInWorkloadSchema(
                         id = '', 
                         table_ids = [
                             ''

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_courier_info import TransportDeliveriesResponseOrderCourierInfo
+from iikocloud_client.models.transport_deliveries_response_order_courier_info import TransportDeliveriesResponseOrderCourierInfo
 
 class TestTransportDeliveriesResponseOrderCourierInfo(unittest.TestCase):
     """TransportDeliveriesResponseOrderCourierInfo unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportDeliveriesResponseOrderCourierInfo(unittest.TestCase):
         model = TransportDeliveriesResponseOrderCourierInfo()
         if include_optional:
             return TransportDeliveriesResponseOrderCourierInfo(
-                courier = iiko_cloud_client.models.order_employee_schema.OrderEmployeeSchema(
+                courier = iikocloud_client.models.order_employee_schema.OrderEmployeeSchema(
                     id = '', 
                     name = '', 
                     phone = '', ),
@@ -43,7 +43,7 @@ class TestTransportDeliveriesResponseOrderCourierInfo(unittest.TestCase):
             )
         else:
             return TransportDeliveriesResponseOrderCourierInfo(
-                courier = iiko_cloud_client.models.order_employee_schema.OrderEmployeeSchema(
+                courier = iikocloud_client.models.order_employee_schema.OrderEmployeeSchema(
                     id = '', 
                     name = '', 
                     phone = '', ),

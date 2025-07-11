@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_courier_locations import TransportCommonRmsItemsResponseWrapperCourierLocations
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_courier_locations import TransportCommonRmsItemsResponseWrapperCourierLocations
 
 class TestTransportCommonRmsItemsResponseWrapperCourierLocations(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperCourierLocations unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportCommonRmsItemsResponseWrapperCourierLocations(unittest.TestCa
             return TransportCommonRmsItemsResponseWrapperCourierLocations(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
+                    iikocloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
                         courier_id = '', 
                         locations = [
-                            iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                            iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                                 latitude = 1.337, 
                                 longitude = 1.337, 
                                 server_timestamp = 56, )
@@ -51,10 +51,10 @@ class TestTransportCommonRmsItemsResponseWrapperCourierLocations(unittest.TestCa
             return TransportCommonRmsItemsResponseWrapperCourierLocations(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
+                    iikocloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
                         courier_id = '', 
                         locations = [
-                            iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                            iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                                 latitude = 1.337, 
                                 longitude = 1.337, 
                                 server_timestamp = 56, )

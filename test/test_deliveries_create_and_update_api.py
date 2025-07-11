@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.deliveries_create_and_update_api import DeliveriesCreateAndUpdateApi
+from iikocloud_client.api.deliveries_create_and_update_api import DeliveriesCreateAndUpdateApi
 
 
 class TestDeliveriesCreateAndUpdateApi(unittest.IsolatedAsyncioTestCase):

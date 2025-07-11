@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_calculate_checkin_request import NetLoyaltyResultCalculateCheckinRequest
+from iikocloud_client.models.net_loyalty_result_calculate_checkin_request import NetLoyaltyResultCalculateCheckinRequest
 
 class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
     """NetLoyaltyResultCalculateCheckinRequest unit test stubs"""
@@ -35,7 +35,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
         model = NetLoyaltyResultCalculateCheckinRequest()
         if include_optional:
             return NetLoyaltyResultCalculateCheckinRequest(
-                order = iiko_cloud_client.models.create_order_order_schema.CreateOrderOrderSchema(
+                order = iikocloud_client.models.create_order_order_schema.CreateOrderOrderSchema(
                     id = '', 
                     external_number = '', 
                     complete_before = '2019-08-24 14:15:22.123', 
@@ -51,7 +51,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                     delivery_duration = 56, 
                     delivery_zone = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -59,7 +59,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -69,7 +69,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -79,7 +79,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -94,7 +94,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                     loyalty_info = null, 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )
@@ -109,7 +109,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                     ''
                     ],
                 dynamic_discounts = [
-                    iiko_cloud_client.models.loyalty_result_dynamic_discount_schema.LoyaltyResultDynamicDiscountSchema(
+                    iikocloud_client.models.loyalty_result_dynamic_discount_schema.LoyaltyResultDynamicDiscountSchema(
                         manual_condition_id = '', 
                         sum = 1.337, )
                     ],
@@ -118,7 +118,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
             )
         else:
             return NetLoyaltyResultCalculateCheckinRequest(
-                order = iiko_cloud_client.models.create_order_order_schema.CreateOrderOrderSchema(
+                order = iikocloud_client.models.create_order_order_schema.CreateOrderOrderSchema(
                     id = '', 
                     external_number = '', 
                     complete_before = '2019-08-24 14:15:22.123', 
@@ -134,7 +134,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                     delivery_duration = 56, 
                     delivery_zone = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -142,7 +142,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -152,7 +152,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -162,7 +162,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -177,7 +177,7 @@ class TestNetLoyaltyResultCalculateCheckinRequest(unittest.TestCase):
                     loyalty_info = null, 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_marketing_sources_marketing_sources_request import TransportMarketingSourcesMarketingSourcesRequest
+from iikocloud_client.models.transport_marketing_sources_marketing_sources_request import TransportMarketingSourcesMarketingSourcesRequest
 
 class TestTransportMarketingSourcesMarketingSourcesRequest(unittest.TestCase):
     """TransportMarketingSourcesMarketingSourcesRequest unit test stubs"""

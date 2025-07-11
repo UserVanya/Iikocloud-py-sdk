@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_product_size import TransportDeliveriesResponseOrderProductSize
+from iikocloud_client.models.transport_deliveries_response_order_product_size import TransportDeliveriesResponseOrderProductSize
 
 class TestTransportDeliveriesResponseOrderProductSize(unittest.TestCase):
     """TransportDeliveriesResponseOrderProductSize unit test stubs"""

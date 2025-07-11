@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_guests import TransportDeliveriesRequestCreateOrderGuests
+from iikocloud_client.models.transport_deliveries_request_create_order_guests import TransportDeliveriesRequestCreateOrderGuests
 
 class TestTransportDeliveriesRequestCreateOrderGuests(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderGuests unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_employee_with_checked_role import TransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_employee_with_checked_role import TransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole
 
 class TestTransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole unit test stubs"""
@@ -37,9 +37,9 @@ class TestTransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole(unittest
             return TransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
+                    iikocloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
                         check_roles_result = [
-                            iiko_cloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
+                            iikocloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
                                 checked_role_code = '', 
                                 employee_has_role = True, )
                             ], 
@@ -56,9 +56,9 @@ class TestTransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole(unittest
             return TransportCommonRmsItemsResponseWrapperEmployeeWithCheckedRole(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
+                    iikocloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
                         check_roles_result = [
-                            iiko_cloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
+                            iikocloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
                                 checked_role_code = '', 
                                 employee_has_role = True, )
                             ], 

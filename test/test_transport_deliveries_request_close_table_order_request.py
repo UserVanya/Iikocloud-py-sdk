@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_close_table_order_request import TransportDeliveriesRequestCloseTableOrderRequest
+from iikocloud_client.models.transport_deliveries_request_close_table_order_request import TransportDeliveriesRequestCloseTableOrderRequest
 
 class TestTransportDeliveriesRequestCloseTableOrderRequest(unittest.TestCase):
     """TransportDeliveriesRequestCloseTableOrderRequest unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportDeliveriesRequestCloseTableOrderRequest(unittest.TestCase):
         model = TransportDeliveriesRequestCloseTableOrderRequest()
         if include_optional:
             return TransportDeliveriesRequestCloseTableOrderRequest(
-                cheque_additional_info = iiko_cloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
+                cheque_additional_info = iikocloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
                     need_receipt = True, 
                     email = '', 
                     settlement_place = '', 

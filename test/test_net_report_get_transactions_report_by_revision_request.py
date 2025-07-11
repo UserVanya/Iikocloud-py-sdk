@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_get_transactions_report_by_revision_request import NetReportGetTransactionsReportByRevisionRequest
+from iikocloud_client.models.net_report_get_transactions_report_by_revision_request import NetReportGetTransactionsReportByRevisionRequest
 
 class TestNetReportGetTransactionsReportByRevisionRequest(unittest.TestCase):
     """NetReportGetTransactionsReportByRevisionRequest unit test stubs"""

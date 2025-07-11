@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_organization_info import TransportOrganizationsOrganizationInfo
+from iikocloud_client.models.transport_organizations_organization_info import TransportOrganizationsOrganizationInfo
 
 class TestTransportOrganizationsOrganizationInfo(unittest.TestCase):
     """TransportOrganizationsOrganizationInfo unit test stubs"""
@@ -40,7 +40,7 @@ class TestTransportOrganizationsOrganizationInfo(unittest.TestCase):
                 name = '',
                 code = '',
                 external_data = [
-                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                         key = '', 
                         value = '', )
                     ]

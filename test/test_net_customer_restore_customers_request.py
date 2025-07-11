@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_restore_customers_request import NetCustomerRestoreCustomersRequest
+from iikocloud_client.models.net_customer_restore_customers_request import NetCustomerRestoreCustomersRequest
 
 class TestNetCustomerRestoreCustomersRequest(unittest.TestCase):
     """NetCustomerRestoreCustomersRequest unit test stubs"""

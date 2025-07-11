@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_gender import TransportDeliveriesCommonGender
+from iikocloud_client.models.transport_deliveries_common_gender import TransportDeliveriesCommonGender
 
 class TestTransportDeliveriesCommonGender(unittest.TestCase):
     """TransportDeliveriesCommonGender unit test stubs"""

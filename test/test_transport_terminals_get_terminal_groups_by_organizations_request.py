@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
 
 class TestTransportTerminalsGetTerminalGroupsByOrganizationsRequest(unittest.TestCase):
     """TransportTerminalsGetTerminalGroupsByOrganizationsRequest unit test stubs"""

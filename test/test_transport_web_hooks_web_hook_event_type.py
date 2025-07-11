@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_web_hook_event_type import TransportWebHooksWebHookEventType
+from iikocloud_client.models.transport_web_hooks_web_hook_event_type import TransportWebHooksWebHookEventType
 
 class TestTransportWebHooksWebHookEventType(unittest.TestCase):
     """TransportWebHooksWebHookEventType unit test stubs"""

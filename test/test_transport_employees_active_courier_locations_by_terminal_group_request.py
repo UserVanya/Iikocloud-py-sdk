@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_active_courier_locations_by_terminal_group_request import TransportEmployeesActiveCourierLocationsByTerminalGroupRequest
+from iikocloud_client.models.transport_employees_active_courier_locations_by_terminal_group_request import TransportEmployeesActiveCourierLocationsByTerminalGroupRequest
 
 class TestTransportEmployeesActiveCourierLocationsByTerminalGroupRequest(unittest.TestCase):
     """TransportEmployeesActiveCourierLocationsByTerminalGroupRequest unit test stubs"""

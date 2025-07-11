@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_payment_type import TransportDeliveriesResponseOrderPaymentType
+from iikocloud_client.models.transport_deliveries_response_order_payment_type import TransportDeliveriesResponseOrderPaymentType
 
 class TestTransportDeliveriesResponseOrderPaymentType(unittest.TestCase):
     """TransportDeliveriesResponseOrderPaymentType unit test stubs"""

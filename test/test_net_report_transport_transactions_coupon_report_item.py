@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_transport_transactions_coupon_report_item import NetReportTransportTransactionsCouponReportItem
+from iikocloud_client.models.net_report_transport_transactions_coupon_report_item import NetReportTransportTransactionsCouponReportItem
 
 class TestNetReportTransportTransactionsCouponReportItem(unittest.TestCase):
     """NetReportTransportTransactionsCouponReportItem unit test stubs"""

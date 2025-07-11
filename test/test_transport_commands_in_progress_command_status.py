@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_commands_in_progress_command_status import TransportCommandsInProgressCommandStatus
+from iikocloud_client.models.transport_commands_in_progress_command_status import TransportCommandsInProgressCommandStatus
 
 class TestTransportCommandsInProgressCommandStatus(unittest.TestCase):
     """TransportCommandsInProgressCommandStatus unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_products_group_info import TransportNomenclatureProductsGroupInfo
+from iikocloud_client.models.transport_nomenclature_products_group_info import TransportNomenclatureProductsGroupInfo
 
 class TestTransportNomenclatureProductsGroupInfo(unittest.TestCase):
     """TransportNomenclatureProductsGroupInfo unit test stubs"""

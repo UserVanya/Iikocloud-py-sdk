@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_commit_draft_request import TransportDeliveriesDraftsCommitDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_commit_draft_request import TransportDeliveriesDraftsCommitDraftRequest
 
 class TestTransportDeliveriesDraftsCommitDraftRequest(unittest.TestCase):
     """TransportDeliveriesDraftsCommitDraftRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesDraftsCommitDraftRequest(unittest.TestCase):
             return TransportDeliveriesDraftsCommitDraftRequest(
                 organization_id = '',
                 terminal_group_id = '',
-                create_order_settings = iiko_cloud_client.models.common_create_order_settings_schema.CommonCreateOrderSettingsSchema(
+                create_order_settings = iikocloud_client.models.common_create_order_settings_schema.CommonCreateOrderSettingsSchema(
                     transport_to_front_timeout = 56, 
                     check_stop_list = False, ),
                 order_id = ''

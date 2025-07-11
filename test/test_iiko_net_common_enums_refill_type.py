@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.iiko_net_common_enums_refill_type import IikoNetCommonEnumsRefillType
+from iikocloud_client.models.iiko_net_common_enums_refill_type import IikoNetCommonEnumsRefillType
 
 class TestIikoNetCommonEnumsRefillType(unittest.TestCase):
     """IikoNetCommonEnumsRefillType unit test stubs"""

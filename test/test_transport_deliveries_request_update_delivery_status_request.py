@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_delivery_status_request import TransportDeliveriesRequestUpdateDeliveryStatusRequest
+from iikocloud_client.models.transport_deliveries_request_update_delivery_status_request import TransportDeliveriesRequestUpdateDeliveryStatusRequest
 
 class TestTransportDeliveriesRequestUpdateDeliveryStatusRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateDeliveryStatusRequest unit test stubs"""

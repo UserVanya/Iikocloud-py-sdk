@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_order_info import TransportDeliveriesResponseOrderOrderInfo
+from iikocloud_client.models.transport_deliveries_response_order_order_info import TransportDeliveriesResponseOrderOrderInfo
 
 class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
     """TransportDeliveriesResponseOrderOrderInfo unit test stubs"""
@@ -41,12 +41,12 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                 organization_id = '',
                 timestamp = 56,
                 creation_status = 'Success',
-                error_info = iiko_cloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
+                error_info = iikocloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
                     code = null, 
                     message = '', 
                     description = '', 
                     additional_data = null, ),
-                order = iiko_cloud_client.models.order_order_schema.OrderOrderSchema(
+                order = iikocloud_client.models.order_order_schema.OrderOrderSchema(
                     parent_delivery_id = '', 
                     customer = null, 
                     phone = '', 
@@ -91,7 +91,7 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                     conception = null, 
                     guests_info = null, 
                     items = [
-                        iiko_cloud_client.models.order_order_item_schema.OrderOrderItemSchema(
+                        iikocloud_client.models.order_order_item_schema.OrderOrderItemSchema(
                             type = '', 
                             status = null, 
                             deleted = null, 
@@ -102,7 +102,7 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                             combo_information = null, )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
+                        iikocloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -111,7 +111,7 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                             size = null, )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
+                        iikocloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
                             payment_type = null, 
                             sum = 1.337, 
                             is_preliminary = True, 
@@ -121,7 +121,7 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
+                        iikocloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
                             tips_type = null, 
                             payment_type = null, 
                             sum = 1.337, 
@@ -132,14 +132,14 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     discounts = [
-                        iiko_cloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
+                        iikocloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
                             discount_type = null, 
                             sum = 1.337, 
                             selective_positions = [
                                 ''
                                 ], 
                             selective_positions_with_sum = [
-                                iiko_cloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
+                                iikocloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
                                     position_id = '', 
                                     sum = 1.337, )
                                 ], )
@@ -149,7 +149,7 @@ class TestTransportDeliveriesResponseOrderOrderInfo(unittest.TestCase):
                     processed_payments_sum = 1.337, 
                     loyalty_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.order_external_data_schema.OrderExternalDataSchema(
+                        iikocloud_client.models.order_external_data_schema.OrderExternalDataSchema(
                             key = '', 
                             value = '', )
                         ], )

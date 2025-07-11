@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_create_or_update_customer_request import NetCustomerCreateOrUpdateCustomerRequest
+from iikocloud_client.models.net_customer_create_or_update_customer_request import NetCustomerCreateOrUpdateCustomerRequest
 
 class TestNetCustomerCreateOrUpdateCustomerRequest(unittest.TestCase):
     """NetCustomerCreateOrUpdateCustomerRequest unit test stubs"""

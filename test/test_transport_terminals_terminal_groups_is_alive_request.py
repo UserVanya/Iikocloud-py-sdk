@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_terminal_groups_is_alive_request import TransportTerminalsTerminalGroupsIsAliveRequest
+from iikocloud_client.models.transport_terminals_terminal_groups_is_alive_request import TransportTerminalsTerminalGroupsIsAliveRequest
 
 class TestTransportTerminalsTerminalGroupsIsAliveRequest(unittest.TestCase):
     """TransportTerminalsTerminalGroupsIsAliveRequest unit test stubs"""

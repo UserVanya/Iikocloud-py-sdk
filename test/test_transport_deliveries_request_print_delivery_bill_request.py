@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_print_delivery_bill_request import TransportDeliveriesRequestPrintDeliveryBillRequest
+from iikocloud_client.models.transport_deliveries_request_print_delivery_bill_request import TransportDeliveriesRequestPrintDeliveryBillRequest
 
 class TestTransportDeliveriesRequestPrintDeliveryBillRequest(unittest.TestCase):
     """TransportDeliveriesRequestPrintDeliveryBillRequest unit test stubs"""

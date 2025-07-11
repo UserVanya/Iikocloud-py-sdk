@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_discount_item import TransportDeliveriesResponseOrderDiscountItem
+from iikocloud_client.models.transport_deliveries_response_order_discount_item import TransportDeliveriesResponseOrderDiscountItem
 
 class TestTransportDeliveriesResponseOrderDiscountItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderDiscountItem unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportDeliveriesResponseOrderDiscountItem(unittest.TestCase):
         model = TransportDeliveriesResponseOrderDiscountItem()
         if include_optional:
             return TransportDeliveriesResponseOrderDiscountItem(
-                discount_type = iiko_cloud_client.models.order_discount_type_schema.OrderDiscountTypeSchema(
+                discount_type = iikocloud_client.models.order_discount_type_schema.OrderDiscountTypeSchema(
                     id = '', 
                     name = '', ),
                 sum = 1.337,
@@ -43,14 +43,14 @@ class TestTransportDeliveriesResponseOrderDiscountItem(unittest.TestCase):
                     ''
                     ],
                 selective_positions_with_sum = [
-                    iiko_cloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
+                    iikocloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
                         position_id = '', 
                         sum = 1.337, )
                     ]
             )
         else:
             return TransportDeliveriesResponseOrderDiscountItem(
-                discount_type = iiko_cloud_client.models.order_discount_type_schema.OrderDiscountTypeSchema(
+                discount_type = iikocloud_client.models.order_discount_type_schema.OrderDiscountTypeSchema(
                     id = '', 
                     name = '', ),
                 sum = 1.337,

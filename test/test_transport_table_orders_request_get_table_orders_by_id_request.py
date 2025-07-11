@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_request_get_table_orders_by_id_request import TransportTableOrdersRequestGetTableOrdersByIdRequest
+from iikocloud_client.models.transport_table_orders_request_get_table_orders_by_id_request import TransportTableOrdersRequestGetTableOrdersByIdRequest
 
 class TestTransportTableOrdersRequestGetTableOrdersByIdRequest(unittest.TestCase):
     """TransportTableOrdersRequestGetTableOrdersByIdRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_loyalty_info import TransportDeliveriesResponseOrderLoyaltyInfo
+from iikocloud_client.models.transport_deliveries_response_order_loyalty_info import TransportDeliveriesResponseOrderLoyaltyInfo
 
 class TestTransportDeliveriesResponseOrderLoyaltyInfo(unittest.TestCase):
     """TransportDeliveriesResponseOrderLoyaltyInfo unit test stubs"""

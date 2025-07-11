@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_guest_balance_info import NetCustomerGuestBalanceInfo
+from iikocloud_client.models.net_customer_guest_balance_info import NetCustomerGuestBalanceInfo
 
 class TestNetCustomerGuestBalanceInfo(unittest.TestCase):
     """NetCustomerGuestBalanceInfo unit test stubs"""

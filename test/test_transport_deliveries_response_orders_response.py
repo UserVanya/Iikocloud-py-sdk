@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_orders_response import TransportDeliveriesResponseOrdersResponse
+from iikocloud_client.models.transport_deliveries_response_orders_response import TransportDeliveriesResponseOrdersResponse
 
 class TestTransportDeliveriesResponseOrdersResponse(unittest.TestCase):
     """TransportDeliveriesResponseOrdersResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesResponseOrdersResponse(unittest.TestCase):
             return TransportDeliveriesResponseOrdersResponse(
                 correlation_id = '',
                 orders = [
-                    iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                    iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                         id = '', 
                         pos_id = '', 
                         external_number = '', 
@@ -52,7 +52,7 @@ class TestTransportDeliveriesResponseOrdersResponse(unittest.TestCase):
             return TransportDeliveriesResponseOrdersResponse(
                 correlation_id = '',
                 orders = [
-                    iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                    iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                         id = '', 
                         pos_id = '', 
                         external_number = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_street import TransportDeliveriesResponseOrderStreet
+from iikocloud_client.models.transport_deliveries_response_order_street import TransportDeliveriesResponseOrderStreet
 
 class TestTransportDeliveriesResponseOrderStreet(unittest.TestCase):
     """TransportDeliveriesResponseOrderStreet unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesResponseOrderStreet(unittest.TestCase):
             return TransportDeliveriesResponseOrderStreet(
                 id = '',
                 name = '',
-                city = iiko_cloud_client.models.order_city_schema.OrderCitySchema(
+                city = iikocloud_client.models.order_city_schema.OrderCitySchema(
                     id = '', 
                     name = '', )
             )
@@ -45,7 +45,7 @@ class TestTransportDeliveriesResponseOrderStreet(unittest.TestCase):
             return TransportDeliveriesResponseOrderStreet(
                 id = '',
                 name = '',
-                city = iiko_cloud_client.models.order_city_schema.OrderCitySchema(
+                city = iikocloud_client.models.order_city_schema.OrderCitySchema(
                     id = '', 
                     name = '', ),
         )

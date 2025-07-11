@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
 
 class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest(unittest.TestCase):
     """TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                 organization_ids = [
                     ''
                     ],
-                delivery_address = iiko_cloud_client.models.allowed_restrictions_restrictions_address_schema.AllowedRestrictionsRestrictionsAddressSchema(
+                delivery_address = iikocloud_client.models.allowed_restrictions_restrictions_address_schema.AllowedRestrictionsRestrictionsAddressSchema(
                     city = '', 
                     street_name = '', 
                     street_id = '', 
@@ -48,16 +48,16 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                     index = '', 
                     line1 = '', 
                     entrance = '', ),
-                order_location = iiko_cloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
+                order_location = iikocloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
                     latitude = 1.337, 
                     longitude = 1.337, ),
                 order_items = [
-                    iiko_cloud_client.models.allowed_restrictions_restrictions_order_item_schema.AllowedRestrictionsRestrictionsOrderItemSchema(
+                    iikocloud_client.models.allowed_restrictions_restrictions_order_item_schema.AllowedRestrictionsRestrictionsOrderItemSchema(
                         id = '', 
                         product = '', 
                         amount = 1.337, 
                         modifiers = [
-                            iiko_cloud_client.models.allowed_restrictions_restrictions_order_item_modifier_schema.AllowedRestrictionsRestrictionsOrderItemModifierSchema(
+                            iikocloud_client.models.allowed_restrictions_restrictions_order_item_modifier_schema.AllowedRestrictionsRestrictionsOrderItemModifierSchema(
                                 id = '', 
                                 product = '', 
                                 amount = 1.337, )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.terminal_groups_api import TerminalGroupsApi
+from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
 
 
 class TestTerminalGroupsApi(unittest.IsolatedAsyncioTestCase):

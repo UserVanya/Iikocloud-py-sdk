@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_nomenclature_response import TransportNomenclatureNomenclatureResponse
+from iikocloud_client.models.transport_nomenclature_nomenclature_response import TransportNomenclatureNomenclatureResponse
 
 class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
     """TransportNomenclatureNomenclatureResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
             return TransportNomenclatureNomenclatureResponse(
                 correlation_id = '',
                 groups = [
-                    iiko_cloud_client.models.nomenclature_products_group_info_schema.NomenclatureProductsGroupInfoSchema(
+                    iikocloud_client.models.nomenclature_products_group_info_schema.NomenclatureProductsGroupInfoSchema(
                         image_links = [
                             ''
                             ], 
@@ -60,13 +60,13 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         seo_title = '', )
                     ],
                 product_categories = [
-                    iiko_cloud_client.models.nomenclature_product_category_info_schema.NomenclatureProductCategoryInfoSchema(
+                    iikocloud_client.models.nomenclature_product_category_info_schema.NomenclatureProductCategoryInfoSchema(
                         id = '', 
                         name = '', 
                         is_deleted = True, )
                     ],
                 products = [
-                    iiko_cloud_client.models.nomenclature_product_info_schema.NomenclatureProductInfoSchema(
+                    iikocloud_client.models.nomenclature_product_info_schema.NomenclatureProductInfoSchema(
                         fat_amount = 1.337, 
                         proteins_amount = 1.337, 
                         carbohydrates_amount = 1.337, 
@@ -85,12 +85,12 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         splittable = True, 
                         measure_unit = '', 
                         size_prices = [
-                            iiko_cloud_client.models.nomenclature_size_price_schema.NomenclatureSizePriceSchema(
+                            iikocloud_client.models.nomenclature_size_price_schema.NomenclatureSizePriceSchema(
                                 size_id = '', 
                                 price = null, )
                             ], 
                         modifiers = [
-                            iiko_cloud_client.models.nomenclature_simple_modifier_info_schema.NomenclatureSimpleModifierInfoSchema(
+                            iikocloud_client.models.nomenclature_simple_modifier_info_schema.NomenclatureSimpleModifierInfoSchema(
                                 id = '', 
                                 default_amount = 56, 
                                 min_amount = 56, 
@@ -101,14 +101,14 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                                 free_of_charge_amount = 56, )
                             ], 
                         group_modifiers = [
-                            iiko_cloud_client.models.nomenclature_group_modifier_info_schema.NomenclatureGroupModifierInfoSchema(
+                            iikocloud_client.models.nomenclature_group_modifier_info_schema.NomenclatureGroupModifierInfoSchema(
                                 id = '', 
                                 min_amount = 56, 
                                 max_amount = 56, 
                                 required = True, 
                                 child_modifiers_have_min_max_restrictions = True, 
                                 child_modifiers = [
-                                    iiko_cloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
+                                    iikocloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
                                         id = '', 
                                         default_amount = 56, 
                                         min_amount = 56, 
@@ -148,7 +148,7 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         seo_title = '', )
                     ],
                 sizes = [
-                    iiko_cloud_client.models.nomenclature_size_schema.NomenclatureSizeSchema(
+                    iikocloud_client.models.nomenclature_size_schema.NomenclatureSizeSchema(
                         id = '', 
                         name = '', 
                         priority = 56, 
@@ -160,7 +160,7 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
             return TransportNomenclatureNomenclatureResponse(
                 correlation_id = '',
                 groups = [
-                    iiko_cloud_client.models.nomenclature_products_group_info_schema.NomenclatureProductsGroupInfoSchema(
+                    iikocloud_client.models.nomenclature_products_group_info_schema.NomenclatureProductsGroupInfoSchema(
                         image_links = [
                             ''
                             ], 
@@ -183,13 +183,13 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         seo_title = '', )
                     ],
                 product_categories = [
-                    iiko_cloud_client.models.nomenclature_product_category_info_schema.NomenclatureProductCategoryInfoSchema(
+                    iikocloud_client.models.nomenclature_product_category_info_schema.NomenclatureProductCategoryInfoSchema(
                         id = '', 
                         name = '', 
                         is_deleted = True, )
                     ],
                 products = [
-                    iiko_cloud_client.models.nomenclature_product_info_schema.NomenclatureProductInfoSchema(
+                    iikocloud_client.models.nomenclature_product_info_schema.NomenclatureProductInfoSchema(
                         fat_amount = 1.337, 
                         proteins_amount = 1.337, 
                         carbohydrates_amount = 1.337, 
@@ -208,12 +208,12 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         splittable = True, 
                         measure_unit = '', 
                         size_prices = [
-                            iiko_cloud_client.models.nomenclature_size_price_schema.NomenclatureSizePriceSchema(
+                            iikocloud_client.models.nomenclature_size_price_schema.NomenclatureSizePriceSchema(
                                 size_id = '', 
                                 price = null, )
                             ], 
                         modifiers = [
-                            iiko_cloud_client.models.nomenclature_simple_modifier_info_schema.NomenclatureSimpleModifierInfoSchema(
+                            iikocloud_client.models.nomenclature_simple_modifier_info_schema.NomenclatureSimpleModifierInfoSchema(
                                 id = '', 
                                 default_amount = 56, 
                                 min_amount = 56, 
@@ -224,14 +224,14 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                                 free_of_charge_amount = 56, )
                             ], 
                         group_modifiers = [
-                            iiko_cloud_client.models.nomenclature_group_modifier_info_schema.NomenclatureGroupModifierInfoSchema(
+                            iikocloud_client.models.nomenclature_group_modifier_info_schema.NomenclatureGroupModifierInfoSchema(
                                 id = '', 
                                 min_amount = 56, 
                                 max_amount = 56, 
                                 required = True, 
                                 child_modifiers_have_min_max_restrictions = True, 
                                 child_modifiers = [
-                                    iiko_cloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
+                                    iikocloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
                                         id = '', 
                                         default_amount = 56, 
                                         min_amount = 56, 
@@ -271,7 +271,7 @@ class TestTransportNomenclatureNomenclatureResponse(unittest.TestCase):
                         seo_title = '', )
                     ],
                 sizes = [
-                    iiko_cloud_client.models.nomenclature_size_schema.NomenclatureSizeSchema(
+                    iikocloud_client.models.nomenclature_size_schema.NomenclatureSizeSchema(
                         id = '', 
                         name = '', 
                         priority = 56, 

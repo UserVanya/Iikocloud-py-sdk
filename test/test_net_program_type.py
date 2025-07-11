@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_program_type import NetProgramType
+from iikocloud_client.models.net_program_type import NetProgramType
 
 class TestNetProgramType(unittest.TestCase):
     """NetProgramType unit test stubs"""

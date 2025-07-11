@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_organization_marketing_campaign_action_condition_binding_info import NetOrganizationMarketingCampaignActionConditionBindingInfo
+from iikocloud_client.models.net_organization_marketing_campaign_action_condition_binding_info import NetOrganizationMarketingCampaignActionConditionBindingInfo
 
 class TestNetOrganizationMarketingCampaignActionConditionBindingInfo(unittest.TestCase):
     """NetOrganizationMarketingCampaignActionConditionBindingInfo unit test stubs"""
@@ -38,14 +38,14 @@ class TestNetOrganizationMarketingCampaignActionConditionBindingInfo(unittest.Te
                 id = '',
                 stop_further_execution = True,
                 actions = [
-                    iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                    iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                         id = '', 
                         settings = '', 
                         type_name = '', 
                         check_sum = '', )
                     ],
                 conditions = [
-                    iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                    iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                         id = '', 
                         settings = '', 
                         type_name = '', 

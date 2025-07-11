@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_errors_error_response import TransportErrorsErrorResponse
+from iikocloud_client.models.transport_errors_error_response import TransportErrorsErrorResponse
 
 class TestTransportErrorsErrorResponse(unittest.TestCase):
     """TransportErrorsErrorResponse unit test stubs"""

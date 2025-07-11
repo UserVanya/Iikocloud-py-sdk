@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_get_transactions_report_by_period_response import NetReportGetTransactionsReportByPeriodResponse
+from iikocloud_client.models.net_report_get_transactions_report_by_period_response import NetReportGetTransactionsReportByPeriodResponse
 
 class TestNetReportGetTransactionsReportByPeriodResponse(unittest.TestCase):
     """NetReportGetTransactionsReportByPeriodResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetReportGetTransactionsReportByPeriodResponse(unittest.TestCase):
         if include_optional:
             return NetReportGetTransactionsReportByPeriodResponse(
                 transactions = [
-                    iiko_cloud_client.models.report_transport_transactions_report_item_schema.ReportTransportTransactionsReportItemSchema(
+                    iikocloud_client.models.report_transport_transactions_report_item_schema.ReportTransportTransactionsReportItemSchema(
                         api_client_login = '', 
                         balance_after = 1.337, 
                         balance_before = 1.337, 

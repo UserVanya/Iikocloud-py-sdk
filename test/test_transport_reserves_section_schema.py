@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_section_schema import TransportReservesSectionSchema
+from iikocloud_client.models.transport_reserves_section_schema import TransportReservesSectionSchema
 
 class TestTransportReservesSectionSchema(unittest.TestCase):
     """TransportReservesSectionSchema unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                 width = 56,
                 height = 56,
                 mark_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_mark_schema.ReservesRestaurantSectionMarkSchema(
+                    iikocloud_client.models.reserves_restaurant_section_mark_schema.ReservesRestaurantSectionMarkSchema(
                         text = '', 
                         font = null, 
                         color = null, 
@@ -50,7 +50,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 table_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_table_schema.ReservesRestaurantSectionTableSchema(
+                    iikocloud_client.models.reserves_restaurant_section_table_schema.ReservesRestaurantSectionTableSchema(
                         table_id = '', 
                         x = 56, 
                         y = 56, 
@@ -60,7 +60,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 rectangle_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_rectangle_schema.ReservesRestaurantSectionRectangleSchema(
+                    iikocloud_client.models.reserves_restaurant_section_rectangle_schema.ReservesRestaurantSectionRectangleSchema(
                         color = null, 
                         x = 56, 
                         y = 56, 
@@ -70,7 +70,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 ellipse_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_ellipse_schema.ReservesRestaurantSectionEllipseSchema(
+                    iikocloud_client.models.reserves_restaurant_section_ellipse_schema.ReservesRestaurantSectionEllipseSchema(
                         color = null, 
                         x = 56, 
                         y = 56, 
@@ -87,7 +87,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                 width = 56,
                 height = 56,
                 mark_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_mark_schema.ReservesRestaurantSectionMarkSchema(
+                    iikocloud_client.models.reserves_restaurant_section_mark_schema.ReservesRestaurantSectionMarkSchema(
                         text = '', 
                         font = null, 
                         color = null, 
@@ -99,7 +99,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 table_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_table_schema.ReservesRestaurantSectionTableSchema(
+                    iikocloud_client.models.reserves_restaurant_section_table_schema.ReservesRestaurantSectionTableSchema(
                         table_id = '', 
                         x = 56, 
                         y = 56, 
@@ -109,7 +109,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 rectangle_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_rectangle_schema.ReservesRestaurantSectionRectangleSchema(
+                    iikocloud_client.models.reserves_restaurant_section_rectangle_schema.ReservesRestaurantSectionRectangleSchema(
                         color = null, 
                         x = 56, 
                         y = 56, 
@@ -119,7 +119,7 @@ class TestTransportReservesSectionSchema(unittest.TestCase):
                         height = 56, )
                     ],
                 ellipse_elements = [
-                    iiko_cloud_client.models.reserves_restaurant_section_ellipse_schema.ReservesRestaurantSectionEllipseSchema(
+                    iikocloud_client.models.reserves_restaurant_section_ellipse_schema.ReservesRestaurantSectionEllipseSchema(
                         color = null, 
                         x = 56, 
                         y = 56, 

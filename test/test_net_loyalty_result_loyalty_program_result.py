@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_loyalty_program_result import NetLoyaltyResultLoyaltyProgramResult
+from iikocloud_client.models.net_loyalty_result_loyalty_program_result import NetLoyaltyResultLoyaltyProgramResult
 
 class TestNetLoyaltyResultLoyaltyProgramResult(unittest.TestCase):
     """NetLoyaltyResultLoyaltyProgramResult unit test stubs"""
@@ -38,7 +38,7 @@ class TestNetLoyaltyResultLoyaltyProgramResult(unittest.TestCase):
                 marketing_campaign_id = '',
                 name = '',
                 discounts = [
-                    iiko_cloud_client.models.loyalty_result_discount_operation_schema.LoyaltyResultDiscountOperationSchema(
+                    iikocloud_client.models.loyalty_result_discount_operation_schema.LoyaltyResultDiscountOperationSchema(
                         code = null, 
                         order_item_id = '', 
                         position_id = '', 
@@ -47,7 +47,7 @@ class TestNetLoyaltyResultLoyaltyProgramResult(unittest.TestCase):
                         comment = '', )
                     ],
                 upsales = [
-                    iiko_cloud_client.models.loyalty_result_upsale_schema.LoyaltyResultUpsaleSchema(
+                    iikocloud_client.models.loyalty_result_upsale_schema.LoyaltyResultUpsaleSchema(
                         source_action_id = '', 
                         suggestion_text = '', 
                         description_for_user = '', 
@@ -55,24 +55,24 @@ class TestNetLoyaltyResultLoyaltyProgramResult(unittest.TestCase):
                             ''
                             ], 
                         products = [
-                            iiko_cloud_client.models.loyalty_result_upsale_product_schema.LoyaltyResultUpsaleProductSchema(
+                            iikocloud_client.models.loyalty_result_upsale_product_schema.LoyaltyResultUpsaleProductSchema(
                                 id = '', 
                                 code = '', )
                             ], )
                     ],
                 free_products = [
-                    iiko_cloud_client.models.loyalty_result_free_products_group_schema.LoyaltyResultFreeProductsGroupSchema(
+                    iikocloud_client.models.loyalty_result_free_products_group_schema.LoyaltyResultFreeProductsGroupSchema(
                         source_action_id = '', 
                         description_for_user = '', 
                         products = [
-                            iiko_cloud_client.models.loyalty_result_free_product_schema.LoyaltyResultFreeProductSchema(
+                            iikocloud_client.models.loyalty_result_free_product_schema.LoyaltyResultFreeProductSchema(
                                 id = '', 
                                 code = '', 
                                 size = [
                                     ''
                                     ], 
                                 sizes = [
-                                    iiko_cloud_client.models.loyalty_result_free_product_size_schema.LoyaltyResultFreeProductSizeSchema(
+                                    iikocloud_client.models.loyalty_result_free_product_size_schema.LoyaltyResultFreeProductSizeSchema(
                                         id = '', 
                                         name = '', )
                                     ], )
@@ -82,10 +82,10 @@ class TestNetLoyaltyResultLoyaltyProgramResult(unittest.TestCase):
                     ''
                     ],
                 available_combos = [
-                    iiko_cloud_client.models.loyalty_result_available_combo_schema.LoyaltyResultAvailableComboSchema(
+                    iikocloud_client.models.loyalty_result_available_combo_schema.LoyaltyResultAvailableComboSchema(
                         specification_id = '', 
                         group_mapping = [
-                            iiko_cloud_client.models.loyalty_result_combo_group_mapping_schema.LoyaltyResultComboGroupMappingSchema(
+                            iikocloud_client.models.loyalty_result_combo_group_mapping_schema.LoyaltyResultComboGroupMappingSchema(
                                 group_id = '', 
                                 item_id = '', )
                             ], )

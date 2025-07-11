@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_cancel_reserve_request import TransportReservesCancelReserveRequest
+from iikocloud_client.models.transport_reserves_cancel_reserve_request import TransportReservesCancelReserveRequest
 
 class TestTransportReservesCancelReserveRequest(unittest.TestCase):
     """TransportReservesCancelReserveRequest unit test stubs"""

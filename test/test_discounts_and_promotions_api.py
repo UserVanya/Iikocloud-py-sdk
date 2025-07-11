@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.discounts_and_promotions_api import DiscountsAndPromotionsApi
+from iikocloud_client.api.discounts_and_promotions_api import DiscountsAndPromotionsApi
 
 
 class TestDiscountsAndPromotionsApi(unittest.IsolatedAsyncioTestCase):

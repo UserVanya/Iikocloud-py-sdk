@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_hold_money_response import NetCustomerHoldMoneyResponse
+from iikocloud_client.models.net_customer_hold_money_response import NetCustomerHoldMoneyResponse
 
 class TestNetCustomerHoldMoneyResponse(unittest.TestCase):
     """NetCustomerHoldMoneyResponse unit test stubs"""

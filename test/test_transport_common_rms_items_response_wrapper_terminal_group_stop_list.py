@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_terminal_group_stop_list import TransportCommonRmsItemsResponseWrapperTerminalGroupStopList
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_terminal_group_stop_list import TransportCommonRmsItemsResponseWrapperTerminalGroupStopList
 
 class TestTransportCommonRmsItemsResponseWrapperTerminalGroupStopList(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperTerminalGroupStopList unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportCommonRmsItemsResponseWrapperTerminalGroupStopList(unittest.T
             return TransportCommonRmsItemsResponseWrapperTerminalGroupStopList(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
+                    iikocloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
                         terminal_group_id = '', 
                         items = [
-                            iiko_cloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
+                            iikocloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
                                 balance = 1.337, 
                                 product_id = '', 
                                 size_id = '', 
@@ -53,10 +53,10 @@ class TestTransportCommonRmsItemsResponseWrapperTerminalGroupStopList(unittest.T
             return TransportCommonRmsItemsResponseWrapperTerminalGroupStopList(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
+                    iikocloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
                         terminal_group_id = '', 
                         items = [
-                            iiko_cloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
+                            iikocloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
                                 balance = 1.337, 
                                 product_id = '', 
                                 size_id = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_response import TransportReservesGetRestaurantSectionsResponse
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_response import TransportReservesGetRestaurantSectionsResponse
 
 class TestTransportReservesGetRestaurantSectionsResponse(unittest.TestCase):
     """TransportReservesGetRestaurantSectionsResponse unit test stubs"""
@@ -37,12 +37,12 @@ class TestTransportReservesGetRestaurantSectionsResponse(unittest.TestCase):
             return TransportReservesGetRestaurantSectionsResponse(
                 correlation_id = '',
                 restaurant_sections = [
-                    iiko_cloud_client.models.reserves_restaurant_section_schema.ReservesRestaurantSectionSchema(
+                    iikocloud_client.models.reserves_restaurant_section_schema.ReservesRestaurantSectionSchema(
                         id = '', 
                         terminal_group_id = '', 
                         name = '', 
                         tables = [
-                            iiko_cloud_client.models.reserves_table_schema.ReservesTableSchema(
+                            iikocloud_client.models.reserves_table_schema.ReservesTableSchema(
                                 id = '', 
                                 number = 56, 
                                 name = '', 
@@ -59,12 +59,12 @@ class TestTransportReservesGetRestaurantSectionsResponse(unittest.TestCase):
             return TransportReservesGetRestaurantSectionsResponse(
                 correlation_id = '',
                 restaurant_sections = [
-                    iiko_cloud_client.models.reserves_restaurant_section_schema.ReservesRestaurantSectionSchema(
+                    iikocloud_client.models.reserves_restaurant_section_schema.ReservesRestaurantSectionSchema(
                         id = '', 
                         terminal_group_id = '', 
                         name = '', 
                         tables = [
-                            iiko_cloud_client.models.reserves_table_schema.ReservesTableSchema(
+                            iikocloud_client.models.reserves_table_schema.ReservesTableSchema(
                                 id = '', 
                                 number = 56, 
                                 name = '', 

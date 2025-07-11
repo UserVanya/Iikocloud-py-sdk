@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_organizations_settings_response import TransportOrganizationsOrganizationsSettingsResponse
+from iikocloud_client.models.transport_organizations_organizations_settings_response import TransportOrganizationsOrganizationsSettingsResponse
 
 class TestTransportOrganizationsOrganizationsSettingsResponse(unittest.TestCase):
     """TransportOrganizationsOrganizationsSettingsResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportOrganizationsOrganizationsSettingsResponse(unittest.TestCase)
             return TransportOrganizationsOrganizationsSettingsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_organization_settings_schema.OrganizationsOrganizationSettingsSchema(
+                    iikocloud_client.models.organizations_organization_settings_schema.OrganizationsOrganizationSettingsSchema(
                         id = '', 
                         prices_vat_inclusive = True, 
                         loyalty_discount_affects_vat = True, 
@@ -68,7 +68,7 @@ class TestTransportOrganizationsOrganizationsSettingsResponse(unittest.TestCase)
                         use_business_hours_and_mapping = True, 
                         currency_iso_name = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )
@@ -78,7 +78,7 @@ class TestTransportOrganizationsOrganizationsSettingsResponse(unittest.TestCase)
             return TransportOrganizationsOrganizationsSettingsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_organization_settings_schema.OrganizationsOrganizationSettingsSchema(
+                    iikocloud_client.models.organizations_organization_settings_schema.OrganizationsOrganizationSettingsSchema(
                         id = '', 
                         prices_vat_inclusive = True, 
                         loyalty_discount_affects_vat = True, 
@@ -109,7 +109,7 @@ class TestTransportOrganizationsOrganizationsSettingsResponse(unittest.TestCase)
                         use_business_hours_and_mapping = True, 
                         currency_iso_name = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_loyalty_card_payment_additional_data import TransportDeliveriesCommonLoyaltyCardPaymentAdditionalData
+from iikocloud_client.models.transport_deliveries_common_loyalty_card_payment_additional_data import TransportDeliveriesCommonLoyaltyCardPaymentAdditionalData
 
 class TestTransportDeliveriesCommonLoyaltyCardPaymentAdditionalData(unittest.TestCase):
     """TransportDeliveriesCommonLoyaltyCardPaymentAdditionalData unit test stubs"""

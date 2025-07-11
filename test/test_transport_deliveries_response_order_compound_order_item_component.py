@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_compound_order_item_component import TransportDeliveriesResponseOrderCompoundOrderItemComponent
+from iikocloud_client.models.transport_deliveries_response_order_compound_order_item_component import TransportDeliveriesResponseOrderCompoundOrderItemComponent
 
 class TestTransportDeliveriesResponseOrderCompoundOrderItemComponent(unittest.TestCase):
     """TransportDeliveriesResponseOrderCompoundOrderItemComponent unit test stubs"""
@@ -35,11 +35,11 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItemComponent(unittest.Te
         model = TransportDeliveriesResponseOrderCompoundOrderItemComponent()
         if include_optional:
             return TransportDeliveriesResponseOrderCompoundOrderItemComponent(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 modifiers = [
-                    iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                    iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                         product = null, 
                         amount = 1.337, 
                         amount_independent_of_parent_amount = True, 
@@ -63,7 +63,7 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItemComponent(unittest.Te
             )
         else:
             return TransportDeliveriesResponseOrderCompoundOrderItemComponent(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 price = 1.337,

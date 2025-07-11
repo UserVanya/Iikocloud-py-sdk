@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_restaurant_section_table import TransportReservesRestaurantSectionTable
+from iikocloud_client.models.transport_reserves_restaurant_section_table import TransportReservesRestaurantSectionTable
 
 class TestTransportReservesRestaurantSectionTable(unittest.TestCase):
     """TransportReservesRestaurantSectionTable unit test stubs"""

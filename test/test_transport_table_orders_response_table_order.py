@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_response_table_order import TransportTableOrdersResponseTableOrder
+from iikocloud_client.models.transport_table_orders_response_table_order import TransportTableOrdersResponseTableOrder
 
 class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
     """TransportTableOrdersResponseTableOrder unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                 table_ids = [
                     ''
                     ],
-                customer = iiko_cloud_client.models.order_regular_customer_schema.OrderRegularCustomerSchema(
+                customer = iikocloud_client.models.order_regular_customer_schema.OrderRegularCustomerSchema(
                     id = '', 
                     name = '', 
                     surname = '', 
@@ -50,7 +50,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                 phone = '',
                 status = 'New',
                 when_created = '2019-08-24 14:15:22.123',
-                waiter = iiko_cloud_client.models.order_employee_schema.OrderEmployeeSchema(
+                waiter = iikocloud_client.models.order_employee_schema.OrderEmployeeSchema(
                     id = '', 
                     name = '', 
                     phone = '', ),
@@ -62,15 +62,15 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                 source_key = '',
                 when_bill_printed = '2019-08-24 14:15:22.123',
                 when_closed = '2019-08-24 14:15:22.123',
-                conception = iiko_cloud_client.models.order_conception_schema.OrderConceptionSchema(
+                conception = iikocloud_client.models.order_conception_schema.OrderConceptionSchema(
                     id = '', 
                     name = '', 
                     code = '', ),
-                guests_info = iiko_cloud_client.models.order_guests_info_schema.OrderGuestsInfoSchema(
+                guests_info = iikocloud_client.models.order_guests_info_schema.OrderGuestsInfoSchema(
                     count = 56, 
                     split_between_persons = True, ),
                 items = [
-                    iiko_cloud_client.models.order_order_item_schema.OrderOrderItemSchema(
+                    iikocloud_client.models.order_order_item_schema.OrderOrderItemSchema(
                         type = '', 
                         status = null, 
                         deleted = null, 
@@ -81,7 +81,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                         combo_information = null, )
                     ],
                 combos = [
-                    iiko_cloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
+                    iikocloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
                         id = '', 
                         name = '', 
                         amount = 56, 
@@ -90,7 +90,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                         size = null, )
                     ],
                 payments = [
-                    iiko_cloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
+                    iikocloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
                         payment_type = null, 
                         sum = 1.337, 
                         is_preliminary = True, 
@@ -100,7 +100,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 tips = [
-                    iiko_cloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
+                    iikocloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
                         tips_type = null, 
                         payment_type = null, 
                         sum = 1.337, 
@@ -111,31 +111,31 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 discounts = [
-                    iiko_cloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
+                    iikocloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
                         discount_type = null, 
                         sum = 1.337, 
                         selective_positions = [
                             ''
                             ], 
                         selective_positions_with_sum = [
-                            iiko_cloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
+                            iikocloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
                                 position_id = '', 
                                 sum = 1.337, )
                             ], )
                     ],
-                order_type = iiko_cloud_client.models.order_order_type_schema.OrderOrderTypeSchema(
+                order_type = iikocloud_client.models.order_order_type_schema.OrderOrderTypeSchema(
                     id = '', 
                     name = '', 
                     order_service_type = null, ),
                 terminal_group_id = '',
                 processed_payments_sum = 1.337,
-                loyalty_info = iiko_cloud_client.models.order_loyalty_info_schema.OrderLoyaltyInfoSchema(
+                loyalty_info = iikocloud_client.models.order_loyalty_info_schema.OrderLoyaltyInfoSchema(
                     coupon = '', 
                     applied_manual_conditions = [
                         ''
                         ], ),
                 external_data = [
-                    iiko_cloud_client.models.order_external_data_schema.OrderExternalDataSchema(
+                    iikocloud_client.models.order_external_data_schema.OrderExternalDataSchema(
                         key = '', 
                         value = '', )
                     ]
@@ -148,11 +148,11 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                 status = 'New',
                 sum = 1.337,
                 number = 56,
-                guests_info = iiko_cloud_client.models.order_guests_info_schema.OrderGuestsInfoSchema(
+                guests_info = iikocloud_client.models.order_guests_info_schema.OrderGuestsInfoSchema(
                     count = 56, 
                     split_between_persons = True, ),
                 items = [
-                    iiko_cloud_client.models.order_order_item_schema.OrderOrderItemSchema(
+                    iikocloud_client.models.order_order_item_schema.OrderOrderItemSchema(
                         type = '', 
                         status = null, 
                         deleted = null, 
@@ -162,7 +162,7 @@ class TestTransportTableOrdersResponseTableOrder(unittest.TestCase):
                         size = null, 
                         combo_information = null, )
                     ],
-                order_type = iiko_cloud_client.models.order_order_type_schema.OrderOrderTypeSchema(
+                order_type = iikocloud_client.models.order_order_type_schema.OrderOrderTypeSchema(
                     id = '', 
                     name = '', 
                     order_service_type = null, ),

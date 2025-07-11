@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_combo_specification import NetLoyaltyResultComboSpecification
+from iikocloud_client.models.net_loyalty_result_combo_specification import NetLoyaltyResultComboSpecification
 
 class TestNetLoyaltyResultComboSpecification(unittest.TestCase):
     """NetLoyaltyResultComboSpecification unit test stubs"""
@@ -46,12 +46,12 @@ class TestNetLoyaltyResultComboSpecification(unittest.TestCase):
                 lacking_groups_to_suggest = 56,
                 include_modifiers = True,
                 groups = [
-                    iiko_cloud_client.models.loyalty_result_combo_group_schema.LoyaltyResultComboGroupSchema(
+                    iikocloud_client.models.loyalty_result_combo_group_schema.LoyaltyResultComboGroupSchema(
                         id = '', 
                         name = '', 
                         is_main_group = True, 
                         products = [
-                            iiko_cloud_client.models.loyalty_result_combo_product_schema.LoyaltyResultComboProductSchema(
+                            iikocloud_client.models.loyalty_result_combo_product_schema.LoyaltyResultComboProductSchema(
                                 product_id = '', 
                                 size_name = '', 
                                 size_id = '', 

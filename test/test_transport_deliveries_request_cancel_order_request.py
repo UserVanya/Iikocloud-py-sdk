@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_cancel_order_request import TransportDeliveriesRequestCancelOrderRequest
+from iikocloud_client.models.transport_deliveries_request_cancel_order_request import TransportDeliveriesRequestCancelOrderRequest
 
 class TestTransportDeliveriesRequestCancelOrderRequest(unittest.TestCase):
     """TransportDeliveriesRequestCancelOrderRequest unit test stubs"""

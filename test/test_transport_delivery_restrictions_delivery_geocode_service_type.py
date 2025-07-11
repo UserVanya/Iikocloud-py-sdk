@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_delivery_geocode_service_type import TransportDeliveryRestrictionsDeliveryGeocodeServiceType
+from iikocloud_client.models.transport_delivery_restrictions_delivery_geocode_service_type import TransportDeliveryRestrictionsDeliveryGeocodeServiceType
 
 class TestTransportDeliveryRestrictionsDeliveryGeocodeServiceType(unittest.TestCase):
     """TransportDeliveryRestrictionsDeliveryGeocodeServiceType unit test stubs"""

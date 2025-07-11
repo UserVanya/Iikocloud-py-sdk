@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_restaurant_section_mark import TransportReservesRestaurantSectionMark
+from iikocloud_client.models.transport_reserves_restaurant_section_mark import TransportReservesRestaurantSectionMark
 
 class TestTransportReservesRestaurantSectionMark(unittest.TestCase):
     """TransportReservesRestaurantSectionMark unit test stubs"""
@@ -36,11 +36,11 @@ class TestTransportReservesRestaurantSectionMark(unittest.TestCase):
         if include_optional:
             return TransportReservesRestaurantSectionMark(
                 text = '',
-                font = iiko_cloud_client.models.reserves_font_schema.ReservesFontSchema(
+                font = iikocloud_client.models.reserves_font_schema.ReservesFontSchema(
                     font_family = '', 
                     size = 1.337, 
                     font_style = null, ),
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 
@@ -55,11 +55,11 @@ class TestTransportReservesRestaurantSectionMark(unittest.TestCase):
         else:
             return TransportReservesRestaurantSectionMark(
                 text = '',
-                font = iiko_cloud_client.models.reserves_font_schema.ReservesFontSchema(
+                font = iikocloud_client.models.reserves_font_schema.ReservesFontSchema(
                     font_family = '', 
                     size = 1.337, 
                     font_style = null, ),
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_delivery_zone_address_binding import TransportDeliveryRestrictionsDeliveryZoneAddressBinding
+from iikocloud_client.models.transport_delivery_restrictions_delivery_zone_address_binding import TransportDeliveryRestrictionsDeliveryZoneAddressBinding
 
 class TestTransportDeliveryRestrictionsDeliveryZoneAddressBinding(unittest.TestCase):
     """TransportDeliveryRestrictionsDeliveryZoneAddressBinding unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveryRestrictionsDeliveryZoneAddressBinding(unittest.TestC
             return TransportDeliveryRestrictionsDeliveryZoneAddressBinding(
                 street_id = '',
                 postcode = '',
-                houses = iiko_cloud_client.models.delivery_restrictions_houses_range_schema.DeliveryRestrictionsHousesRangeSchema(
+                houses = iikocloud_client.models.delivery_restrictions_houses_range_schema.DeliveryRestrictionsHousesRangeSchema(
                     type = null, 
                     starting_number = 56, 
                     max_number = 56, 
@@ -50,7 +50,7 @@ class TestTransportDeliveryRestrictionsDeliveryZoneAddressBinding(unittest.TestC
             return TransportDeliveryRestrictionsDeliveryZoneAddressBinding(
                 street_id = '',
                 postcode = '',
-                houses = iiko_cloud_client.models.delivery_restrictions_houses_range_schema.DeliveryRestrictionsHousesRangeSchema(
+                houses = iikocloud_client.models.delivery_restrictions_houses_range_schema.DeliveryRestrictionsHousesRangeSchema(
                     type = null, 
                     starting_number = 56, 
                     max_number = 56, 

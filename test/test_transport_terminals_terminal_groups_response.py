@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_terminal_groups_response import TransportTerminalsTerminalGroupsResponse
+from iikocloud_client.models.transport_terminals_terminal_groups_response import TransportTerminalsTerminalGroupsResponse
 
 class TestTransportTerminalsTerminalGroupsResponse(unittest.TestCase):
     """TransportTerminalsTerminalGroupsResponse unit test stubs"""
@@ -37,34 +37,34 @@ class TestTransportTerminalsTerminalGroupsResponse(unittest.TestCase):
             return TransportTerminalsTerminalGroupsResponse(
                 correlation_id = '',
                 terminal_groups = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )
                             ], )
                     ],
                 terminal_groups_in_sleep = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )
@@ -75,34 +75,34 @@ class TestTransportTerminalsTerminalGroupsResponse(unittest.TestCase):
             return TransportTerminalsTerminalGroupsResponse(
                 correlation_id = '',
                 terminal_groups = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )
                             ], )
                     ],
                 terminal_groups_in_sleep = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_schema.RmsItemsResponseWrapperTerminalGroupSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_combo_group_mapping import NetLoyaltyResultComboGroupMapping
+from iikocloud_client.models.net_loyalty_result_combo_group_mapping import NetLoyaltyResultComboGroupMapping
 
 class TestNetLoyaltyResultComboGroupMapping(unittest.TestCase):
     """NetLoyaltyResultComboGroupMapping unit test stubs"""

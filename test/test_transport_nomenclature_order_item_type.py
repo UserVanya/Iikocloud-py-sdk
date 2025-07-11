@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_order_item_type import TransportNomenclatureOrderItemType
+from iikocloud_client.models.transport_nomenclature_order_item_type import TransportNomenclatureOrderItemType
 
 class TestTransportNomenclatureOrderItemType(unittest.TestCase):
     """TransportNomenclatureOrderItemType unit test stubs"""

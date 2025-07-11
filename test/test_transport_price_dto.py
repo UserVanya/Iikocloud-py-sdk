@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_price_dto import TransportPriceDto
+from iikocloud_client.models.transport_price_dto import TransportPriceDto
 
 class TestTransportPriceDto(unittest.TestCase):
     """TransportPriceDto unit test stubs"""

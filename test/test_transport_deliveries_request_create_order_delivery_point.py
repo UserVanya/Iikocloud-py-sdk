@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_delivery_point import TransportDeliveriesRequestCreateOrderDeliveryPoint
+from iikocloud_client.models.transport_deliveries_request_create_order_delivery_point import TransportDeliveriesRequestCreateOrderDeliveryPoint
 
 class TestTransportDeliveriesRequestCreateOrderDeliveryPoint(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderDeliveryPoint unit test stubs"""
@@ -35,10 +35,10 @@ class TestTransportDeliveriesRequestCreateOrderDeliveryPoint(unittest.TestCase):
         model = TransportDeliveriesRequestCreateOrderDeliveryPoint()
         if include_optional:
             return TransportDeliveriesRequestCreateOrderDeliveryPoint(
-                coordinates = iiko_cloud_client.models.common_coordinates_schema.CommonCoordinatesSchema(
+                coordinates = iikocloud_client.models.common_coordinates_schema.CommonCoordinatesSchema(
                     latitude = 1.337, 
                     longitude = 1.337, ),
-                address = iiko_cloud_client.models.create_order_address_schema.CreateOrderAddressSchema(
+                address = iikocloud_client.models.create_order_address_schema.CreateOrderAddressSchema(
                     type = '', ),
                 external_cartography_id = '',
                 comment = ''

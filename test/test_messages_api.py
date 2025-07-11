@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.messages_api import MessagesApi
+from iikocloud_client.api.messages_api import MessagesApi
 
 
 class TestMessagesApi(unittest.IsolatedAsyncioTestCase):

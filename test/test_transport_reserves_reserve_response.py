@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_reserve_response import TransportReservesReserveResponse
+from iikocloud_client.models.transport_reserves_reserve_response import TransportReservesReserveResponse
 
 class TestTransportReservesReserveResponse(unittest.TestCase):
     """TransportReservesReserveResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportReservesReserveResponse(unittest.TestCase):
         if include_optional:
             return TransportReservesReserveResponse(
                 correlation_id = '',
-                reserve_info = iiko_cloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
+                reserve_info = iikocloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
                     id = '', 
                     external_number = '', 
                     organization_id = '', 
@@ -49,7 +49,7 @@ class TestTransportReservesReserveResponse(unittest.TestCase):
         else:
             return TransportReservesReserveResponse(
                 correlation_id = '',
-                reserve_info = iiko_cloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
+                reserve_info = iikocloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
                     id = '', 
                     external_number = '', 
                     organization_id = '', 

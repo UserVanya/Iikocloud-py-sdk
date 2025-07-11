@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.allergen_group_dto import AllergenGroupDto
+from iikocloud_client.models.allergen_group_dto import AllergenGroupDto
 
 class TestAllergenGroupDto(unittest.TestCase):
     """AllergenGroupDto unit test stubs"""

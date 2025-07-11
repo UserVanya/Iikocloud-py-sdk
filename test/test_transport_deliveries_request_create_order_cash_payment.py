@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_cash_payment import TransportDeliveriesRequestCreateOrderCashPayment
+from iikocloud_client.models.transport_deliveries_request_create_order_cash_payment import TransportDeliveriesRequestCreateOrderCashPayment
 
 class TestTransportDeliveriesRequestCreateOrderCashPayment(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderCashPayment unit test stubs"""

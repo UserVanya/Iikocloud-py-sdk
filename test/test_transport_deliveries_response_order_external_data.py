@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_external_data import TransportDeliveriesResponseOrderExternalData
+from iikocloud_client.models.transport_deliveries_response_order_external_data import TransportDeliveriesResponseOrderExternalData
 
 class TestTransportDeliveriesResponseOrderExternalData(unittest.TestCase):
     """TransportDeliveriesResponseOrderExternalData unit test stubs"""

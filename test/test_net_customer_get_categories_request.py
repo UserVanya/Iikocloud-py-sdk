@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_categories_request import NetCustomerGetCategoriesRequest
+from iikocloud_client.models.net_customer_get_categories_request import NetCustomerGetCategoriesRequest
 
 class TestNetCustomerGetCategoriesRequest(unittest.TestCase):
     """NetCustomerGetCategoriesRequest unit test stubs"""

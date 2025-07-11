@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_delivery_settings_service_type import TransportOrganizationsDeliverySettingsServiceType
+from iikocloud_client.models.transport_organizations_delivery_settings_service_type import TransportOrganizationsDeliverySettingsServiceType
 
 class TestTransportOrganizationsDeliverySettingsServiceType(unittest.TestCase):
     """TransportOrganizationsDeliverySettingsServiceType unit test stubs"""

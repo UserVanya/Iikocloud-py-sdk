@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_commands_get_command_status_request import TransportCommandsGetCommandStatusRequest
+from iikocloud_client.models.transport_commands_get_command_status_request import TransportCommandsGetCommandStatusRequest
 
 class TestTransportCommandsGetCommandStatusRequest(unittest.TestCase):
     """TransportCommandsGetCommandStatusRequest unit test stubs"""

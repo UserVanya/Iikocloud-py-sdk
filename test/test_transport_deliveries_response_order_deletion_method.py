@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_deletion_method import TransportDeliveriesResponseOrderDeletionMethod
+from iikocloud_client.models.transport_deliveries_response_order_deletion_method import TransportDeliveriesResponseOrderDeletionMethod
 
 class TestTransportDeliveriesResponseOrderDeletionMethod(unittest.TestCase):
     """TransportDeliveriesResponseOrderDeletionMethod unit test stubs"""
@@ -37,14 +37,14 @@ class TestTransportDeliveriesResponseOrderDeletionMethod(unittest.TestCase):
             return TransportDeliveriesResponseOrderDeletionMethod(
                 id = '',
                 comment = '',
-                removal_type = iiko_cloud_client.models.order_removal_type_schema.OrderRemovalTypeSchema(
+                removal_type = iikocloud_client.models.order_removal_type_schema.OrderRemovalTypeSchema(
                     id = '', 
                     name = '', )
             )
         else:
             return TransportDeliveriesResponseOrderDeletionMethod(
                 id = '',
-                removal_type = iiko_cloud_client.models.order_removal_type_schema.OrderRemovalTypeSchema(
+                removal_type = iikocloud_client.models.order_removal_type_schema.OrderRemovalTypeSchema(
                     id = '', 
                     name = '', ),
         )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_categories_response import NetCustomerGetCategoriesResponse
+from iikocloud_client.models.net_customer_get_categories_response import NetCustomerGetCategoriesResponse
 
 class TestNetCustomerGetCategoriesResponse(unittest.TestCase):
     """NetCustomerGetCategoriesResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetCustomerGetCategoriesResponse(unittest.TestCase):
         if include_optional:
             return NetCustomerGetCategoriesResponse(
                 guest_categories = [
-                    iiko_cloud_client.models.customer_guest_category_short_info_schema.CustomerGuestCategoryShortInfoSchema(
+                    iikocloud_client.models.customer_guest_category_short_info_schema.CustomerGuestCategoryShortInfoSchema(
                         id = '', 
                         name = '', 
                         is_active = True, 

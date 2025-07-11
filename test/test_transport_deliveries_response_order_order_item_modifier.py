@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_order_item_modifier import TransportDeliveriesResponseOrderOrderItemModifier
+from iikocloud_client.models.transport_deliveries_response_order_order_item_modifier import TransportDeliveriesResponseOrderOrderItemModifier
 
 class TestTransportDeliveriesResponseOrderOrderItemModifier(unittest.TestCase):
     """TransportDeliveriesResponseOrderOrderItemModifier unit test stubs"""
@@ -35,18 +35,18 @@ class TestTransportDeliveriesResponseOrderOrderItemModifier(unittest.TestCase):
         model = TransportDeliveriesResponseOrderOrderItemModifier()
         if include_optional:
             return TransportDeliveriesResponseOrderOrderItemModifier(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 amount = 1.337,
                 amount_independent_of_parent_amount = True,
-                product_group = iiko_cloud_client.models.order_product_group_schema.OrderProductGroupSchema(
+                product_group = iikocloud_client.models.order_product_group_schema.OrderProductGroupSchema(
                     id = '', 
                     name = '', ),
                 price = 1.337,
                 price_predefined = True,
                 result_sum = 1.337,
-                deleted = iiko_cloud_client.models.order_item_deleted_info_schema.OrderItemDeletedInfoSchema(
+                deleted = iikocloud_client.models.order_item_deleted_info_schema.OrderItemDeletedInfoSchema(
                     deletion_method = null, ),
                 position_id = '',
                 default_amount = 56,
@@ -56,7 +56,7 @@ class TestTransportDeliveriesResponseOrderOrderItemModifier(unittest.TestCase):
             )
         else:
             return TransportDeliveriesResponseOrderOrderItemModifier(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 amount = 1.337,

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_simple_modifier_info import TransportNomenclatureSimpleModifierInfo
+from iikocloud_client.models.transport_nomenclature_simple_modifier_info import TransportNomenclatureSimpleModifierInfo
 
 class TestTransportNomenclatureSimpleModifierInfo(unittest.TestCase):
     """TransportNomenclatureSimpleModifierInfo unit test stubs"""

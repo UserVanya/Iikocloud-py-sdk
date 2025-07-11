@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
+from iikocloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
 
 class TestNetCommonGetByOrganizationIdRequest(unittest.TestCase):
     """NetCommonGetByOrganizationIdRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_item_deleted_info import TransportDeliveriesResponseOrderItemDeletedInfo
+from iikocloud_client.models.transport_deliveries_response_order_item_deleted_info import TransportDeliveriesResponseOrderItemDeletedInfo
 
 class TestTransportDeliveriesResponseOrderItemDeletedInfo(unittest.TestCase):
     """TransportDeliveriesResponseOrderItemDeletedInfo unit test stubs"""
@@ -35,14 +35,14 @@ class TestTransportDeliveriesResponseOrderItemDeletedInfo(unittest.TestCase):
         model = TransportDeliveriesResponseOrderItemDeletedInfo()
         if include_optional:
             return TransportDeliveriesResponseOrderItemDeletedInfo(
-                deletion_method = iiko_cloud_client.models.order_deletion_method_schema.OrderDeletionMethodSchema(
+                deletion_method = iikocloud_client.models.order_deletion_method_schema.OrderDeletionMethodSchema(
                     id = '', 
                     comment = '', 
                     removal_type = null, )
             )
         else:
             return TransportDeliveriesResponseOrderItemDeletedInfo(
-                deletion_method = iiko_cloud_client.models.order_deletion_method_schema.OrderDeletionMethodSchema(
+                deletion_method = iikocloud_client.models.order_deletion_method_schema.OrderDeletionMethodSchema(
                     id = '', 
                     comment = '', 
                     removal_type = null, ),

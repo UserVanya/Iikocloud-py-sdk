@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.customers_api import CustomersApi
+from iikocloud_client.api.customers_api import CustomersApi
 
 
 class TestCustomersApi(unittest.IsolatedAsyncioTestCase):

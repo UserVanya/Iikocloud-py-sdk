@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_size import TransportNomenclatureSize
+from iikocloud_client.models.transport_nomenclature_size import TransportNomenclatureSize
 
 class TestTransportNomenclatureSize(unittest.TestCase):
     """TransportNomenclatureSize unit test stubs"""

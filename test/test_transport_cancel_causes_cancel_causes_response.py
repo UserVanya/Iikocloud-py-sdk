@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_cancel_causes_cancel_causes_response import TransportCancelCausesCancelCausesResponse
+from iikocloud_client.models.transport_cancel_causes_cancel_causes_response import TransportCancelCausesCancelCausesResponse
 
 class TestTransportCancelCausesCancelCausesResponse(unittest.TestCase):
     """TransportCancelCausesCancelCausesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCancelCausesCancelCausesResponse(unittest.TestCase):
             return TransportCancelCausesCancelCausesResponse(
                 correlation_id = '',
                 cancel_causes = [
-                    iiko_cloud_client.models.cancel_causes_cancel_cause_schema.CancelCausesCancelCauseSchema(
+                    iikocloud_client.models.cancel_causes_cancel_cause_schema.CancelCausesCancelCauseSchema(
                         id = '', 
                         name = '', 
                         is_deleted = True, )
@@ -47,7 +47,7 @@ class TestTransportCancelCausesCancelCausesResponse(unittest.TestCase):
             return TransportCancelCausesCancelCausesResponse(
                 correlation_id = '',
                 cancel_causes = [
-                    iiko_cloud_client.models.cancel_causes_cancel_cause_schema.CancelCausesCancelCauseSchema(
+                    iikocloud_client.models.cancel_causes_cancel_cause_schema.CancelCausesCancelCauseSchema(
                         id = '', 
                         name = '', 
                         is_deleted = True, )

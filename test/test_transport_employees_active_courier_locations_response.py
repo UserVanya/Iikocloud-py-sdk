@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
+from iikocloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
 
 class TestTransportEmployeesActiveCourierLocationsResponse(unittest.TestCase):
     """TransportEmployeesActiveCourierLocationsResponse unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportEmployeesActiveCourierLocationsResponse(unittest.TestCase):
             return TransportEmployeesActiveCourierLocationsResponse(
                 correlation_id = '',
                 active_courier_locations = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_active_courier_location_schema.RmsItemsResponseWrapperActiveCourierLocationSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_active_courier_location_schema.RmsItemsResponseWrapperActiveCourierLocationSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
+                            iikocloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
                                 courier_id = '', 
                                 last_active_latitude = 1.337, 
                                 last_active_longitude = 1.337, 
@@ -52,10 +52,10 @@ class TestTransportEmployeesActiveCourierLocationsResponse(unittest.TestCase):
             return TransportEmployeesActiveCourierLocationsResponse(
                 correlation_id = '',
                 active_courier_locations = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_active_courier_location_schema.RmsItemsResponseWrapperActiveCourierLocationSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_active_courier_location_schema.RmsItemsResponseWrapperActiveCourierLocationSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
+                            iikocloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
                                 courier_id = '', 
                                 last_active_latitude = 1.337, 
                                 last_active_longitude = 1.337, 

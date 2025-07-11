@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_get_manual_conditions_response import NetLoyaltyResultGetManualConditionsResponse
+from iikocloud_client.models.net_loyalty_result_get_manual_conditions_response import NetLoyaltyResultGetManualConditionsResponse
 
 class TestNetLoyaltyResultGetManualConditionsResponse(unittest.TestCase):
     """NetLoyaltyResultGetManualConditionsResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultGetManualConditionsResponse(unittest.TestCase):
         if include_optional:
             return NetLoyaltyResultGetManualConditionsResponse(
                 manual_conditions = [
-                    iiko_cloud_client.models.loyalty_result_manual_condition_info_schema.LoyaltyResultManualConditionInfoSchema(
+                    iikocloud_client.models.loyalty_result_manual_condition_info_schema.LoyaltyResultManualConditionInfoSchema(
                         id = '', 
                         caption = '', 
                         is_dynamic_discount = True, 

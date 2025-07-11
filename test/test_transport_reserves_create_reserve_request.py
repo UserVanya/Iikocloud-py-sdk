@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
+from iikocloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
 
 class TestTransportReservesCreateReserveRequest(unittest.TestCase):
     """TransportReservesCreateReserveRequest unit test stubs"""
@@ -39,10 +39,10 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                 terminal_group_id = '',
                 id = '',
                 external_number = '',
-                order = iiko_cloud_client.models.request_reserve_order_schema.RequestReserveOrderSchema(
+                order = iikocloud_client.models.request_reserve_order_schema.RequestReserveOrderSchema(
                     menu_id = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -50,7 +50,7 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -60,7 +60,7 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -70,7 +70,7 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -86,12 +86,12 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                     order_type_id = '', 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )
                         ], ),
-                customer = iiko_cloud_client.models.create_order_regular_customer_schema.CreateOrderRegularCustomerSchema(
+                customer = iikocloud_client.models.create_order_regular_customer_schema.CreateOrderRegularCustomerSchema(
                     id = '', 
                     name = '', 
                     surname = '', 
@@ -111,17 +111,17 @@ class TestTransportReservesCreateReserveRequest(unittest.TestCase):
                     ],
                 estimated_start_time = '2019-08-24 14:15:22.123',
                 transport_to_front_timeout = 56,
-                guests = iiko_cloud_client.models.reserves_guests_info_schema.ReservesGuestsInfoSchema(
+                guests = iikocloud_client.models.reserves_guests_info_schema.ReservesGuestsInfoSchema(
                     count = 56, ),
                 event_type = '',
-                create_reserve_settings = iiko_cloud_client.models.common_create_order_settings_schema.CommonCreateOrderSettingsSchema(
+                create_reserve_settings = iikocloud_client.models.common_create_order_settings_schema.CommonCreateOrderSettingsSchema(
                     transport_to_front_timeout = 56, 
                     check_stop_list = False, )
             )
         else:
             return TransportReservesCreateReserveRequest(
                 organization_id = '',
-                customer = iiko_cloud_client.models.create_order_regular_customer_schema.CreateOrderRegularCustomerSchema(
+                customer = iikocloud_client.models.create_order_regular_customer_schema.CreateOrderRegularCustomerSchema(
                     id = '', 
                     name = '', 
                     surname = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_tips_types_tips_types_response import TransportTipsTypesTipsTypesResponse
+from iikocloud_client.models.transport_tips_types_tips_types_response import TransportTipsTypesTipsTypesResponse
 
 class TestTransportTipsTypesTipsTypesResponse(unittest.TestCase):
     """TransportTipsTypesTipsTypesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportTipsTypesTipsTypesResponse(unittest.TestCase):
             return TransportTipsTypesTipsTypesResponse(
                 correlation_id = '',
                 tips_types = [
-                    iiko_cloud_client.models.tips_types_tips_type_schema.TipsTypesTipsTypeSchema(
+                    iikocloud_client.models.tips_types_tips_type_schema.TipsTypesTipsTypeSchema(
                         id = '', 
                         name = '', 
                         organization_ids = [
@@ -55,7 +55,7 @@ class TestTransportTipsTypesTipsTypesResponse(unittest.TestCase):
             return TransportTipsTypesTipsTypesResponse(
                 correlation_id = '',
                 tips_types = [
-                    iiko_cloud_client.models.tips_types_tips_type_schema.TipsTypesTipsTypeSchema(
+                    iikocloud_client.models.tips_types_tips_type_schema.TipsTypesTipsTypeSchema(
                         id = '', 
                         name = '', 
                         organization_ids = [

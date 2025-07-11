@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_customer_info_by_email_request import NetCustomerGetCustomerInfoByEmailRequest
+from iikocloud_client.models.net_customer_get_customer_info_by_email_request import NetCustomerGetCustomerInfoByEmailRequest
 
 class TestNetCustomerGetCustomerInfoByEmailRequest(unittest.TestCase):
     """NetCustomerGetCustomerInfoByEmailRequest unit test stubs"""

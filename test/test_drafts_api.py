@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.drafts_api import DraftsApi
+from iikocloud_client.api.drafts_api import DraftsApi
 
 
 class TestDraftsApi(unittest.IsolatedAsyncioTestCase):

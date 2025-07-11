@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_streets_by_id_response import TransportAddressStreetsByIdResponse
+from iikocloud_client.models.transport_address_streets_by_id_response import TransportAddressStreetsByIdResponse
 
 class TestTransportAddressStreetsByIdResponse(unittest.TestCase):
     """TransportAddressStreetsByIdResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportAddressStreetsByIdResponse(unittest.TestCase):
         if include_optional:
             return TransportAddressStreetsByIdResponse(
                 streets = [
-                    iiko_cloud_client.models.address_street_by_id_schema.AddressStreetByIdSchema(
+                    iikocloud_client.models.address_street_by_id_schema.AddressStreetByIdSchema(
                         id = '', 
                         classifier_id = '', 
                         city_id = '', 

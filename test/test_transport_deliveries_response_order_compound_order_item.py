@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_compound_order_item import TransportDeliveriesResponseOrderCompoundOrderItem
+from iikocloud_client.models.transport_deliveries_response_order_compound_order_item import TransportDeliveriesResponseOrderCompoundOrderItem
 
 class TestTransportDeliveriesResponseOrderCompoundOrderItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderCompoundOrderItem unit test stubs"""
@@ -35,10 +35,10 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItem(unittest.TestCase):
         model = TransportDeliveriesResponseOrderCompoundOrderItem()
         if include_optional:
             return TransportDeliveriesResponseOrderCompoundOrderItem(
-                primary_component = iiko_cloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
+                primary_component = iikocloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
                     product = null, 
                     modifiers = [
-                        iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                        iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                             product = null, 
                             amount = 1.337, 
                             amount_independent_of_parent_amount = True, 
@@ -59,10 +59,10 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItem(unittest.TestCase):
                     position_id = '', 
                     tax_percent = 1.337, 
                     result_sum = 1.337, ),
-                secondary_component = iiko_cloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
+                secondary_component = iikocloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
                     product = null, 
                     modifiers = [
-                        iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                        iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                             product = null, 
                             amount = 1.337, 
                             amount_independent_of_parent_amount = True, 
@@ -84,7 +84,7 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItem(unittest.TestCase):
                     tax_percent = 1.337, 
                     result_sum = 1.337, ),
                 common_modifiers = [
-                    iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                    iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                         product = null, 
                         amount = 1.337, 
                         amount_independent_of_parent_amount = True, 
@@ -99,16 +99,16 @@ class TestTransportDeliveriesResponseOrderCompoundOrderItem(unittest.TestCase):
                         tax_percent = 1.337, 
                         free_of_charge_amount = 56, )
                     ],
-                template = iiko_cloud_client.models.order_compound_item_template_schema.OrderCompoundItemTemplateSchema(
+                template = iikocloud_client.models.order_compound_item_template_schema.OrderCompoundItemTemplateSchema(
                     id = '', 
                     name = '', )
             )
         else:
             return TransportDeliveriesResponseOrderCompoundOrderItem(
-                primary_component = iiko_cloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
+                primary_component = iikocloud_client.models.order_compound_order_item_component_schema.OrderCompoundOrderItemComponentSchema(
                     product = null, 
                     modifiers = [
-                        iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                        iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                             product = null, 
                             amount = 1.337, 
                             amount_independent_of_parent_amount = True, 

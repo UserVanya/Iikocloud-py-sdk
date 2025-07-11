@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
 
 class TestTransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest(unittest.TestCase):
     """TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
+from iikocloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
 
 class TestTransportNomenclatureMenuRequest(unittest.TestCase):
     """TransportNomenclatureMenuRequest unit test stubs"""

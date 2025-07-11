@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_organization_get_programs_response import NetOrganizationGetProgramsResponse
+from iikocloud_client.models.net_organization_get_programs_response import NetOrganizationGetProgramsResponse
 
 class TestNetOrganizationGetProgramsResponse(unittest.TestCase):
     """NetOrganizationGetProgramsResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetOrganizationGetProgramsResponse(unittest.TestCase):
         if include_optional:
             return NetOrganizationGetProgramsResponse(
                 programs = [
-                    iiko_cloud_client.models.organization_loyalty_program_schema.OrganizationLoyaltyProgramSchema(
+                    iikocloud_client.models.organization_loyalty_program_schema.OrganizationLoyaltyProgramSchema(
                         id = '', 
                         name = '', 
                         description = '', 
@@ -47,7 +47,7 @@ class TestNetOrganizationGetProgramsResponse(unittest.TestCase):
                         is_active = True, 
                         wallet_id = '', 
                         marketing_campaigns = [
-                            iiko_cloud_client.models.organization_marketing_campaign_info_schema.OrganizationMarketingCampaignInfoSchema(
+                            iikocloud_client.models.organization_marketing_campaign_info_schema.OrganizationMarketingCampaignInfoSchema(
                                 id = '', 
                                 program_id = '', 
                                 name = '', 
@@ -56,18 +56,18 @@ class TestNetOrganizationGetProgramsResponse(unittest.TestCase):
                                 period_from = '2019-08-24 14:15:22.123', 
                                 period_to = '2019-08-24 14:15:22.123', 
                                 order_action_condition_bindings = [
-                                    iiko_cloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
+                                    iikocloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
                                         id = '', 
                                         stop_further_execution = True, 
                                         actions = [
-                                            iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                                            iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                                                 id = '', 
                                                 settings = '', 
                                                 type_name = '', 
                                                 check_sum = '', )
                                             ], 
                                         conditions = [
-                                            iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                                            iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                                                 id = '', 
                                                 settings = '', 
                                                 type_name = '', 
@@ -75,7 +75,7 @@ class TestNetOrganizationGetProgramsResponse(unittest.TestCase):
                                             ], )
                                     ], 
                                 periodic_action_condition_bindings = [
-                                    iiko_cloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
+                                    iikocloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
                                         id = '', 
                                         stop_further_execution = True, )
                                     ], 

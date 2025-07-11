@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_available_payment import NetLoyaltyResultAvailablePayment
+from iikocloud_client.models.net_loyalty_result_available_payment import NetLoyaltyResultAvailablePayment
 
 class TestNetLoyaltyResultAvailablePayment(unittest.TestCase):
     """NetLoyaltyResultAvailablePayment unit test stubs"""
@@ -39,7 +39,7 @@ class TestNetLoyaltyResultAvailablePayment(unittest.TestCase):
                 max_sum = 1.337,
                 order = 56,
                 wallet_infos = [
-                    iiko_cloud_client.models.loyalty_result_wallet_info_schema.LoyaltyResultWalletInfoSchema(
+                    iikocloud_client.models.loyalty_result_wallet_info_schema.LoyaltyResultWalletInfoSchema(
                         id = '', 
                         max_sum = 1.337, 
                         can_hold_money = True, )

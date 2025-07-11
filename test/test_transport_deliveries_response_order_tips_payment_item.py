@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_tips_payment_item import TransportDeliveriesResponseOrderTipsPaymentItem
+from iikocloud_client.models.transport_deliveries_response_order_tips_payment_item import TransportDeliveriesResponseOrderTipsPaymentItem
 
 class TestTransportDeliveriesResponseOrderTipsPaymentItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderTipsPaymentItem unit test stubs"""
@@ -35,10 +35,10 @@ class TestTransportDeliveriesResponseOrderTipsPaymentItem(unittest.TestCase):
         model = TransportDeliveriesResponseOrderTipsPaymentItem()
         if include_optional:
             return TransportDeliveriesResponseOrderTipsPaymentItem(
-                tips_type = iiko_cloud_client.models.order_tips_type_schema.OrderTipsTypeSchema(
+                tips_type = iikocloud_client.models.order_tips_type_schema.OrderTipsTypeSchema(
                     id = '', 
                     name = '', ),
-                payment_type = iiko_cloud_client.models.order_payment_type_schema.OrderPaymentTypeSchema(
+                payment_type = iikocloud_client.models.order_payment_type_schema.OrderPaymentTypeSchema(
                     id = '', 
                     name = '', 
                     kind = null, ),
@@ -51,7 +51,7 @@ class TestTransportDeliveriesResponseOrderTipsPaymentItem(unittest.TestCase):
             )
         else:
             return TransportDeliveriesResponseOrderTipsPaymentItem(
-                payment_type = iiko_cloud_client.models.order_payment_type_schema.OrderPaymentTypeSchema(
+                payment_type = iikocloud_client.models.order_payment_type_schema.OrderPaymentTypeSchema(
                     id = '', 
                     name = '', 
                     kind = null, ),

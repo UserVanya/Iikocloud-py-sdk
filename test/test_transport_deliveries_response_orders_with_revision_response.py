@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
 
 class TestTransportDeliveriesResponseOrdersWithRevisionResponse(unittest.TestCase):
     """TransportDeliveriesResponseOrdersWithRevisionResponse unit test stubs"""
@@ -38,10 +38,10 @@ class TestTransportDeliveriesResponseOrdersWithRevisionResponse(unittest.TestCas
                 correlation_id = '',
                 max_revision = 56,
                 orders_by_organizations = [
-                    iiko_cloud_client.models.response_orders_by_organization_schema.ResponseOrdersByOrganizationSchema(
+                    iikocloud_client.models.response_orders_by_organization_schema.ResponseOrdersByOrganizationSchema(
                         organization_id = '', 
                         orders = [
-                            iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                            iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                                 id = '', 
                                 pos_id = '', 
                                 external_number = '', 
@@ -58,10 +58,10 @@ class TestTransportDeliveriesResponseOrdersWithRevisionResponse(unittest.TestCas
                 correlation_id = '',
                 max_revision = 56,
                 orders_by_organizations = [
-                    iiko_cloud_client.models.response_orders_by_organization_schema.ResponseOrdersByOrganizationSchema(
+                    iikocloud_client.models.response_orders_by_organization_schema.ResponseOrdersByOrganizationSchema(
                         organization_id = '', 
                         orders = [
-                            iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                            iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                                 id = '', 
                                 pos_id = '', 
                                 external_number = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
+from iikocloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
 
 class TestTransportDeliveriesDraftsCreateOrSaveDraftResponse(unittest.TestCase):
     """TransportDeliveriesDraftsCreateOrSaveDraftResponse unit test stubs"""

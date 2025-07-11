@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_coordinate_info import TransportEmployeesCoordinateInfo
+from iikocloud_client.models.transport_employees_coordinate_info import TransportEmployeesCoordinateInfo
 
 class TestTransportEmployeesCoordinateInfo(unittest.TestCase):
     """TransportEmployeesCoordinateInfo unit test stubs"""

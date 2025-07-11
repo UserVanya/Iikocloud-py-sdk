@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
 
 class TestNetLoyaltyResultCalculateComboPriceRequest(unittest.TestCase):
     """NetLoyaltyResultCalculateComboPriceRequest unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultCalculateComboPriceRequest(unittest.TestCase):
         if include_optional:
             return NetLoyaltyResultCalculateComboPriceRequest(
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -48,7 +48,7 @@ class TestNetLoyaltyResultCalculateComboPriceRequest(unittest.TestCase):
         else:
             return NetLoyaltyResultCalculateComboPriceRequest(
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_anonymous_customer import TransportDeliveriesRequestCreateOrderAnonymousCustomer
+from iikocloud_client.models.transport_deliveries_request_create_order_anonymous_customer import TransportDeliveriesRequestCreateOrderAnonymousCustomer
 
 class TestTransportDeliveriesRequestCreateOrderAnonymousCustomer(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderAnonymousCustomer unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_tips_types_tips_type import TransportTipsTypesTipsType
+from iikocloud_client.models.transport_tips_types_tips_type import TransportTipsTypesTipsType
 
 class TestTransportTipsTypesTipsType(unittest.TestCase):
     """TransportTipsTypesTipsType unit test stubs"""

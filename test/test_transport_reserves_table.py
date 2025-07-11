@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_table import TransportReservesTable
+from iikocloud_client.models.transport_reserves_table import TransportReservesTable
 
 class TestTransportReservesTable(unittest.TestCase):
     """TransportReservesTable unit test stubs"""

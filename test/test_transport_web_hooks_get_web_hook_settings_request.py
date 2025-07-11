@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_get_web_hook_settings_request import TransportWebHooksGetWebHookSettingsRequest
+from iikocloud_client.models.transport_web_hooks_get_web_hook_settings_request import TransportWebHooksGetWebHookSettingsRequest
 
 class TestTransportWebHooksGetWebHookSettingsRequest(unittest.TestCase):
     """TransportWebHooksGetWebHookSettingsRequest unit test stubs"""

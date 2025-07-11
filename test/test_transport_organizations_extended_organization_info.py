@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_extended_organization_info import TransportOrganizationsExtendedOrganizationInfo
+from iikocloud_client.models.transport_organizations_extended_organization_info import TransportOrganizationsExtendedOrganizationInfo
 
 class TestTransportOrganizationsExtendedOrganizationInfo(unittest.TestCase):
     """TransportOrganizationsExtendedOrganizationInfo unit test stubs"""

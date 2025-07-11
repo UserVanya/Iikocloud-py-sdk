@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_discount import TransportDeliveriesRequestCreateOrderDiscount
+from iikocloud_client.models.transport_deliveries_request_create_order_discount import TransportDeliveriesRequestCreateOrderDiscount
 
 class TestTransportDeliveriesRequestCreateOrderDiscount(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderDiscount unit test stubs"""

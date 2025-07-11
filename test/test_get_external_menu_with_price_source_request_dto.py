@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.get_external_menu_with_price_source_request_dto import GetExternalMenuWithPriceSourceRequestDto
+from iikocloud_client.models.get_external_menu_with_price_source_request_dto import GetExternalMenuWithPriceSourceRequestDto
 
 class TestGetExternalMenuWithPriceSourceRequestDto(unittest.TestCase):
     """GetExternalMenuWithPriceSourceRequestDto unit test stubs"""

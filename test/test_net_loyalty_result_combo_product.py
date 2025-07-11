@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_combo_product import NetLoyaltyResultComboProduct
+from iikocloud_client.models.net_loyalty_result_combo_product import NetLoyaltyResultComboProduct
 
 class TestNetLoyaltyResultComboProduct(unittest.TestCase):
     """NetLoyaltyResultComboProduct unit test stubs"""

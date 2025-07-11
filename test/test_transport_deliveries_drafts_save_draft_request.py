@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_save_draft_request import TransportDeliveriesDraftsSaveDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_save_draft_request import TransportDeliveriesDraftsSaveDraftRequest
 
 class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
     """TransportDeliveriesDraftsSaveDraftRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
             return TransportDeliveriesDraftsSaveDraftRequest(
                 employee_id = '',
                 organization_id = '',
-                order = iiko_cloud_client.models.drafts_delivery_order_draft_schema.DraftsDeliveryOrderDraftSchema(
+                order = iikocloud_client.models.drafts_delivery_order_draft_schema.DraftsDeliveryOrderDraftSchema(
                     menu_id = '', 
                     id = '', 
                     external_number = '', 
@@ -54,7 +54,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                     delivery_duration = 56, 
                     delivery_zone = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -62,7 +62,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -72,7 +72,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -82,7 +82,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -97,7 +97,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                     loyalty_info = null, 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )
@@ -108,7 +108,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
             return TransportDeliveriesDraftsSaveDraftRequest(
                 employee_id = '',
                 organization_id = '',
-                order = iiko_cloud_client.models.drafts_delivery_order_draft_schema.DraftsDeliveryOrderDraftSchema(
+                order = iikocloud_client.models.drafts_delivery_order_draft_schema.DraftsDeliveryOrderDraftSchema(
                     menu_id = '', 
                     id = '', 
                     external_number = '', 
@@ -125,7 +125,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                     delivery_duration = 56, 
                     delivery_zone = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -133,7 +133,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -143,7 +143,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -153,7 +153,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -168,7 +168,7 @@ class TestTransportDeliveriesDraftsSaveDraftRequest(unittest.TestCase):
                     loyalty_info = null, 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )

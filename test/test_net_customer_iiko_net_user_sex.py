@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_iiko_net_user_sex import NetCustomerIikoNetUserSex
+from iikocloud_client.models.net_customer_iiko_net_user_sex import NetCustomerIikoNetUserSex
 
 class TestNetCustomerIikoNetUserSex(unittest.TestCase):
     """NetCustomerIikoNetUserSex unit test stubs"""

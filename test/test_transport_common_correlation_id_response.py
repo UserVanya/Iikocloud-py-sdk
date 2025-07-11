@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
 
 class TestTransportCommonCorrelationIdResponse(unittest.TestCase):
     """TransportCommonCorrelationIdResponse unit test stubs"""

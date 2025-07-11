@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_add_order_payments_to_banquet_request import TransportReservesAddOrderPaymentsToBanquetRequest
+from iikocloud_client.models.transport_reserves_add_order_payments_to_banquet_request import TransportReservesAddOrderPaymentsToBanquetRequest
 
 class TestTransportReservesAddOrderPaymentsToBanquetRequest(unittest.TestCase):
     """TransportReservesAddOrderPaymentsToBanquetRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportReservesAddOrderPaymentsToBanquetRequest(unittest.TestCase):
                 reserve_id = '',
                 organization_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 
@@ -53,7 +53,7 @@ class TestTransportReservesAddOrderPaymentsToBanquetRequest(unittest.TestCase):
                 reserve_id = '',
                 organization_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 

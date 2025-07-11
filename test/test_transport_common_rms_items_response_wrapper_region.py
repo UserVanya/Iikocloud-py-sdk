@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_region import TransportCommonRmsItemsResponseWrapperRegion
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_region import TransportCommonRmsItemsResponseWrapperRegion
 
 class TestTransportCommonRmsItemsResponseWrapperRegion(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperRegion unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCommonRmsItemsResponseWrapperRegion(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperRegion(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.address_region_schema.AddressRegionSchema(
+                    iikocloud_client.models.address_region_schema.AddressRegionSchema(
                         id = '', 
                         name = '', 
                         external_revision = 56, 
@@ -48,7 +48,7 @@ class TestTransportCommonRmsItemsResponseWrapperRegion(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperRegion(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.address_region_schema.AddressRegionSchema(
+                    iikocloud_client.models.address_region_schema.AddressRegionSchema(
                         id = '', 
                         name = '', 
                         external_revision = 56, 

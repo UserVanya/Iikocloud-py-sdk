@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_request_add_table_order_items_settings import TransportTableOrdersRequestAddTableOrderItemsSettings
+from iikocloud_client.models.transport_table_orders_request_add_table_order_items_settings import TransportTableOrdersRequestAddTableOrderItemsSettings
 
 class TestTransportTableOrdersRequestAddTableOrderItemsSettings(unittest.TestCase):
     """TransportTableOrdersRequestAddTableOrderItemsSettings unit test stubs"""

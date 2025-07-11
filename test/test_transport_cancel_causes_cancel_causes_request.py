@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_cancel_causes_cancel_causes_request import TransportCancelCausesCancelCausesRequest
+from iikocloud_client.models.transport_cancel_causes_cancel_causes_request import TransportCancelCausesCancelCausesRequest
 
 class TestTransportCancelCausesCancelCausesRequest(unittest.TestCase):
     """TransportCancelCausesCancelCausesRequest unit test stubs"""

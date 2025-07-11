@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.notifications_api import NotificationsApi
+from iikocloud_client.api.notifications_api import NotificationsApi
 
 
 class TestNotificationsApi(unittest.IsolatedAsyncioTestCase):

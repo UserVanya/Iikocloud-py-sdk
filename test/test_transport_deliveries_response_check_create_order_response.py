@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_check_create_order_response import TransportDeliveriesResponseCheckCreateOrderResponse
+from iikocloud_client.models.transport_deliveries_response_check_create_order_response import TransportDeliveriesResponseCheckCreateOrderResponse
 
 class TestTransportDeliveriesResponseCheckCreateOrderResponse(unittest.TestCase):
     """TransportDeliveriesResponseCheckCreateOrderResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportDeliveriesResponseCheckCreateOrderResponse(unittest.TestCase)
         if include_optional:
             return TransportDeliveriesResponseCheckCreateOrderResponse(
                 correlation_id = '',
-                error_info = iiko_cloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
+                error_info = iikocloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
                     code = null, 
                     message = '', 
                     description = '', 
@@ -45,7 +45,7 @@ class TestTransportDeliveriesResponseCheckCreateOrderResponse(unittest.TestCase)
         else:
             return TransportDeliveriesResponseCheckCreateOrderResponse(
                 correlation_id = '',
-                error_info = iiko_cloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
+                error_info = iikocloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
                     code = null, 
                     message = '', 
                     description = '', 

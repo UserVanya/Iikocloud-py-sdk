@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_active_courier_location import TransportCommonRmsItemsResponseWrapperActiveCourierLocation
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_active_courier_location import TransportCommonRmsItemsResponseWrapperActiveCourierLocation
 
 class TestTransportCommonRmsItemsResponseWrapperActiveCourierLocation(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperActiveCourierLocation unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCommonRmsItemsResponseWrapperActiveCourierLocation(unittest.T
             return TransportCommonRmsItemsResponseWrapperActiveCourierLocation(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
+                    iikocloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
                         courier_id = '', 
                         last_active_latitude = 1.337, 
                         last_active_longitude = 1.337, 
@@ -48,7 +48,7 @@ class TestTransportCommonRmsItemsResponseWrapperActiveCourierLocation(unittest.T
             return TransportCommonRmsItemsResponseWrapperActiveCourierLocation(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
+                    iikocloud_client.models.employees_active_courier_location_schema.EmployeesActiveCourierLocationSchema(
                         courier_id = '', 
                         last_active_latitude = 1.337, 
                         last_active_longitude = 1.337, 

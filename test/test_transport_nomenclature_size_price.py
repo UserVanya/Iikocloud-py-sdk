@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_size_price import TransportNomenclatureSizePrice
+from iikocloud_client.models.transport_nomenclature_size_price import TransportNomenclatureSizePrice
 
 class TestTransportNomenclatureSizePrice(unittest.TestCase):
     """TransportNomenclatureSizePrice unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportNomenclatureSizePrice(unittest.TestCase):
         if include_optional:
             return TransportNomenclatureSizePrice(
                 size_id = '',
-                price = iiko_cloud_client.models.nomenclature_price_schema.NomenclaturePriceSchema(
+                price = iikocloud_client.models.nomenclature_price_schema.NomenclaturePriceSchema(
                     current_price = 1.337, 
                     is_included_in_menu = True, 
                     next_price = 1.337, 
@@ -46,7 +46,7 @@ class TestTransportNomenclatureSizePrice(unittest.TestCase):
         else:
             return TransportNomenclatureSizePrice(
                 size_id = '',
-                price = iiko_cloud_client.models.nomenclature_price_schema.NomenclaturePriceSchema(
+                price = iikocloud_client.models.nomenclature_price_schema.NomenclaturePriceSchema(
                     current_price = 1.337, 
                     is_included_in_menu = True, 
                     next_price = 1.337, 

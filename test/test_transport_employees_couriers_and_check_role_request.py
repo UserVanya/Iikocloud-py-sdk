@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_couriers_and_check_role_request import TransportEmployeesCouriersAndCheckRoleRequest
+from iikocloud_client.models.transport_employees_couriers_and_check_role_request import TransportEmployeesCouriersAndCheckRoleRequest
 
 class TestTransportEmployeesCouriersAndCheckRoleRequest(unittest.TestCase):
     """TransportEmployeesCouriersAndCheckRoleRequest unit test stubs"""

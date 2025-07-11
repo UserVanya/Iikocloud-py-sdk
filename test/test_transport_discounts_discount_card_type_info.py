@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_discounts_discount_card_type_info import TransportDiscountsDiscountCardTypeInfo
+from iikocloud_client.models.transport_discounts_discount_card_type_info import TransportDiscountsDiscountCardTypeInfo
 
 class TestTransportDiscountsDiscountCardTypeInfo(unittest.TestCase):
     """TransportDiscountsDiscountCardTypeInfo unit test stubs"""
@@ -40,7 +40,7 @@ class TestTransportDiscountsDiscountCardTypeInfo(unittest.TestCase):
                 percent = 1.337,
                 is_categorised_discount = True,
                 product_category_discounts = [
-                    iiko_cloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
+                    iikocloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
                         category_id = '', 
                         category_name = '', 
                         percent = 1.337, )
@@ -63,7 +63,7 @@ class TestTransportDiscountsDiscountCardTypeInfo(unittest.TestCase):
                 percent = 1.337,
                 is_categorised_discount = True,
                 product_category_discounts = [
-                    iiko_cloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
+                    iikocloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
                         category_id = '', 
                         category_name = '', 
                         percent = 1.337, )

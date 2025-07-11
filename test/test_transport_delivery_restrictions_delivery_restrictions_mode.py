@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_delivery_restrictions_mode import TransportDeliveryRestrictionsDeliveryRestrictionsMode
+from iikocloud_client.models.transport_delivery_restrictions_delivery_restrictions_mode import TransportDeliveryRestrictionsDeliveryRestrictionsMode
 
 class TestTransportDeliveryRestrictionsDeliveryRestrictionsMode(unittest.TestCase):
     """TransportDeliveryRestrictionsDeliveryRestrictionsMode unit test stubs"""

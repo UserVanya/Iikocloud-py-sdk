@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_get_transactions_report_by_revision_response import NetReportGetTransactionsReportByRevisionResponse
+from iikocloud_client.models.net_report_get_transactions_report_by_revision_response import NetReportGetTransactionsReportByRevisionResponse
 
 class TestNetReportGetTransactionsReportByRevisionResponse(unittest.TestCase):
     """NetReportGetTransactionsReportByRevisionResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetReportGetTransactionsReportByRevisionResponse(unittest.TestCase):
         if include_optional:
             return NetReportGetTransactionsReportByRevisionResponse(
                 transactions = [
-                    iiko_cloud_client.models.report_transport_transactions_report_item_schema.ReportTransportTransactionsReportItemSchema(
+                    iikocloud_client.models.report_transport_transactions_report_item_schema.ReportTransportTransactionsReportItemSchema(
                         api_client_login = '', 
                         balance_after = 1.337, 
                         balance_before = 1.337, 

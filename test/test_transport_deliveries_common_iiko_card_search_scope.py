@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_iiko_card_search_scope import TransportDeliveriesCommonIikoCardSearchScope
+from iikocloud_client.models.transport_deliveries_common_iiko_card_search_scope import TransportDeliveriesCommonIikoCardSearchScope
 
 class TestTransportDeliveriesCommonIikoCardSearchScope(unittest.TestCase):
     """TransportDeliveriesCommonIikoCardSearchScope unit test stubs"""

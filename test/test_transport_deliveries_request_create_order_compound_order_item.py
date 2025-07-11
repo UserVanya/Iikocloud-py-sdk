@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_compound_order_item import TransportDeliveriesRequestCreateOrderCompoundOrderItem
+from iikocloud_client.models.transport_deliveries_request_create_order_compound_order_item import TransportDeliveriesRequestCreateOrderCompoundOrderItem
 
 class TestTransportDeliveriesRequestCreateOrderCompoundOrderItem(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderCompoundOrderItem unit test stubs"""
@@ -35,10 +35,10 @@ class TestTransportDeliveriesRequestCreateOrderCompoundOrderItem(unittest.TestCa
         model = TransportDeliveriesRequestCreateOrderCompoundOrderItem()
         if include_optional:
             return TransportDeliveriesRequestCreateOrderCompoundOrderItem(
-                primary_component = iiko_cloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
+                primary_component = iikocloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
                     product_id = '', 
                     modifiers = [
-                        iiko_cloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
+                        iikocloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
                             product_id = '', 
                             amount = 1.337, 
                             product_group_id = '', 
@@ -47,10 +47,10 @@ class TestTransportDeliveriesRequestCreateOrderCompoundOrderItem(unittest.TestCa
                         ], 
                     price = 1.337, 
                     position_id = '', ),
-                secondary_component = iiko_cloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
+                secondary_component = iikocloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
                     product_id = '', 
                     modifiers = [
-                        iiko_cloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
+                        iikocloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
                             product_id = '', 
                             amount = 1.337, 
                             product_group_id = '', 
@@ -60,7 +60,7 @@ class TestTransportDeliveriesRequestCreateOrderCompoundOrderItem(unittest.TestCa
                     price = 1.337, 
                     position_id = '', ),
                 common_modifiers = [
-                    iiko_cloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
+                    iikocloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
                         product_id = '', 
                         amount = 1.337, 
                         product_group_id = '', 
@@ -70,10 +70,10 @@ class TestTransportDeliveriesRequestCreateOrderCompoundOrderItem(unittest.TestCa
             )
         else:
             return TransportDeliveriesRequestCreateOrderCompoundOrderItem(
-                primary_component = iiko_cloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
+                primary_component = iikocloud_client.models.create_order_compound_order_item_component_schema.CreateOrderCompoundOrderItemComponentSchema(
                     product_id = '', 
                     modifiers = [
-                        iiko_cloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
+                        iikocloud_client.models.create_order_modifier_schema.CreateOrderModifierSchema(
                             product_id = '', 
                             amount = 1.337, 
                             product_group_id = '', 

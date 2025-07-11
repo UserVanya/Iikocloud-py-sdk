@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_order_types_order_service_type import TransportOrderTypesOrderServiceType
+from iikocloud_client.models.transport_order_types_order_service_type import TransportOrderTypesOrderServiceType
 
 class TestTransportOrderTypesOrderServiceType(unittest.TestCase):
     """TransportOrderTypesOrderServiceType unit test stubs"""

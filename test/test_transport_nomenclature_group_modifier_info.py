@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_group_modifier_info import TransportNomenclatureGroupModifierInfo
+from iikocloud_client.models.transport_nomenclature_group_modifier_info import TransportNomenclatureGroupModifierInfo
 
 class TestTransportNomenclatureGroupModifierInfo(unittest.TestCase):
     """TransportNomenclatureGroupModifierInfo unit test stubs"""
@@ -41,7 +41,7 @@ class TestTransportNomenclatureGroupModifierInfo(unittest.TestCase):
                 required = True,
                 child_modifiers_have_min_max_restrictions = True,
                 child_modifiers = [
-                    iiko_cloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
+                    iikocloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
                         id = '', 
                         default_amount = 56, 
                         min_amount = 56, 
@@ -63,7 +63,7 @@ class TestTransportNomenclatureGroupModifierInfo(unittest.TestCase):
                 max_amount = 56,
                 required = True,
                 child_modifiers = [
-                    iiko_cloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
+                    iikocloud_client.models.nomenclature_child_modifier_info_schema.NomenclatureChildModifierInfoSchema(
                         id = '', 
                         default_amount = 56, 
                         min_amount = 56, 

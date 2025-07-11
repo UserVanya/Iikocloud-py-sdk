@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_iiko_card_discount import TransportDeliveriesRequestCreateOrderIikoCardDiscount
+from iikocloud_client.models.transport_deliveries_request_create_order_iiko_card_discount import TransportDeliveriesRequestCreateOrderIikoCardDiscount
 
 class TestTransportDeliveriesRequestCreateOrderIikoCardDiscount(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderIikoCardDiscount unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportDeliveriesRequestCreateOrderIikoCardDiscount(unittest.TestCas
                 program_id = '',
                 program_name = '',
                 discount_items = [
-                    iiko_cloud_client.models.create_order_iiko_card_discount_item_schema.CreateOrderIikoCardDiscountItemSchema(
+                    iikocloud_client.models.create_order_iiko_card_discount_item_schema.CreateOrderIikoCardDiscountItemSchema(
                         position_id = '', 
                         sum = 1.337, 
                         amount = 1.337, )
@@ -49,7 +49,7 @@ class TestTransportDeliveriesRequestCreateOrderIikoCardDiscount(unittest.TestCas
                 program_id = '',
                 program_name = '',
                 discount_items = [
-                    iiko_cloud_client.models.create_order_iiko_card_discount_item_schema.CreateOrderIikoCardDiscountItemSchema(
+                    iikocloud_client.models.create_order_iiko_card_discount_item_schema.CreateOrderIikoCardDiscountItemSchema(
                         position_id = '', 
                         sum = 1.337, 
                         amount = 1.337, )

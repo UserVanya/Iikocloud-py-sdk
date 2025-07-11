@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_organization_marketing_campaign_settings_info import NetOrganizationMarketingCampaignSettingsInfo
+from iikocloud_client.models.net_organization_marketing_campaign_settings_info import NetOrganizationMarketingCampaignSettingsInfo
 
 class TestNetOrganizationMarketingCampaignSettingsInfo(unittest.TestCase):
     """NetOrganizationMarketingCampaignSettingsInfo unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_hints_address_hints_service_type import TransportAddressHintsAddressHintsServiceType
+from iikocloud_client.models.transport_address_hints_address_hints_service_type import TransportAddressHintsAddressHintsServiceType
 
 class TestTransportAddressHintsAddressHintsServiceType(unittest.TestCase):
     """TransportAddressHintsAddressHintsServiceType unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_restaurant_section_rectangle import TransportReservesRestaurantSectionRectangle
+from iikocloud_client.models.transport_reserves_restaurant_section_rectangle import TransportReservesRestaurantSectionRectangle
 
 class TestTransportReservesRestaurantSectionRectangle(unittest.TestCase):
     """TransportReservesRestaurantSectionRectangle unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportReservesRestaurantSectionRectangle(unittest.TestCase):
         model = TransportReservesRestaurantSectionRectangle()
         if include_optional:
             return TransportReservesRestaurantSectionRectangle(
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 
@@ -49,7 +49,7 @@ class TestTransportReservesRestaurantSectionRectangle(unittest.TestCase):
             )
         else:
             return TransportReservesRestaurantSectionRectangle(
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 

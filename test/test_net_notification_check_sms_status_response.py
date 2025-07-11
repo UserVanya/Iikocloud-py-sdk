@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_notification_check_sms_status_response import NetNotificationCheckSmsStatusResponse
+from iikocloud_client.models.net_notification_check_sms_status_response import NetNotificationCheckSmsStatusResponse
 
 class TestNetNotificationCheckSmsStatusResponse(unittest.TestCase):
     """NetNotificationCheckSmsStatusResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetNotificationCheckSmsStatusResponse(unittest.TestCase):
         if include_optional:
             return NetNotificationCheckSmsStatusResponse(
                 statuses = [
-                    iiko_cloud_client.models.notification_sms_sending_status_info_schema.NotificationSmsSendingStatusInfoSchema(
+                    iikocloud_client.models.notification_sms_sending_status_info_schema.NotificationSmsSendingStatusInfoSchema(
                         sms_id = '', 
                         status = null, 
                         internal_error = '', )
@@ -45,7 +45,7 @@ class TestNetNotificationCheckSmsStatusResponse(unittest.TestCase):
         else:
             return NetNotificationCheckSmsStatusResponse(
                 statuses = [
-                    iiko_cloud_client.models.notification_sms_sending_status_info_schema.NotificationSmsSendingStatusInfoSchema(
+                    iikocloud_client.models.notification_sms_sending_status_info_schema.NotificationSmsSendingStatusInfoSchema(
                         sms_id = '', 
                         status = null, 
                         internal_error = '', )

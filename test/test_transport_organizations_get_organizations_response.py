@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_get_organizations_response import TransportOrganizationsGetOrganizationsResponse
+from iikocloud_client.models.transport_organizations_get_organizations_response import TransportOrganizationsGetOrganizationsResponse
 
 class TestTransportOrganizationsGetOrganizationsResponse(unittest.TestCase):
     """TransportOrganizationsGetOrganizationsResponse unit test stubs"""
@@ -37,13 +37,13 @@ class TestTransportOrganizationsGetOrganizationsResponse(unittest.TestCase):
             return TransportOrganizationsGetOrganizationsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_organization_info_schema.OrganizationsOrganizationInfoSchema(
+                    iikocloud_client.models.organizations_organization_info_schema.OrganizationsOrganizationInfoSchema(
                         response_type = '', 
                         id = '', 
                         name = '', 
                         code = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )
@@ -53,13 +53,13 @@ class TestTransportOrganizationsGetOrganizationsResponse(unittest.TestCase):
             return TransportOrganizationsGetOrganizationsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_organization_info_schema.OrganizationsOrganizationInfoSchema(
+                    iikocloud_client.models.organizations_organization_info_schema.OrganizationsOrganizationInfoSchema(
                         response_type = '', 
                         id = '', 
                         name = '', 
                         code = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )

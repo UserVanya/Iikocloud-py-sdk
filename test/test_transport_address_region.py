@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_region import TransportAddressRegion
+from iikocloud_client.models.transport_address_region import TransportAddressRegion
 
 class TestTransportAddressRegion(unittest.TestCase):
     """TransportAddressRegion unit test stubs"""

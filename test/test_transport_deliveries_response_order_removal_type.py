@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_removal_type import TransportDeliveriesResponseOrderRemovalType
+from iikocloud_client.models.transport_deliveries_response_order_removal_type import TransportDeliveriesResponseOrderRemovalType
 
 class TestTransportDeliveriesResponseOrderRemovalType(unittest.TestCase):
     """TransportDeliveriesResponseOrderRemovalType unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_get_organizations_request import TransportOrganizationsGetOrganizationsRequest
+from iikocloud_client.models.transport_organizations_get_organizations_request import TransportOrganizationsGetOrganizationsRequest
 
 class TestTransportOrganizationsGetOrganizationsRequest(unittest.TestCase):
     """TransportOrganizationsGetOrganizationsRequest unit test stubs"""

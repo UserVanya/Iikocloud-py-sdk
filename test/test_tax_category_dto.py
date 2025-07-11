@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.tax_category_dto import TaxCategoryDto
+from iikocloud_client.models.tax_category_dto import TaxCategoryDto
 
 class TestTaxCategoryDto(unittest.TestCase):
     """TaxCategoryDto unit test stubs"""

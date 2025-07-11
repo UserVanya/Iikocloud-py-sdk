@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_commands_error_command_status import TransportCommandsErrorCommandStatus
+from iikocloud_client.models.transport_commands_error_command_status import TransportCommandsErrorCommandStatus
 
 class TestTransportCommandsErrorCommandStatus(unittest.TestCase):
     """TransportCommandsErrorCommandStatus unit test stubs"""

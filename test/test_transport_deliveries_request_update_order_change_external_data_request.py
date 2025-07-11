@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_external_data_request import TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest
+from iikocloud_client.models.transport_deliveries_request_update_order_change_external_data_request import TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest
 
 class TestTransportDeliveriesRequestUpdateOrderChangeExternalDataRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeExternalDataRequest(unittes
                 organization_id = '',
                 order_id = '',
                 external_data = [
-                    iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                    iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                         key = '', 
                         value = '', 
                         is_public = True, )
@@ -49,7 +49,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeExternalDataRequest(unittes
                 organization_id = '',
                 order_id = '',
                 external_data = [
-                    iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                    iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                         key = '', 
                         value = '', 
                         is_public = True, )

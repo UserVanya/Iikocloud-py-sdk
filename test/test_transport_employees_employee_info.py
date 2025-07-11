@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_employee_info import TransportEmployeesEmployeeInfo
+from iikocloud_client.models.transport_employees_employee_info import TransportEmployeesEmployeeInfo
 
 class TestTransportEmployeesEmployeeInfo(unittest.TestCase):
     """TransportEmployeesEmployeeInfo unit test stubs"""

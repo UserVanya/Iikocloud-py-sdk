@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_web_hook_on_stop_list_change_data import TransportStopListsWebHookOnStopListChangeData
+from iikocloud_client.models.transport_stop_lists_web_hook_on_stop_list_change_data import TransportStopListsWebHookOnStopListChangeData
 
 class TestTransportStopListsWebHookOnStopListChangeData(unittest.TestCase):
     """TransportStopListsWebHookOnStopListChangeData unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportStopListsWebHookOnStopListChangeData(unittest.TestCase):
         if include_optional:
             return TransportStopListsWebHookOnStopListChangeData(
                 terminal_groups_stop_lists_updates = [
-                    iiko_cloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
+                    iikocloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
                         id = '', 
                         is_full = True, )
                     ]
@@ -44,7 +44,7 @@ class TestTransportStopListsWebHookOnStopListChangeData(unittest.TestCase):
         else:
             return TransportStopListsWebHookOnStopListChangeData(
                 terminal_groups_stop_lists_updates = [
-                    iiko_cloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
+                    iikocloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
                         id = '', 
                         is_full = True, )
                     ],

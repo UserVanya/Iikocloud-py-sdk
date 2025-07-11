@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_allowed_restrictions_order_location import TransportDeliveryRestrictionsAllowedRestrictionsOrderLocation
+from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_order_location import TransportDeliveryRestrictionsAllowedRestrictionsOrderLocation
 
 class TestTransportDeliveryRestrictionsAllowedRestrictionsOrderLocation(unittest.TestCase):
     """TransportDeliveryRestrictionsAllowedRestrictionsOrderLocation unit test stubs"""

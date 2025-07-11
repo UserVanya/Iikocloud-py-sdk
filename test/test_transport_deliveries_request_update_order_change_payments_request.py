@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_payments_request import TransportDeliveriesRequestUpdateOrderChangePaymentsRequest
+from iikocloud_client.models.transport_deliveries_request_update_order_change_payments_request import TransportDeliveriesRequestUpdateOrderChangePaymentsRequest
 
 class TestTransportDeliveriesRequestUpdateOrderChangePaymentsRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderChangePaymentsRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangePaymentsRequest(unittest.Te
                 organization_id = '',
                 order_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 
@@ -48,7 +48,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangePaymentsRequest(unittest.Te
                         is_prepay = True, )
                     ],
                 tips = [
-                    iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                    iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                         payment_type_kind = '', 
                         tips_type_id = '', 
                         sum = 0, 
@@ -64,7 +64,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangePaymentsRequest(unittest.Te
                 organization_id = '',
                 order_id = '',
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 

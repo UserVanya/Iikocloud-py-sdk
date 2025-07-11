@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_reserve import TransportReservesReserve
+from iikocloud_client.models.transport_reserves_reserve import TransportReservesReserve
 
 class TestTransportReservesReserve(unittest.TestCase):
     """TransportReservesReserve unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportReservesReserve(unittest.TestCase):
         model = TransportReservesReserve()
         if include_optional:
             return TransportReservesReserve(
-                customer = iiko_cloud_client.models.order_customer_schema.OrderCustomerSchema(
+                customer = iikocloud_client.models.order_customer_schema.OrderCustomerSchema(
                     type = '', ),
                 guests_count = 56,
                 comment = '',
@@ -50,7 +50,7 @@ class TestTransportReservesReserve(unittest.TestCase):
                 guests_coming_time = '2019-08-24 14:15:22.123',
                 phone = '',
                 event_type = '',
-                order = iiko_cloud_client.models.response_reserve_order_schema.ResponseReserveOrderSchema(
+                order = iikocloud_client.models.response_reserve_order_schema.ResponseReserveOrderSchema(
                     menu_id = '', 
                     sum = 1.337, 
                     number = 56, 
@@ -60,7 +60,7 @@ class TestTransportReservesReserve(unittest.TestCase):
                     conception = null, 
                     guests_info = null, 
                     items = [
-                        iiko_cloud_client.models.order_order_item_schema.OrderOrderItemSchema(
+                        iikocloud_client.models.order_order_item_schema.OrderOrderItemSchema(
                             type = '', 
                             status = null, 
                             deleted = null, 
@@ -71,7 +71,7 @@ class TestTransportReservesReserve(unittest.TestCase):
                             combo_information = null, )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
+                        iikocloud_client.models.order_order_combo_schema.OrderOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -80,7 +80,7 @@ class TestTransportReservesReserve(unittest.TestCase):
                             size = null, )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
+                        iikocloud_client.models.order_payment_item_schema.OrderPaymentItemSchema(
                             payment_type = null, 
                             sum = 1.337, 
                             is_preliminary = True, 
@@ -90,7 +90,7 @@ class TestTransportReservesReserve(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
+                        iikocloud_client.models.order_tips_payment_item_schema.OrderTipsPaymentItemSchema(
                             tips_type = null, 
                             payment_type = null, 
                             sum = 1.337, 
@@ -101,14 +101,14 @@ class TestTransportReservesReserve(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     discounts = [
-                        iiko_cloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
+                        iikocloud_client.models.order_discount_item_schema.OrderDiscountItemSchema(
                             discount_type = null, 
                             sum = 1.337, 
                             selective_positions = [
                                 ''
                                 ], 
                             selective_positions_with_sum = [
-                                iiko_cloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
+                                iikocloud_client.models.order_position_with_sum_schema.OrderPositionWithSumSchema(
                                     position_id = '', 
                                     sum = 1.337, )
                                 ], )
@@ -118,14 +118,14 @@ class TestTransportReservesReserve(unittest.TestCase):
                     processed_payments_sum = 1.337, 
                     loyalty_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.order_external_data_schema.OrderExternalDataSchema(
+                        iikocloud_client.models.order_external_data_schema.OrderExternalDataSchema(
                             key = '', 
                             value = '', )
                         ], )
             )
         else:
             return TransportReservesReserve(
-                customer = iiko_cloud_client.models.order_customer_schema.OrderCustomerSchema(
+                customer = iikocloud_client.models.order_customer_schema.OrderCustomerSchema(
                     type = '', ),
                 guests_count = 56,
                 duration_in_minutes = 56,

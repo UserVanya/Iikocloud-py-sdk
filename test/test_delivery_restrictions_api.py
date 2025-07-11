@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.delivery_restrictions_api import DeliveryRestrictionsApi
+from iikocloud_client.api.delivery_restrictions_api import DeliveryRestrictionsApi
 
 
 class TestDeliveryRestrictionsApi(unittest.IsolatedAsyncioTestCase):

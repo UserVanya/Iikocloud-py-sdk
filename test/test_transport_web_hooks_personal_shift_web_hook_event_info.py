@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_personal_shift_web_hook_event_info import TransportWebHooksPersonalShiftWebHookEventInfo
+from iikocloud_client.models.transport_web_hooks_personal_shift_web_hook_event_info import TransportWebHooksPersonalShiftWebHookEventInfo
 
 class TestTransportWebHooksPersonalShiftWebHookEventInfo(unittest.TestCase):
     """TransportWebHooksPersonalShiftWebHookEventInfo unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportWebHooksPersonalShiftWebHookEventInfo(unittest.TestCase):
                 event_time = '2019-08-24 14:15:22.123',
                 organization_id = '',
                 correlation_id = '',
-                event_info = iiko_cloud_client.models.employees_personal_shift_schema.EmployeesPersonalShiftSchema(
+                event_info = iikocloud_client.models.employees_personal_shift_schema.EmployeesPersonalShiftSchema(
                     id = '', 
                     role_id = '', 
                     opened = True, 

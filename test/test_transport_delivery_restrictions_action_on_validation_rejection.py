@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_action_on_validation_rejection import TransportDeliveryRestrictionsActionOnValidationRejection
+from iikocloud_client.models.transport_delivery_restrictions_action_on_validation_rejection import TransportDeliveryRestrictionsActionOnValidationRejection
 
 class TestTransportDeliveryRestrictionsActionOnValidationRejection(unittest.TestCase):
     """TransportDeliveryRestrictionsActionOnValidationRejection unit test stubs"""

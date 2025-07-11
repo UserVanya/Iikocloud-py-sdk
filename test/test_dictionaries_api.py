@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.dictionaries_api import DictionariesApi
+from iikocloud_client.api.dictionaries_api import DictionariesApi
 
 
 class TestDictionariesApi(unittest.IsolatedAsyncioTestCase):

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_upsale import NetLoyaltyResultUpsale
+from iikocloud_client.models.net_loyalty_result_upsale import NetLoyaltyResultUpsale
 
 class TestNetLoyaltyResultUpsale(unittest.TestCase):
     """NetLoyaltyResultUpsale unit test stubs"""
@@ -42,7 +42,7 @@ class TestNetLoyaltyResultUpsale(unittest.TestCase):
                     ''
                     ],
                 products = [
-                    iiko_cloud_client.models.loyalty_result_upsale_product_schema.LoyaltyResultUpsaleProductSchema(
+                    iikocloud_client.models.loyalty_result_upsale_product_schema.LoyaltyResultUpsaleProductSchema(
                         id = '', 
                         code = '', )
                     ]

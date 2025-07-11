@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_service_type_delivery_by_courier import TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
+from iikocloud_client.models.transport_deliveries_request_update_order_change_service_type_delivery_by_courier import TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
 
 class TestTransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourie
         model = TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier()
         if include_optional:
             return TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(
-                delivery_point = iiko_cloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
+                delivery_point = iikocloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
                     coordinates = null, 
                     address = null, 
                     external_cartography_id = '', 
@@ -43,7 +43,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourie
             )
         else:
             return TransportDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(
-                delivery_point = iiko_cloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
+                delivery_point = iikocloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
                     coordinates = null, 
                     address = null, 
                     external_cartography_id = '', 

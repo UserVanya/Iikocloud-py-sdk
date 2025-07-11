@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_employee import TransportCommonRmsItemsResponseWrapperEmployee
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_employee import TransportCommonRmsItemsResponseWrapperEmployee
 
 class TestTransportCommonRmsItemsResponseWrapperEmployee(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperEmployee unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCommonRmsItemsResponseWrapperEmployee(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperEmployee(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
+                    iikocloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
                         id = '', 
                         first_name = '', 
                         middle_name = '', 
@@ -51,7 +51,7 @@ class TestTransportCommonRmsItemsResponseWrapperEmployee(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperEmployee(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
+                    iikocloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
                         id = '', 
                         first_name = '', 
                         middle_name = '', 

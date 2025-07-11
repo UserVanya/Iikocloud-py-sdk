@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_color import TransportReservesColor
+from iikocloud_client.models.transport_reserves_color import TransportReservesColor
 
 class TestTransportReservesColor(unittest.TestCase):
     """TransportReservesColor unit test stubs"""

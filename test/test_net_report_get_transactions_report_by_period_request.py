@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_get_transactions_report_by_period_request import NetReportGetTransactionsReportByPeriodRequest
+from iikocloud_client.models.net_report_get_transactions_report_by_period_request import NetReportGetTransactionsReportByPeriodRequest
 
 class TestNetReportGetTransactionsReportByPeriodRequest(unittest.TestCase):
     """NetReportGetTransactionsReportByPeriodRequest unit test stubs"""

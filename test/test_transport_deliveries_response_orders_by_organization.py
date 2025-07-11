@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_orders_by_organization import TransportDeliveriesResponseOrdersByOrganization
+from iikocloud_client.models.transport_deliveries_response_orders_by_organization import TransportDeliveriesResponseOrdersByOrganization
 
 class TestTransportDeliveriesResponseOrdersByOrganization(unittest.TestCase):
     """TransportDeliveriesResponseOrdersByOrganization unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesResponseOrdersByOrganization(unittest.TestCase):
             return TransportDeliveriesResponseOrdersByOrganization(
                 organization_id = '',
                 orders = [
-                    iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                    iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                         id = '', 
                         pos_id = '', 
                         external_number = '', 
@@ -52,7 +52,7 @@ class TestTransportDeliveriesResponseOrdersByOrganization(unittest.TestCase):
             return TransportDeliveriesResponseOrdersByOrganization(
                 organization_id = '',
                 orders = [
-                    iiko_cloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
+                    iikocloud_client.models.order_order_info_schema.OrderOrderInfoSchema(
                         id = '', 
                         pos_id = '', 
                         external_number = '', 

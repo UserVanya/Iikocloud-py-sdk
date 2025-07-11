@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_payment_types_payment_processing_type import TransportPaymentTypesPaymentProcessingType
+from iikocloud_client.models.transport_payment_types_payment_processing_type import TransportPaymentTypesPaymentProcessingType
 
 class TestTransportPaymentTypesPaymentProcessingType(unittest.TestCase):
     """TransportPaymentTypesPaymentProcessingType unit test stubs"""

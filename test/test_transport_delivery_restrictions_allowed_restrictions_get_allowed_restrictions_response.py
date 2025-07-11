@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
+from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
 
 class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse(unittest.TestCase):
     """TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse unit test stubs"""
@@ -39,11 +39,11 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                 is_allowed = True,
                 reject_cause = '',
                 address_external_id = '',
-                location = iiko_cloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
+                location = iikocloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
                     latitude = 1.337, 
                     longitude = 1.337, ),
                 allowed_items = [
-                    iiko_cloud_client.models.allowed_restrictions_allowed_item_with_duration_schema.AllowedRestrictionsAllowedItemWithDurationSchema(
+                    iikocloud_client.models.allowed_restrictions_allowed_item_with_duration_schema.AllowedRestrictionsAllowedItemWithDurationSchema(
                         terminal_group_id = '', 
                         organization_id = '', 
                         delivery_duration_in_minutes = 56, 
@@ -51,7 +51,7 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                         delivery_service_product_id = '', )
                     ],
                 rejected_items = [
-                    iiko_cloud_client.models.allowed_restrictions_reject_item_schema.AllowedRestrictionsRejectItemSchema(
+                    iikocloud_client.models.allowed_restrictions_reject_item_schema.AllowedRestrictionsRejectItemSchema(
                         terminal_group_id = '', 
                         organization_id = '', 
                         zone = '', 
@@ -66,11 +66,11 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                 is_allowed = True,
                 reject_cause = '',
                 address_external_id = '',
-                location = iiko_cloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
+                location = iikocloud_client.models.allowed_restrictions_order_location_schema.AllowedRestrictionsOrderLocationSchema(
                     latitude = 1.337, 
                     longitude = 1.337, ),
                 allowed_items = [
-                    iiko_cloud_client.models.allowed_restrictions_allowed_item_with_duration_schema.AllowedRestrictionsAllowedItemWithDurationSchema(
+                    iikocloud_client.models.allowed_restrictions_allowed_item_with_duration_schema.AllowedRestrictionsAllowedItemWithDurationSchema(
                         terminal_group_id = '', 
                         organization_id = '', 
                         delivery_duration_in_minutes = 56, 
@@ -78,7 +78,7 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictions
                         delivery_service_product_id = '', )
                     ],
                 rejected_items = [
-                    iiko_cloud_client.models.allowed_restrictions_reject_item_schema.AllowedRestrictionsRejectItemSchema(
+                    iikocloud_client.models.allowed_restrictions_reject_item_schema.AllowedRestrictionsRejectItemSchema(
                         terminal_group_id = '', 
                         organization_id = '', 
                         zone = '', 

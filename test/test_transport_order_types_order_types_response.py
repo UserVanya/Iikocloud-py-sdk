@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_order_types_order_types_response import TransportOrderTypesOrderTypesResponse
+from iikocloud_client.models.transport_order_types_order_types_response import TransportOrderTypesOrderTypesResponse
 
 class TestTransportOrderTypesOrderTypesResponse(unittest.TestCase):
     """TransportOrderTypesOrderTypesResponse unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportOrderTypesOrderTypesResponse(unittest.TestCase):
             return TransportOrderTypesOrderTypesResponse(
                 correlation_id = '',
                 order_types = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_order_type_schema.RmsItemsResponseWrapperOrderTypeSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_order_type_schema.RmsItemsResponseWrapperOrderTypeSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
+                            iikocloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
                                 id = '', 
                                 name = '', 
                                 order_service_type = null, 
@@ -54,10 +54,10 @@ class TestTransportOrderTypesOrderTypesResponse(unittest.TestCase):
             return TransportOrderTypesOrderTypesResponse(
                 correlation_id = '',
                 order_types = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_order_type_schema.RmsItemsResponseWrapperOrderTypeSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_order_type_schema.RmsItemsResponseWrapperOrderTypeSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
+                            iikocloud_client.models.order_types_order_type_schema.OrderTypesOrderTypeSchema(
                                 id = '', 
                                 name = '', 
                                 order_service_type = null, 

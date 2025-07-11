@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
+from iikocloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
 
 class TestNetCustomerChangeUserBalanceRequest(unittest.TestCase):
     """NetCustomerChangeUserBalanceRequest unit test stubs"""

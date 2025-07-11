@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_product_order_item import TransportDeliveriesResponseOrderProductOrderItem
+from iikocloud_client.models.transport_deliveries_response_order_product_order_item import TransportDeliveriesResponseOrderProductOrderItem
 
 class TestTransportDeliveriesResponseOrderProductOrderItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderProductOrderItem unit test stubs"""
@@ -35,11 +35,11 @@ class TestTransportDeliveriesResponseOrderProductOrderItem(unittest.TestCase):
         model = TransportDeliveriesResponseOrderProductOrderItem()
         if include_optional:
             return TransportDeliveriesResponseOrderProductOrderItem(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 modifiers = [
-                    iiko_cloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
+                    iikocloud_client.models.order_order_item_modifier_schema.OrderOrderItemModifierSchema(
                         product = null, 
                         amount = 1.337, 
                         amount_independent_of_parent_amount = True, 
@@ -63,7 +63,7 @@ class TestTransportDeliveriesResponseOrderProductOrderItem(unittest.TestCase):
             )
         else:
             return TransportDeliveriesResponseOrderProductOrderItem(
-                product = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                product = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 price = 1.337,

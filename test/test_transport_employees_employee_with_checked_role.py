@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_employee_with_checked_role import TransportEmployeesEmployeeWithCheckedRole
+from iikocloud_client.models.transport_employees_employee_with_checked_role import TransportEmployeesEmployeeWithCheckedRole
 
 class TestTransportEmployeesEmployeeWithCheckedRole(unittest.TestCase):
     """TransportEmployeesEmployeeWithCheckedRole unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportEmployeesEmployeeWithCheckedRole(unittest.TestCase):
         if include_optional:
             return TransportEmployeesEmployeeWithCheckedRole(
                 check_roles_result = [
-                    iiko_cloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
+                    iikocloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
                         checked_role_code = '', 
                         employee_has_role = True, )
                     ],

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_customer_info_by_card_number_request import NetCustomerGetCustomerInfoByCardNumberRequest
+from iikocloud_client.models.net_customer_get_customer_info_by_card_number_request import NetCustomerGetCustomerInfoByCardNumberRequest
 
 class TestNetCustomerGetCustomerInfoByCardNumberRequest(unittest.TestCase):
     """NetCustomerGetCustomerInfoByCardNumberRequest unit test stubs"""

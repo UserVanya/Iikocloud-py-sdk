@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_delete_draft_request import TransportDeliveriesDraftsDeleteDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_delete_draft_request import TransportDeliveriesDraftsDeleteDraftRequest
 
 class TestTransportDeliveriesDraftsDeleteDraftRequest(unittest.TestCase):
     """TransportDeliveriesDraftsDeleteDraftRequest unit test stubs"""

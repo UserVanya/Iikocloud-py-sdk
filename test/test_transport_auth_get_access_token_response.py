@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_auth_get_access_token_response import TransportAuthGetAccessTokenResponse
+from iikocloud_client.models.transport_auth_get_access_token_response import TransportAuthGetAccessTokenResponse
 
 class TestTransportAuthGetAccessTokenResponse(unittest.TestCase):
     """TransportAuthGetAccessTokenResponse unit test stubs"""

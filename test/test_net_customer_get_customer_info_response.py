@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_get_customer_info_response import NetCustomerGetCustomerInfoResponse
+from iikocloud_client.models.net_customer_get_customer_info_response import NetCustomerGetCustomerInfoResponse
 
 class TestNetCustomerGetCustomerInfoResponse(unittest.TestCase):
     """NetCustomerGetCustomerInfoResponse unit test stubs"""
@@ -49,21 +49,21 @@ class TestNetCustomerGetCustomerInfoResponse(unittest.TestCase):
                 consent_status = 0,
                 anonymized = True,
                 cards = [
-                    iiko_cloud_client.models.customer_guest_card_info_schema.CustomerGuestCardInfoSchema(
+                    iikocloud_client.models.customer_guest_card_info_schema.CustomerGuestCardInfoSchema(
                         id = '', 
                         track = '', 
                         number = '', 
                         valid_to_date = '2019-08-24 14:15:22.123', )
                     ],
                 categories = [
-                    iiko_cloud_client.models.customer_guest_category_short_info_schema.CustomerGuestCategoryShortInfoSchema(
+                    iikocloud_client.models.customer_guest_category_short_info_schema.CustomerGuestCategoryShortInfoSchema(
                         id = '', 
                         name = '', 
                         is_active = True, 
                         is_default_for_new_guests = True, )
                     ],
                 wallet_balances = [
-                    iiko_cloud_client.models.customer_guest_balance_info_schema.CustomerGuestBalanceInfoSchema(
+                    iikocloud_client.models.customer_guest_balance_info_schema.CustomerGuestBalanceInfoSchema(
                         id = '', 
                         name = '', 
                         type = null, 

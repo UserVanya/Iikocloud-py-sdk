@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_conception import TransportDeliveriesResponseOrderConception
+from iikocloud_client.models.transport_deliveries_response_order_conception import TransportDeliveriesResponseOrderConception
 
 class TestTransportDeliveriesResponseOrderConception(unittest.TestCase):
     """TransportDeliveriesResponseOrderConception unit test stubs"""

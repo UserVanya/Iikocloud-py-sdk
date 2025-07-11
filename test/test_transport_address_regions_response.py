@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_regions_response import TransportAddressRegionsResponse
+from iikocloud_client.models.transport_address_regions_response import TransportAddressRegionsResponse
 
 class TestTransportAddressRegionsResponse(unittest.TestCase):
     """TransportAddressRegionsResponse unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportAddressRegionsResponse(unittest.TestCase):
             return TransportAddressRegionsResponse(
                 correlation_id = '',
                 regions = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_region_schema.RmsItemsResponseWrapperRegionSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_region_schema.RmsItemsResponseWrapperRegionSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.address_region_schema.AddressRegionSchema(
+                            iikocloud_client.models.address_region_schema.AddressRegionSchema(
                                 id = '', 
                                 name = '', 
                                 external_revision = 56, 
@@ -52,10 +52,10 @@ class TestTransportAddressRegionsResponse(unittest.TestCase):
             return TransportAddressRegionsResponse(
                 correlation_id = '',
                 regions = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_region_schema.RmsItemsResponseWrapperRegionSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_region_schema.RmsItemsResponseWrapperRegionSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.address_region_schema.AddressRegionSchema(
+                            iikocloud_client.models.address_region_schema.AddressRegionSchema(
                                 id = '', 
                                 name = '', 
                                 external_revision = 56, 

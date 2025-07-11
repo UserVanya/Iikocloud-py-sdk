@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_cancel_info import TransportDeliveriesResponseOrderCancelInfo
+from iikocloud_client.models.transport_deliveries_response_order_cancel_info import TransportDeliveriesResponseOrderCancelInfo
 
 class TestTransportDeliveriesResponseOrderCancelInfo(unittest.TestCase):
     """TransportDeliveriesResponseOrderCancelInfo unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportDeliveriesResponseOrderCancelInfo(unittest.TestCase):
         if include_optional:
             return TransportDeliveriesResponseOrderCancelInfo(
                 when_cancelled = '2019-08-24 14:15:22.123',
-                cause = iiko_cloud_client.models.order_cancel_cause_schema.OrderCancelCauseSchema(
+                cause = iikocloud_client.models.order_cancel_cause_schema.OrderCancelCauseSchema(
                     id = '', 
                     name = '', ),
                 comment = ''
@@ -44,7 +44,7 @@ class TestTransportDeliveriesResponseOrderCancelInfo(unittest.TestCase):
         else:
             return TransportDeliveriesResponseOrderCancelInfo(
                 when_cancelled = '2019-08-24 14:15:22.123',
-                cause = iiko_cloud_client.models.order_cancel_cause_schema.OrderCancelCauseSchema(
+                cause = iikocloud_client.models.order_cancel_cause_schema.OrderCancelCauseSchema(
                     id = '', 
                     name = '', ),
         )

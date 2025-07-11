@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_payment_types_payment_type import TransportPaymentTypesPaymentType
+from iikocloud_client.models.transport_payment_types_payment_type import TransportPaymentTypesPaymentType
 
 class TestTransportPaymentTypesPaymentType(unittest.TestCase):
     """TransportPaymentTypesPaymentType unit test stubs"""
@@ -49,14 +49,14 @@ class TestTransportPaymentTypesPaymentType(unittest.TestCase):
                 payment_processing_type = 'External',
                 payment_type_kind = 'Unknown',
                 terminal_groups = [
-                    iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                    iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                         id = '', 
                         organization_id = '', 
                         name = '', 
                         address = '', 
                         time_zone = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )
@@ -68,14 +68,14 @@ class TestTransportPaymentTypesPaymentType(unittest.TestCase):
                     ''
                     ],
                 terminal_groups = [
-                    iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                    iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                         id = '', 
                         organization_id = '', 
                         name = '', 
                         address = '', 
                         time_zone = '', 
                         external_data = [
-                            iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                            iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                 key = '', 
                                 value = '', )
                             ], )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_table_order_update_web_hook_event_info import TransportWebHooksTableOrderUpdateWebHookEventInfo
+from iikocloud_client.models.transport_web_hooks_table_order_update_web_hook_event_info import TransportWebHooksTableOrderUpdateWebHookEventInfo
 
 class TestTransportWebHooksTableOrderUpdateWebHookEventInfo(unittest.TestCase):
     """TransportWebHooksTableOrderUpdateWebHookEventInfo unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportWebHooksTableOrderUpdateWebHookEventInfo(unittest.TestCase):
                 event_time = '2019-08-24 14:15:22.123',
                 organization_id = '',
                 correlation_id = '',
-                event_info = iiko_cloud_client.models.response_table_order_info_schema.ResponseTableOrderInfoSchema(
+                event_info = iikocloud_client.models.response_table_order_info_schema.ResponseTableOrderInfoSchema(
                     id = '', 
                     pos_id = '', 
                     external_number = '', 

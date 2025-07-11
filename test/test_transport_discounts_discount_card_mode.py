@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_discounts_discount_card_mode import TransportDiscountsDiscountCardMode
+from iikocloud_client.models.transport_discounts_discount_card_mode import TransportDiscountsDiscountCardMode
 
 class TestTransportDiscountsDiscountCardMode(unittest.TestCase):
     """TransportDiscountsDiscountCardMode unit test stubs"""

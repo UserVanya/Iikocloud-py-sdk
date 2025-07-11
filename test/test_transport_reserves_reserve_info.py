@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_reserve_info import TransportReservesReserveInfo
+from iikocloud_client.models.transport_reserves_reserve_info import TransportReservesReserveInfo
 
 class TestTransportReservesReserveInfo(unittest.TestCase):
     """TransportReservesReserveInfo unit test stubs"""
@@ -40,13 +40,13 @@ class TestTransportReservesReserveInfo(unittest.TestCase):
                 organization_id = '',
                 timestamp = 56,
                 creation_status = 'Success',
-                error_info = iiko_cloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
+                error_info = iikocloud_client.models.errors_error_info_schema.ErrorsErrorInfoSchema(
                     code = null, 
                     message = '', 
                     description = '', 
                     additional_data = null, ),
                 is_deleted = True,
-                reserve = iiko_cloud_client.models.reserves_reserve_schema.ReservesReserveSchema(
+                reserve = iikocloud_client.models.reserves_reserve_schema.ReservesReserveSchema(
                     customer = null, 
                     guests_count = 56, 
                     comment = '', 

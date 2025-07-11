@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_restaurant_section_ellipse import TransportReservesRestaurantSectionEllipse
+from iikocloud_client.models.transport_reserves_restaurant_section_ellipse import TransportReservesRestaurantSectionEllipse
 
 class TestTransportReservesRestaurantSectionEllipse(unittest.TestCase):
     """TransportReservesRestaurantSectionEllipse unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportReservesRestaurantSectionEllipse(unittest.TestCase):
         model = TransportReservesRestaurantSectionEllipse()
         if include_optional:
             return TransportReservesRestaurantSectionEllipse(
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 
@@ -49,7 +49,7 @@ class TestTransportReservesRestaurantSectionEllipse(unittest.TestCase):
             )
         else:
             return TransportReservesRestaurantSectionEllipse(
-                color = iiko_cloud_client.models.reserves_color_schema.ReservesColorSchema(
+                color = iikocloud_client.models.reserves_color_schema.ReservesColorSchema(
                     a = 56, 
                     r = 56, 
                     g = 56, 

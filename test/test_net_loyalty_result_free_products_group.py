@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_free_products_group import NetLoyaltyResultFreeProductsGroup
+from iikocloud_client.models.net_loyalty_result_free_products_group import NetLoyaltyResultFreeProductsGroup
 
 class TestNetLoyaltyResultFreeProductsGroup(unittest.TestCase):
     """NetLoyaltyResultFreeProductsGroup unit test stubs"""
@@ -38,14 +38,14 @@ class TestNetLoyaltyResultFreeProductsGroup(unittest.TestCase):
                 source_action_id = '',
                 description_for_user = '',
                 products = [
-                    iiko_cloud_client.models.loyalty_result_free_product_schema.LoyaltyResultFreeProductSchema(
+                    iikocloud_client.models.loyalty_result_free_product_schema.LoyaltyResultFreeProductSchema(
                         id = '', 
                         code = '', 
                         size = [
                             ''
                             ], 
                         sizes = [
-                            iiko_cloud_client.models.loyalty_result_free_product_size_schema.LoyaltyResultFreeProductSizeSchema(
+                            iikocloud_client.models.loyalty_result_free_product_size_schema.LoyaltyResultFreeProductSizeSchema(
                                 id = '', 
                                 name = '', )
                             ], )

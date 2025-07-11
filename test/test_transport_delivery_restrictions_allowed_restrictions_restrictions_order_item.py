@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_allowed_restrictions_restrictions_order_item import TransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem
+from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_restrictions_order_item import TransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem
 
 class TestTransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem(unittest.TestCase):
     """TransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem(
                 product = '',
                 amount = 1.337,
                 modifiers = [
-                    iiko_cloud_client.models.allowed_restrictions_restrictions_order_item_modifier_schema.AllowedRestrictionsRestrictionsOrderItemModifierSchema(
+                    iikocloud_client.models.allowed_restrictions_restrictions_order_item_modifier_schema.AllowedRestrictionsRestrictionsOrderItemModifierSchema(
                         id = '', 
                         product = '', 
                         amount = 1.337, )

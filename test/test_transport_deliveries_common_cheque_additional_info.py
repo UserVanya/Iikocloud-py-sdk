@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_cheque_additional_info import TransportDeliveriesCommonChequeAdditionalInfo
+from iikocloud_client.models.transport_deliveries_common_cheque_additional_info import TransportDeliveriesCommonChequeAdditionalInfo
 
 class TestTransportDeliveriesCommonChequeAdditionalInfo(unittest.TestCase):
     """TransportDeliveriesCommonChequeAdditionalInfo unit test stubs"""

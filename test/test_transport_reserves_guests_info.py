@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_guests_info import TransportReservesGuestsInfo
+from iikocloud_client.models.transport_reserves_guests_info import TransportReservesGuestsInfo
 
 class TestTransportReservesGuestsInfo(unittest.TestCase):
     """TransportReservesGuestsInfo unit test stubs"""

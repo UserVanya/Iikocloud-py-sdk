@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_free_product_size import NetLoyaltyResultFreeProductSize
+from iikocloud_client.models.net_loyalty_result_free_product_size import NetLoyaltyResultFreeProductSize
 
 class TestNetLoyaltyResultFreeProductSize(unittest.TestCase):
     """NetLoyaltyResultFreeProductSize unit test stubs"""

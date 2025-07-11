@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_courier_locations import TransportEmployeesCourierLocations
+from iikocloud_client.models.transport_employees_courier_locations import TransportEmployeesCourierLocations
 
 class TestTransportEmployeesCourierLocations(unittest.TestCase):
     """TransportEmployeesCourierLocations unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportEmployeesCourierLocations(unittest.TestCase):
             return TransportEmployeesCourierLocations(
                 courier_id = '',
                 locations = [
-                    iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                    iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                         latitude = 1.337, 
                         longitude = 1.337, 
                         server_timestamp = 56, )
@@ -47,7 +47,7 @@ class TestTransportEmployeesCourierLocations(unittest.TestCase):
             return TransportEmployeesCourierLocations(
                 courier_id = '',
                 locations = [
-                    iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                    iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                         latitude = 1.337, 
                         longitude = 1.337, 
                         server_timestamp = 56, )

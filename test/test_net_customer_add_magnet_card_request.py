@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
+from iikocloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
 
 class TestNetCustomerAddMagnetCardRequest(unittest.TestCase):
     """NetCustomerAddMagnetCardRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_marketing_sources_marketing_sources_response import TransportMarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.transport_marketing_sources_marketing_sources_response import TransportMarketingSourcesMarketingSourcesResponse
 
 class TestTransportMarketingSourcesMarketingSourcesResponse(unittest.TestCase):
     """TransportMarketingSourcesMarketingSourcesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportMarketingSourcesMarketingSourcesResponse(unittest.TestCase):
             return TransportMarketingSourcesMarketingSourcesResponse(
                 correlation_id = '',
                 marketing_sources = [
-                    iiko_cloud_client.models.marketing_sources_marketing_source_schema.MarketingSourcesMarketingSourceSchema(
+                    iikocloud_client.models.marketing_sources_marketing_source_schema.MarketingSourcesMarketingSourceSchema(
                         id = '', 
                         organization_id = '', 
                         name = '', 
@@ -52,7 +52,7 @@ class TestTransportMarketingSourcesMarketingSourcesResponse(unittest.TestCase):
             return TransportMarketingSourcesMarketingSourcesResponse(
                 correlation_id = '',
                 marketing_sources = [
-                    iiko_cloud_client.models.marketing_sources_marketing_source_schema.MarketingSourcesMarketingSourceSchema(
+                    iikocloud_client.models.marketing_sources_marketing_source_schema.MarketingSourcesMarketingSourceSchema(
                         id = '', 
                         organization_id = '', 
                         name = '', 

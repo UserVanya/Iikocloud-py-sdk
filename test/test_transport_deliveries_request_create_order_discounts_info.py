@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_discounts_info import TransportDeliveriesRequestCreateOrderDiscountsInfo
+from iikocloud_client.models.transport_deliveries_request_create_order_discounts_info import TransportDeliveriesRequestCreateOrderDiscountsInfo
 
 class TestTransportDeliveriesRequestCreateOrderDiscountsInfo(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderDiscountsInfo unit test stubs"""
@@ -35,10 +35,10 @@ class TestTransportDeliveriesRequestCreateOrderDiscountsInfo(unittest.TestCase):
         model = TransportDeliveriesRequestCreateOrderDiscountsInfo()
         if include_optional:
             return TransportDeliveriesRequestCreateOrderDiscountsInfo(
-                card = iiko_cloud_client.models.create_order_discount_card_schema.CreateOrderDiscountCardSchema(
+                card = iikocloud_client.models.create_order_discount_card_schema.CreateOrderDiscountCardSchema(
                     track = '', ),
                 discounts = [
-                    iiko_cloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
+                    iikocloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
                         type = '', )
                     ],
                 fixed_loyalty_discounts = True

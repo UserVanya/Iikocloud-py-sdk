@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_employees_with_role_sign_response import TransportEmployeesEmployeesWithRoleSignResponse
+from iikocloud_client.models.transport_employees_employees_with_role_sign_response import TransportEmployeesEmployeesWithRoleSignResponse
 
 class TestTransportEmployeesEmployeesWithRoleSignResponse(unittest.TestCase):
     """TransportEmployeesEmployeesWithRoleSignResponse unit test stubs"""
@@ -37,12 +37,12 @@ class TestTransportEmployeesEmployeesWithRoleSignResponse(unittest.TestCase):
             return TransportEmployeesEmployeesWithRoleSignResponse(
                 correlation_id = '',
                 employees_with_check_roles = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_employee_with_checked_role_schema.RmsItemsResponseWrapperEmployeeWithCheckedRoleSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_employee_with_checked_role_schema.RmsItemsResponseWrapperEmployeeWithCheckedRoleSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
+                            iikocloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
                                 check_roles_result = [
-                                    iiko_cloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
+                                    iikocloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
                                         checked_role_code = '', 
                                         employee_has_role = True, )
                                     ], 
@@ -60,12 +60,12 @@ class TestTransportEmployeesEmployeesWithRoleSignResponse(unittest.TestCase):
             return TransportEmployeesEmployeesWithRoleSignResponse(
                 correlation_id = '',
                 employees_with_check_roles = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_employee_with_checked_role_schema.RmsItemsResponseWrapperEmployeeWithCheckedRoleSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_employee_with_checked_role_schema.RmsItemsResponseWrapperEmployeeWithCheckedRoleSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
+                            iikocloud_client.models.employees_employee_with_checked_role_schema.EmployeesEmployeeWithCheckedRoleSchema(
                                 check_roles_result = [
-                                    iiko_cloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
+                                    iikocloud_client.models.employees_role_check_result_schema.EmployeesRoleCheckResultSchema(
                                         checked_role_code = '', 
                                         employee_has_role = True, )
                                     ], 

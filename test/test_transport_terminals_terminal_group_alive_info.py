@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_terminal_group_alive_info import TransportTerminalsTerminalGroupAliveInfo
+from iikocloud_client.models.transport_terminals_terminal_group_alive_info import TransportTerminalsTerminalGroupAliveInfo
 
 class TestTransportTerminalsTerminalGroupAliveInfo(unittest.TestCase):
     """TransportTerminalsTerminalGroupAliveInfo unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_personal_shift import TransportEmployeesPersonalShift
+from iikocloud_client.models.transport_employees_personal_shift import TransportEmployeesPersonalShift
 
 class TestTransportEmployeesPersonalShift(unittest.TestCase):
     """TransportEmployeesPersonalShift unit test stubs"""

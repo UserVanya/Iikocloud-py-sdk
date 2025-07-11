@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_address_city import TransportAddressCity
+from iikocloud_client.models.transport_address_city import TransportAddressCity
 
 class TestTransportAddressCity(unittest.TestCase):
     """TransportAddressCity unit test stubs"""

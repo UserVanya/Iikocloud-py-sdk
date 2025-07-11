@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_courier_locations_by_time_offset_request import TransportEmployeesCourierLocationsByTimeOffsetRequest
+from iikocloud_client.models.transport_employees_courier_locations_by_time_offset_request import TransportEmployeesCourierLocationsByTimeOffsetRequest
 
 class TestTransportEmployeesCourierLocationsByTimeOffsetRequest(unittest.TestCase):
     """TransportEmployeesCourierLocationsByTimeOffsetRequest unit test stubs"""

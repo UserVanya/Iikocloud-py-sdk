@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_request_add_customer_to_table_order_request import TransportTableOrdersRequestAddCustomerToTableOrderRequest
+from iikocloud_client.models.transport_table_orders_request_add_customer_to_table_order_request import TransportTableOrdersRequestAddCustomerToTableOrderRequest
 
 class TestTransportTableOrdersRequestAddCustomerToTableOrderRequest(unittest.TestCase):
     """TransportTableOrdersRequestAddCustomerToTableOrderRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportTableOrdersRequestAddCustomerToTableOrderRequest(unittest.Tes
             return TransportTableOrdersRequestAddCustomerToTableOrderRequest(
                 organization_id = '',
                 order_id = '',
-                customer = iiko_cloud_client.models.request_table_order_customer_schema.RequestTableOrderCustomerSchema(
+                customer = iikocloud_client.models.request_table_order_customer_schema.RequestTableOrderCustomerSchema(
                     id = '', 
                     name = '', 
                     surname = '', 
@@ -52,7 +52,7 @@ class TestTransportTableOrdersRequestAddCustomerToTableOrderRequest(unittest.Tes
             return TransportTableOrdersRequestAddCustomerToTableOrderRequest(
                 organization_id = '',
                 order_id = '',
-                customer = iiko_cloud_client.models.request_table_order_customer_schema.RequestTableOrderCustomerSchema(
+                customer = iikocloud_client.models.request_table_order_customer_schema.RequestTableOrderCustomerSchema(
                     id = '', 
                     name = '', 
                     surname = '', 

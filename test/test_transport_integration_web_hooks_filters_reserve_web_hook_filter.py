@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_integration_web_hooks_filters_reserve_web_hook_filter import TransportIntegrationWebHooksFiltersReserveWebHookFilter
+from iikocloud_client.models.transport_integration_web_hooks_filters_reserve_web_hook_filter import TransportIntegrationWebHooksFiltersReserveWebHookFilter
 
 class TestTransportIntegrationWebHooksFiltersReserveWebHookFilter(unittest.TestCase):
     """TransportIntegrationWebHooksFiltersReserveWebHookFilter unit test stubs"""

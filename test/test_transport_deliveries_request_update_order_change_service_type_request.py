@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_service_type_request import TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest
+from iikocloud_client.models.transport_deliveries_request_update_order_change_service_type_request import TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest
 
 class TestTransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest unit test stubs"""

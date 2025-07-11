@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_get_personal_session_info_response import TransportEmployeesGetPersonalSessionInfoResponse
+from iikocloud_client.models.transport_employees_get_personal_session_info_response import TransportEmployeesGetPersonalSessionInfoResponse
 
 class TestTransportEmployeesGetPersonalSessionInfoResponse(unittest.TestCase):
     """TransportEmployeesGetPersonalSessionInfoResponse unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_payment_types_payment_types_response import TransportPaymentTypesPaymentTypesResponse
+from iikocloud_client.models.transport_payment_types_payment_types_response import TransportPaymentTypesPaymentTypesResponse
 
 class TestTransportPaymentTypesPaymentTypesResponse(unittest.TestCase):
     """TransportPaymentTypesPaymentTypesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportPaymentTypesPaymentTypesResponse(unittest.TestCase):
             return TransportPaymentTypesPaymentTypesResponse(
                 correlation_id = '',
                 payment_types = [
-                    iiko_cloud_client.models.payment_types_payment_type_schema.PaymentTypesPaymentTypeSchema(
+                    iikocloud_client.models.payment_types_payment_type_schema.PaymentTypesPaymentTypeSchema(
                         id = '', 
                         code = '', 
                         name = '', 
@@ -52,14 +52,14 @@ class TestTransportPaymentTypesPaymentTypesResponse(unittest.TestCase):
                         payment_processing_type = null, 
                         payment_type_kind = null, 
                         terminal_groups = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )
@@ -70,7 +70,7 @@ class TestTransportPaymentTypesPaymentTypesResponse(unittest.TestCase):
             return TransportPaymentTypesPaymentTypesResponse(
                 correlation_id = '',
                 payment_types = [
-                    iiko_cloud_client.models.payment_types_payment_type_schema.PaymentTypesPaymentTypeSchema(
+                    iikocloud_client.models.payment_types_payment_type_schema.PaymentTypesPaymentTypeSchema(
                         id = '', 
                         code = '', 
                         name = '', 
@@ -85,14 +85,14 @@ class TestTransportPaymentTypesPaymentTypesResponse(unittest.TestCase):
                         payment_processing_type = null, 
                         payment_type_kind = null, 
                         terminal_groups = [
-                            iiko_cloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
+                            iikocloud_client.models.terminals_terminal_group_schema.TerminalsTerminalGroupSchema(
                                 id = '', 
                                 organization_id = '', 
                                 name = '', 
                                 address = '', 
                                 time_zone = '', 
                                 external_data = [
-                                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                                         key = '', 
                                         value = '', )
                                     ], )

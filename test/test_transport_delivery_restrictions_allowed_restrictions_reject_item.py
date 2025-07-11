@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_allowed_restrictions_reject_item import TransportDeliveryRestrictionsAllowedRestrictionsRejectItem
+from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_reject_item import TransportDeliveryRestrictionsAllowedRestrictionsRejectItem
 
 class TestTransportDeliveryRestrictionsAllowedRestrictionsRejectItem(unittest.TestCase):
     """TransportDeliveryRestrictionsAllowedRestrictionsRejectItem unit test stubs"""
@@ -40,7 +40,7 @@ class TestTransportDeliveryRestrictionsAllowedRestrictionsRejectItem(unittest.Te
                 zone = '',
                 reject_code = 'Undefined',
                 reject_hint = '',
-                reject_item_data = iiko_cloud_client.models.allowed_restrictions_reject_item_data_schema.AllowedRestrictionsRejectItemDataSchema(
+                reject_item_data = iikocloud_client.models.allowed_restrictions_reject_item_data_schema.AllowedRestrictionsRejectItemDataSchema(
                     date_from = '', 
                     date_to = '', 
                     allowed_week_days = [

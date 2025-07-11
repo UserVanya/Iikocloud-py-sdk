@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_filter_drafts_response import TransportDeliveriesDraftsFilterDraftsResponse
+from iikocloud_client.models.transport_deliveries_drafts_filter_drafts_response import TransportDeliveriesDraftsFilterDraftsResponse
 
 class TestTransportDeliveriesDraftsFilterDraftsResponse(unittest.TestCase):
     """TransportDeliveriesDraftsFilterDraftsResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesDraftsFilterDraftsResponse(unittest.TestCase):
             return TransportDeliveriesDraftsFilterDraftsResponse(
                 correlation_id = '',
                 drafts = [
-                    iiko_cloud_client.models.drafts_order_draft_schema.DraftsOrderDraftSchema(
+                    iikocloud_client.models.drafts_order_draft_schema.DraftsOrderDraftSchema(
                         id = '', 
                         organization_id = '', 
                         locked_by_user = '', 
@@ -50,7 +50,7 @@ class TestTransportDeliveriesDraftsFilterDraftsResponse(unittest.TestCase):
             return TransportDeliveriesDraftsFilterDraftsResponse(
                 correlation_id = '',
                 drafts = [
-                    iiko_cloud_client.models.drafts_order_draft_schema.DraftsOrderDraftSchema(
+                    iikocloud_client.models.drafts_order_draft_schema.DraftsOrderDraftSchema(
                         id = '', 
                         organization_id = '', 
                         locked_by_user = '', 

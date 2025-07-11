@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_metrics_call_center_action import TransportMetricsCallCenterAction
+from iikocloud_client.models.transport_metrics_call_center_action import TransportMetricsCallCenterAction
 
 class TestTransportMetricsCallCenterAction(unittest.TestCase):
     """TransportMetricsCallCenterAction unit test stubs"""

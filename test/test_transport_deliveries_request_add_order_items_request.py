@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_add_order_items_request import TransportDeliveriesRequestAddOrderItemsRequest
+from iikocloud_client.models.transport_deliveries_request_add_order_items_request import TransportDeliveriesRequestAddOrderItemsRequest
 
 class TestTransportDeliveriesRequestAddOrderItemsRequest(unittest.TestCase):
     """TransportDeliveriesRequestAddOrderItemsRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportDeliveriesRequestAddOrderItemsRequest(unittest.TestCase):
                 order_id = '',
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -46,7 +46,7 @@ class TestTransportDeliveriesRequestAddOrderItemsRequest(unittest.TestCase):
                         comment = '', )
                     ],
                 combos = [
-                    iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                    iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                         id = '', 
                         name = '', 
                         amount = 56, 
@@ -61,7 +61,7 @@ class TestTransportDeliveriesRequestAddOrderItemsRequest(unittest.TestCase):
                 order_id = '',
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
+from iikocloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
 
 class TestTransportEmployeesChangePersonalSessionResponse(unittest.TestCase):
     """TransportEmployeesChangePersonalSessionResponse unit test stubs"""

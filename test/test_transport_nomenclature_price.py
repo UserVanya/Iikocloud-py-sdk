@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_nomenclature_price import TransportNomenclaturePrice
+from iikocloud_client.models.transport_nomenclature_price import TransportNomenclaturePrice
 
 class TestTransportNomenclaturePrice(unittest.TestCase):
     """TransportNomenclaturePrice unit test stubs"""

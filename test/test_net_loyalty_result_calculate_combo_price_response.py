@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_calculate_combo_price_response import NetLoyaltyResultCalculateComboPriceResponse
+from iikocloud_client.models.net_loyalty_result_calculate_combo_price_response import NetLoyaltyResultCalculateComboPriceResponse
 
 class TestNetLoyaltyResultCalculateComboPriceResponse(unittest.TestCase):
     """NetLoyaltyResultCalculateComboPriceResponse unit test stubs"""

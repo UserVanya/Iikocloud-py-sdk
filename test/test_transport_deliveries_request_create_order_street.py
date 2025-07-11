@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_street import TransportDeliveriesRequestCreateOrderStreet
+from iikocloud_client.models.transport_deliveries_request_create_order_street import TransportDeliveriesRequestCreateOrderStreet
 
 class TestTransportDeliveriesRequestCreateOrderStreet(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderStreet unit test stubs"""

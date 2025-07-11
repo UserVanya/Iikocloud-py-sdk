@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.tag_dto import TagDto
+from iikocloud_client.models.tag_dto import TagDto
 
 class TestTagDto(unittest.TestCase):
     """TagDto unit test stubs"""

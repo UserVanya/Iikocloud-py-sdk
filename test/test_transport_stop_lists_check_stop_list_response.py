@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_check_stop_list_response import TransportStopListsCheckStopListResponse
+from iikocloud_client.models.transport_stop_lists_check_stop_list_response import TransportStopListsCheckStopListResponse
 
 class TestTransportStopListsCheckStopListResponse(unittest.TestCase):
     """TransportStopListsCheckStopListResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportStopListsCheckStopListResponse(unittest.TestCase):
             return TransportStopListsCheckStopListResponse(
                 correlation_id = '',
                 rejected_items = [
-                    iiko_cloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
+                    iikocloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
                         balance = 1.337, 
                         product_id = '', 
                         size_id = '', 

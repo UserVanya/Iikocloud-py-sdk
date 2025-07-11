@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_organization_get_programs_request import NetOrganizationGetProgramsRequest
+from iikocloud_client.models.net_organization_get_programs_request import NetOrganizationGetProgramsRequest
 
 class TestNetOrganizationGetProgramsRequest(unittest.TestCase):
     """NetOrganizationGetProgramsRequest unit test stubs"""

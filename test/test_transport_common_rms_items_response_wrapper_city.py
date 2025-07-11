@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_rms_items_response_wrapper_city import TransportCommonRmsItemsResponseWrapperCity
+from iikocloud_client.models.transport_common_rms_items_response_wrapper_city import TransportCommonRmsItemsResponseWrapperCity
 
 class TestTransportCommonRmsItemsResponseWrapperCity(unittest.TestCase):
     """TransportCommonRmsItemsResponseWrapperCity unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportCommonRmsItemsResponseWrapperCity(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperCity(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.address_city_schema.AddressCitySchema(
+                    iikocloud_client.models.address_city_schema.AddressCitySchema(
                         id = '', 
                         name = '', 
                         external_revision = 56, 
@@ -50,7 +50,7 @@ class TestTransportCommonRmsItemsResponseWrapperCity(unittest.TestCase):
             return TransportCommonRmsItemsResponseWrapperCity(
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.address_city_schema.AddressCitySchema(
+                    iikocloud_client.models.address_city_schema.AddressCitySchema(
                         id = '', 
                         name = '', 
                         external_revision = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_courier_locations_by_time_offset_response import TransportEmployeesCourierLocationsByTimeOffsetResponse
+from iikocloud_client.models.transport_employees_courier_locations_by_time_offset_response import TransportEmployeesCourierLocationsByTimeOffsetResponse
 
 class TestTransportEmployeesCourierLocationsByTimeOffsetResponse(unittest.TestCase):
     """TransportEmployeesCourierLocationsByTimeOffsetResponse unit test stubs"""
@@ -37,13 +37,13 @@ class TestTransportEmployeesCourierLocationsByTimeOffsetResponse(unittest.TestCa
             return TransportEmployeesCourierLocationsByTimeOffsetResponse(
                 correlation_id = '',
                 courier_locations = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_courier_locations_schema.RmsItemsResponseWrapperCourierLocationsSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_courier_locations_schema.RmsItemsResponseWrapperCourierLocationsSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
+                            iikocloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
                                 courier_id = '', 
                                 locations = [
-                                    iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                                    iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                                         latitude = 1.337, 
                                         longitude = 1.337, 
                                         server_timestamp = 56, )
@@ -55,13 +55,13 @@ class TestTransportEmployeesCourierLocationsByTimeOffsetResponse(unittest.TestCa
             return TransportEmployeesCourierLocationsByTimeOffsetResponse(
                 correlation_id = '',
                 courier_locations = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_courier_locations_schema.RmsItemsResponseWrapperCourierLocationsSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_courier_locations_schema.RmsItemsResponseWrapperCourierLocationsSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
+                            iikocloud_client.models.employees_courier_locations_schema.EmployeesCourierLocationsSchema(
                                 courier_id = '', 
                                 locations = [
-                                    iiko_cloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
+                                    iikocloud_client.models.employees_coordinate_info_schema.EmployeesCoordinateInfoSchema(
                                         latitude = 1.337, 
                                         longitude = 1.337, 
                                         server_timestamp = 56, )

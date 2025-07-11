@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_operation_code import NetLoyaltyResultOperationCode
+from iikocloud_client.models.net_loyalty_result_operation_code import NetLoyaltyResultOperationCode
 
 class TestNetLoyaltyResultOperationCode(unittest.TestCase):
     """NetLoyaltyResultOperationCode unit test stubs"""

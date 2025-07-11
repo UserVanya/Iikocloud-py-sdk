@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_integration_web_hooks_filters_web_hooks_filter import TransportIntegrationWebHooksFiltersWebHooksFilter
+from iikocloud_client.models.transport_integration_web_hooks_filters_web_hooks_filter import TransportIntegrationWebHooksFiltersWebHooksFilter
 
 class TestTransportIntegrationWebHooksFiltersWebHooksFilter(unittest.TestCase):
     """TransportIntegrationWebHooksFiltersWebHooksFilter unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportIntegrationWebHooksFiltersWebHooksFilter(unittest.TestCase):
         model = TransportIntegrationWebHooksFiltersWebHooksFilter()
         if include_optional:
             return TransportIntegrationWebHooksFiltersWebHooksFilter(
-                delivery_order_filter = iiko_cloud_client.models.web_hooks_filters_delivery_order_web_hooks_filter_schema.WebHooksFiltersDeliveryOrderWebHooksFilterSchema(
+                delivery_order_filter = iikocloud_client.models.web_hooks_filters_delivery_order_web_hooks_filter_schema.WebHooksFiltersDeliveryOrderWebHooksFilterSchema(
                     order_statuses = [
                         'Unconfirmed'
                         ], 
@@ -46,7 +46,7 @@ class TestTransportIntegrationWebHooksFiltersWebHooksFilter(unittest.TestCase):
                     returned_external_data_keys = [
                         ''
                         ], ),
-                table_order_filter = iiko_cloud_client.models.web_hooks_filters_table_order_web_hook_filter_schema.WebHooksFiltersTableOrderWebHookFilterSchema(
+                table_order_filter = iikocloud_client.models.web_hooks_filters_table_order_web_hook_filter_schema.WebHooksFiltersTableOrderWebHookFilterSchema(
                     order_statuses = [
                         'New'
                         ], 
@@ -54,14 +54,14 @@ class TestTransportIntegrationWebHooksFiltersWebHooksFilter(unittest.TestCase):
                         'Added'
                         ], 
                     errors = True, ),
-                reserve_filter = iiko_cloud_client.models.web_hooks_filters_reserve_web_hook_filter_schema.WebHooksFiltersReserveWebHookFilterSchema(
+                reserve_filter = iikocloud_client.models.web_hooks_filters_reserve_web_hook_filter_schema.WebHooksFiltersReserveWebHookFilterSchema(
                     updates = True, 
                     errors = True, ),
-                stop_list_update_filter = iiko_cloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
+                stop_list_update_filter = iikocloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
                     updates = True, ),
-                personal_shift_filter = iiko_cloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
+                personal_shift_filter = iikocloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
                     updates = True, ),
-                nomenclature_update_filter = iiko_cloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
+                nomenclature_update_filter = iikocloud_client.models.web_hooks_filters_web_hook_short_filter_schema.WebHooksFiltersWebHookShortFilterSchema(
                     updates = True, )
             )
         else:

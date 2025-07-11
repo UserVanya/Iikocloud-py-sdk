@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_discounts_discounts_response import TransportDiscountsDiscountsResponse
+from iikocloud_client.models.transport_discounts_discounts_response import TransportDiscountsDiscountsResponse
 
 class TestTransportDiscountsDiscountsResponse(unittest.TestCase):
     """TransportDiscountsDiscountsResponse unit test stubs"""
@@ -37,16 +37,16 @@ class TestTransportDiscountsDiscountsResponse(unittest.TestCase):
             return TransportDiscountsDiscountsResponse(
                 correlation_id = '',
                 discounts = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_discount_card_type_info_schema.RmsItemsResponseWrapperDiscountCardTypeInfoSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_discount_card_type_info_schema.RmsItemsResponseWrapperDiscountCardTypeInfoSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.discounts_discount_card_type_info_schema.DiscountsDiscountCardTypeInfoSchema(
+                            iikocloud_client.models.discounts_discount_card_type_info_schema.DiscountsDiscountCardTypeInfoSchema(
                                 id = '', 
                                 name = '', 
                                 percent = 1.337, 
                                 is_categorised_discount = True, 
                                 product_category_discounts = [
-                                    iiko_cloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
+                                    iikocloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
                                         category_id = '', 
                                         category_name = '', 
                                         percent = 1.337, )
@@ -68,16 +68,16 @@ class TestTransportDiscountsDiscountsResponse(unittest.TestCase):
             return TransportDiscountsDiscountsResponse(
                 correlation_id = '',
                 discounts = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_discount_card_type_info_schema.RmsItemsResponseWrapperDiscountCardTypeInfoSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_discount_card_type_info_schema.RmsItemsResponseWrapperDiscountCardTypeInfoSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.discounts_discount_card_type_info_schema.DiscountsDiscountCardTypeInfoSchema(
+                            iikocloud_client.models.discounts_discount_card_type_info_schema.DiscountsDiscountCardTypeInfoSchema(
                                 id = '', 
                                 name = '', 
                                 percent = 1.337, 
                                 is_categorised_discount = True, 
                                 product_category_discounts = [
-                                    iiko_cloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
+                                    iikocloud_client.models.discounts_product_category_discount_schema.DiscountsProductCategoryDiscountSchema(
                                         category_id = '', 
                                         category_name = '', 
                                         percent = 1.337, )

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_metrics_call_center_telemetry import TransportMetricsCallCenterTelemetry
+from iikocloud_client.models.transport_metrics_call_center_telemetry import TransportMetricsCallCenterTelemetry
 
 class TestTransportMetricsCallCenterTelemetry(unittest.TestCase):
     """TransportMetricsCallCenterTelemetry unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportMetricsCallCenterTelemetry(unittest.TestCase):
             return TransportMetricsCallCenterTelemetry(
                 employee_id = '',
                 actions = [
-                    iiko_cloud_client.models.metrics_call_center_action_schema.MetricsCallCenterActionSchema(
+                    iikocloud_client.models.metrics_call_center_action_schema.MetricsCallCenterActionSchema(
                         type = null, 
                         time = '2019-08-24 14:15:22.123', 
                         duration = 56, )
@@ -47,7 +47,7 @@ class TestTransportMetricsCallCenterTelemetry(unittest.TestCase):
             return TransportMetricsCallCenterTelemetry(
                 employee_id = '',
                 actions = [
-                    iiko_cloud_client.models.metrics_call_center_action_schema.MetricsCallCenterActionSchema(
+                    iikocloud_client.models.metrics_call_center_action_schema.MetricsCallCenterActionSchema(
                         type = null, 
                         time = '2019-08-24 14:15:22.123', 
                         duration = 56, )

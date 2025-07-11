@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_address_legacy import TransportDeliveriesRequestCreateOrderAddressLegacy
+from iikocloud_client.models.transport_deliveries_request_create_order_address_legacy import TransportDeliveriesRequestCreateOrderAddressLegacy
 
 class TestTransportDeliveriesRequestCreateOrderAddressLegacy(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderAddressLegacy unit test stubs"""
@@ -35,7 +35,7 @@ class TestTransportDeliveriesRequestCreateOrderAddressLegacy(unittest.TestCase):
         model = TransportDeliveriesRequestCreateOrderAddressLegacy()
         if include_optional:
             return TransportDeliveriesRequestCreateOrderAddressLegacy(
-                street = iiko_cloud_client.models.create_order_street_schema.CreateOrderStreetSchema(
+                street = iikocloud_client.models.create_order_street_schema.CreateOrderStreetSchema(
                     classifier_id = '', 
                     id = '', 
                     name = '', 
@@ -51,7 +51,7 @@ class TestTransportDeliveriesRequestCreateOrderAddressLegacy(unittest.TestCase):
             )
         else:
             return TransportDeliveriesRequestCreateOrderAddressLegacy(
-                street = iiko_cloud_client.models.create_order_street_schema.CreateOrderStreetSchema(
+                street = iikocloud_client.models.create_order_street_schema.CreateOrderStreetSchema(
                     classifier_id = '', 
                     id = '', 
                     name = '', 

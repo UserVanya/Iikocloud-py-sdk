@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.authorization_api import AuthorizationApi
+from iikocloud_client.api.authorization_api import AuthorizationApi
 
 
 class TestAuthorizationApi(unittest.IsolatedAsyncioTestCase):

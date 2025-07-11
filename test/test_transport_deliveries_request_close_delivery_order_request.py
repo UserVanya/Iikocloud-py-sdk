@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_close_delivery_order_request import TransportDeliveriesRequestCloseDeliveryOrderRequest
+from iikocloud_client.models.transport_deliveries_request_close_delivery_order_request import TransportDeliveriesRequestCloseDeliveryOrderRequest
 
 class TestTransportDeliveriesRequestCloseDeliveryOrderRequest(unittest.TestCase):
     """TransportDeliveriesRequestCloseDeliveryOrderRequest unit test stubs"""

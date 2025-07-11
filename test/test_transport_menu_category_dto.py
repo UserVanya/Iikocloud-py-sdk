@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_menu_category_dto import TransportMenuCategoryDto
+from iikocloud_client.models.transport_menu_category_dto import TransportMenuCategoryDto
 
 class TestTransportMenuCategoryDto(unittest.TestCase):
     """TransportMenuCategoryDto unit test stubs"""
@@ -36,19 +36,19 @@ class TestTransportMenuCategoryDto(unittest.TestCase):
         if include_optional:
             return TransportMenuCategoryDto(
                 items = [
-                    iiko_cloud_client.models.transport_item_dto_schema.TransportItemDtoSchema(
+                    iikocloud_client.models.transport_item_dto_schema.TransportItemDtoSchema(
                         item_sizes = [
-                            iiko_cloud_client.models.transport_item_size_dto_schema.TransportItemSizeDtoSchema(
+                            iikocloud_client.models.transport_item_size_dto_schema.TransportItemSizeDtoSchema(
                                 prices = [
-                                    iiko_cloud_client.models.transport_price_dto_schema.TransportPriceDtoSchema(
+                                    iikocloud_client.models.transport_price_dto_schema.TransportPriceDtoSchema(
                                         organization_id = '', 
                                         price = 20.5, )
                                     ], 
                                 item_modifier_groups = [
-                                    iiko_cloud_client.models.transport_modifier_group_dto_schema.TransportModifierGroupDtoSchema(
+                                    iikocloud_client.models.transport_modifier_group_dto_schema.TransportModifierGroupDtoSchema(
                                         name = '', 
                                         description = '', 
-                                        restrictions = iiko_cloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
+                                        restrictions = iikocloud_client.models.modifier_restrictions_dto_schema.ModifierRestrictionsDtoSchema(
                                             min_quantity = 56, 
                                             max_quantity = 56, 
                                             free_quantity = 56, 
@@ -64,7 +64,7 @@ class TestTransportMenuCategoryDto(unittest.TestCase):
                                 is_default = True, 
                                 portion_weight_grams = 0, 
                                 size_id = '', 
-                                nutrition_per_hundred_grams = iiko_cloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
+                                nutrition_per_hundred_grams = iikocloud_client.models.nutrition_info_dto_schema.NutritionInfoDtoSchema(), 
                                 button_image_url = 'https://102922.selcdn.ru/ecomm/someimage.png', 
                                 button_image_cropped_url = [
                                     'https://102922.selcdn.ru/ecomm/someimage.png'
@@ -74,14 +74,14 @@ class TestTransportMenuCategoryDto(unittest.TestCase):
                         name = 'Chicken Parmegiano', 
                         description = 'Delicate taste, juicy chicken fillet, mushrooms, Cheddar cheese and Mozzarella cheese, oregano, Parmegiano sauce', 
                         allergen_groups = [
-                            iiko_cloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
+                            iikocloud_client.models.allergen_group_dto_schema.AllergenGroupDtoSchema(
                                 id = '', 
                                 code = '', 
                                 name = '', )
                             ], 
                         item_id = '', 
                         modifier_schema_id = '', 
-                        tax_category = iiko_cloud_client.models.tax_category_dto_schema.TaxCategoryDtoSchema(
+                        tax_category = iikocloud_client.models.tax_category_dto_schema.TaxCategoryDtoSchema(
                             id = '', 
                             name = '', 
                             percentage = 1.337, ), 

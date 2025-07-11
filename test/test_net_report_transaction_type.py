@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_transaction_type import NetReportTransactionType
+from iikocloud_client.models.net_report_transaction_type import NetReportTransactionType
 
 class TestNetReportTransactionType(unittest.TestCase):
     """NetReportTransactionType unit test stubs"""

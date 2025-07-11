@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_check_stop_list_request import TransportStopListsCheckStopListRequest
+from iikocloud_client.models.transport_stop_lists_check_stop_list_request import TransportStopListsCheckStopListRequest
 
 class TestTransportStopListsCheckStopListRequest(unittest.TestCase):
     """TransportStopListsCheckStopListRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportStopListsCheckStopListRequest(unittest.TestCase):
                 organization_id = '',
                 terminal_group_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -51,7 +51,7 @@ class TestTransportStopListsCheckStopListRequest(unittest.TestCase):
                 organization_id = '',
                 terminal_group_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

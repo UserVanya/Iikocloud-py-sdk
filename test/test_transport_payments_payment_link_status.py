@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_payments_payment_link_status import TransportPaymentsPaymentLinkStatus
+from iikocloud_client.models.transport_payments_payment_link_status import TransportPaymentsPaymentLinkStatus
 
 class TestTransportPaymentsPaymentLinkStatus(unittest.TestCase):
     """TransportPaymentsPaymentLinkStatus unit test stubs"""

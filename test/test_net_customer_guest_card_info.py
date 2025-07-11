@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_guest_card_info import NetCustomerGuestCardInfo
+from iikocloud_client.models.net_customer_guest_card_info import NetCustomerGuestCardInfo
 
 class TestNetCustomerGuestCardInfo(unittest.TestCase):
     """NetCustomerGuestCardInfo unit test stubs"""

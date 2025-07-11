@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_common_payment_type_kind import TransportDeliveriesCommonPaymentTypeKind
+from iikocloud_client.models.transport_deliveries_common_payment_type_kind import TransportDeliveriesCommonPaymentTypeKind
 
 class TestTransportDeliveriesCommonPaymentTypeKind(unittest.TestCase):
     """TransportDeliveriesCommonPaymentTypeKind unit test stubs"""

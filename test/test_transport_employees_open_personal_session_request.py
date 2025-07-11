@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_open_personal_session_request import TransportEmployeesOpenPersonalSessionRequest
+from iikocloud_client.models.transport_employees_open_personal_session_request import TransportEmployeesOpenPersonalSessionRequest
 
 class TestTransportEmployeesOpenPersonalSessionRequest(unittest.TestCase):
     """TransportEmployeesOpenPersonalSessionRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_stop_list_update_web_hook_event_info import TransportWebHooksStopListUpdateWebHookEventInfo
+from iikocloud_client.models.transport_web_hooks_stop_list_update_web_hook_event_info import TransportWebHooksStopListUpdateWebHookEventInfo
 
 class TestTransportWebHooksStopListUpdateWebHookEventInfo(unittest.TestCase):
     """TransportWebHooksStopListUpdateWebHookEventInfo unit test stubs"""
@@ -39,9 +39,9 @@ class TestTransportWebHooksStopListUpdateWebHookEventInfo(unittest.TestCase):
                 event_time = '2019-08-24 14:15:22.123',
                 organization_id = '',
                 correlation_id = '',
-                event_info = iiko_cloud_client.models.stop_lists_web_hook_on_stop_list_change_data_schema.StopListsWebHookOnStopListChangeDataSchema(
+                event_info = iikocloud_client.models.stop_lists_web_hook_on_stop_list_change_data_schema.StopListsWebHookOnStopListChangeDataSchema(
                     terminal_groups_stop_lists_updates = [
-                        iiko_cloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
+                        iikocloud_client.models.stop_lists_terminal_group_stop_list_update_schema.StopListsTerminalGroupStopListUpdateSchema(
                             id = '', 
                             is_full = True, )
                         ], )

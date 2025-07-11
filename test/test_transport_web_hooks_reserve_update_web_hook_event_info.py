@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_reserve_update_web_hook_event_info import TransportWebHooksReserveUpdateWebHookEventInfo
+from iikocloud_client.models.transport_web_hooks_reserve_update_web_hook_event_info import TransportWebHooksReserveUpdateWebHookEventInfo
 
 class TestTransportWebHooksReserveUpdateWebHookEventInfo(unittest.TestCase):
     """TransportWebHooksReserveUpdateWebHookEventInfo unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportWebHooksReserveUpdateWebHookEventInfo(unittest.TestCase):
                 event_time = '2019-08-24 14:15:22.123',
                 organization_id = '',
                 correlation_id = '',
-                event_info = iiko_cloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
+                event_info = iikocloud_client.models.reserves_reserve_info_schema.ReservesReserveInfoSchema(
                     id = '', 
                     external_number = '', 
                     organization_id = '', 

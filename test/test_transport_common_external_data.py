@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_external_data import TransportCommonExternalData
+from iikocloud_client.models.transport_common_external_data import TransportCommonExternalData
 
 class TestTransportCommonExternalData(unittest.TestCase):
     """TransportCommonExternalData unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_order import TransportDeliveriesRequestCreateOrderOrder
+from iikocloud_client.models.transport_deliveries_request_create_order_order import TransportDeliveriesRequestCreateOrderOrder
 
 class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderOrder unit test stubs"""
@@ -41,15 +41,15 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                 phone = '01234567',
                 order_type_id = '',
                 order_service_type = 'DeliveryByCourier',
-                delivery_point = iiko_cloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
+                delivery_point = iikocloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
                     coordinates = null, 
                     address = null, 
                     external_cartography_id = '', 
                     comment = '', ),
                 comment = '',
-                customer = iiko_cloud_client.models.create_order_customer_schema.CreateOrderCustomerSchema(
+                customer = iikocloud_client.models.create_order_customer_schema.CreateOrderCustomerSchema(
                     type = '', ),
-                guests = iiko_cloud_client.models.create_order_guests_schema.CreateOrderGuestsSchema(
+                guests = iikocloud_client.models.create_order_guests_schema.CreateOrderGuestsSchema(
                     count = 56, 
                     split_between_persons = True, ),
                 marketing_source_id = '',
@@ -57,7 +57,7 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                 delivery_duration = 56,
                 delivery_zone = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -65,7 +65,7 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                         comment = '', )
                     ],
                 combos = [
-                    iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                    iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                         id = '', 
                         name = '', 
                         amount = 56, 
@@ -75,7 +75,7 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                         size_id = '', )
                     ],
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 
@@ -85,7 +85,7 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 tips = [
-                    iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                    iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                         payment_type_kind = '', 
                         tips_type_id = '', 
                         sum = 0, 
@@ -96,25 +96,25 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 source_key = '',
-                discounts_info = iiko_cloud_client.models.create_order_discounts_info_schema.CreateOrderDiscountsInfoSchema(
+                discounts_info = iikocloud_client.models.create_order_discounts_info_schema.CreateOrderDiscountsInfoSchema(
                     card = null, 
                     discounts = [
-                        iiko_cloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
+                        iikocloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
                             type = '', )
                         ], 
                     fixed_loyalty_discounts = True, ),
-                loyalty_info = iiko_cloud_client.models.create_order_loyalty_info_schema.CreateOrderLoyaltyInfoSchema(
+                loyalty_info = iikocloud_client.models.create_order_loyalty_info_schema.CreateOrderLoyaltyInfoSchema(
                     coupon = '', 
                     applicable_manual_conditions = [
                         ''
                         ], ),
-                cheque_additional_info = iiko_cloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
+                cheque_additional_info = iikocloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
                     need_receipt = True, 
                     email = '', 
                     settlement_place = '', 
                     phone = '01234567', ),
                 external_data = [
-                    iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                    iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                         key = '', 
                         value = '', 
                         is_public = True, )
@@ -124,7 +124,7 @@ class TestTransportDeliveriesRequestCreateOrderOrder(unittest.TestCase):
             return TransportDeliveriesRequestCreateOrderOrder(
                 phone = '01234567',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

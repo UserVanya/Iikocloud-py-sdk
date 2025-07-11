@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_common_sort_direction import TransportCommonSortDirection
+from iikocloud_client.models.transport_common_sort_direction import TransportCommonSortDirection
 
 class TestTransportCommonSortDirection(unittest.TestCase):
     """TransportCommonSortDirection unit test stubs"""

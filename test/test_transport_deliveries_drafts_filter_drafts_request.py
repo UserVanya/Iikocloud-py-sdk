@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_filter_drafts_request import TransportDeliveriesDraftsFilterDraftsRequest
+from iikocloud_client.models.transport_deliveries_drafts_filter_drafts_request import TransportDeliveriesDraftsFilterDraftsRequest
 
 class TestTransportDeliveriesDraftsFilterDraftsRequest(unittest.TestCase):
     """TransportDeliveriesDraftsFilterDraftsRequest unit test stubs"""

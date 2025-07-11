@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_delivery_restrictions import TransportDeliveryRestrictionsDeliveryRestrictions
+from iikocloud_client.models.transport_delivery_restrictions_delivery_restrictions import TransportDeliveryRestrictionsDeliveryRestrictions
 
 class TestTransportDeliveryRestrictionsDeliveryRestrictions(unittest.TestCase):
     """TransportDeliveryRestrictionsDeliveryRestrictions unit test stubs"""
@@ -48,7 +48,7 @@ class TestTransportDeliveryRestrictionsDeliveryRestrictions(unittest.TestCase):
                 default_to = 56,
                 use_same_restrictions_on_all_week = True,
                 restrictions = [
-                    iiko_cloud_client.models.delivery_restrictions_delivery_restriction_item_schema.DeliveryRestrictionsDeliveryRestrictionItemSchema(
+                    iikocloud_client.models.delivery_restrictions_delivery_restriction_item_schema.DeliveryRestrictionsDeliveryRestrictionItemSchema(
                         min_sum = 1.337, 
                         terminal_group_id = '', 
                         organization_id = '', 
@@ -61,15 +61,15 @@ class TestTransportDeliveryRestrictionsDeliveryRestrictions(unittest.TestCase):
                         delivery_service_product_id = '', )
                     ],
                 delivery_zones = [
-                    iiko_cloud_client.models.delivery_restrictions_delivery_zone_schema.DeliveryRestrictionsDeliveryZoneSchema(
+                    iikocloud_client.models.delivery_restrictions_delivery_zone_schema.DeliveryRestrictionsDeliveryZoneSchema(
                         name = '', 
                         coordinates = [
-                            iiko_cloud_client.models.delivery_restrictions_coordinates_schema.DeliveryRestrictionsCoordinatesSchema(
+                            iikocloud_client.models.delivery_restrictions_coordinates_schema.DeliveryRestrictionsCoordinatesSchema(
                                 latitude = 1.337, 
                                 longitude = 1.337, )
                             ], 
                         addresses = [
-                            iiko_cloud_client.models.delivery_restrictions_delivery_zone_address_binding_schema.DeliveryRestrictionsDeliveryZoneAddressBindingSchema(
+                            iikocloud_client.models.delivery_restrictions_delivery_zone_address_binding_schema.DeliveryRestrictionsDeliveryZoneAddressBindingSchema(
                                 street_id = '', 
                                 postcode = '', 
                                 houses = null, )
@@ -102,7 +102,7 @@ class TestTransportDeliveryRestrictionsDeliveryRestrictions(unittest.TestCase):
                 default_to = 56,
                 use_same_restrictions_on_all_week = True,
                 restrictions = [
-                    iiko_cloud_client.models.delivery_restrictions_delivery_restriction_item_schema.DeliveryRestrictionsDeliveryRestrictionItemSchema(
+                    iikocloud_client.models.delivery_restrictions_delivery_restriction_item_schema.DeliveryRestrictionsDeliveryRestrictionItemSchema(
                         min_sum = 1.337, 
                         terminal_group_id = '', 
                         organization_id = '', 
@@ -115,15 +115,15 @@ class TestTransportDeliveryRestrictionsDeliveryRestrictions(unittest.TestCase):
                         delivery_service_product_id = '', )
                     ],
                 delivery_zones = [
-                    iiko_cloud_client.models.delivery_restrictions_delivery_zone_schema.DeliveryRestrictionsDeliveryZoneSchema(
+                    iikocloud_client.models.delivery_restrictions_delivery_zone_schema.DeliveryRestrictionsDeliveryZoneSchema(
                         name = '', 
                         coordinates = [
-                            iiko_cloud_client.models.delivery_restrictions_coordinates_schema.DeliveryRestrictionsCoordinatesSchema(
+                            iikocloud_client.models.delivery_restrictions_coordinates_schema.DeliveryRestrictionsCoordinatesSchema(
                                 latitude = 1.337, 
                                 longitude = 1.337, )
                             ], 
                         addresses = [
-                            iiko_cloud_client.models.delivery_restrictions_delivery_zone_address_binding_schema.DeliveryRestrictionsDeliveryZoneAddressBindingSchema(
+                            iikocloud_client.models.delivery_restrictions_delivery_zone_address_binding_schema.DeliveryRestrictionsDeliveryZoneAddressBindingSchema(
                                 street_id = '', 
                                 postcode = '', 
                                 houses = null, )

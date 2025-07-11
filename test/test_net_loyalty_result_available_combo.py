@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_available_combo import NetLoyaltyResultAvailableCombo
+from iikocloud_client.models.net_loyalty_result_available_combo import NetLoyaltyResultAvailableCombo
 
 class TestNetLoyaltyResultAvailableCombo(unittest.TestCase):
     """NetLoyaltyResultAvailableCombo unit test stubs"""
@@ -37,7 +37,7 @@ class TestNetLoyaltyResultAvailableCombo(unittest.TestCase):
             return NetLoyaltyResultAvailableCombo(
                 specification_id = '',
                 group_mapping = [
-                    iiko_cloud_client.models.loyalty_result_combo_group_mapping_schema.LoyaltyResultComboGroupMappingSchema(
+                    iikocloud_client.models.loyalty_result_combo_group_mapping_schema.LoyaltyResultComboGroupMappingSchema(
                         group_id = '', 
                         item_id = '', )
                     ]

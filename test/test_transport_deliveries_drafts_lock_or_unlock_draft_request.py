@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
 
 class TestTransportDeliveriesDraftsLockOrUnlockDraftRequest(unittest.TestCase):
     """TransportDeliveriesDraftsLockOrUnlockDraftRequest unit test stubs"""

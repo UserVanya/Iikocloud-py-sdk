@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_discounts_product_category_discount import TransportDiscountsProductCategoryDiscount
+from iikocloud_client.models.transport_discounts_product_category_discount import TransportDiscountsProductCategoryDiscount
 
 class TestTransportDiscountsProductCategoryDiscount(unittest.TestCase):
     """TransportDiscountsProductCategoryDiscount unit test stubs"""

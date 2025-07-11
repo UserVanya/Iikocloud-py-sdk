@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_get_simple_organizations_response import TransportOrganizationsGetSimpleOrganizationsResponse
+from iikocloud_client.models.transport_organizations_get_simple_organizations_response import TransportOrganizationsGetSimpleOrganizationsResponse
 
 class TestTransportOrganizationsGetSimpleOrganizationsResponse(unittest.TestCase):
     """TransportOrganizationsGetSimpleOrganizationsResponse unit test stubs"""
@@ -37,14 +37,14 @@ class TestTransportOrganizationsGetSimpleOrganizationsResponse(unittest.TestCase
             return TransportOrganizationsGetSimpleOrganizationsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_simple_organization_info_schema.OrganizationsSimpleOrganizationInfoSchema()
+                    iikocloud_client.models.organizations_simple_organization_info_schema.OrganizationsSimpleOrganizationInfoSchema()
                     ]
             )
         else:
             return TransportOrganizationsGetSimpleOrganizationsResponse(
                 correlation_id = '',
                 organizations = [
-                    iiko_cloud_client.models.organizations_simple_organization_info_schema.OrganizationsSimpleOrganizationInfoSchema()
+                    iikocloud_client.models.organizations_simple_organization_info_schema.OrganizationsSimpleOrganizationInfoSchema()
                     ],
         )
         """

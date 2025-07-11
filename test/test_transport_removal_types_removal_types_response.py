@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_removal_types_removal_types_response import TransportRemovalTypesRemovalTypesResponse
+from iikocloud_client.models.transport_removal_types_removal_types_response import TransportRemovalTypesRemovalTypesResponse
 
 class TestTransportRemovalTypesRemovalTypesResponse(unittest.TestCase):
     """TransportRemovalTypesRemovalTypesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportRemovalTypesRemovalTypesResponse(unittest.TestCase):
             return TransportRemovalTypesRemovalTypesResponse(
                 correlation_id = '',
                 removal_types = [
-                    iiko_cloud_client.models.removal_types_removal_type_schema.RemovalTypesRemovalTypeSchema(
+                    iikocloud_client.models.removal_types_removal_type_schema.RemovalTypesRemovalTypeSchema(
                         id = '', 
                         name = '', 
                         comment = '', 
@@ -53,7 +53,7 @@ class TestTransportRemovalTypesRemovalTypesResponse(unittest.TestCase):
             return TransportRemovalTypesRemovalTypesResponse(
                 correlation_id = '',
                 removal_types = [
-                    iiko_cloud_client.models.removal_types_removal_type_schema.RemovalTypesRemovalTypeSchema(
+                    iikocloud_client.models.removal_types_removal_type_schema.RemovalTypesRemovalTypeSchema(
                         id = '', 
                         name = '', 
                         comment = '', 

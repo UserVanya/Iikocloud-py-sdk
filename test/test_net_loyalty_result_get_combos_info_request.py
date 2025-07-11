@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_get_combos_info_request import NetLoyaltyResultGetCombosInfoRequest
+from iikocloud_client.models.net_loyalty_result_get_combos_info_request import NetLoyaltyResultGetCombosInfoRequest
 
 class TestNetLoyaltyResultGetCombosInfoRequest(unittest.TestCase):
     """NetLoyaltyResultGetCombosInfoRequest unit test stubs"""

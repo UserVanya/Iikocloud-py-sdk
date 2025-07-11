@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.addresses_api import AddressesApi
+from iikocloud_client.api.addresses_api import AddressesApi
 
 
 class TestAddressesApi(unittest.IsolatedAsyncioTestCase):

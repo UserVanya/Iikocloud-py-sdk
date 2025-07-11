@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_get_web_hook_settings_response import TransportWebHooksGetWebHookSettingsResponse
+from iikocloud_client.models.transport_web_hooks_get_web_hook_settings_response import TransportWebHooksGetWebHookSettingsResponse
 
 class TestTransportWebHooksGetWebHookSettingsResponse(unittest.TestCase):
     """TransportWebHooksGetWebHookSettingsResponse unit test stubs"""
@@ -39,7 +39,7 @@ class TestTransportWebHooksGetWebHookSettingsResponse(unittest.TestCase):
                 api_login_name = '',
                 web_hooks_uri = '',
                 auth_token = '',
-                web_hooks_filter = iiko_cloud_client.models.web_hooks_filters_web_hooks_filter_schema.WebHooksFiltersWebHooksFilterSchema(
+                web_hooks_filter = iikocloud_client.models.web_hooks_filters_web_hooks_filter_schema.WebHooksFiltersWebHooksFilterSchema(
                     delivery_order_filter = null, 
                     table_order_filter = null, 
                     reserve_filter = null, 

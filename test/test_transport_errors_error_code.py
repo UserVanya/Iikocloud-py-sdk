@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_errors_error_code import TransportErrorsErrorCode
+from iikocloud_client.models.transport_errors_error_code import TransportErrorsErrorCode
 
 class TestTransportErrorsErrorCode(unittest.TestCase):
     """TransportErrorsErrorCode unit test stubs"""

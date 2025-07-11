@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.iiko_net_common_enums_counter_metric import IikoNetCommonEnumsCounterMetric
+from iikocloud_client.models.iiko_net_common_enums_counter_metric import IikoNetCommonEnumsCounterMetric
 
 class TestIikoNetCommonEnumsCounterMetric(unittest.TestCase):
     """IikoNetCommonEnumsCounterMetric unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_get_counters_response import NetLoyaltyResultGetCountersResponse
+from iikocloud_client.models.net_loyalty_result_get_counters_response import NetLoyaltyResultGetCountersResponse
 
 class TestNetLoyaltyResultGetCountersResponse(unittest.TestCase):
     """NetLoyaltyResultGetCountersResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultGetCountersResponse(unittest.TestCase):
         if include_optional:
             return NetLoyaltyResultGetCountersResponse(
                 counters = [
-                    iiko_cloud_client.models.loyalty_result_guest_counter_schema.LoyaltyResultGuestCounterSchema(
+                    iikocloud_client.models.loyalty_result_guest_counter_schema.LoyaltyResultGuestCounterSchema(
                         guest_id = '', 
                         period = null, 
                         metric = null, 

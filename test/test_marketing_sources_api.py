@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.marketing_sources_api import MarketingSourcesApi
+from iikocloud_client.api.marketing_sources_api import MarketingSourcesApi
 
 
 class TestMarketingSourcesApi(unittest.IsolatedAsyncioTestCase):

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_payments_request import TransportDeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.models.transport_deliveries_request_update_order_payments_request import TransportDeliveriesRequestUpdateOrderPaymentsRequest
 
 class TestTransportDeliveriesRequestUpdateOrderPaymentsRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderPaymentsRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportDeliveriesRequestUpdateOrderPaymentsRequest(unittest.TestCase
                 organization_id = '',
                 order_id = '',
                 payment_items = [
-                    iiko_cloud_client.models.update_order_order_payment_item_schema.UpdateOrderOrderPaymentItemSchema(
+                    iikocloud_client.models.update_order_order_payment_item_schema.UpdateOrderOrderPaymentItemSchema(
                         sum = 1.337, 
                         payment_type_id = '', 
                         is_processed_externally = True, )

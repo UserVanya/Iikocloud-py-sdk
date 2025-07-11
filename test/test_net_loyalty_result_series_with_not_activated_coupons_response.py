@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_series_with_not_activated_coupons_response import NetLoyaltyResultSeriesWithNotActivatedCouponsResponse
+from iikocloud_client.models.net_loyalty_result_series_with_not_activated_coupons_response import NetLoyaltyResultSeriesWithNotActivatedCouponsResponse
 
 class TestNetLoyaltyResultSeriesWithNotActivatedCouponsResponse(unittest.TestCase):
     """NetLoyaltyResultSeriesWithNotActivatedCouponsResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultSeriesWithNotActivatedCouponsResponse(unittest.TestCas
         if include_optional:
             return NetLoyaltyResultSeriesWithNotActivatedCouponsResponse(
                 series_with_not_activated_coupons = [
-                    iiko_cloud_client.models.loyalty_result_series_with_not_activated_coupons_schema.LoyaltyResultSeriesWithNotActivatedCouponsSchema(
+                    iikocloud_client.models.loyalty_result_series_with_not_activated_coupons_schema.LoyaltyResultSeriesWithNotActivatedCouponsSchema(
                         id = '', 
                         number = '', )
                     ]

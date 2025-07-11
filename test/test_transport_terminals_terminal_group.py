@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_terminal_group import TransportTerminalsTerminalGroup
+from iikocloud_client.models.transport_terminals_terminal_group import TransportTerminalsTerminalGroup
 
 class TestTransportTerminalsTerminalGroup(unittest.TestCase):
     """TransportTerminalsTerminalGroup unit test stubs"""
@@ -41,7 +41,7 @@ class TestTransportTerminalsTerminalGroup(unittest.TestCase):
                 address = '',
                 time_zone = '',
                 external_data = [
-                    iiko_cloud_client.models.common_external_data_schema.CommonExternalDataSchema(
+                    iikocloud_client.models.common_external_data_schema.CommonExternalDataSchema(
                         key = '', 
                         value = '', )
                     ]

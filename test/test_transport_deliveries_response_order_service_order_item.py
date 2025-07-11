@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_service_order_item import TransportDeliveriesResponseOrderServiceOrderItem
+from iikocloud_client.models.transport_deliveries_response_order_service_order_item import TransportDeliveriesResponseOrderServiceOrderItem
 
 class TestTransportDeliveriesResponseOrderServiceOrderItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderServiceOrderItem unit test stubs"""
@@ -35,14 +35,14 @@ class TestTransportDeliveriesResponseOrderServiceOrderItem(unittest.TestCase):
         model = TransportDeliveriesResponseOrderServiceOrderItem()
         if include_optional:
             return TransportDeliveriesResponseOrderServiceOrderItem(
-                service = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                service = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 cost = 1.337
             )
         else:
             return TransportDeliveriesResponseOrderServiceOrderItem(
-                service = iiko_cloud_client.models.order_product_schema.OrderProductSchema(
+                service = iikocloud_client.models.order_product_schema.OrderProductSchema(
                     id = '', 
                     name = '', ),
                 cost = 1.337,

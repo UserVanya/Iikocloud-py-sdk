@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_organization_loyalty_program import NetOrganizationLoyaltyProgram
+from iikocloud_client.models.net_organization_loyalty_program import NetOrganizationLoyaltyProgram
 
 class TestNetOrganizationLoyaltyProgram(unittest.TestCase):
     """NetOrganizationLoyaltyProgram unit test stubs"""
@@ -45,7 +45,7 @@ class TestNetOrganizationLoyaltyProgram(unittest.TestCase):
                 is_active = True,
                 wallet_id = '',
                 marketing_campaigns = [
-                    iiko_cloud_client.models.organization_marketing_campaign_info_schema.OrganizationMarketingCampaignInfoSchema(
+                    iikocloud_client.models.organization_marketing_campaign_info_schema.OrganizationMarketingCampaignInfoSchema(
                         id = '', 
                         program_id = '', 
                         name = '', 
@@ -54,18 +54,18 @@ class TestNetOrganizationLoyaltyProgram(unittest.TestCase):
                         period_from = '2019-08-24 14:15:22.123', 
                         period_to = '2019-08-24 14:15:22.123', 
                         order_action_condition_bindings = [
-                            iiko_cloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
+                            iikocloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
                                 id = '', 
                                 stop_further_execution = True, 
                                 actions = [
-                                    iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                                    iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                                         id = '', 
                                         settings = '', 
                                         type_name = '', 
                                         check_sum = '', )
                                     ], 
                                 conditions = [
-                                    iiko_cloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
+                                    iikocloud_client.models.organization_marketing_campaign_settings_info_schema.OrganizationMarketingCampaignSettingsInfoSchema(
                                         id = '', 
                                         settings = '', 
                                         type_name = '', 
@@ -73,7 +73,7 @@ class TestNetOrganizationLoyaltyProgram(unittest.TestCase):
                                     ], )
                             ], 
                         periodic_action_condition_bindings = [
-                            iiko_cloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
+                            iikocloud_client.models.organization_marketing_campaign_action_condition_binding_info_schema.OrganizationMarketingCampaignActionConditionBindingInfoSchema(
                                 id = '', 
                                 stop_further_execution = True, )
                             ], 

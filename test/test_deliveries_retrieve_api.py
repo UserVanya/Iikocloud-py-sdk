@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.deliveries_retrieve_api import DeliveriesRetrieveApi
+from iikocloud_client.api.deliveries_retrieve_api import DeliveriesRetrieveApi
 
 
 class TestDeliveriesRetrieveApi(unittest.IsolatedAsyncioTestCase):

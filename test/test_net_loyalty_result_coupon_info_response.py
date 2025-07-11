@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_coupon_info_response import NetLoyaltyResultCouponInfoResponse
+from iikocloud_client.models.net_loyalty_result_coupon_info_response import NetLoyaltyResultCouponInfoResponse
 
 class TestNetLoyaltyResultCouponInfoResponse(unittest.TestCase):
     """NetLoyaltyResultCouponInfoResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultCouponInfoResponse(unittest.TestCase):
         if include_optional:
             return NetLoyaltyResultCouponInfoResponse(
                 coupon_info = [
-                    iiko_cloud_client.models.loyalty_result_coupon_info_schema.LoyaltyResultCouponInfoSchema(
+                    iikocloud_client.models.loyalty_result_coupon_info_schema.LoyaltyResultCouponInfoSchema(
                         id = '', 
                         number = '', 
                         series_name = '', 

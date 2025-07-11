@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_position_with_sum import TransportDeliveriesResponseOrderPositionWithSum
+from iikocloud_client.models.transport_deliveries_response_order_position_with_sum import TransportDeliveriesResponseOrderPositionWithSum
 
 class TestTransportDeliveriesResponseOrderPositionWithSum(unittest.TestCase):
     """TransportDeliveriesResponseOrderPositionWithSum unit test stubs"""

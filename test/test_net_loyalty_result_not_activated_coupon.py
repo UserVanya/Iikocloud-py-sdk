@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_not_activated_coupon import NetLoyaltyResultNotActivatedCoupon
+from iikocloud_client.models.net_loyalty_result_not_activated_coupon import NetLoyaltyResultNotActivatedCoupon
 
 class TestNetLoyaltyResultNotActivatedCoupon(unittest.TestCase):
     """NetLoyaltyResultNotActivatedCoupon unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_coordinates import TransportDeliveryRestrictionsCoordinates
+from iikocloud_client.models.transport_delivery_restrictions_coordinates import TransportDeliveryRestrictionsCoordinates
 
 class TestTransportDeliveryRestrictionsCoordinates(unittest.TestCase):
     """TransportDeliveryRestrictionsCoordinates unit test stubs"""

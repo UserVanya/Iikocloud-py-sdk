@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_personal_data_consent_status import NetCustomerPersonalDataConsentStatus
+from iikocloud_client.models.net_customer_personal_data_consent_status import NetCustomerPersonalDataConsentStatus
 
 class TestNetCustomerPersonalDataConsentStatus(unittest.TestCase):
     """NetCustomerPersonalDataConsentStatus unit test stubs"""

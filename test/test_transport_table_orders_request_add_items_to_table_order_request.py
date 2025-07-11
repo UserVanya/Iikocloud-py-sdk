@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_request_add_items_to_table_order_request import TransportTableOrdersRequestAddItemsToTableOrderRequest
+from iikocloud_client.models.transport_table_orders_request_add_items_to_table_order_request import TransportTableOrdersRequestAddItemsToTableOrderRequest
 
 class TestTransportTableOrdersRequestAddItemsToTableOrderRequest(unittest.TestCase):
     """TransportTableOrdersRequestAddItemsToTableOrderRequest unit test stubs"""
@@ -35,12 +35,12 @@ class TestTransportTableOrdersRequestAddItemsToTableOrderRequest(unittest.TestCa
         model = TransportTableOrdersRequestAddItemsToTableOrderRequest()
         if include_optional:
             return TransportTableOrdersRequestAddItemsToTableOrderRequest(
-                add_order_items_settings = iiko_cloud_client.models.request_add_table_order_items_settings_schema.RequestAddTableOrderItemsSettingsSchema(
+                add_order_items_settings = iikocloud_client.models.request_add_table_order_items_settings_schema.RequestAddTableOrderItemsSettingsSchema(
                     service_print = False, ),
                 order_id = '',
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -48,7 +48,7 @@ class TestTransportTableOrdersRequestAddItemsToTableOrderRequest(unittest.TestCa
                         comment = '', )
                     ],
                 combos = [
-                    iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                    iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                         id = '', 
                         name = '', 
                         amount = 56, 
@@ -63,7 +63,7 @@ class TestTransportTableOrdersRequestAddItemsToTableOrderRequest(unittest.TestCa
                 order_id = '',
                 organization_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

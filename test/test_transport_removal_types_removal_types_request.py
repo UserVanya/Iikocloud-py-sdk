@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_removal_types_removal_types_request import TransportRemovalTypesRemovalTypesRequest
+from iikocloud_client.models.transport_removal_types_removal_types_request import TransportRemovalTypesRemovalTypesRequest
 
 class TestTransportRemovalTypesRemovalTypesRequest(unittest.TestCase):
     """TransportRemovalTypesRemovalTypesRequest unit test stubs"""

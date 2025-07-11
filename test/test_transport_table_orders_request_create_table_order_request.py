@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_request_create_table_order_request import TransportTableOrdersRequestCreateTableOrderRequest
+from iikocloud_client.models.transport_table_orders_request_create_table_order_request import TransportTableOrdersRequestCreateTableOrderRequest
 
 class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
     """TransportTableOrdersRequestCreateTableOrderRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
             return TransportTableOrdersRequestCreateTableOrderRequest(
                 organization_id = '',
                 terminal_group_id = '',
-                order = iiko_cloud_client.models.request_table_order_schema.RequestTableOrderSchema(
+                order = iikocloud_client.models.request_table_order_schema.RequestTableOrderSchema(
                     id = '', 
                     external_number = '', 
                     table_ids = [
@@ -50,7 +50,7 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
                     tab_name = '', 
                     menu_id = '', 
                     items = [
-                        iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                        iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                             type = '', 
                             amount = 0, 
                             product_size_id = '', 
@@ -58,7 +58,7 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
                             comment = '', )
                         ], 
                     combos = [
-                        iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                        iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                             id = '', 
                             name = '', 
                             amount = 56, 
@@ -68,7 +68,7 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
                             size_id = '', )
                         ], 
                     payments = [
-                        iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                        iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                             payment_type_kind = '', 
                             sum = 0, 
                             payment_type_id = '', 
@@ -78,7 +78,7 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
                             is_prepay = True, )
                         ], 
                     tips = [
-                        iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                        iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                             payment_type_kind = '', 
                             tips_type_id = '', 
                             sum = 0, 
@@ -94,12 +94,12 @@ class TestTransportTableOrdersRequestCreateTableOrderRequest(unittest.TestCase):
                     order_type_id = '', 
                     cheque_additional_info = null, 
                     external_data = [
-                        iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                        iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                             key = '', 
                             value = '', 
                             is_public = True, )
                         ], ),
-                create_order_settings = iiko_cloud_client.models.request_create_table_order_settings_schema.RequestCreateTableOrderSettingsSchema(
+                create_order_settings = iikocloud_client.models.request_create_table_order_settings_schema.RequestCreateTableOrderSettingsSchema(
                     service_print = False, 
                     transport_to_front_timeout = 56, 
                     check_stop_list = False, )

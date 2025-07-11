@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_delete_customers_response import NetCustomerDeleteCustomersResponse
+from iikocloud_client.models.net_customer_delete_customers_response import NetCustomerDeleteCustomersResponse
 
 class TestNetCustomerDeleteCustomersResponse(unittest.TestCase):
     """NetCustomerDeleteCustomersResponse unit test stubs"""

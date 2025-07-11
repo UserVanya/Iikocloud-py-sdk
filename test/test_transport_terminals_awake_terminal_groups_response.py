@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_awake_terminal_groups_response import TransportTerminalsAwakeTerminalGroupsResponse
+from iikocloud_client.models.transport_terminals_awake_terminal_groups_response import TransportTerminalsAwakeTerminalGroupsResponse
 
 class TestTransportTerminalsAwakeTerminalGroupsResponse(unittest.TestCase):
     """TransportTerminalsAwakeTerminalGroupsResponse unit test stubs"""

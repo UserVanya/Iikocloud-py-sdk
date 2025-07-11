@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_employee_info_response import TransportEmployeesEmployeeInfoResponse
+from iikocloud_client.models.transport_employees_employee_info_response import TransportEmployeesEmployeeInfoResponse
 
 class TestTransportEmployeesEmployeeInfoResponse(unittest.TestCase):
     """TransportEmployeesEmployeeInfoResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestTransportEmployeesEmployeeInfoResponse(unittest.TestCase):
         if include_optional:
             return TransportEmployeesEmployeeInfoResponse(
                 correlation_id = '',
-                employee_info = iiko_cloud_client.models.employees_employee_info_schema.EmployeesEmployeeInfoSchema(
+                employee_info = iikocloud_client.models.employees_employee_info_schema.EmployeesEmployeeInfoSchema(
                     id = '', 
                     first_name = '', 
                     middle_name = '', 
@@ -49,7 +49,7 @@ class TestTransportEmployeesEmployeeInfoResponse(unittest.TestCase):
         else:
             return TransportEmployeesEmployeeInfoResponse(
                 correlation_id = '',
-                employee_info = iiko_cloud_client.models.employees_employee_info_schema.EmployeesEmployeeInfoSchema(
+                employee_info = iikocloud_client.models.employees_employee_info_schema.EmployeesEmployeeInfoSchema(
                     id = '', 
                     first_name = '', 
                     middle_name = '', 

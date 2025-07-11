@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.deprecated_api import DeprecatedApi
+from iikocloud_client.api.deprecated_api import DeprecatedApi
 
 
 class TestDeprecatedApi(unittest.IsolatedAsyncioTestCase):

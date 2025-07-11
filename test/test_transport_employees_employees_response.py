@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_employees_employees_response import TransportEmployeesEmployeesResponse
+from iikocloud_client.models.transport_employees_employees_response import TransportEmployeesEmployeesResponse
 
 class TestTransportEmployeesEmployeesResponse(unittest.TestCase):
     """TransportEmployeesEmployeesResponse unit test stubs"""
@@ -37,10 +37,10 @@ class TestTransportEmployeesEmployeesResponse(unittest.TestCase):
             return TransportEmployeesEmployeesResponse(
                 correlation_id = '',
                 employees = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_employee_schema.RmsItemsResponseWrapperEmployeeSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_employee_schema.RmsItemsResponseWrapperEmployeeSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
+                            iikocloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
                                 id = '', 
                                 first_name = '', 
                                 middle_name = '', 
@@ -55,10 +55,10 @@ class TestTransportEmployeesEmployeesResponse(unittest.TestCase):
             return TransportEmployeesEmployeesResponse(
                 correlation_id = '',
                 employees = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_employee_schema.RmsItemsResponseWrapperEmployeeSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_employee_schema.RmsItemsResponseWrapperEmployeeSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
+                            iikocloud_client.models.employees_employee_schema.EmployeesEmployeeSchema(
                                 id = '', 
                                 first_name = '', 
                                 middle_name = '', 

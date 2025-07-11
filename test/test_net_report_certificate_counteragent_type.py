@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_certificate_counteragent_type import NetReportCertificateCounteragentType
+from iikocloud_client.models.net_report_certificate_counteragent_type import NetReportCertificateCounteragentType
 
 class TestNetReportCertificateCounteragentType(unittest.TestCase):
     """NetReportCertificateCounteragentType unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_notifications_delivery_attention_notification_request import TransportNotificationsDeliveryAttentionNotificationRequest
+from iikocloud_client.models.transport_notifications_delivery_attention_notification_request import TransportNotificationsDeliveryAttentionNotificationRequest
 
 class TestTransportNotificationsDeliveryAttentionNotificationRequest(unittest.TestCase):
     """TransportNotificationsDeliveryAttentionNotificationRequest unit test stubs"""

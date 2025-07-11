@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_stop_lists_stop_lists_response import TransportStopListsStopListsResponse
+from iikocloud_client.models.transport_stop_lists_stop_lists_response import TransportStopListsStopListsResponse
 
 class TestTransportStopListsStopListsResponse(unittest.TestCase):
     """TransportStopListsStopListsResponse unit test stubs"""
@@ -37,13 +37,13 @@ class TestTransportStopListsStopListsResponse(unittest.TestCase):
             return TransportStopListsStopListsResponse(
                 correlation_id = '',
                 terminal_group_stop_lists = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_stop_list_schema.RmsItemsResponseWrapperTerminalGroupStopListSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_stop_list_schema.RmsItemsResponseWrapperTerminalGroupStopListSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
+                            iikocloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
                                 terminal_group_id = '', 
                                 items = [
-                                    iiko_cloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
+                                    iikocloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
                                         balance = 1.337, 
                                         product_id = '', 
                                         size_id = '', 
@@ -57,13 +57,13 @@ class TestTransportStopListsStopListsResponse(unittest.TestCase):
             return TransportStopListsStopListsResponse(
                 correlation_id = '',
                 terminal_group_stop_lists = [
-                    iiko_cloud_client.models.rms_items_response_wrapper_terminal_group_stop_list_schema.RmsItemsResponseWrapperTerminalGroupStopListSchema(
+                    iikocloud_client.models.rms_items_response_wrapper_terminal_group_stop_list_schema.RmsItemsResponseWrapperTerminalGroupStopListSchema(
                         organization_id = '', 
                         items = [
-                            iiko_cloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
+                            iikocloud_client.models.stop_lists_terminal_group_stop_list_schema.StopListsTerminalGroupStopListSchema(
                                 terminal_group_id = '', 
                                 items = [
-                                    iiko_cloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
+                                    iikocloud_client.models.stop_lists_stop_list_item_schema.StopListsStopListItemSchema(
                                         balance = 1.337, 
                                         product_id = '', 
                                         size_id = '', 

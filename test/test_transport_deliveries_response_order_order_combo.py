@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_order_combo import TransportDeliveriesResponseOrderOrderCombo
+from iikocloud_client.models.transport_deliveries_response_order_order_combo import TransportDeliveriesResponseOrderOrderCombo
 
 class TestTransportDeliveriesResponseOrderOrderCombo(unittest.TestCase):
     """TransportDeliveriesResponseOrderOrderCombo unit test stubs"""
@@ -40,7 +40,7 @@ class TestTransportDeliveriesResponseOrderOrderCombo(unittest.TestCase):
                 amount = 56,
                 price = 1.337,
                 source_id = '',
-                size = iiko_cloud_client.models.order_product_size_schema.OrderProductSizeSchema(
+                size = iikocloud_client.models.order_product_size_schema.OrderProductSizeSchema(
                     id = '', 
                     name = '', )
             )

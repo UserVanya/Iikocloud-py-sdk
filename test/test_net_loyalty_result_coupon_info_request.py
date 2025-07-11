@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_coupon_info_request import NetLoyaltyResultCouponInfoRequest
+from iikocloud_client.models.net_loyalty_result_coupon_info_request import NetLoyaltyResultCouponInfoRequest
 
 class TestNetLoyaltyResultCouponInfoRequest(unittest.TestCase):
     """NetLoyaltyResultCouponInfoRequest unit test stubs"""

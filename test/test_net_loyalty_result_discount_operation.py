@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_discount_operation import NetLoyaltyResultDiscountOperation
+from iikocloud_client.models.net_loyalty_result_discount_operation import NetLoyaltyResultDiscountOperation
 
 class TestNetLoyaltyResultDiscountOperation(unittest.TestCase):
     """NetLoyaltyResultDiscountOperation unit test stubs"""

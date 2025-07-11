@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_notification_sms_sending_status_info import NetNotificationSmsSendingStatusInfo
+from iikocloud_client.models.net_notification_sms_sending_status_info import NetNotificationSmsSendingStatusInfo
 
 class TestNetNotificationSmsSendingStatusInfo(unittest.TestCase):
     """NetNotificationSmsSendingStatusInfo unit test stubs"""

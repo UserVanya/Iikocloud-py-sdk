@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_change_driver_info_request import TransportDeliveriesRequestChangeDriverInfoRequest
+from iikocloud_client.models.transport_deliveries_request_change_driver_info_request import TransportDeliveriesRequestChangeDriverInfoRequest
 
 class TestTransportDeliveriesRequestChangeDriverInfoRequest(unittest.TestCase):
     """TransportDeliveriesRequestChangeDriverInfoRequest unit test stubs"""

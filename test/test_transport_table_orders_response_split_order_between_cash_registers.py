@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_table_orders_response_split_order_between_cash_registers import TransportTableOrdersResponseSplitOrderBetweenCashRegisters
+from iikocloud_client.models.transport_table_orders_response_split_order_between_cash_registers import TransportTableOrdersResponseSplitOrderBetweenCashRegisters
 
 class TestTransportTableOrdersResponseSplitOrderBetweenCashRegisters(unittest.TestCase):
     """TransportTableOrdersResponseSplitOrderBetweenCashRegisters unit test stubs"""

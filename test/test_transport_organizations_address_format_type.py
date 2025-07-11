@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_organizations_address_format_type import TransportOrganizationsAddressFormatType
+from iikocloud_client.models.transport_organizations_address_format_type import TransportOrganizationsAddressFormatType
 
 class TestTransportOrganizationsAddressFormatType(unittest.TestCase):
     """TransportOrganizationsAddressFormatType unit test stubs"""

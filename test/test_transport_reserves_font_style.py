@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_font_style import TransportReservesFontStyle
+from iikocloud_client.models.transport_reserves_font_style import TransportReservesFontStyle
 
 class TestTransportReservesFontStyle(unittest.TestCase):
     """TransportReservesFontStyle unit test stubs"""

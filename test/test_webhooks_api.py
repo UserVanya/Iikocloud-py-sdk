@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.webhooks_api import WebhooksApi
+from iikocloud_client.api.webhooks_api import WebhooksApi
 
 
 class TestWebhooksApi(unittest.IsolatedAsyncioTestCase):

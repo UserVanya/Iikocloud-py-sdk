@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_loyalty_result_get_combos_info_response import NetLoyaltyResultGetCombosInfoResponse
+from iikocloud_client.models.net_loyalty_result_get_combos_info_response import NetLoyaltyResultGetCombosInfoResponse
 
 class TestNetLoyaltyResultGetCombosInfoResponse(unittest.TestCase):
     """NetLoyaltyResultGetCombosInfoResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestNetLoyaltyResultGetCombosInfoResponse(unittest.TestCase):
         if include_optional:
             return NetLoyaltyResultGetCombosInfoResponse(
                 combo_specifications = [
-                    iiko_cloud_client.models.loyalty_result_combo_specification_schema.LoyaltyResultComboSpecificationSchema(
+                    iikocloud_client.models.loyalty_result_combo_specification_schema.LoyaltyResultComboSpecificationSchema(
                         source_action_id = '', 
                         category_id = '', 
                         name = '', 
@@ -48,12 +48,12 @@ class TestNetLoyaltyResultGetCombosInfoResponse(unittest.TestCase):
                         lacking_groups_to_suggest = 56, 
                         include_modifiers = True, 
                         groups = [
-                            iiko_cloud_client.models.loyalty_result_combo_group_schema.LoyaltyResultComboGroupSchema(
+                            iikocloud_client.models.loyalty_result_combo_group_schema.LoyaltyResultComboGroupSchema(
                                 id = '', 
                                 name = '', 
                                 is_main_group = True, 
                                 products = [
-                                    iiko_cloud_client.models.loyalty_result_combo_product_schema.LoyaltyResultComboProductSchema(
+                                    iikocloud_client.models.loyalty_result_combo_product_schema.LoyaltyResultComboProductSchema(
                                         product_id = '', 
                                         size_name = '', 
                                         size_id = '', 
@@ -65,12 +65,12 @@ class TestNetLoyaltyResultGetCombosInfoResponse(unittest.TestCase):
                             ], )
                     ],
                 combo_categories = [
-                    iiko_cloud_client.models.loyalty_result_combo_category_schema.LoyaltyResultComboCategorySchema(
+                    iikocloud_client.models.loyalty_result_combo_category_schema.LoyaltyResultComboCategorySchema(
                         id = '', 
                         name = '', )
                     ],
                 warnings = [
-                    iiko_cloud_client.models.loyalty_result_warning_info_schema.LoyaltyResultWarningInfoSchema(
+                    iikocloud_client.models.loyalty_result_warning_info_schema.LoyaltyResultWarningInfoSchema(
                         code = '', 
                         error_code = '', 
                         message = '', )

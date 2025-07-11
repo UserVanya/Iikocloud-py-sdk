@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_response_order_order_item import TransportDeliveriesResponseOrderOrderItem
+from iikocloud_client.models.transport_deliveries_response_order_order_item import TransportDeliveriesResponseOrderOrderItem
 
 class TestTransportDeliveriesResponseOrderOrderItem(unittest.TestCase):
     """TransportDeliveriesResponseOrderOrderItem unit test stubs"""
@@ -37,15 +37,15 @@ class TestTransportDeliveriesResponseOrderOrderItem(unittest.TestCase):
             return TransportDeliveriesResponseOrderOrderItem(
                 type = '',
                 status = 'Added',
-                deleted = iiko_cloud_client.models.order_item_deleted_info_schema.OrderItemDeletedInfoSchema(
+                deleted = iikocloud_client.models.order_item_deleted_info_schema.OrderItemDeletedInfoSchema(
                     deletion_method = null, ),
                 amount = 1.337,
                 comment = '',
                 when_printed = '2019-08-24 14:15:22.123',
-                size = iiko_cloud_client.models.order_product_size_schema.OrderProductSizeSchema(
+                size = iikocloud_client.models.order_product_size_schema.OrderProductSizeSchema(
                     id = '', 
                     name = '', ),
-                combo_information = iiko_cloud_client.models.order_combo_item_information_schema.OrderComboItemInformationSchema(
+                combo_information = iikocloud_client.models.order_combo_item_information_schema.OrderComboItemInformationSchema(
                     combo_id = '', 
                     combo_source_id = '', 
                     group_id = '', 

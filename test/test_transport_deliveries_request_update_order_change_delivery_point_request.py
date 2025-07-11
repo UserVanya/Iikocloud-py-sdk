@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_delivery_point_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+from iikocloud_client.models.transport_deliveries_request_update_order_change_delivery_point_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
 
 class TestTransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest(unittest.TestCase):
     """TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest(unitte
             return TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest(
                 organization_id = '',
                 order_id = '',
-                new_delivery_point = iiko_cloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
+                new_delivery_point = iikocloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
                     coordinates = null, 
                     address = null, 
                     external_cartography_id = '', 
@@ -47,7 +47,7 @@ class TestTransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest(unitte
             return TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest(
                 organization_id = '',
                 order_id = '',
-                new_delivery_point = iiko_cloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
+                new_delivery_point = iikocloud_client.models.create_order_delivery_point_schema.CreateOrderDeliveryPointSchema(
                     coordinates = null, 
                     address = null, 
                     external_cartography_id = '', 

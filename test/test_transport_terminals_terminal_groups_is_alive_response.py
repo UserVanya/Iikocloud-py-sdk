@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_terminals_terminal_groups_is_alive_response import TransportTerminalsTerminalGroupsIsAliveResponse
+from iikocloud_client.models.transport_terminals_terminal_groups_is_alive_response import TransportTerminalsTerminalGroupsIsAliveResponse
 
 class TestTransportTerminalsTerminalGroupsIsAliveResponse(unittest.TestCase):
     """TransportTerminalsTerminalGroupsIsAliveResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportTerminalsTerminalGroupsIsAliveResponse(unittest.TestCase):
             return TransportTerminalsTerminalGroupsIsAliveResponse(
                 correlation_id = '',
                 is_alive_status = [
-                    iiko_cloud_client.models.terminals_terminal_group_alive_info_schema.TerminalsTerminalGroupAliveInfoSchema(
+                    iikocloud_client.models.terminals_terminal_group_alive_info_schema.TerminalsTerminalGroupAliveInfoSchema(
                         is_alive = True, 
                         terminal_group_id = '', 
                         organization_id = '', )
@@ -47,7 +47,7 @@ class TestTransportTerminalsTerminalGroupsIsAliveResponse(unittest.TestCase):
             return TransportTerminalsTerminalGroupsIsAliveResponse(
                 correlation_id = '',
                 is_alive_status = [
-                    iiko_cloud_client.models.terminals_terminal_group_alive_info_schema.TerminalsTerminalGroupAliveInfoSchema(
+                    iikocloud_client.models.terminals_terminal_group_alive_info_schema.TerminalsTerminalGroupAliveInfoSchema(
                         is_alive = True, 
                         terminal_group_id = '', 
                         organization_id = '', )

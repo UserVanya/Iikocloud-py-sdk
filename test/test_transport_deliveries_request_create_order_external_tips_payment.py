@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_request_create_order_external_tips_payment import TransportDeliveriesRequestCreateOrderExternalTipsPayment
+from iikocloud_client.models.transport_deliveries_request_create_order_external_tips_payment import TransportDeliveriesRequestCreateOrderExternalTipsPayment
 
 class TestTransportDeliveriesRequestCreateOrderExternalTipsPayment(unittest.TestCase):
     """TransportDeliveriesRequestCreateOrderExternalTipsPayment unit test stubs"""

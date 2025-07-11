@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_reserve_cancel_reason import TransportReservesReserveCancelReason
+from iikocloud_client.models.transport_reserves_reserve_cancel_reason import TransportReservesReserveCancelReason
 
 class TestTransportReservesReserveCancelReason(unittest.TestCase):
     """TransportReservesReserveCancelReason unit test stubs"""

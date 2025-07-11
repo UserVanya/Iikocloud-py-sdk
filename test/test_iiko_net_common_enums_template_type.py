@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.iiko_net_common_enums_template_type import IikoNetCommonEnumsTemplateType
+from iikocloud_client.models.iiko_net_common_enums_template_type import IikoNetCommonEnumsTemplateType
 
 class TestIikoNetCommonEnumsTemplateType(unittest.TestCase):
     """IikoNetCommonEnumsTemplateType unit test stubs"""

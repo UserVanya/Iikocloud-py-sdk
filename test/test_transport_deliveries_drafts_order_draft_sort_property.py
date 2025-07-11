@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_deliveries_drafts_order_draft_sort_property import TransportDeliveriesDraftsOrderDraftSortProperty
+from iikocloud_client.models.transport_deliveries_drafts_order_draft_sort_property import TransportDeliveriesDraftsOrderDraftSortProperty
 
 class TestTransportDeliveriesDraftsOrderDraftSortProperty(unittest.TestCase):
     """TransportDeliveriesDraftsOrderDraftSortProperty unit test stubs"""

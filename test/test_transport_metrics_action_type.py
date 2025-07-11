@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_metrics_action_type import TransportMetricsActionType
+from iikocloud_client.models.transport_metrics_action_type import TransportMetricsActionType
 
 class TestTransportMetricsActionType(unittest.TestCase):
     """TransportMetricsActionType unit test stubs"""

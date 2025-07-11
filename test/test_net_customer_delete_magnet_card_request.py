@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_customer_delete_magnet_card_request import NetCustomerDeleteMagnetCardRequest
+from iikocloud_client.models.net_customer_delete_magnet_card_request import NetCustomerDeleteMagnetCardRequest
 
 class TestNetCustomerDeleteMagnetCardRequest(unittest.TestCase):
     """NetCustomerDeleteMagnetCardRequest unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.net_report_transport_transactions_report_item import NetReportTransportTransactionsReportItem
+from iikocloud_client.models.net_report_transport_transactions_report_item import NetReportTransportTransactionsReportItem
 
 class TestNetReportTransportTransactionsReportItem(unittest.TestCase):
     """NetReportTransportTransactionsReportItem unit test stubs"""
@@ -39,7 +39,7 @@ class TestNetReportTransportTransactionsReportItem(unittest.TestCase):
                 balance_after = 1.337,
                 balance_before = 1.337,
                 block_reason = '',
-                certificate = iiko_cloud_client.models.report_transport_transactions_certificate_report_item_schema.ReportTransportTransactionsCertificateReportItemSchema(
+                certificate = iikocloud_client.models.report_transport_transactions_certificate_report_item_schema.ReportTransportTransactionsCertificateReportItemSchema(
                     number = '', 
                     series = '', 
                     status_name = '', 
@@ -48,7 +48,7 @@ class TestNetReportTransportTransactionsReportItem(unittest.TestCase):
                 counteragent = '',
                 counteragent_type = 0,
                 counteragent_type_name = '',
-                coupon = iiko_cloud_client.models.report_transport_transactions_coupon_report_item_schema.ReportTransportTransactionsCouponReportItemSchema(
+                coupon = iikocloud_client.models.report_transport_transactions_coupon_report_item_schema.ReportTransportTransactionsCouponReportItemSchema(
                     number = '', 
                     series = '', ),
                 emitent_name = '',

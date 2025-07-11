@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_delivery_restrictions_houses_range_type import TransportDeliveryRestrictionsHousesRangeType
+from iikocloud_client.models.transport_delivery_restrictions_houses_range_type import TransportDeliveryRestrictionsHousesRangeType
 
 class TestTransportDeliveryRestrictionsHousesRangeType(unittest.TestCase):
     """TransportDeliveryRestrictionsHousesRangeType unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_reserves_request_reserve_order import TransportReservesRequestReserveOrder
+from iikocloud_client.models.transport_reserves_request_reserve_order import TransportReservesRequestReserveOrder
 
 class TestTransportReservesRequestReserveOrder(unittest.TestCase):
     """TransportReservesRequestReserveOrder unit test stubs"""
@@ -37,7 +37,7 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
             return TransportReservesRequestReserveOrder(
                 menu_id = '',
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 
@@ -45,7 +45,7 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
                         comment = '', )
                     ],
                 combos = [
-                    iiko_cloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
+                    iikocloud_client.models.create_order_combo_schema.CreateOrderComboSchema(
                         id = '', 
                         name = '', 
                         amount = 56, 
@@ -55,7 +55,7 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
                         size_id = '', )
                     ],
                 payments = [
-                    iiko_cloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
+                    iikocloud_client.models.create_order_payment_schema.CreateOrderPaymentSchema(
                         payment_type_kind = '', 
                         sum = 0, 
                         payment_type_id = '', 
@@ -65,7 +65,7 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 tips = [
-                    iiko_cloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
+                    iikocloud_client.models.create_order_tips_payment_schema.CreateOrderTipsPaymentSchema(
                         payment_type_kind = '', 
                         tips_type_id = '', 
                         sum = 0, 
@@ -76,26 +76,26 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
                         is_prepay = True, )
                     ],
                 source_key = '',
-                discounts_info = iiko_cloud_client.models.create_order_discounts_info_schema.CreateOrderDiscountsInfoSchema(
+                discounts_info = iikocloud_client.models.create_order_discounts_info_schema.CreateOrderDiscountsInfoSchema(
                     card = null, 
                     discounts = [
-                        iiko_cloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
+                        iikocloud_client.models.create_order_discount_schema.CreateOrderDiscountSchema(
                             type = '', )
                         ], 
                     fixed_loyalty_discounts = True, ),
-                loyalty_info = iiko_cloud_client.models.create_order_loyalty_info_schema.CreateOrderLoyaltyInfoSchema(
+                loyalty_info = iikocloud_client.models.create_order_loyalty_info_schema.CreateOrderLoyaltyInfoSchema(
                     coupon = '', 
                     applicable_manual_conditions = [
                         ''
                         ], ),
                 order_type_id = '',
-                cheque_additional_info = iiko_cloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
+                cheque_additional_info = iikocloud_client.models.common_cheque_additional_info_schema.CommonChequeAdditionalInfoSchema(
                     need_receipt = True, 
                     email = '', 
                     settlement_place = '', 
                     phone = '01234567', ),
                 external_data = [
-                    iiko_cloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
+                    iikocloud_client.models.create_order_external_data_schema.CreateOrderExternalDataSchema(
                         key = '', 
                         value = '', 
                         is_public = True, )
@@ -104,7 +104,7 @@ class TestTransportReservesRequestReserveOrder(unittest.TestCase):
         else:
             return TransportReservesRequestReserveOrder(
                 items = [
-                    iiko_cloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
+                    iikocloud_client.models.create_order_order_item_schema.CreateOrderOrderItemSchema(
                         type = '', 
                         amount = 0, 
                         product_size_id = '', 

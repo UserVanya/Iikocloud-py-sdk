@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.models.transport_web_hooks_update_web_hook_settings_request import TransportWebHooksUpdateWebHookSettingsRequest
+from iikocloud_client.models.transport_web_hooks_update_web_hook_settings_request import TransportWebHooksUpdateWebHookSettingsRequest
 
 class TestTransportWebHooksUpdateWebHookSettingsRequest(unittest.TestCase):
     """TransportWebHooksUpdateWebHookSettingsRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestTransportWebHooksUpdateWebHookSettingsRequest(unittest.TestCase):
                 organization_id = '',
                 web_hooks_uri = '',
                 auth_token = '',
-                web_hooks_filter = iiko_cloud_client.models.web_hooks_filters_web_hooks_filter_schema.WebHooksFiltersWebHooksFilterSchema(
+                web_hooks_filter = iikocloud_client.models.web_hooks_filters_web_hooks_filter_schema.WebHooksFiltersWebHooksFilterSchema(
                     delivery_order_filter = null, 
                     table_order_filter = null, 
                     reserve_filter = null, 

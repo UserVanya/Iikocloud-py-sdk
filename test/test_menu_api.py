@@ -14,7 +14,7 @@
 
 import unittest
 
-from iiko_cloud_client.api.menu_api import MenuApi
+from iikocloud_client.api.menu_api import MenuApi
 
 
 class TestMenuApi(unittest.IsolatedAsyncioTestCase):
