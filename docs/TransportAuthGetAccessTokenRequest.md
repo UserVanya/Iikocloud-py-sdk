@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_auth_get_access_token_request import TransportAuthGetAccessTokenRequest
+from iikocloud_client.models.transport_auth_get_access_token_request import TransportAuthGetAccessTokenRequest
 
 # TODO update the JSON string below
 json = "{}"

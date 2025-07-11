@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_web_hooks_personal_shift_web_hook_event_info import TransportWebHooksPersonalShiftWebHookEventInfo
+from iikocloud_client.models.transport_web_hooks_personal_shift_web_hook_event_info import TransportWebHooksPersonalShiftWebHookEventInfo
 
 # TODO update the JSON string below
 json = "{}"

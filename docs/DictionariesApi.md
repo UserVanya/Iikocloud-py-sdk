@@ -1,4 +1,4 @@
-# iiko_cloud_client.DictionariesApi
+# iikocloud_client.DictionariesApi
 
 All URIs are relative to *http://localhost*
 
@@ -27,26 +27,26 @@ Delivery cancel causes.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_cancel_causes_cancel_causes_request import TransportCancelCausesCancelCausesRequest
-from iiko_cloud_client.models.transport_cancel_causes_cancel_causes_response import TransportCancelCausesCancelCausesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_cancel_causes_cancel_causes_request import TransportCancelCausesCancelCausesRequest
+from iikocloud_client.models.transport_cancel_causes_cancel_causes_response import TransportCancelCausesCancelCausesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_cancel_causes_cancel_causes_request = iiko_cloud_client.TransportCancelCausesCancelCausesRequest() # TransportCancelCausesCancelCausesRequest |  (optional)
+    transport_cancel_causes_cancel_causes_request = iikocloud_client.TransportCancelCausesCancelCausesRequest() # TransportCancelCausesCancelCausesRequest |  (optional)
 
     try:
         # Delivery cancel causes.
@@ -106,26 +106,26 @@ Order types.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_order_types_order_types_request import TransportOrderTypesOrderTypesRequest
-from iiko_cloud_client.models.transport_order_types_order_types_response import TransportOrderTypesOrderTypesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_order_types_order_types_request import TransportOrderTypesOrderTypesRequest
+from iikocloud_client.models.transport_order_types_order_types_response import TransportOrderTypesOrderTypesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_order_types_order_types_request = iiko_cloud_client.TransportOrderTypesOrderTypesRequest() # TransportOrderTypesOrderTypesRequest |  (optional)
+    transport_order_types_order_types_request = iikocloud_client.TransportOrderTypesOrderTypesRequest() # TransportOrderTypesOrderTypesRequest |  (optional)
 
     try:
         # Order types.
@@ -185,26 +185,26 @@ Discounts / surcharges.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_discounts_discounts_request import TransportDiscountsDiscountsRequest
-from iiko_cloud_client.models.transport_discounts_discounts_response import TransportDiscountsDiscountsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_discounts_discounts_request import TransportDiscountsDiscountsRequest
+from iikocloud_client.models.transport_discounts_discounts_response import TransportDiscountsDiscountsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_discounts_discounts_request = iiko_cloud_client.TransportDiscountsDiscountsRequest() # TransportDiscountsDiscountsRequest |  (optional)
+    transport_discounts_discounts_request = iikocloud_client.TransportDiscountsDiscountsRequest() # TransportDiscountsDiscountsRequest |  (optional)
 
     try:
         # Discounts / surcharges.
@@ -264,26 +264,26 @@ Payment types.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_payment_types_payment_types_request import TransportPaymentTypesPaymentTypesRequest
-from iiko_cloud_client.models.transport_payment_types_payment_types_response import TransportPaymentTypesPaymentTypesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_payment_types_payment_types_request import TransportPaymentTypesPaymentTypesRequest
+from iikocloud_client.models.transport_payment_types_payment_types_response import TransportPaymentTypesPaymentTypesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_payment_types_payment_types_request = iiko_cloud_client.TransportPaymentTypesPaymentTypesRequest() # TransportPaymentTypesPaymentTypesRequest |  (optional)
+    transport_payment_types_payment_types_request = iikocloud_client.TransportPaymentTypesPaymentTypesRequest() # TransportPaymentTypesPaymentTypesRequest |  (optional)
 
     try:
         # Payment types.
@@ -345,26 +345,26 @@ Removal types (reasons for deletion).
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_removal_types_removal_types_request import TransportRemovalTypesRemovalTypesRequest
-from iiko_cloud_client.models.transport_removal_types_removal_types_response import TransportRemovalTypesRemovalTypesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_removal_types_removal_types_request import TransportRemovalTypesRemovalTypesRequest
+from iikocloud_client.models.transport_removal_types_removal_types_response import TransportRemovalTypesRemovalTypesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_removal_types_removal_types_request = iiko_cloud_client.TransportRemovalTypesRemovalTypesRequest() # TransportRemovalTypesRemovalTypesRequest |  (optional)
+    transport_removal_types_removal_types_request = iikocloud_client.TransportRemovalTypesRemovalTypesRequest() # TransportRemovalTypesRemovalTypesRequest |  (optional)
 
     try:
         # Removal types (reasons for deletion).
@@ -426,22 +426,22 @@ Get tips types for api-login`s rms group.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_tips_types_tips_types_response import TransportTipsTypesTipsTypesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_tips_types_tips_types_response import TransportTipsTypesTipsTypesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DictionariesApi(api_client)
+    api_instance = iikocloud_client.DictionariesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
 

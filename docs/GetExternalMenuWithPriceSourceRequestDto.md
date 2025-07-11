@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.get_external_menu_with_price_source_request_dto import GetExternalMenuWithPriceSourceRequestDto
+from iikocloud_client.models.get_external_menu_with_price_source_request_dto import GetExternalMenuWithPriceSourceRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
+from iikocloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
 
 # TODO update the JSON string below
 json = "{}"

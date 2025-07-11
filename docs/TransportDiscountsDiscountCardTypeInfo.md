@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_discounts_discount_card_type_info import TransportDiscountsDiscountCardTypeInfo
+from iikocloud_client.models.transport_discounts_discount_card_type_info import TransportDiscountsDiscountCardTypeInfo
 
 # TODO update the JSON string below
 json = "{}"

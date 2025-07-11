@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
+from iikocloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
 
 # TODO update the JSON string below
 json = "{}"

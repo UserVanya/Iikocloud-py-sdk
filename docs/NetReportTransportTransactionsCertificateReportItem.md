@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_report_transport_transactions_certificate_report_item import NetReportTransportTransactionsCertificateReportItem
+from iikocloud_client.models.net_report_transport_transactions_certificate_report_item import NetReportTransportTransactionsCertificateReportItem
 
 # TODO update the JSON string below
 json = "{}"

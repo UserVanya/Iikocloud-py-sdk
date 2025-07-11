@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_deliveries_request_create_order_modifier import TransportDeliveriesRequestCreateOrderModifier
+from iikocloud_client.models.transport_deliveries_request_create_order_modifier import TransportDeliveriesRequestCreateOrderModifier
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_stop_lists_web_hook_on_stop_list_change_data import TransportStopListsWebHookOnStopListChangeData
+from iikocloud_client.models.transport_stop_lists_web_hook_on_stop_list_change_data import TransportStopListsWebHookOnStopListChangeData
 
 # TODO update the JSON string below
 json = "{}"

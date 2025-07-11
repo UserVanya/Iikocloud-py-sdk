@@ -20,7 +20,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "iiko_cloud_client"
+NAME = "iikocloud_client"
 VERSION = "0.1.0"
 PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
@@ -47,5 +47,5 @@ setup(
     long_description="""\
     &lt;h3&gt;Description of common data formats:&lt;/h3&gt;&lt;b&gt;uuid&lt;/b&gt; - string in UUID(universally unique identifier).&lt;br/&gt;Examples: &lt;i&gt;550e8400-e29b-41d4-a716-446655440000, b090de0b-8550-6e17-70b2-bbba152bcbd3&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&lt;b&gt;date-time&lt;/b&gt; - date and time string in custom string format &lt;b&gt;yyyy-MM-dd HH:mm:ss.fff&lt;/b&gt;.&lt;br/&gt;Examples: &lt;i&gt;2017-04-29 20:45:00.000, 2018-01-01 01:01:30.123&lt;/i&gt;
     """,  # noqa: E501
-    package_data={"iiko_cloud_client": ["py.typed"]},
+    package_data={"iikocloud_client": ["py.typed"]},
 )

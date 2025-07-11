@@ -1,4 +1,4 @@
-# iiko_cloud_client.MessagesApi
+# iikocloud_client.MessagesApi
 
 All URIs are relative to *http://localhost*
 
@@ -21,26 +21,26 @@ Check sms sending possibility before send sms message.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_notification_sms_sending_possibility_request import NetNotificationSmsSendingPossibilityRequest
-from iiko_cloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_notification_sms_sending_possibility_request import NetNotificationSmsSendingPossibilityRequest
+from iikocloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MessagesApi(api_client)
+    api_instance = iikocloud_client.MessagesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_notification_sms_sending_possibility_request = iiko_cloud_client.NetNotificationSmsSendingPossibilityRequest() # NetNotificationSmsSendingPossibilityRequest |  (optional)
+    net_notification_sms_sending_possibility_request = iikocloud_client.NetNotificationSmsSendingPossibilityRequest() # NetNotificationSmsSendingPossibilityRequest |  (optional)
 
     try:
         # Check sms sending possibility.
@@ -98,26 +98,26 @@ Check the status of sending SMS messages.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_notification_check_sms_status_request import NetNotificationCheckSmsStatusRequest
-from iiko_cloud_client.models.net_notification_check_sms_status_response import NetNotificationCheckSmsStatusResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_notification_check_sms_status_request import NetNotificationCheckSmsStatusRequest
+from iikocloud_client.models.net_notification_check_sms_status_response import NetNotificationCheckSmsStatusResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MessagesApi(api_client)
+    api_instance = iikocloud_client.MessagesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_notification_check_sms_status_request = iiko_cloud_client.NetNotificationCheckSmsStatusRequest() # NetNotificationCheckSmsStatusRequest |  (optional)
+    net_notification_check_sms_status_request = iikocloud_client.NetNotificationCheckSmsStatusRequest() # NetNotificationCheckSmsStatusRequest |  (optional)
 
     try:
         # Check SMS status.
@@ -177,25 +177,25 @@ Send email message to specified email address. Sending proceed according iikoCar
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_notification_send_email_request import NetNotificationSendEmailRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_notification_send_email_request import NetNotificationSendEmailRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MessagesApi(api_client)
+    api_instance = iikocloud_client.MessagesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_notification_send_email_request = iiko_cloud_client.NetNotificationSendEmailRequest() # NetNotificationSendEmailRequest |  (optional)
+    net_notification_send_email_request = iikocloud_client.NetNotificationSendEmailRequest() # NetNotificationSendEmailRequest |  (optional)
 
     try:
         # Send email.
@@ -255,26 +255,26 @@ Send sms message to specified phone number. Sending proceed according iikoCard o
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_notification_send_sms_request import NetNotificationSendSmsRequest
-from iiko_cloud_client.models.net_notification_send_sms_response import NetNotificationSendSmsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_notification_send_sms_request import NetNotificationSendSmsRequest
+from iikocloud_client.models.net_notification_send_sms_response import NetNotificationSendSmsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MessagesApi(api_client)
+    api_instance = iikocloud_client.MessagesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_notification_send_sms_request = iiko_cloud_client.NetNotificationSendSmsRequest() # NetNotificationSendSmsRequest |  (optional)
+    net_notification_send_sms_request = iikocloud_client.NetNotificationSendSmsRequest() # NetNotificationSendSmsRequest |  (optional)
 
     try:
         # Send sms.

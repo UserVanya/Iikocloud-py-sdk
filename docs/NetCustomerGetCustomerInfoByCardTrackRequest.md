@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_customer_get_customer_info_by_card_track_request import NetCustomerGetCustomerInfoByCardTrackRequest
+from iikocloud_client.models.net_customer_get_customer_info_by_card_track_request import NetCustomerGetCustomerInfoByCardTrackRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# iiko_cloud_client.DiscountsAndPromotionsApi
+# iikocloud_client.DiscountsAndPromotionsApi
 
 All URIs are relative to *http://localhost*
 
@@ -25,26 +25,26 @@ Calculate discounts and other loyalty items for an order.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_calculate_checkin_request import NetLoyaltyResultCalculateCheckinRequest
-from iiko_cloud_client.models.net_loyalty_result_calculate_checkin_response import NetLoyaltyResultCalculateCheckinResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_calculate_checkin_request import NetLoyaltyResultCalculateCheckinRequest
+from iikocloud_client.models.net_loyalty_result_calculate_checkin_response import NetLoyaltyResultCalculateCheckinResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_calculate_checkin_request = iiko_cloud_client.NetLoyaltyResultCalculateCheckinRequest() # NetLoyaltyResultCalculateCheckinRequest |  (optional)
+    net_loyalty_result_calculate_checkin_request = iikocloud_client.NetLoyaltyResultCalculateCheckinRequest() # NetLoyaltyResultCalculateCheckinRequest |  (optional)
 
     try:
         # Calculate checkin.
@@ -104,26 +104,26 @@ Get list of non-activated coupons.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_not_activated_coupon_request import NetLoyaltyResultNotActivatedCouponRequest
-from iiko_cloud_client.models.net_loyalty_result_not_activated_coupon_response import NetLoyaltyResultNotActivatedCouponResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_not_activated_coupon_request import NetLoyaltyResultNotActivatedCouponRequest
+from iikocloud_client.models.net_loyalty_result_not_activated_coupon_response import NetLoyaltyResultNotActivatedCouponResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_not_activated_coupon_request = iiko_cloud_client.NetLoyaltyResultNotActivatedCouponRequest() # NetLoyaltyResultNotActivatedCouponRequest |  (optional)
+    net_loyalty_result_not_activated_coupon_request = iikocloud_client.NetLoyaltyResultNotActivatedCouponRequest() # NetLoyaltyResultNotActivatedCouponRequest |  (optional)
 
     try:
         # Get non-activated coupons
@@ -183,26 +183,26 @@ Get information about the specified coupon.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_coupon_info_request import NetLoyaltyResultCouponInfoRequest
-from iiko_cloud_client.models.net_loyalty_result_coupon_info_response import NetLoyaltyResultCouponInfoResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_coupon_info_request import NetLoyaltyResultCouponInfoRequest
+from iikocloud_client.models.net_loyalty_result_coupon_info_response import NetLoyaltyResultCouponInfoResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_coupon_info_request = iiko_cloud_client.NetLoyaltyResultCouponInfoRequest() # NetLoyaltyResultCouponInfoRequest |  (optional)
+    net_loyalty_result_coupon_info_request = iikocloud_client.NetLoyaltyResultCouponInfoRequest() # NetLoyaltyResultCouponInfoRequest |  (optional)
 
     try:
         # Get coupon info.
@@ -262,26 +262,26 @@ Get a list of coupon series in which there are not deleted and not activated cou
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_series_with_not_activated_coupons_request import NetLoyaltyResultSeriesWithNotActivatedCouponsRequest
-from iiko_cloud_client.models.net_loyalty_result_series_with_not_activated_coupons_response import NetLoyaltyResultSeriesWithNotActivatedCouponsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_series_with_not_activated_coupons_request import NetLoyaltyResultSeriesWithNotActivatedCouponsRequest
+from iikocloud_client.models.net_loyalty_result_series_with_not_activated_coupons_response import NetLoyaltyResultSeriesWithNotActivatedCouponsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_series_with_not_activated_coupons_request = iiko_cloud_client.NetLoyaltyResultSeriesWithNotActivatedCouponsRequest() # NetLoyaltyResultSeriesWithNotActivatedCouponsRequest |  (optional)
+    net_loyalty_result_series_with_not_activated_coupons_request = iikocloud_client.NetLoyaltyResultSeriesWithNotActivatedCouponsRequest() # NetLoyaltyResultSeriesWithNotActivatedCouponsRequest |  (optional)
 
     try:
         # Get coupon series with non-activated coupons.
@@ -341,26 +341,26 @@ Get all organization's manual conditions.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
-from iiko_cloud_client.models.net_loyalty_result_get_manual_conditions_response import NetLoyaltyResultGetManualConditionsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
+from iikocloud_client.models.net_loyalty_result_get_manual_conditions_response import NetLoyaltyResultGetManualConditionsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_common_get_by_organization_id_request = iiko_cloud_client.NetCommonGetByOrganizationIdRequest() # NetCommonGetByOrganizationIdRequest |  (optional)
+    net_common_get_by_organization_id_request = iikocloud_client.NetCommonGetByOrganizationIdRequest() # NetCommonGetByOrganizationIdRequest |  (optional)
 
     try:
         # Get manual conditions.
@@ -420,26 +420,26 @@ Get all loyalty programs for organization.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_organization_get_programs_request import NetOrganizationGetProgramsRequest
-from iiko_cloud_client.models.net_organization_get_programs_response import NetOrganizationGetProgramsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_organization_get_programs_request import NetOrganizationGetProgramsRequest
+from iikocloud_client.models.net_organization_get_programs_response import NetOrganizationGetProgramsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DiscountsAndPromotionsApi(api_client)
+    api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_organization_get_programs_request = iiko_cloud_client.NetOrganizationGetProgramsRequest() # NetOrganizationGetProgramsRequest |  (optional)
+    net_organization_get_programs_request = iikocloud_client.NetOrganizationGetProgramsRequest() # NetOrganizationGetProgramsRequest |  (optional)
 
     try:
         # Get programs.

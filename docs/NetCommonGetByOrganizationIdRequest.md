@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
+from iikocloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
 
 # TODO update the JSON string below
 json = "{}"

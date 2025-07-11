@@ -3,7 +3,7 @@
 #
 # ref: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: iiko_cloud_client Python package
+name: iikocloud_client Python package
 
 on: [push, pull_request]
 
@@ -28,4 +28,4 @@ jobs:
           pip install -r test-requirements.txt
       - name: Test with pytest
         run: |
-          pytest --cov=iiko_cloud_client
+          pytest --cov=iikocloud_client

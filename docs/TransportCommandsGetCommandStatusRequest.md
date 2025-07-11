@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_commands_get_command_status_request import TransportCommandsGetCommandStatusRequest
+from iikocloud_client.models.transport_commands_get_command_status_request import TransportCommandsGetCommandStatusRequest
 
 # TODO update the JSON string below
 json = "{}"

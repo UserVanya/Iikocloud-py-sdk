@@ -1,4 +1,4 @@
-# iiko_cloud_client.DeliveriesRetrieveApi
+# iikocloud_client.DeliveriesRetrieveApi
 
 All URIs are relative to *http://localhost*
 
@@ -25,26 +25,26 @@ Retrieve list of orders by telephone number, dates and revision.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_phone_request = iiko_cloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
+    transport_deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of orders by telephone number, dates and revision.
@@ -104,26 +104,26 @@ Search orders by search text and additional filters (date, problem, statuses and
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_filter_request import TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_filter_request import TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_filter_request = iiko_cloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
+    transport_deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
 
     try:
         # Search orders by search text and additional filters (date, problem, statuses and other).
@@ -183,26 +183,26 @@ Retrieve list of orders by statuses and dates.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_status_request import TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_status_request import TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_status_request = iiko_cloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
+    transport_deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
 
     try:
         # Retrieve list of orders by statuses and dates.
@@ -262,26 +262,26 @@ Retrieve orders by IDs.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_id_request import TransportDeliveriesRequestOrdersByIdRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_response import TransportDeliveriesResponseOrdersResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_by_id_request import TransportDeliveriesRequestOrdersByIdRequest
+from iikocloud_client.models.transport_deliveries_response_orders_response import TransportDeliveriesResponseOrdersResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_id_request = iiko_cloud_client.TransportDeliveriesRequestOrdersByIdRequest() # TransportDeliveriesRequestOrdersByIdRequest |  (optional)
+    transport_deliveries_request_orders_by_id_request = iikocloud_client.TransportDeliveriesRequestOrdersByIdRequest() # TransportDeliveriesRequestOrdersByIdRequest |  (optional)
 
     try:
         # Retrieve orders by IDs.
@@ -341,26 +341,26 @@ Retrieve list of orders changed from the time revision was passed.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_by_revision_request import TransportDeliveriesRequestOrdersByRevisionRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_by_revision_request import TransportDeliveriesRequestOrdersByRevisionRequest
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_revision_request = iiko_cloud_client.TransportDeliveriesRequestOrdersByRevisionRequest() # TransportDeliveriesRequestOrdersByRevisionRequest |  (optional)
+    transport_deliveries_request_orders_by_revision_request = iikocloud_client.TransportDeliveriesRequestOrdersByRevisionRequest() # TransportDeliveriesRequestOrdersByRevisionRequest |  (optional)
 
     try:
         # Retrieve list of orders changed from the time revision was passed.
@@ -420,26 +420,26 @@ Retrieve list of history orders by telephone number, dates and revision.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_orders_history_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
-from iiko_cloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_orders_history_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesRetrieveApi(api_client)
+    api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_history_by_delivery_date_and_phone_request = iiko_cloud_client.TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
+    transport_deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of history orders by telephone number, dates and revision.

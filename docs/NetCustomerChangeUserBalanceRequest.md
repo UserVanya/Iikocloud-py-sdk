@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
+from iikocloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
 
 # TODO update the JSON string below
 json = "{}"

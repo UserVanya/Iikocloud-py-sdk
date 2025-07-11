@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_integration_web_hooks_filters_web_hook_short_filter import TransportIntegrationWebHooksFiltersWebHookShortFilter
+from iikocloud_client.models.transport_integration_web_hooks_filters_web_hook_short_filter import TransportIntegrationWebHooksFiltersWebHookShortFilter
 
 # TODO update the JSON string below
 json = "{}"

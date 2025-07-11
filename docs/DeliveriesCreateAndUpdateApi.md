@@ -1,4 +1,4 @@
-# iiko_cloud_client.DeliveriesCreateAndUpdateApi
+# iikocloud_client.DeliveriesCreateAndUpdateApi
 
 All URIs are relative to *http://localhost*
 
@@ -43,26 +43,26 @@ Add order items.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_add_order_items_request import TransportDeliveriesRequestAddOrderItemsRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_add_order_items_request import TransportDeliveriesRequestAddOrderItemsRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_add_order_items_request = iiko_cloud_client.TransportDeliveriesRequestAddOrderItemsRequest() # TransportDeliveriesRequestAddOrderItemsRequest |  (optional)
+    transport_deliveries_request_add_order_items_request = iikocloud_client.TransportDeliveriesRequestAddOrderItemsRequest() # TransportDeliveriesRequestAddOrderItemsRequest |  (optional)
 
     try:
         # Add order items.
@@ -126,26 +126,26 @@ Add order payments.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_orders_common_add_order_payments_request import TransportOrdersCommonAddOrderPaymentsRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_orders_common_add_order_payments_request import TransportOrdersCommonAddOrderPaymentsRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_orders_common_add_order_payments_request = iiko_cloud_client.TransportOrdersCommonAddOrderPaymentsRequest() # TransportOrdersCommonAddOrderPaymentsRequest |  (optional)
+    transport_orders_common_add_order_payments_request = iikocloud_client.TransportOrdersCommonAddOrderPaymentsRequest() # TransportOrdersCommonAddOrderPaymentsRequest |  (optional)
 
     try:
         # Add order payments.
@@ -209,26 +209,26 @@ Cancel delivery confirmation.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_cancel_delivery_confirmation_request import TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_cancel_delivery_confirmation_request import TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_cancel_delivery_confirmation_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest() # TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest |  (optional)
+    transport_deliveries_request_update_order_cancel_delivery_confirmation_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest() # TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest |  (optional)
 
     try:
         # Cancel delivery confirmation.
@@ -292,26 +292,26 @@ Cancel delivery order.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_cancel_order_request import TransportDeliveriesRequestCancelOrderRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_cancel_order_request import TransportDeliveriesRequestCancelOrderRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_cancel_order_request = iiko_cloud_client.TransportDeliveriesRequestCancelOrderRequest() # TransportDeliveriesRequestCancelOrderRequest |  (optional)
+    transport_deliveries_request_cancel_order_request = iikocloud_client.TransportDeliveriesRequestCancelOrderRequest() # TransportDeliveriesRequestCancelOrderRequest |  (optional)
 
     try:
         # Cancel delivery order.
@@ -375,26 +375,26 @@ Change delivery comment.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_delivery_comment_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_delivery_comment_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_delivery_comment_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest |  (optional)
+    transport_deliveries_request_update_order_change_delivery_comment_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest |  (optional)
 
     try:
         # Change delivery comment.
@@ -458,26 +458,26 @@ Change time when client wants the order to be delivered.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_complete_before_request import TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_complete_before_request import TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_complete_before_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest() # TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest |  (optional)
+    transport_deliveries_request_update_order_change_complete_before_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest() # TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest |  (optional)
 
     try:
         # Change time when client wants the order to be delivered.
@@ -541,26 +541,26 @@ Change order's delivery point information.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_delivery_point_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_delivery_point_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_delivery_point_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest |  (optional)
+    transport_deliveries_request_update_order_change_delivery_point_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest |  (optional)
 
     try:
         # Change order's delivery point information.
@@ -624,26 +624,26 @@ Change driver info.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_change_driver_info_request import TransportDeliveriesRequestChangeDriverInfoRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_change_driver_info_request import TransportDeliveriesRequestChangeDriverInfoRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_change_driver_info_request = iiko_cloud_client.TransportDeliveriesRequestChangeDriverInfoRequest() # TransportDeliveriesRequestChangeDriverInfoRequest |  (optional)
+    transport_deliveries_request_change_driver_info_request = iikocloud_client.TransportDeliveriesRequestChangeDriverInfoRequest() # TransportDeliveriesRequestChangeDriverInfoRequest |  (optional)
 
     try:
         # Change driver info.
@@ -703,26 +703,26 @@ Change delivery external data.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_external_data_request import TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_external_data_request import TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_external_data_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest() # TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest |  (optional)
+    transport_deliveries_request_update_order_change_external_data_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest() # TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest |  (optional)
 
     try:
         # Change delivery external data.
@@ -786,26 +786,26 @@ Assign/change the order operator.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_delivery_operator_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_delivery_operator_request import TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_delivery_operator_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest |  (optional)
+    transport_deliveries_request_update_order_change_delivery_operator_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest() # TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest |  (optional)
 
     try:
         # Assign/change the order operator.
@@ -870,26 +870,26 @@ Change order's payments.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_payments_request import TransportDeliveriesRequestUpdateOrderChangePaymentsRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_payments_request import TransportDeliveriesRequestUpdateOrderChangePaymentsRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_payments_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangePaymentsRequest() # TransportDeliveriesRequestUpdateOrderChangePaymentsRequest |  (optional)
+    transport_deliveries_request_update_order_change_payments_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangePaymentsRequest() # TransportDeliveriesRequestUpdateOrderChangePaymentsRequest |  (optional)
 
     try:
         # Change order's payments.
@@ -953,26 +953,26 @@ Change order's delivery type.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_change_service_type_request import TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_change_service_type_request import TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_change_service_type_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest() # TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest |  (optional)
+    transport_deliveries_request_update_order_change_service_type_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest() # TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest |  (optional)
 
     try:
         # Change order's delivery type.
@@ -1038,26 +1038,26 @@ orderServiceType only, starting from version `8.0.6` it's also possible to close
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_close_delivery_order_request import TransportDeliveriesRequestCloseDeliveryOrderRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_close_delivery_order_request import TransportDeliveriesRequestCloseDeliveryOrderRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_close_delivery_order_request = iiko_cloud_client.TransportDeliveriesRequestCloseDeliveryOrderRequest() # TransportDeliveriesRequestCloseDeliveryOrderRequest |  (optional)
+    transport_deliveries_request_close_delivery_order_request = iikocloud_client.TransportDeliveriesRequestCloseDeliveryOrderRequest() # TransportDeliveriesRequestCloseDeliveryOrderRequest |  (optional)
 
     try:
         # Close order.
@@ -1121,26 +1121,26 @@ Confirm delivery.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_confirm_delivery_request import TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_confirm_delivery_request import TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_confirm_delivery_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest() # TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest |  (optional)
+    transport_deliveries_request_update_order_confirm_delivery_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest() # TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest |  (optional)
 
     try:
         # Confirm delivery.
@@ -1202,26 +1202,26 @@ Create delivery.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_request_create_order_request import TransportDeliveriesRequestCreateOrderRequest
-from iiko_cloud_client.models.transport_deliveries_response_order_response import TransportDeliveriesResponseOrderResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_request_create_order_request import TransportDeliveriesRequestCreateOrderRequest
+from iikocloud_client.models.transport_deliveries_response_order_response import TransportDeliveriesResponseOrderResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_create_order_request = iiko_cloud_client.TransportDeliveriesRequestCreateOrderRequest() # TransportDeliveriesRequestCreateOrderRequest |  (optional)
+    transport_deliveries_request_create_order_request = iikocloud_client.TransportDeliveriesRequestCreateOrderRequest() # TransportDeliveriesRequestCreateOrderRequest |  (optional)
 
     try:
         # Create delivery.
@@ -1285,26 +1285,26 @@ Print delivery bill.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_print_delivery_bill_request import TransportDeliveriesRequestPrintDeliveryBillRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_print_delivery_bill_request import TransportDeliveriesRequestPrintDeliveryBillRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_print_delivery_bill_request = iiko_cloud_client.TransportDeliveriesRequestPrintDeliveryBillRequest() # TransportDeliveriesRequestPrintDeliveryBillRequest |  (optional)
+    transport_deliveries_request_print_delivery_bill_request = iikocloud_client.TransportDeliveriesRequestPrintDeliveryBillRequest() # TransportDeliveriesRequestPrintDeliveryBillRequest |  (optional)
 
     try:
         # Print delivery bill.
@@ -1368,26 +1368,26 @@ Update order courier.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_courier_request import TransportDeliveriesRequestUpdateOrderCourierRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_courier_request import TransportDeliveriesRequestUpdateOrderCourierRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_courier_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderCourierRequest() # TransportDeliveriesRequestUpdateOrderCourierRequest |  (optional)
+    transport_deliveries_request_update_order_courier_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderCourierRequest() # TransportDeliveriesRequestUpdateOrderCourierRequest |  (optional)
 
     try:
         # Update order courier.
@@ -1449,26 +1449,26 @@ Update delivery status.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_delivery_status_request import TransportDeliveriesRequestUpdateDeliveryStatusRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_delivery_status_request import TransportDeliveriesRequestUpdateDeliveryStatusRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_delivery_status_request = iiko_cloud_client.TransportDeliveriesRequestUpdateDeliveryStatusRequest() # TransportDeliveriesRequestUpdateDeliveryStatusRequest |  (optional)
+    transport_deliveries_request_update_delivery_status_request = iikocloud_client.TransportDeliveriesRequestUpdateDeliveryStatusRequest() # TransportDeliveriesRequestUpdateDeliveryStatusRequest |  (optional)
 
     try:
         # Update delivery status.
@@ -1530,26 +1530,26 @@ Update order payment details.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_payments_request import TransportDeliveriesRequestUpdateOrderPaymentsRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_payments_request import TransportDeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_payments_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderPaymentsRequest() # TransportDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
+    transport_deliveries_request_update_order_payments_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderPaymentsRequest() # TransportDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
 
     try:
         # Update order payment details.
@@ -1611,26 +1611,26 @@ Update order problem.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_request_update_order_problem_request import TransportDeliveriesRequestUpdateOrderProblemRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_request_update_order_problem_request import TransportDeliveriesRequestUpdateOrderProblemRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DeliveriesCreateAndUpdateApi(api_client)
+    api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_update_order_problem_request = iiko_cloud_client.TransportDeliveriesRequestUpdateOrderProblemRequest() # TransportDeliveriesRequestUpdateOrderProblemRequest |  (optional)
+    transport_deliveries_request_update_order_problem_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderProblemRequest() # TransportDeliveriesRequestUpdateOrderProblemRequest |  (optional)
 
     try:
         # Update order problem.

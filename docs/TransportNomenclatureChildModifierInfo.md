@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_nomenclature_child_modifier_info import TransportNomenclatureChildModifierInfo
+from iikocloud_client.models.transport_nomenclature_child_modifier_info import TransportNomenclatureChildModifierInfo
 
 # TODO update the JSON string below
 json = "{}"

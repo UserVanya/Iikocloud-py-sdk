@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
+from iikocloud_client.models.net_notification_sms_sending_possibility_response import NetNotificationSmsSendingPossibilityResponse
 
 # TODO update the JSON string below
 json = "{}"

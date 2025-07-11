@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
 
 # TODO update the JSON string below
 json = "{}"

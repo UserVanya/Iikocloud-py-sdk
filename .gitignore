@@ -64,6 +64,3 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
-codegen.sh
-iikocloud_openapi.json
-config.yaml

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_modifier_group_dto import TransportModifierGroupDto
+from iikocloud_client.models.transport_modifier_group_dto import TransportModifierGroupDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# iiko_cloud_client.CustomersApi
+# iikocloud_client.CustomersApi
 
 All URIs are relative to *http://localhost*
 
@@ -31,25 +31,25 @@ Add new card for customer.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_add_magnet_card_request import NetCustomerAddMagnetCardRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_add_magnet_card_request = iiko_cloud_client.NetCustomerAddMagnetCardRequest() # NetCustomerAddMagnetCardRequest |  (optional)
+    net_customer_add_magnet_card_request = iikocloud_client.NetCustomerAddMagnetCardRequest() # NetCustomerAddMagnetCardRequest |  (optional)
 
     try:
         # Add card.
@@ -109,25 +109,25 @@ Delete existing card for customer.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_delete_magnet_card_request import NetCustomerDeleteMagnetCardRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_delete_magnet_card_request import NetCustomerDeleteMagnetCardRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_delete_magnet_card_request = iiko_cloud_client.NetCustomerDeleteMagnetCardRequest() # NetCustomerDeleteMagnetCardRequest |  (optional)
+    net_customer_delete_magnet_card_request = iikocloud_client.NetCustomerDeleteMagnetCardRequest() # NetCustomerDeleteMagnetCardRequest |  (optional)
 
     try:
         # Delete card.
@@ -187,26 +187,26 @@ Create or update customer info by id or phone or card track.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_create_or_update_customer_request import NetCustomerCreateOrUpdateCustomerRequest
-from iiko_cloud_client.models.net_customer_create_or_update_customer_response import NetCustomerCreateOrUpdateCustomerResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_create_or_update_customer_request import NetCustomerCreateOrUpdateCustomerRequest
+from iikocloud_client.models.net_customer_create_or_update_customer_response import NetCustomerCreateOrUpdateCustomerResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_create_or_update_customer_request = iiko_cloud_client.NetCustomerCreateOrUpdateCustomerRequest() # NetCustomerCreateOrUpdateCustomerRequest |  (optional)
+    net_customer_create_or_update_customer_request = iikocloud_client.NetCustomerCreateOrUpdateCustomerRequest() # NetCustomerCreateOrUpdateCustomerRequest |  (optional)
 
     try:
         # Create or update customer.
@@ -266,26 +266,26 @@ Get customer info by specified criterion.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_get_customer_info_request import NetCustomerGetCustomerInfoRequest
-from iiko_cloud_client.models.net_customer_get_customer_info_response import NetCustomerGetCustomerInfoResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_get_customer_info_request import NetCustomerGetCustomerInfoRequest
+from iikocloud_client.models.net_customer_get_customer_info_response import NetCustomerGetCustomerInfoResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_get_customer_info_request = iiko_cloud_client.NetCustomerGetCustomerInfoRequest() # NetCustomerGetCustomerInfoRequest |  (optional)
+    net_customer_get_customer_info_request = iikocloud_client.NetCustomerGetCustomerInfoRequest() # NetCustomerGetCustomerInfoRequest |  (optional)
 
     try:
         # Get customer info.
@@ -345,26 +345,26 @@ Add new customer for program.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
-from iiko_cloud_client.models.net_customer_add_customer_to_program_response import NetCustomerAddCustomerToProgramResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
+from iikocloud_client.models.net_customer_add_customer_to_program_response import NetCustomerAddCustomerToProgramResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_add_customer_to_program_request = iiko_cloud_client.NetCustomerAddCustomerToProgramRequest() # NetCustomerAddCustomerToProgramRequest |  (optional)
+    net_customer_add_customer_to_program_request = iikocloud_client.NetCustomerAddCustomerToProgramRequest() # NetCustomerAddCustomerToProgramRequest |  (optional)
 
     try:
         # Add customer to program.
@@ -424,25 +424,25 @@ Cancel holding transaction that created earlier.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_cancel_hold_money_request import NetCustomerCancelHoldMoneyRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_cancel_hold_money_request import NetCustomerCancelHoldMoneyRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_cancel_hold_money_request = iiko_cloud_client.NetCustomerCancelHoldMoneyRequest() # NetCustomerCancelHoldMoneyRequest |  (optional)
+    net_customer_cancel_hold_money_request = iikocloud_client.NetCustomerCancelHoldMoneyRequest() # NetCustomerCancelHoldMoneyRequest |  (optional)
 
     try:
         # Cancel hold money.
@@ -502,25 +502,25 @@ Withdraw customer balance.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_change_user_balance_request = iiko_cloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
+    net_customer_change_user_balance_request = iikocloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Withdraw balance.
@@ -580,26 +580,26 @@ Hold customer's money in loyalty program. Payment will be process on POS during 
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_hold_money_request import NetCustomerHoldMoneyRequest
-from iiko_cloud_client.models.net_customer_hold_money_response import NetCustomerHoldMoneyResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_hold_money_request import NetCustomerHoldMoneyRequest
+from iikocloud_client.models.net_customer_hold_money_response import NetCustomerHoldMoneyResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_hold_money_request = iiko_cloud_client.NetCustomerHoldMoneyRequest() # NetCustomerHoldMoneyRequest |  (optional)
+    net_customer_hold_money_request = iikocloud_client.NetCustomerHoldMoneyRequest() # NetCustomerHoldMoneyRequest |  (optional)
 
     try:
         # Hold money.
@@ -659,25 +659,25 @@ Refill customer balance.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_change_user_balance_request import NetCustomerChangeUserBalanceRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_change_user_balance_request = iiko_cloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
+    net_customer_change_user_balance_request = iikocloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Refill balance.
@@ -735,26 +735,26 @@ Mark customers as deleted.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_delete_customers_request import NetCustomerDeleteCustomersRequest
-from iiko_cloud_client.models.net_customer_delete_customers_response import NetCustomerDeleteCustomersResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_delete_customers_request import NetCustomerDeleteCustomersRequest
+from iikocloud_client.models.net_customer_delete_customers_response import NetCustomerDeleteCustomersResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_delete_customers_request = iiko_cloud_client.NetCustomerDeleteCustomersRequest() # NetCustomerDeleteCustomersRequest |  (optional)
+    net_customer_delete_customers_request = iikocloud_client.NetCustomerDeleteCustomersRequest() # NetCustomerDeleteCustomersRequest |  (optional)
 
     try:
         # Logical deletion of customers.
@@ -812,26 +812,26 @@ Get customer orders count and sum for different period.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_get_counters_request import NetLoyaltyResultGetCountersRequest
-from iiko_cloud_client.models.net_loyalty_result_get_counters_response import NetLoyaltyResultGetCountersResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_get_counters_request import NetLoyaltyResultGetCountersRequest
+from iikocloud_client.models.net_loyalty_result_get_counters_response import NetLoyaltyResultGetCountersResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_get_counters_request = iiko_cloud_client.NetLoyaltyResultGetCountersRequest() # NetLoyaltyResultGetCountersRequest |  (optional)
+    net_loyalty_result_get_counters_request = iikocloud_client.NetLoyaltyResultGetCountersRequest() # NetLoyaltyResultGetCountersRequest |  (optional)
 
     try:
         # Get counters.
@@ -889,26 +889,26 @@ Removing deletion flags for customers.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_restore_customers_request import NetCustomerRestoreCustomersRequest
-from iiko_cloud_client.models.net_customer_restore_customers_response import NetCustomerRestoreCustomersResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_restore_customers_request import NetCustomerRestoreCustomersRequest
+from iikocloud_client.models.net_customer_restore_customers_response import NetCustomerRestoreCustomersResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomersApi(api_client)
+    api_instance = iikocloud_client.CustomersApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_restore_customers_request = iiko_cloud_client.NetCustomerRestoreCustomersRequest() # NetCustomerRestoreCustomersRequest |  (optional)
+    net_customer_restore_customers_request = iikocloud_client.NetCustomerRestoreCustomersRequest() # NetCustomerRestoreCustomersRequest |  (optional)
 
     try:
         # Logical recovery of customers.

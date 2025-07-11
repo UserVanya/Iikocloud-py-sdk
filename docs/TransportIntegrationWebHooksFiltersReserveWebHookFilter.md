@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_integration_web_hooks_filters_reserve_web_hook_filter import TransportIntegrationWebHooksFiltersReserveWebHookFilter
+from iikocloud_client.models.transport_integration_web_hooks_filters_reserve_web_hook_filter import TransportIntegrationWebHooksFiltersReserveWebHookFilter
 
 # TODO update the JSON string below
 json = "{}"

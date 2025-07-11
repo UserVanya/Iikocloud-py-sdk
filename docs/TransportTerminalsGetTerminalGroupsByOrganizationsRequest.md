@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
 
 # TODO update the JSON string below
 json = "{}"

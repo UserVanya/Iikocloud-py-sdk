@@ -1,4 +1,4 @@
-# iiko_cloud_client.BanquetsReservesApi
+# iikocloud_client.BanquetsReservesApi
 
 All URIs are relative to *http://localhost*
 
@@ -32,26 +32,26 @@ Available only for banquets.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_reserves_add_order_items_to_banquet_request import TransportReservesAddOrderItemsToBanquetRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_reserves_add_order_items_to_banquet_request import TransportReservesAddOrderItemsToBanquetRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_add_order_items_to_banquet_request = iiko_cloud_client.TransportReservesAddOrderItemsToBanquetRequest() # TransportReservesAddOrderItemsToBanquetRequest |  (optional)
+    transport_reserves_add_order_items_to_banquet_request = iikocloud_client.TransportReservesAddOrderItemsToBanquetRequest() # TransportReservesAddOrderItemsToBanquetRequest |  (optional)
 
     try:
         # Add order items.
@@ -115,26 +115,26 @@ Available only for banquets.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_reserves_add_order_payments_to_banquet_request import TransportReservesAddOrderPaymentsToBanquetRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_reserves_add_order_payments_to_banquet_request import TransportReservesAddOrderPaymentsToBanquetRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_add_order_payments_to_banquet_request = iiko_cloud_client.TransportReservesAddOrderPaymentsToBanquetRequest() # TransportReservesAddOrderPaymentsToBanquetRequest |  (optional)
+    transport_reserves_add_order_payments_to_banquet_request = iikocloud_client.TransportReservesAddOrderPaymentsToBanquetRequest() # TransportReservesAddOrderPaymentsToBanquetRequest |  (optional)
 
     try:
         # Add order payments.
@@ -196,26 +196,26 @@ Returns all organizations of current account (determined by Authorization reques
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_organizations_get_organizations_request import TransportOrganizationsGetOrganizationsRequest
-from iiko_cloud_client.models.transport_organizations_get_organizations_response import TransportOrganizationsGetOrganizationsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_organizations_get_organizations_request import TransportOrganizationsGetOrganizationsRequest
+from iikocloud_client.models.transport_organizations_get_organizations_response import TransportOrganizationsGetOrganizationsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_organizations_get_organizations_request = iiko_cloud_client.TransportOrganizationsGetOrganizationsRequest() # TransportOrganizationsGetOrganizationsRequest |  (optional)
+    transport_organizations_get_organizations_request = iikocloud_client.TransportOrganizationsGetOrganizationsRequest() # TransportOrganizationsGetOrganizationsRequest |  (optional)
 
     try:
         # Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
@@ -277,26 +277,26 @@ Returns all restaurant sections of specified terminal groups, for which banquet/
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_request import TransportReservesGetRestaurantSectionsRequest
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_response import TransportReservesGetRestaurantSectionsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_request import TransportReservesGetRestaurantSectionsRequest
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_response import TransportReservesGetRestaurantSectionsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_get_restaurant_sections_request = iiko_cloud_client.TransportReservesGetRestaurantSectionsRequest() # TransportReservesGetRestaurantSectionsRequest |  (optional)
+    transport_reserves_get_restaurant_sections_request = iikocloud_client.TransportReservesGetRestaurantSectionsRequest() # TransportReservesGetRestaurantSectionsRequest |  (optional)
 
     try:
         # Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
@@ -358,26 +358,26 @@ Returns all terminal groups of specified organizations, for which banquet/reserv
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
-from iiko_cloud_client.models.transport_terminals_terminal_groups_response import TransportTerminalsTerminalGroupsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.transport_terminals_terminal_groups_response import TransportTerminalsTerminalGroupsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_terminals_get_terminal_groups_by_organizations_request = iiko_cloud_client.TransportTerminalsGetTerminalGroupsByOrganizationsRequest() # TransportTerminalsGetTerminalGroupsByOrganizationsRequest |  (optional)
+    transport_terminals_get_terminal_groups_by_organizations_request = iikocloud_client.TransportTerminalsGetTerminalGroupsByOrganizationsRequest() # TransportTerminalsGetTerminalGroupsByOrganizationsRequest |  (optional)
 
     try:
         # Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
@@ -441,26 +441,26 @@ Available only for reserves with status 'New'.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_reserves_cancel_reserve_request import TransportReservesCancelReserveRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_reserves_cancel_reserve_request import TransportReservesCancelReserveRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_cancel_reserve_request = iiko_cloud_client.TransportReservesCancelReserveRequest() # TransportReservesCancelReserveRequest |  (optional)
+    transport_reserves_cancel_reserve_request = iikocloud_client.TransportReservesCancelReserveRequest() # TransportReservesCancelReserveRequest |  (optional)
 
     try:
         # Cancel reservation due to some reason.
@@ -524,26 +524,26 @@ Create banquet/reserve.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
-from iiko_cloud_client.models.transport_reserves_reserve_response import TransportReservesReserveResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
+from iikocloud_client.models.transport_reserves_reserve_response import TransportReservesReserveResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_create_reserve_request = iiko_cloud_client.TransportReservesCreateReserveRequest() # TransportReservesCreateReserveRequest |  (optional)
+    transport_reserves_create_reserve_request = iikocloud_client.TransportReservesCreateReserveRequest() # TransportReservesCreateReserveRequest |  (optional)
 
     try:
         # Create banquet/reserve.
@@ -605,26 +605,26 @@ Returns all banquets/reserves for passed restaurant sections.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_workload_request import TransportReservesGetRestaurantSectionsWorkloadRequest
-from iiko_cloud_client.models.transport_reserves_get_restaurant_sections_workload_response import TransportReservesGetRestaurantSectionsWorkloadResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload_request import TransportReservesGetRestaurantSectionsWorkloadRequest
+from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload_response import TransportReservesGetRestaurantSectionsWorkloadResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_get_restaurant_sections_workload_request = iiko_cloud_client.TransportReservesGetRestaurantSectionsWorkloadRequest() # TransportReservesGetRestaurantSectionsWorkloadRequest |  (optional)
+    transport_reserves_get_restaurant_sections_workload_request = iikocloud_client.TransportReservesGetRestaurantSectionsWorkloadRequest() # TransportReservesGetRestaurantSectionsWorkloadRequest |  (optional)
 
     try:
         # Returns all banquets/reserves for passed restaurant sections.
@@ -686,26 +686,26 @@ Retrieve banquets/reserves statuses by IDs.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_reserves_reserves_by_id_request import TransportReservesReservesByIdRequest
-from iiko_cloud_client.models.transport_reserves_reserves_response import TransportReservesReservesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_reserves_reserves_by_id_request import TransportReservesReservesByIdRequest
+from iikocloud_client.models.transport_reserves_reserves_response import TransportReservesReservesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.BanquetsReservesApi(api_client)
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_reserves_by_id_request = iiko_cloud_client.TransportReservesReservesByIdRequest() # TransportReservesReservesByIdRequest |  (optional)
+    transport_reserves_reserves_by_id_request = iikocloud_client.TransportReservesReservesByIdRequest() # TransportReservesReservesByIdRequest |  (optional)
 
     try:
         # Retrieve banquets/reserves statuses by IDs.

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.external_menu_preset import ExternalMenuPreset
+from iikocloud_client.models.external_menu_preset import ExternalMenuPreset
 
 # TODO update the JSON string below
 json = "{}"

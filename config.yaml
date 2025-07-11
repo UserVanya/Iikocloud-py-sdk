@@ -1,0 +1,20 @@
+additionalProperties:
+  # Базовые параметры
+  projectName: iikocloud_client
+  packageName: iikocloud_client
+  packageVersion: 0.1.0
+
+  library: asyncio
+
+  # Улучшения кода
+  hideGenerationTimestamp: true
+  pythonAttrNoneIfUnset: true
+
+  # Исключения по типам
+  useExceptionForAPIErrors: true # Генерировать исключения при ошибках API
+
+  # Аутентификация
+  useOneOfDiscriminatorLookup: true # Улучшает обработку аутентификации
+
+  # Настройка импортов
+  recursiveImports: false # Включить рекурсивные импорты

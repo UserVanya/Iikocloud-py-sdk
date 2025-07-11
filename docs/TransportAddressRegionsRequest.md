@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_address_regions_request import TransportAddressRegionsRequest
+from iikocloud_client.models.transport_address_regions_request import TransportAddressRegionsRequest
 
 # TODO update the JSON string below
 json = "{}"

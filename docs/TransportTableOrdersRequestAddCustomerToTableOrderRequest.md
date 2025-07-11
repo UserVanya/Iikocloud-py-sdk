@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_table_orders_request_add_customer_to_table_order_request import TransportTableOrdersRequestAddCustomerToTableOrderRequest
+from iikocloud_client.models.transport_table_orders_request_add_customer_to_table_order_request import TransportTableOrdersRequestAddCustomerToTableOrderRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_loyalty_result_guest_counter import NetLoyaltyResultGuestCounter
+from iikocloud_client.models.net_loyalty_result_guest_counter import NetLoyaltyResultGuestCounter
 
 # TODO update the JSON string below
 json = "{}"

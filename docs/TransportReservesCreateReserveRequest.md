@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
+from iikocloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
 
 # TODO update the JSON string below
 json = "{}"

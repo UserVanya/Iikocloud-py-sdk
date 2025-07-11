@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_common_external_data import TransportCommonExternalData
+from iikocloud_client.models.transport_common_external_data import TransportCommonExternalData
 
 # TODO update the JSON string below
 json = "{}"

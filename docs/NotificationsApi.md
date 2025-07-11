@@ -1,4 +1,4 @@
-# iiko_cloud_client.NotificationsApi
+# iikocloud_client.NotificationsApi
 
 All URIs are relative to *http://localhost*
 
@@ -20,26 +20,26 @@ Send notification to external systems (iikoFront and iikoWeb).
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_notifications_send_notification_request import TransportNotificationsSendNotificationRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_notifications_send_notification_request import TransportNotificationsSendNotificationRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.NotificationsApi(api_client)
+    api_instance = iikocloud_client.NotificationsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_notifications_send_notification_request = iiko_cloud_client.TransportNotificationsSendNotificationRequest() # TransportNotificationsSendNotificationRequest |  (optional)
+    transport_notifications_send_notification_request = iikocloud_client.TransportNotificationsSendNotificationRequest() # TransportNotificationsSendNotificationRequest |  (optional)
 
     try:
         # Send notification to external systems (iikoFront and iikoWeb).

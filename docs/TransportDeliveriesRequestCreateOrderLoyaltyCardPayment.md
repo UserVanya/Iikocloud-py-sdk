@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_deliveries_request_create_order_loyalty_card_payment import TransportDeliveriesRequestCreateOrderLoyaltyCardPayment
+from iikocloud_client.models.transport_deliveries_request_create_order_loyalty_card_payment import TransportDeliveriesRequestCreateOrderLoyaltyCardPayment
 
 # TODO update the JSON string below
 json = "{}"

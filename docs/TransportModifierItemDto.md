@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_modifier_item_dto import TransportModifierItemDto
+from iikocloud_client.models.transport_modifier_item_dto import TransportModifierItemDto
 
 # TODO update the JSON string below
 json = "{}"

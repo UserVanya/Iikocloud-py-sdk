@@ -1,4 +1,4 @@
-# iiko_cloud_client.ReportApi
+# iikocloud_client.ReportApi
 
 All URIs are relative to *http://localhost*
 
@@ -21,26 +21,26 @@ Get transaction report for specified customer by provided date range.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_report_get_transactions_report_by_period_request import NetReportGetTransactionsReportByPeriodRequest
-from iiko_cloud_client.models.net_report_get_transactions_report_by_period_response import NetReportGetTransactionsReportByPeriodResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_report_get_transactions_report_by_period_request import NetReportGetTransactionsReportByPeriodRequest
+from iikocloud_client.models.net_report_get_transactions_report_by_period_response import NetReportGetTransactionsReportByPeriodResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.ReportApi(api_client)
+    api_instance = iikocloud_client.ReportApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_report_get_transactions_report_by_period_request = iiko_cloud_client.NetReportGetTransactionsReportByPeriodRequest() # NetReportGetTransactionsReportByPeriodRequest |  (optional)
+    net_report_get_transactions_report_by_period_request = iikocloud_client.NetReportGetTransactionsReportByPeriodRequest() # NetReportGetTransactionsReportByPeriodRequest |  (optional)
 
     try:
         # Get transaction report by period.
@@ -100,26 +100,26 @@ Get transaction report for specified customer by provided revision.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_report_get_transactions_report_by_revision_request import NetReportGetTransactionsReportByRevisionRequest
-from iiko_cloud_client.models.net_report_get_transactions_report_by_revision_response import NetReportGetTransactionsReportByRevisionResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_report_get_transactions_report_by_revision_request import NetReportGetTransactionsReportByRevisionRequest
+from iikocloud_client.models.net_report_get_transactions_report_by_revision_response import NetReportGetTransactionsReportByRevisionResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.ReportApi(api_client)
+    api_instance = iikocloud_client.ReportApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_report_get_transactions_report_by_revision_request = iiko_cloud_client.NetReportGetTransactionsReportByRevisionRequest() # NetReportGetTransactionsReportByRevisionRequest |  (optional)
+    net_report_get_transactions_report_by_revision_request = iikocloud_client.NetReportGetTransactionsReportByRevisionRequest() # NetReportGetTransactionsReportByRevisionRequest |  (optional)
 
     try:
         # Get transaction report by revision.

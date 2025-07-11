@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.tax_category_dto import TaxCategoryDto
+from iikocloud_client.models.tax_category_dto import TaxCategoryDto
 
 # TODO update the JSON string below
 json = "{}"

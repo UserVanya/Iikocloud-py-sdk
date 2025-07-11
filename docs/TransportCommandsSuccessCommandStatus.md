@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_commands_success_command_status import TransportCommandsSuccessCommandStatus
+from iikocloud_client.models.transport_commands_success_command_status import TransportCommandsSuccessCommandStatus
 
 # TODO update the JSON string below
 json = "{}"

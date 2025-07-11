@@ -1,4 +1,4 @@
-# iiko_cloud_client.AddressesApi
+# iikocloud_client.AddressesApi
 
 All URIs are relative to *http://localhost*
 
@@ -23,26 +23,26 @@ Cities.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_address_cities_request import TransportAddressCitiesRequest
-from iiko_cloud_client.models.transport_address_cities_response import TransportAddressCitiesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_address_cities_request import TransportAddressCitiesRequest
+from iikocloud_client.models.transport_address_cities_response import TransportAddressCitiesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    api_instance = iikocloud_client.AddressesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_address_cities_request = iiko_cloud_client.TransportAddressCitiesRequest() # TransportAddressCitiesRequest |  (optional)
+    transport_address_cities_request = iikocloud_client.TransportAddressCitiesRequest() # TransportAddressCitiesRequest |  (optional)
 
     try:
         # Cities.
@@ -102,26 +102,26 @@ Regions.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_address_regions_request import TransportAddressRegionsRequest
-from iiko_cloud_client.models.transport_address_regions_response import TransportAddressRegionsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_address_regions_request import TransportAddressRegionsRequest
+from iikocloud_client.models.transport_address_regions_response import TransportAddressRegionsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    api_instance = iikocloud_client.AddressesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_address_regions_request = iiko_cloud_client.TransportAddressRegionsRequest() # TransportAddressRegionsRequest |  (optional)
+    transport_address_regions_request = iikocloud_client.TransportAddressRegionsRequest() # TransportAddressRegionsRequest |  (optional)
 
     try:
         # Regions.
@@ -181,26 +181,26 @@ Streets by city.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_address_streets_by_city_request import TransportAddressStreetsByCityRequest
-from iiko_cloud_client.models.transport_address_streets_response import TransportAddressStreetsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_address_streets_by_city_request import TransportAddressStreetsByCityRequest
+from iikocloud_client.models.transport_address_streets_response import TransportAddressStreetsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    api_instance = iikocloud_client.AddressesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_address_streets_by_city_request = iiko_cloud_client.TransportAddressStreetsByCityRequest() # TransportAddressStreetsByCityRequest |  (optional)
+    transport_address_streets_by_city_request = iikocloud_client.TransportAddressStreetsByCityRequest() # TransportAddressStreetsByCityRequest |  (optional)
 
     try:
         # Streets by city.
@@ -260,26 +260,26 @@ Streets by id or by classifierId.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_address_streets_by_id_request import TransportAddressStreetsByIdRequest
-from iiko_cloud_client.models.transport_address_streets_by_id_response import TransportAddressStreetsByIdResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_address_streets_by_id_request import TransportAddressStreetsByIdRequest
+from iikocloud_client.models.transport_address_streets_by_id_response import TransportAddressStreetsByIdResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.AddressesApi(api_client)
+    api_instance = iikocloud_client.AddressesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_address_streets_by_id_request = iiko_cloud_client.TransportAddressStreetsByIdRequest() # TransportAddressStreetsByIdRequest |  (optional)
+    transport_address_streets_by_id_request = iikocloud_client.TransportAddressStreetsByIdRequest() # TransportAddressStreetsByIdRequest |  (optional)
 
     try:
         # Streets by id or by classifierId.

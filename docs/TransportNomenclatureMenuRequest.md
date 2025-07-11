@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
+from iikocloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
 
 # TODO update the JSON string below
 json = "{}"

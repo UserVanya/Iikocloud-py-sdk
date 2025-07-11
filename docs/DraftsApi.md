@@ -1,4 +1,4 @@
-# iiko_cloud_client.DraftsApi
+# iikocloud_client.DraftsApi
 
 All URIs are relative to *http://localhost*
 
@@ -27,26 +27,26 @@ Retrieve order drafts list by parameters.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_drafts_filter_drafts_request import TransportDeliveriesDraftsFilterDraftsRequest
-from iiko_cloud_client.models.transport_deliveries_drafts_filter_drafts_response import TransportDeliveriesDraftsFilterDraftsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_drafts_filter_drafts_request import TransportDeliveriesDraftsFilterDraftsRequest
+from iikocloud_client.models.transport_deliveries_drafts_filter_drafts_response import TransportDeliveriesDraftsFilterDraftsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_filter_drafts_request = iiko_cloud_client.TransportDeliveriesDraftsFilterDraftsRequest() # TransportDeliveriesDraftsFilterDraftsRequest |  (optional)
+    transport_deliveries_drafts_filter_drafts_request = iikocloud_client.TransportDeliveriesDraftsFilterDraftsRequest() # TransportDeliveriesDraftsFilterDraftsRequest |  (optional)
 
     try:
         # Retrieve order drafts list by parameters.
@@ -106,26 +106,26 @@ Retrieve order draft by ID.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_drafts_get_draft_request import TransportDeliveriesDraftsGetDraftRequest
-from iiko_cloud_client.models.transport_deliveries_drafts_get_draft_response import TransportDeliveriesDraftsGetDraftResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_drafts_get_draft_request import TransportDeliveriesDraftsGetDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_get_draft_response import TransportDeliveriesDraftsGetDraftResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_get_draft_request = iiko_cloud_client.TransportDeliveriesDraftsGetDraftRequest() # TransportDeliveriesDraftsGetDraftRequest |  (optional)
+    transport_deliveries_drafts_get_draft_request = iikocloud_client.TransportDeliveriesDraftsGetDraftRequest() # TransportDeliveriesDraftsGetDraftRequest |  (optional)
 
     try:
         # Retrieve order draft by ID.
@@ -185,26 +185,26 @@ Admit order draft changes and send them to Front.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_drafts_commit_draft_request import TransportDeliveriesDraftsCommitDraftRequest
-from iiko_cloud_client.models.transport_deliveries_response_order_response import TransportDeliveriesResponseOrderResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_drafts_commit_draft_request import TransportDeliveriesDraftsCommitDraftRequest
+from iikocloud_client.models.transport_deliveries_response_order_response import TransportDeliveriesResponseOrderResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_commit_draft_request = iiko_cloud_client.TransportDeliveriesDraftsCommitDraftRequest() # TransportDeliveriesDraftsCommitDraftRequest |  (optional)
+    transport_deliveries_drafts_commit_draft_request = iikocloud_client.TransportDeliveriesDraftsCommitDraftRequest() # TransportDeliveriesDraftsCommitDraftRequest |  (optional)
 
     try:
         # Admit order draft changes and send them to Front.
@@ -264,26 +264,26 @@ Create delivery order draft.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_drafts_create_draft_request import TransportDeliveriesDraftsCreateDraftRequest
-from iiko_cloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_drafts_create_draft_request import TransportDeliveriesDraftsCreateDraftRequest
+from iikocloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_create_draft_request = iiko_cloud_client.TransportDeliveriesDraftsCreateDraftRequest() # TransportDeliveriesDraftsCreateDraftRequest |  (optional)
+    transport_deliveries_drafts_create_draft_request = iikocloud_client.TransportDeliveriesDraftsCreateDraftRequest() # TransportDeliveriesDraftsCreateDraftRequest |  (optional)
 
     try:
         # Create delivery order draft.
@@ -343,26 +343,26 @@ Delete order draft.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_drafts_delete_draft_request import TransportDeliveriesDraftsDeleteDraftRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_drafts_delete_draft_request import TransportDeliveriesDraftsDeleteDraftRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_delete_draft_request = iiko_cloud_client.TransportDeliveriesDraftsDeleteDraftRequest() # TransportDeliveriesDraftsDeleteDraftRequest |  (optional)
+    transport_deliveries_drafts_delete_draft_request = iikocloud_client.TransportDeliveriesDraftsDeleteDraftRequest() # TransportDeliveriesDraftsDeleteDraftRequest |  (optional)
 
     try:
         # Delete order draft.
@@ -422,26 +422,26 @@ Lock order draft.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_lock_or_unlock_draft_request = iiko_cloud_client.TransportDeliveriesDraftsLockOrUnlockDraftRequest() # TransportDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
+    transport_deliveries_drafts_lock_or_unlock_draft_request = iikocloud_client.TransportDeliveriesDraftsLockOrUnlockDraftRequest() # TransportDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
 
     try:
         # Lock order draft.
@@ -501,26 +501,26 @@ Update existing delivery order draft.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
-from iiko_cloud_client.models.transport_deliveries_drafts_save_draft_request import TransportDeliveriesDraftsSaveDraftRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_deliveries_drafts_create_or_save_draft_response import TransportDeliveriesDraftsCreateOrSaveDraftResponse
+from iikocloud_client.models.transport_deliveries_drafts_save_draft_request import TransportDeliveriesDraftsSaveDraftRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_save_draft_request = iiko_cloud_client.TransportDeliveriesDraftsSaveDraftRequest() # TransportDeliveriesDraftsSaveDraftRequest |  (optional)
+    transport_deliveries_drafts_save_draft_request = iikocloud_client.TransportDeliveriesDraftsSaveDraftRequest() # TransportDeliveriesDraftsSaveDraftRequest |  (optional)
 
     try:
         # Update existing delivery order draft.
@@ -580,26 +580,26 @@ Unlock order draft.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_deliveries_drafts_lock_or_unlock_draft_request import TransportDeliveriesDraftsLockOrUnlockDraftRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.DraftsApi(api_client)
+    api_instance = iikocloud_client.DraftsApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_drafts_lock_or_unlock_draft_request = iiko_cloud_client.TransportDeliveriesDraftsLockOrUnlockDraftRequest() # TransportDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
+    transport_deliveries_drafts_lock_or_unlock_draft_request = iikocloud_client.TransportDeliveriesDraftsLockOrUnlockDraftRequest() # TransportDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
 
     try:
         # Unlock order draft.

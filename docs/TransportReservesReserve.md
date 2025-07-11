@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_reserves_reserve import TransportReservesReserve
+from iikocloud_client.models.transport_reserves_reserve import TransportReservesReserve
 
 # TODO update the JSON string below
 json = "{}"

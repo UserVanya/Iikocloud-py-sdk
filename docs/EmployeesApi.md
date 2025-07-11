@@ -1,4 +1,4 @@
-# iiko_cloud_client.EmployeesApi
+# iikocloud_client.EmployeesApi
 
 All URIs are relative to *http://localhost*
 
@@ -29,26 +29,26 @@ Returns list of all active (courier session is opened) courier's locations which
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_active_courier_locations_by_terminal_group_request import TransportEmployeesActiveCourierLocationsByTerminalGroupRequest
-from iiko_cloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_active_courier_locations_by_terminal_group_request import TransportEmployeesActiveCourierLocationsByTerminalGroupRequest
+from iikocloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_active_courier_locations_by_terminal_group_request = iiko_cloud_client.TransportEmployeesActiveCourierLocationsByTerminalGroupRequest() # TransportEmployeesActiveCourierLocationsByTerminalGroupRequest |  (optional)
+    transport_employees_active_courier_locations_by_terminal_group_request = iikocloud_client.TransportEmployeesActiveCourierLocationsByTerminalGroupRequest() # TransportEmployeesActiveCourierLocationsByTerminalGroupRequest |  (optional)
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
@@ -108,26 +108,26 @@ Returns list of all active (courier session is opened) courier's locations which
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
-from iiko_cloud_client.models.transport_employees_couriers_request import TransportEmployeesCouriersRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_active_courier_locations_response import TransportEmployeesActiveCourierLocationsResponse
+from iikocloud_client.models.transport_employees_couriers_request import TransportEmployeesCouriersRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_couriers_request = iiko_cloud_client.TransportEmployeesCouriersRequest() # TransportEmployeesCouriersRequest |  (optional)
+    transport_employees_couriers_request = iikocloud_client.TransportEmployeesCouriersRequest() # TransportEmployeesCouriersRequest |  (optional)
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
@@ -187,26 +187,26 @@ Returns list of all employees which are delivery drivers in specified restaurant
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_couriers_and_check_role_request import TransportEmployeesCouriersAndCheckRoleRequest
-from iiko_cloud_client.models.transport_employees_employees_with_role_sign_response import TransportEmployeesEmployeesWithRoleSignResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_couriers_and_check_role_request import TransportEmployeesCouriersAndCheckRoleRequest
+from iikocloud_client.models.transport_employees_employees_with_role_sign_response import TransportEmployeesEmployeesWithRoleSignResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_couriers_and_check_role_request = iiko_cloud_client.TransportEmployeesCouriersAndCheckRoleRequest() # TransportEmployeesCouriersAndCheckRoleRequest |  (optional)
+    transport_employees_couriers_and_check_role_request = iikocloud_client.TransportEmployeesCouriersAndCheckRoleRequest() # TransportEmployeesCouriersAndCheckRoleRequest |  (optional)
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
@@ -266,26 +266,26 @@ Method of obtaining drivers' coordinates history.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_courier_locations_by_time_offset_request import TransportEmployeesCourierLocationsByTimeOffsetRequest
-from iiko_cloud_client.models.transport_employees_courier_locations_by_time_offset_response import TransportEmployeesCourierLocationsByTimeOffsetResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_courier_locations_by_time_offset_request import TransportEmployeesCourierLocationsByTimeOffsetRequest
+from iikocloud_client.models.transport_employees_courier_locations_by_time_offset_response import TransportEmployeesCourierLocationsByTimeOffsetResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_courier_locations_by_time_offset_request = iiko_cloud_client.TransportEmployeesCourierLocationsByTimeOffsetRequest() # TransportEmployeesCourierLocationsByTimeOffsetRequest |  (optional)
+    transport_employees_courier_locations_by_time_offset_request = iikocloud_client.TransportEmployeesCourierLocationsByTimeOffsetRequest() # TransportEmployeesCourierLocationsByTimeOffsetRequest |  (optional)
 
     try:
         # Method of obtaining drivers' coordinates history.
@@ -345,26 +345,26 @@ Returns list of all employees which are delivery drivers in specified restaurant
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_couriers_request import TransportEmployeesCouriersRequest
-from iiko_cloud_client.models.transport_employees_employees_response import TransportEmployeesEmployeesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_couriers_request import TransportEmployeesCouriersRequest
+from iikocloud_client.models.transport_employees_employees_response import TransportEmployeesEmployeesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_couriers_request = iiko_cloud_client.TransportEmployeesCouriersRequest() # TransportEmployeesCouriersRequest |  (optional)
+    transport_employees_couriers_request = iikocloud_client.TransportEmployeesCouriersRequest() # TransportEmployeesCouriersRequest |  (optional)
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants.
@@ -424,26 +424,26 @@ Returns employee info.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_employee_info_request import TransportEmployeesEmployeeInfoRequest
-from iiko_cloud_client.models.transport_employees_employee_info_response import TransportEmployeesEmployeeInfoResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_employee_info_request import TransportEmployeesEmployeeInfoRequest
+from iikocloud_client.models.transport_employees_employee_info_response import TransportEmployeesEmployeeInfoResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_employee_info_request = iiko_cloud_client.TransportEmployeesEmployeeInfoRequest() # TransportEmployeesEmployeeInfoRequest |  (optional)
+    transport_employees_employee_info_request = iikocloud_client.TransportEmployeesEmployeeInfoRequest() # TransportEmployeesEmployeeInfoRequest |  (optional)
 
     try:
         # Returns employee info.
@@ -505,26 +505,26 @@ Open personal session.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
-from iiko_cloud_client.models.transport_employees_open_personal_session_request import TransportEmployeesOpenPersonalSessionRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
+from iikocloud_client.models.transport_employees_open_personal_session_request import TransportEmployeesOpenPersonalSessionRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_open_personal_session_request = iiko_cloud_client.TransportEmployeesOpenPersonalSessionRequest() # TransportEmployeesOpenPersonalSessionRequest |  (optional)
+    transport_employees_open_personal_session_request = iikocloud_client.TransportEmployeesOpenPersonalSessionRequest() # TransportEmployeesOpenPersonalSessionRequest |  (optional)
 
     try:
         # Open personal session.
@@ -586,26 +586,26 @@ Close personal session.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
-from iiko_cloud_client.models.transport_employees_close_personal_session_request import TransportEmployeesClosePersonalSessionRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_change_personal_session_response import TransportEmployeesChangePersonalSessionResponse
+from iikocloud_client.models.transport_employees_close_personal_session_request import TransportEmployeesClosePersonalSessionRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_close_personal_session_request = iiko_cloud_client.TransportEmployeesClosePersonalSessionRequest() # TransportEmployeesClosePersonalSessionRequest |  (optional)
+    transport_employees_close_personal_session_request = iikocloud_client.TransportEmployeesClosePersonalSessionRequest() # TransportEmployeesClosePersonalSessionRequest |  (optional)
 
     try:
         # Close personal session.
@@ -665,26 +665,26 @@ Check if personal session is open.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_get_personal_session_info_request import TransportEmployeesGetPersonalSessionInfoRequest
-from iiko_cloud_client.models.transport_employees_get_personal_session_info_response import TransportEmployeesGetPersonalSessionInfoResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_get_personal_session_info_request import TransportEmployeesGetPersonalSessionInfoRequest
+from iikocloud_client.models.transport_employees_get_personal_session_info_response import TransportEmployeesGetPersonalSessionInfoResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_get_personal_session_info_request = iiko_cloud_client.TransportEmployeesGetPersonalSessionInfoRequest() # TransportEmployeesGetPersonalSessionInfoRequest |  (optional)
+    transport_employees_get_personal_session_info_request = iikocloud_client.TransportEmployeesGetPersonalSessionInfoRequest() # TransportEmployeesGetPersonalSessionInfoRequest |  (optional)
 
     try:
         # Check if personal session is open.
@@ -744,26 +744,26 @@ Get terminal groups where employee session is opened.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_employees_get_terminal_groups_of_employee_request import TransportEmployeesGetTerminalGroupsOfEmployeeRequest
-from iiko_cloud_client.models.transport_employees_get_terminal_groups_of_employee_response import TransportEmployeesGetTerminalGroupsOfEmployeeResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_employees_get_terminal_groups_of_employee_request import TransportEmployeesGetTerminalGroupsOfEmployeeRequest
+from iikocloud_client.models.transport_employees_get_terminal_groups_of_employee_response import TransportEmployeesGetTerminalGroupsOfEmployeeResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.EmployeesApi(api_client)
+    api_instance = iikocloud_client.EmployeesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_employees_get_terminal_groups_of_employee_request = iiko_cloud_client.TransportEmployeesGetTerminalGroupsOfEmployeeRequest() # TransportEmployeesGetTerminalGroupsOfEmployeeRequest |  (optional)
+    transport_employees_get_terminal_groups_of_employee_request = iikocloud_client.TransportEmployeesGetTerminalGroupsOfEmployeeRequest() # TransportEmployeesGetTerminalGroupsOfEmployeeRequest |  (optional)
 
     try:
         # Get terminal groups where employee session is opened.

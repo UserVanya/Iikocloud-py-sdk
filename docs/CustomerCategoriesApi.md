@@ -1,4 +1,4 @@
-# iiko_cloud_client.CustomerCategoriesApi
+# iikocloud_client.CustomerCategoriesApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,25 +22,25 @@ Add specified category for customer.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_change_category_for_customer_request import NetCustomerChangeCategoryForCustomerRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_change_category_for_customer_request import NetCustomerChangeCategoryForCustomerRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomerCategoriesApi(api_client)
+    api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_change_category_for_customer_request = iiko_cloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
+    net_customer_change_category_for_customer_request = iikocloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Add category for customer.
@@ -100,26 +100,26 @@ Get all organization's customer categories.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_get_categories_request import NetCustomerGetCategoriesRequest
-from iiko_cloud_client.models.net_customer_get_categories_response import NetCustomerGetCategoriesResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_get_categories_request import NetCustomerGetCategoriesRequest
+from iikocloud_client.models.net_customer_get_categories_response import NetCustomerGetCategoriesResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomerCategoriesApi(api_client)
+    api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_get_categories_request = iiko_cloud_client.NetCustomerGetCategoriesRequest() # NetCustomerGetCategoriesRequest |  (optional)
+    net_customer_get_categories_request = iikocloud_client.NetCustomerGetCategoriesRequest() # NetCustomerGetCategoriesRequest |  (optional)
 
     try:
         # Get customer categories.
@@ -179,25 +179,25 @@ Remove specified category for customer.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_customer_change_category_for_customer_request import NetCustomerChangeCategoryForCustomerRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_customer_change_category_for_customer_request import NetCustomerChangeCategoryForCustomerRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.CustomerCategoriesApi(api_client)
+    api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_customer_change_category_for_customer_request = iiko_cloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
+    net_customer_change_category_for_customer_request = iikocloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Remove category for customer.

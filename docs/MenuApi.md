@@ -1,4 +1,4 @@
-# iiko_cloud_client.MenuApi
+# iikocloud_client.MenuApi
 
 All URIs are relative to *http://localhost*
 
@@ -29,26 +29,26 @@ Make combo price calculation.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
-from iiko_cloud_client.models.net_loyalty_result_calculate_combo_price_response import NetLoyaltyResultCalculateComboPriceResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_calculate_combo_price_request import NetLoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.net_loyalty_result_calculate_combo_price_response import NetLoyaltyResultCalculateComboPriceResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_calculate_combo_price_request = iiko_cloud_client.NetLoyaltyResultCalculateComboPriceRequest() # NetLoyaltyResultCalculateComboPriceRequest |  (optional)
+    net_loyalty_result_calculate_combo_price_request = iikocloud_client.NetLoyaltyResultCalculateComboPriceRequest() # NetLoyaltyResultCalculateComboPriceRequest |  (optional)
 
     try:
         # Calculate combo price
@@ -108,26 +108,26 @@ Get all organization's combos.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.net_loyalty_result_get_combos_info_request import NetLoyaltyResultGetCombosInfoRequest
-from iiko_cloud_client.models.net_loyalty_result_get_combos_info_response import NetLoyaltyResultGetCombosInfoResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.net_loyalty_result_get_combos_info_request import NetLoyaltyResultGetCombosInfoRequest
+from iikocloud_client.models.net_loyalty_result_get_combos_info_response import NetLoyaltyResultGetCombosInfoResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    net_loyalty_result_get_combos_info_request = iiko_cloud_client.NetLoyaltyResultGetCombosInfoRequest() # NetLoyaltyResultGetCombosInfoRequest |  (optional)
+    net_loyalty_result_get_combos_info_request = iikocloud_client.NetLoyaltyResultGetCombosInfoRequest() # NetLoyaltyResultGetCombosInfoRequest |  (optional)
 
     try:
         # Get combos info
@@ -187,26 +187,26 @@ Menu.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_nomenclature_nomenclature_request import TransportNomenclatureNomenclatureRequest
-from iiko_cloud_client.models.transport_nomenclature_nomenclature_response import TransportNomenclatureNomenclatureResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_nomenclature_nomenclature_request import TransportNomenclatureNomenclatureRequest
+from iikocloud_client.models.transport_nomenclature_nomenclature_response import TransportNomenclatureNomenclatureResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_nomenclature_nomenclature_request = iiko_cloud_client.TransportNomenclatureNomenclatureRequest() # TransportNomenclatureNomenclatureRequest |  (optional)
+    transport_nomenclature_nomenclature_request = iikocloud_client.TransportNomenclatureNomenclatureRequest() # TransportNomenclatureNomenclatureRequest |  (optional)
 
     try:
         # Menu.
@@ -268,26 +268,26 @@ Add items to out-of-stock list.  (You should have extra rights to use this metho
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_stop_lists_add_products_to_stop_list_request import TransportStopListsAddProductsToStopListRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_stop_lists_add_products_to_stop_list_request import TransportStopListsAddProductsToStopListRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_stop_lists_add_products_to_stop_list_request = iiko_cloud_client.TransportStopListsAddProductsToStopListRequest() # TransportStopListsAddProductsToStopListRequest |  (optional)
+    transport_stop_lists_add_products_to_stop_list_request = iikocloud_client.TransportStopListsAddProductsToStopListRequest() # TransportStopListsAddProductsToStopListRequest |  (optional)
 
     try:
         # Add items to out-of-stock list.  (You should have extra rights to use this method).
@@ -347,26 +347,26 @@ Check items in out-of-stock list.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_stop_lists_check_stop_list_request import TransportStopListsCheckStopListRequest
-from iiko_cloud_client.models.transport_stop_lists_check_stop_list_response import TransportStopListsCheckStopListResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_stop_lists_check_stop_list_request import TransportStopListsCheckStopListRequest
+from iikocloud_client.models.transport_stop_lists_check_stop_list_response import TransportStopListsCheckStopListResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_stop_lists_check_stop_list_request = iiko_cloud_client.TransportStopListsCheckStopListRequest() # TransportStopListsCheckStopListRequest |  (optional)
+    transport_stop_lists_check_stop_list_request = iikocloud_client.TransportStopListsCheckStopListRequest() # TransportStopListsCheckStopListRequest |  (optional)
 
     try:
         # Check items in out-of-stock list.
@@ -428,26 +428,26 @@ Clear out-of-stock list.  (You should have extra rights to use this method).
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_stop_lists_clear_stop_list_request import TransportStopListsClearStopListRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_stop_lists_clear_stop_list_request import TransportStopListsClearStopListRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_stop_lists_clear_stop_list_request = iiko_cloud_client.TransportStopListsClearStopListRequest() # TransportStopListsClearStopListRequest |  (optional)
+    transport_stop_lists_clear_stop_list_request = iikocloud_client.TransportStopListsClearStopListRequest() # TransportStopListsClearStopListRequest |  (optional)
 
     try:
         # Clear out-of-stock list.  (You should have extra rights to use this method).
@@ -507,26 +507,26 @@ Out-of-stock items.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_stop_lists_stop_lists_request import TransportStopListsStopListsRequest
-from iiko_cloud_client.models.transport_stop_lists_stop_lists_response import TransportStopListsStopListsResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_stop_lists_stop_lists_request import TransportStopListsStopListsRequest
+from iikocloud_client.models.transport_stop_lists_stop_lists_response import TransportStopListsStopListsResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_stop_lists_stop_lists_request = iiko_cloud_client.TransportStopListsStopListsRequest() # TransportStopListsStopListsRequest |  (optional)
+    transport_stop_lists_stop_lists_request = iikocloud_client.TransportStopListsStopListsRequest() # TransportStopListsStopListsRequest |  (optional)
 
     try:
         # Out-of-stock items.
@@ -588,26 +588,26 @@ Remove items from out-of-stock list.  (You should have extra rights to use this 
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iiko_cloud_client.models.transport_stop_lists_remove_products_from_stop_list_request import TransportStopListsRemoveProductsFromStopListRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
+from iikocloud_client.models.transport_stop_lists_remove_products_from_stop_list_request import TransportStopListsRemoveProductsFromStopListRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_stop_lists_remove_products_from_stop_list_request = iiko_cloud_client.TransportStopListsRemoveProductsFromStopListRequest() # TransportStopListsRemoveProductsFromStopListRequest |  (optional)
+    transport_stop_lists_remove_products_from_stop_list_request = iikocloud_client.TransportStopListsRemoveProductsFromStopListRequest() # TransportStopListsRemoveProductsFromStopListRequest |  (optional)
 
     try:
         # Remove items from out-of-stock list.  (You should have extra rights to use this method).
@@ -667,26 +667,26 @@ Retrieve external menu by ID.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.external_menu_preset import ExternalMenuPreset
-from iiko_cloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.external_menu_preset import ExternalMenuPreset
+from iikocloud_client.models.transport_nomenclature_menu_request import TransportNomenclatureMenuRequest
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_nomenclature_menu_request = iiko_cloud_client.TransportNomenclatureMenuRequest() # TransportNomenclatureMenuRequest |  (optional)
+    transport_nomenclature_menu_request = iikocloud_client.TransportNomenclatureMenuRequest() # TransportNomenclatureMenuRequest |  (optional)
 
     try:
         # Retrieve external menu by ID.
@@ -746,22 +746,22 @@ External menus with price categories.
 
 
 ```python
-import iiko_cloud_client
-from iiko_cloud_client.models.transport_nomenclature_menus_data_response import TransportNomenclatureMenusDataResponse
-from iiko_cloud_client.rest import ApiException
+import iikocloud_client
+from iikocloud_client.models.transport_nomenclature_menus_data_response import TransportNomenclatureMenusDataResponse
+from iikocloud_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = iiko_cloud_client.Configuration(
+configuration = iikocloud_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-async with iiko_cloud_client.ApiClient(configuration) as api_client:
+async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = iiko_cloud_client.MenuApi(api_client)
+    api_instance = iikocloud_client.MenuApi(api_client)
     authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
 

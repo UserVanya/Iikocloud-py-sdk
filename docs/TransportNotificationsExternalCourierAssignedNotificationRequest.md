@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_notifications_external_courier_assigned_notification_request import TransportNotificationsExternalCourierAssignedNotificationRequest
+from iikocloud_client.models.transport_notifications_external_courier_assigned_notification_request import TransportNotificationsExternalCourierAssignedNotificationRequest
 
 # TODO update the JSON string below
 json = "{}"

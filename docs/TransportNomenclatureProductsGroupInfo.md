@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.transport_nomenclature_products_group_info import TransportNomenclatureProductsGroupInfo
+from iikocloud_client.models.transport_nomenclature_products_group_info import TransportNomenclatureProductsGroupInfo
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from iiko_cloud_client.models.net_notification_send_email_request import NetNotificationSendEmailRequest
+from iikocloud_client.models.net_notification_send_email_request import NetNotificationSendEmailRequest
 
 # TODO update the JSON string below
 json = "{}"
