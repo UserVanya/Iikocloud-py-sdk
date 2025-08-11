@@ -1,6 +1,6 @@
 # iikocloud_client.MenuApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **api1_combo_calculate_post**
-> NetLoyaltyResultCalculateComboPriceResponse api1_combo_calculate_post(authorization, timeout=timeout, net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request)
+> NetLoyaltyResultCalculateComboPriceResponse api1_combo_calculate_post(timeout=timeout, net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request)
 
 Calculate combo price
 
@@ -27,6 +27,7 @@ Make combo price calculation.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -35,24 +36,32 @@ from iikocloud_client.models.net_loyalty_result_calculate_combo_price_response i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_loyalty_result_calculate_combo_price_request = iikocloud_client.NetLoyaltyResultCalculateComboPriceRequest() # NetLoyaltyResultCalculateComboPriceRequest |  (optional)
 
     try:
         # Calculate combo price
-        api_response = await api_instance.api1_combo_calculate_post(authorization, timeout=timeout, net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request)
+        api_response = await api_instance.api1_combo_calculate_post(timeout=timeout, net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request)
         print("The response of MenuApi->api1_combo_calculate_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,7 +75,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_loyalty_result_calculate_combo_price_request** | [**NetLoyaltyResultCalculateComboPriceRequest**](NetLoyaltyResultCalculateComboPriceRequest.md)|  | [optional] 
 
@@ -76,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -96,7 +104,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_combo_post**
-> NetLoyaltyResultGetCombosInfoResponse api1_combo_post(authorization, timeout=timeout, net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request)
+> NetLoyaltyResultGetCombosInfoResponse api1_combo_post(timeout=timeout, net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request)
 
 Get combos info
 
@@ -106,6 +114,7 @@ Get all organization's combos.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -114,24 +123,32 @@ from iikocloud_client.models.net_loyalty_result_get_combos_info_response import 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_loyalty_result_get_combos_info_request = iikocloud_client.NetLoyaltyResultGetCombosInfoRequest() # NetLoyaltyResultGetCombosInfoRequest |  (optional)
 
     try:
         # Get combos info
-        api_response = await api_instance.api1_combo_post(authorization, timeout=timeout, net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request)
+        api_response = await api_instance.api1_combo_post(timeout=timeout, net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request)
         print("The response of MenuApi->api1_combo_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,7 +162,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_loyalty_result_get_combos_info_request** | [**NetLoyaltyResultGetCombosInfoRequest**](NetLoyaltyResultGetCombosInfoRequest.md)|  | [optional] 
 
@@ -155,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -175,7 +191,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_nomenclature_post**
-> TransportNomenclatureNomenclatureResponse api1_nomenclature_post(authorization, timeout=timeout, transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request)
+> TransportNomenclatureNomenclatureResponse api1_nomenclature_post(timeout=timeout, transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request)
 
 Menu.
 
@@ -185,6 +201,7 @@ Menu.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -193,24 +210,32 @@ from iikocloud_client.models.transport_nomenclature_nomenclature_response import
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_nomenclature_nomenclature_request = iikocloud_client.TransportNomenclatureNomenclatureRequest() # TransportNomenclatureNomenclatureRequest |  (optional)
 
     try:
         # Menu.
-        api_response = await api_instance.api1_nomenclature_post(authorization, timeout=timeout, transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request)
+        api_response = await api_instance.api1_nomenclature_post(timeout=timeout, transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request)
         print("The response of MenuApi->api1_nomenclature_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -224,7 +249,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_nomenclature_nomenclature_request** | [**TransportNomenclatureNomenclatureRequest**](TransportNomenclatureNomenclatureRequest.md)|  | [optional] 
 
@@ -234,7 +258,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -254,7 +278,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_stop_lists_add_post**
-> TransportCommonCorrelationIdResponse api1_stop_lists_add_post(authorization, timeout=timeout, transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request)
+> TransportCommonCorrelationIdResponse api1_stop_lists_add_post(timeout=timeout, transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request)
 
 Add items to out-of-stock list.  (You should have extra rights to use this method).
 
@@ -266,6 +290,7 @@ Add items to out-of-stock list.  (You should have extra rights to use this metho
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -274,24 +299,32 @@ from iikocloud_client.models.transport_stop_lists_add_products_to_stop_list_requ
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_stop_lists_add_products_to_stop_list_request = iikocloud_client.TransportStopListsAddProductsToStopListRequest() # TransportStopListsAddProductsToStopListRequest |  (optional)
 
     try:
         # Add items to out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.api1_stop_lists_add_post(authorization, timeout=timeout, transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request)
+        api_response = await api_instance.api1_stop_lists_add_post(timeout=timeout, transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request)
         print("The response of MenuApi->api1_stop_lists_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -305,7 +338,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_stop_lists_add_products_to_stop_list_request** | [**TransportStopListsAddProductsToStopListRequest**](TransportStopListsAddProductsToStopListRequest.md)|  | [optional] 
 
@@ -315,7 +347,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -335,7 +367,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_stop_lists_check_post**
-> TransportStopListsCheckStopListResponse api1_stop_lists_check_post(authorization, timeout=timeout, transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request)
+> TransportStopListsCheckStopListResponse api1_stop_lists_check_post(timeout=timeout, transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request)
 
 Check items in out-of-stock list.
 
@@ -345,6 +377,7 @@ Check items in out-of-stock list.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -353,24 +386,32 @@ from iikocloud_client.models.transport_stop_lists_check_stop_list_response impor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_stop_lists_check_stop_list_request = iikocloud_client.TransportStopListsCheckStopListRequest() # TransportStopListsCheckStopListRequest |  (optional)
 
     try:
         # Check items in out-of-stock list.
-        api_response = await api_instance.api1_stop_lists_check_post(authorization, timeout=timeout, transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request)
+        api_response = await api_instance.api1_stop_lists_check_post(timeout=timeout, transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request)
         print("The response of MenuApi->api1_stop_lists_check_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -384,7 +425,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_stop_lists_check_stop_list_request** | [**TransportStopListsCheckStopListRequest**](TransportStopListsCheckStopListRequest.md)|  | [optional] 
 
@@ -394,7 +434,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -414,7 +454,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_stop_lists_clear_post**
-> TransportCommonCorrelationIdResponse api1_stop_lists_clear_post(authorization, timeout=timeout, transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request)
+> TransportCommonCorrelationIdResponse api1_stop_lists_clear_post(timeout=timeout, transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request)
 
 Clear out-of-stock list.  (You should have extra rights to use this method).
 
@@ -426,6 +466,7 @@ Clear out-of-stock list.  (You should have extra rights to use this method).
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -434,24 +475,32 @@ from iikocloud_client.models.transport_stop_lists_clear_stop_list_request import
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_stop_lists_clear_stop_list_request = iikocloud_client.TransportStopListsClearStopListRequest() # TransportStopListsClearStopListRequest |  (optional)
 
     try:
         # Clear out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.api1_stop_lists_clear_post(authorization, timeout=timeout, transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request)
+        api_response = await api_instance.api1_stop_lists_clear_post(timeout=timeout, transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request)
         print("The response of MenuApi->api1_stop_lists_clear_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -465,7 +514,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_stop_lists_clear_stop_list_request** | [**TransportStopListsClearStopListRequest**](TransportStopListsClearStopListRequest.md)|  | [optional] 
 
@@ -475,7 +523,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -495,7 +543,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_stop_lists_post**
-> TransportStopListsStopListsResponse api1_stop_lists_post(authorization, timeout=timeout, transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request)
+> TransportStopListsStopListsResponse api1_stop_lists_post(timeout=timeout, transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request)
 
 Out-of-stock items.
 
@@ -505,6 +553,7 @@ Out-of-stock items.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -513,24 +562,32 @@ from iikocloud_client.models.transport_stop_lists_stop_lists_response import Tra
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_stop_lists_stop_lists_request = iikocloud_client.TransportStopListsStopListsRequest() # TransportStopListsStopListsRequest |  (optional)
 
     try:
         # Out-of-stock items.
-        api_response = await api_instance.api1_stop_lists_post(authorization, timeout=timeout, transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request)
+        api_response = await api_instance.api1_stop_lists_post(timeout=timeout, transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request)
         print("The response of MenuApi->api1_stop_lists_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -544,7 +601,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_stop_lists_stop_lists_request** | [**TransportStopListsStopListsRequest**](TransportStopListsStopListsRequest.md)|  | [optional] 
 
@@ -554,7 +610,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -574,7 +630,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_stop_lists_remove_post**
-> TransportCommonCorrelationIdResponse api1_stop_lists_remove_post(authorization, timeout=timeout, transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request)
+> TransportCommonCorrelationIdResponse api1_stop_lists_remove_post(timeout=timeout, transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request)
 
 Remove items from out-of-stock list.  (You should have extra rights to use this method).
 
@@ -586,6 +642,7 @@ Remove items from out-of-stock list.  (You should have extra rights to use this 
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -594,24 +651,32 @@ from iikocloud_client.models.transport_stop_lists_remove_products_from_stop_list
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_stop_lists_remove_products_from_stop_list_request = iikocloud_client.TransportStopListsRemoveProductsFromStopListRequest() # TransportStopListsRemoveProductsFromStopListRequest |  (optional)
 
     try:
         # Remove items from out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.api1_stop_lists_remove_post(authorization, timeout=timeout, transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request)
+        api_response = await api_instance.api1_stop_lists_remove_post(timeout=timeout, transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request)
         print("The response of MenuApi->api1_stop_lists_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -625,7 +690,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_stop_lists_remove_products_from_stop_list_request** | [**TransportStopListsRemoveProductsFromStopListRequest**](TransportStopListsRemoveProductsFromStopListRequest.md)|  | [optional] 
 
@@ -635,7 +699,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -655,7 +719,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api2_menu_by_id_post**
-> ExternalMenuPreset api2_menu_by_id_post(authorization, timeout=timeout, transport_nomenclature_menu_request=transport_nomenclature_menu_request)
+> ExternalMenuPreset api2_menu_by_id_post(timeout=timeout, transport_nomenclature_menu_request=transport_nomenclature_menu_request)
 
 Retrieve external menu by ID.
 
@@ -665,6 +729,7 @@ Retrieve external menu by ID.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -673,24 +738,32 @@ from iikocloud_client.models.transport_nomenclature_menu_request import Transpor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_nomenclature_menu_request = iikocloud_client.TransportNomenclatureMenuRequest() # TransportNomenclatureMenuRequest |  (optional)
 
     try:
         # Retrieve external menu by ID.
-        api_response = await api_instance.api2_menu_by_id_post(authorization, timeout=timeout, transport_nomenclature_menu_request=transport_nomenclature_menu_request)
+        api_response = await api_instance.api2_menu_by_id_post(timeout=timeout, transport_nomenclature_menu_request=transport_nomenclature_menu_request)
         print("The response of MenuApi->api2_menu_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -704,7 +777,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_nomenclature_menu_request** | [**TransportNomenclatureMenuRequest**](TransportNomenclatureMenuRequest.md)|  | [optional] 
 
@@ -714,7 +786,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -734,7 +806,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api2_menu_post**
-> TransportNomenclatureMenusDataResponse api2_menu_post(authorization, timeout=timeout)
+> TransportNomenclatureMenusDataResponse api2_menu_post(timeout=timeout)
 
 External menus with price categories.
 
@@ -744,6 +816,7 @@ External menus with price categories.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -751,23 +824,31 @@ from iikocloud_client.models.transport_nomenclature_menus_data_response import T
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
 
     try:
         # External menus with price categories.
-        api_response = await api_instance.api2_menu_post(authorization, timeout=timeout)
+        api_response = await api_instance.api2_menu_post(timeout=timeout)
         print("The response of MenuApi->api2_menu_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -781,7 +862,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
 
 ### Return type
@@ -790,7 +870,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

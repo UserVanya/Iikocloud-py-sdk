@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.net_customer_add_customer_to_program_request import NetCustomerAddCustomerToProgramRequest
@@ -59,7 +59,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_add_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -79,8 +78,6 @@ class CustomersApi:
 
         Add new card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_magnet_card_request:
@@ -108,7 +105,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -138,7 +134,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_add_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -158,8 +153,6 @@ class CustomersApi:
 
         Add new card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_magnet_card_request:
@@ -187,7 +180,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -217,7 +209,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_add_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -237,8 +228,6 @@ class CustomersApi:
 
         Add new card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_magnet_card_request:
@@ -266,7 +255,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -291,7 +279,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_card_add_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_add_magnet_card_request,
         _request_auth,
@@ -317,8 +304,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -351,6 +336,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -374,7 +360,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_remove_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -394,8 +379,6 @@ class CustomersApi:
 
         Delete existing card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_magnet_card_request:
@@ -423,7 +406,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -453,7 +435,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_remove_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -473,8 +454,6 @@ class CustomersApi:
 
         Delete existing card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_magnet_card_request:
@@ -502,7 +481,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -532,7 +510,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_card_remove_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
@@ -552,8 +529,6 @@ class CustomersApi:
 
         Delete existing card for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_magnet_card_request:
@@ -581,7 +556,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -606,7 +580,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_card_remove_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_delete_magnet_card_request,
         _request_auth,
@@ -632,8 +605,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -666,6 +637,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -689,7 +661,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_create_or_update_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
@@ -709,8 +680,6 @@ class CustomersApi:
 
         Create or update customer info by id or phone or card track.   > Restriction group: `Guests: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_create_or_update_customer_request:
@@ -738,7 +707,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -768,7 +736,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_create_or_update_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
@@ -788,8 +755,6 @@ class CustomersApi:
 
         Create or update customer info by id or phone or card track.   > Restriction group: `Guests: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_create_or_update_customer_request:
@@ -817,7 +782,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -847,7 +811,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_create_or_update_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
@@ -867,8 +830,6 @@ class CustomersApi:
 
         Create or update customer info by id or phone or card track.   > Restriction group: `Guests: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_create_or_update_customer_request:
@@ -896,7 +857,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -921,7 +881,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_create_or_update_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_create_or_update_customer_request,
         _request_auth,
@@ -947,8 +906,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -981,6 +938,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1004,7 +962,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_info_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
@@ -1024,8 +981,6 @@ class CustomersApi:
 
         Get customer info by specified criterion.   > Restriction group: `Guests: info`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_customer_info_request:
@@ -1053,7 +1008,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1083,7 +1037,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_info_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
@@ -1103,8 +1056,6 @@ class CustomersApi:
 
         Get customer info by specified criterion.   > Restriction group: `Guests: info`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_customer_info_request:
@@ -1132,7 +1083,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1162,7 +1112,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_info_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
@@ -1182,8 +1131,6 @@ class CustomersApi:
 
         Get customer info by specified criterion.   > Restriction group: `Guests: info`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_customer_info_request:
@@ -1211,7 +1158,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1236,7 +1182,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_info_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_get_customer_info_request,
         _request_auth,
@@ -1262,8 +1207,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1296,6 +1239,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1319,7 +1263,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_program_add_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
@@ -1339,8 +1282,6 @@ class CustomersApi:
 
         Add new customer for program.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_customer_to_program_request:
@@ -1368,7 +1309,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1398,7 +1338,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_program_add_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
@@ -1418,8 +1357,6 @@ class CustomersApi:
 
         Add new customer for program.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_customer_to_program_request:
@@ -1447,7 +1384,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1477,7 +1413,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_program_add_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
@@ -1497,8 +1432,6 @@ class CustomersApi:
 
         Add new customer for program.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_add_customer_to_program_request:
@@ -1526,7 +1459,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1551,7 +1483,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_program_add_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_add_customer_to_program_request,
         _request_auth,
@@ -1577,8 +1508,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1611,6 +1540,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1634,7 +1564,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_cancel_hold_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -1654,8 +1583,6 @@ class CustomersApi:
 
         Cancel holding transaction that created earlier.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_cancel_hold_money_request:
@@ -1683,7 +1610,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1713,7 +1639,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_cancel_hold_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -1733,8 +1658,6 @@ class CustomersApi:
 
         Cancel holding transaction that created earlier.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_cancel_hold_money_request:
@@ -1762,7 +1685,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1792,7 +1714,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_cancel_hold_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -1812,8 +1733,6 @@ class CustomersApi:
 
         Cancel holding transaction that created earlier.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_cancel_hold_money_request:
@@ -1841,7 +1760,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1866,7 +1784,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_cancel_hold_money_request,
         _request_auth,
@@ -1892,8 +1809,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1926,6 +1841,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1949,7 +1865,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_chargeoff_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -1969,8 +1884,6 @@ class CustomersApi:
 
         Withdraw customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -1998,7 +1911,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2028,7 +1940,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_chargeoff_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -2048,8 +1959,6 @@ class CustomersApi:
 
         Withdraw customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -2077,7 +1986,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2107,7 +2015,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_chargeoff_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -2127,8 +2034,6 @@ class CustomersApi:
 
         Withdraw customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -2156,7 +2061,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2181,7 +2085,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_change_user_balance_request,
         _request_auth,
@@ -2207,8 +2110,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2241,6 +2142,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2264,7 +2166,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_hold_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -2284,8 +2185,6 @@ class CustomersApi:
 
         Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_hold_money_request:
@@ -2313,7 +2212,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2343,7 +2241,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_hold_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -2363,8 +2260,6 @@ class CustomersApi:
 
         Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_hold_money_request:
@@ -2392,7 +2287,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2422,7 +2316,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_hold_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
@@ -2442,8 +2335,6 @@ class CustomersApi:
 
         Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_hold_money_request:
@@ -2471,7 +2362,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2496,7 +2386,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_wallet_hold_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_hold_money_request,
         _request_auth,
@@ -2522,8 +2411,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2556,6 +2443,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2579,7 +2467,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_topup_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -2599,8 +2486,6 @@ class CustomersApi:
 
         Refill customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -2628,7 +2513,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2658,7 +2542,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_topup_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -2678,8 +2561,6 @@ class CustomersApi:
 
         Refill customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -2707,7 +2588,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2737,7 +2617,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_customer_wallet_topup_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
@@ -2757,8 +2636,6 @@ class CustomersApi:
 
         Refill customer balance.   > Restriction group: `Loyalty: wallets`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_user_balance_request:
@@ -2786,7 +2663,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2811,7 +2687,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_customer_wallet_topup_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_change_user_balance_request,
         _request_auth,
@@ -2837,8 +2712,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2871,6 +2744,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2894,7 +2768,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_delete_customers_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
@@ -2914,8 +2787,6 @@ class CustomersApi:
 
         Mark customers as deleted.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_customers_request:
@@ -2943,7 +2814,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -2973,7 +2843,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_delete_customers_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
@@ -2993,8 +2862,6 @@ class CustomersApi:
 
         Mark customers as deleted.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_customers_request:
@@ -3022,7 +2889,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -3052,7 +2918,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_delete_customers_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
@@ -3072,8 +2937,6 @@ class CustomersApi:
 
         Mark customers as deleted.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_delete_customers_request:
@@ -3101,7 +2964,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -3126,7 +2988,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_delete_customers_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_delete_customers_request,
         _request_auth,
@@ -3152,8 +3013,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3186,6 +3045,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3209,7 +3069,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_get_counters_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
@@ -3229,8 +3088,6 @@ class CustomersApi:
 
         Get customer orders count and sum for different period.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_counters_request:
@@ -3258,7 +3115,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_get_counters_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3288,7 +3144,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_get_counters_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
@@ -3308,8 +3163,6 @@ class CustomersApi:
 
         Get customer orders count and sum for different period.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_counters_request:
@@ -3337,7 +3190,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_get_counters_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3367,7 +3219,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_get_counters_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
@@ -3387,8 +3238,6 @@ class CustomersApi:
 
         Get customer orders count and sum for different period.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_counters_request:
@@ -3416,7 +3265,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_get_counters_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3441,7 +3289,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_get_counters_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_get_counters_request,
         _request_auth,
@@ -3467,8 +3314,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3501,6 +3346,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3524,7 +3370,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_restore_customers_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
@@ -3544,8 +3389,6 @@ class CustomersApi:
 
         Removing deletion flags for customers.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_restore_customers_request:
@@ -3573,7 +3416,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3603,7 +3445,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_restore_customers_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
@@ -3623,8 +3464,6 @@ class CustomersApi:
 
         Removing deletion flags for customers.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_restore_customers_request:
@@ -3652,7 +3491,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3682,7 +3520,6 @@ class CustomersApi:
     @validate_call
     async def api1_loyalty_iiko_restore_customers_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
@@ -3702,8 +3539,6 @@ class CustomersApi:
 
         Removing deletion flags for customers.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_restore_customers_request:
@@ -3731,7 +3566,6 @@ class CustomersApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3756,7 +3590,6 @@ class CustomersApi:
 
     def _api1_loyalty_iiko_restore_customers_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_restore_customers_request,
         _request_auth,
@@ -3782,8 +3615,6 @@ class CustomersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3816,6 +3647,7 @@ class CustomersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

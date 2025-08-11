@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.external_menu_preset import ExternalMenuPreset
@@ -58,7 +58,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_calculate_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
@@ -78,8 +77,6 @@ class MenuApi:
 
         Make combo price calculation.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_combo_price_request:
@@ -107,7 +104,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -137,7 +133,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_calculate_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
@@ -157,8 +152,6 @@ class MenuApi:
 
         Make combo price calculation.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_combo_price_request:
@@ -186,7 +179,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -216,7 +208,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_calculate_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
@@ -236,8 +227,6 @@ class MenuApi:
 
         Make combo price calculation.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_combo_price_request:
@@ -265,7 +254,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -290,7 +278,6 @@ class MenuApi:
 
     def _api1_combo_calculate_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_calculate_combo_price_request,
         _request_auth,
@@ -316,8 +303,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -350,6 +335,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -373,7 +359,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
@@ -393,8 +378,6 @@ class MenuApi:
 
         Get all organization's combos.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_combos_info_request:
@@ -422,7 +405,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -452,7 +434,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
@@ -472,8 +453,6 @@ class MenuApi:
 
         Get all organization's combos.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_combos_info_request:
@@ -501,7 +480,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -531,7 +509,6 @@ class MenuApi:
     @validate_call
     async def api1_combo_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
@@ -551,8 +528,6 @@ class MenuApi:
 
         Get all organization's combos.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_get_combos_info_request:
@@ -580,7 +555,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_combo_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -605,7 +579,6 @@ class MenuApi:
 
     def _api1_combo_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_get_combos_info_request,
         _request_auth,
@@ -631,8 +604,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -665,6 +636,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -688,7 +660,6 @@ class MenuApi:
     @validate_call
     async def api1_nomenclature_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
@@ -708,8 +679,6 @@ class MenuApi:
 
         > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_nomenclature_request:
@@ -737,7 +706,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_nomenclature_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -767,7 +735,6 @@ class MenuApi:
     @validate_call
     async def api1_nomenclature_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
@@ -787,8 +754,6 @@ class MenuApi:
 
         > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_nomenclature_request:
@@ -816,7 +781,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_nomenclature_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -846,7 +810,6 @@ class MenuApi:
     @validate_call
     async def api1_nomenclature_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
@@ -866,8 +829,6 @@ class MenuApi:
 
         > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_nomenclature_request:
@@ -895,7 +856,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_nomenclature_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -920,7 +880,6 @@ class MenuApi:
 
     def _api1_nomenclature_post_serialize(
         self,
-        authorization,
         timeout,
         transport_nomenclature_nomenclature_request,
         _request_auth,
@@ -946,8 +905,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -980,6 +937,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1003,7 +961,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_add_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
@@ -1023,8 +980,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_add_products_to_stop_list_request:
@@ -1052,7 +1007,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1082,7 +1036,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_add_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
@@ -1102,8 +1055,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_add_products_to_stop_list_request:
@@ -1131,7 +1082,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1161,7 +1111,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_add_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
@@ -1181,8 +1130,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_add_products_to_stop_list_request:
@@ -1210,7 +1157,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1235,7 +1181,6 @@ class MenuApi:
 
     def _api1_stop_lists_add_post_serialize(
         self,
-        authorization,
         timeout,
         transport_stop_lists_add_products_to_stop_list_request,
         _request_auth,
@@ -1261,8 +1206,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1295,6 +1238,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1318,7 +1262,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_check_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
         _request_timeout: Union[
@@ -1338,8 +1281,6 @@ class MenuApi:
 
            > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_check_stop_list_request:
@@ -1367,7 +1308,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_check_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1397,7 +1337,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_check_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
         _request_timeout: Union[
@@ -1417,8 +1356,6 @@ class MenuApi:
 
            > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_check_stop_list_request:
@@ -1446,7 +1383,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_check_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1476,7 +1412,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_check_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
         _request_timeout: Union[
@@ -1496,8 +1431,6 @@ class MenuApi:
 
            > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_check_stop_list_request:
@@ -1525,7 +1458,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_check_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1550,7 +1482,6 @@ class MenuApi:
 
     def _api1_stop_lists_check_post_serialize(
         self,
-        authorization,
         timeout,
         transport_stop_lists_check_stop_list_request,
         _request_auth,
@@ -1576,8 +1507,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1610,6 +1539,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1633,7 +1563,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_clear_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
         _request_timeout: Union[
@@ -1653,8 +1582,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_clear_stop_list_request:
@@ -1682,7 +1609,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_clear_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1712,7 +1638,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_clear_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
         _request_timeout: Union[
@@ -1732,8 +1657,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_clear_stop_list_request:
@@ -1761,7 +1684,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_clear_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1791,7 +1713,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_clear_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
         _request_timeout: Union[
@@ -1811,8 +1732,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_clear_stop_list_request:
@@ -1840,7 +1759,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_clear_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1865,7 +1783,6 @@ class MenuApi:
 
     def _api1_stop_lists_clear_post_serialize(
         self,
-        authorization,
         timeout,
         transport_stop_lists_clear_stop_list_request,
         _request_auth,
@@ -1891,8 +1808,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1925,6 +1840,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1948,7 +1864,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
         _request_timeout: Union[
@@ -1968,8 +1883,6 @@ class MenuApi:
 
            > Restriction group: `Data: stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_stop_lists_request:
@@ -1997,7 +1910,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -2027,7 +1939,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
         _request_timeout: Union[
@@ -2047,8 +1958,6 @@ class MenuApi:
 
            > Restriction group: `Data: stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_stop_lists_request:
@@ -2076,7 +1985,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -2106,7 +2014,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
         _request_timeout: Union[
@@ -2126,8 +2033,6 @@ class MenuApi:
 
            > Restriction group: `Data: stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_stop_lists_request:
@@ -2155,7 +2060,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -2180,7 +2084,6 @@ class MenuApi:
 
     def _api1_stop_lists_post_serialize(
         self,
-        authorization,
         timeout,
         transport_stop_lists_stop_lists_request,
         _request_auth,
@@ -2206,8 +2109,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2240,6 +2141,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2263,7 +2165,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_remove_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
@@ -2283,8 +2184,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_remove_products_from_stop_list_request:
@@ -2312,7 +2211,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2342,7 +2240,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_remove_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
@@ -2362,8 +2259,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_remove_products_from_stop_list_request:
@@ -2391,7 +2286,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2421,7 +2315,6 @@ class MenuApi:
     @validate_call
     async def api1_stop_lists_remove_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
@@ -2441,8 +2334,6 @@ class MenuApi:
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_stop_lists_remove_products_from_stop_list_request:
@@ -2470,7 +2361,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api1_stop_lists_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2495,7 +2385,6 @@ class MenuApi:
 
     def _api1_stop_lists_remove_post_serialize(
         self,
-        authorization,
         timeout,
         transport_stop_lists_remove_products_from_stop_list_request,
         _request_auth,
@@ -2521,8 +2410,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2555,6 +2442,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2578,7 +2466,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
         _request_timeout: Union[
@@ -2598,8 +2485,6 @@ class MenuApi:
 
         > Sourced from Web External menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_menu_request:
@@ -2627,7 +2512,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_menu_request=transport_nomenclature_menu_request,
             _request_auth=_request_auth,
@@ -2657,7 +2541,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
         _request_timeout: Union[
@@ -2677,8 +2560,6 @@ class MenuApi:
 
         > Sourced from Web External menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_menu_request:
@@ -2706,7 +2587,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_menu_request=transport_nomenclature_menu_request,
             _request_auth=_request_auth,
@@ -2736,7 +2616,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
         _request_timeout: Union[
@@ -2756,8 +2635,6 @@ class MenuApi:
 
         > Sourced from Web External menu.   > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_nomenclature_menu_request:
@@ -2785,7 +2662,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_nomenclature_menu_request=transport_nomenclature_menu_request,
             _request_auth=_request_auth,
@@ -2810,7 +2686,6 @@ class MenuApi:
 
     def _api2_menu_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         transport_nomenclature_menu_request,
         _request_auth,
@@ -2836,8 +2711,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2870,6 +2743,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2893,7 +2767,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -2912,8 +2785,6 @@ class MenuApi:
 
            > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -2939,7 +2810,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2968,7 +2838,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -2987,8 +2856,6 @@ class MenuApi:
 
            > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -3014,7 +2881,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3043,7 +2909,6 @@ class MenuApi:
     @validate_call
     async def api2_menu_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -3062,8 +2927,6 @@ class MenuApi:
 
            > Restriction group: `Data: menu`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -3089,7 +2952,6 @@ class MenuApi:
         """ # noqa: E501
 
         _param = self._api2_menu_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3113,7 +2975,6 @@ class MenuApi:
 
     def _api2_menu_post_serialize(
         self,
-        authorization,
         timeout,
         _request_auth,
         _content_type,
@@ -3138,8 +2999,6 @@ class MenuApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3157,6 +3016,7 @@ class MenuApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

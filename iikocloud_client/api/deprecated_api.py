@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
@@ -46,7 +46,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_check_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -66,8 +65,6 @@ class DeprecatedApi:
 
         > Deprecated, all checks are available in `api/1/deliveries/create`.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -96,7 +93,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/check_create is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_check_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -126,7 +122,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_check_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -146,8 +141,6 @@ class DeprecatedApi:
 
         > Deprecated, all checks are available in `api/1/deliveries/create`.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -176,7 +169,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/check_create is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_check_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -206,7 +198,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_check_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -226,8 +217,6 @@ class DeprecatedApi:
 
         > Deprecated, all checks are available in `api/1/deliveries/create`.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -256,7 +245,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/check_create is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_check_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -281,7 +269,6 @@ class DeprecatedApi:
 
     def _api1_deliveries_check_create_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_create_order_request,
         _request_auth,
@@ -307,8 +294,6 @@ class DeprecatedApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -341,6 +326,7 @@ class DeprecatedApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -364,7 +350,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -384,8 +369,6 @@ class DeprecatedApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -414,7 +397,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -444,7 +426,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -464,8 +445,6 @@ class DeprecatedApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -494,7 +473,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -524,7 +502,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -544,8 +521,6 @@ class DeprecatedApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -574,7 +549,6 @@ class DeprecatedApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -599,7 +573,6 @@ class DeprecatedApi:
 
     def _api1_deliveries_update_order_payments_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_payments_request,
         _request_auth,
@@ -625,8 +598,6 @@ class DeprecatedApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -659,6 +630,7 @@ class DeprecatedApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -682,7 +654,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_organizations_get(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -701,8 +672,6 @@ class DeprecatedApi:
 
         > Deprecated, use `POST api/1/organizations`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -729,7 +698,6 @@ class DeprecatedApi:
         warnings.warn("GET /api/1/organizations is deprecated.", DeprecationWarning)
 
         _param = self._api1_organizations_get_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -758,7 +726,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_organizations_get_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -777,8 +744,6 @@ class DeprecatedApi:
 
         > Deprecated, use `POST api/1/organizations`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -805,7 +770,6 @@ class DeprecatedApi:
         warnings.warn("GET /api/1/organizations is deprecated.", DeprecationWarning)
 
         _param = self._api1_organizations_get_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -834,7 +798,6 @@ class DeprecatedApi:
     @validate_call
     async def api1_organizations_get_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -853,8 +816,6 @@ class DeprecatedApi:
 
         > Deprecated, use `POST api/1/organizations`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -881,7 +842,6 @@ class DeprecatedApi:
         warnings.warn("GET /api/1/organizations is deprecated.", DeprecationWarning)
 
         _param = self._api1_organizations_get_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -905,7 +865,6 @@ class DeprecatedApi:
 
     def _api1_organizations_get_serialize(
         self,
-        authorization,
         timeout,
         _request_auth,
         _content_type,
@@ -930,8 +889,6 @@ class DeprecatedApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -949,6 +906,7 @@ class DeprecatedApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

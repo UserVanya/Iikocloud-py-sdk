@@ -1,6 +1,6 @@
 # iikocloud_client.DeprecatedApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **api1_deliveries_check_create_post**
-> TransportDeliveriesResponseCheckCreateOrderResponse api1_deliveries_check_create_post(authorization, timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
+> TransportDeliveriesResponseCheckCreateOrderResponse api1_deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
 
 Check create delivery.
 
@@ -20,6 +20,7 @@ Check create delivery.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -28,24 +29,32 @@ from iikocloud_client.models.transport_deliveries_response_check_create_order_re
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_deliveries_request_create_order_request = iikocloud_client.TransportDeliveriesRequestCreateOrderRequest() # TransportDeliveriesRequestCreateOrderRequest |  (optional)
 
     try:
         # Check create delivery.
-        api_response = await api_instance.api1_deliveries_check_create_post(authorization, timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
+        api_response = await api_instance.api1_deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
         print("The response of DeprecatedApi->api1_deliveries_check_create_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -59,7 +68,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_deliveries_request_create_order_request** | [**TransportDeliveriesRequestCreateOrderRequest**](TransportDeliveriesRequestCreateOrderRequest.md)|  | [optional] 
 
@@ -69,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -89,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_deliveries_update_order_payments_post**
-> TransportCommonCorrelationIdResponse api1_deliveries_update_order_payments_post(authorization, timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
+> TransportCommonCorrelationIdResponse api1_deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
 
 Update order payment details.
 
@@ -101,6 +109,7 @@ Update order payment details.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -109,24 +118,32 @@ from iikocloud_client.models.transport_deliveries_request_update_order_payments_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_deliveries_request_update_order_payments_request = iikocloud_client.TransportDeliveriesRequestUpdateOrderPaymentsRequest() # TransportDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
 
     try:
         # Update order payment details.
-        api_response = await api_instance.api1_deliveries_update_order_payments_post(authorization, timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
+        api_response = await api_instance.api1_deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
         print("The response of DeprecatedApi->api1_deliveries_update_order_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -140,7 +157,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_deliveries_request_update_order_payments_request** | [**TransportDeliveriesRequestUpdateOrderPaymentsRequest**](TransportDeliveriesRequestUpdateOrderPaymentsRequest.md)|  | [optional] 
 
@@ -150,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -170,7 +186,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_organizations_get**
-> TransportOrganizationsGetSimpleOrganizationsResponse api1_organizations_get(authorization, timeout=timeout)
+> TransportOrganizationsGetSimpleOrganizationsResponse api1_organizations_get(timeout=timeout)
 
 Returns organizations available to api-login user.
 
@@ -180,6 +196,7 @@ Returns organizations available to api-login user.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -187,23 +204,31 @@ from iikocloud_client.models.transport_organizations_get_simple_organizations_re
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.api1_organizations_get(authorization, timeout=timeout)
+        api_response = await api_instance.api1_organizations_get(timeout=timeout)
         print("The response of DeprecatedApi->api1_organizations_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -217,7 +242,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
 
 ### Return type
@@ -226,7 +250,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

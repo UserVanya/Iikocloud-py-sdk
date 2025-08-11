@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.net_common_get_by_organization_id_request import NetCommonGetByOrganizationIdRequest
@@ -53,7 +53,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_calculate_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -73,8 +72,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_checkin_request:
@@ -102,7 +99,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -132,7 +128,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_calculate_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -152,8 +147,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_checkin_request:
@@ -181,7 +174,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -211,7 +203,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_calculate_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -231,8 +222,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_calculate_checkin_request:
@@ -260,7 +249,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -285,7 +273,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_calculate_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_calculate_checkin_request,
         _request_auth,
@@ -311,8 +298,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -345,6 +330,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -368,7 +354,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_by_series_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -388,8 +373,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_not_activated_coupon_request:
@@ -417,7 +400,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -447,7 +429,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_by_series_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -467,8 +448,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_not_activated_coupon_request:
@@ -496,7 +475,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -526,7 +504,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_by_series_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -546,8 +523,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_not_activated_coupon_request:
@@ -575,7 +550,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -600,7 +574,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_coupons_by_series_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_not_activated_coupon_request,
         _request_auth,
@@ -626,8 +599,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -660,6 +631,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -683,7 +655,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_info_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -703,8 +674,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_coupon_info_request:
@@ -732,7 +701,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -762,7 +730,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_info_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -782,8 +749,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_coupon_info_request:
@@ -811,7 +776,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -841,7 +805,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_info_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -861,8 +824,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_coupon_info_request:
@@ -890,7 +851,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -915,7 +875,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_coupons_info_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_coupon_info_request,
         _request_auth,
@@ -941,8 +900,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -975,6 +932,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -998,7 +956,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_series_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1018,8 +975,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_series_with_not_activated_coupons_request:
@@ -1047,7 +1002,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1077,7 +1031,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_series_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1097,8 +1050,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_series_with_not_activated_coupons_request:
@@ -1126,7 +1077,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1156,7 +1106,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_coupons_series_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1176,8 +1125,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_loyalty_result_series_with_not_activated_coupons_request:
@@ -1205,7 +1152,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1230,7 +1176,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_coupons_series_post_serialize(
         self,
-        authorization,
         timeout,
         net_loyalty_result_series_with_not_activated_coupons_request,
         _request_auth,
@@ -1256,8 +1201,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1290,6 +1233,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1313,7 +1257,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_manual_condition_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1333,8 +1276,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_common_get_by_organization_id_request:
@@ -1362,7 +1303,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1392,7 +1332,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_manual_condition_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1412,8 +1351,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_common_get_by_organization_id_request:
@@ -1441,7 +1378,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1471,7 +1407,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_manual_condition_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1491,8 +1426,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_common_get_by_organization_id_request:
@@ -1520,7 +1453,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1545,7 +1477,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_manual_condition_post_serialize(
         self,
-        authorization,
         timeout,
         net_common_get_by_organization_id_request,
         _request_auth,
@@ -1571,8 +1502,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1605,6 +1534,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1628,7 +1558,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_program_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1648,8 +1577,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_organization_get_programs_request:
@@ -1677,7 +1604,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1707,7 +1633,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_program_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1727,8 +1652,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_organization_get_programs_request:
@@ -1756,7 +1679,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1786,7 +1708,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def api1_loyalty_iiko_program_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1806,8 +1727,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_organization_get_programs_request:
@@ -1835,7 +1754,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1860,7 +1778,6 @@ class DiscountsAndPromotionsApi:
 
     def _api1_loyalty_iiko_program_post_serialize(
         self,
-        authorization,
         timeout,
         net_organization_get_programs_request,
         _request_auth,
@@ -1886,8 +1803,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1920,6 +1835,7 @@ class DiscountsAndPromotionsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

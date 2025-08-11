@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.net_customer_change_category_for_customer_request import NetCustomerChangeCategoryForCustomerRequest
@@ -44,7 +44,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_add_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -64,8 +63,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -93,7 +90,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -123,7 +119,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_add_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -143,8 +138,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -172,7 +165,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -202,7 +194,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_add_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -222,8 +213,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -251,7 +240,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -276,7 +264,6 @@ class CustomerCategoriesApi:
 
     def _api1_loyalty_iiko_customer_category_add_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_change_category_for_customer_request,
         _request_auth,
@@ -302,8 +289,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -336,6 +321,7 @@ class CustomerCategoriesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -359,7 +345,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -379,8 +364,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_categories_request:
@@ -408,7 +391,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -438,7 +420,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -458,8 +439,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_categories_request:
@@ -487,7 +466,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -517,7 +495,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -537,8 +514,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_get_categories_request:
@@ -566,7 +541,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -591,7 +565,6 @@ class CustomerCategoriesApi:
 
     def _api1_loyalty_iiko_customer_category_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_get_categories_request,
         _request_auth,
@@ -617,8 +590,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -651,6 +622,7 @@ class CustomerCategoriesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -674,7 +646,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_remove_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -694,8 +665,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -723,7 +692,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -753,7 +721,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_remove_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -773,8 +740,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -802,7 +767,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -832,7 +796,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def api1_loyalty_iiko_customer_category_remove_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -852,8 +815,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_customer_change_category_for_customer_request:
@@ -881,7 +842,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -906,7 +866,6 @@ class CustomerCategoriesApi:
 
     def _api1_loyalty_iiko_customer_category_remove_post_serialize(
         self,
-        authorization,
         timeout,
         net_customer_change_category_for_customer_request,
         _request_auth,
@@ -932,8 +891,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -966,6 +923,7 @@ class CustomerCategoriesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

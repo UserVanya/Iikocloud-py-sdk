@@ -1,6 +1,6 @@
 # iikocloud_client.CustomersApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **api1_loyalty_iiko_customer_card_add_post**
-> object api1_loyalty_iiko_customer_card_add_post(authorization, timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
+> object api1_loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
 
 Add card.
 
@@ -29,6 +29,7 @@ Add new card for customer.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -36,24 +37,32 @@ from iikocloud_client.models.net_customer_add_magnet_card_request import NetCust
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_add_magnet_card_request = iikocloud_client.NetCustomerAddMagnetCardRequest() # NetCustomerAddMagnetCardRequest |  (optional)
 
     try:
         # Add card.
-        api_response = await api_instance.api1_loyalty_iiko_customer_card_add_post(authorization, timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_card_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,7 +76,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_add_magnet_card_request** | [**NetCustomerAddMagnetCardRequest**](NetCustomerAddMagnetCardRequest.md)|  | [optional] 
 
@@ -77,7 +85,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -97,7 +105,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_card_remove_post**
-> object api1_loyalty_iiko_customer_card_remove_post(authorization, timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
+> object api1_loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
 
 Delete card.
 
@@ -107,6 +115,7 @@ Delete existing card for customer.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -114,24 +123,32 @@ from iikocloud_client.models.net_customer_delete_magnet_card_request import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_delete_magnet_card_request = iikocloud_client.NetCustomerDeleteMagnetCardRequest() # NetCustomerDeleteMagnetCardRequest |  (optional)
 
     try:
         # Delete card.
-        api_response = await api_instance.api1_loyalty_iiko_customer_card_remove_post(authorization, timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_card_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,7 +162,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_delete_magnet_card_request** | [**NetCustomerDeleteMagnetCardRequest**](NetCustomerDeleteMagnetCardRequest.md)|  | [optional] 
 
@@ -155,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -175,7 +191,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_create_or_update_post**
-> NetCustomerCreateOrUpdateCustomerResponse api1_loyalty_iiko_customer_create_or_update_post(authorization, timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
+> NetCustomerCreateOrUpdateCustomerResponse api1_loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
 
 Create or update customer.
 
@@ -185,6 +201,7 @@ Create or update customer info by id or phone or card track.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -193,24 +210,32 @@ from iikocloud_client.models.net_customer_create_or_update_customer_response imp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_create_or_update_customer_request = iikocloud_client.NetCustomerCreateOrUpdateCustomerRequest() # NetCustomerCreateOrUpdateCustomerRequest |  (optional)
 
     try:
         # Create or update customer.
-        api_response = await api_instance.api1_loyalty_iiko_customer_create_or_update_post(authorization, timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_create_or_update_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -224,7 +249,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_create_or_update_customer_request** | [**NetCustomerCreateOrUpdateCustomerRequest**](NetCustomerCreateOrUpdateCustomerRequest.md)|  | [optional] 
 
@@ -234,7 +258,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -254,7 +278,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_info_post**
-> NetCustomerGetCustomerInfoResponse api1_loyalty_iiko_customer_info_post(authorization, timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
+> NetCustomerGetCustomerInfoResponse api1_loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
 
 Get customer info.
 
@@ -264,6 +288,7 @@ Get customer info by specified criterion.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -272,24 +297,32 @@ from iikocloud_client.models.net_customer_get_customer_info_response import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_get_customer_info_request = iikocloud_client.NetCustomerGetCustomerInfoRequest() # NetCustomerGetCustomerInfoRequest |  (optional)
 
     try:
         # Get customer info.
-        api_response = await api_instance.api1_loyalty_iiko_customer_info_post(authorization, timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_info_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -303,7 +336,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_get_customer_info_request** | [**NetCustomerGetCustomerInfoRequest**](NetCustomerGetCustomerInfoRequest.md)|  | [optional] 
 
@@ -313,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -333,7 +365,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_program_add_post**
-> NetCustomerAddCustomerToProgramResponse api1_loyalty_iiko_customer_program_add_post(authorization, timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
+> NetCustomerAddCustomerToProgramResponse api1_loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
 
 Add customer to program.
 
@@ -343,6 +375,7 @@ Add new customer for program.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -351,24 +384,32 @@ from iikocloud_client.models.net_customer_add_customer_to_program_response impor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_add_customer_to_program_request = iikocloud_client.NetCustomerAddCustomerToProgramRequest() # NetCustomerAddCustomerToProgramRequest |  (optional)
 
     try:
         # Add customer to program.
-        api_response = await api_instance.api1_loyalty_iiko_customer_program_add_post(authorization, timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_program_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -382,7 +423,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_add_customer_to_program_request** | [**NetCustomerAddCustomerToProgramRequest**](NetCustomerAddCustomerToProgramRequest.md)|  | [optional] 
 
@@ -392,7 +432,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -412,7 +452,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_wallet_cancel_hold_post**
-> object api1_loyalty_iiko_customer_wallet_cancel_hold_post(authorization, timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
+> object api1_loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
 
 Cancel hold money.
 
@@ -422,6 +462,7 @@ Cancel holding transaction that created earlier.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -429,24 +470,32 @@ from iikocloud_client.models.net_customer_cancel_hold_money_request import NetCu
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_cancel_hold_money_request = iikocloud_client.NetCustomerCancelHoldMoneyRequest() # NetCustomerCancelHoldMoneyRequest |  (optional)
 
     try:
         # Cancel hold money.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_cancel_hold_post(authorization, timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_cancel_hold_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -460,7 +509,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_cancel_hold_money_request** | [**NetCustomerCancelHoldMoneyRequest**](NetCustomerCancelHoldMoneyRequest.md)|  | [optional] 
 
@@ -470,7 +518,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -490,7 +538,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_wallet_chargeoff_post**
-> object api1_loyalty_iiko_customer_wallet_chargeoff_post(authorization, timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+> object api1_loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
 
 Withdraw balance.
 
@@ -500,6 +548,7 @@ Withdraw customer balance.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -507,24 +556,32 @@ from iikocloud_client.models.net_customer_change_user_balance_request import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_change_user_balance_request = iikocloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Withdraw balance.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_chargeoff_post(authorization, timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_chargeoff_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -538,7 +595,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_change_user_balance_request** | [**NetCustomerChangeUserBalanceRequest**](NetCustomerChangeUserBalanceRequest.md)|  | [optional] 
 
@@ -548,7 +604,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -568,7 +624,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_wallet_hold_post**
-> NetCustomerHoldMoneyResponse api1_loyalty_iiko_customer_wallet_hold_post(authorization, timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
+> NetCustomerHoldMoneyResponse api1_loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
 
 Hold money.
 
@@ -578,6 +634,7 @@ Hold customer's money in loyalty program. Payment will be process on POS during 
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -586,24 +643,32 @@ from iikocloud_client.models.net_customer_hold_money_response import NetCustomer
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_hold_money_request = iikocloud_client.NetCustomerHoldMoneyRequest() # NetCustomerHoldMoneyRequest |  (optional)
 
     try:
         # Hold money.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_hold_post(authorization, timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_hold_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -617,7 +682,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_hold_money_request** | [**NetCustomerHoldMoneyRequest**](NetCustomerHoldMoneyRequest.md)|  | [optional] 
 
@@ -627,7 +691,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -647,7 +711,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_wallet_topup_post**
-> object api1_loyalty_iiko_customer_wallet_topup_post(authorization, timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+> object api1_loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
 
 Refill balance.
 
@@ -657,6 +721,7 @@ Refill customer balance.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -664,24 +729,32 @@ from iikocloud_client.models.net_customer_change_user_balance_request import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_change_user_balance_request = iikocloud_client.NetCustomerChangeUserBalanceRequest() # NetCustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Refill balance.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_topup_post(authorization, timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
         print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_topup_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -695,7 +768,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_change_user_balance_request** | [**NetCustomerChangeUserBalanceRequest**](NetCustomerChangeUserBalanceRequest.md)|  | [optional] 
 
@@ -705,7 +777,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -725,7 +797,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_delete_customers_post**
-> NetCustomerDeleteCustomersResponse api1_loyalty_iiko_delete_customers_post(authorization, timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
+> NetCustomerDeleteCustomersResponse api1_loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
 
 Logical deletion of customers.
 
@@ -733,6 +805,7 @@ Mark customers as deleted.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -741,24 +814,32 @@ from iikocloud_client.models.net_customer_delete_customers_response import NetCu
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_delete_customers_request = iikocloud_client.NetCustomerDeleteCustomersRequest() # NetCustomerDeleteCustomersRequest |  (optional)
 
     try:
         # Logical deletion of customers.
-        api_response = await api_instance.api1_loyalty_iiko_delete_customers_post(authorization, timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
+        api_response = await api_instance.api1_loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
         print("The response of CustomersApi->api1_loyalty_iiko_delete_customers_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -772,7 +853,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_delete_customers_request** | [**NetCustomerDeleteCustomersRequest**](NetCustomerDeleteCustomersRequest.md)|  | [optional] 
 
@@ -782,7 +862,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -802,7 +882,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_get_counters_post**
-> NetLoyaltyResultGetCountersResponse api1_loyalty_iiko_get_counters_post(authorization, timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
+> NetLoyaltyResultGetCountersResponse api1_loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
 
 Get counters.
 
@@ -810,6 +890,7 @@ Get customer orders count and sum for different period.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -818,24 +899,32 @@ from iikocloud_client.models.net_loyalty_result_get_counters_response import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_loyalty_result_get_counters_request = iikocloud_client.NetLoyaltyResultGetCountersRequest() # NetLoyaltyResultGetCountersRequest |  (optional)
 
     try:
         # Get counters.
-        api_response = await api_instance.api1_loyalty_iiko_get_counters_post(authorization, timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
+        api_response = await api_instance.api1_loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
         print("The response of CustomersApi->api1_loyalty_iiko_get_counters_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -849,7 +938,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_loyalty_result_get_counters_request** | [**NetLoyaltyResultGetCountersRequest**](NetLoyaltyResultGetCountersRequest.md)|  | [optional] 
 
@@ -859,7 +947,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -879,7 +967,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_restore_customers_post**
-> NetCustomerRestoreCustomersResponse api1_loyalty_iiko_restore_customers_post(authorization, timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
+> NetCustomerRestoreCustomersResponse api1_loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
 
 Logical recovery of customers.
 
@@ -887,6 +975,7 @@ Removing deletion flags for customers.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -895,24 +984,32 @@ from iikocloud_client.models.net_customer_restore_customers_response import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_restore_customers_request = iikocloud_client.NetCustomerRestoreCustomersRequest() # NetCustomerRestoreCustomersRequest |  (optional)
 
     try:
         # Logical recovery of customers.
-        api_response = await api_instance.api1_loyalty_iiko_restore_customers_post(authorization, timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
+        api_response = await api_instance.api1_loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
         print("The response of CustomersApi->api1_loyalty_iiko_restore_customers_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -926,7 +1023,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_restore_customers_request** | [**NetCustomerRestoreCustomersRequest**](NetCustomerRestoreCustomersRequest.md)|  | [optional] 
 
@@ -936,7 +1032,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

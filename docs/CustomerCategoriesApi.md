@@ -1,6 +1,6 @@
 # iikocloud_client.CustomerCategoriesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **api1_loyalty_iiko_customer_category_add_post**
-> object api1_loyalty_iiko_customer_category_add_post(authorization, timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
+> object api1_loyalty_iiko_customer_category_add_post(timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
 
 Add category for customer.
 
@@ -20,6 +20,7 @@ Add specified category for customer.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -27,24 +28,32 @@ from iikocloud_client.models.net_customer_change_category_for_customer_request i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_change_category_for_customer_request = iikocloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Add category for customer.
-        api_response = await api_instance.api1_loyalty_iiko_customer_category_add_post(authorization, timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_category_add_post(timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
         print("The response of CustomerCategoriesApi->api1_loyalty_iiko_customer_category_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +67,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_change_category_for_customer_request** | [**NetCustomerChangeCategoryForCustomerRequest**](NetCustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
 
@@ -68,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -88,7 +96,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_category_post**
-> NetCustomerGetCategoriesResponse api1_loyalty_iiko_customer_category_post(authorization, timeout=timeout, net_customer_get_categories_request=net_customer_get_categories_request)
+> NetCustomerGetCategoriesResponse api1_loyalty_iiko_customer_category_post(timeout=timeout, net_customer_get_categories_request=net_customer_get_categories_request)
 
 Get customer categories.
 
@@ -98,6 +106,7 @@ Get all organization's customer categories.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -106,24 +115,32 @@ from iikocloud_client.models.net_customer_get_categories_response import NetCust
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_get_categories_request = iikocloud_client.NetCustomerGetCategoriesRequest() # NetCustomerGetCategoriesRequest |  (optional)
 
     try:
         # Get customer categories.
-        api_response = await api_instance.api1_loyalty_iiko_customer_category_post(authorization, timeout=timeout, net_customer_get_categories_request=net_customer_get_categories_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_category_post(timeout=timeout, net_customer_get_categories_request=net_customer_get_categories_request)
         print("The response of CustomerCategoriesApi->api1_loyalty_iiko_customer_category_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +154,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_get_categories_request** | [**NetCustomerGetCategoriesRequest**](NetCustomerGetCategoriesRequest.md)|  | [optional] 
 
@@ -147,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -167,7 +183,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_category_remove_post**
-> object api1_loyalty_iiko_customer_category_remove_post(authorization, timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
+> object api1_loyalty_iiko_customer_category_remove_post(timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
 
 Remove category for customer.
 
@@ -177,6 +193,7 @@ Remove specified category for customer.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -184,24 +201,32 @@ from iikocloud_client.models.net_customer_change_category_for_customer_request i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_customer_change_category_for_customer_request = iikocloud_client.NetCustomerChangeCategoryForCustomerRequest() # NetCustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Remove category for customer.
-        api_response = await api_instance.api1_loyalty_iiko_customer_category_remove_post(authorization, timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_category_remove_post(timeout=timeout, net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request)
         print("The response of CustomerCategoriesApi->api1_loyalty_iiko_customer_category_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -215,7 +240,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_customer_change_category_for_customer_request** | [**NetCustomerChangeCategoryForCustomerRequest**](NetCustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
 
@@ -225,7 +249,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

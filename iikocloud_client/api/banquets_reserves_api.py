@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
@@ -57,7 +57,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_items_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -77,8 +76,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_items_to_banquet_request:
@@ -106,7 +103,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -136,7 +132,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_items_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -156,8 +151,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_items_to_banquet_request:
@@ -185,7 +178,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -215,7 +207,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_items_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -235,8 +226,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_items_to_banquet_request:
@@ -264,7 +253,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -289,7 +277,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_add_items_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_add_order_items_to_banquet_request,
         _request_auth,
@@ -315,8 +302,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -349,6 +334,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -372,7 +358,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -392,8 +377,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_payments_to_banquet_request:
@@ -421,7 +404,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -451,7 +433,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -471,8 +452,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_payments_to_banquet_request:
@@ -500,7 +479,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -530,7 +508,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_add_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -550,8 +527,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_add_order_payments_to_banquet_request:
@@ -579,7 +554,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -604,7 +578,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_add_payments_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_add_order_payments_to_banquet_request,
         _request_auth,
@@ -630,8 +603,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -664,6 +635,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -687,7 +659,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_organizations_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -707,8 +678,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_organizations_get_organizations_request:
@@ -736,7 +705,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -766,7 +734,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_organizations_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -786,8 +753,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_organizations_get_organizations_request:
@@ -815,7 +780,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -845,7 +809,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_organizations_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -865,8 +828,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_organizations_get_organizations_request:
@@ -894,7 +855,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -919,7 +879,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_available_organizations_post_serialize(
         self,
-        authorization,
         timeout,
         transport_organizations_get_organizations_request,
         _request_auth,
@@ -945,8 +904,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -979,6 +936,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1002,7 +960,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_restaurant_sections_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1022,8 +979,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_request:
@@ -1051,7 +1006,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1081,7 +1035,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_restaurant_sections_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1101,8 +1054,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_request:
@@ -1130,7 +1081,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1160,7 +1110,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_restaurant_sections_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1180,8 +1129,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_request:
@@ -1209,7 +1156,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1234,7 +1180,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_available_restaurant_sections_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_get_restaurant_sections_request,
         _request_auth,
@@ -1260,8 +1205,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1294,6 +1237,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1317,7 +1261,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_terminal_groups_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1337,8 +1280,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_get_terminal_groups_by_organizations_request:
@@ -1366,7 +1307,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1396,7 +1336,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_terminal_groups_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1416,8 +1355,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_get_terminal_groups_by_organizations_request:
@@ -1445,7 +1382,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1475,7 +1411,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_available_terminal_groups_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1495,8 +1430,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_get_terminal_groups_by_organizations_request:
@@ -1524,7 +1457,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1549,7 +1481,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_available_terminal_groups_post_serialize(
         self,
-        authorization,
         timeout,
         transport_terminals_get_terminal_groups_by_organizations_request,
         _request_auth,
@@ -1575,8 +1506,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1609,6 +1538,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1632,7 +1562,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_cancel_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1652,8 +1581,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_cancel_reserve_request:
@@ -1681,7 +1608,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1711,7 +1637,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_cancel_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1731,8 +1656,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_cancel_reserve_request:
@@ -1760,7 +1683,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1790,7 +1712,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_cancel_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1810,8 +1731,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_cancel_reserve_request:
@@ -1839,7 +1758,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1864,7 +1782,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_cancel_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_cancel_reserve_request,
         _request_auth,
@@ -1890,8 +1807,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1924,6 +1839,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1947,7 +1863,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -1967,8 +1882,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_create_reserve_request:
@@ -1996,7 +1909,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2026,7 +1938,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -2046,8 +1957,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_create_reserve_request:
@@ -2075,7 +1984,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2105,7 +2013,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -2125,8 +2032,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_create_reserve_request:
@@ -2154,7 +2059,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2179,7 +2083,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_create_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_create_reserve_request,
         _request_auth,
@@ -2205,8 +2108,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2239,6 +2140,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2262,7 +2164,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_restaurant_sections_workload_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -2282,8 +2183,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_workload_request:
@@ -2311,7 +2210,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2341,7 +2239,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_restaurant_sections_workload_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -2361,8 +2258,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_workload_request:
@@ -2390,7 +2285,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2420,7 +2314,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_restaurant_sections_workload_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -2440,8 +2333,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_get_restaurant_sections_workload_request:
@@ -2469,7 +2360,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2494,7 +2384,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_restaurant_sections_workload_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_get_restaurant_sections_workload_request,
         _request_auth,
@@ -2520,8 +2409,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2554,6 +2441,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2577,7 +2465,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_status_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -2597,8 +2484,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_reserves_by_id_request:
@@ -2626,7 +2511,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2656,7 +2540,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_status_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -2676,8 +2559,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_reserves_by_id_request:
@@ -2705,7 +2586,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2735,7 +2615,6 @@ class BanquetsReservesApi:
     @validate_call
     async def api1_reserve_status_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -2755,8 +2634,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_reserves_reserves_by_id_request:
@@ -2784,7 +2661,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._api1_reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2809,7 +2685,6 @@ class BanquetsReservesApi:
 
     def _api1_reserve_status_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         transport_reserves_reserves_by_id_request,
         _request_auth,
@@ -2835,8 +2710,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2869,6 +2742,7 @@ class BanquetsReservesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

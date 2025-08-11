@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
@@ -53,7 +53,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_filter_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
@@ -73,8 +72,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_filter_drafts_request:
@@ -102,7 +99,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -132,7 +128,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_filter_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
@@ -152,8 +147,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_filter_drafts_request:
@@ -181,7 +174,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -211,7 +203,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_filter_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
@@ -231,8 +222,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_filter_drafts_request:
@@ -260,7 +249,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -285,7 +273,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_by_filter_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_filter_drafts_request,
         _request_auth,
@@ -311,8 +298,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -345,6 +330,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -368,7 +354,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
@@ -388,8 +373,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_get_draft_request:
@@ -417,7 +400,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -447,7 +429,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
@@ -467,8 +448,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_get_draft_request:
@@ -496,7 +475,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -526,7 +504,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
@@ -546,8 +523,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_get_draft_request:
@@ -575,7 +550,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -600,7 +574,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_get_draft_request,
         _request_auth,
@@ -626,8 +599,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -660,6 +631,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -683,7 +655,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_commit_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
@@ -703,8 +674,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_commit_draft_request:
@@ -732,7 +701,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_commit_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -762,7 +730,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_commit_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
@@ -782,8 +749,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_commit_draft_request:
@@ -811,7 +776,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_commit_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -841,7 +805,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_commit_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
@@ -861,8 +824,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_commit_draft_request:
@@ -890,7 +851,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_commit_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -915,7 +875,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_commit_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_commit_draft_request,
         _request_auth,
@@ -941,8 +900,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -975,6 +932,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -998,7 +956,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
@@ -1018,8 +975,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_create_draft_request:
@@ -1047,7 +1002,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1077,7 +1031,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
@@ -1097,8 +1050,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_create_draft_request:
@@ -1126,7 +1077,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1156,7 +1106,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
@@ -1176,8 +1125,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_create_draft_request:
@@ -1205,7 +1152,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1230,7 +1176,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_create_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_create_draft_request,
         _request_auth,
@@ -1256,8 +1201,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1290,6 +1233,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1313,7 +1257,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_delete_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
@@ -1333,8 +1276,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_delete_draft_request:
@@ -1362,7 +1303,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_delete_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1392,7 +1332,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_delete_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
@@ -1412,8 +1351,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_delete_draft_request:
@@ -1441,7 +1378,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_delete_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1471,7 +1407,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_delete_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
@@ -1491,8 +1426,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_delete_draft_request:
@@ -1520,7 +1453,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_delete_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1545,7 +1477,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_delete_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_delete_draft_request,
         _request_auth,
@@ -1571,8 +1502,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1605,6 +1534,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1628,7 +1558,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_lock_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -1648,8 +1577,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -1677,7 +1604,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_lock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1707,7 +1633,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_lock_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -1727,8 +1652,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -1756,7 +1679,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_lock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1786,7 +1708,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_lock_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -1806,8 +1727,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -1835,7 +1754,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_lock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1860,7 +1778,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_lock_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_lock_or_unlock_draft_request,
         _request_auth,
@@ -1886,8 +1803,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1920,6 +1835,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1943,7 +1859,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_save_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
@@ -1963,8 +1878,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_save_draft_request:
@@ -1992,7 +1905,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_save_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -2022,7 +1934,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_save_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
@@ -2042,8 +1953,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_save_draft_request:
@@ -2071,7 +1980,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_save_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -2101,7 +2009,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_save_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
@@ -2121,8 +2028,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_save_draft_request:
@@ -2150,7 +2055,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_save_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -2175,7 +2079,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_save_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_save_draft_request,
         _request_auth,
@@ -2201,8 +2104,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2235,6 +2136,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2258,7 +2160,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_unlock_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -2278,8 +2179,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -2307,7 +2206,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_unlock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2337,7 +2235,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_unlock_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -2357,8 +2254,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -2386,7 +2281,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_unlock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2416,7 +2310,6 @@ class DraftsApi:
     @validate_call
     async def api1_deliveries_drafts_unlock_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
@@ -2436,8 +2329,6 @@ class DraftsApi:
 
            > Restriction group: `Drafts: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_drafts_lock_or_unlock_draft_request:
@@ -2465,7 +2356,6 @@ class DraftsApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_drafts_unlock_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2490,7 +2380,6 @@ class DraftsApi:
 
     def _api1_deliveries_drafts_unlock_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_drafts_lock_or_unlock_draft_request,
         _request_auth,
@@ -2516,8 +2405,6 @@ class DraftsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2550,6 +2437,7 @@ class DraftsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

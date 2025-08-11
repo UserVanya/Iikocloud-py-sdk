@@ -1,6 +1,6 @@
 # iikocloud_client.AddressesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **api1_cities_post**
-> TransportAddressCitiesResponse api1_cities_post(authorization, timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+> TransportAddressCitiesResponse api1_cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
 
 Cities.
 
@@ -21,6 +21,7 @@ Cities.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -29,24 +30,32 @@ from iikocloud_client.models.transport_address_cities_response import TransportA
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AddressesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_address_cities_request = iikocloud_client.TransportAddressCitiesRequest() # TransportAddressCitiesRequest |  (optional)
 
     try:
         # Cities.
-        api_response = await api_instance.api1_cities_post(authorization, timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+        api_response = await api_instance.api1_cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
         print("The response of AddressesApi->api1_cities_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,7 +69,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_address_cities_request** | [**TransportAddressCitiesRequest**](TransportAddressCitiesRequest.md)|  | [optional] 
 
@@ -70,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -90,7 +98,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_regions_post**
-> TransportAddressRegionsResponse api1_regions_post(authorization, timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+> TransportAddressRegionsResponse api1_regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
 
 Regions.
 
@@ -100,6 +108,7 @@ Regions.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -108,24 +117,32 @@ from iikocloud_client.models.transport_address_regions_response import Transport
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AddressesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_address_regions_request = iikocloud_client.TransportAddressRegionsRequest() # TransportAddressRegionsRequest |  (optional)
 
     try:
         # Regions.
-        api_response = await api_instance.api1_regions_post(authorization, timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+        api_response = await api_instance.api1_regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
         print("The response of AddressesApi->api1_regions_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -139,7 +156,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_address_regions_request** | [**TransportAddressRegionsRequest**](TransportAddressRegionsRequest.md)|  | [optional] 
 
@@ -149,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -169,7 +185,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_streets_by_city_post**
-> TransportAddressStreetsResponse api1_streets_by_city_post(authorization, timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+> TransportAddressStreetsResponse api1_streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
 
 Streets by city.
 
@@ -179,6 +195,7 @@ Streets by city.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -187,24 +204,32 @@ from iikocloud_client.models.transport_address_streets_response import Transport
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AddressesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_address_streets_by_city_request = iikocloud_client.TransportAddressStreetsByCityRequest() # TransportAddressStreetsByCityRequest |  (optional)
 
     try:
         # Streets by city.
-        api_response = await api_instance.api1_streets_by_city_post(authorization, timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+        api_response = await api_instance.api1_streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
         print("The response of AddressesApi->api1_streets_by_city_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -218,7 +243,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_address_streets_by_city_request** | [**TransportAddressStreetsByCityRequest**](TransportAddressStreetsByCityRequest.md)|  | [optional] 
 
@@ -228,7 +252,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -248,7 +272,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_streets_by_id_post**
-> TransportAddressStreetsByIdResponse api1_streets_by_id_post(authorization, timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+> TransportAddressStreetsByIdResponse api1_streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
 
 Streets by id or by classifierId.
 
@@ -258,6 +282,7 @@ Streets by id or by classifierId.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -266,24 +291,32 @@ from iikocloud_client.models.transport_address_streets_by_id_response import Tra
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AddressesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_address_streets_by_id_request = iikocloud_client.TransportAddressStreetsByIdRequest() # TransportAddressStreetsByIdRequest |  (optional)
 
     try:
         # Streets by id or by classifierId.
-        api_response = await api_instance.api1_streets_by_id_post(authorization, timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+        api_response = await api_instance.api1_streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
         print("The response of AddressesApi->api1_streets_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -297,7 +330,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_address_streets_by_id_request** | [**TransportAddressStreetsByIdRequest**](TransportAddressStreetsByIdRequest.md)|  | [optional] 
 
@@ -307,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

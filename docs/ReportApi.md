@@ -1,6 +1,6 @@
 # iikocloud_client.ReportApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **api1_loyalty_iiko_customer_transactions_by_date_post**
-> NetReportGetTransactionsReportByPeriodResponse api1_loyalty_iiko_customer_transactions_by_date_post(authorization, timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
+> NetReportGetTransactionsReportByPeriodResponse api1_loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
 
 Get transaction report by period.
 
@@ -19,6 +19,7 @@ Get transaction report for specified customer by provided date range.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -27,24 +28,32 @@ from iikocloud_client.models.net_report_get_transactions_report_by_period_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.ReportApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_report_get_transactions_report_by_period_request = iikocloud_client.NetReportGetTransactionsReportByPeriodRequest() # NetReportGetTransactionsReportByPeriodRequest |  (optional)
 
     try:
         # Get transaction report by period.
-        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_date_post(authorization, timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
         print("The response of ReportApi->api1_loyalty_iiko_customer_transactions_by_date_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +67,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_report_get_transactions_report_by_period_request** | [**NetReportGetTransactionsReportByPeriodRequest**](NetReportGetTransactionsReportByPeriodRequest.md)|  | [optional] 
 
@@ -68,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -88,7 +96,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_customer_transactions_by_revision_post**
-> NetReportGetTransactionsReportByRevisionResponse api1_loyalty_iiko_customer_transactions_by_revision_post(authorization, timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
+> NetReportGetTransactionsReportByRevisionResponse api1_loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
 
 Get transaction report by revision.
 
@@ -98,6 +106,7 @@ Get transaction report for specified customer by provided revision.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -106,24 +115,32 @@ from iikocloud_client.models.net_report_get_transactions_report_by_revision_resp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.ReportApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_report_get_transactions_report_by_revision_request = iikocloud_client.NetReportGetTransactionsReportByRevisionRequest() # NetReportGetTransactionsReportByRevisionRequest |  (optional)
 
     try:
         # Get transaction report by revision.
-        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_revision_post(authorization, timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
+        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
         print("The response of ReportApi->api1_loyalty_iiko_customer_transactions_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +154,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_report_get_transactions_report_by_revision_request** | [**NetReportGetTransactionsReportByRevisionRequest**](NetReportGetTransactionsReportByRevisionRequest.md)|  | [optional] 
 
@@ -147,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

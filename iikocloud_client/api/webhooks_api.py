@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
@@ -45,7 +45,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_settings_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_get_web_hook_settings_request: Optional[TransportWebHooksGetWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -65,8 +64,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_get_web_hook_settings_request:
@@ -94,7 +91,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -124,7 +120,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_settings_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_get_web_hook_settings_request: Optional[TransportWebHooksGetWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -144,8 +139,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_get_web_hook_settings_request:
@@ -173,7 +166,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -203,7 +195,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_settings_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_get_web_hook_settings_request: Optional[TransportWebHooksGetWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -223,8 +214,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_get_web_hook_settings_request:
@@ -252,7 +241,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -277,7 +265,6 @@ class WebhooksApi:
 
     def _api1_webhooks_settings_post_serialize(
         self,
-        authorization,
         timeout,
         transport_web_hooks_get_web_hook_settings_request,
         _request_auth,
@@ -303,8 +290,6 @@ class WebhooksApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -337,6 +322,7 @@ class WebhooksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -360,7 +346,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_update_settings_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_update_web_hook_settings_request: Optional[TransportWebHooksUpdateWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -380,8 +365,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_update_web_hook_settings_request:
@@ -409,7 +392,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_update_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -439,7 +421,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_update_settings_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_update_web_hook_settings_request: Optional[TransportWebHooksUpdateWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -459,8 +440,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_update_web_hook_settings_request:
@@ -488,7 +467,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_update_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -518,7 +496,6 @@ class WebhooksApi:
     @validate_call
     async def api1_webhooks_update_settings_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_web_hooks_update_web_hook_settings_request: Optional[TransportWebHooksUpdateWebHookSettingsRequest] = None,
         _request_timeout: Union[
@@ -538,8 +515,6 @@ class WebhooksApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_web_hooks_update_web_hook_settings_request:
@@ -567,7 +542,6 @@ class WebhooksApi:
         """ # noqa: E501
 
         _param = self._api1_webhooks_update_settings_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request,
             _request_auth=_request_auth,
@@ -592,7 +566,6 @@ class WebhooksApi:
 
     def _api1_webhooks_update_settings_post_serialize(
         self,
-        authorization,
         timeout,
         transport_web_hooks_update_web_hook_settings_request,
         _request_auth,
@@ -618,8 +591,6 @@ class WebhooksApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -652,6 +623,7 @@ class WebhooksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

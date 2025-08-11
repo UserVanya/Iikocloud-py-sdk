@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.net_notification_check_sms_status_request import NetNotificationCheckSmsStatusRequest
@@ -48,7 +48,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_sending_possibility_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
@@ -68,8 +67,6 @@ class MessagesApi:
 
         Check sms sending possibility before send sms message.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_sms_sending_possibility_request:
@@ -97,7 +94,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -127,7 +123,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_sending_possibility_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
@@ -147,8 +142,6 @@ class MessagesApi:
 
         Check sms sending possibility before send sms message.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_sms_sending_possibility_request:
@@ -176,7 +169,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -206,7 +198,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_sending_possibility_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
@@ -226,8 +217,6 @@ class MessagesApi:
 
         Check sms sending possibility before send sms message.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_sms_sending_possibility_request:
@@ -255,7 +244,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -280,7 +268,6 @@ class MessagesApi:
 
     def _api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
         self,
-        authorization,
         timeout,
         net_notification_sms_sending_possibility_request,
         _request_auth,
@@ -306,8 +293,6 @@ class MessagesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -340,6 +325,7 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -363,7 +349,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_status_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
@@ -383,8 +368,6 @@ class MessagesApi:
 
         Check the status of sending SMS messages.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_check_sms_status_request:
@@ -412,7 +395,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -442,7 +424,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_status_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
@@ -462,8 +443,6 @@ class MessagesApi:
 
         Check the status of sending SMS messages.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_check_sms_status_request:
@@ -491,7 +470,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -521,7 +499,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_check_sms_status_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
@@ -541,8 +518,6 @@ class MessagesApi:
 
         Check the status of sending SMS messages.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_check_sms_status_request:
@@ -570,7 +545,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -595,7 +569,6 @@ class MessagesApi:
 
     def _api1_loyalty_iiko_check_sms_status_post_serialize(
         self,
-        authorization,
         timeout,
         net_notification_check_sms_status_request,
         _request_auth,
@@ -621,8 +594,6 @@ class MessagesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -655,6 +626,7 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -678,7 +650,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_email_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
         _request_timeout: Union[
@@ -698,8 +669,6 @@ class MessagesApi:
 
         Send email message to specified email address. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_email_request:
@@ -727,7 +696,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -757,7 +725,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_email_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
         _request_timeout: Union[
@@ -777,8 +744,6 @@ class MessagesApi:
 
         Send email message to specified email address. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_email_request:
@@ -806,7 +771,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -836,7 +800,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_email_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
         _request_timeout: Union[
@@ -856,8 +819,6 @@ class MessagesApi:
 
         Send email message to specified email address. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_email_request:
@@ -885,7 +846,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -910,7 +870,6 @@ class MessagesApi:
 
     def _api1_loyalty_iiko_message_send_email_post_serialize(
         self,
-        authorization,
         timeout,
         net_notification_send_email_request,
         _request_auth,
@@ -936,8 +895,6 @@ class MessagesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -970,6 +927,7 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -993,7 +951,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_sms_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
         _request_timeout: Union[
@@ -1013,8 +970,6 @@ class MessagesApi:
 
         Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_sms_request:
@@ -1042,7 +997,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1072,7 +1026,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_sms_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
         _request_timeout: Union[
@@ -1092,8 +1045,6 @@ class MessagesApi:
 
         Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_sms_request:
@@ -1121,7 +1072,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1151,7 +1101,6 @@ class MessagesApi:
     @validate_call
     async def api1_loyalty_iiko_message_send_sms_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
         _request_timeout: Union[
@@ -1171,8 +1120,6 @@ class MessagesApi:
 
         Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param net_notification_send_sms_request:
@@ -1200,7 +1147,6 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1225,7 +1171,6 @@ class MessagesApi:
 
     def _api1_loyalty_iiko_message_send_sms_post_serialize(
         self,
-        authorization,
         timeout,
         net_notification_send_sms_request,
         _request_auth,
@@ -1251,8 +1196,6 @@ class MessagesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1285,6 +1228,7 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

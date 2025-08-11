@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_address_cities_request import TransportAddressCitiesRequest
@@ -49,7 +49,6 @@ class AddressesApi:
     @validate_call
     async def api1_cities_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -69,8 +68,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_cities_request:
@@ -98,7 +95,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -128,7 +124,6 @@ class AddressesApi:
     @validate_call
     async def api1_cities_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -148,8 +143,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_cities_request:
@@ -177,7 +170,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -207,7 +199,6 @@ class AddressesApi:
     @validate_call
     async def api1_cities_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -227,8 +218,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_cities_request:
@@ -256,7 +245,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -281,7 +269,6 @@ class AddressesApi:
 
     def _api1_cities_post_serialize(
         self,
-        authorization,
         timeout,
         transport_address_cities_request,
         _request_auth,
@@ -307,8 +294,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -341,6 +326,7 @@ class AddressesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -364,7 +350,6 @@ class AddressesApi:
     @validate_call
     async def api1_regions_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -384,8 +369,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_regions_request:
@@ -413,7 +396,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -443,7 +425,6 @@ class AddressesApi:
     @validate_call
     async def api1_regions_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -463,8 +444,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_regions_request:
@@ -492,7 +471,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -522,7 +500,6 @@ class AddressesApi:
     @validate_call
     async def api1_regions_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -542,8 +519,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_regions_request:
@@ -571,7 +546,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -596,7 +570,6 @@ class AddressesApi:
 
     def _api1_regions_post_serialize(
         self,
-        authorization,
         timeout,
         transport_address_regions_request,
         _request_auth,
@@ -622,8 +595,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -656,6 +627,7 @@ class AddressesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -679,7 +651,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_city_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -699,8 +670,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_city_request:
@@ -728,7 +697,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -758,7 +726,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_city_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -778,8 +745,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_city_request:
@@ -807,7 +772,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -837,7 +801,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_city_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -857,8 +820,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_city_request:
@@ -886,7 +847,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -911,7 +871,6 @@ class AddressesApi:
 
     def _api1_streets_by_city_post_serialize(
         self,
-        authorization,
         timeout,
         transport_address_streets_by_city_request,
         _request_auth,
@@ -937,8 +896,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -971,6 +928,7 @@ class AddressesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -994,7 +952,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1014,8 +971,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_id_request:
@@ -1043,7 +998,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1073,7 +1027,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1093,8 +1046,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_id_request:
@@ -1122,7 +1073,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1152,7 +1102,6 @@ class AddressesApi:
     @validate_call
     async def api1_streets_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1172,8 +1121,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_address_streets_by_id_request:
@@ -1201,7 +1148,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._api1_streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1226,7 +1172,6 @@ class AddressesApi:
 
     def _api1_streets_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         transport_address_streets_by_id_request,
         _request_auth,
@@ -1252,8 +1197,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1286,6 +1229,7 @@ class AddressesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

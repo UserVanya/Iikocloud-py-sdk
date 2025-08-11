@@ -1,6 +1,6 @@
 # iikocloud_client.MessagesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **api1_loyalty_iiko_check_sms_sending_possibility_post**
-> NetNotificationSmsSendingPossibilityResponse api1_loyalty_iiko_check_sms_sending_possibility_post(authorization, timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
+> NetNotificationSmsSendingPossibilityResponse api1_loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
 
 Check sms sending possibility.
 
@@ -19,6 +19,7 @@ Check sms sending possibility before send sms message.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -27,24 +28,32 @@ from iikocloud_client.models.net_notification_sms_sending_possibility_response i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_notification_sms_sending_possibility_request = iikocloud_client.NetNotificationSmsSendingPossibilityRequest() # NetNotificationSmsSendingPossibilityRequest |  (optional)
 
     try:
         # Check sms sending possibility.
-        api_response = await api_instance.api1_loyalty_iiko_check_sms_sending_possibility_post(authorization, timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
+        api_response = await api_instance.api1_loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
         print("The response of MessagesApi->api1_loyalty_iiko_check_sms_sending_possibility_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +67,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_notification_sms_sending_possibility_request** | [**NetNotificationSmsSendingPossibilityRequest**](NetNotificationSmsSendingPossibilityRequest.md)|  | [optional] 
 
@@ -68,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -88,7 +96,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_check_sms_status_post**
-> NetNotificationCheckSmsStatusResponse api1_loyalty_iiko_check_sms_status_post(authorization, timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
+> NetNotificationCheckSmsStatusResponse api1_loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
 
 Check SMS status.
 
@@ -96,6 +104,7 @@ Check the status of sending SMS messages.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -104,24 +113,32 @@ from iikocloud_client.models.net_notification_check_sms_status_response import N
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_notification_check_sms_status_request = iikocloud_client.NetNotificationCheckSmsStatusRequest() # NetNotificationCheckSmsStatusRequest |  (optional)
 
     try:
         # Check SMS status.
-        api_response = await api_instance.api1_loyalty_iiko_check_sms_status_post(authorization, timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
+        api_response = await api_instance.api1_loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
         print("The response of MessagesApi->api1_loyalty_iiko_check_sms_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -135,7 +152,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_notification_check_sms_status_request** | [**NetNotificationCheckSmsStatusRequest**](NetNotificationCheckSmsStatusRequest.md)|  | [optional] 
 
@@ -145,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -165,7 +181,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_message_send_email_post**
-> object api1_loyalty_iiko_message_send_email_post(authorization, timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
+> object api1_loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
 
 Send email.
 
@@ -175,6 +191,7 @@ Send email message to specified email address. Sending proceed according iikoCar
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -182,24 +199,32 @@ from iikocloud_client.models.net_notification_send_email_request import NetNotif
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_notification_send_email_request = iikocloud_client.NetNotificationSendEmailRequest() # NetNotificationSendEmailRequest |  (optional)
 
     try:
         # Send email.
-        api_response = await api_instance.api1_loyalty_iiko_message_send_email_post(authorization, timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
+        api_response = await api_instance.api1_loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
         print("The response of MessagesApi->api1_loyalty_iiko_message_send_email_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -213,7 +238,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_notification_send_email_request** | [**NetNotificationSendEmailRequest**](NetNotificationSendEmailRequest.md)|  | [optional] 
 
@@ -223,7 +247,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -243,7 +267,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_loyalty_iiko_message_send_sms_post**
-> NetNotificationSendSmsResponse api1_loyalty_iiko_message_send_sms_post(authorization, timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
+> NetNotificationSendSmsResponse api1_loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
 
 Send sms.
 
@@ -253,6 +277,7 @@ Send sms message to specified phone number. Sending proceed according iikoCard o
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -261,24 +286,32 @@ from iikocloud_client.models.net_notification_send_sms_response import NetNotifi
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     net_notification_send_sms_request = iikocloud_client.NetNotificationSendSmsRequest() # NetNotificationSendSmsRequest |  (optional)
 
     try:
         # Send sms.
-        api_response = await api_instance.api1_loyalty_iiko_message_send_sms_post(authorization, timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
+        api_response = await api_instance.api1_loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
         print("The response of MessagesApi->api1_loyalty_iiko_message_send_sms_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -292,7 +325,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **net_notification_send_sms_request** | [**NetNotificationSendSmsRequest**](NetNotificationSendSmsRequest.md)|  | [optional] 
 
@@ -302,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 

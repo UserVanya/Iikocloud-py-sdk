@@ -112,6 +112,7 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
+        "Bearer": BearerFormatAuthSetting,
     },
     total=False,
 )
@@ -162,6 +163,7 @@ class Configuration:
     :param ca_cert_data: verify the peer using concatenated CA certificate data
       in PEM (str) or DER (bytes) format.
 
+    :Example:
     """
 
     _default: ClassVar[Optional[Self]] = None
@@ -187,7 +189,7 @@ class Configuration:
     ) -> None:
         """Constructor
         """
-        self._base_path = "http://localhost" if host is None else host
+        self._base_path = "https://api-ru.iiko.services" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -486,6 +488,14 @@ class Configuration:
         :return: The Auth Settings information dict.
         """
         auth: AuthSettings = {}
+        if self.access_token is not None:
+            auth['Bearer'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'format': 'JWT',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         return auth
 
     def to_debug_report(self) -> str:
@@ -507,8 +517,8 @@ class Configuration:
         """
         return [
             {
-                'url': "",
-                'description': "No description provided",
+                'url': "https://api-ru.iiko.services",
+                'description': "Production",
             }
         ]
 

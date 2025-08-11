@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_terminals_awake_terminal_groups_request import TransportTerminalsAwakeTerminalGroupsRequest
@@ -47,7 +47,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_awake_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -67,8 +66,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_awake_terminal_groups_request:
@@ -96,7 +93,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_awake_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -126,7 +122,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_awake_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -146,8 +141,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_awake_terminal_groups_request:
@@ -175,7 +168,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_awake_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -205,7 +197,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_awake_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -225,8 +216,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Organizations: settings`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_awake_terminal_groups_request:
@@ -254,7 +243,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_awake_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -279,7 +267,6 @@ class TerminalGroupsApi:
 
     def _api1_terminal_groups_awake_post_serialize(
         self,
-        authorization,
         timeout,
         transport_terminals_awake_terminal_groups_request,
         _request_auth,
@@ -305,8 +292,6 @@ class TerminalGroupsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -339,6 +324,7 @@ class TerminalGroupsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -362,7 +348,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_is_alive_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
@@ -382,8 +367,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `POS: availability`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_is_alive_request:
@@ -411,7 +394,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_is_alive_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -441,7 +423,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_is_alive_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
@@ -461,8 +442,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `POS: availability`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_is_alive_request:
@@ -490,7 +469,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_is_alive_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -520,7 +498,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_is_alive_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
@@ -540,8 +517,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `POS: availability`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_is_alive_request:
@@ -569,7 +544,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_is_alive_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -594,7 +568,6 @@ class TerminalGroupsApi:
 
     def _api1_terminal_groups_is_alive_post_serialize(
         self,
-        authorization,
         timeout,
         transport_terminals_terminal_groups_is_alive_request,
         _request_auth,
@@ -620,8 +593,6 @@ class TerminalGroupsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -654,6 +625,7 @@ class TerminalGroupsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -677,7 +649,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -697,8 +668,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_request:
@@ -726,7 +695,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -756,7 +724,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -776,8 +743,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_request:
@@ -805,7 +770,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -835,7 +799,6 @@ class TerminalGroupsApi:
     @validate_call
     async def api1_terminal_groups_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
@@ -855,8 +818,6 @@ class TerminalGroupsApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_terminals_terminal_groups_request:
@@ -884,7 +845,6 @@ class TerminalGroupsApi:
         """ # noqa: E501
 
         _param = self._api1_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -909,7 +869,6 @@ class TerminalGroupsApi:
 
     def _api1_terminal_groups_post_serialize(
         self,
-        authorization,
         timeout,
         transport_terminals_terminal_groups_request,
         _request_auth,
@@ -935,8 +894,6 @@ class TerminalGroupsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -969,6 +926,7 @@ class TerminalGroupsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

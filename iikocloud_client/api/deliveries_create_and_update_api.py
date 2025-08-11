@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
@@ -63,7 +63,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_items_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -83,8 +82,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_add_order_items_request:
@@ -112,7 +109,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -142,7 +138,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_items_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -162,8 +157,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_add_order_items_request:
@@ -191,7 +184,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -221,7 +213,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_items_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -241,8 +232,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_add_order_items_request:
@@ -270,7 +259,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -295,7 +283,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_add_items_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_add_order_items_request,
         _request_auth,
@@ -321,8 +308,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -355,6 +340,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -378,7 +364,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -398,8 +383,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_orders_common_add_order_payments_request:
@@ -427,7 +410,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -457,7 +439,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -477,8 +458,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_orders_common_add_order_payments_request:
@@ -506,7 +485,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -536,7 +514,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_add_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -556,8 +533,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_orders_common_add_order_payments_request:
@@ -585,7 +560,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -610,7 +584,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_add_payments_post_serialize(
         self,
-        authorization,
         timeout,
         transport_orders_common_add_order_payments_request,
         _request_auth,
@@ -636,8 +609,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -670,6 +641,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -693,7 +665,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_confirmation_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
@@ -713,8 +684,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_cancel_delivery_confirmation_request:
@@ -742,7 +711,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_confirmation_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -772,7 +740,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_confirmation_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
@@ -792,8 +759,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_cancel_delivery_confirmation_request:
@@ -821,7 +786,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_confirmation_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -851,7 +815,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_confirmation_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
@@ -871,8 +834,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_cancel_delivery_confirmation_request:
@@ -900,7 +861,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_confirmation_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -925,7 +885,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_cancel_confirmation_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
         _request_auth,
@@ -951,8 +910,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -985,6 +942,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1008,7 +966,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
@@ -1028,8 +985,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_cancel_order_request:
@@ -1057,7 +1012,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1087,7 +1041,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
@@ -1107,8 +1060,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_cancel_order_request:
@@ -1136,7 +1087,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1166,7 +1116,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_cancel_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
@@ -1186,8 +1135,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_cancel_order_request:
@@ -1215,7 +1162,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1240,7 +1186,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_cancel_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_cancel_order_request,
         _request_auth,
@@ -1266,8 +1211,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1300,6 +1243,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1323,7 +1267,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_comment_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
@@ -1343,8 +1286,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_comment_request:
@@ -1372,7 +1313,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_comment_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1402,7 +1342,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_comment_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
@@ -1422,8 +1361,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_comment_request:
@@ -1451,7 +1388,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_comment_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1481,7 +1417,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_comment_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
@@ -1501,8 +1436,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_comment_request:
@@ -1530,7 +1463,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_comment_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1555,7 +1487,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_comment_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_delivery_comment_request,
         _request_auth,
@@ -1581,8 +1512,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1615,6 +1544,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1638,7 +1568,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_complete_before_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
@@ -1658,8 +1587,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_complete_before_request:
@@ -1687,7 +1614,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_complete_before_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1717,7 +1643,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_complete_before_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
@@ -1737,8 +1662,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_complete_before_request:
@@ -1766,7 +1689,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_complete_before_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1796,7 +1718,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_complete_before_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
@@ -1816,8 +1737,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_complete_before_request:
@@ -1845,7 +1764,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_complete_before_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1870,7 +1788,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_complete_before_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_complete_before_request,
         _request_auth,
@@ -1896,8 +1813,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1930,6 +1845,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1953,7 +1869,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_delivery_point_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
@@ -1973,8 +1888,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_point_request:
@@ -2002,7 +1915,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_delivery_point_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -2032,7 +1944,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_delivery_point_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
@@ -2052,8 +1963,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_point_request:
@@ -2081,7 +1990,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_delivery_point_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -2111,7 +2019,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_delivery_point_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
@@ -2131,8 +2038,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_point_request:
@@ -2160,7 +2065,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_delivery_point_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -2185,7 +2089,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_delivery_point_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_delivery_point_request,
         _request_auth,
@@ -2211,8 +2114,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2245,6 +2146,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2268,7 +2170,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_driver_info_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
@@ -2288,8 +2189,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.6.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_change_driver_info_request:
@@ -2317,7 +2216,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_driver_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2347,7 +2245,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_driver_info_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
@@ -2367,8 +2264,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.6.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_change_driver_info_request:
@@ -2396,7 +2291,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_driver_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2426,7 +2320,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_driver_info_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
@@ -2446,8 +2339,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `8.6.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_change_driver_info_request:
@@ -2475,7 +2366,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_driver_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2500,7 +2390,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_driver_info_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_change_driver_info_request,
         _request_auth,
@@ -2526,8 +2415,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2560,6 +2447,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2583,7 +2471,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_external_data_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -2603,8 +2490,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_external_data_request:
@@ -2632,7 +2517,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2662,7 +2546,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_external_data_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -2682,8 +2565,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_external_data_request:
@@ -2711,7 +2592,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2741,7 +2621,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_external_data_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -2761,8 +2640,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_external_data_request:
@@ -2790,7 +2667,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2815,7 +2691,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_external_data_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_external_data_request,
         _request_auth,
@@ -2841,8 +2716,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2875,6 +2748,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2898,7 +2772,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_operator_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
@@ -2918,8 +2791,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_operator_request:
@@ -2947,7 +2818,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_operator_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -2977,7 +2847,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_operator_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
@@ -2997,8 +2866,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_operator_request:
@@ -3026,7 +2893,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_operator_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -3056,7 +2922,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_operator_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
@@ -3076,8 +2941,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_delivery_operator_request:
@@ -3105,7 +2968,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_operator_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -3130,7 +2992,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_operator_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_delivery_operator_request,
         _request_auth,
@@ -3156,8 +3017,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3190,6 +3049,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3213,7 +3073,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -3233,8 +3092,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.6.3`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_payments_request:
@@ -3262,7 +3119,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3292,7 +3148,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -3312,8 +3167,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.6.3`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_payments_request:
@@ -3341,7 +3194,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3371,7 +3223,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -3391,8 +3242,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.6.3`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_payments_request:
@@ -3420,7 +3269,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3445,7 +3293,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_payments_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_payments_request,
         _request_auth,
@@ -3471,8 +3318,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3505,6 +3350,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3528,7 +3374,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_service_type_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
@@ -3548,8 +3393,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_service_type_request:
@@ -3577,7 +3420,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_service_type_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3607,7 +3449,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_service_type_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
@@ -3627,8 +3468,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_service_type_request:
@@ -3656,7 +3495,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_service_type_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3686,7 +3524,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_change_service_type_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
@@ -3706,8 +3543,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_change_service_type_request:
@@ -3735,7 +3570,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_change_service_type_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3760,7 +3594,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_change_service_type_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_change_service_type_request,
         _request_auth,
@@ -3786,8 +3619,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3820,6 +3651,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3843,7 +3675,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_close_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
@@ -3863,8 +3694,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`  orderServiceType only, starting from version `8.0.6` it's also possible to close  `DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .   > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_close_delivery_order_request:
@@ -3892,7 +3721,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -3922,7 +3750,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_close_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
@@ -3942,8 +3769,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`  orderServiceType only, starting from version `8.0.6` it's also possible to close  `DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .   > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_close_delivery_order_request:
@@ -3971,7 +3796,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -4001,7 +3825,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_close_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
@@ -4021,8 +3844,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`  orderServiceType only, starting from version `8.0.6` it's also possible to close  `DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .   > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_close_delivery_order_request:
@@ -4050,7 +3871,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -4075,7 +3895,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_close_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_close_delivery_order_request,
         _request_auth,
@@ -4101,8 +3920,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -4135,6 +3952,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4158,7 +3976,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_confirm_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
@@ -4178,8 +3995,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_confirm_delivery_request:
@@ -4207,7 +4022,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_confirm_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4237,7 +4051,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_confirm_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
@@ -4257,8 +4070,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_confirm_delivery_request:
@@ -4286,7 +4097,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_confirm_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4316,7 +4126,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_confirm_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
@@ -4336,8 +4145,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_confirm_delivery_request:
@@ -4365,7 +4172,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_confirm_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4390,7 +4196,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_confirm_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_confirm_delivery_request,
         _request_auth,
@@ -4416,8 +4221,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -4450,6 +4253,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4473,7 +4277,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -4493,8 +4296,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -4522,7 +4323,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4552,7 +4352,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -4572,8 +4371,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -4601,7 +4398,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4631,7 +4427,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
@@ -4651,8 +4446,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_create_order_request:
@@ -4680,7 +4473,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4705,7 +4497,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_create_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_create_order_request,
         _request_auth,
@@ -4731,8 +4522,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -4765,6 +4554,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4788,7 +4578,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_print_delivery_bill_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
@@ -4808,8 +4597,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_print_delivery_bill_request:
@@ -4837,7 +4624,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_print_delivery_bill_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -4867,7 +4653,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_print_delivery_bill_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
@@ -4887,8 +4672,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_print_delivery_bill_request:
@@ -4916,7 +4699,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_print_delivery_bill_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -4946,7 +4728,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_print_delivery_bill_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
@@ -4966,8 +4747,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_print_delivery_bill_request:
@@ -4995,7 +4774,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_print_delivery_bill_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -5020,7 +4798,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_print_delivery_bill_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_print_delivery_bill_request,
         _request_auth,
@@ -5046,8 +4823,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -5080,6 +4855,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5103,7 +4879,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_courier_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
@@ -5123,8 +4898,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_courier_request:
@@ -5153,7 +4926,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -5183,7 +4955,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_courier_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
@@ -5203,8 +4974,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_courier_request:
@@ -5233,7 +5002,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -5263,7 +5031,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_courier_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
@@ -5283,8 +5050,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_courier_request:
@@ -5313,7 +5078,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -5338,7 +5102,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_update_order_courier_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_courier_request,
         _request_auth,
@@ -5364,8 +5127,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -5398,6 +5159,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5421,7 +5183,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_delivery_status_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
@@ -5441,8 +5202,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_delivery_status_request:
@@ -5470,7 +5229,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5500,7 +5258,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_delivery_status_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
@@ -5520,8 +5277,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_delivery_status_request:
@@ -5549,7 +5304,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5579,7 +5333,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_delivery_status_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
@@ -5599,8 +5352,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_delivery_status_request:
@@ -5628,7 +5379,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5653,7 +5403,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_update_order_delivery_status_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_delivery_status_request,
         _request_auth,
@@ -5679,8 +5428,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -5713,6 +5460,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5736,7 +5484,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -5756,8 +5503,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -5786,7 +5531,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5816,7 +5560,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -5836,8 +5579,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -5866,7 +5607,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5896,7 +5636,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -5916,8 +5655,6 @@ class DeliveriesCreateAndUpdateApi:
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_payments_request:
@@ -5946,7 +5683,6 @@ class DeliveriesCreateAndUpdateApi:
         warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
         _param = self._api1_deliveries_update_order_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5971,7 +5707,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_update_order_payments_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_payments_request,
         _request_auth,
@@ -5997,8 +5732,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -6031,6 +5764,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -6054,7 +5788,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_problem_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
@@ -6074,8 +5807,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_problem_request:
@@ -6103,7 +5834,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_problem_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -6133,7 +5863,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_problem_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
@@ -6153,8 +5882,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_problem_request:
@@ -6182,7 +5909,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_problem_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -6212,7 +5938,6 @@ class DeliveriesCreateAndUpdateApi:
     @validate_call
     async def api1_deliveries_update_order_problem_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
@@ -6232,8 +5957,6 @@ class DeliveriesCreateAndUpdateApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param transport_deliveries_request_update_order_problem_request:
@@ -6261,7 +5984,6 @@ class DeliveriesCreateAndUpdateApi:
         """ # noqa: E501
 
         _param = self._api1_deliveries_update_order_problem_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -6286,7 +6008,6 @@ class DeliveriesCreateAndUpdateApi:
 
     def _api1_deliveries_update_order_problem_post_serialize(
         self,
-        authorization,
         timeout,
         transport_deliveries_request_update_order_problem_request,
         _request_auth,
@@ -6312,8 +6033,6 @@ class DeliveriesCreateAndUpdateApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -6346,6 +6065,7 @@ class DeliveriesCreateAndUpdateApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Bearer'
         ]
 
         return self.api_client.param_serialize(

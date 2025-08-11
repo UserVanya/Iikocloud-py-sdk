@@ -1,6 +1,6 @@
 # iikocloud_client.OrganizationsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **api1_organizations_post**
-> TransportOrganizationsGetOrganizationsResponse api1_organizations_post(authorization, timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+> TransportOrganizationsGetOrganizationsResponse api1_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
 
 Returns organizations available to api-login user.
 
@@ -19,6 +19,7 @@ Returns organizations available to api-login user.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -27,24 +28,32 @@ from iikocloud_client.models.transport_organizations_get_organizations_response 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrganizationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_organizations_get_organizations_request = iikocloud_client.TransportOrganizationsGetOrganizationsRequest() # TransportOrganizationsGetOrganizationsRequest |  (optional)
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.api1_organizations_post(authorization, timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+        api_response = await api_instance.api1_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
         print("The response of OrganizationsApi->api1_organizations_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +67,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_organizations_get_organizations_request** | [**TransportOrganizationsGetOrganizationsRequest**](TransportOrganizationsGetOrganizationsRequest.md)|  | [optional] 
 
@@ -68,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -88,7 +96,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api1_organizations_settings_post**
-> TransportOrganizationsOrganizationsSettingsResponse api1_organizations_settings_post(authorization, timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
+> TransportOrganizationsOrganizationsSettingsResponse api1_organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
 
 Returns available to api-login user organizations specified settings.
 
@@ -98,6 +106,7 @@ Returns available to api-login user organizations specified settings.
 
 ### Example
 
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
@@ -106,24 +115,32 @@ from iikocloud_client.models.transport_organizations_organizations_settings_resp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api-ru.iiko.services
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "http://localhost"
+    host = "https://api-ru.iiko.services"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrganizationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     transport_organizations_organizations_settings_request = iikocloud_client.TransportOrganizationsOrganizationsSettingsRequest() # TransportOrganizationsOrganizationsSettingsRequest |  (optional)
 
     try:
         # Returns available to api-login user organizations specified settings.
-        api_response = await api_instance.api1_organizations_settings_post(authorization, timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
+        api_response = await api_instance.api1_organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
         print("The response of OrganizationsApi->api1_organizations_settings_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +154,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **transport_organizations_organizations_settings_request** | [**TransportOrganizationsOrganizationsSettingsRequest**](TransportOrganizationsOrganizationsSettingsRequest.md)|  | [optional] 
 
@@ -147,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Bearer](../README.md#Bearer)
 
 ### HTTP request headers
 
