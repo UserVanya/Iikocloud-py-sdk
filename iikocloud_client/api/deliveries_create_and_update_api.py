@@ -61,7 +61,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_items_post(
+    async def deliveries_add_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
@@ -108,7 +108,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_items_post_serialize(
+        _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -136,7 +136,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_items_post_with_http_info(
+    async def deliveries_add_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
@@ -183,7 +183,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_items_post_serialize(
+        _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -211,7 +211,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_items_post_without_preload_content(
+    async def deliveries_add_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_add_order_items_request: Optional[TransportDeliveriesRequestAddOrderItemsRequest] = None,
@@ -258,7 +258,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_items_post_serialize(
+        _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
             transport_deliveries_request_add_order_items_request=transport_deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
@@ -281,7 +281,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_add_items_post_serialize(
+    def _deliveries_add_items_post_serialize(
         self,
         timeout,
         transport_deliveries_request_add_order_items_request,
@@ -345,7 +345,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/add_items',
+            resource_path='/deliveries/add_items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -362,7 +362,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_payments_post(
+    async def deliveries_add_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -409,7 +409,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_payments_post_serialize(
+        _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -437,7 +437,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_payments_post_with_http_info(
+    async def deliveries_add_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -484,7 +484,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_payments_post_serialize(
+        _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -512,7 +512,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_add_payments_post_without_preload_content(
+    async def deliveries_add_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -559,7 +559,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_add_payments_post_serialize(
+        _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -582,7 +582,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_add_payments_post_serialize(
+    def _deliveries_add_payments_post_serialize(
         self,
         timeout,
         transport_orders_common_add_order_payments_request,
@@ -646,7 +646,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/add_payments',
+            resource_path='/deliveries/add_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -663,7 +663,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_confirmation_post(
+    async def deliveries_cancel_confirmation_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
@@ -710,7 +710,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_confirmation_post_serialize(
+        _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -738,7 +738,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_confirmation_post_with_http_info(
+    async def deliveries_cancel_confirmation_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
@@ -785,7 +785,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_confirmation_post_serialize(
+        _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -813,7 +813,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_confirmation_post_without_preload_content(
+    async def deliveries_cancel_confirmation_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[TransportDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
@@ -860,7 +860,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_confirmation_post_serialize(
+        _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_cancel_delivery_confirmation_request=transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
@@ -883,7 +883,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_cancel_confirmation_post_serialize(
+    def _deliveries_cancel_confirmation_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_cancel_delivery_confirmation_request,
@@ -947,7 +947,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/cancel_confirmation',
+            resource_path='/deliveries/cancel_confirmation',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -964,7 +964,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_post(
+    async def deliveries_cancel_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
@@ -1011,7 +1011,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_post_serialize(
+        _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1039,7 +1039,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_post_with_http_info(
+    async def deliveries_cancel_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
@@ -1086,7 +1086,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_post_serialize(
+        _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1114,7 +1114,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_cancel_post_without_preload_content(
+    async def deliveries_cancel_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_cancel_order_request: Optional[TransportDeliveriesRequestCancelOrderRequest] = None,
@@ -1161,7 +1161,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_cancel_post_serialize(
+        _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
             transport_deliveries_request_cancel_order_request=transport_deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
@@ -1184,7 +1184,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_cancel_post_serialize(
+    def _deliveries_cancel_post_serialize(
         self,
         timeout,
         transport_deliveries_request_cancel_order_request,
@@ -1248,7 +1248,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/cancel',
+            resource_path='/deliveries/cancel',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1265,7 +1265,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_comment_post(
+    async def deliveries_change_comment_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
@@ -1312,7 +1312,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_comment_post_serialize(
+        _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1340,7 +1340,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_comment_post_with_http_info(
+    async def deliveries_change_comment_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
@@ -1387,7 +1387,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_comment_post_serialize(
+        _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1415,7 +1415,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_comment_post_without_preload_content(
+    async def deliveries_change_comment_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_comment_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
@@ -1462,7 +1462,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_comment_post_serialize(
+        _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_comment_request=transport_deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
@@ -1485,7 +1485,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_comment_post_serialize(
+    def _deliveries_change_comment_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_delivery_comment_request,
@@ -1549,7 +1549,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_comment',
+            resource_path='/deliveries/change_comment',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1566,7 +1566,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_complete_before_post(
+    async def deliveries_change_complete_before_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
@@ -1613,7 +1613,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_complete_before_post_serialize(
+        _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1641,7 +1641,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_complete_before_post_with_http_info(
+    async def deliveries_change_complete_before_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
@@ -1688,7 +1688,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_complete_before_post_serialize(
+        _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1716,7 +1716,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_complete_before_post_without_preload_content(
+    async def deliveries_change_complete_before_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_complete_before_request: Optional[TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
@@ -1763,7 +1763,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_complete_before_post_serialize(
+        _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_complete_before_request=transport_deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
@@ -1786,7 +1786,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_complete_before_post_serialize(
+    def _deliveries_change_complete_before_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_complete_before_request,
@@ -1850,7 +1850,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_complete_before',
+            resource_path='/deliveries/change_complete_before',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1867,7 +1867,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_delivery_point_post(
+    async def deliveries_change_delivery_point_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
@@ -1914,7 +1914,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_delivery_point_post_serialize(
+        _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -1942,7 +1942,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_delivery_point_post_with_http_info(
+    async def deliveries_change_delivery_point_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
@@ -1989,7 +1989,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_delivery_point_post_serialize(
+        _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -2017,7 +2017,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_delivery_point_post_without_preload_content(
+    async def deliveries_change_delivery_point_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_point_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
@@ -2064,7 +2064,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_delivery_point_post_serialize(
+        _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_point_request=transport_deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
@@ -2087,7 +2087,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_delivery_point_post_serialize(
+    def _deliveries_change_delivery_point_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_delivery_point_request,
@@ -2151,7 +2151,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_delivery_point',
+            resource_path='/deliveries/change_delivery_point',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2168,7 +2168,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_driver_info_post(
+    async def deliveries_change_driver_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
@@ -2215,7 +2215,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_driver_info_post_serialize(
+        _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2243,7 +2243,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_driver_info_post_with_http_info(
+    async def deliveries_change_driver_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
@@ -2290,7 +2290,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_driver_info_post_serialize(
+        _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2318,7 +2318,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_driver_info_post_without_preload_content(
+    async def deliveries_change_driver_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_change_driver_info_request: Optional[TransportDeliveriesRequestChangeDriverInfoRequest] = None,
@@ -2365,7 +2365,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_driver_info_post_serialize(
+        _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
             transport_deliveries_request_change_driver_info_request=transport_deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
@@ -2388,7 +2388,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_driver_info_post_serialize(
+    def _deliveries_change_driver_info_post_serialize(
         self,
         timeout,
         transport_deliveries_request_change_driver_info_request,
@@ -2452,7 +2452,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_driver_info',
+            resource_path='/deliveries/change_driver_info',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2469,7 +2469,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_external_data_post(
+    async def deliveries_change_external_data_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -2516,7 +2516,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_external_data_post_serialize(
+        _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2544,7 +2544,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_external_data_post_with_http_info(
+    async def deliveries_change_external_data_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -2591,7 +2591,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_external_data_post_serialize(
+        _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2619,7 +2619,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_external_data_post_without_preload_content(
+    async def deliveries_change_external_data_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -2666,7 +2666,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_external_data_post_serialize(
+        _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2689,7 +2689,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_external_data_post_serialize(
+    def _deliveries_change_external_data_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_external_data_request,
@@ -2753,7 +2753,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_external_data',
+            resource_path='/deliveries/change_external_data',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2770,7 +2770,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_operator_post(
+    async def deliveries_change_operator_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
@@ -2817,7 +2817,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_operator_post_serialize(
+        _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -2845,7 +2845,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_operator_post_with_http_info(
+    async def deliveries_change_operator_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
@@ -2892,7 +2892,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_operator_post_serialize(
+        _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -2920,7 +2920,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_operator_post_without_preload_content(
+    async def deliveries_change_operator_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_delivery_operator_request: Optional[TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
@@ -2967,7 +2967,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_operator_post_serialize(
+        _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_delivery_operator_request=transport_deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
@@ -2990,7 +2990,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_operator_post_serialize(
+    def _deliveries_change_operator_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_delivery_operator_request,
@@ -3054,7 +3054,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_operator',
+            resource_path='/deliveries/change_operator',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3071,7 +3071,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_payments_post(
+    async def deliveries_change_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -3118,7 +3118,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_payments_post_serialize(
+        _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3146,7 +3146,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_payments_post_with_http_info(
+    async def deliveries_change_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -3193,7 +3193,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_payments_post_serialize(
+        _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3221,7 +3221,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_payments_post_without_preload_content(
+    async def deliveries_change_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -3268,7 +3268,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_payments_post_serialize(
+        _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -3291,7 +3291,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_payments_post_serialize(
+    def _deliveries_change_payments_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_payments_request,
@@ -3355,7 +3355,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_payments',
+            resource_path='/deliveries/change_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3372,7 +3372,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_service_type_post(
+    async def deliveries_change_service_type_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
@@ -3419,7 +3419,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_service_type_post_serialize(
+        _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3447,7 +3447,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_service_type_post_with_http_info(
+    async def deliveries_change_service_type_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
@@ -3494,7 +3494,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_service_type_post_serialize(
+        _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3522,7 +3522,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_change_service_type_post_without_preload_content(
+    async def deliveries_change_service_type_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_service_type_request: Optional[TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
@@ -3569,7 +3569,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_change_service_type_post_serialize(
+        _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_service_type_request=transport_deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
@@ -3592,7 +3592,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_change_service_type_post_serialize(
+    def _deliveries_change_service_type_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_service_type_request,
@@ -3656,7 +3656,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/change_service_type',
+            resource_path='/deliveries/change_service_type',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3673,7 +3673,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_close_post(
+    async def deliveries_close_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
@@ -3720,7 +3720,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_close_post_serialize(
+        _param = self._deliveries_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -3748,7 +3748,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_close_post_with_http_info(
+    async def deliveries_close_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
@@ -3795,7 +3795,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_close_post_serialize(
+        _param = self._deliveries_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -3823,7 +3823,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_close_post_without_preload_content(
+    async def deliveries_close_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_delivery_order_request: Optional[TransportDeliveriesRequestCloseDeliveryOrderRequest] = None,
@@ -3870,7 +3870,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_close_post_serialize(
+        _param = self._deliveries_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_delivery_order_request=transport_deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
@@ -3893,7 +3893,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_close_post_serialize(
+    def _deliveries_close_post_serialize(
         self,
         timeout,
         transport_deliveries_request_close_delivery_order_request,
@@ -3957,7 +3957,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/close',
+            resource_path='/deliveries/close',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3974,7 +3974,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_confirm_post(
+    async def deliveries_confirm_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
@@ -4021,7 +4021,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_confirm_post_serialize(
+        _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4049,7 +4049,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_confirm_post_with_http_info(
+    async def deliveries_confirm_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
@@ -4096,7 +4096,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_confirm_post_serialize(
+        _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4124,7 +4124,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_confirm_post_without_preload_content(
+    async def deliveries_confirm_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_confirm_delivery_request: Optional[TransportDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
@@ -4171,7 +4171,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_confirm_post_serialize(
+        _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_confirm_delivery_request=transport_deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
@@ -4194,7 +4194,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_confirm_post_serialize(
+    def _deliveries_confirm_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_confirm_delivery_request,
@@ -4258,7 +4258,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/confirm',
+            resource_path='/deliveries/confirm',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4275,7 +4275,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_create_post(
+    async def deliveries_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
@@ -4322,7 +4322,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_create_post_serialize(
+        _param = self._deliveries_create_post_serialize(
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4350,7 +4350,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_create_post_with_http_info(
+    async def deliveries_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
@@ -4397,7 +4397,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_create_post_serialize(
+        _param = self._deliveries_create_post_serialize(
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4425,7 +4425,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_create_post_without_preload_content(
+    async def deliveries_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_create_order_request: Optional[TransportDeliveriesRequestCreateOrderRequest] = None,
@@ -4472,7 +4472,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_create_post_serialize(
+        _param = self._deliveries_create_post_serialize(
             timeout=timeout,
             transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request,
             _request_auth=_request_auth,
@@ -4495,7 +4495,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_create_post_serialize(
+    def _deliveries_create_post_serialize(
         self,
         timeout,
         transport_deliveries_request_create_order_request,
@@ -4559,7 +4559,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/create',
+            resource_path='/deliveries/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4576,7 +4576,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_print_delivery_bill_post(
+    async def deliveries_print_delivery_bill_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
@@ -4623,7 +4623,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_print_delivery_bill_post_serialize(
+        _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -4651,7 +4651,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_print_delivery_bill_post_with_http_info(
+    async def deliveries_print_delivery_bill_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
@@ -4698,7 +4698,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_print_delivery_bill_post_serialize(
+        _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -4726,7 +4726,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_print_delivery_bill_post_without_preload_content(
+    async def deliveries_print_delivery_bill_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_print_delivery_bill_request: Optional[TransportDeliveriesRequestPrintDeliveryBillRequest] = None,
@@ -4773,7 +4773,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_print_delivery_bill_post_serialize(
+        _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
             transport_deliveries_request_print_delivery_bill_request=transport_deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
@@ -4796,7 +4796,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_print_delivery_bill_post_serialize(
+    def _deliveries_print_delivery_bill_post_serialize(
         self,
         timeout,
         transport_deliveries_request_print_delivery_bill_request,
@@ -4860,7 +4860,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/print_delivery_bill',
+            resource_path='/deliveries/print_delivery_bill',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4877,7 +4877,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_courier_post(
+    async def deliveries_update_order_courier_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
@@ -4923,9 +4923,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_courier_post_serialize(
+        _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -4953,7 +4953,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_courier_post_with_http_info(
+    async def deliveries_update_order_courier_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
@@ -4999,9 +4999,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_courier_post_serialize(
+        _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -5029,7 +5029,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_courier_post_without_preload_content(
+    async def deliveries_update_order_courier_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_courier_request: Optional[TransportDeliveriesRequestUpdateOrderCourierRequest] = None,
@@ -5075,9 +5075,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_courier is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_courier is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_courier_post_serialize(
+        _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_courier_request=transport_deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
@@ -5100,7 +5100,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_update_order_courier_post_serialize(
+    def _deliveries_update_order_courier_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_courier_request,
@@ -5164,7 +5164,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/update_order_courier',
+            resource_path='/deliveries/update_order_courier',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5181,7 +5181,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_delivery_status_post(
+    async def deliveries_update_order_delivery_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
@@ -5228,7 +5228,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
+        _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5256,7 +5256,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_delivery_status_post_with_http_info(
+    async def deliveries_update_order_delivery_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
@@ -5303,7 +5303,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
+        _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5331,7 +5331,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_delivery_status_post_without_preload_content(
+    async def deliveries_update_order_delivery_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_delivery_status_request: Optional[TransportDeliveriesRequestUpdateDeliveryStatusRequest] = None,
@@ -5378,7 +5378,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_delivery_status_post_serialize(
+        _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_delivery_status_request=transport_deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
@@ -5401,7 +5401,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_update_order_delivery_status_post_serialize(
+    def _deliveries_update_order_delivery_status_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_delivery_status_request,
@@ -5465,7 +5465,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/update_order_delivery_status',
+            resource_path='/deliveries/update_order_delivery_status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5482,7 +5482,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_payments_post(
+    async def deliveries_update_order_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
@@ -5528,9 +5528,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_payments_post_serialize(
+        _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5558,7 +5558,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_payments_post_with_http_info(
+    async def deliveries_update_order_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
@@ -5604,9 +5604,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_payments_post_serialize(
+        _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5634,7 +5634,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_payments_post_without_preload_content(
+    async def deliveries_update_order_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_payments_request: Optional[TransportDeliveriesRequestUpdateOrderPaymentsRequest] = None,
@@ -5680,9 +5680,9 @@ class DeliveriesCreateAndUpdateApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-        warnings.warn("POST /api/1/deliveries/update_order_payments is deprecated.", DeprecationWarning)
+        warnings.warn("POST /deliveries/update_order_payments is deprecated.", DeprecationWarning)
 
-        _param = self._api1_deliveries_update_order_payments_post_serialize(
+        _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
@@ -5705,7 +5705,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_update_order_payments_post_serialize(
+    def _deliveries_update_order_payments_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_payments_request,
@@ -5769,7 +5769,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/update_order_payments',
+            resource_path='/deliveries/update_order_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5786,7 +5786,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_problem_post(
+    async def deliveries_update_order_problem_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
@@ -5833,7 +5833,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_problem_post_serialize(
+        _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -5861,7 +5861,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_problem_post_with_http_info(
+    async def deliveries_update_order_problem_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
@@ -5908,7 +5908,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_problem_post_serialize(
+        _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -5936,7 +5936,7 @@ class DeliveriesCreateAndUpdateApi:
 
 
     @validate_call
-    async def api1_deliveries_update_order_problem_post_without_preload_content(
+    async def deliveries_update_order_problem_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_problem_request: Optional[TransportDeliveriesRequestUpdateOrderProblemRequest] = None,
@@ -5983,7 +5983,7 @@ class DeliveriesCreateAndUpdateApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_update_order_problem_post_serialize(
+        _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_problem_request=transport_deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
@@ -6006,7 +6006,7 @@ class DeliveriesCreateAndUpdateApi:
         return response_data.response
 
 
-    def _api1_deliveries_update_order_problem_post_serialize(
+    def _deliveries_update_order_problem_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_problem_request,
@@ -6070,7 +6070,7 @@ class DeliveriesCreateAndUpdateApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/update_order_problem',
+            resource_path='/deliveries/update_order_problem',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -36,9 +36,9 @@ class TransportDeliveriesRequestCreateOrderTipsPayment(BaseModel):
     Base class of delivery order payment item.
     """ # noqa: E501
     payment_type_kind: StrictStr = Field(alias="paymentTypeKind")
-    tips_type_id: Optional[StrictStr] = Field(default=None, description="Tips type ID.                Can be obtained by `/api/1/tips_types` operation.", alias="tipsTypeId")
+    tips_type_id: Optional[StrictStr] = Field(default=None, description="Tips type ID.                Can be obtained by `/tips_types` operation.", alias="tipsTypeId")
     sum: Union[Annotated[float, Field(le=10000000000, strict=True, ge=0)], Annotated[int, Field(le=2147483647, strict=True, ge=0)]] = Field(description="Amount due.")
-    payment_type_id: StrictStr = Field(description="Payment type.                 Can be obtained by `/api/1/payment_types` operation.", alias="paymentTypeId")
+    payment_type_id: StrictStr = Field(description="Payment type.                 Can be obtained by `/payment_types` operation.", alias="paymentTypeId")
     is_processed_externally: Optional[StrictBool] = Field(default=None, description="Whether payment item is processed by external payment system (made from outside).", alias="isProcessedExternally")
     payment_additional_data: Optional[TransportDeliveriesCommonPaymentAdditionalData] = Field(default=None, description="Additional payment parameters.", alias="paymentAdditionalData")
     is_fiscalized_externally: Optional[StrictBool] = Field(default=None, description="Whether the payment item is externally fiscalized.   > Allowed from version `7.6.3`.", alias="isFiscalizedExternally")

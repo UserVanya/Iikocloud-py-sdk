@@ -31,7 +31,7 @@ class TransportTableOrdersRequestAddItemsToTableOrderRequest(BaseModel):
     """ # noqa: E501
     add_order_items_settings: Optional[TransportTableOrdersRequestAddTableOrderItemsSettings] = Field(default=None, description="Add order items parameters.", alias="addOrderItemsSettings")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     items: List[TransportDeliveriesRequestCreateOrderOrderItem] = Field(description="Order items (may include ProductOrderItem or CompoundOrderItem).")
     combos: Optional[List[TransportDeliveriesRequestCreateOrderCombo]] = Field(default=None, description="Combos.   > Allowed from version `7.6.1`.")
     __properties: ClassVar[List[str]] = ["addOrderItemsSettings", "orderId", "organizationId", "items", "combos"]

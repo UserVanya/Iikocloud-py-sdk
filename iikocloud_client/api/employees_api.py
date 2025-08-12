@@ -56,7 +56,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_by_terminal_post(
+    async def employees_couriers_active_location_by_terminal_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_active_courier_locations_by_terminal_group_request: Optional[TransportEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
@@ -103,7 +103,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_by_terminal_post_serialize(
+        _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
             transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -131,7 +131,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_by_terminal_post_with_http_info(
+    async def employees_couriers_active_location_by_terminal_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_active_courier_locations_by_terminal_group_request: Optional[TransportEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
@@ -178,7 +178,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_by_terminal_post_serialize(
+        _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
             transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -206,7 +206,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_by_terminal_post_without_preload_content(
+    async def employees_couriers_active_location_by_terminal_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_active_courier_locations_by_terminal_group_request: Optional[TransportEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
@@ -253,7 +253,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_by_terminal_post_serialize(
+        _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
             transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -276,7 +276,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_couriers_active_location_by_terminal_post_serialize(
+    def _employees_couriers_active_location_by_terminal_post_serialize(
         self,
         timeout,
         transport_employees_active_courier_locations_by_terminal_group_request,
@@ -340,7 +340,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/couriers/active_location/by_terminal',
+            resource_path='/employees/couriers/active_location/by_terminal',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -357,7 +357,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_post(
+    async def employees_couriers_active_location_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -404,7 +404,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_post_serialize(
+        _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -432,7 +432,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_post_with_http_info(
+    async def employees_couriers_active_location_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -479,7 +479,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_post_serialize(
+        _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -507,7 +507,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_active_location_post_without_preload_content(
+    async def employees_couriers_active_location_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -554,7 +554,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_active_location_post_serialize(
+        _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -577,7 +577,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_couriers_active_location_post_serialize(
+    def _employees_couriers_active_location_post_serialize(
         self,
         timeout,
         transport_employees_couriers_request,
@@ -641,7 +641,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/couriers/active_location',
+            resource_path='/employees/couriers/active_location',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -658,7 +658,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_by_role_post(
+    async def employees_couriers_by_role_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_and_check_role_request: Optional[TransportEmployeesCouriersAndCheckRoleRequest] = None,
@@ -705,7 +705,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_by_role_post_serialize(
+        _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
             transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -733,7 +733,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_by_role_post_with_http_info(
+    async def employees_couriers_by_role_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_and_check_role_request: Optional[TransportEmployeesCouriersAndCheckRoleRequest] = None,
@@ -780,7 +780,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_by_role_post_serialize(
+        _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
             transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -808,7 +808,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_by_role_post_without_preload_content(
+    async def employees_couriers_by_role_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_and_check_role_request: Optional[TransportEmployeesCouriersAndCheckRoleRequest] = None,
@@ -855,7 +855,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_by_role_post_serialize(
+        _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
             transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -878,7 +878,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_couriers_by_role_post_serialize(
+    def _employees_couriers_by_role_post_serialize(
         self,
         timeout,
         transport_employees_couriers_and_check_role_request,
@@ -942,7 +942,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/couriers/by_role',
+            resource_path='/employees/couriers/by_role',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -959,7 +959,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_locations_by_time_offset_post(
+    async def employees_couriers_locations_by_time_offset_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_courier_locations_by_time_offset_request: Optional[TransportEmployeesCourierLocationsByTimeOffsetRequest] = None,
@@ -1006,7 +1006,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_locations_by_time_offset_post_serialize(
+        _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
             transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1034,7 +1034,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_locations_by_time_offset_post_with_http_info(
+    async def employees_couriers_locations_by_time_offset_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_courier_locations_by_time_offset_request: Optional[TransportEmployeesCourierLocationsByTimeOffsetRequest] = None,
@@ -1081,7 +1081,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_locations_by_time_offset_post_serialize(
+        _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
             transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1109,7 +1109,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_locations_by_time_offset_post_without_preload_content(
+    async def employees_couriers_locations_by_time_offset_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_courier_locations_by_time_offset_request: Optional[TransportEmployeesCourierLocationsByTimeOffsetRequest] = None,
@@ -1156,7 +1156,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_locations_by_time_offset_post_serialize(
+        _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
             transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1179,7 +1179,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_couriers_locations_by_time_offset_post_serialize(
+    def _employees_couriers_locations_by_time_offset_post_serialize(
         self,
         timeout,
         transport_employees_courier_locations_by_time_offset_request,
@@ -1243,7 +1243,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/couriers/locations/by_time_offset',
+            resource_path='/employees/couriers/locations/by_time_offset',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1260,7 +1260,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_post(
+    async def employees_couriers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -1307,7 +1307,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_post_serialize(
+        _param = self._employees_couriers_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1335,7 +1335,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_post_with_http_info(
+    async def employees_couriers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -1382,7 +1382,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_post_serialize(
+        _param = self._employees_couriers_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1410,7 +1410,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_couriers_post_without_preload_content(
+    async def employees_couriers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_couriers_request: Optional[TransportEmployeesCouriersRequest] = None,
@@ -1457,7 +1457,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_couriers_post_serialize(
+        _param = self._employees_couriers_post_serialize(
             timeout=timeout,
             transport_employees_couriers_request=transport_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1480,7 +1480,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_couriers_post_serialize(
+    def _employees_couriers_post_serialize(
         self,
         timeout,
         transport_employees_couriers_request,
@@ -1544,7 +1544,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/couriers',
+            resource_path='/employees/couriers',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1561,7 +1561,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_info_post(
+    async def employees_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_employee_info_request: Optional[TransportEmployeesEmployeeInfoRequest] = None,
@@ -1608,7 +1608,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_info_post_serialize(
+        _param = self._employees_info_post_serialize(
             timeout=timeout,
             transport_employees_employee_info_request=transport_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1636,7 +1636,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_info_post_with_http_info(
+    async def employees_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_employee_info_request: Optional[TransportEmployeesEmployeeInfoRequest] = None,
@@ -1683,7 +1683,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_info_post_serialize(
+        _param = self._employees_info_post_serialize(
             timeout=timeout,
             transport_employees_employee_info_request=transport_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1711,7 +1711,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_info_post_without_preload_content(
+    async def employees_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_employee_info_request: Optional[TransportEmployeesEmployeeInfoRequest] = None,
@@ -1758,7 +1758,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_info_post_serialize(
+        _param = self._employees_info_post_serialize(
             timeout=timeout,
             transport_employees_employee_info_request=transport_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1781,7 +1781,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_info_post_serialize(
+    def _employees_info_post_serialize(
         self,
         timeout,
         transport_employees_employee_info_request,
@@ -1845,7 +1845,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/info',
+            resource_path='/employees/info',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1862,7 +1862,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockin_post(
+    async def employees_shift_clockin_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_open_personal_session_request: Optional[TransportEmployeesOpenPersonalSessionRequest] = None,
@@ -1909,7 +1909,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockin_post_serialize(
+        _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
             transport_employees_open_personal_session_request=transport_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -1937,7 +1937,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockin_post_with_http_info(
+    async def employees_shift_clockin_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_open_personal_session_request: Optional[TransportEmployeesOpenPersonalSessionRequest] = None,
@@ -1984,7 +1984,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockin_post_serialize(
+        _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
             transport_employees_open_personal_session_request=transport_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -2012,7 +2012,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockin_post_without_preload_content(
+    async def employees_shift_clockin_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_open_personal_session_request: Optional[TransportEmployeesOpenPersonalSessionRequest] = None,
@@ -2059,7 +2059,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockin_post_serialize(
+        _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
             transport_employees_open_personal_session_request=transport_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -2082,7 +2082,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_shift_clockin_post_serialize(
+    def _employees_shift_clockin_post_serialize(
         self,
         timeout,
         transport_employees_open_personal_session_request,
@@ -2146,7 +2146,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/shift/clockin',
+            resource_path='/employees/shift/clockin',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2163,7 +2163,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockout_post(
+    async def employees_shift_clockout_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_close_personal_session_request: Optional[TransportEmployeesClosePersonalSessionRequest] = None,
@@ -2210,7 +2210,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockout_post_serialize(
+        _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
             transport_employees_close_personal_session_request=transport_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2238,7 +2238,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockout_post_with_http_info(
+    async def employees_shift_clockout_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_close_personal_session_request: Optional[TransportEmployeesClosePersonalSessionRequest] = None,
@@ -2285,7 +2285,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockout_post_serialize(
+        _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
             transport_employees_close_personal_session_request=transport_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2313,7 +2313,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_clockout_post_without_preload_content(
+    async def employees_shift_clockout_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_close_personal_session_request: Optional[TransportEmployeesClosePersonalSessionRequest] = None,
@@ -2360,7 +2360,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_clockout_post_serialize(
+        _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
             transport_employees_close_personal_session_request=transport_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2383,7 +2383,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_shift_clockout_post_serialize(
+    def _employees_shift_clockout_post_serialize(
         self,
         timeout,
         transport_employees_close_personal_session_request,
@@ -2447,7 +2447,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/shift/clockout',
+            resource_path='/employees/shift/clockout',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2464,7 +2464,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_is_open_post(
+    async def employees_shift_is_open_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_personal_session_info_request: Optional[TransportEmployeesGetPersonalSessionInfoRequest] = None,
@@ -2511,7 +2511,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_is_open_post_serialize(
+        _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
             transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2539,7 +2539,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_is_open_post_with_http_info(
+    async def employees_shift_is_open_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_personal_session_info_request: Optional[TransportEmployeesGetPersonalSessionInfoRequest] = None,
@@ -2586,7 +2586,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_is_open_post_serialize(
+        _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
             transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2614,7 +2614,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shift_is_open_post_without_preload_content(
+    async def employees_shift_is_open_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_personal_session_info_request: Optional[TransportEmployeesGetPersonalSessionInfoRequest] = None,
@@ -2661,7 +2661,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shift_is_open_post_serialize(
+        _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
             transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2684,7 +2684,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_shift_is_open_post_serialize(
+    def _employees_shift_is_open_post_serialize(
         self,
         timeout,
         transport_employees_get_personal_session_info_request,
@@ -2748,7 +2748,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/shift/is_open',
+            resource_path='/employees/shift/is_open',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2765,7 +2765,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shifts_by_courier_post(
+    async def employees_shifts_by_courier_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_terminal_groups_of_employee_request: Optional[TransportEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
@@ -2812,7 +2812,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shifts_by_courier_post_serialize(
+        _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
             transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -2840,7 +2840,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shifts_by_courier_post_with_http_info(
+    async def employees_shifts_by_courier_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_terminal_groups_of_employee_request: Optional[TransportEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
@@ -2887,7 +2887,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shifts_by_courier_post_serialize(
+        _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
             transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -2915,7 +2915,7 @@ class EmployeesApi:
 
 
     @validate_call
-    async def api1_employees_shifts_by_courier_post_without_preload_content(
+    async def employees_shifts_by_courier_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_employees_get_terminal_groups_of_employee_request: Optional[TransportEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
@@ -2962,7 +2962,7 @@ class EmployeesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_employees_shifts_by_courier_post_serialize(
+        _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
             transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -2985,7 +2985,7 @@ class EmployeesApi:
         return response_data.response
 
 
-    def _api1_employees_shifts_by_courier_post_serialize(
+    def _employees_shifts_by_courier_post_serialize(
         self,
         timeout,
         transport_employees_get_terminal_groups_of_employee_request,
@@ -3049,7 +3049,7 @@ class EmployeesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/employees/shifts/by_courier',
+            resource_path='/employees/shifts/by_courier',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

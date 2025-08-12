@@ -27,8 +27,8 @@ class TransportDeliveryRestrictionsDeliveryRestrictionItem(BaseModel):
     Item of delivery restrictions.
     """ # noqa: E501
     min_sum: Optional[Union[StrictFloat, StrictInt]] = Field(description="The minimum order amount for a given point in a given time interval in this delivery zone.", alias="minSum")
-    terminal_group_id: Optional[StrictStr] = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
-    organization_id: Optional[StrictStr] = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    terminal_group_id: Optional[StrictStr] = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: Optional[StrictStr] = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     zone: Optional[StrictStr] = Field(description="Name of delivery zone from cartography.")
     week_map: StrictInt = Field(description="Days of the week.", alias="weekMap")
     var_from: Optional[StrictInt] = Field(description="The time from which the point can process orders from the selected zone, in minutes from the beginning of the day.", alias="from")

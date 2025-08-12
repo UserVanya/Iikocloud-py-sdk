@@ -51,7 +51,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_filter_post(
+    async def deliveries_drafts_by_filter_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
@@ -98,7 +98,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_filter_post_serialize(
+        _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -126,7 +126,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_filter_post_with_http_info(
+    async def deliveries_drafts_by_filter_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
@@ -173,7 +173,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_filter_post_serialize(
+        _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -201,7 +201,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_filter_post_without_preload_content(
+    async def deliveries_drafts_by_filter_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_filter_drafts_request: Optional[TransportDeliveriesDraftsFilterDraftsRequest] = None,
@@ -248,7 +248,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_filter_post_serialize(
+        _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_filter_drafts_request=transport_deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
@@ -271,7 +271,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_by_filter_post_serialize(
+    def _deliveries_drafts_by_filter_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_filter_drafts_request,
@@ -335,7 +335,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/by_filter',
+            resource_path='/deliveries/drafts/by_filter',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -352,7 +352,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_id_post(
+    async def deliveries_drafts_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
@@ -399,7 +399,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_id_post_serialize(
+        _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -427,7 +427,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_id_post_with_http_info(
+    async def deliveries_drafts_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
@@ -474,7 +474,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_id_post_serialize(
+        _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -502,7 +502,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_by_id_post_without_preload_content(
+    async def deliveries_drafts_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_get_draft_request: Optional[TransportDeliveriesDraftsGetDraftRequest] = None,
@@ -549,7 +549,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_by_id_post_serialize(
+        _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_get_draft_request=transport_deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
@@ -572,7 +572,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_by_id_post_serialize(
+    def _deliveries_drafts_by_id_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_get_draft_request,
@@ -636,7 +636,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/by_id',
+            resource_path='/deliveries/drafts/by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -653,7 +653,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_commit_post(
+    async def deliveries_drafts_commit_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
@@ -700,7 +700,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_commit_post_serialize(
+        _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -728,7 +728,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_commit_post_with_http_info(
+    async def deliveries_drafts_commit_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
@@ -775,7 +775,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_commit_post_serialize(
+        _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -803,7 +803,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_commit_post_without_preload_content(
+    async def deliveries_drafts_commit_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_commit_draft_request: Optional[TransportDeliveriesDraftsCommitDraftRequest] = None,
@@ -850,7 +850,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_commit_post_serialize(
+        _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_commit_draft_request=transport_deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
@@ -873,7 +873,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_commit_post_serialize(
+    def _deliveries_drafts_commit_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_commit_draft_request,
@@ -937,7 +937,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/commit',
+            resource_path='/deliveries/drafts/commit',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -954,7 +954,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_create_post(
+    async def deliveries_drafts_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
@@ -1001,7 +1001,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_create_post_serialize(
+        _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1029,7 +1029,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_create_post_with_http_info(
+    async def deliveries_drafts_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
@@ -1076,7 +1076,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_create_post_serialize(
+        _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1104,7 +1104,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_create_post_without_preload_content(
+    async def deliveries_drafts_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_create_draft_request: Optional[TransportDeliveriesDraftsCreateDraftRequest] = None,
@@ -1151,7 +1151,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_create_post_serialize(
+        _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_create_draft_request=transport_deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
@@ -1174,7 +1174,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_create_post_serialize(
+    def _deliveries_drafts_create_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_create_draft_request,
@@ -1238,7 +1238,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/create',
+            resource_path='/deliveries/drafts/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1255,7 +1255,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_delete_post(
+    async def deliveries_drafts_delete_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
@@ -1302,7 +1302,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_delete_post_serialize(
+        _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1330,7 +1330,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_delete_post_with_http_info(
+    async def deliveries_drafts_delete_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
@@ -1377,7 +1377,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_delete_post_serialize(
+        _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1405,7 +1405,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_delete_post_without_preload_content(
+    async def deliveries_drafts_delete_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_delete_draft_request: Optional[TransportDeliveriesDraftsDeleteDraftRequest] = None,
@@ -1452,7 +1452,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_delete_post_serialize(
+        _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_delete_draft_request=transport_deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
@@ -1475,7 +1475,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_delete_post_serialize(
+    def _deliveries_drafts_delete_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_delete_draft_request,
@@ -1539,7 +1539,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/delete',
+            resource_path='/deliveries/drafts/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1556,7 +1556,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_lock_post(
+    async def deliveries_drafts_lock_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -1603,7 +1603,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_lock_post_serialize(
+        _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1631,7 +1631,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_lock_post_with_http_info(
+    async def deliveries_drafts_lock_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -1678,7 +1678,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_lock_post_serialize(
+        _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1706,7 +1706,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_lock_post_without_preload_content(
+    async def deliveries_drafts_lock_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -1753,7 +1753,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_lock_post_serialize(
+        _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -1776,7 +1776,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_lock_post_serialize(
+    def _deliveries_drafts_lock_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_lock_or_unlock_draft_request,
@@ -1840,7 +1840,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/lock',
+            resource_path='/deliveries/drafts/lock',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1857,7 +1857,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_save_post(
+    async def deliveries_drafts_save_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
@@ -1904,7 +1904,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_save_post_serialize(
+        _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -1932,7 +1932,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_save_post_with_http_info(
+    async def deliveries_drafts_save_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
@@ -1979,7 +1979,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_save_post_serialize(
+        _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -2007,7 +2007,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_save_post_without_preload_content(
+    async def deliveries_drafts_save_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_save_draft_request: Optional[TransportDeliveriesDraftsSaveDraftRequest] = None,
@@ -2054,7 +2054,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_save_post_serialize(
+        _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_save_draft_request=transport_deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
@@ -2077,7 +2077,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_save_post_serialize(
+    def _deliveries_drafts_save_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_save_draft_request,
@@ -2141,7 +2141,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/save',
+            resource_path='/deliveries/drafts/save',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2158,7 +2158,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_unlock_post(
+    async def deliveries_drafts_unlock_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -2205,7 +2205,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_unlock_post_serialize(
+        _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2233,7 +2233,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_unlock_post_with_http_info(
+    async def deliveries_drafts_unlock_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -2280,7 +2280,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_unlock_post_serialize(
+        _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2308,7 +2308,7 @@ class DraftsApi:
 
 
     @validate_call
-    async def api1_deliveries_drafts_unlock_post_without_preload_content(
+    async def deliveries_drafts_unlock_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_drafts_lock_or_unlock_draft_request: Optional[TransportDeliveriesDraftsLockOrUnlockDraftRequest] = None,
@@ -2355,7 +2355,7 @@ class DraftsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_drafts_unlock_post_serialize(
+        _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
             transport_deliveries_drafts_lock_or_unlock_draft_request=transport_deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
@@ -2378,7 +2378,7 @@ class DraftsApi:
         return response_data.response
 
 
-    def _api1_deliveries_drafts_unlock_post_serialize(
+    def _deliveries_drafts_unlock_post_serialize(
         self,
         timeout,
         transport_deliveries_drafts_lock_or_unlock_draft_request,
@@ -2442,7 +2442,7 @@ class DraftsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/drafts/unlock',
+            resource_path='/deliveries/drafts/unlock',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -28,8 +28,8 @@ class TransportDeliveriesRequestCreateOrderRequest(BaseModel):
     """
     Order creation model.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID of the new order.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
-    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID the order must be sent to.    Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: StrictStr = Field(description="Organization ID of the new order.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID the order must be sent to.    Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
     create_order_settings: Optional[TransportOrdersCommonCreateOrderSettings] = Field(default=None, description="Order creation parameters.", alias="createOrderSettings")
     order: TransportDeliveriesRequestCreateOrderDeliveryOrder = Field(description="Order.")
     __properties: ClassVar[List[str]] = ["organizationId", "terminalGroupId", "createOrderSettings", "order"]

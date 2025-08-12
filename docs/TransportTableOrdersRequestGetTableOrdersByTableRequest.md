@@ -7,8 +7,8 @@ Request for information about orders using table IDs.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **source_keys** | **List[str]** | Source keys. | [optional] 
-**organization_ids** | **List[str]** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**table_ids** | **List[str]** | Table IDs.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | 
+**organization_ids** | **List[str]** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**table_ids** | **List[str]** | Table IDs.                Can be obtained by &#x60;/reserve/available_restaurant_sections&#x60; operation. | 
 **statuses** | [**List[TransportOrdersCommonOrderStatus]**](TransportOrdersCommonOrderStatus.md) | Order statuses. | [optional] 
 **date_from** | **str** | Order creation date (terminal time zone). Lower limit.                Order details are stored for 90 days. | [optional] 
 **date_to** | **str** | Order creation date (terminal time zone). Upper limit. | [optional] 

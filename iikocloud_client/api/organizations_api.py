@@ -43,7 +43,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_post(
+    async def organizations_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -90,7 +90,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_post_serialize(
+        _param = self._organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -118,7 +118,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_post_with_http_info(
+    async def organizations_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -165,7 +165,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_post_serialize(
+        _param = self._organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -193,7 +193,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_post_without_preload_content(
+    async def organizations_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -240,7 +240,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_post_serialize(
+        _param = self._organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -263,7 +263,7 @@ class OrganizationsApi:
         return response_data.response
 
 
-    def _api1_organizations_post_serialize(
+    def _organizations_post_serialize(
         self,
         timeout,
         transport_organizations_get_organizations_request,
@@ -327,7 +327,7 @@ class OrganizationsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/organizations',
+            resource_path='/organizations',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -344,7 +344,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_settings_post(
+    async def organizations_settings_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_organizations_settings_request: Optional[TransportOrganizationsOrganizationsSettingsRequest] = None,
@@ -391,7 +391,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_settings_post_serialize(
+        _param = self._organizations_settings_post_serialize(
             timeout=timeout,
             transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request,
             _request_auth=_request_auth,
@@ -419,7 +419,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_settings_post_with_http_info(
+    async def organizations_settings_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_organizations_settings_request: Optional[TransportOrganizationsOrganizationsSettingsRequest] = None,
@@ -466,7 +466,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_settings_post_serialize(
+        _param = self._organizations_settings_post_serialize(
             timeout=timeout,
             transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request,
             _request_auth=_request_auth,
@@ -494,7 +494,7 @@ class OrganizationsApi:
 
 
     @validate_call
-    async def api1_organizations_settings_post_without_preload_content(
+    async def organizations_settings_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_organizations_settings_request: Optional[TransportOrganizationsOrganizationsSettingsRequest] = None,
@@ -541,7 +541,7 @@ class OrganizationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_organizations_settings_post_serialize(
+        _param = self._organizations_settings_post_serialize(
             timeout=timeout,
             transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request,
             _request_auth=_request_auth,
@@ -564,7 +564,7 @@ class OrganizationsApi:
         return response_data.response
 
 
-    def _api1_organizations_settings_post_serialize(
+    def _organizations_settings_post_serialize(
         self,
         timeout,
         transport_organizations_organizations_settings_request,
@@ -628,7 +628,7 @@ class OrganizationsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/organizations/settings',
+            resource_path='/organizations/settings',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

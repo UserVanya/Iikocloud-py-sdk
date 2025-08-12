@@ -26,7 +26,7 @@ class TransportOrganizationsGetOrganizationsRequest(BaseModel):
     """
     Request for organizations.
     """ # noqa: E501
-    organization_ids: Optional[List[StrictStr]] = Field(default=None, description="Organizations IDs which have to be returned. By default - all organizations from apiLogin.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: Optional[List[StrictStr]] = Field(default=None, description="Organizations IDs which have to be returned. By default - all organizations from apiLogin.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     return_additional_info: Optional[StrictBool] = Field(default=None, description="A sign whether additional information about the organization should be returned (RMS version, country, restaurantAddress, etc.),    or only minimal information should be returned (id and name).", alias="returnAdditionalInfo")
     include_disabled: Optional[StrictBool] = Field(default=None, description="Attribute that shows that response contains disabled organizations.", alias="includeDisabled")
     return_external_data: Optional[List[StrictStr]] = Field(default=None, description="External data keys that have to be returned.", alias="returnExternalData")

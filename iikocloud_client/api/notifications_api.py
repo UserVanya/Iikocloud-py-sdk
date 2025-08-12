@@ -41,7 +41,7 @@ class NotificationsApi:
 
 
     @validate_call
-    async def api1_notifications_send_post(
+    async def notifications_send_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_notifications_send_notification_request: Optional[TransportNotificationsSendNotificationRequest] = None,
@@ -88,7 +88,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_notifications_send_post_serialize(
+        _param = self._notifications_send_post_serialize(
             timeout=timeout,
             transport_notifications_send_notification_request=transport_notifications_send_notification_request,
             _request_auth=_request_auth,
@@ -116,7 +116,7 @@ class NotificationsApi:
 
 
     @validate_call
-    async def api1_notifications_send_post_with_http_info(
+    async def notifications_send_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_notifications_send_notification_request: Optional[TransportNotificationsSendNotificationRequest] = None,
@@ -163,7 +163,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_notifications_send_post_serialize(
+        _param = self._notifications_send_post_serialize(
             timeout=timeout,
             transport_notifications_send_notification_request=transport_notifications_send_notification_request,
             _request_auth=_request_auth,
@@ -191,7 +191,7 @@ class NotificationsApi:
 
 
     @validate_call
-    async def api1_notifications_send_post_without_preload_content(
+    async def notifications_send_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_notifications_send_notification_request: Optional[TransportNotificationsSendNotificationRequest] = None,
@@ -238,7 +238,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_notifications_send_post_serialize(
+        _param = self._notifications_send_post_serialize(
             timeout=timeout,
             transport_notifications_send_notification_request=transport_notifications_send_notification_request,
             _request_auth=_request_auth,
@@ -261,7 +261,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _api1_notifications_send_post_serialize(
+    def _notifications_send_post_serialize(
         self,
         timeout,
         transport_notifications_send_notification_request,
@@ -325,7 +325,7 @@ class NotificationsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/notifications/send',
+            resource_path='/notifications/send',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

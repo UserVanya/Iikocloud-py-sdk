@@ -26,8 +26,8 @@ class TestAuthorizationApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_access_token_post(self) -> None:
-        """Test case for api1_access_token_post
+    async def test_access_token_post(self) -> None:
+        """Test case for access_token_post
 
         Retrieve session key for API user.
         """

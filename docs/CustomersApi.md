@@ -1,25 +1,25 @@
 # iikocloud_client.CustomersApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_loyalty_iiko_customer_card_add_post**](CustomersApi.md#api1_loyalty_iiko_customer_card_add_post) | **POST** /api/1/loyalty/iiko/customer/card/add | Add card.
-[**api1_loyalty_iiko_customer_card_remove_post**](CustomersApi.md#api1_loyalty_iiko_customer_card_remove_post) | **POST** /api/1/loyalty/iiko/customer/card/remove | Delete card.
-[**api1_loyalty_iiko_customer_create_or_update_post**](CustomersApi.md#api1_loyalty_iiko_customer_create_or_update_post) | **POST** /api/1/loyalty/iiko/customer/create_or_update | Create or update customer.
-[**api1_loyalty_iiko_customer_info_post**](CustomersApi.md#api1_loyalty_iiko_customer_info_post) | **POST** /api/1/loyalty/iiko/customer/info | Get customer info.
-[**api1_loyalty_iiko_customer_program_add_post**](CustomersApi.md#api1_loyalty_iiko_customer_program_add_post) | **POST** /api/1/loyalty/iiko/customer/program/add | Add customer to program.
-[**api1_loyalty_iiko_customer_wallet_cancel_hold_post**](CustomersApi.md#api1_loyalty_iiko_customer_wallet_cancel_hold_post) | **POST** /api/1/loyalty/iiko/customer/wallet/cancel_hold | Cancel hold money.
-[**api1_loyalty_iiko_customer_wallet_chargeoff_post**](CustomersApi.md#api1_loyalty_iiko_customer_wallet_chargeoff_post) | **POST** /api/1/loyalty/iiko/customer/wallet/chargeoff | Withdraw balance.
-[**api1_loyalty_iiko_customer_wallet_hold_post**](CustomersApi.md#api1_loyalty_iiko_customer_wallet_hold_post) | **POST** /api/1/loyalty/iiko/customer/wallet/hold | Hold money.
-[**api1_loyalty_iiko_customer_wallet_topup_post**](CustomersApi.md#api1_loyalty_iiko_customer_wallet_topup_post) | **POST** /api/1/loyalty/iiko/customer/wallet/topup | Refill balance.
-[**api1_loyalty_iiko_delete_customers_post**](CustomersApi.md#api1_loyalty_iiko_delete_customers_post) | **POST** /api/1/loyalty/iiko/delete_customers | Logical deletion of customers.
-[**api1_loyalty_iiko_get_counters_post**](CustomersApi.md#api1_loyalty_iiko_get_counters_post) | **POST** /api/1/loyalty/iiko/get_counters | Get counters.
-[**api1_loyalty_iiko_restore_customers_post**](CustomersApi.md#api1_loyalty_iiko_restore_customers_post) | **POST** /api/1/loyalty/iiko/restore_customers | Logical recovery of customers.
+[**loyalty_iiko_customer_card_add_post**](CustomersApi.md#loyalty_iiko_customer_card_add_post) | **POST** /loyalty/iiko/customer/card/add | Add card.
+[**loyalty_iiko_customer_card_remove_post**](CustomersApi.md#loyalty_iiko_customer_card_remove_post) | **POST** /loyalty/iiko/customer/card/remove | Delete card.
+[**loyalty_iiko_customer_create_or_update_post**](CustomersApi.md#loyalty_iiko_customer_create_or_update_post) | **POST** /loyalty/iiko/customer/create_or_update | Create or update customer.
+[**loyalty_iiko_customer_info_post**](CustomersApi.md#loyalty_iiko_customer_info_post) | **POST** /loyalty/iiko/customer/info | Get customer info.
+[**loyalty_iiko_customer_program_add_post**](CustomersApi.md#loyalty_iiko_customer_program_add_post) | **POST** /loyalty/iiko/customer/program/add | Add customer to program.
+[**loyalty_iiko_customer_wallet_cancel_hold_post**](CustomersApi.md#loyalty_iiko_customer_wallet_cancel_hold_post) | **POST** /loyalty/iiko/customer/wallet/cancel_hold | Cancel hold money.
+[**loyalty_iiko_customer_wallet_chargeoff_post**](CustomersApi.md#loyalty_iiko_customer_wallet_chargeoff_post) | **POST** /loyalty/iiko/customer/wallet/chargeoff | Withdraw balance.
+[**loyalty_iiko_customer_wallet_hold_post**](CustomersApi.md#loyalty_iiko_customer_wallet_hold_post) | **POST** /loyalty/iiko/customer/wallet/hold | Hold money.
+[**loyalty_iiko_customer_wallet_topup_post**](CustomersApi.md#loyalty_iiko_customer_wallet_topup_post) | **POST** /loyalty/iiko/customer/wallet/topup | Refill balance.
+[**loyalty_iiko_delete_customers_post**](CustomersApi.md#loyalty_iiko_delete_customers_post) | **POST** /loyalty/iiko/delete_customers | Logical deletion of customers.
+[**loyalty_iiko_get_counters_post**](CustomersApi.md#loyalty_iiko_get_counters_post) | **POST** /loyalty/iiko/get_counters | Get counters.
+[**loyalty_iiko_restore_customers_post**](CustomersApi.md#loyalty_iiko_restore_customers_post) | **POST** /loyalty/iiko/restore_customers | Logical recovery of customers.
 
 
-# **api1_loyalty_iiko_customer_card_add_post**
-> object api1_loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
+# **loyalty_iiko_customer_card_add_post**
+> object loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
 
 Add card.
 
@@ -37,10 +37,10 @@ from iikocloud_client.models.net_customer_add_magnet_card_request import NetCust
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -62,11 +62,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add card.
-        api_response = await api_instance.api1_loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_card_add_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_card_add_post(timeout=timeout, net_customer_add_magnet_card_request=net_customer_add_magnet_card_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_card_add_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_card_add_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_card_add_post: %s\n" % e)
 ```
 
 
@@ -104,8 +104,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_card_remove_post**
-> object api1_loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
+# **loyalty_iiko_customer_card_remove_post**
+> object loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
 
 Delete card.
 
@@ -123,10 +123,10 @@ from iikocloud_client.models.net_customer_delete_magnet_card_request import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -148,11 +148,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete card.
-        api_response = await api_instance.api1_loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_card_remove_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_card_remove_post(timeout=timeout, net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_card_remove_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_card_remove_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_card_remove_post: %s\n" % e)
 ```
 
 
@@ -190,8 +190,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_create_or_update_post**
-> NetCustomerCreateOrUpdateCustomerResponse api1_loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
+# **loyalty_iiko_customer_create_or_update_post**
+> NetCustomerCreateOrUpdateCustomerResponse loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
 
 Create or update customer.
 
@@ -210,10 +210,10 @@ from iikocloud_client.models.net_customer_create_or_update_customer_response imp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -235,11 +235,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Create or update customer.
-        api_response = await api_instance.api1_loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_create_or_update_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_create_or_update_post(timeout=timeout, net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_create_or_update_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_create_or_update_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_create_or_update_post: %s\n" % e)
 ```
 
 
@@ -277,8 +277,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_info_post**
-> NetCustomerGetCustomerInfoResponse api1_loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
+# **loyalty_iiko_customer_info_post**
+> NetCustomerGetCustomerInfoResponse loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
 
 Get customer info.
 
@@ -297,10 +297,10 @@ from iikocloud_client.models.net_customer_get_customer_info_response import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -322,11 +322,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get customer info.
-        api_response = await api_instance.api1_loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_info_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_info_post(timeout=timeout, net_customer_get_customer_info_request=net_customer_get_customer_info_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_info_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_info_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_info_post: %s\n" % e)
 ```
 
 
@@ -364,8 +364,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_program_add_post**
-> NetCustomerAddCustomerToProgramResponse api1_loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
+# **loyalty_iiko_customer_program_add_post**
+> NetCustomerAddCustomerToProgramResponse loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
 
 Add customer to program.
 
@@ -384,10 +384,10 @@ from iikocloud_client.models.net_customer_add_customer_to_program_response impor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -409,11 +409,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add customer to program.
-        api_response = await api_instance.api1_loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_program_add_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_program_add_post(timeout=timeout, net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_program_add_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_program_add_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_program_add_post: %s\n" % e)
 ```
 
 
@@ -451,8 +451,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_wallet_cancel_hold_post**
-> object api1_loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
+# **loyalty_iiko_customer_wallet_cancel_hold_post**
+> object loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
 
 Cancel hold money.
 
@@ -470,10 +470,10 @@ from iikocloud_client.models.net_customer_cancel_hold_money_request import NetCu
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -495,11 +495,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Cancel hold money.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_cancel_hold_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_wallet_cancel_hold_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_wallet_cancel_hold_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_wallet_cancel_hold_post: %s\n" % e)
 ```
 
 
@@ -537,8 +537,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_wallet_chargeoff_post**
-> object api1_loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+# **loyalty_iiko_customer_wallet_chargeoff_post**
+> object loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
 
 Withdraw balance.
 
@@ -556,10 +556,10 @@ from iikocloud_client.models.net_customer_change_user_balance_request import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -581,11 +581,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Withdraw balance.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_chargeoff_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_wallet_chargeoff_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_wallet_chargeoff_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_wallet_chargeoff_post: %s\n" % e)
 ```
 
 
@@ -623,8 +623,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_wallet_hold_post**
-> NetCustomerHoldMoneyResponse api1_loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
+# **loyalty_iiko_customer_wallet_hold_post**
+> NetCustomerHoldMoneyResponse loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
 
 Hold money.
 
@@ -643,10 +643,10 @@ from iikocloud_client.models.net_customer_hold_money_response import NetCustomer
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -668,11 +668,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Hold money.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_hold_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_wallet_hold_post(timeout=timeout, net_customer_hold_money_request=net_customer_hold_money_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_wallet_hold_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_wallet_hold_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_wallet_hold_post: %s\n" % e)
 ```
 
 
@@ -710,8 +710,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_wallet_topup_post**
-> object api1_loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+# **loyalty_iiko_customer_wallet_topup_post**
+> object loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
 
 Refill balance.
 
@@ -729,10 +729,10 @@ from iikocloud_client.models.net_customer_change_user_balance_request import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -754,11 +754,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Refill balance.
-        api_response = await api_instance.api1_loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_customer_wallet_topup_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_wallet_topup_post(timeout=timeout, net_customer_change_user_balance_request=net_customer_change_user_balance_request)
+        print("The response of CustomersApi->loyalty_iiko_customer_wallet_topup_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_customer_wallet_topup_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_customer_wallet_topup_post: %s\n" % e)
 ```
 
 
@@ -796,8 +796,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_delete_customers_post**
-> NetCustomerDeleteCustomersResponse api1_loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
+# **loyalty_iiko_delete_customers_post**
+> NetCustomerDeleteCustomersResponse loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
 
 Logical deletion of customers.
 
@@ -814,10 +814,10 @@ from iikocloud_client.models.net_customer_delete_customers_response import NetCu
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -839,11 +839,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Logical deletion of customers.
-        api_response = await api_instance.api1_loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_delete_customers_post:\n")
+        api_response = await api_instance.loyalty_iiko_delete_customers_post(timeout=timeout, net_customer_delete_customers_request=net_customer_delete_customers_request)
+        print("The response of CustomersApi->loyalty_iiko_delete_customers_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_delete_customers_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_delete_customers_post: %s\n" % e)
 ```
 
 
@@ -881,8 +881,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_get_counters_post**
-> NetLoyaltyResultGetCountersResponse api1_loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
+# **loyalty_iiko_get_counters_post**
+> NetLoyaltyResultGetCountersResponse loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
 
 Get counters.
 
@@ -899,10 +899,10 @@ from iikocloud_client.models.net_loyalty_result_get_counters_response import Net
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -924,11 +924,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get counters.
-        api_response = await api_instance.api1_loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_get_counters_post:\n")
+        api_response = await api_instance.loyalty_iiko_get_counters_post(timeout=timeout, net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request)
+        print("The response of CustomersApi->loyalty_iiko_get_counters_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_get_counters_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_get_counters_post: %s\n" % e)
 ```
 
 
@@ -966,8 +966,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_restore_customers_post**
-> NetCustomerRestoreCustomersResponse api1_loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
+# **loyalty_iiko_restore_customers_post**
+> NetCustomerRestoreCustomersResponse loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
 
 Logical recovery of customers.
 
@@ -984,10 +984,10 @@ from iikocloud_client.models.net_customer_restore_customers_response import NetC
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1009,11 +1009,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Logical recovery of customers.
-        api_response = await api_instance.api1_loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
-        print("The response of CustomersApi->api1_loyalty_iiko_restore_customers_post:\n")
+        api_response = await api_instance.loyalty_iiko_restore_customers_post(timeout=timeout, net_customer_restore_customers_request=net_customer_restore_customers_request)
+        print("The response of CustomersApi->loyalty_iiko_restore_customers_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CustomersApi->api1_loyalty_iiko_restore_customers_post: %s\n" % e)
+        print("Exception when calling CustomersApi->loyalty_iiko_restore_customers_post: %s\n" % e)
 ```
 
 

@@ -26,15 +26,15 @@ class TestWebhooksApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_webhooks_settings_post(self) -> None:
-        """Test case for api1_webhooks_settings_post
+    async def test_webhooks_settings_post(self) -> None:
+        """Test case for webhooks_settings_post
 
         Get webhooks settings for specified organization and authorized API login.
         """
         pass
 
-    async def test_api1_webhooks_update_settings_post(self) -> None:
-        """Test case for api1_webhooks_update_settings_post
+    async def test_webhooks_update_settings_post(self) -> None:
+        """Test case for webhooks_update_settings_post
 
         Update webhooks settings for specified organization and authorized API login.
         """

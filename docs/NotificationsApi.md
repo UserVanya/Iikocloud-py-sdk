@@ -1,14 +1,14 @@
 # iikocloud_client.NotificationsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_notifications_send_post**](NotificationsApi.md#api1_notifications_send_post) | **POST** /api/1/notifications/send | Send notification to external systems (iikoFront and iikoWeb).
+[**notifications_send_post**](NotificationsApi.md#notifications_send_post) | **POST** /notifications/send | Send notification to external systems (iikoFront and iikoWeb).
 
 
-# **api1_notifications_send_post**
-> TransportCommonCorrelationIdResponse api1_notifications_send_post(timeout=timeout, transport_notifications_send_notification_request=transport_notifications_send_notification_request)
+# **notifications_send_post**
+> TransportCommonCorrelationIdResponse notifications_send_post(timeout=timeout, transport_notifications_send_notification_request=transport_notifications_send_notification_request)
 
 Send notification to external systems (iikoFront and iikoWeb).
 
@@ -27,10 +27,10 @@ from iikocloud_client.models.transport_notifications_send_notification_request i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -52,11 +52,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Send notification to external systems (iikoFront and iikoWeb).
-        api_response = await api_instance.api1_notifications_send_post(timeout=timeout, transport_notifications_send_notification_request=transport_notifications_send_notification_request)
-        print("The response of NotificationsApi->api1_notifications_send_post:\n")
+        api_response = await api_instance.notifications_send_post(timeout=timeout, transport_notifications_send_notification_request=transport_notifications_send_notification_request)
+        print("The response of NotificationsApi->notifications_send_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling NotificationsApi->api1_notifications_send_post: %s\n" % e)
+        print("Exception when calling NotificationsApi->notifications_send_post: %s\n" % e)
 ```
 
 

@@ -27,7 +27,7 @@ class TransportTableOrdersRequestGetTableOrdersByIdRequest(BaseModel):
     Request for information about orders using IDs.
     """ # noqa: E501
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
-    organization_ids: List[StrictStr] = Field(description="Organization IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization IDs.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     order_ids: Optional[List[StrictStr]] = Field(default=None, description="Order IDs.                > Required if \"posOrderIds\" is null. Must be null if \"posOrderIds\" is not null.", alias="orderIds")
     pos_order_ids: Optional[List[StrictStr]] = Field(default=None, description="POS order IDs.                > Required if \"orderIds\" is null. Must be null if \"orderIds\" is not null.", alias="posOrderIds")
     return_external_data_keys: Optional[List[StrictStr]] = Field(default=None, description="Keys for retrun external data information.", alias="returnExternalDataKeys")

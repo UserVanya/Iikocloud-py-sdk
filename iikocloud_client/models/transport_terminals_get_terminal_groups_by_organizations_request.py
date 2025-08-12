@@ -26,7 +26,7 @@ class TransportTerminalsGetTerminalGroupsByOrganizationsRequest(BaseModel):
     """
     Request for list of terminal groups.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description="Organizations IDs for which information is requested.                 Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organizations IDs for which information is requested.                 Can be obtained by `/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

@@ -30,7 +30,7 @@ class TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequ
     Request to identify suitable terminal groups.
     """ # noqa: E501
     organization_id: Optional[StrictStr] = Field(default=None, description="Organization ID. Deprecated, use \"organizationIds\".", alias="organizationId")
-    organization_ids: Optional[List[StrictStr]] = Field(default=None, description="Organization IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: Optional[List[StrictStr]] = Field(default=None, description="Organization IDs.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     delivery_address: Optional[TransportDeliveryRestrictionsAllowedRestrictionsRestrictionsAddress] = Field(default=None, description="Delivery address.", alias="deliveryAddress")
     order_location: Optional[TransportDeliveryRestrictionsAllowedRestrictionsOrderLocation] = Field(default=None, description="Order location.", alias="orderLocation")
     order_items: Optional[List[TransportDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem]] = Field(default=None, description="Order list.", alias="orderItems")

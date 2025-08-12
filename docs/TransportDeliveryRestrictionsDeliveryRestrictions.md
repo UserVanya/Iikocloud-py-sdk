@@ -6,7 +6,7 @@ Delivery restrictions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **delivery_geocode_service_type** | [**TransportDeliveryRestrictionsDeliveryGeocodeServiceType**](TransportDeliveryRestrictionsDeliveryGeocodeServiceType.md) | Geocoding service type. | 
 **delivery_regions_map_url** | **str** | Link to the map of delivery service regions. | 
 **default_delivery_duration_in_minutes** | **int** | General standard of delivery time. | 

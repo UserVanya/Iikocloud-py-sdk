@@ -26,141 +26,141 @@ class TestDeliveriesCreateAndUpdateApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_deliveries_add_items_post(self) -> None:
-        """Test case for api1_deliveries_add_items_post
+    async def test_deliveries_add_items_post(self) -> None:
+        """Test case for deliveries_add_items_post
 
         Add order items.
         """
         pass
 
-    async def test_api1_deliveries_add_payments_post(self) -> None:
-        """Test case for api1_deliveries_add_payments_post
+    async def test_deliveries_add_payments_post(self) -> None:
+        """Test case for deliveries_add_payments_post
 
         Add order payments.
         """
         pass
 
-    async def test_api1_deliveries_cancel_confirmation_post(self) -> None:
-        """Test case for api1_deliveries_cancel_confirmation_post
+    async def test_deliveries_cancel_confirmation_post(self) -> None:
+        """Test case for deliveries_cancel_confirmation_post
 
         Cancel delivery confirmation.
         """
         pass
 
-    async def test_api1_deliveries_cancel_post(self) -> None:
-        """Test case for api1_deliveries_cancel_post
+    async def test_deliveries_cancel_post(self) -> None:
+        """Test case for deliveries_cancel_post
 
         Cancel delivery order.
         """
         pass
 
-    async def test_api1_deliveries_change_comment_post(self) -> None:
-        """Test case for api1_deliveries_change_comment_post
+    async def test_deliveries_change_comment_post(self) -> None:
+        """Test case for deliveries_change_comment_post
 
         Change delivery comment.
         """
         pass
 
-    async def test_api1_deliveries_change_complete_before_post(self) -> None:
-        """Test case for api1_deliveries_change_complete_before_post
+    async def test_deliveries_change_complete_before_post(self) -> None:
+        """Test case for deliveries_change_complete_before_post
 
         Change time when client wants the order to be delivered.
         """
         pass
 
-    async def test_api1_deliveries_change_delivery_point_post(self) -> None:
-        """Test case for api1_deliveries_change_delivery_point_post
+    async def test_deliveries_change_delivery_point_post(self) -> None:
+        """Test case for deliveries_change_delivery_point_post
 
         Change order's delivery point information.
         """
         pass
 
-    async def test_api1_deliveries_change_driver_info_post(self) -> None:
-        """Test case for api1_deliveries_change_driver_info_post
+    async def test_deliveries_change_driver_info_post(self) -> None:
+        """Test case for deliveries_change_driver_info_post
 
         Change driver info.
         """
         pass
 
-    async def test_api1_deliveries_change_external_data_post(self) -> None:
-        """Test case for api1_deliveries_change_external_data_post
+    async def test_deliveries_change_external_data_post(self) -> None:
+        """Test case for deliveries_change_external_data_post
 
         Change delivery external data.
         """
         pass
 
-    async def test_api1_deliveries_change_operator_post(self) -> None:
-        """Test case for api1_deliveries_change_operator_post
+    async def test_deliveries_change_operator_post(self) -> None:
+        """Test case for deliveries_change_operator_post
 
         Assign/change the order operator.
         """
         pass
 
-    async def test_api1_deliveries_change_payments_post(self) -> None:
-        """Test case for api1_deliveries_change_payments_post
+    async def test_deliveries_change_payments_post(self) -> None:
+        """Test case for deliveries_change_payments_post
 
         Change order's payments.
         """
         pass
 
-    async def test_api1_deliveries_change_service_type_post(self) -> None:
-        """Test case for api1_deliveries_change_service_type_post
+    async def test_deliveries_change_service_type_post(self) -> None:
+        """Test case for deliveries_change_service_type_post
 
         Change order's delivery type.
         """
         pass
 
-    async def test_api1_deliveries_close_post(self) -> None:
-        """Test case for api1_deliveries_close_post
+    async def test_deliveries_close_post(self) -> None:
+        """Test case for deliveries_close_post
 
         Close order.
         """
         pass
 
-    async def test_api1_deliveries_confirm_post(self) -> None:
-        """Test case for api1_deliveries_confirm_post
+    async def test_deliveries_confirm_post(self) -> None:
+        """Test case for deliveries_confirm_post
 
         Confirm delivery.
         """
         pass
 
-    async def test_api1_deliveries_create_post(self) -> None:
-        """Test case for api1_deliveries_create_post
+    async def test_deliveries_create_post(self) -> None:
+        """Test case for deliveries_create_post
 
         Create delivery.
         """
         pass
 
-    async def test_api1_deliveries_print_delivery_bill_post(self) -> None:
-        """Test case for api1_deliveries_print_delivery_bill_post
+    async def test_deliveries_print_delivery_bill_post(self) -> None:
+        """Test case for deliveries_print_delivery_bill_post
 
         Print delivery bill.
         """
         pass
 
-    async def test_api1_deliveries_update_order_courier_post(self) -> None:
-        """Test case for api1_deliveries_update_order_courier_post
+    async def test_deliveries_update_order_courier_post(self) -> None:
+        """Test case for deliveries_update_order_courier_post
 
         Update order courier.
         """
         pass
 
-    async def test_api1_deliveries_update_order_delivery_status_post(self) -> None:
-        """Test case for api1_deliveries_update_order_delivery_status_post
+    async def test_deliveries_update_order_delivery_status_post(self) -> None:
+        """Test case for deliveries_update_order_delivery_status_post
 
         Update delivery status.
         """
         pass
 
-    async def test_api1_deliveries_update_order_payments_post(self) -> None:
-        """Test case for api1_deliveries_update_order_payments_post
+    async def test_deliveries_update_order_payments_post(self) -> None:
+        """Test case for deliveries_update_order_payments_post
 
         Update order payment details.
         """
         pass
 
-    async def test_api1_deliveries_update_order_problem_post(self) -> None:
-        """Test case for api1_deliveries_update_order_problem_post
+    async def test_deliveries_update_order_problem_post(self) -> None:
+        """Test case for deliveries_update_order_problem_post
 
         Update order problem.
         """

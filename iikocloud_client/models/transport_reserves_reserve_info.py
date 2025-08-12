@@ -31,7 +31,7 @@ class TransportReservesReserveInfo(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="Banquet/reserve ID.")
     external_number: Optional[StrictStr] = Field(default=None, description="Banquet/reserve external number.", alias="externalNumber")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     timestamp: StrictInt = Field(description="Timestamp of most recent banquet/reserve change that took place on iikoTransport server.")
     creation_status: TransportDeliveriesResponseOrderCreationStatus = Field(description="Banquet/reserve creation status. In case of asynchronous creation, it allows to track the instance an banquet/reserve was validated/created in iikoFront.", alias="creationStatus")
     error_info: Optional[TransportErrorsErrorInfo] = Field(default=None, description="Banquet/reserve creation error details.  > Required only if \"creationStatus\"=\"Error\".", alias="errorInfo")

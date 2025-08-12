@@ -26,78 +26,78 @@ class TestOrdersApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_order_add_customer_post(self) -> None:
-        """Test case for api1_order_add_customer_post
+    async def test_order_add_customer_post(self) -> None:
+        """Test case for order_add_customer_post
 
         Add customer to order.
         """
         pass
 
-    async def test_api1_order_add_items_post(self) -> None:
-        """Test case for api1_order_add_items_post
+    async def test_order_add_items_post(self) -> None:
+        """Test case for order_add_items_post
 
         Add order items.
         """
         pass
 
-    async def test_api1_order_add_payments_post(self) -> None:
-        """Test case for api1_order_add_payments_post
+    async def test_order_add_payments_post(self) -> None:
+        """Test case for order_add_payments_post
 
         Add order payments.
         """
         pass
 
-    async def test_api1_order_by_id_post(self) -> None:
-        """Test case for api1_order_by_id_post
+    async def test_order_by_id_post(self) -> None:
+        """Test case for order_by_id_post
 
         Retrieve orders by IDs.
         """
         pass
 
-    async def test_api1_order_by_table_post(self) -> None:
-        """Test case for api1_order_by_table_post
+    async def test_order_by_table_post(self) -> None:
+        """Test case for order_by_table_post
 
         Retrieve orders by tables.
         """
         pass
 
-    async def test_api1_order_change_external_data_post(self) -> None:
-        """Test case for api1_order_change_external_data_post
+    async def test_order_change_external_data_post(self) -> None:
+        """Test case for order_change_external_data_post
 
         Change table order external_data.
         """
         pass
 
-    async def test_api1_order_change_payments_post(self) -> None:
-        """Test case for api1_order_change_payments_post
+    async def test_order_change_payments_post(self) -> None:
+        """Test case for order_change_payments_post
 
         Change table order's payments.
         """
         pass
 
-    async def test_api1_order_close_post(self) -> None:
-        """Test case for api1_order_close_post
+    async def test_order_close_post(self) -> None:
+        """Test case for order_close_post
 
         Close order.
         """
         pass
 
-    async def test_api1_order_create_post(self) -> None:
-        """Test case for api1_order_create_post
+    async def test_order_create_post(self) -> None:
+        """Test case for order_create_post
 
         Create order.
         """
         pass
 
-    async def test_api1_order_init_by_pos_order_post(self) -> None:
-        """Test case for api1_order_init_by_pos_order_post
+    async def test_order_init_by_pos_order_post(self) -> None:
+        """Test case for order_init_by_pos_order_post
 
         Init orders, created on POS, by POS orders.
         """
         pass
 
-    async def test_api1_order_init_by_table_post(self) -> None:
-        """Test case for api1_order_init_by_table_post
+    async def test_order_init_by_table_post(self) -> None:
+        """Test case for order_init_by_table_post
 
         Init orders, created on POS, by tables.
         """

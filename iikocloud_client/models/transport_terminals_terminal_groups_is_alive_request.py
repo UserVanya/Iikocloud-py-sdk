@@ -27,8 +27,8 @@ class TransportTerminalsTerminalGroupsIsAliveRequest(BaseModel):
     Request for terminal group availability details.
     """ # noqa: E501
     organization_id: Optional[StrictStr] = Field(default=None, description="Organization ID. Deprecated, use \"organizationIds\".", alias="organizationId")
-    organization_ids: Optional[List[StrictStr]] = Field(default=None, description=" Organization IDs.     Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
-    terminal_group_ids: List[StrictStr] = Field(description="List of terminal groups IDs.                 Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupIds")
+    organization_ids: Optional[List[StrictStr]] = Field(default=None, description=" Organization IDs.     Can be obtained by `/organizations` operation.", alias="organizationIds")
+    terminal_group_ids: List[StrictStr] = Field(description="List of terminal groups IDs.                 Can be obtained by `/terminal_groups` operation.", alias="terminalGroupIds")
     __properties: ClassVar[List[str]] = ["organizationId", "organizationIds", "terminalGroupIds"]
 
     model_config = ConfigDict(

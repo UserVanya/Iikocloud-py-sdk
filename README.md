@@ -55,10 +55,10 @@ import iikocloud_client
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -81,147 +81,147 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Cities.
-        api_response = await api_instance.api1_cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
-        print("The response of AddressesApi->api1_cities_post:\n")
+        api_response = await api_instance.cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+        print("The response of AddressesApi->cities_post:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling AddressesApi->api1_cities_post: %s\n" % e)
+        print("Exception when calling AddressesApi->cities_post: %s\n" % e)
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AddressesApi* | [**api1_cities_post**](docs/AddressesApi.md#api1_cities_post) | **POST** /api/1/cities | Cities.
-*AddressesApi* | [**api1_regions_post**](docs/AddressesApi.md#api1_regions_post) | **POST** /api/1/regions | Regions.
-*AddressesApi* | [**api1_streets_by_city_post**](docs/AddressesApi.md#api1_streets_by_city_post) | **POST** /api/1/streets/by_city | Streets by city.
-*AddressesApi* | [**api1_streets_by_id_post**](docs/AddressesApi.md#api1_streets_by_id_post) | **POST** /api/1/streets/by_id | Streets by id or by classifierId.
-*AuthorizationApi* | [**api1_access_token_post**](docs/AuthorizationApi.md#api1_access_token_post) | **POST** /api/1/access_token | Retrieve session key for API user.
-*BanquetsReservesApi* | [**api1_reserve_add_items_post**](docs/BanquetsReservesApi.md#api1_reserve_add_items_post) | **POST** /api/1/reserve/add_items | Add order items.
-*BanquetsReservesApi* | [**api1_reserve_add_payments_post**](docs/BanquetsReservesApi.md#api1_reserve_add_payments_post) | **POST** /api/1/reserve/add_payments | Add order payments.
-*BanquetsReservesApi* | [**api1_reserve_available_organizations_post**](docs/BanquetsReservesApi.md#api1_reserve_available_organizations_post) | **POST** /api/1/reserve/available_organizations | Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
-*BanquetsReservesApi* | [**api1_reserve_available_restaurant_sections_post**](docs/BanquetsReservesApi.md#api1_reserve_available_restaurant_sections_post) | **POST** /api/1/reserve/available_restaurant_sections | Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
-*BanquetsReservesApi* | [**api1_reserve_available_terminal_groups_post**](docs/BanquetsReservesApi.md#api1_reserve_available_terminal_groups_post) | **POST** /api/1/reserve/available_terminal_groups | Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
-*BanquetsReservesApi* | [**api1_reserve_cancel_post**](docs/BanquetsReservesApi.md#api1_reserve_cancel_post) | **POST** /api/1/reserve/cancel | Cancel reservation due to some reason.
-*BanquetsReservesApi* | [**api1_reserve_create_post**](docs/BanquetsReservesApi.md#api1_reserve_create_post) | **POST** /api/1/reserve/create | Create banquet/reserve.
-*BanquetsReservesApi* | [**api1_reserve_restaurant_sections_workload_post**](docs/BanquetsReservesApi.md#api1_reserve_restaurant_sections_workload_post) | **POST** /api/1/reserve/restaurant_sections_workload | Returns all banquets/reserves for passed restaurant sections.
-*BanquetsReservesApi* | [**api1_reserve_status_by_id_post**](docs/BanquetsReservesApi.md#api1_reserve_status_by_id_post) | **POST** /api/1/reserve/status_by_id | Retrieve banquets/reserves statuses by IDs.
-*CustomerCategoriesApi* | [**api1_loyalty_iiko_customer_category_add_post**](docs/CustomerCategoriesApi.md#api1_loyalty_iiko_customer_category_add_post) | **POST** /api/1/loyalty/iiko/customer_category/add | Add category for customer.
-*CustomerCategoriesApi* | [**api1_loyalty_iiko_customer_category_post**](docs/CustomerCategoriesApi.md#api1_loyalty_iiko_customer_category_post) | **POST** /api/1/loyalty/iiko/customer_category | Get customer categories.
-*CustomerCategoriesApi* | [**api1_loyalty_iiko_customer_category_remove_post**](docs/CustomerCategoriesApi.md#api1_loyalty_iiko_customer_category_remove_post) | **POST** /api/1/loyalty/iiko/customer_category/remove | Remove category for customer.
-*CustomersApi* | [**api1_loyalty_iiko_customer_card_add_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_card_add_post) | **POST** /api/1/loyalty/iiko/customer/card/add | Add card.
-*CustomersApi* | [**api1_loyalty_iiko_customer_card_remove_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_card_remove_post) | **POST** /api/1/loyalty/iiko/customer/card/remove | Delete card.
-*CustomersApi* | [**api1_loyalty_iiko_customer_create_or_update_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_create_or_update_post) | **POST** /api/1/loyalty/iiko/customer/create_or_update | Create or update customer.
-*CustomersApi* | [**api1_loyalty_iiko_customer_info_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_info_post) | **POST** /api/1/loyalty/iiko/customer/info | Get customer info.
-*CustomersApi* | [**api1_loyalty_iiko_customer_program_add_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_program_add_post) | **POST** /api/1/loyalty/iiko/customer/program/add | Add customer to program.
-*CustomersApi* | [**api1_loyalty_iiko_customer_wallet_cancel_hold_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_wallet_cancel_hold_post) | **POST** /api/1/loyalty/iiko/customer/wallet/cancel_hold | Cancel hold money.
-*CustomersApi* | [**api1_loyalty_iiko_customer_wallet_chargeoff_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_wallet_chargeoff_post) | **POST** /api/1/loyalty/iiko/customer/wallet/chargeoff | Withdraw balance.
-*CustomersApi* | [**api1_loyalty_iiko_customer_wallet_hold_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_wallet_hold_post) | **POST** /api/1/loyalty/iiko/customer/wallet/hold | Hold money.
-*CustomersApi* | [**api1_loyalty_iiko_customer_wallet_topup_post**](docs/CustomersApi.md#api1_loyalty_iiko_customer_wallet_topup_post) | **POST** /api/1/loyalty/iiko/customer/wallet/topup | Refill balance.
-*CustomersApi* | [**api1_loyalty_iiko_delete_customers_post**](docs/CustomersApi.md#api1_loyalty_iiko_delete_customers_post) | **POST** /api/1/loyalty/iiko/delete_customers | Logical deletion of customers.
-*CustomersApi* | [**api1_loyalty_iiko_get_counters_post**](docs/CustomersApi.md#api1_loyalty_iiko_get_counters_post) | **POST** /api/1/loyalty/iiko/get_counters | Get counters.
-*CustomersApi* | [**api1_loyalty_iiko_restore_customers_post**](docs/CustomersApi.md#api1_loyalty_iiko_restore_customers_post) | **POST** /api/1/loyalty/iiko/restore_customers | Logical recovery of customers.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_add_items_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_add_items_post) | **POST** /api/1/deliveries/add_items | Add order items.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_add_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_add_payments_post) | **POST** /api/1/deliveries/add_payments | Add order payments.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_cancel_confirmation_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_cancel_confirmation_post) | **POST** /api/1/deliveries/cancel_confirmation | Cancel delivery confirmation.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_cancel_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_cancel_post) | **POST** /api/1/deliveries/cancel | Cancel delivery order.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_comment_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_comment_post) | **POST** /api/1/deliveries/change_comment | Change delivery comment.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_complete_before_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_complete_before_post) | **POST** /api/1/deliveries/change_complete_before | Change time when client wants the order to be delivered.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_delivery_point_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_delivery_point_post) | **POST** /api/1/deliveries/change_delivery_point | Change order&#39;s delivery point information.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_driver_info_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_driver_info_post) | **POST** /api/1/deliveries/change_driver_info | Change driver info.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_external_data_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_external_data_post) | **POST** /api/1/deliveries/change_external_data | Change delivery external data.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_operator_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_operator_post) | **POST** /api/1/deliveries/change_operator | Assign/change the order operator.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_payments_post) | **POST** /api/1/deliveries/change_payments | Change order&#39;s payments.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_change_service_type_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_change_service_type_post) | **POST** /api/1/deliveries/change_service_type | Change order&#39;s delivery type.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_close_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_close_post) | **POST** /api/1/deliveries/close | Close order.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_confirm_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_confirm_post) | **POST** /api/1/deliveries/confirm | Confirm delivery.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_create_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_create_post) | **POST** /api/1/deliveries/create | Create delivery.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_print_delivery_bill_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_print_delivery_bill_post) | **POST** /api/1/deliveries/print_delivery_bill | Print delivery bill.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_update_order_courier_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_update_order_courier_post) | **POST** /api/1/deliveries/update_order_courier | Update order courier.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_update_order_delivery_status_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_update_order_delivery_status_post) | **POST** /api/1/deliveries/update_order_delivery_status | Update delivery status.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_update_order_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_update_order_payments_post) | **POST** /api/1/deliveries/update_order_payments | Update order payment details.
-*DeliveriesCreateAndUpdateApi* | [**api1_deliveries_update_order_problem_post**](docs/DeliveriesCreateAndUpdateApi.md#api1_deliveries_update_order_problem_post) | **POST** /api/1/deliveries/update_order_problem | Update order problem.
-*DeliveriesRetrieveApi* | [**api1_deliveries_by_delivery_date_and_phone_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_phone_post) | **POST** /api/1/deliveries/by_delivery_date_and_phone | Retrieve list of orders by telephone number, dates and revision.
-*DeliveriesRetrieveApi* | [**api1_deliveries_by_delivery_date_and_source_key_and_filter_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_source_key_and_filter_post) | **POST** /api/1/deliveries/by_delivery_date_and_source_key_and_filter | Search orders by search text and additional filters (date, problem, statuses and other).
-*DeliveriesRetrieveApi* | [**api1_deliveries_by_delivery_date_and_status_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_status_post) | **POST** /api/1/deliveries/by_delivery_date_and_status | Retrieve list of orders by statuses and dates.
-*DeliveriesRetrieveApi* | [**api1_deliveries_by_id_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_by_id_post) | **POST** /api/1/deliveries/by_id | Retrieve orders by IDs.
-*DeliveriesRetrieveApi* | [**api1_deliveries_by_revision_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_by_revision_post) | **POST** /api/1/deliveries/by_revision | Retrieve list of orders changed from the time revision was passed.
-*DeliveriesRetrieveApi* | [**api1_deliveries_history_by_delivery_date_and_phone_post**](docs/DeliveriesRetrieveApi.md#api1_deliveries_history_by_delivery_date_and_phone_post) | **POST** /api/1/deliveries/history/by_delivery_date_and_phone | Retrieve list of history orders by telephone number, dates and revision.
-*DeliveryRestrictionsApi* | [**api1_delivery_restrictions_allowed_post**](docs/DeliveryRestrictionsApi.md#api1_delivery_restrictions_allowed_post) | **POST** /api/1/delivery_restrictions/allowed | Get suitable terminal groups for delivery restrictions.
-*DeliveryRestrictionsApi* | [**api1_delivery_restrictions_post**](docs/DeliveryRestrictionsApi.md#api1_delivery_restrictions_post) | **POST** /api/1/delivery_restrictions | Retrieve list of delivery restrictions.
-*DeprecatedApi* | [**api1_deliveries_check_create_post**](docs/DeprecatedApi.md#api1_deliveries_check_create_post) | **POST** /api/1/deliveries/check_create | Check create delivery.
-*DeprecatedApi* | [**api1_deliveries_update_order_payments_post**](docs/DeprecatedApi.md#api1_deliveries_update_order_payments_post) | **POST** /api/1/deliveries/update_order_payments | Update order payment details.
-*DeprecatedApi* | [**api1_organizations_get**](docs/DeprecatedApi.md#api1_organizations_get) | **GET** /api/1/organizations | Returns organizations available to api-login user.
-*DictionariesApi* | [**api1_cancel_causes_post**](docs/DictionariesApi.md#api1_cancel_causes_post) | **POST** /api/1/cancel_causes | Delivery cancel causes.
-*DictionariesApi* | [**api1_deliveries_order_types_post**](docs/DictionariesApi.md#api1_deliveries_order_types_post) | **POST** /api/1/deliveries/order_types | Order types.
-*DictionariesApi* | [**api1_discounts_post**](docs/DictionariesApi.md#api1_discounts_post) | **POST** /api/1/discounts | Discounts / surcharges.
-*DictionariesApi* | [**api1_payment_types_post**](docs/DictionariesApi.md#api1_payment_types_post) | **POST** /api/1/payment_types | Payment types.
-*DictionariesApi* | [**api1_removal_types_post**](docs/DictionariesApi.md#api1_removal_types_post) | **POST** /api/1/removal_types | Removal types (reasons for deletion).
-*DictionariesApi* | [**api1_tips_types_post**](docs/DictionariesApi.md#api1_tips_types_post) | **POST** /api/1/tips_types | Get tips types for api-login&#x60;s rms group.
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_calculate_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_calculate_post) | **POST** /api/1/loyalty/iiko/calculate | Calculate checkin.
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_coupons_by_series_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_by_series_post) | **POST** /api/1/loyalty/iiko/coupons/by_series | Get non-activated coupons
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_coupons_info_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_info_post) | **POST** /api/1/loyalty/iiko/coupons/info | Get coupon info.
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_coupons_series_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_series_post) | **POST** /api/1/loyalty/iiko/coupons/series | Get coupon series with non-activated coupons.
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_manual_condition_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_manual_condition_post) | **POST** /api/1/loyalty/iiko/manual_condition | Get manual conditions.
-*DiscountsAndPromotionsApi* | [**api1_loyalty_iiko_program_post**](docs/DiscountsAndPromotionsApi.md#api1_loyalty_iiko_program_post) | **POST** /api/1/loyalty/iiko/program | Get programs.
-*DraftsApi* | [**api1_deliveries_drafts_by_filter_post**](docs/DraftsApi.md#api1_deliveries_drafts_by_filter_post) | **POST** /api/1/deliveries/drafts/by_filter | Retrieve order drafts list by parameters.
-*DraftsApi* | [**api1_deliveries_drafts_by_id_post**](docs/DraftsApi.md#api1_deliveries_drafts_by_id_post) | **POST** /api/1/deliveries/drafts/by_id | Retrieve order draft by ID.
-*DraftsApi* | [**api1_deliveries_drafts_commit_post**](docs/DraftsApi.md#api1_deliveries_drafts_commit_post) | **POST** /api/1/deliveries/drafts/commit | Admit order draft changes and send them to Front.
-*DraftsApi* | [**api1_deliveries_drafts_create_post**](docs/DraftsApi.md#api1_deliveries_drafts_create_post) | **POST** /api/1/deliveries/drafts/create | Create delivery order draft.
-*DraftsApi* | [**api1_deliveries_drafts_delete_post**](docs/DraftsApi.md#api1_deliveries_drafts_delete_post) | **POST** /api/1/deliveries/drafts/delete | Delete order draft.
-*DraftsApi* | [**api1_deliveries_drafts_lock_post**](docs/DraftsApi.md#api1_deliveries_drafts_lock_post) | **POST** /api/1/deliveries/drafts/lock | Lock order draft.
-*DraftsApi* | [**api1_deliveries_drafts_save_post**](docs/DraftsApi.md#api1_deliveries_drafts_save_post) | **POST** /api/1/deliveries/drafts/save | Update existing delivery order draft.
-*DraftsApi* | [**api1_deliveries_drafts_unlock_post**](docs/DraftsApi.md#api1_deliveries_drafts_unlock_post) | **POST** /api/1/deliveries/drafts/unlock | Unlock order draft.
-*EmployeesApi* | [**api1_employees_couriers_active_location_by_terminal_post**](docs/EmployeesApi.md#api1_employees_couriers_active_location_by_terminal_post) | **POST** /api/1/employees/couriers/active_location/by_terminal | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
-*EmployeesApi* | [**api1_employees_couriers_active_location_post**](docs/EmployeesApi.md#api1_employees_couriers_active_location_post) | **POST** /api/1/employees/couriers/active_location | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers   in specified restaurants.
-*EmployeesApi* | [**api1_employees_couriers_by_role_post**](docs/EmployeesApi.md#api1_employees_couriers_by_role_post) | **POST** /api/1/employees/couriers/by_role | Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
-*EmployeesApi* | [**api1_employees_couriers_locations_by_time_offset_post**](docs/EmployeesApi.md#api1_employees_couriers_locations_by_time_offset_post) | **POST** /api/1/employees/couriers/locations/by_time_offset | Method of obtaining drivers&#39; coordinates history.
-*EmployeesApi* | [**api1_employees_couriers_post**](docs/EmployeesApi.md#api1_employees_couriers_post) | **POST** /api/1/employees/couriers | Returns list of all employees which are delivery drivers in specified restaurants.
-*EmployeesApi* | [**api1_employees_info_post**](docs/EmployeesApi.md#api1_employees_info_post) | **POST** /api/1/employees/info | Returns employee info.
-*EmployeesApi* | [**api1_employees_shift_clockin_post**](docs/EmployeesApi.md#api1_employees_shift_clockin_post) | **POST** /api/1/employees/shift/clockin | Open personal session.
-*EmployeesApi* | [**api1_employees_shift_clockout_post**](docs/EmployeesApi.md#api1_employees_shift_clockout_post) | **POST** /api/1/employees/shift/clockout | Close personal session.
-*EmployeesApi* | [**api1_employees_shift_is_open_post**](docs/EmployeesApi.md#api1_employees_shift_is_open_post) | **POST** /api/1/employees/shift/is_open | Check if personal session is open.
-*EmployeesApi* | [**api1_employees_shifts_by_courier_post**](docs/EmployeesApi.md#api1_employees_shifts_by_courier_post) | **POST** /api/1/employees/shifts/by_courier | Get terminal groups where employee session is opened.
-*MarketingSourcesApi* | [**api1_marketing_sources_post**](docs/MarketingSourcesApi.md#api1_marketing_sources_post) | **POST** /api/1/marketing_sources | Marketing sources.
-*MenuApi* | [**api1_combo_calculate_post**](docs/MenuApi.md#api1_combo_calculate_post) | **POST** /api/1/combo/calculate | Calculate combo price
-*MenuApi* | [**api1_combo_post**](docs/MenuApi.md#api1_combo_post) | **POST** /api/1/combo | Get combos info
-*MenuApi* | [**api1_nomenclature_post**](docs/MenuApi.md#api1_nomenclature_post) | **POST** /api/1/nomenclature | Menu.
-*MenuApi* | [**api1_stop_lists_add_post**](docs/MenuApi.md#api1_stop_lists_add_post) | **POST** /api/1/stop_lists/add | Add items to out-of-stock list.  (You should have extra rights to use this method).
-*MenuApi* | [**api1_stop_lists_check_post**](docs/MenuApi.md#api1_stop_lists_check_post) | **POST** /api/1/stop_lists/check | Check items in out-of-stock list.
-*MenuApi* | [**api1_stop_lists_clear_post**](docs/MenuApi.md#api1_stop_lists_clear_post) | **POST** /api/1/stop_lists/clear | Clear out-of-stock list.  (You should have extra rights to use this method).
-*MenuApi* | [**api1_stop_lists_post**](docs/MenuApi.md#api1_stop_lists_post) | **POST** /api/1/stop_lists | Out-of-stock items.
-*MenuApi* | [**api1_stop_lists_remove_post**](docs/MenuApi.md#api1_stop_lists_remove_post) | **POST** /api/1/stop_lists/remove | Remove items from out-of-stock list.  (You should have extra rights to use this method).
-*MenuApi* | [**api2_menu_by_id_post**](docs/MenuApi.md#api2_menu_by_id_post) | **POST** /api/2/menu/by_id | Retrieve external menu by ID.
-*MenuApi* | [**api2_menu_post**](docs/MenuApi.md#api2_menu_post) | **POST** /api/2/menu | External menus with price categories.
-*MessagesApi* | [**api1_loyalty_iiko_check_sms_sending_possibility_post**](docs/MessagesApi.md#api1_loyalty_iiko_check_sms_sending_possibility_post) | **POST** /api/1/loyalty/iiko/check_sms_sending_possibility | Check sms sending possibility.
-*MessagesApi* | [**api1_loyalty_iiko_check_sms_status_post**](docs/MessagesApi.md#api1_loyalty_iiko_check_sms_status_post) | **POST** /api/1/loyalty/iiko/check_sms_status | Check SMS status.
-*MessagesApi* | [**api1_loyalty_iiko_message_send_email_post**](docs/MessagesApi.md#api1_loyalty_iiko_message_send_email_post) | **POST** /api/1/loyalty/iiko/message/send_email | Send email.
-*MessagesApi* | [**api1_loyalty_iiko_message_send_sms_post**](docs/MessagesApi.md#api1_loyalty_iiko_message_send_sms_post) | **POST** /api/1/loyalty/iiko/message/send_sms | Send sms.
-*NotificationsApi* | [**api1_notifications_send_post**](docs/NotificationsApi.md#api1_notifications_send_post) | **POST** /api/1/notifications/send | Send notification to external systems (iikoFront and iikoWeb).
-*OperationsApi* | [**api1_commands_status_post**](docs/OperationsApi.md#api1_commands_status_post) | **POST** /api/1/commands/status | Get status of command.
-*OrdersApi* | [**api1_order_add_customer_post**](docs/OrdersApi.md#api1_order_add_customer_post) | **POST** /api/1/order/add_customer | Add customer to order.
-*OrdersApi* | [**api1_order_add_items_post**](docs/OrdersApi.md#api1_order_add_items_post) | **POST** /api/1/order/add_items | Add order items.
-*OrdersApi* | [**api1_order_add_payments_post**](docs/OrdersApi.md#api1_order_add_payments_post) | **POST** /api/1/order/add_payments | Add order payments.
-*OrdersApi* | [**api1_order_by_id_post**](docs/OrdersApi.md#api1_order_by_id_post) | **POST** /api/1/order/by_id | Retrieve orders by IDs.
-*OrdersApi* | [**api1_order_by_table_post**](docs/OrdersApi.md#api1_order_by_table_post) | **POST** /api/1/order/by_table | Retrieve orders by tables.
-*OrdersApi* | [**api1_order_change_external_data_post**](docs/OrdersApi.md#api1_order_change_external_data_post) | **POST** /api/1/order/change_external_data | Change table order external_data.
-*OrdersApi* | [**api1_order_change_payments_post**](docs/OrdersApi.md#api1_order_change_payments_post) | **POST** /api/1/order/change_payments | Change table order&#39;s payments.
-*OrdersApi* | [**api1_order_close_post**](docs/OrdersApi.md#api1_order_close_post) | **POST** /api/1/order/close | Close order.
-*OrdersApi* | [**api1_order_create_post**](docs/OrdersApi.md#api1_order_create_post) | **POST** /api/1/order/create | Create order.
-*OrdersApi* | [**api1_order_init_by_pos_order_post**](docs/OrdersApi.md#api1_order_init_by_pos_order_post) | **POST** /api/1/order/init_by_posOrder | Init orders, created on POS, by POS orders.
-*OrdersApi* | [**api1_order_init_by_table_post**](docs/OrdersApi.md#api1_order_init_by_table_post) | **POST** /api/1/order/init_by_table | Init orders, created on POS, by tables.
-*OrganizationsApi* | [**api1_organizations_post**](docs/OrganizationsApi.md#api1_organizations_post) | **POST** /api/1/organizations | Returns organizations available to api-login user.
-*OrganizationsApi* | [**api1_organizations_settings_post**](docs/OrganizationsApi.md#api1_organizations_settings_post) | **POST** /api/1/organizations/settings | Returns available to api-login user organizations specified settings.
-*ReportApi* | [**api1_loyalty_iiko_customer_transactions_by_date_post**](docs/ReportApi.md#api1_loyalty_iiko_customer_transactions_by_date_post) | **POST** /api/1/loyalty/iiko/customer/transactions/by_date | Get transaction report by period.
-*ReportApi* | [**api1_loyalty_iiko_customer_transactions_by_revision_post**](docs/ReportApi.md#api1_loyalty_iiko_customer_transactions_by_revision_post) | **POST** /api/1/loyalty/iiko/customer/transactions/by_revision | Get transaction report by revision.
-*TerminalGroupsApi* | [**api1_terminal_groups_awake_post**](docs/TerminalGroupsApi.md#api1_terminal_groups_awake_post) | **POST** /api/1/terminal_groups/awake | Awake terminal groups from sleep mode.
-*TerminalGroupsApi* | [**api1_terminal_groups_is_alive_post**](docs/TerminalGroupsApi.md#api1_terminal_groups_is_alive_post) | **POST** /api/1/terminal_groups/is_alive | Returns information on availability of group of terminals.
-*TerminalGroupsApi* | [**api1_terminal_groups_post**](docs/TerminalGroupsApi.md#api1_terminal_groups_post) | **POST** /api/1/terminal_groups | Method that returns information on groups of delivery terminals.
-*WebhooksApi* | [**api1_webhooks_settings_post**](docs/WebhooksApi.md#api1_webhooks_settings_post) | **POST** /api/1/webhooks/settings | Get webhooks settings for specified organization and authorized API login.
-*WebhooksApi* | [**api1_webhooks_update_settings_post**](docs/WebhooksApi.md#api1_webhooks_update_settings_post) | **POST** /api/1/webhooks/update_settings | Update webhooks settings for specified organization and authorized API login.
+*AddressesApi* | [**cities_post**](docs/AddressesApi.md#cities_post) | **POST** /cities | Cities.
+*AddressesApi* | [**regions_post**](docs/AddressesApi.md#regions_post) | **POST** /regions | Regions.
+*AddressesApi* | [**streets_by_city_post**](docs/AddressesApi.md#streets_by_city_post) | **POST** /streets/by_city | Streets by city.
+*AddressesApi* | [**streets_by_id_post**](docs/AddressesApi.md#streets_by_id_post) | **POST** /streets/by_id | Streets by id or by classifierId.
+*AuthorizationApi* | [**access_token_post**](docs/AuthorizationApi.md#access_token_post) | **POST** /access_token | Retrieve session key for API user.
+*BanquetsReservesApi* | [**reserve_add_items_post**](docs/BanquetsReservesApi.md#reserve_add_items_post) | **POST** /reserve/add_items | Add order items.
+*BanquetsReservesApi* | [**reserve_add_payments_post**](docs/BanquetsReservesApi.md#reserve_add_payments_post) | **POST** /reserve/add_payments | Add order payments.
+*BanquetsReservesApi* | [**reserve_available_organizations_post**](docs/BanquetsReservesApi.md#reserve_available_organizations_post) | **POST** /reserve/available_organizations | Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
+*BanquetsReservesApi* | [**reserve_available_restaurant_sections_post**](docs/BanquetsReservesApi.md#reserve_available_restaurant_sections_post) | **POST** /reserve/available_restaurant_sections | Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
+*BanquetsReservesApi* | [**reserve_available_terminal_groups_post**](docs/BanquetsReservesApi.md#reserve_available_terminal_groups_post) | **POST** /reserve/available_terminal_groups | Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
+*BanquetsReservesApi* | [**reserve_cancel_post**](docs/BanquetsReservesApi.md#reserve_cancel_post) | **POST** /reserve/cancel | Cancel reservation due to some reason.
+*BanquetsReservesApi* | [**reserve_create_post**](docs/BanquetsReservesApi.md#reserve_create_post) | **POST** /reserve/create | Create banquet/reserve.
+*BanquetsReservesApi* | [**reserve_restaurant_sections_workload_post**](docs/BanquetsReservesApi.md#reserve_restaurant_sections_workload_post) | **POST** /reserve/restaurant_sections_workload | Returns all banquets/reserves for passed restaurant sections.
+*BanquetsReservesApi* | [**reserve_status_by_id_post**](docs/BanquetsReservesApi.md#reserve_status_by_id_post) | **POST** /reserve/status_by_id | Retrieve banquets/reserves statuses by IDs.
+*CustomerCategoriesApi* | [**loyalty_iiko_customer_category_add_post**](docs/CustomerCategoriesApi.md#loyalty_iiko_customer_category_add_post) | **POST** /loyalty/iiko/customer_category/add | Add category for customer.
+*CustomerCategoriesApi* | [**loyalty_iiko_customer_category_post**](docs/CustomerCategoriesApi.md#loyalty_iiko_customer_category_post) | **POST** /loyalty/iiko/customer_category | Get customer categories.
+*CustomerCategoriesApi* | [**loyalty_iiko_customer_category_remove_post**](docs/CustomerCategoriesApi.md#loyalty_iiko_customer_category_remove_post) | **POST** /loyalty/iiko/customer_category/remove | Remove category for customer.
+*CustomersApi* | [**loyalty_iiko_customer_card_add_post**](docs/CustomersApi.md#loyalty_iiko_customer_card_add_post) | **POST** /loyalty/iiko/customer/card/add | Add card.
+*CustomersApi* | [**loyalty_iiko_customer_card_remove_post**](docs/CustomersApi.md#loyalty_iiko_customer_card_remove_post) | **POST** /loyalty/iiko/customer/card/remove | Delete card.
+*CustomersApi* | [**loyalty_iiko_customer_create_or_update_post**](docs/CustomersApi.md#loyalty_iiko_customer_create_or_update_post) | **POST** /loyalty/iiko/customer/create_or_update | Create or update customer.
+*CustomersApi* | [**loyalty_iiko_customer_info_post**](docs/CustomersApi.md#loyalty_iiko_customer_info_post) | **POST** /loyalty/iiko/customer/info | Get customer info.
+*CustomersApi* | [**loyalty_iiko_customer_program_add_post**](docs/CustomersApi.md#loyalty_iiko_customer_program_add_post) | **POST** /loyalty/iiko/customer/program/add | Add customer to program.
+*CustomersApi* | [**loyalty_iiko_customer_wallet_cancel_hold_post**](docs/CustomersApi.md#loyalty_iiko_customer_wallet_cancel_hold_post) | **POST** /loyalty/iiko/customer/wallet/cancel_hold | Cancel hold money.
+*CustomersApi* | [**loyalty_iiko_customer_wallet_chargeoff_post**](docs/CustomersApi.md#loyalty_iiko_customer_wallet_chargeoff_post) | **POST** /loyalty/iiko/customer/wallet/chargeoff | Withdraw balance.
+*CustomersApi* | [**loyalty_iiko_customer_wallet_hold_post**](docs/CustomersApi.md#loyalty_iiko_customer_wallet_hold_post) | **POST** /loyalty/iiko/customer/wallet/hold | Hold money.
+*CustomersApi* | [**loyalty_iiko_customer_wallet_topup_post**](docs/CustomersApi.md#loyalty_iiko_customer_wallet_topup_post) | **POST** /loyalty/iiko/customer/wallet/topup | Refill balance.
+*CustomersApi* | [**loyalty_iiko_delete_customers_post**](docs/CustomersApi.md#loyalty_iiko_delete_customers_post) | **POST** /loyalty/iiko/delete_customers | Logical deletion of customers.
+*CustomersApi* | [**loyalty_iiko_get_counters_post**](docs/CustomersApi.md#loyalty_iiko_get_counters_post) | **POST** /loyalty/iiko/get_counters | Get counters.
+*CustomersApi* | [**loyalty_iiko_restore_customers_post**](docs/CustomersApi.md#loyalty_iiko_restore_customers_post) | **POST** /loyalty/iiko/restore_customers | Logical recovery of customers.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_add_items_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_add_items_post) | **POST** /deliveries/add_items | Add order items.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_add_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_add_payments_post) | **POST** /deliveries/add_payments | Add order payments.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_cancel_confirmation_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_cancel_confirmation_post) | **POST** /deliveries/cancel_confirmation | Cancel delivery confirmation.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_cancel_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_cancel_post) | **POST** /deliveries/cancel | Cancel delivery order.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_comment_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_comment_post) | **POST** /deliveries/change_comment | Change delivery comment.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_complete_before_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_complete_before_post) | **POST** /deliveries/change_complete_before | Change time when client wants the order to be delivered.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_delivery_point_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_delivery_point_post) | **POST** /deliveries/change_delivery_point | Change order&#39;s delivery point information.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_driver_info_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_driver_info_post) | **POST** /deliveries/change_driver_info | Change driver info.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_external_data_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_external_data_post) | **POST** /deliveries/change_external_data | Change delivery external data.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_operator_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_operator_post) | **POST** /deliveries/change_operator | Assign/change the order operator.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_payments_post) | **POST** /deliveries/change_payments | Change order&#39;s payments.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_change_service_type_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_change_service_type_post) | **POST** /deliveries/change_service_type | Change order&#39;s delivery type.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_close_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_close_post) | **POST** /deliveries/close | Close order.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_confirm_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_confirm_post) | **POST** /deliveries/confirm | Confirm delivery.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_create_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_create_post) | **POST** /deliveries/create | Create delivery.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_print_delivery_bill_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_print_delivery_bill_post) | **POST** /deliveries/print_delivery_bill | Print delivery bill.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_update_order_courier_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_update_order_courier_post) | **POST** /deliveries/update_order_courier | Update order courier.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_update_order_delivery_status_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_update_order_delivery_status_post) | **POST** /deliveries/update_order_delivery_status | Update delivery status.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_update_order_payments_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_update_order_payments_post) | **POST** /deliveries/update_order_payments | Update order payment details.
+*DeliveriesCreateAndUpdateApi* | [**deliveries_update_order_problem_post**](docs/DeliveriesCreateAndUpdateApi.md#deliveries_update_order_problem_post) | **POST** /deliveries/update_order_problem | Update order problem.
+*DeliveriesRetrieveApi* | [**deliveries_by_delivery_date_and_phone_post**](docs/DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_phone_post) | **POST** /deliveries/by_delivery_date_and_phone | Retrieve list of orders by telephone number, dates and revision.
+*DeliveriesRetrieveApi* | [**deliveries_by_delivery_date_and_source_key_and_filter_post**](docs/DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_source_key_and_filter_post) | **POST** /deliveries/by_delivery_date_and_source_key_and_filter | Search orders by search text and additional filters (date, problem, statuses and other).
+*DeliveriesRetrieveApi* | [**deliveries_by_delivery_date_and_status_post**](docs/DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_status_post) | **POST** /deliveries/by_delivery_date_and_status | Retrieve list of orders by statuses and dates.
+*DeliveriesRetrieveApi* | [**deliveries_by_id_post**](docs/DeliveriesRetrieveApi.md#deliveries_by_id_post) | **POST** /deliveries/by_id | Retrieve orders by IDs.
+*DeliveriesRetrieveApi* | [**deliveries_by_revision_post**](docs/DeliveriesRetrieveApi.md#deliveries_by_revision_post) | **POST** /deliveries/by_revision | Retrieve list of orders changed from the time revision was passed.
+*DeliveriesRetrieveApi* | [**deliveries_history_by_delivery_date_and_phone_post**](docs/DeliveriesRetrieveApi.md#deliveries_history_by_delivery_date_and_phone_post) | **POST** /deliveries/history/by_delivery_date_and_phone | Retrieve list of history orders by telephone number, dates and revision.
+*DeliveryRestrictionsApi* | [**delivery_restrictions_allowed_post**](docs/DeliveryRestrictionsApi.md#delivery_restrictions_allowed_post) | **POST** /delivery_restrictions/allowed | Get suitable terminal groups for delivery restrictions.
+*DeliveryRestrictionsApi* | [**delivery_restrictions_post**](docs/DeliveryRestrictionsApi.md#delivery_restrictions_post) | **POST** /delivery_restrictions | Retrieve list of delivery restrictions.
+*DeprecatedApi* | [**deliveries_check_create_post**](docs/DeprecatedApi.md#deliveries_check_create_post) | **POST** /deliveries/check_create | Check create delivery.
+*DeprecatedApi* | [**deliveries_update_order_payments_post**](docs/DeprecatedApi.md#deliveries_update_order_payments_post) | **POST** /deliveries/update_order_payments | Update order payment details.
+*DeprecatedApi* | [**organizations_get**](docs/DeprecatedApi.md#organizations_get) | **GET** /organizations | Returns organizations available to api-login user.
+*DictionariesApi* | [**cancel_causes_post**](docs/DictionariesApi.md#cancel_causes_post) | **POST** /cancel_causes | Delivery cancel causes.
+*DictionariesApi* | [**deliveries_order_types_post**](docs/DictionariesApi.md#deliveries_order_types_post) | **POST** /deliveries/order_types | Order types.
+*DictionariesApi* | [**discounts_post**](docs/DictionariesApi.md#discounts_post) | **POST** /discounts | Discounts / surcharges.
+*DictionariesApi* | [**payment_types_post**](docs/DictionariesApi.md#payment_types_post) | **POST** /payment_types | Payment types.
+*DictionariesApi* | [**removal_types_post**](docs/DictionariesApi.md#removal_types_post) | **POST** /removal_types | Removal types (reasons for deletion).
+*DictionariesApi* | [**tips_types_post**](docs/DictionariesApi.md#tips_types_post) | **POST** /tips_types | Get tips types for api-login&#x60;s rms group.
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_calculate_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_calculate_post) | **POST** /loyalty/iiko/calculate | Calculate checkin.
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_coupons_by_series_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_by_series_post) | **POST** /loyalty/iiko/coupons/by_series | Get non-activated coupons
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_coupons_info_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_info_post) | **POST** /loyalty/iiko/coupons/info | Get coupon info.
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_coupons_series_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_series_post) | **POST** /loyalty/iiko/coupons/series | Get coupon series with non-activated coupons.
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_manual_condition_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_manual_condition_post) | **POST** /loyalty/iiko/manual_condition | Get manual conditions.
+*DiscountsAndPromotionsApi* | [**loyalty_iiko_program_post**](docs/DiscountsAndPromotionsApi.md#loyalty_iiko_program_post) | **POST** /loyalty/iiko/program | Get programs.
+*DraftsApi* | [**deliveries_drafts_by_filter_post**](docs/DraftsApi.md#deliveries_drafts_by_filter_post) | **POST** /deliveries/drafts/by_filter | Retrieve order drafts list by parameters.
+*DraftsApi* | [**deliveries_drafts_by_id_post**](docs/DraftsApi.md#deliveries_drafts_by_id_post) | **POST** /deliveries/drafts/by_id | Retrieve order draft by ID.
+*DraftsApi* | [**deliveries_drafts_commit_post**](docs/DraftsApi.md#deliveries_drafts_commit_post) | **POST** /deliveries/drafts/commit | Admit order draft changes and send them to Front.
+*DraftsApi* | [**deliveries_drafts_create_post**](docs/DraftsApi.md#deliveries_drafts_create_post) | **POST** /deliveries/drafts/create | Create delivery order draft.
+*DraftsApi* | [**deliveries_drafts_delete_post**](docs/DraftsApi.md#deliveries_drafts_delete_post) | **POST** /deliveries/drafts/delete | Delete order draft.
+*DraftsApi* | [**deliveries_drafts_lock_post**](docs/DraftsApi.md#deliveries_drafts_lock_post) | **POST** /deliveries/drafts/lock | Lock order draft.
+*DraftsApi* | [**deliveries_drafts_save_post**](docs/DraftsApi.md#deliveries_drafts_save_post) | **POST** /deliveries/drafts/save | Update existing delivery order draft.
+*DraftsApi* | [**deliveries_drafts_unlock_post**](docs/DraftsApi.md#deliveries_drafts_unlock_post) | **POST** /deliveries/drafts/unlock | Unlock order draft.
+*EmployeesApi* | [**employees_couriers_active_location_by_terminal_post**](docs/EmployeesApi.md#employees_couriers_active_location_by_terminal_post) | **POST** /employees/couriers/active_location/by_terminal | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
+*EmployeesApi* | [**employees_couriers_active_location_post**](docs/EmployeesApi.md#employees_couriers_active_location_post) | **POST** /employees/couriers/active_location | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers   in specified restaurants.
+*EmployeesApi* | [**employees_couriers_by_role_post**](docs/EmployeesApi.md#employees_couriers_by_role_post) | **POST** /employees/couriers/by_role | Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
+*EmployeesApi* | [**employees_couriers_locations_by_time_offset_post**](docs/EmployeesApi.md#employees_couriers_locations_by_time_offset_post) | **POST** /employees/couriers/locations/by_time_offset | Method of obtaining drivers&#39; coordinates history.
+*EmployeesApi* | [**employees_couriers_post**](docs/EmployeesApi.md#employees_couriers_post) | **POST** /employees/couriers | Returns list of all employees which are delivery drivers in specified restaurants.
+*EmployeesApi* | [**employees_info_post**](docs/EmployeesApi.md#employees_info_post) | **POST** /employees/info | Returns employee info.
+*EmployeesApi* | [**employees_shift_clockin_post**](docs/EmployeesApi.md#employees_shift_clockin_post) | **POST** /employees/shift/clockin | Open personal session.
+*EmployeesApi* | [**employees_shift_clockout_post**](docs/EmployeesApi.md#employees_shift_clockout_post) | **POST** /employees/shift/clockout | Close personal session.
+*EmployeesApi* | [**employees_shift_is_open_post**](docs/EmployeesApi.md#employees_shift_is_open_post) | **POST** /employees/shift/is_open | Check if personal session is open.
+*EmployeesApi* | [**employees_shifts_by_courier_post**](docs/EmployeesApi.md#employees_shifts_by_courier_post) | **POST** /employees/shifts/by_courier | Get terminal groups where employee session is opened.
+*MarketingSourcesApi* | [**marketing_sources_post**](docs/MarketingSourcesApi.md#marketing_sources_post) | **POST** /marketing_sources | Marketing sources.
+*MenuApi* | [**combo_calculate_post**](docs/MenuApi.md#combo_calculate_post) | **POST** /combo/calculate | Calculate combo price
+*MenuApi* | [**combo_post**](docs/MenuApi.md#combo_post) | **POST** /combo | Get combos info
+*MenuApi* | [**menu_by_id_post**](docs/MenuApi.md#menu_by_id_post) | **POST** /menu/by_id | Retrieve external menu by ID.
+*MenuApi* | [**menu_post**](docs/MenuApi.md#menu_post) | **POST** /menu | External menus with price categories.
+*MenuApi* | [**nomenclature_post**](docs/MenuApi.md#nomenclature_post) | **POST** /nomenclature | Menu.
+*MenuApi* | [**stop_lists_add_post**](docs/MenuApi.md#stop_lists_add_post) | **POST** /stop_lists/add | Add items to out-of-stock list.  (You should have extra rights to use this method).
+*MenuApi* | [**stop_lists_check_post**](docs/MenuApi.md#stop_lists_check_post) | **POST** /stop_lists/check | Check items in out-of-stock list.
+*MenuApi* | [**stop_lists_clear_post**](docs/MenuApi.md#stop_lists_clear_post) | **POST** /stop_lists/clear | Clear out-of-stock list.  (You should have extra rights to use this method).
+*MenuApi* | [**stop_lists_post**](docs/MenuApi.md#stop_lists_post) | **POST** /stop_lists | Out-of-stock items.
+*MenuApi* | [**stop_lists_remove_post**](docs/MenuApi.md#stop_lists_remove_post) | **POST** /stop_lists/remove | Remove items from out-of-stock list.  (You should have extra rights to use this method).
+*MessagesApi* | [**loyalty_iiko_check_sms_sending_possibility_post**](docs/MessagesApi.md#loyalty_iiko_check_sms_sending_possibility_post) | **POST** /loyalty/iiko/check_sms_sending_possibility | Check sms sending possibility.
+*MessagesApi* | [**loyalty_iiko_check_sms_status_post**](docs/MessagesApi.md#loyalty_iiko_check_sms_status_post) | **POST** /loyalty/iiko/check_sms_status | Check SMS status.
+*MessagesApi* | [**loyalty_iiko_message_send_email_post**](docs/MessagesApi.md#loyalty_iiko_message_send_email_post) | **POST** /loyalty/iiko/message/send_email | Send email.
+*MessagesApi* | [**loyalty_iiko_message_send_sms_post**](docs/MessagesApi.md#loyalty_iiko_message_send_sms_post) | **POST** /loyalty/iiko/message/send_sms | Send sms.
+*NotificationsApi* | [**notifications_send_post**](docs/NotificationsApi.md#notifications_send_post) | **POST** /notifications/send | Send notification to external systems (iikoFront and iikoWeb).
+*OperationsApi* | [**commands_status_post**](docs/OperationsApi.md#commands_status_post) | **POST** /commands/status | Get status of command.
+*OrdersApi* | [**order_add_customer_post**](docs/OrdersApi.md#order_add_customer_post) | **POST** /order/add_customer | Add customer to order.
+*OrdersApi* | [**order_add_items_post**](docs/OrdersApi.md#order_add_items_post) | **POST** /order/add_items | Add order items.
+*OrdersApi* | [**order_add_payments_post**](docs/OrdersApi.md#order_add_payments_post) | **POST** /order/add_payments | Add order payments.
+*OrdersApi* | [**order_by_id_post**](docs/OrdersApi.md#order_by_id_post) | **POST** /order/by_id | Retrieve orders by IDs.
+*OrdersApi* | [**order_by_table_post**](docs/OrdersApi.md#order_by_table_post) | **POST** /order/by_table | Retrieve orders by tables.
+*OrdersApi* | [**order_change_external_data_post**](docs/OrdersApi.md#order_change_external_data_post) | **POST** /order/change_external_data | Change table order external_data.
+*OrdersApi* | [**order_change_payments_post**](docs/OrdersApi.md#order_change_payments_post) | **POST** /order/change_payments | Change table order&#39;s payments.
+*OrdersApi* | [**order_close_post**](docs/OrdersApi.md#order_close_post) | **POST** /order/close | Close order.
+*OrdersApi* | [**order_create_post**](docs/OrdersApi.md#order_create_post) | **POST** /order/create | Create order.
+*OrdersApi* | [**order_init_by_pos_order_post**](docs/OrdersApi.md#order_init_by_pos_order_post) | **POST** /order/init_by_posOrder | Init orders, created on POS, by POS orders.
+*OrdersApi* | [**order_init_by_table_post**](docs/OrdersApi.md#order_init_by_table_post) | **POST** /order/init_by_table | Init orders, created on POS, by tables.
+*OrganizationsApi* | [**organizations_post**](docs/OrganizationsApi.md#organizations_post) | **POST** /organizations | Returns organizations available to api-login user.
+*OrganizationsApi* | [**organizations_settings_post**](docs/OrganizationsApi.md#organizations_settings_post) | **POST** /organizations/settings | Returns available to api-login user organizations specified settings.
+*ReportApi* | [**loyalty_iiko_customer_transactions_by_date_post**](docs/ReportApi.md#loyalty_iiko_customer_transactions_by_date_post) | **POST** /loyalty/iiko/customer/transactions/by_date | Get transaction report by period.
+*ReportApi* | [**loyalty_iiko_customer_transactions_by_revision_post**](docs/ReportApi.md#loyalty_iiko_customer_transactions_by_revision_post) | **POST** /loyalty/iiko/customer/transactions/by_revision | Get transaction report by revision.
+*TerminalGroupsApi* | [**terminal_groups_awake_post**](docs/TerminalGroupsApi.md#terminal_groups_awake_post) | **POST** /terminal_groups/awake | Awake terminal groups from sleep mode.
+*TerminalGroupsApi* | [**terminal_groups_is_alive_post**](docs/TerminalGroupsApi.md#terminal_groups_is_alive_post) | **POST** /terminal_groups/is_alive | Returns information on availability of group of terminals.
+*TerminalGroupsApi* | [**terminal_groups_post**](docs/TerminalGroupsApi.md#terminal_groups_post) | **POST** /terminal_groups | Method that returns information on groups of delivery terminals.
+*WebhooksApi* | [**webhooks_settings_post**](docs/WebhooksApi.md#webhooks_settings_post) | **POST** /webhooks/settings | Get webhooks settings for specified organization and authorized API login.
+*WebhooksApi* | [**webhooks_update_settings_post**](docs/WebhooksApi.md#webhooks_update_settings_post) | **POST** /webhooks/update_settings | Update webhooks settings for specified organization and authorized API login.
 
 
 ## Documentation For Models

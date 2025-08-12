@@ -26,15 +26,15 @@ class TestReportApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_loyalty_iiko_customer_transactions_by_date_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_transactions_by_date_post
+    async def test_loyalty_iiko_customer_transactions_by_date_post(self) -> None:
+        """Test case for loyalty_iiko_customer_transactions_by_date_post
 
         Get transaction report by period.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_transactions_by_revision_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_transactions_by_revision_post
+    async def test_loyalty_iiko_customer_transactions_by_revision_post(self) -> None:
+        """Test case for loyalty_iiko_customer_transactions_by_revision_post
 
         Get transaction report by revision.
         """

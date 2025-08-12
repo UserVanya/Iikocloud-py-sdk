@@ -29,7 +29,7 @@ class TransportTerminalsTerminalGroupsResponse(BaseModel):
     """ # noqa: E501
     correlation_id: StrictStr = Field(description="Operation ID.", alias="correlationId")
     terminal_groups: List[TransportCommonRmsItemsResponseWrapperTerminalGroup] = Field(description="List of terminal groups broken down by organizations.", alias="terminalGroups")
-    terminal_groups_in_sleep: List[TransportCommonRmsItemsResponseWrapperTerminalGroup] = Field(description="Terminal groups are in sleep mode because they are not active.    Can be awakened by `/api/1/terminal_groups/awake` operation.", alias="terminalGroupsInSleep")
+    terminal_groups_in_sleep: List[TransportCommonRmsItemsResponseWrapperTerminalGroup] = Field(description="Terminal groups are in sleep mode because they are not active.    Can be awakened by `/terminal_groups/awake` operation.", alias="terminalGroupsInSleep")
     __properties: ClassVar[List[str]] = ["correlationId", "terminalGroups", "terminalGroupsInSleep"]
 
     model_config = ConfigDict(

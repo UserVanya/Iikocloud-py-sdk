@@ -27,8 +27,8 @@ class TransportTerminalsTerminalGroup(BaseModel):
     """
     DTO containing terminal groups details
     """ # noqa: E501
-    id: StrictStr = Field(description="Delivery group ID.                Can be obtained by `/api/1/terminal_groups` operation.")
-    organization_id: StrictStr = Field(description="Organization ID to which delivery group belongs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    id: StrictStr = Field(description="Delivery group ID.                Can be obtained by `/terminal_groups` operation.")
+    organization_id: StrictStr = Field(description="Organization ID to which delivery group belongs.                Can be obtained by `/organizations` operation.", alias="organizationId")
     name: StrictStr = Field(description="Terminal group name.")
     address: Optional[StrictStr] = Field(description="Group address. Not used.")
     time_zone: StrictStr = Field(description="Terminal group time zone.", alias="timeZone")

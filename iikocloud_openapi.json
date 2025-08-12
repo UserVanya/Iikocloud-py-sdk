@@ -10,12 +10,12 @@
     },
     "servers": [
         {
-            "url": "https://api-ru.iiko.services",
+            "url": "https://api-ru.iiko.services/api/1",
             "description": "Production"
         }
     ],
     "paths": {
-        "/api/1/regions": {
+        "/regions": {
             "post": {
                 "tags": [
                     "Addresses"
@@ -98,7 +98,7 @@
                 }
             }
         },
-        "/api/1/cities": {
+        "/cities": {
             "post": {
                 "tags": [
                     "Addresses"
@@ -181,7 +181,7 @@
                 }
             }
         },
-        "/api/1/streets/by_city": {
+        "/streets/by_city": {
             "post": {
                 "tags": [
                     "Addresses"
@@ -264,7 +264,7 @@
                 }
             }
         },
-        "/api/1/streets/by_id": {
+        "/streets/by_id": {
             "post": {
                 "tags": [
                     "Addresses"
@@ -347,7 +347,7 @@
                 }
             }
         },
-        "/api/1/access_token": {
+        "/access_token": {
             "post": {
                 "tags": [
                     "Authorization"
@@ -429,7 +429,7 @@
                 }
             }
         },
-        "/api/1/reserve/available_organizations": {
+        "/reserve/available_organizations": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -512,7 +512,7 @@
                 }
             }
         },
-        "/api/1/reserve/available_terminal_groups": {
+        "/reserve/available_terminal_groups": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -595,7 +595,7 @@
                 }
             }
         },
-        "/api/1/reserve/available_restaurant_sections": {
+        "/reserve/available_restaurant_sections": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -678,7 +678,7 @@
                 }
             }
         },
-        "/api/1/reserve/restaurant_sections_workload": {
+        "/reserve/restaurant_sections_workload": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -761,7 +761,7 @@
                 }
             }
         },
-        "/api/1/reserve/create": {
+        "/reserve/create": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -844,7 +844,7 @@
                 }
             }
         },
-        "/api/1/reserve/status_by_id": {
+        "/reserve/status_by_id": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -927,7 +927,7 @@
                 }
             }
         },
-        "/api/1/reserve/add_items": {
+        "/reserve/add_items": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -1010,7 +1010,7 @@
                 }
             }
         },
-        "/api/1/reserve/cancel": {
+        "/reserve/cancel": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -1093,7 +1093,7 @@
                 }
             }
         },
-        "/api/1/reserve/add_payments": {
+        "/reserve/add_payments": {
             "post": {
                 "tags": [
                     "Banquets/reserves"
@@ -1176,7 +1176,7 @@
                 }
             }
         },
-        "/api/1/deliveries/create": {
+        "/deliveries/create": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1259,7 +1259,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_external_data": {
+        "/deliveries/change_external_data": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1342,7 +1342,7 @@
                 }
             }
         },
-        "/api/1/deliveries/update_order_problem": {
+        "/deliveries/update_order_problem": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1425,7 +1425,7 @@
                 }
             }
         },
-        "/api/1/deliveries/update_order_payments": {
+        "/deliveries/update_order_payments": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update",
@@ -1510,7 +1510,7 @@
                 "deprecated": true
             }
         },
-        "/api/1/deliveries/update_order_delivery_status": {
+        "/deliveries/update_order_delivery_status": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1593,7 +1593,7 @@
                 }
             }
         },
-        "/api/1/deliveries/update_order_courier": {
+        "/deliveries/update_order_courier": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1677,7 +1677,7 @@
                 "deprecated": true
             }
         },
-        "/api/1/deliveries/add_items": {
+        "/deliveries/add_items": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1760,7 +1760,7 @@
                 }
             }
         },
-        "/api/1/deliveries/close": {
+        "/deliveries/close": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1843,7 +1843,7 @@
                 }
             }
         },
-        "/api/1/deliveries/cancel": {
+        "/deliveries/cancel": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -1926,7 +1926,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_complete_before": {
+        "/deliveries/change_complete_before": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2009,7 +2009,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_delivery_point": {
+        "/deliveries/change_delivery_point": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2092,7 +2092,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_service_type": {
+        "/deliveries/change_service_type": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2175,7 +2175,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_payments": {
+        "/deliveries/change_payments": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2258,7 +2258,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_comment": {
+        "/deliveries/change_comment": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2341,7 +2341,7 @@
                 }
             }
         },
-        "/api/1/deliveries/print_delivery_bill": {
+        "/deliveries/print_delivery_bill": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2424,7 +2424,7 @@
                 }
             }
         },
-        "/api/1/deliveries/confirm": {
+        "/deliveries/confirm": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2507,7 +2507,7 @@
                 }
             }
         },
-        "/api/1/deliveries/cancel_confirmation": {
+        "/deliveries/cancel_confirmation": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2590,7 +2590,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_operator": {
+        "/deliveries/change_operator": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2673,7 +2673,7 @@
                 }
             }
         },
-        "/api/1/deliveries/add_payments": {
+        "/deliveries/add_payments": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2756,7 +2756,7 @@
                 }
             }
         },
-        "/api/1/deliveries/change_driver_info": {
+        "/deliveries/change_driver_info": {
             "post": {
                 "tags": [
                     "Deliveries: Create and update"
@@ -2839,7 +2839,7 @@
                 }
             }
         },
-        "/api/1/deliveries/by_id": {
+        "/deliveries/by_id": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -2922,7 +2922,7 @@
                 }
             }
         },
-        "/api/1/deliveries/by_delivery_date_and_status": {
+        "/deliveries/by_delivery_date_and_status": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -3005,7 +3005,7 @@
                 }
             }
         },
-        "/api/1/deliveries/by_revision": {
+        "/deliveries/by_revision": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -3088,7 +3088,7 @@
                 }
             }
         },
-        "/api/1/deliveries/by_delivery_date_and_phone": {
+        "/deliveries/by_delivery_date_and_phone": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -3171,7 +3171,7 @@
                 }
             }
         },
-        "/api/1/deliveries/by_delivery_date_and_source_key_and_filter": {
+        "/deliveries/by_delivery_date_and_source_key_and_filter": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -3254,7 +3254,7 @@
                 }
             }
         },
-        "/api/1/deliveries/history/by_delivery_date_and_phone": {
+        "/deliveries/history/by_delivery_date_and_phone": {
             "post": {
                 "tags": [
                     "Deliveries: Retrieve"
@@ -3337,7 +3337,7 @@
                 }
             }
         },
-        "/api/1/delivery_restrictions": {
+        "/delivery_restrictions": {
             "post": {
                 "tags": [
                     "Delivery restrictions"
@@ -3420,7 +3420,7 @@
                 }
             }
         },
-        "/api/1/delivery_restrictions/allowed": {
+        "/delivery_restrictions/allowed": {
             "post": {
                 "tags": [
                     "Delivery restrictions"
@@ -3503,7 +3503,7 @@
                 }
             }
         },
-        "/api/1/deliveries/check_create": {
+        "/deliveries/check_create": {
             "post": {
                 "tags": [
                     "Deprecated"
@@ -3587,7 +3587,7 @@
                 "deprecated": true
             }
         },
-        "/api/1/organizations": {
+        "/organizations": {
             "get": {
                 "tags": [
                     "Deprecated"
@@ -3743,7 +3743,7 @@
                 }
             }
         },
-        "/api/1/cancel_causes": {
+        "/cancel_causes": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -3826,7 +3826,7 @@
                 }
             }
         },
-        "/api/1/deliveries/order_types": {
+        "/deliveries/order_types": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -3909,7 +3909,7 @@
                 }
             }
         },
-        "/api/1/discounts": {
+        "/discounts": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -3992,7 +3992,7 @@
                 }
             }
         },
-        "/api/1/payment_types": {
+        "/payment_types": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -4075,7 +4075,7 @@
                 }
             }
         },
-        "/api/1/removal_types": {
+        "/removal_types": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -4158,7 +4158,7 @@
                 }
             }
         },
-        "/api/1/tips_types": {
+        "/tips_types": {
             "post": {
                 "tags": [
                     "Dictionaries"
@@ -4232,7 +4232,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/by_id": {
+        "/deliveries/drafts/by_id": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4315,7 +4315,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/by_filter": {
+        "/deliveries/drafts/by_filter": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4398,7 +4398,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/create": {
+        "/deliveries/drafts/create": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4481,7 +4481,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/save": {
+        "/deliveries/drafts/save": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4564,7 +4564,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/commit": {
+        "/deliveries/drafts/commit": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4647,7 +4647,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/delete": {
+        "/deliveries/drafts/delete": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4730,7 +4730,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/lock": {
+        "/deliveries/drafts/lock": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4813,7 +4813,7 @@
                 }
             }
         },
-        "/api/1/deliveries/drafts/unlock": {
+        "/deliveries/drafts/unlock": {
             "post": {
                 "tags": [
                     "Drafts"
@@ -4896,7 +4896,7 @@
                 }
             }
         },
-        "/api/1/employees/couriers/locations/by_time_offset": {
+        "/employees/couriers/locations/by_time_offset": {
             "post": {
                 "tags": [
                     "Employees"
@@ -4979,7 +4979,7 @@
                 }
             }
         },
-        "/api/1/employees/couriers": {
+        "/employees/couriers": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5062,7 +5062,7 @@
                 }
             }
         },
-        "/api/1/employees/couriers/by_role": {
+        "/employees/couriers/by_role": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5145,7 +5145,7 @@
                 }
             }
         },
-        "/api/1/employees/couriers/active_location/by_terminal": {
+        "/employees/couriers/active_location/by_terminal": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5228,7 +5228,7 @@
                 }
             }
         },
-        "/api/1/employees/couriers/active_location": {
+        "/employees/couriers/active_location": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5311,7 +5311,7 @@
                 }
             }
         },
-        "/api/1/employees/info": {
+        "/employees/info": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5394,7 +5394,7 @@
                 }
             }
         },
-        "/api/1/employees/shift/clockin": {
+        "/employees/shift/clockin": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5477,7 +5477,7 @@
                 }
             }
         },
-        "/api/1/employees/shift/clockout": {
+        "/employees/shift/clockout": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5560,7 +5560,7 @@
                 }
             }
         },
-        "/api/1/employees/shift/is_open": {
+        "/employees/shift/is_open": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5643,7 +5643,7 @@
                 }
             }
         },
-        "/api/1/employees/shifts/by_courier": {
+        "/employees/shifts/by_courier": {
             "post": {
                 "tags": [
                     "Employees"
@@ -5726,7 +5726,7 @@
                 }
             }
         },
-        "/api/1/marketing_sources": {
+        "/marketing_sources": {
             "post": {
                 "tags": [
                     "Marketing sources"
@@ -5809,7 +5809,7 @@
                 }
             }
         },
-        "/api/1/nomenclature": {
+        "/nomenclature": {
             "post": {
                 "tags": [
                     "Menu"
@@ -5892,13 +5892,19 @@
                 }
             }
         },
-        "/api/2/menu": {
+        "/menu": {
             "post": {
                 "tags": [
                     "Menu"
                 ],
                 "summary": "External menus with price categories.",
                 "description": "\n\n > Restriction group: `Data: menu`.",
+                "servers": [
+                    {
+                        "url": "https://api-ru.iiko.services/api/2",
+                        "description": "Production"
+                    }
+                ],
                 "parameters": [
                     
                     {
@@ -5966,13 +5972,19 @@
                 }
             }
         },
-        "/api/2/menu/by_id": {
+        "/menu/by_id": {
             "post": {
                 "tags": [
                     "Menu"
                 ],
                 "summary": "Retrieve external menu by ID.",
                 "description": "> Sourced from Web External menu.\n\n > Restriction group: `Data: menu`.",
+                "servers": [
+                    {
+                        "url": "https://api-ru.iiko.services/api/2",
+                        "description": "Production"
+                    }
+                ],
                 "parameters": [
                     
                     {
@@ -6049,7 +6061,7 @@
                 }
             }
         },
-        "/api/1/stop_lists": {
+        "/stop_lists": {
             "post": {
                 "tags": [
                     "Menu"
@@ -6132,7 +6144,7 @@
                 }
             }
         },
-        "/api/1/stop_lists/check": {
+        "/stop_lists/check": {
             "post": {
                 "tags": [
                     "Menu"
@@ -6215,7 +6227,7 @@
                 }
             }
         },
-        "/api/1/stop_lists/add": {
+        "/stop_lists/add": {
             "post": {
                 "tags": [
                     "Menu"
@@ -6298,7 +6310,7 @@
                 }
             }
         },
-        "/api/1/stop_lists/remove": {
+        "/stop_lists/remove": {
             "post": {
                 "tags": [
                     "Menu"
@@ -6381,7 +6393,7 @@
                 }
             }
         },
-        "/api/1/stop_lists/clear": {
+        "/stop_lists/clear": {
             "post": {
                 "tags": [
                     "Menu"
@@ -6464,7 +6476,7 @@
                 }
             }
         },
-        "/api/1/notifications/send": {
+        "/notifications/send": {
             "post": {
                 "tags": [
                     "Notifications"
@@ -6547,7 +6559,7 @@
                 }
             }
         },
-        "/api/1/commands/status": {
+        "/commands/status": {
             "post": {
                 "tags": [
                     "Operations"
@@ -6640,7 +6652,7 @@
                 }
             }
         },
-        "/api/1/order/create": {
+        "/order/create": {
             "post": {
                 "tags": [
                     "Orders"
@@ -6723,7 +6735,7 @@
                 }
             }
         },
-        "/api/1/order/by_id": {
+        "/order/by_id": {
             "post": {
                 "tags": [
                     "Orders"
@@ -6806,7 +6818,7 @@
                 }
             }
         },
-        "/api/1/order/by_table": {
+        "/order/by_table": {
             "post": {
                 "tags": [
                     "Orders"
@@ -6889,7 +6901,7 @@
                 }
             }
         },
-        "/api/1/order/add_items": {
+        "/order/add_items": {
             "post": {
                 "tags": [
                     "Orders"
@@ -6972,7 +6984,7 @@
                 }
             }
         },
-        "/api/1/order/close": {
+        "/order/close": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7055,7 +7067,7 @@
                 }
             }
         },
-        "/api/1/order/change_payments": {
+        "/order/change_payments": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7138,7 +7150,7 @@
                 }
             }
         },
-        "/api/1/order/change_external_data": {
+        "/order/change_external_data": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7221,7 +7233,7 @@
                 }
             }
         },
-        "/api/1/order/init_by_table": {
+        "/order/init_by_table": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7304,7 +7316,7 @@
                 }
             }
         },
-        "/api/1/order/init_by_posOrder": {
+        "/order/init_by_posOrder": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7387,7 +7399,7 @@
                 }
             }
         },
-        "/api/1/order/add_customer": {
+        "/order/add_customer": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7470,7 +7482,7 @@
                 }
             }
         },
-        "/api/1/order/add_payments": {
+        "/order/add_payments": {
             "post": {
                 "tags": [
                     "Orders"
@@ -7553,7 +7565,7 @@
                 }
             }
         },
-        "/api/1/organizations/settings": {
+        "/organizations/settings": {
             "post": {
                 "tags": [
                     "Organizations"
@@ -7636,7 +7648,7 @@
                 }
             }
         },
-        "/api/1/terminal_groups": {
+        "/terminal_groups": {
             "post": {
                 "tags": [
                     "Terminal groups"
@@ -7719,7 +7731,7 @@
                 }
             }
         },
-        "/api/1/terminal_groups/is_alive": {
+        "/terminal_groups/is_alive": {
             "post": {
                 "tags": [
                     "Terminal groups"
@@ -7802,7 +7814,7 @@
                 }
             }
         },
-        "/api/1/terminal_groups/awake": {
+        "/terminal_groups/awake": {
             "post": {
                 "tags": [
                     "Terminal groups"
@@ -7885,7 +7897,7 @@
                 }
             }
         },
-        "/api/1/webhooks/settings": {
+        "/webhooks/settings": {
             "post": {
                 "tags": [
                     "Webhooks"
@@ -7968,7 +7980,7 @@
                 }
             }
         },
-        "/api/1/webhooks/update_settings": {
+        "/webhooks/update_settings": {
             "post": {
                 "tags": [
                     "Webhooks"
@@ -8051,7 +8063,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/info": {
+        "/loyalty/iiko/customer/info": {
             "post": {
                 "tags": [
                     "Customers"
@@ -8134,7 +8146,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/calculate": {
+        "/loyalty/iiko/calculate": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -8217,7 +8229,7 @@
                 }
             }
         },
-        "/api/1/combo": {
+        "/combo": {
             "post": {
                 "tags": [
                     "Menu"
@@ -8300,7 +8312,7 @@
                 }
             }
         },
-        "/api/1/combo/calculate": {
+        "/combo/calculate": {
             "post": {
                 "tags": [
                     "Menu"
@@ -8383,7 +8395,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/manual_condition": {
+        "/loyalty/iiko/manual_condition": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -8466,7 +8478,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer_category": {
+        "/loyalty/iiko/customer_category": {
             "post": {
                 "tags": [
                     "Customer categories"
@@ -8549,7 +8561,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/create_or_update": {
+        "/loyalty/iiko/customer/create_or_update": {
             "post": {
                 "tags": [
                     "Customers"
@@ -8632,7 +8644,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/delete_customers": {
+        "/loyalty/iiko/delete_customers": {
             "post": {
                 "tags": [
                     "Customers"
@@ -8715,7 +8727,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/restore_customers": {
+        "/loyalty/iiko/restore_customers": {
             "post": {
                 "tags": [
                     "Customers"
@@ -8798,7 +8810,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer_category/add": {
+        "/loyalty/iiko/customer_category/add": {
             "post": {
                 "tags": [
                     "Customer categories"
@@ -8881,7 +8893,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer_category/remove": {
+        "/loyalty/iiko/customer_category/remove": {
             "post": {
                 "tags": [
                     "Customer categories"
@@ -8964,7 +8976,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/check_sms_sending_possibility": {
+        "/loyalty/iiko/check_sms_sending_possibility": {
             "post": {
                 "tags": [
                     "Messages"
@@ -9047,7 +9059,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/message/send_sms": {
+        "/loyalty/iiko/message/send_sms": {
             "post": {
                 "tags": [
                     "Messages"
@@ -9130,7 +9142,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/check_sms_status": {
+        "/loyalty/iiko/check_sms_status": {
             "post": {
                 "tags": [
                     "Messages"
@@ -9213,7 +9225,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/message/send_email": {
+        "/loyalty/iiko/message/send_email": {
             "post": {
                 "tags": [
                     "Messages"
@@ -9296,7 +9308,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/program": {
+        "/loyalty/iiko/program": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -9379,7 +9391,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/program/add": {
+        "/loyalty/iiko/customer/program/add": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9462,7 +9474,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/card/add": {
+        "/loyalty/iiko/customer/card/add": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9545,7 +9557,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/card/remove": {
+        "/loyalty/iiko/customer/card/remove": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9628,7 +9640,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/wallet/hold": {
+        "/loyalty/iiko/customer/wallet/hold": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9711,7 +9723,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/wallet/cancel_hold": {
+        "/loyalty/iiko/customer/wallet/cancel_hold": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9794,7 +9806,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/wallet/topup": {
+        "/loyalty/iiko/customer/wallet/topup": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9877,7 +9889,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/wallet/chargeoff": {
+        "/loyalty/iiko/customer/wallet/chargeoff": {
             "post": {
                 "tags": [
                     "Customers"
@@ -9960,7 +9972,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/get_counters": {
+        "/loyalty/iiko/get_counters": {
             "post": {
                 "tags": [
                     "Customers"
@@ -10043,7 +10055,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/coupons/info": {
+        "/loyalty/iiko/coupons/info": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -10126,7 +10138,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/coupons/series": {
+        "/loyalty/iiko/coupons/series": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -10209,7 +10221,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/coupons/by_series": {
+        "/loyalty/iiko/coupons/by_series": {
             "post": {
                 "tags": [
                     "Discounts and promotions"
@@ -10292,7 +10304,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/transactions/by_revision": {
+        "/loyalty/iiko/customer/transactions/by_revision": {
             "post": {
                 "tags": [
                     "Report"
@@ -10375,7 +10387,7 @@
                 }
             }
         },
-        "/api/1/loyalty/iiko/customer/transactions/by_date": {
+        "/loyalty/iiko/customer/transactions/by_date": {
             "post": {
                 "tags": [
                     "Report"
@@ -13518,7 +13530,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "IDs of organizations that require data return.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "IDs of organizations that require data return.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "includeDeleted": {
                         "type": "boolean",
@@ -13640,7 +13652,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "IDs of organizations that require data return.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "IDs of organizations that require data return.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -13754,7 +13766,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID details of which have to be returned.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID details of which have to be returned.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "cityId": {
@@ -13933,7 +13945,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations ids which delivery cancel causes needs to be returned. \r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations ids which delivery cancel causes needs to be returned. \r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -13990,7 +14002,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization id which \"correlationId\" belongs to.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization id which \"correlationId\" belongs to.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -14092,7 +14104,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14116,7 +14128,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14140,7 +14152,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14164,7 +14176,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14188,7 +14200,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14212,7 +14224,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14236,7 +14248,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14260,7 +14272,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14284,7 +14296,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14308,7 +14320,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -14568,12 +14580,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -14604,7 +14616,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "order": {
@@ -14617,7 +14629,7 @@
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     }
@@ -14657,7 +14669,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -14710,7 +14722,7 @@
                     },
                     "orderTypeId": {
                         "type": "string",
-                        "description": "Order type ID. \r\n\r\nCan be obtained by `/api/1/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
+                        "description": "Order type ID. \r\n\r\nCan be obtained by `/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -14757,7 +14769,7 @@
                     },
                     "marketingSourceId": {
                         "type": "string",
-                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/api/1/marketing_sources` operation.",
+                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/marketing_sources` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -14866,7 +14878,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which the order drafts search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which the order drafts search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "dateFrom": {
                         "type": "string",
@@ -14995,7 +15007,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID for which the order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID for which the order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15069,7 +15081,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15103,7 +15115,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "lockedByUser": {
@@ -15161,7 +15173,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "order": {
@@ -15174,7 +15186,7 @@
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID the order must be sent to.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     }
@@ -15198,7 +15210,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -15230,7 +15242,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15288,7 +15300,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15298,7 +15310,7 @@
                     },
                     "driverId": {
                         "type": "string",
-                        "description": "Driver ID.\r\n            \r\nCan be obtained by `/api/1/employees/couriers` operation.",
+                        "description": "Driver ID.\r\n            \r\nCan be obtained by `/employees/couriers` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -15330,7 +15342,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15361,7 +15373,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -15828,7 +15840,7 @@
                     },
                     "orderTypeId": {
                         "type": "string",
-                        "description": "Order type ID. \r\n\r\nCan be obtained by `/api/1/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
+                        "description": "Order type ID. \r\n\r\nCan be obtained by `/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -15875,7 +15887,7 @@
                     },
                     "marketingSourceId": {
                         "type": "string",
-                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/api/1/marketing_sources` operation.",
+                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/marketing_sources` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -15990,7 +16002,7 @@
                                 "$ref": "#/components/schemas/Transport.Deliveries.Request.CreateOrder.Address"
                             }
                         ],
-                        "description": "Order delivery address.\r\n            \r\n> The use of type **City** is allowed if the parameter **addressFormatType == City**.\r\n            \r\n> Can be obtained by `/api/1/organizations` or `/api/1/organizations/settings` operations (`addressFormatType` parameter).",
+                        "description": "Order delivery address.\r\n            \r\n> The use of type **City** is allowed if the parameter **addressFormatType == City**.\r\n            \r\n> Can be obtained by `/organizations` or `/organizations/settings` operations (`addressFormatType` parameter).",
                         "nullable": true
                     },
                     "externalCartographyId": {
@@ -16249,7 +16261,7 @@
                 "properties": {
                     "productId": {
                         "type": "string",
-                        "description": "Modifier item ID.\r\n            \r\nCan be obtained by `/api/1/nomenclature` operation.",
+                        "description": "Modifier item ID.\r\n            \r\nCan be obtained by `/nomenclature` operation.",
                         "format": "uuid"
                     },
                     "amount": {
@@ -16259,7 +16271,7 @@
                     },
                     "productGroupId": {
                         "type": "string",
-                        "description": "Modifiers group ID (for group modifier). Required for a group modifier.\r\n            \r\nCan be obtained by `/api/1/nomenclature` operation.",
+                        "description": "Modifiers group ID (for group modifier). Required for a group modifier.\r\n            \r\nCan be obtained by `/nomenclature` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -16315,7 +16327,7 @@
                     },
                     "orderTypeId": {
                         "type": "string",
-                        "description": "Order type ID. \r\n\r\nCan be obtained by `/api/1/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
+                        "description": "Order type ID. \r\n\r\nCan be obtained by `/deliveries/order_types` operation.\r\n\r\n> Only one of the fields must be defined: **orderTypeId** or **orderServiceType**.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -16362,7 +16374,7 @@
                     },
                     "marketingSourceId": {
                         "type": "string",
-                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/api/1/marketing_sources` operation.",
+                        "description": "Marketing source (advertisement) ID. \r\n            \r\nCan be obtained by `/marketing_sources` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -16539,7 +16551,7 @@
                     },
                     "paymentTypeId": {
                         "type": "string",
-                        "description": "Payment type. \r\n            \r\nCan be obtained by `/api/1/payment_types` operation.",
+                        "description": "Payment type. \r\n            \r\nCan be obtained by `/payment_types` operation.",
                         "format": "uuid"
                     },
                     "isProcessedExternally": {
@@ -16591,7 +16603,7 @@
                 "properties": {
                     "productId": {
                         "type": "string",
-                        "description": "ID of menu item.\r\n            \r\nCan be obtained by `/api/1/nomenclature` operation.",
+                        "description": "ID of menu item.\r\n            \r\nCan be obtained by `/nomenclature` operation.",
                         "format": "uuid"
                     },
                     "modifiers": {
@@ -16702,7 +16714,7 @@
                 "properties": {
                     "discountTypeId": {
                         "type": "string",
-                        "description": "Discount type. \r\n            \r\nCan be obtained by `/api/1/discounts` operation.",
+                        "description": "Discount type. \r\n            \r\nCan be obtained by `/discounts` operation.",
                         "format": "uuid"
                     },
                     "sum": {
@@ -16736,7 +16748,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "ID. \r\n            \r\nCan be obtained by `/api/1/streets/by_city` operation.",
+                        "description": "ID. \r\n            \r\nCan be obtained by `/streets/by_city` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -16772,7 +16784,7 @@
                     },
                     "tipsTypeId": {
                         "type": "string",
-                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/api/1/tips_types` operation.",
+                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/tips_types` operation.",
                         "format": "uuid"
                     },
                     "sum": {
@@ -16784,7 +16796,7 @@
                     },
                     "paymentTypeId": {
                         "type": "string",
-                        "description": "Payment type. \r\n            \r\nCan be obtained by `/api/1/payment_types` operation.",
+                        "description": "Payment type. \r\n            \r\nCan be obtained by `/payment_types` operation.",
                         "format": "uuid"
                     },
                     "isProcessedExternally": {
@@ -16830,12 +16842,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of the new order.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID the order must be sent to.\r\n\r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID the order must be sent to.\r\n\r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -16873,7 +16885,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "terminalGroupIds": {
                         "type": "array",
@@ -16886,7 +16898,7 @@
                     },
                     "deliveryDateFrom": {
                         "type": "string",
-                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.",
+                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.",
                         "format": "yyyy-MM-dd HH:mm:ss.fff",
                         "nullable": true,
                         "example": "2019-08-24 14:15:22.123"
@@ -17001,7 +17013,7 @@
                     },
                     "deliveryDateFrom": {
                         "type": "string",
-                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.",
+                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.",
                         "format": "yyyy-MM-dd HH:mm:ss.fff",
                         "nullable": true,
                         "example": "2019-08-24 14:15:22.123"
@@ -17019,7 +17031,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "startRevision": {
                         "type": "integer",
@@ -17059,11 +17071,11 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "deliveryDateFrom": {
                         "type": "string",
-                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.",
+                        "description": "Order delivery date (Local for delivery terminal). Lower limit.\r\n            \r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.",
                         "format": "yyyy-MM-dd HH:mm:ss.fff",
                         "example": "2019-08-24 14:15:22.123"
                     },
@@ -17112,7 +17124,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderIds": {
@@ -17121,7 +17133,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "IDs of orders information on which is required.\r\n            \r\n> Required if \"posOrderIds\" is null. Must be null if \"posOrderIds\" is not null.\r\n            \r\n> Maximum allowed \"orderIds\" to request - `200`.\r\n\r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.",
+                        "description": "IDs of orders information on which is required.\r\n            \r\n> Required if \"posOrderIds\" is null. Must be null if \"posOrderIds\" is not null.\r\n            \r\n> Maximum allowed \"orderIds\" to request - `200`.\r\n\r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.",
                         "nullable": true
                     },
                     "sourceKeys": {
@@ -17138,7 +17150,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "POS order IDs information on which is required.\r\n            \r\n> Required if \"orderIds\" is null. Must be null if \"orderIds\" is not null.\r\n            \r\n> Maximum allowed \"posOrderIds\" to request - `200`.\r\n\r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.",
+                        "description": "POS order IDs information on which is required.\r\n            \r\n> Required if \"orderIds\" is null. Must be null if \"orderIds\" is not null.\r\n            \r\n> Maximum allowed \"posOrderIds\" to request - `200`.\r\n\r\nThe guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.",
                         "nullable": true
                     },
                     "returnExternalDataKeys": {
@@ -17176,7 +17188,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "sourceKeys": {
                         "type": "array",
@@ -17223,7 +17235,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "startRevision": {
                         "type": "integer",
@@ -17295,7 +17307,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17332,7 +17344,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17355,7 +17367,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17411,7 +17423,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17439,7 +17451,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17500,7 +17512,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17576,7 +17588,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17605,7 +17617,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17655,7 +17667,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17665,7 +17677,7 @@
                     },
                     "employeeId": {
                         "type": "string",
-                        "description": "Courier ID.\r\n            \r\nCan be obtained by `/api/1/employees/couriers` operation.",
+                        "description": "Courier ID.\r\n            \r\nCan be obtained by `/employees/couriers` operation.",
                         "format": "uuid"
                     }
                 },
@@ -17682,7 +17694,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -17713,7 +17725,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -18249,7 +18261,7 @@
                                 "$ref": "#/components/schemas/Transport.Deliveries.Response.Order.DiscountType"
                             }
                         ],
-                        "description": "Discount type. \r\n            \r\nCan be obtained by `/api/1/discounts` operation."
+                        "description": "Discount type. \r\n            \r\nCan be obtained by `/discounts` operation."
                     },
                     "sum": {
                         "type": "number",
@@ -18914,7 +18926,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "timestamp": {
@@ -19193,7 +19205,7 @@
                                 "$ref": "#/components/schemas/Transport.Deliveries.Response.Order.PaymentType"
                             }
                         ],
-                        "description": "Payment type. \r\n            \r\nCan be obtained by `/api/1/payment_types` operation."
+                        "description": "Payment type. \r\n            \r\nCan be obtained by `/payment_types` operation."
                     },
                     "sum": {
                         "type": "number",
@@ -19252,7 +19264,7 @@
                     }
                 },
                 "additionalProperties": false,
-                "description": "Payment type. \r\n            \r\nCan be obtained by `/api/1/payment_types` operation."
+                "description": "Payment type. \r\n            \r\nCan be obtained by `/payment_types` operation."
             },
             "Transport.Deliveries.Response.Order.PositionWithSum": {
                 "title": "OrderPositionWithSumSchema",
@@ -19612,7 +19624,7 @@
                                 "$ref": "#/components/schemas/Transport.Deliveries.Response.Order.PaymentType"
                             }
                         ],
-                        "description": "Payment type. \r\n            \r\nCan be obtained by `/api/1/payment_types` operation."
+                        "description": "Payment type. \r\n            \r\nCan be obtained by `/payment_types` operation."
                     },
                     "sum": {
                         "type": "number",
@@ -19653,7 +19665,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/api/1/tips_types` operation.",
+                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/tips_types` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -19699,7 +19711,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orders": {
@@ -19789,12 +19801,12 @@
                 "properties": {
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "deliveryDurationInMinutes": {
@@ -19849,7 +19861,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "deliveryAddress": {
                         "allOf": [
@@ -19997,13 +20009,13 @@
                 "properties": {
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -20238,13 +20250,13 @@
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -20323,7 +20335,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "deliveryGeocodeServiceType": {
@@ -20541,7 +20553,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs which delivery restrictions have to be returned.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs which delivery restrictions have to be returned.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -20702,7 +20714,7 @@
                                 "$ref": "#/components/schemas/Transport.Discounts.DiscountCardMode"
                             }
                         ],
-                        "description": "Discount type. \r\n\r\nCan be obtained by `/api/1/discounts` operation."
+                        "description": "Discount type. \r\n\r\nCan be obtained by `/discounts` operation."
                     },
                     "sum": {
                         "type": "number",
@@ -20746,7 +20758,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization IDs that require discounts return.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization IDs that require discounts return.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -20846,12 +20858,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "iikoFront terminals group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "iikoFront terminals group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     }
                 },
@@ -20914,12 +20926,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "employeeId": {
@@ -21046,7 +21058,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "rolesToCheck": {
                         "type": "array",
@@ -21184,7 +21196,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "id": {
@@ -21332,12 +21344,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "employeeId": {
@@ -21417,12 +21429,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "employeeId": {
@@ -21808,7 +21820,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -21849,7 +21861,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs which marketing sources have to be returned.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs which marketing sources have to be returned.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -22106,7 +22118,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "priceCategoryId": {
                         "type": "string",
@@ -22182,7 +22194,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "startRevision": {
@@ -22978,7 +22990,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "payments": {
@@ -23090,7 +23102,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs which payment types have to be returned. \r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs which payment types have to be returned. \r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -23328,7 +23340,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs which have to be returned. By default - all organizations from apiLogin.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organizations IDs which have to be returned. By default - all organizations from apiLogin.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "nullable": true
                     },
                     "returnAdditionalInfo": {
@@ -23369,7 +23381,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Transport.Organizations.OrganizationInfo"
                         },
-                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -23393,7 +23405,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Transport.Organizations.SimpleOrganizationInfo"
                         },
-                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "List of organizations.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -23413,7 +23425,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -23898,7 +23910,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs which payment types have to be returned. \r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs which payment types have to be returned. \r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -23990,7 +24002,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations ids which removal types needs to be returned.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations ids which removal types needs to be returned.\r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -24036,7 +24048,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -24074,7 +24086,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "payments": {
@@ -24099,7 +24111,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of the reserve.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of the reserve.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "reserveId": {
@@ -24168,12 +24180,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID of a new banquet/reserve.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID of a new banquet/reserve.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID an banquet/reserve must be sent to.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID an banquet/reserve must be sent to.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "id": {
@@ -24336,7 +24348,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Collection of terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation."
+                        "description": "Collection of terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation."
                     },
                     "returnSchema": {
                         "type": "boolean",
@@ -24396,7 +24408,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Collection of restaurant section ID.\r\n            \r\nCan be obtained by `/api/1/reserve/available_restaurant_sections` operation."
+                        "description": "Collection of restaurant section ID.\r\n            \r\nCan be obtained by `/reserve/available_restaurant_sections` operation."
                     },
                     "dateFrom": {
                         "type": "string",
@@ -24524,7 +24536,7 @@
                     },
                     "orderTypeId": {
                         "type": "string",
-                        "description": "Order type ID. \r\n            \r\nCan be obtained by `/api/1/deliveries/order_types` operation",
+                        "description": "Order type ID. \r\n            \r\nCan be obtained by `/deliveries/order_types` operation",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -24683,7 +24695,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "timestamp": {
@@ -24803,7 +24815,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID for which an order search will be performed.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "reserveIds": {
@@ -25021,7 +25033,7 @@
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -25433,12 +25445,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -25463,12 +25475,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID the order must be sent to.\r\n\r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID the order must be sent to.\r\n\r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -25516,12 +25528,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     }
                 },
@@ -25561,12 +25573,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -25634,7 +25646,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations for which out-of-stock lists will be requested.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations for which out-of-stock lists will be requested.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "returnSize": {
                         "type": "boolean",
@@ -25647,7 +25659,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "List of terminal groups for which you need to get out-of-stock lists.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "List of terminal groups for which you need to get out-of-stock lists.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "nullable": true
                     }
                 },
@@ -25751,7 +25763,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "orderId": {
@@ -25796,7 +25808,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "items": {
@@ -25842,12 +25854,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Front group ID an order must be sent to.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Front group ID an order must be sent to.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "order": {
@@ -25917,7 +25929,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization IDs.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "orderIds": {
                         "type": "array",
@@ -25971,7 +25983,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "tableIds": {
                         "type": "array",
@@ -25979,7 +25991,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/api/1/reserve/available_restaurant_sections` operation."
+                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/reserve/available_restaurant_sections` operation."
                     },
                     "statuses": {
                         "type": "array",
@@ -26034,12 +26046,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "posOrderIds": {
@@ -26065,12 +26077,12 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Terminal group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "tableIds": {
@@ -26079,7 +26091,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/api/1/reserve/available_restaurant_sections` operation."
+                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/reserve/available_restaurant_sections` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -26111,7 +26123,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/api/1/reserve/available_restaurant_sections` operation.",
+                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/reserve/available_restaurant_sections` operation.",
                         "nullable": true
                     },
                     "customer": {
@@ -26211,7 +26223,7 @@
                     },
                     "orderTypeId": {
                         "type": "string",
-                        "description": "Order type ID. \r\n            \r\nCan be obtained by `/api/1/deliveries/order_types` operation",
+                        "description": "Order type ID. \r\n            \r\nCan be obtained by `/deliveries/order_types` operation",
                         "format": "uuid",
                         "nullable": true
                     },
@@ -26330,7 +26342,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/api/1/reserve/available_restaurant_sections` operation."
+                        "description": "Table IDs.\r\n            \r\nCan be obtained by `/reserve/available_restaurant_sections` operation."
                     },
                     "customer": {
                         "allOf": [
@@ -26544,7 +26556,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "timestamp": {
@@ -26645,7 +26657,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": " Organization IDs. \r\n\r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": " Organization IDs. \r\n\r\nCan be obtained by `/organizations` operation."
                     },
                     "terminalGroupIds": {
                         "type": "array",
@@ -26653,7 +26665,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "List of terminal groups IDs. \r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation."
+                        "description": "List of terminal groups IDs. \r\n            \r\nCan be obtained by `/terminal_groups` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -26698,7 +26710,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs for which information is requested. \r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs for which information is requested. \r\n            \r\nCan be obtained by `/organizations` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -26717,12 +26729,12 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "Delivery group ID.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID to which delivery group belongs.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID to which delivery group belongs.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -26767,12 +26779,12 @@
                     },
                     "terminalGroupId": {
                         "type": "string",
-                        "description": "ID of front group of terminals.\r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation.",
+                        "description": "ID of front group of terminals.\r\n            \r\nCan be obtained by `/terminal_groups` operation.",
                         "format": "uuid"
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organizations ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organizations ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     }
                 },
@@ -26799,7 +26811,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": " Organization IDs. \r\n\r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": " Organization IDs. \r\n\r\nCan be obtained by `/organizations` operation."
                     },
                     "terminalGroupIds": {
                         "type": "array",
@@ -26807,7 +26819,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "List of terminal groups IDs. \r\n            \r\nCan be obtained by `/api/1/terminal_groups` operation."
+                        "description": "List of terminal groups IDs. \r\n            \r\nCan be obtained by `/terminal_groups` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -26850,7 +26862,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Organizations IDs for which information is requested. \r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Organizations IDs for which information is requested. \r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "includeDisabled": {
                         "type": "boolean",
@@ -26895,7 +26907,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Transport.Common.RmsItemsResponseWrapper.TerminalGroup"
                         },
-                        "description": "Terminal groups are in sleep mode because they are not active.\r\n\r\nCan be awakened by `/api/1/terminal_groups/awake` operation."
+                        "description": "Terminal groups are in sleep mode because they are not active.\r\n\r\nCan be awakened by `/terminal_groups/awake` operation."
                     }
                 },
                 "additionalProperties": false,
@@ -26914,7 +26926,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/api/1/tips_types` operation.",
+                        "description": "Tips type ID.\r\n            \r\nCan be obtained by `/tips_types` operation.",
                         "format": "uuid"
                     },
                     "name": {
@@ -26927,7 +26939,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Supported organizations IDs.\r\n            \r\nCan be obtained by `/api/1/organizations` operation."
+                        "description": "Supported organizations IDs.\r\n            \r\nCan be obtained by `/organizations` operation."
                     },
                     "orderServiceTypes": {
                         "type": "array",
@@ -26992,7 +27004,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27032,7 +27044,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27061,7 +27073,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization UOC Id.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization UOC Id.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     }
                 },
@@ -27130,7 +27142,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27170,7 +27182,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27210,7 +27222,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27250,7 +27262,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27290,7 +27302,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27330,7 +27342,7 @@
                     },
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization ID.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "correlationId": {
@@ -27360,7 +27372,7 @@
                 "properties": {
                     "organizationId": {
                         "type": "string",
-                        "description": "Organization UOC Id.\r\n            \r\nCan be obtained by `/api/1/organizations` operation.",
+                        "description": "Organization UOC Id.\r\n            \r\nCan be obtained by `/organizations` operation.",
                         "format": "uuid"
                     },
                     "webHooksUri": {

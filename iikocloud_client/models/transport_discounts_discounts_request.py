@@ -26,7 +26,7 @@ class TransportDiscountsDiscountsRequest(BaseModel):
     """
     Request of discounts/surcharges.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description="Organization IDs that require discounts return.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization IDs that require discounts return.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

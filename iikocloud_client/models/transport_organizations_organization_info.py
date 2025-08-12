@@ -34,7 +34,7 @@ class TransportOrganizationsOrganizationInfo(BaseModel):
     Organization details.
     """ # noqa: E501
     response_type: StrictStr = Field(alias="responseType")
-    id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.")
+    id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.")
     name: Optional[StrictStr] = Field(description="Organization name.")
     code: Optional[StrictStr] = Field(default=None, description="Organization`s code.")
     external_data: Optional[List[TransportCommonExternalData]] = Field(default=None, description="Organization`s external data.", alias="externalData")

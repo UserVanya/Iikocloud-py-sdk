@@ -26,7 +26,7 @@ class TransportDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest(BaseModel
     """
     Request for change time when client wants the order to be delivered.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     new_complete_before: StrictStr = Field(description="New time when client wants the order to be delivered (Local for delivery terminal).", alias="newCompleteBefore")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "newCompleteBefore"]

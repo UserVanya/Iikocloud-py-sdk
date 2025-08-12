@@ -28,7 +28,7 @@ class TransportDeliveriesDraftsFilterDraftsRequest(BaseModel):
     """
     Request for the list of order drafts by several filters.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description="Organization ID for which the order drafts search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization ID for which the order drafts search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     date_from: Optional[StrictStr] = Field(default=None, description="Draft creation time (UTC). Lower limit.", alias="dateFrom")
     date_to: Optional[StrictStr] = Field(default=None, description="Draft creation time (UTC). Upper limit.", alias="dateTo")
     phone: Optional[StrictStr] = Field(default=None, description="Phone number.")

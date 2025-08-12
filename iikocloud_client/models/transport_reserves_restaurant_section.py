@@ -29,7 +29,7 @@ class TransportReservesRestaurantSection(BaseModel):
     Restaurant section.
     """ # noqa: E501
     id: StrictStr = Field(description="Restaurant section ID.")
-    terminal_group_id: StrictStr = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    terminal_group_id: StrictStr = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
     name: StrictStr = Field(description="Name.")
     tables: List[TransportReservesTable] = Field(description="Tables.")
     var_schema: Optional[TransportReservesSectionSchema] = Field(default=None, description="Table layout.", alias="schema")

@@ -51,7 +51,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_calculate_post(
+    async def loyalty_iiko_calculate_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
@@ -98,7 +98,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_calculate_post_serialize(
+        _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -126,7 +126,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_calculate_post_with_http_info(
+    async def loyalty_iiko_calculate_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
@@ -173,7 +173,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_calculate_post_serialize(
+        _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -201,7 +201,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_calculate_post_without_preload_content(
+    async def loyalty_iiko_calculate_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_checkin_request: Optional[NetLoyaltyResultCalculateCheckinRequest] = None,
@@ -248,7 +248,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_calculate_post_serialize(
+        _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -271,7 +271,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_calculate_post_serialize(
+    def _loyalty_iiko_calculate_post_serialize(
         self,
         timeout,
         net_loyalty_result_calculate_checkin_request,
@@ -335,7 +335,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/calculate',
+            resource_path='/loyalty/iiko/calculate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -352,7 +352,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_by_series_post(
+    async def loyalty_iiko_coupons_by_series_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
@@ -399,7 +399,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -427,7 +427,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_by_series_post_with_http_info(
+    async def loyalty_iiko_coupons_by_series_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
@@ -474,7 +474,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -502,7 +502,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_by_series_post_without_preload_content(
+    async def loyalty_iiko_coupons_by_series_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_not_activated_coupon_request: Optional[NetLoyaltyResultNotActivatedCouponRequest] = None,
@@ -549,7 +549,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_by_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -572,7 +572,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_coupons_by_series_post_serialize(
+    def _loyalty_iiko_coupons_by_series_post_serialize(
         self,
         timeout,
         net_loyalty_result_not_activated_coupon_request,
@@ -636,7 +636,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/coupons/by_series',
+            resource_path='/loyalty/iiko/coupons/by_series',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -653,7 +653,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_info_post(
+    async def loyalty_iiko_coupons_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
@@ -700,7 +700,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
+        _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -728,7 +728,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_info_post_with_http_info(
+    async def loyalty_iiko_coupons_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
@@ -775,7 +775,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
+        _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -803,7 +803,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_info_post_without_preload_content(
+    async def loyalty_iiko_coupons_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_coupon_info_request: Optional[NetLoyaltyResultCouponInfoRequest] = None,
@@ -850,7 +850,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_info_post_serialize(
+        _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
             net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -873,7 +873,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_coupons_info_post_serialize(
+    def _loyalty_iiko_coupons_info_post_serialize(
         self,
         timeout,
         net_loyalty_result_coupon_info_request,
@@ -937,7 +937,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/coupons/info',
+            resource_path='/loyalty/iiko/coupons/info',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -954,7 +954,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_series_post(
+    async def loyalty_iiko_coupons_series_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
@@ -1001,7 +1001,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1029,7 +1029,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_series_post_with_http_info(
+    async def loyalty_iiko_coupons_series_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
@@ -1076,7 +1076,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1104,7 +1104,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_coupons_series_post_without_preload_content(
+    async def loyalty_iiko_coupons_series_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_series_with_not_activated_coupons_request: Optional[NetLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
@@ -1151,7 +1151,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_coupons_series_post_serialize(
+        _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
             net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1174,7 +1174,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_coupons_series_post_serialize(
+    def _loyalty_iiko_coupons_series_post_serialize(
         self,
         timeout,
         net_loyalty_result_series_with_not_activated_coupons_request,
@@ -1238,7 +1238,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/coupons/series',
+            resource_path='/loyalty/iiko/coupons/series',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1255,7 +1255,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_manual_condition_post(
+    async def loyalty_iiko_manual_condition_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
@@ -1302,7 +1302,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
+        _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1330,7 +1330,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_manual_condition_post_with_http_info(
+    async def loyalty_iiko_manual_condition_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
@@ -1377,7 +1377,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
+        _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1405,7 +1405,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_manual_condition_post_without_preload_content(
+    async def loyalty_iiko_manual_condition_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_common_get_by_organization_id_request: Optional[NetCommonGetByOrganizationIdRequest] = None,
@@ -1452,7 +1452,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_manual_condition_post_serialize(
+        _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
             net_common_get_by_organization_id_request=net_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1475,7 +1475,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_manual_condition_post_serialize(
+    def _loyalty_iiko_manual_condition_post_serialize(
         self,
         timeout,
         net_common_get_by_organization_id_request,
@@ -1539,7 +1539,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/manual_condition',
+            resource_path='/loyalty/iiko/manual_condition',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1556,7 +1556,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_program_post(
+    async def loyalty_iiko_program_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
@@ -1603,7 +1603,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_program_post_serialize(
+        _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1631,7 +1631,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_program_post_with_http_info(
+    async def loyalty_iiko_program_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
@@ -1678,7 +1678,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_program_post_serialize(
+        _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1706,7 +1706,7 @@ class DiscountsAndPromotionsApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_program_post_without_preload_content(
+    async def loyalty_iiko_program_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_organization_get_programs_request: Optional[NetOrganizationGetProgramsRequest] = None,
@@ -1753,7 +1753,7 @@ class DiscountsAndPromotionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_program_post_serialize(
+        _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
             net_organization_get_programs_request=net_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1776,7 +1776,7 @@ class DiscountsAndPromotionsApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_program_post_serialize(
+    def _loyalty_iiko_program_post_serialize(
         self,
         timeout,
         net_organization_get_programs_request,
@@ -1840,7 +1840,7 @@ class DiscountsAndPromotionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/program',
+            resource_path='/loyalty/iiko/program',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

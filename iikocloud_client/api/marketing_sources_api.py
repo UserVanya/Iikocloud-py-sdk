@@ -41,7 +41,7 @@ class MarketingSourcesApi:
 
 
     @validate_call
-    async def api1_marketing_sources_post(
+    async def marketing_sources_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_marketing_sources_marketing_sources_request: Optional[TransportMarketingSourcesMarketingSourcesRequest] = None,
@@ -88,7 +88,7 @@ class MarketingSourcesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_marketing_sources_post_serialize(
+        _param = self._marketing_sources_post_serialize(
             timeout=timeout,
             transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
@@ -116,7 +116,7 @@ class MarketingSourcesApi:
 
 
     @validate_call
-    async def api1_marketing_sources_post_with_http_info(
+    async def marketing_sources_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_marketing_sources_marketing_sources_request: Optional[TransportMarketingSourcesMarketingSourcesRequest] = None,
@@ -163,7 +163,7 @@ class MarketingSourcesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_marketing_sources_post_serialize(
+        _param = self._marketing_sources_post_serialize(
             timeout=timeout,
             transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
@@ -191,7 +191,7 @@ class MarketingSourcesApi:
 
 
     @validate_call
-    async def api1_marketing_sources_post_without_preload_content(
+    async def marketing_sources_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_marketing_sources_marketing_sources_request: Optional[TransportMarketingSourcesMarketingSourcesRequest] = None,
@@ -238,7 +238,7 @@ class MarketingSourcesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_marketing_sources_post_serialize(
+        _param = self._marketing_sources_post_serialize(
             timeout=timeout,
             transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
@@ -261,7 +261,7 @@ class MarketingSourcesApi:
         return response_data.response
 
 
-    def _api1_marketing_sources_post_serialize(
+    def _marketing_sources_post_serialize(
         self,
         timeout,
         transport_marketing_sources_marketing_sources_request,
@@ -325,7 +325,7 @@ class MarketingSourcesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/marketing_sources',
+            resource_path='/marketing_sources',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

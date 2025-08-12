@@ -40,7 +40,7 @@ class TransportTableOrdersResponseTableOrder(BaseModel):
     """
     Order.
     """ # noqa: E501
-    table_ids: List[StrictStr] = Field(description="Table IDs.                Can be obtained by `/api/1/reserve/available_restaurant_sections` operation.", alias="tableIds")
+    table_ids: List[StrictStr] = Field(description="Table IDs.                Can be obtained by `/reserve/available_restaurant_sections` operation.", alias="tableIds")
     customer: Optional[TransportDeliveriesResponseOrderRegularCustomer] = Field(default=None, description="Guest.   > Allowed from version `7.5.2`.")
     phone: Optional[StrictStr] = Field(default=None, description="Guest phone.   > Allowed from version `7.5.2`.")
     status: TransportDeliveriesResponseOrderOrderStatus = Field(description="Order status.")

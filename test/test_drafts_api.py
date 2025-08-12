@@ -26,57 +26,57 @@ class TestDraftsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_deliveries_drafts_by_filter_post(self) -> None:
-        """Test case for api1_deliveries_drafts_by_filter_post
+    async def test_deliveries_drafts_by_filter_post(self) -> None:
+        """Test case for deliveries_drafts_by_filter_post
 
         Retrieve order drafts list by parameters.
         """
         pass
 
-    async def test_api1_deliveries_drafts_by_id_post(self) -> None:
-        """Test case for api1_deliveries_drafts_by_id_post
+    async def test_deliveries_drafts_by_id_post(self) -> None:
+        """Test case for deliveries_drafts_by_id_post
 
         Retrieve order draft by ID.
         """
         pass
 
-    async def test_api1_deliveries_drafts_commit_post(self) -> None:
-        """Test case for api1_deliveries_drafts_commit_post
+    async def test_deliveries_drafts_commit_post(self) -> None:
+        """Test case for deliveries_drafts_commit_post
 
         Admit order draft changes and send them to Front.
         """
         pass
 
-    async def test_api1_deliveries_drafts_create_post(self) -> None:
-        """Test case for api1_deliveries_drafts_create_post
+    async def test_deliveries_drafts_create_post(self) -> None:
+        """Test case for deliveries_drafts_create_post
 
         Create delivery order draft.
         """
         pass
 
-    async def test_api1_deliveries_drafts_delete_post(self) -> None:
-        """Test case for api1_deliveries_drafts_delete_post
+    async def test_deliveries_drafts_delete_post(self) -> None:
+        """Test case for deliveries_drafts_delete_post
 
         Delete order draft.
         """
         pass
 
-    async def test_api1_deliveries_drafts_lock_post(self) -> None:
-        """Test case for api1_deliveries_drafts_lock_post
+    async def test_deliveries_drafts_lock_post(self) -> None:
+        """Test case for deliveries_drafts_lock_post
 
         Lock order draft.
         """
         pass
 
-    async def test_api1_deliveries_drafts_save_post(self) -> None:
-        """Test case for api1_deliveries_drafts_save_post
+    async def test_deliveries_drafts_save_post(self) -> None:
+        """Test case for deliveries_drafts_save_post
 
         Update existing delivery order draft.
         """
         pass
 
-    async def test_api1_deliveries_drafts_unlock_post(self) -> None:
-        """Test case for api1_deliveries_drafts_unlock_post
+    async def test_deliveries_drafts_unlock_post(self) -> None:
+        """Test case for deliveries_drafts_unlock_post
 
         Unlock order draft.
         """

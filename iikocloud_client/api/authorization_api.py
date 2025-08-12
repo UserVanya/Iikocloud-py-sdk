@@ -41,7 +41,7 @@ class AuthorizationApi:
 
 
     @validate_call
-    async def api1_access_token_post(
+    async def access_token_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_auth_get_access_token_request: Optional[TransportAuthGetAccessTokenRequest] = None,
@@ -87,7 +87,7 @@ class AuthorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_access_token_post_serialize(
+        _param = self._access_token_post_serialize(
             timeout=timeout,
             transport_auth_get_access_token_request=transport_auth_get_access_token_request,
             _request_auth=_request_auth,
@@ -115,7 +115,7 @@ class AuthorizationApi:
 
 
     @validate_call
-    async def api1_access_token_post_with_http_info(
+    async def access_token_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_auth_get_access_token_request: Optional[TransportAuthGetAccessTokenRequest] = None,
@@ -161,7 +161,7 @@ class AuthorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_access_token_post_serialize(
+        _param = self._access_token_post_serialize(
             timeout=timeout,
             transport_auth_get_access_token_request=transport_auth_get_access_token_request,
             _request_auth=_request_auth,
@@ -189,7 +189,7 @@ class AuthorizationApi:
 
 
     @validate_call
-    async def api1_access_token_post_without_preload_content(
+    async def access_token_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_auth_get_access_token_request: Optional[TransportAuthGetAccessTokenRequest] = None,
@@ -235,7 +235,7 @@ class AuthorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_access_token_post_serialize(
+        _param = self._access_token_post_serialize(
             timeout=timeout,
             transport_auth_get_access_token_request=transport_auth_get_access_token_request,
             _request_auth=_request_auth,
@@ -258,7 +258,7 @@ class AuthorizationApi:
         return response_data.response
 
 
-    def _api1_access_token_post_serialize(
+    def _access_token_post_serialize(
         self,
         timeout,
         transport_auth_get_access_token_request,
@@ -321,7 +321,7 @@ class AuthorizationApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/access_token',
+            resource_path='/access_token',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

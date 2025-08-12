@@ -26,22 +26,22 @@ class TestCustomerCategoriesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_loyalty_iiko_customer_category_add_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_category_add_post
+    async def test_loyalty_iiko_customer_category_add_post(self) -> None:
+        """Test case for loyalty_iiko_customer_category_add_post
 
         Add category for customer.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_category_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_category_post
+    async def test_loyalty_iiko_customer_category_post(self) -> None:
+        """Test case for loyalty_iiko_customer_category_post
 
         Get customer categories.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_category_remove_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_category_remove_post
+    async def test_loyalty_iiko_customer_category_remove_post(self) -> None:
+        """Test case for loyalty_iiko_customer_category_remove_post
 
         Remove category for customer.
         """

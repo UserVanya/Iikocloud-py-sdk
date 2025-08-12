@@ -26,8 +26,8 @@ class TestOperationsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_commands_status_post(self) -> None:
-        """Test case for api1_commands_status_post
+    async def test_commands_status_post(self) -> None:
+        """Test case for commands_status_post
 
         Get status of command.
         """

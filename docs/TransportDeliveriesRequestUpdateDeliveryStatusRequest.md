@@ -6,7 +6,7 @@ Request for delivery status update.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **order_id** | **str** | Order ID. | 
 **delivery_status** | [**TransportDeliveriesCommonDeliveryStatusForUpdate**](TransportDeliveriesCommonDeliveryStatusForUpdate.md) | Delivery status. Can be only switched between these three statuses. | 
 **delivery_date** | **str** | The date and time when the order was received by the guest (Local for delivery terminal). | [optional] 

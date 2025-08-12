@@ -1,15 +1,15 @@
 # iikocloud_client.OrganizationsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_organizations_post**](OrganizationsApi.md#api1_organizations_post) | **POST** /api/1/organizations | Returns organizations available to api-login user.
-[**api1_organizations_settings_post**](OrganizationsApi.md#api1_organizations_settings_post) | **POST** /api/1/organizations/settings | Returns available to api-login user organizations specified settings.
+[**organizations_post**](OrganizationsApi.md#organizations_post) | **POST** /organizations | Returns organizations available to api-login user.
+[**organizations_settings_post**](OrganizationsApi.md#organizations_settings_post) | **POST** /organizations/settings | Returns available to api-login user organizations specified settings.
 
 
-# **api1_organizations_post**
-> TransportOrganizationsGetOrganizationsResponse api1_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+# **organizations_post**
+> TransportOrganizationsGetOrganizationsResponse organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
 
 Returns organizations available to api-login user.
 
@@ -28,10 +28,10 @@ from iikocloud_client.models.transport_organizations_get_organizations_response 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.api1_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
-        print("The response of OrganizationsApi->api1_organizations_post:\n")
+        api_response = await api_instance.organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+        print("The response of OrganizationsApi->organizations_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrganizationsApi->api1_organizations_post: %s\n" % e)
+        print("Exception when calling OrganizationsApi->organizations_post: %s\n" % e)
 ```
 
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_organizations_settings_post**
-> TransportOrganizationsOrganizationsSettingsResponse api1_organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
+# **organizations_settings_post**
+> TransportOrganizationsOrganizationsSettingsResponse organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
 
 Returns available to api-login user organizations specified settings.
 
@@ -115,10 +115,10 @@ from iikocloud_client.models.transport_organizations_organizations_settings_resp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -140,11 +140,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns available to api-login user organizations specified settings.
-        api_response = await api_instance.api1_organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
-        print("The response of OrganizationsApi->api1_organizations_settings_post:\n")
+        api_response = await api_instance.organizations_settings_post(timeout=timeout, transport_organizations_organizations_settings_request=transport_organizations_organizations_settings_request)
+        print("The response of OrganizationsApi->organizations_settings_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrganizationsApi->api1_organizations_settings_post: %s\n" % e)
+        print("Exception when calling OrganizationsApi->organizations_settings_post: %s\n" % e)
 ```
 
 

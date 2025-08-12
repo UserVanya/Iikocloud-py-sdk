@@ -45,7 +45,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_awake_post(
+    async def terminal_groups_awake_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
@@ -92,7 +92,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_awake_post_serialize(
+        _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -120,7 +120,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_awake_post_with_http_info(
+    async def terminal_groups_awake_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
@@ -167,7 +167,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_awake_post_serialize(
+        _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -195,7 +195,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_awake_post_without_preload_content(
+    async def terminal_groups_awake_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_awake_terminal_groups_request: Optional[TransportTerminalsAwakeTerminalGroupsRequest] = None,
@@ -242,7 +242,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_awake_post_serialize(
+        _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
             transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
@@ -265,7 +265,7 @@ class TerminalGroupsApi:
         return response_data.response
 
 
-    def _api1_terminal_groups_awake_post_serialize(
+    def _terminal_groups_awake_post_serialize(
         self,
         timeout,
         transport_terminals_awake_terminal_groups_request,
@@ -329,7 +329,7 @@ class TerminalGroupsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/terminal_groups/awake',
+            resource_path='/terminal_groups/awake',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -346,7 +346,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_is_alive_post(
+    async def terminal_groups_is_alive_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
@@ -393,7 +393,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_is_alive_post_serialize(
+        _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -421,7 +421,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_is_alive_post_with_http_info(
+    async def terminal_groups_is_alive_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
@@ -468,7 +468,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_is_alive_post_serialize(
+        _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -496,7 +496,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_is_alive_post_without_preload_content(
+    async def terminal_groups_is_alive_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_is_alive_request: Optional[TransportTerminalsTerminalGroupsIsAliveRequest] = None,
@@ -543,7 +543,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_is_alive_post_serialize(
+        _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
@@ -566,7 +566,7 @@ class TerminalGroupsApi:
         return response_data.response
 
 
-    def _api1_terminal_groups_is_alive_post_serialize(
+    def _terminal_groups_is_alive_post_serialize(
         self,
         timeout,
         transport_terminals_terminal_groups_is_alive_request,
@@ -630,7 +630,7 @@ class TerminalGroupsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/terminal_groups/is_alive',
+            resource_path='/terminal_groups/is_alive',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -647,7 +647,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_post(
+    async def terminal_groups_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
@@ -694,7 +694,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_post_serialize(
+        _param = self._terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -722,7 +722,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_post_with_http_info(
+    async def terminal_groups_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
@@ -769,7 +769,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_post_serialize(
+        _param = self._terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -797,7 +797,7 @@ class TerminalGroupsApi:
 
 
     @validate_call
-    async def api1_terminal_groups_post_without_preload_content(
+    async def terminal_groups_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_terminal_groups_request: Optional[TransportTerminalsTerminalGroupsRequest] = None,
@@ -844,7 +844,7 @@ class TerminalGroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_terminal_groups_post_serialize(
+        _param = self._terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request,
             _request_auth=_request_auth,
@@ -867,7 +867,7 @@ class TerminalGroupsApi:
         return response_data.response
 
 
-    def _api1_terminal_groups_post_serialize(
+    def _terminal_groups_post_serialize(
         self,
         timeout,
         transport_terminals_terminal_groups_request,
@@ -931,7 +931,7 @@ class TerminalGroupsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/terminal_groups',
+            resource_path='/terminal_groups',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

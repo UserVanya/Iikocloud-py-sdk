@@ -27,7 +27,7 @@ class TransportDeliveriesRequestUpdateOrderProblemRequest(BaseModel):
     """
     Request for order problem update.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     has_problem: StrictBool = Field(description="Problem flag.", alias="hasProblem")
     problem: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=1000)]] = Field(description="Problem text.")

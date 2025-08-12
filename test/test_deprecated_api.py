@@ -26,22 +26,22 @@ class TestDeprecatedApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_deliveries_check_create_post(self) -> None:
-        """Test case for api1_deliveries_check_create_post
+    async def test_deliveries_check_create_post(self) -> None:
+        """Test case for deliveries_check_create_post
 
         Check create delivery.
         """
         pass
 
-    async def test_api1_deliveries_update_order_payments_post(self) -> None:
-        """Test case for api1_deliveries_update_order_payments_post
+    async def test_deliveries_update_order_payments_post(self) -> None:
+        """Test case for deliveries_update_order_payments_post
 
         Update order payment details.
         """
         pass
 
-    async def test_api1_organizations_get(self) -> None:
-        """Test case for api1_organizations_get
+    async def test_organizations_get(self) -> None:
+        """Test case for organizations_get
 
         Returns organizations available to api-login user.
         """

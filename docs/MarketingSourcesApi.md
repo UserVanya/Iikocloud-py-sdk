@@ -1,14 +1,14 @@
 # iikocloud_client.MarketingSourcesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_marketing_sources_post**](MarketingSourcesApi.md#api1_marketing_sources_post) | **POST** /api/1/marketing_sources | Marketing sources.
+[**marketing_sources_post**](MarketingSourcesApi.md#marketing_sources_post) | **POST** /marketing_sources | Marketing sources.
 
 
-# **api1_marketing_sources_post**
-> TransportMarketingSourcesMarketingSourcesResponse api1_marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
+# **marketing_sources_post**
+> TransportMarketingSourcesMarketingSourcesResponse marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
 
 Marketing sources.
 
@@ -29,10 +29,10 @@ from iikocloud_client.models.transport_marketing_sources_marketing_sources_respo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -54,11 +54,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Marketing sources.
-        api_response = await api_instance.api1_marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
-        print("The response of MarketingSourcesApi->api1_marketing_sources_post:\n")
+        api_response = await api_instance.marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
+        print("The response of MarketingSourcesApi->marketing_sources_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MarketingSourcesApi->api1_marketing_sources_post: %s\n" % e)
+        print("Exception when calling MarketingSourcesApi->marketing_sources_post: %s\n" % e)
 ```
 
 

@@ -1,16 +1,16 @@
 # iikocloud_client.DeprecatedApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_deliveries_check_create_post**](DeprecatedApi.md#api1_deliveries_check_create_post) | **POST** /api/1/deliveries/check_create | Check create delivery.
-[**api1_deliveries_update_order_payments_post**](DeprecatedApi.md#api1_deliveries_update_order_payments_post) | **POST** /api/1/deliveries/update_order_payments | Update order payment details.
-[**api1_organizations_get**](DeprecatedApi.md#api1_organizations_get) | **GET** /api/1/organizations | Returns organizations available to api-login user.
+[**deliveries_check_create_post**](DeprecatedApi.md#deliveries_check_create_post) | **POST** /deliveries/check_create | Check create delivery.
+[**deliveries_update_order_payments_post**](DeprecatedApi.md#deliveries_update_order_payments_post) | **POST** /deliveries/update_order_payments | Update order payment details.
+[**organizations_get**](DeprecatedApi.md#organizations_get) | **GET** /organizations | Returns organizations available to api-login user.
 
 
-# **api1_deliveries_check_create_post**
-> TransportDeliveriesResponseCheckCreateOrderResponse api1_deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
+# **deliveries_check_create_post**
+> TransportDeliveriesResponseCheckCreateOrderResponse deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
 
 Check create delivery.
 
@@ -29,10 +29,10 @@ from iikocloud_client.models.transport_deliveries_response_check_create_order_re
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -54,11 +54,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Check create delivery.
-        api_response = await api_instance.api1_deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
-        print("The response of DeprecatedApi->api1_deliveries_check_create_post:\n")
+        api_response = await api_instance.deliveries_check_create_post(timeout=timeout, transport_deliveries_request_create_order_request=transport_deliveries_request_create_order_request)
+        print("The response of DeprecatedApi->deliveries_check_create_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeprecatedApi->api1_deliveries_check_create_post: %s\n" % e)
+        print("Exception when calling DeprecatedApi->deliveries_check_create_post: %s\n" % e)
 ```
 
 
@@ -96,8 +96,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_update_order_payments_post**
-> TransportCommonCorrelationIdResponse api1_deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
+# **deliveries_update_order_payments_post**
+> TransportCommonCorrelationIdResponse deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
 
 Update order payment details.
 
@@ -118,10 +118,10 @@ from iikocloud_client.models.transport_deliveries_request_update_order_payments_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -143,11 +143,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Update order payment details.
-        api_response = await api_instance.api1_deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
-        print("The response of DeprecatedApi->api1_deliveries_update_order_payments_post:\n")
+        api_response = await api_instance.deliveries_update_order_payments_post(timeout=timeout, transport_deliveries_request_update_order_payments_request=transport_deliveries_request_update_order_payments_request)
+        print("The response of DeprecatedApi->deliveries_update_order_payments_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeprecatedApi->api1_deliveries_update_order_payments_post: %s\n" % e)
+        print("Exception when calling DeprecatedApi->deliveries_update_order_payments_post: %s\n" % e)
 ```
 
 
@@ -185,8 +185,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_organizations_get**
-> TransportOrganizationsGetSimpleOrganizationsResponse api1_organizations_get(timeout=timeout)
+# **organizations_get**
+> TransportOrganizationsGetSimpleOrganizationsResponse organizations_get(timeout=timeout)
 
 Returns organizations available to api-login user.
 
@@ -204,10 +204,10 @@ from iikocloud_client.models.transport_organizations_get_simple_organizations_re
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -228,11 +228,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.api1_organizations_get(timeout=timeout)
-        print("The response of DeprecatedApi->api1_organizations_get:\n")
+        api_response = await api_instance.organizations_get(timeout=timeout)
+        print("The response of DeprecatedApi->organizations_get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeprecatedApi->api1_organizations_get: %s\n" % e)
+        print("Exception when calling DeprecatedApi->organizations_get: %s\n" % e)
 ```
 
 

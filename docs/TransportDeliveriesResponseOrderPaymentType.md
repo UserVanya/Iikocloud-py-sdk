@@ -1,6 +1,6 @@
 # TransportDeliveriesResponseOrderPaymentType
 
-Payment type.                 Can be obtained by `/api/1/payment_types` operation.
+Payment type.                 Can be obtained by `/payment_types` operation.
 
 ## Properties
 

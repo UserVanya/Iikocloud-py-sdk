@@ -1,19 +1,19 @@
 # iikocloud_client.DictionariesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_cancel_causes_post**](DictionariesApi.md#api1_cancel_causes_post) | **POST** /api/1/cancel_causes | Delivery cancel causes.
-[**api1_deliveries_order_types_post**](DictionariesApi.md#api1_deliveries_order_types_post) | **POST** /api/1/deliveries/order_types | Order types.
-[**api1_discounts_post**](DictionariesApi.md#api1_discounts_post) | **POST** /api/1/discounts | Discounts / surcharges.
-[**api1_payment_types_post**](DictionariesApi.md#api1_payment_types_post) | **POST** /api/1/payment_types | Payment types.
-[**api1_removal_types_post**](DictionariesApi.md#api1_removal_types_post) | **POST** /api/1/removal_types | Removal types (reasons for deletion).
-[**api1_tips_types_post**](DictionariesApi.md#api1_tips_types_post) | **POST** /api/1/tips_types | Get tips types for api-login&#x60;s rms group.
+[**cancel_causes_post**](DictionariesApi.md#cancel_causes_post) | **POST** /cancel_causes | Delivery cancel causes.
+[**deliveries_order_types_post**](DictionariesApi.md#deliveries_order_types_post) | **POST** /deliveries/order_types | Order types.
+[**discounts_post**](DictionariesApi.md#discounts_post) | **POST** /discounts | Discounts / surcharges.
+[**payment_types_post**](DictionariesApi.md#payment_types_post) | **POST** /payment_types | Payment types.
+[**removal_types_post**](DictionariesApi.md#removal_types_post) | **POST** /removal_types | Removal types (reasons for deletion).
+[**tips_types_post**](DictionariesApi.md#tips_types_post) | **POST** /tips_types | Get tips types for api-login&#x60;s rms group.
 
 
-# **api1_cancel_causes_post**
-> TransportCancelCausesCancelCausesResponse api1_cancel_causes_post(timeout=timeout, transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request)
+# **cancel_causes_post**
+> TransportCancelCausesCancelCausesResponse cancel_causes_post(timeout=timeout, transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request)
 
 Delivery cancel causes.
 
@@ -34,10 +34,10 @@ from iikocloud_client.models.transport_cancel_causes_cancel_causes_response impo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -59,11 +59,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Delivery cancel causes.
-        api_response = await api_instance.api1_cancel_causes_post(timeout=timeout, transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request)
-        print("The response of DictionariesApi->api1_cancel_causes_post:\n")
+        api_response = await api_instance.cancel_causes_post(timeout=timeout, transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request)
+        print("The response of DictionariesApi->cancel_causes_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_cancel_causes_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->cancel_causes_post: %s\n" % e)
 ```
 
 
@@ -101,8 +101,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_order_types_post**
-> TransportOrderTypesOrderTypesResponse api1_deliveries_order_types_post(timeout=timeout, transport_order_types_order_types_request=transport_order_types_order_types_request)
+# **deliveries_order_types_post**
+> TransportOrderTypesOrderTypesResponse deliveries_order_types_post(timeout=timeout, transport_order_types_order_types_request=transport_order_types_order_types_request)
 
 Order types.
 
@@ -121,10 +121,10 @@ from iikocloud_client.models.transport_order_types_order_types_response import T
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -146,11 +146,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Order types.
-        api_response = await api_instance.api1_deliveries_order_types_post(timeout=timeout, transport_order_types_order_types_request=transport_order_types_order_types_request)
-        print("The response of DictionariesApi->api1_deliveries_order_types_post:\n")
+        api_response = await api_instance.deliveries_order_types_post(timeout=timeout, transport_order_types_order_types_request=transport_order_types_order_types_request)
+        print("The response of DictionariesApi->deliveries_order_types_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_deliveries_order_types_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->deliveries_order_types_post: %s\n" % e)
 ```
 
 
@@ -188,8 +188,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_discounts_post**
-> TransportDiscountsDiscountsResponse api1_discounts_post(timeout=timeout, transport_discounts_discounts_request=transport_discounts_discounts_request)
+# **discounts_post**
+> TransportDiscountsDiscountsResponse discounts_post(timeout=timeout, transport_discounts_discounts_request=transport_discounts_discounts_request)
 
 Discounts / surcharges.
 
@@ -208,10 +208,10 @@ from iikocloud_client.models.transport_discounts_discounts_response import Trans
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -233,11 +233,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Discounts / surcharges.
-        api_response = await api_instance.api1_discounts_post(timeout=timeout, transport_discounts_discounts_request=transport_discounts_discounts_request)
-        print("The response of DictionariesApi->api1_discounts_post:\n")
+        api_response = await api_instance.discounts_post(timeout=timeout, transport_discounts_discounts_request=transport_discounts_discounts_request)
+        print("The response of DictionariesApi->discounts_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_discounts_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->discounts_post: %s\n" % e)
 ```
 
 
@@ -275,8 +275,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_payment_types_post**
-> TransportPaymentTypesPaymentTypesResponse api1_payment_types_post(timeout=timeout, transport_payment_types_payment_types_request=transport_payment_types_payment_types_request)
+# **payment_types_post**
+> TransportPaymentTypesPaymentTypesResponse payment_types_post(timeout=timeout, transport_payment_types_payment_types_request=transport_payment_types_payment_types_request)
 
 Payment types.
 
@@ -295,10 +295,10 @@ from iikocloud_client.models.transport_payment_types_payment_types_response impo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -320,11 +320,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Payment types.
-        api_response = await api_instance.api1_payment_types_post(timeout=timeout, transport_payment_types_payment_types_request=transport_payment_types_payment_types_request)
-        print("The response of DictionariesApi->api1_payment_types_post:\n")
+        api_response = await api_instance.payment_types_post(timeout=timeout, transport_payment_types_payment_types_request=transport_payment_types_payment_types_request)
+        print("The response of DictionariesApi->payment_types_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_payment_types_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->payment_types_post: %s\n" % e)
 ```
 
 
@@ -362,8 +362,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_removal_types_post**
-> TransportRemovalTypesRemovalTypesResponse api1_removal_types_post(timeout=timeout, transport_removal_types_removal_types_request=transport_removal_types_removal_types_request)
+# **removal_types_post**
+> TransportRemovalTypesRemovalTypesResponse removal_types_post(timeout=timeout, transport_removal_types_removal_types_request=transport_removal_types_removal_types_request)
 
 Removal types (reasons for deletion).
 
@@ -384,10 +384,10 @@ from iikocloud_client.models.transport_removal_types_removal_types_response impo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -409,11 +409,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Removal types (reasons for deletion).
-        api_response = await api_instance.api1_removal_types_post(timeout=timeout, transport_removal_types_removal_types_request=transport_removal_types_removal_types_request)
-        print("The response of DictionariesApi->api1_removal_types_post:\n")
+        api_response = await api_instance.removal_types_post(timeout=timeout, transport_removal_types_removal_types_request=transport_removal_types_removal_types_request)
+        print("The response of DictionariesApi->removal_types_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_removal_types_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->removal_types_post: %s\n" % e)
 ```
 
 
@@ -451,8 +451,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_tips_types_post**
-> TransportTipsTypesTipsTypesResponse api1_tips_types_post(timeout=timeout)
+# **tips_types_post**
+> TransportTipsTypesTipsTypesResponse tips_types_post(timeout=timeout)
 
 Get tips types for api-login`s rms group.
 
@@ -472,10 +472,10 @@ from iikocloud_client.models.transport_tips_types_tips_types_response import Tra
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -496,11 +496,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get tips types for api-login`s rms group.
-        api_response = await api_instance.api1_tips_types_post(timeout=timeout)
-        print("The response of DictionariesApi->api1_tips_types_post:\n")
+        api_response = await api_instance.tips_types_post(timeout=timeout)
+        print("The response of DictionariesApi->tips_types_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DictionariesApi->api1_tips_types_post: %s\n" % e)
+        print("Exception when calling DictionariesApi->tips_types_post: %s\n" % e)
 ```
 
 

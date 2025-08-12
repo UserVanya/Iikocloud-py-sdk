@@ -42,7 +42,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_add_post(
+    async def loyalty_iiko_customer_category_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -89,7 +89,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
+        _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -117,7 +117,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_add_post_with_http_info(
+    async def loyalty_iiko_customer_category_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -164,7 +164,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
+        _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -192,7 +192,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_add_post_without_preload_content(
+    async def loyalty_iiko_customer_category_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -239,7 +239,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_add_post_serialize(
+        _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -262,7 +262,7 @@ class CustomerCategoriesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_category_add_post_serialize(
+    def _loyalty_iiko_customer_category_add_post_serialize(
         self,
         timeout,
         net_customer_change_category_for_customer_request,
@@ -326,7 +326,7 @@ class CustomerCategoriesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer_category/add',
+            resource_path='/loyalty/iiko/customer_category/add',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -343,7 +343,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_post(
+    async def loyalty_iiko_customer_category_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
@@ -390,7 +390,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_post_serialize(
+        _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -418,7 +418,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_post_with_http_info(
+    async def loyalty_iiko_customer_category_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
@@ -465,7 +465,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_post_serialize(
+        _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -493,7 +493,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_post_without_preload_content(
+    async def loyalty_iiko_customer_category_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_categories_request: Optional[NetCustomerGetCategoriesRequest] = None,
@@ -540,7 +540,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_post_serialize(
+        _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
             net_customer_get_categories_request=net_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -563,7 +563,7 @@ class CustomerCategoriesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_category_post_serialize(
+    def _loyalty_iiko_customer_category_post_serialize(
         self,
         timeout,
         net_customer_get_categories_request,
@@ -627,7 +627,7 @@ class CustomerCategoriesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer_category',
+            resource_path='/loyalty/iiko/customer_category',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -644,7 +644,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_remove_post(
+    async def loyalty_iiko_customer_category_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -691,7 +691,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -719,7 +719,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_remove_post_with_http_info(
+    async def loyalty_iiko_customer_category_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -766,7 +766,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -794,7 +794,7 @@ class CustomerCategoriesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_category_remove_post_without_preload_content(
+    async def loyalty_iiko_customer_category_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_category_for_customer_request: Optional[NetCustomerChangeCategoryForCustomerRequest] = None,
@@ -841,7 +841,7 @@ class CustomerCategoriesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_category_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
             net_customer_change_category_for_customer_request=net_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -864,7 +864,7 @@ class CustomerCategoriesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_category_remove_post_serialize(
+    def _loyalty_iiko_customer_category_remove_post_serialize(
         self,
         timeout,
         net_customer_change_category_for_customer_request,
@@ -928,7 +928,7 @@ class CustomerCategoriesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer_category/remove',
+            resource_path='/loyalty/iiko/customer_category/remove',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -31,8 +31,8 @@ class TransportReservesCreateReserveRequest(BaseModel):
     """
     Banquet/reserve creation model.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID of a new banquet/reserve.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
-    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID an banquet/reserve must be sent to.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: StrictStr = Field(description="Organization ID of a new banquet/reserve.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID an banquet/reserve must be sent to.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
     id: Optional[StrictStr] = Field(default=None, description="Banquet/reserve ID. Must be unique.")
     external_number: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="Banquet/reserve external number.   > Allowed from version `8.0.6`.", alias="externalNumber")
     order: Optional[TransportReservesRequestReserveOrder] = Field(default=None, description="Order. Used only at a banquet.")

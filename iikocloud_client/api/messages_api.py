@@ -46,7 +46,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_sending_possibility_post(
+    async def loyalty_iiko_check_sms_sending_possibility_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
@@ -93,7 +93,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
+        _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -121,7 +121,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_sending_possibility_post_with_http_info(
+    async def loyalty_iiko_check_sms_sending_possibility_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
@@ -168,7 +168,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
+        _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -196,7 +196,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_sending_possibility_post_without_preload_content(
+    async def loyalty_iiko_check_sms_sending_possibility_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_sms_sending_possibility_request: Optional[NetNotificationSmsSendingPossibilityRequest] = None,
@@ -243,7 +243,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
+        _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
             net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
@@ -266,7 +266,7 @@ class MessagesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_check_sms_sending_possibility_post_serialize(
+    def _loyalty_iiko_check_sms_sending_possibility_post_serialize(
         self,
         timeout,
         net_notification_sms_sending_possibility_request,
@@ -330,7 +330,7 @@ class MessagesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/check_sms_sending_possibility',
+            resource_path='/loyalty/iiko/check_sms_sending_possibility',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -347,7 +347,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_status_post(
+    async def loyalty_iiko_check_sms_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
@@ -394,7 +394,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
+        _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -422,7 +422,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_status_post_with_http_info(
+    async def loyalty_iiko_check_sms_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
@@ -469,7 +469,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
+        _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -497,7 +497,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_check_sms_status_post_without_preload_content(
+    async def loyalty_iiko_check_sms_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_check_sms_status_request: Optional[NetNotificationCheckSmsStatusRequest] = None,
@@ -544,7 +544,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_check_sms_status_post_serialize(
+        _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
             net_notification_check_sms_status_request=net_notification_check_sms_status_request,
             _request_auth=_request_auth,
@@ -567,7 +567,7 @@ class MessagesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_check_sms_status_post_serialize(
+    def _loyalty_iiko_check_sms_status_post_serialize(
         self,
         timeout,
         net_notification_check_sms_status_request,
@@ -631,7 +631,7 @@ class MessagesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/check_sms_status',
+            resource_path='/loyalty/iiko/check_sms_status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -648,7 +648,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_email_post(
+    async def loyalty_iiko_message_send_email_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
@@ -695,7 +695,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
+        _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -723,7 +723,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_email_post_with_http_info(
+    async def loyalty_iiko_message_send_email_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
@@ -770,7 +770,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
+        _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -798,7 +798,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_email_post_without_preload_content(
+    async def loyalty_iiko_message_send_email_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_email_request: Optional[NetNotificationSendEmailRequest] = None,
@@ -845,7 +845,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_email_post_serialize(
+        _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
             net_notification_send_email_request=net_notification_send_email_request,
             _request_auth=_request_auth,
@@ -868,7 +868,7 @@ class MessagesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_message_send_email_post_serialize(
+    def _loyalty_iiko_message_send_email_post_serialize(
         self,
         timeout,
         net_notification_send_email_request,
@@ -932,7 +932,7 @@ class MessagesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/message/send_email',
+            resource_path='/loyalty/iiko/message/send_email',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -949,7 +949,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_sms_post(
+    async def loyalty_iiko_message_send_sms_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
@@ -996,7 +996,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
+        _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1024,7 +1024,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_sms_post_with_http_info(
+    async def loyalty_iiko_message_send_sms_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
@@ -1071,7 +1071,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
+        _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1099,7 +1099,7 @@ class MessagesApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_message_send_sms_post_without_preload_content(
+    async def loyalty_iiko_message_send_sms_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_notification_send_sms_request: Optional[NetNotificationSendSmsRequest] = None,
@@ -1146,7 +1146,7 @@ class MessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_message_send_sms_post_serialize(
+        _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
             net_notification_send_sms_request=net_notification_send_sms_request,
             _request_auth=_request_auth,
@@ -1169,7 +1169,7 @@ class MessagesApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_message_send_sms_post_serialize(
+    def _loyalty_iiko_message_send_sms_post_serialize(
         self,
         timeout,
         net_notification_send_sms_request,
@@ -1233,7 +1233,7 @@ class MessagesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/message/send_sms',
+            resource_path='/loyalty/iiko/message/send_sms',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

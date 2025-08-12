@@ -26,7 +26,7 @@ class TransportReservesReservesByIdRequest(BaseModel):
     """
     Request for information about banquets/reserves using IDs.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationId")
     reserve_ids: List[StrictStr] = Field(description="IDs of banquets/reserves information on which is required.", alias="reserveIds")
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
     __properties: ClassVar[List[str]] = ["organizationId", "reserveIds", "sourceKeys"]

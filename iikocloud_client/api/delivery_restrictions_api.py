@@ -43,7 +43,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_allowed_post(
+    async def delivery_restrictions_allowed_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
@@ -90,7 +90,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_allowed_post_serialize(
+        _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
@@ -118,7 +118,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_allowed_post_with_http_info(
+    async def delivery_restrictions_allowed_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
@@ -165,7 +165,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_allowed_post_serialize(
+        _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
@@ -193,7 +193,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_allowed_post_without_preload_content(
+    async def delivery_restrictions_allowed_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
@@ -240,7 +240,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_allowed_post_serialize(
+        _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
@@ -263,7 +263,7 @@ class DeliveryRestrictionsApi:
         return response_data.response
 
 
-    def _api1_delivery_restrictions_allowed_post_serialize(
+    def _delivery_restrictions_allowed_post_serialize(
         self,
         timeout,
         transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
@@ -327,7 +327,7 @@ class DeliveryRestrictionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/delivery_restrictions/allowed',
+            resource_path='/delivery_restrictions/allowed',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -344,7 +344,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_post(
+    async def delivery_restrictions_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_get_delivery_restrictions_request: Optional[TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
@@ -391,7 +391,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_post_serialize(
+        _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
@@ -419,7 +419,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_post_with_http_info(
+    async def delivery_restrictions_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_get_delivery_restrictions_request: Optional[TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
@@ -466,7 +466,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_post_serialize(
+        _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
@@ -494,7 +494,7 @@ class DeliveryRestrictionsApi:
 
 
     @validate_call
-    async def api1_delivery_restrictions_post_without_preload_content(
+    async def delivery_restrictions_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_delivery_restrictions_get_delivery_restrictions_request: Optional[TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
@@ -541,7 +541,7 @@ class DeliveryRestrictionsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_delivery_restrictions_post_serialize(
+        _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
             transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
@@ -564,7 +564,7 @@ class DeliveryRestrictionsApi:
         return response_data.response
 
 
-    def _api1_delivery_restrictions_post_serialize(
+    def _delivery_restrictions_post_serialize(
         self,
         timeout,
         transport_delivery_restrictions_get_delivery_restrictions_request,
@@ -628,7 +628,7 @@ class DeliveryRestrictionsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/delivery_restrictions',
+            resource_path='/delivery_restrictions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -27,7 +27,7 @@ class TransportDeliveriesRequestUpdateOrderPaymentsRequest(BaseModel):
     """
     Request for order payment update.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     payment_items: Optional[List[TransportDeliveriesRequestUpdateOrderOrderPaymentItem]] = Field(default=None, description="Payment details.", alias="paymentItems")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "paymentItems"]

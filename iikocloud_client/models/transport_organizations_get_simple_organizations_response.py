@@ -28,7 +28,7 @@ class TransportOrganizationsGetSimpleOrganizationsResponse(BaseModel):
     Response to request for organizations.
     """ # noqa: E501
     correlation_id: StrictStr = Field(description="Operation ID.", alias="correlationId")
-    organizations: List[TransportOrganizationsSimpleOrganizationInfo] = Field(description="List of organizations.                Can be obtained by `/api/1/organizations` operation.")
+    organizations: List[TransportOrganizationsSimpleOrganizationInfo] = Field(description="List of organizations.                Can be obtained by `/organizations` operation.")
     __properties: ClassVar[List[str]] = ["correlationId", "organizations"]
 
     model_config = ConfigDict(

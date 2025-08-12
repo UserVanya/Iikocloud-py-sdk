@@ -28,7 +28,7 @@ class TransportDeliveriesDraftsOrderDraft(BaseModel):
     Order draft object.
     """ # noqa: E501
     id: StrictStr = Field(description="Order ID.")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     locked_by_user: Optional[StrictStr] = Field(default=None, description="ID of the employee, who is editing this draft.", alias="lockedByUser")
     order: TransportDeliveriesDraftsDeliveryOrderDraft = Field(description="Order.")
     terminal_group_id: Optional[StrictStr] = Field(default=None, description="Terminal group ID.", alias="terminalGroupId")

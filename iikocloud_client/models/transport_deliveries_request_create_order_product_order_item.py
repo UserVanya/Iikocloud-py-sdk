@@ -29,7 +29,7 @@ class TransportDeliveriesRequestCreateOrderProductOrderItem(TransportDeliveriesR
     """
     Order item: item.
     """ # noqa: E501
-    product_id: StrictStr = Field(description="ID of menu item.                Can be obtained by `/api/1/nomenclature` operation.", alias="productId")
+    product_id: StrictStr = Field(description="ID of menu item.                Can be obtained by `/nomenclature` operation.", alias="productId")
     modifiers: Optional[List[TransportDeliveriesRequestCreateOrderModifier]] = Field(default=None, description="Modifiers.")
     price: Union[StrictFloat, StrictInt] = Field(description="Price per item unit. Can be sent different from the price in the base menu.")
     position_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  > If sent null, it generates automatically on iikoTransport side.", alias="positionId")

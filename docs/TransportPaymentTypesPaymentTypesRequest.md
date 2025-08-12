@@ -6,7 +6,7 @@ Request for payment types.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[str]** | Organizations IDs which payment types have to be returned.                 Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organizations IDs which payment types have to be returned.                 Can be obtained by &#x60;/organizations&#x60; operation. | 
 
 ## Example
 

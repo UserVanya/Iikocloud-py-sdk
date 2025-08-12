@@ -32,7 +32,7 @@ class TransportDeliveriesResponseOrderOrderInfo(BaseModel):
     id: StrictStr = Field(description="Delivery order ID.")
     pos_id: Optional[StrictStr] = Field(default=None, description="POS delivery order ID.", alias="posId")
     external_number: Optional[StrictStr] = Field(default=None, description="Order external number.", alias="externalNumber")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     timestamp: StrictInt = Field(description="Timestamp of most recent order change that took place on iikoTransport server.")
     creation_status: TransportDeliveriesResponseOrderCreationStatus = Field(description="Order creation status. In case of asynchronous creation, it allows to track the instance an order was validated/created in iikoFront.", alias="creationStatus")
     error_info: Optional[TransportErrorsErrorInfo] = Field(default=None, description="Order creation error details.  > Required only if \"creationStatus\"=\"Error\".", alias="errorInfo")

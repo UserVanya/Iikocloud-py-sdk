@@ -42,7 +42,7 @@ class TransportReservesRequestReserveOrder(BaseModel):
     source_key: Optional[StrictStr] = Field(default=None, description="The string key (marker) of the source (partner - api user) that created the order. Needed to limit the visibility of orders for external integration.", alias="sourceKey")
     discounts_info: Optional[TransportDeliveriesRequestCreateOrderDiscountsInfo] = Field(default=None, description="Discounts/surcharges.", alias="discountsInfo")
     loyalty_info: Optional[TransportDeliveriesRequestCreateOrderLoyaltyInfo] = Field(default=None, description="Information about Loyalty app.", alias="loyaltyInfo")
-    order_type_id: Optional[StrictStr] = Field(default=None, description="Order type ID.                 Can be obtained by `/api/1/deliveries/order_types` operation", alias="orderTypeId")
+    order_type_id: Optional[StrictStr] = Field(default=None, description="Order type ID.                 Can be obtained by `/deliveries/order_types` operation", alias="orderTypeId")
     cheque_additional_info: Optional[TransportDeliveriesCommonChequeAdditionalInfo] = Field(default=None, description="Cheque additional information.", alias="chequeAdditionalInfo")
     external_data: Optional[List[TransportDeliveriesRequestCreateOrderExternalData]] = Field(default=None, description="Order external data.   > Allowed from version `8.0.6`.", alias="externalData")
     __properties: ClassVar[List[str]] = ["menuId", "items", "combos", "payments", "tips", "sourceKey", "discountsInfo", "loyaltyInfo", "orderTypeId", "chequeAdditionalInfo", "externalData"]

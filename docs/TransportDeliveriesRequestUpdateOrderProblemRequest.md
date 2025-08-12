@@ -6,7 +6,7 @@ Request for order problem update.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **order_id** | **str** | Order ID. | 
 **has_problem** | **bool** | Problem flag. | 
 **problem** | **str** | Problem text. | 

@@ -1,16 +1,16 @@
 # iikocloud_client.TerminalGroupsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_terminal_groups_awake_post**](TerminalGroupsApi.md#api1_terminal_groups_awake_post) | **POST** /api/1/terminal_groups/awake | Awake terminal groups from sleep mode.
-[**api1_terminal_groups_is_alive_post**](TerminalGroupsApi.md#api1_terminal_groups_is_alive_post) | **POST** /api/1/terminal_groups/is_alive | Returns information on availability of group of terminals.
-[**api1_terminal_groups_post**](TerminalGroupsApi.md#api1_terminal_groups_post) | **POST** /api/1/terminal_groups | Method that returns information on groups of delivery terminals.
+[**terminal_groups_awake_post**](TerminalGroupsApi.md#terminal_groups_awake_post) | **POST** /terminal_groups/awake | Awake terminal groups from sleep mode.
+[**terminal_groups_is_alive_post**](TerminalGroupsApi.md#terminal_groups_is_alive_post) | **POST** /terminal_groups/is_alive | Returns information on availability of group of terminals.
+[**terminal_groups_post**](TerminalGroupsApi.md#terminal_groups_post) | **POST** /terminal_groups | Method that returns information on groups of delivery terminals.
 
 
-# **api1_terminal_groups_awake_post**
-> TransportTerminalsAwakeTerminalGroupsResponse api1_terminal_groups_awake_post(timeout=timeout, transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request)
+# **terminal_groups_awake_post**
+> TransportTerminalsAwakeTerminalGroupsResponse terminal_groups_awake_post(timeout=timeout, transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request)
 
 Awake terminal groups from sleep mode.
 
@@ -29,10 +29,10 @@ from iikocloud_client.models.transport_terminals_awake_terminal_groups_response 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -54,11 +54,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Awake terminal groups from sleep mode.
-        api_response = await api_instance.api1_terminal_groups_awake_post(timeout=timeout, transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request)
-        print("The response of TerminalGroupsApi->api1_terminal_groups_awake_post:\n")
+        api_response = await api_instance.terminal_groups_awake_post(timeout=timeout, transport_terminals_awake_terminal_groups_request=transport_terminals_awake_terminal_groups_request)
+        print("The response of TerminalGroupsApi->terminal_groups_awake_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TerminalGroupsApi->api1_terminal_groups_awake_post: %s\n" % e)
+        print("Exception when calling TerminalGroupsApi->terminal_groups_awake_post: %s\n" % e)
 ```
 
 
@@ -96,8 +96,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_terminal_groups_is_alive_post**
-> TransportTerminalsTerminalGroupsIsAliveResponse api1_terminal_groups_is_alive_post(timeout=timeout, transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request)
+# **terminal_groups_is_alive_post**
+> TransportTerminalsTerminalGroupsIsAliveResponse terminal_groups_is_alive_post(timeout=timeout, transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request)
 
 Returns information on availability of group of terminals.
 
@@ -116,10 +116,10 @@ from iikocloud_client.models.transport_terminals_terminal_groups_is_alive_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -141,11 +141,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns information on availability of group of terminals.
-        api_response = await api_instance.api1_terminal_groups_is_alive_post(timeout=timeout, transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request)
-        print("The response of TerminalGroupsApi->api1_terminal_groups_is_alive_post:\n")
+        api_response = await api_instance.terminal_groups_is_alive_post(timeout=timeout, transport_terminals_terminal_groups_is_alive_request=transport_terminals_terminal_groups_is_alive_request)
+        print("The response of TerminalGroupsApi->terminal_groups_is_alive_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TerminalGroupsApi->api1_terminal_groups_is_alive_post: %s\n" % e)
+        print("Exception when calling TerminalGroupsApi->terminal_groups_is_alive_post: %s\n" % e)
 ```
 
 
@@ -183,8 +183,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_terminal_groups_post**
-> TransportTerminalsTerminalGroupsResponse api1_terminal_groups_post(timeout=timeout, transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request)
+# **terminal_groups_post**
+> TransportTerminalsTerminalGroupsResponse terminal_groups_post(timeout=timeout, transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request)
 
 Method that returns information on groups of delivery terminals.
 
@@ -203,10 +203,10 @@ from iikocloud_client.models.transport_terminals_terminal_groups_response import
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -228,11 +228,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Method that returns information on groups of delivery terminals.
-        api_response = await api_instance.api1_terminal_groups_post(timeout=timeout, transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request)
-        print("The response of TerminalGroupsApi->api1_terminal_groups_post:\n")
+        api_response = await api_instance.terminal_groups_post(timeout=timeout, transport_terminals_terminal_groups_request=transport_terminals_terminal_groups_request)
+        print("The response of TerminalGroupsApi->terminal_groups_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TerminalGroupsApi->api1_terminal_groups_post: %s\n" % e)
+        print("Exception when calling TerminalGroupsApi->terminal_groups_post: %s\n" % e)
 ```
 
 

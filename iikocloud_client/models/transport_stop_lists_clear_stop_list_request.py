@@ -26,8 +26,8 @@ class TransportStopListsClearStopListRequest(BaseModel):
     """
     Request to clear out-of-stock list.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
-    terminal_group_id: StrictStr = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    terminal_group_id: StrictStr = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
     __properties: ClassVar[List[str]] = ["organizationId", "terminalGroupId"]
 
     model_config = ConfigDict(

@@ -26,43 +26,43 @@ class TestDeliveriesRetrieveApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_deliveries_by_delivery_date_and_phone_post(self) -> None:
-        """Test case for api1_deliveries_by_delivery_date_and_phone_post
+    async def test_deliveries_by_delivery_date_and_phone_post(self) -> None:
+        """Test case for deliveries_by_delivery_date_and_phone_post
 
         Retrieve list of orders by telephone number, dates and revision.
         """
         pass
 
-    async def test_api1_deliveries_by_delivery_date_and_source_key_and_filter_post(self) -> None:
-        """Test case for api1_deliveries_by_delivery_date_and_source_key_and_filter_post
+    async def test_deliveries_by_delivery_date_and_source_key_and_filter_post(self) -> None:
+        """Test case for deliveries_by_delivery_date_and_source_key_and_filter_post
 
         Search orders by search text and additional filters (date, problem, statuses and other).
         """
         pass
 
-    async def test_api1_deliveries_by_delivery_date_and_status_post(self) -> None:
-        """Test case for api1_deliveries_by_delivery_date_and_status_post
+    async def test_deliveries_by_delivery_date_and_status_post(self) -> None:
+        """Test case for deliveries_by_delivery_date_and_status_post
 
         Retrieve list of orders by statuses and dates.
         """
         pass
 
-    async def test_api1_deliveries_by_id_post(self) -> None:
-        """Test case for api1_deliveries_by_id_post
+    async def test_deliveries_by_id_post(self) -> None:
+        """Test case for deliveries_by_id_post
 
         Retrieve orders by IDs.
         """
         pass
 
-    async def test_api1_deliveries_by_revision_post(self) -> None:
-        """Test case for api1_deliveries_by_revision_post
+    async def test_deliveries_by_revision_post(self) -> None:
+        """Test case for deliveries_by_revision_post
 
         Retrieve list of orders changed from the time revision was passed.
         """
         pass
 
-    async def test_api1_deliveries_history_by_delivery_date_and_phone_post(self) -> None:
-        """Test case for api1_deliveries_history_by_delivery_date_and_phone_post
+    async def test_deliveries_history_by_delivery_date_and_phone_post(self) -> None:
+        """Test case for deliveries_history_by_delivery_date_and_phone_post
 
         Retrieve list of history orders by telephone number, dates and revision.
         """

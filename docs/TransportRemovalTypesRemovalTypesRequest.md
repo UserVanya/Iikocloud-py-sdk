@@ -6,7 +6,7 @@ Request for organization's removal types (reasons for deletion).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[str]** | Organizations ids which removal types needs to be returned.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organizations ids which removal types needs to be returned.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 
 ## Example
 

@@ -6,9 +6,9 @@ Draft creation model.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID of the new order.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID of the new order.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **order** | [**TransportDeliveriesDraftsDeliveryOrderDraft**](TransportDeliveriesDraftsDeliveryOrderDraft.md) | Order item. | 
-**terminal_group_id** | **str** | Front group ID the order must be sent to.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | [optional] 
+**terminal_group_id** | **str** | Front group ID the order must be sent to.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | [optional] 
 
 ## Example
 

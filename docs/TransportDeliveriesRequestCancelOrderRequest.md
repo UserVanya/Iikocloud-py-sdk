@@ -6,7 +6,7 @@ Request for cancel the order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **order_id** | **str** | Order ID. | 
 **moved_order_id** | **str** | Fill this field with id of the new order if current order has been moved to the new RMS/terminal group. | [optional] 
 **cancel_cause_id** | **str** | Cancel order dictionary item id.   &gt; Allowed from version &#x60;7.7.1&#x60;. | [optional] 

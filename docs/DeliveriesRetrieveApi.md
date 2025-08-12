@@ -1,19 +1,19 @@
 # iikocloud_client.DeliveriesRetrieveApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_deliveries_by_delivery_date_and_phone_post**](DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_phone_post) | **POST** /api/1/deliveries/by_delivery_date_and_phone | Retrieve list of orders by telephone number, dates and revision.
-[**api1_deliveries_by_delivery_date_and_source_key_and_filter_post**](DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_source_key_and_filter_post) | **POST** /api/1/deliveries/by_delivery_date_and_source_key_and_filter | Search orders by search text and additional filters (date, problem, statuses and other).
-[**api1_deliveries_by_delivery_date_and_status_post**](DeliveriesRetrieveApi.md#api1_deliveries_by_delivery_date_and_status_post) | **POST** /api/1/deliveries/by_delivery_date_and_status | Retrieve list of orders by statuses and dates.
-[**api1_deliveries_by_id_post**](DeliveriesRetrieveApi.md#api1_deliveries_by_id_post) | **POST** /api/1/deliveries/by_id | Retrieve orders by IDs.
-[**api1_deliveries_by_revision_post**](DeliveriesRetrieveApi.md#api1_deliveries_by_revision_post) | **POST** /api/1/deliveries/by_revision | Retrieve list of orders changed from the time revision was passed.
-[**api1_deliveries_history_by_delivery_date_and_phone_post**](DeliveriesRetrieveApi.md#api1_deliveries_history_by_delivery_date_and_phone_post) | **POST** /api/1/deliveries/history/by_delivery_date_and_phone | Retrieve list of history orders by telephone number, dates and revision.
+[**deliveries_by_delivery_date_and_phone_post**](DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_phone_post) | **POST** /deliveries/by_delivery_date_and_phone | Retrieve list of orders by telephone number, dates and revision.
+[**deliveries_by_delivery_date_and_source_key_and_filter_post**](DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_source_key_and_filter_post) | **POST** /deliveries/by_delivery_date_and_source_key_and_filter | Search orders by search text and additional filters (date, problem, statuses and other).
+[**deliveries_by_delivery_date_and_status_post**](DeliveriesRetrieveApi.md#deliveries_by_delivery_date_and_status_post) | **POST** /deliveries/by_delivery_date_and_status | Retrieve list of orders by statuses and dates.
+[**deliveries_by_id_post**](DeliveriesRetrieveApi.md#deliveries_by_id_post) | **POST** /deliveries/by_id | Retrieve orders by IDs.
+[**deliveries_by_revision_post**](DeliveriesRetrieveApi.md#deliveries_by_revision_post) | **POST** /deliveries/by_revision | Retrieve list of orders changed from the time revision was passed.
+[**deliveries_history_by_delivery_date_and_phone_post**](DeliveriesRetrieveApi.md#deliveries_history_by_delivery_date_and_phone_post) | **POST** /deliveries/history/by_delivery_date_and_phone | Retrieve list of history orders by telephone number, dates and revision.
 
 
-# **api1_deliveries_by_delivery_date_and_phone_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse api1_deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
+# **deliveries_by_delivery_date_and_phone_post**
+> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
 
 Retrieve list of orders by telephone number, dates and revision.
 
@@ -32,10 +32,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_with_revision_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -57,11 +57,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve list of orders by telephone number, dates and revision.
-        api_response = await api_instance.api1_deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_phone_post:\n")
+        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_phone_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_by_delivery_date_and_phone_post: %s\n" % e)
 ```
 
 
@@ -99,8 +99,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_by_delivery_date_and_source_key_and_filter_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse api1_deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
+# **deliveries_by_delivery_date_and_source_key_and_filter_post**
+> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
 
 Search orders by search text and additional filters (date, problem, statuses and other).
 
@@ -119,10 +119,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_with_revision_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,11 +144,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Search orders by search text and additional filters (date, problem, statuses and other).
-        api_response = await api_instance.api1_deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_source_key_and_filter_post:\n")
+        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_source_key_and_filter_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_source_key_and_filter_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_by_delivery_date_and_source_key_and_filter_post: %s\n" % e)
 ```
 
 
@@ -186,8 +186,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_by_delivery_date_and_status_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse api1_deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
+# **deliveries_by_delivery_date_and_status_post**
+> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
 
 Retrieve list of orders by statuses and dates.
 
@@ -206,10 +206,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_with_revision_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -231,11 +231,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve list of orders by statuses and dates.
-        api_response = await api_instance.api1_deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_status_post:\n")
+        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_status_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_by_delivery_date_and_status_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_by_delivery_date_and_status_post: %s\n" % e)
 ```
 
 
@@ -273,8 +273,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_by_id_post**
-> TransportDeliveriesResponseOrdersResponse api1_deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
+# **deliveries_by_id_post**
+> TransportDeliveriesResponseOrdersResponse deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -293,10 +293,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_response impor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -318,11 +318,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.api1_deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_by_id_post:\n")
+        api_response = await api_instance.deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_by_id_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_by_id_post: %s\n" % e)
 ```
 
 
@@ -360,8 +360,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_by_revision_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse api1_deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
+# **deliveries_by_revision_post**
+> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
 
 Retrieve list of orders changed from the time revision was passed.
 
@@ -380,10 +380,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_with_revision_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -405,11 +405,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve list of orders changed from the time revision was passed.
-        api_response = await api_instance.api1_deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_by_revision_post:\n")
+        api_response = await api_instance.deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_by_revision_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_by_revision_post: %s\n" % e)
 ```
 
 
@@ -447,8 +447,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_deliveries_history_by_delivery_date_and_phone_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse api1_deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+# **deliveries_history_by_delivery_date_and_phone_post**
+> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
 
 Retrieve list of history orders by telephone number, dates and revision.
 
@@ -467,10 +467,10 @@ from iikocloud_client.models.transport_deliveries_response_orders_with_revision_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -492,11 +492,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve list of history orders by telephone number, dates and revision.
-        api_response = await api_instance.api1_deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
-        print("The response of DeliveriesRetrieveApi->api1_deliveries_history_by_delivery_date_and_phone_post:\n")
+        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+        print("The response of DeliveriesRetrieveApi->deliveries_history_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveriesRetrieveApi->api1_deliveries_history_by_delivery_date_and_phone_post: %s\n" % e)
+        print("Exception when calling DeliveriesRetrieveApi->deliveries_history_by_delivery_date_and_phone_post: %s\n" % e)
 ```
 
 

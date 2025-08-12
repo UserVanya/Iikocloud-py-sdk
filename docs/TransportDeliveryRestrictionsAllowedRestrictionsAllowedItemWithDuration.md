@@ -6,8 +6,8 @@ Suitable terminal group with delivery duration and other parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terminal_group_id** | **str** | Terminal group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**terminal_group_id** | **str** | Terminal group ID.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **delivery_duration_in_minutes** | **int** | Delivery duration in minutes. | 
 **zone** | **str** | Delivery zone name which this TerminalGroupId belongs to. | 
 **delivery_service_product_id** | **str** | Link to \&quot;delivery service payment\&quot;. | 

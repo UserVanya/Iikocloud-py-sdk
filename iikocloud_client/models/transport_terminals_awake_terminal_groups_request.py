@@ -26,8 +26,8 @@ class TransportTerminalsAwakeTerminalGroupsRequest(BaseModel):
     """
     Request to awake terminal groups from sleep mode.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description=" Organization IDs.     Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
-    terminal_group_ids: List[StrictStr] = Field(description="List of terminal groups IDs.                 Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupIds")
+    organization_ids: List[StrictStr] = Field(description=" Organization IDs.     Can be obtained by `/organizations` operation.", alias="organizationIds")
+    terminal_group_ids: List[StrictStr] = Field(description="List of terminal groups IDs.                 Can be obtained by `/terminal_groups` operation.", alias="terminalGroupIds")
     __properties: ClassVar[List[str]] = ["organizationIds", "terminalGroupIds"]
 
     model_config = ConfigDict(

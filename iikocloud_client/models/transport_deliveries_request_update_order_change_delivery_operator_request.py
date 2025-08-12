@@ -26,7 +26,7 @@ class TransportDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest(BaseMod
     """
     Request for assign/change the order operator.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     operator_id: StrictStr = Field(description="Operator to assign the order to.", alias="operatorId")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "operatorId"]

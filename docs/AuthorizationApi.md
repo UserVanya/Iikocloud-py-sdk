@@ -1,14 +1,14 @@
 # iikocloud_client.AuthorizationApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_access_token_post**](AuthorizationApi.md#api1_access_token_post) | **POST** /api/1/access_token | Retrieve session key for API user.
+[**access_token_post**](AuthorizationApi.md#access_token_post) | **POST** /access_token | Retrieve session key for API user.
 
 
-# **api1_access_token_post**
-> TransportAuthGetAccessTokenResponse api1_access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
+# **access_token_post**
+> TransportAuthGetAccessTokenResponse access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
 
 Retrieve session key for API user.
 
@@ -22,10 +22,10 @@ from iikocloud_client.models.transport_auth_get_access_token_response import Tra
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 
@@ -38,11 +38,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve session key for API user.
-        api_response = await api_instance.api1_access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
-        print("The response of AuthorizationApi->api1_access_token_post:\n")
+        api_response = await api_instance.access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
+        print("The response of AuthorizationApi->access_token_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AuthorizationApi->api1_access_token_post: %s\n" % e)
+        print("Exception when calling AuthorizationApi->access_token_post: %s\n" % e)
 ```
 
 

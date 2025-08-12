@@ -55,7 +55,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_items_post(
+    async def reserve_add_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
@@ -102,7 +102,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_items_post_serialize(
+        _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -130,7 +130,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_items_post_with_http_info(
+    async def reserve_add_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
@@ -177,7 +177,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_items_post_serialize(
+        _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -205,7 +205,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_items_post_without_preload_content(
+    async def reserve_add_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_items_to_banquet_request: Optional[TransportReservesAddOrderItemsToBanquetRequest] = None,
@@ -252,7 +252,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_items_post_serialize(
+        _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -275,7 +275,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_add_items_post_serialize(
+    def _reserve_add_items_post_serialize(
         self,
         timeout,
         transport_reserves_add_order_items_to_banquet_request,
@@ -339,7 +339,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/add_items',
+            resource_path='/reserve/add_items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -356,7 +356,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_payments_post(
+    async def reserve_add_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
@@ -403,7 +403,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_payments_post_serialize(
+        _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -431,7 +431,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_payments_post_with_http_info(
+    async def reserve_add_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
@@ -478,7 +478,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_payments_post_serialize(
+        _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -506,7 +506,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_add_payments_post_without_preload_content(
+    async def reserve_add_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_add_order_payments_to_banquet_request: Optional[TransportReservesAddOrderPaymentsToBanquetRequest] = None,
@@ -553,7 +553,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_add_payments_post_serialize(
+        _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
             transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -576,7 +576,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_add_payments_post_serialize(
+    def _reserve_add_payments_post_serialize(
         self,
         timeout,
         transport_reserves_add_order_payments_to_banquet_request,
@@ -640,7 +640,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/add_payments',
+            resource_path='/reserve/add_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -657,7 +657,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_organizations_post(
+    async def reserve_available_organizations_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -704,7 +704,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_organizations_post_serialize(
+        _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -732,7 +732,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_organizations_post_with_http_info(
+    async def reserve_available_organizations_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -779,7 +779,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_organizations_post_serialize(
+        _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -807,7 +807,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_organizations_post_without_preload_content(
+    async def reserve_available_organizations_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_organizations_get_organizations_request: Optional[TransportOrganizationsGetOrganizationsRequest] = None,
@@ -854,7 +854,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_organizations_post_serialize(
+        _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
             transport_organizations_get_organizations_request=transport_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -877,7 +877,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_available_organizations_post_serialize(
+    def _reserve_available_organizations_post_serialize(
         self,
         timeout,
         transport_organizations_get_organizations_request,
@@ -941,7 +941,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/available_organizations',
+            resource_path='/reserve/available_organizations',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -958,7 +958,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_restaurant_sections_post(
+    async def reserve_available_restaurant_sections_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
@@ -1005,7 +1005,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_restaurant_sections_post_serialize(
+        _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1033,7 +1033,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_restaurant_sections_post_with_http_info(
+    async def reserve_available_restaurant_sections_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
@@ -1080,7 +1080,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_restaurant_sections_post_serialize(
+        _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1108,7 +1108,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_restaurant_sections_post_without_preload_content(
+    async def reserve_available_restaurant_sections_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_request: Optional[TransportReservesGetRestaurantSectionsRequest] = None,
@@ -1155,7 +1155,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_restaurant_sections_post_serialize(
+        _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1178,7 +1178,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_available_restaurant_sections_post_serialize(
+    def _reserve_available_restaurant_sections_post_serialize(
         self,
         timeout,
         transport_reserves_get_restaurant_sections_request,
@@ -1242,7 +1242,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/available_restaurant_sections',
+            resource_path='/reserve/available_restaurant_sections',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1259,7 +1259,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_terminal_groups_post(
+    async def reserve_available_terminal_groups_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
@@ -1306,7 +1306,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_terminal_groups_post_serialize(
+        _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1334,7 +1334,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_terminal_groups_post_with_http_info(
+    async def reserve_available_terminal_groups_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
@@ -1381,7 +1381,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_terminal_groups_post_serialize(
+        _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1409,7 +1409,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_available_terminal_groups_post_without_preload_content(
+    async def reserve_available_terminal_groups_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_terminals_get_terminal_groups_by_organizations_request: Optional[TransportTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
@@ -1456,7 +1456,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_available_terminal_groups_post_serialize(
+        _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
             transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1479,7 +1479,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_available_terminal_groups_post_serialize(
+    def _reserve_available_terminal_groups_post_serialize(
         self,
         timeout,
         transport_terminals_get_terminal_groups_by_organizations_request,
@@ -1543,7 +1543,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/available_terminal_groups',
+            resource_path='/reserve/available_terminal_groups',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1560,7 +1560,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_cancel_post(
+    async def reserve_cancel_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
@@ -1607,7 +1607,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_cancel_post_serialize(
+        _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1635,7 +1635,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_cancel_post_with_http_info(
+    async def reserve_cancel_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
@@ -1682,7 +1682,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_cancel_post_serialize(
+        _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1710,7 +1710,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_cancel_post_without_preload_content(
+    async def reserve_cancel_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_cancel_reserve_request: Optional[TransportReservesCancelReserveRequest] = None,
@@ -1757,7 +1757,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_cancel_post_serialize(
+        _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
             transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1780,7 +1780,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_cancel_post_serialize(
+    def _reserve_cancel_post_serialize(
         self,
         timeout,
         transport_reserves_cancel_reserve_request,
@@ -1844,7 +1844,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/cancel',
+            resource_path='/reserve/cancel',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1861,7 +1861,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_create_post(
+    async def reserve_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
@@ -1908,7 +1908,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_create_post_serialize(
+        _param = self._reserve_create_post_serialize(
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -1936,7 +1936,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_create_post_with_http_info(
+    async def reserve_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
@@ -1983,7 +1983,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_create_post_serialize(
+        _param = self._reserve_create_post_serialize(
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2011,7 +2011,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_create_post_without_preload_content(
+    async def reserve_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_create_reserve_request: Optional[TransportReservesCreateReserveRequest] = None,
@@ -2058,7 +2058,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_create_post_serialize(
+        _param = self._reserve_create_post_serialize(
             timeout=timeout,
             transport_reserves_create_reserve_request=transport_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2081,7 +2081,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_create_post_serialize(
+    def _reserve_create_post_serialize(
         self,
         timeout,
         transport_reserves_create_reserve_request,
@@ -2145,7 +2145,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/create',
+            resource_path='/reserve/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2162,7 +2162,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_restaurant_sections_workload_post(
+    async def reserve_restaurant_sections_workload_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
@@ -2209,7 +2209,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
+        _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2237,7 +2237,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_restaurant_sections_workload_post_with_http_info(
+    async def reserve_restaurant_sections_workload_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
@@ -2284,7 +2284,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
+        _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2312,7 +2312,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_restaurant_sections_workload_post_without_preload_content(
+    async def reserve_restaurant_sections_workload_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_get_restaurant_sections_workload_request: Optional[TransportReservesGetRestaurantSectionsWorkloadRequest] = None,
@@ -2359,7 +2359,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_restaurant_sections_workload_post_serialize(
+        _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
             transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -2382,7 +2382,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_restaurant_sections_workload_post_serialize(
+    def _reserve_restaurant_sections_workload_post_serialize(
         self,
         timeout,
         transport_reserves_get_restaurant_sections_workload_request,
@@ -2446,7 +2446,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/restaurant_sections_workload',
+            resource_path='/reserve/restaurant_sections_workload',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2463,7 +2463,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_status_by_id_post(
+    async def reserve_status_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
@@ -2510,7 +2510,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_status_by_id_post_serialize(
+        _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2538,7 +2538,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_status_by_id_post_with_http_info(
+    async def reserve_status_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
@@ -2585,7 +2585,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_status_by_id_post_serialize(
+        _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2613,7 +2613,7 @@ class BanquetsReservesApi:
 
 
     @validate_call
-    async def api1_reserve_status_by_id_post_without_preload_content(
+    async def reserve_status_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_reserves_reserves_by_id_request: Optional[TransportReservesReservesByIdRequest] = None,
@@ -2660,7 +2660,7 @@ class BanquetsReservesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_reserve_status_by_id_post_serialize(
+        _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
             transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -2683,7 +2683,7 @@ class BanquetsReservesApi:
         return response_data.response
 
 
-    def _api1_reserve_status_by_id_post_serialize(
+    def _reserve_status_by_id_post_serialize(
         self,
         timeout,
         transport_reserves_reserves_by_id_request,
@@ -2747,7 +2747,7 @@ class BanquetsReservesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/reserve/status_by_id',
+            resource_path='/reserve/status_by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

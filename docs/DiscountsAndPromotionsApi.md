@@ -1,19 +1,19 @@
 # iikocloud_client.DiscountsAndPromotionsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_loyalty_iiko_calculate_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_calculate_post) | **POST** /api/1/loyalty/iiko/calculate | Calculate checkin.
-[**api1_loyalty_iiko_coupons_by_series_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_by_series_post) | **POST** /api/1/loyalty/iiko/coupons/by_series | Get non-activated coupons
-[**api1_loyalty_iiko_coupons_info_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_info_post) | **POST** /api/1/loyalty/iiko/coupons/info | Get coupon info.
-[**api1_loyalty_iiko_coupons_series_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_coupons_series_post) | **POST** /api/1/loyalty/iiko/coupons/series | Get coupon series with non-activated coupons.
-[**api1_loyalty_iiko_manual_condition_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_manual_condition_post) | **POST** /api/1/loyalty/iiko/manual_condition | Get manual conditions.
-[**api1_loyalty_iiko_program_post**](DiscountsAndPromotionsApi.md#api1_loyalty_iiko_program_post) | **POST** /api/1/loyalty/iiko/program | Get programs.
+[**loyalty_iiko_calculate_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_calculate_post) | **POST** /loyalty/iiko/calculate | Calculate checkin.
+[**loyalty_iiko_coupons_by_series_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_by_series_post) | **POST** /loyalty/iiko/coupons/by_series | Get non-activated coupons
+[**loyalty_iiko_coupons_info_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_info_post) | **POST** /loyalty/iiko/coupons/info | Get coupon info.
+[**loyalty_iiko_coupons_series_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_coupons_series_post) | **POST** /loyalty/iiko/coupons/series | Get coupon series with non-activated coupons.
+[**loyalty_iiko_manual_condition_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_manual_condition_post) | **POST** /loyalty/iiko/manual_condition | Get manual conditions.
+[**loyalty_iiko_program_post**](DiscountsAndPromotionsApi.md#loyalty_iiko_program_post) | **POST** /loyalty/iiko/program | Get programs.
 
 
-# **api1_loyalty_iiko_calculate_post**
-> NetLoyaltyResultCalculateCheckinResponse api1_loyalty_iiko_calculate_post(timeout=timeout, net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request)
+# **loyalty_iiko_calculate_post**
+> NetLoyaltyResultCalculateCheckinResponse loyalty_iiko_calculate_post(timeout=timeout, net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request)
 
 Calculate checkin.
 
@@ -32,10 +32,10 @@ from iikocloud_client.models.net_loyalty_result_calculate_checkin_response impor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -57,11 +57,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Calculate checkin.
-        api_response = await api_instance.api1_loyalty_iiko_calculate_post(timeout=timeout, net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_calculate_post:\n")
+        api_response = await api_instance.loyalty_iiko_calculate_post(timeout=timeout, net_loyalty_result_calculate_checkin_request=net_loyalty_result_calculate_checkin_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_calculate_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_calculate_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_calculate_post: %s\n" % e)
 ```
 
 
@@ -99,8 +99,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_coupons_by_series_post**
-> NetLoyaltyResultNotActivatedCouponResponse api1_loyalty_iiko_coupons_by_series_post(timeout=timeout, net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request)
+# **loyalty_iiko_coupons_by_series_post**
+> NetLoyaltyResultNotActivatedCouponResponse loyalty_iiko_coupons_by_series_post(timeout=timeout, net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request)
 
 Get non-activated coupons
 
@@ -119,10 +119,10 @@ from iikocloud_client.models.net_loyalty_result_not_activated_coupon_response im
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,11 +144,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get non-activated coupons
-        api_response = await api_instance.api1_loyalty_iiko_coupons_by_series_post(timeout=timeout, net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_by_series_post:\n")
+        api_response = await api_instance.loyalty_iiko_coupons_by_series_post(timeout=timeout, net_loyalty_result_not_activated_coupon_request=net_loyalty_result_not_activated_coupon_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_by_series_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_by_series_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_coupons_by_series_post: %s\n" % e)
 ```
 
 
@@ -186,8 +186,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_coupons_info_post**
-> NetLoyaltyResultCouponInfoResponse api1_loyalty_iiko_coupons_info_post(timeout=timeout, net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request)
+# **loyalty_iiko_coupons_info_post**
+> NetLoyaltyResultCouponInfoResponse loyalty_iiko_coupons_info_post(timeout=timeout, net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request)
 
 Get coupon info.
 
@@ -206,10 +206,10 @@ from iikocloud_client.models.net_loyalty_result_coupon_info_response import NetL
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -231,11 +231,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get coupon info.
-        api_response = await api_instance.api1_loyalty_iiko_coupons_info_post(timeout=timeout, net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_info_post:\n")
+        api_response = await api_instance.loyalty_iiko_coupons_info_post(timeout=timeout, net_loyalty_result_coupon_info_request=net_loyalty_result_coupon_info_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_info_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_info_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_coupons_info_post: %s\n" % e)
 ```
 
 
@@ -273,8 +273,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_coupons_series_post**
-> NetLoyaltyResultSeriesWithNotActivatedCouponsResponse api1_loyalty_iiko_coupons_series_post(timeout=timeout, net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request)
+# **loyalty_iiko_coupons_series_post**
+> NetLoyaltyResultSeriesWithNotActivatedCouponsResponse loyalty_iiko_coupons_series_post(timeout=timeout, net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request)
 
 Get coupon series with non-activated coupons.
 
@@ -293,10 +293,10 @@ from iikocloud_client.models.net_loyalty_result_series_with_not_activated_coupon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -318,11 +318,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get coupon series with non-activated coupons.
-        api_response = await api_instance.api1_loyalty_iiko_coupons_series_post(timeout=timeout, net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_series_post:\n")
+        api_response = await api_instance.loyalty_iiko_coupons_series_post(timeout=timeout, net_loyalty_result_series_with_not_activated_coupons_request=net_loyalty_result_series_with_not_activated_coupons_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_series_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_coupons_series_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_coupons_series_post: %s\n" % e)
 ```
 
 
@@ -360,8 +360,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_manual_condition_post**
-> NetLoyaltyResultGetManualConditionsResponse api1_loyalty_iiko_manual_condition_post(timeout=timeout, net_common_get_by_organization_id_request=net_common_get_by_organization_id_request)
+# **loyalty_iiko_manual_condition_post**
+> NetLoyaltyResultGetManualConditionsResponse loyalty_iiko_manual_condition_post(timeout=timeout, net_common_get_by_organization_id_request=net_common_get_by_organization_id_request)
 
 Get manual conditions.
 
@@ -380,10 +380,10 @@ from iikocloud_client.models.net_loyalty_result_get_manual_conditions_response i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -405,11 +405,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get manual conditions.
-        api_response = await api_instance.api1_loyalty_iiko_manual_condition_post(timeout=timeout, net_common_get_by_organization_id_request=net_common_get_by_organization_id_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_manual_condition_post:\n")
+        api_response = await api_instance.loyalty_iiko_manual_condition_post(timeout=timeout, net_common_get_by_organization_id_request=net_common_get_by_organization_id_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_manual_condition_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_manual_condition_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_manual_condition_post: %s\n" % e)
 ```
 
 
@@ -447,8 +447,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_program_post**
-> NetOrganizationGetProgramsResponse api1_loyalty_iiko_program_post(timeout=timeout, net_organization_get_programs_request=net_organization_get_programs_request)
+# **loyalty_iiko_program_post**
+> NetOrganizationGetProgramsResponse loyalty_iiko_program_post(timeout=timeout, net_organization_get_programs_request=net_organization_get_programs_request)
 
 Get programs.
 
@@ -467,10 +467,10 @@ from iikocloud_client.models.net_organization_get_programs_response import NetOr
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -492,11 +492,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get programs.
-        api_response = await api_instance.api1_loyalty_iiko_program_post(timeout=timeout, net_organization_get_programs_request=net_organization_get_programs_request)
-        print("The response of DiscountsAndPromotionsApi->api1_loyalty_iiko_program_post:\n")
+        api_response = await api_instance.loyalty_iiko_program_post(timeout=timeout, net_organization_get_programs_request=net_organization_get_programs_request)
+        print("The response of DiscountsAndPromotionsApi->loyalty_iiko_program_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DiscountsAndPromotionsApi->api1_loyalty_iiko_program_post: %s\n" % e)
+        print("Exception when calling DiscountsAndPromotionsApi->loyalty_iiko_program_post: %s\n" % e)
 ```
 
 

@@ -50,7 +50,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_cancel_causes_post(
+    async def cancel_causes_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_cancel_causes_cancel_causes_request: Optional[TransportCancelCausesCancelCausesRequest] = None,
@@ -97,7 +97,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cancel_causes_post_serialize(
+        _param = self._cancel_causes_post_serialize(
             timeout=timeout,
             transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -125,7 +125,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_cancel_causes_post_with_http_info(
+    async def cancel_causes_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_cancel_causes_cancel_causes_request: Optional[TransportCancelCausesCancelCausesRequest] = None,
@@ -172,7 +172,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cancel_causes_post_serialize(
+        _param = self._cancel_causes_post_serialize(
             timeout=timeout,
             transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -200,7 +200,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_cancel_causes_post_without_preload_content(
+    async def cancel_causes_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_cancel_causes_cancel_causes_request: Optional[TransportCancelCausesCancelCausesRequest] = None,
@@ -247,7 +247,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cancel_causes_post_serialize(
+        _param = self._cancel_causes_post_serialize(
             timeout=timeout,
             transport_cancel_causes_cancel_causes_request=transport_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -270,7 +270,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_cancel_causes_post_serialize(
+    def _cancel_causes_post_serialize(
         self,
         timeout,
         transport_cancel_causes_cancel_causes_request,
@@ -334,7 +334,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/cancel_causes',
+            resource_path='/cancel_causes',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -351,7 +351,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_deliveries_order_types_post(
+    async def deliveries_order_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_order_types_order_types_request: Optional[TransportOrderTypesOrderTypesRequest] = None,
@@ -398,7 +398,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_order_types_post_serialize(
+        _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
             transport_order_types_order_types_request=transport_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -426,7 +426,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_deliveries_order_types_post_with_http_info(
+    async def deliveries_order_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_order_types_order_types_request: Optional[TransportOrderTypesOrderTypesRequest] = None,
@@ -473,7 +473,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_order_types_post_serialize(
+        _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
             transport_order_types_order_types_request=transport_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -501,7 +501,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_deliveries_order_types_post_without_preload_content(
+    async def deliveries_order_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_order_types_order_types_request: Optional[TransportOrderTypesOrderTypesRequest] = None,
@@ -548,7 +548,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_order_types_post_serialize(
+        _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
             transport_order_types_order_types_request=transport_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -571,7 +571,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_deliveries_order_types_post_serialize(
+    def _deliveries_order_types_post_serialize(
         self,
         timeout,
         transport_order_types_order_types_request,
@@ -635,7 +635,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/order_types',
+            resource_path='/deliveries/order_types',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -652,7 +652,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_discounts_post(
+    async def discounts_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_discounts_discounts_request: Optional[TransportDiscountsDiscountsRequest] = None,
@@ -699,7 +699,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_discounts_post_serialize(
+        _param = self._discounts_post_serialize(
             timeout=timeout,
             transport_discounts_discounts_request=transport_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -727,7 +727,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_discounts_post_with_http_info(
+    async def discounts_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_discounts_discounts_request: Optional[TransportDiscountsDiscountsRequest] = None,
@@ -774,7 +774,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_discounts_post_serialize(
+        _param = self._discounts_post_serialize(
             timeout=timeout,
             transport_discounts_discounts_request=transport_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -802,7 +802,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_discounts_post_without_preload_content(
+    async def discounts_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_discounts_discounts_request: Optional[TransportDiscountsDiscountsRequest] = None,
@@ -849,7 +849,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_discounts_post_serialize(
+        _param = self._discounts_post_serialize(
             timeout=timeout,
             transport_discounts_discounts_request=transport_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -872,7 +872,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_discounts_post_serialize(
+    def _discounts_post_serialize(
         self,
         timeout,
         transport_discounts_discounts_request,
@@ -936,7 +936,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/discounts',
+            resource_path='/discounts',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -953,7 +953,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_payment_types_post(
+    async def payment_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_payment_types_payment_types_request: Optional[TransportPaymentTypesPaymentTypesRequest] = None,
@@ -1000,7 +1000,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_payment_types_post_serialize(
+        _param = self._payment_types_post_serialize(
             timeout=timeout,
             transport_payment_types_payment_types_request=transport_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1028,7 +1028,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_payment_types_post_with_http_info(
+    async def payment_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_payment_types_payment_types_request: Optional[TransportPaymentTypesPaymentTypesRequest] = None,
@@ -1075,7 +1075,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_payment_types_post_serialize(
+        _param = self._payment_types_post_serialize(
             timeout=timeout,
             transport_payment_types_payment_types_request=transport_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1103,7 +1103,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_payment_types_post_without_preload_content(
+    async def payment_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_payment_types_payment_types_request: Optional[TransportPaymentTypesPaymentTypesRequest] = None,
@@ -1150,7 +1150,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_payment_types_post_serialize(
+        _param = self._payment_types_post_serialize(
             timeout=timeout,
             transport_payment_types_payment_types_request=transport_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1173,7 +1173,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_payment_types_post_serialize(
+    def _payment_types_post_serialize(
         self,
         timeout,
         transport_payment_types_payment_types_request,
@@ -1237,7 +1237,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/payment_types',
+            resource_path='/payment_types',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1254,7 +1254,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_removal_types_post(
+    async def removal_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_removal_types_removal_types_request: Optional[TransportRemovalTypesRemovalTypesRequest] = None,
@@ -1301,7 +1301,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_removal_types_post_serialize(
+        _param = self._removal_types_post_serialize(
             timeout=timeout,
             transport_removal_types_removal_types_request=transport_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1329,7 +1329,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_removal_types_post_with_http_info(
+    async def removal_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_removal_types_removal_types_request: Optional[TransportRemovalTypesRemovalTypesRequest] = None,
@@ -1376,7 +1376,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_removal_types_post_serialize(
+        _param = self._removal_types_post_serialize(
             timeout=timeout,
             transport_removal_types_removal_types_request=transport_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1404,7 +1404,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_removal_types_post_without_preload_content(
+    async def removal_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_removal_types_removal_types_request: Optional[TransportRemovalTypesRemovalTypesRequest] = None,
@@ -1451,7 +1451,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_removal_types_post_serialize(
+        _param = self._removal_types_post_serialize(
             timeout=timeout,
             transport_removal_types_removal_types_request=transport_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1474,7 +1474,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_removal_types_post_serialize(
+    def _removal_types_post_serialize(
         self,
         timeout,
         transport_removal_types_removal_types_request,
@@ -1538,7 +1538,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/removal_types',
+            resource_path='/removal_types',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1555,7 +1555,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_tips_types_post(
+    async def tips_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
@@ -1599,7 +1599,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_tips_types_post_serialize(
+        _param = self._tips_types_post_serialize(
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1626,7 +1626,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_tips_types_post_with_http_info(
+    async def tips_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
@@ -1670,7 +1670,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_tips_types_post_serialize(
+        _param = self._tips_types_post_serialize(
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1697,7 +1697,7 @@ class DictionariesApi:
 
 
     @validate_call
-    async def api1_tips_types_post_without_preload_content(
+    async def tips_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
@@ -1741,7 +1741,7 @@ class DictionariesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_tips_types_post_serialize(
+        _param = self._tips_types_post_serialize(
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1763,7 +1763,7 @@ class DictionariesApi:
         return response_data.response
 
 
-    def _api1_tips_types_post_serialize(
+    def _tips_types_post_serialize(
         self,
         timeout,
         _request_auth,
@@ -1811,7 +1811,7 @@ class DictionariesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/tips_types',
+            resource_path='/tips_types',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

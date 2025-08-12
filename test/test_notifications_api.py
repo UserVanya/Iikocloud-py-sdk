@@ -26,8 +26,8 @@ class TestNotificationsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_notifications_send_post(self) -> None:
-        """Test case for api1_notifications_send_post
+    async def test_notifications_send_post(self) -> None:
+        """Test case for notifications_send_post
 
         Send notification to external systems (iikoFront and iikoWeb).
         """

@@ -26,8 +26,8 @@ class TestMarketingSourcesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_marketing_sources_post(self) -> None:
-        """Test case for api1_marketing_sources_post
+    async def test_marketing_sources_post(self) -> None:
+        """Test case for marketing_sources_post
 
         Marketing sources.
         """

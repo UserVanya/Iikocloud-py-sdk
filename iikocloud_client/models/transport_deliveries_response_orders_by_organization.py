@@ -27,7 +27,7 @@ class TransportDeliveriesResponseOrdersByOrganization(BaseModel):
     """
     Orders grouped by organization.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     orders: List[TransportDeliveriesResponseOrderOrderInfo] = Field(description="List of orders by organization.")
     __properties: ClassVar[List[str]] = ["organizationId", "orders"]
 

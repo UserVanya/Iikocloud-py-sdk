@@ -56,7 +56,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_calculate_post(
+    async def combo_calculate_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
@@ -103,7 +103,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_calculate_post_serialize(
+        _param = self._combo_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -131,7 +131,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_calculate_post_with_http_info(
+    async def combo_calculate_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
@@ -178,7 +178,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_calculate_post_serialize(
+        _param = self._combo_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -206,7 +206,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_calculate_post_without_preload_content(
+    async def combo_calculate_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_calculate_combo_price_request: Optional[NetLoyaltyResultCalculateComboPriceRequest] = None,
@@ -253,7 +253,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_calculate_post_serialize(
+        _param = self._combo_calculate_post_serialize(
             timeout=timeout,
             net_loyalty_result_calculate_combo_price_request=net_loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
@@ -276,7 +276,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_combo_calculate_post_serialize(
+    def _combo_calculate_post_serialize(
         self,
         timeout,
         net_loyalty_result_calculate_combo_price_request,
@@ -340,7 +340,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/combo/calculate',
+            resource_path='/combo/calculate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -357,7 +357,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_post(
+    async def combo_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
@@ -404,7 +404,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_post_serialize(
+        _param = self._combo_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -432,7 +432,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_post_with_http_info(
+    async def combo_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
@@ -479,7 +479,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_post_serialize(
+        _param = self._combo_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -507,7 +507,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_combo_post_without_preload_content(
+    async def combo_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_combos_info_request: Optional[NetLoyaltyResultGetCombosInfoRequest] = None,
@@ -554,7 +554,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_combo_post_serialize(
+        _param = self._combo_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_combos_info_request=net_loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
@@ -577,7 +577,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_combo_post_serialize(
+    def _combo_post_serialize(
         self,
         timeout,
         net_loyalty_result_get_combos_info_request,
@@ -641,7 +641,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/combo',
+            resource_path='/combo',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -658,7 +658,587 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_nomenclature_post(
+    async def menu_by_id_post(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> ExternalMenuPreset:
+        """Retrieve external menu by ID.
+
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param transport_nomenclature_menu_request:
+        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_by_id_post_serialize(
+            timeout=timeout,
+            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalMenuPreset",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def menu_by_id_post_with_http_info(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> ApiResponse[ExternalMenuPreset]:
+        """Retrieve external menu by ID.
+
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param transport_nomenclature_menu_request:
+        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_by_id_post_serialize(
+            timeout=timeout,
+            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalMenuPreset",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def menu_by_id_post_without_preload_content(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> RESTResponseType:
+        """Retrieve external menu by ID.
+
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param transport_nomenclature_menu_request:
+        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_by_id_post_serialize(
+            timeout=timeout,
+            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalMenuPreset",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _menu_by_id_post_serialize(
+        self,
+        timeout,
+        transport_nomenclature_menu_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _hosts = [
+            'https://api-ru.iiko.services/api/2'
+        ]
+        _host = _hosts[_host_index]
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if transport_nomenclature_menu_request is not None:
+            _body_params = transport_nomenclature_menu_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/menu/by_id',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def menu_post(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> TransportNomenclatureMenusDataResponse:
+        """External menus with price categories.
+
+           > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_post_serialize(
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransportNomenclatureMenusDataResponse",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def menu_post_with_http_info(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> ApiResponse[TransportNomenclatureMenusDataResponse]:
+        """External menus with price categories.
+
+           > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_post_serialize(
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransportNomenclatureMenusDataResponse",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def menu_post_without_preload_content(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
+    ) -> RESTResponseType:
+        """External menus with price categories.
+
+           > Restriction group: `Data: menu`.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._menu_post_serialize(
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransportNomenclatureMenusDataResponse",
+            '400': "TransportErrorsErrorResponse",
+            '401': "TransportErrorsErrorResponse",
+            '500': "TransportErrorsErrorResponse",
+            '408': "TransportErrorsErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _menu_post_serialize(
+        self,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _hosts = [
+            'https://api-ru.iiko.services/api/2'
+        ]
+        _host = _hosts[_host_index]
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/menu',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def nomenclature_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
@@ -705,7 +1285,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_nomenclature_post_serialize(
+        _param = self._nomenclature_post_serialize(
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -733,7 +1313,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_nomenclature_post_with_http_info(
+    async def nomenclature_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
@@ -780,7 +1360,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_nomenclature_post_serialize(
+        _param = self._nomenclature_post_serialize(
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -808,7 +1388,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_nomenclature_post_without_preload_content(
+    async def nomenclature_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_nomenclature_nomenclature_request: Optional[TransportNomenclatureNomenclatureRequest] = None,
@@ -855,7 +1435,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_nomenclature_post_serialize(
+        _param = self._nomenclature_post_serialize(
             timeout=timeout,
             transport_nomenclature_nomenclature_request=transport_nomenclature_nomenclature_request,
             _request_auth=_request_auth,
@@ -878,7 +1458,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_nomenclature_post_serialize(
+    def _nomenclature_post_serialize(
         self,
         timeout,
         transport_nomenclature_nomenclature_request,
@@ -942,7 +1522,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/nomenclature',
+            resource_path='/nomenclature',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -959,7 +1539,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_add_post(
+    async def stop_lists_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
@@ -1006,7 +1586,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_add_post_serialize(
+        _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1034,7 +1614,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_add_post_with_http_info(
+    async def stop_lists_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
@@ -1081,7 +1661,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_add_post_serialize(
+        _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1109,7 +1689,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_add_post_without_preload_content(
+    async def stop_lists_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_add_products_to_stop_list_request: Optional[TransportStopListsAddProductsToStopListRequest] = None,
@@ -1156,7 +1736,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_add_post_serialize(
+        _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
             transport_stop_lists_add_products_to_stop_list_request=transport_stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
@@ -1179,7 +1759,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_stop_lists_add_post_serialize(
+    def _stop_lists_add_post_serialize(
         self,
         timeout,
         transport_stop_lists_add_products_to_stop_list_request,
@@ -1243,7 +1823,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/stop_lists/add',
+            resource_path='/stop_lists/add',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1260,7 +1840,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_check_post(
+    async def stop_lists_check_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
@@ -1307,7 +1887,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_check_post_serialize(
+        _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1335,7 +1915,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_check_post_with_http_info(
+    async def stop_lists_check_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
@@ -1382,7 +1962,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_check_post_serialize(
+        _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1410,7 +1990,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_check_post_without_preload_content(
+    async def stop_lists_check_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_check_stop_list_request: Optional[TransportStopListsCheckStopListRequest] = None,
@@ -1457,7 +2037,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_check_post_serialize(
+        _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
             transport_stop_lists_check_stop_list_request=transport_stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
@@ -1480,7 +2060,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_stop_lists_check_post_serialize(
+    def _stop_lists_check_post_serialize(
         self,
         timeout,
         transport_stop_lists_check_stop_list_request,
@@ -1544,7 +2124,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/stop_lists/check',
+            resource_path='/stop_lists/check',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1561,7 +2141,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_clear_post(
+    async def stop_lists_clear_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
@@ -1608,7 +2188,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_clear_post_serialize(
+        _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1636,7 +2216,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_clear_post_with_http_info(
+    async def stop_lists_clear_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
@@ -1683,7 +2263,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_clear_post_serialize(
+        _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1711,7 +2291,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_clear_post_without_preload_content(
+    async def stop_lists_clear_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_clear_stop_list_request: Optional[TransportStopListsClearStopListRequest] = None,
@@ -1758,7 +2338,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_clear_post_serialize(
+        _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
             transport_stop_lists_clear_stop_list_request=transport_stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
@@ -1781,7 +2361,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_stop_lists_clear_post_serialize(
+    def _stop_lists_clear_post_serialize(
         self,
         timeout,
         transport_stop_lists_clear_stop_list_request,
@@ -1845,7 +2425,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/stop_lists/clear',
+            resource_path='/stop_lists/clear',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1862,7 +2442,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_post(
+    async def stop_lists_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
@@ -1909,7 +2489,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_post_serialize(
+        _param = self._stop_lists_post_serialize(
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -1937,7 +2517,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_post_with_http_info(
+    async def stop_lists_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
@@ -1984,7 +2564,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_post_serialize(
+        _param = self._stop_lists_post_serialize(
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -2012,7 +2592,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_post_without_preload_content(
+    async def stop_lists_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_stop_lists_request: Optional[TransportStopListsStopListsRequest] = None,
@@ -2059,7 +2639,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_post_serialize(
+        _param = self._stop_lists_post_serialize(
             timeout=timeout,
             transport_stop_lists_stop_lists_request=transport_stop_lists_stop_lists_request,
             _request_auth=_request_auth,
@@ -2082,7 +2662,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_stop_lists_post_serialize(
+    def _stop_lists_post_serialize(
         self,
         timeout,
         transport_stop_lists_stop_lists_request,
@@ -2146,7 +2726,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/stop_lists',
+            resource_path='/stop_lists',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2163,7 +2743,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_remove_post(
+    async def stop_lists_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
@@ -2210,7 +2790,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_remove_post_serialize(
+        _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2238,7 +2818,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_remove_post_with_http_info(
+    async def stop_lists_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
@@ -2285,7 +2865,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_remove_post_serialize(
+        _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2313,7 +2893,7 @@ class MenuApi:
 
 
     @validate_call
-    async def api1_stop_lists_remove_post_without_preload_content(
+    async def stop_lists_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_stop_lists_remove_products_from_stop_list_request: Optional[TransportStopListsRemoveProductsFromStopListRequest] = None,
@@ -2360,7 +2940,7 @@ class MenuApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_stop_lists_remove_post_serialize(
+        _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
             transport_stop_lists_remove_products_from_stop_list_request=transport_stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
@@ -2383,7 +2963,7 @@ class MenuApi:
         return response_data.response
 
 
-    def _api1_stop_lists_remove_post_serialize(
+    def _stop_lists_remove_post_serialize(
         self,
         timeout,
         transport_stop_lists_remove_products_from_stop_list_request,
@@ -2447,581 +3027,7 @@ class MenuApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/stop_lists/remove',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def api2_menu_by_id_post(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ExternalMenuPreset:
-        """Retrieve external menu by ID.
-
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param transport_nomenclature_menu_request:
-        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_by_id_post_serialize(
-            timeout=timeout,
-            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExternalMenuPreset",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def api2_menu_by_id_post_with_http_info(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ExternalMenuPreset]:
-        """Retrieve external menu by ID.
-
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param transport_nomenclature_menu_request:
-        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_by_id_post_serialize(
-            timeout=timeout,
-            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExternalMenuPreset",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def api2_menu_by_id_post_without_preload_content(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        transport_nomenclature_menu_request: Optional[TransportNomenclatureMenuRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Retrieve external menu by ID.
-
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param transport_nomenclature_menu_request:
-        :type transport_nomenclature_menu_request: TransportNomenclatureMenuRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_by_id_post_serialize(
-            timeout=timeout,
-            transport_nomenclature_menu_request=transport_nomenclature_menu_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExternalMenuPreset",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api2_menu_by_id_post_serialize(
-        self,
-        timeout,
-        transport_nomenclature_menu_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        if timeout is not None:
-            _header_params['Timeout'] = timeout
-        # process the form parameters
-        # process the body parameter
-        if transport_nomenclature_menu_request is not None:
-            _body_params = transport_nomenclature_menu_request
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/2/menu/by_id',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def api2_menu_post(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TransportNomenclatureMenusDataResponse:
-        """External menus with price categories.
-
-           > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_post_serialize(
-            timeout=timeout,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TransportNomenclatureMenusDataResponse",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def api2_menu_post_with_http_info(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TransportNomenclatureMenusDataResponse]:
-        """External menus with price categories.
-
-           > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_post_serialize(
-            timeout=timeout,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TransportNomenclatureMenusDataResponse",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def api2_menu_post_without_preload_content(
-        self,
-        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """External menus with price categories.
-
-           > Restriction group: `Data: menu`.
-
-        :param timeout: Timeout in seconds.
-        :type timeout: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api2_menu_post_serialize(
-            timeout=timeout,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TransportNomenclatureMenusDataResponse",
-            '400': "TransportErrorsErrorResponse",
-            '401': "TransportErrorsErrorResponse",
-            '500': "TransportErrorsErrorResponse",
-            '408': "TransportErrorsErrorResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api2_menu_post_serialize(
-        self,
-        timeout,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        if timeout is not None:
-            _header_params['Timeout'] = timeout
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/2/menu',
+            resource_path='/stop_lists/remove',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

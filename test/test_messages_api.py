@@ -26,29 +26,29 @@ class TestMessagesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_loyalty_iiko_check_sms_sending_possibility_post(self) -> None:
-        """Test case for api1_loyalty_iiko_check_sms_sending_possibility_post
+    async def test_loyalty_iiko_check_sms_sending_possibility_post(self) -> None:
+        """Test case for loyalty_iiko_check_sms_sending_possibility_post
 
         Check sms sending possibility.
         """
         pass
 
-    async def test_api1_loyalty_iiko_check_sms_status_post(self) -> None:
-        """Test case for api1_loyalty_iiko_check_sms_status_post
+    async def test_loyalty_iiko_check_sms_status_post(self) -> None:
+        """Test case for loyalty_iiko_check_sms_status_post
 
         Check SMS status.
         """
         pass
 
-    async def test_api1_loyalty_iiko_message_send_email_post(self) -> None:
-        """Test case for api1_loyalty_iiko_message_send_email_post
+    async def test_loyalty_iiko_message_send_email_post(self) -> None:
+        """Test case for loyalty_iiko_message_send_email_post
 
         Send email.
         """
         pass
 
-    async def test_api1_loyalty_iiko_message_send_sms_post(self) -> None:
-        """Test case for api1_loyalty_iiko_message_send_sms_post
+    async def test_loyalty_iiko_message_send_sms_post(self) -> None:
+        """Test case for loyalty_iiko_message_send_sms_post
 
         Send sms.
         """

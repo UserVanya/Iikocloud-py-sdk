@@ -26,85 +26,85 @@ class TestCustomersApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_loyalty_iiko_customer_card_add_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_card_add_post
+    async def test_loyalty_iiko_customer_card_add_post(self) -> None:
+        """Test case for loyalty_iiko_customer_card_add_post
 
         Add card.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_card_remove_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_card_remove_post
+    async def test_loyalty_iiko_customer_card_remove_post(self) -> None:
+        """Test case for loyalty_iiko_customer_card_remove_post
 
         Delete card.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_create_or_update_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_create_or_update_post
+    async def test_loyalty_iiko_customer_create_or_update_post(self) -> None:
+        """Test case for loyalty_iiko_customer_create_or_update_post
 
         Create or update customer.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_info_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_info_post
+    async def test_loyalty_iiko_customer_info_post(self) -> None:
+        """Test case for loyalty_iiko_customer_info_post
 
         Get customer info.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_program_add_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_program_add_post
+    async def test_loyalty_iiko_customer_program_add_post(self) -> None:
+        """Test case for loyalty_iiko_customer_program_add_post
 
         Add customer to program.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_wallet_cancel_hold_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_wallet_cancel_hold_post
+    async def test_loyalty_iiko_customer_wallet_cancel_hold_post(self) -> None:
+        """Test case for loyalty_iiko_customer_wallet_cancel_hold_post
 
         Cancel hold money.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_wallet_chargeoff_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_wallet_chargeoff_post
+    async def test_loyalty_iiko_customer_wallet_chargeoff_post(self) -> None:
+        """Test case for loyalty_iiko_customer_wallet_chargeoff_post
 
         Withdraw balance.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_wallet_hold_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_wallet_hold_post
+    async def test_loyalty_iiko_customer_wallet_hold_post(self) -> None:
+        """Test case for loyalty_iiko_customer_wallet_hold_post
 
         Hold money.
         """
         pass
 
-    async def test_api1_loyalty_iiko_customer_wallet_topup_post(self) -> None:
-        """Test case for api1_loyalty_iiko_customer_wallet_topup_post
+    async def test_loyalty_iiko_customer_wallet_topup_post(self) -> None:
+        """Test case for loyalty_iiko_customer_wallet_topup_post
 
         Refill balance.
         """
         pass
 
-    async def test_api1_loyalty_iiko_delete_customers_post(self) -> None:
-        """Test case for api1_loyalty_iiko_delete_customers_post
+    async def test_loyalty_iiko_delete_customers_post(self) -> None:
+        """Test case for loyalty_iiko_delete_customers_post
 
         Logical deletion of customers.
         """
         pass
 
-    async def test_api1_loyalty_iiko_get_counters_post(self) -> None:
-        """Test case for api1_loyalty_iiko_get_counters_post
+    async def test_loyalty_iiko_get_counters_post(self) -> None:
+        """Test case for loyalty_iiko_get_counters_post
 
         Get counters.
         """
         pass
 
-    async def test_api1_loyalty_iiko_restore_customers_post(self) -> None:
-        """Test case for api1_loyalty_iiko_restore_customers_post
+    async def test_loyalty_iiko_restore_customers_post(self) -> None:
+        """Test case for loyalty_iiko_restore_customers_post
 
         Logical recovery of customers.
         """

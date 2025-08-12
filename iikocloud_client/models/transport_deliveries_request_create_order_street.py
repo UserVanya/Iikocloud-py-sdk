@@ -28,7 +28,7 @@ class TransportDeliveriesRequestCreateOrderStreet(BaseModel):
     Street.
     """ # noqa: E501
     classifier_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Street ID in classifier, e.g., address database.  \\n > For using in the Russian Federation only.", alias="classifierId")
-    id: Optional[StrictStr] = Field(default=None, description="ID.                 Can be obtained by `/api/1/streets/by_city` operation.")
+    id: Optional[StrictStr] = Field(default=None, description="ID.                 Can be obtained by `/streets/by_city` operation.")
     name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=60)]] = Field(default=None, description="Name.")
     city: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=60)]] = Field(default=None, description="City name.")
     __properties: ClassVar[List[str]] = ["classifierId", "id", "name", "city"]

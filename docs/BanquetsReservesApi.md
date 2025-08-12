@@ -1,22 +1,22 @@
 # iikocloud_client.BanquetsReservesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_reserve_add_items_post**](BanquetsReservesApi.md#api1_reserve_add_items_post) | **POST** /api/1/reserve/add_items | Add order items.
-[**api1_reserve_add_payments_post**](BanquetsReservesApi.md#api1_reserve_add_payments_post) | **POST** /api/1/reserve/add_payments | Add order payments.
-[**api1_reserve_available_organizations_post**](BanquetsReservesApi.md#api1_reserve_available_organizations_post) | **POST** /api/1/reserve/available_organizations | Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
-[**api1_reserve_available_restaurant_sections_post**](BanquetsReservesApi.md#api1_reserve_available_restaurant_sections_post) | **POST** /api/1/reserve/available_restaurant_sections | Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
-[**api1_reserve_available_terminal_groups_post**](BanquetsReservesApi.md#api1_reserve_available_terminal_groups_post) | **POST** /api/1/reserve/available_terminal_groups | Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
-[**api1_reserve_cancel_post**](BanquetsReservesApi.md#api1_reserve_cancel_post) | **POST** /api/1/reserve/cancel | Cancel reservation due to some reason.
-[**api1_reserve_create_post**](BanquetsReservesApi.md#api1_reserve_create_post) | **POST** /api/1/reserve/create | Create banquet/reserve.
-[**api1_reserve_restaurant_sections_workload_post**](BanquetsReservesApi.md#api1_reserve_restaurant_sections_workload_post) | **POST** /api/1/reserve/restaurant_sections_workload | Returns all banquets/reserves for passed restaurant sections.
-[**api1_reserve_status_by_id_post**](BanquetsReservesApi.md#api1_reserve_status_by_id_post) | **POST** /api/1/reserve/status_by_id | Retrieve banquets/reserves statuses by IDs.
+[**reserve_add_items_post**](BanquetsReservesApi.md#reserve_add_items_post) | **POST** /reserve/add_items | Add order items.
+[**reserve_add_payments_post**](BanquetsReservesApi.md#reserve_add_payments_post) | **POST** /reserve/add_payments | Add order payments.
+[**reserve_available_organizations_post**](BanquetsReservesApi.md#reserve_available_organizations_post) | **POST** /reserve/available_organizations | Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
+[**reserve_available_restaurant_sections_post**](BanquetsReservesApi.md#reserve_available_restaurant_sections_post) | **POST** /reserve/available_restaurant_sections | Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
+[**reserve_available_terminal_groups_post**](BanquetsReservesApi.md#reserve_available_terminal_groups_post) | **POST** /reserve/available_terminal_groups | Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
+[**reserve_cancel_post**](BanquetsReservesApi.md#reserve_cancel_post) | **POST** /reserve/cancel | Cancel reservation due to some reason.
+[**reserve_create_post**](BanquetsReservesApi.md#reserve_create_post) | **POST** /reserve/create | Create banquet/reserve.
+[**reserve_restaurant_sections_workload_post**](BanquetsReservesApi.md#reserve_restaurant_sections_workload_post) | **POST** /reserve/restaurant_sections_workload | Returns all banquets/reserves for passed restaurant sections.
+[**reserve_status_by_id_post**](BanquetsReservesApi.md#reserve_status_by_id_post) | **POST** /reserve/status_by_id | Retrieve banquets/reserves statuses by IDs.
 
 
-# **api1_reserve_add_items_post**
-> TransportCommonCorrelationIdResponse api1_reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
+# **reserve_add_items_post**
+> TransportCommonCorrelationIdResponse reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
 
 Add order items.
 
@@ -39,10 +39,10 @@ from iikocloud_client.models.transport_reserves_add_order_items_to_banquet_reque
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -64,11 +64,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add order items.
-        api_response = await api_instance.api1_reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
-        print("The response of BanquetsReservesApi->api1_reserve_add_items_post:\n")
+        api_response = await api_instance.reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
+        print("The response of BanquetsReservesApi->reserve_add_items_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_add_items_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_add_items_post: %s\n" % e)
 ```
 
 
@@ -106,8 +106,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_add_payments_post**
-> TransportCommonCorrelationIdResponse api1_reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
+# **reserve_add_payments_post**
+> TransportCommonCorrelationIdResponse reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
 
 Add order payments.
 
@@ -130,10 +130,10 @@ from iikocloud_client.models.transport_reserves_add_order_payments_to_banquet_re
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -155,11 +155,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add order payments.
-        api_response = await api_instance.api1_reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
-        print("The response of BanquetsReservesApi->api1_reserve_add_payments_post:\n")
+        api_response = await api_instance.reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
+        print("The response of BanquetsReservesApi->reserve_add_payments_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_add_payments_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_add_payments_post: %s\n" % e)
 ```
 
 
@@ -197,8 +197,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_available_organizations_post**
-> TransportOrganizationsGetOrganizationsResponse api1_reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+# **reserve_available_organizations_post**
+> TransportOrganizationsGetOrganizationsResponse reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
 
 Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
 
@@ -219,10 +219,10 @@ from iikocloud_client.models.transport_organizations_get_organizations_response 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -244,11 +244,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
-        api_response = await api_instance.api1_reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
-        print("The response of BanquetsReservesApi->api1_reserve_available_organizations_post:\n")
+        api_response = await api_instance.reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+        print("The response of BanquetsReservesApi->reserve_available_organizations_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_available_organizations_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_available_organizations_post: %s\n" % e)
 ```
 
 
@@ -286,8 +286,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_available_restaurant_sections_post**
-> TransportReservesGetRestaurantSectionsResponse api1_reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
+# **reserve_available_restaurant_sections_post**
+> TransportReservesGetRestaurantSectionsResponse reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
 
 Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
 
@@ -308,10 +308,10 @@ from iikocloud_client.models.transport_reserves_get_restaurant_sections_response
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -333,11 +333,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
-        api_response = await api_instance.api1_reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
-        print("The response of BanquetsReservesApi->api1_reserve_available_restaurant_sections_post:\n")
+        api_response = await api_instance.reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
+        print("The response of BanquetsReservesApi->reserve_available_restaurant_sections_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_available_restaurant_sections_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_available_restaurant_sections_post: %s\n" % e)
 ```
 
 
@@ -375,8 +375,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_available_terminal_groups_post**
-> TransportTerminalsTerminalGroupsResponse api1_reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
+# **reserve_available_terminal_groups_post**
+> TransportTerminalsTerminalGroupsResponse reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
 
 Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
 
@@ -397,10 +397,10 @@ from iikocloud_client.models.transport_terminals_terminal_groups_response import
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -422,11 +422,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
-        api_response = await api_instance.api1_reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
-        print("The response of BanquetsReservesApi->api1_reserve_available_terminal_groups_post:\n")
+        api_response = await api_instance.reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
+        print("The response of BanquetsReservesApi->reserve_available_terminal_groups_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_available_terminal_groups_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_available_terminal_groups_post: %s\n" % e)
 ```
 
 
@@ -464,8 +464,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_cancel_post**
-> TransportCommonCorrelationIdResponse api1_reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
+# **reserve_cancel_post**
+> TransportCommonCorrelationIdResponse reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
 
 Cancel reservation due to some reason.
 
@@ -488,10 +488,10 @@ from iikocloud_client.models.transport_reserves_cancel_reserve_request import Tr
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -513,11 +513,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Cancel reservation due to some reason.
-        api_response = await api_instance.api1_reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
-        print("The response of BanquetsReservesApi->api1_reserve_cancel_post:\n")
+        api_response = await api_instance.reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
+        print("The response of BanquetsReservesApi->reserve_cancel_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_cancel_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_cancel_post: %s\n" % e)
 ```
 
 
@@ -555,8 +555,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_create_post**
-> TransportReservesReserveResponse api1_reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
+# **reserve_create_post**
+> TransportReservesReserveResponse reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
 
 Create banquet/reserve.
 
@@ -579,10 +579,10 @@ from iikocloud_client.models.transport_reserves_reserve_response import Transpor
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -604,11 +604,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Create banquet/reserve.
-        api_response = await api_instance.api1_reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
-        print("The response of BanquetsReservesApi->api1_reserve_create_post:\n")
+        api_response = await api_instance.reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
+        print("The response of BanquetsReservesApi->reserve_create_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_create_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_create_post: %s\n" % e)
 ```
 
 
@@ -646,8 +646,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_restaurant_sections_workload_post**
-> TransportReservesGetRestaurantSectionsWorkloadResponse api1_reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
+# **reserve_restaurant_sections_workload_post**
+> TransportReservesGetRestaurantSectionsWorkloadResponse reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
 
 Returns all banquets/reserves for passed restaurant sections.
 
@@ -668,10 +668,10 @@ from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -693,11 +693,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns all banquets/reserves for passed restaurant sections.
-        api_response = await api_instance.api1_reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
-        print("The response of BanquetsReservesApi->api1_reserve_restaurant_sections_workload_post:\n")
+        api_response = await api_instance.reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
+        print("The response of BanquetsReservesApi->reserve_restaurant_sections_workload_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_restaurant_sections_workload_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_restaurant_sections_workload_post: %s\n" % e)
 ```
 
 
@@ -735,8 +735,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_reserve_status_by_id_post**
-> TransportReservesReservesResponse api1_reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
+# **reserve_status_by_id_post**
+> TransportReservesReservesResponse reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
 
 Retrieve banquets/reserves statuses by IDs.
 
@@ -757,10 +757,10 @@ from iikocloud_client.models.transport_reserves_reserves_response import Transpo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -782,11 +782,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve banquets/reserves statuses by IDs.
-        api_response = await api_instance.api1_reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
-        print("The response of BanquetsReservesApi->api1_reserve_status_by_id_post:\n")
+        api_response = await api_instance.reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
+        print("The response of BanquetsReservesApi->reserve_status_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BanquetsReservesApi->api1_reserve_status_by_id_post: %s\n" % e)
+        print("Exception when calling BanquetsReservesApi->reserve_status_by_id_post: %s\n" % e)
 ```
 
 

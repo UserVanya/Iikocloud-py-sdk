@@ -28,9 +28,9 @@ class TransportDeliveriesDraftsSaveDraftRequest(BaseModel):
     Draft editing model.
     """ # noqa: E501
     employee_id: StrictStr = Field(description="ID of the employee who wants to update order draft.", alias="employeeId")
-    organization_id: StrictStr = Field(description="Organization ID of the new order.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID of the new order.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order: TransportDeliveriesDraftsDeliveryOrderDraft = Field(description="Order item.")
-    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    terminal_group_id: Optional[StrictStr] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
     __properties: ClassVar[List[str]] = ["employeeId", "organizationId", "order", "terminalGroupId"]
 
     model_config = ConfigDict(

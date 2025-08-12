@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **correlation_id** | **str** | Operation ID. | 
 **terminal_groups** | [**List[TransportCommonRmsItemsResponseWrapperTerminalGroup]**](TransportCommonRmsItemsResponseWrapperTerminalGroup.md) | List of terminal groups broken down by organizations. | 
-**terminal_groups_in_sleep** | [**List[TransportCommonRmsItemsResponseWrapperTerminalGroup]**](TransportCommonRmsItemsResponseWrapperTerminalGroup.md) | Terminal groups are in sleep mode because they are not active.    Can be awakened by &#x60;/api/1/terminal_groups/awake&#x60; operation. | 
+**terminal_groups_in_sleep** | [**List[TransportCommonRmsItemsResponseWrapperTerminalGroup]**](TransportCommonRmsItemsResponseWrapperTerminalGroup.md) | Terminal groups are in sleep mode because they are not active.    Can be awakened by &#x60;/terminal_groups/awake&#x60; operation. | 
 
 ## Example
 

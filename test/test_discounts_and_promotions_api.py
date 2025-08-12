@@ -26,43 +26,43 @@ class TestDiscountsAndPromotionsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_loyalty_iiko_calculate_post(self) -> None:
-        """Test case for api1_loyalty_iiko_calculate_post
+    async def test_loyalty_iiko_calculate_post(self) -> None:
+        """Test case for loyalty_iiko_calculate_post
 
         Calculate checkin.
         """
         pass
 
-    async def test_api1_loyalty_iiko_coupons_by_series_post(self) -> None:
-        """Test case for api1_loyalty_iiko_coupons_by_series_post
+    async def test_loyalty_iiko_coupons_by_series_post(self) -> None:
+        """Test case for loyalty_iiko_coupons_by_series_post
 
         Get non-activated coupons
         """
         pass
 
-    async def test_api1_loyalty_iiko_coupons_info_post(self) -> None:
-        """Test case for api1_loyalty_iiko_coupons_info_post
+    async def test_loyalty_iiko_coupons_info_post(self) -> None:
+        """Test case for loyalty_iiko_coupons_info_post
 
         Get coupon info.
         """
         pass
 
-    async def test_api1_loyalty_iiko_coupons_series_post(self) -> None:
-        """Test case for api1_loyalty_iiko_coupons_series_post
+    async def test_loyalty_iiko_coupons_series_post(self) -> None:
+        """Test case for loyalty_iiko_coupons_series_post
 
         Get coupon series with non-activated coupons.
         """
         pass
 
-    async def test_api1_loyalty_iiko_manual_condition_post(self) -> None:
-        """Test case for api1_loyalty_iiko_manual_condition_post
+    async def test_loyalty_iiko_manual_condition_post(self) -> None:
+        """Test case for loyalty_iiko_manual_condition_post
 
         Get manual conditions.
         """
         pass
 
-    async def test_api1_loyalty_iiko_program_post(self) -> None:
-        """Test case for api1_loyalty_iiko_program_post
+    async def test_loyalty_iiko_program_post(self) -> None:
+        """Test case for loyalty_iiko_program_post
 
         Get programs.
         """

@@ -1,15 +1,15 @@
 # iikocloud_client.ReportApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_loyalty_iiko_customer_transactions_by_date_post**](ReportApi.md#api1_loyalty_iiko_customer_transactions_by_date_post) | **POST** /api/1/loyalty/iiko/customer/transactions/by_date | Get transaction report by period.
-[**api1_loyalty_iiko_customer_transactions_by_revision_post**](ReportApi.md#api1_loyalty_iiko_customer_transactions_by_revision_post) | **POST** /api/1/loyalty/iiko/customer/transactions/by_revision | Get transaction report by revision.
+[**loyalty_iiko_customer_transactions_by_date_post**](ReportApi.md#loyalty_iiko_customer_transactions_by_date_post) | **POST** /loyalty/iiko/customer/transactions/by_date | Get transaction report by period.
+[**loyalty_iiko_customer_transactions_by_revision_post**](ReportApi.md#loyalty_iiko_customer_transactions_by_revision_post) | **POST** /loyalty/iiko/customer/transactions/by_revision | Get transaction report by revision.
 
 
-# **api1_loyalty_iiko_customer_transactions_by_date_post**
-> NetReportGetTransactionsReportByPeriodResponse api1_loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
+# **loyalty_iiko_customer_transactions_by_date_post**
+> NetReportGetTransactionsReportByPeriodResponse loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
 
 Get transaction report by period.
 
@@ -28,10 +28,10 @@ from iikocloud_client.models.net_report_get_transactions_report_by_period_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get transaction report by period.
-        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
-        print("The response of ReportApi->api1_loyalty_iiko_customer_transactions_by_date_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request)
+        print("The response of ReportApi->loyalty_iiko_customer_transactions_by_date_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ReportApi->api1_loyalty_iiko_customer_transactions_by_date_post: %s\n" % e)
+        print("Exception when calling ReportApi->loyalty_iiko_customer_transactions_by_date_post: %s\n" % e)
 ```
 
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_customer_transactions_by_revision_post**
-> NetReportGetTransactionsReportByRevisionResponse api1_loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
+# **loyalty_iiko_customer_transactions_by_revision_post**
+> NetReportGetTransactionsReportByRevisionResponse loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
 
 Get transaction report by revision.
 
@@ -115,10 +115,10 @@ from iikocloud_client.models.net_report_get_transactions_report_by_revision_resp
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -140,11 +140,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get transaction report by revision.
-        api_response = await api_instance.api1_loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
-        print("The response of ReportApi->api1_loyalty_iiko_customer_transactions_by_revision_post:\n")
+        api_response = await api_instance.loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request)
+        print("The response of ReportApi->loyalty_iiko_customer_transactions_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ReportApi->api1_loyalty_iiko_customer_transactions_by_revision_post: %s\n" % e)
+        print("Exception when calling ReportApi->loyalty_iiko_customer_transactions_by_revision_post: %s\n" % e)
 ```
 
 

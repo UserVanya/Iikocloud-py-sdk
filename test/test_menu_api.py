@@ -15,84 +15,87 @@
 import unittest
 
 from iikocloud_client.api.menu_api import MenuApi
+from iikocloud_client.api_client import ApiClient
+from iikocloud_client.api.authorization_api import AuthorizationApi
 
 
 class TestMenuApi(unittest.IsolatedAsyncioTestCase):
     """MenuApi unit test stubs"""
 
     async def asyncSetUp(self) -> None:
-        self.api = MenuApi()
+        self.api_client = ApiClient()
+        self.authorization_api = AuthorizationApi(self.api_client)
+        self.api = MenuApi(self.api_client)
 
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_combo_calculate_post(self) -> None:
-        """Test case for api1_combo_calculate_post
+    async def test_combo_calculate_post(self) -> None:
+        """Test case for combo_calculate_post
 
         Calculate combo price
         """
         pass
 
-    async def test_api1_combo_post(self) -> None:
-        """Test case for api1_combo_post
+    async def test_combo_post(self) -> None:
+        """Test case for combo_post
 
         Get combos info
         """
         pass
 
-    async def test_api1_nomenclature_post(self) -> None:
-        """Test case for api1_nomenclature_post
-
-        Menu.
-        """
-        pass
-
-    async def test_api1_stop_lists_add_post(self) -> None:
-        """Test case for api1_stop_lists_add_post
-
-        Add items to out-of-stock list.  (You should have extra rights to use this method).
-        """
-        pass
-
-    async def test_api1_stop_lists_check_post(self) -> None:
-        """Test case for api1_stop_lists_check_post
-
-        Check items in out-of-stock list.
-        """
-        pass
-
-    async def test_api1_stop_lists_clear_post(self) -> None:
-        """Test case for api1_stop_lists_clear_post
-
-        Clear out-of-stock list.  (You should have extra rights to use this method).
-        """
-        pass
-
-    async def test_api1_stop_lists_post(self) -> None:
-        """Test case for api1_stop_lists_post
-
-        Out-of-stock items.
-        """
-        pass
-
-    async def test_api1_stop_lists_remove_post(self) -> None:
-        """Test case for api1_stop_lists_remove_post
-
-        Remove items from out-of-stock list.  (You should have extra rights to use this method).
-        """
-        pass
-
-    async def test_api2_menu_by_id_post(self) -> None:
-        """Test case for api2_menu_by_id_post
+    async def test_menu_by_id_post(self) -> None:
+        """Test case for menu_by_id_post
 
         Retrieve external menu by ID.
         """
         pass
 
-    async def test_api2_menu_post(self) -> None:
-        """Test case for api2_menu_post
+    async def test_menu_post(self) -> None:
+        """Test case for menu_post
 
         External menus with price categories.
+        """
+
+    async def test_nomenclature_post(self) -> None:
+        """Test case for nomenclature_post
+
+        Menu.
+        """
+        pass
+
+    async def test_stop_lists_add_post(self) -> None:
+        """Test case for stop_lists_add_post
+
+        Add items to out-of-stock list.  (You should have extra rights to use this method).
+        """
+        pass
+
+    async def test_stop_lists_check_post(self) -> None:
+        """Test case for stop_lists_check_post
+
+        Check items in out-of-stock list.
+        """
+        pass
+
+    async def test_stop_lists_clear_post(self) -> None:
+        """Test case for stop_lists_clear_post
+
+        Clear out-of-stock list.  (You should have extra rights to use this method).
+        """
+        pass
+
+    async def test_stop_lists_post(self) -> None:
+        """Test case for stop_lists_post
+
+        Out-of-stock items.
+        """
+        pass
+
+    async def test_stop_lists_remove_post(self) -> None:
+        """Test case for stop_lists_remove_post
+
+        Remove items from out-of-stock list.  (You should have extra rights to use this method).
         """
         pass
 

@@ -26,71 +26,71 @@ class TestEmployeesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_employees_couriers_active_location_by_terminal_post(self) -> None:
-        """Test case for api1_employees_couriers_active_location_by_terminal_post
+    async def test_employees_couriers_active_location_by_terminal_post(self) -> None:
+        """Test case for employees_couriers_active_location_by_terminal_post
 
         Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
         """
         pass
 
-    async def test_api1_employees_couriers_active_location_post(self) -> None:
-        """Test case for api1_employees_couriers_active_location_post
+    async def test_employees_couriers_active_location_post(self) -> None:
+        """Test case for employees_couriers_active_location_post
 
         Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
         """
         pass
 
-    async def test_api1_employees_couriers_by_role_post(self) -> None:
-        """Test case for api1_employees_couriers_by_role_post
+    async def test_employees_couriers_by_role_post(self) -> None:
+        """Test case for employees_couriers_by_role_post
 
         Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
         """
         pass
 
-    async def test_api1_employees_couriers_locations_by_time_offset_post(self) -> None:
-        """Test case for api1_employees_couriers_locations_by_time_offset_post
+    async def test_employees_couriers_locations_by_time_offset_post(self) -> None:
+        """Test case for employees_couriers_locations_by_time_offset_post
 
         Method of obtaining drivers' coordinates history.
         """
         pass
 
-    async def test_api1_employees_couriers_post(self) -> None:
-        """Test case for api1_employees_couriers_post
+    async def test_employees_couriers_post(self) -> None:
+        """Test case for employees_couriers_post
 
         Returns list of all employees which are delivery drivers in specified restaurants.
         """
         pass
 
-    async def test_api1_employees_info_post(self) -> None:
-        """Test case for api1_employees_info_post
+    async def test_employees_info_post(self) -> None:
+        """Test case for employees_info_post
 
         Returns employee info.
         """
         pass
 
-    async def test_api1_employees_shift_clockin_post(self) -> None:
-        """Test case for api1_employees_shift_clockin_post
+    async def test_employees_shift_clockin_post(self) -> None:
+        """Test case for employees_shift_clockin_post
 
         Open personal session.
         """
         pass
 
-    async def test_api1_employees_shift_clockout_post(self) -> None:
-        """Test case for api1_employees_shift_clockout_post
+    async def test_employees_shift_clockout_post(self) -> None:
+        """Test case for employees_shift_clockout_post
 
         Close personal session.
         """
         pass
 
-    async def test_api1_employees_shift_is_open_post(self) -> None:
-        """Test case for api1_employees_shift_is_open_post
+    async def test_employees_shift_is_open_post(self) -> None:
+        """Test case for employees_shift_is_open_post
 
         Check if personal session is open.
         """
         pass
 
-    async def test_api1_employees_shifts_by_courier_post(self) -> None:
-        """Test case for api1_employees_shifts_by_courier_post
+    async def test_employees_shifts_by_courier_post(self) -> None:
+        """Test case for employees_shifts_by_courier_post
 
         Get terminal groups where employee session is opened.
         """

@@ -27,7 +27,7 @@ class TransportCommonRmsItemsResponseWrapperTerminalGroupStopList(BaseModel):
     """
     RMS pair wrapping - list of response items that belong to this RMS.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     items: List[TransportStopListsTerminalGroupStopList] = Field(description="Items for organization.")
     __properties: ClassVar[List[str]] = ["organizationId", "items"]
 

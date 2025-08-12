@@ -1,15 +1,15 @@
 # iikocloud_client.WebhooksApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_webhooks_settings_post**](WebhooksApi.md#api1_webhooks_settings_post) | **POST** /api/1/webhooks/settings | Get webhooks settings for specified organization and authorized API login.
-[**api1_webhooks_update_settings_post**](WebhooksApi.md#api1_webhooks_update_settings_post) | **POST** /api/1/webhooks/update_settings | Update webhooks settings for specified organization and authorized API login.
+[**webhooks_settings_post**](WebhooksApi.md#webhooks_settings_post) | **POST** /webhooks/settings | Get webhooks settings for specified organization and authorized API login.
+[**webhooks_update_settings_post**](WebhooksApi.md#webhooks_update_settings_post) | **POST** /webhooks/update_settings | Update webhooks settings for specified organization and authorized API login.
 
 
-# **api1_webhooks_settings_post**
-> TransportWebHooksGetWebHookSettingsResponse api1_webhooks_settings_post(timeout=timeout, transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request)
+# **webhooks_settings_post**
+> TransportWebHooksGetWebHookSettingsResponse webhooks_settings_post(timeout=timeout, transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request)
 
 Get webhooks settings for specified organization and authorized API login.
 
@@ -28,10 +28,10 @@ from iikocloud_client.models.transport_web_hooks_get_web_hook_settings_response 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get webhooks settings for specified organization and authorized API login.
-        api_response = await api_instance.api1_webhooks_settings_post(timeout=timeout, transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request)
-        print("The response of WebhooksApi->api1_webhooks_settings_post:\n")
+        api_response = await api_instance.webhooks_settings_post(timeout=timeout, transport_web_hooks_get_web_hook_settings_request=transport_web_hooks_get_web_hook_settings_request)
+        print("The response of WebhooksApi->webhooks_settings_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api1_webhooks_settings_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->webhooks_settings_post: %s\n" % e)
 ```
 
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_webhooks_update_settings_post**
-> TransportCommonCorrelationIdResponse api1_webhooks_update_settings_post(timeout=timeout, transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request)
+# **webhooks_update_settings_post**
+> TransportCommonCorrelationIdResponse webhooks_update_settings_post(timeout=timeout, transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request)
 
 Update webhooks settings for specified organization and authorized API login.
 
@@ -115,10 +115,10 @@ from iikocloud_client.models.transport_web_hooks_update_web_hook_settings_reques
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -140,11 +140,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Update webhooks settings for specified organization and authorized API login.
-        api_response = await api_instance.api1_webhooks_update_settings_post(timeout=timeout, transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request)
-        print("The response of WebhooksApi->api1_webhooks_update_settings_post:\n")
+        api_response = await api_instance.webhooks_update_settings_post(timeout=timeout, transport_web_hooks_update_web_hook_settings_request=transport_web_hooks_update_web_hook_settings_request)
+        print("The response of WebhooksApi->webhooks_update_settings_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api1_webhooks_update_settings_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->webhooks_update_settings_post: %s\n" % e)
 ```
 
 

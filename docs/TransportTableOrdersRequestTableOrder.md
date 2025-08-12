@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Order ID. | [optional] 
 **external_number** | **str** | Order external number.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 
-**table_ids** | **List[str]** | Table IDs.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | [optional] 
+**table_ids** | **List[str]** | Table IDs.                Can be obtained by &#x60;/reserve/available_restaurant_sections&#x60; operation. | [optional] 
 **customer** | [**TransportDeliveriesRequestCreateOrderRegularCustomer**](TransportDeliveriesRequestCreateOrderRegularCustomer.md) | Guest.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **phone** | **str** | Guest phone.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **guest_count** | **int** | Amount of guests in the order.   &gt; Allowed from version &#x60;7.6.1&#x60;. | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **source_key** | **str** | The string key (marker) of the source (partner - api user) that created the order. Needed to limit the visibility of orders for external integration. | [optional] 
 **discounts_info** | [**TransportDeliveriesRequestCreateOrderDiscountsInfo**](TransportDeliveriesRequestCreateOrderDiscountsInfo.md) | Discounts/surcharges. | [optional] 
 **loyalty_info** | [**TransportDeliveriesRequestCreateOrderLoyaltyInfo**](TransportDeliveriesRequestCreateOrderLoyaltyInfo.md) | Information about Loyalty app. | [optional] 
-**order_type_id** | **str** | Order type ID.                 Can be obtained by &#x60;/api/1/deliveries/order_types&#x60; operation | [optional] 
+**order_type_id** | **str** | Order type ID.                 Can be obtained by &#x60;/deliveries/order_types&#x60; operation | [optional] 
 **cheque_additional_info** | [**TransportDeliveriesCommonChequeAdditionalInfo**](TransportDeliveriesCommonChequeAdditionalInfo.md) | Cheque additional information. | [optional] 
 **external_data** | [**List[TransportDeliveriesRequestCreateOrderExternalData]**](TransportDeliveriesRequestCreateOrderExternalData.md) | Order external data.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 
 

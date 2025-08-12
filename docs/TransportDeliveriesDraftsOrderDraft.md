@@ -7,7 +7,7 @@ Order draft object.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Order ID. | 
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **locked_by_user** | **str** | ID of the employee, who is editing this draft. | [optional] 
 **order** | [**TransportDeliveriesDraftsDeliveryOrderDraft**](TransportDeliveriesDraftsDeliveryOrderDraft.md) | Order. | 
 **terminal_group_id** | **str** | Terminal group ID. | [optional] 

@@ -41,7 +41,7 @@ class OperationsApi:
 
 
     @validate_call
-    async def api1_commands_status_post(
+    async def commands_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_commands_get_command_status_request: Optional[TransportCommandsGetCommandStatusRequest] = None,
@@ -88,7 +88,7 @@ class OperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_commands_status_post_serialize(
+        _param = self._commands_status_post_serialize(
             timeout=timeout,
             transport_commands_get_command_status_request=transport_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -117,7 +117,7 @@ class OperationsApi:
 
 
     @validate_call
-    async def api1_commands_status_post_with_http_info(
+    async def commands_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_commands_get_command_status_request: Optional[TransportCommandsGetCommandStatusRequest] = None,
@@ -164,7 +164,7 @@ class OperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_commands_status_post_serialize(
+        _param = self._commands_status_post_serialize(
             timeout=timeout,
             transport_commands_get_command_status_request=transport_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -193,7 +193,7 @@ class OperationsApi:
 
 
     @validate_call
-    async def api1_commands_status_post_without_preload_content(
+    async def commands_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_commands_get_command_status_request: Optional[TransportCommandsGetCommandStatusRequest] = None,
@@ -240,7 +240,7 @@ class OperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_commands_status_post_serialize(
+        _param = self._commands_status_post_serialize(
             timeout=timeout,
             transport_commands_get_command_status_request=transport_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -264,7 +264,7 @@ class OperationsApi:
         return response_data.response
 
 
-    def _api1_commands_status_post_serialize(
+    def _commands_status_post_serialize(
         self,
         timeout,
         transport_commands_get_command_status_request,
@@ -328,7 +328,7 @@ class OperationsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/commands/status',
+            resource_path='/commands/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -26,43 +26,43 @@ class TestDictionariesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_cancel_causes_post(self) -> None:
-        """Test case for api1_cancel_causes_post
+    async def test_cancel_causes_post(self) -> None:
+        """Test case for cancel_causes_post
 
         Delivery cancel causes.
         """
         pass
 
-    async def test_api1_deliveries_order_types_post(self) -> None:
-        """Test case for api1_deliveries_order_types_post
+    async def test_deliveries_order_types_post(self) -> None:
+        """Test case for deliveries_order_types_post
 
         Order types.
         """
         pass
 
-    async def test_api1_discounts_post(self) -> None:
-        """Test case for api1_discounts_post
+    async def test_discounts_post(self) -> None:
+        """Test case for discounts_post
 
         Discounts / surcharges.
         """
         pass
 
-    async def test_api1_payment_types_post(self) -> None:
-        """Test case for api1_payment_types_post
+    async def test_payment_types_post(self) -> None:
+        """Test case for payment_types_post
 
         Payment types.
         """
         pass
 
-    async def test_api1_removal_types_post(self) -> None:
-        """Test case for api1_removal_types_post
+    async def test_removal_types_post(self) -> None:
+        """Test case for removal_types_post
 
         Removal types (reasons for deletion).
         """
         pass
 
-    async def test_api1_tips_types_post(self) -> None:
-        """Test case for api1_tips_types_post
+    async def test_tips_types_post(self) -> None:
+        """Test case for tips_types_post
 
         Get tips types for api-login`s rms group.
         """

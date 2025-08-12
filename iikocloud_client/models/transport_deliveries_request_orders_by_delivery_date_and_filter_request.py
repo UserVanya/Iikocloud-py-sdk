@@ -30,9 +30,9 @@ class TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest(BaseModel):
     """
     Request for information about orders from external source and based on additional filters.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     terminal_group_ids: Optional[List[StrictStr]] = Field(default=None, description="List of terminal groups IDs.", alias="terminalGroupIds")
-    delivery_date_from: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Lower limit.                The guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.", alias="deliveryDateFrom")
+    delivery_date_from: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Lower limit.                The guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.", alias="deliveryDateFrom")
     delivery_date_to: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Upper limit.", alias="deliveryDateTo")
     statuses: Optional[List[TransportDeliveriesCommonDeliveryStatus]] = Field(default=None, description="Allowed order statuses.")
     has_problem: Optional[StrictBool] = Field(default=None, description="If true, delivery has a problem.  > Conditions under which the order has a problem:  > * order.problem.hasProblem is true;  > * order status is Unconfirmed and CookingStartTime before now;  > * order status is ReadyForCooking and (CookingStartTime + timeToCookingErrorTimeout) before now;  > * order status is CookingCompleted or Waiting and (CookingStartTime + cookingTimeout) before now.", alias="hasProblem")

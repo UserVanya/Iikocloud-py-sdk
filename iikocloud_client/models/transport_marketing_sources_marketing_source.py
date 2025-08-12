@@ -27,7 +27,7 @@ class TransportMarketingSourcesMarketingSource(BaseModel):
     DTO for marketing source in iikoRMS.
     """ # noqa: E501
     id: StrictStr = Field(description="Marketing source ID.")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     name: StrictStr = Field(description="Marketing source name.")
     external_revision: Optional[StrictInt] = Field(default=None, description="External system revision number.", alias="externalRevision")
     is_deleted: Optional[StrictBool] = Field(default=None, description="IsDeleted attribute of marketing source.", alias="isDeleted")

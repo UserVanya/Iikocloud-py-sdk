@@ -57,7 +57,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_add_post(
+    async def loyalty_iiko_customer_card_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
@@ -104,7 +104,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
+        _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -132,7 +132,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_add_post_with_http_info(
+    async def loyalty_iiko_customer_card_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
@@ -179,7 +179,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
+        _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -207,7 +207,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_add_post_without_preload_content(
+    async def loyalty_iiko_customer_card_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_magnet_card_request: Optional[NetCustomerAddMagnetCardRequest] = None,
@@ -254,7 +254,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_add_post_serialize(
+        _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
             net_customer_add_magnet_card_request=net_customer_add_magnet_card_request,
             _request_auth=_request_auth,
@@ -277,7 +277,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_card_add_post_serialize(
+    def _loyalty_iiko_customer_card_add_post_serialize(
         self,
         timeout,
         net_customer_add_magnet_card_request,
@@ -341,7 +341,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/card/add',
+            resource_path='/loyalty/iiko/customer/card/add',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -358,7 +358,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_remove_post(
+    async def loyalty_iiko_customer_card_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
@@ -405,7 +405,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -433,7 +433,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_remove_post_with_http_info(
+    async def loyalty_iiko_customer_card_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
@@ -480,7 +480,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -508,7 +508,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_card_remove_post_without_preload_content(
+    async def loyalty_iiko_customer_card_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_magnet_card_request: Optional[NetCustomerDeleteMagnetCardRequest] = None,
@@ -555,7 +555,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_card_remove_post_serialize(
+        _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
             net_customer_delete_magnet_card_request=net_customer_delete_magnet_card_request,
             _request_auth=_request_auth,
@@ -578,7 +578,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_card_remove_post_serialize(
+    def _loyalty_iiko_customer_card_remove_post_serialize(
         self,
         timeout,
         net_customer_delete_magnet_card_request,
@@ -642,7 +642,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/card/remove',
+            resource_path='/loyalty/iiko/customer/card/remove',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -659,7 +659,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_create_or_update_post(
+    async def loyalty_iiko_customer_create_or_update_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
@@ -706,7 +706,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
+        _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -734,7 +734,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_create_or_update_post_with_http_info(
+    async def loyalty_iiko_customer_create_or_update_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
@@ -781,7 +781,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
+        _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -809,7 +809,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_create_or_update_post_without_preload_content(
+    async def loyalty_iiko_customer_create_or_update_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_create_or_update_customer_request: Optional[NetCustomerCreateOrUpdateCustomerRequest] = None,
@@ -856,7 +856,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_create_or_update_post_serialize(
+        _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
             net_customer_create_or_update_customer_request=net_customer_create_or_update_customer_request,
             _request_auth=_request_auth,
@@ -879,7 +879,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_create_or_update_post_serialize(
+    def _loyalty_iiko_customer_create_or_update_post_serialize(
         self,
         timeout,
         net_customer_create_or_update_customer_request,
@@ -943,7 +943,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/create_or_update',
+            resource_path='/loyalty/iiko/customer/create_or_update',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -960,7 +960,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_info_post(
+    async def loyalty_iiko_customer_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
@@ -1007,7 +1007,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_info_post_serialize(
+        _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1035,7 +1035,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_info_post_with_http_info(
+    async def loyalty_iiko_customer_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
@@ -1082,7 +1082,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_info_post_serialize(
+        _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1110,7 +1110,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_info_post_without_preload_content(
+    async def loyalty_iiko_customer_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_get_customer_info_request: Optional[NetCustomerGetCustomerInfoRequest] = None,
@@ -1157,7 +1157,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_info_post_serialize(
+        _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
             net_customer_get_customer_info_request=net_customer_get_customer_info_request,
             _request_auth=_request_auth,
@@ -1180,7 +1180,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_info_post_serialize(
+    def _loyalty_iiko_customer_info_post_serialize(
         self,
         timeout,
         net_customer_get_customer_info_request,
@@ -1244,7 +1244,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/info',
+            resource_path='/loyalty/iiko/customer/info',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1261,7 +1261,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_program_add_post(
+    async def loyalty_iiko_customer_program_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
@@ -1308,7 +1308,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
+        _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1336,7 +1336,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_program_add_post_with_http_info(
+    async def loyalty_iiko_customer_program_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
@@ -1383,7 +1383,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
+        _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1411,7 +1411,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_program_add_post_without_preload_content(
+    async def loyalty_iiko_customer_program_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_add_customer_to_program_request: Optional[NetCustomerAddCustomerToProgramRequest] = None,
@@ -1458,7 +1458,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_program_add_post_serialize(
+        _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
             net_customer_add_customer_to_program_request=net_customer_add_customer_to_program_request,
             _request_auth=_request_auth,
@@ -1481,7 +1481,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_program_add_post_serialize(
+    def _loyalty_iiko_customer_program_add_post_serialize(
         self,
         timeout,
         net_customer_add_customer_to_program_request,
@@ -1545,7 +1545,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/program/add',
+            resource_path='/loyalty/iiko/customer/program/add',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1562,7 +1562,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_cancel_hold_post(
+    async def loyalty_iiko_customer_wallet_cancel_hold_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
@@ -1609,7 +1609,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1637,7 +1637,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_cancel_hold_post_with_http_info(
+    async def loyalty_iiko_customer_wallet_cancel_hold_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
@@ -1684,7 +1684,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1712,7 +1712,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_cancel_hold_post_without_preload_content(
+    async def loyalty_iiko_customer_wallet_cancel_hold_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_cancel_hold_money_request: Optional[NetCustomerCancelHoldMoneyRequest] = None,
@@ -1759,7 +1759,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
             net_customer_cancel_hold_money_request=net_customer_cancel_hold_money_request,
             _request_auth=_request_auth,
@@ -1782,7 +1782,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
+    def _loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
         self,
         timeout,
         net_customer_cancel_hold_money_request,
@@ -1846,7 +1846,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/wallet/cancel_hold',
+            resource_path='/loyalty/iiko/customer/wallet/cancel_hold',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1863,7 +1863,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_chargeoff_post(
+    async def loyalty_iiko_customer_wallet_chargeoff_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -1910,7 +1910,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -1938,7 +1938,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_chargeoff_post_with_http_info(
+    async def loyalty_iiko_customer_wallet_chargeoff_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -1985,7 +1985,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2013,7 +2013,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_chargeoff_post_without_preload_content(
+    async def loyalty_iiko_customer_wallet_chargeoff_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -2060,7 +2060,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2083,7 +2083,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_wallet_chargeoff_post_serialize(
+    def _loyalty_iiko_customer_wallet_chargeoff_post_serialize(
         self,
         timeout,
         net_customer_change_user_balance_request,
@@ -2147,7 +2147,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/wallet/chargeoff',
+            resource_path='/loyalty/iiko/customer/wallet/chargeoff',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2164,7 +2164,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_hold_post(
+    async def loyalty_iiko_customer_wallet_hold_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
@@ -2211,7 +2211,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2239,7 +2239,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_hold_post_with_http_info(
+    async def loyalty_iiko_customer_wallet_hold_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
@@ -2286,7 +2286,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2314,7 +2314,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_hold_post_without_preload_content(
+    async def loyalty_iiko_customer_wallet_hold_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_hold_money_request: Optional[NetCustomerHoldMoneyRequest] = None,
@@ -2361,7 +2361,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_hold_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
             net_customer_hold_money_request=net_customer_hold_money_request,
             _request_auth=_request_auth,
@@ -2384,7 +2384,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_wallet_hold_post_serialize(
+    def _loyalty_iiko_customer_wallet_hold_post_serialize(
         self,
         timeout,
         net_customer_hold_money_request,
@@ -2448,7 +2448,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/wallet/hold',
+            resource_path='/loyalty/iiko/customer/wallet/hold',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2465,7 +2465,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_topup_post(
+    async def loyalty_iiko_customer_wallet_topup_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -2512,7 +2512,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2540,7 +2540,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_topup_post_with_http_info(
+    async def loyalty_iiko_customer_wallet_topup_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -2587,7 +2587,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2615,7 +2615,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_wallet_topup_post_without_preload_content(
+    async def loyalty_iiko_customer_wallet_topup_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_change_user_balance_request: Optional[NetCustomerChangeUserBalanceRequest] = None,
@@ -2662,7 +2662,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_wallet_topup_post_serialize(
+        _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
             net_customer_change_user_balance_request=net_customer_change_user_balance_request,
             _request_auth=_request_auth,
@@ -2685,7 +2685,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_wallet_topup_post_serialize(
+    def _loyalty_iiko_customer_wallet_topup_post_serialize(
         self,
         timeout,
         net_customer_change_user_balance_request,
@@ -2749,7 +2749,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/wallet/topup',
+            resource_path='/loyalty/iiko/customer/wallet/topup',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2766,7 +2766,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_delete_customers_post(
+    async def loyalty_iiko_delete_customers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
@@ -2813,7 +2813,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
+        _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -2841,7 +2841,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_delete_customers_post_with_http_info(
+    async def loyalty_iiko_delete_customers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
@@ -2888,7 +2888,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
+        _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -2916,7 +2916,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_delete_customers_post_without_preload_content(
+    async def loyalty_iiko_delete_customers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_delete_customers_request: Optional[NetCustomerDeleteCustomersRequest] = None,
@@ -2963,7 +2963,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_delete_customers_post_serialize(
+        _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
             net_customer_delete_customers_request=net_customer_delete_customers_request,
             _request_auth=_request_auth,
@@ -2986,7 +2986,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_delete_customers_post_serialize(
+    def _loyalty_iiko_delete_customers_post_serialize(
         self,
         timeout,
         net_customer_delete_customers_request,
@@ -3050,7 +3050,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/delete_customers',
+            resource_path='/loyalty/iiko/delete_customers',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3067,7 +3067,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_get_counters_post(
+    async def loyalty_iiko_get_counters_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
@@ -3114,7 +3114,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_get_counters_post_serialize(
+        _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3142,7 +3142,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_get_counters_post_with_http_info(
+    async def loyalty_iiko_get_counters_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
@@ -3189,7 +3189,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_get_counters_post_serialize(
+        _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3217,7 +3217,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_get_counters_post_without_preload_content(
+    async def loyalty_iiko_get_counters_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_loyalty_result_get_counters_request: Optional[NetLoyaltyResultGetCountersRequest] = None,
@@ -3264,7 +3264,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_get_counters_post_serialize(
+        _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
             net_loyalty_result_get_counters_request=net_loyalty_result_get_counters_request,
             _request_auth=_request_auth,
@@ -3287,7 +3287,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_get_counters_post_serialize(
+    def _loyalty_iiko_get_counters_post_serialize(
         self,
         timeout,
         net_loyalty_result_get_counters_request,
@@ -3351,7 +3351,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/get_counters',
+            resource_path='/loyalty/iiko/get_counters',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3368,7 +3368,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_restore_customers_post(
+    async def loyalty_iiko_restore_customers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
@@ -3415,7 +3415,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
+        _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3443,7 +3443,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_restore_customers_post_with_http_info(
+    async def loyalty_iiko_restore_customers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
@@ -3490,7 +3490,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
+        _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3518,7 +3518,7 @@ class CustomersApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_restore_customers_post_without_preload_content(
+    async def loyalty_iiko_restore_customers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_customer_restore_customers_request: Optional[NetCustomerRestoreCustomersRequest] = None,
@@ -3565,7 +3565,7 @@ class CustomersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_restore_customers_post_serialize(
+        _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
             net_customer_restore_customers_request=net_customer_restore_customers_request,
             _request_auth=_request_auth,
@@ -3588,7 +3588,7 @@ class CustomersApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_restore_customers_post_serialize(
+    def _loyalty_iiko_restore_customers_post_serialize(
         self,
         timeout,
         net_customer_restore_customers_request,
@@ -3652,7 +3652,7 @@ class CustomersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/restore_customers',
+            resource_path='/loyalty/iiko/restore_customers',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

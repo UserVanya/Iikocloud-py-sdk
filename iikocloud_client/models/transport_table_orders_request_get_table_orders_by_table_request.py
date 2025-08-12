@@ -28,8 +28,8 @@ class TransportTableOrdersRequestGetTableOrdersByTableRequest(BaseModel):
     Request for information about orders using table IDs.
     """ # noqa: E501
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
-    organization_ids: List[StrictStr] = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
-    table_ids: List[StrictStr] = Field(description="Table IDs.                Can be obtained by `/api/1/reserve/available_restaurant_sections` operation.", alias="tableIds")
+    organization_ids: List[StrictStr] = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    table_ids: List[StrictStr] = Field(description="Table IDs.                Can be obtained by `/reserve/available_restaurant_sections` operation.", alias="tableIds")
     statuses: Optional[List[TransportOrdersCommonOrderStatus]] = Field(default=None, description="Order statuses.")
     date_from: Optional[StrictStr] = Field(default=None, description="Order creation date (terminal time zone). Lower limit.                Order details are stored for 90 days.", alias="dateFrom")
     date_to: Optional[StrictStr] = Field(default=None, description="Order creation date (terminal time zone). Upper limit.", alias="dateTo")

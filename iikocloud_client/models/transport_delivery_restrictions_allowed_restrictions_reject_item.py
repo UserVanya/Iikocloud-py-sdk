@@ -28,8 +28,8 @@ class TransportDeliveryRestrictionsAllowedRestrictionsRejectItem(BaseModel):
     """
     Rejected item info.
     """ # noqa: E501
-    terminal_group_id: Optional[StrictStr] = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
-    organization_id: Optional[StrictStr] = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    terminal_group_id: Optional[StrictStr] = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: Optional[StrictStr] = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     zone: Optional[StrictStr] = Field(default=None, description="Delivery zone name which this TerminalGroupId belongs to.")
     reject_code: TransportDeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode = Field(description="Reject cause code.", alias="rejectCode")
     reject_hint: StrictStr = Field(description="Reject hint.", alias="rejectHint")

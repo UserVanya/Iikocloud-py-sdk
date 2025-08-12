@@ -6,7 +6,7 @@ The tips type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Tips type ID.                Can be obtained by &#x60;/api/1/tips_types&#x60; operation. | 
+**id** | **str** | Tips type ID.                Can be obtained by &#x60;/tips_types&#x60; operation. | 
 **name** | **str** | Tips type name. | 
 
 ## Example

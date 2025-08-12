@@ -29,7 +29,7 @@ class TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest(BaseM
     phone: StrictStr = Field(description="Delivery order phone number.")
     delivery_date_from: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Lower limit.                Order details are stored for 90 days.", alias="deliveryDateFrom")
     delivery_date_to: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Upper limit.                Order details are stored for 90 days.", alias="deliveryDateTo")
-    organization_ids: List[StrictStr] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     start_revision: Optional[StrictInt] = Field(default=None, description="Revision start number beginning from which (but not including) orders will be returned.                > Maximum revision offset to request - `3 hours`.", alias="startRevision")
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
     rows_count: StrictInt = Field(description="Maximum number of items returned.                > Maximum numbers of items to request - `200`.", alias="rowsCount")

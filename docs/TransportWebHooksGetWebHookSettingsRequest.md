@@ -6,7 +6,7 @@ Request to get webhooks settings for specified organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization UOC Id.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization UOC Id.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 
 ## Example
 

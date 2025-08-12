@@ -1,14 +1,14 @@
 # iikocloud_client.OperationsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_commands_status_post**](OperationsApi.md#api1_commands_status_post) | **POST** /api/1/commands/status | Get status of command.
+[**commands_status_post**](OperationsApi.md#commands_status_post) | **POST** /commands/status | Get status of command.
 
 
-# **api1_commands_status_post**
-> TransportCommandsGetCommandStatusResponse api1_commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
+# **commands_status_post**
+> TransportCommandsGetCommandStatusResponse commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
 
 Get status of command.
 
@@ -28,10 +28,10 @@ from iikocloud_client.models.transport_commands_get_command_status_response impo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get status of command.
-        api_response = await api_instance.api1_commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
-        print("The response of OperationsApi->api1_commands_status_post:\n")
+        api_response = await api_instance.commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
+        print("The response of OperationsApi->commands_status_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OperationsApi->api1_commands_status_post: %s\n" % e)
+        print("Exception when calling OperationsApi->commands_status_post: %s\n" % e)
 ```
 
 

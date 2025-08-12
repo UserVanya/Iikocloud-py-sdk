@@ -26,15 +26,15 @@ class TestDeliveryRestrictionsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_delivery_restrictions_allowed_post(self) -> None:
-        """Test case for api1_delivery_restrictions_allowed_post
+    async def test_delivery_restrictions_allowed_post(self) -> None:
+        """Test case for delivery_restrictions_allowed_post
 
         Get suitable terminal groups for delivery restrictions.
         """
         pass
 
-    async def test_api1_delivery_restrictions_post(self) -> None:
-        """Test case for api1_delivery_restrictions_post
+    async def test_delivery_restrictions_post(self) -> None:
+        """Test case for delivery_restrictions_post
 
         Retrieve list of delivery restrictions.
         """

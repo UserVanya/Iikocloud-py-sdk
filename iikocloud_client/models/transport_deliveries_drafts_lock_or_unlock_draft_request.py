@@ -26,7 +26,7 @@ class TransportDeliveriesDraftsLockOrUnlockDraftRequest(BaseModel):
     """
     Delivery order draft lock or unlock request.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="ID of the order.", alias="orderId")
     employee_id: StrictStr = Field(description="ID of the employee.", alias="employeeId")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "employeeId"]

@@ -47,7 +47,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_cities_post(
+    async def cities_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
@@ -94,7 +94,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cities_post_serialize(
+        _param = self._cities_post_serialize(
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -122,7 +122,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_cities_post_with_http_info(
+    async def cities_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
@@ -169,7 +169,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cities_post_serialize(
+        _param = self._cities_post_serialize(
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -197,7 +197,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_cities_post_without_preload_content(
+    async def cities_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_cities_request: Optional[TransportAddressCitiesRequest] = None,
@@ -244,7 +244,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_cities_post_serialize(
+        _param = self._cities_post_serialize(
             timeout=timeout,
             transport_address_cities_request=transport_address_cities_request,
             _request_auth=_request_auth,
@@ -267,7 +267,7 @@ class AddressesApi:
         return response_data.response
 
 
-    def _api1_cities_post_serialize(
+    def _cities_post_serialize(
         self,
         timeout,
         transport_address_cities_request,
@@ -331,7 +331,7 @@ class AddressesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/cities',
+            resource_path='/cities',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -348,7 +348,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_regions_post(
+    async def regions_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
@@ -395,7 +395,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_regions_post_serialize(
+        _param = self._regions_post_serialize(
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -423,7 +423,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_regions_post_with_http_info(
+    async def regions_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
@@ -470,7 +470,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_regions_post_serialize(
+        _param = self._regions_post_serialize(
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -498,7 +498,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_regions_post_without_preload_content(
+    async def regions_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_regions_request: Optional[TransportAddressRegionsRequest] = None,
@@ -545,7 +545,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_regions_post_serialize(
+        _param = self._regions_post_serialize(
             timeout=timeout,
             transport_address_regions_request=transport_address_regions_request,
             _request_auth=_request_auth,
@@ -568,7 +568,7 @@ class AddressesApi:
         return response_data.response
 
 
-    def _api1_regions_post_serialize(
+    def _regions_post_serialize(
         self,
         timeout,
         transport_address_regions_request,
@@ -632,7 +632,7 @@ class AddressesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/regions',
+            resource_path='/regions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -649,7 +649,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_city_post(
+    async def streets_by_city_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
@@ -696,7 +696,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_city_post_serialize(
+        _param = self._streets_by_city_post_serialize(
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -724,7 +724,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_city_post_with_http_info(
+    async def streets_by_city_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
@@ -771,7 +771,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_city_post_serialize(
+        _param = self._streets_by_city_post_serialize(
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -799,7 +799,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_city_post_without_preload_content(
+    async def streets_by_city_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_city_request: Optional[TransportAddressStreetsByCityRequest] = None,
@@ -846,7 +846,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_city_post_serialize(
+        _param = self._streets_by_city_post_serialize(
             timeout=timeout,
             transport_address_streets_by_city_request=transport_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -869,7 +869,7 @@ class AddressesApi:
         return response_data.response
 
 
-    def _api1_streets_by_city_post_serialize(
+    def _streets_by_city_post_serialize(
         self,
         timeout,
         transport_address_streets_by_city_request,
@@ -933,7 +933,7 @@ class AddressesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/streets/by_city',
+            resource_path='/streets/by_city',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -950,7 +950,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_id_post(
+    async def streets_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
@@ -997,7 +997,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_id_post_serialize(
+        _param = self._streets_by_id_post_serialize(
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1025,7 +1025,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_id_post_with_http_info(
+    async def streets_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
@@ -1072,7 +1072,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_id_post_serialize(
+        _param = self._streets_by_id_post_serialize(
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1100,7 +1100,7 @@ class AddressesApi:
 
 
     @validate_call
-    async def api1_streets_by_id_post_without_preload_content(
+    async def streets_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_address_streets_by_id_request: Optional[TransportAddressStreetsByIdRequest] = None,
@@ -1147,7 +1147,7 @@ class AddressesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_streets_by_id_post_serialize(
+        _param = self._streets_by_id_post_serialize(
             timeout=timeout,
             transport_address_streets_by_id_request=transport_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1170,7 +1170,7 @@ class AddressesApi:
         return response_data.response
 
 
-    def _api1_streets_by_id_post_serialize(
+    def _streets_by_id_post_serialize(
         self,
         timeout,
         transport_address_streets_by_id_request,
@@ -1234,7 +1234,7 @@ class AddressesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/streets/by_id',
+            resource_path='/streets/by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

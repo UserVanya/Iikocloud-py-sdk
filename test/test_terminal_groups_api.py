@@ -26,22 +26,22 @@ class TestTerminalGroupsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_terminal_groups_awake_post(self) -> None:
-        """Test case for api1_terminal_groups_awake_post
+    async def test_terminal_groups_awake_post(self) -> None:
+        """Test case for terminal_groups_awake_post
 
         Awake terminal groups from sleep mode.
         """
         pass
 
-    async def test_api1_terminal_groups_is_alive_post(self) -> None:
-        """Test case for api1_terminal_groups_is_alive_post
+    async def test_terminal_groups_is_alive_post(self) -> None:
+        """Test case for terminal_groups_is_alive_post
 
         Returns information on availability of group of terminals.
         """
         pass
 
-    async def test_api1_terminal_groups_post(self) -> None:
-        """Test case for api1_terminal_groups_post
+    async def test_terminal_groups_post(self) -> None:
+        """Test case for terminal_groups_post
 
         Method that returns information on groups of delivery terminals.
         """

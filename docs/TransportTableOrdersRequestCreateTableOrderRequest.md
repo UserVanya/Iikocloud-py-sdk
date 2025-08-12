@@ -6,8 +6,8 @@ Order creation model.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**terminal_group_id** | **str** | Front group ID an order must be sent to.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**terminal_group_id** | **str** | Front group ID an order must be sent to.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
 **order** | [**TransportTableOrdersRequestTableOrder**](TransportTableOrdersRequestTableOrder.md) | Order. | [optional] 
 **create_order_settings** | [**TransportTableOrdersRequestCreateTableOrderSettings**](TransportTableOrdersRequestCreateTableOrderSettings.md) | Order creation parameters. | [optional] 
 

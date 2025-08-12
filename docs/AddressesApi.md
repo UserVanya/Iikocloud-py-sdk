@@ -1,17 +1,17 @@
 # iikocloud_client.AddressesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_cities_post**](AddressesApi.md#api1_cities_post) | **POST** /api/1/cities | Cities.
-[**api1_regions_post**](AddressesApi.md#api1_regions_post) | **POST** /api/1/regions | Regions.
-[**api1_streets_by_city_post**](AddressesApi.md#api1_streets_by_city_post) | **POST** /api/1/streets/by_city | Streets by city.
-[**api1_streets_by_id_post**](AddressesApi.md#api1_streets_by_id_post) | **POST** /api/1/streets/by_id | Streets by id or by classifierId.
+[**cities_post**](AddressesApi.md#cities_post) | **POST** /cities | Cities.
+[**regions_post**](AddressesApi.md#regions_post) | **POST** /regions | Regions.
+[**streets_by_city_post**](AddressesApi.md#streets_by_city_post) | **POST** /streets/by_city | Streets by city.
+[**streets_by_id_post**](AddressesApi.md#streets_by_id_post) | **POST** /streets/by_id | Streets by id or by classifierId.
 
 
-# **api1_cities_post**
-> TransportAddressCitiesResponse api1_cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+# **cities_post**
+> TransportAddressCitiesResponse cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
 
 Cities.
 
@@ -30,10 +30,10 @@ from iikocloud_client.models.transport_address_cities_response import TransportA
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -55,11 +55,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Cities.
-        api_response = await api_instance.api1_cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
-        print("The response of AddressesApi->api1_cities_post:\n")
+        api_response = await api_instance.cities_post(timeout=timeout, transport_address_cities_request=transport_address_cities_request)
+        print("The response of AddressesApi->cities_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AddressesApi->api1_cities_post: %s\n" % e)
+        print("Exception when calling AddressesApi->cities_post: %s\n" % e)
 ```
 
 
@@ -97,8 +97,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_regions_post**
-> TransportAddressRegionsResponse api1_regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+# **regions_post**
+> TransportAddressRegionsResponse regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
 
 Regions.
 
@@ -117,10 +117,10 @@ from iikocloud_client.models.transport_address_regions_response import Transport
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -142,11 +142,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Regions.
-        api_response = await api_instance.api1_regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
-        print("The response of AddressesApi->api1_regions_post:\n")
+        api_response = await api_instance.regions_post(timeout=timeout, transport_address_regions_request=transport_address_regions_request)
+        print("The response of AddressesApi->regions_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AddressesApi->api1_regions_post: %s\n" % e)
+        print("Exception when calling AddressesApi->regions_post: %s\n" % e)
 ```
 
 
@@ -184,8 +184,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_streets_by_city_post**
-> TransportAddressStreetsResponse api1_streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+# **streets_by_city_post**
+> TransportAddressStreetsResponse streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
 
 Streets by city.
 
@@ -204,10 +204,10 @@ from iikocloud_client.models.transport_address_streets_response import Transport
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -229,11 +229,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Streets by city.
-        api_response = await api_instance.api1_streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
-        print("The response of AddressesApi->api1_streets_by_city_post:\n")
+        api_response = await api_instance.streets_by_city_post(timeout=timeout, transport_address_streets_by_city_request=transport_address_streets_by_city_request)
+        print("The response of AddressesApi->streets_by_city_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AddressesApi->api1_streets_by_city_post: %s\n" % e)
+        print("Exception when calling AddressesApi->streets_by_city_post: %s\n" % e)
 ```
 
 
@@ -271,8 +271,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_streets_by_id_post**
-> TransportAddressStreetsByIdResponse api1_streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+# **streets_by_id_post**
+> TransportAddressStreetsByIdResponse streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
 
 Streets by id or by classifierId.
 
@@ -291,10 +291,10 @@ from iikocloud_client.models.transport_address_streets_by_id_response import Tra
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -316,11 +316,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Streets by id or by classifierId.
-        api_response = await api_instance.api1_streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
-        print("The response of AddressesApi->api1_streets_by_id_post:\n")
+        api_response = await api_instance.streets_by_id_post(timeout=timeout, transport_address_streets_by_id_request=transport_address_streets_by_id_request)
+        print("The response of AddressesApi->streets_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AddressesApi->api1_streets_by_id_post: %s\n" % e)
+        print("Exception when calling AddressesApi->streets_by_id_post: %s\n" % e)
 ```
 
 

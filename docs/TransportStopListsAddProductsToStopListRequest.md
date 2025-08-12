@@ -6,8 +6,8 @@ Request for add items to out-of-stock list.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**terminal_group_id** | **str** | Terminal group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**terminal_group_id** | **str** | Terminal group ID.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
 **items** | [**List[TransportStopListsAddProductsToStopListItem]**](TransportStopListsAddProductsToStopListItem.md) | Items for adding to out-of-stock list. | 
 
 ## Example

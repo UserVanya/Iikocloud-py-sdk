@@ -1,23 +1,23 @@
 # iikocloud_client.EmployeesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_employees_couriers_active_location_by_terminal_post**](EmployeesApi.md#api1_employees_couriers_active_location_by_terminal_post) | **POST** /api/1/employees/couriers/active_location/by_terminal | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
-[**api1_employees_couriers_active_location_post**](EmployeesApi.md#api1_employees_couriers_active_location_post) | **POST** /api/1/employees/couriers/active_location | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers   in specified restaurants.
-[**api1_employees_couriers_by_role_post**](EmployeesApi.md#api1_employees_couriers_by_role_post) | **POST** /api/1/employees/couriers/by_role | Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
-[**api1_employees_couriers_locations_by_time_offset_post**](EmployeesApi.md#api1_employees_couriers_locations_by_time_offset_post) | **POST** /api/1/employees/couriers/locations/by_time_offset | Method of obtaining drivers&#39; coordinates history.
-[**api1_employees_couriers_post**](EmployeesApi.md#api1_employees_couriers_post) | **POST** /api/1/employees/couriers | Returns list of all employees which are delivery drivers in specified restaurants.
-[**api1_employees_info_post**](EmployeesApi.md#api1_employees_info_post) | **POST** /api/1/employees/info | Returns employee info.
-[**api1_employees_shift_clockin_post**](EmployeesApi.md#api1_employees_shift_clockin_post) | **POST** /api/1/employees/shift/clockin | Open personal session.
-[**api1_employees_shift_clockout_post**](EmployeesApi.md#api1_employees_shift_clockout_post) | **POST** /api/1/employees/shift/clockout | Close personal session.
-[**api1_employees_shift_is_open_post**](EmployeesApi.md#api1_employees_shift_is_open_post) | **POST** /api/1/employees/shift/is_open | Check if personal session is open.
-[**api1_employees_shifts_by_courier_post**](EmployeesApi.md#api1_employees_shifts_by_courier_post) | **POST** /api/1/employees/shifts/by_courier | Get terminal groups where employee session is opened.
+[**employees_couriers_active_location_by_terminal_post**](EmployeesApi.md#employees_couriers_active_location_by_terminal_post) | **POST** /employees/couriers/active_location/by_terminal | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
+[**employees_couriers_active_location_post**](EmployeesApi.md#employees_couriers_active_location_post) | **POST** /employees/couriers/active_location | Returns list of all active (courier session is opened) courier&#39;s locations which are delivery drivers   in specified restaurants.
+[**employees_couriers_by_role_post**](EmployeesApi.md#employees_couriers_by_role_post) | **POST** /employees/couriers/by_role | Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
+[**employees_couriers_locations_by_time_offset_post**](EmployeesApi.md#employees_couriers_locations_by_time_offset_post) | **POST** /employees/couriers/locations/by_time_offset | Method of obtaining drivers&#39; coordinates history.
+[**employees_couriers_post**](EmployeesApi.md#employees_couriers_post) | **POST** /employees/couriers | Returns list of all employees which are delivery drivers in specified restaurants.
+[**employees_info_post**](EmployeesApi.md#employees_info_post) | **POST** /employees/info | Returns employee info.
+[**employees_shift_clockin_post**](EmployeesApi.md#employees_shift_clockin_post) | **POST** /employees/shift/clockin | Open personal session.
+[**employees_shift_clockout_post**](EmployeesApi.md#employees_shift_clockout_post) | **POST** /employees/shift/clockout | Close personal session.
+[**employees_shift_is_open_post**](EmployeesApi.md#employees_shift_is_open_post) | **POST** /employees/shift/is_open | Check if personal session is open.
+[**employees_shifts_by_courier_post**](EmployeesApi.md#employees_shifts_by_courier_post) | **POST** /employees/shifts/by_courier | Get terminal groups where employee session is opened.
 
 
-# **api1_employees_couriers_active_location_by_terminal_post**
-> TransportEmployeesActiveCourierLocationsResponse api1_employees_couriers_active_location_by_terminal_post(timeout=timeout, transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request)
+# **employees_couriers_active_location_by_terminal_post**
+> TransportEmployeesActiveCourierLocationsResponse employees_couriers_active_location_by_terminal_post(timeout=timeout, transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request)
 
 Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
@@ -36,10 +36,10 @@ from iikocloud_client.models.transport_employees_active_courier_locations_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -61,11 +61,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
-        api_response = await api_instance.api1_employees_couriers_active_location_by_terminal_post(timeout=timeout, transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request)
-        print("The response of EmployeesApi->api1_employees_couriers_active_location_by_terminal_post:\n")
+        api_response = await api_instance.employees_couriers_active_location_by_terminal_post(timeout=timeout, transport_employees_active_courier_locations_by_terminal_group_request=transport_employees_active_courier_locations_by_terminal_group_request)
+        print("The response of EmployeesApi->employees_couriers_active_location_by_terminal_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_couriers_active_location_by_terminal_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_couriers_active_location_by_terminal_post: %s\n" % e)
 ```
 
 
@@ -103,8 +103,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_couriers_active_location_post**
-> TransportEmployeesActiveCourierLocationsResponse api1_employees_couriers_active_location_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
+# **employees_couriers_active_location_post**
+> TransportEmployeesActiveCourierLocationsResponse employees_couriers_active_location_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
 
 Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
@@ -123,10 +123,10 @@ from iikocloud_client.models.transport_employees_couriers_request import Transpo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -148,11 +148,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
-        api_response = await api_instance.api1_employees_couriers_active_location_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
-        print("The response of EmployeesApi->api1_employees_couriers_active_location_post:\n")
+        api_response = await api_instance.employees_couriers_active_location_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
+        print("The response of EmployeesApi->employees_couriers_active_location_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_couriers_active_location_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_couriers_active_location_post: %s\n" % e)
 ```
 
 
@@ -190,8 +190,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_couriers_by_role_post**
-> TransportEmployeesEmployeesWithRoleSignResponse api1_employees_couriers_by_role_post(timeout=timeout, transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request)
+# **employees_couriers_by_role_post**
+> TransportEmployeesEmployeesWithRoleSignResponse employees_couriers_by_role_post(timeout=timeout, transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request)
 
 Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
@@ -210,10 +210,10 @@ from iikocloud_client.models.transport_employees_employees_with_role_sign_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -235,11 +235,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
-        api_response = await api_instance.api1_employees_couriers_by_role_post(timeout=timeout, transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request)
-        print("The response of EmployeesApi->api1_employees_couriers_by_role_post:\n")
+        api_response = await api_instance.employees_couriers_by_role_post(timeout=timeout, transport_employees_couriers_and_check_role_request=transport_employees_couriers_and_check_role_request)
+        print("The response of EmployeesApi->employees_couriers_by_role_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_couriers_by_role_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_couriers_by_role_post: %s\n" % e)
 ```
 
 
@@ -277,8 +277,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_couriers_locations_by_time_offset_post**
-> TransportEmployeesCourierLocationsByTimeOffsetResponse api1_employees_couriers_locations_by_time_offset_post(timeout=timeout, transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request)
+# **employees_couriers_locations_by_time_offset_post**
+> TransportEmployeesCourierLocationsByTimeOffsetResponse employees_couriers_locations_by_time_offset_post(timeout=timeout, transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request)
 
 Method of obtaining drivers' coordinates history.
 
@@ -297,10 +297,10 @@ from iikocloud_client.models.transport_employees_courier_locations_by_time_offse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -322,11 +322,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Method of obtaining drivers' coordinates history.
-        api_response = await api_instance.api1_employees_couriers_locations_by_time_offset_post(timeout=timeout, transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request)
-        print("The response of EmployeesApi->api1_employees_couriers_locations_by_time_offset_post:\n")
+        api_response = await api_instance.employees_couriers_locations_by_time_offset_post(timeout=timeout, transport_employees_courier_locations_by_time_offset_request=transport_employees_courier_locations_by_time_offset_request)
+        print("The response of EmployeesApi->employees_couriers_locations_by_time_offset_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_couriers_locations_by_time_offset_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_couriers_locations_by_time_offset_post: %s\n" % e)
 ```
 
 
@@ -364,8 +364,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_couriers_post**
-> TransportEmployeesEmployeesResponse api1_employees_couriers_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
+# **employees_couriers_post**
+> TransportEmployeesEmployeesResponse employees_couriers_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
 
 Returns list of all employees which are delivery drivers in specified restaurants.
 
@@ -384,10 +384,10 @@ from iikocloud_client.models.transport_employees_employees_response import Trans
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -409,11 +409,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants.
-        api_response = await api_instance.api1_employees_couriers_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
-        print("The response of EmployeesApi->api1_employees_couriers_post:\n")
+        api_response = await api_instance.employees_couriers_post(timeout=timeout, transport_employees_couriers_request=transport_employees_couriers_request)
+        print("The response of EmployeesApi->employees_couriers_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_couriers_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_couriers_post: %s\n" % e)
 ```
 
 
@@ -451,8 +451,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_info_post**
-> TransportEmployeesEmployeeInfoResponse api1_employees_info_post(timeout=timeout, transport_employees_employee_info_request=transport_employees_employee_info_request)
+# **employees_info_post**
+> TransportEmployeesEmployeeInfoResponse employees_info_post(timeout=timeout, transport_employees_employee_info_request=transport_employees_employee_info_request)
 
 Returns employee info.
 
@@ -471,10 +471,10 @@ from iikocloud_client.models.transport_employees_employee_info_response import T
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -496,11 +496,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Returns employee info.
-        api_response = await api_instance.api1_employees_info_post(timeout=timeout, transport_employees_employee_info_request=transport_employees_employee_info_request)
-        print("The response of EmployeesApi->api1_employees_info_post:\n")
+        api_response = await api_instance.employees_info_post(timeout=timeout, transport_employees_employee_info_request=transport_employees_employee_info_request)
+        print("The response of EmployeesApi->employees_info_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_info_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_info_post: %s\n" % e)
 ```
 
 
@@ -538,8 +538,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_shift_clockin_post**
-> TransportEmployeesChangePersonalSessionResponse api1_employees_shift_clockin_post(timeout=timeout, transport_employees_open_personal_session_request=transport_employees_open_personal_session_request)
+# **employees_shift_clockin_post**
+> TransportEmployeesChangePersonalSessionResponse employees_shift_clockin_post(timeout=timeout, transport_employees_open_personal_session_request=transport_employees_open_personal_session_request)
 
 Open personal session.
 
@@ -560,10 +560,10 @@ from iikocloud_client.models.transport_employees_open_personal_session_request i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -585,11 +585,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Open personal session.
-        api_response = await api_instance.api1_employees_shift_clockin_post(timeout=timeout, transport_employees_open_personal_session_request=transport_employees_open_personal_session_request)
-        print("The response of EmployeesApi->api1_employees_shift_clockin_post:\n")
+        api_response = await api_instance.employees_shift_clockin_post(timeout=timeout, transport_employees_open_personal_session_request=transport_employees_open_personal_session_request)
+        print("The response of EmployeesApi->employees_shift_clockin_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_shift_clockin_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_shift_clockin_post: %s\n" % e)
 ```
 
 
@@ -627,8 +627,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_shift_clockout_post**
-> TransportEmployeesChangePersonalSessionResponse api1_employees_shift_clockout_post(timeout=timeout, transport_employees_close_personal_session_request=transport_employees_close_personal_session_request)
+# **employees_shift_clockout_post**
+> TransportEmployeesChangePersonalSessionResponse employees_shift_clockout_post(timeout=timeout, transport_employees_close_personal_session_request=transport_employees_close_personal_session_request)
 
 Close personal session.
 
@@ -649,10 +649,10 @@ from iikocloud_client.models.transport_employees_close_personal_session_request 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -674,11 +674,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Close personal session.
-        api_response = await api_instance.api1_employees_shift_clockout_post(timeout=timeout, transport_employees_close_personal_session_request=transport_employees_close_personal_session_request)
-        print("The response of EmployeesApi->api1_employees_shift_clockout_post:\n")
+        api_response = await api_instance.employees_shift_clockout_post(timeout=timeout, transport_employees_close_personal_session_request=transport_employees_close_personal_session_request)
+        print("The response of EmployeesApi->employees_shift_clockout_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_shift_clockout_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_shift_clockout_post: %s\n" % e)
 ```
 
 
@@ -716,8 +716,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_shift_is_open_post**
-> TransportEmployeesGetPersonalSessionInfoResponse api1_employees_shift_is_open_post(timeout=timeout, transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request)
+# **employees_shift_is_open_post**
+> TransportEmployeesGetPersonalSessionInfoResponse employees_shift_is_open_post(timeout=timeout, transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request)
 
 Check if personal session is open.
 
@@ -736,10 +736,10 @@ from iikocloud_client.models.transport_employees_get_personal_session_info_respo
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -761,11 +761,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Check if personal session is open.
-        api_response = await api_instance.api1_employees_shift_is_open_post(timeout=timeout, transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request)
-        print("The response of EmployeesApi->api1_employees_shift_is_open_post:\n")
+        api_response = await api_instance.employees_shift_is_open_post(timeout=timeout, transport_employees_get_personal_session_info_request=transport_employees_get_personal_session_info_request)
+        print("The response of EmployeesApi->employees_shift_is_open_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_shift_is_open_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_shift_is_open_post: %s\n" % e)
 ```
 
 
@@ -803,8 +803,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_employees_shifts_by_courier_post**
-> TransportEmployeesGetTerminalGroupsOfEmployeeResponse api1_employees_shifts_by_courier_post(timeout=timeout, transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request)
+# **employees_shifts_by_courier_post**
+> TransportEmployeesGetTerminalGroupsOfEmployeeResponse employees_shifts_by_courier_post(timeout=timeout, transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request)
 
 Get terminal groups where employee session is opened.
 
@@ -823,10 +823,10 @@ from iikocloud_client.models.transport_employees_get_terminal_groups_of_employee
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -848,11 +848,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get terminal groups where employee session is opened.
-        api_response = await api_instance.api1_employees_shifts_by_courier_post(timeout=timeout, transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request)
-        print("The response of EmployeesApi->api1_employees_shifts_by_courier_post:\n")
+        api_response = await api_instance.employees_shifts_by_courier_post(timeout=timeout, transport_employees_get_terminal_groups_of_employee_request=transport_employees_get_terminal_groups_of_employee_request)
+        print("The response of EmployeesApi->employees_shifts_by_courier_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EmployeesApi->api1_employees_shifts_by_courier_post: %s\n" % e)
+        print("Exception when calling EmployeesApi->employees_shifts_by_courier_post: %s\n" % e)
 ```
 
 

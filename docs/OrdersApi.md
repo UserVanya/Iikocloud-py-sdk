@@ -1,24 +1,24 @@
 # iikocloud_client.OrdersApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_order_add_customer_post**](OrdersApi.md#api1_order_add_customer_post) | **POST** /api/1/order/add_customer | Add customer to order.
-[**api1_order_add_items_post**](OrdersApi.md#api1_order_add_items_post) | **POST** /api/1/order/add_items | Add order items.
-[**api1_order_add_payments_post**](OrdersApi.md#api1_order_add_payments_post) | **POST** /api/1/order/add_payments | Add order payments.
-[**api1_order_by_id_post**](OrdersApi.md#api1_order_by_id_post) | **POST** /api/1/order/by_id | Retrieve orders by IDs.
-[**api1_order_by_table_post**](OrdersApi.md#api1_order_by_table_post) | **POST** /api/1/order/by_table | Retrieve orders by tables.
-[**api1_order_change_external_data_post**](OrdersApi.md#api1_order_change_external_data_post) | **POST** /api/1/order/change_external_data | Change table order external_data.
-[**api1_order_change_payments_post**](OrdersApi.md#api1_order_change_payments_post) | **POST** /api/1/order/change_payments | Change table order&#39;s payments.
-[**api1_order_close_post**](OrdersApi.md#api1_order_close_post) | **POST** /api/1/order/close | Close order.
-[**api1_order_create_post**](OrdersApi.md#api1_order_create_post) | **POST** /api/1/order/create | Create order.
-[**api1_order_init_by_pos_order_post**](OrdersApi.md#api1_order_init_by_pos_order_post) | **POST** /api/1/order/init_by_posOrder | Init orders, created on POS, by POS orders.
-[**api1_order_init_by_table_post**](OrdersApi.md#api1_order_init_by_table_post) | **POST** /api/1/order/init_by_table | Init orders, created on POS, by tables.
+[**order_add_customer_post**](OrdersApi.md#order_add_customer_post) | **POST** /order/add_customer | Add customer to order.
+[**order_add_items_post**](OrdersApi.md#order_add_items_post) | **POST** /order/add_items | Add order items.
+[**order_add_payments_post**](OrdersApi.md#order_add_payments_post) | **POST** /order/add_payments | Add order payments.
+[**order_by_id_post**](OrdersApi.md#order_by_id_post) | **POST** /order/by_id | Retrieve orders by IDs.
+[**order_by_table_post**](OrdersApi.md#order_by_table_post) | **POST** /order/by_table | Retrieve orders by tables.
+[**order_change_external_data_post**](OrdersApi.md#order_change_external_data_post) | **POST** /order/change_external_data | Change table order external_data.
+[**order_change_payments_post**](OrdersApi.md#order_change_payments_post) | **POST** /order/change_payments | Change table order&#39;s payments.
+[**order_close_post**](OrdersApi.md#order_close_post) | **POST** /order/close | Close order.
+[**order_create_post**](OrdersApi.md#order_create_post) | **POST** /order/create | Create order.
+[**order_init_by_pos_order_post**](OrdersApi.md#order_init_by_pos_order_post) | **POST** /order/init_by_posOrder | Init orders, created on POS, by POS orders.
+[**order_init_by_table_post**](OrdersApi.md#order_init_by_table_post) | **POST** /order/init_by_table | Init orders, created on POS, by tables.
 
 
-# **api1_order_add_customer_post**
-> TransportCommonCorrelationIdResponse api1_order_add_customer_post(timeout=timeout, transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request)
+# **order_add_customer_post**
+> TransportCommonCorrelationIdResponse order_add_customer_post(timeout=timeout, transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request)
 
 Add customer to order.
 
@@ -41,10 +41,10 @@ from iikocloud_client.models.transport_table_orders_request_add_customer_to_tabl
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -66,11 +66,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add customer to order.
-        api_response = await api_instance.api1_order_add_customer_post(timeout=timeout, transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request)
-        print("The response of OrdersApi->api1_order_add_customer_post:\n")
+        api_response = await api_instance.order_add_customer_post(timeout=timeout, transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request)
+        print("The response of OrdersApi->order_add_customer_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_add_customer_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_add_customer_post: %s\n" % e)
 ```
 
 
@@ -108,8 +108,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_add_items_post**
-> TransportCommonCorrelationIdResponse api1_order_add_items_post(timeout=timeout, transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request)
+# **order_add_items_post**
+> TransportCommonCorrelationIdResponse order_add_items_post(timeout=timeout, transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request)
 
 Add order items.
 
@@ -132,10 +132,10 @@ from iikocloud_client.models.transport_table_orders_request_add_items_to_table_o
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -157,11 +157,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add order items.
-        api_response = await api_instance.api1_order_add_items_post(timeout=timeout, transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request)
-        print("The response of OrdersApi->api1_order_add_items_post:\n")
+        api_response = await api_instance.order_add_items_post(timeout=timeout, transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request)
+        print("The response of OrdersApi->order_add_items_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_add_items_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_add_items_post: %s\n" % e)
 ```
 
 
@@ -199,8 +199,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_add_payments_post**
-> TransportCommonCorrelationIdResponse api1_order_add_payments_post(timeout=timeout, transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request)
+# **order_add_payments_post**
+> TransportCommonCorrelationIdResponse order_add_payments_post(timeout=timeout, transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request)
 
 Add order payments.
 
@@ -223,10 +223,10 @@ from iikocloud_client.models.transport_orders_common_add_order_payments_request 
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -248,11 +248,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Add order payments.
-        api_response = await api_instance.api1_order_add_payments_post(timeout=timeout, transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request)
-        print("The response of OrdersApi->api1_order_add_payments_post:\n")
+        api_response = await api_instance.order_add_payments_post(timeout=timeout, transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request)
+        print("The response of OrdersApi->order_add_payments_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_add_payments_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_add_payments_post: %s\n" % e)
 ```
 
 
@@ -290,8 +290,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_by_id_post**
-> TransportTableOrdersResponseTableOrdersResponse api1_order_by_id_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request)
+# **order_by_id_post**
+> TransportTableOrdersResponseTableOrdersResponse order_by_id_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -312,10 +312,10 @@ from iikocloud_client.models.transport_table_orders_response_table_orders_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -337,11 +337,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.api1_order_by_id_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request)
-        print("The response of OrdersApi->api1_order_by_id_post:\n")
+        api_response = await api_instance.order_by_id_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request)
+        print("The response of OrdersApi->order_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_by_id_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_by_id_post: %s\n" % e)
 ```
 
 
@@ -379,8 +379,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_by_table_post**
-> TransportTableOrdersResponseTableOrdersResponse api1_order_by_table_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request)
+# **order_by_table_post**
+> TransportTableOrdersResponseTableOrdersResponse order_by_table_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request)
 
 Retrieve orders by tables.
 
@@ -401,10 +401,10 @@ from iikocloud_client.models.transport_table_orders_response_table_orders_respon
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -426,11 +426,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve orders by tables.
-        api_response = await api_instance.api1_order_by_table_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request)
-        print("The response of OrdersApi->api1_order_by_table_post:\n")
+        api_response = await api_instance.order_by_table_post(timeout=timeout, transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request)
+        print("The response of OrdersApi->order_by_table_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_by_table_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_by_table_post: %s\n" % e)
 ```
 
 
@@ -468,8 +468,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_change_external_data_post**
-> TransportCommonCorrelationIdResponse api1_order_change_external_data_post(timeout=timeout, transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request)
+# **order_change_external_data_post**
+> TransportCommonCorrelationIdResponse order_change_external_data_post(timeout=timeout, transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request)
 
 Change table order external_data.
 
@@ -488,10 +488,10 @@ from iikocloud_client.models.transport_deliveries_request_update_order_change_ex
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -513,11 +513,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Change table order external_data.
-        api_response = await api_instance.api1_order_change_external_data_post(timeout=timeout, transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request)
-        print("The response of OrdersApi->api1_order_change_external_data_post:\n")
+        api_response = await api_instance.order_change_external_data_post(timeout=timeout, transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request)
+        print("The response of OrdersApi->order_change_external_data_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_change_external_data_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_change_external_data_post: %s\n" % e)
 ```
 
 
@@ -555,8 +555,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_change_payments_post**
-> TransportCommonCorrelationIdResponse api1_order_change_payments_post(timeout=timeout, transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request)
+# **order_change_payments_post**
+> TransportCommonCorrelationIdResponse order_change_payments_post(timeout=timeout, transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request)
 
 Change table order's payments.
 
@@ -578,10 +578,10 @@ from iikocloud_client.models.transport_deliveries_request_update_order_change_pa
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -603,11 +603,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Change table order's payments.
-        api_response = await api_instance.api1_order_change_payments_post(timeout=timeout, transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request)
-        print("The response of OrdersApi->api1_order_change_payments_post:\n")
+        api_response = await api_instance.order_change_payments_post(timeout=timeout, transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request)
+        print("The response of OrdersApi->order_change_payments_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_change_payments_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_change_payments_post: %s\n" % e)
 ```
 
 
@@ -645,8 +645,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_close_post**
-> TransportCommonCorrelationIdResponse api1_order_close_post(timeout=timeout, transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request)
+# **order_close_post**
+> TransportCommonCorrelationIdResponse order_close_post(timeout=timeout, transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request)
 
 Close order.
 
@@ -669,10 +669,10 @@ from iikocloud_client.models.transport_deliveries_request_close_table_order_requ
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -694,11 +694,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Close order.
-        api_response = await api_instance.api1_order_close_post(timeout=timeout, transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request)
-        print("The response of OrdersApi->api1_order_close_post:\n")
+        api_response = await api_instance.order_close_post(timeout=timeout, transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request)
+        print("The response of OrdersApi->order_close_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_close_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_close_post: %s\n" % e)
 ```
 
 
@@ -736,8 +736,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_create_post**
-> TransportTableOrdersResponseTableOrderResponse api1_order_create_post(timeout=timeout, transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request)
+# **order_create_post**
+> TransportTableOrdersResponseTableOrderResponse order_create_post(timeout=timeout, transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request)
 
 Create order.
 
@@ -760,10 +760,10 @@ from iikocloud_client.models.transport_table_orders_response_table_order_respons
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -785,11 +785,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Create order.
-        api_response = await api_instance.api1_order_create_post(timeout=timeout, transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request)
-        print("The response of OrdersApi->api1_order_create_post:\n")
+        api_response = await api_instance.order_create_post(timeout=timeout, transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request)
+        print("The response of OrdersApi->order_create_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_create_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_create_post: %s\n" % e)
 ```
 
 
@@ -827,8 +827,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_init_by_pos_order_post**
-> TransportCommonCorrelationIdResponse api1_order_init_by_pos_order_post(timeout=timeout, transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request)
+# **order_init_by_pos_order_post**
+> TransportCommonCorrelationIdResponse order_init_by_pos_order_post(timeout=timeout, transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request)
 
 Init orders, created on POS, by POS orders.
 
@@ -851,10 +851,10 @@ from iikocloud_client.models.transport_table_orders_request_init_table_order_by_
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -876,11 +876,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Init orders, created on POS, by POS orders.
-        api_response = await api_instance.api1_order_init_by_pos_order_post(timeout=timeout, transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request)
-        print("The response of OrdersApi->api1_order_init_by_pos_order_post:\n")
+        api_response = await api_instance.order_init_by_pos_order_post(timeout=timeout, transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request)
+        print("The response of OrdersApi->order_init_by_pos_order_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_init_by_pos_order_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_init_by_pos_order_post: %s\n" % e)
 ```
 
 
@@ -918,8 +918,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_order_init_by_table_post**
-> TransportCommonCorrelationIdResponse api1_order_init_by_table_post(timeout=timeout, transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request)
+# **order_init_by_table_post**
+> TransportCommonCorrelationIdResponse order_init_by_table_post(timeout=timeout, transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request)
 
 Init orders, created on POS, by tables.
 
@@ -942,10 +942,10 @@ from iikocloud_client.models.transport_table_orders_request_init_table_order_req
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -967,11 +967,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Init orders, created on POS, by tables.
-        api_response = await api_instance.api1_order_init_by_table_post(timeout=timeout, transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request)
-        print("The response of OrdersApi->api1_order_init_by_table_post:\n")
+        api_response = await api_instance.order_init_by_table_post(timeout=timeout, transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request)
+        print("The response of OrdersApi->order_init_by_table_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OrdersApi->api1_order_init_by_table_post: %s\n" % e)
+        print("Exception when calling OrdersApi->order_init_by_table_post: %s\n" % e)
 ```
 
 

@@ -26,9 +26,9 @@ class TransportStopListsStopListsRequest(BaseModel):
     """
     DTO of out-of-stock lists request.
     """ # noqa: E501
-    organization_ids: List[StrictStr] = Field(description="Organizations for which out-of-stock lists will be requested.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organizations for which out-of-stock lists will be requested.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     return_size: Optional[StrictBool] = Field(default=None, description="Flag indicating the need to return the sizes of the dish.", alias="returnSize")
-    terminal_groups_ids: Optional[List[StrictStr]] = Field(default=None, description="List of terminal groups for which you need to get out-of-stock lists.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupsIds")
+    terminal_groups_ids: Optional[List[StrictStr]] = Field(default=None, description="List of terminal groups for which you need to get out-of-stock lists.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupsIds")
     __properties: ClassVar[List[str]] = ["organizationIds", "returnSize", "terminalGroupsIds"]
 
     model_config = ConfigDict(

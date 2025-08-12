@@ -30,7 +30,7 @@ class TransportOrdersCommonAddOrderPaymentsRequest(BaseModel):
     """ # noqa: E501
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     tips: Optional[List[TransportDeliveriesRequestCreateOrderTipsPayment]] = Field(default=None, description="Order tips.")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     payments: List[TransportDeliveriesRequestCreateOrderPayment] = Field(description="Order payments.")
     __properties: ClassVar[List[str]] = ["orderId", "tips", "organizationId", "payments"]
 

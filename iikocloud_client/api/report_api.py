@@ -43,7 +43,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_date_post(
+    async def loyalty_iiko_customer_transactions_by_date_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_period_request: Optional[NetReportGetTransactionsReportByPeriodRequest] = None,
@@ -90,7 +90,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_date_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
@@ -118,7 +118,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_date_post_with_http_info(
+    async def loyalty_iiko_customer_transactions_by_date_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_period_request: Optional[NetReportGetTransactionsReportByPeriodRequest] = None,
@@ -165,7 +165,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_date_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
@@ -193,7 +193,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_date_post_without_preload_content(
+    async def loyalty_iiko_customer_transactions_by_date_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_period_request: Optional[NetReportGetTransactionsReportByPeriodRequest] = None,
@@ -240,7 +240,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_date_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_period_request=net_report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
@@ -263,7 +263,7 @@ class ReportApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_transactions_by_date_post_serialize(
+    def _loyalty_iiko_customer_transactions_by_date_post_serialize(
         self,
         timeout,
         net_report_get_transactions_report_by_period_request,
@@ -327,7 +327,7 @@ class ReportApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/transactions/by_date',
+            resource_path='/loyalty/iiko/customer/transactions/by_date',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -344,7 +344,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_revision_post(
+    async def loyalty_iiko_customer_transactions_by_revision_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_revision_request: Optional[NetReportGetTransactionsReportByRevisionRequest] = None,
@@ -391,7 +391,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_revision_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
@@ -419,7 +419,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_revision_post_with_http_info(
+    async def loyalty_iiko_customer_transactions_by_revision_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_revision_request: Optional[NetReportGetTransactionsReportByRevisionRequest] = None,
@@ -466,7 +466,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_revision_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
@@ -494,7 +494,7 @@ class ReportApi:
 
 
     @validate_call
-    async def api1_loyalty_iiko_customer_transactions_by_revision_post_without_preload_content(
+    async def loyalty_iiko_customer_transactions_by_revision_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         net_report_get_transactions_report_by_revision_request: Optional[NetReportGetTransactionsReportByRevisionRequest] = None,
@@ -541,7 +541,7 @@ class ReportApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_loyalty_iiko_customer_transactions_by_revision_post_serialize(
+        _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
             net_report_get_transactions_report_by_revision_request=net_report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
@@ -564,7 +564,7 @@ class ReportApi:
         return response_data.response
 
 
-    def _api1_loyalty_iiko_customer_transactions_by_revision_post_serialize(
+    def _loyalty_iiko_customer_transactions_by_revision_post_serialize(
         self,
         timeout,
         net_report_get_transactions_report_by_revision_request,
@@ -628,7 +628,7 @@ class ReportApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/loyalty/iiko/customer/transactions/by_revision',
+            resource_path='/loyalty/iiko/customer/transactions/by_revision',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

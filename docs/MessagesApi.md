@@ -1,17 +1,17 @@
 # iikocloud_client.MessagesApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_loyalty_iiko_check_sms_sending_possibility_post**](MessagesApi.md#api1_loyalty_iiko_check_sms_sending_possibility_post) | **POST** /api/1/loyalty/iiko/check_sms_sending_possibility | Check sms sending possibility.
-[**api1_loyalty_iiko_check_sms_status_post**](MessagesApi.md#api1_loyalty_iiko_check_sms_status_post) | **POST** /api/1/loyalty/iiko/check_sms_status | Check SMS status.
-[**api1_loyalty_iiko_message_send_email_post**](MessagesApi.md#api1_loyalty_iiko_message_send_email_post) | **POST** /api/1/loyalty/iiko/message/send_email | Send email.
-[**api1_loyalty_iiko_message_send_sms_post**](MessagesApi.md#api1_loyalty_iiko_message_send_sms_post) | **POST** /api/1/loyalty/iiko/message/send_sms | Send sms.
+[**loyalty_iiko_check_sms_sending_possibility_post**](MessagesApi.md#loyalty_iiko_check_sms_sending_possibility_post) | **POST** /loyalty/iiko/check_sms_sending_possibility | Check sms sending possibility.
+[**loyalty_iiko_check_sms_status_post**](MessagesApi.md#loyalty_iiko_check_sms_status_post) | **POST** /loyalty/iiko/check_sms_status | Check SMS status.
+[**loyalty_iiko_message_send_email_post**](MessagesApi.md#loyalty_iiko_message_send_email_post) | **POST** /loyalty/iiko/message/send_email | Send email.
+[**loyalty_iiko_message_send_sms_post**](MessagesApi.md#loyalty_iiko_message_send_sms_post) | **POST** /loyalty/iiko/message/send_sms | Send sms.
 
 
-# **api1_loyalty_iiko_check_sms_sending_possibility_post**
-> NetNotificationSmsSendingPossibilityResponse api1_loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
+# **loyalty_iiko_check_sms_sending_possibility_post**
+> NetNotificationSmsSendingPossibilityResponse loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
 
 Check sms sending possibility.
 
@@ -28,10 +28,10 @@ from iikocloud_client.models.net_notification_sms_sending_possibility_response i
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Check sms sending possibility.
-        api_response = await api_instance.api1_loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
-        print("The response of MessagesApi->api1_loyalty_iiko_check_sms_sending_possibility_post:\n")
+        api_response = await api_instance.loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, net_notification_sms_sending_possibility_request=net_notification_sms_sending_possibility_request)
+        print("The response of MessagesApi->loyalty_iiko_check_sms_sending_possibility_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MessagesApi->api1_loyalty_iiko_check_sms_sending_possibility_post: %s\n" % e)
+        print("Exception when calling MessagesApi->loyalty_iiko_check_sms_sending_possibility_post: %s\n" % e)
 ```
 
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_check_sms_status_post**
-> NetNotificationCheckSmsStatusResponse api1_loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
+# **loyalty_iiko_check_sms_status_post**
+> NetNotificationCheckSmsStatusResponse loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
 
 Check SMS status.
 
@@ -113,10 +113,10 @@ from iikocloud_client.models.net_notification_check_sms_status_response import N
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -138,11 +138,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Check SMS status.
-        api_response = await api_instance.api1_loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
-        print("The response of MessagesApi->api1_loyalty_iiko_check_sms_status_post:\n")
+        api_response = await api_instance.loyalty_iiko_check_sms_status_post(timeout=timeout, net_notification_check_sms_status_request=net_notification_check_sms_status_request)
+        print("The response of MessagesApi->loyalty_iiko_check_sms_status_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MessagesApi->api1_loyalty_iiko_check_sms_status_post: %s\n" % e)
+        print("Exception when calling MessagesApi->loyalty_iiko_check_sms_status_post: %s\n" % e)
 ```
 
 
@@ -180,8 +180,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_message_send_email_post**
-> object api1_loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
+# **loyalty_iiko_message_send_email_post**
+> object loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
 
 Send email.
 
@@ -199,10 +199,10 @@ from iikocloud_client.models.net_notification_send_email_request import NetNotif
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -224,11 +224,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Send email.
-        api_response = await api_instance.api1_loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
-        print("The response of MessagesApi->api1_loyalty_iiko_message_send_email_post:\n")
+        api_response = await api_instance.loyalty_iiko_message_send_email_post(timeout=timeout, net_notification_send_email_request=net_notification_send_email_request)
+        print("The response of MessagesApi->loyalty_iiko_message_send_email_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MessagesApi->api1_loyalty_iiko_message_send_email_post: %s\n" % e)
+        print("Exception when calling MessagesApi->loyalty_iiko_message_send_email_post: %s\n" % e)
 ```
 
 
@@ -266,8 +266,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_loyalty_iiko_message_send_sms_post**
-> NetNotificationSendSmsResponse api1_loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
+# **loyalty_iiko_message_send_sms_post**
+> NetNotificationSendSmsResponse loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
 
 Send sms.
 
@@ -286,10 +286,10 @@ from iikocloud_client.models.net_notification_send_sms_response import NetNotifi
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -311,11 +311,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Send sms.
-        api_response = await api_instance.api1_loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
-        print("The response of MessagesApi->api1_loyalty_iiko_message_send_sms_post:\n")
+        api_response = await api_instance.loyalty_iiko_message_send_sms_post(timeout=timeout, net_notification_send_sms_request=net_notification_send_sms_request)
+        print("The response of MessagesApi->loyalty_iiko_message_send_sms_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MessagesApi->api1_loyalty_iiko_message_send_sms_post: %s\n" % e)
+        print("Exception when calling MessagesApi->loyalty_iiko_message_send_sms_post: %s\n" % e)
 ```
 
 

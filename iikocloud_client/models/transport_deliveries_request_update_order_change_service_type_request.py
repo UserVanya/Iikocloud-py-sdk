@@ -33,7 +33,7 @@ class TransportDeliveriesRequestUpdateOrderChangeServiceTypeRequest(BaseModel):
     Request for change order's delivery type.
     """ # noqa: E501
     new_service_type: StrictStr = Field(alias="newServiceType")
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     __properties: ClassVar[List[str]] = ["newServiceType", "organizationId", "orderId"]
 

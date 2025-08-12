@@ -7,7 +7,7 @@ Organization details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **response_type** | **str** |  | 
-**id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**id** | **str** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
 **name** | **str** | Organization name. | 
 **code** | **str** | Organization&#x60;s code. | [optional] 
 **external_data** | [**List[TransportCommonExternalData]**](TransportCommonExternalData.md) | Organization&#x60;s external data. | [optional] 

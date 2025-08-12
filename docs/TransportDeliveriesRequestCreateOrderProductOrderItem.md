@@ -6,7 +6,7 @@ Order item: item.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | ID of menu item.                Can be obtained by &#x60;/api/1/nomenclature&#x60; operation. | 
+**product_id** | **str** | ID of menu item.                Can be obtained by &#x60;/nomenclature&#x60; operation. | 
 **modifiers** | [**List[TransportDeliveriesRequestCreateOrderModifier]**](TransportDeliveriesRequestCreateOrderModifier.md) | Modifiers. | [optional] 
 **price** | **float** | Price per item unit. Can be sent different from the price in the base menu. | 
 **position_id** | **str** | Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  &gt; If sent null, it generates automatically on iikoTransport side. | [optional] 

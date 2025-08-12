@@ -26,15 +26,15 @@ class TestOrganizationsApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_organizations_post(self) -> None:
-        """Test case for api1_organizations_post
+    async def test_organizations_post(self) -> None:
+        """Test case for organizations_post
 
         Returns organizations available to api-login user.
         """
         pass
 
-    async def test_api1_organizations_settings_post(self) -> None:
-        """Test case for api1_organizations_settings_post
+    async def test_organizations_settings_post(self) -> None:
+        """Test case for organizations_settings_post
 
         Returns available to api-login user organizations specified settings.
         """

@@ -26,29 +26,29 @@ class TestAddressesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_cities_post(self) -> None:
-        """Test case for api1_cities_post
+    async def test_cities_post(self) -> None:
+        """Test case for cities_post
 
         Cities.
         """
         pass
 
-    async def test_api1_regions_post(self) -> None:
-        """Test case for api1_regions_post
+    async def test_regions_post(self) -> None:
+        """Test case for regions_post
 
         Regions.
         """
         pass
 
-    async def test_api1_streets_by_city_post(self) -> None:
-        """Test case for api1_streets_by_city_post
+    async def test_streets_by_city_post(self) -> None:
+        """Test case for streets_by_city_post
 
         Streets by city.
         """
         pass
 
-    async def test_api1_streets_by_id_post(self) -> None:
-        """Test case for api1_streets_by_id_post
+    async def test_streets_by_id_post(self) -> None:
+        """Test case for streets_by_id_post
 
         Streets by id or by classifierId.
         """

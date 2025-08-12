@@ -26,64 +26,64 @@ class TestBanquetsReservesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
-    async def test_api1_reserve_add_items_post(self) -> None:
-        """Test case for api1_reserve_add_items_post
+    async def test_reserve_add_items_post(self) -> None:
+        """Test case for reserve_add_items_post
 
         Add order items.
         """
         pass
 
-    async def test_api1_reserve_add_payments_post(self) -> None:
-        """Test case for api1_reserve_add_payments_post
+    async def test_reserve_add_payments_post(self) -> None:
+        """Test case for reserve_add_payments_post
 
         Add order payments.
         """
         pass
 
-    async def test_api1_reserve_available_organizations_post(self) -> None:
-        """Test case for api1_reserve_available_organizations_post
+    async def test_reserve_available_organizations_post(self) -> None:
+        """Test case for reserve_available_organizations_post
 
         Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
         """
         pass
 
-    async def test_api1_reserve_available_restaurant_sections_post(self) -> None:
-        """Test case for api1_reserve_available_restaurant_sections_post
+    async def test_reserve_available_restaurant_sections_post(self) -> None:
+        """Test case for reserve_available_restaurant_sections_post
 
         Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
         """
         pass
 
-    async def test_api1_reserve_available_terminal_groups_post(self) -> None:
-        """Test case for api1_reserve_available_terminal_groups_post
+    async def test_reserve_available_terminal_groups_post(self) -> None:
+        """Test case for reserve_available_terminal_groups_post
 
         Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
         """
         pass
 
-    async def test_api1_reserve_cancel_post(self) -> None:
-        """Test case for api1_reserve_cancel_post
+    async def test_reserve_cancel_post(self) -> None:
+        """Test case for reserve_cancel_post
 
         Cancel reservation due to some reason.
         """
         pass
 
-    async def test_api1_reserve_create_post(self) -> None:
-        """Test case for api1_reserve_create_post
+    async def test_reserve_create_post(self) -> None:
+        """Test case for reserve_create_post
 
         Create banquet/reserve.
         """
         pass
 
-    async def test_api1_reserve_restaurant_sections_workload_post(self) -> None:
-        """Test case for api1_reserve_restaurant_sections_workload_post
+    async def test_reserve_restaurant_sections_workload_post(self) -> None:
+        """Test case for reserve_restaurant_sections_workload_post
 
         Returns all banquets/reserves for passed restaurant sections.
         """
         pass
 
-    async def test_api1_reserve_status_by_id_post(self) -> None:
-        """Test case for api1_reserve_status_by_id_post
+    async def test_reserve_status_by_id_post(self) -> None:
+        """Test case for reserve_status_by_id_post
 
         Retrieve banquets/reserves statuses by IDs.
         """

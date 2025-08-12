@@ -53,7 +53,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_customer_post(
+    async def order_add_customer_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_customer_to_table_order_request: Optional[TransportTableOrdersRequestAddCustomerToTableOrderRequest] = None,
@@ -100,7 +100,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_customer_post_serialize(
+        _param = self._order_add_customer_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -128,7 +128,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_customer_post_with_http_info(
+    async def order_add_customer_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_customer_to_table_order_request: Optional[TransportTableOrdersRequestAddCustomerToTableOrderRequest] = None,
@@ -175,7 +175,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_customer_post_serialize(
+        _param = self._order_add_customer_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -203,7 +203,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_customer_post_without_preload_content(
+    async def order_add_customer_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_customer_to_table_order_request: Optional[TransportTableOrdersRequestAddCustomerToTableOrderRequest] = None,
@@ -250,7 +250,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_customer_post_serialize(
+        _param = self._order_add_customer_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_customer_to_table_order_request=transport_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -273,7 +273,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_add_customer_post_serialize(
+    def _order_add_customer_post_serialize(
         self,
         timeout,
         transport_table_orders_request_add_customer_to_table_order_request,
@@ -337,7 +337,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/add_customer',
+            resource_path='/order/add_customer',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -354,7 +354,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_items_post(
+    async def order_add_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_items_to_table_order_request: Optional[TransportTableOrdersRequestAddItemsToTableOrderRequest] = None,
@@ -401,7 +401,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_items_post_serialize(
+        _param = self._order_add_items_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -429,7 +429,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_items_post_with_http_info(
+    async def order_add_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_items_to_table_order_request: Optional[TransportTableOrdersRequestAddItemsToTableOrderRequest] = None,
@@ -476,7 +476,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_items_post_serialize(
+        _param = self._order_add_items_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -504,7 +504,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_items_post_without_preload_content(
+    async def order_add_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_add_items_to_table_order_request: Optional[TransportTableOrdersRequestAddItemsToTableOrderRequest] = None,
@@ -551,7 +551,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_items_post_serialize(
+        _param = self._order_add_items_post_serialize(
             timeout=timeout,
             transport_table_orders_request_add_items_to_table_order_request=transport_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -574,7 +574,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_add_items_post_serialize(
+    def _order_add_items_post_serialize(
         self,
         timeout,
         transport_table_orders_request_add_items_to_table_order_request,
@@ -638,7 +638,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/add_items',
+            resource_path='/order/add_items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -655,7 +655,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_payments_post(
+    async def order_add_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -702,7 +702,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_payments_post_serialize(
+        _param = self._order_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -730,7 +730,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_payments_post_with_http_info(
+    async def order_add_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -777,7 +777,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_payments_post_serialize(
+        _param = self._order_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -805,7 +805,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_add_payments_post_without_preload_content(
+    async def order_add_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_orders_common_add_order_payments_request: Optional[TransportOrdersCommonAddOrderPaymentsRequest] = None,
@@ -852,7 +852,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_add_payments_post_serialize(
+        _param = self._order_add_payments_post_serialize(
             timeout=timeout,
             transport_orders_common_add_order_payments_request=transport_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -875,7 +875,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_add_payments_post_serialize(
+    def _order_add_payments_post_serialize(
         self,
         timeout,
         transport_orders_common_add_order_payments_request,
@@ -939,7 +939,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/add_payments',
+            resource_path='/order/add_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -956,7 +956,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_id_post(
+    async def order_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_id_request: Optional[TransportTableOrdersRequestGetTableOrdersByIdRequest] = None,
@@ -1003,7 +1003,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_id_post_serialize(
+        _param = self._order_by_id_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1031,7 +1031,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_id_post_with_http_info(
+    async def order_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_id_request: Optional[TransportTableOrdersRequestGetTableOrdersByIdRequest] = None,
@@ -1078,7 +1078,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_id_post_serialize(
+        _param = self._order_by_id_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1106,7 +1106,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_id_post_without_preload_content(
+    async def order_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_id_request: Optional[TransportTableOrdersRequestGetTableOrdersByIdRequest] = None,
@@ -1153,7 +1153,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_id_post_serialize(
+        _param = self._order_by_id_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_id_request=transport_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1176,7 +1176,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_by_id_post_serialize(
+    def _order_by_id_post_serialize(
         self,
         timeout,
         transport_table_orders_request_get_table_orders_by_id_request,
@@ -1240,7 +1240,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/by_id',
+            resource_path='/order/by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1257,7 +1257,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_table_post(
+    async def order_by_table_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_table_request: Optional[TransportTableOrdersRequestGetTableOrdersByTableRequest] = None,
@@ -1304,7 +1304,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_table_post_serialize(
+        _param = self._order_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1332,7 +1332,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_table_post_with_http_info(
+    async def order_by_table_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_table_request: Optional[TransportTableOrdersRequestGetTableOrdersByTableRequest] = None,
@@ -1379,7 +1379,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_table_post_serialize(
+        _param = self._order_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1407,7 +1407,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_by_table_post_without_preload_content(
+    async def order_by_table_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_get_table_orders_by_table_request: Optional[TransportTableOrdersRequestGetTableOrdersByTableRequest] = None,
@@ -1454,7 +1454,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_by_table_post_serialize(
+        _param = self._order_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_get_table_orders_by_table_request=transport_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1477,7 +1477,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_by_table_post_serialize(
+    def _order_by_table_post_serialize(
         self,
         timeout,
         transport_table_orders_request_get_table_orders_by_table_request,
@@ -1541,7 +1541,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/by_table',
+            resource_path='/order/by_table',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1558,7 +1558,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_external_data_post(
+    async def order_change_external_data_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -1605,7 +1605,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_external_data_post_serialize(
+        _param = self._order_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -1633,7 +1633,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_external_data_post_with_http_info(
+    async def order_change_external_data_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -1680,7 +1680,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_external_data_post_serialize(
+        _param = self._order_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -1708,7 +1708,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_external_data_post_without_preload_content(
+    async def order_change_external_data_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_external_data_request: Optional[TransportDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
@@ -1755,7 +1755,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_external_data_post_serialize(
+        _param = self._order_change_external_data_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_external_data_request=transport_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -1778,7 +1778,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_change_external_data_post_serialize(
+    def _order_change_external_data_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_external_data_request,
@@ -1842,7 +1842,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/change_external_data',
+            resource_path='/order/change_external_data',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1859,7 +1859,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_payments_post(
+    async def order_change_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -1906,7 +1906,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_payments_post_serialize(
+        _param = self._order_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -1934,7 +1934,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_payments_post_with_http_info(
+    async def order_change_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -1981,7 +1981,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_payments_post_serialize(
+        _param = self._order_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -2009,7 +2009,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_change_payments_post_without_preload_content(
+    async def order_change_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_update_order_change_payments_request: Optional[TransportDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
@@ -2056,7 +2056,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_change_payments_post_serialize(
+        _param = self._order_change_payments_post_serialize(
             timeout=timeout,
             transport_deliveries_request_update_order_change_payments_request=transport_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -2079,7 +2079,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_change_payments_post_serialize(
+    def _order_change_payments_post_serialize(
         self,
         timeout,
         transport_deliveries_request_update_order_change_payments_request,
@@ -2143,7 +2143,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/change_payments',
+            resource_path='/order/change_payments',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2160,7 +2160,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_close_post(
+    async def order_close_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_table_order_request: Optional[TransportDeliveriesRequestCloseTableOrderRequest] = None,
@@ -2207,7 +2207,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_close_post_serialize(
+        _param = self._order_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2235,7 +2235,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_close_post_with_http_info(
+    async def order_close_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_table_order_request: Optional[TransportDeliveriesRequestCloseTableOrderRequest] = None,
@@ -2282,7 +2282,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_close_post_serialize(
+        _param = self._order_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2310,7 +2310,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_close_post_without_preload_content(
+    async def order_close_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_close_table_order_request: Optional[TransportDeliveriesRequestCloseTableOrderRequest] = None,
@@ -2357,7 +2357,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_close_post_serialize(
+        _param = self._order_close_post_serialize(
             timeout=timeout,
             transport_deliveries_request_close_table_order_request=transport_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2380,7 +2380,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_close_post_serialize(
+    def _order_close_post_serialize(
         self,
         timeout,
         transport_deliveries_request_close_table_order_request,
@@ -2444,7 +2444,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/close',
+            resource_path='/order/close',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2461,7 +2461,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_create_post(
+    async def order_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_create_table_order_request: Optional[TransportTableOrdersRequestCreateTableOrderRequest] = None,
@@ -2508,7 +2508,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_create_post_serialize(
+        _param = self._order_create_post_serialize(
             timeout=timeout,
             transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -2536,7 +2536,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_create_post_with_http_info(
+    async def order_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_create_table_order_request: Optional[TransportTableOrdersRequestCreateTableOrderRequest] = None,
@@ -2583,7 +2583,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_create_post_serialize(
+        _param = self._order_create_post_serialize(
             timeout=timeout,
             transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -2611,7 +2611,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_create_post_without_preload_content(
+    async def order_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_create_table_order_request: Optional[TransportTableOrdersRequestCreateTableOrderRequest] = None,
@@ -2658,7 +2658,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_create_post_serialize(
+        _param = self._order_create_post_serialize(
             timeout=timeout,
             transport_table_orders_request_create_table_order_request=transport_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -2681,7 +2681,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_create_post_serialize(
+    def _order_create_post_serialize(
         self,
         timeout,
         transport_table_orders_request_create_table_order_request,
@@ -2745,7 +2745,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/create',
+            resource_path='/order/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2762,7 +2762,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_pos_order_post(
+    async def order_init_by_pos_order_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_by_pos_order_request: Optional[TransportTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
@@ -2809,7 +2809,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_pos_order_post_serialize(
+        _param = self._order_init_by_pos_order_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -2837,7 +2837,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_pos_order_post_with_http_info(
+    async def order_init_by_pos_order_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_by_pos_order_request: Optional[TransportTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
@@ -2884,7 +2884,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_pos_order_post_serialize(
+        _param = self._order_init_by_pos_order_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -2912,7 +2912,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_pos_order_post_without_preload_content(
+    async def order_init_by_pos_order_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_by_pos_order_request: Optional[TransportTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
@@ -2959,7 +2959,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_pos_order_post_serialize(
+        _param = self._order_init_by_pos_order_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_by_pos_order_request=transport_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -2982,7 +2982,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_init_by_pos_order_post_serialize(
+    def _order_init_by_pos_order_post_serialize(
         self,
         timeout,
         transport_table_orders_request_init_table_order_by_pos_order_request,
@@ -3046,7 +3046,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/init_by_posOrder',
+            resource_path='/order/init_by_posOrder',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3063,7 +3063,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_table_post(
+    async def order_init_by_table_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_request: Optional[TransportTableOrdersRequestInitTableOrderRequest] = None,
@@ -3110,7 +3110,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_table_post_serialize(
+        _param = self._order_init_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3138,7 +3138,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_table_post_with_http_info(
+    async def order_init_by_table_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_request: Optional[TransportTableOrdersRequestInitTableOrderRequest] = None,
@@ -3185,7 +3185,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_table_post_serialize(
+        _param = self._order_init_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3213,7 +3213,7 @@ class OrdersApi:
 
 
     @validate_call
-    async def api1_order_init_by_table_post_without_preload_content(
+    async def order_init_by_table_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_table_orders_request_init_table_order_request: Optional[TransportTableOrdersRequestInitTableOrderRequest] = None,
@@ -3260,7 +3260,7 @@ class OrdersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_order_init_by_table_post_serialize(
+        _param = self._order_init_by_table_post_serialize(
             timeout=timeout,
             transport_table_orders_request_init_table_order_request=transport_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3283,7 +3283,7 @@ class OrdersApi:
         return response_data.response
 
 
-    def _api1_order_init_by_table_post_serialize(
+    def _order_init_by_table_post_serialize(
         self,
         timeout,
         transport_table_orders_request_init_table_order_request,
@@ -3347,7 +3347,7 @@ class OrdersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/order/init_by_table',
+            resource_path='/order/init_by_table',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

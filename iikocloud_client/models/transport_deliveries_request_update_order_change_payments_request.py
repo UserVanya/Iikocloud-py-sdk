@@ -28,7 +28,7 @@ class TransportDeliveriesRequestUpdateOrderChangePaymentsRequest(BaseModel):
     """
     Change order's payments request.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     order_id: StrictStr = Field(description="Order ID.", alias="orderId")
     payments: List[TransportDeliveriesRequestCreateOrderPayment] = Field(description="Order payments.")
     tips: Optional[List[TransportDeliveriesRequestCreateOrderTipsPayment]] = Field(default=None, description="Order tips.")

@@ -26,7 +26,7 @@ class TransportReservesGetRestaurantSectionsRequest(BaseModel):
     """
     Request for get all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
     """ # noqa: E501
-    terminal_group_ids: List[StrictStr] = Field(description="Collection of terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupIds")
+    terminal_group_ids: List[StrictStr] = Field(description="Collection of terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupIds")
     return_schema: Optional[StrictBool] = Field(default=None, description="Indicates whether table layout information should be returned...", alias="returnSchema")
     revision: Optional[StrictInt] = Field(default=None, description="Last modified time after.")
     __properties: ClassVar[List[str]] = ["terminalGroupIds", "returnSchema", "revision"]

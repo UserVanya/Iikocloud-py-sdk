@@ -29,7 +29,7 @@ class TransportWebHooksStopListUpdateWebHookEventInfo(BaseModel):
     """ # noqa: E501
     event_type: Optional[StrictStr] = Field(default=None, description="Event type.", alias="eventType")
     event_time: Optional[StrictStr] = Field(default=None, description="Event date and time (UTC).", alias="eventTime")
-    organization_id: Optional[StrictStr] = Field(default=None, description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: Optional[StrictStr] = Field(default=None, description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
     correlation_id: Optional[StrictStr] = Field(default=None, description="Operation ID.", alias="correlationId")
     event_info: Optional[TransportStopListsWebHookOnStopListChangeData] = Field(default=None, description="Event details.", alias="eventInfo")
     __properties: ClassVar[List[str]] = ["eventType", "eventTime", "organizationId", "correlationId", "eventInfo"]

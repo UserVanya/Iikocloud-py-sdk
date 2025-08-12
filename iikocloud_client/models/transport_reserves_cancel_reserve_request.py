@@ -27,7 +27,7 @@ class TransportReservesCancelReserveRequest(BaseModel):
     """
     Request for canceling the reservation.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization ID of the reserve.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization ID of the reserve.                Can be obtained by `/organizations` operation.", alias="organizationId")
     reserve_id: StrictStr = Field(description="Reserve ID to cancel.", alias="reserveId")
     cancel_reason: TransportReservesReserveCancelReason = Field(description="Reason to cancel planned event.", alias="cancelReason")
     __properties: ClassVar[List[str]] = ["organizationId", "reserveId", "cancelReason"]

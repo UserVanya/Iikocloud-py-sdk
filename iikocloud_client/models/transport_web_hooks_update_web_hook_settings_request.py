@@ -27,7 +27,7 @@ class TransportWebHooksUpdateWebHookSettingsRequest(BaseModel):
     """
     Request to add or update webhooks settings for listed api logins of the specified organization.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization UOC Id.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization UOC Id.                Can be obtained by `/organizations` operation.", alias="organizationId")
     web_hooks_uri: StrictStr = Field(description="Webhook handler url.", alias="webHooksUri")
     auth_token: Optional[StrictStr] = Field(default=None, description="Authorization token to pass to the webhook handler.", alias="authToken")
     web_hooks_filter: Optional[TransportIntegrationWebHooksFiltersWebHooksFilter] = Field(default=None, description="Webhooks filter.", alias="webHooksFilter")

@@ -27,7 +27,7 @@ class TransportNomenclatureMenuRequest(BaseModel):
     Request for menu by id.
     """ # noqa: E501
     external_menu_id: StrictStr = Field(description="External menu id                Can be obtained by `api/2/menu` operation.", alias="externalMenuId")
-    organization_ids: List[StrictStr] = Field(description="Organization IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    organization_ids: List[StrictStr] = Field(description="Organization IDs.                Can be obtained by `/organizations` operation.", alias="organizationIds")
     price_category_id: Optional[StrictStr] = Field(default=None, description="Price category id.                Can be obtained by `api/2/menu` operation.", alias="priceCategoryId")
     version: Optional[StrictInt] = Field(default=None, description="Version of the result data model.")
     language: Optional[StrictStr] = Field(default=None, description="Language of the external menu.")

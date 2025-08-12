@@ -26,7 +26,7 @@ class TransportWebHooksGetWebHookSettingsRequest(BaseModel):
     """
     Request to get webhooks settings for specified organization.
     """ # noqa: E501
-    organization_id: StrictStr = Field(description="Organization UOC Id.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    organization_id: StrictStr = Field(description="Organization UOC Id.                Can be obtained by `/organizations` operation.", alias="organizationId")
     __properties: ClassVar[List[str]] = ["organizationId"]
 
     model_config = ConfigDict(

@@ -47,7 +47,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_phone_post(
+    async def deliveries_by_delivery_date_and_phone_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
@@ -94,7 +94,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -122,7 +122,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_phone_post_with_http_info(
+    async def deliveries_by_delivery_date_and_phone_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
@@ -169,7 +169,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -197,7 +197,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_phone_post_without_preload_content(
+    async def deliveries_by_delivery_date_and_phone_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
@@ -244,7 +244,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -267,7 +267,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_by_delivery_date_and_phone_post_serialize(
+    def _deliveries_by_delivery_date_and_phone_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_by_delivery_date_and_phone_request,
@@ -331,7 +331,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/by_delivery_date_and_phone',
+            resource_path='/deliveries/by_delivery_date_and_phone',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -348,7 +348,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_source_key_and_filter_post(
+    async def deliveries_by_delivery_date_and_source_key_and_filter_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
@@ -395,7 +395,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -423,7 +423,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_source_key_and_filter_post_with_http_info(
+    async def deliveries_by_delivery_date_and_source_key_and_filter_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
@@ -470,7 +470,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -498,7 +498,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_source_key_and_filter_post_without_preload_content(
+    async def deliveries_by_delivery_date_and_source_key_and_filter_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
@@ -545,7 +545,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -568,7 +568,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
+    def _deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_by_delivery_date_and_filter_request,
@@ -632,7 +632,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/by_delivery_date_and_source_key_and_filter',
+            resource_path='/deliveries/by_delivery_date_and_source_key_and_filter',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -649,7 +649,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_status_post(
+    async def deliveries_by_delivery_date_and_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_status_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
@@ -696,7 +696,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_status_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -724,7 +724,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_status_post_with_http_info(
+    async def deliveries_by_delivery_date_and_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_status_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
@@ -771,7 +771,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_status_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -799,7 +799,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_delivery_date_and_status_post_without_preload_content(
+    async def deliveries_by_delivery_date_and_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_delivery_date_and_status_request: Optional[TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
@@ -846,7 +846,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_delivery_date_and_status_post_serialize(
+        _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -869,7 +869,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_by_delivery_date_and_status_post_serialize(
+    def _deliveries_by_delivery_date_and_status_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_by_delivery_date_and_status_request,
@@ -933,7 +933,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/by_delivery_date_and_status',
+            resource_path='/deliveries/by_delivery_date_and_status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -950,7 +950,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_id_post(
+    async def deliveries_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_id_request: Optional[TransportDeliveriesRequestOrdersByIdRequest] = None,
@@ -997,7 +997,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_id_post_serialize(
+        _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1025,7 +1025,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_id_post_with_http_info(
+    async def deliveries_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_id_request: Optional[TransportDeliveriesRequestOrdersByIdRequest] = None,
@@ -1072,7 +1072,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_id_post_serialize(
+        _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1100,7 +1100,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_id_post_without_preload_content(
+    async def deliveries_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_id_request: Optional[TransportDeliveriesRequestOrdersByIdRequest] = None,
@@ -1147,7 +1147,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_id_post_serialize(
+        _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1170,7 +1170,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_by_id_post_serialize(
+    def _deliveries_by_id_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_by_id_request,
@@ -1234,7 +1234,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/by_id',
+            resource_path='/deliveries/by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1251,7 +1251,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_revision_post(
+    async def deliveries_by_revision_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_revision_request: Optional[TransportDeliveriesRequestOrdersByRevisionRequest] = None,
@@ -1298,7 +1298,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_revision_post_serialize(
+        _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1326,7 +1326,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_revision_post_with_http_info(
+    async def deliveries_by_revision_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_revision_request: Optional[TransportDeliveriesRequestOrdersByRevisionRequest] = None,
@@ -1373,7 +1373,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_revision_post_serialize(
+        _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1401,7 +1401,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_by_revision_post_without_preload_content(
+    async def deliveries_by_revision_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_by_revision_request: Optional[TransportDeliveriesRequestOrdersByRevisionRequest] = None,
@@ -1448,7 +1448,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_by_revision_post_serialize(
+        _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1471,7 +1471,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_by_revision_post_serialize(
+    def _deliveries_by_revision_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_by_revision_request,
@@ -1535,7 +1535,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/by_revision',
+            resource_path='/deliveries/by_revision',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1552,7 +1552,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_history_by_delivery_date_and_phone_post(
+    async def deliveries_history_by_delivery_date_and_phone_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
@@ -1599,7 +1599,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_history_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1627,7 +1627,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_history_by_delivery_date_and_phone_post_with_http_info(
+    async def deliveries_history_by_delivery_date_and_phone_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
@@ -1674,7 +1674,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_history_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1702,7 +1702,7 @@ class DeliveriesRetrieveApi:
 
 
     @validate_call
-    async def api1_deliveries_history_by_delivery_date_and_phone_post_without_preload_content(
+    async def deliveries_history_by_delivery_date_and_phone_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         transport_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
@@ -1749,7 +1749,7 @@ class DeliveriesRetrieveApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api1_deliveries_history_by_delivery_date_and_phone_post_serialize(
+        _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
             transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1772,7 +1772,7 @@ class DeliveriesRetrieveApi:
         return response_data.response
 
 
-    def _api1_deliveries_history_by_delivery_date_and_phone_post_serialize(
+    def _deliveries_history_by_delivery_date_and_phone_post_serialize(
         self,
         timeout,
         transport_deliveries_request_orders_history_by_delivery_date_and_phone_request,
@@ -1836,7 +1836,7 @@ class DeliveriesRetrieveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/1/deliveries/history/by_delivery_date_and_phone',
+            resource_path='/deliveries/history/by_delivery_date_and_phone',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -7,7 +7,7 @@ Delivery location details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **coordinates** | [**TransportDeliveriesCommonCoordinates**](TransportDeliveriesCommonCoordinates.md) | Delivery address coordinates.  &gt; Allowed from version &#x60;7.7.3&#x60;. | [optional] 
-**address** | [**TransportDeliveriesRequestCreateOrderAddress**](TransportDeliveriesRequestCreateOrderAddress.md) | Order delivery address.                &gt; The use of type **City** is allowed if the parameter **addressFormatType &#x3D;&#x3D; City**.                &gt; Can be obtained by &#x60;/api/1/organizations&#x60; or &#x60;/api/1/organizations/settings&#x60; operations (&#x60;addressFormatType&#x60; parameter). | [optional] 
+**address** | [**TransportDeliveriesRequestCreateOrderAddress**](TransportDeliveriesRequestCreateOrderAddress.md) | Order delivery address.                &gt; The use of type **City** is allowed if the parameter **addressFormatType &#x3D;&#x3D; City**.                &gt; Can be obtained by &#x60;/organizations&#x60; or &#x60;/organizations/settings&#x60; operations (&#x60;addressFormatType&#x60; parameter). | [optional] 
 **external_cartography_id** | **str** | Delivery location custom code in customer&#39;s API system. | [optional] 
 **comment** | **str** | Additional information. | [optional] 
 

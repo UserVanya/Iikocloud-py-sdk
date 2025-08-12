@@ -1,15 +1,15 @@
 # iikocloud_client.DeliveryRestrictionsApi
 
-All URIs are relative to *https://api-ru.iiko.services*
+All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api1_delivery_restrictions_allowed_post**](DeliveryRestrictionsApi.md#api1_delivery_restrictions_allowed_post) | **POST** /api/1/delivery_restrictions/allowed | Get suitable terminal groups for delivery restrictions.
-[**api1_delivery_restrictions_post**](DeliveryRestrictionsApi.md#api1_delivery_restrictions_post) | **POST** /api/1/delivery_restrictions | Retrieve list of delivery restrictions.
+[**delivery_restrictions_allowed_post**](DeliveryRestrictionsApi.md#delivery_restrictions_allowed_post) | **POST** /delivery_restrictions/allowed | Get suitable terminal groups for delivery restrictions.
+[**delivery_restrictions_post**](DeliveryRestrictionsApi.md#delivery_restrictions_post) | **POST** /delivery_restrictions | Retrieve list of delivery restrictions.
 
 
-# **api1_delivery_restrictions_allowed_post**
-> TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse api1_delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+# **delivery_restrictions_allowed_post**
+> TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
 
 Get suitable terminal groups for delivery restrictions.
 
@@ -30,10 +30,10 @@ from iikocloud_client.models.transport_delivery_restrictions_allowed_restriction
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -55,11 +55,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Get suitable terminal groups for delivery restrictions.
-        api_response = await api_instance.api1_delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
-        print("The response of DeliveryRestrictionsApi->api1_delivery_restrictions_allowed_post:\n")
+        api_response = await api_instance.delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+        print("The response of DeliveryRestrictionsApi->delivery_restrictions_allowed_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveryRestrictionsApi->api1_delivery_restrictions_allowed_post: %s\n" % e)
+        print("Exception when calling DeliveryRestrictionsApi->delivery_restrictions_allowed_post: %s\n" % e)
 ```
 
 
@@ -97,8 +97,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api1_delivery_restrictions_post**
-> TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse api1_delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
+# **delivery_restrictions_post**
+> TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
 
 Retrieve list of delivery restrictions.
 
@@ -119,10 +119,10 @@ from iikocloud_client.models.transport_delivery_restrictions_get_delivery_restri
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-ru.iiko.services
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services"
+    host = "https://api-ru.iiko.services/api/1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,11 +144,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve list of delivery restrictions.
-        api_response = await api_instance.api1_delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
-        print("The response of DeliveryRestrictionsApi->api1_delivery_restrictions_post:\n")
+        api_response = await api_instance.delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
+        print("The response of DeliveryRestrictionsApi->delivery_restrictions_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeliveryRestrictionsApi->api1_delivery_restrictions_post: %s\n" % e)
+        print("Exception when calling DeliveryRestrictionsApi->delivery_restrictions_post: %s\n" % e)
 ```
 
 

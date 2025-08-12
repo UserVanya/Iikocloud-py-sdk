@@ -27,7 +27,7 @@ class TransportDeliveriesResponseOrderPaymentItem(BaseModel):
     """
     Delivery order payment component.
     """ # noqa: E501
-    payment_type: TransportDeliveriesResponseOrderPaymentType = Field(description="Payment type.                 Can be obtained by `/api/1/payment_types` operation.", alias="paymentType")
+    payment_type: TransportDeliveriesResponseOrderPaymentType = Field(description="Payment type.                 Can be obtained by `/payment_types` operation.", alias="paymentType")
     sum: Union[StrictFloat, StrictInt] = Field(description="Amount due.")
     is_preliminary: StrictBool = Field(description="Whether payment item is preliminary.", alias="isPreliminary")
     is_external: StrictBool = Field(description="Payment item is external (created via biz.API).", alias="isExternal")
