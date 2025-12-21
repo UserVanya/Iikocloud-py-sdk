@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request import IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
@@ -58,7 +58,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_by_terminal_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
@@ -78,8 +77,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
@@ -107,7 +104,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -137,7 +133,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_by_terminal_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
@@ -157,8 +152,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
@@ -186,7 +179,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -216,7 +208,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_by_terminal_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
@@ -236,8 +227,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
@@ -265,7 +254,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
@@ -290,7 +278,6 @@ class EmployeesApi:
 
     def _employees_couriers_active_location_by_terminal_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
         _request_auth,
@@ -316,8 +303,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -373,7 +358,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -393,8 +377,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -422,7 +404,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -452,7 +433,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -472,8 +452,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -501,7 +479,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -531,7 +508,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_active_location_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -551,8 +527,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -580,7 +554,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_active_location_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -605,7 +578,6 @@ class EmployeesApi:
 
     def _employees_couriers_active_location_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_couriers_request,
         _request_auth,
@@ -631,8 +603,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -688,7 +658,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_by_role_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
@@ -708,8 +677,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
@@ -737,7 +704,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_by_role_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -767,7 +733,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_by_role_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
@@ -787,8 +752,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
@@ -816,7 +779,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_by_role_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -846,7 +808,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_by_role_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
@@ -866,8 +827,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
@@ -895,7 +854,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_by_role_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
@@ -920,7 +878,6 @@ class EmployeesApi:
 
     def _employees_couriers_by_role_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
         _request_auth,
@@ -946,8 +903,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1003,7 +958,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_locations_by_time_offset_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
@@ -1023,8 +977,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
@@ -1052,7 +1004,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1082,7 +1033,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_locations_by_time_offset_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
@@ -1102,8 +1052,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
@@ -1131,7 +1079,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1161,7 +1108,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_locations_by_time_offset_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
@@ -1181,8 +1127,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: location`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
@@ -1210,7 +1154,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
@@ -1235,7 +1178,6 @@ class EmployeesApi:
 
     def _employees_couriers_locations_by_time_offset_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
         _request_auth,
@@ -1261,8 +1203,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1318,7 +1258,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -1338,8 +1277,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -1367,7 +1304,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1397,7 +1333,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -1417,8 +1352,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -1446,7 +1379,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1476,7 +1408,6 @@ class EmployeesApi:
     @validate_call
     async def employees_couriers_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
         _request_timeout: Union[
@@ -1496,8 +1427,6 @@ class EmployeesApi:
 
            > Restriction group: `Drivers: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_couriers_request:
@@ -1525,7 +1454,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_couriers_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
             _request_auth=_request_auth,
@@ -1550,7 +1478,6 @@ class EmployeesApi:
 
     def _employees_couriers_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_couriers_request,
         _request_auth,
@@ -1576,8 +1503,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1633,7 +1558,6 @@ class EmployeesApi:
     @validate_call
     async def employees_info_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
@@ -1653,8 +1577,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_employee_info_request:
@@ -1682,7 +1604,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1712,7 +1633,6 @@ class EmployeesApi:
     @validate_call
     async def employees_info_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
@@ -1732,8 +1652,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_employee_info_request:
@@ -1761,7 +1679,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1791,7 +1708,6 @@ class EmployeesApi:
     @validate_call
     async def employees_info_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
@@ -1811,8 +1727,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_employee_info_request:
@@ -1840,7 +1754,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
             _request_auth=_request_auth,
@@ -1865,7 +1778,6 @@ class EmployeesApi:
 
     def _employees_info_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_employee_info_request,
         _request_auth,
@@ -1891,8 +1803,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1948,7 +1858,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockin_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -1968,8 +1877,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
@@ -1997,7 +1904,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockin_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -2027,7 +1933,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockin_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -2047,8 +1952,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
@@ -2076,7 +1979,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockin_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -2106,7 +2008,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockin_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -2126,8 +2027,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
@@ -2155,7 +2054,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockin_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
             _request_auth=_request_auth,
@@ -2180,7 +2078,6 @@ class EmployeesApi:
 
     def _employees_shift_clockin_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_open_personal_session_request,
         _request_auth,
@@ -2206,8 +2103,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2263,7 +2158,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockout_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -2283,8 +2177,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
@@ -2312,7 +2204,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockout_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2342,7 +2233,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockout_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -2362,8 +2252,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
@@ -2391,7 +2279,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockout_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2421,7 +2308,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_clockout_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
@@ -2441,8 +2327,6 @@ class EmployeesApi:
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
@@ -2470,7 +2354,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_clockout_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
             _request_auth=_request_auth,
@@ -2495,7 +2378,6 @@ class EmployeesApi:
 
     def _employees_shift_clockout_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_close_personal_session_request,
         _request_auth,
@@ -2521,8 +2403,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2578,7 +2458,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_is_open_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
@@ -2598,8 +2477,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
@@ -2627,7 +2504,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_is_open_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2657,7 +2533,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_is_open_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
@@ -2677,8 +2552,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
@@ -2706,7 +2579,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_is_open_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2736,7 +2608,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shift_is_open_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
@@ -2756,8 +2627,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
@@ -2785,7 +2654,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shift_is_open_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
             _request_auth=_request_auth,
@@ -2810,7 +2678,6 @@ class EmployeesApi:
 
     def _employees_shift_is_open_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
         _request_auth,
@@ -2836,8 +2703,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2893,7 +2758,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shifts_by_courier_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
@@ -2913,8 +2777,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
@@ -2942,7 +2804,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shifts_by_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -2972,7 +2833,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shifts_by_courier_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
@@ -2992,8 +2852,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
@@ -3021,7 +2879,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shifts_by_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -3051,7 +2908,6 @@ class EmployeesApi:
     @validate_call
     async def employees_shifts_by_courier_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
@@ -3071,8 +2927,6 @@ class EmployeesApi:
 
            > Restriction group: `Employees: shifts`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
@@ -3100,7 +2954,6 @@ class EmployeesApi:
         """ # noqa: E501
 
         _param = self._employees_shifts_by_courier_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
@@ -3125,7 +2978,6 @@ class EmployeesApi:
 
     def _employees_shifts_by_courier_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
         _request_auth,
@@ -3151,8 +3003,6 @@ class EmployeesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

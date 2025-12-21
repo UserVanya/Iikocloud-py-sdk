@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_add_items_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_add_items_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request)
 
 Add order items.
 
@@ -62,13 +62,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_add_order_items_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest() # IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest |  (optional)
 
     try:
         # Add order items.
-        api_response = await api_instance.deliveries_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request)
+        api_response = await api_instance.deliveries_add_items_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_add_items_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -82,7 +81,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_add_order_items_request** | [**IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest**](IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest.md)|  | [optional] 
 
@@ -112,7 +110,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_add_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_add_payments_post(timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
 
 Add order payments.
 
@@ -145,13 +143,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_orders_common_add_order_payments_request = iikocloud_client.IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest() # IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest |  (optional)
 
     try:
         # Add order payments.
-        api_response = await api_instance.deliveries_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
+        api_response = await api_instance.deliveries_add_payments_post(timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_add_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -165,7 +162,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_orders_common_add_order_payments_request** | [**IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest**](IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest.md)|  | [optional] 
 
@@ -195,7 +191,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_cancel_confirmation_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_cancel_confirmation_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_cancel_confirmation_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request)
 
 Cancel delivery confirmation.
 
@@ -228,13 +224,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest |  (optional)
 
     try:
         # Cancel delivery confirmation.
-        api_response = await api_instance.deliveries_cancel_confirmation_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request)
+        api_response = await api_instance.deliveries_cancel_confirmation_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_cancel_confirmation_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -248,7 +243,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest.md)|  | [optional] 
 
@@ -278,7 +272,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_cancel_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_cancel_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request)
 
 Cancel delivery order.
 
@@ -311,13 +305,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_cancel_order_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest() # IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest |  (optional)
 
     try:
         # Cancel delivery order.
-        api_response = await api_instance.deliveries_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request)
+        api_response = await api_instance.deliveries_cancel_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_cancel_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -331,7 +324,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_cancel_order_request** | [**IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest**](IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest.md)|  | [optional] 
 
@@ -361,7 +353,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_comment_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_comment_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_comment_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request)
 
 Change delivery comment.
 
@@ -394,13 +386,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest |  (optional)
 
     try:
         # Change delivery comment.
-        api_response = await api_instance.deliveries_change_comment_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request)
+        api_response = await api_instance.deliveries_change_comment_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_comment_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -414,7 +405,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest.md)|  | [optional] 
 
@@ -444,7 +434,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_complete_before_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_complete_before_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_complete_before_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request)
 
 Change time when client wants the order to be delivered.
 
@@ -477,13 +467,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest |  (optional)
 
     try:
         # Change time when client wants the order to be delivered.
-        api_response = await api_instance.deliveries_change_complete_before_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request)
+        api_response = await api_instance.deliveries_change_complete_before_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_complete_before_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -497,7 +486,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest.md)|  | [optional] 
 
@@ -527,7 +515,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_delivery_point_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_delivery_point_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_delivery_point_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request)
 
 Change order's delivery point information.
 
@@ -560,13 +548,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest |  (optional)
 
     try:
         # Change order's delivery point information.
-        api_response = await api_instance.deliveries_change_delivery_point_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request)
+        api_response = await api_instance.deliveries_change_delivery_point_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_delivery_point_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -580,7 +567,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest.md)|  | [optional] 
 
@@ -610,7 +596,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_driver_info_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_driver_info_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_driver_info_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request)
 
 Change driver info.
 
@@ -643,13 +629,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest() # IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest |  (optional)
 
     try:
         # Change driver info.
-        api_response = await api_instance.deliveries_change_driver_info_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request)
+        api_response = await api_instance.deliveries_change_driver_info_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_driver_info_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -663,7 +648,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request** | [**IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest**](IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest.md)|  | [optional] 
 
@@ -693,7 +677,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_external_data_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_external_data_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_external_data_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
 
 Change delivery external data.
 
@@ -722,13 +706,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest |  (optional)
 
     try:
         # Change delivery external data.
-        api_response = await api_instance.deliveries_change_external_data_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
+        api_response = await api_instance.deliveries_change_external_data_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_external_data_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -742,7 +725,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest.md)|  | [optional] 
 
@@ -772,7 +754,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_operator_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_operator_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_operator_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request)
 
 Assign/change the order operator.
 
@@ -805,13 +787,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest |  (optional)
 
     try:
         # Assign/change the order operator.
-        api_response = await api_instance.deliveries_change_operator_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request)
+        api_response = await api_instance.deliveries_change_operator_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_operator_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -825,7 +806,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest.md)|  | [optional] 
 
@@ -855,7 +835,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
 
 Change order's payments.
 
@@ -889,13 +869,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest |  (optional)
 
     try:
         # Change order's payments.
-        api_response = await api_instance.deliveries_change_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
+        api_response = await api_instance.deliveries_change_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -909,7 +888,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest.md)|  | [optional] 
 
@@ -939,7 +917,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_change_service_type_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_service_type_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_change_service_type_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request)
 
 Change order's delivery type.
 
@@ -972,13 +950,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest |  (optional)
 
     try:
         # Change order's delivery type.
-        api_response = await api_instance.deliveries_change_service_type_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request)
+        api_response = await api_instance.deliveries_change_service_type_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_change_service_type_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -992,7 +969,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest.md)|  | [optional] 
 
@@ -1022,7 +998,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_close_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_close_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_close_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request)
 
 Close order.
 
@@ -1057,13 +1033,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest() # IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest |  (optional)
 
     try:
         # Close order.
-        api_response = await api_instance.deliveries_close_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request)
+        api_response = await api_instance.deliveries_close_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_close_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1077,7 +1052,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request** | [**IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest**](IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest.md)|  | [optional] 
 
@@ -1107,7 +1081,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_confirm_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_confirm_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_confirm_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request)
 
 Confirm delivery.
 
@@ -1140,13 +1114,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest |  (optional)
 
     try:
         # Confirm delivery.
-        api_response = await api_instance.deliveries_confirm_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request)
+        api_response = await api_instance.deliveries_confirm_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_confirm_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1160,7 +1133,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest.md)|  | [optional] 
 
@@ -1190,7 +1162,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_create_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse deliveries_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse deliveries_create_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request)
 
 Create delivery.
 
@@ -1221,13 +1193,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_create_order_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest() # IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest |  (optional)
 
     try:
         # Create delivery.
-        api_response = await api_instance.deliveries_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request)
+        api_response = await api_instance.deliveries_create_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_create_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1241,7 +1212,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_create_order_request** | [**IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest**](IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest.md)|  | [optional] 
 
@@ -1271,7 +1241,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_print_delivery_bill_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_print_delivery_bill_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_print_delivery_bill_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request)
 
 Print delivery bill.
 
@@ -1304,13 +1274,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest() # IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest |  (optional)
 
     try:
         # Print delivery bill.
-        api_response = await api_instance.deliveries_print_delivery_bill_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request)
+        api_response = await api_instance.deliveries_print_delivery_bill_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_print_delivery_bill_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1324,7 +1293,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request** | [**IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest**](IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest.md)|  | [optional] 
 
@@ -1354,7 +1322,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_update_order_courier_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_courier_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_courier_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request)
 
 Update order courier.
 
@@ -1387,13 +1355,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest |  (optional)
 
     try:
         # Update order courier.
-        api_response = await api_instance.deliveries_update_order_courier_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request)
+        api_response = await api_instance.deliveries_update_order_courier_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_update_order_courier_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1407,7 +1374,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest.md)|  | [optional] 
 
@@ -1437,7 +1403,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_update_order_delivery_status_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_delivery_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_delivery_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request)
 
 Update delivery status.
 
@@ -1468,13 +1434,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest |  (optional)
 
     try:
         # Update delivery status.
-        api_response = await api_instance.deliveries_update_order_delivery_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request)
+        api_response = await api_instance.deliveries_update_order_delivery_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_update_order_delivery_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1488,7 +1453,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest.md)|  | [optional] 
 
@@ -1518,7 +1482,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_update_order_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
 
 Update order payment details.
 
@@ -1549,13 +1513,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
 
     try:
         # Update order payment details.
-        api_response = await api_instance.deliveries_update_order_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+        api_response = await api_instance.deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_update_order_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1569,7 +1532,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest.md)|  | [optional] 
 
@@ -1599,7 +1561,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_update_order_problem_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_problem_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_problem_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request)
 
 Update order problem.
 
@@ -1630,13 +1592,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest |  (optional)
 
     try:
         # Update order problem.
-        api_response = await api_instance.deliveries_update_order_problem_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request)
+        api_response = await api_instance.deliveries_update_order_problem_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request)
         print("The response of DeliveriesCreateAndUpdateApi->deliveries_update_order_problem_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1650,7 +1611,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest.md)|  | [optional] 
 
@@ -1680,7 +1640,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_update_tracking_link_post**
-> deliveries_update_tracking_link_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request)
+> deliveries_update_tracking_link_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request)
 
 Update tracking link of an order.
 
@@ -1704,13 +1664,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest |  (optional)
 
     try:
         # Update tracking link of an order.
-        await api_instance.deliveries_update_tracking_link_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request)
+        await api_instance.deliveries_update_tracking_link_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request)
     except Exception as e:
         print("Exception when calling DeliveriesCreateAndUpdateApi->deliveries_update_tracking_link_post: %s\n" % e)
 ```
@@ -1722,7 +1681,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest.md)|  | [optional] 
 
@@ -1752,7 +1710,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_print_bill_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_print_bill_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_print_bill_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request)
 
 Print bill.
 
@@ -1781,13 +1739,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesCreateAndUpdateApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_print_bill_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest() # IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest |  (optional)
 
     try:
         # Print bill.
-        api_response = await api_instance.order_print_bill_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request)
+        api_response = await api_instance.order_print_bill_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request)
         print("The response of DeliveriesCreateAndUpdateApi->order_print_bill_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1801,7 +1758,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_print_bill_request** | [**IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest**](IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest.md)|  | [optional] 
 

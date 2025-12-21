@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
@@ -60,7 +60,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_items_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -80,8 +79,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
@@ -109,7 +106,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -139,7 +135,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_items_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -159,8 +154,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
@@ -188,7 +181,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -218,7 +210,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_items_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -238,8 +229,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
@@ -267,7 +256,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
@@ -292,7 +280,6 @@ class BanquetsReservesApi:
 
     def _reserve_add_items_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
         _request_auth,
@@ -318,8 +305,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -375,7 +360,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -395,8 +379,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
@@ -424,7 +406,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -454,7 +435,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -474,8 +454,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
@@ -503,7 +481,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -533,7 +510,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_add_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
@@ -553,8 +529,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
@@ -582,7 +556,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
@@ -607,7 +580,6 @@ class BanquetsReservesApi:
 
     def _reserve_add_payments_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
         _request_auth,
@@ -633,8 +605,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -690,7 +660,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_organizations_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -710,8 +679,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
@@ -739,7 +706,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -769,7 +735,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_organizations_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -789,8 +754,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
@@ -818,7 +781,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -848,7 +810,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_organizations_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -868,8 +829,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
@@ -897,7 +856,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_organizations_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
             _request_auth=_request_auth,
@@ -922,7 +880,6 @@ class BanquetsReservesApi:
 
     def _reserve_available_organizations_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_organizations_get_organizations_request,
         _request_auth,
@@ -948,8 +905,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1005,7 +960,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_restaurant_sections_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1025,8 +979,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
@@ -1054,7 +1006,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1084,7 +1035,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_restaurant_sections_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1104,8 +1054,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
@@ -1133,7 +1081,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1163,7 +1110,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_restaurant_sections_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
@@ -1183,8 +1129,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
@@ -1212,7 +1156,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
@@ -1237,7 +1180,6 @@ class BanquetsReservesApi:
 
     def _reserve_available_restaurant_sections_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
         _request_auth,
@@ -1263,8 +1205,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1320,7 +1260,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_terminal_groups_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1340,8 +1279,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
@@ -1369,7 +1306,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1399,7 +1335,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_terminal_groups_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1419,8 +1354,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
@@ -1448,7 +1381,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1478,7 +1410,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_available_terminal_groups_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
@@ -1498,8 +1429,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
@@ -1527,7 +1456,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_available_terminal_groups_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
@@ -1552,7 +1480,6 @@ class BanquetsReservesApi:
 
     def _reserve_available_terminal_groups_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
         _request_auth,
@@ -1578,8 +1505,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1635,7 +1560,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_cancel_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1655,8 +1579,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
@@ -1684,7 +1606,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1714,7 +1635,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_cancel_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1734,8 +1654,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
@@ -1763,7 +1681,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1793,7 +1710,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_cancel_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
         _request_timeout: Union[
@@ -1813,8 +1729,6 @@ class BanquetsReservesApi:
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
@@ -1842,7 +1756,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
             _request_auth=_request_auth,
@@ -1867,7 +1780,6 @@ class BanquetsReservesApi:
 
     def _reserve_cancel_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
         _request_auth,
@@ -1893,8 +1805,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1950,7 +1860,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_estimated_start_time_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
@@ -1970,8 +1879,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
@@ -1999,7 +1906,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
@@ -2029,7 +1935,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_estimated_start_time_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
@@ -2049,8 +1954,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
@@ -2078,7 +1981,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
@@ -2108,7 +2010,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_estimated_start_time_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
@@ -2128,8 +2029,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
@@ -2157,7 +2056,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
@@ -2182,7 +2080,6 @@ class BanquetsReservesApi:
 
     def _reserve_change_estimated_start_time_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
         _request_auth,
@@ -2208,8 +2105,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2265,7 +2160,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_items_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -2285,8 +2179,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
@@ -2314,7 +2206,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
@@ -2344,7 +2235,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_items_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -2364,8 +2254,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
@@ -2393,7 +2281,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
@@ -2423,7 +2310,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_items_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
@@ -2443,8 +2329,6 @@ class BanquetsReservesApi:
 
         Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
@@ -2472,7 +2356,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
@@ -2497,7 +2380,6 @@ class BanquetsReservesApi:
 
     def _reserve_change_items_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
         _request_auth,
@@ -2523,8 +2405,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2580,7 +2460,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_tables_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
@@ -2600,8 +2479,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
@@ -2629,7 +2506,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_tables_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
@@ -2659,7 +2535,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_tables_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
@@ -2679,8 +2554,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
@@ -2708,7 +2581,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_tables_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
@@ -2738,7 +2610,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_change_tables_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
@@ -2758,8 +2629,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
@@ -2787,7 +2656,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_change_tables_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
@@ -2812,7 +2680,6 @@ class BanquetsReservesApi:
 
     def _reserve_change_tables_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
         _request_auth,
@@ -2838,8 +2705,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2895,7 +2760,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -2915,8 +2779,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
@@ -2944,7 +2806,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -2974,7 +2835,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -2994,8 +2854,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
@@ -3023,7 +2881,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -3053,7 +2910,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
         _request_timeout: Union[
@@ -3073,8 +2929,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
@@ -3102,7 +2956,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
             _request_auth=_request_auth,
@@ -3127,7 +2980,6 @@ class BanquetsReservesApi:
 
     def _reserve_create_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_create_reserve_request,
         _request_auth,
@@ -3153,8 +3005,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3210,7 +3060,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_restaurant_sections_workload_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -3230,8 +3079,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
@@ -3259,7 +3106,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -3289,7 +3135,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_restaurant_sections_workload_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -3309,8 +3154,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
@@ -3338,7 +3181,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -3368,7 +3210,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_restaurant_sections_workload_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
@@ -3388,8 +3229,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
@@ -3417,7 +3256,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
@@ -3442,7 +3280,6 @@ class BanquetsReservesApi:
 
     def _reserve_restaurant_sections_workload_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
         _request_auth,
@@ -3468,8 +3305,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3525,7 +3360,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_status_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -3545,8 +3379,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
@@ -3574,7 +3406,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -3604,7 +3435,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_status_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -3624,8 +3454,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
@@ -3653,7 +3481,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -3683,7 +3510,6 @@ class BanquetsReservesApi:
     @validate_call
     async def reserve_status_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
         _request_timeout: Union[
@@ -3703,8 +3529,6 @@ class BanquetsReservesApi:
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
@@ -3732,7 +3556,6 @@ class BanquetsReservesApi:
         """ # noqa: E501
 
         _param = self._reserve_status_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
             _request_auth=_request_auth,
@@ -3757,7 +3580,6 @@ class BanquetsReservesApi:
 
     def _reserve_status_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
         _request_auth,
@@ -3783,8 +3605,6 @@ class BanquetsReservesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

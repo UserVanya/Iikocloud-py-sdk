@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **order_add_customer_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_customer_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_customer_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request)
 
 Add customer to order.
 
@@ -52,13 +52,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest() # IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest |  (optional)
 
     try:
         # Add customer to order.
-        api_response = await api_instance.order_add_customer_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request)
+        api_response = await api_instance.order_add_customer_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request)
         print("The response of OrdersApi->order_add_customer_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,7 +71,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request** | [**IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest**](IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest.md)|  | [optional] 
 
@@ -102,7 +100,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_add_items_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_items_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request)
 
 Add order items.
 
@@ -135,13 +133,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest() # IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest |  (optional)
 
     try:
         # Add order items.
-        api_response = await api_instance.order_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request)
+        api_response = await api_instance.order_add_items_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request)
         print("The response of OrdersApi->order_add_items_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,7 +152,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request** | [**IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest**](IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest.md)|  | [optional] 
 
@@ -185,7 +181,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_add_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_add_payments_post(timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
 
 Add order payments.
 
@@ -218,13 +214,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_orders_common_add_order_payments_request = iikocloud_client.IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest() # IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest |  (optional)
 
     try:
         # Add order payments.
-        api_response = await api_instance.order_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
+        api_response = await api_instance.order_add_payments_post(timeout=timeout, iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request)
         print("The response of OrdersApi->order_add_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -238,7 +233,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_orders_common_add_order_payments_request** | [**IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest**](IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest.md)|  | [optional] 
 
@@ -268,7 +262,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_by_id_post**
-> IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse order_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request)
+> IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse order_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -299,13 +293,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest() # IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest |  (optional)
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.order_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request)
+        api_response = await api_instance.order_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request)
         print("The response of OrdersApi->order_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -319,7 +312,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request** | [**IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest**](IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest.md)|  | [optional] 
 
@@ -349,7 +341,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_by_table_post**
-> IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse order_by_table_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request)
+> IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse order_by_table_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request)
 
 Retrieve orders by tables.
 
@@ -380,13 +372,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest() # IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest |  (optional)
 
     try:
         # Retrieve orders by tables.
-        api_response = await api_instance.order_by_table_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request)
+        api_response = await api_instance.order_by_table_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request)
         print("The response of OrdersApi->order_by_table_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,7 +391,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request** | [**IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest**](IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest.md)|  | [optional] 
 
@@ -430,7 +420,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_cancel_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_cancel_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request)
 
 Cancel the table order.
 
@@ -461,13 +451,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest() # IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest |  (optional)
 
     try:
         # Cancel the table order.
-        api_response = await api_instance.order_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request)
+        api_response = await api_instance.order_cancel_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request)
         print("The response of OrdersApi->order_cancel_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -481,7 +470,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request** | [**IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest**](IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest.md)|  | [optional] 
 
@@ -511,7 +499,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_change_external_data_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_change_external_data_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_change_external_data_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
 
 Change table order external_data.
 
@@ -540,13 +528,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest |  (optional)
 
     try:
         # Change table order external_data.
-        api_response = await api_instance.order_change_external_data_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
+        api_response = await api_instance.order_change_external_data_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request)
         print("The response of OrdersApi->order_change_external_data_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -560,7 +547,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest.md)|  | [optional] 
 
@@ -590,7 +576,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_change_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_change_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_change_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
 
 Change table order's payments.
 
@@ -622,13 +608,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest |  (optional)
 
     try:
         # Change table order's payments.
-        api_response = await api_instance.order_change_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
+        api_response = await api_instance.order_change_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request)
         print("The response of OrdersApi->order_change_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -642,7 +627,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest.md)|  | [optional] 
 
@@ -672,7 +656,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_close_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_close_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_close_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request)
 
 Close order.
 
@@ -705,13 +689,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_close_table_order_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest() # IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest |  (optional)
 
     try:
         # Close order.
-        api_response = await api_instance.order_close_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request)
+        api_response = await api_instance.order_close_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request)
         print("The response of OrdersApi->order_close_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -725,7 +708,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_close_table_order_request** | [**IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest**](IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest.md)|  | [optional] 
 
@@ -755,7 +737,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_create_post**
-> IikoTransportPublicApiContractsTableOrdersResponseTableOrderResponse order_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request)
+> IikoTransportPublicApiContractsTableOrdersResponseTableOrderResponse order_create_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request)
 
 Create order.
 
@@ -788,13 +770,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_create_table_order_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest() # IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest |  (optional)
 
     try:
         # Create order.
-        api_response = await api_instance.order_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request)
+        api_response = await api_instance.order_create_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request)
         print("The response of OrdersApi->order_create_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -808,7 +789,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_create_table_order_request** | [**IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest**](IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest.md)|  | [optional] 
 
@@ -838,7 +818,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_init_by_pos_order_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_init_by_pos_order_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_init_by_pos_order_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request)
 
 Init orders, created on POS, by POS orders.
 
@@ -869,13 +849,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest() # IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest |  (optional)
 
     try:
         # Init orders, created on POS, by POS orders.
-        api_response = await api_instance.order_init_by_pos_order_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request)
+        api_response = await api_instance.order_init_by_pos_order_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request)
         print("The response of OrdersApi->order_init_by_pos_order_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -889,7 +868,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request** | [**IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest**](IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest.md)|  | [optional] 
 
@@ -919,7 +897,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **order_init_by_table_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_init_by_table_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse order_init_by_table_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request)
 
 Init orders, created on POS, by tables.
 
@@ -950,13 +928,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrdersApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_table_orders_request_init_table_order_request = iikocloud_client.IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest() # IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest |  (optional)
 
     try:
         # Init orders, created on POS, by tables.
-        api_response = await api_instance.order_init_by_table_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request)
+        api_response = await api_instance.order_init_by_table_post(timeout=timeout, iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request)
         print("The response of OrdersApi->order_init_by_table_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -970,7 +947,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_table_orders_request_init_table_order_request** | [**IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest**](IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest.md)|  | [optional] 
 

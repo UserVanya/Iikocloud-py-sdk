@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_address_cities_request import IikoTransportPublicApiContractsAddressCitiesRequest
@@ -49,7 +49,6 @@ class AddressesApi:
     @validate_call
     async def cities_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -69,8 +68,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_cities_request:
@@ -98,7 +95,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
             _request_auth=_request_auth,
@@ -128,7 +124,6 @@ class AddressesApi:
     @validate_call
     async def cities_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -148,8 +143,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_cities_request:
@@ -177,7 +170,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
             _request_auth=_request_auth,
@@ -207,7 +199,6 @@ class AddressesApi:
     @validate_call
     async def cities_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
         _request_timeout: Union[
@@ -227,8 +218,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_cities_request:
@@ -256,7 +245,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._cities_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
             _request_auth=_request_auth,
@@ -281,7 +269,6 @@ class AddressesApi:
 
     def _cities_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_address_cities_request,
         _request_auth,
@@ -307,8 +294,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -364,7 +349,6 @@ class AddressesApi:
     @validate_call
     async def regions_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -384,8 +368,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_regions_request:
@@ -413,7 +395,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
             _request_auth=_request_auth,
@@ -443,7 +424,6 @@ class AddressesApi:
     @validate_call
     async def regions_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -463,8 +443,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_regions_request:
@@ -492,7 +470,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
             _request_auth=_request_auth,
@@ -522,7 +499,6 @@ class AddressesApi:
     @validate_call
     async def regions_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
         _request_timeout: Union[
@@ -542,8 +518,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_regions_request:
@@ -571,7 +545,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._regions_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
             _request_auth=_request_auth,
@@ -596,7 +569,6 @@ class AddressesApi:
 
     def _regions_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_address_regions_request,
         _request_auth,
@@ -622,8 +594,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -679,7 +649,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_city_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -699,8 +668,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_city_request:
@@ -728,7 +695,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -758,7 +724,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_city_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -778,8 +743,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_city_request:
@@ -807,7 +770,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -837,7 +799,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_city_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
         _request_timeout: Union[
@@ -857,8 +818,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_city_request:
@@ -886,7 +845,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_city_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
             _request_auth=_request_auth,
@@ -911,7 +869,6 @@ class AddressesApi:
 
     def _streets_by_city_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_address_streets_by_city_request,
         _request_auth,
@@ -937,8 +894,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -994,7 +949,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1014,8 +968,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_id_request:
@@ -1043,7 +995,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1073,7 +1024,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1093,8 +1043,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_id_request:
@@ -1122,7 +1070,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1152,7 +1099,6 @@ class AddressesApi:
     @validate_call
     async def streets_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
         _request_timeout: Union[
@@ -1172,8 +1118,6 @@ class AddressesApi:
 
            > Restriction group: `Data: geo`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_address_streets_by_id_request:
@@ -1201,7 +1145,6 @@ class AddressesApi:
         """ # noqa: E501
 
         _param = self._streets_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
             _request_auth=_request_auth,
@@ -1226,7 +1169,6 @@ class AddressesApi:
 
     def _streets_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_address_streets_by_id_request,
         _request_auth,
@@ -1252,8 +1194,6 @@ class AddressesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

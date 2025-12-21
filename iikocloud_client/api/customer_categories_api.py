@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request import IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
@@ -44,7 +44,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_add_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -64,8 +63,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -93,7 +90,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -123,7 +119,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_add_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -143,8 +138,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -172,7 +165,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -202,7 +194,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_add_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -222,8 +213,6 @@ class CustomerCategoriesApi:
 
         Add specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -251,7 +240,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -276,7 +264,6 @@ class CustomerCategoriesApi:
 
     def _loyalty_iiko_customer_category_add_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
         _request_auth,
@@ -302,8 +289,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -359,7 +344,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -379,8 +363,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
@@ -408,7 +390,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -438,7 +419,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -458,8 +438,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
@@ -487,7 +465,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -517,7 +494,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
@@ -537,8 +513,6 @@ class CustomerCategoriesApi:
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
@@ -566,7 +540,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
             _request_auth=_request_auth,
@@ -591,7 +564,6 @@ class CustomerCategoriesApi:
 
     def _loyalty_iiko_customer_category_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
         _request_auth,
@@ -617,8 +589,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -674,7 +644,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_remove_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -694,8 +663,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -723,7 +690,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -753,7 +719,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_remove_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -773,8 +738,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -802,7 +765,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -832,7 +794,6 @@ class CustomerCategoriesApi:
     @validate_call
     async def loyalty_iiko_customer_category_remove_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
@@ -852,8 +813,6 @@ class CustomerCategoriesApi:
 
         Remove specified category for customer.   > Restriction group: `Guests: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
@@ -881,7 +840,6 @@ class CustomerCategoriesApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
             _request_auth=_request_auth,
@@ -906,7 +864,6 @@ class CustomerCategoriesApi:
 
     def _loyalty_iiko_customer_category_remove_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
         _request_auth,
@@ -932,8 +889,6 @@ class CustomerCategoriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

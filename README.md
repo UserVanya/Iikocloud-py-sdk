@@ -67,13 +67,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AddressesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_address_cities_request = iikocloud_client.IikoTransportPublicApiContractsAddressCitiesRequest() # IikoTransportPublicApiContractsAddressCitiesRequest |  (optional)
 
     try:
         # Cities.
-        api_response = await api_instance.cities_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request)
+        api_response = await api_instance.cities_post(timeout=timeout, iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request)
         print("The response of AddressesApi->cities_post:\n")
         pprint(api_response)
     except ApiException as e:

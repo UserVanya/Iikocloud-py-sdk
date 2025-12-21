@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **terminal_groups_awake_post**
-> IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse terminal_groups_awake_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request)
+> IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse terminal_groups_awake_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request)
 
 Awake terminal groups from sleep mode.
 
@@ -39,13 +39,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.TerminalGroupsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request = iikocloud_client.IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest() # IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest |  (optional)
 
     try:
         # Awake terminal groups from sleep mode.
-        api_response = await api_instance.terminal_groups_awake_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request)
+        api_response = await api_instance.terminal_groups_awake_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request)
         print("The response of TerminalGroupsApi->terminal_groups_awake_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -59,7 +58,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request** | [**IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest**](IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest.md)|  | [optional] 
 
@@ -89,7 +87,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **terminal_groups_is_alive_post**
-> IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse terminal_groups_is_alive_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request)
+> IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse terminal_groups_is_alive_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request)
 
 Returns information on availability of group of terminals.
 
@@ -118,13 +116,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.TerminalGroupsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request = iikocloud_client.IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest() # IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest |  (optional)
 
     try:
         # Returns information on availability of group of terminals.
-        api_response = await api_instance.terminal_groups_is_alive_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request)
+        api_response = await api_instance.terminal_groups_is_alive_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request)
         print("The response of TerminalGroupsApi->terminal_groups_is_alive_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -138,7 +135,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request** | [**IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest**](IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest.md)|  | [optional] 
 
@@ -168,7 +164,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **terminal_groups_post**
-> IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse terminal_groups_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request)
+> IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse terminal_groups_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request)
 
 Method that returns information on groups of delivery terminals.
 
@@ -197,13 +193,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.TerminalGroupsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_terminals_terminal_groups_request = iikocloud_client.IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest() # IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest |  (optional)
 
     try:
         # Method that returns information on groups of delivery terminals.
-        api_response = await api_instance.terminal_groups_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request)
+        api_response = await api_instance.terminal_groups_post(timeout=timeout, iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request)
         print("The response of TerminalGroupsApi->terminal_groups_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -217,7 +212,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_terminals_terminal_groups_request** | [**IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest**](IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest.md)|  | [optional] 
 

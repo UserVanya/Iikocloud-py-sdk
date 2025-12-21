@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **commands_status_post**
-> IikoTransportPublicApiContractsCommandsGetCommandStatusResponse commands_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
+> IikoTransportPublicApiContractsCommandsGetCommandStatusResponse commands_status_post(timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
 
 Get status of command.
 
@@ -38,13 +38,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OperationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_commands_get_command_status_request = iikocloud_client.IikoTransportPublicApiContractsCommandsGetCommandStatusRequest() # IikoTransportPublicApiContractsCommandsGetCommandStatusRequest |  (optional)
 
     try:
         # Get status of command.
-        api_response = await api_instance.commands_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
+        api_response = await api_instance.commands_status_post(timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
         print("The response of OperationsApi->commands_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +57,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_commands_get_command_status_request** | [**IikoTransportPublicApiContractsCommandsGetCommandStatusRequest**](IikoTransportPublicApiContractsCommandsGetCommandStatusRequest.md)|  | [optional] 
 

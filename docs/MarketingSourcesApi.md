@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **marketing_sources_post**
-> IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse marketing_sources_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
+> IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse marketing_sources_post(timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
 
 Marketing sources.
 
@@ -39,13 +39,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MarketingSourcesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request = iikocloud_client.IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest() # IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest |  (optional)
 
     try:
         # Marketing sources.
-        api_response = await api_instance.marketing_sources_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
+        api_response = await api_instance.marketing_sources_post(timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
         print("The response of MarketingSourcesApi->marketing_sources_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -59,7 +58,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request** | [**IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest**](IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest.md)|  | [optional] 
 

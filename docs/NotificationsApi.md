@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **notifications_send_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse notifications_send_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse notifications_send_post(timeout=timeout, iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request)
 
 Send notification to external systems.
 
@@ -37,13 +37,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.NotificationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_notifications_send_notification_request = iikocloud_client.IikoTransportPublicApiContractsNotificationsSendNotificationRequest() # IikoTransportPublicApiContractsNotificationsSendNotificationRequest |  (optional)
 
     try:
         # Send notification to external systems.
-        api_response = await api_instance.notifications_send_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request)
+        api_response = await api_instance.notifications_send_post(timeout=timeout, iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request)
         print("The response of NotificationsApi->notifications_send_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -57,7 +56,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_notifications_send_notification_request** | [**IikoTransportPublicApiContractsNotificationsSendNotificationRequest**](IikoTransportPublicApiContractsNotificationsSendNotificationRequest.md)|  | [optional] 
 

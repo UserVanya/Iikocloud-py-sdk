@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_request import IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
@@ -43,7 +43,6 @@ class OperationsApi:
     @validate_call
     async def commands_status_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
@@ -63,8 +62,6 @@ class OperationsApi:
 
         > Response code `410` means that the correlationId value specified in the method is no longer supported.  Please do not request methods that include such a value.   > Restriction group: `Commands`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_commands_get_command_status_request:
@@ -92,7 +89,6 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._commands_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -123,7 +119,6 @@ class OperationsApi:
     @validate_call
     async def commands_status_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
@@ -143,8 +138,6 @@ class OperationsApi:
 
         > Response code `410` means that the correlationId value specified in the method is no longer supported.  Please do not request methods that include such a value.   > Restriction group: `Commands`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_commands_get_command_status_request:
@@ -172,7 +165,6 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._commands_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -203,7 +195,6 @@ class OperationsApi:
     @validate_call
     async def commands_status_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
@@ -223,8 +214,6 @@ class OperationsApi:
 
         > Response code `410` means that the correlationId value specified in the method is no longer supported.  Please do not request methods that include such a value.   > Restriction group: `Commands`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_commands_get_command_status_request:
@@ -252,7 +241,6 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._commands_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
             _request_auth=_request_auth,
@@ -278,7 +266,6 @@ class OperationsApi:
 
     def _commands_status_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_commands_get_command_status_request,
         _request_auth,
@@ -304,8 +291,6 @@ class OperationsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

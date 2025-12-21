@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_by_delivery_date_and_phone_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
 
 Retrieve list of orders by telephone number, dates and revision.
 
@@ -42,13 +42,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -62,7 +61,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 
@@ -92,7 +90,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_source_key_and_filter_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
 
 Search orders by search text and additional filters (date, problem, statuses and other).
 
@@ -121,13 +119,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
 
     try:
         # Search orders by search text and additional filters (date, problem, statuses and other).
-        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_source_key_and_filter_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -141,7 +138,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest.md)|  | [optional] 
 
@@ -171,7 +167,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_status_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
 
 Retrieve list of orders by statuses and dates.
 
@@ -200,13 +196,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
 
     try:
         # Retrieve list of orders by statuses and dates.
-        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -220,7 +215,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest.md)|  | [optional] 
 
@@ -250,7 +244,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_id_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse deliveries_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse deliveries_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -279,13 +273,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest |  (optional)
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.deliveries_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
+        api_response = await api_instance.deliveries_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -299,7 +292,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest.md)|  | [optional] 
 
@@ -329,7 +321,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_revision_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
 
 Retrieve list of orders changed from the time revision was passed.
 
@@ -358,13 +350,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest |  (optional)
 
     try:
         # Retrieve list of orders changed from the time revision was passed.
-        api_response = await api_instance.deliveries_by_revision_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
+        api_response = await api_instance.deliveries_by_revision_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,7 +369,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest.md)|  | [optional] 
 
@@ -408,7 +398,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_history_by_delivery_date_and_phone_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
 
 Retrieve list of history orders by telephone number, dates and revision.
 
@@ -437,13 +427,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of history orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_history_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -457,7 +446,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 

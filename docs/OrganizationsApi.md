@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **organizations_post**
-> IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse organizations_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
+> IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse organizations_post(timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
 
 Returns organizations available to api-login user.
 
@@ -38,13 +38,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrganizationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_organizations_get_organizations_request = iikocloud_client.IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest() # IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest |  (optional)
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.organizations_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
+        api_response = await api_instance.organizations_post(timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
         print("The response of OrganizationsApi->organizations_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +57,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_organizations_get_organizations_request** | [**IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest**](IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest.md)|  | [optional] 
 
@@ -88,7 +86,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **organizations_settings_post**
-> IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse organizations_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request)
+> IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse organizations_settings_post(timeout=timeout, iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request)
 
 Returns available to api-login user organizations specified settings.
 
@@ -117,13 +115,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OrganizationsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_organizations_organizations_settings_request = iikocloud_client.IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest() # IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest |  (optional)
 
     try:
         # Returns available to api-login user organizations specified settings.
-        api_response = await api_instance.organizations_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request)
+        api_response = await api_instance.organizations_settings_post(timeout=timeout, iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request)
         print("The response of OrganizationsApi->organizations_settings_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +134,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_organizations_organizations_settings_request** | [**IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest**](IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest.md)|  | [optional] 
 

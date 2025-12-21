@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
@@ -56,7 +56,6 @@ class OrdersApi:
     @validate_call
     async def order_add_customer_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -76,8 +75,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request:
@@ -105,7 +102,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_customer_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -135,7 +131,6 @@ class OrdersApi:
     @validate_call
     async def order_add_customer_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -155,8 +150,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request:
@@ -184,7 +177,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_customer_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -214,7 +206,6 @@ class OrdersApi:
     @validate_call
     async def order_add_customer_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -234,8 +225,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request:
@@ -263,7 +252,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_customer_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request,
             _request_auth=_request_auth,
@@ -288,7 +276,6 @@ class OrdersApi:
 
     def _order_add_customer_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request,
         _request_auth,
@@ -314,8 +301,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -371,7 +356,6 @@ class OrdersApi:
     @validate_call
     async def order_add_items_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -391,8 +375,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request:
@@ -420,7 +402,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -450,7 +431,6 @@ class OrdersApi:
     @validate_call
     async def order_add_items_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -470,8 +450,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request:
@@ -499,7 +477,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -529,7 +506,6 @@ class OrdersApi:
     @validate_call
     async def order_add_items_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest] = None,
         _request_timeout: Union[
@@ -549,8 +525,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request:
@@ -578,7 +552,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_items_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request=iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request,
             _request_auth=_request_auth,
@@ -603,7 +576,6 @@ class OrdersApi:
 
     def _order_add_items_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request,
         _request_auth,
@@ -629,8 +601,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -686,7 +656,6 @@ class OrdersApi:
     @validate_call
     async def order_add_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -706,8 +675,6 @@ class OrdersApi:
 
            > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
@@ -735,7 +702,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -765,7 +731,6 @@ class OrdersApi:
     @validate_call
     async def order_add_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -785,8 +750,6 @@ class OrdersApi:
 
            > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
@@ -814,7 +777,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -844,7 +806,6 @@ class OrdersApi:
     @validate_call
     async def order_add_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
@@ -864,8 +825,6 @@ class OrdersApi:
 
            > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
@@ -893,7 +852,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_add_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
             _request_auth=_request_auth,
@@ -918,7 +876,6 @@ class OrdersApi:
 
     def _order_add_payments_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
         _request_auth,
@@ -944,8 +901,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1001,7 +956,6 @@ class OrdersApi:
     @validate_call
     async def order_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1021,8 +975,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request:
@@ -1050,7 +1002,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1080,7 +1031,6 @@ class OrdersApi:
     @validate_call
     async def order_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1100,8 +1050,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request:
@@ -1129,7 +1077,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1159,7 +1106,6 @@ class OrdersApi:
     @validate_call
     async def order_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1179,8 +1125,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request:
@@ -1208,7 +1152,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1233,7 +1176,6 @@ class OrdersApi:
 
     def _order_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request,
         _request_auth,
@@ -1259,8 +1201,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1316,7 +1256,6 @@ class OrdersApi:
     @validate_call
     async def order_by_table_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest] = None,
         _request_timeout: Union[
@@ -1336,8 +1275,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request:
@@ -1365,7 +1302,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1395,7 +1331,6 @@ class OrdersApi:
     @validate_call
     async def order_by_table_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest] = None,
         _request_timeout: Union[
@@ -1415,8 +1350,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request:
@@ -1444,7 +1377,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1474,7 +1406,6 @@ class OrdersApi:
     @validate_call
     async def order_by_table_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest] = None,
         _request_timeout: Union[
@@ -1494,8 +1425,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request:
@@ -1523,7 +1452,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request=iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request,
             _request_auth=_request_auth,
@@ -1548,7 +1476,6 @@ class OrdersApi:
 
     def _order_by_table_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request,
         _request_auth,
@@ -1574,8 +1501,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1631,7 +1556,6 @@ class OrdersApi:
     @validate_call
     async def order_cancel_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest] = None,
         _request_timeout: Union[
@@ -1651,8 +1575,6 @@ class OrdersApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request:
@@ -1680,7 +1602,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request,
             _request_auth=_request_auth,
@@ -1710,7 +1631,6 @@ class OrdersApi:
     @validate_call
     async def order_cancel_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest] = None,
         _request_timeout: Union[
@@ -1730,8 +1650,6 @@ class OrdersApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request:
@@ -1759,7 +1677,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request,
             _request_auth=_request_auth,
@@ -1789,7 +1706,6 @@ class OrdersApi:
     @validate_call
     async def order_cancel_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest] = None,
         _request_timeout: Union[
@@ -1809,8 +1725,6 @@ class OrdersApi:
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request:
@@ -1838,7 +1752,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_cancel_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request,
             _request_auth=_request_auth,
@@ -1863,7 +1776,6 @@ class OrdersApi:
 
     def _order_cancel_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request,
         _request_auth,
@@ -1889,8 +1801,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1946,7 +1856,6 @@ class OrdersApi:
     @validate_call
     async def order_change_external_data_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -1966,8 +1875,6 @@ class OrdersApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
@@ -1995,7 +1902,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2025,7 +1931,6 @@ class OrdersApi:
     @validate_call
     async def order_change_external_data_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -2045,8 +1950,6 @@ class OrdersApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
@@ -2074,7 +1977,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2104,7 +2006,6 @@ class OrdersApi:
     @validate_call
     async def order_change_external_data_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
@@ -2124,8 +2025,6 @@ class OrdersApi:
 
            > Restriction group: `Orders: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
@@ -2153,7 +2052,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_external_data_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
@@ -2178,7 +2076,6 @@ class OrdersApi:
 
     def _order_change_external_data_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
         _request_auth,
@@ -2204,8 +2101,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2261,7 +2156,6 @@ class OrdersApi:
     @validate_call
     async def order_change_payments_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -2281,8 +2175,6 @@ class OrdersApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.7.4`.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
@@ -2310,7 +2202,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -2340,7 +2231,6 @@ class OrdersApi:
     @validate_call
     async def order_change_payments_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -2360,8 +2250,6 @@ class OrdersApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.7.4`.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
@@ -2389,7 +2277,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -2419,7 +2306,6 @@ class OrdersApi:
     @validate_call
     async def order_change_payments_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
@@ -2439,8 +2325,6 @@ class OrdersApi:
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.7.4`.   > Restriction group: `Order payments: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
@@ -2468,7 +2352,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_change_payments_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
@@ -2493,7 +2376,6 @@ class OrdersApi:
 
     def _order_change_payments_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
         _request_auth,
@@ -2519,8 +2401,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2576,7 +2456,6 @@ class OrdersApi:
     @validate_call
     async def order_close_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_close_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest] = None,
         _request_timeout: Union[
@@ -2596,8 +2475,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_close_table_order_request:
@@ -2625,7 +2502,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2655,7 +2531,6 @@ class OrdersApi:
     @validate_call
     async def order_close_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_close_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest] = None,
         _request_timeout: Union[
@@ -2675,8 +2550,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_close_table_order_request:
@@ -2704,7 +2577,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2734,7 +2606,6 @@ class OrdersApi:
     @validate_call
     async def order_close_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_close_table_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest] = None,
         _request_timeout: Union[
@@ -2754,8 +2625,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_close_table_order_request:
@@ -2783,7 +2652,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_close_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_close_table_order_request=iiko_transport_public_api_contracts_deliveries_request_close_table_order_request,
             _request_auth=_request_auth,
@@ -2808,7 +2676,6 @@ class OrdersApi:
 
     def _order_close_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_close_table_order_request,
         _request_auth,
@@ -2834,8 +2701,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -2891,7 +2756,6 @@ class OrdersApi:
     @validate_call
     async def order_create_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_create_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest] = None,
         _request_timeout: Union[
@@ -2911,8 +2775,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_create_table_order_request:
@@ -2940,7 +2802,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -2970,7 +2831,6 @@ class OrdersApi:
     @validate_call
     async def order_create_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_create_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest] = None,
         _request_timeout: Union[
@@ -2990,8 +2850,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_create_table_order_request:
@@ -3019,7 +2877,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -3049,7 +2906,6 @@ class OrdersApi:
     @validate_call
     async def order_create_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_create_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest] = None,
         _request_timeout: Union[
@@ -3069,8 +2925,6 @@ class OrdersApi:
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_create_table_order_request:
@@ -3098,7 +2952,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_create_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_create_table_order_request=iiko_transport_public_api_contracts_table_orders_request_create_table_order_request,
             _request_auth=_request_auth,
@@ -3123,7 +2976,6 @@ class OrdersApi:
 
     def _order_create_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_create_table_order_request,
         _request_auth,
@@ -3149,8 +3001,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3206,7 +3056,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_pos_order_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
         _request_timeout: Union[
@@ -3226,8 +3075,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request:
@@ -3255,7 +3102,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_pos_order_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -3285,7 +3131,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_pos_order_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
         _request_timeout: Union[
@@ -3305,8 +3150,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request:
@@ -3334,7 +3177,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_pos_order_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -3364,7 +3206,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_pos_order_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest] = None,
         _request_timeout: Union[
@@ -3384,8 +3225,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request:
@@ -3413,7 +3252,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_pos_order_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request,
             _request_auth=_request_auth,
@@ -3438,7 +3276,6 @@ class OrdersApi:
 
     def _order_init_by_pos_order_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request,
         _request_auth,
@@ -3464,8 +3301,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -3521,7 +3356,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_table_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest] = None,
         _request_timeout: Union[
@@ -3541,8 +3375,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_request:
@@ -3570,7 +3402,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3600,7 +3431,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_table_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest] = None,
         _request_timeout: Union[
@@ -3620,8 +3450,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_request:
@@ -3649,7 +3477,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3679,7 +3506,6 @@ class OrdersApi:
     @validate_call
     async def order_init_by_table_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_request: Optional[IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest] = None,
         _request_timeout: Union[
@@ -3699,8 +3525,6 @@ class OrdersApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Orders: loading data`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_table_orders_request_init_table_order_request:
@@ -3728,7 +3552,6 @@ class OrdersApi:
         """ # noqa: E501
 
         _param = self._order_init_by_table_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_table_orders_request_init_table_order_request=iiko_transport_public_api_contracts_table_orders_request_init_table_order_request,
             _request_auth=_request_auth,
@@ -3753,7 +3576,6 @@ class OrdersApi:
 
     def _order_init_by_table_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_table_orders_request_init_table_order_request,
         _request_auth,
@@ -3779,8 +3601,6 @@ class OrdersApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

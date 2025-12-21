@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **webhooks_settings_post**
-> IikoTransportPublicApiContractsWebHooksGetWebHookSettingsResponse webhooks_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request)
+> IikoTransportPublicApiContractsWebHooksGetWebHookSettingsResponse webhooks_settings_post(timeout=timeout, iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request)
 
 Get webhooks settings for specified organization and authorized API login.
 
@@ -38,13 +38,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.WebhooksApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request = iikocloud_client.IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest() # IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest |  (optional)
 
     try:
         # Get webhooks settings for specified organization and authorized API login.
-        api_response = await api_instance.webhooks_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request)
+        api_response = await api_instance.webhooks_settings_post(timeout=timeout, iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request)
         print("The response of WebhooksApi->webhooks_settings_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +57,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request** | [**IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest**](IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest.md)|  | [optional] 
 
@@ -88,7 +86,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **webhooks_update_settings_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse webhooks_update_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse webhooks_update_settings_post(timeout=timeout, iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request)
 
 Update webhooks settings for specified organization and authorized API login.
 
@@ -117,13 +115,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.WebhooksApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request = iikocloud_client.IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest() # IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest |  (optional)
 
     try:
         # Update webhooks settings for specified organization and authorized API login.
-        api_response = await api_instance.webhooks_update_settings_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request)
+        api_response = await api_instance.webhooks_update_settings_post(timeout=timeout, iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request=iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request)
         print("The response of WebhooksApi->webhooks_update_settings_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +134,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request** | [**IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest**](IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest.md)|  | [optional] 
 

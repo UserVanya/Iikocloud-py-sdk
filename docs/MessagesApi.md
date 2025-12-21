@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **loyalty_iiko_check_sms_sending_possibility_post**
-> IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse loyalty_iiko_check_sms_sending_possibility_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request)
+> IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request)
 
 Check sms sending possibility.
 
@@ -38,13 +38,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest() # IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest |  (optional)
 
     try:
         # Check sms sending possibility.
-        api_response = await api_instance.loyalty_iiko_check_sms_sending_possibility_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request)
+        api_response = await api_instance.loyalty_iiko_check_sms_sending_possibility_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request)
         print("The response of MessagesApi->loyalty_iiko_check_sms_sending_possibility_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,7 +57,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request** | [**IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest**](IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest.md)|  | [optional] 
 
@@ -88,7 +86,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_check_sms_status_post**
-> IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse loyalty_iiko_check_sms_status_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request)
+> IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse loyalty_iiko_check_sms_status_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request)
 
 Check SMS status.
 
@@ -115,13 +113,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest() # IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest |  (optional)
 
     try:
         # Check SMS status.
-        api_response = await api_instance.loyalty_iiko_check_sms_status_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request)
+        api_response = await api_instance.loyalty_iiko_check_sms_status_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request)
         print("The response of MessagesApi->loyalty_iiko_check_sms_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -135,7 +132,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request** | [**IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest**](IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest.md)|  | [optional] 
 
@@ -165,7 +161,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_message_send_email_post**
-> object loyalty_iiko_message_send_email_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request)
+> object loyalty_iiko_message_send_email_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request)
 
 Send email.
 
@@ -193,13 +189,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_notification_send_email_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest() # IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest |  (optional)
 
     try:
         # Send email.
-        api_response = await api_instance.loyalty_iiko_message_send_email_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request)
+        api_response = await api_instance.loyalty_iiko_message_send_email_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request)
         print("The response of MessagesApi->loyalty_iiko_message_send_email_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -213,7 +208,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_notification_send_email_request** | [**IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest**](IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest.md)|  | [optional] 
 
@@ -243,7 +237,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_message_send_sms_post**
-> IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse loyalty_iiko_message_send_sms_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request)
+> IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse loyalty_iiko_message_send_sms_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request)
 
 Send sms.
 
@@ -272,13 +266,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MessagesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest() # IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest |  (optional)
 
     try:
         # Send sms.
-        api_response = await api_instance.loyalty_iiko_message_send_sms_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request)
+        api_response = await api_instance.loyalty_iiko_message_send_sms_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request)
         print("The response of MessagesApi->loyalty_iiko_message_send_sms_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -292,7 +285,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request** | [**IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest**](IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest.md)|  | [optional] 
 

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_drafts_by_filter_post**
-> IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse deliveries_drafts_by_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request)
+> IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse deliveries_drafts_by_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request)
 
 Retrieve order drafts list by parameters.
 
@@ -44,13 +44,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest() # IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest |  (optional)
 
     try:
         # Retrieve order drafts list by parameters.
-        api_response = await api_instance.deliveries_drafts_by_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request)
+        api_response = await api_instance.deliveries_drafts_by_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request)
         print("The response of DraftsApi->deliveries_drafts_by_filter_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -64,7 +63,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest**](IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest.md)|  | [optional] 
 
@@ -94,7 +92,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_by_id_post**
-> IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse deliveries_drafts_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request)
+> IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse deliveries_drafts_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request)
 
 Retrieve order draft by ID.
 
@@ -123,13 +121,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest |  (optional)
 
     try:
         # Retrieve order draft by ID.
-        api_response = await api_instance.deliveries_drafts_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request)
+        api_response = await api_instance.deliveries_drafts_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request)
         print("The response of DraftsApi->deliveries_drafts_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -143,7 +140,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest.md)|  | [optional] 
 
@@ -173,7 +169,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_commit_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse deliveries_drafts_commit_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse deliveries_drafts_commit_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request)
 
 Admit order draft changes and send them to Front.
 
@@ -202,13 +198,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest |  (optional)
 
     try:
         # Admit order draft changes and send them to Front.
-        api_response = await api_instance.deliveries_drafts_commit_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request)
+        api_response = await api_instance.deliveries_drafts_commit_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request)
         print("The response of DraftsApi->deliveries_drafts_commit_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -222,7 +217,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest.md)|  | [optional] 
 
@@ -252,7 +246,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_create_post**
-> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse deliveries_drafts_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request)
+> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse deliveries_drafts_create_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request)
 
 Create delivery order draft.
 
@@ -281,13 +275,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest |  (optional)
 
     try:
         # Create delivery order draft.
-        api_response = await api_instance.deliveries_drafts_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request)
+        api_response = await api_instance.deliveries_drafts_create_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request)
         print("The response of DraftsApi->deliveries_drafts_create_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -301,7 +294,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest.md)|  | [optional] 
 
@@ -331,7 +323,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_delete_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_delete_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_delete_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request)
 
 Delete order draft.
 
@@ -360,13 +352,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest |  (optional)
 
     try:
         # Delete order draft.
-        api_response = await api_instance.deliveries_drafts_delete_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request)
+        api_response = await api_instance.deliveries_drafts_delete_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request)
         print("The response of DraftsApi->deliveries_drafts_delete_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -380,7 +371,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest.md)|  | [optional] 
 
@@ -410,7 +400,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_lock_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_lock_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_lock_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
 
 Lock order draft.
 
@@ -439,13 +429,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
 
     try:
         # Lock order draft.
-        api_response = await api_instance.deliveries_drafts_lock_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
+        api_response = await api_instance.deliveries_drafts_lock_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
         print("The response of DraftsApi->deliveries_drafts_lock_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -459,7 +448,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest.md)|  | [optional] 
 
@@ -489,7 +477,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_save_post**
-> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse deliveries_drafts_save_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request)
+> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse deliveries_drafts_save_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request)
 
 Update existing delivery order draft.
 
@@ -518,13 +506,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest |  (optional)
 
     try:
         # Update existing delivery order draft.
-        api_response = await api_instance.deliveries_drafts_save_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request)
+        api_response = await api_instance.deliveries_drafts_save_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request)
         print("The response of DraftsApi->deliveries_drafts_save_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -538,7 +525,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest.md)|  | [optional] 
 
@@ -568,7 +554,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_drafts_unlock_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_unlock_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_drafts_unlock_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
 
 Unlock order draft.
 
@@ -597,13 +583,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DraftsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest() # IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest |  (optional)
 
     try:
         # Unlock order draft.
-        api_response = await api_instance.deliveries_drafts_unlock_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
+        api_response = await api_instance.deliveries_drafts_unlock_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request)
         print("The response of DraftsApi->deliveries_drafts_unlock_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -617,7 +602,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request** | [**IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest**](IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest.md)|  | [optional] 
 

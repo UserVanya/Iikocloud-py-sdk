@@ -24,16 +24,6 @@
         "description": "\n\n > Restriction group: `Data: geo`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -115,16 +105,6 @@
         "summary": "Cities.",
         "description": "\n\n > Restriction group: `Data: geo`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -208,16 +188,6 @@
         "description": "\n\n > Restriction group: `Data: geo`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -299,16 +269,6 @@
         "summary": "Streets by id or by classifierId.",
         "description": "\n\n > Restriction group: `Data: geo`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -473,16 +433,6 @@
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > Restriction group: `Orders: preparing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -564,16 +514,6 @@
         "summary": "Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.",
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > Restriction group: `Orders: preparing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -657,16 +597,6 @@
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > Restriction group: `Orders: preparing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -748,16 +678,6 @@
         "summary": "Returns all banquets/reserves for passed restaurant sections.",
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -841,16 +761,6 @@
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: creating`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -932,16 +842,6 @@
         "summary": "Retrieve banquets/reserves statuses by IDs.",
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -1025,16 +925,6 @@
         "description": "Available only for banquets.\n\n > Allowed from version `8.2.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1116,16 +1006,6 @@
         "summary": "Cancel reservation due to some reason.",
         "description": "Available only for reserves with status 'New'.\n\n > Allowed from version `8.2.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -1209,16 +1089,6 @@
         "description": "Available only for banquets.\n\n > Allowed from version `8.2.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order payments: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1300,16 +1170,6 @@
         "summary": "Change reserve/banquet tables.",
         "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -1393,16 +1253,6 @@
         "description": "Available only for banquets.\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1484,16 +1334,6 @@
         "summary": "Change reserve/banquet estimated start time.",
         "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -1577,16 +1417,6 @@
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: creating`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1669,16 +1499,6 @@
         "description": "\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1760,16 +1580,6 @@
         "summary": "Update order problem.",
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -1854,16 +1664,6 @@
         "description": "> Deprecated, use `api/1/deliveries/change_payments` method instead.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Deprecated`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -1947,16 +1747,6 @@
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2038,16 +1828,6 @@
         "summary": "Update order courier.",
         "description": "\n\n > Allowed from version `7.1.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order driver: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -2132,16 +1912,6 @@
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2223,16 +1993,6 @@
         "summary": "Close order.",
         "description": "> Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`\r\norderServiceType only, starting from version `8.0.6` it's also possible to close\r\n`DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .\n\n > Allowed from version `7.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -2316,16 +2076,6 @@
         "description": "\n\n > Allowed from version `7.5.4`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2407,16 +2157,6 @@
         "summary": "Change time when client wants the order to be delivered.",
         "description": "\n\n > Allowed from version `7.5.4`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -2500,16 +2240,6 @@
         "description": "\n\n > Allowed from version `7.5.4`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2591,16 +2321,6 @@
         "summary": "Change order's delivery type.",
         "description": "\n\n > Allowed from version `7.5.4`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -2684,16 +2404,6 @@
         "description": "> Method will fail if there are any processed payments in the order.\r\n> If all payments in the order are unprocessed they will be removed and replaced with new ones.\n\n > Allowed from version `7.6.3`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order payments: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2775,16 +2485,6 @@
         "summary": "Change delivery comment.",
         "description": "\n\n > Allowed from version `7.6.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -2868,16 +2568,6 @@
         "description": "\n\n > Allowed from version `7.6.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -2959,16 +2649,6 @@
         "summary": "Confirm delivery.",
         "description": "\n\n > Allowed from version `7.6.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -3052,16 +2732,6 @@
         "description": "\n\n > Allowed from version `7.6.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3143,16 +2813,6 @@
         "summary": "Assign/change the order operator.",
         "description": "\n\n > Allowed from version `7.6.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -3236,16 +2896,6 @@
         "description": "\n\n > Allowed from version `8.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order payments: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3328,16 +2978,6 @@
         "description": "\n\n > Allowed from version `8.6.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order driver: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3419,16 +3059,6 @@
         "summary": "Update tracking link of an order.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3503,16 +3133,6 @@
         "summary": "Print bill.",
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -3596,16 +3216,6 @@
         "description": "\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3687,16 +3297,6 @@
         "summary": "Retrieve list of orders by statuses and dates.",
         "description": "\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -3780,16 +3380,6 @@
         "description": "\n\n > Restriction group: `Orders: receiving by revision`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -3871,16 +3461,6 @@
         "summary": "Retrieve list of orders by telephone number, dates and revision.",
         "description": "\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -3964,16 +3544,6 @@
         "description": "\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4055,16 +3625,6 @@
         "summary": "Retrieve list of history orders by telephone number, dates and revision.",
         "description": "\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -4148,16 +3708,6 @@
         "description": "\n\n > Allowed from version `6.4.16`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4239,16 +3789,6 @@
         "summary": "Get suitable terminal groups for delivery restrictions.",
         "description": "\n\n > Allowed from version `6.4.16`.\n\n > Restriction group: `Orders: preparing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -4332,16 +3872,6 @@
         "description": "> Deprecated, use `POST api/1/organizations`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4413,16 +3943,6 @@
         "summary": "Returns organizations available to api-login user.",
         "description": "\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -4506,16 +4026,6 @@
         "description": "\n\n > Allowed from version `7.7.1`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4597,16 +4107,6 @@
         "summary": "Order types.",
         "description": "\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -4690,16 +4190,6 @@
         "description": "\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4781,16 +4271,6 @@
         "summary": "Payment types.",
         "description": "\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -4874,16 +4354,6 @@
         "description": "\n\n > Allowed from version `7.5.3`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -4966,16 +4436,6 @@
         "description": "\n\n > Allowed from version `7.7.4`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5048,16 +4508,6 @@
         "summary": "Retrieve order draft by ID.",
         "description": "\n\n > Restriction group: `Drafts: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -5141,16 +4591,6 @@
         "description": "\n\n > Restriction group: `Drafts: receiving`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5232,16 +4672,6 @@
         "summary": "Create delivery order draft.",
         "description": "\n\n > Restriction group: `Drafts: creating`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -5325,16 +4755,6 @@
         "description": "\n\n > Restriction group: `Drafts: creating`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5416,16 +4836,6 @@
         "summary": "Admit order draft changes and send them to Front.",
         "description": "\n\n > Restriction group: `Drafts: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -5509,16 +4919,6 @@
         "description": "\n\n > Restriction group: `Drafts: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5600,16 +5000,6 @@
         "summary": "Lock order draft.",
         "description": "\n\n > Restriction group: `Drafts: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -5693,16 +5083,6 @@
         "description": "\n\n > Restriction group: `Drafts: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5784,16 +5164,6 @@
         "summary": "Method of obtaining drivers' coordinates history.",
         "description": "\n\n > Restriction group: `Drivers: location`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -5877,16 +5247,6 @@
         "description": "\n\n > Restriction group: `Drivers: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -5968,16 +5328,6 @@
         "summary": "Returns list of all employees which are delivery drivers in specified restaurants, \r\nand checks whether each employee has passed role.",
         "description": "\n\n > Restriction group: `Drivers: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -6061,16 +5411,6 @@
         "description": "\n\n > Restriction group: `Drivers: location`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6152,16 +5492,6 @@
         "summary": "Returns list of all active (courier session is opened) courier's locations which are delivery drivers \r\nin specified restaurants.",
         "description": "\n\n > Restriction group: `Drivers: location`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -6245,16 +5575,6 @@
         "description": "\n\n > Restriction group: `Employees: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6336,16 +5656,6 @@
         "summary": "Open personal session.",
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Employees: shifts`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -6429,16 +5739,6 @@
         "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Employees: shifts`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6520,16 +5820,6 @@
         "summary": "Check if personal session is open.",
         "description": "\n\n > Restriction group: `Employees: shifts`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -6613,16 +5903,6 @@
         "description": "\n\n > Restriction group: `Employees: shifts`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6704,16 +5984,6 @@
         "summary": "Marketing sources.",
         "description": "\n\n > Allowed from version `7.2.5`.\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -6797,16 +6067,6 @@
         "description": "> Sourced from RMS Data Exchange Export menu.\n\n > Restriction group: `Data: menu`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6889,16 +6149,6 @@
         "description": "\n\n > Restriction group: `Data: menu`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -6971,16 +6221,6 @@
         "summary": "Retrieve external menu by ID.",
         "description": "> Sourced from Web External menu.\n\n > Restriction group: `Data: menu`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -7118,16 +6358,6 @@
         "description": "\n\n > Restriction group: `Data: stoplists`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -7209,16 +6439,6 @@
         "summary": "Check items in out-of-stock list.",
         "description": "\n\n > Restriction group: `Orders: creating`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -7302,16 +6522,6 @@
         "description": "\n\n > Allowed from version `8.6.1`.\n\n > Restriction group: `Data: changing stoplists`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -7393,16 +6603,6 @@
         "summary": "Remove items from out-of-stock list.\r\n(You should have extra rights to use this method).",
         "description": "\n\n > Allowed from version `8.6.1`.\n\n > Restriction group: `Data: changing stoplists`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -7486,16 +6686,6 @@
         "description": "\n\n > Allowed from version `8.6.1`.\n\n > Restriction group: `Data: changing stoplists`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -7578,16 +6768,6 @@
         "description": "\n\n > Restriction group: `Notifications`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -7669,16 +6849,6 @@
         "summary": "Get status of command.",
         "description": "> Response code `410` means that the correlationId value specified in the method is no longer supported.\r\nPlease do not request methods that include such a value.\n\n > Restriction group: `Commands`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -7772,16 +6942,6 @@
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: creating`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -7863,16 +7023,6 @@
         "summary": "Retrieve orders by IDs.",
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -7956,16 +7106,6 @@
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > Restriction group: `Orders: receiving`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8047,16 +7187,6 @@
         "summary": "Add order items.",
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -8140,16 +7270,6 @@
         "description": "\n\n > Allowed from version `7.4.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8231,16 +7351,6 @@
         "summary": "Cancel the table order.",
         "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -8324,16 +7434,6 @@
         "description": "> Method will fail if there are any processed payments in the order.\r\n> If all payments in the order are unprocessed they will be removed and replaced with new ones.\n\n > Allowed from version `7.7.4`.\n\n > Restriction group: `Order payments: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8415,16 +7515,6 @@
         "summary": "Change table order external_data.",
         "description": "\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -8508,16 +7598,6 @@
         "description": "\n\n > Allowed from version `7.7.1`.\n\n > Restriction group: `Orders: loading data`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8599,16 +7679,6 @@
         "summary": "Init orders, created on POS, by POS orders.",
         "description": "\n\n > Allowed from version `7.7.1`.\n\n > Restriction group: `Orders: loading data`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -8692,16 +7762,6 @@
         "description": "\n\n > Allowed from version `7.7.1`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8783,16 +7843,6 @@
         "summary": "Add order payments.",
         "description": "\n\n > Allowed from version `8.2.6`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order payments: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -8876,16 +7926,6 @@
         "description": "\n\n > Restriction group: `Organizations: settings`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -8967,16 +8007,6 @@
         "summary": "Method that returns information on groups of delivery terminals.",
         "description": "\n\n > Restriction group: `Data: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9060,16 +8090,6 @@
         "description": "\n\n > Restriction group: `POS: availability`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -9151,16 +8171,6 @@
         "summary": "Awake terminal groups from sleep mode.",
         "description": "\n\n > Restriction group: `Organizations: settings`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9244,16 +8254,6 @@
         "description": "\n\n > Restriction group: `Organizations: settings`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -9335,16 +8335,6 @@
         "summary": "Update webhooks settings for specified organization and authorized API login.",
         "description": "\n\n > Restriction group: `WebHooks: settings`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9428,16 +8418,6 @@
         "description": "Get customer info by specified criterion.\n\n > Restriction group: `Guests: info`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -9519,16 +8499,6 @@
         "summary": "Calculate checkin.",
         "description": "Calculate discounts and other loyalty items for an order.\n\n > Restriction group: `Loyalty: order calculate`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9612,16 +8582,6 @@
         "description": "Get all organization's combos.\n\n > Restriction group: `Data: menu`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -9703,16 +8663,6 @@
         "summary": "Calculate combo price",
         "description": "Make combo price calculation.\n\n > Restriction group: `Loyalty: order calculate`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9796,16 +8746,6 @@
         "description": "Get all organization's manual conditions.\n\n > Restriction group: `Loyalty: dictionaries`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -9887,16 +8827,6 @@
         "summary": "Get customer categories.",
         "description": "Get all organization's customer categories.\n\n > Restriction group: `Loyalty: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -9980,16 +8910,6 @@
         "description": "Create or update customer info by id or phone or card track.\n\n > Restriction group: `Guests: creating`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10071,16 +8991,6 @@
         "summary": "Logical deletion of customers.",
         "description": "Mark customers as deleted.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -10164,16 +9074,6 @@
         "description": "Removing deletion flags for customers.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10255,16 +9155,6 @@
         "summary": "Add category for customer.",
         "description": "Add specified category for customer.\n\n > Restriction group: `Guests: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -10348,16 +9238,6 @@
         "description": "Remove specified category for customer.\n\n > Restriction group: `Guests: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10439,16 +9319,6 @@
         "summary": "Check sms sending possibility.",
         "description": "Check sms sending possibility before send sms message.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -10532,16 +9402,6 @@
         "description": "Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.\n\n > Restriction group: `Loyalty: messages`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10623,16 +9483,6 @@
         "summary": "Check SMS status.",
         "description": "Check the status of sending SMS messages.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -10716,16 +9566,6 @@
         "description": "Send email message to specified email address. Sending proceed according iikoCard organization's settings.\n\n > Restriction group: `Loyalty: messages`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10807,16 +9647,6 @@
         "summary": "Get programs.",
         "description": "Get all loyalty programs for organization.\n\n > Restriction group: `Loyalty: dictionaries`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -10900,16 +9730,6 @@
         "description": "Add new customer for program.\n\n > Restriction group: `Guests: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -10991,16 +9811,6 @@
         "summary": "Add card.",
         "description": "Add new card for customer.\n\n > Restriction group: `Guests: changing`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -11084,16 +9894,6 @@
         "description": "Delete existing card for customer.\n\n > Restriction group: `Guests: changing`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -11175,16 +9975,6 @@
         "summary": "Hold money.",
         "description": "Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.\n\n > Restriction group: `Loyalty: wallets`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -11268,16 +10058,6 @@
         "description": "Cancel holding transaction that created earlier.\n\n > Restriction group: `Loyalty: wallets`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -11359,16 +10139,6 @@
         "summary": "Refill balance.",
         "description": "Refill customer balance.\n\n > Restriction group: `Loyalty: wallets`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -11452,16 +10222,6 @@
         "description": "Withdraw customer balance.\n\n > Restriction group: `Loyalty: wallets`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -11543,16 +10303,6 @@
         "summary": "Get counters.",
         "description": "Get customer orders count and sum for different period.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -11636,16 +10386,6 @@
         "description": "Get information about the specified coupon.\n\n > Restriction group: `Loyalty: coupons`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -11727,16 +10467,6 @@
         "summary": "Get coupon series with non-activated coupons.",
         "description": "Get a list of coupon series in which there are not deleted and not activated coupons.\n\n > Restriction group: `Loyalty: coupons`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -11820,16 +10550,6 @@
         "description": "Get list of non-activated coupons.\n\n > Restriction group: `Loyalty: coupons`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -11912,16 +10632,6 @@
         "description": "Get transaction report for specified customer by provided revision.\n\n > Restriction group: `Guests: info`.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
-          {
             "name": "Timeout",
             "in": "header",
             "description": "Timeout in seconds.",
@@ -12003,16 +10713,6 @@
         "summary": "Get transaction report by period.",
         "description": "Get transaction report for specified customer by provided date range.\n\n > Restriction group: `Guests: info`.",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization token.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw"
-            }
-          },
           {
             "name": "Timeout",
             "in": "header",
@@ -34186,6 +32886,11 @@
       }
     }
   },
+  "security": [
+        {
+            "Bearer": []
+        }
+  ],
   "tags": [
     {
       "name": "Authorization",

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **employees_couriers_active_location_by_terminal_post**
-> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse employees_couriers_active_location_by_terminal_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request)
+> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse employees_couriers_active_location_by_terminal_post(timeout=timeout, iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request)
 
 Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
@@ -46,13 +46,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest() # IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest |  (optional)
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
-        api_response = await api_instance.employees_couriers_active_location_by_terminal_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request)
+        api_response = await api_instance.employees_couriers_active_location_by_terminal_post(timeout=timeout, iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request)
         print("The response of EmployeesApi->employees_couriers_active_location_by_terminal_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,7 +65,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request** | [**IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest**](IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest.md)|  | [optional] 
 
@@ -96,7 +94,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_couriers_active_location_post**
-> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse employees_couriers_active_location_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
+> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse employees_couriers_active_location_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
 
 Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
@@ -125,13 +123,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_couriers_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesCouriersRequest() # IikoTransportPublicApiContractsEmployeesCouriersRequest |  (optional)
 
     try:
         # Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
-        api_response = await api_instance.employees_couriers_active_location_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
+        api_response = await api_instance.employees_couriers_active_location_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
         print("The response of EmployeesApi->employees_couriers_active_location_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,7 +142,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_couriers_request** | [**IikoTransportPublicApiContractsEmployeesCouriersRequest**](IikoTransportPublicApiContractsEmployeesCouriersRequest.md)|  | [optional] 
 
@@ -175,7 +171,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_couriers_by_role_post**
-> IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse employees_couriers_by_role_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request)
+> IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse employees_couriers_by_role_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request)
 
 Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
@@ -204,13 +200,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_couriers_and_check_role_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest() # IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest |  (optional)
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
-        api_response = await api_instance.employees_couriers_by_role_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request)
+        api_response = await api_instance.employees_couriers_by_role_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request)
         print("The response of EmployeesApi->employees_couriers_by_role_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -224,7 +219,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_couriers_and_check_role_request** | [**IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest**](IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest.md)|  | [optional] 
 
@@ -254,7 +248,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_couriers_locations_by_time_offset_post**
-> IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse employees_couriers_locations_by_time_offset_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request)
+> IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse employees_couriers_locations_by_time_offset_post(timeout=timeout, iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request)
 
 Method of obtaining drivers' coordinates history.
 
@@ -283,13 +277,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest() # IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest |  (optional)
 
     try:
         # Method of obtaining drivers' coordinates history.
-        api_response = await api_instance.employees_couriers_locations_by_time_offset_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request)
+        api_response = await api_instance.employees_couriers_locations_by_time_offset_post(timeout=timeout, iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request)
         print("The response of EmployeesApi->employees_couriers_locations_by_time_offset_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -303,7 +296,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request** | [**IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest**](IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest.md)|  | [optional] 
 
@@ -333,7 +325,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_couriers_post**
-> IikoTransportPublicApiContractsEmployeesEmployeesResponse employees_couriers_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
+> IikoTransportPublicApiContractsEmployeesEmployeesResponse employees_couriers_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
 
 Returns list of all employees which are delivery drivers in specified restaurants.
 
@@ -362,13 +354,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_couriers_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesCouriersRequest() # IikoTransportPublicApiContractsEmployeesCouriersRequest |  (optional)
 
     try:
         # Returns list of all employees which are delivery drivers in specified restaurants.
-        api_response = await api_instance.employees_couriers_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
+        api_response = await api_instance.employees_couriers_post(timeout=timeout, iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request)
         print("The response of EmployeesApi->employees_couriers_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -382,7 +373,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_couriers_request** | [**IikoTransportPublicApiContractsEmployeesCouriersRequest**](IikoTransportPublicApiContractsEmployeesCouriersRequest.md)|  | [optional] 
 
@@ -412,7 +402,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_info_post**
-> IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse employees_info_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request)
+> IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse employees_info_post(timeout=timeout, iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request)
 
 Returns employee info.
 
@@ -441,13 +431,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_employee_info_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest() # IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest |  (optional)
 
     try:
         # Returns employee info.
-        api_response = await api_instance.employees_info_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request)
+        api_response = await api_instance.employees_info_post(timeout=timeout, iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request)
         print("The response of EmployeesApi->employees_info_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -461,7 +450,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_employee_info_request** | [**IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest**](IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest.md)|  | [optional] 
 
@@ -491,7 +479,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_shift_clockin_post**
-> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse employees_shift_clockin_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request)
+> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse employees_shift_clockin_post(timeout=timeout, iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request)
 
 Open personal session.
 
@@ -522,13 +510,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_open_personal_session_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest() # IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest |  (optional)
 
     try:
         # Open personal session.
-        api_response = await api_instance.employees_shift_clockin_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request)
+        api_response = await api_instance.employees_shift_clockin_post(timeout=timeout, iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request)
         print("The response of EmployeesApi->employees_shift_clockin_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -542,7 +529,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_open_personal_session_request** | [**IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest**](IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest.md)|  | [optional] 
 
@@ -572,7 +558,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_shift_clockout_post**
-> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse employees_shift_clockout_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request)
+> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse employees_shift_clockout_post(timeout=timeout, iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request)
 
 Close personal session.
 
@@ -603,13 +589,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_close_personal_session_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest() # IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest |  (optional)
 
     try:
         # Close personal session.
-        api_response = await api_instance.employees_shift_clockout_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request)
+        api_response = await api_instance.employees_shift_clockout_post(timeout=timeout, iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request)
         print("The response of EmployeesApi->employees_shift_clockout_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -623,7 +608,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_close_personal_session_request** | [**IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest**](IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest.md)|  | [optional] 
 
@@ -653,7 +637,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_shift_is_open_post**
-> IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse employees_shift_is_open_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request)
+> IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse employees_shift_is_open_post(timeout=timeout, iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request)
 
 Check if personal session is open.
 
@@ -682,13 +666,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_get_personal_session_info_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest() # IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest |  (optional)
 
     try:
         # Check if personal session is open.
-        api_response = await api_instance.employees_shift_is_open_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request)
+        api_response = await api_instance.employees_shift_is_open_post(timeout=timeout, iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request)
         print("The response of EmployeesApi->employees_shift_is_open_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -702,7 +685,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_get_personal_session_info_request** | [**IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest**](IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest.md)|  | [optional] 
 
@@ -732,7 +714,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **employees_shifts_by_courier_post**
-> IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse employees_shifts_by_courier_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request)
+> IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse employees_shifts_by_courier_post(timeout=timeout, iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request)
 
 Get terminal groups where employee session is opened.
 
@@ -761,13 +743,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.EmployeesApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request = iikocloud_client.IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest() # IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest |  (optional)
 
     try:
         # Get terminal groups where employee session is opened.
-        api_response = await api_instance.employees_shifts_by_courier_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request)
+        api_response = await api_instance.employees_shifts_by_courier_post(timeout=timeout, iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request)
         print("The response of EmployeesApi->employees_shifts_by_courier_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -781,7 +762,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request** | [**IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest**](IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest.md)|  | [optional] 
 

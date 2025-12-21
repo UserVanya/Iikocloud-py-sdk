@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request import IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
@@ -53,7 +53,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_calculate_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -73,8 +72,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
@@ -102,7 +99,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -132,7 +128,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_calculate_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -152,8 +147,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
@@ -181,7 +174,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -211,7 +203,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_calculate_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
@@ -231,8 +222,6 @@ class DiscountsAndPromotionsApi:
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
@@ -260,7 +249,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_calculate_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
@@ -285,7 +273,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_calculate_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
         _request_auth,
@@ -311,8 +298,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -368,7 +353,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_by_series_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -388,8 +372,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
@@ -417,7 +399,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -447,7 +428,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_by_series_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -467,8 +447,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
@@ -496,7 +474,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -526,7 +503,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_by_series_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
@@ -546,8 +522,6 @@ class DiscountsAndPromotionsApi:
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
@@ -575,7 +549,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
@@ -600,7 +573,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_coupons_by_series_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
         _request_auth,
@@ -626,8 +598,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -683,7 +653,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_info_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -703,8 +672,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
@@ -732,7 +699,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -762,7 +728,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_info_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -782,8 +747,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
@@ -811,7 +774,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -841,7 +803,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_info_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
@@ -861,8 +822,6 @@ class DiscountsAndPromotionsApi:
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
@@ -890,7 +849,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
@@ -915,7 +873,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_coupons_info_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
         _request_auth,
@@ -941,8 +898,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -998,7 +953,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_series_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1018,8 +972,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
@@ -1047,7 +999,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1077,7 +1028,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_series_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1097,8 +1047,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
@@ -1126,7 +1074,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1156,7 +1103,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_coupons_series_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
@@ -1176,8 +1122,6 @@ class DiscountsAndPromotionsApi:
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
@@ -1205,7 +1149,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
@@ -1230,7 +1173,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_coupons_series_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
         _request_auth,
@@ -1256,8 +1198,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1313,7 +1253,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_manual_condition_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1333,8 +1272,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
@@ -1362,7 +1299,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1392,7 +1328,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_manual_condition_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1412,8 +1347,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
@@ -1441,7 +1374,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1471,7 +1403,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_manual_condition_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
@@ -1491,8 +1422,6 @@ class DiscountsAndPromotionsApi:
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
@@ -1520,7 +1449,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
             _request_auth=_request_auth,
@@ -1545,7 +1473,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_manual_condition_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
         _request_auth,
@@ -1571,8 +1498,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1628,7 +1553,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_program_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1648,8 +1572,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
@@ -1677,7 +1599,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1707,7 +1628,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_program_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1727,8 +1647,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
@@ -1756,7 +1674,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1786,7 +1703,6 @@ class DiscountsAndPromotionsApi:
     @validate_call
     async def loyalty_iiko_program_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
@@ -1806,8 +1722,6 @@ class DiscountsAndPromotionsApi:
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
@@ -1835,7 +1749,6 @@ class DiscountsAndPromotionsApi:
         """ # noqa: E501
 
         _param = self._loyalty_iiko_program_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
             _request_auth=_request_auth,
@@ -1860,7 +1773,6 @@ class DiscountsAndPromotionsApi:
 
     def _loyalty_iiko_program_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
         _request_auth,
@@ -1886,8 +1798,6 @@ class DiscountsAndPromotionsApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

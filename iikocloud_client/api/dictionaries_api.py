@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request import IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
@@ -52,7 +52,6 @@ class DictionariesApi:
     @validate_call
     async def cancel_causes_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
@@ -72,8 +71,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
@@ -101,7 +98,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._cancel_causes_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -131,7 +127,6 @@ class DictionariesApi:
     @validate_call
     async def cancel_causes_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
@@ -151,8 +146,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
@@ -180,7 +173,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._cancel_causes_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -210,7 +202,6 @@ class DictionariesApi:
     @validate_call
     async def cancel_causes_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
@@ -230,8 +221,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.1`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
@@ -259,7 +248,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._cancel_causes_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
@@ -284,7 +272,6 @@ class DictionariesApi:
 
     def _cancel_causes_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
         _request_auth,
@@ -310,8 +297,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -367,7 +352,6 @@ class DictionariesApi:
     @validate_call
     async def deliveries_order_types_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
@@ -387,8 +371,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_order_types_order_types_request:
@@ -416,7 +398,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._deliveries_order_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -446,7 +427,6 @@ class DictionariesApi:
     @validate_call
     async def deliveries_order_types_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
@@ -466,8 +446,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_order_types_order_types_request:
@@ -495,7 +473,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._deliveries_order_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -525,7 +502,6 @@ class DictionariesApi:
     @validate_call
     async def deliveries_order_types_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
@@ -545,8 +521,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_order_types_order_types_request:
@@ -574,7 +548,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._deliveries_order_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
             _request_auth=_request_auth,
@@ -599,7 +572,6 @@ class DictionariesApi:
 
     def _deliveries_order_types_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_order_types_order_types_request,
         _request_auth,
@@ -625,8 +597,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -682,7 +652,6 @@ class DictionariesApi:
     @validate_call
     async def discounts_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
         _request_timeout: Union[
@@ -702,8 +671,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_discounts_discounts_request:
@@ -731,7 +698,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._discounts_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -761,7 +727,6 @@ class DictionariesApi:
     @validate_call
     async def discounts_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
         _request_timeout: Union[
@@ -781,8 +746,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_discounts_discounts_request:
@@ -810,7 +773,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._discounts_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -840,7 +802,6 @@ class DictionariesApi:
     @validate_call
     async def discounts_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
         _request_timeout: Union[
@@ -860,8 +821,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_discounts_discounts_request:
@@ -889,7 +848,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._discounts_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
             _request_auth=_request_auth,
@@ -914,7 +872,6 @@ class DictionariesApi:
 
     def _discounts_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_discounts_discounts_request,
         _request_auth,
@@ -940,8 +897,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -997,7 +952,6 @@ class DictionariesApi:
     @validate_call
     async def payment_types_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
@@ -1017,8 +971,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
@@ -1046,7 +998,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._payment_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1076,7 +1027,6 @@ class DictionariesApi:
     @validate_call
     async def payment_types_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
@@ -1096,8 +1046,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
@@ -1125,7 +1073,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._payment_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1155,7 +1102,6 @@ class DictionariesApi:
     @validate_call
     async def payment_types_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
@@ -1175,8 +1121,6 @@ class DictionariesApi:
 
            > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
@@ -1204,7 +1148,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._payment_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
             _request_auth=_request_auth,
@@ -1229,7 +1172,6 @@ class DictionariesApi:
 
     def _payment_types_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_payment_types_payment_types_request,
         _request_auth,
@@ -1255,8 +1197,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1312,7 +1252,6 @@ class DictionariesApi:
     @validate_call
     async def removal_types_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
@@ -1332,8 +1271,6 @@ class DictionariesApi:
 
            > Allowed from version `7.5.3`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
@@ -1361,7 +1298,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._removal_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1391,7 +1327,6 @@ class DictionariesApi:
     @validate_call
     async def removal_types_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
@@ -1411,8 +1346,6 @@ class DictionariesApi:
 
            > Allowed from version `7.5.3`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
@@ -1440,7 +1373,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._removal_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1470,7 +1402,6 @@ class DictionariesApi:
     @validate_call
     async def removal_types_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
@@ -1490,8 +1421,6 @@ class DictionariesApi:
 
            > Allowed from version `7.5.3`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
@@ -1519,7 +1448,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._removal_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
             _request_auth=_request_auth,
@@ -1544,7 +1472,6 @@ class DictionariesApi:
 
     def _removal_types_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_removal_types_removal_types_request,
         _request_auth,
@@ -1570,8 +1497,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1627,7 +1552,6 @@ class DictionariesApi:
     @validate_call
     async def tips_types_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -1646,8 +1570,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.4`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1673,7 +1595,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._tips_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1702,7 +1623,6 @@ class DictionariesApi:
     @validate_call
     async def tips_types_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -1721,8 +1641,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.4`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1748,7 +1666,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._tips_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1777,7 +1694,6 @@ class DictionariesApi:
     @validate_call
     async def tips_types_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         _request_timeout: Union[
             None,
@@ -1796,8 +1712,6 @@ class DictionariesApi:
 
            > Allowed from version `7.7.4`.   > Restriction group: `Data: dictionaries`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1823,7 +1737,6 @@ class DictionariesApi:
         """ # noqa: E501
 
         _param = self._tips_types_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1847,7 +1760,6 @@ class DictionariesApi:
 
     def _tips_types_post_serialize(
         self,
-        authorization,
         timeout,
         _request_auth,
         _content_type,
@@ -1872,8 +1784,6 @@ class DictionariesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_update_order_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
 
 Update order payment details.
 
@@ -40,13 +40,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
 
     try:
         # Update order payment details.
-        api_response = await api_instance.deliveries_update_order_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+        api_response = await api_instance.deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
         print("The response of DeprecatedApi->deliveries_update_order_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,7 +59,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest.md)|  | [optional] 
 
@@ -90,7 +88,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **organizations_get**
-> IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse organizations_get(authorization, timeout=timeout)
+> IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse organizations_get(timeout=timeout)
 
 Returns organizations available to api-login user.
 
@@ -118,12 +116,11 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
 
     try:
         # Returns organizations available to api-login user.
-        api_response = await api_instance.organizations_get(authorization, timeout=timeout)
+        api_response = await api_instance.organizations_get(timeout=timeout)
         print("The response of DeprecatedApi->organizations_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,7 +134,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
 
 ### Return type

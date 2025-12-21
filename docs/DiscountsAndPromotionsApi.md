@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **loyalty_iiko_calculate_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse loyalty_iiko_calculate_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request)
+> IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse loyalty_iiko_calculate_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request)
 
 Calculate checkin.
 
@@ -42,13 +42,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest |  (optional)
 
     try:
         # Calculate checkin.
-        api_response = await api_instance.loyalty_iiko_calculate_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request)
+        api_response = await api_instance.loyalty_iiko_calculate_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_calculate_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -62,7 +61,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest.md)|  | [optional] 
 
@@ -92,7 +90,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_coupons_by_series_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse loyalty_iiko_coupons_by_series_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request)
+> IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse loyalty_iiko_coupons_by_series_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request)
 
 Get non-activated coupons
 
@@ -121,13 +119,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest |  (optional)
 
     try:
         # Get non-activated coupons
-        api_response = await api_instance.loyalty_iiko_coupons_by_series_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request)
+        api_response = await api_instance.loyalty_iiko_coupons_by_series_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_by_series_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -141,7 +138,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest.md)|  | [optional] 
 
@@ -171,7 +167,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_coupons_info_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse loyalty_iiko_coupons_info_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request)
+> IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse loyalty_iiko_coupons_info_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request)
 
 Get coupon info.
 
@@ -200,13 +196,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest |  (optional)
 
     try:
         # Get coupon info.
-        api_response = await api_instance.loyalty_iiko_coupons_info_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request)
+        api_response = await api_instance.loyalty_iiko_coupons_info_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_info_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -220,7 +215,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest.md)|  | [optional] 
 
@@ -250,7 +244,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_coupons_series_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse loyalty_iiko_coupons_series_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request)
+> IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse loyalty_iiko_coupons_series_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request)
 
 Get coupon series with non-activated coupons.
 
@@ -279,13 +273,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest |  (optional)
 
     try:
         # Get coupon series with non-activated coupons.
-        api_response = await api_instance.loyalty_iiko_coupons_series_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request)
+        api_response = await api_instance.loyalty_iiko_coupons_series_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_coupons_series_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -299,7 +292,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest.md)|  | [optional] 
 
@@ -329,7 +321,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_manual_condition_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse loyalty_iiko_manual_condition_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request)
+> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse loyalty_iiko_manual_condition_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request)
 
 Get manual conditions.
 
@@ -358,13 +350,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest() # IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest |  (optional)
 
     try:
         # Get manual conditions.
-        api_response = await api_instance.loyalty_iiko_manual_condition_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request)
+        api_response = await api_instance.loyalty_iiko_manual_condition_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_manual_condition_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,7 +369,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request** | [**IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest**](IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest.md)|  | [optional] 
 
@@ -408,7 +398,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_program_post**
-> IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse loyalty_iiko_program_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request)
+> IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse loyalty_iiko_program_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request)
 
 Get programs.
 
@@ -437,13 +427,12 @@ configuration = iikocloud_client.Configuration(
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DiscountsAndPromotionsApi(api_client)
-    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
     iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest() # IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest |  (optional)
 
     try:
         # Get programs.
-        api_response = await api_instance.loyalty_iiko_program_post(authorization, timeout=timeout, iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request)
+        api_response = await api_instance.loyalty_iiko_program_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request)
         print("The response of DiscountsAndPromotionsApi->loyalty_iiko_program_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -457,7 +446,6 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
  **iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request** | [**IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest**](IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest.md)|  | [optional] 
 

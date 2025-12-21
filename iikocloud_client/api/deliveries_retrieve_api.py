@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
@@ -49,7 +49,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_phone_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -69,8 +68,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
@@ -98,7 +95,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -128,7 +124,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_phone_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -148,8 +143,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
@@ -177,7 +170,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -207,7 +199,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_phone_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -227,8 +218,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
@@ -256,7 +245,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -281,7 +269,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_by_delivery_date_and_phone_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
         _request_auth,
@@ -307,8 +294,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -364,7 +349,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_source_key_and_filter_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
@@ -384,8 +368,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
@@ -413,7 +395,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -443,7 +424,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_source_key_and_filter_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
@@ -463,8 +443,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
@@ -492,7 +470,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -522,7 +499,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_source_key_and_filter_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
@@ -542,8 +518,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
@@ -571,7 +545,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
@@ -596,7 +569,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
         _request_auth,
@@ -622,8 +594,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -679,7 +649,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_status_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
@@ -699,8 +668,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
@@ -728,7 +695,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -758,7 +724,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_status_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
@@ -778,8 +743,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
@@ -807,7 +770,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -837,7 +799,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_delivery_date_and_status_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
@@ -857,8 +818,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
@@ -886,7 +845,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
@@ -911,7 +869,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_by_delivery_date_and_status_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
         _request_auth,
@@ -937,8 +894,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -994,7 +949,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_id_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1014,8 +968,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
@@ -1043,7 +995,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1073,7 +1024,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_id_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1093,8 +1043,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
@@ -1122,7 +1070,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1152,7 +1099,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_id_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
@@ -1172,8 +1118,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
@@ -1201,7 +1145,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_id_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
@@ -1226,7 +1169,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_by_id_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
         _request_auth,
@@ -1252,8 +1194,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1309,7 +1249,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_revision_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
@@ -1329,8 +1268,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving by revision`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
@@ -1358,7 +1295,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_revision_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1388,7 +1324,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_revision_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
@@ -1408,8 +1343,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving by revision`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
@@ -1437,7 +1370,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_revision_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1467,7 +1399,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_by_revision_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
@@ -1487,8 +1418,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving by revision`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
@@ -1516,7 +1445,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_by_revision_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
@@ -1541,7 +1469,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_by_revision_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
         _request_auth,
@@ -1567,8 +1494,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
@@ -1624,7 +1549,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_history_by_delivery_date_and_phone_post(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -1644,8 +1568,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
@@ -1673,7 +1595,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1703,7 +1624,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_history_by_delivery_date_and_phone_post_with_http_info(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -1723,8 +1643,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
@@ -1752,7 +1670,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1782,7 +1699,6 @@ class DeliveriesRetrieveApi:
     @validate_call
     async def deliveries_history_by_delivery_date_and_phone_post_without_preload_content(
         self,
-        authorization: Annotated[StrictStr, Field(description="Authorization token.")],
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
         iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
@@ -1802,8 +1718,6 @@ class DeliveriesRetrieveApi:
 
            > Restriction group: `Orders: receiving`.
 
-        :param authorization: Authorization token. (required)
-        :type authorization: str
         :param timeout: Timeout in seconds.
         :type timeout: int
         :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
@@ -1831,7 +1745,6 @@ class DeliveriesRetrieveApi:
         """ # noqa: E501
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
-            authorization=authorization,
             timeout=timeout,
             iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
@@ -1856,7 +1769,6 @@ class DeliveriesRetrieveApi:
 
     def _deliveries_history_by_delivery_date_and_phone_post_serialize(
         self,
-        authorization,
         timeout,
         iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
         _request_auth,
@@ -1882,8 +1794,6 @@ class DeliveriesRetrieveApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         if timeout is not None:
             _header_params['Timeout'] = timeout
         # process the form parameters
