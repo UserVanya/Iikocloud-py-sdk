@@ -19,8 +19,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_response import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.marketing_sources_marketing_sources_request import MarketingSourcesMarketingSourcesRequest
+from iikocloud_client.models.marketing_sources_marketing_sources_response import MarketingSourcesMarketingSourcesResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -44,7 +44,7 @@ class MarketingSourcesApi:
     async def marketing_sources_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: Optional[IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest] = None,
+        marketing_sources_marketing_sources_request: Optional[MarketingSourcesMarketingSourcesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,15 +57,15 @@ class MarketingSourcesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse:
+    ) -> MarketingSourcesMarketingSourcesResponse:
         """Marketing sources.
 
            > Allowed from version `7.2.5`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request:
-        :type iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
+        :param marketing_sources_marketing_sources_request:
+        :type marketing_sources_marketing_sources_request: MarketingSourcesMarketingSourcesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class MarketingSourcesApi:
 
         _param = self._marketing_sources_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request,
+            marketing_sources_marketing_sources_request=marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,11 +98,11 @@ class MarketingSourcesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "MarketingSourcesMarketingSourcesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -119,7 +119,7 @@ class MarketingSourcesApi:
     async def marketing_sources_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: Optional[IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest] = None,
+        marketing_sources_marketing_sources_request: Optional[MarketingSourcesMarketingSourcesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,15 +132,15 @@ class MarketingSourcesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse]:
+    ) -> ApiResponse[MarketingSourcesMarketingSourcesResponse]:
         """Marketing sources.
 
            > Allowed from version `7.2.5`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request:
-        :type iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
+        :param marketing_sources_marketing_sources_request:
+        :type marketing_sources_marketing_sources_request: MarketingSourcesMarketingSourcesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -165,7 +165,7 @@ class MarketingSourcesApi:
 
         _param = self._marketing_sources_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request,
+            marketing_sources_marketing_sources_request=marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -173,11 +173,11 @@ class MarketingSourcesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "MarketingSourcesMarketingSourcesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -194,7 +194,7 @@ class MarketingSourcesApi:
     async def marketing_sources_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: Optional[IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest] = None,
+        marketing_sources_marketing_sources_request: Optional[MarketingSourcesMarketingSourcesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,8 +214,8 @@ class MarketingSourcesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request:
-        :type iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request: IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
+        :param marketing_sources_marketing_sources_request:
+        :type marketing_sources_marketing_sources_request: MarketingSourcesMarketingSourcesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -240,7 +240,7 @@ class MarketingSourcesApi:
 
         _param = self._marketing_sources_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request,
+            marketing_sources_marketing_sources_request=marketing_sources_marketing_sources_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -248,11 +248,11 @@ class MarketingSourcesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "MarketingSourcesMarketingSourcesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -264,7 +264,7 @@ class MarketingSourcesApi:
     def _marketing_sources_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request,
+        marketing_sources_marketing_sources_request,
         _request_auth,
         _content_type,
         _headers,
@@ -292,8 +292,8 @@ class MarketingSourcesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request is not None:
-            _body_params = iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request
+        if marketing_sources_marketing_sources_request is not None:
+            _body_params = marketing_sources_marketing_sources_request
 
 
         # set the HTTP header `Accept`

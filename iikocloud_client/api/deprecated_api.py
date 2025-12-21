@@ -19,9 +19,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_simple_organizations_response import IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.deliveries_request_update_order_payments_request import DeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.models.organizations_get_simple_organizations_response import OrganizationsGetSimpleOrganizationsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -45,7 +45,7 @@ class DeprecatedApi:
     async def deliveries_update_order_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,15 +58,15 @@ class DeprecatedApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """(Deprecated) Update order payment details.
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,7 +92,7 @@ class DeprecatedApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,11 +100,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +121,7 @@ class DeprecatedApi:
     async def deliveries_update_order_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,15 +134,15 @@ class DeprecatedApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """(Deprecated) Update order payment details.
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -168,7 +168,7 @@ class DeprecatedApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -176,11 +176,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -197,7 +197,7 @@ class DeprecatedApi:
     async def deliveries_update_order_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -217,8 +217,8 @@ class DeprecatedApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -244,7 +244,7 @@ class DeprecatedApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -252,11 +252,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -268,7 +268,7 @@ class DeprecatedApi:
     def _deliveries_update_order_payments_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+        deliveries_request_update_order_payments_request,
         _request_auth,
         _content_type,
         _headers,
@@ -296,8 +296,8 @@ class DeprecatedApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request
+        if deliveries_request_update_order_payments_request is not None:
+            _body_params = deliveries_request_update_order_payments_request
 
 
         # set the HTTP header `Accept`
@@ -361,7 +361,7 @@ class DeprecatedApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse:
+    ) -> OrganizationsGetSimpleOrganizationsResponse:
         """(Deprecated) Returns organizations available to api-login user.
 
         > Deprecated, use `POST api/1/organizations`.   > Restriction group: `Data: dictionaries`.
@@ -400,11 +400,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetSimpleOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -433,7 +433,7 @@ class DeprecatedApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse]:
+    ) -> ApiResponse[OrganizationsGetSimpleOrganizationsResponse]:
         """(Deprecated) Returns organizations available to api-login user.
 
         > Deprecated, use `POST api/1/organizations`.   > Restriction group: `Data: dictionaries`.
@@ -472,11 +472,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetSimpleOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -544,11 +544,11 @@ class DeprecatedApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetSimpleOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

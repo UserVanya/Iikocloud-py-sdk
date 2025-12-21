@@ -19,13 +19,13 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request import IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_response import IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_email_request import IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request import IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_sms_response import IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_response import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse
+from iikocloud_client.models.notification_check_sms_status_request import NotificationCheckSmsStatusRequest
+from iikocloud_client.models.notification_check_sms_status_response import NotificationCheckSmsStatusResponse
+from iikocloud_client.models.notification_send_email_request import NotificationSendEmailRequest
+from iikocloud_client.models.notification_send_sms_request import NotificationSendSmsRequest
+from iikocloud_client.models.notification_send_sms_response import NotificationSendSmsResponse
+from iikocloud_client.models.notification_sms_sending_possibility_request import NotificationSmsSendingPossibilityRequest
+from iikocloud_client.models.notification_sms_sending_possibility_response import NotificationSmsSendingPossibilityResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -49,7 +49,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_sending_possibility_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest] = None,
+        notification_sms_sending_possibility_request: Optional[NotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,15 +62,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse:
+    ) -> NotificationSmsSendingPossibilityResponse:
         """Check sms sending possibility.
 
         Check sms sending possibility before send sms message.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest
+        :param notification_sms_sending_possibility_request:
+        :type notification_sms_sending_possibility_request: NotificationSmsSendingPossibilityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -95,7 +95,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request,
+            notification_sms_sending_possibility_request=notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -103,11 +103,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSmsSendingPossibilityResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -124,7 +124,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_sending_possibility_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest] = None,
+        notification_sms_sending_possibility_request: Optional[NotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -137,15 +137,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse]:
+    ) -> ApiResponse[NotificationSmsSendingPossibilityResponse]:
         """Check sms sending possibility.
 
         Check sms sending possibility before send sms message.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest
+        :param notification_sms_sending_possibility_request:
+        :type notification_sms_sending_possibility_request: NotificationSmsSendingPossibilityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -170,7 +170,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request,
+            notification_sms_sending_possibility_request=notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -178,11 +178,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSmsSendingPossibilityResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -199,7 +199,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_sending_possibility_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest] = None,
+        notification_sms_sending_possibility_request: Optional[NotificationSmsSendingPossibilityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -219,8 +219,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request: IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest
+        :param notification_sms_sending_possibility_request:
+        :type notification_sms_sending_possibility_request: NotificationSmsSendingPossibilityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -245,7 +245,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_sending_possibility_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request=iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request,
+            notification_sms_sending_possibility_request=notification_sms_sending_possibility_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -253,11 +253,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSmsSendingPossibilityResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -269,7 +269,7 @@ class MessagesApi:
     def _loyalty_iiko_check_sms_sending_possibility_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request,
+        notification_sms_sending_possibility_request,
         _request_auth,
         _content_type,
         _headers,
@@ -297,8 +297,8 @@ class MessagesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request
+        if notification_sms_sending_possibility_request is not None:
+            _body_params = notification_sms_sending_possibility_request
 
 
         # set the HTTP header `Accept`
@@ -350,7 +350,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest] = None,
+        notification_check_sms_status_request: Optional[NotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,15 +363,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse:
+    ) -> NotificationCheckSmsStatusResponse:
         """Check SMS status.
 
         Check the status of sending SMS messages.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest
+        :param notification_check_sms_status_request:
+        :type notification_check_sms_status_request: NotificationCheckSmsStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -396,7 +396,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request,
+            notification_check_sms_status_request=notification_check_sms_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -404,11 +404,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationCheckSmsStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -425,7 +425,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest] = None,
+        notification_check_sms_status_request: Optional[NotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,15 +438,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse]:
+    ) -> ApiResponse[NotificationCheckSmsStatusResponse]:
         """Check SMS status.
 
         Check the status of sending SMS messages.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest
+        :param notification_check_sms_status_request:
+        :type notification_check_sms_status_request: NotificationCheckSmsStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -471,7 +471,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request,
+            notification_check_sms_status_request=notification_check_sms_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -479,11 +479,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationCheckSmsStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -500,7 +500,7 @@ class MessagesApi:
     async def loyalty_iiko_check_sms_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest] = None,
+        notification_check_sms_status_request: Optional[NotificationCheckSmsStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -520,8 +520,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request: IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest
+        :param notification_check_sms_status_request:
+        :type notification_check_sms_status_request: NotificationCheckSmsStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -546,7 +546,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_check_sms_status_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request=iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request,
+            notification_check_sms_status_request=notification_check_sms_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -554,11 +554,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationCheckSmsStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -570,7 +570,7 @@ class MessagesApi:
     def _loyalty_iiko_check_sms_status_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request,
+        notification_check_sms_status_request,
         _request_auth,
         _content_type,
         _headers,
@@ -598,8 +598,8 @@ class MessagesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request
+        if notification_check_sms_status_request is not None:
+            _body_params = notification_check_sms_status_request
 
 
         # set the HTTP header `Accept`
@@ -651,7 +651,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_email_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest] = None,
+        notification_send_email_request: Optional[NotificationSendEmailRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -671,8 +671,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_email_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest
+        :param notification_send_email_request:
+        :type notification_send_email_request: NotificationSendEmailRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -697,7 +697,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request,
+            notification_send_email_request=notification_send_email_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -706,10 +706,10 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -726,7 +726,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_email_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest] = None,
+        notification_send_email_request: Optional[NotificationSendEmailRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -746,8 +746,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_email_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest
+        :param notification_send_email_request:
+        :type notification_send_email_request: NotificationSendEmailRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -772,7 +772,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request,
+            notification_send_email_request=notification_send_email_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -781,10 +781,10 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -801,7 +801,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_email_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest] = None,
+        notification_send_email_request: Optional[NotificationSendEmailRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -821,8 +821,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_email_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_email_request: IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest
+        :param notification_send_email_request:
+        :type notification_send_email_request: NotificationSendEmailRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -847,7 +847,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_email_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_email_request=iiko_net_service_contracts_api_iiko_transport_notification_send_email_request,
+            notification_send_email_request=notification_send_email_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -856,10 +856,10 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -871,7 +871,7 @@ class MessagesApi:
     def _loyalty_iiko_message_send_email_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_email_request,
+        notification_send_email_request,
         _request_auth,
         _content_type,
         _headers,
@@ -899,8 +899,8 @@ class MessagesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_notification_send_email_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_notification_send_email_request
+        if notification_send_email_request is not None:
+            _body_params = notification_send_email_request
 
 
         # set the HTTP header `Accept`
@@ -952,7 +952,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_sms_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest] = None,
+        notification_send_sms_request: Optional[NotificationSendSmsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -965,15 +965,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse:
+    ) -> NotificationSendSmsResponse:
         """Send sms.
 
         Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest
+        :param notification_send_sms_request:
+        :type notification_send_sms_request: NotificationSendSmsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -998,7 +998,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request,
+            notification_send_sms_request=notification_send_sms_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1006,11 +1006,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSendSmsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1027,7 +1027,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_sms_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest] = None,
+        notification_send_sms_request: Optional[NotificationSendSmsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1040,15 +1040,15 @@ class MessagesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse]:
+    ) -> ApiResponse[NotificationSendSmsResponse]:
         """Send sms.
 
         Send sms message to specified phone number. Sending proceed according iikoCard organization's settings.   > Restriction group: `Loyalty: messages`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest
+        :param notification_send_sms_request:
+        :type notification_send_sms_request: NotificationSendSmsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1073,7 +1073,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request,
+            notification_send_sms_request=notification_send_sms_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1081,11 +1081,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSendSmsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1102,7 +1102,7 @@ class MessagesApi:
     async def loyalty_iiko_message_send_sms_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: Optional[IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest] = None,
+        notification_send_sms_request: Optional[NotificationSendSmsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1122,8 +1122,8 @@ class MessagesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request:
-        :type iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request: IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest
+        :param notification_send_sms_request:
+        :type notification_send_sms_request: NotificationSendSmsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1148,7 +1148,7 @@ class MessagesApi:
 
         _param = self._loyalty_iiko_message_send_sms_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request=iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request,
+            notification_send_sms_request=notification_send_sms_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1156,11 +1156,11 @@ class MessagesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NotificationSendSmsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1172,7 +1172,7 @@ class MessagesApi:
     def _loyalty_iiko_message_send_sms_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request,
+        notification_send_sms_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1200,8 +1200,8 @@ class MessagesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request
+        if notification_send_sms_request is not None:
+            _body_params = notification_send_sms_request
 
 
         # set the HTTP header `Accept`

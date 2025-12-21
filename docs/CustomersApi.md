@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **loyalty_iiko_customer_card_add_post**
-> object loyalty_iiko_customer_card_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request)
+> object loyalty_iiko_customer_card_add_post(timeout=timeout, customer_add_magnet_card_request=customer_add_magnet_card_request)
 
 Add card.
 
@@ -33,7 +33,7 @@ Add new card for customer.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
+from iikocloud_client.models.customer_add_magnet_card_request import CustomerAddMagnetCardRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -58,11 +58,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest() # IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest |  (optional)
+    customer_add_magnet_card_request = iikocloud_client.CustomerAddMagnetCardRequest() # CustomerAddMagnetCardRequest |  (optional)
 
     try:
         # Add card.
-        api_response = await api_instance.loyalty_iiko_customer_card_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request)
+        api_response = await api_instance.loyalty_iiko_customer_card_add_post(timeout=timeout, customer_add_magnet_card_request=customer_add_magnet_card_request)
         print("The response of CustomersApi->loyalty_iiko_customer_card_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -77,7 +77,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request** | [**IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest**](IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest.md)|  | [optional] 
+ **customer_add_magnet_card_request** | [**CustomerAddMagnetCardRequest**](CustomerAddMagnetCardRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_card_remove_post**
-> object loyalty_iiko_customer_card_remove_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request)
+> object loyalty_iiko_customer_card_remove_post(timeout=timeout, customer_delete_magnet_card_request=customer_delete_magnet_card_request)
 
 Delete card.
 
@@ -119,7 +119,7 @@ Delete existing card for customer.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
+from iikocloud_client.models.customer_delete_magnet_card_request import CustomerDeleteMagnetCardRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -144,11 +144,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest() # IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest |  (optional)
+    customer_delete_magnet_card_request = iikocloud_client.CustomerDeleteMagnetCardRequest() # CustomerDeleteMagnetCardRequest |  (optional)
 
     try:
         # Delete card.
-        api_response = await api_instance.loyalty_iiko_customer_card_remove_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request)
+        api_response = await api_instance.loyalty_iiko_customer_card_remove_post(timeout=timeout, customer_delete_magnet_card_request=customer_delete_magnet_card_request)
         print("The response of CustomersApi->loyalty_iiko_customer_card_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -163,7 +163,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request** | [**IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest**](IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest.md)|  | [optional] 
+ **customer_delete_magnet_card_request** | [**CustomerDeleteMagnetCardRequest**](CustomerDeleteMagnetCardRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_create_or_update_post**
-> IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse loyalty_iiko_customer_create_or_update_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request)
+> CustomerCreateOrUpdateCustomerResponse loyalty_iiko_customer_create_or_update_post(timeout=timeout, customer_create_or_update_customer_request=customer_create_or_update_customer_request)
 
 Create or update customer.
 
@@ -205,8 +205,8 @@ Create or update customer info by id or phone or card track.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_response import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse
+from iikocloud_client.models.customer_create_or_update_customer_request import CustomerCreateOrUpdateCustomerRequest
+from iikocloud_client.models.customer_create_or_update_customer_response import CustomerCreateOrUpdateCustomerResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -231,11 +231,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest() # IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest |  (optional)
+    customer_create_or_update_customer_request = iikocloud_client.CustomerCreateOrUpdateCustomerRequest() # CustomerCreateOrUpdateCustomerRequest |  (optional)
 
     try:
         # Create or update customer.
-        api_response = await api_instance.loyalty_iiko_customer_create_or_update_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request)
+        api_response = await api_instance.loyalty_iiko_customer_create_or_update_post(timeout=timeout, customer_create_or_update_customer_request=customer_create_or_update_customer_request)
         print("The response of CustomersApi->loyalty_iiko_customer_create_or_update_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -250,11 +250,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request** | [**IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest**](IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest.md)|  | [optional] 
+ **customer_create_or_update_customer_request** | [**CustomerCreateOrUpdateCustomerRequest**](CustomerCreateOrUpdateCustomerRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse**](IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse.md)
+[**CustomerCreateOrUpdateCustomerResponse**](CustomerCreateOrUpdateCustomerResponse.md)
 
 ### Authorization
 
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_info_post**
-> IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse loyalty_iiko_customer_info_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request=iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request)
+> CustomerGetCustomerInfoResponse loyalty_iiko_customer_info_post(timeout=timeout, customer_get_customer_info_request=customer_get_customer_info_request)
 
 Get customer info.
 
@@ -292,8 +292,8 @@ Get customer info by specified criterion.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_response import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse
+from iikocloud_client.models.customer_get_customer_info_request import CustomerGetCustomerInfoRequest
+from iikocloud_client.models.customer_get_customer_info_response import CustomerGetCustomerInfoResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -318,11 +318,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest() # IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest |  (optional)
+    customer_get_customer_info_request = iikocloud_client.CustomerGetCustomerInfoRequest() # CustomerGetCustomerInfoRequest |  (optional)
 
     try:
         # Get customer info.
-        api_response = await api_instance.loyalty_iiko_customer_info_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request=iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request)
+        api_response = await api_instance.loyalty_iiko_customer_info_post(timeout=timeout, customer_get_customer_info_request=customer_get_customer_info_request)
         print("The response of CustomersApi->loyalty_iiko_customer_info_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -337,11 +337,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request** | [**IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest**](IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest.md)|  | [optional] 
+ **customer_get_customer_info_request** | [**CustomerGetCustomerInfoRequest**](CustomerGetCustomerInfoRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse**](IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse.md)
+[**CustomerGetCustomerInfoResponse**](CustomerGetCustomerInfoResponse.md)
 
 ### Authorization
 
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_program_add_post**
-> IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse loyalty_iiko_customer_program_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request=iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request)
+> CustomerAddCustomerToProgramResponse loyalty_iiko_customer_program_add_post(timeout=timeout, customer_add_customer_to_program_request=customer_add_customer_to_program_request)
 
 Add customer to program.
 
@@ -379,8 +379,8 @@ Add new customer for program.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_response import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse
+from iikocloud_client.models.customer_add_customer_to_program_request import CustomerAddCustomerToProgramRequest
+from iikocloud_client.models.customer_add_customer_to_program_response import CustomerAddCustomerToProgramResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -405,11 +405,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest() # IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest |  (optional)
+    customer_add_customer_to_program_request = iikocloud_client.CustomerAddCustomerToProgramRequest() # CustomerAddCustomerToProgramRequest |  (optional)
 
     try:
         # Add customer to program.
-        api_response = await api_instance.loyalty_iiko_customer_program_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request=iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request)
+        api_response = await api_instance.loyalty_iiko_customer_program_add_post(timeout=timeout, customer_add_customer_to_program_request=customer_add_customer_to_program_request)
         print("The response of CustomersApi->loyalty_iiko_customer_program_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -424,11 +424,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request** | [**IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest**](IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest.md)|  | [optional] 
+ **customer_add_customer_to_program_request** | [**CustomerAddCustomerToProgramRequest**](CustomerAddCustomerToProgramRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse**](IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse.md)
+[**CustomerAddCustomerToProgramResponse**](CustomerAddCustomerToProgramResponse.md)
 
 ### Authorization
 
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_wallet_cancel_hold_post**
-> object loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request)
+> object loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, customer_cancel_hold_money_request=customer_cancel_hold_money_request)
 
 Cancel hold money.
 
@@ -466,7 +466,7 @@ Cancel holding transaction that created earlier.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
+from iikocloud_client.models.customer_cancel_hold_money_request import CustomerCancelHoldMoneyRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -491,11 +491,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest() # IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest |  (optional)
+    customer_cancel_hold_money_request = iikocloud_client.CustomerCancelHoldMoneyRequest() # CustomerCancelHoldMoneyRequest |  (optional)
 
     try:
         # Cancel hold money.
-        api_response = await api_instance.loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request)
+        api_response = await api_instance.loyalty_iiko_customer_wallet_cancel_hold_post(timeout=timeout, customer_cancel_hold_money_request=customer_cancel_hold_money_request)
         print("The response of CustomersApi->loyalty_iiko_customer_wallet_cancel_hold_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -510,7 +510,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request** | [**IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest**](IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest.md)|  | [optional] 
+ **customer_cancel_hold_money_request** | [**CustomerCancelHoldMoneyRequest**](CustomerCancelHoldMoneyRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -538,7 +538,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_wallet_chargeoff_post**
-> object loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request)
+> object loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, customer_change_user_balance_request=customer_change_user_balance_request)
 
 Withdraw balance.
 
@@ -552,7 +552,7 @@ Withdraw customer balance.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request import IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+from iikocloud_client.models.customer_change_user_balance_request import CustomerChangeUserBalanceRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -577,11 +577,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest() # IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest |  (optional)
+    customer_change_user_balance_request = iikocloud_client.CustomerChangeUserBalanceRequest() # CustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Withdraw balance.
-        api_response = await api_instance.loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request)
+        api_response = await api_instance.loyalty_iiko_customer_wallet_chargeoff_post(timeout=timeout, customer_change_user_balance_request=customer_change_user_balance_request)
         print("The response of CustomersApi->loyalty_iiko_customer_wallet_chargeoff_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -596,7 +596,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request** | [**IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest**](IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest.md)|  | [optional] 
+ **customer_change_user_balance_request** | [**CustomerChangeUserBalanceRequest**](CustomerChangeUserBalanceRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -624,7 +624,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_wallet_hold_post**
-> IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse loyalty_iiko_customer_wallet_hold_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request)
+> CustomerHoldMoneyResponse loyalty_iiko_customer_wallet_hold_post(timeout=timeout, customer_hold_money_request=customer_hold_money_request)
 
 Hold money.
 
@@ -638,8 +638,8 @@ Hold customer's money in loyalty program. Payment will be process on POS during 
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_response import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse
+from iikocloud_client.models.customer_hold_money_request import CustomerHoldMoneyRequest
+from iikocloud_client.models.customer_hold_money_response import CustomerHoldMoneyResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -664,11 +664,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest() # IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest |  (optional)
+    customer_hold_money_request = iikocloud_client.CustomerHoldMoneyRequest() # CustomerHoldMoneyRequest |  (optional)
 
     try:
         # Hold money.
-        api_response = await api_instance.loyalty_iiko_customer_wallet_hold_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request)
+        api_response = await api_instance.loyalty_iiko_customer_wallet_hold_post(timeout=timeout, customer_hold_money_request=customer_hold_money_request)
         print("The response of CustomersApi->loyalty_iiko_customer_wallet_hold_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -683,11 +683,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request** | [**IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest**](IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest.md)|  | [optional] 
+ **customer_hold_money_request** | [**CustomerHoldMoneyRequest**](CustomerHoldMoneyRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse**](IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse.md)
+[**CustomerHoldMoneyResponse**](CustomerHoldMoneyResponse.md)
 
 ### Authorization
 
@@ -711,7 +711,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_wallet_topup_post**
-> object loyalty_iiko_customer_wallet_topup_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request)
+> object loyalty_iiko_customer_wallet_topup_post(timeout=timeout, customer_change_user_balance_request=customer_change_user_balance_request)
 
 Refill balance.
 
@@ -725,7 +725,7 @@ Refill customer balance.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request import IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+from iikocloud_client.models.customer_change_user_balance_request import CustomerChangeUserBalanceRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -750,11 +750,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest() # IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest |  (optional)
+    customer_change_user_balance_request = iikocloud_client.CustomerChangeUserBalanceRequest() # CustomerChangeUserBalanceRequest |  (optional)
 
     try:
         # Refill balance.
-        api_response = await api_instance.loyalty_iiko_customer_wallet_topup_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request)
+        api_response = await api_instance.loyalty_iiko_customer_wallet_topup_post(timeout=timeout, customer_change_user_balance_request=customer_change_user_balance_request)
         print("The response of CustomersApi->loyalty_iiko_customer_wallet_topup_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -769,7 +769,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request** | [**IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest**](IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest.md)|  | [optional] 
+ **customer_change_user_balance_request** | [**CustomerChangeUserBalanceRequest**](CustomerChangeUserBalanceRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -797,7 +797,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_delete_customers_post**
-> IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse loyalty_iiko_delete_customers_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request)
+> CustomerDeleteCustomersResponse loyalty_iiko_delete_customers_post(timeout=timeout, customer_delete_customers_request=customer_delete_customers_request)
 
 Logical deletion of customers.
 
@@ -809,8 +809,8 @@ Mark customers as deleted.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_response import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse
+from iikocloud_client.models.customer_delete_customers_request import CustomerDeleteCustomersRequest
+from iikocloud_client.models.customer_delete_customers_response import CustomerDeleteCustomersResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -835,11 +835,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest() # IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest |  (optional)
+    customer_delete_customers_request = iikocloud_client.CustomerDeleteCustomersRequest() # CustomerDeleteCustomersRequest |  (optional)
 
     try:
         # Logical deletion of customers.
-        api_response = await api_instance.loyalty_iiko_delete_customers_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request)
+        api_response = await api_instance.loyalty_iiko_delete_customers_post(timeout=timeout, customer_delete_customers_request=customer_delete_customers_request)
         print("The response of CustomersApi->loyalty_iiko_delete_customers_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -854,11 +854,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request** | [**IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest**](IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest.md)|  | [optional] 
+ **customer_delete_customers_request** | [**CustomerDeleteCustomersRequest**](CustomerDeleteCustomersRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse**](IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse.md)
+[**CustomerDeleteCustomersResponse**](CustomerDeleteCustomersResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_get_counters_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse loyalty_iiko_get_counters_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request)
+> LoyaltyResultGetCountersResponse loyalty_iiko_get_counters_post(timeout=timeout, loyalty_result_get_counters_request=loyalty_result_get_counters_request)
 
 Get counters.
 
@@ -894,8 +894,8 @@ Get customer orders count and sum for different period.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse
+from iikocloud_client.models.loyalty_result_get_counters_request import LoyaltyResultGetCountersRequest
+from iikocloud_client.models.loyalty_result_get_counters_response import LoyaltyResultGetCountersResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -920,11 +920,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest |  (optional)
+    loyalty_result_get_counters_request = iikocloud_client.LoyaltyResultGetCountersRequest() # LoyaltyResultGetCountersRequest |  (optional)
 
     try:
         # Get counters.
-        api_response = await api_instance.loyalty_iiko_get_counters_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request)
+        api_response = await api_instance.loyalty_iiko_get_counters_post(timeout=timeout, loyalty_result_get_counters_request=loyalty_result_get_counters_request)
         print("The response of CustomersApi->loyalty_iiko_get_counters_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -939,11 +939,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest.md)|  | [optional] 
+ **loyalty_result_get_counters_request** | [**LoyaltyResultGetCountersRequest**](LoyaltyResultGetCountersRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse**](IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse.md)
+[**LoyaltyResultGetCountersResponse**](LoyaltyResultGetCountersResponse.md)
 
 ### Authorization
 
@@ -967,7 +967,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_restore_customers_post**
-> IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse loyalty_iiko_restore_customers_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request)
+> CustomerRestoreCustomersResponse loyalty_iiko_restore_customers_post(timeout=timeout, customer_restore_customers_request=customer_restore_customers_request)
 
 Logical recovery of customers.
 
@@ -979,8 +979,8 @@ Removing deletion flags for customers.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_response import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse
+from iikocloud_client.models.customer_restore_customers_request import CustomerRestoreCustomersRequest
+from iikocloud_client.models.customer_restore_customers_response import CustomerRestoreCustomersResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -1005,11 +1005,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomersApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest() # IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest |  (optional)
+    customer_restore_customers_request = iikocloud_client.CustomerRestoreCustomersRequest() # CustomerRestoreCustomersRequest |  (optional)
 
     try:
         # Logical recovery of customers.
-        api_response = await api_instance.loyalty_iiko_restore_customers_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request)
+        api_response = await api_instance.loyalty_iiko_restore_customers_post(timeout=timeout, customer_restore_customers_request=customer_restore_customers_request)
         print("The response of CustomersApi->loyalty_iiko_restore_customers_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -1024,11 +1024,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request** | [**IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest**](IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest.md)|  | [optional] 
+ **customer_restore_customers_request** | [**CustomerRestoreCustomersRequest**](CustomerRestoreCustomersRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse**](IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse.md)
+[**CustomerRestoreCustomersResponse**](CustomerRestoreCustomersResponse.md)
 
 ### Authorization
 

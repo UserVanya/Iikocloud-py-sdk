@@ -19,10 +19,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse
+from iikocloud_client.models.report_get_transactions_report_by_period_request import ReportGetTransactionsReportByPeriodRequest
+from iikocloud_client.models.report_get_transactions_report_by_period_response import ReportGetTransactionsReportByPeriodResponse
+from iikocloud_client.models.report_get_transactions_report_by_revision_request import ReportGetTransactionsReportByRevisionRequest
+from iikocloud_client.models.report_get_transactions_report_by_revision_response import ReportGetTransactionsReportByRevisionResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -46,7 +46,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_date_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest] = None,
+        report_get_transactions_report_by_period_request: Optional[ReportGetTransactionsReportByPeriodRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,15 +59,15 @@ class ReportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse:
+    ) -> ReportGetTransactionsReportByPeriodResponse:
         """Get transaction report by period.
 
         Get transaction report for specified customer by provided date range.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
+        :param report_get_transactions_report_by_period_request:
+        :type report_get_transactions_report_by_period_request: ReportGetTransactionsReportByPeriodRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,7 +92,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request,
+            report_get_transactions_report_by_period_request=report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,11 +100,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByPeriodResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +121,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_date_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest] = None,
+        report_get_transactions_report_by_period_request: Optional[ReportGetTransactionsReportByPeriodRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,15 +134,15 @@ class ReportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse]:
+    ) -> ApiResponse[ReportGetTransactionsReportByPeriodResponse]:
         """Get transaction report by period.
 
         Get transaction report for specified customer by provided date range.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
+        :param report_get_transactions_report_by_period_request:
+        :type report_get_transactions_report_by_period_request: ReportGetTransactionsReportByPeriodRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +167,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request,
+            report_get_transactions_report_by_period_request=report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,11 +175,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByPeriodResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -196,7 +196,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_date_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest] = None,
+        report_get_transactions_report_by_period_request: Optional[ReportGetTransactionsReportByPeriodRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,8 +216,8 @@ class ReportApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
+        :param report_get_transactions_report_by_period_request:
+        :type report_get_transactions_report_by_period_request: ReportGetTransactionsReportByPeriodRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -242,7 +242,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_date_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request,
+            report_get_transactions_report_by_period_request=report_get_transactions_report_by_period_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,11 +250,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByPeriodResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -266,7 +266,7 @@ class ReportApi:
     def _loyalty_iiko_customer_transactions_by_date_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request,
+        report_get_transactions_report_by_period_request,
         _request_auth,
         _content_type,
         _headers,
@@ -294,8 +294,8 @@ class ReportApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request
+        if report_get_transactions_report_by_period_request is not None:
+            _body_params = report_get_transactions_report_by_period_request
 
 
         # set the HTTP header `Accept`
@@ -347,7 +347,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_revision_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest] = None,
+        report_get_transactions_report_by_revision_request: Optional[ReportGetTransactionsReportByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -360,15 +360,15 @@ class ReportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse:
+    ) -> ReportGetTransactionsReportByRevisionResponse:
         """Get transaction report by revision.
 
         Get transaction report for specified customer by provided revision.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
+        :param report_get_transactions_report_by_revision_request:
+        :type report_get_transactions_report_by_revision_request: ReportGetTransactionsReportByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -393,7 +393,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request,
+            report_get_transactions_report_by_revision_request=report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -401,11 +401,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -422,7 +422,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_revision_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest] = None,
+        report_get_transactions_report_by_revision_request: Optional[ReportGetTransactionsReportByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -435,15 +435,15 @@ class ReportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse]:
+    ) -> ApiResponse[ReportGetTransactionsReportByRevisionResponse]:
         """Get transaction report by revision.
 
         Get transaction report for specified customer by provided revision.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
+        :param report_get_transactions_report_by_revision_request:
+        :type report_get_transactions_report_by_revision_request: ReportGetTransactionsReportByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -468,7 +468,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request,
+            report_get_transactions_report_by_revision_request=report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -476,11 +476,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -497,7 +497,7 @@ class ReportApi:
     async def loyalty_iiko_customer_transactions_by_revision_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: Optional[IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest] = None,
+        report_get_transactions_report_by_revision_request: Optional[ReportGetTransactionsReportByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -517,8 +517,8 @@ class ReportApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request:
-        :type iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request: IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
+        :param report_get_transactions_report_by_revision_request:
+        :type report_get_transactions_report_by_revision_request: ReportGetTransactionsReportByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -543,7 +543,7 @@ class ReportApi:
 
         _param = self._loyalty_iiko_customer_transactions_by_revision_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request,
+            report_get_transactions_report_by_revision_request=report_get_transactions_report_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -551,11 +551,11 @@ class ReportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReportGetTransactionsReportByRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -567,7 +567,7 @@ class ReportApi:
     def _loyalty_iiko_customer_transactions_by_revision_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request,
+        report_get_transactions_report_by_revision_request,
         _request_auth,
         _content_type,
         _headers,
@@ -595,8 +595,8 @@ class ReportApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request
+        if report_get_transactions_report_by_revision_request is not None:
+            _body_params = report_get_transactions_report_by_revision_request
 
 
         # set the HTTP header `Accept`

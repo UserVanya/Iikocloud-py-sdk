@@ -19,9 +19,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request import IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_response import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse
+from iikocloud_client.models.customer_change_category_for_customer_request import CustomerChangeCategoryForCustomerRequest
+from iikocloud_client.models.customer_get_categories_request import CustomerGetCategoriesRequest
+from iikocloud_client.models.customer_get_categories_response import CustomerGetCategoriesResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -45,7 +45,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,8 +65,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,7 +91,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,10 +100,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -120,7 +120,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -140,8 +140,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -166,7 +166,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,10 +175,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -195,7 +195,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -215,8 +215,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -241,7 +241,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,10 +250,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -265,7 +265,7 @@ class CustomerCategoriesApi:
     def _loyalty_iiko_customer_category_add_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+        customer_change_category_for_customer_request,
         _request_auth,
         _content_type,
         _headers,
@@ -293,8 +293,8 @@ class CustomerCategoriesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request
+        if customer_change_category_for_customer_request is not None:
+            _body_params = customer_change_category_for_customer_request
 
 
         # set the HTTP header `Accept`
@@ -346,7 +346,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
+        customer_get_categories_request: Optional[CustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -359,15 +359,15 @@ class CustomerCategoriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse:
+    ) -> CustomerGetCategoriesResponse:
         """Get customer categories.
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
+        :param customer_get_categories_request:
+        :type customer_get_categories_request: CustomerGetCategoriesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -392,7 +392,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
+            customer_get_categories_request=customer_get_categories_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -400,11 +400,11 @@ class CustomerCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCategoriesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -421,7 +421,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
+        customer_get_categories_request: Optional[CustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -434,15 +434,15 @@ class CustomerCategoriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse]:
+    ) -> ApiResponse[CustomerGetCategoriesResponse]:
         """Get customer categories.
 
         Get all organization's customer categories.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
+        :param customer_get_categories_request:
+        :type customer_get_categories_request: CustomerGetCategoriesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -467,7 +467,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
+            customer_get_categories_request=customer_get_categories_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -475,11 +475,11 @@ class CustomerCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCategoriesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -496,7 +496,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest] = None,
+        customer_get_categories_request: Optional[CustomerGetCategoriesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -516,8 +516,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request: IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
+        :param customer_get_categories_request:
+        :type customer_get_categories_request: CustomerGetCategoriesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -542,7 +542,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
+            customer_get_categories_request=customer_get_categories_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -550,11 +550,11 @@ class CustomerCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCategoriesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -566,7 +566,7 @@ class CustomerCategoriesApi:
     def _loyalty_iiko_customer_category_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request,
+        customer_get_categories_request,
         _request_auth,
         _content_type,
         _headers,
@@ -594,8 +594,8 @@ class CustomerCategoriesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request
+        if customer_get_categories_request is not None:
+            _body_params = customer_get_categories_request
 
 
         # set the HTTP header `Accept`
@@ -647,7 +647,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -667,8 +667,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -693,7 +693,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -702,10 +702,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -722,7 +722,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -742,8 +742,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -768,7 +768,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -777,10 +777,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -797,7 +797,7 @@ class CustomerCategoriesApi:
     async def loyalty_iiko_customer_category_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest] = None,
+        customer_change_category_for_customer_request: Optional[CustomerChangeCategoryForCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -817,8 +817,8 @@ class CustomerCategoriesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request: IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+        :param customer_change_category_for_customer_request:
+        :type customer_change_category_for_customer_request: CustomerChangeCategoryForCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -843,7 +843,7 @@ class CustomerCategoriesApi:
 
         _param = self._loyalty_iiko_customer_category_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+            customer_change_category_for_customer_request=customer_change_category_for_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -852,10 +852,10 @@ class CustomerCategoriesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -867,7 +867,7 @@ class CustomerCategoriesApi:
     def _loyalty_iiko_customer_category_remove_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request,
+        customer_change_category_for_customer_request,
         _request_auth,
         _content_type,
         _headers,
@@ -895,8 +895,8 @@ class CustomerCategoriesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request
+        if customer_change_category_for_customer_request is not None:
+            _body_params = customer_change_category_for_customer_request
 
 
         # set the HTTP header `Accept`

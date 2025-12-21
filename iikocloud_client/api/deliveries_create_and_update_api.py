@@ -19,30 +19,30 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_add_order_items_request import IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_cancel_order_request import IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request import IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request import IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_request import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_print_bill_request import IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request import IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_response import IikoTransportPublicApiContractsDeliveriesResponseOrderResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_orders_common_add_order_payments_request import IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.deliveries_request_add_order_items_request import DeliveriesRequestAddOrderItemsRequest
+from iikocloud_client.models.deliveries_request_cancel_order_request import DeliveriesRequestCancelOrderRequest
+from iikocloud_client.models.deliveries_request_change_driver_info_request import DeliveriesRequestChangeDriverInfoRequest
+from iikocloud_client.models.deliveries_request_close_delivery_order_request import DeliveriesRequestCloseDeliveryOrderRequest
+from iikocloud_client.models.deliveries_request_create_order_request import DeliveriesRequestCreateOrderRequest
+from iikocloud_client.models.deliveries_request_print_bill_request import DeliveriesRequestPrintBillRequest
+from iikocloud_client.models.deliveries_request_print_delivery_bill_request import DeliveriesRequestPrintDeliveryBillRequest
+from iikocloud_client.models.deliveries_request_update_delivery_status_request import DeliveriesRequestUpdateDeliveryStatusRequest
+from iikocloud_client.models.deliveries_request_update_order_cancel_delivery_confirmation_request import DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+from iikocloud_client.models.deliveries_request_update_order_change_complete_before_request import DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_comment_request import DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_operator_request import DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_point_request import DeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+from iikocloud_client.models.deliveries_request_update_order_change_external_data_request import DeliveriesRequestUpdateOrderChangeExternalDataRequest
+from iikocloud_client.models.deliveries_request_update_order_change_payments_request import DeliveriesRequestUpdateOrderChangePaymentsRequest
+from iikocloud_client.models.deliveries_request_update_order_change_service_type_request import DeliveriesRequestUpdateOrderChangeServiceTypeRequest
+from iikocloud_client.models.deliveries_request_update_order_confirm_delivery_request import DeliveriesRequestUpdateOrderConfirmDeliveryRequest
+from iikocloud_client.models.deliveries_request_update_order_courier_request import DeliveriesRequestUpdateOrderCourierRequest
+from iikocloud_client.models.deliveries_request_update_order_payments_request import DeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.models.deliveries_request_update_order_problem_request import DeliveriesRequestUpdateOrderProblemRequest
+from iikocloud_client.models.deliveries_request_update_tracking_link_request import DeliveriesRequestUpdateTrackingLinkRequest
+from iikocloud_client.models.deliveries_response_order_response import DeliveriesResponseOrderResponse
+from iikocloud_client.models.orders_common_add_order_payments_request import OrdersCommonAddOrderPaymentsRequest
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -66,7 +66,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest] = None,
+        deliveries_request_add_order_items_request: Optional[DeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -79,15 +79,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Add order items.
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_add_order_items_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest
+        :param deliveries_request_add_order_items_request:
+        :type deliveries_request_add_order_items_request: DeliveriesRequestAddOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -112,7 +112,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request,
+            deliveries_request_add_order_items_request=deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -120,11 +120,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -141,7 +141,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest] = None,
+        deliveries_request_add_order_items_request: Optional[DeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -154,15 +154,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Add order items.
 
            > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_add_order_items_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest
+        :param deliveries_request_add_order_items_request:
+        :type deliveries_request_add_order_items_request: DeliveriesRequestAddOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -187,7 +187,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request,
+            deliveries_request_add_order_items_request=deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -195,11 +195,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -216,7 +216,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest] = None,
+        deliveries_request_add_order_items_request: Optional[DeliveriesRequestAddOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -236,8 +236,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_add_order_items_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_add_order_items_request: IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest
+        :param deliveries_request_add_order_items_request:
+        :type deliveries_request_add_order_items_request: DeliveriesRequestAddOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -262,7 +262,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_add_order_items_request=iiko_transport_public_api_contracts_deliveries_request_add_order_items_request,
+            deliveries_request_add_order_items_request=deliveries_request_add_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -270,11 +270,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -286,7 +286,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_add_items_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_add_order_items_request,
+        deliveries_request_add_order_items_request,
         _request_auth,
         _content_type,
         _headers,
@@ -314,8 +314,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_add_order_items_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_add_order_items_request
+        if deliveries_request_add_order_items_request is not None:
+            _body_params = deliveries_request_add_order_items_request
 
 
         # set the HTTP header `Accept`
@@ -367,7 +367,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
+        orders_common_add_order_payments_request: Optional[OrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -380,15 +380,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Add order payments.
 
            > Allowed from version `8.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
-        :type iiko_transport_public_api_contracts_orders_common_add_order_payments_request: IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest
+        :param orders_common_add_order_payments_request:
+        :type orders_common_add_order_payments_request: OrdersCommonAddOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -413,7 +413,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
+            orders_common_add_order_payments_request=orders_common_add_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -421,11 +421,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -442,7 +442,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
+        orders_common_add_order_payments_request: Optional[OrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -455,15 +455,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Add order payments.
 
            > Allowed from version `8.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
-        :type iiko_transport_public_api_contracts_orders_common_add_order_payments_request: IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest
+        :param orders_common_add_order_payments_request:
+        :type orders_common_add_order_payments_request: OrdersCommonAddOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -488,7 +488,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
+            orders_common_add_order_payments_request=orders_common_add_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -496,11 +496,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -517,7 +517,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_add_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_orders_common_add_order_payments_request: Optional[IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest] = None,
+        orders_common_add_order_payments_request: Optional[OrdersCommonAddOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -537,8 +537,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_orders_common_add_order_payments_request:
-        :type iiko_transport_public_api_contracts_orders_common_add_order_payments_request: IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest
+        :param orders_common_add_order_payments_request:
+        :type orders_common_add_order_payments_request: OrdersCommonAddOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -563,7 +563,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_orders_common_add_order_payments_request=iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
+            orders_common_add_order_payments_request=orders_common_add_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -571,11 +571,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -587,7 +587,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_add_payments_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_orders_common_add_order_payments_request,
+        orders_common_add_order_payments_request,
         _request_auth,
         _content_type,
         _headers,
@@ -615,8 +615,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_orders_common_add_order_payments_request is not None:
-            _body_params = iiko_transport_public_api_contracts_orders_common_add_order_payments_request
+        if orders_common_add_order_payments_request is not None:
+            _body_params = orders_common_add_order_payments_request
 
 
         # set the HTTP header `Accept`
@@ -668,7 +668,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_confirmation_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
+        deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -681,15 +681,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Cancel delivery confirmation.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+        :param deliveries_request_update_order_cancel_delivery_confirmation_request:
+        :type deliveries_request_update_order_cancel_delivery_confirmation_request: DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -714,7 +714,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request,
+            deliveries_request_update_order_cancel_delivery_confirmation_request=deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -722,11 +722,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -743,7 +743,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_confirmation_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
+        deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -756,15 +756,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Cancel delivery confirmation.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+        :param deliveries_request_update_order_cancel_delivery_confirmation_request:
+        :type deliveries_request_update_order_cancel_delivery_confirmation_request: DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -789,7 +789,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request,
+            deliveries_request_update_order_cancel_delivery_confirmation_request=deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -797,11 +797,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -818,7 +818,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_confirmation_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
+        deliveries_request_update_order_cancel_delivery_confirmation_request: Optional[DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -838,8 +838,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+        :param deliveries_request_update_order_cancel_delivery_confirmation_request:
+        :type deliveries_request_update_order_cancel_delivery_confirmation_request: DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -864,7 +864,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_confirmation_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request=iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request,
+            deliveries_request_update_order_cancel_delivery_confirmation_request=deliveries_request_update_order_cancel_delivery_confirmation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -872,11 +872,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -888,7 +888,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_cancel_confirmation_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request,
+        deliveries_request_update_order_cancel_delivery_confirmation_request,
         _request_auth,
         _content_type,
         _headers,
@@ -916,8 +916,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request
+        if deliveries_request_update_order_cancel_delivery_confirmation_request is not None:
+            _body_params = deliveries_request_update_order_cancel_delivery_confirmation_request
 
 
         # set the HTTP header `Accept`
@@ -969,7 +969,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest] = None,
+        deliveries_request_cancel_order_request: Optional[DeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -982,15 +982,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Cancel delivery order.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_cancel_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest
+        :param deliveries_request_cancel_order_request:
+        :type deliveries_request_cancel_order_request: DeliveriesRequestCancelOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1015,7 +1015,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request,
+            deliveries_request_cancel_order_request=deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1023,11 +1023,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1044,7 +1044,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest] = None,
+        deliveries_request_cancel_order_request: Optional[DeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1057,15 +1057,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Cancel delivery order.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_cancel_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest
+        :param deliveries_request_cancel_order_request:
+        :type deliveries_request_cancel_order_request: DeliveriesRequestCancelOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1090,7 +1090,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request,
+            deliveries_request_cancel_order_request=deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1098,11 +1098,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1119,7 +1119,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_cancel_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest] = None,
+        deliveries_request_cancel_order_request: Optional[DeliveriesRequestCancelOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1139,8 +1139,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_cancel_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_cancel_order_request: IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest
+        :param deliveries_request_cancel_order_request:
+        :type deliveries_request_cancel_order_request: DeliveriesRequestCancelOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1165,7 +1165,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_cancel_order_request=iiko_transport_public_api_contracts_deliveries_request_cancel_order_request,
+            deliveries_request_cancel_order_request=deliveries_request_cancel_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1173,11 +1173,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1189,7 +1189,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_cancel_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_cancel_order_request,
+        deliveries_request_cancel_order_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1217,8 +1217,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_cancel_order_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_cancel_order_request
+        if deliveries_request_cancel_order_request is not None:
+            _body_params = deliveries_request_cancel_order_request
 
 
         # set the HTTP header `Accept`
@@ -1270,7 +1270,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_comment_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
+        deliveries_request_update_order_change_delivery_comment_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1283,15 +1283,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change delivery comment.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+        :param deliveries_request_update_order_change_delivery_comment_request:
+        :type deliveries_request_update_order_change_delivery_comment_request: DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1316,7 +1316,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request,
+            deliveries_request_update_order_change_delivery_comment_request=deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1324,11 +1324,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1345,7 +1345,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_comment_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
+        deliveries_request_update_order_change_delivery_comment_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1358,15 +1358,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change delivery comment.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+        :param deliveries_request_update_order_change_delivery_comment_request:
+        :type deliveries_request_update_order_change_delivery_comment_request: DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1391,7 +1391,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request,
+            deliveries_request_update_order_change_delivery_comment_request=deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1399,11 +1399,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1420,7 +1420,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_comment_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
+        deliveries_request_update_order_change_delivery_comment_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1440,8 +1440,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+        :param deliveries_request_update_order_change_delivery_comment_request:
+        :type deliveries_request_update_order_change_delivery_comment_request: DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1466,7 +1466,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_comment_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request,
+            deliveries_request_update_order_change_delivery_comment_request=deliveries_request_update_order_change_delivery_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1474,11 +1474,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1490,7 +1490,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_comment_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request,
+        deliveries_request_update_order_change_delivery_comment_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1518,8 +1518,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request
+        if deliveries_request_update_order_change_delivery_comment_request is not None:
+            _body_params = deliveries_request_update_order_change_delivery_comment_request
 
 
         # set the HTTP header `Accept`
@@ -1571,7 +1571,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_complete_before_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
+        deliveries_request_update_order_change_complete_before_request: Optional[DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1584,15 +1584,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change time when client wants the order to be delivered.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+        :param deliveries_request_update_order_change_complete_before_request:
+        :type deliveries_request_update_order_change_complete_before_request: DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1617,7 +1617,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request,
+            deliveries_request_update_order_change_complete_before_request=deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1625,11 +1625,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1646,7 +1646,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_complete_before_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
+        deliveries_request_update_order_change_complete_before_request: Optional[DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1659,15 +1659,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change time when client wants the order to be delivered.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+        :param deliveries_request_update_order_change_complete_before_request:
+        :type deliveries_request_update_order_change_complete_before_request: DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1692,7 +1692,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request,
+            deliveries_request_update_order_change_complete_before_request=deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1700,11 +1700,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1721,7 +1721,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_complete_before_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
+        deliveries_request_update_order_change_complete_before_request: Optional[DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1741,8 +1741,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+        :param deliveries_request_update_order_change_complete_before_request:
+        :type deliveries_request_update_order_change_complete_before_request: DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1767,7 +1767,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_complete_before_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request,
+            deliveries_request_update_order_change_complete_before_request=deliveries_request_update_order_change_complete_before_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1775,11 +1775,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1791,7 +1791,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_complete_before_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request,
+        deliveries_request_update_order_change_complete_before_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1819,8 +1819,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request
+        if deliveries_request_update_order_change_complete_before_request is not None:
+            _body_params = deliveries_request_update_order_change_complete_before_request
 
 
         # set the HTTP header `Accept`
@@ -1872,7 +1872,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_delivery_point_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
+        deliveries_request_update_order_change_delivery_point_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1885,15 +1885,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change order's delivery point information.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+        :param deliveries_request_update_order_change_delivery_point_request:
+        :type deliveries_request_update_order_change_delivery_point_request: DeliveriesRequestUpdateOrderChangeDeliveryPointRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1918,7 +1918,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request,
+            deliveries_request_update_order_change_delivery_point_request=deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1926,11 +1926,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1947,7 +1947,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_delivery_point_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
+        deliveries_request_update_order_change_delivery_point_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1960,15 +1960,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change order's delivery point information.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+        :param deliveries_request_update_order_change_delivery_point_request:
+        :type deliveries_request_update_order_change_delivery_point_request: DeliveriesRequestUpdateOrderChangeDeliveryPointRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1993,7 +1993,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request,
+            deliveries_request_update_order_change_delivery_point_request=deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2001,11 +2001,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2022,7 +2022,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_delivery_point_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
+        deliveries_request_update_order_change_delivery_point_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryPointRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2042,8 +2042,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+        :param deliveries_request_update_order_change_delivery_point_request:
+        :type deliveries_request_update_order_change_delivery_point_request: DeliveriesRequestUpdateOrderChangeDeliveryPointRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2068,7 +2068,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_delivery_point_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request,
+            deliveries_request_update_order_change_delivery_point_request=deliveries_request_update_order_change_delivery_point_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2076,11 +2076,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2092,7 +2092,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_delivery_point_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request,
+        deliveries_request_update_order_change_delivery_point_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2120,8 +2120,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request
+        if deliveries_request_update_order_change_delivery_point_request is not None:
+            _body_params = deliveries_request_update_order_change_delivery_point_request
 
 
         # set the HTTP header `Accept`
@@ -2173,7 +2173,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_driver_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest] = None,
+        deliveries_request_change_driver_info_request: Optional[DeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2186,15 +2186,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change driver info.
 
            > Allowed from version `8.6.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest
+        :param deliveries_request_change_driver_info_request:
+        :type deliveries_request_change_driver_info_request: DeliveriesRequestChangeDriverInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2219,7 +2219,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request,
+            deliveries_request_change_driver_info_request=deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2227,11 +2227,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2248,7 +2248,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_driver_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest] = None,
+        deliveries_request_change_driver_info_request: Optional[DeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2261,15 +2261,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change driver info.
 
            > Allowed from version `8.6.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest
+        :param deliveries_request_change_driver_info_request:
+        :type deliveries_request_change_driver_info_request: DeliveriesRequestChangeDriverInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2294,7 +2294,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request,
+            deliveries_request_change_driver_info_request=deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2302,11 +2302,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2323,7 +2323,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_driver_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest] = None,
+        deliveries_request_change_driver_info_request: Optional[DeliveriesRequestChangeDriverInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2343,8 +2343,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request: IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest
+        :param deliveries_request_change_driver_info_request:
+        :type deliveries_request_change_driver_info_request: DeliveriesRequestChangeDriverInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2369,7 +2369,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_driver_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request=iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request,
+            deliveries_request_change_driver_info_request=deliveries_request_change_driver_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2377,11 +2377,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2393,7 +2393,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_driver_info_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request,
+        deliveries_request_change_driver_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2421,8 +2421,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request
+        if deliveries_request_change_driver_info_request is not None:
+            _body_params = deliveries_request_change_driver_info_request
 
 
         # set the HTTP header `Accept`
@@ -2474,7 +2474,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_external_data_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
+        deliveries_request_update_order_change_external_data_request: Optional[DeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2487,15 +2487,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change delivery external data.
 
            > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest
+        :param deliveries_request_update_order_change_external_data_request:
+        :type deliveries_request_update_order_change_external_data_request: DeliveriesRequestUpdateOrderChangeExternalDataRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2520,7 +2520,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
+            deliveries_request_update_order_change_external_data_request=deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2528,11 +2528,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2549,7 +2549,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_external_data_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
+        deliveries_request_update_order_change_external_data_request: Optional[DeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2562,15 +2562,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change delivery external data.
 
            > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest
+        :param deliveries_request_update_order_change_external_data_request:
+        :type deliveries_request_update_order_change_external_data_request: DeliveriesRequestUpdateOrderChangeExternalDataRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2595,7 +2595,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
+            deliveries_request_update_order_change_external_data_request=deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2603,11 +2603,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2624,7 +2624,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_external_data_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
+        deliveries_request_update_order_change_external_data_request: Optional[DeliveriesRequestUpdateOrderChangeExternalDataRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2644,8 +2644,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest
+        :param deliveries_request_update_order_change_external_data_request:
+        :type deliveries_request_update_order_change_external_data_request: DeliveriesRequestUpdateOrderChangeExternalDataRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2670,7 +2670,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_external_data_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
+            deliveries_request_update_order_change_external_data_request=deliveries_request_update_order_change_external_data_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2678,11 +2678,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2694,7 +2694,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_external_data_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request,
+        deliveries_request_update_order_change_external_data_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2722,8 +2722,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request
+        if deliveries_request_update_order_change_external_data_request is not None:
+            _body_params = deliveries_request_update_order_change_external_data_request
 
 
         # set the HTTP header `Accept`
@@ -2775,7 +2775,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_operator_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
+        deliveries_request_update_order_change_delivery_operator_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2788,15 +2788,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Assign/change the order operator.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+        :param deliveries_request_update_order_change_delivery_operator_request:
+        :type deliveries_request_update_order_change_delivery_operator_request: DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2821,7 +2821,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request,
+            deliveries_request_update_order_change_delivery_operator_request=deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2829,11 +2829,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2850,7 +2850,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_operator_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
+        deliveries_request_update_order_change_delivery_operator_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2863,15 +2863,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Assign/change the order operator.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+        :param deliveries_request_update_order_change_delivery_operator_request:
+        :type deliveries_request_update_order_change_delivery_operator_request: DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2896,7 +2896,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request,
+            deliveries_request_update_order_change_delivery_operator_request=deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2904,11 +2904,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2925,7 +2925,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_operator_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
+        deliveries_request_update_order_change_delivery_operator_request: Optional[DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2945,8 +2945,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+        :param deliveries_request_update_order_change_delivery_operator_request:
+        :type deliveries_request_update_order_change_delivery_operator_request: DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2971,7 +2971,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_operator_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request,
+            deliveries_request_update_order_change_delivery_operator_request=deliveries_request_update_order_change_delivery_operator_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2979,11 +2979,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2995,7 +2995,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_operator_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request,
+        deliveries_request_update_order_change_delivery_operator_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3023,8 +3023,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request
+        if deliveries_request_update_order_change_delivery_operator_request is not None:
+            _body_params = deliveries_request_update_order_change_delivery_operator_request
 
 
         # set the HTTP header `Accept`
@@ -3076,7 +3076,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
+        deliveries_request_update_order_change_payments_request: Optional[DeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3089,15 +3089,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change order's payments.
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.6.3`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest
+        :param deliveries_request_update_order_change_payments_request:
+        :type deliveries_request_update_order_change_payments_request: DeliveriesRequestUpdateOrderChangePaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3122,7 +3122,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
+            deliveries_request_update_order_change_payments_request=deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3130,11 +3130,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3151,7 +3151,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
+        deliveries_request_update_order_change_payments_request: Optional[DeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3164,15 +3164,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change order's payments.
 
         > Method will fail if there are any processed payments in the order.  > If all payments in the order are unprocessed they will be removed and replaced with new ones.   > Allowed from version `7.6.3`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest
+        :param deliveries_request_update_order_change_payments_request:
+        :type deliveries_request_update_order_change_payments_request: DeliveriesRequestUpdateOrderChangePaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3197,7 +3197,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
+            deliveries_request_update_order_change_payments_request=deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3205,11 +3205,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3226,7 +3226,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
+        deliveries_request_update_order_change_payments_request: Optional[DeliveriesRequestUpdateOrderChangePaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3246,8 +3246,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest
+        :param deliveries_request_update_order_change_payments_request:
+        :type deliveries_request_update_order_change_payments_request: DeliveriesRequestUpdateOrderChangePaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3272,7 +3272,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
+            deliveries_request_update_order_change_payments_request=deliveries_request_update_order_change_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3280,11 +3280,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3296,7 +3296,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_payments_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request,
+        deliveries_request_update_order_change_payments_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3324,8 +3324,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request
+        if deliveries_request_update_order_change_payments_request is not None:
+            _body_params = deliveries_request_update_order_change_payments_request
 
 
         # set the HTTP header `Accept`
@@ -3377,7 +3377,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_service_type_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
+        deliveries_request_update_order_change_service_type_request: Optional[DeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3390,15 +3390,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change order's delivery type.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest
+        :param deliveries_request_update_order_change_service_type_request:
+        :type deliveries_request_update_order_change_service_type_request: DeliveriesRequestUpdateOrderChangeServiceTypeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3423,7 +3423,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request,
+            deliveries_request_update_order_change_service_type_request=deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3431,11 +3431,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3452,7 +3452,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_service_type_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
+        deliveries_request_update_order_change_service_type_request: Optional[DeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3465,15 +3465,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change order's delivery type.
 
            > Allowed from version `7.5.4`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest
+        :param deliveries_request_update_order_change_service_type_request:
+        :type deliveries_request_update_order_change_service_type_request: DeliveriesRequestUpdateOrderChangeServiceTypeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3498,7 +3498,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request,
+            deliveries_request_update_order_change_service_type_request=deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3506,11 +3506,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3527,7 +3527,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_change_service_type_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
+        deliveries_request_update_order_change_service_type_request: Optional[DeliveriesRequestUpdateOrderChangeServiceTypeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3547,8 +3547,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest
+        :param deliveries_request_update_order_change_service_type_request:
+        :type deliveries_request_update_order_change_service_type_request: DeliveriesRequestUpdateOrderChangeServiceTypeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3573,7 +3573,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_change_service_type_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request=iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request,
+            deliveries_request_update_order_change_service_type_request=deliveries_request_update_order_change_service_type_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3581,11 +3581,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3597,7 +3597,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_change_service_type_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request,
+        deliveries_request_update_order_change_service_type_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3625,8 +3625,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request
+        if deliveries_request_update_order_change_service_type_request is not None:
+            _body_params = deliveries_request_update_order_change_service_type_request
 
 
         # set the HTTP header `Accept`
@@ -3678,7 +3678,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_close_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest] = None,
+        deliveries_request_close_delivery_order_request: Optional[DeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3691,15 +3691,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Close order.
 
         > Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`  orderServiceType only, starting from version `8.0.6` it's also possible to close  `DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .   > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest
+        :param deliveries_request_close_delivery_order_request:
+        :type deliveries_request_close_delivery_order_request: DeliveriesRequestCloseDeliveryOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3724,7 +3724,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_close_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request,
+            deliveries_request_close_delivery_order_request=deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3732,11 +3732,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3753,7 +3753,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_close_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest] = None,
+        deliveries_request_close_delivery_order_request: Optional[DeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3766,15 +3766,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Close order.
 
         > Before version `8.0.6` it's possible to close deliveries with `DeliveryByClient`  orderServiceType only, starting from version `8.0.6` it's also possible to close  `DeliveryByCourier` deiveries in the DeliveryStatus `OnWay` or `Delivered` .   > Allowed from version `7.4.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest
+        :param deliveries_request_close_delivery_order_request:
+        :type deliveries_request_close_delivery_order_request: DeliveriesRequestCloseDeliveryOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3799,7 +3799,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_close_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request,
+            deliveries_request_close_delivery_order_request=deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3807,11 +3807,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3828,7 +3828,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_close_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest] = None,
+        deliveries_request_close_delivery_order_request: Optional[DeliveriesRequestCloseDeliveryOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3848,8 +3848,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request: IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest
+        :param deliveries_request_close_delivery_order_request:
+        :type deliveries_request_close_delivery_order_request: DeliveriesRequestCloseDeliveryOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3874,7 +3874,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_close_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request=iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request,
+            deliveries_request_close_delivery_order_request=deliveries_request_close_delivery_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3882,11 +3882,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3898,7 +3898,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_close_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request,
+        deliveries_request_close_delivery_order_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3926,8 +3926,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request
+        if deliveries_request_close_delivery_order_request is not None:
+            _body_params = deliveries_request_close_delivery_order_request
 
 
         # set the HTTP header `Accept`
@@ -3979,7 +3979,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_confirm_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
+        deliveries_request_update_order_confirm_delivery_request: Optional[DeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3992,15 +3992,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Confirm delivery.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest
+        :param deliveries_request_update_order_confirm_delivery_request:
+        :type deliveries_request_update_order_confirm_delivery_request: DeliveriesRequestUpdateOrderConfirmDeliveryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4025,7 +4025,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request,
+            deliveries_request_update_order_confirm_delivery_request=deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4033,11 +4033,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4054,7 +4054,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_confirm_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
+        deliveries_request_update_order_confirm_delivery_request: Optional[DeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4067,15 +4067,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Confirm delivery.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest
+        :param deliveries_request_update_order_confirm_delivery_request:
+        :type deliveries_request_update_order_confirm_delivery_request: DeliveriesRequestUpdateOrderConfirmDeliveryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4100,7 +4100,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request,
+            deliveries_request_update_order_confirm_delivery_request=deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4108,11 +4108,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4129,7 +4129,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_confirm_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
+        deliveries_request_update_order_confirm_delivery_request: Optional[DeliveriesRequestUpdateOrderConfirmDeliveryRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4149,8 +4149,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest
+        :param deliveries_request_update_order_confirm_delivery_request:
+        :type deliveries_request_update_order_confirm_delivery_request: DeliveriesRequestUpdateOrderConfirmDeliveryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4175,7 +4175,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_confirm_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request=iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request,
+            deliveries_request_update_order_confirm_delivery_request=deliveries_request_update_order_confirm_delivery_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4183,11 +4183,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4199,7 +4199,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_confirm_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request,
+        deliveries_request_update_order_confirm_delivery_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4227,8 +4227,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request
+        if deliveries_request_update_order_confirm_delivery_request is not None:
+            _body_params = deliveries_request_update_order_confirm_delivery_request
 
 
         # set the HTTP header `Accept`
@@ -4280,7 +4280,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_create_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest] = None,
+        deliveries_request_create_order_request: Optional[DeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4293,15 +4293,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse:
+    ) -> DeliveriesResponseOrderResponse:
         """Create delivery.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_create_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_create_order_request: IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest
+        :param deliveries_request_create_order_request:
+        :type deliveries_request_create_order_request: DeliveriesRequestCreateOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4326,7 +4326,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request,
+            deliveries_request_create_order_request=deliveries_request_create_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4334,11 +4334,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4355,7 +4355,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_create_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest] = None,
+        deliveries_request_create_order_request: Optional[DeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4368,15 +4368,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrderResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrderResponse]:
         """Create delivery.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_create_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_create_order_request: IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest
+        :param deliveries_request_create_order_request:
+        :type deliveries_request_create_order_request: DeliveriesRequestCreateOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4401,7 +4401,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request,
+            deliveries_request_create_order_request=deliveries_request_create_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4409,11 +4409,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4430,7 +4430,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_create_order_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest] = None,
+        deliveries_request_create_order_request: Optional[DeliveriesRequestCreateOrderRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4450,8 +4450,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_create_order_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_create_order_request: IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest
+        :param deliveries_request_create_order_request:
+        :type deliveries_request_create_order_request: DeliveriesRequestCreateOrderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4476,7 +4476,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_create_order_request=iiko_transport_public_api_contracts_deliveries_request_create_order_request,
+            deliveries_request_create_order_request=deliveries_request_create_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4484,11 +4484,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4500,7 +4500,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_create_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_create_order_request,
+        deliveries_request_create_order_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4528,8 +4528,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_create_order_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_create_order_request
+        if deliveries_request_create_order_request is not None:
+            _body_params = deliveries_request_create_order_request
 
 
         # set the HTTP header `Accept`
@@ -4581,7 +4581,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_print_delivery_bill_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest] = None,
+        deliveries_request_print_delivery_bill_request: Optional[DeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4594,15 +4594,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Print delivery bill.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest
+        :param deliveries_request_print_delivery_bill_request:
+        :type deliveries_request_print_delivery_bill_request: DeliveriesRequestPrintDeliveryBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4627,7 +4627,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request,
+            deliveries_request_print_delivery_bill_request=deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4635,11 +4635,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4656,7 +4656,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_print_delivery_bill_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest] = None,
+        deliveries_request_print_delivery_bill_request: Optional[DeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4669,15 +4669,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Print delivery bill.
 
            > Allowed from version `7.6.1`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest
+        :param deliveries_request_print_delivery_bill_request:
+        :type deliveries_request_print_delivery_bill_request: DeliveriesRequestPrintDeliveryBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4702,7 +4702,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request,
+            deliveries_request_print_delivery_bill_request=deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4710,11 +4710,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4731,7 +4731,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_print_delivery_bill_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest] = None,
+        deliveries_request_print_delivery_bill_request: Optional[DeliveriesRequestPrintDeliveryBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4751,8 +4751,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest
+        :param deliveries_request_print_delivery_bill_request:
+        :type deliveries_request_print_delivery_bill_request: DeliveriesRequestPrintDeliveryBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4777,7 +4777,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_print_delivery_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request,
+            deliveries_request_print_delivery_bill_request=deliveries_request_print_delivery_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4785,11 +4785,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4801,7 +4801,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_print_delivery_bill_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request,
+        deliveries_request_print_delivery_bill_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4829,8 +4829,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request
+        if deliveries_request_print_delivery_bill_request is not None:
+            _body_params = deliveries_request_print_delivery_bill_request
 
 
         # set the HTTP header `Accept`
@@ -4882,7 +4882,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_courier_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest] = None,
+        deliveries_request_update_order_courier_request: Optional[DeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4895,15 +4895,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """(Deprecated) Update order courier.
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest
+        :param deliveries_request_update_order_courier_request:
+        :type deliveries_request_update_order_courier_request: DeliveriesRequestUpdateOrderCourierRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4929,7 +4929,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request,
+            deliveries_request_update_order_courier_request=deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4937,11 +4937,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4958,7 +4958,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_courier_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest] = None,
+        deliveries_request_update_order_courier_request: Optional[DeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4971,15 +4971,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """(Deprecated) Update order courier.
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest
+        :param deliveries_request_update_order_courier_request:
+        :type deliveries_request_update_order_courier_request: DeliveriesRequestUpdateOrderCourierRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5005,7 +5005,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request,
+            deliveries_request_update_order_courier_request=deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5013,11 +5013,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5034,7 +5034,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_courier_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest] = None,
+        deliveries_request_update_order_courier_request: Optional[DeliveriesRequestUpdateOrderCourierRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5054,8 +5054,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest
+        :param deliveries_request_update_order_courier_request:
+        :type deliveries_request_update_order_courier_request: DeliveriesRequestUpdateOrderCourierRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5081,7 +5081,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request=iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request,
+            deliveries_request_update_order_courier_request=deliveries_request_update_order_courier_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5089,11 +5089,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5105,7 +5105,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_update_order_courier_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request,
+        deliveries_request_update_order_courier_request,
         _request_auth,
         _content_type,
         _headers,
@@ -5133,8 +5133,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request
+        if deliveries_request_update_order_courier_request is not None:
+            _body_params = deliveries_request_update_order_courier_request
 
 
         # set the HTTP header `Accept`
@@ -5186,7 +5186,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_delivery_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest] = None,
+        deliveries_request_update_delivery_status_request: Optional[DeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5199,15 +5199,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Update delivery status.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest
+        :param deliveries_request_update_delivery_status_request:
+        :type deliveries_request_update_delivery_status_request: DeliveriesRequestUpdateDeliveryStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5232,7 +5232,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request,
+            deliveries_request_update_delivery_status_request=deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5240,11 +5240,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5261,7 +5261,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_delivery_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest] = None,
+        deliveries_request_update_delivery_status_request: Optional[DeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5274,15 +5274,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Update delivery status.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest
+        :param deliveries_request_update_delivery_status_request:
+        :type deliveries_request_update_delivery_status_request: DeliveriesRequestUpdateDeliveryStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5307,7 +5307,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request,
+            deliveries_request_update_delivery_status_request=deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5315,11 +5315,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5336,7 +5336,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_delivery_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest] = None,
+        deliveries_request_update_delivery_status_request: Optional[DeliveriesRequestUpdateDeliveryStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5356,8 +5356,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest
+        :param deliveries_request_update_delivery_status_request:
+        :type deliveries_request_update_delivery_status_request: DeliveriesRequestUpdateDeliveryStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5382,7 +5382,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_delivery_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request=iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request,
+            deliveries_request_update_delivery_status_request=deliveries_request_update_delivery_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5390,11 +5390,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5406,7 +5406,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_update_order_delivery_status_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request,
+        deliveries_request_update_delivery_status_request,
         _request_auth,
         _content_type,
         _headers,
@@ -5434,8 +5434,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request
+        if deliveries_request_update_delivery_status_request is not None:
+            _body_params = deliveries_request_update_delivery_status_request
 
 
         # set the HTTP header `Accept`
@@ -5487,7 +5487,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5500,15 +5500,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """(Deprecated) Update order payment details.
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5534,7 +5534,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5542,11 +5542,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5563,7 +5563,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5576,15 +5576,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """(Deprecated) Update order payment details.
 
         > Deprecated, use `api/1/deliveries/change_payments` method instead.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Deprecated`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5610,7 +5610,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5618,11 +5618,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5639,7 +5639,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest] = None,
+        deliveries_request_update_order_payments_request: Optional[DeliveriesRequestUpdateOrderPaymentsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5659,8 +5659,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+        :param deliveries_request_update_order_payments_request:
+        :type deliveries_request_update_order_payments_request: DeliveriesRequestUpdateOrderPaymentsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5686,7 +5686,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+            deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5694,11 +5694,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5710,7 +5710,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_update_order_payments_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request,
+        deliveries_request_update_order_payments_request,
         _request_auth,
         _content_type,
         _headers,
@@ -5738,8 +5738,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request
+        if deliveries_request_update_order_payments_request is not None:
+            _body_params = deliveries_request_update_order_payments_request
 
 
         # set the HTTP header `Accept`
@@ -5791,7 +5791,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_problem_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest] = None,
+        deliveries_request_update_order_problem_request: Optional[DeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5804,15 +5804,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Update order problem.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest
+        :param deliveries_request_update_order_problem_request:
+        :type deliveries_request_update_order_problem_request: DeliveriesRequestUpdateOrderProblemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5837,7 +5837,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request,
+            deliveries_request_update_order_problem_request=deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5845,11 +5845,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5866,7 +5866,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_problem_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest] = None,
+        deliveries_request_update_order_problem_request: Optional[DeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5879,15 +5879,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Update order problem.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest
+        :param deliveries_request_update_order_problem_request:
+        :type deliveries_request_update_order_problem_request: DeliveriesRequestUpdateOrderProblemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5912,7 +5912,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request,
+            deliveries_request_update_order_problem_request=deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5920,11 +5920,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5941,7 +5941,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_order_problem_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest] = None,
+        deliveries_request_update_order_problem_request: Optional[DeliveriesRequestUpdateOrderProblemRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5961,8 +5961,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest
+        :param deliveries_request_update_order_problem_request:
+        :type deliveries_request_update_order_problem_request: DeliveriesRequestUpdateOrderProblemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5987,7 +5987,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_order_problem_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request=iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request,
+            deliveries_request_update_order_problem_request=deliveries_request_update_order_problem_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5995,11 +5995,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6011,7 +6011,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_update_order_problem_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request,
+        deliveries_request_update_order_problem_request,
         _request_auth,
         _content_type,
         _headers,
@@ -6039,8 +6039,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request
+        if deliveries_request_update_order_problem_request is not None:
+            _body_params = deliveries_request_update_order_problem_request
 
 
         # set the HTTP header `Accept`
@@ -6092,7 +6092,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_tracking_link_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest] = None,
+        deliveries_request_update_tracking_link_request: Optional[DeliveriesRequestUpdateTrackingLinkRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6111,8 +6111,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest
+        :param deliveries_request_update_tracking_link_request:
+        :type deliveries_request_update_tracking_link_request: DeliveriesRequestUpdateTrackingLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6137,7 +6137,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_tracking_link_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request,
+            deliveries_request_update_tracking_link_request=deliveries_request_update_tracking_link_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6146,10 +6146,10 @@ class DeliveriesCreateAndUpdateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6166,7 +6166,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_tracking_link_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest] = None,
+        deliveries_request_update_tracking_link_request: Optional[DeliveriesRequestUpdateTrackingLinkRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6185,8 +6185,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest
+        :param deliveries_request_update_tracking_link_request:
+        :type deliveries_request_update_tracking_link_request: DeliveriesRequestUpdateTrackingLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6211,7 +6211,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_tracking_link_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request,
+            deliveries_request_update_tracking_link_request=deliveries_request_update_tracking_link_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6220,10 +6220,10 @@ class DeliveriesCreateAndUpdateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6240,7 +6240,7 @@ class DeliveriesCreateAndUpdateApi:
     async def deliveries_update_tracking_link_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest] = None,
+        deliveries_request_update_tracking_link_request: Optional[DeliveriesRequestUpdateTrackingLinkRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6259,8 +6259,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request: IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest
+        :param deliveries_request_update_tracking_link_request:
+        :type deliveries_request_update_tracking_link_request: DeliveriesRequestUpdateTrackingLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6285,7 +6285,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._deliveries_update_tracking_link_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request=iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request,
+            deliveries_request_update_tracking_link_request=deliveries_request_update_tracking_link_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6294,10 +6294,10 @@ class DeliveriesCreateAndUpdateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6309,7 +6309,7 @@ class DeliveriesCreateAndUpdateApi:
     def _deliveries_update_tracking_link_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request,
+        deliveries_request_update_tracking_link_request,
         _request_auth,
         _content_type,
         _headers,
@@ -6337,8 +6337,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request
+        if deliveries_request_update_tracking_link_request is not None:
+            _body_params = deliveries_request_update_tracking_link_request
 
 
         # set the HTTP header `Accept`
@@ -6390,7 +6390,7 @@ class DeliveriesCreateAndUpdateApi:
     async def order_print_bill_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest] = None,
+        deliveries_request_print_bill_request: Optional[DeliveriesRequestPrintBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6403,15 +6403,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Print bill.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest
+        :param deliveries_request_print_bill_request:
+        :type deliveries_request_print_bill_request: DeliveriesRequestPrintBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6436,7 +6436,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._order_print_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request,
+            deliveries_request_print_bill_request=deliveries_request_print_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6444,11 +6444,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6465,7 +6465,7 @@ class DeliveriesCreateAndUpdateApi:
     async def order_print_bill_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest] = None,
+        deliveries_request_print_bill_request: Optional[DeliveriesRequestPrintBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6478,15 +6478,15 @@ class DeliveriesCreateAndUpdateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Print bill.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest
+        :param deliveries_request_print_bill_request:
+        :type deliveries_request_print_bill_request: DeliveriesRequestPrintBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6511,7 +6511,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._order_print_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request,
+            deliveries_request_print_bill_request=deliveries_request_print_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6519,11 +6519,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6540,7 +6540,7 @@ class DeliveriesCreateAndUpdateApi:
     async def order_print_bill_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_print_bill_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest] = None,
+        deliveries_request_print_bill_request: Optional[DeliveriesRequestPrintBillRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6560,8 +6560,8 @@ class DeliveriesCreateAndUpdateApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_print_bill_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_print_bill_request: IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest
+        :param deliveries_request_print_bill_request:
+        :type deliveries_request_print_bill_request: DeliveriesRequestPrintBillRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6586,7 +6586,7 @@ class DeliveriesCreateAndUpdateApi:
 
         _param = self._order_print_bill_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_print_bill_request=iiko_transport_public_api_contracts_deliveries_request_print_bill_request,
+            deliveries_request_print_bill_request=deliveries_request_print_bill_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6594,11 +6594,11 @@ class DeliveriesCreateAndUpdateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6610,7 +6610,7 @@ class DeliveriesCreateAndUpdateApi:
     def _order_print_bill_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_print_bill_request,
+        deliveries_request_print_bill_request,
         _request_auth,
         _content_type,
         _headers,
@@ -6638,8 +6638,8 @@ class DeliveriesCreateAndUpdateApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_print_bill_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_print_bill_request
+        if deliveries_request_print_bill_request is not None:
+            _body_params = deliveries_request_print_bill_request
 
 
         # set the HTTP header `Accept`

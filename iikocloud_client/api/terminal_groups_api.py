@@ -19,12 +19,12 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request import IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_awake_terminal_groups_response import IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request import IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_request import IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse
+from iikocloud_client.models.terminals_awake_terminal_groups_request import TerminalsAwakeTerminalGroupsRequest
+from iikocloud_client.models.terminals_awake_terminal_groups_response import TerminalsAwakeTerminalGroupsResponse
+from iikocloud_client.models.terminals_terminal_groups_is_alive_request import TerminalsTerminalGroupsIsAliveRequest
+from iikocloud_client.models.terminals_terminal_groups_is_alive_response import TerminalsTerminalGroupsIsAliveResponse
+from iikocloud_client.models.terminals_terminal_groups_request import TerminalsTerminalGroupsRequest
+from iikocloud_client.models.terminals_terminal_groups_response import TerminalsTerminalGroupsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -48,7 +48,7 @@ class TerminalGroupsApi:
     async def terminal_groups_awake_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest] = None,
+        terminals_awake_terminal_groups_request: Optional[TerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,15 +61,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse:
+    ) -> TerminalsAwakeTerminalGroupsResponse:
         """Awake terminal groups from sleep mode.
 
            > Restriction group: `Organizations: settings`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest
+        :param terminals_awake_terminal_groups_request:
+        :type terminals_awake_terminal_groups_request: TerminalsAwakeTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -94,7 +94,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request,
+            terminals_awake_terminal_groups_request=terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -102,11 +102,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsAwakeTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -123,7 +123,7 @@ class TerminalGroupsApi:
     async def terminal_groups_awake_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest] = None,
+        terminals_awake_terminal_groups_request: Optional[TerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -136,15 +136,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse]:
+    ) -> ApiResponse[TerminalsAwakeTerminalGroupsResponse]:
         """Awake terminal groups from sleep mode.
 
            > Restriction group: `Organizations: settings`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest
+        :param terminals_awake_terminal_groups_request:
+        :type terminals_awake_terminal_groups_request: TerminalsAwakeTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -169,7 +169,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request,
+            terminals_awake_terminal_groups_request=terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -177,11 +177,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsAwakeTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -198,7 +198,7 @@ class TerminalGroupsApi:
     async def terminal_groups_awake_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest] = None,
+        terminals_awake_terminal_groups_request: Optional[TerminalsAwakeTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -218,8 +218,8 @@ class TerminalGroupsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request: IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest
+        :param terminals_awake_terminal_groups_request:
+        :type terminals_awake_terminal_groups_request: TerminalsAwakeTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -244,7 +244,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_awake_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request=iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request,
+            terminals_awake_terminal_groups_request=terminals_awake_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -252,11 +252,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsAwakeTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -268,7 +268,7 @@ class TerminalGroupsApi:
     def _terminal_groups_awake_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request,
+        terminals_awake_terminal_groups_request,
         _request_auth,
         _content_type,
         _headers,
@@ -296,8 +296,8 @@ class TerminalGroupsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request is not None:
-            _body_params = iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request
+        if terminals_awake_terminal_groups_request is not None:
+            _body_params = terminals_awake_terminal_groups_request
 
 
         # set the HTTP header `Accept`
@@ -349,7 +349,7 @@ class TerminalGroupsApi:
     async def terminal_groups_is_alive_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest] = None,
+        terminals_terminal_groups_is_alive_request: Optional[TerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -362,15 +362,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse:
+    ) -> TerminalsTerminalGroupsIsAliveResponse:
         """Returns information on availability of group of terminals.
 
            > Restriction group: `POS: availability`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest
+        :param terminals_terminal_groups_is_alive_request:
+        :type terminals_terminal_groups_is_alive_request: TerminalsTerminalGroupsIsAliveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -395,7 +395,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request,
+            terminals_terminal_groups_is_alive_request=terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -403,11 +403,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsIsAliveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -424,7 +424,7 @@ class TerminalGroupsApi:
     async def terminal_groups_is_alive_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest] = None,
+        terminals_terminal_groups_is_alive_request: Optional[TerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -437,15 +437,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse]:
+    ) -> ApiResponse[TerminalsTerminalGroupsIsAliveResponse]:
         """Returns information on availability of group of terminals.
 
            > Restriction group: `POS: availability`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest
+        :param terminals_terminal_groups_is_alive_request:
+        :type terminals_terminal_groups_is_alive_request: TerminalsTerminalGroupsIsAliveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -470,7 +470,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request,
+            terminals_terminal_groups_is_alive_request=terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -478,11 +478,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsIsAliveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -499,7 +499,7 @@ class TerminalGroupsApi:
     async def terminal_groups_is_alive_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest] = None,
+        terminals_terminal_groups_is_alive_request: Optional[TerminalsTerminalGroupsIsAliveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -519,8 +519,8 @@ class TerminalGroupsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest
+        :param terminals_terminal_groups_is_alive_request:
+        :type terminals_terminal_groups_is_alive_request: TerminalsTerminalGroupsIsAliveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -545,7 +545,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_is_alive_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request=iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request,
+            terminals_terminal_groups_is_alive_request=terminals_terminal_groups_is_alive_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -553,11 +553,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsIsAliveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -569,7 +569,7 @@ class TerminalGroupsApi:
     def _terminal_groups_is_alive_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request,
+        terminals_terminal_groups_is_alive_request,
         _request_auth,
         _content_type,
         _headers,
@@ -597,8 +597,8 @@ class TerminalGroupsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request is not None:
-            _body_params = iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request
+        if terminals_terminal_groups_is_alive_request is not None:
+            _body_params = terminals_terminal_groups_is_alive_request
 
 
         # set the HTTP header `Accept`
@@ -650,7 +650,7 @@ class TerminalGroupsApi:
     async def terminal_groups_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest] = None,
+        terminals_terminal_groups_request: Optional[TerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -663,15 +663,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse:
+    ) -> TerminalsTerminalGroupsResponse:
         """Method that returns information on groups of delivery terminals.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest
+        :param terminals_terminal_groups_request:
+        :type terminals_terminal_groups_request: TerminalsTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -696,7 +696,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request,
+            terminals_terminal_groups_request=terminals_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -704,11 +704,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -725,7 +725,7 @@ class TerminalGroupsApi:
     async def terminal_groups_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest] = None,
+        terminals_terminal_groups_request: Optional[TerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -738,15 +738,15 @@ class TerminalGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse]:
+    ) -> ApiResponse[TerminalsTerminalGroupsResponse]:
         """Method that returns information on groups of delivery terminals.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest
+        :param terminals_terminal_groups_request:
+        :type terminals_terminal_groups_request: TerminalsTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -771,7 +771,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request,
+            terminals_terminal_groups_request=terminals_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -779,11 +779,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -800,7 +800,7 @@ class TerminalGroupsApi:
     async def terminal_groups_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_request: Optional[IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest] = None,
+        terminals_terminal_groups_request: Optional[TerminalsTerminalGroupsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -820,8 +820,8 @@ class TerminalGroupsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_terminal_groups_request:
-        :type iiko_transport_public_api_contracts_terminals_terminal_groups_request: IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest
+        :param terminals_terminal_groups_request:
+        :type terminals_terminal_groups_request: TerminalsTerminalGroupsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -846,7 +846,7 @@ class TerminalGroupsApi:
 
         _param = self._terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_terminal_groups_request=iiko_transport_public_api_contracts_terminals_terminal_groups_request,
+            terminals_terminal_groups_request=terminals_terminal_groups_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -854,11 +854,11 @@ class TerminalGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -870,7 +870,7 @@ class TerminalGroupsApi:
     def _terminal_groups_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_terminals_terminal_groups_request,
+        terminals_terminal_groups_request,
         _request_auth,
         _content_type,
         _headers,
@@ -898,8 +898,8 @@ class TerminalGroupsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_terminals_terminal_groups_request is not None:
-            _body_params = iiko_transport_public_api_contracts_terminals_terminal_groups_request
+        if terminals_terminal_groups_request is not None:
+            _body_params = terminals_terminal_groups_request
 
 
         # set the HTTP header `Accept`

@@ -19,23 +19,23 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request import IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_locations_response import IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_change_personal_session_response import IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_close_personal_session_request import IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request import IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_response import IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_couriers_and_check_role_request import IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_couriers_request import IikoTransportPublicApiContractsEmployeesCouriersRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_info_request import IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_info_response import IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employees_response import IikoTransportPublicApiContractsEmployeesEmployeesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employees_with_role_sign_response import IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_personal_session_info_request import IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_personal_session_info_response import IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request import IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_response import IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_open_personal_session_request import IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest
+from iikocloud_client.models.employees_active_courier_locations_by_terminal_group_request import EmployeesActiveCourierLocationsByTerminalGroupRequest
+from iikocloud_client.models.employees_active_courier_locations_response import EmployeesActiveCourierLocationsResponse
+from iikocloud_client.models.employees_change_personal_session_response import EmployeesChangePersonalSessionResponse
+from iikocloud_client.models.employees_close_personal_session_request import EmployeesClosePersonalSessionRequest
+from iikocloud_client.models.employees_courier_locations_by_time_offset_request import EmployeesCourierLocationsByTimeOffsetRequest
+from iikocloud_client.models.employees_courier_locations_by_time_offset_response import EmployeesCourierLocationsByTimeOffsetResponse
+from iikocloud_client.models.employees_couriers_and_check_role_request import EmployeesCouriersAndCheckRoleRequest
+from iikocloud_client.models.employees_couriers_request import EmployeesCouriersRequest
+from iikocloud_client.models.employees_employee_info_request import EmployeesEmployeeInfoRequest
+from iikocloud_client.models.employees_employee_info_response import EmployeesEmployeeInfoResponse
+from iikocloud_client.models.employees_employees_response import EmployeesEmployeesResponse
+from iikocloud_client.models.employees_employees_with_role_sign_response import EmployeesEmployeesWithRoleSignResponse
+from iikocloud_client.models.employees_get_personal_session_info_request import EmployeesGetPersonalSessionInfoRequest
+from iikocloud_client.models.employees_get_personal_session_info_response import EmployeesGetPersonalSessionInfoResponse
+from iikocloud_client.models.employees_get_terminal_groups_of_employee_request import EmployeesGetTerminalGroupsOfEmployeeRequest
+from iikocloud_client.models.employees_get_terminal_groups_of_employee_response import EmployeesGetTerminalGroupsOfEmployeeResponse
+from iikocloud_client.models.employees_open_personal_session_request import EmployeesOpenPersonalSessionRequest
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -59,7 +59,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_by_terminal_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
+        employees_active_courier_locations_by_terminal_group_request: Optional[EmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,15 +72,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse:
+    ) -> EmployeesActiveCourierLocationsResponse:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
-        :type iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
+        :param employees_active_courier_locations_by_terminal_group_request:
+        :type employees_active_courier_locations_by_terminal_group_request: EmployeesActiveCourierLocationsByTerminalGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -105,7 +105,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
+            employees_active_courier_locations_by_terminal_group_request=employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -113,11 +113,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -134,7 +134,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_by_terminal_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
+        employees_active_courier_locations_by_terminal_group_request: Optional[EmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,15 +147,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse]:
+    ) -> ApiResponse[EmployeesActiveCourierLocationsResponse]:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
-        :type iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
+        :param employees_active_courier_locations_by_terminal_group_request:
+        :type employees_active_courier_locations_by_terminal_group_request: EmployeesActiveCourierLocationsByTerminalGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -180,7 +180,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
+            employees_active_courier_locations_by_terminal_group_request=employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -188,11 +188,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -209,7 +209,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_by_terminal_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: Optional[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
+        employees_active_courier_locations_by_terminal_group_request: Optional[EmployeesActiveCourierLocationsByTerminalGroupRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -229,8 +229,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request:
-        :type iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request: IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
+        :param employees_active_courier_locations_by_terminal_group_request:
+        :type employees_active_courier_locations_by_terminal_group_request: EmployeesActiveCourierLocationsByTerminalGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,7 +255,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_by_terminal_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request=iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
+            employees_active_courier_locations_by_terminal_group_request=employees_active_courier_locations_by_terminal_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -263,11 +263,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -279,7 +279,7 @@ class EmployeesApi:
     def _employees_couriers_active_location_by_terminal_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request,
+        employees_active_courier_locations_by_terminal_group_request,
         _request_auth,
         _content_type,
         _headers,
@@ -307,8 +307,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request
+        if employees_active_courier_locations_by_terminal_group_request is not None:
+            _body_params = employees_active_courier_locations_by_terminal_group_request
 
 
         # set the HTTP header `Accept`
@@ -360,7 +360,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -373,15 +373,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse:
+    ) -> EmployeesActiveCourierLocationsResponse:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -406,7 +406,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -414,11 +414,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -435,7 +435,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -448,15 +448,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse]:
+    ) -> ApiResponse[EmployeesActiveCourierLocationsResponse]:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -481,7 +481,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,11 +489,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -510,7 +510,7 @@ class EmployeesApi:
     async def employees_couriers_active_location_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -530,8 +530,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -556,7 +556,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_active_location_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -564,11 +564,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesActiveCourierLocationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -580,7 +580,7 @@ class EmployeesApi:
     def _employees_couriers_active_location_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_couriers_request,
+        employees_couriers_request,
         _request_auth,
         _content_type,
         _headers,
@@ -608,8 +608,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_couriers_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_couriers_request
+        if employees_couriers_request is not None:
+            _body_params = employees_couriers_request
 
 
         # set the HTTP header `Accept`
@@ -661,7 +661,7 @@ class EmployeesApi:
     async def employees_couriers_by_role_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
+        employees_couriers_and_check_role_request: Optional[EmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -674,15 +674,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse:
+    ) -> EmployeesEmployeesWithRoleSignResponse:
         """Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
            > Restriction group: `Drivers: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest
+        :param employees_couriers_and_check_role_request:
+        :type employees_couriers_and_check_role_request: EmployeesCouriersAndCheckRoleRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -707,7 +707,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
+            employees_couriers_and_check_role_request=employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -715,11 +715,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesWithRoleSignResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -736,7 +736,7 @@ class EmployeesApi:
     async def employees_couriers_by_role_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
+        employees_couriers_and_check_role_request: Optional[EmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -749,15 +749,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse]:
+    ) -> ApiResponse[EmployeesEmployeesWithRoleSignResponse]:
         """Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
            > Restriction group: `Drivers: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest
+        :param employees_couriers_and_check_role_request:
+        :type employees_couriers_and_check_role_request: EmployeesCouriersAndCheckRoleRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -782,7 +782,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
+            employees_couriers_and_check_role_request=employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -790,11 +790,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesWithRoleSignResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -811,7 +811,7 @@ class EmployeesApi:
     async def employees_couriers_by_role_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest] = None,
+        employees_couriers_and_check_role_request: Optional[EmployeesCouriersAndCheckRoleRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -831,8 +831,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_and_check_role_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_and_check_role_request: IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest
+        :param employees_couriers_and_check_role_request:
+        :type employees_couriers_and_check_role_request: EmployeesCouriersAndCheckRoleRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -857,7 +857,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_by_role_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_and_check_role_request=iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
+            employees_couriers_and_check_role_request=employees_couriers_and_check_role_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -865,11 +865,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesWithRoleSignResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -881,7 +881,7 @@ class EmployeesApi:
     def _employees_couriers_by_role_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_couriers_and_check_role_request,
+        employees_couriers_and_check_role_request,
         _request_auth,
         _content_type,
         _headers,
@@ -909,8 +909,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_couriers_and_check_role_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_couriers_and_check_role_request
+        if employees_couriers_and_check_role_request is not None:
+            _body_params = employees_couriers_and_check_role_request
 
 
         # set the HTTP header `Accept`
@@ -962,7 +962,7 @@ class EmployeesApi:
     async def employees_couriers_locations_by_time_offset_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
+        employees_courier_locations_by_time_offset_request: Optional[EmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -975,15 +975,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse:
+    ) -> EmployeesCourierLocationsByTimeOffsetResponse:
         """Method of obtaining drivers' coordinates history.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
-        :type iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest
+        :param employees_courier_locations_by_time_offset_request:
+        :type employees_courier_locations_by_time_offset_request: EmployeesCourierLocationsByTimeOffsetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1008,7 +1008,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
+            employees_courier_locations_by_time_offset_request=employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1016,11 +1016,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesCourierLocationsByTimeOffsetResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1037,7 +1037,7 @@ class EmployeesApi:
     async def employees_couriers_locations_by_time_offset_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
+        employees_courier_locations_by_time_offset_request: Optional[EmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1050,15 +1050,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse]:
+    ) -> ApiResponse[EmployeesCourierLocationsByTimeOffsetResponse]:
         """Method of obtaining drivers' coordinates history.
 
            > Restriction group: `Drivers: location`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
-        :type iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest
+        :param employees_courier_locations_by_time_offset_request:
+        :type employees_courier_locations_by_time_offset_request: EmployeesCourierLocationsByTimeOffsetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1083,7 +1083,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
+            employees_courier_locations_by_time_offset_request=employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1091,11 +1091,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesCourierLocationsByTimeOffsetResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1112,7 +1112,7 @@ class EmployeesApi:
     async def employees_couriers_locations_by_time_offset_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: Optional[IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest] = None,
+        employees_courier_locations_by_time_offset_request: Optional[EmployeesCourierLocationsByTimeOffsetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1132,8 +1132,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request:
-        :type iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request: IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest
+        :param employees_courier_locations_by_time_offset_request:
+        :type employees_courier_locations_by_time_offset_request: EmployeesCourierLocationsByTimeOffsetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1158,7 +1158,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_locations_by_time_offset_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request=iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
+            employees_courier_locations_by_time_offset_request=employees_courier_locations_by_time_offset_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1166,11 +1166,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesCourierLocationsByTimeOffsetResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1182,7 +1182,7 @@ class EmployeesApi:
     def _employees_couriers_locations_by_time_offset_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request,
+        employees_courier_locations_by_time_offset_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1210,8 +1210,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request
+        if employees_courier_locations_by_time_offset_request is not None:
+            _body_params = employees_courier_locations_by_time_offset_request
 
 
         # set the HTTP header `Accept`
@@ -1263,7 +1263,7 @@ class EmployeesApi:
     async def employees_couriers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1276,15 +1276,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesEmployeesResponse:
+    ) -> EmployeesEmployeesResponse:
         """Returns list of all employees which are delivery drivers in specified restaurants.
 
            > Restriction group: `Drivers: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1309,7 +1309,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1317,11 +1317,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1338,7 +1338,7 @@ class EmployeesApi:
     async def employees_couriers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1351,15 +1351,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesEmployeesResponse]:
+    ) -> ApiResponse[EmployeesEmployeesResponse]:
         """Returns list of all employees which are delivery drivers in specified restaurants.
 
            > Restriction group: `Drivers: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1384,7 +1384,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1392,11 +1392,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1413,7 +1413,7 @@ class EmployeesApi:
     async def employees_couriers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_couriers_request: Optional[IikoTransportPublicApiContractsEmployeesCouriersRequest] = None,
+        employees_couriers_request: Optional[EmployeesCouriersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1433,8 +1433,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_couriers_request:
-        :type iiko_transport_public_api_contracts_employees_couriers_request: IikoTransportPublicApiContractsEmployeesCouriersRequest
+        :param employees_couriers_request:
+        :type employees_couriers_request: EmployeesCouriersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1459,7 +1459,7 @@ class EmployeesApi:
 
         _param = self._employees_couriers_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_couriers_request=iiko_transport_public_api_contracts_employees_couriers_request,
+            employees_couriers_request=employees_couriers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1467,11 +1467,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1483,7 +1483,7 @@ class EmployeesApi:
     def _employees_couriers_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_couriers_request,
+        employees_couriers_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1511,8 +1511,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_couriers_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_couriers_request
+        if employees_couriers_request is not None:
+            _body_params = employees_couriers_request
 
 
         # set the HTTP header `Accept`
@@ -1564,7 +1564,7 @@ class EmployeesApi:
     async def employees_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
+        employees_employee_info_request: Optional[EmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1577,15 +1577,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse:
+    ) -> EmployeesEmployeeInfoResponse:
         """Returns employee info.
 
            > Restriction group: `Employees: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_employee_info_request:
-        :type iiko_transport_public_api_contracts_employees_employee_info_request: IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest
+        :param employees_employee_info_request:
+        :type employees_employee_info_request: EmployeesEmployeeInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1610,7 +1610,7 @@ class EmployeesApi:
 
         _param = self._employees_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
+            employees_employee_info_request=employees_employee_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1618,11 +1618,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeeInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1639,7 +1639,7 @@ class EmployeesApi:
     async def employees_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
+        employees_employee_info_request: Optional[EmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1652,15 +1652,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse]:
+    ) -> ApiResponse[EmployeesEmployeeInfoResponse]:
         """Returns employee info.
 
            > Restriction group: `Employees: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_employee_info_request:
-        :type iiko_transport_public_api_contracts_employees_employee_info_request: IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest
+        :param employees_employee_info_request:
+        :type employees_employee_info_request: EmployeesEmployeeInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1685,7 +1685,7 @@ class EmployeesApi:
 
         _param = self._employees_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
+            employees_employee_info_request=employees_employee_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1693,11 +1693,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeeInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1714,7 +1714,7 @@ class EmployeesApi:
     async def employees_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_employee_info_request: Optional[IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest] = None,
+        employees_employee_info_request: Optional[EmployeesEmployeeInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1734,8 +1734,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_employee_info_request:
-        :type iiko_transport_public_api_contracts_employees_employee_info_request: IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest
+        :param employees_employee_info_request:
+        :type employees_employee_info_request: EmployeesEmployeeInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1760,7 +1760,7 @@ class EmployeesApi:
 
         _param = self._employees_info_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_employee_info_request=iiko_transport_public_api_contracts_employees_employee_info_request,
+            employees_employee_info_request=employees_employee_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1768,11 +1768,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesEmployeeInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1784,7 +1784,7 @@ class EmployeesApi:
     def _employees_info_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_employee_info_request,
+        employees_employee_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1812,8 +1812,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_employee_info_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_employee_info_request
+        if employees_employee_info_request is not None:
+            _body_params = employees_employee_info_request
 
 
         # set the HTTP header `Accept`
@@ -1865,7 +1865,7 @@ class EmployeesApi:
     async def employees_shift_clockin_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
+        employees_open_personal_session_request: Optional[EmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1878,15 +1878,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse:
+    ) -> EmployeesChangePersonalSessionResponse:
         """Open personal session.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_open_personal_session_request: IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest
+        :param employees_open_personal_session_request:
+        :type employees_open_personal_session_request: EmployeesOpenPersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1911,7 +1911,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
+            employees_open_personal_session_request=employees_open_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1919,11 +1919,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1940,7 +1940,7 @@ class EmployeesApi:
     async def employees_shift_clockin_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
+        employees_open_personal_session_request: Optional[EmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1953,15 +1953,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse]:
+    ) -> ApiResponse[EmployeesChangePersonalSessionResponse]:
         """Open personal session.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_open_personal_session_request: IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest
+        :param employees_open_personal_session_request:
+        :type employees_open_personal_session_request: EmployeesOpenPersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1986,7 +1986,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
+            employees_open_personal_session_request=employees_open_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1994,11 +1994,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2015,7 +2015,7 @@ class EmployeesApi:
     async def employees_shift_clockin_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_open_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest] = None,
+        employees_open_personal_session_request: Optional[EmployeesOpenPersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2035,8 +2035,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_open_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_open_personal_session_request: IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest
+        :param employees_open_personal_session_request:
+        :type employees_open_personal_session_request: EmployeesOpenPersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2061,7 +2061,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockin_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_open_personal_session_request=iiko_transport_public_api_contracts_employees_open_personal_session_request,
+            employees_open_personal_session_request=employees_open_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2069,11 +2069,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2085,7 +2085,7 @@ class EmployeesApi:
     def _employees_shift_clockin_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_open_personal_session_request,
+        employees_open_personal_session_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2113,8 +2113,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_open_personal_session_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_open_personal_session_request
+        if employees_open_personal_session_request is not None:
+            _body_params = employees_open_personal_session_request
 
 
         # set the HTTP header `Accept`
@@ -2166,7 +2166,7 @@ class EmployeesApi:
     async def employees_shift_clockout_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
+        employees_close_personal_session_request: Optional[EmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2179,15 +2179,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse:
+    ) -> EmployeesChangePersonalSessionResponse:
         """Close personal session.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_close_personal_session_request: IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest
+        :param employees_close_personal_session_request:
+        :type employees_close_personal_session_request: EmployeesClosePersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2212,7 +2212,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
+            employees_close_personal_session_request=employees_close_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2220,11 +2220,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2241,7 +2241,7 @@ class EmployeesApi:
     async def employees_shift_clockout_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
+        employees_close_personal_session_request: Optional[EmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2254,15 +2254,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse]:
+    ) -> ApiResponse[EmployeesChangePersonalSessionResponse]:
         """Close personal session.
 
            > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_close_personal_session_request: IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest
+        :param employees_close_personal_session_request:
+        :type employees_close_personal_session_request: EmployeesClosePersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2287,7 +2287,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
+            employees_close_personal_session_request=employees_close_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2295,11 +2295,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2316,7 +2316,7 @@ class EmployeesApi:
     async def employees_shift_clockout_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_close_personal_session_request: Optional[IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest] = None,
+        employees_close_personal_session_request: Optional[EmployeesClosePersonalSessionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2336,8 +2336,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_close_personal_session_request:
-        :type iiko_transport_public_api_contracts_employees_close_personal_session_request: IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest
+        :param employees_close_personal_session_request:
+        :type employees_close_personal_session_request: EmployeesClosePersonalSessionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2362,7 +2362,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_clockout_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_close_personal_session_request=iiko_transport_public_api_contracts_employees_close_personal_session_request,
+            employees_close_personal_session_request=employees_close_personal_session_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2370,11 +2370,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesChangePersonalSessionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2386,7 +2386,7 @@ class EmployeesApi:
     def _employees_shift_clockout_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_close_personal_session_request,
+        employees_close_personal_session_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2414,8 +2414,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_close_personal_session_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_close_personal_session_request
+        if employees_close_personal_session_request is not None:
+            _body_params = employees_close_personal_session_request
 
 
         # set the HTTP header `Accept`
@@ -2467,7 +2467,7 @@ class EmployeesApi:
     async def employees_shift_is_open_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
+        employees_get_personal_session_info_request: Optional[EmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2480,15 +2480,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse:
+    ) -> EmployeesGetPersonalSessionInfoResponse:
         """Check if personal session is open.
 
            > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
-        :type iiko_transport_public_api_contracts_employees_get_personal_session_info_request: IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest
+        :param employees_get_personal_session_info_request:
+        :type employees_get_personal_session_info_request: EmployeesGetPersonalSessionInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2513,7 +2513,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
+            employees_get_personal_session_info_request=employees_get_personal_session_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2521,11 +2521,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetPersonalSessionInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2542,7 +2542,7 @@ class EmployeesApi:
     async def employees_shift_is_open_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
+        employees_get_personal_session_info_request: Optional[EmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2555,15 +2555,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse]:
+    ) -> ApiResponse[EmployeesGetPersonalSessionInfoResponse]:
         """Check if personal session is open.
 
            > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
-        :type iiko_transport_public_api_contracts_employees_get_personal_session_info_request: IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest
+        :param employees_get_personal_session_info_request:
+        :type employees_get_personal_session_info_request: EmployeesGetPersonalSessionInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2588,7 +2588,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
+            employees_get_personal_session_info_request=employees_get_personal_session_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2596,11 +2596,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetPersonalSessionInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2617,7 +2617,7 @@ class EmployeesApi:
     async def employees_shift_is_open_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_personal_session_info_request: Optional[IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest] = None,
+        employees_get_personal_session_info_request: Optional[EmployeesGetPersonalSessionInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2637,8 +2637,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_personal_session_info_request:
-        :type iiko_transport_public_api_contracts_employees_get_personal_session_info_request: IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest
+        :param employees_get_personal_session_info_request:
+        :type employees_get_personal_session_info_request: EmployeesGetPersonalSessionInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2663,7 +2663,7 @@ class EmployeesApi:
 
         _param = self._employees_shift_is_open_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_personal_session_info_request=iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
+            employees_get_personal_session_info_request=employees_get_personal_session_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2671,11 +2671,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetPersonalSessionInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2687,7 +2687,7 @@ class EmployeesApi:
     def _employees_shift_is_open_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_get_personal_session_info_request,
+        employees_get_personal_session_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2715,8 +2715,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_get_personal_session_info_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_get_personal_session_info_request
+        if employees_get_personal_session_info_request is not None:
+            _body_params = employees_get_personal_session_info_request
 
 
         # set the HTTP header `Accept`
@@ -2768,7 +2768,7 @@ class EmployeesApi:
     async def employees_shifts_by_courier_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
+        employees_get_terminal_groups_of_employee_request: Optional[EmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2781,15 +2781,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse:
+    ) -> EmployeesGetTerminalGroupsOfEmployeeResponse:
         """Get terminal groups where employee session is opened.
 
            > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
-        :type iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest
+        :param employees_get_terminal_groups_of_employee_request:
+        :type employees_get_terminal_groups_of_employee_request: EmployeesGetTerminalGroupsOfEmployeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2814,7 +2814,7 @@ class EmployeesApi:
 
         _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
+            employees_get_terminal_groups_of_employee_request=employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2822,11 +2822,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetTerminalGroupsOfEmployeeResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2843,7 +2843,7 @@ class EmployeesApi:
     async def employees_shifts_by_courier_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
+        employees_get_terminal_groups_of_employee_request: Optional[EmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2856,15 +2856,15 @@ class EmployeesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse]:
+    ) -> ApiResponse[EmployeesGetTerminalGroupsOfEmployeeResponse]:
         """Get terminal groups where employee session is opened.
 
            > Restriction group: `Employees: shifts`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
-        :type iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest
+        :param employees_get_terminal_groups_of_employee_request:
+        :type employees_get_terminal_groups_of_employee_request: EmployeesGetTerminalGroupsOfEmployeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2889,7 +2889,7 @@ class EmployeesApi:
 
         _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
+            employees_get_terminal_groups_of_employee_request=employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2897,11 +2897,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetTerminalGroupsOfEmployeeResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2918,7 +2918,7 @@ class EmployeesApi:
     async def employees_shifts_by_courier_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: Optional[IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest] = None,
+        employees_get_terminal_groups_of_employee_request: Optional[EmployeesGetTerminalGroupsOfEmployeeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2938,8 +2938,8 @@ class EmployeesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request:
-        :type iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request: IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest
+        :param employees_get_terminal_groups_of_employee_request:
+        :type employees_get_terminal_groups_of_employee_request: EmployeesGetTerminalGroupsOfEmployeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2964,7 +2964,7 @@ class EmployeesApi:
 
         _param = self._employees_shifts_by_courier_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request=iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
+            employees_get_terminal_groups_of_employee_request=employees_get_terminal_groups_of_employee_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2972,11 +2972,11 @@ class EmployeesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "EmployeesGetTerminalGroupsOfEmployeeResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2988,7 +2988,7 @@ class EmployeesApi:
     def _employees_shifts_by_courier_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request,
+        employees_get_terminal_groups_of_employee_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3016,8 +3016,8 @@ class EmployeesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request is not None:
-            _body_params = iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request
+        if employees_get_terminal_groups_of_employee_request is not None:
+            _body_params = employees_get_terminal_groups_of_employee_request
 
 
         # set the HTTP header `Accept`

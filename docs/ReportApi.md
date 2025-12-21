@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **loyalty_iiko_customer_transactions_by_date_post**
-> IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request)
+> ReportGetTransactionsReportByPeriodResponse loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, report_get_transactions_report_by_period_request=report_get_transactions_report_by_period_request)
 
 Get transaction report by period.
 
@@ -23,8 +23,8 @@ Get transaction report for specified customer by provided date range.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse
+from iikocloud_client.models.report_get_transactions_report_by_period_request import ReportGetTransactionsReportByPeriodRequest
+from iikocloud_client.models.report_get_transactions_report_by_period_response import ReportGetTransactionsReportByPeriodResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -49,11 +49,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.ReportApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest() # IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest |  (optional)
+    report_get_transactions_report_by_period_request = iikocloud_client.ReportGetTransactionsReportByPeriodRequest() # ReportGetTransactionsReportByPeriodRequest |  (optional)
 
     try:
         # Get transaction report by period.
-        api_response = await api_instance.loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request)
+        api_response = await api_instance.loyalty_iiko_customer_transactions_by_date_post(timeout=timeout, report_get_transactions_report_by_period_request=report_get_transactions_report_by_period_request)
         print("The response of ReportApi->loyalty_iiko_customer_transactions_by_date_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,11 +68,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request** | [**IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest**](IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest.md)|  | [optional] 
+ **report_get_transactions_report_by_period_request** | [**ReportGetTransactionsReportByPeriodRequest**](ReportGetTransactionsReportByPeriodRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse**](IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse.md)
+[**ReportGetTransactionsReportByPeriodResponse**](ReportGetTransactionsReportByPeriodResponse.md)
 
 ### Authorization
 
@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_transactions_by_revision_post**
-> IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request)
+> ReportGetTransactionsReportByRevisionResponse loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, report_get_transactions_report_by_revision_request=report_get_transactions_report_by_revision_request)
 
 Get transaction report by revision.
 
@@ -110,8 +110,8 @@ Get transaction report for specified customer by provided revision.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse
+from iikocloud_client.models.report_get_transactions_report_by_revision_request import ReportGetTransactionsReportByRevisionRequest
+from iikocloud_client.models.report_get_transactions_report_by_revision_response import ReportGetTransactionsReportByRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -136,11 +136,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.ReportApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest() # IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest |  (optional)
+    report_get_transactions_report_by_revision_request = iikocloud_client.ReportGetTransactionsReportByRevisionRequest() # ReportGetTransactionsReportByRevisionRequest |  (optional)
 
     try:
         # Get transaction report by revision.
-        api_response = await api_instance.loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request=iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request)
+        api_response = await api_instance.loyalty_iiko_customer_transactions_by_revision_post(timeout=timeout, report_get_transactions_report_by_revision_request=report_get_transactions_report_by_revision_request)
         print("The response of ReportApi->loyalty_iiko_customer_transactions_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,11 +155,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request** | [**IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest**](IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest.md)|  | [optional] 
+ **report_get_transactions_report_by_revision_request** | [**ReportGetTransactionsReportByRevisionRequest**](ReportGetTransactionsReportByRevisionRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse**](IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse.md)
+[**ReportGetTransactionsReportByRevisionResponse**](ReportGetTransactionsReportByRevisionResponse.md)
 
 ### Authorization
 

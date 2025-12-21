@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **marketing_sources_post**
-> IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse marketing_sources_post(timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
+> MarketingSourcesMarketingSourcesResponse marketing_sources_post(timeout=timeout, marketing_sources_marketing_sources_request=marketing_sources_marketing_sources_request)
 
 Marketing sources.
 
@@ -24,8 +24,8 @@ Marketing sources.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_response import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.marketing_sources_marketing_sources_request import MarketingSourcesMarketingSourcesRequest
+from iikocloud_client.models.marketing_sources_marketing_sources_response import MarketingSourcesMarketingSourcesResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -50,11 +50,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MarketingSourcesApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request = iikocloud_client.IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest() # IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest |  (optional)
+    marketing_sources_marketing_sources_request = iikocloud_client.MarketingSourcesMarketingSourcesRequest() # MarketingSourcesMarketingSourcesRequest |  (optional)
 
     try:
         # Marketing sources.
-        api_response = await api_instance.marketing_sources_post(timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
+        api_response = await api_instance.marketing_sources_post(timeout=timeout, marketing_sources_marketing_sources_request=marketing_sources_marketing_sources_request)
         print("The response of MarketingSourcesApi->marketing_sources_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,11 +69,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request** | [**IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest**](IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest.md)|  | [optional] 
+ **marketing_sources_marketing_sources_request** | [**MarketingSourcesMarketingSourcesRequest**](MarketingSourcesMarketingSourcesRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse**](IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse.md)
+[**MarketingSourcesMarketingSourcesResponse**](MarketingSourcesMarketingSourcesResponse.md)
 
 ### Authorization
 

@@ -19,18 +19,18 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request import IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_manual_conditions_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request import IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_get_programs_response import IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse
+from iikocloud_client.models.common_get_by_organization_id_request import CommonGetByOrganizationIdRequest
+from iikocloud_client.models.loyalty_result_calculate_checkin_request import LoyaltyResultCalculateCheckinRequest
+from iikocloud_client.models.loyalty_result_calculate_checkin_response import LoyaltyResultCalculateCheckinResponse
+from iikocloud_client.models.loyalty_result_coupon_info_request import LoyaltyResultCouponInfoRequest
+from iikocloud_client.models.loyalty_result_coupon_info_response import LoyaltyResultCouponInfoResponse
+from iikocloud_client.models.loyalty_result_get_manual_conditions_response import LoyaltyResultGetManualConditionsResponse
+from iikocloud_client.models.loyalty_result_not_activated_coupon_request import LoyaltyResultNotActivatedCouponRequest
+from iikocloud_client.models.loyalty_result_not_activated_coupon_response import LoyaltyResultNotActivatedCouponResponse
+from iikocloud_client.models.loyalty_result_series_with_not_activated_coupons_request import LoyaltyResultSeriesWithNotActivatedCouponsRequest
+from iikocloud_client.models.loyalty_result_series_with_not_activated_coupons_response import LoyaltyResultSeriesWithNotActivatedCouponsResponse
+from iikocloud_client.models.organization_get_programs_request import OrganizationGetProgramsRequest
+from iikocloud_client.models.organization_get_programs_response import OrganizationGetProgramsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -54,7 +54,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_calculate_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
+        loyalty_result_calculate_checkin_request: Optional[LoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,15 +67,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse:
+    ) -> LoyaltyResultCalculateCheckinResponse:
         """Calculate checkin.
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest
+        :param loyalty_result_calculate_checkin_request:
+        :type loyalty_result_calculate_checkin_request: LoyaltyResultCalculateCheckinRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -100,7 +100,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
+            loyalty_result_calculate_checkin_request=loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -108,11 +108,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateCheckinResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +129,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_calculate_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
+        loyalty_result_calculate_checkin_request: Optional[LoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,15 +142,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse]:
+    ) -> ApiResponse[LoyaltyResultCalculateCheckinResponse]:
         """Calculate checkin.
 
         Calculate discounts and other loyalty items for an order.   > Restriction group: `Loyalty: order calculate`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest
+        :param loyalty_result_calculate_checkin_request:
+        :type loyalty_result_calculate_checkin_request: LoyaltyResultCalculateCheckinRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -175,7 +175,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
+            loyalty_result_calculate_checkin_request=loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -183,11 +183,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateCheckinResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -204,7 +204,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_calculate_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest] = None,
+        loyalty_result_calculate_checkin_request: Optional[LoyaltyResultCalculateCheckinRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -224,8 +224,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest
+        :param loyalty_result_calculate_checkin_request:
+        :type loyalty_result_calculate_checkin_request: LoyaltyResultCalculateCheckinRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -250,7 +250,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
+            loyalty_result_calculate_checkin_request=loyalty_result_calculate_checkin_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -258,11 +258,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateCheckinResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -274,7 +274,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_calculate_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request,
+        loyalty_result_calculate_checkin_request,
         _request_auth,
         _content_type,
         _headers,
@@ -302,8 +302,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request
+        if loyalty_result_calculate_checkin_request is not None:
+            _body_params = loyalty_result_calculate_checkin_request
 
 
         # set the HTTP header `Accept`
@@ -355,7 +355,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_by_series_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
+        loyalty_result_not_activated_coupon_request: Optional[LoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,15 +368,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse:
+    ) -> LoyaltyResultNotActivatedCouponResponse:
         """Get non-activated coupons
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest
+        :param loyalty_result_not_activated_coupon_request:
+        :type loyalty_result_not_activated_coupon_request: LoyaltyResultNotActivatedCouponRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -401,7 +401,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
+            loyalty_result_not_activated_coupon_request=loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -409,11 +409,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultNotActivatedCouponResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -430,7 +430,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_by_series_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
+        loyalty_result_not_activated_coupon_request: Optional[LoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -443,15 +443,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse]:
+    ) -> ApiResponse[LoyaltyResultNotActivatedCouponResponse]:
         """Get non-activated coupons
 
         Get list of non-activated coupons.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest
+        :param loyalty_result_not_activated_coupon_request:
+        :type loyalty_result_not_activated_coupon_request: LoyaltyResultNotActivatedCouponRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -476,7 +476,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
+            loyalty_result_not_activated_coupon_request=loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -484,11 +484,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultNotActivatedCouponResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -505,7 +505,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_by_series_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest] = None,
+        loyalty_result_not_activated_coupon_request: Optional[LoyaltyResultNotActivatedCouponRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -525,8 +525,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest
+        :param loyalty_result_not_activated_coupon_request:
+        :type loyalty_result_not_activated_coupon_request: LoyaltyResultNotActivatedCouponRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -551,7 +551,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_by_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
+            loyalty_result_not_activated_coupon_request=loyalty_result_not_activated_coupon_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -559,11 +559,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultNotActivatedCouponResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -575,7 +575,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_coupons_by_series_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request,
+        loyalty_result_not_activated_coupon_request,
         _request_auth,
         _content_type,
         _headers,
@@ -603,8 +603,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request
+        if loyalty_result_not_activated_coupon_request is not None:
+            _body_params = loyalty_result_not_activated_coupon_request
 
 
         # set the HTTP header `Accept`
@@ -656,7 +656,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
+        loyalty_result_coupon_info_request: Optional[LoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,15 +669,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse:
+    ) -> LoyaltyResultCouponInfoResponse:
         """Get coupon info.
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest
+        :param loyalty_result_coupon_info_request:
+        :type loyalty_result_coupon_info_request: LoyaltyResultCouponInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -702,7 +702,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
+            loyalty_result_coupon_info_request=loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -710,11 +710,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCouponInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -731,7 +731,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
+        loyalty_result_coupon_info_request: Optional[LoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -744,15 +744,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse]:
+    ) -> ApiResponse[LoyaltyResultCouponInfoResponse]:
         """Get coupon info.
 
         Get information about the specified coupon.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest
+        :param loyalty_result_coupon_info_request:
+        :type loyalty_result_coupon_info_request: LoyaltyResultCouponInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -777,7 +777,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
+            loyalty_result_coupon_info_request=loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -785,11 +785,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCouponInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -806,7 +806,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest] = None,
+        loyalty_result_coupon_info_request: Optional[LoyaltyResultCouponInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -826,8 +826,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest
+        :param loyalty_result_coupon_info_request:
+        :type loyalty_result_coupon_info_request: LoyaltyResultCouponInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -852,7 +852,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
+            loyalty_result_coupon_info_request=loyalty_result_coupon_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -860,11 +860,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCouponInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -876,7 +876,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_coupons_info_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request,
+        loyalty_result_coupon_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -904,8 +904,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request
+        if loyalty_result_coupon_info_request is not None:
+            _body_params = loyalty_result_coupon_info_request
 
 
         # set the HTTP header `Accept`
@@ -957,7 +957,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_series_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
+        loyalty_result_series_with_not_activated_coupons_request: Optional[LoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -970,15 +970,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse:
+    ) -> LoyaltyResultSeriesWithNotActivatedCouponsResponse:
         """Get coupon series with non-activated coupons.
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest
+        :param loyalty_result_series_with_not_activated_coupons_request:
+        :type loyalty_result_series_with_not_activated_coupons_request: LoyaltyResultSeriesWithNotActivatedCouponsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1003,7 +1003,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
+            loyalty_result_series_with_not_activated_coupons_request=loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1011,11 +1011,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultSeriesWithNotActivatedCouponsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1032,7 +1032,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_series_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
+        loyalty_result_series_with_not_activated_coupons_request: Optional[LoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1045,15 +1045,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse]:
+    ) -> ApiResponse[LoyaltyResultSeriesWithNotActivatedCouponsResponse]:
         """Get coupon series with non-activated coupons.
 
         Get a list of coupon series in which there are not deleted and not activated coupons.   > Restriction group: `Loyalty: coupons`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest
+        :param loyalty_result_series_with_not_activated_coupons_request:
+        :type loyalty_result_series_with_not_activated_coupons_request: LoyaltyResultSeriesWithNotActivatedCouponsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1078,7 +1078,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
+            loyalty_result_series_with_not_activated_coupons_request=loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1086,11 +1086,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultSeriesWithNotActivatedCouponsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1107,7 +1107,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_coupons_series_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
+        loyalty_result_series_with_not_activated_coupons_request: Optional[LoyaltyResultSeriesWithNotActivatedCouponsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1127,8 +1127,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest
+        :param loyalty_result_series_with_not_activated_coupons_request:
+        :type loyalty_result_series_with_not_activated_coupons_request: LoyaltyResultSeriesWithNotActivatedCouponsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1153,7 +1153,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_coupons_series_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
+            loyalty_result_series_with_not_activated_coupons_request=loyalty_result_series_with_not_activated_coupons_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1161,11 +1161,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultSeriesWithNotActivatedCouponsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1177,7 +1177,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_coupons_series_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request,
+        loyalty_result_series_with_not_activated_coupons_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1205,8 +1205,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request
+        if loyalty_result_series_with_not_activated_coupons_request is not None:
+            _body_params = loyalty_result_series_with_not_activated_coupons_request
 
 
         # set the HTTP header `Accept`
@@ -1258,7 +1258,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_manual_condition_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
+        common_get_by_organization_id_request: Optional[CommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1271,15 +1271,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse:
+    ) -> LoyaltyResultGetManualConditionsResponse:
         """Get manual conditions.
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
-        :type iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
+        :param common_get_by_organization_id_request:
+        :type common_get_by_organization_id_request: CommonGetByOrganizationIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1304,7 +1304,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
+            common_get_by_organization_id_request=common_get_by_organization_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1312,11 +1312,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetManualConditionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1333,7 +1333,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_manual_condition_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
+        common_get_by_organization_id_request: Optional[CommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1346,15 +1346,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse]:
+    ) -> ApiResponse[LoyaltyResultGetManualConditionsResponse]:
         """Get manual conditions.
 
         Get all organization's manual conditions.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
-        :type iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
+        :param common_get_by_organization_id_request:
+        :type common_get_by_organization_id_request: CommonGetByOrganizationIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1379,7 +1379,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
+            common_get_by_organization_id_request=common_get_by_organization_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1387,11 +1387,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetManualConditionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1408,7 +1408,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_manual_condition_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: Optional[IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest] = None,
+        common_get_by_organization_id_request: Optional[CommonGetByOrganizationIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1428,8 +1428,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request:
-        :type iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request: IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
+        :param common_get_by_organization_id_request:
+        :type common_get_by_organization_id_request: CommonGetByOrganizationIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1454,7 +1454,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_manual_condition_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request=iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
+            common_get_by_organization_id_request=common_get_by_organization_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1462,11 +1462,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetManualConditionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1478,7 +1478,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_manual_condition_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request,
+        common_get_by_organization_id_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1506,8 +1506,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request
+        if common_get_by_organization_id_request is not None:
+            _body_params = common_get_by_organization_id_request
 
 
         # set the HTTP header `Accept`
@@ -1559,7 +1559,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_program_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
+        organization_get_programs_request: Optional[OrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1572,15 +1572,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse:
+    ) -> OrganizationGetProgramsResponse:
         """Get programs.
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
-        :type iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest
+        :param organization_get_programs_request:
+        :type organization_get_programs_request: OrganizationGetProgramsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1605,7 +1605,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
+            organization_get_programs_request=organization_get_programs_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1613,11 +1613,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationGetProgramsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1634,7 +1634,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_program_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
+        organization_get_programs_request: Optional[OrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1647,15 +1647,15 @@ class DiscountsAndPromotionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse]:
+    ) -> ApiResponse[OrganizationGetProgramsResponse]:
         """Get programs.
 
         Get all loyalty programs for organization.   > Restriction group: `Loyalty: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
-        :type iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest
+        :param organization_get_programs_request:
+        :type organization_get_programs_request: OrganizationGetProgramsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1680,7 +1680,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
+            organization_get_programs_request=organization_get_programs_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1688,11 +1688,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationGetProgramsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1709,7 +1709,7 @@ class DiscountsAndPromotionsApi:
     async def loyalty_iiko_program_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: Optional[IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest] = None,
+        organization_get_programs_request: Optional[OrganizationGetProgramsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1729,8 +1729,8 @@ class DiscountsAndPromotionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request:
-        :type iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request: IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest
+        :param organization_get_programs_request:
+        :type organization_get_programs_request: OrganizationGetProgramsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1755,7 +1755,7 @@ class DiscountsAndPromotionsApi:
 
         _param = self._loyalty_iiko_program_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request=iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
+            organization_get_programs_request=organization_get_programs_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1763,11 +1763,11 @@ class DiscountsAndPromotionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationGetProgramsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1779,7 +1779,7 @@ class DiscountsAndPromotionsApi:
     def _loyalty_iiko_program_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request,
+        organization_get_programs_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1807,8 +1807,8 @@ class DiscountsAndPromotionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request
+        if organization_get_programs_request is not None:
+            _body_params = organization_get_programs_request
 
 
         # set the HTTP header `Accept`

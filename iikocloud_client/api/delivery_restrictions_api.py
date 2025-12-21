@@ -19,10 +19,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_request import DeliveryRestrictionsGetDeliveryRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_response import DeliveryRestrictionsGetDeliveryRestrictionsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -46,7 +46,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_allowed_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
+        delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,15 +59,15 @@ class DeliveryRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse:
+    ) -> DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse:
         """Get suitable terminal groups for delivery restrictions.
 
            > Allowed from version `6.4.16`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+        :param delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
+        :type delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,7 +92,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
+            delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,11 +100,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +121,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_allowed_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
+        delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,15 +134,15 @@ class DeliveryRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse]:
+    ) -> ApiResponse[DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse]:
         """Get suitable terminal groups for delivery restrictions.
 
            > Allowed from version `6.4.16`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+        :param delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
+        :type delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +167,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
+            delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,11 +175,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -196,7 +196,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_allowed_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
+        delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: Optional[DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,8 +216,8 @@ class DeliveryRestrictionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+        :param delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request:
+        :type delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request: DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -242,7 +242,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_allowed_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
+            delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,11 +250,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -266,7 +266,7 @@ class DeliveryRestrictionsApi:
     def _delivery_restrictions_allowed_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
+        delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request,
         _request_auth,
         _content_type,
         _headers,
@@ -294,8 +294,8 @@ class DeliveryRestrictionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request is not None:
-            _body_params = iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request
+        if delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request is not None:
+            _body_params = delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request
 
 
         # set the HTTP header `Accept`
@@ -347,7 +347,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
+        delivery_restrictions_get_delivery_restrictions_request: Optional[DeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -360,15 +360,15 @@ class DeliveryRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse:
+    ) -> DeliveryRestrictionsGetDeliveryRestrictionsResponse:
         """Retrieve list of delivery restrictions.
 
            > Allowed from version `6.4.16`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
+        :param delivery_restrictions_get_delivery_restrictions_request:
+        :type delivery_restrictions_get_delivery_restrictions_request: DeliveryRestrictionsGetDeliveryRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -393,7 +393,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request,
+            delivery_restrictions_get_delivery_restrictions_request=delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -401,11 +401,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsGetDeliveryRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -422,7 +422,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
+        delivery_restrictions_get_delivery_restrictions_request: Optional[DeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -435,15 +435,15 @@ class DeliveryRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse]:
+    ) -> ApiResponse[DeliveryRestrictionsGetDeliveryRestrictionsResponse]:
         """Retrieve list of delivery restrictions.
 
            > Allowed from version `6.4.16`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
+        :param delivery_restrictions_get_delivery_restrictions_request:
+        :type delivery_restrictions_get_delivery_restrictions_request: DeliveryRestrictionsGetDeliveryRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -468,7 +468,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request,
+            delivery_restrictions_get_delivery_restrictions_request=delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -476,11 +476,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsGetDeliveryRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -497,7 +497,7 @@ class DeliveryRestrictionsApi:
     async def delivery_restrictions_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: Optional[IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
+        delivery_restrictions_get_delivery_restrictions_request: Optional[DeliveryRestrictionsGetDeliveryRestrictionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -517,8 +517,8 @@ class DeliveryRestrictionsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request:
-        :type iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request: IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
+        :param delivery_restrictions_get_delivery_restrictions_request:
+        :type delivery_restrictions_get_delivery_restrictions_request: DeliveryRestrictionsGetDeliveryRestrictionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -543,7 +543,7 @@ class DeliveryRestrictionsApi:
 
         _param = self._delivery_restrictions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request,
+            delivery_restrictions_get_delivery_restrictions_request=delivery_restrictions_get_delivery_restrictions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -551,11 +551,11 @@ class DeliveryRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveryRestrictionsGetDeliveryRestrictionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -567,7 +567,7 @@ class DeliveryRestrictionsApi:
     def _delivery_restrictions_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request,
+        delivery_restrictions_get_delivery_restrictions_request,
         _request_auth,
         _content_type,
         _headers,
@@ -595,8 +595,8 @@ class DeliveryRestrictionsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request is not None:
-            _body_params = iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request
+        if delivery_restrictions_get_delivery_restrictions_request is not None:
+            _body_params = delivery_restrictions_get_delivery_restrictions_request
 
 
         # set the HTTP header `Accept`

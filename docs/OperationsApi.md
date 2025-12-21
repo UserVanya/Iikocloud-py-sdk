@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **commands_status_post**
-> IikoTransportPublicApiContractsCommandsGetCommandStatusResponse commands_status_post(timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
+> CommandsGetCommandStatusResponse commands_status_post(timeout=timeout, commands_get_command_status_request=commands_get_command_status_request)
 
 Get status of command.
 
@@ -23,8 +23,8 @@ Please do not request methods that include such a value.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_request import IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_response import IikoTransportPublicApiContractsCommandsGetCommandStatusResponse
+from iikocloud_client.models.commands_get_command_status_request import CommandsGetCommandStatusRequest
+from iikocloud_client.models.commands_get_command_status_response import CommandsGetCommandStatusResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -49,11 +49,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OperationsApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_commands_get_command_status_request = iikocloud_client.IikoTransportPublicApiContractsCommandsGetCommandStatusRequest() # IikoTransportPublicApiContractsCommandsGetCommandStatusRequest |  (optional)
+    commands_get_command_status_request = iikocloud_client.CommandsGetCommandStatusRequest() # CommandsGetCommandStatusRequest |  (optional)
 
     try:
         # Get status of command.
-        api_response = await api_instance.commands_status_post(timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
+        api_response = await api_instance.commands_status_post(timeout=timeout, commands_get_command_status_request=commands_get_command_status_request)
         print("The response of OperationsApi->commands_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,11 +68,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_commands_get_command_status_request** | [**IikoTransportPublicApiContractsCommandsGetCommandStatusRequest**](IikoTransportPublicApiContractsCommandsGetCommandStatusRequest.md)|  | [optional] 
+ **commands_get_command_status_request** | [**CommandsGetCommandStatusRequest**](CommandsGetCommandStatusRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsCommandsGetCommandStatusResponse**](IikoTransportPublicApiContractsCommandsGetCommandStatusResponse.md)
+[**CommandsGetCommandStatusResponse**](CommandsGetCommandStatusResponse.md)
 
 ### Authorization
 

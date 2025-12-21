@@ -19,25 +19,25 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_request import IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_response import IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_cancel_reserve_request import IikoTransportPublicApiContractsReservesCancelReserveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request import IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request import IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_tables_request import IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_create_reserve_request import IikoTransportPublicApiContractsReservesCreateReserveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_response import IikoTransportPublicApiContractsReservesReserveResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_by_id_request import IikoTransportPublicApiContractsReservesReservesByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_response import IikoTransportPublicApiContractsReservesReservesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request import IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.organizations_get_organizations_request import OrganizationsGetOrganizationsRequest
+from iikocloud_client.models.organizations_get_organizations_response import OrganizationsGetOrganizationsResponse
+from iikocloud_client.models.reserves_add_order_items_to_banquet_request import ReservesAddOrderItemsToBanquetRequest
+from iikocloud_client.models.reserves_add_order_payments_to_banquet_request import ReservesAddOrderPaymentsToBanquetRequest
+from iikocloud_client.models.reserves_cancel_reserve_request import ReservesCancelReserveRequest
+from iikocloud_client.models.reserves_change_banquet_order_items_request import ReservesChangeBanquetOrderItemsRequest
+from iikocloud_client.models.reserves_change_reserve_estimated_start_time_request import ReservesChangeReserveEstimatedStartTimeRequest
+from iikocloud_client.models.reserves_change_reserve_tables_request import ReservesChangeReserveTablesRequest
+from iikocloud_client.models.reserves_create_reserve_request import ReservesCreateReserveRequest
+from iikocloud_client.models.reserves_get_restaurant_sections_request import ReservesGetRestaurantSectionsRequest
+from iikocloud_client.models.reserves_get_restaurant_sections_response import ReservesGetRestaurantSectionsResponse
+from iikocloud_client.models.reserves_get_restaurant_sections_workload_request import ReservesGetRestaurantSectionsWorkloadRequest
+from iikocloud_client.models.reserves_get_restaurant_sections_workload_response import ReservesGetRestaurantSectionsWorkloadResponse
+from iikocloud_client.models.reserves_reserve_response import ReservesReserveResponse
+from iikocloud_client.models.reserves_reserves_by_id_request import ReservesReservesByIdRequest
+from iikocloud_client.models.reserves_reserves_response import ReservesReservesResponse
+from iikocloud_client.models.terminals_get_terminal_groups_by_organizations_request import TerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.terminals_terminal_groups_response import TerminalsTerminalGroupsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -61,7 +61,7 @@ class BanquetsReservesApi:
     async def reserve_add_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
+        reserves_add_order_items_to_banquet_request: Optional[ReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -74,15 +74,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Add order items.
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
+        :param reserves_add_order_items_to_banquet_request:
+        :type reserves_add_order_items_to_banquet_request: ReservesAddOrderItemsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -107,7 +107,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
+            reserves_add_order_items_to_banquet_request=reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -115,11 +115,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -136,7 +136,7 @@ class BanquetsReservesApi:
     async def reserve_add_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
+        reserves_add_order_items_to_banquet_request: Optional[ReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -149,15 +149,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Add order items.
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
+        :param reserves_add_order_items_to_banquet_request:
+        :type reserves_add_order_items_to_banquet_request: ReservesAddOrderItemsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -182,7 +182,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
+            reserves_add_order_items_to_banquet_request=reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -190,11 +190,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -211,7 +211,7 @@ class BanquetsReservesApi:
     async def reserve_add_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest] = None,
+        reserves_add_order_items_to_banquet_request: Optional[ReservesAddOrderItemsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -231,8 +231,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
+        :param reserves_add_order_items_to_banquet_request:
+        :type reserves_add_order_items_to_banquet_request: ReservesAddOrderItemsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -257,7 +257,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
+            reserves_add_order_items_to_banquet_request=reserves_add_order_items_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -265,11 +265,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -281,7 +281,7 @@ class BanquetsReservesApi:
     def _reserve_add_items_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request,
+        reserves_add_order_items_to_banquet_request,
         _request_auth,
         _content_type,
         _headers,
@@ -309,8 +309,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request
+        if reserves_add_order_items_to_banquet_request is not None:
+            _body_params = reserves_add_order_items_to_banquet_request
 
 
         # set the HTTP header `Accept`
@@ -362,7 +362,7 @@ class BanquetsReservesApi:
     async def reserve_add_payments_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
+        reserves_add_order_payments_to_banquet_request: Optional[ReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -375,15 +375,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Add order payments.
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
+        :param reserves_add_order_payments_to_banquet_request:
+        :type reserves_add_order_payments_to_banquet_request: ReservesAddOrderPaymentsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -408,7 +408,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
+            reserves_add_order_payments_to_banquet_request=reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -416,11 +416,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -437,7 +437,7 @@ class BanquetsReservesApi:
     async def reserve_add_payments_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
+        reserves_add_order_payments_to_banquet_request: Optional[ReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -450,15 +450,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Add order payments.
 
         Available only for banquets.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order payments: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
+        :param reserves_add_order_payments_to_banquet_request:
+        :type reserves_add_order_payments_to_banquet_request: ReservesAddOrderPaymentsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -483,7 +483,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
+            reserves_add_order_payments_to_banquet_request=reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -491,11 +491,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -512,7 +512,7 @@ class BanquetsReservesApi:
     async def reserve_add_payments_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: Optional[IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest] = None,
+        reserves_add_order_payments_to_banquet_request: Optional[ReservesAddOrderPaymentsToBanquetRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -532,8 +532,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request:
-        :type iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request: IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
+        :param reserves_add_order_payments_to_banquet_request:
+        :type reserves_add_order_payments_to_banquet_request: ReservesAddOrderPaymentsToBanquetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -558,7 +558,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_add_payments_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
+            reserves_add_order_payments_to_banquet_request=reserves_add_order_payments_to_banquet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -566,11 +566,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -582,7 +582,7 @@ class BanquetsReservesApi:
     def _reserve_add_payments_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request,
+        reserves_add_order_payments_to_banquet_request,
         _request_auth,
         _content_type,
         _headers,
@@ -610,8 +610,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request
+        if reserves_add_order_payments_to_banquet_request is not None:
+            _body_params = reserves_add_order_payments_to_banquet_request
 
 
         # set the HTTP header `Accept`
@@ -663,7 +663,7 @@ class BanquetsReservesApi:
     async def reserve_available_organizations_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -676,15 +676,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse:
+    ) -> OrganizationsGetOrganizationsResponse:
         """Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -709,7 +709,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -717,11 +717,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -738,7 +738,7 @@ class BanquetsReservesApi:
     async def reserve_available_organizations_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -751,15 +751,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse]:
+    ) -> ApiResponse[OrganizationsGetOrganizationsResponse]:
         """Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -784,7 +784,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -792,11 +792,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -813,7 +813,7 @@ class BanquetsReservesApi:
     async def reserve_available_organizations_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -833,8 +833,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -859,7 +859,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -867,11 +867,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -883,7 +883,7 @@ class BanquetsReservesApi:
     def _reserve_available_organizations_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request,
+        organizations_get_organizations_request,
         _request_auth,
         _content_type,
         _headers,
@@ -911,8 +911,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_organizations_get_organizations_request is not None:
-            _body_params = iiko_transport_public_api_contracts_organizations_get_organizations_request
+        if organizations_get_organizations_request is not None:
+            _body_params = organizations_get_organizations_request
 
 
         # set the HTTP header `Accept`
@@ -964,7 +964,7 @@ class BanquetsReservesApi:
     async def reserve_available_restaurant_sections_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
+        reserves_get_restaurant_sections_request: Optional[ReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -977,15 +977,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse:
+    ) -> ReservesGetRestaurantSectionsResponse:
         """Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
+        :param reserves_get_restaurant_sections_request:
+        :type reserves_get_restaurant_sections_request: ReservesGetRestaurantSectionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1010,7 +1010,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
+            reserves_get_restaurant_sections_request=reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1018,11 +1018,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1039,7 +1039,7 @@ class BanquetsReservesApi:
     async def reserve_available_restaurant_sections_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
+        reserves_get_restaurant_sections_request: Optional[ReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1052,15 +1052,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse]:
+    ) -> ApiResponse[ReservesGetRestaurantSectionsResponse]:
         """Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
+        :param reserves_get_restaurant_sections_request:
+        :type reserves_get_restaurant_sections_request: ReservesGetRestaurantSectionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1085,7 +1085,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
+            reserves_get_restaurant_sections_request=reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1093,11 +1093,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1114,7 +1114,7 @@ class BanquetsReservesApi:
     async def reserve_available_restaurant_sections_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest] = None,
+        reserves_get_restaurant_sections_request: Optional[ReservesGetRestaurantSectionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1134,8 +1134,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
+        :param reserves_get_restaurant_sections_request:
+        :type reserves_get_restaurant_sections_request: ReservesGetRestaurantSectionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1160,7 +1160,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_restaurant_sections_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
+            reserves_get_restaurant_sections_request=reserves_get_restaurant_sections_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1168,11 +1168,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1184,7 +1184,7 @@ class BanquetsReservesApi:
     def _reserve_available_restaurant_sections_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request,
+        reserves_get_restaurant_sections_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1212,8 +1212,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request
+        if reserves_get_restaurant_sections_request is not None:
+            _body_params = reserves_get_restaurant_sections_request
 
 
         # set the HTTP header `Accept`
@@ -1265,7 +1265,7 @@ class BanquetsReservesApi:
     async def reserve_available_terminal_groups_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
+        terminals_get_terminal_groups_by_organizations_request: Optional[TerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1278,15 +1278,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse:
+    ) -> TerminalsTerminalGroupsResponse:
         """Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
-        :type iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
+        :param terminals_get_terminal_groups_by_organizations_request:
+        :type terminals_get_terminal_groups_by_organizations_request: TerminalsGetTerminalGroupsByOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1311,7 +1311,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
+            terminals_get_terminal_groups_by_organizations_request=terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1319,11 +1319,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1340,7 +1340,7 @@ class BanquetsReservesApi:
     async def reserve_available_terminal_groups_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
+        terminals_get_terminal_groups_by_organizations_request: Optional[TerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1353,15 +1353,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse]:
+    ) -> ApiResponse[TerminalsTerminalGroupsResponse]:
         """Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: preparing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
-        :type iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
+        :param terminals_get_terminal_groups_by_organizations_request:
+        :type terminals_get_terminal_groups_by_organizations_request: TerminalsGetTerminalGroupsByOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1386,7 +1386,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
+            terminals_get_terminal_groups_by_organizations_request=terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1394,11 +1394,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1415,7 +1415,7 @@ class BanquetsReservesApi:
     async def reserve_available_terminal_groups_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: Optional[IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest] = None,
+        terminals_get_terminal_groups_by_organizations_request: Optional[TerminalsGetTerminalGroupsByOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1435,8 +1435,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request:
-        :type iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request: IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
+        :param terminals_get_terminal_groups_by_organizations_request:
+        :type terminals_get_terminal_groups_by_organizations_request: TerminalsGetTerminalGroupsByOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1461,7 +1461,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_available_terminal_groups_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
+            terminals_get_terminal_groups_by_organizations_request=terminals_get_terminal_groups_by_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1469,11 +1469,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TerminalsTerminalGroupsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1485,7 +1485,7 @@ class BanquetsReservesApi:
     def _reserve_available_terminal_groups_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request,
+        terminals_get_terminal_groups_by_organizations_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1513,8 +1513,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request is not None:
-            _body_params = iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request
+        if terminals_get_terminal_groups_by_organizations_request is not None:
+            _body_params = terminals_get_terminal_groups_by_organizations_request
 
 
         # set the HTTP header `Accept`
@@ -1566,7 +1566,7 @@ class BanquetsReservesApi:
     async def reserve_cancel_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
+        reserves_cancel_reserve_request: Optional[ReservesCancelReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1579,15 +1579,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Cancel reservation due to some reason.
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_cancel_reserve_request: IikoTransportPublicApiContractsReservesCancelReserveRequest
+        :param reserves_cancel_reserve_request:
+        :type reserves_cancel_reserve_request: ReservesCancelReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1612,7 +1612,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
+            reserves_cancel_reserve_request=reserves_cancel_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1620,11 +1620,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1641,7 +1641,7 @@ class BanquetsReservesApi:
     async def reserve_cancel_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
+        reserves_cancel_reserve_request: Optional[ReservesCancelReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1654,15 +1654,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Cancel reservation due to some reason.
 
         Available only for reserves with status 'New'.   > Allowed from version `8.2.6`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_cancel_reserve_request: IikoTransportPublicApiContractsReservesCancelReserveRequest
+        :param reserves_cancel_reserve_request:
+        :type reserves_cancel_reserve_request: ReservesCancelReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1687,7 +1687,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
+            reserves_cancel_reserve_request=reserves_cancel_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1695,11 +1695,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1716,7 +1716,7 @@ class BanquetsReservesApi:
     async def reserve_cancel_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_cancel_reserve_request: Optional[IikoTransportPublicApiContractsReservesCancelReserveRequest] = None,
+        reserves_cancel_reserve_request: Optional[ReservesCancelReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1736,8 +1736,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_cancel_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_cancel_reserve_request: IikoTransportPublicApiContractsReservesCancelReserveRequest
+        :param reserves_cancel_reserve_request:
+        :type reserves_cancel_reserve_request: ReservesCancelReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1762,7 +1762,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_cancel_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
+            reserves_cancel_reserve_request=reserves_cancel_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1770,11 +1770,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1786,7 +1786,7 @@ class BanquetsReservesApi:
     def _reserve_cancel_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_cancel_reserve_request,
+        reserves_cancel_reserve_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1814,8 +1814,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_cancel_reserve_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_cancel_reserve_request
+        if reserves_cancel_reserve_request is not None:
+            _body_params = reserves_cancel_reserve_request
 
 
         # set the HTTP header `Accept`
@@ -1867,7 +1867,7 @@ class BanquetsReservesApi:
     async def reserve_change_estimated_start_time_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
+        reserves_change_reserve_estimated_start_time_request: Optional[ReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1880,15 +1880,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change reserve/banquet estimated start time.
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
+        :param reserves_change_reserve_estimated_start_time_request:
+        :type reserves_change_reserve_estimated_start_time_request: ReservesChangeReserveEstimatedStartTimeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1913,7 +1913,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
+            reserves_change_reserve_estimated_start_time_request=reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1921,11 +1921,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1942,7 +1942,7 @@ class BanquetsReservesApi:
     async def reserve_change_estimated_start_time_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
+        reserves_change_reserve_estimated_start_time_request: Optional[ReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1955,15 +1955,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change reserve/banquet estimated start time.
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
+        :param reserves_change_reserve_estimated_start_time_request:
+        :type reserves_change_reserve_estimated_start_time_request: ReservesChangeReserveEstimatedStartTimeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1988,7 +1988,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
+            reserves_change_reserve_estimated_start_time_request=reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1996,11 +1996,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2017,7 +2017,7 @@ class BanquetsReservesApi:
     async def reserve_change_estimated_start_time_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest] = None,
+        reserves_change_reserve_estimated_start_time_request: Optional[ReservesChangeReserveEstimatedStartTimeRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2037,8 +2037,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request: IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
+        :param reserves_change_reserve_estimated_start_time_request:
+        :type reserves_change_reserve_estimated_start_time_request: ReservesChangeReserveEstimatedStartTimeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2063,7 +2063,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_estimated_start_time_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
+            reserves_change_reserve_estimated_start_time_request=reserves_change_reserve_estimated_start_time_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2071,11 +2071,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2087,7 +2087,7 @@ class BanquetsReservesApi:
     def _reserve_change_estimated_start_time_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request,
+        reserves_change_reserve_estimated_start_time_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2115,8 +2115,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request
+        if reserves_change_reserve_estimated_start_time_request is not None:
+            _body_params = reserves_change_reserve_estimated_start_time_request
 
 
         # set the HTTP header `Accept`
@@ -2168,7 +2168,7 @@ class BanquetsReservesApi:
     async def reserve_change_items_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
+        reserves_change_banquet_order_items_request: Optional[ReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2181,15 +2181,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change order items.
 
         Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
-        :type iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
+        :param reserves_change_banquet_order_items_request:
+        :type reserves_change_banquet_order_items_request: ReservesChangeBanquetOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2214,7 +2214,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
+            reserves_change_banquet_order_items_request=reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2222,11 +2222,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2243,7 +2243,7 @@ class BanquetsReservesApi:
     async def reserve_change_items_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
+        reserves_change_banquet_order_items_request: Optional[ReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2256,15 +2256,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change order items.
 
         Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
-        :type iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
+        :param reserves_change_banquet_order_items_request:
+        :type reserves_change_banquet_order_items_request: ReservesChangeBanquetOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2289,7 +2289,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
+            reserves_change_banquet_order_items_request=reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2297,11 +2297,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2318,7 +2318,7 @@ class BanquetsReservesApi:
     async def reserve_change_items_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: Optional[IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest] = None,
+        reserves_change_banquet_order_items_request: Optional[ReservesChangeBanquetOrderItemsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2338,8 +2338,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request:
-        :type iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request: IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
+        :param reserves_change_banquet_order_items_request:
+        :type reserves_change_banquet_order_items_request: ReservesChangeBanquetOrderItemsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2364,7 +2364,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_items_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
+            reserves_change_banquet_order_items_request=reserves_change_banquet_order_items_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2372,11 +2372,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2388,7 +2388,7 @@ class BanquetsReservesApi:
     def _reserve_change_items_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request,
+        reserves_change_banquet_order_items_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2416,8 +2416,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request
+        if reserves_change_banquet_order_items_request is not None:
+            _body_params = reserves_change_banquet_order_items_request
 
 
         # set the HTTP header `Accept`
@@ -2469,7 +2469,7 @@ class BanquetsReservesApi:
     async def reserve_change_tables_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
+        reserves_change_reserve_tables_request: Optional[ReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2482,15 +2482,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Change reserve/banquet tables.
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
+        :param reserves_change_reserve_tables_request:
+        :type reserves_change_reserve_tables_request: ReservesChangeReserveTablesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2515,7 +2515,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_tables_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
+            reserves_change_reserve_tables_request=reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2523,11 +2523,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2544,7 +2544,7 @@ class BanquetsReservesApi:
     async def reserve_change_tables_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
+        reserves_change_reserve_tables_request: Optional[ReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2557,15 +2557,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Change reserve/banquet tables.
 
            > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
+        :param reserves_change_reserve_tables_request:
+        :type reserves_change_reserve_tables_request: ReservesChangeReserveTablesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2590,7 +2590,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_tables_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
+            reserves_change_reserve_tables_request=reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2598,11 +2598,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2619,7 +2619,7 @@ class BanquetsReservesApi:
     async def reserve_change_tables_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: Optional[IikoTransportPublicApiContractsReservesChangeReserveTablesRequest] = None,
+        reserves_change_reserve_tables_request: Optional[ReservesChangeReserveTablesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2639,8 +2639,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_change_reserve_tables_request:
-        :type iiko_transport_public_api_contracts_reserves_change_reserve_tables_request: IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
+        :param reserves_change_reserve_tables_request:
+        :type reserves_change_reserve_tables_request: ReservesChangeReserveTablesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2665,7 +2665,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_change_tables_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
+            reserves_change_reserve_tables_request=reserves_change_reserve_tables_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2673,11 +2673,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2689,7 +2689,7 @@ class BanquetsReservesApi:
     def _reserve_change_tables_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_change_reserve_tables_request,
+        reserves_change_reserve_tables_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2717,8 +2717,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_change_reserve_tables_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_change_reserve_tables_request
+        if reserves_change_reserve_tables_request is not None:
+            _body_params = reserves_change_reserve_tables_request
 
 
         # set the HTTP header `Accept`
@@ -2770,7 +2770,7 @@ class BanquetsReservesApi:
     async def reserve_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
+        reserves_create_reserve_request: Optional[ReservesCreateReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2783,15 +2783,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsReservesReserveResponse:
+    ) -> ReservesReserveResponse:
         """Create banquet/reserve.
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_create_reserve_request: IikoTransportPublicApiContractsReservesCreateReserveRequest
+        :param reserves_create_reserve_request:
+        :type reserves_create_reserve_request: ReservesCreateReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2816,7 +2816,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
+            reserves_create_reserve_request=reserves_create_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2824,11 +2824,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReserveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReserveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2845,7 +2845,7 @@ class BanquetsReservesApi:
     async def reserve_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
+        reserves_create_reserve_request: Optional[ReservesCreateReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2858,15 +2858,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsReservesReserveResponse]:
+    ) -> ApiResponse[ReservesReserveResponse]:
         """Create banquet/reserve.
 
            > Allowed from version `7.1.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_create_reserve_request: IikoTransportPublicApiContractsReservesCreateReserveRequest
+        :param reserves_create_reserve_request:
+        :type reserves_create_reserve_request: ReservesCreateReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2891,7 +2891,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
+            reserves_create_reserve_request=reserves_create_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2899,11 +2899,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReserveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReserveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2920,7 +2920,7 @@ class BanquetsReservesApi:
     async def reserve_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_create_reserve_request: Optional[IikoTransportPublicApiContractsReservesCreateReserveRequest] = None,
+        reserves_create_reserve_request: Optional[ReservesCreateReserveRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2940,8 +2940,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_create_reserve_request:
-        :type iiko_transport_public_api_contracts_reserves_create_reserve_request: IikoTransportPublicApiContractsReservesCreateReserveRequest
+        :param reserves_create_reserve_request:
+        :type reserves_create_reserve_request: ReservesCreateReserveRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2966,7 +2966,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request,
+            reserves_create_reserve_request=reserves_create_reserve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2974,11 +2974,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReserveResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReserveResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2990,7 +2990,7 @@ class BanquetsReservesApi:
     def _reserve_create_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_create_reserve_request,
+        reserves_create_reserve_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3018,8 +3018,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_create_reserve_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_create_reserve_request
+        if reserves_create_reserve_request is not None:
+            _body_params = reserves_create_reserve_request
 
 
         # set the HTTP header `Accept`
@@ -3071,7 +3071,7 @@ class BanquetsReservesApi:
     async def reserve_restaurant_sections_workload_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
+        reserves_get_restaurant_sections_workload_request: Optional[ReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3084,15 +3084,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse:
+    ) -> ReservesGetRestaurantSectionsWorkloadResponse:
         """Returns all banquets/reserves for passed restaurant sections.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+        :param reserves_get_restaurant_sections_workload_request:
+        :type reserves_get_restaurant_sections_workload_request: ReservesGetRestaurantSectionsWorkloadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3117,7 +3117,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
+            reserves_get_restaurant_sections_workload_request=reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3125,11 +3125,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsWorkloadResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3146,7 +3146,7 @@ class BanquetsReservesApi:
     async def reserve_restaurant_sections_workload_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
+        reserves_get_restaurant_sections_workload_request: Optional[ReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3159,15 +3159,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse]:
+    ) -> ApiResponse[ReservesGetRestaurantSectionsWorkloadResponse]:
         """Returns all banquets/reserves for passed restaurant sections.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+        :param reserves_get_restaurant_sections_workload_request:
+        :type reserves_get_restaurant_sections_workload_request: ReservesGetRestaurantSectionsWorkloadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3192,7 +3192,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
+            reserves_get_restaurant_sections_workload_request=reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3200,11 +3200,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsWorkloadResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3221,7 +3221,7 @@ class BanquetsReservesApi:
     async def reserve_restaurant_sections_workload_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: Optional[IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest] = None,
+        reserves_get_restaurant_sections_workload_request: Optional[ReservesGetRestaurantSectionsWorkloadRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3241,8 +3241,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request:
-        :type iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request: IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+        :param reserves_get_restaurant_sections_workload_request:
+        :type reserves_get_restaurant_sections_workload_request: ReservesGetRestaurantSectionsWorkloadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3267,7 +3267,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_restaurant_sections_workload_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
+            reserves_get_restaurant_sections_workload_request=reserves_get_restaurant_sections_workload_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3275,11 +3275,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesGetRestaurantSectionsWorkloadResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3291,7 +3291,7 @@ class BanquetsReservesApi:
     def _reserve_restaurant_sections_workload_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request,
+        reserves_get_restaurant_sections_workload_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3319,8 +3319,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request
+        if reserves_get_restaurant_sections_workload_request is not None:
+            _body_params = reserves_get_restaurant_sections_workload_request
 
 
         # set the HTTP header `Accept`
@@ -3372,7 +3372,7 @@ class BanquetsReservesApi:
     async def reserve_status_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
+        reserves_reserves_by_id_request: Optional[ReservesReservesByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3385,15 +3385,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsReservesReservesResponse:
+    ) -> ReservesReservesResponse:
         """Retrieve banquets/reserves statuses by IDs.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
-        :type iiko_transport_public_api_contracts_reserves_reserves_by_id_request: IikoTransportPublicApiContractsReservesReservesByIdRequest
+        :param reserves_reserves_by_id_request:
+        :type reserves_reserves_by_id_request: ReservesReservesByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3418,7 +3418,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
+            reserves_reserves_by_id_request=reserves_reserves_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3426,11 +3426,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReservesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReservesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3447,7 +3447,7 @@ class BanquetsReservesApi:
     async def reserve_status_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
+        reserves_reserves_by_id_request: Optional[ReservesReservesByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3460,15 +3460,15 @@ class BanquetsReservesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsReservesReservesResponse]:
+    ) -> ApiResponse[ReservesReservesResponse]:
         """Retrieve banquets/reserves statuses by IDs.
 
            > Allowed from version `7.1.5`.   > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
-        :type iiko_transport_public_api_contracts_reserves_reserves_by_id_request: IikoTransportPublicApiContractsReservesReservesByIdRequest
+        :param reserves_reserves_by_id_request:
+        :type reserves_reserves_by_id_request: ReservesReservesByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3493,7 +3493,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
+            reserves_reserves_by_id_request=reserves_reserves_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3501,11 +3501,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReservesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReservesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3522,7 +3522,7 @@ class BanquetsReservesApi:
     async def reserve_status_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_reserves_reserves_by_id_request: Optional[IikoTransportPublicApiContractsReservesReservesByIdRequest] = None,
+        reserves_reserves_by_id_request: Optional[ReservesReservesByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3542,8 +3542,8 @@ class BanquetsReservesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_reserves_reserves_by_id_request:
-        :type iiko_transport_public_api_contracts_reserves_reserves_by_id_request: IikoTransportPublicApiContractsReservesReservesByIdRequest
+        :param reserves_reserves_by_id_request:
+        :type reserves_reserves_by_id_request: ReservesReservesByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3568,7 +3568,7 @@ class BanquetsReservesApi:
 
         _param = self._reserve_status_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
+            reserves_reserves_by_id_request=reserves_reserves_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3576,11 +3576,11 @@ class BanquetsReservesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsReservesReservesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "ReservesReservesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3592,7 +3592,7 @@ class BanquetsReservesApi:
     def _reserve_status_by_id_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_reserves_reserves_by_id_request,
+        reserves_reserves_by_id_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3620,8 +3620,8 @@ class BanquetsReservesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_reserves_reserves_by_id_request is not None:
-            _body_params = iiko_transport_public_api_contracts_reserves_reserves_by_id_request
+        if reserves_reserves_by_id_request is not None:
+            _body_params = reserves_reserves_by_id_request
 
 
         # set the HTTP header `Accept`

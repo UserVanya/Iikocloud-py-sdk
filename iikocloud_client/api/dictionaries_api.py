@@ -19,17 +19,17 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request import IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_causes_response import IikoTransportPublicApiContractsCancelCausesCancelCausesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discounts_request import IikoTransportPublicApiContractsDiscountsDiscountsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discounts_response import IikoTransportPublicApiContractsDiscountsDiscountsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_types_request import IikoTransportPublicApiContractsOrderTypesOrderTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_types_response import IikoTransportPublicApiContractsOrderTypesOrderTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_types_request import IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_types_response import IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_removal_types_removal_types_request import IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_removal_types_removal_types_response import IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_tips_types_tips_types_response import IikoTransportPublicApiContractsTipsTypesTipsTypesResponse
+from iikocloud_client.models.cancel_causes_cancel_causes_request import CancelCausesCancelCausesRequest
+from iikocloud_client.models.cancel_causes_cancel_causes_response import CancelCausesCancelCausesResponse
+from iikocloud_client.models.discounts_discounts_request import DiscountsDiscountsRequest
+from iikocloud_client.models.discounts_discounts_response import DiscountsDiscountsResponse
+from iikocloud_client.models.order_types_order_types_request import OrderTypesOrderTypesRequest
+from iikocloud_client.models.order_types_order_types_response import OrderTypesOrderTypesResponse
+from iikocloud_client.models.payment_types_payment_types_request import PaymentTypesPaymentTypesRequest
+from iikocloud_client.models.payment_types_payment_types_response import PaymentTypesPaymentTypesResponse
+from iikocloud_client.models.removal_types_removal_types_request import RemovalTypesRemovalTypesRequest
+from iikocloud_client.models.removal_types_removal_types_response import RemovalTypesRemovalTypesResponse
+from iikocloud_client.models.tips_types_tips_types_response import TipsTypesTipsTypesResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -53,7 +53,7 @@ class DictionariesApi:
     async def cancel_causes_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
+        cancel_causes_cancel_causes_request: Optional[CancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,15 +66,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCancelCausesCancelCausesResponse:
+    ) -> CancelCausesCancelCausesResponse:
         """Delivery cancel causes.
 
            > Allowed from version `7.7.1`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
-        :type iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
+        :param cancel_causes_cancel_causes_request:
+        :type cancel_causes_cancel_causes_request: CancelCausesCancelCausesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,7 +99,7 @@ class DictionariesApi:
 
         _param = self._cancel_causes_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
+            cancel_causes_cancel_causes_request=cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -107,11 +107,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCancelCausesCancelCausesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CancelCausesCancelCausesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +128,7 @@ class DictionariesApi:
     async def cancel_causes_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
+        cancel_causes_cancel_causes_request: Optional[CancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,15 +141,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCancelCausesCancelCausesResponse]:
+    ) -> ApiResponse[CancelCausesCancelCausesResponse]:
         """Delivery cancel causes.
 
            > Allowed from version `7.7.1`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
-        :type iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
+        :param cancel_causes_cancel_causes_request:
+        :type cancel_causes_cancel_causes_request: CancelCausesCancelCausesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -174,7 +174,7 @@ class DictionariesApi:
 
         _param = self._cancel_causes_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
+            cancel_causes_cancel_causes_request=cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,11 +182,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCancelCausesCancelCausesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CancelCausesCancelCausesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -203,7 +203,7 @@ class DictionariesApi:
     async def cancel_causes_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: Optional[IikoTransportPublicApiContractsCancelCausesCancelCausesRequest] = None,
+        cancel_causes_cancel_causes_request: Optional[CancelCausesCancelCausesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -223,8 +223,8 @@ class DictionariesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request:
-        :type iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request: IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
+        :param cancel_causes_cancel_causes_request:
+        :type cancel_causes_cancel_causes_request: CancelCausesCancelCausesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -249,7 +249,7 @@ class DictionariesApi:
 
         _param = self._cancel_causes_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request=iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
+            cancel_causes_cancel_causes_request=cancel_causes_cancel_causes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -257,11 +257,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCancelCausesCancelCausesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CancelCausesCancelCausesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -273,7 +273,7 @@ class DictionariesApi:
     def _cancel_causes_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request,
+        cancel_causes_cancel_causes_request,
         _request_auth,
         _content_type,
         _headers,
@@ -301,8 +301,8 @@ class DictionariesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request is not None:
-            _body_params = iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request
+        if cancel_causes_cancel_causes_request is not None:
+            _body_params = cancel_causes_cancel_causes_request
 
 
         # set the HTTP header `Accept`
@@ -354,7 +354,7 @@ class DictionariesApi:
     async def deliveries_order_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
+        order_types_order_types_request: Optional[OrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -367,15 +367,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsOrderTypesOrderTypesResponse:
+    ) -> OrderTypesOrderTypesResponse:
         """Order types.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_order_types_order_types_request:
-        :type iiko_transport_public_api_contracts_order_types_order_types_request: IikoTransportPublicApiContractsOrderTypesOrderTypesRequest
+        :param order_types_order_types_request:
+        :type order_types_order_types_request: OrderTypesOrderTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -400,7 +400,7 @@ class DictionariesApi:
 
         _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
+            order_types_order_types_request=order_types_order_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -408,11 +408,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrderTypesOrderTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrderTypesOrderTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -429,7 +429,7 @@ class DictionariesApi:
     async def deliveries_order_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
+        order_types_order_types_request: Optional[OrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -442,15 +442,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsOrderTypesOrderTypesResponse]:
+    ) -> ApiResponse[OrderTypesOrderTypesResponse]:
         """Order types.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_order_types_order_types_request:
-        :type iiko_transport_public_api_contracts_order_types_order_types_request: IikoTransportPublicApiContractsOrderTypesOrderTypesRequest
+        :param order_types_order_types_request:
+        :type order_types_order_types_request: OrderTypesOrderTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -475,7 +475,7 @@ class DictionariesApi:
 
         _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
+            order_types_order_types_request=order_types_order_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -483,11 +483,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrderTypesOrderTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrderTypesOrderTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -504,7 +504,7 @@ class DictionariesApi:
     async def deliveries_order_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_order_types_order_types_request: Optional[IikoTransportPublicApiContractsOrderTypesOrderTypesRequest] = None,
+        order_types_order_types_request: Optional[OrderTypesOrderTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -524,8 +524,8 @@ class DictionariesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_order_types_order_types_request:
-        :type iiko_transport_public_api_contracts_order_types_order_types_request: IikoTransportPublicApiContractsOrderTypesOrderTypesRequest
+        :param order_types_order_types_request:
+        :type order_types_order_types_request: OrderTypesOrderTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -550,7 +550,7 @@ class DictionariesApi:
 
         _param = self._deliveries_order_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_order_types_order_types_request=iiko_transport_public_api_contracts_order_types_order_types_request,
+            order_types_order_types_request=order_types_order_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -558,11 +558,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrderTypesOrderTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrderTypesOrderTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -574,7 +574,7 @@ class DictionariesApi:
     def _deliveries_order_types_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_order_types_order_types_request,
+        order_types_order_types_request,
         _request_auth,
         _content_type,
         _headers,
@@ -602,8 +602,8 @@ class DictionariesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_order_types_order_types_request is not None:
-            _body_params = iiko_transport_public_api_contracts_order_types_order_types_request
+        if order_types_order_types_request is not None:
+            _body_params = order_types_order_types_request
 
 
         # set the HTTP header `Accept`
@@ -655,7 +655,7 @@ class DictionariesApi:
     async def discounts_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
+        discounts_discounts_request: Optional[DiscountsDiscountsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -668,15 +668,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDiscountsDiscountsResponse:
+    ) -> DiscountsDiscountsResponse:
         """Discounts / surcharges.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_discounts_discounts_request:
-        :type iiko_transport_public_api_contracts_discounts_discounts_request: IikoTransportPublicApiContractsDiscountsDiscountsRequest
+        :param discounts_discounts_request:
+        :type discounts_discounts_request: DiscountsDiscountsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -701,7 +701,7 @@ class DictionariesApi:
 
         _param = self._discounts_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
+            discounts_discounts_request=discounts_discounts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -709,11 +709,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDiscountsDiscountsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DiscountsDiscountsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -730,7 +730,7 @@ class DictionariesApi:
     async def discounts_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
+        discounts_discounts_request: Optional[DiscountsDiscountsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -743,15 +743,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDiscountsDiscountsResponse]:
+    ) -> ApiResponse[DiscountsDiscountsResponse]:
         """Discounts / surcharges.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_discounts_discounts_request:
-        :type iiko_transport_public_api_contracts_discounts_discounts_request: IikoTransportPublicApiContractsDiscountsDiscountsRequest
+        :param discounts_discounts_request:
+        :type discounts_discounts_request: DiscountsDiscountsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -776,7 +776,7 @@ class DictionariesApi:
 
         _param = self._discounts_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
+            discounts_discounts_request=discounts_discounts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -784,11 +784,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDiscountsDiscountsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DiscountsDiscountsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -805,7 +805,7 @@ class DictionariesApi:
     async def discounts_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_discounts_discounts_request: Optional[IikoTransportPublicApiContractsDiscountsDiscountsRequest] = None,
+        discounts_discounts_request: Optional[DiscountsDiscountsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -825,8 +825,8 @@ class DictionariesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_discounts_discounts_request:
-        :type iiko_transport_public_api_contracts_discounts_discounts_request: IikoTransportPublicApiContractsDiscountsDiscountsRequest
+        :param discounts_discounts_request:
+        :type discounts_discounts_request: DiscountsDiscountsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -851,7 +851,7 @@ class DictionariesApi:
 
         _param = self._discounts_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_discounts_discounts_request=iiko_transport_public_api_contracts_discounts_discounts_request,
+            discounts_discounts_request=discounts_discounts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -859,11 +859,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDiscountsDiscountsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DiscountsDiscountsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -875,7 +875,7 @@ class DictionariesApi:
     def _discounts_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_discounts_discounts_request,
+        discounts_discounts_request,
         _request_auth,
         _content_type,
         _headers,
@@ -903,8 +903,8 @@ class DictionariesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_discounts_discounts_request is not None:
-            _body_params = iiko_transport_public_api_contracts_discounts_discounts_request
+        if discounts_discounts_request is not None:
+            _body_params = discounts_discounts_request
 
 
         # set the HTTP header `Accept`
@@ -956,7 +956,7 @@ class DictionariesApi:
     async def payment_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
+        payment_types_payment_types_request: Optional[PaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -969,15 +969,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse:
+    ) -> PaymentTypesPaymentTypesResponse:
         """Payment types.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
-        :type iiko_transport_public_api_contracts_payment_types_payment_types_request: IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest
+        :param payment_types_payment_types_request:
+        :type payment_types_payment_types_request: PaymentTypesPaymentTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1002,7 +1002,7 @@ class DictionariesApi:
 
         _param = self._payment_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
+            payment_types_payment_types_request=payment_types_payment_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1010,11 +1010,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "PaymentTypesPaymentTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1031,7 +1031,7 @@ class DictionariesApi:
     async def payment_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
+        payment_types_payment_types_request: Optional[PaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1044,15 +1044,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse]:
+    ) -> ApiResponse[PaymentTypesPaymentTypesResponse]:
         """Payment types.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
-        :type iiko_transport_public_api_contracts_payment_types_payment_types_request: IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest
+        :param payment_types_payment_types_request:
+        :type payment_types_payment_types_request: PaymentTypesPaymentTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1077,7 +1077,7 @@ class DictionariesApi:
 
         _param = self._payment_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
+            payment_types_payment_types_request=payment_types_payment_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1085,11 +1085,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "PaymentTypesPaymentTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1106,7 +1106,7 @@ class DictionariesApi:
     async def payment_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_payment_types_payment_types_request: Optional[IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest] = None,
+        payment_types_payment_types_request: Optional[PaymentTypesPaymentTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1126,8 +1126,8 @@ class DictionariesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_payment_types_payment_types_request:
-        :type iiko_transport_public_api_contracts_payment_types_payment_types_request: IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest
+        :param payment_types_payment_types_request:
+        :type payment_types_payment_types_request: PaymentTypesPaymentTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1152,7 +1152,7 @@ class DictionariesApi:
 
         _param = self._payment_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_payment_types_payment_types_request=iiko_transport_public_api_contracts_payment_types_payment_types_request,
+            payment_types_payment_types_request=payment_types_payment_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1160,11 +1160,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "PaymentTypesPaymentTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1176,7 +1176,7 @@ class DictionariesApi:
     def _payment_types_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_payment_types_payment_types_request,
+        payment_types_payment_types_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1204,8 +1204,8 @@ class DictionariesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_payment_types_payment_types_request is not None:
-            _body_params = iiko_transport_public_api_contracts_payment_types_payment_types_request
+        if payment_types_payment_types_request is not None:
+            _body_params = payment_types_payment_types_request
 
 
         # set the HTTP header `Accept`
@@ -1257,7 +1257,7 @@ class DictionariesApi:
     async def removal_types_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
+        removal_types_removal_types_request: Optional[RemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,15 +1270,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse:
+    ) -> RemovalTypesRemovalTypesResponse:
         """Removal types (reasons for deletion).
 
            > Allowed from version `7.5.3`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
-        :type iiko_transport_public_api_contracts_removal_types_removal_types_request: IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest
+        :param removal_types_removal_types_request:
+        :type removal_types_removal_types_request: RemovalTypesRemovalTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1303,7 +1303,7 @@ class DictionariesApi:
 
         _param = self._removal_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
+            removal_types_removal_types_request=removal_types_removal_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1311,11 +1311,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "RemovalTypesRemovalTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1332,7 +1332,7 @@ class DictionariesApi:
     async def removal_types_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
+        removal_types_removal_types_request: Optional[RemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1345,15 +1345,15 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse]:
+    ) -> ApiResponse[RemovalTypesRemovalTypesResponse]:
         """Removal types (reasons for deletion).
 
            > Allowed from version `7.5.3`.   > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
-        :type iiko_transport_public_api_contracts_removal_types_removal_types_request: IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest
+        :param removal_types_removal_types_request:
+        :type removal_types_removal_types_request: RemovalTypesRemovalTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1378,7 +1378,7 @@ class DictionariesApi:
 
         _param = self._removal_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
+            removal_types_removal_types_request=removal_types_removal_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1386,11 +1386,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "RemovalTypesRemovalTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1407,7 +1407,7 @@ class DictionariesApi:
     async def removal_types_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_removal_types_removal_types_request: Optional[IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest] = None,
+        removal_types_removal_types_request: Optional[RemovalTypesRemovalTypesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1427,8 +1427,8 @@ class DictionariesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_removal_types_removal_types_request:
-        :type iiko_transport_public_api_contracts_removal_types_removal_types_request: IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest
+        :param removal_types_removal_types_request:
+        :type removal_types_removal_types_request: RemovalTypesRemovalTypesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1453,7 +1453,7 @@ class DictionariesApi:
 
         _param = self._removal_types_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_removal_types_removal_types_request=iiko_transport_public_api_contracts_removal_types_removal_types_request,
+            removal_types_removal_types_request=removal_types_removal_types_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1461,11 +1461,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "RemovalTypesRemovalTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1477,7 +1477,7 @@ class DictionariesApi:
     def _removal_types_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_removal_types_removal_types_request,
+        removal_types_removal_types_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1505,8 +1505,8 @@ class DictionariesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_removal_types_removal_types_request is not None:
-            _body_params = iiko_transport_public_api_contracts_removal_types_removal_types_request
+        if removal_types_removal_types_request is not None:
+            _body_params = removal_types_removal_types_request
 
 
         # set the HTTP header `Accept`
@@ -1570,7 +1570,7 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsTipsTypesTipsTypesResponse:
+    ) -> TipsTypesTipsTypesResponse:
         """Get tips types for api-login`s rms group.
 
            > Allowed from version `7.7.4`.   > Restriction group: `Data: dictionaries`.
@@ -1608,11 +1608,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTipsTypesTipsTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TipsTypesTipsTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1641,7 +1641,7 @@ class DictionariesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsTipsTypesTipsTypesResponse]:
+    ) -> ApiResponse[TipsTypesTipsTypesResponse]:
         """Get tips types for api-login`s rms group.
 
            > Allowed from version `7.7.4`.   > Restriction group: `Data: dictionaries`.
@@ -1679,11 +1679,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTipsTypesTipsTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TipsTypesTipsTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1750,11 +1750,11 @@ class DictionariesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsTipsTypesTipsTypesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "TipsTypesTipsTypesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

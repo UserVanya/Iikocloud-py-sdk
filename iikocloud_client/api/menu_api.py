@@ -20,22 +20,22 @@ from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.api2_menu_by_id_post200_response import Api2MenuByIdPost200Response
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menu_request import IikoTransportPublicApiContractsNomenclatureMenuRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menus_data_response import IikoTransportPublicApiContractsNomenclatureMenusDataResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_request import IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_response import IikoTransportPublicApiContractsNomenclatureNomenclatureResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request import IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_request import IikoTransportPublicApiContractsStopListsCheckStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_response import IikoTransportPublicApiContractsStopListsCheckStopListResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request import IikoTransportPublicApiContractsStopListsClearStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request import IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_request import IikoTransportPublicApiContractsStopListsStopListsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_response import IikoTransportPublicApiContractsStopListsStopListsResponse
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.loyalty_result_calculate_combo_price_request import LoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.loyalty_result_calculate_combo_price_response import LoyaltyResultCalculateComboPriceResponse
+from iikocloud_client.models.loyalty_result_get_combos_info_request import LoyaltyResultGetCombosInfoRequest
+from iikocloud_client.models.loyalty_result_get_combos_info_response import LoyaltyResultGetCombosInfoResponse
+from iikocloud_client.models.nomenclature_menu_request import NomenclatureMenuRequest
+from iikocloud_client.models.nomenclature_menus_data_response import NomenclatureMenusDataResponse
+from iikocloud_client.models.nomenclature_nomenclature_request import NomenclatureNomenclatureRequest
+from iikocloud_client.models.nomenclature_nomenclature_response import NomenclatureNomenclatureResponse
+from iikocloud_client.models.stop_lists_add_products_to_stop_list_request import StopListsAddProductsToStopListRequest
+from iikocloud_client.models.stop_lists_check_stop_list_request import StopListsCheckStopListRequest
+from iikocloud_client.models.stop_lists_check_stop_list_response import StopListsCheckStopListResponse
+from iikocloud_client.models.stop_lists_clear_stop_list_request import StopListsClearStopListRequest
+from iikocloud_client.models.stop_lists_remove_products_from_stop_list_request import StopListsRemoveProductsFromStopListRequest
+from iikocloud_client.models.stop_lists_stop_lists_request import StopListsStopListsRequest
+from iikocloud_client.models.stop_lists_stop_lists_response import StopListsStopListsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -59,7 +59,7 @@ class MenuApi:
     async def api2_menu_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_menu_request: Optional[IikoTransportPublicApiContractsNomenclatureMenuRequest] = None,
+        nomenclature_menu_request: Optional[NomenclatureMenuRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -79,8 +79,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_menu_request:
-        :type iiko_transport_public_api_contracts_nomenclature_menu_request: IikoTransportPublicApiContractsNomenclatureMenuRequest
+        :param nomenclature_menu_request:
+        :type nomenclature_menu_request: NomenclatureMenuRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -105,7 +105,7 @@ class MenuApi:
 
         _param = self._api2_menu_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_menu_request=iiko_transport_public_api_contracts_nomenclature_menu_request,
+            nomenclature_menu_request=nomenclature_menu_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,10 +114,10 @@ class MenuApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Api2MenuByIdPost200Response",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -134,7 +134,7 @@ class MenuApi:
     async def api2_menu_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_menu_request: Optional[IikoTransportPublicApiContractsNomenclatureMenuRequest] = None,
+        nomenclature_menu_request: Optional[NomenclatureMenuRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -154,8 +154,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_menu_request:
-        :type iiko_transport_public_api_contracts_nomenclature_menu_request: IikoTransportPublicApiContractsNomenclatureMenuRequest
+        :param nomenclature_menu_request:
+        :type nomenclature_menu_request: NomenclatureMenuRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -180,7 +180,7 @@ class MenuApi:
 
         _param = self._api2_menu_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_menu_request=iiko_transport_public_api_contracts_nomenclature_menu_request,
+            nomenclature_menu_request=nomenclature_menu_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -189,10 +189,10 @@ class MenuApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Api2MenuByIdPost200Response",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -209,7 +209,7 @@ class MenuApi:
     async def api2_menu_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_menu_request: Optional[IikoTransportPublicApiContractsNomenclatureMenuRequest] = None,
+        nomenclature_menu_request: Optional[NomenclatureMenuRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -229,8 +229,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_menu_request:
-        :type iiko_transport_public_api_contracts_nomenclature_menu_request: IikoTransportPublicApiContractsNomenclatureMenuRequest
+        :param nomenclature_menu_request:
+        :type nomenclature_menu_request: NomenclatureMenuRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,7 +255,7 @@ class MenuApi:
 
         _param = self._api2_menu_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_menu_request=iiko_transport_public_api_contracts_nomenclature_menu_request,
+            nomenclature_menu_request=nomenclature_menu_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -264,10 +264,10 @@ class MenuApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Api2MenuByIdPost200Response",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -279,7 +279,7 @@ class MenuApi:
     def _api2_menu_by_id_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_nomenclature_menu_request,
+        nomenclature_menu_request,
         _request_auth,
         _content_type,
         _headers,
@@ -307,8 +307,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_nomenclature_menu_request is not None:
-            _body_params = iiko_transport_public_api_contracts_nomenclature_menu_request
+        if nomenclature_menu_request is not None:
+            _body_params = nomenclature_menu_request
 
 
         # set the HTTP header `Accept`
@@ -372,7 +372,7 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsNomenclatureMenusDataResponse:
+    ) -> NomenclatureMenusDataResponse:
         """External menus with price categories.
 
            > Restriction group: `Data: menu`.
@@ -410,11 +410,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureMenusDataResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureMenusDataResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -443,7 +443,7 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsNomenclatureMenusDataResponse]:
+    ) -> ApiResponse[NomenclatureMenusDataResponse]:
         """External menus with price categories.
 
            > Restriction group: `Data: menu`.
@@ -481,11 +481,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureMenusDataResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureMenusDataResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -552,11 +552,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureMenusDataResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureMenusDataResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -633,7 +633,7 @@ class MenuApi:
     async def combo_calculate_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest] = None,
+        loyalty_result_calculate_combo_price_request: Optional[LoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,15 +646,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse:
+    ) -> LoyaltyResultCalculateComboPriceResponse:
         """Calculate combo price
 
         Make combo price calculation.   > Restriction group: `Loyalty: order calculate`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
+        :param loyalty_result_calculate_combo_price_request:
+        :type loyalty_result_calculate_combo_price_request: LoyaltyResultCalculateComboPriceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -679,7 +679,7 @@ class MenuApi:
 
         _param = self._combo_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request,
+            loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -687,11 +687,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateComboPriceResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -708,7 +708,7 @@ class MenuApi:
     async def combo_calculate_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest] = None,
+        loyalty_result_calculate_combo_price_request: Optional[LoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -721,15 +721,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse]:
+    ) -> ApiResponse[LoyaltyResultCalculateComboPriceResponse]:
         """Calculate combo price
 
         Make combo price calculation.   > Restriction group: `Loyalty: order calculate`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
+        :param loyalty_result_calculate_combo_price_request:
+        :type loyalty_result_calculate_combo_price_request: LoyaltyResultCalculateComboPriceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -754,7 +754,7 @@ class MenuApi:
 
         _param = self._combo_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request,
+            loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -762,11 +762,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateComboPriceResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -783,7 +783,7 @@ class MenuApi:
     async def combo_calculate_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest] = None,
+        loyalty_result_calculate_combo_price_request: Optional[LoyaltyResultCalculateComboPriceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -803,8 +803,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
+        :param loyalty_result_calculate_combo_price_request:
+        :type loyalty_result_calculate_combo_price_request: LoyaltyResultCalculateComboPriceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -829,7 +829,7 @@ class MenuApi:
 
         _param = self._combo_calculate_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request,
+            loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -837,11 +837,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultCalculateComboPriceResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -853,7 +853,7 @@ class MenuApi:
     def _combo_calculate_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request,
+        loyalty_result_calculate_combo_price_request,
         _request_auth,
         _content_type,
         _headers,
@@ -881,8 +881,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request
+        if loyalty_result_calculate_combo_price_request is not None:
+            _body_params = loyalty_result_calculate_combo_price_request
 
 
         # set the HTTP header `Accept`
@@ -934,7 +934,7 @@ class MenuApi:
     async def combo_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest] = None,
+        loyalty_result_get_combos_info_request: Optional[LoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -947,15 +947,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse:
+    ) -> LoyaltyResultGetCombosInfoResponse:
         """Get combos info
 
         Get all organization's combos.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
+        :param loyalty_result_get_combos_info_request:
+        :type loyalty_result_get_combos_info_request: LoyaltyResultGetCombosInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -980,7 +980,7 @@ class MenuApi:
 
         _param = self._combo_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request,
+            loyalty_result_get_combos_info_request=loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -988,11 +988,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCombosInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1009,7 +1009,7 @@ class MenuApi:
     async def combo_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest] = None,
+        loyalty_result_get_combos_info_request: Optional[LoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1022,15 +1022,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse]:
+    ) -> ApiResponse[LoyaltyResultGetCombosInfoResponse]:
         """Get combos info
 
         Get all organization's combos.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
+        :param loyalty_result_get_combos_info_request:
+        :type loyalty_result_get_combos_info_request: LoyaltyResultGetCombosInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1055,7 +1055,7 @@ class MenuApi:
 
         _param = self._combo_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request,
+            loyalty_result_get_combos_info_request=loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1063,11 +1063,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCombosInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1084,7 +1084,7 @@ class MenuApi:
     async def combo_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest] = None,
+        loyalty_result_get_combos_info_request: Optional[LoyaltyResultGetCombosInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1104,8 +1104,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
+        :param loyalty_result_get_combos_info_request:
+        :type loyalty_result_get_combos_info_request: LoyaltyResultGetCombosInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1130,7 +1130,7 @@ class MenuApi:
 
         _param = self._combo_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request,
+            loyalty_result_get_combos_info_request=loyalty_result_get_combos_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1138,11 +1138,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCombosInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1154,7 +1154,7 @@ class MenuApi:
     def _combo_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request,
+        loyalty_result_get_combos_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1182,8 +1182,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request
+        if loyalty_result_get_combos_info_request is not None:
+            _body_params = loyalty_result_get_combos_info_request
 
 
         # set the HTTP header `Accept`
@@ -1235,7 +1235,7 @@ class MenuApi:
     async def nomenclature_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_nomenclature_request: Optional[IikoTransportPublicApiContractsNomenclatureNomenclatureRequest] = None,
+        nomenclature_nomenclature_request: Optional[NomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1248,15 +1248,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsNomenclatureNomenclatureResponse:
+    ) -> NomenclatureNomenclatureResponse:
         """Menu.
 
         > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_nomenclature_request:
-        :type iiko_transport_public_api_contracts_nomenclature_nomenclature_request: IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
+        :param nomenclature_nomenclature_request:
+        :type nomenclature_nomenclature_request: NomenclatureNomenclatureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1281,7 +1281,7 @@ class MenuApi:
 
         _param = self._nomenclature_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_nomenclature_request=iiko_transport_public_api_contracts_nomenclature_nomenclature_request,
+            nomenclature_nomenclature_request=nomenclature_nomenclature_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1289,11 +1289,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureNomenclatureResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureNomenclatureResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1310,7 +1310,7 @@ class MenuApi:
     async def nomenclature_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_nomenclature_request: Optional[IikoTransportPublicApiContractsNomenclatureNomenclatureRequest] = None,
+        nomenclature_nomenclature_request: Optional[NomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1323,15 +1323,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsNomenclatureNomenclatureResponse]:
+    ) -> ApiResponse[NomenclatureNomenclatureResponse]:
         """Menu.
 
         > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_nomenclature_request:
-        :type iiko_transport_public_api_contracts_nomenclature_nomenclature_request: IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
+        :param nomenclature_nomenclature_request:
+        :type nomenclature_nomenclature_request: NomenclatureNomenclatureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1356,7 +1356,7 @@ class MenuApi:
 
         _param = self._nomenclature_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_nomenclature_request=iiko_transport_public_api_contracts_nomenclature_nomenclature_request,
+            nomenclature_nomenclature_request=nomenclature_nomenclature_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1364,11 +1364,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureNomenclatureResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureNomenclatureResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1385,7 +1385,7 @@ class MenuApi:
     async def nomenclature_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_nomenclature_nomenclature_request: Optional[IikoTransportPublicApiContractsNomenclatureNomenclatureRequest] = None,
+        nomenclature_nomenclature_request: Optional[NomenclatureNomenclatureRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1405,8 +1405,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_nomenclature_nomenclature_request:
-        :type iiko_transport_public_api_contracts_nomenclature_nomenclature_request: IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
+        :param nomenclature_nomenclature_request:
+        :type nomenclature_nomenclature_request: NomenclatureNomenclatureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1431,7 +1431,7 @@ class MenuApi:
 
         _param = self._nomenclature_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_nomenclature_nomenclature_request=iiko_transport_public_api_contracts_nomenclature_nomenclature_request,
+            nomenclature_nomenclature_request=nomenclature_nomenclature_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1439,11 +1439,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsNomenclatureNomenclatureResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "NomenclatureNomenclatureResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1455,7 +1455,7 @@ class MenuApi:
     def _nomenclature_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_nomenclature_nomenclature_request,
+        nomenclature_nomenclature_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1483,8 +1483,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_nomenclature_nomenclature_request is not None:
-            _body_params = iiko_transport_public_api_contracts_nomenclature_nomenclature_request
+        if nomenclature_nomenclature_request is not None:
+            _body_params = nomenclature_nomenclature_request
 
 
         # set the HTTP header `Accept`
@@ -1536,7 +1536,7 @@ class MenuApi:
     async def stop_lists_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest] = None,
+        stop_lists_add_products_to_stop_list_request: Optional[StopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1549,15 +1549,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Add items to out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
+        :param stop_lists_add_products_to_stop_list_request:
+        :type stop_lists_add_products_to_stop_list_request: StopListsAddProductsToStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1582,7 +1582,7 @@ class MenuApi:
 
         _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request=iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request,
+            stop_lists_add_products_to_stop_list_request=stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1590,11 +1590,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1611,7 +1611,7 @@ class MenuApi:
     async def stop_lists_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest] = None,
+        stop_lists_add_products_to_stop_list_request: Optional[StopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1624,15 +1624,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Add items to out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
+        :param stop_lists_add_products_to_stop_list_request:
+        :type stop_lists_add_products_to_stop_list_request: StopListsAddProductsToStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1657,7 +1657,7 @@ class MenuApi:
 
         _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request=iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request,
+            stop_lists_add_products_to_stop_list_request=stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1665,11 +1665,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1686,7 +1686,7 @@ class MenuApi:
     async def stop_lists_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest] = None,
+        stop_lists_add_products_to_stop_list_request: Optional[StopListsAddProductsToStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1706,8 +1706,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request: IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
+        :param stop_lists_add_products_to_stop_list_request:
+        :type stop_lists_add_products_to_stop_list_request: StopListsAddProductsToStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1732,7 +1732,7 @@ class MenuApi:
 
         _param = self._stop_lists_add_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request=iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request,
+            stop_lists_add_products_to_stop_list_request=stop_lists_add_products_to_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1740,11 +1740,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1756,7 +1756,7 @@ class MenuApi:
     def _stop_lists_add_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request,
+        stop_lists_add_products_to_stop_list_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1784,8 +1784,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request is not None:
-            _body_params = iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request
+        if stop_lists_add_products_to_stop_list_request is not None:
+            _body_params = stop_lists_add_products_to_stop_list_request
 
 
         # set the HTTP header `Accept`
@@ -1837,7 +1837,7 @@ class MenuApi:
     async def stop_lists_check_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsCheckStopListRequest] = None,
+        stop_lists_check_stop_list_request: Optional[StopListsCheckStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1850,15 +1850,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsStopListsCheckStopListResponse:
+    ) -> StopListsCheckStopListResponse:
         """Check items in out-of-stock list.
 
            > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_check_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: IikoTransportPublicApiContractsStopListsCheckStopListRequest
+        :param stop_lists_check_stop_list_request:
+        :type stop_lists_check_stop_list_request: StopListsCheckStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1883,7 +1883,7 @@ class MenuApi:
 
         _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_check_stop_list_request=iiko_transport_public_api_contracts_stop_lists_check_stop_list_request,
+            stop_lists_check_stop_list_request=stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1891,11 +1891,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsCheckStopListResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsCheckStopListResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1912,7 +1912,7 @@ class MenuApi:
     async def stop_lists_check_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsCheckStopListRequest] = None,
+        stop_lists_check_stop_list_request: Optional[StopListsCheckStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1925,15 +1925,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsStopListsCheckStopListResponse]:
+    ) -> ApiResponse[StopListsCheckStopListResponse]:
         """Check items in out-of-stock list.
 
            > Restriction group: `Orders: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_check_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: IikoTransportPublicApiContractsStopListsCheckStopListRequest
+        :param stop_lists_check_stop_list_request:
+        :type stop_lists_check_stop_list_request: StopListsCheckStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1958,7 +1958,7 @@ class MenuApi:
 
         _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_check_stop_list_request=iiko_transport_public_api_contracts_stop_lists_check_stop_list_request,
+            stop_lists_check_stop_list_request=stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1966,11 +1966,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsCheckStopListResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsCheckStopListResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1987,7 +1987,7 @@ class MenuApi:
     async def stop_lists_check_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsCheckStopListRequest] = None,
+        stop_lists_check_stop_list_request: Optional[StopListsCheckStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2007,8 +2007,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_check_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_check_stop_list_request: IikoTransportPublicApiContractsStopListsCheckStopListRequest
+        :param stop_lists_check_stop_list_request:
+        :type stop_lists_check_stop_list_request: StopListsCheckStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2033,7 +2033,7 @@ class MenuApi:
 
         _param = self._stop_lists_check_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_check_stop_list_request=iiko_transport_public_api_contracts_stop_lists_check_stop_list_request,
+            stop_lists_check_stop_list_request=stop_lists_check_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2041,11 +2041,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsCheckStopListResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsCheckStopListResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2057,7 +2057,7 @@ class MenuApi:
     def _stop_lists_check_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_stop_lists_check_stop_list_request,
+        stop_lists_check_stop_list_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2085,8 +2085,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_stop_lists_check_stop_list_request is not None:
-            _body_params = iiko_transport_public_api_contracts_stop_lists_check_stop_list_request
+        if stop_lists_check_stop_list_request is not None:
+            _body_params = stop_lists_check_stop_list_request
 
 
         # set the HTTP header `Accept`
@@ -2138,7 +2138,7 @@ class MenuApi:
     async def stop_lists_clear_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsClearStopListRequest] = None,
+        stop_lists_clear_stop_list_request: Optional[StopListsClearStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2151,15 +2151,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Clear out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: IikoTransportPublicApiContractsStopListsClearStopListRequest
+        :param stop_lists_clear_stop_list_request:
+        :type stop_lists_clear_stop_list_request: StopListsClearStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2184,7 +2184,7 @@ class MenuApi:
 
         _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request=iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request,
+            stop_lists_clear_stop_list_request=stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2192,11 +2192,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2213,7 +2213,7 @@ class MenuApi:
     async def stop_lists_clear_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsClearStopListRequest] = None,
+        stop_lists_clear_stop_list_request: Optional[StopListsClearStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2226,15 +2226,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Clear out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: IikoTransportPublicApiContractsStopListsClearStopListRequest
+        :param stop_lists_clear_stop_list_request:
+        :type stop_lists_clear_stop_list_request: StopListsClearStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2259,7 +2259,7 @@ class MenuApi:
 
         _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request=iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request,
+            stop_lists_clear_stop_list_request=stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2267,11 +2267,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2288,7 +2288,7 @@ class MenuApi:
     async def stop_lists_clear_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsClearStopListRequest] = None,
+        stop_lists_clear_stop_list_request: Optional[StopListsClearStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2308,8 +2308,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request: IikoTransportPublicApiContractsStopListsClearStopListRequest
+        :param stop_lists_clear_stop_list_request:
+        :type stop_lists_clear_stop_list_request: StopListsClearStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2334,7 +2334,7 @@ class MenuApi:
 
         _param = self._stop_lists_clear_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request=iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request,
+            stop_lists_clear_stop_list_request=stop_lists_clear_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2342,11 +2342,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2358,7 +2358,7 @@ class MenuApi:
     def _stop_lists_clear_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request,
+        stop_lists_clear_stop_list_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2386,8 +2386,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request is not None:
-            _body_params = iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request
+        if stop_lists_clear_stop_list_request is not None:
+            _body_params = stop_lists_clear_stop_list_request
 
 
         # set the HTTP header `Accept`
@@ -2439,7 +2439,7 @@ class MenuApi:
     async def stop_lists_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_stop_lists_request: Optional[IikoTransportPublicApiContractsStopListsStopListsRequest] = None,
+        stop_lists_stop_lists_request: Optional[StopListsStopListsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2452,15 +2452,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsStopListsStopListsResponse:
+    ) -> StopListsStopListsResponse:
         """Out-of-stock items.
 
            > Restriction group: `Data: stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_stop_lists_request:
-        :type iiko_transport_public_api_contracts_stop_lists_stop_lists_request: IikoTransportPublicApiContractsStopListsStopListsRequest
+        :param stop_lists_stop_lists_request:
+        :type stop_lists_stop_lists_request: StopListsStopListsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2485,7 +2485,7 @@ class MenuApi:
 
         _param = self._stop_lists_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_stop_lists_request=iiko_transport_public_api_contracts_stop_lists_stop_lists_request,
+            stop_lists_stop_lists_request=stop_lists_stop_lists_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2493,11 +2493,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsStopListsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsStopListsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2514,7 +2514,7 @@ class MenuApi:
     async def stop_lists_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_stop_lists_request: Optional[IikoTransportPublicApiContractsStopListsStopListsRequest] = None,
+        stop_lists_stop_lists_request: Optional[StopListsStopListsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2527,15 +2527,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsStopListsStopListsResponse]:
+    ) -> ApiResponse[StopListsStopListsResponse]:
         """Out-of-stock items.
 
            > Restriction group: `Data: stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_stop_lists_request:
-        :type iiko_transport_public_api_contracts_stop_lists_stop_lists_request: IikoTransportPublicApiContractsStopListsStopListsRequest
+        :param stop_lists_stop_lists_request:
+        :type stop_lists_stop_lists_request: StopListsStopListsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2560,7 +2560,7 @@ class MenuApi:
 
         _param = self._stop_lists_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_stop_lists_request=iiko_transport_public_api_contracts_stop_lists_stop_lists_request,
+            stop_lists_stop_lists_request=stop_lists_stop_lists_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2568,11 +2568,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsStopListsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsStopListsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2589,7 +2589,7 @@ class MenuApi:
     async def stop_lists_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_stop_lists_request: Optional[IikoTransportPublicApiContractsStopListsStopListsRequest] = None,
+        stop_lists_stop_lists_request: Optional[StopListsStopListsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2609,8 +2609,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_stop_lists_request:
-        :type iiko_transport_public_api_contracts_stop_lists_stop_lists_request: IikoTransportPublicApiContractsStopListsStopListsRequest
+        :param stop_lists_stop_lists_request:
+        :type stop_lists_stop_lists_request: StopListsStopListsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2635,7 +2635,7 @@ class MenuApi:
 
         _param = self._stop_lists_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_stop_lists_request=iiko_transport_public_api_contracts_stop_lists_stop_lists_request,
+            stop_lists_stop_lists_request=stop_lists_stop_lists_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2643,11 +2643,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsStopListsStopListsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "StopListsStopListsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2659,7 +2659,7 @@ class MenuApi:
     def _stop_lists_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_stop_lists_stop_lists_request,
+        stop_lists_stop_lists_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2687,8 +2687,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_stop_lists_stop_lists_request is not None:
-            _body_params = iiko_transport_public_api_contracts_stop_lists_stop_lists_request
+        if stop_lists_stop_lists_request is not None:
+            _body_params = stop_lists_stop_lists_request
 
 
         # set the HTTP header `Accept`
@@ -2740,7 +2740,7 @@ class MenuApi:
     async def stop_lists_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest] = None,
+        stop_lists_remove_products_from_stop_list_request: Optional[StopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2753,15 +2753,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Remove items from out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
+        :param stop_lists_remove_products_from_stop_list_request:
+        :type stop_lists_remove_products_from_stop_list_request: StopListsRemoveProductsFromStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2786,7 +2786,7 @@ class MenuApi:
 
         _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request=iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request,
+            stop_lists_remove_products_from_stop_list_request=stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2794,11 +2794,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2815,7 +2815,7 @@ class MenuApi:
     async def stop_lists_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest] = None,
+        stop_lists_remove_products_from_stop_list_request: Optional[StopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2828,15 +2828,15 @@ class MenuApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Remove items from out-of-stock list.  (You should have extra rights to use this method).
 
            > Allowed from version `8.6.1`.   > Restriction group: `Data: changing stoplists`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
+        :param stop_lists_remove_products_from_stop_list_request:
+        :type stop_lists_remove_products_from_stop_list_request: StopListsRemoveProductsFromStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2861,7 +2861,7 @@ class MenuApi:
 
         _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request=iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request,
+            stop_lists_remove_products_from_stop_list_request=stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2869,11 +2869,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2890,7 +2890,7 @@ class MenuApi:
     async def stop_lists_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: Optional[IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest] = None,
+        stop_lists_remove_products_from_stop_list_request: Optional[StopListsRemoveProductsFromStopListRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2910,8 +2910,8 @@ class MenuApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request:
-        :type iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request: IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
+        :param stop_lists_remove_products_from_stop_list_request:
+        :type stop_lists_remove_products_from_stop_list_request: StopListsRemoveProductsFromStopListRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2936,7 +2936,7 @@ class MenuApi:
 
         _param = self._stop_lists_remove_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request=iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request,
+            stop_lists_remove_products_from_stop_list_request=stop_lists_remove_products_from_stop_list_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2944,11 +2944,11 @@ class MenuApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2960,7 +2960,7 @@ class MenuApi:
     def _stop_lists_remove_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request,
+        stop_lists_remove_products_from_stop_list_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2988,8 +2988,8 @@ class MenuApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request is not None:
-            _body_params = iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request
+        if stop_lists_remove_products_from_stop_list_request is not None:
+            _body_params = stop_lists_remove_products_from_stop_list_request
 
 
         # set the HTTP header `Accept`

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_by_delivery_date_and_phone_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
+> DeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_phone_request=deliveries_request_orders_by_delivery_date_and_phone_request)
 
 Retrieve list of orders by telephone number, dates and revision.
 
@@ -27,8 +27,8 @@ Retrieve list of orders by telephone number, dates and revision.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_phone_request import DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
+    deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_phone_request=deliveries_request_orders_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,11 +72,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest.md)|  | [optional] 
+ **deliveries_request_orders_by_delivery_date_and_phone_request** | [**DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest**](DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
+[**DeliveriesResponseOrdersWithRevisionResponse**](DeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_source_key_and_filter_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
+> DeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_filter_request=deliveries_request_orders_by_delivery_date_and_filter_request)
 
 Search orders by search text and additional filters (date, problem, statuses and other).
 
@@ -114,8 +114,8 @@ Search orders by search text and additional filters (date, problem, statuses and
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_filter_request import DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -140,11 +140,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
+    deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.DeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # DeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
 
     try:
         # Search orders by search text and additional filters (date, problem, statuses and other).
-        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_filter_request=deliveries_request_orders_by_delivery_date_and_filter_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_source_key_and_filter_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -159,11 +159,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest.md)|  | [optional] 
+ **deliveries_request_orders_by_delivery_date_and_filter_request** | [**DeliveriesRequestOrdersByDeliveryDateAndFilterRequest**](DeliveriesRequestOrdersByDeliveryDateAndFilterRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
+[**DeliveriesResponseOrdersWithRevisionResponse**](DeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_status_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
+> DeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_status_request=deliveries_request_orders_by_delivery_date_and_status_request)
 
 Retrieve list of orders by statuses and dates.
 
@@ -201,8 +201,8 @@ Retrieve list of orders by statuses and dates.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_status_request import DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -227,11 +227,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
+    deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.DeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # DeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
 
     try:
         # Retrieve list of orders by statuses and dates.
-        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(timeout=timeout, deliveries_request_orders_by_delivery_date_and_status_request=deliveries_request_orders_by_delivery_date_and_status_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -246,11 +246,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest.md)|  | [optional] 
+ **deliveries_request_orders_by_delivery_date_and_status_request** | [**DeliveriesRequestOrdersByDeliveryDateAndStatusRequest**](DeliveriesRequestOrdersByDeliveryDateAndStatusRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
+[**DeliveriesResponseOrdersWithRevisionResponse**](DeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_id_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse deliveries_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
+> DeliveriesResponseOrdersResponse deliveries_by_id_post(timeout=timeout, deliveries_request_orders_by_id_request=deliveries_request_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -288,8 +288,8 @@ Retrieve orders by IDs.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse
+from iikocloud_client.models.deliveries_request_orders_by_id_request import DeliveriesRequestOrdersByIdRequest
+from iikocloud_client.models.deliveries_response_orders_response import DeliveriesResponseOrdersResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -314,11 +314,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest |  (optional)
+    deliveries_request_orders_by_id_request = iikocloud_client.DeliveriesRequestOrdersByIdRequest() # DeliveriesRequestOrdersByIdRequest |  (optional)
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.deliveries_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
+        api_response = await api_instance.deliveries_by_id_post(timeout=timeout, deliveries_request_orders_by_id_request=deliveries_request_orders_by_id_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -333,11 +333,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest.md)|  | [optional] 
+ **deliveries_request_orders_by_id_request** | [**DeliveriesRequestOrdersByIdRequest**](DeliveriesRequestOrdersByIdRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse.md)
+[**DeliveriesResponseOrdersResponse**](DeliveriesResponseOrdersResponse.md)
 
 ### Authorization
 
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_revision_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
+> DeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(timeout=timeout, deliveries_request_orders_by_revision_request=deliveries_request_orders_by_revision_request)
 
 Retrieve list of orders changed from the time revision was passed.
 
@@ -375,8 +375,8 @@ Retrieve list of orders changed from the time revision was passed.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_by_revision_request import DeliveriesRequestOrdersByRevisionRequest
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -401,11 +401,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest |  (optional)
+    deliveries_request_orders_by_revision_request = iikocloud_client.DeliveriesRequestOrdersByRevisionRequest() # DeliveriesRequestOrdersByRevisionRequest |  (optional)
 
     try:
         # Retrieve list of orders changed from the time revision was passed.
-        api_response = await api_instance.deliveries_by_revision_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
+        api_response = await api_instance.deliveries_by_revision_post(timeout=timeout, deliveries_request_orders_by_revision_request=deliveries_request_orders_by_revision_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -420,11 +420,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest.md)|  | [optional] 
+ **deliveries_request_orders_by_revision_request** | [**DeliveriesRequestOrdersByRevisionRequest**](DeliveriesRequestOrdersByRevisionRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
+[**DeliveriesResponseOrdersWithRevisionResponse**](DeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
@@ -448,7 +448,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_history_by_delivery_date_and_phone_post**
-> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+> DeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, deliveries_request_orders_history_by_delivery_date_and_phone_request=deliveries_request_orders_history_by_delivery_date_and_phone_request)
 
 Retrieve list of history orders by telephone number, dates and revision.
 
@@ -462,8 +462,8 @@ Retrieve list of history orders by telephone number, dates and revision.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_history_by_delivery_date_and_phone_request import DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -488,11 +488,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
+    deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of history orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, deliveries_request_orders_history_by_delivery_date_and_phone_request=deliveries_request_orders_history_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_history_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -507,11 +507,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest.md)|  | [optional] 
+ **deliveries_request_orders_history_by_delivery_date_and_phone_request** | [**DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest**](DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
+[**DeliveriesResponseOrdersWithRevisionResponse**](DeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 

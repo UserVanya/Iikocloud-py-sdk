@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **api2_menu_by_id_post**
-> Api2MenuByIdPost200Response api2_menu_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_nomenclature_menu_request=iiko_transport_public_api_contracts_nomenclature_menu_request)
+> Api2MenuByIdPost200Response api2_menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
 
 Retrieve external menu by ID.
 
@@ -32,7 +32,7 @@ Retrieve external menu by ID.
 ```python
 import iikocloud_client
 from iikocloud_client.models.api2_menu_by_id_post200_response import Api2MenuByIdPost200Response
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menu_request import IikoTransportPublicApiContractsNomenclatureMenuRequest
+from iikocloud_client.models.nomenclature_menu_request import NomenclatureMenuRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -57,11 +57,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_nomenclature_menu_request = {"externalMenuId":"15#3","organizationIds":["706e5f4a-3efa-49f0-8f1c-15a6c1603e1f"],"version":2} # IikoTransportPublicApiContractsNomenclatureMenuRequest |  (optional)
+    nomenclature_menu_request = {"externalMenuId":"15#3","organizationIds":["706e5f4a-3efa-49f0-8f1c-15a6c1603e1f"],"version":2} # NomenclatureMenuRequest |  (optional)
 
     try:
         # Retrieve external menu by ID.
-        api_response = await api_instance.api2_menu_by_id_post(timeout=timeout, iiko_transport_public_api_contracts_nomenclature_menu_request=iiko_transport_public_api_contracts_nomenclature_menu_request)
+        api_response = await api_instance.api2_menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
         print("The response of MenuApi->api2_menu_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,7 +76,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_nomenclature_menu_request** | [**IikoTransportPublicApiContractsNomenclatureMenuRequest**](IikoTransportPublicApiContractsNomenclatureMenuRequest.md)|  | [optional] 
+ **nomenclature_menu_request** | [**NomenclatureMenuRequest**](NomenclatureMenuRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api2_menu_post**
-> IikoTransportPublicApiContractsNomenclatureMenusDataResponse api2_menu_post(timeout=timeout)
+> NomenclatureMenusDataResponse api2_menu_post(timeout=timeout)
 
 External menus with price categories.
 
@@ -118,7 +118,7 @@ External menus with price categories.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menus_data_response import IikoTransportPublicApiContractsNomenclatureMenusDataResponse
+from iikocloud_client.models.nomenclature_menus_data_response import NomenclatureMenusDataResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IikoTransportPublicApiContractsNomenclatureMenusDataResponse**](IikoTransportPublicApiContractsNomenclatureMenusDataResponse.md)
+[**NomenclatureMenusDataResponse**](NomenclatureMenusDataResponse.md)
 
 ### Authorization
 
@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **combo_calculate_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse combo_calculate_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request)
+> LoyaltyResultCalculateComboPriceResponse combo_calculate_post(timeout=timeout, loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request)
 
 Calculate combo price
 
@@ -202,8 +202,8 @@ Make combo price calculation.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse
+from iikocloud_client.models.loyalty_result_calculate_combo_price_request import LoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.loyalty_result_calculate_combo_price_response import LoyaltyResultCalculateComboPriceResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -228,11 +228,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest |  (optional)
+    loyalty_result_calculate_combo_price_request = iikocloud_client.LoyaltyResultCalculateComboPriceRequest() # LoyaltyResultCalculateComboPriceRequest |  (optional)
 
     try:
         # Calculate combo price
-        api_response = await api_instance.combo_calculate_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request)
+        api_response = await api_instance.combo_calculate_post(timeout=timeout, loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request)
         print("The response of MenuApi->combo_calculate_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -247,11 +247,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest.md)|  | [optional] 
+ **loyalty_result_calculate_combo_price_request** | [**LoyaltyResultCalculateComboPriceRequest**](LoyaltyResultCalculateComboPriceRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse**](IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse.md)
+[**LoyaltyResultCalculateComboPriceResponse**](LoyaltyResultCalculateComboPriceResponse.md)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **combo_post**
-> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse combo_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request)
+> LoyaltyResultGetCombosInfoResponse combo_post(timeout=timeout, loyalty_result_get_combos_info_request=loyalty_result_get_combos_info_request)
 
 Get combos info
 
@@ -289,8 +289,8 @@ Get all organization's combos.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse
+from iikocloud_client.models.loyalty_result_get_combos_info_request import LoyaltyResultGetCombosInfoRequest
+from iikocloud_client.models.loyalty_result_get_combos_info_response import LoyaltyResultGetCombosInfoResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -315,11 +315,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest() # IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest |  (optional)
+    loyalty_result_get_combos_info_request = iikocloud_client.LoyaltyResultGetCombosInfoRequest() # LoyaltyResultGetCombosInfoRequest |  (optional)
 
     try:
         # Get combos info
-        api_response = await api_instance.combo_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request)
+        api_response = await api_instance.combo_post(timeout=timeout, loyalty_result_get_combos_info_request=loyalty_result_get_combos_info_request)
         print("The response of MenuApi->combo_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -334,11 +334,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request** | [**IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest**](IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest.md)|  | [optional] 
+ **loyalty_result_get_combos_info_request** | [**LoyaltyResultGetCombosInfoRequest**](LoyaltyResultGetCombosInfoRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse**](IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse.md)
+[**LoyaltyResultGetCombosInfoResponse**](LoyaltyResultGetCombosInfoResponse.md)
 
 ### Authorization
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **nomenclature_post**
-> IikoTransportPublicApiContractsNomenclatureNomenclatureResponse nomenclature_post(timeout=timeout, iiko_transport_public_api_contracts_nomenclature_nomenclature_request=iiko_transport_public_api_contracts_nomenclature_nomenclature_request)
+> NomenclatureNomenclatureResponse nomenclature_post(timeout=timeout, nomenclature_nomenclature_request=nomenclature_nomenclature_request)
 
 Menu.
 
@@ -376,8 +376,8 @@ Menu.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_request import IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_response import IikoTransportPublicApiContractsNomenclatureNomenclatureResponse
+from iikocloud_client.models.nomenclature_nomenclature_request import NomenclatureNomenclatureRequest
+from iikocloud_client.models.nomenclature_nomenclature_response import NomenclatureNomenclatureResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -402,11 +402,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_nomenclature_nomenclature_request = iikocloud_client.IikoTransportPublicApiContractsNomenclatureNomenclatureRequest() # IikoTransportPublicApiContractsNomenclatureNomenclatureRequest |  (optional)
+    nomenclature_nomenclature_request = iikocloud_client.NomenclatureNomenclatureRequest() # NomenclatureNomenclatureRequest |  (optional)
 
     try:
         # Menu.
-        api_response = await api_instance.nomenclature_post(timeout=timeout, iiko_transport_public_api_contracts_nomenclature_nomenclature_request=iiko_transport_public_api_contracts_nomenclature_nomenclature_request)
+        api_response = await api_instance.nomenclature_post(timeout=timeout, nomenclature_nomenclature_request=nomenclature_nomenclature_request)
         print("The response of MenuApi->nomenclature_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -421,11 +421,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_nomenclature_nomenclature_request** | [**IikoTransportPublicApiContractsNomenclatureNomenclatureRequest**](IikoTransportPublicApiContractsNomenclatureNomenclatureRequest.md)|  | [optional] 
+ **nomenclature_nomenclature_request** | [**NomenclatureNomenclatureRequest**](NomenclatureNomenclatureRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsNomenclatureNomenclatureResponse**](IikoTransportPublicApiContractsNomenclatureNomenclatureResponse.md)
+[**NomenclatureNomenclatureResponse**](NomenclatureNomenclatureResponse.md)
 
 ### Authorization
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop_lists_add_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse stop_lists_add_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request=iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request)
+> CommonCorrelationIdResponse stop_lists_add_post(timeout=timeout, stop_lists_add_products_to_stop_list_request=stop_lists_add_products_to_stop_list_request)
 
 Add items to out-of-stock list.  (You should have extra rights to use this method).
 
@@ -465,8 +465,8 @@ Add items to out-of-stock list.  (You should have extra rights to use this metho
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request import IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.stop_lists_add_products_to_stop_list_request import StopListsAddProductsToStopListRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -491,11 +491,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request = iikocloud_client.IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest() # IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest |  (optional)
+    stop_lists_add_products_to_stop_list_request = iikocloud_client.StopListsAddProductsToStopListRequest() # StopListsAddProductsToStopListRequest |  (optional)
 
     try:
         # Add items to out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.stop_lists_add_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request=iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request)
+        api_response = await api_instance.stop_lists_add_post(timeout=timeout, stop_lists_add_products_to_stop_list_request=stop_lists_add_products_to_stop_list_request)
         print("The response of MenuApi->stop_lists_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -510,11 +510,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request** | [**IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest**](IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest.md)|  | [optional] 
+ **stop_lists_add_products_to_stop_list_request** | [**StopListsAddProductsToStopListRequest**](StopListsAddProductsToStopListRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+[**CommonCorrelationIdResponse**](CommonCorrelationIdResponse.md)
 
 ### Authorization
 
@@ -538,7 +538,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop_lists_check_post**
-> IikoTransportPublicApiContractsStopListsCheckStopListResponse stop_lists_check_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_check_stop_list_request=iiko_transport_public_api_contracts_stop_lists_check_stop_list_request)
+> StopListsCheckStopListResponse stop_lists_check_post(timeout=timeout, stop_lists_check_stop_list_request=stop_lists_check_stop_list_request)
 
 Check items in out-of-stock list.
 
@@ -552,8 +552,8 @@ Check items in out-of-stock list.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_request import IikoTransportPublicApiContractsStopListsCheckStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_response import IikoTransportPublicApiContractsStopListsCheckStopListResponse
+from iikocloud_client.models.stop_lists_check_stop_list_request import StopListsCheckStopListRequest
+from iikocloud_client.models.stop_lists_check_stop_list_response import StopListsCheckStopListResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -578,11 +578,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_stop_lists_check_stop_list_request = iikocloud_client.IikoTransportPublicApiContractsStopListsCheckStopListRequest() # IikoTransportPublicApiContractsStopListsCheckStopListRequest |  (optional)
+    stop_lists_check_stop_list_request = iikocloud_client.StopListsCheckStopListRequest() # StopListsCheckStopListRequest |  (optional)
 
     try:
         # Check items in out-of-stock list.
-        api_response = await api_instance.stop_lists_check_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_check_stop_list_request=iiko_transport_public_api_contracts_stop_lists_check_stop_list_request)
+        api_response = await api_instance.stop_lists_check_post(timeout=timeout, stop_lists_check_stop_list_request=stop_lists_check_stop_list_request)
         print("The response of MenuApi->stop_lists_check_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -597,11 +597,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_stop_lists_check_stop_list_request** | [**IikoTransportPublicApiContractsStopListsCheckStopListRequest**](IikoTransportPublicApiContractsStopListsCheckStopListRequest.md)|  | [optional] 
+ **stop_lists_check_stop_list_request** | [**StopListsCheckStopListRequest**](StopListsCheckStopListRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsStopListsCheckStopListResponse**](IikoTransportPublicApiContractsStopListsCheckStopListResponse.md)
+[**StopListsCheckStopListResponse**](StopListsCheckStopListResponse.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop_lists_clear_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse stop_lists_clear_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request=iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request)
+> CommonCorrelationIdResponse stop_lists_clear_post(timeout=timeout, stop_lists_clear_stop_list_request=stop_lists_clear_stop_list_request)
 
 Clear out-of-stock list.  (You should have extra rights to use this method).
 
@@ -641,8 +641,8 @@ Clear out-of-stock list.  (You should have extra rights to use this method).
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request import IikoTransportPublicApiContractsStopListsClearStopListRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.stop_lists_clear_stop_list_request import StopListsClearStopListRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -667,11 +667,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request = iikocloud_client.IikoTransportPublicApiContractsStopListsClearStopListRequest() # IikoTransportPublicApiContractsStopListsClearStopListRequest |  (optional)
+    stop_lists_clear_stop_list_request = iikocloud_client.StopListsClearStopListRequest() # StopListsClearStopListRequest |  (optional)
 
     try:
         # Clear out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.stop_lists_clear_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request=iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request)
+        api_response = await api_instance.stop_lists_clear_post(timeout=timeout, stop_lists_clear_stop_list_request=stop_lists_clear_stop_list_request)
         print("The response of MenuApi->stop_lists_clear_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -686,11 +686,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request** | [**IikoTransportPublicApiContractsStopListsClearStopListRequest**](IikoTransportPublicApiContractsStopListsClearStopListRequest.md)|  | [optional] 
+ **stop_lists_clear_stop_list_request** | [**StopListsClearStopListRequest**](StopListsClearStopListRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+[**CommonCorrelationIdResponse**](CommonCorrelationIdResponse.md)
 
 ### Authorization
 
@@ -714,7 +714,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop_lists_post**
-> IikoTransportPublicApiContractsStopListsStopListsResponse stop_lists_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_stop_lists_request=iiko_transport_public_api_contracts_stop_lists_stop_lists_request)
+> StopListsStopListsResponse stop_lists_post(timeout=timeout, stop_lists_stop_lists_request=stop_lists_stop_lists_request)
 
 Out-of-stock items.
 
@@ -728,8 +728,8 @@ Out-of-stock items.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_request import IikoTransportPublicApiContractsStopListsStopListsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_response import IikoTransportPublicApiContractsStopListsStopListsResponse
+from iikocloud_client.models.stop_lists_stop_lists_request import StopListsStopListsRequest
+from iikocloud_client.models.stop_lists_stop_lists_response import StopListsStopListsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -754,11 +754,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_stop_lists_stop_lists_request = iikocloud_client.IikoTransportPublicApiContractsStopListsStopListsRequest() # IikoTransportPublicApiContractsStopListsStopListsRequest |  (optional)
+    stop_lists_stop_lists_request = iikocloud_client.StopListsStopListsRequest() # StopListsStopListsRequest |  (optional)
 
     try:
         # Out-of-stock items.
-        api_response = await api_instance.stop_lists_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_stop_lists_request=iiko_transport_public_api_contracts_stop_lists_stop_lists_request)
+        api_response = await api_instance.stop_lists_post(timeout=timeout, stop_lists_stop_lists_request=stop_lists_stop_lists_request)
         print("The response of MenuApi->stop_lists_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -773,11 +773,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_stop_lists_stop_lists_request** | [**IikoTransportPublicApiContractsStopListsStopListsRequest**](IikoTransportPublicApiContractsStopListsStopListsRequest.md)|  | [optional] 
+ **stop_lists_stop_lists_request** | [**StopListsStopListsRequest**](StopListsStopListsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsStopListsStopListsResponse**](IikoTransportPublicApiContractsStopListsStopListsResponse.md)
+[**StopListsStopListsResponse**](StopListsStopListsResponse.md)
 
 ### Authorization
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop_lists_remove_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse stop_lists_remove_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request=iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request)
+> CommonCorrelationIdResponse stop_lists_remove_post(timeout=timeout, stop_lists_remove_products_from_stop_list_request=stop_lists_remove_products_from_stop_list_request)
 
 Remove items from out-of-stock list.  (You should have extra rights to use this method).
 
@@ -817,8 +817,8 @@ Remove items from out-of-stock list.  (You should have extra rights to use this 
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request import IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.stop_lists_remove_products_from_stop_list_request import StopListsRemoveProductsFromStopListRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -843,11 +843,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MenuApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request = iikocloud_client.IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest() # IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest |  (optional)
+    stop_lists_remove_products_from_stop_list_request = iikocloud_client.StopListsRemoveProductsFromStopListRequest() # StopListsRemoveProductsFromStopListRequest |  (optional)
 
     try:
         # Remove items from out-of-stock list.  (You should have extra rights to use this method).
-        api_response = await api_instance.stop_lists_remove_post(timeout=timeout, iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request=iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request)
+        api_response = await api_instance.stop_lists_remove_post(timeout=timeout, stop_lists_remove_products_from_stop_list_request=stop_lists_remove_products_from_stop_list_request)
         print("The response of MenuApi->stop_lists_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -862,11 +862,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request** | [**IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest**](IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest.md)|  | [optional] 
+ **stop_lists_remove_products_from_stop_list_request** | [**StopListsRemoveProductsFromStopListRequest**](StopListsRemoveProductsFromStopListRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+[**CommonCorrelationIdResponse**](CommonCorrelationIdResponse.md)
 
 ### Authorization
 

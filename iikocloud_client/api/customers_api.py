@@ -19,24 +19,24 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_response import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request import IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_response import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_response import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_response import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_response import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_response import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse
+from iikocloud_client.models.customer_add_customer_to_program_request import CustomerAddCustomerToProgramRequest
+from iikocloud_client.models.customer_add_customer_to_program_response import CustomerAddCustomerToProgramResponse
+from iikocloud_client.models.customer_add_magnet_card_request import CustomerAddMagnetCardRequest
+from iikocloud_client.models.customer_cancel_hold_money_request import CustomerCancelHoldMoneyRequest
+from iikocloud_client.models.customer_change_user_balance_request import CustomerChangeUserBalanceRequest
+from iikocloud_client.models.customer_create_or_update_customer_request import CustomerCreateOrUpdateCustomerRequest
+from iikocloud_client.models.customer_create_or_update_customer_response import CustomerCreateOrUpdateCustomerResponse
+from iikocloud_client.models.customer_delete_customers_request import CustomerDeleteCustomersRequest
+from iikocloud_client.models.customer_delete_customers_response import CustomerDeleteCustomersResponse
+from iikocloud_client.models.customer_delete_magnet_card_request import CustomerDeleteMagnetCardRequest
+from iikocloud_client.models.customer_get_customer_info_request import CustomerGetCustomerInfoRequest
+from iikocloud_client.models.customer_get_customer_info_response import CustomerGetCustomerInfoResponse
+from iikocloud_client.models.customer_hold_money_request import CustomerHoldMoneyRequest
+from iikocloud_client.models.customer_hold_money_response import CustomerHoldMoneyResponse
+from iikocloud_client.models.customer_restore_customers_request import CustomerRestoreCustomersRequest
+from iikocloud_client.models.customer_restore_customers_response import CustomerRestoreCustomersResponse
+from iikocloud_client.models.loyalty_result_get_counters_request import LoyaltyResultGetCountersRequest
+from iikocloud_client.models.loyalty_result_get_counters_response import LoyaltyResultGetCountersResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -60,7 +60,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest] = None,
+        customer_add_magnet_card_request: Optional[CustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -80,8 +80,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
+        :param customer_add_magnet_card_request:
+        :type customer_add_magnet_card_request: CustomerAddMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -106,7 +106,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request,
+            customer_add_magnet_card_request=customer_add_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -115,10 +115,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -135,7 +135,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest] = None,
+        customer_add_magnet_card_request: Optional[CustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -155,8 +155,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
+        :param customer_add_magnet_card_request:
+        :type customer_add_magnet_card_request: CustomerAddMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -181,7 +181,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request,
+            customer_add_magnet_card_request=customer_add_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -190,10 +190,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -210,7 +210,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest] = None,
+        customer_add_magnet_card_request: Optional[CustomerAddMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -230,8 +230,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
+        :param customer_add_magnet_card_request:
+        :type customer_add_magnet_card_request: CustomerAddMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -256,7 +256,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request,
+            customer_add_magnet_card_request=customer_add_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -265,10 +265,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -280,7 +280,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_card_add_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request,
+        customer_add_magnet_card_request,
         _request_auth,
         _content_type,
         _headers,
@@ -308,8 +308,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request
+        if customer_add_magnet_card_request is not None:
+            _body_params = customer_add_magnet_card_request
 
 
         # set the HTTP header `Accept`
@@ -361,7 +361,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_remove_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest] = None,
+        customer_delete_magnet_card_request: Optional[CustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -381,8 +381,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
+        :param customer_delete_magnet_card_request:
+        :type customer_delete_magnet_card_request: CustomerDeleteMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -407,7 +407,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request,
+            customer_delete_magnet_card_request=customer_delete_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -416,10 +416,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -436,7 +436,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_remove_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest] = None,
+        customer_delete_magnet_card_request: Optional[CustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -456,8 +456,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
+        :param customer_delete_magnet_card_request:
+        :type customer_delete_magnet_card_request: CustomerDeleteMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -482,7 +482,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request,
+            customer_delete_magnet_card_request=customer_delete_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -491,10 +491,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -511,7 +511,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_card_remove_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest] = None,
+        customer_delete_magnet_card_request: Optional[CustomerDeleteMagnetCardRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -531,8 +531,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
+        :param customer_delete_magnet_card_request:
+        :type customer_delete_magnet_card_request: CustomerDeleteMagnetCardRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -557,7 +557,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_card_remove_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request,
+            customer_delete_magnet_card_request=customer_delete_magnet_card_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -566,10 +566,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -581,7 +581,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_card_remove_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request,
+        customer_delete_magnet_card_request,
         _request_auth,
         _content_type,
         _headers,
@@ -609,8 +609,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request
+        if customer_delete_magnet_card_request is not None:
+            _body_params = customer_delete_magnet_card_request
 
 
         # set the HTTP header `Accept`
@@ -662,7 +662,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_create_or_update_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest] = None,
+        customer_create_or_update_customer_request: Optional[CustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -675,15 +675,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse:
+    ) -> CustomerCreateOrUpdateCustomerResponse:
         """Create or update customer.
 
         Create or update customer info by id or phone or card track.   > Restriction group: `Guests: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
+        :param customer_create_or_update_customer_request:
+        :type customer_create_or_update_customer_request: CustomerCreateOrUpdateCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -708,7 +708,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request,
+            customer_create_or_update_customer_request=customer_create_or_update_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -716,11 +716,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerCreateOrUpdateCustomerResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -737,7 +737,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_create_or_update_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest] = None,
+        customer_create_or_update_customer_request: Optional[CustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -750,15 +750,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse]:
+    ) -> ApiResponse[CustomerCreateOrUpdateCustomerResponse]:
         """Create or update customer.
 
         Create or update customer info by id or phone or card track.   > Restriction group: `Guests: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
+        :param customer_create_or_update_customer_request:
+        :type customer_create_or_update_customer_request: CustomerCreateOrUpdateCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -783,7 +783,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request,
+            customer_create_or_update_customer_request=customer_create_or_update_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -791,11 +791,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerCreateOrUpdateCustomerResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -812,7 +812,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_create_or_update_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest] = None,
+        customer_create_or_update_customer_request: Optional[CustomerCreateOrUpdateCustomerRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -832,8 +832,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request: IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
+        :param customer_create_or_update_customer_request:
+        :type customer_create_or_update_customer_request: CustomerCreateOrUpdateCustomerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -858,7 +858,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_create_or_update_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request,
+            customer_create_or_update_customer_request=customer_create_or_update_customer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -866,11 +866,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerCreateOrUpdateCustomerResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -882,7 +882,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_create_or_update_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request,
+        customer_create_or_update_customer_request,
         _request_auth,
         _content_type,
         _headers,
@@ -910,8 +910,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request
+        if customer_create_or_update_customer_request is not None:
+            _body_params = customer_create_or_update_customer_request
 
 
         # set the HTTP header `Accept`
@@ -963,7 +963,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_info_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest] = None,
+        customer_get_customer_info_request: Optional[CustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -976,15 +976,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse:
+    ) -> CustomerGetCustomerInfoResponse:
         """Get customer info.
 
         Get customer info by specified criterion.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
+        :param customer_get_customer_info_request:
+        :type customer_get_customer_info_request: CustomerGetCustomerInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1009,7 +1009,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request=iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request,
+            customer_get_customer_info_request=customer_get_customer_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1017,11 +1017,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCustomerInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1038,7 +1038,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_info_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest] = None,
+        customer_get_customer_info_request: Optional[CustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1051,15 +1051,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse]:
+    ) -> ApiResponse[CustomerGetCustomerInfoResponse]:
         """Get customer info.
 
         Get customer info by specified criterion.   > Restriction group: `Guests: info`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
+        :param customer_get_customer_info_request:
+        :type customer_get_customer_info_request: CustomerGetCustomerInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1084,7 +1084,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request=iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request,
+            customer_get_customer_info_request=customer_get_customer_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1092,11 +1092,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCustomerInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1113,7 +1113,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_info_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest] = None,
+        customer_get_customer_info_request: Optional[CustomerGetCustomerInfoRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1133,8 +1133,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request: IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
+        :param customer_get_customer_info_request:
+        :type customer_get_customer_info_request: CustomerGetCustomerInfoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1159,7 +1159,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_info_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request=iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request,
+            customer_get_customer_info_request=customer_get_customer_info_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1167,11 +1167,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerGetCustomerInfoResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1183,7 +1183,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_info_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request,
+        customer_get_customer_info_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1211,8 +1211,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request
+        if customer_get_customer_info_request is not None:
+            _body_params = customer_get_customer_info_request
 
 
         # set the HTTP header `Accept`
@@ -1264,7 +1264,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_program_add_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest] = None,
+        customer_add_customer_to_program_request: Optional[CustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1277,15 +1277,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse:
+    ) -> CustomerAddCustomerToProgramResponse:
         """Add customer to program.
 
         Add new customer for program.   > Restriction group: `Guests: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
+        :param customer_add_customer_to_program_request:
+        :type customer_add_customer_to_program_request: CustomerAddCustomerToProgramRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1310,7 +1310,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request=iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request,
+            customer_add_customer_to_program_request=customer_add_customer_to_program_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1318,11 +1318,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerAddCustomerToProgramResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1339,7 +1339,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_program_add_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest] = None,
+        customer_add_customer_to_program_request: Optional[CustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1352,15 +1352,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse]:
+    ) -> ApiResponse[CustomerAddCustomerToProgramResponse]:
         """Add customer to program.
 
         Add new customer for program.   > Restriction group: `Guests: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
+        :param customer_add_customer_to_program_request:
+        :type customer_add_customer_to_program_request: CustomerAddCustomerToProgramRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1385,7 +1385,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request=iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request,
+            customer_add_customer_to_program_request=customer_add_customer_to_program_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1393,11 +1393,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerAddCustomerToProgramResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1414,7 +1414,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_program_add_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest] = None,
+        customer_add_customer_to_program_request: Optional[CustomerAddCustomerToProgramRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1434,8 +1434,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request: IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
+        :param customer_add_customer_to_program_request:
+        :type customer_add_customer_to_program_request: CustomerAddCustomerToProgramRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1460,7 +1460,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_program_add_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request=iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request,
+            customer_add_customer_to_program_request=customer_add_customer_to_program_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1468,11 +1468,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerAddCustomerToProgramResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1484,7 +1484,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_program_add_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request,
+        customer_add_customer_to_program_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1512,8 +1512,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request
+        if customer_add_customer_to_program_request is not None:
+            _body_params = customer_add_customer_to_program_request
 
 
         # set the HTTP header `Accept`
@@ -1565,7 +1565,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_cancel_hold_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest] = None,
+        customer_cancel_hold_money_request: Optional[CustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1585,8 +1585,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
+        :param customer_cancel_hold_money_request:
+        :type customer_cancel_hold_money_request: CustomerCancelHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1611,7 +1611,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request,
+            customer_cancel_hold_money_request=customer_cancel_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1620,10 +1620,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1640,7 +1640,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_cancel_hold_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest] = None,
+        customer_cancel_hold_money_request: Optional[CustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1660,8 +1660,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
+        :param customer_cancel_hold_money_request:
+        :type customer_cancel_hold_money_request: CustomerCancelHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1686,7 +1686,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request,
+            customer_cancel_hold_money_request=customer_cancel_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1695,10 +1695,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1715,7 +1715,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_cancel_hold_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest] = None,
+        customer_cancel_hold_money_request: Optional[CustomerCancelHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1735,8 +1735,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
+        :param customer_cancel_hold_money_request:
+        :type customer_cancel_hold_money_request: CustomerCancelHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1761,7 +1761,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request,
+            customer_cancel_hold_money_request=customer_cancel_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1770,10 +1770,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1785,7 +1785,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_wallet_cancel_hold_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request,
+        customer_cancel_hold_money_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1813,8 +1813,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request
+        if customer_cancel_hold_money_request is not None:
+            _body_params = customer_cancel_hold_money_request
 
 
         # set the HTTP header `Accept`
@@ -1866,7 +1866,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_chargeoff_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1886,8 +1886,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1912,7 +1912,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1921,10 +1921,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1941,7 +1941,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_chargeoff_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1961,8 +1961,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1987,7 +1987,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1996,10 +1996,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2016,7 +2016,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_chargeoff_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2036,8 +2036,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2062,7 +2062,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_chargeoff_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2071,10 +2071,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2086,7 +2086,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_wallet_chargeoff_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+        customer_change_user_balance_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2114,8 +2114,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request
+        if customer_change_user_balance_request is not None:
+            _body_params = customer_change_user_balance_request
 
 
         # set the HTTP header `Accept`
@@ -2167,7 +2167,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_hold_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest] = None,
+        customer_hold_money_request: Optional[CustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2180,15 +2180,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse:
+    ) -> CustomerHoldMoneyResponse:
         """Hold money.
 
         Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.   > Restriction group: `Loyalty: wallets`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
+        :param customer_hold_money_request:
+        :type customer_hold_money_request: CustomerHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2213,7 +2213,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request,
+            customer_hold_money_request=customer_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2221,11 +2221,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerHoldMoneyResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2242,7 +2242,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_hold_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest] = None,
+        customer_hold_money_request: Optional[CustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2255,15 +2255,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse]:
+    ) -> ApiResponse[CustomerHoldMoneyResponse]:
         """Hold money.
 
         Hold customer's money in loyalty program. Payment will be process on POS during processing of an order.   > Restriction group: `Loyalty: wallets`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
+        :param customer_hold_money_request:
+        :type customer_hold_money_request: CustomerHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2288,7 +2288,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request,
+            customer_hold_money_request=customer_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2296,11 +2296,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerHoldMoneyResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2317,7 +2317,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_hold_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest] = None,
+        customer_hold_money_request: Optional[CustomerHoldMoneyRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2337,8 +2337,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request: IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
+        :param customer_hold_money_request:
+        :type customer_hold_money_request: CustomerHoldMoneyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2363,7 +2363,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_hold_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request=iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request,
+            customer_hold_money_request=customer_hold_money_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2371,11 +2371,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerHoldMoneyResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2387,7 +2387,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_wallet_hold_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request,
+        customer_hold_money_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2415,8 +2415,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request
+        if customer_hold_money_request is not None:
+            _body_params = customer_hold_money_request
 
 
         # set the HTTP header `Accept`
@@ -2468,7 +2468,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_topup_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2488,8 +2488,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2514,7 +2514,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2523,10 +2523,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2543,7 +2543,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_topup_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2563,8 +2563,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2589,7 +2589,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2598,10 +2598,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2618,7 +2618,7 @@ class CustomersApi:
     async def loyalty_iiko_customer_wallet_topup_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest] = None,
+        customer_change_user_balance_request: Optional[CustomerChangeUserBalanceRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2638,8 +2638,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request: IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
+        :param customer_change_user_balance_request:
+        :type customer_change_user_balance_request: CustomerChangeUserBalanceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2664,7 +2664,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_customer_wallet_topup_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request=iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+            customer_change_user_balance_request=customer_change_user_balance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2673,10 +2673,10 @@ class CustomersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2688,7 +2688,7 @@ class CustomersApi:
     def _loyalty_iiko_customer_wallet_topup_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request,
+        customer_change_user_balance_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2716,8 +2716,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request
+        if customer_change_user_balance_request is not None:
+            _body_params = customer_change_user_balance_request
 
 
         # set the HTTP header `Accept`
@@ -2769,7 +2769,7 @@ class CustomersApi:
     async def loyalty_iiko_delete_customers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest] = None,
+        customer_delete_customers_request: Optional[CustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2782,15 +2782,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse:
+    ) -> CustomerDeleteCustomersResponse:
         """Logical deletion of customers.
 
         Mark customers as deleted.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
+        :param customer_delete_customers_request:
+        :type customer_delete_customers_request: CustomerDeleteCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2815,7 +2815,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request,
+            customer_delete_customers_request=customer_delete_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2823,11 +2823,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerDeleteCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2844,7 +2844,7 @@ class CustomersApi:
     async def loyalty_iiko_delete_customers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest] = None,
+        customer_delete_customers_request: Optional[CustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2857,15 +2857,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse]:
+    ) -> ApiResponse[CustomerDeleteCustomersResponse]:
         """Logical deletion of customers.
 
         Mark customers as deleted.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
+        :param customer_delete_customers_request:
+        :type customer_delete_customers_request: CustomerDeleteCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2890,7 +2890,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request,
+            customer_delete_customers_request=customer_delete_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2898,11 +2898,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerDeleteCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2919,7 +2919,7 @@ class CustomersApi:
     async def loyalty_iiko_delete_customers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest] = None,
+        customer_delete_customers_request: Optional[CustomerDeleteCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2939,8 +2939,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request: IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
+        :param customer_delete_customers_request:
+        :type customer_delete_customers_request: CustomerDeleteCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2965,7 +2965,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_delete_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request,
+            customer_delete_customers_request=customer_delete_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2973,11 +2973,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerDeleteCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2989,7 +2989,7 @@ class CustomersApi:
     def _loyalty_iiko_delete_customers_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request,
+        customer_delete_customers_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3017,8 +3017,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request
+        if customer_delete_customers_request is not None:
+            _body_params = customer_delete_customers_request
 
 
         # set the HTTP header `Accept`
@@ -3070,7 +3070,7 @@ class CustomersApi:
     async def loyalty_iiko_get_counters_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest] = None,
+        loyalty_result_get_counters_request: Optional[LoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3083,15 +3083,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse:
+    ) -> LoyaltyResultGetCountersResponse:
         """Get counters.
 
         Get customer orders count and sum for different period.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
+        :param loyalty_result_get_counters_request:
+        :type loyalty_result_get_counters_request: LoyaltyResultGetCountersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3116,7 +3116,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request,
+            loyalty_result_get_counters_request=loyalty_result_get_counters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3124,11 +3124,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCountersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3145,7 +3145,7 @@ class CustomersApi:
     async def loyalty_iiko_get_counters_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest] = None,
+        loyalty_result_get_counters_request: Optional[LoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3158,15 +3158,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse]:
+    ) -> ApiResponse[LoyaltyResultGetCountersResponse]:
         """Get counters.
 
         Get customer orders count and sum for different period.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
+        :param loyalty_result_get_counters_request:
+        :type loyalty_result_get_counters_request: LoyaltyResultGetCountersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3191,7 +3191,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request,
+            loyalty_result_get_counters_request=loyalty_result_get_counters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3199,11 +3199,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCountersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3220,7 +3220,7 @@ class CustomersApi:
     async def loyalty_iiko_get_counters_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: Optional[IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest] = None,
+        loyalty_result_get_counters_request: Optional[LoyaltyResultGetCountersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3240,8 +3240,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request:
-        :type iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request: IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
+        :param loyalty_result_get_counters_request:
+        :type loyalty_result_get_counters_request: LoyaltyResultGetCountersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3266,7 +3266,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_get_counters_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request=iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request,
+            loyalty_result_get_counters_request=loyalty_result_get_counters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3274,11 +3274,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "LoyaltyResultGetCountersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3290,7 +3290,7 @@ class CustomersApi:
     def _loyalty_iiko_get_counters_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request,
+        loyalty_result_get_counters_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3318,8 +3318,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request
+        if loyalty_result_get_counters_request is not None:
+            _body_params = loyalty_result_get_counters_request
 
 
         # set the HTTP header `Accept`
@@ -3371,7 +3371,7 @@ class CustomersApi:
     async def loyalty_iiko_restore_customers_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest] = None,
+        customer_restore_customers_request: Optional[CustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3384,15 +3384,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse:
+    ) -> CustomerRestoreCustomersResponse:
         """Logical recovery of customers.
 
         Removing deletion flags for customers.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
+        :param customer_restore_customers_request:
+        :type customer_restore_customers_request: CustomerRestoreCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3417,7 +3417,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request,
+            customer_restore_customers_request=customer_restore_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3425,11 +3425,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerRestoreCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3446,7 +3446,7 @@ class CustomersApi:
     async def loyalty_iiko_restore_customers_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest] = None,
+        customer_restore_customers_request: Optional[CustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3459,15 +3459,15 @@ class CustomersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse]:
+    ) -> ApiResponse[CustomerRestoreCustomersResponse]:
         """Logical recovery of customers.
 
         Removing deletion flags for customers.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
+        :param customer_restore_customers_request:
+        :type customer_restore_customers_request: CustomerRestoreCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3492,7 +3492,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request,
+            customer_restore_customers_request=customer_restore_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3500,11 +3500,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerRestoreCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3521,7 +3521,7 @@ class CustomersApi:
     async def loyalty_iiko_restore_customers_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: Optional[IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest] = None,
+        customer_restore_customers_request: Optional[CustomerRestoreCustomersRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3541,8 +3541,8 @@ class CustomersApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request:
-        :type iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request: IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
+        :param customer_restore_customers_request:
+        :type customer_restore_customers_request: CustomerRestoreCustomersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3567,7 +3567,7 @@ class CustomersApi:
 
         _param = self._loyalty_iiko_restore_customers_post_serialize(
             timeout=timeout,
-            iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request=iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request,
+            customer_restore_customers_request=customer_restore_customers_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3575,11 +3575,11 @@ class CustomersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CustomerRestoreCustomersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3591,7 +3591,7 @@ class CustomersApi:
     def _loyalty_iiko_restore_customers_post_serialize(
         self,
         timeout,
-        iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request,
+        customer_restore_customers_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3619,8 +3619,8 @@ class CustomersApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request is not None:
-            _body_params = iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request
+        if customer_restore_customers_request is not None:
+            _body_params = customer_restore_customers_request
 
 
         # set the HTTP header `Accept`

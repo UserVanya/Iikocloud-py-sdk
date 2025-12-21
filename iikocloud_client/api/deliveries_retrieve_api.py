@@ -19,14 +19,14 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_filter_request import DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_phone_request import DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_status_request import DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+from iikocloud_client.models.deliveries_request_orders_by_id_request import DeliveriesRequestOrdersByIdRequest
+from iikocloud_client.models.deliveries_request_orders_by_revision_request import DeliveriesRequestOrdersByRevisionRequest
+from iikocloud_client.models.deliveries_request_orders_history_by_delivery_date_and_phone_request import DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_response_orders_response import DeliveriesResponseOrdersResponse
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -50,7 +50,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_phone_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -63,15 +63,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse:
+    ) -> DeliveriesResponseOrdersWithRevisionResponse:
         """Retrieve list of orders by telephone number, dates and revision.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_by_delivery_date_and_phone_request: DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -96,7 +96,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
+            deliveries_request_orders_by_delivery_date_and_phone_request=deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -104,11 +104,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -125,7 +125,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_phone_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -138,15 +138,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersWithRevisionResponse]:
         """Retrieve list of orders by telephone number, dates and revision.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_by_delivery_date_and_phone_request: DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -171,7 +171,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
+            deliveries_request_orders_by_delivery_date_and_phone_request=deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,11 +179,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -200,7 +200,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_phone_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -220,8 +220,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_by_delivery_date_and_phone_request: DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -246,7 +246,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
+            deliveries_request_orders_by_delivery_date_and_phone_request=deliveries_request_orders_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -254,11 +254,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -270,7 +270,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_by_delivery_date_and_phone_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request,
+        deliveries_request_orders_by_delivery_date_and_phone_request,
         _request_auth,
         _content_type,
         _headers,
@@ -298,8 +298,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request
+        if deliveries_request_orders_by_delivery_date_and_phone_request is not None:
+            _body_params = deliveries_request_orders_by_delivery_date_and_phone_request
 
 
         # set the HTTP header `Accept`
@@ -351,7 +351,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_source_key_and_filter_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_filter_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -364,15 +364,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse:
+    ) -> DeliveriesResponseOrdersWithRevisionResponse:
         """Search orders by search text and additional filters (date, problem, statuses and other).
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+        :param deliveries_request_orders_by_delivery_date_and_filter_request:
+        :type deliveries_request_orders_by_delivery_date_and_filter_request: DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -397,7 +397,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
+            deliveries_request_orders_by_delivery_date_and_filter_request=deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -405,11 +405,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -426,7 +426,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_source_key_and_filter_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_filter_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -439,15 +439,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersWithRevisionResponse]:
         """Search orders by search text and additional filters (date, problem, statuses and other).
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+        :param deliveries_request_orders_by_delivery_date_and_filter_request:
+        :type deliveries_request_orders_by_delivery_date_and_filter_request: DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -472,7 +472,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
+            deliveries_request_orders_by_delivery_date_and_filter_request=deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -480,11 +480,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -501,7 +501,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_source_key_and_filter_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_filter_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndFilterRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -521,8 +521,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+        :param deliveries_request_orders_by_delivery_date_and_filter_request:
+        :type deliveries_request_orders_by_delivery_date_and_filter_request: DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -547,7 +547,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
+            deliveries_request_orders_by_delivery_date_and_filter_request=deliveries_request_orders_by_delivery_date_and_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -555,11 +555,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -571,7 +571,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_by_delivery_date_and_source_key_and_filter_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request,
+        deliveries_request_orders_by_delivery_date_and_filter_request,
         _request_auth,
         _content_type,
         _headers,
@@ -599,8 +599,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request
+        if deliveries_request_orders_by_delivery_date_and_filter_request is not None:
+            _body_params = deliveries_request_orders_by_delivery_date_and_filter_request
 
 
         # set the HTTP header `Accept`
@@ -652,7 +652,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_status_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,15 +665,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse:
+    ) -> DeliveriesResponseOrdersWithRevisionResponse:
         """Retrieve list of orders by statuses and dates.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+        :param deliveries_request_orders_by_delivery_date_and_status_request:
+        :type deliveries_request_orders_by_delivery_date_and_status_request: DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -698,7 +698,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
+            deliveries_request_orders_by_delivery_date_and_status_request=deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -706,11 +706,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -727,7 +727,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_status_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,15 +740,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersWithRevisionResponse]:
         """Retrieve list of orders by statuses and dates.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+        :param deliveries_request_orders_by_delivery_date_and_status_request:
+        :type deliveries_request_orders_by_delivery_date_and_status_request: DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -773,7 +773,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
+            deliveries_request_orders_by_delivery_date_and_status_request=deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -781,11 +781,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -802,7 +802,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_delivery_date_and_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
+        deliveries_request_orders_by_delivery_date_and_status_request: Optional[DeliveriesRequestOrdersByDeliveryDateAndStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -822,8 +822,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+        :param deliveries_request_orders_by_delivery_date_and_status_request:
+        :type deliveries_request_orders_by_delivery_date_and_status_request: DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -848,7 +848,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_delivery_date_and_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
+            deliveries_request_orders_by_delivery_date_and_status_request=deliveries_request_orders_by_delivery_date_and_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -856,11 +856,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -872,7 +872,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_by_delivery_date_and_status_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request,
+        deliveries_request_orders_by_delivery_date_and_status_request,
         _request_auth,
         _content_type,
         _headers,
@@ -900,8 +900,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request
+        if deliveries_request_orders_by_delivery_date_and_status_request is not None:
+            _body_params = deliveries_request_orders_by_delivery_date_and_status_request
 
 
         # set the HTTP header `Accept`
@@ -953,7 +953,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
+        deliveries_request_orders_by_id_request: Optional[DeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -966,15 +966,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse:
+    ) -> DeliveriesResponseOrdersResponse:
         """Retrieve orders by IDs.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
+        :param deliveries_request_orders_by_id_request:
+        :type deliveries_request_orders_by_id_request: DeliveriesRequestOrdersByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -999,7 +999,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
+            deliveries_request_orders_by_id_request=deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1007,11 +1007,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1028,7 +1028,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
+        deliveries_request_orders_by_id_request: Optional[DeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1041,15 +1041,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersResponse]:
         """Retrieve orders by IDs.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
+        :param deliveries_request_orders_by_id_request:
+        :type deliveries_request_orders_by_id_request: DeliveriesRequestOrdersByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1074,7 +1074,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
+            deliveries_request_orders_by_id_request=deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1082,11 +1082,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1103,7 +1103,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest] = None,
+        deliveries_request_orders_by_id_request: Optional[DeliveriesRequestOrdersByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1123,8 +1123,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
+        :param deliveries_request_orders_by_id_request:
+        :type deliveries_request_orders_by_id_request: DeliveriesRequestOrdersByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1149,7 +1149,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
+            deliveries_request_orders_by_id_request=deliveries_request_orders_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1157,11 +1157,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1173,7 +1173,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_by_id_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request,
+        deliveries_request_orders_by_id_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1201,8 +1201,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request
+        if deliveries_request_orders_by_id_request is not None:
+            _body_params = deliveries_request_orders_by_id_request
 
 
         # set the HTTP header `Accept`
@@ -1254,7 +1254,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_revision_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
+        deliveries_request_orders_by_revision_request: Optional[DeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1267,15 +1267,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse:
+    ) -> DeliveriesResponseOrdersWithRevisionResponse:
         """Retrieve list of orders changed from the time revision was passed.
 
            > Restriction group: `Orders: receiving by revision`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
+        :param deliveries_request_orders_by_revision_request:
+        :type deliveries_request_orders_by_revision_request: DeliveriesRequestOrdersByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1300,7 +1300,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
+            deliveries_request_orders_by_revision_request=deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1308,11 +1308,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1329,7 +1329,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_revision_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
+        deliveries_request_orders_by_revision_request: Optional[DeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1342,15 +1342,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersWithRevisionResponse]:
         """Retrieve list of orders changed from the time revision was passed.
 
            > Restriction group: `Orders: receiving by revision`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
+        :param deliveries_request_orders_by_revision_request:
+        :type deliveries_request_orders_by_revision_request: DeliveriesRequestOrdersByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1375,7 +1375,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
+            deliveries_request_orders_by_revision_request=deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1383,11 +1383,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1404,7 +1404,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_by_revision_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest] = None,
+        deliveries_request_orders_by_revision_request: Optional[DeliveriesRequestOrdersByRevisionRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1424,8 +1424,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
+        :param deliveries_request_orders_by_revision_request:
+        :type deliveries_request_orders_by_revision_request: DeliveriesRequestOrdersByRevisionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1450,7 +1450,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_by_revision_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
+            deliveries_request_orders_by_revision_request=deliveries_request_orders_by_revision_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1458,11 +1458,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1474,7 +1474,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_by_revision_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request,
+        deliveries_request_orders_by_revision_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1502,8 +1502,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request
+        if deliveries_request_orders_by_revision_request is not None:
+            _body_params = deliveries_request_orders_by_revision_request
 
 
         # set the HTTP header `Accept`
@@ -1555,7 +1555,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_history_by_delivery_date_and_phone_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1568,15 +1568,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse:
+    ) -> DeliveriesResponseOrdersWithRevisionResponse:
         """Retrieve list of history orders by telephone number, dates and revision.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_history_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_history_by_delivery_date_and_phone_request: DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1601,7 +1601,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
+            deliveries_request_orders_history_by_delivery_date_and_phone_request=deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1609,11 +1609,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1630,7 +1630,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_history_by_delivery_date_and_phone_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1643,15 +1643,15 @@ class DeliveriesRetrieveApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrdersWithRevisionResponse]:
         """Retrieve list of history orders by telephone number, dates and revision.
 
            > Restriction group: `Orders: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_history_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_history_by_delivery_date_and_phone_request: DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1676,7 +1676,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
+            deliveries_request_orders_history_by_delivery_date_and_phone_request=deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1684,11 +1684,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1705,7 +1705,7 @@ class DeliveriesRetrieveApi:
     async def deliveries_history_by_delivery_date_and_phone_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
+        deliveries_request_orders_history_by_delivery_date_and_phone_request: Optional[DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1725,8 +1725,8 @@ class DeliveriesRetrieveApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request:
-        :type iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request: IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+        :param deliveries_request_orders_history_by_delivery_date_and_phone_request:
+        :type deliveries_request_orders_history_by_delivery_date_and_phone_request: DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1751,7 +1751,7 @@ class DeliveriesRetrieveApi:
 
         _param = self._deliveries_history_by_delivery_date_and_phone_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
+            deliveries_request_orders_history_by_delivery_date_and_phone_request=deliveries_request_orders_history_by_delivery_date_and_phone_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1759,11 +1759,11 @@ class DeliveriesRetrieveApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrdersWithRevisionResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1775,7 +1775,7 @@ class DeliveriesRetrieveApi:
     def _deliveries_history_by_delivery_date_and_phone_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request,
+        deliveries_request_orders_history_by_delivery_date_and_phone_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1803,8 +1803,8 @@ class DeliveriesRetrieveApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request
+        if deliveries_request_orders_history_by_delivery_date_and_phone_request is not None:
+            _body_params = deliveries_request_orders_history_by_delivery_date_and_phone_request
 
 
         # set the HTTP header `Accept`

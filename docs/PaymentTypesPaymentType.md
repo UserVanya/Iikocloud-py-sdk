@@ -1,0 +1,41 @@
+# PaymentTypesPaymentType
+
+DTO for payment type in iikoRMS
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **UUID** | Payment type ID | [optional] 
+**code** | **str** | Payment type code | [optional] 
+**name** | **str** | Payment type name | [optional] 
+**comment** | **str** | Payment type comment | [optional] 
+**combinable** | **bool** | Combinability attribute | [optional] 
+**external_revision** | **int** | External system revision number. | [optional] 
+**applicable_marketing_campaigns** | **List[UUID]** | Array of marketing campaigns associated with LoyaltyApp payment type applicable to this organization. | 
+**is_deleted** | **bool** | IsDeleted attribute of payment type. | [optional] 
+**print_cheque** | **bool** | If true, payment type is fiscal and bill will be printed. | [optional] 
+**payment_processing_type** | [**PaymentTypesPaymentProcessingType**](PaymentTypesPaymentProcessingType.md) | Describes operation processing type. | [optional] 
+**payment_type_kind** | [**PaymentTypesPaymentTypeKind**](PaymentTypesPaymentTypeKind.md) | Payment type category. | [optional] 
+**terminal_groups** | [**List[TerminalsTerminalGroup]**](TerminalsTerminalGroup.md) | Terminal groups where this payment type is available. | 
+
+## Example
+
+```python
+from iikocloud_client.models.payment_types_payment_type import PaymentTypesPaymentType
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PaymentTypesPaymentType from a JSON string
+payment_types_payment_type_instance = PaymentTypesPaymentType.from_json(json)
+# print the JSON string representation of the object
+print(PaymentTypesPaymentType.to_json())
+
+# convert the object into a dict
+payment_types_payment_type_dict = payment_types_payment_type_instance.to_dict()
+# create an instance of PaymentTypesPaymentType from a dict
+payment_types_payment_type_from_dict = PaymentTypesPaymentType.from_dict(payment_types_payment_type_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

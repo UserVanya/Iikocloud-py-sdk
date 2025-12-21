@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_update_order_payments_post**
-> IikoTransportPublicApiContractsCommonCorrelationIdResponse deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+> CommonCorrelationIdResponse deliveries_update_order_payments_post(timeout=timeout, deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request)
 
 Update order payment details.
 
@@ -25,8 +25,8 @@ Update order payment details.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.deliveries_request_update_order_payments_request import DeliveriesRequestUpdateOrderPaymentsRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -51,11 +51,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeprecatedApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest() # IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
+    deliveries_request_update_order_payments_request = iikocloud_client.DeliveriesRequestUpdateOrderPaymentsRequest() # DeliveriesRequestUpdateOrderPaymentsRequest |  (optional)
 
     try:
         # Update order payment details.
-        api_response = await api_instance.deliveries_update_order_payments_post(timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request=iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request)
+        api_response = await api_instance.deliveries_update_order_payments_post(timeout=timeout, deliveries_request_update_order_payments_request=deliveries_request_update_order_payments_request)
         print("The response of DeprecatedApi->deliveries_update_order_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,11 +70,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request** | [**IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest**](IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest.md)|  | [optional] 
+ **deliveries_request_update_order_payments_request** | [**DeliveriesRequestUpdateOrderPaymentsRequest**](DeliveriesRequestUpdateOrderPaymentsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+[**CommonCorrelationIdResponse**](CommonCorrelationIdResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **organizations_get**
-> IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse organizations_get(timeout=timeout)
+> OrganizationsGetSimpleOrganizationsResponse organizations_get(timeout=timeout)
 
 Returns organizations available to api-login user.
 
@@ -112,7 +112,7 @@ Returns organizations available to api-login user.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_simple_organizations_response import IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse
+from iikocloud_client.models.organizations_get_simple_organizations_response import OrganizationsGetSimpleOrganizationsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse**](IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse.md)
+[**OrganizationsGetSimpleOrganizationsResponse**](OrganizationsGetSimpleOrganizationsResponse.md)
 
 ### Authorization
 

@@ -1,0 +1,33 @@
+# DeliveriesRequestUpdateOrderChangePaymentsRequest
+
+Change order's payments request.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**order_id** | **UUID** | Order ID. | 
+**payments** | [**List[DeliveriesRequestCreateOrderPayment]**](DeliveriesRequestCreateOrderPayment.md) | Order payments. | 
+**tips** | [**List[DeliveriesRequestCreateOrderTipsPayment]**](DeliveriesRequestCreateOrderTipsPayment.md) | Order tips. | [optional] 
+
+## Example
+
+```python
+from iikocloud_client.models.deliveries_request_update_order_change_payments_request import DeliveriesRequestUpdateOrderChangePaymentsRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DeliveriesRequestUpdateOrderChangePaymentsRequest from a JSON string
+deliveries_request_update_order_change_payments_request_instance = DeliveriesRequestUpdateOrderChangePaymentsRequest.from_json(json)
+# print the JSON string representation of the object
+print(DeliveriesRequestUpdateOrderChangePaymentsRequest.to_json())
+
+# convert the object into a dict
+deliveries_request_update_order_change_payments_request_dict = deliveries_request_update_order_change_payments_request_instance.to_dict()
+# create an instance of DeliveriesRequestUpdateOrderChangePaymentsRequest from a dict
+deliveries_request_update_order_change_payments_request_from_dict = DeliveriesRequestUpdateOrderChangePaymentsRequest.from_dict(deliveries_request_update_order_change_payments_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

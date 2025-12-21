@@ -19,8 +19,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_send_notification_request import IikoTransportPublicApiContractsNotificationsSendNotificationRequest
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.notifications_send_notification_request import NotificationsSendNotificationRequest
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -44,7 +44,7 @@ class NotificationsApi:
     async def notifications_send_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_notifications_send_notification_request: Optional[IikoTransportPublicApiContractsNotificationsSendNotificationRequest] = None,
+        notifications_send_notification_request: Optional[NotificationsSendNotificationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,15 +57,15 @@ class NotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Send notification to external systems.
 
            > Restriction group: `Notifications`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_notifications_send_notification_request:
-        :type iiko_transport_public_api_contracts_notifications_send_notification_request: IikoTransportPublicApiContractsNotificationsSendNotificationRequest
+        :param notifications_send_notification_request:
+        :type notifications_send_notification_request: NotificationsSendNotificationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class NotificationsApi:
 
         _param = self._notifications_send_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request,
+            notifications_send_notification_request=notifications_send_notification_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,11 +98,11 @@ class NotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -119,7 +119,7 @@ class NotificationsApi:
     async def notifications_send_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_notifications_send_notification_request: Optional[IikoTransportPublicApiContractsNotificationsSendNotificationRequest] = None,
+        notifications_send_notification_request: Optional[NotificationsSendNotificationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,15 +132,15 @@ class NotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Send notification to external systems.
 
            > Restriction group: `Notifications`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_notifications_send_notification_request:
-        :type iiko_transport_public_api_contracts_notifications_send_notification_request: IikoTransportPublicApiContractsNotificationsSendNotificationRequest
+        :param notifications_send_notification_request:
+        :type notifications_send_notification_request: NotificationsSendNotificationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -165,7 +165,7 @@ class NotificationsApi:
 
         _param = self._notifications_send_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request,
+            notifications_send_notification_request=notifications_send_notification_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -173,11 +173,11 @@ class NotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -194,7 +194,7 @@ class NotificationsApi:
     async def notifications_send_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_notifications_send_notification_request: Optional[IikoTransportPublicApiContractsNotificationsSendNotificationRequest] = None,
+        notifications_send_notification_request: Optional[NotificationsSendNotificationRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,8 +214,8 @@ class NotificationsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_notifications_send_notification_request:
-        :type iiko_transport_public_api_contracts_notifications_send_notification_request: IikoTransportPublicApiContractsNotificationsSendNotificationRequest
+        :param notifications_send_notification_request:
+        :type notifications_send_notification_request: NotificationsSendNotificationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -240,7 +240,7 @@ class NotificationsApi:
 
         _param = self._notifications_send_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_notifications_send_notification_request=iiko_transport_public_api_contracts_notifications_send_notification_request,
+            notifications_send_notification_request=notifications_send_notification_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -248,11 +248,11 @@ class NotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -264,7 +264,7 @@ class NotificationsApi:
     def _notifications_send_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_notifications_send_notification_request,
+        notifications_send_notification_request,
         _request_auth,
         _content_type,
         _headers,
@@ -292,8 +292,8 @@ class NotificationsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_notifications_send_notification_request is not None:
-            _body_params = iiko_transport_public_api_contracts_notifications_send_notification_request
+        if notifications_send_notification_request is not None:
+            _body_params = notifications_send_notification_request
 
 
         # set the HTTP header `Accept`

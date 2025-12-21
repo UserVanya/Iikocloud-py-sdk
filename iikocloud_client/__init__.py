@@ -50,11 +50,26 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AddressCitiesRequest",
+    "AddressCitiesResponse",
+    "AddressCity",
+    "AddressHintsAddressHintsServiceType",
+    "AddressRegion",
+    "AddressRegionsRequest",
+    "AddressRegionsResponse",
+    "AddressStreet",
+    "AddressStreetById",
+    "AddressStreetsByCityRequest",
+    "AddressStreetsByIdRequest",
+    "AddressStreetsByIdResponse",
+    "AddressStreetsResponse",
     "AllergenGroupDto",
     "AllergenGroupDto2",
     "AllergenGroupDto3",
     "AllergenGroupDto4",
     "Api2MenuByIdPost200Response",
+    "AuthGetAccessTokenRequest",
+    "AuthGetAccessTokenResponse",
     "BarcodeDto",
     "BarcodeDto2",
     "BarcodeDto3",
@@ -66,6 +81,9 @@ __all__ = [
     "ButtonImageDto",
     "ButtonImageDto2",
     "ButtonImageDto3",
+    "CancelCausesCancelCause",
+    "CancelCausesCancelCausesRequest",
+    "CancelCausesCancelCausesResponse",
     "ComboCategoryDto",
     "ComboCategoryDto2",
     "ComboCategoryDto3",
@@ -90,12 +108,255 @@ __all__ = [
     "ComboSizeDto",
     "ComboSizeDto2",
     "ComboSizeDto3",
+    "CommandsErrorCommandStatus",
+    "CommandsGetCommandStatusRequest",
+    "CommandsGetCommandStatusResponse",
+    "CommandsInProgressCommandStatus",
+    "CommandsSuccessCommandStatus",
+    "CommonCorrelationIdResponse",
+    "CommonExternalData",
+    "CommonGetByOrganizationIdRequest",
+    "CommonPriceCategory",
+    "CommonSortDirection",
+    "CustomerAddCustomerToProgramRequest",
+    "CustomerAddCustomerToProgramResponse",
+    "CustomerAddMagnetCardRequest",
+    "CustomerCancelHoldMoneyRequest",
+    "CustomerChangeCategoryForCustomerRequest",
+    "CustomerChangeUserBalanceRequest",
+    "CustomerCreateOrUpdateCustomerRequest",
+    "CustomerCreateOrUpdateCustomerResponse",
+    "CustomerDeleteCustomersRequest",
+    "CustomerDeleteCustomersResponse",
+    "CustomerDeleteMagnetCardRequest",
+    "CustomerGetCategoriesRequest",
+    "CustomerGetCategoriesResponse",
+    "CustomerGetCustomerInfoByCardNumberRequest",
+    "CustomerGetCustomerInfoByCardTrackRequest",
+    "CustomerGetCustomerInfoByEmailRequest",
+    "CustomerGetCustomerInfoByIdRequest",
+    "CustomerGetCustomerInfoByPhoneRequest",
+    "CustomerGetCustomerInfoRequest",
+    "CustomerGetCustomerInfoResponse",
+    "CustomerGuestBalanceInfo",
+    "CustomerGuestCardInfo",
+    "CustomerGuestCategoryShortInfo",
+    "CustomerHoldMoneyRequest",
+    "CustomerHoldMoneyResponse",
+    "CustomerIikoNetUserSex",
+    "CustomerPersonalDataConsentStatus",
+    "CustomerRestoreCustomersRequest",
+    "CustomerRestoreCustomersResponse",
     "CustomerTagGroup",
     "CustomerTagGroup2",
     "CustomerTagGroup3",
     "CustomerTagItem",
     "CustomerTagItem2",
     "CustomerTagItem3",
+    "DeliveriesCommonCardPaymentAdditionalData",
+    "DeliveriesCommonChequeAdditionalInfo",
+    "DeliveriesCommonCoordinates",
+    "DeliveriesCommonDeliveryStatus",
+    "DeliveriesCommonDeliveryStatusForUpdate",
+    "DeliveriesCommonExternalPaymentAdditionalData",
+    "DeliveriesCommonGender",
+    "DeliveriesCommonIikoCardSearchScope",
+    "DeliveriesCommonLoyaltyCardPaymentAdditionalData",
+    "DeliveriesCommonOrderServiceType",
+    "DeliveriesCommonPaymentAdditionalData",
+    "DeliveriesCommonPaymentTypeKind",
+    "DeliveriesDraftsCommitDraftRequest",
+    "DeliveriesDraftsCreateDraftRequest",
+    "DeliveriesDraftsCreateOrSaveDraftResponse",
+    "DeliveriesDraftsDeleteDraftRequest",
+    "DeliveriesDraftsDeliveryOrderDraft",
+    "DeliveriesDraftsFilterDraftsRequest",
+    "DeliveriesDraftsFilterDraftsResponse",
+    "DeliveriesDraftsGetDraftRequest",
+    "DeliveriesDraftsGetDraftResponse",
+    "DeliveriesDraftsLockOrUnlockDraftRequest",
+    "DeliveriesDraftsOrderDraft",
+    "DeliveriesDraftsOrderDraftSortProperty",
+    "DeliveriesDraftsSaveDraftRequest",
+    "DeliveriesRequestAddOrderItemsRequest",
+    "DeliveriesRequestCancelOrderRequest",
+    "DeliveriesRequestCancelTableOrderRequest",
+    "DeliveriesRequestChangeDriverInfoRequest",
+    "DeliveriesRequestCloseDeliveryOrderRequest",
+    "DeliveriesRequestCloseTableOrderRequest",
+    "DeliveriesRequestCreateOrderAddress",
+    "DeliveriesRequestCreateOrderAddressCity",
+    "DeliveriesRequestCreateOrderAddressLegacy",
+    "DeliveriesRequestCreateOrderAnonymousCustomer",
+    "DeliveriesRequestCreateOrderCardPayment",
+    "DeliveriesRequestCreateOrderCardTipsPayment",
+    "DeliveriesRequestCreateOrderCashPayment",
+    "DeliveriesRequestCreateOrderCashTipsPayment",
+    "DeliveriesRequestCreateOrderCombo",
+    "DeliveriesRequestCreateOrderComboItemInformation",
+    "DeliveriesRequestCreateOrderCompoundOrderItem",
+    "DeliveriesRequestCreateOrderCompoundOrderItemComponent",
+    "DeliveriesRequestCreateOrderCustomer",
+    "DeliveriesRequestCreateOrderDeliveryOrder",
+    "DeliveriesRequestCreateOrderDeliveryPoint",
+    "DeliveriesRequestCreateOrderDiscount",
+    "DeliveriesRequestCreateOrderDiscountCard",
+    "DeliveriesRequestCreateOrderDiscountsInfo",
+    "DeliveriesRequestCreateOrderDynamicDiscount",
+    "DeliveriesRequestCreateOrderExternalData",
+    "DeliveriesRequestCreateOrderExternalPayment",
+    "DeliveriesRequestCreateOrderExternalTipsPayment",
+    "DeliveriesRequestCreateOrderGuests",
+    "DeliveriesRequestCreateOrderIikoCardDiscount",
+    "DeliveriesRequestCreateOrderIikoCardDiscountItem",
+    "DeliveriesRequestCreateOrderLoyaltyCardPayment",
+    "DeliveriesRequestCreateOrderLoyaltyInfo",
+    "DeliveriesRequestCreateOrderModifier",
+    "DeliveriesRequestCreateOrderOrder",
+    "DeliveriesRequestCreateOrderOrderItem",
+    "DeliveriesRequestCreateOrderOrderServiceType",
+    "DeliveriesRequestCreateOrderPayment",
+    "DeliveriesRequestCreateOrderProductOrderItem",
+    "DeliveriesRequestCreateOrderRegularCustomer",
+    "DeliveriesRequestCreateOrderRequest",
+    "DeliveriesRequestCreateOrderRmsDiscount",
+    "DeliveriesRequestCreateOrderStreet",
+    "DeliveriesRequestCreateOrderTipsPayment",
+    "DeliveriesRequestOrderSortProperty",
+    "DeliveriesRequestOrdersByDeliveryDateAndFilterRequest",
+    "DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest",
+    "DeliveriesRequestOrdersByDeliveryDateAndStatusRequest",
+    "DeliveriesRequestOrdersByIdRequest",
+    "DeliveriesRequestOrdersByRevisionRequest",
+    "DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest",
+    "DeliveriesRequestPrintBillRequest",
+    "DeliveriesRequestPrintDeliveryBillRequest",
+    "DeliveriesRequestUpdateDeliveryStatusRequest",
+    "DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest",
+    "DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest",
+    "DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest",
+    "DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest",
+    "DeliveriesRequestUpdateOrderChangeDeliveryPointRequest",
+    "DeliveriesRequestUpdateOrderChangeExternalDataRequest",
+    "DeliveriesRequestUpdateOrderChangePaymentsRequest",
+    "DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient",
+    "DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier",
+    "DeliveriesRequestUpdateOrderChangeServiceTypeRequest",
+    "DeliveriesRequestUpdateOrderConfirmDeliveryRequest",
+    "DeliveriesRequestUpdateOrderCourierRequest",
+    "DeliveriesRequestUpdateOrderOrderPaymentItem",
+    "DeliveriesRequestUpdateOrderPaymentsRequest",
+    "DeliveriesRequestUpdateOrderProblemRequest",
+    "DeliveriesRequestUpdateTrackingLinkRequest",
+    "DeliveriesResponseOrderAddress",
+    "DeliveriesResponseOrderAnonymousCustomer",
+    "DeliveriesResponseOrderCancelCause",
+    "DeliveriesResponseOrderCancelInfo",
+    "DeliveriesResponseOrderCity",
+    "DeliveriesResponseOrderComboItemInformation",
+    "DeliveriesResponseOrderCompoundItemTemplate",
+    "DeliveriesResponseOrderCompoundOrderItem",
+    "DeliveriesResponseOrderCompoundOrderItemComponent",
+    "DeliveriesResponseOrderConception",
+    "DeliveriesResponseOrderCourierInfo",
+    "DeliveriesResponseOrderCreationStatus",
+    "DeliveriesResponseOrderCustomer",
+    "DeliveriesResponseOrderDeletionMethod",
+    "DeliveriesResponseOrderDeliveryPoint",
+    "DeliveriesResponseOrderDiscountItem",
+    "DeliveriesResponseOrderDiscountType",
+    "DeliveriesResponseOrderDynamicDiscount",
+    "DeliveriesResponseOrderEmployee",
+    "DeliveriesResponseOrderExternalCourierService",
+    "DeliveriesResponseOrderExternalData",
+    "DeliveriesResponseOrderGuestsInfo",
+    "DeliveriesResponseOrderIdentifierCode",
+    "DeliveriesResponseOrderItemDeletedInfo",
+    "DeliveriesResponseOrderLoyaltyInfo",
+    "DeliveriesResponseOrderMarketingSource",
+    "DeliveriesResponseOrderOrder",
+    "DeliveriesResponseOrderOrderCombo",
+    "DeliveriesResponseOrderOrderInfo",
+    "DeliveriesResponseOrderOrderItem",
+    "DeliveriesResponseOrderOrderItemIdentifierCode",
+    "DeliveriesResponseOrderOrderItemModifier",
+    "DeliveriesResponseOrderOrderItemStatus",
+    "DeliveriesResponseOrderOrderStatus",
+    "DeliveriesResponseOrderOrderType",
+    "DeliveriesResponseOrderPaymentItem",
+    "DeliveriesResponseOrderPaymentType",
+    "DeliveriesResponseOrderPositionWithSum",
+    "DeliveriesResponseOrderProblem",
+    "DeliveriesResponseOrderProduct",
+    "DeliveriesResponseOrderProductGroup",
+    "DeliveriesResponseOrderProductOrderItem",
+    "DeliveriesResponseOrderProductSize",
+    "DeliveriesResponseOrderRegion",
+    "DeliveriesResponseOrderRegularCustomer",
+    "DeliveriesResponseOrderRemovalType",
+    "DeliveriesResponseOrderResponse",
+    "DeliveriesResponseOrderServiceOrderItem",
+    "DeliveriesResponseOrderStreet",
+    "DeliveriesResponseOrderTipsPaymentItem",
+    "DeliveriesResponseOrderTipsType",
+    "DeliveriesResponseOrdersByOrganization",
+    "DeliveriesResponseOrdersResponse",
+    "DeliveriesResponseOrdersWithRevisionResponse",
+    "DeliveryRestrictionsActionOnValidationRejection",
+    "DeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration",
+    "DeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode",
+    "DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest",
+    "DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
+    "DeliveryRestrictionsAllowedRestrictionsOrderLocation",
+    "DeliveryRestrictionsAllowedRestrictionsRejectItem",
+    "DeliveryRestrictionsAllowedRestrictionsRejectItemData",
+    "DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress",
+    "DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem",
+    "DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier",
+    "DeliveryRestrictionsCoordinates",
+    "DeliveryRestrictionsDeliveryGeocodeServiceType",
+    "DeliveryRestrictionsDeliveryRestrictionItem",
+    "DeliveryRestrictionsDeliveryRestrictions",
+    "DeliveryRestrictionsDeliveryRestrictionsMode",
+    "DeliveryRestrictionsDeliveryZone",
+    "DeliveryRestrictionsDeliveryZoneAddressBinding",
+    "DeliveryRestrictionsGetDeliveryRestrictionsRequest",
+    "DeliveryRestrictionsGetDeliveryRestrictionsResponse",
+    "DeliveryRestrictionsHousesRange",
+    "DeliveryRestrictionsHousesRangeType",
+    "DiscountsDiscountCardMode",
+    "DiscountsDiscountCardTypeInfo",
+    "DiscountsDiscountsRequest",
+    "DiscountsDiscountsResponse",
+    "DiscountsProductCategoryDiscount",
+    "EmployeesActiveCourierLocation",
+    "EmployeesActiveCourierLocationsByTerminalGroupRequest",
+    "EmployeesActiveCourierLocationsResponse",
+    "EmployeesChangePersonalSessionResponse",
+    "EmployeesClosePersonalSessionRequest",
+    "EmployeesCoordinateInfo",
+    "EmployeesCourierLocations",
+    "EmployeesCourierLocationsByTimeOffsetRequest",
+    "EmployeesCourierLocationsByTimeOffsetResponse",
+    "EmployeesCouriersAndCheckRoleRequest",
+    "EmployeesCouriersRequest",
+    "EmployeesEmployee",
+    "EmployeesEmployeeInfo",
+    "EmployeesEmployeeInfoRequest",
+    "EmployeesEmployeeInfoResponse",
+    "EmployeesEmployeeWithCheckedRole",
+    "EmployeesEmployeesResponse",
+    "EmployeesEmployeesWithRoleSignResponse",
+    "EmployeesGetPersonalSessionInfoRequest",
+    "EmployeesGetPersonalSessionInfoResponse",
+    "EmployeesGetTerminalGroupsOfEmployeeRequest",
+    "EmployeesGetTerminalGroupsOfEmployeeResponse",
+    "EmployeesOpenPersonalSessionRequest",
+    "EmployeesPersonalShift",
+    "EmployeesRoleCheckResult",
+    "ErrorsErrorCode",
+    "ErrorsErrorInfo",
+    "ErrorsErrorResponse",
     "ExternalMenuCategory",
     "ExternalMenuCategory2",
     "ExternalMenuCategory3",
@@ -132,486 +393,62 @@ __all__ = [
     "IikoNetCommonEnumsCounterPeriod",
     "IikoNetCommonEnumsRefillType",
     "IikoNetCommonEnumsTemplateType",
-    "IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerGuestBalanceInfo",
-    "IikoNetServiceContractsApiIikoTransportCustomerGuestCardInfo",
-    "IikoNetServiceContractsApiIikoTransportCustomerGuestCategoryShortInfo",
-    "IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse",
-    "IikoNetServiceContractsApiIikoTransportCustomerIikoNetUserSex",
-    "IikoNetServiceContractsApiIikoTransportCustomerPersonalDataConsentStatus",
-    "IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest",
-    "IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailableCombo",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailablePayment",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboCategory",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroup",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroupMapping",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboPriceModificationType",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboProduct",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultComboSpecification",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfo",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultDiscountOperation",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultDynamicDiscount",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProduct",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductSize",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductsGroup",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultGuestCounter",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultLoyaltyProgramResult",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultManualConditionInfo",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCoupon",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultOperationCode",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCoupons",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsale",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsaleProduct",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultWalletInfo",
-    "IikoNetServiceContractsApiIikoTransportLoyaltyResultWarningInfo",
-    "IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest",
-    "IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse",
-    "IikoNetServiceContractsApiIikoTransportNotificationNotificationSendingCapabilityCheckStatus",
-    "IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest",
-    "IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest",
-    "IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse",
-    "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest",
-    "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse",
-    "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatus",
-    "IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatusInfo",
-    "IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest",
-    "IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse",
-    "IikoNetServiceContractsApiIikoTransportOrganizationLoyaltyProgram",
-    "IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignActionConditionBindingInfo",
-    "IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignInfo",
-    "IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignSettingsInfo",
-    "IikoNetServiceContractsApiIikoTransportProgramType",
-    "IikoNetServiceContractsApiIikoTransportReportCertificateCounteragentType",
-    "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest",
-    "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse",
-    "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest",
-    "IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse",
-    "IikoNetServiceContractsApiIikoTransportReportTransactionType",
-    "IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCertificateReportItem",
-    "IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCouponReportItem",
-    "IikoNetServiceContractsApiIikoTransportReportTransportTransactionsReportItem",
-    "IikoTransportPublicApiContractsAddressCitiesRequest",
-    "IikoTransportPublicApiContractsAddressCitiesResponse",
-    "IikoTransportPublicApiContractsAddressCity",
-    "IikoTransportPublicApiContractsAddressHintsAddressHintsServiceType",
-    "IikoTransportPublicApiContractsAddressRegion",
-    "IikoTransportPublicApiContractsAddressRegionsRequest",
-    "IikoTransportPublicApiContractsAddressRegionsResponse",
-    "IikoTransportPublicApiContractsAddressStreet",
-    "IikoTransportPublicApiContractsAddressStreetById",
-    "IikoTransportPublicApiContractsAddressStreetsByCityRequest",
-    "IikoTransportPublicApiContractsAddressStreetsByIdRequest",
-    "IikoTransportPublicApiContractsAddressStreetsByIdResponse",
-    "IikoTransportPublicApiContractsAddressStreetsResponse",
-    "IikoTransportPublicApiContractsAuthGetAccessTokenRequest",
-    "IikoTransportPublicApiContractsAuthGetAccessTokenResponse",
-    "IikoTransportPublicApiContractsCancelCausesCancelCause",
-    "IikoTransportPublicApiContractsCancelCausesCancelCausesRequest",
-    "IikoTransportPublicApiContractsCancelCausesCancelCausesResponse",
-    "IikoTransportPublicApiContractsCommandsErrorCommandStatus",
-    "IikoTransportPublicApiContractsCommandsGetCommandStatusRequest",
-    "IikoTransportPublicApiContractsCommandsGetCommandStatusResponse",
-    "IikoTransportPublicApiContractsCommandsInProgressCommandStatus",
-    "IikoTransportPublicApiContractsCommandsSuccessCommandStatus",
-    "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-    "IikoTransportPublicApiContractsCommonExternalData",
-    "IikoTransportPublicApiContractsCommonPriceCategory",
-    "IikoTransportPublicApiContractsCommonSortDirection",
-    "IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData",
-    "IikoTransportPublicApiContractsDeliveriesCommonChequeAdditionalInfo",
-    "IikoTransportPublicApiContractsDeliveriesCommonCoordinates",
-    "IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatus",
-    "IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatusForUpdate",
-    "IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData",
-    "IikoTransportPublicApiContractsDeliveriesCommonGender",
-    "IikoTransportPublicApiContractsDeliveriesCommonIikoCardSearchScope",
-    "IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData",
-    "IikoTransportPublicApiContractsDeliveriesCommonOrderServiceType",
-    "IikoTransportPublicApiContractsDeliveriesCommonPaymentAdditionalData",
-    "IikoTransportPublicApiContractsDeliveriesCommonPaymentTypeKind",
-    "IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-    "IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsDeliveryOrderDraft",
-    "IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse",
-    "IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse",
-    "IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesDraftsOrderDraft",
-    "IikoTransportPublicApiContractsDeliveriesDraftsOrderDraftSortProperty",
-    "IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddress",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAnonymousCustomer",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCombo",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderComboItemInformation",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItemComponent",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCustomer",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryOrder",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryPoint",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscount",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountCard",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountsInfo",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDynamicDiscount",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalData",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderGuests",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscountItem",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyInfo",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderModifier",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrder",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderServiceType",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRegularCustomer",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderStreet",
-    "IikoTransportPublicApiContractsDeliveriesRequestCreateOrderTipsPayment",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrderSortProperty",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderOrderPaymentItem",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest",
-    "IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderAddress",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderAnonymousCustomer",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCancelCause",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCancelInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCity",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderComboItemInformation",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundItemTemplate",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItemComponent",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderConception",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCourierInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCreationStatus",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderCustomer",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderDeletionMethod",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderDeliveryPoint",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountType",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderDynamicDiscount",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderEmployee",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderExternalCourierService",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderExternalData",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderGuestsInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderIdentifierCode",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderItemDeletedInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderLoyaltyInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderMarketingSource",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrder",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderCombo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderInfo",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemIdentifierCode",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemModifier",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemStatus",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderStatus",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderOrderType",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentType",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderPositionWithSum",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderProblem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderProduct",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderProductGroup",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderProductSize",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderRegion",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderRegularCustomer",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderRemovalType",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderStreet",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderTipsPaymentItem",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrderTipsType",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrdersByOrganization",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse",
-    "IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsActionOnValidationRejection",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsOrderLocation",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItem",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItemData",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsAddress",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsCoordinates",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryGeocodeServiceType",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionItem",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictions",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionsMode",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZone",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZoneAddressBinding",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsHousesRange",
-    "IikoTransportPublicApiContractsDeliveryRestrictionsHousesRangeType",
-    "IikoTransportPublicApiContractsDiscountsDiscountCardMode",
-    "IikoTransportPublicApiContractsDiscountsDiscountCardTypeInfo",
-    "IikoTransportPublicApiContractsDiscountsDiscountsRequest",
-    "IikoTransportPublicApiContractsDiscountsDiscountsResponse",
-    "IikoTransportPublicApiContractsDiscountsProductCategoryDiscount",
-    "IikoTransportPublicApiContractsEmployeesActiveCourierLocation",
-    "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest",
-    "IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse",
-    "IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse",
-    "IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest",
-    "IikoTransportPublicApiContractsEmployeesCoordinateInfo",
-    "IikoTransportPublicApiContractsEmployeesCourierLocations",
-    "IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest",
-    "IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse",
-    "IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest",
-    "IikoTransportPublicApiContractsEmployeesCouriersRequest",
-    "IikoTransportPublicApiContractsEmployeesEmployee",
-    "IikoTransportPublicApiContractsEmployeesEmployeeInfo",
-    "IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest",
-    "IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse",
-    "IikoTransportPublicApiContractsEmployeesEmployeeWithCheckedRole",
-    "IikoTransportPublicApiContractsEmployeesEmployeesResponse",
-    "IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse",
-    "IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest",
-    "IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse",
-    "IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest",
-    "IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse",
-    "IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest",
-    "IikoTransportPublicApiContractsEmployeesPersonalShift",
-    "IikoTransportPublicApiContractsEmployeesRoleCheckResult",
-    "IikoTransportPublicApiContractsErrorsErrorCode",
-    "IikoTransportPublicApiContractsErrorsErrorInfo",
-    "IikoTransportPublicApiContractsErrorsErrorResponse",
-    "IikoTransportPublicApiContractsIntegrationWebHooksFiltersDeliveryOrderWebHooksFilter",
-    "IikoTransportPublicApiContractsIntegrationWebHooksFiltersReserveWebHookFilter",
-    "IikoTransportPublicApiContractsIntegrationWebHooksFiltersTableOrderWebHookFilter",
-    "IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHookShortFilter",
-    "IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHooksFilter",
-    "IikoTransportPublicApiContractsMarketingSourcesMarketingSource",
-    "IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest",
-    "IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse",
-    "IikoTransportPublicApiContractsMetricsActionType",
-    "IikoTransportPublicApiContractsMetricsCallCenterAction",
-    "IikoTransportPublicApiContractsMetricsCallCenterTelemetry",
-    "IikoTransportPublicApiContractsNomenclatureChildModifierInfo",
-    "IikoTransportPublicApiContractsNomenclatureExternalMenu",
-    "IikoTransportPublicApiContractsNomenclatureGroupModifierInfo",
-    "IikoTransportPublicApiContractsNomenclatureMenuRequest",
-    "IikoTransportPublicApiContractsNomenclatureMenusDataResponse",
-    "IikoTransportPublicApiContractsNomenclatureNomenclatureRequest",
-    "IikoTransportPublicApiContractsNomenclatureNomenclatureResponse",
-    "IikoTransportPublicApiContractsNomenclatureOrderItemType",
-    "IikoTransportPublicApiContractsNomenclaturePrice",
-    "IikoTransportPublicApiContractsNomenclaturePriceCategory",
-    "IikoTransportPublicApiContractsNomenclatureProductCategoryInfo",
-    "IikoTransportPublicApiContractsNomenclatureProductInfo",
-    "IikoTransportPublicApiContractsNomenclatureProductsGroupInfo",
-    "IikoTransportPublicApiContractsNomenclatureSimpleModifierInfo",
-    "IikoTransportPublicApiContractsNomenclatureSize",
-    "IikoTransportPublicApiContractsNomenclatureSizePrice",
-    "IikoTransportPublicApiContractsNotificationsDeliveryAttentionNotificationRequest",
-    "IikoTransportPublicApiContractsNotificationsExternalCourierArrivedNotificationRequest",
-    "IikoTransportPublicApiContractsNotificationsExternalCourierAssignedNotificationRequest",
-    "IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest",
-    "IikoTransportPublicApiContractsNotificationsSendNotificationRequest",
-    "IikoTransportPublicApiContractsOrderTypesOrderServiceType",
-    "IikoTransportPublicApiContractsOrderTypesOrderType",
-    "IikoTransportPublicApiContractsOrderTypesOrderTypesRequest",
-    "IikoTransportPublicApiContractsOrderTypesOrderTypesResponse",
-    "IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest",
-    "IikoTransportPublicApiContractsOrdersCommonCreateOrderSettings",
-    "IikoTransportPublicApiContractsOrdersCommonCreateOrderSettingsBase",
-    "IikoTransportPublicApiContractsOrdersCommonOrderStatus",
-    "IikoTransportPublicApiContractsOrganizationsAddressFormatType",
-    "IikoTransportPublicApiContractsOrganizationsDeliveryOrderPaymentSettings",
-    "IikoTransportPublicApiContractsOrganizationsDeliverySettingsServiceType",
-    "IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo",
-    "IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest",
-    "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-    "IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse",
-    "IikoTransportPublicApiContractsOrganizationsOrganizationInfo",
-    "IikoTransportPublicApiContractsOrganizationsOrganizationSettings",
-    "IikoTransportPublicApiContractsOrganizationsOrganizationSettingsParameters",
-    "IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest",
-    "IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse",
-    "IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo",
-    "IikoTransportPublicApiContractsPaymentTypesPaymentProcessingType",
-    "IikoTransportPublicApiContractsPaymentTypesPaymentType",
-    "IikoTransportPublicApiContractsPaymentTypesPaymentTypeKind",
-    "IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest",
-    "IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse",
-    "IikoTransportPublicApiContractsPaymentsPaymentLink",
-    "IikoTransportPublicApiContractsPaymentsPaymentLinkStatus",
-    "IikoTransportPublicApiContractsRemovalTypesRemovalType",
-    "IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest",
-    "IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse",
-    "IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest",
-    "IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest",
-    "IikoTransportPublicApiContractsReservesCancelReserveRequest",
-    "IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest",
-    "IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest",
-    "IikoTransportPublicApiContractsReservesChangeReserveTablesRequest",
-    "IikoTransportPublicApiContractsReservesColor",
-    "IikoTransportPublicApiContractsReservesCreateReserveRequest",
-    "IikoTransportPublicApiContractsReservesFont",
-    "IikoTransportPublicApiContractsReservesFontStyle",
-    "IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest",
-    "IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse",
-    "IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest",
-    "IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse",
-    "IikoTransportPublicApiContractsReservesGuestsInfo",
-    "IikoTransportPublicApiContractsReservesRequestReserveOrder",
-    "IikoTransportPublicApiContractsReservesReserve",
-    "IikoTransportPublicApiContractsReservesReserveCancelReason",
-    "IikoTransportPublicApiContractsReservesReserveInWorkload",
-    "IikoTransportPublicApiContractsReservesReserveInfo",
-    "IikoTransportPublicApiContractsReservesReserveResponse",
-    "IikoTransportPublicApiContractsReservesReserveStatus",
-    "IikoTransportPublicApiContractsReservesReservesByIdRequest",
-    "IikoTransportPublicApiContractsReservesReservesResponse",
-    "IikoTransportPublicApiContractsReservesResponseReserveOrder",
-    "IikoTransportPublicApiContractsReservesRestaurantSection",
-    "IikoTransportPublicApiContractsReservesRestaurantSectionEllipse",
-    "IikoTransportPublicApiContractsReservesRestaurantSectionMark",
-    "IikoTransportPublicApiContractsReservesRestaurantSectionRectangle",
-    "IikoTransportPublicApiContractsReservesRestaurantSectionTable",
-    "IikoTransportPublicApiContractsReservesSectionSchema",
-    "IikoTransportPublicApiContractsReservesTable",
-    "IikoTransportPublicApiContractsStopListsAddProductsToStopListItem",
-    "IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest",
-    "IikoTransportPublicApiContractsStopListsCheckStopListRequest",
-    "IikoTransportPublicApiContractsStopListsCheckStopListResponse",
-    "IikoTransportPublicApiContractsStopListsClearStopListRequest",
-    "IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListItem",
-    "IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest",
-    "IikoTransportPublicApiContractsStopListsStopListItem",
-    "IikoTransportPublicApiContractsStopListsStopListsRequest",
-    "IikoTransportPublicApiContractsStopListsStopListsResponse",
-    "IikoTransportPublicApiContractsStopListsTerminalGroupStopList",
-    "IikoTransportPublicApiContractsStopListsTerminalGroupStopListUpdate",
-    "IikoTransportPublicApiContractsStopListsWebHookOnStopListChangeData",
-    "IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestAddTableOrderItemsSettings",
-    "IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderSettings",
-    "IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestGuestsInfo",
-    "IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest",
-    "IikoTransportPublicApiContractsTableOrdersRequestTableOrder",
-    "IikoTransportPublicApiContractsTableOrdersRequestTableOrderCustomer",
-    "IikoTransportPublicApiContractsTableOrdersResponseSplitOrderBetweenCashRegisters",
-    "IikoTransportPublicApiContractsTableOrdersResponseTableOrder",
-    "IikoTransportPublicApiContractsTableOrdersResponseTableOrderInfo",
-    "IikoTransportPublicApiContractsTableOrdersResponseTableOrderResponse",
-    "IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse",
-    "IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest",
-    "IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse",
-    "IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroup",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroupAliveInfo",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest",
-    "IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse",
-    "IikoTransportPublicApiContractsTipsTypesTipsType",
-    "IikoTransportPublicApiContractsTipsTypesTipsTypesResponse",
-    "IikoTransportPublicApiContractsWebHooksDeliveryOrderErrorWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksDeliveryOrderUpdateWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest",
-    "IikoTransportPublicApiContractsWebHooksGetWebHookSettingsResponse",
-    "IikoTransportPublicApiContractsWebHooksPersonalShiftWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksReserveErrorWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksReserveUpdateWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksStopListUpdateWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksTableOrderErrorWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksTableOrderUpdateWebHookEventInfo",
-    "IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest",
-    "IikoTransportPublicApiContractsWebHooksWebHookEventType",
+    "IntegrationWebHooksFiltersDeliveryOrderWebHooksFilter",
+    "IntegrationWebHooksFiltersReserveWebHookFilter",
+    "IntegrationWebHooksFiltersTableOrderWebHookFilter",
+    "IntegrationWebHooksFiltersWebHookShortFilter",
+    "IntegrationWebHooksFiltersWebHooksFilter",
     "IntervalDto",
     "IntervalDto2",
     "IntervalDto3",
     "LabelDto",
     "LabelDto2",
     "LabelDto3",
+    "LoyaltyResultAvailableCombo",
+    "LoyaltyResultAvailablePayment",
+    "LoyaltyResultCalculateCheckinRequest",
+    "LoyaltyResultCalculateCheckinResponse",
+    "LoyaltyResultCalculateComboPriceRequest",
+    "LoyaltyResultCalculateComboPriceResponse",
+    "LoyaltyResultComboCategory",
+    "LoyaltyResultComboGroup",
+    "LoyaltyResultComboGroupMapping",
+    "LoyaltyResultComboPriceModificationType",
+    "LoyaltyResultComboProduct",
+    "LoyaltyResultComboSpecification",
+    "LoyaltyResultCouponInfo",
+    "LoyaltyResultCouponInfoRequest",
+    "LoyaltyResultCouponInfoResponse",
+    "LoyaltyResultDiscountOperation",
+    "LoyaltyResultDynamicDiscount",
+    "LoyaltyResultFreeProduct",
+    "LoyaltyResultFreeProductSize",
+    "LoyaltyResultFreeProductsGroup",
+    "LoyaltyResultGetCombosInfoRequest",
+    "LoyaltyResultGetCombosInfoResponse",
+    "LoyaltyResultGetCountersRequest",
+    "LoyaltyResultGetCountersResponse",
+    "LoyaltyResultGetManualConditionsResponse",
+    "LoyaltyResultGuestCounter",
+    "LoyaltyResultLoyaltyProgramResult",
+    "LoyaltyResultManualConditionInfo",
+    "LoyaltyResultNotActivatedCoupon",
+    "LoyaltyResultNotActivatedCouponRequest",
+    "LoyaltyResultNotActivatedCouponResponse",
+    "LoyaltyResultOperationCode",
+    "LoyaltyResultSeriesWithNotActivatedCoupons",
+    "LoyaltyResultSeriesWithNotActivatedCouponsRequest",
+    "LoyaltyResultSeriesWithNotActivatedCouponsResponse",
+    "LoyaltyResultUpsale",
+    "LoyaltyResultUpsaleProduct",
+    "LoyaltyResultWalletInfo",
+    "LoyaltyResultWarningInfo",
+    "MarketingSourcesMarketingSource",
+    "MarketingSourcesMarketingSourcesRequest",
+    "MarketingSourcesMarketingSourcesResponse",
+    "MetricsActionType",
+    "MetricsCallCenterAction",
+    "MetricsCallCenterTelemetry",
     "ModifierRestrictionsDto",
     "ModifierRestrictionsDto2",
     "ModifierRestrictionsDto3",
@@ -620,6 +457,37 @@ __all__ = [
     "ModifierRestrictionsDto6",
     "ModifierRestrictionsDto7",
     "ModifierRestrictionsDto8",
+    "NomenclatureChildModifierInfo",
+    "NomenclatureExternalMenu",
+    "NomenclatureGroupModifierInfo",
+    "NomenclatureMenuRequest",
+    "NomenclatureMenusDataResponse",
+    "NomenclatureNomenclatureRequest",
+    "NomenclatureNomenclatureResponse",
+    "NomenclatureOrderItemType",
+    "NomenclaturePrice",
+    "NomenclaturePriceCategory",
+    "NomenclatureProductCategoryInfo",
+    "NomenclatureProductInfo",
+    "NomenclatureProductsGroupInfo",
+    "NomenclatureSimpleModifierInfo",
+    "NomenclatureSize",
+    "NomenclatureSizePrice",
+    "NotificationCheckSmsStatusRequest",
+    "NotificationCheckSmsStatusResponse",
+    "NotificationNotificationSendingCapabilityCheckStatus",
+    "NotificationSendEmailRequest",
+    "NotificationSendSmsRequest",
+    "NotificationSendSmsResponse",
+    "NotificationSmsSendingPossibilityRequest",
+    "NotificationSmsSendingPossibilityResponse",
+    "NotificationSmsSendingStatus",
+    "NotificationSmsSendingStatusInfo",
+    "NotificationsDeliveryAttentionNotificationRequest",
+    "NotificationsExternalCourierArrivedNotificationRequest",
+    "NotificationsExternalCourierAssignedNotificationRequest",
+    "NotificationsOrderAttentionNotificationRequest",
+    "NotificationsSendNotificationRequest",
     "NutritionInfoDto",
     "NutritionInfoDto2",
     "NutritionInfoDto3",
@@ -628,25 +496,94 @@ __all__ = [
     "NutritionInfoDto6",
     "NutritionInfoDto7",
     "NutritionInfoDto8",
+    "OrderTypesOrderServiceType",
+    "OrderTypesOrderType",
+    "OrderTypesOrderTypesRequest",
+    "OrderTypesOrderTypesResponse",
+    "OrdersCommonAddOrderPaymentsRequest",
+    "OrdersCommonCreateOrderSettings",
+    "OrdersCommonCreateOrderSettingsBase",
+    "OrdersCommonOrderStatus",
+    "OrganizationGetProgramsRequest",
+    "OrganizationGetProgramsResponse",
+    "OrganizationLoyaltyProgram",
+    "OrganizationMarketingCampaignActionConditionBindingInfo",
+    "OrganizationMarketingCampaignInfo",
+    "OrganizationMarketingCampaignSettingsInfo",
+    "OrganizationsAddressFormatType",
+    "OrganizationsDeliveryOrderPaymentSettings",
+    "OrganizationsDeliverySettingsServiceType",
+    "OrganizationsExtendedOrganizationInfo",
+    "OrganizationsGetOrganizationsRequest",
+    "OrganizationsGetOrganizationsResponse",
+    "OrganizationsGetSimpleOrganizationsResponse",
+    "OrganizationsOrganizationInfo",
+    "OrganizationsOrganizationSettings",
+    "OrganizationsOrganizationSettingsParameters",
+    "OrganizationsOrganizationsSettingsRequest",
+    "OrganizationsOrganizationsSettingsResponse",
+    "OrganizationsSimpleOrganizationInfo",
     "OverrideTaxesDto",
     "OverrideTaxesDto2",
+    "PaymentTypesPaymentProcessingType",
+    "PaymentTypesPaymentType",
+    "PaymentTypesPaymentTypeKind",
+    "PaymentTypesPaymentTypesRequest",
+    "PaymentTypesPaymentTypesResponse",
+    "PaymentsPaymentLink",
+    "PaymentsPaymentLinkStatus",
     "PeriodScheduleDto",
     "PeriodScheduleDto2",
     "PeriodScheduleDto3",
     "ProductCategoryDto",
     "ProductCategoryDto2",
     "ProductCategoryDto3",
+    "ProgramType",
+    "RemovalTypesRemovalType",
+    "RemovalTypesRemovalTypesRequest",
+    "RemovalTypesRemovalTypesResponse",
+    "ReportCertificateCounteragentType",
+    "ReportGetTransactionsReportByPeriodRequest",
+    "ReportGetTransactionsReportByPeriodResponse",
+    "ReportGetTransactionsReportByRevisionRequest",
+    "ReportGetTransactionsReportByRevisionResponse",
+    "ReportTransactionType",
+    "ReportTransportTransactionsCertificateReportItem",
+    "ReportTransportTransactionsCouponReportItem",
+    "ReportTransportTransactionsReportItem",
+    "ReservesAddOrderItemsToBanquetRequest",
+    "ReservesAddOrderPaymentsToBanquetRequest",
+    "ReservesCancelReserveRequest",
+    "ReservesChangeBanquetOrderItemsRequest",
+    "ReservesChangeReserveEstimatedStartTimeRequest",
+    "ReservesChangeReserveTablesRequest",
+    "ReservesColor",
+    "ReservesCreateReserveRequest",
+    "ReservesFont",
+    "ReservesFontStyle",
+    "ReservesGetRestaurantSectionsRequest",
+    "ReservesGetRestaurantSectionsResponse",
+    "ReservesGetRestaurantSectionsWorkloadRequest",
+    "ReservesGetRestaurantSectionsWorkloadResponse",
+    "ReservesGuestsInfo",
+    "ReservesRequestReserveOrder",
+    "ReservesReserve",
+    "ReservesReserveCancelReason",
+    "ReservesReserveInWorkload",
+    "ReservesReserveInfo",
+    "ReservesReserveResponse",
+    "ReservesReserveStatus",
+    "ReservesReservesByIdRequest",
+    "ReservesReservesResponse",
+    "ReservesResponseReserveOrder",
+    "ReservesRestaurantSection",
+    "ReservesRestaurantSectionEllipse",
+    "ReservesRestaurantSectionMark",
+    "ReservesRestaurantSectionRectangle",
+    "ReservesRestaurantSectionTable",
+    "ReservesSectionSchema",
+    "ReservesTable",
     "RetrieveExternalMenuRequestDto",
-    "RmsItemsResponseWrapperAddressCity",
-    "RmsItemsResponseWrapperAddressRegion",
-    "RmsItemsResponseWrapperDiscountsDiscountCardTypeInfo",
-    "RmsItemsResponseWrapperEmployeesActiveCourierLocation",
-    "RmsItemsResponseWrapperEmployeesCourierLocations",
-    "RmsItemsResponseWrapperEmployeesEmployee",
-    "RmsItemsResponseWrapperEmployeesEmployeeWithCheckedRole",
-    "RmsItemsResponseWrapperOrderTypesOrderType",
-    "RmsItemsResponseWrapperStopListsTerminalGroupStopList",
-    "RmsItemsResponseWrapperTerminalsTerminalGroup",
     "SelectedCustomerTag",
     "SelectedCustomerTag2",
     "SelectedCustomerTag3",
@@ -655,12 +592,75 @@ __all__ = [
     "SelectedCustomerTag6",
     "SelectedCustomerTag7",
     "SelectedCustomerTag8",
+    "StopListsAddProductsToStopListItem",
+    "StopListsAddProductsToStopListRequest",
+    "StopListsCheckStopListRequest",
+    "StopListsCheckStopListResponse",
+    "StopListsClearStopListRequest",
+    "StopListsRemoveProductsFromStopListItem",
+    "StopListsRemoveProductsFromStopListRequest",
+    "StopListsStopListItem",
+    "StopListsStopListsRequest",
+    "StopListsStopListsResponse",
+    "StopListsTerminalGroupStopList",
+    "StopListsTerminalGroupStopListUpdate",
+    "StopListsWebHookOnStopListChangeData",
+    "TableOrdersRequestAddCustomerToTableOrderRequest",
+    "TableOrdersRequestAddItemsToTableOrderRequest",
+    "TableOrdersRequestAddTableOrderItemsSettings",
+    "TableOrdersRequestCreateTableOrderRequest",
+    "TableOrdersRequestCreateTableOrderSettings",
+    "TableOrdersRequestGetTableOrdersByIdRequest",
+    "TableOrdersRequestGetTableOrdersByTableRequest",
+    "TableOrdersRequestGuestsInfo",
+    "TableOrdersRequestInitTableOrderByPosOrderRequest",
+    "TableOrdersRequestInitTableOrderRequest",
+    "TableOrdersRequestTableOrder",
+    "TableOrdersRequestTableOrderCustomer",
+    "TableOrdersResponseSplitOrderBetweenCashRegisters",
+    "TableOrdersResponseTableOrder",
+    "TableOrdersResponseTableOrderInfo",
+    "TableOrdersResponseTableOrderResponse",
+    "TableOrdersResponseTableOrdersResponse",
     "TagDto",
     "TagDto2",
     "TagDto3",
     "TaxCategoryDto",
     "TaxCategoryDto2",
     "TaxCategoryDto3",
+    "TerminalsAwakeTerminalGroupsRequest",
+    "TerminalsAwakeTerminalGroupsResponse",
+    "TerminalsGetTerminalGroupsByOrganizationsRequest",
+    "TerminalsTerminalGroup",
+    "TerminalsTerminalGroupAliveInfo",
+    "TerminalsTerminalGroupsIsAliveRequest",
+    "TerminalsTerminalGroupsIsAliveResponse",
+    "TerminalsTerminalGroupsRequest",
+    "TerminalsTerminalGroupsResponse",
+    "TipsTypesTipsType",
+    "TipsTypesTipsTypesResponse",
+    "WebHooksDeliveryOrderErrorWebHookEventInfo",
+    "WebHooksDeliveryOrderUpdateWebHookEventInfo",
+    "WebHooksGetWebHookSettingsRequest",
+    "WebHooksGetWebHookSettingsResponse",
+    "WebHooksPersonalShiftWebHookEventInfo",
+    "WebHooksReserveErrorWebHookEventInfo",
+    "WebHooksReserveUpdateWebHookEventInfo",
+    "WebHooksStopListUpdateWebHookEventInfo",
+    "WebHooksTableOrderErrorWebHookEventInfo",
+    "WebHooksTableOrderUpdateWebHookEventInfo",
+    "WebHooksUpdateWebHookSettingsRequest",
+    "WebHooksWebHookEventType",
+    "WrapperAddressCity",
+    "WrapperAddressRegion",
+    "WrapperDiscountsDiscountCardTypeInfo",
+    "WrapperEmployeesActiveCourierLocation",
+    "WrapperEmployeesCourierLocations",
+    "WrapperEmployeesEmployee",
+    "WrapperEmployeesEmployeeWithCheckedRole",
+    "WrapperOrderTypesOrderType",
+    "WrapperStopListsTerminalGroupStopList",
+    "WrapperTerminalsTerminalGroup",
 ]
 
 # import apis into sdk package
@@ -700,11 +700,26 @@ from iikocloud_client.exceptions import ApiAttributeError as ApiAttributeError
 from iikocloud_client.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from iikocloud_client.models.address_cities_request import AddressCitiesRequest as AddressCitiesRequest
+from iikocloud_client.models.address_cities_response import AddressCitiesResponse as AddressCitiesResponse
+from iikocloud_client.models.address_city import AddressCity as AddressCity
+from iikocloud_client.models.address_hints_address_hints_service_type import AddressHintsAddressHintsServiceType as AddressHintsAddressHintsServiceType
+from iikocloud_client.models.address_region import AddressRegion as AddressRegion
+from iikocloud_client.models.address_regions_request import AddressRegionsRequest as AddressRegionsRequest
+from iikocloud_client.models.address_regions_response import AddressRegionsResponse as AddressRegionsResponse
+from iikocloud_client.models.address_street import AddressStreet as AddressStreet
+from iikocloud_client.models.address_street_by_id import AddressStreetById as AddressStreetById
+from iikocloud_client.models.address_streets_by_city_request import AddressStreetsByCityRequest as AddressStreetsByCityRequest
+from iikocloud_client.models.address_streets_by_id_request import AddressStreetsByIdRequest as AddressStreetsByIdRequest
+from iikocloud_client.models.address_streets_by_id_response import AddressStreetsByIdResponse as AddressStreetsByIdResponse
+from iikocloud_client.models.address_streets_response import AddressStreetsResponse as AddressStreetsResponse
 from iikocloud_client.models.allergen_group_dto import AllergenGroupDto as AllergenGroupDto
 from iikocloud_client.models.allergen_group_dto2 import AllergenGroupDto2 as AllergenGroupDto2
 from iikocloud_client.models.allergen_group_dto3 import AllergenGroupDto3 as AllergenGroupDto3
 from iikocloud_client.models.allergen_group_dto4 import AllergenGroupDto4 as AllergenGroupDto4
 from iikocloud_client.models.api2_menu_by_id_post200_response import Api2MenuByIdPost200Response as Api2MenuByIdPost200Response
+from iikocloud_client.models.auth_get_access_token_request import AuthGetAccessTokenRequest as AuthGetAccessTokenRequest
+from iikocloud_client.models.auth_get_access_token_response import AuthGetAccessTokenResponse as AuthGetAccessTokenResponse
 from iikocloud_client.models.barcode_dto import BarcodeDto as BarcodeDto
 from iikocloud_client.models.barcode_dto2 import BarcodeDto2 as BarcodeDto2
 from iikocloud_client.models.barcode_dto3 import BarcodeDto3 as BarcodeDto3
@@ -716,6 +731,9 @@ from iikocloud_client.models.barcode_dto8 import BarcodeDto8 as BarcodeDto8
 from iikocloud_client.models.button_image_dto import ButtonImageDto as ButtonImageDto
 from iikocloud_client.models.button_image_dto2 import ButtonImageDto2 as ButtonImageDto2
 from iikocloud_client.models.button_image_dto3 import ButtonImageDto3 as ButtonImageDto3
+from iikocloud_client.models.cancel_causes_cancel_cause import CancelCausesCancelCause as CancelCausesCancelCause
+from iikocloud_client.models.cancel_causes_cancel_causes_request import CancelCausesCancelCausesRequest as CancelCausesCancelCausesRequest
+from iikocloud_client.models.cancel_causes_cancel_causes_response import CancelCausesCancelCausesResponse as CancelCausesCancelCausesResponse
 from iikocloud_client.models.combo_category_dto import ComboCategoryDto as ComboCategoryDto
 from iikocloud_client.models.combo_category_dto2 import ComboCategoryDto2 as ComboCategoryDto2
 from iikocloud_client.models.combo_category_dto3 import ComboCategoryDto3 as ComboCategoryDto3
@@ -740,12 +758,255 @@ from iikocloud_client.models.combo_group_item_size_dto4 import ComboGroupItemSiz
 from iikocloud_client.models.combo_size_dto import ComboSizeDto as ComboSizeDto
 from iikocloud_client.models.combo_size_dto2 import ComboSizeDto2 as ComboSizeDto2
 from iikocloud_client.models.combo_size_dto3 import ComboSizeDto3 as ComboSizeDto3
+from iikocloud_client.models.commands_error_command_status import CommandsErrorCommandStatus as CommandsErrorCommandStatus
+from iikocloud_client.models.commands_get_command_status_request import CommandsGetCommandStatusRequest as CommandsGetCommandStatusRequest
+from iikocloud_client.models.commands_get_command_status_response import CommandsGetCommandStatusResponse as CommandsGetCommandStatusResponse
+from iikocloud_client.models.commands_in_progress_command_status import CommandsInProgressCommandStatus as CommandsInProgressCommandStatus
+from iikocloud_client.models.commands_success_command_status import CommandsSuccessCommandStatus as CommandsSuccessCommandStatus
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse as CommonCorrelationIdResponse
+from iikocloud_client.models.common_external_data import CommonExternalData as CommonExternalData
+from iikocloud_client.models.common_get_by_organization_id_request import CommonGetByOrganizationIdRequest as CommonGetByOrganizationIdRequest
+from iikocloud_client.models.common_price_category import CommonPriceCategory as CommonPriceCategory
+from iikocloud_client.models.common_sort_direction import CommonSortDirection as CommonSortDirection
+from iikocloud_client.models.customer_add_customer_to_program_request import CustomerAddCustomerToProgramRequest as CustomerAddCustomerToProgramRequest
+from iikocloud_client.models.customer_add_customer_to_program_response import CustomerAddCustomerToProgramResponse as CustomerAddCustomerToProgramResponse
+from iikocloud_client.models.customer_add_magnet_card_request import CustomerAddMagnetCardRequest as CustomerAddMagnetCardRequest
+from iikocloud_client.models.customer_cancel_hold_money_request import CustomerCancelHoldMoneyRequest as CustomerCancelHoldMoneyRequest
+from iikocloud_client.models.customer_change_category_for_customer_request import CustomerChangeCategoryForCustomerRequest as CustomerChangeCategoryForCustomerRequest
+from iikocloud_client.models.customer_change_user_balance_request import CustomerChangeUserBalanceRequest as CustomerChangeUserBalanceRequest
+from iikocloud_client.models.customer_create_or_update_customer_request import CustomerCreateOrUpdateCustomerRequest as CustomerCreateOrUpdateCustomerRequest
+from iikocloud_client.models.customer_create_or_update_customer_response import CustomerCreateOrUpdateCustomerResponse as CustomerCreateOrUpdateCustomerResponse
+from iikocloud_client.models.customer_delete_customers_request import CustomerDeleteCustomersRequest as CustomerDeleteCustomersRequest
+from iikocloud_client.models.customer_delete_customers_response import CustomerDeleteCustomersResponse as CustomerDeleteCustomersResponse
+from iikocloud_client.models.customer_delete_magnet_card_request import CustomerDeleteMagnetCardRequest as CustomerDeleteMagnetCardRequest
+from iikocloud_client.models.customer_get_categories_request import CustomerGetCategoriesRequest as CustomerGetCategoriesRequest
+from iikocloud_client.models.customer_get_categories_response import CustomerGetCategoriesResponse as CustomerGetCategoriesResponse
+from iikocloud_client.models.customer_get_customer_info_by_card_number_request import CustomerGetCustomerInfoByCardNumberRequest as CustomerGetCustomerInfoByCardNumberRequest
+from iikocloud_client.models.customer_get_customer_info_by_card_track_request import CustomerGetCustomerInfoByCardTrackRequest as CustomerGetCustomerInfoByCardTrackRequest
+from iikocloud_client.models.customer_get_customer_info_by_email_request import CustomerGetCustomerInfoByEmailRequest as CustomerGetCustomerInfoByEmailRequest
+from iikocloud_client.models.customer_get_customer_info_by_id_request import CustomerGetCustomerInfoByIdRequest as CustomerGetCustomerInfoByIdRequest
+from iikocloud_client.models.customer_get_customer_info_by_phone_request import CustomerGetCustomerInfoByPhoneRequest as CustomerGetCustomerInfoByPhoneRequest
+from iikocloud_client.models.customer_get_customer_info_request import CustomerGetCustomerInfoRequest as CustomerGetCustomerInfoRequest
+from iikocloud_client.models.customer_get_customer_info_response import CustomerGetCustomerInfoResponse as CustomerGetCustomerInfoResponse
+from iikocloud_client.models.customer_guest_balance_info import CustomerGuestBalanceInfo as CustomerGuestBalanceInfo
+from iikocloud_client.models.customer_guest_card_info import CustomerGuestCardInfo as CustomerGuestCardInfo
+from iikocloud_client.models.customer_guest_category_short_info import CustomerGuestCategoryShortInfo as CustomerGuestCategoryShortInfo
+from iikocloud_client.models.customer_hold_money_request import CustomerHoldMoneyRequest as CustomerHoldMoneyRequest
+from iikocloud_client.models.customer_hold_money_response import CustomerHoldMoneyResponse as CustomerHoldMoneyResponse
+from iikocloud_client.models.customer_iiko_net_user_sex import CustomerIikoNetUserSex as CustomerIikoNetUserSex
+from iikocloud_client.models.customer_personal_data_consent_status import CustomerPersonalDataConsentStatus as CustomerPersonalDataConsentStatus
+from iikocloud_client.models.customer_restore_customers_request import CustomerRestoreCustomersRequest as CustomerRestoreCustomersRequest
+from iikocloud_client.models.customer_restore_customers_response import CustomerRestoreCustomersResponse as CustomerRestoreCustomersResponse
 from iikocloud_client.models.customer_tag_group import CustomerTagGroup as CustomerTagGroup
 from iikocloud_client.models.customer_tag_group2 import CustomerTagGroup2 as CustomerTagGroup2
 from iikocloud_client.models.customer_tag_group3 import CustomerTagGroup3 as CustomerTagGroup3
 from iikocloud_client.models.customer_tag_item import CustomerTagItem as CustomerTagItem
 from iikocloud_client.models.customer_tag_item2 import CustomerTagItem2 as CustomerTagItem2
 from iikocloud_client.models.customer_tag_item3 import CustomerTagItem3 as CustomerTagItem3
+from iikocloud_client.models.deliveries_common_card_payment_additional_data import DeliveriesCommonCardPaymentAdditionalData as DeliveriesCommonCardPaymentAdditionalData
+from iikocloud_client.models.deliveries_common_cheque_additional_info import DeliveriesCommonChequeAdditionalInfo as DeliveriesCommonChequeAdditionalInfo
+from iikocloud_client.models.deliveries_common_coordinates import DeliveriesCommonCoordinates as DeliveriesCommonCoordinates
+from iikocloud_client.models.deliveries_common_delivery_status import DeliveriesCommonDeliveryStatus as DeliveriesCommonDeliveryStatus
+from iikocloud_client.models.deliveries_common_delivery_status_for_update import DeliveriesCommonDeliveryStatusForUpdate as DeliveriesCommonDeliveryStatusForUpdate
+from iikocloud_client.models.deliveries_common_external_payment_additional_data import DeliveriesCommonExternalPaymentAdditionalData as DeliveriesCommonExternalPaymentAdditionalData
+from iikocloud_client.models.deliveries_common_gender import DeliveriesCommonGender as DeliveriesCommonGender
+from iikocloud_client.models.deliveries_common_iiko_card_search_scope import DeliveriesCommonIikoCardSearchScope as DeliveriesCommonIikoCardSearchScope
+from iikocloud_client.models.deliveries_common_loyalty_card_payment_additional_data import DeliveriesCommonLoyaltyCardPaymentAdditionalData as DeliveriesCommonLoyaltyCardPaymentAdditionalData
+from iikocloud_client.models.deliveries_common_order_service_type import DeliveriesCommonOrderServiceType as DeliveriesCommonOrderServiceType
+from iikocloud_client.models.deliveries_common_payment_additional_data import DeliveriesCommonPaymentAdditionalData as DeliveriesCommonPaymentAdditionalData
+from iikocloud_client.models.deliveries_common_payment_type_kind import DeliveriesCommonPaymentTypeKind as DeliveriesCommonPaymentTypeKind
+from iikocloud_client.models.deliveries_drafts_commit_draft_request import DeliveriesDraftsCommitDraftRequest as DeliveriesDraftsCommitDraftRequest
+from iikocloud_client.models.deliveries_drafts_create_draft_request import DeliveriesDraftsCreateDraftRequest as DeliveriesDraftsCreateDraftRequest
+from iikocloud_client.models.deliveries_drafts_create_or_save_draft_response import DeliveriesDraftsCreateOrSaveDraftResponse as DeliveriesDraftsCreateOrSaveDraftResponse
+from iikocloud_client.models.deliveries_drafts_delete_draft_request import DeliveriesDraftsDeleteDraftRequest as DeliveriesDraftsDeleteDraftRequest
+from iikocloud_client.models.deliveries_drafts_delivery_order_draft import DeliveriesDraftsDeliveryOrderDraft as DeliveriesDraftsDeliveryOrderDraft
+from iikocloud_client.models.deliveries_drafts_filter_drafts_request import DeliveriesDraftsFilterDraftsRequest as DeliveriesDraftsFilterDraftsRequest
+from iikocloud_client.models.deliveries_drafts_filter_drafts_response import DeliveriesDraftsFilterDraftsResponse as DeliveriesDraftsFilterDraftsResponse
+from iikocloud_client.models.deliveries_drafts_get_draft_request import DeliveriesDraftsGetDraftRequest as DeliveriesDraftsGetDraftRequest
+from iikocloud_client.models.deliveries_drafts_get_draft_response import DeliveriesDraftsGetDraftResponse as DeliveriesDraftsGetDraftResponse
+from iikocloud_client.models.deliveries_drafts_lock_or_unlock_draft_request import DeliveriesDraftsLockOrUnlockDraftRequest as DeliveriesDraftsLockOrUnlockDraftRequest
+from iikocloud_client.models.deliveries_drafts_order_draft import DeliveriesDraftsOrderDraft as DeliveriesDraftsOrderDraft
+from iikocloud_client.models.deliveries_drafts_order_draft_sort_property import DeliveriesDraftsOrderDraftSortProperty as DeliveriesDraftsOrderDraftSortProperty
+from iikocloud_client.models.deliveries_drafts_save_draft_request import DeliveriesDraftsSaveDraftRequest as DeliveriesDraftsSaveDraftRequest
+from iikocloud_client.models.deliveries_request_add_order_items_request import DeliveriesRequestAddOrderItemsRequest as DeliveriesRequestAddOrderItemsRequest
+from iikocloud_client.models.deliveries_request_cancel_order_request import DeliveriesRequestCancelOrderRequest as DeliveriesRequestCancelOrderRequest
+from iikocloud_client.models.deliveries_request_cancel_table_order_request import DeliveriesRequestCancelTableOrderRequest as DeliveriesRequestCancelTableOrderRequest
+from iikocloud_client.models.deliveries_request_change_driver_info_request import DeliveriesRequestChangeDriverInfoRequest as DeliveriesRequestChangeDriverInfoRequest
+from iikocloud_client.models.deliveries_request_close_delivery_order_request import DeliveriesRequestCloseDeliveryOrderRequest as DeliveriesRequestCloseDeliveryOrderRequest
+from iikocloud_client.models.deliveries_request_close_table_order_request import DeliveriesRequestCloseTableOrderRequest as DeliveriesRequestCloseTableOrderRequest
+from iikocloud_client.models.deliveries_request_create_order_address import DeliveriesRequestCreateOrderAddress as DeliveriesRequestCreateOrderAddress
+from iikocloud_client.models.deliveries_request_create_order_address_city import DeliveriesRequestCreateOrderAddressCity as DeliveriesRequestCreateOrderAddressCity
+from iikocloud_client.models.deliveries_request_create_order_address_legacy import DeliveriesRequestCreateOrderAddressLegacy as DeliveriesRequestCreateOrderAddressLegacy
+from iikocloud_client.models.deliveries_request_create_order_anonymous_customer import DeliveriesRequestCreateOrderAnonymousCustomer as DeliveriesRequestCreateOrderAnonymousCustomer
+from iikocloud_client.models.deliveries_request_create_order_card_payment import DeliveriesRequestCreateOrderCardPayment as DeliveriesRequestCreateOrderCardPayment
+from iikocloud_client.models.deliveries_request_create_order_card_tips_payment import DeliveriesRequestCreateOrderCardTipsPayment as DeliveriesRequestCreateOrderCardTipsPayment
+from iikocloud_client.models.deliveries_request_create_order_cash_payment import DeliveriesRequestCreateOrderCashPayment as DeliveriesRequestCreateOrderCashPayment
+from iikocloud_client.models.deliveries_request_create_order_cash_tips_payment import DeliveriesRequestCreateOrderCashTipsPayment as DeliveriesRequestCreateOrderCashTipsPayment
+from iikocloud_client.models.deliveries_request_create_order_combo import DeliveriesRequestCreateOrderCombo as DeliveriesRequestCreateOrderCombo
+from iikocloud_client.models.deliveries_request_create_order_combo_item_information import DeliveriesRequestCreateOrderComboItemInformation as DeliveriesRequestCreateOrderComboItemInformation
+from iikocloud_client.models.deliveries_request_create_order_compound_order_item import DeliveriesRequestCreateOrderCompoundOrderItem as DeliveriesRequestCreateOrderCompoundOrderItem
+from iikocloud_client.models.deliveries_request_create_order_compound_order_item_component import DeliveriesRequestCreateOrderCompoundOrderItemComponent as DeliveriesRequestCreateOrderCompoundOrderItemComponent
+from iikocloud_client.models.deliveries_request_create_order_customer import DeliveriesRequestCreateOrderCustomer as DeliveriesRequestCreateOrderCustomer
+from iikocloud_client.models.deliveries_request_create_order_delivery_order import DeliveriesRequestCreateOrderDeliveryOrder as DeliveriesRequestCreateOrderDeliveryOrder
+from iikocloud_client.models.deliveries_request_create_order_delivery_point import DeliveriesRequestCreateOrderDeliveryPoint as DeliveriesRequestCreateOrderDeliveryPoint
+from iikocloud_client.models.deliveries_request_create_order_discount import DeliveriesRequestCreateOrderDiscount as DeliveriesRequestCreateOrderDiscount
+from iikocloud_client.models.deliveries_request_create_order_discount_card import DeliveriesRequestCreateOrderDiscountCard as DeliveriesRequestCreateOrderDiscountCard
+from iikocloud_client.models.deliveries_request_create_order_discounts_info import DeliveriesRequestCreateOrderDiscountsInfo as DeliveriesRequestCreateOrderDiscountsInfo
+from iikocloud_client.models.deliveries_request_create_order_dynamic_discount import DeliveriesRequestCreateOrderDynamicDiscount as DeliveriesRequestCreateOrderDynamicDiscount
+from iikocloud_client.models.deliveries_request_create_order_external_data import DeliveriesRequestCreateOrderExternalData as DeliveriesRequestCreateOrderExternalData
+from iikocloud_client.models.deliveries_request_create_order_external_payment import DeliveriesRequestCreateOrderExternalPayment as DeliveriesRequestCreateOrderExternalPayment
+from iikocloud_client.models.deliveries_request_create_order_external_tips_payment import DeliveriesRequestCreateOrderExternalTipsPayment as DeliveriesRequestCreateOrderExternalTipsPayment
+from iikocloud_client.models.deliveries_request_create_order_guests import DeliveriesRequestCreateOrderGuests as DeliveriesRequestCreateOrderGuests
+from iikocloud_client.models.deliveries_request_create_order_iiko_card_discount import DeliveriesRequestCreateOrderIikoCardDiscount as DeliveriesRequestCreateOrderIikoCardDiscount
+from iikocloud_client.models.deliveries_request_create_order_iiko_card_discount_item import DeliveriesRequestCreateOrderIikoCardDiscountItem as DeliveriesRequestCreateOrderIikoCardDiscountItem
+from iikocloud_client.models.deliveries_request_create_order_loyalty_card_payment import DeliveriesRequestCreateOrderLoyaltyCardPayment as DeliveriesRequestCreateOrderLoyaltyCardPayment
+from iikocloud_client.models.deliveries_request_create_order_loyalty_info import DeliveriesRequestCreateOrderLoyaltyInfo as DeliveriesRequestCreateOrderLoyaltyInfo
+from iikocloud_client.models.deliveries_request_create_order_modifier import DeliveriesRequestCreateOrderModifier as DeliveriesRequestCreateOrderModifier
+from iikocloud_client.models.deliveries_request_create_order_order import DeliveriesRequestCreateOrderOrder as DeliveriesRequestCreateOrderOrder
+from iikocloud_client.models.deliveries_request_create_order_order_item import DeliveriesRequestCreateOrderOrderItem as DeliveriesRequestCreateOrderOrderItem
+from iikocloud_client.models.deliveries_request_create_order_order_service_type import DeliveriesRequestCreateOrderOrderServiceType as DeliveriesRequestCreateOrderOrderServiceType
+from iikocloud_client.models.deliveries_request_create_order_payment import DeliveriesRequestCreateOrderPayment as DeliveriesRequestCreateOrderPayment
+from iikocloud_client.models.deliveries_request_create_order_product_order_item import DeliveriesRequestCreateOrderProductOrderItem as DeliveriesRequestCreateOrderProductOrderItem
+from iikocloud_client.models.deliveries_request_create_order_regular_customer import DeliveriesRequestCreateOrderRegularCustomer as DeliveriesRequestCreateOrderRegularCustomer
+from iikocloud_client.models.deliveries_request_create_order_request import DeliveriesRequestCreateOrderRequest as DeliveriesRequestCreateOrderRequest
+from iikocloud_client.models.deliveries_request_create_order_rms_discount import DeliveriesRequestCreateOrderRmsDiscount as DeliveriesRequestCreateOrderRmsDiscount
+from iikocloud_client.models.deliveries_request_create_order_street import DeliveriesRequestCreateOrderStreet as DeliveriesRequestCreateOrderStreet
+from iikocloud_client.models.deliveries_request_create_order_tips_payment import DeliveriesRequestCreateOrderTipsPayment as DeliveriesRequestCreateOrderTipsPayment
+from iikocloud_client.models.deliveries_request_order_sort_property import DeliveriesRequestOrderSortProperty as DeliveriesRequestOrderSortProperty
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_filter_request import DeliveriesRequestOrdersByDeliveryDateAndFilterRequest as DeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_phone_request import DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest as DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_request_orders_by_delivery_date_and_status_request import DeliveriesRequestOrdersByDeliveryDateAndStatusRequest as DeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+from iikocloud_client.models.deliveries_request_orders_by_id_request import DeliveriesRequestOrdersByIdRequest as DeliveriesRequestOrdersByIdRequest
+from iikocloud_client.models.deliveries_request_orders_by_revision_request import DeliveriesRequestOrdersByRevisionRequest as DeliveriesRequestOrdersByRevisionRequest
+from iikocloud_client.models.deliveries_request_orders_history_by_delivery_date_and_phone_request import DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest as DeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.deliveries_request_print_bill_request import DeliveriesRequestPrintBillRequest as DeliveriesRequestPrintBillRequest
+from iikocloud_client.models.deliveries_request_print_delivery_bill_request import DeliveriesRequestPrintDeliveryBillRequest as DeliveriesRequestPrintDeliveryBillRequest
+from iikocloud_client.models.deliveries_request_update_delivery_status_request import DeliveriesRequestUpdateDeliveryStatusRequest as DeliveriesRequestUpdateDeliveryStatusRequest
+from iikocloud_client.models.deliveries_request_update_order_cancel_delivery_confirmation_request import DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest as DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
+from iikocloud_client.models.deliveries_request_update_order_change_complete_before_request import DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest as DeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_comment_request import DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest as DeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_operator_request import DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest as DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
+from iikocloud_client.models.deliveries_request_update_order_change_delivery_point_request import DeliveriesRequestUpdateOrderChangeDeliveryPointRequest as DeliveriesRequestUpdateOrderChangeDeliveryPointRequest
+from iikocloud_client.models.deliveries_request_update_order_change_external_data_request import DeliveriesRequestUpdateOrderChangeExternalDataRequest as DeliveriesRequestUpdateOrderChangeExternalDataRequest
+from iikocloud_client.models.deliveries_request_update_order_change_payments_request import DeliveriesRequestUpdateOrderChangePaymentsRequest as DeliveriesRequestUpdateOrderChangePaymentsRequest
+from iikocloud_client.models.deliveries_request_update_order_change_service_type_delivery_by_client import DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient as DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient
+from iikocloud_client.models.deliveries_request_update_order_change_service_type_delivery_by_courier import DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier as DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
+from iikocloud_client.models.deliveries_request_update_order_change_service_type_request import DeliveriesRequestUpdateOrderChangeServiceTypeRequest as DeliveriesRequestUpdateOrderChangeServiceTypeRequest
+from iikocloud_client.models.deliveries_request_update_order_confirm_delivery_request import DeliveriesRequestUpdateOrderConfirmDeliveryRequest as DeliveriesRequestUpdateOrderConfirmDeliveryRequest
+from iikocloud_client.models.deliveries_request_update_order_courier_request import DeliveriesRequestUpdateOrderCourierRequest as DeliveriesRequestUpdateOrderCourierRequest
+from iikocloud_client.models.deliveries_request_update_order_order_payment_item import DeliveriesRequestUpdateOrderOrderPaymentItem as DeliveriesRequestUpdateOrderOrderPaymentItem
+from iikocloud_client.models.deliveries_request_update_order_payments_request import DeliveriesRequestUpdateOrderPaymentsRequest as DeliveriesRequestUpdateOrderPaymentsRequest
+from iikocloud_client.models.deliveries_request_update_order_problem_request import DeliveriesRequestUpdateOrderProblemRequest as DeliveriesRequestUpdateOrderProblemRequest
+from iikocloud_client.models.deliveries_request_update_tracking_link_request import DeliveriesRequestUpdateTrackingLinkRequest as DeliveriesRequestUpdateTrackingLinkRequest
+from iikocloud_client.models.deliveries_response_order_address import DeliveriesResponseOrderAddress as DeliveriesResponseOrderAddress
+from iikocloud_client.models.deliveries_response_order_anonymous_customer import DeliveriesResponseOrderAnonymousCustomer as DeliveriesResponseOrderAnonymousCustomer
+from iikocloud_client.models.deliveries_response_order_cancel_cause import DeliveriesResponseOrderCancelCause as DeliveriesResponseOrderCancelCause
+from iikocloud_client.models.deliveries_response_order_cancel_info import DeliveriesResponseOrderCancelInfo as DeliveriesResponseOrderCancelInfo
+from iikocloud_client.models.deliveries_response_order_city import DeliveriesResponseOrderCity as DeliveriesResponseOrderCity
+from iikocloud_client.models.deliveries_response_order_combo_item_information import DeliveriesResponseOrderComboItemInformation as DeliveriesResponseOrderComboItemInformation
+from iikocloud_client.models.deliveries_response_order_compound_item_template import DeliveriesResponseOrderCompoundItemTemplate as DeliveriesResponseOrderCompoundItemTemplate
+from iikocloud_client.models.deliveries_response_order_compound_order_item import DeliveriesResponseOrderCompoundOrderItem as DeliveriesResponseOrderCompoundOrderItem
+from iikocloud_client.models.deliveries_response_order_compound_order_item_component import DeliveriesResponseOrderCompoundOrderItemComponent as DeliveriesResponseOrderCompoundOrderItemComponent
+from iikocloud_client.models.deliveries_response_order_conception import DeliveriesResponseOrderConception as DeliveriesResponseOrderConception
+from iikocloud_client.models.deliveries_response_order_courier_info import DeliveriesResponseOrderCourierInfo as DeliveriesResponseOrderCourierInfo
+from iikocloud_client.models.deliveries_response_order_creation_status import DeliveriesResponseOrderCreationStatus as DeliveriesResponseOrderCreationStatus
+from iikocloud_client.models.deliveries_response_order_customer import DeliveriesResponseOrderCustomer as DeliveriesResponseOrderCustomer
+from iikocloud_client.models.deliveries_response_order_deletion_method import DeliveriesResponseOrderDeletionMethod as DeliveriesResponseOrderDeletionMethod
+from iikocloud_client.models.deliveries_response_order_delivery_point import DeliveriesResponseOrderDeliveryPoint as DeliveriesResponseOrderDeliveryPoint
+from iikocloud_client.models.deliveries_response_order_discount_item import DeliveriesResponseOrderDiscountItem as DeliveriesResponseOrderDiscountItem
+from iikocloud_client.models.deliveries_response_order_discount_type import DeliveriesResponseOrderDiscountType as DeliveriesResponseOrderDiscountType
+from iikocloud_client.models.deliveries_response_order_dynamic_discount import DeliveriesResponseOrderDynamicDiscount as DeliveriesResponseOrderDynamicDiscount
+from iikocloud_client.models.deliveries_response_order_employee import DeliveriesResponseOrderEmployee as DeliveriesResponseOrderEmployee
+from iikocloud_client.models.deliveries_response_order_external_courier_service import DeliveriesResponseOrderExternalCourierService as DeliveriesResponseOrderExternalCourierService
+from iikocloud_client.models.deliveries_response_order_external_data import DeliveriesResponseOrderExternalData as DeliveriesResponseOrderExternalData
+from iikocloud_client.models.deliveries_response_order_guests_info import DeliveriesResponseOrderGuestsInfo as DeliveriesResponseOrderGuestsInfo
+from iikocloud_client.models.deliveries_response_order_identifier_code import DeliveriesResponseOrderIdentifierCode as DeliveriesResponseOrderIdentifierCode
+from iikocloud_client.models.deliveries_response_order_item_deleted_info import DeliveriesResponseOrderItemDeletedInfo as DeliveriesResponseOrderItemDeletedInfo
+from iikocloud_client.models.deliveries_response_order_loyalty_info import DeliveriesResponseOrderLoyaltyInfo as DeliveriesResponseOrderLoyaltyInfo
+from iikocloud_client.models.deliveries_response_order_marketing_source import DeliveriesResponseOrderMarketingSource as DeliveriesResponseOrderMarketingSource
+from iikocloud_client.models.deliveries_response_order_order import DeliveriesResponseOrderOrder as DeliveriesResponseOrderOrder
+from iikocloud_client.models.deliveries_response_order_order_combo import DeliveriesResponseOrderOrderCombo as DeliveriesResponseOrderOrderCombo
+from iikocloud_client.models.deliveries_response_order_order_info import DeliveriesResponseOrderOrderInfo as DeliveriesResponseOrderOrderInfo
+from iikocloud_client.models.deliveries_response_order_order_item import DeliveriesResponseOrderOrderItem as DeliveriesResponseOrderOrderItem
+from iikocloud_client.models.deliveries_response_order_order_item_identifier_code import DeliveriesResponseOrderOrderItemIdentifierCode as DeliveriesResponseOrderOrderItemIdentifierCode
+from iikocloud_client.models.deliveries_response_order_order_item_modifier import DeliveriesResponseOrderOrderItemModifier as DeliveriesResponseOrderOrderItemModifier
+from iikocloud_client.models.deliveries_response_order_order_item_status import DeliveriesResponseOrderOrderItemStatus as DeliveriesResponseOrderOrderItemStatus
+from iikocloud_client.models.deliveries_response_order_order_status import DeliveriesResponseOrderOrderStatus as DeliveriesResponseOrderOrderStatus
+from iikocloud_client.models.deliveries_response_order_order_type import DeliveriesResponseOrderOrderType as DeliveriesResponseOrderOrderType
+from iikocloud_client.models.deliveries_response_order_payment_item import DeliveriesResponseOrderPaymentItem as DeliveriesResponseOrderPaymentItem
+from iikocloud_client.models.deliveries_response_order_payment_type import DeliveriesResponseOrderPaymentType as DeliveriesResponseOrderPaymentType
+from iikocloud_client.models.deliveries_response_order_position_with_sum import DeliveriesResponseOrderPositionWithSum as DeliveriesResponseOrderPositionWithSum
+from iikocloud_client.models.deliveries_response_order_problem import DeliveriesResponseOrderProblem as DeliveriesResponseOrderProblem
+from iikocloud_client.models.deliveries_response_order_product import DeliveriesResponseOrderProduct as DeliveriesResponseOrderProduct
+from iikocloud_client.models.deliveries_response_order_product_group import DeliveriesResponseOrderProductGroup as DeliveriesResponseOrderProductGroup
+from iikocloud_client.models.deliveries_response_order_product_order_item import DeliveriesResponseOrderProductOrderItem as DeliveriesResponseOrderProductOrderItem
+from iikocloud_client.models.deliveries_response_order_product_size import DeliveriesResponseOrderProductSize as DeliveriesResponseOrderProductSize
+from iikocloud_client.models.deliveries_response_order_region import DeliveriesResponseOrderRegion as DeliveriesResponseOrderRegion
+from iikocloud_client.models.deliveries_response_order_regular_customer import DeliveriesResponseOrderRegularCustomer as DeliveriesResponseOrderRegularCustomer
+from iikocloud_client.models.deliveries_response_order_removal_type import DeliveriesResponseOrderRemovalType as DeliveriesResponseOrderRemovalType
+from iikocloud_client.models.deliveries_response_order_response import DeliveriesResponseOrderResponse as DeliveriesResponseOrderResponse
+from iikocloud_client.models.deliveries_response_order_service_order_item import DeliveriesResponseOrderServiceOrderItem as DeliveriesResponseOrderServiceOrderItem
+from iikocloud_client.models.deliveries_response_order_street import DeliveriesResponseOrderStreet as DeliveriesResponseOrderStreet
+from iikocloud_client.models.deliveries_response_order_tips_payment_item import DeliveriesResponseOrderTipsPaymentItem as DeliveriesResponseOrderTipsPaymentItem
+from iikocloud_client.models.deliveries_response_order_tips_type import DeliveriesResponseOrderTipsType as DeliveriesResponseOrderTipsType
+from iikocloud_client.models.deliveries_response_orders_by_organization import DeliveriesResponseOrdersByOrganization as DeliveriesResponseOrdersByOrganization
+from iikocloud_client.models.deliveries_response_orders_response import DeliveriesResponseOrdersResponse as DeliveriesResponseOrdersResponse
+from iikocloud_client.models.deliveries_response_orders_with_revision_response import DeliveriesResponseOrdersWithRevisionResponse as DeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.delivery_restrictions_action_on_validation_rejection import DeliveryRestrictionsActionOnValidationRejection as DeliveryRestrictionsActionOnValidationRejection
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_allowed_item_with_duration import DeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration as DeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_delivery_restriction_reject_code import DeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode as DeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest as DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse as DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_order_location import DeliveryRestrictionsAllowedRestrictionsOrderLocation as DeliveryRestrictionsAllowedRestrictionsOrderLocation
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_reject_item import DeliveryRestrictionsAllowedRestrictionsRejectItem as DeliveryRestrictionsAllowedRestrictionsRejectItem
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_reject_item_data import DeliveryRestrictionsAllowedRestrictionsRejectItemData as DeliveryRestrictionsAllowedRestrictionsRejectItemData
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_restrictions_address import DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress as DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_restrictions_order_item import DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem as DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_restrictions_order_item_modifier import DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier as DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier
+from iikocloud_client.models.delivery_restrictions_coordinates import DeliveryRestrictionsCoordinates as DeliveryRestrictionsCoordinates
+from iikocloud_client.models.delivery_restrictions_delivery_geocode_service_type import DeliveryRestrictionsDeliveryGeocodeServiceType as DeliveryRestrictionsDeliveryGeocodeServiceType
+from iikocloud_client.models.delivery_restrictions_delivery_restriction_item import DeliveryRestrictionsDeliveryRestrictionItem as DeliveryRestrictionsDeliveryRestrictionItem
+from iikocloud_client.models.delivery_restrictions_delivery_restrictions import DeliveryRestrictionsDeliveryRestrictions as DeliveryRestrictionsDeliveryRestrictions
+from iikocloud_client.models.delivery_restrictions_delivery_restrictions_mode import DeliveryRestrictionsDeliveryRestrictionsMode as DeliveryRestrictionsDeliveryRestrictionsMode
+from iikocloud_client.models.delivery_restrictions_delivery_zone import DeliveryRestrictionsDeliveryZone as DeliveryRestrictionsDeliveryZone
+from iikocloud_client.models.delivery_restrictions_delivery_zone_address_binding import DeliveryRestrictionsDeliveryZoneAddressBinding as DeliveryRestrictionsDeliveryZoneAddressBinding
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_request import DeliveryRestrictionsGetDeliveryRestrictionsRequest as DeliveryRestrictionsGetDeliveryRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_response import DeliveryRestrictionsGetDeliveryRestrictionsResponse as DeliveryRestrictionsGetDeliveryRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_houses_range import DeliveryRestrictionsHousesRange as DeliveryRestrictionsHousesRange
+from iikocloud_client.models.delivery_restrictions_houses_range_type import DeliveryRestrictionsHousesRangeType as DeliveryRestrictionsHousesRangeType
+from iikocloud_client.models.discounts_discount_card_mode import DiscountsDiscountCardMode as DiscountsDiscountCardMode
+from iikocloud_client.models.discounts_discount_card_type_info import DiscountsDiscountCardTypeInfo as DiscountsDiscountCardTypeInfo
+from iikocloud_client.models.discounts_discounts_request import DiscountsDiscountsRequest as DiscountsDiscountsRequest
+from iikocloud_client.models.discounts_discounts_response import DiscountsDiscountsResponse as DiscountsDiscountsResponse
+from iikocloud_client.models.discounts_product_category_discount import DiscountsProductCategoryDiscount as DiscountsProductCategoryDiscount
+from iikocloud_client.models.employees_active_courier_location import EmployeesActiveCourierLocation as EmployeesActiveCourierLocation
+from iikocloud_client.models.employees_active_courier_locations_by_terminal_group_request import EmployeesActiveCourierLocationsByTerminalGroupRequest as EmployeesActiveCourierLocationsByTerminalGroupRequest
+from iikocloud_client.models.employees_active_courier_locations_response import EmployeesActiveCourierLocationsResponse as EmployeesActiveCourierLocationsResponse
+from iikocloud_client.models.employees_change_personal_session_response import EmployeesChangePersonalSessionResponse as EmployeesChangePersonalSessionResponse
+from iikocloud_client.models.employees_close_personal_session_request import EmployeesClosePersonalSessionRequest as EmployeesClosePersonalSessionRequest
+from iikocloud_client.models.employees_coordinate_info import EmployeesCoordinateInfo as EmployeesCoordinateInfo
+from iikocloud_client.models.employees_courier_locations import EmployeesCourierLocations as EmployeesCourierLocations
+from iikocloud_client.models.employees_courier_locations_by_time_offset_request import EmployeesCourierLocationsByTimeOffsetRequest as EmployeesCourierLocationsByTimeOffsetRequest
+from iikocloud_client.models.employees_courier_locations_by_time_offset_response import EmployeesCourierLocationsByTimeOffsetResponse as EmployeesCourierLocationsByTimeOffsetResponse
+from iikocloud_client.models.employees_couriers_and_check_role_request import EmployeesCouriersAndCheckRoleRequest as EmployeesCouriersAndCheckRoleRequest
+from iikocloud_client.models.employees_couriers_request import EmployeesCouriersRequest as EmployeesCouriersRequest
+from iikocloud_client.models.employees_employee import EmployeesEmployee as EmployeesEmployee
+from iikocloud_client.models.employees_employee_info import EmployeesEmployeeInfo as EmployeesEmployeeInfo
+from iikocloud_client.models.employees_employee_info_request import EmployeesEmployeeInfoRequest as EmployeesEmployeeInfoRequest
+from iikocloud_client.models.employees_employee_info_response import EmployeesEmployeeInfoResponse as EmployeesEmployeeInfoResponse
+from iikocloud_client.models.employees_employee_with_checked_role import EmployeesEmployeeWithCheckedRole as EmployeesEmployeeWithCheckedRole
+from iikocloud_client.models.employees_employees_response import EmployeesEmployeesResponse as EmployeesEmployeesResponse
+from iikocloud_client.models.employees_employees_with_role_sign_response import EmployeesEmployeesWithRoleSignResponse as EmployeesEmployeesWithRoleSignResponse
+from iikocloud_client.models.employees_get_personal_session_info_request import EmployeesGetPersonalSessionInfoRequest as EmployeesGetPersonalSessionInfoRequest
+from iikocloud_client.models.employees_get_personal_session_info_response import EmployeesGetPersonalSessionInfoResponse as EmployeesGetPersonalSessionInfoResponse
+from iikocloud_client.models.employees_get_terminal_groups_of_employee_request import EmployeesGetTerminalGroupsOfEmployeeRequest as EmployeesGetTerminalGroupsOfEmployeeRequest
+from iikocloud_client.models.employees_get_terminal_groups_of_employee_response import EmployeesGetTerminalGroupsOfEmployeeResponse as EmployeesGetTerminalGroupsOfEmployeeResponse
+from iikocloud_client.models.employees_open_personal_session_request import EmployeesOpenPersonalSessionRequest as EmployeesOpenPersonalSessionRequest
+from iikocloud_client.models.employees_personal_shift import EmployeesPersonalShift as EmployeesPersonalShift
+from iikocloud_client.models.employees_role_check_result import EmployeesRoleCheckResult as EmployeesRoleCheckResult
+from iikocloud_client.models.errors_error_code import ErrorsErrorCode as ErrorsErrorCode
+from iikocloud_client.models.errors_error_info import ErrorsErrorInfo as ErrorsErrorInfo
+from iikocloud_client.models.errors_error_response import ErrorsErrorResponse as ErrorsErrorResponse
 from iikocloud_client.models.external_menu_category import ExternalMenuCategory as ExternalMenuCategory
 from iikocloud_client.models.external_menu_category2 import ExternalMenuCategory2 as ExternalMenuCategory2
 from iikocloud_client.models.external_menu_category3 import ExternalMenuCategory3 as ExternalMenuCategory3
@@ -782,486 +1043,62 @@ from iikocloud_client.models.iiko_net_common_enums_counter_metric import IikoNet
 from iikocloud_client.models.iiko_net_common_enums_counter_period import IikoNetCommonEnumsCounterPeriod as IikoNetCommonEnumsCounterPeriod
 from iikocloud_client.models.iiko_net_common_enums_refill_type import IikoNetCommonEnumsRefillType as IikoNetCommonEnumsRefillType
 from iikocloud_client.models.iiko_net_common_enums_template_type import IikoNetCommonEnumsTemplateType as IikoNetCommonEnumsTemplateType
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_common_get_by_organization_id_request import IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest as IikoNetServiceContractsApiIikoTransportCommonGetByOrganizationIdRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_request import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest as IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_customer_to_program_response import IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse as IikoNetServiceContractsApiIikoTransportCustomerAddCustomerToProgramResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_add_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest as IikoNetServiceContractsApiIikoTransportCustomerAddMagnetCardRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_cancel_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest as IikoNetServiceContractsApiIikoTransportCustomerCancelHoldMoneyRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request import IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest as IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_user_balance_request import IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest as IikoNetServiceContractsApiIikoTransportCustomerChangeUserBalanceRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_request import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest as IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_create_or_update_customer_response import IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse as IikoNetServiceContractsApiIikoTransportCustomerCreateOrUpdateCustomerResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest as IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_customers_response import IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse as IikoNetServiceContractsApiIikoTransportCustomerDeleteCustomersResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_delete_magnet_card_request import IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest as IikoNetServiceContractsApiIikoTransportCustomerDeleteMagnetCardRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_response import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse as IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_by_card_number_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_by_card_track_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_by_email_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_by_id_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_by_phone_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_request import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_customer_info_response import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse as IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_guest_balance_info import IikoNetServiceContractsApiIikoTransportCustomerGuestBalanceInfo as IikoNetServiceContractsApiIikoTransportCustomerGuestBalanceInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_guest_card_info import IikoNetServiceContractsApiIikoTransportCustomerGuestCardInfo as IikoNetServiceContractsApiIikoTransportCustomerGuestCardInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_guest_category_short_info import IikoNetServiceContractsApiIikoTransportCustomerGuestCategoryShortInfo as IikoNetServiceContractsApiIikoTransportCustomerGuestCategoryShortInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_request import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest as IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_hold_money_response import IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse as IikoNetServiceContractsApiIikoTransportCustomerHoldMoneyResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_iiko_net_user_sex import IikoNetServiceContractsApiIikoTransportCustomerIikoNetUserSex as IikoNetServiceContractsApiIikoTransportCustomerIikoNetUserSex
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_personal_data_consent_status import IikoNetServiceContractsApiIikoTransportCustomerPersonalDataConsentStatus as IikoNetServiceContractsApiIikoTransportCustomerPersonalDataConsentStatus
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_request import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest as IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_restore_customers_response import IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse as IikoNetServiceContractsApiIikoTransportCustomerRestoreCustomersResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_available_combo import IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailableCombo as IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailableCombo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_available_payment import IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailablePayment as IikoNetServiceContractsApiIikoTransportLoyaltyResultAvailablePayment
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_checkin_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateCheckinResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_calculate_combo_price_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultCalculateComboPriceResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_category import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboCategory as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboCategory
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_group import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroup as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroup
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_group_mapping import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroupMapping as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboGroupMapping
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_price_modification_type import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboPriceModificationType as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboPriceModificationType
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_product import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboProduct as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboProduct
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_combo_specification import IikoNetServiceContractsApiIikoTransportLoyaltyResultComboSpecification as IikoNetServiceContractsApiIikoTransportLoyaltyResultComboSpecification
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info import IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfo as IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_coupon_info_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultCouponInfoResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_discount_operation import IikoNetServiceContractsApiIikoTransportLoyaltyResultDiscountOperation as IikoNetServiceContractsApiIikoTransportLoyaltyResultDiscountOperation
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_dynamic_discount import IikoNetServiceContractsApiIikoTransportLoyaltyResultDynamicDiscount as IikoNetServiceContractsApiIikoTransportLoyaltyResultDynamicDiscount
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_free_product import IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProduct as IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProduct
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_free_product_size import IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductSize as IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductSize
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_free_products_group import IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductsGroup as IikoNetServiceContractsApiIikoTransportLoyaltyResultFreeProductsGroup
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_combos_info_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCombosInfoResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_counters_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultGetCountersResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_get_manual_conditions_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultGetManualConditionsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_guest_counter import IikoNetServiceContractsApiIikoTransportLoyaltyResultGuestCounter as IikoNetServiceContractsApiIikoTransportLoyaltyResultGuestCounter
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_loyalty_program_result import IikoNetServiceContractsApiIikoTransportLoyaltyResultLoyaltyProgramResult as IikoNetServiceContractsApiIikoTransportLoyaltyResultLoyaltyProgramResult
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_manual_condition_info import IikoNetServiceContractsApiIikoTransportLoyaltyResultManualConditionInfo as IikoNetServiceContractsApiIikoTransportLoyaltyResultManualConditionInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon import IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCoupon as IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCoupon
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_not_activated_coupon_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultNotActivatedCouponResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_operation_code import IikoNetServiceContractsApiIikoTransportLoyaltyResultOperationCode as IikoNetServiceContractsApiIikoTransportLoyaltyResultOperationCode
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons import IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCoupons as IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCoupons
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_request import IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest as IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_series_with_not_activated_coupons_response import IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse as IikoNetServiceContractsApiIikoTransportLoyaltyResultSeriesWithNotActivatedCouponsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_upsale import IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsale as IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsale
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_upsale_product import IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsaleProduct as IikoNetServiceContractsApiIikoTransportLoyaltyResultUpsaleProduct
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_wallet_info import IikoNetServiceContractsApiIikoTransportLoyaltyResultWalletInfo as IikoNetServiceContractsApiIikoTransportLoyaltyResultWalletInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_loyalty_result_warning_info import IikoNetServiceContractsApiIikoTransportLoyaltyResultWarningInfo as IikoNetServiceContractsApiIikoTransportLoyaltyResultWarningInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_request import IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest as IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_check_sms_status_response import IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse as IikoNetServiceContractsApiIikoTransportNotificationCheckSmsStatusResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_notification_sending_capability_check_status import IikoNetServiceContractsApiIikoTransportNotificationNotificationSendingCapabilityCheckStatus as IikoNetServiceContractsApiIikoTransportNotificationNotificationSendingCapabilityCheckStatus
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_email_request import IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest as IikoNetServiceContractsApiIikoTransportNotificationSendEmailRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_sms_request import IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest as IikoNetServiceContractsApiIikoTransportNotificationSendSmsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_send_sms_response import IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse as IikoNetServiceContractsApiIikoTransportNotificationSendSmsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_request import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest as IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_possibility_response import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse as IikoNetServiceContractsApiIikoTransportNotificationSmsSendingPossibilityResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_status import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatus as IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatus
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_notification_sms_sending_status_info import IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatusInfo as IikoNetServiceContractsApiIikoTransportNotificationSmsSendingStatusInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_get_programs_request import IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest as IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_get_programs_response import IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse as IikoNetServiceContractsApiIikoTransportOrganizationGetProgramsResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_loyalty_program import IikoNetServiceContractsApiIikoTransportOrganizationLoyaltyProgram as IikoNetServiceContractsApiIikoTransportOrganizationLoyaltyProgram
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_marketing_campaign_action_condition_binding_info import IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignActionConditionBindingInfo as IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignActionConditionBindingInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_marketing_campaign_info import IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignInfo as IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_organization_marketing_campaign_settings_info import IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignSettingsInfo as IikoNetServiceContractsApiIikoTransportOrganizationMarketingCampaignSettingsInfo
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_program_type import IikoNetServiceContractsApiIikoTransportProgramType as IikoNetServiceContractsApiIikoTransportProgramType
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_certificate_counteragent_type import IikoNetServiceContractsApiIikoTransportReportCertificateCounteragentType as IikoNetServiceContractsApiIikoTransportReportCertificateCounteragentType
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest as IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_period_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse as IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByPeriodResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_request import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest as IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_get_transactions_report_by_revision_response import IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse as IikoNetServiceContractsApiIikoTransportReportGetTransactionsReportByRevisionResponse
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_transaction_type import IikoNetServiceContractsApiIikoTransportReportTransactionType as IikoNetServiceContractsApiIikoTransportReportTransactionType
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_transport_transactions_certificate_report_item import IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCertificateReportItem as IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCertificateReportItem
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_transport_transactions_coupon_report_item import IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCouponReportItem as IikoNetServiceContractsApiIikoTransportReportTransportTransactionsCouponReportItem
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_report_transport_transactions_report_item import IikoNetServiceContractsApiIikoTransportReportTransportTransactionsReportItem as IikoNetServiceContractsApiIikoTransportReportTransportTransactionsReportItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_cities_request import IikoTransportPublicApiContractsAddressCitiesRequest as IikoTransportPublicApiContractsAddressCitiesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_cities_response import IikoTransportPublicApiContractsAddressCitiesResponse as IikoTransportPublicApiContractsAddressCitiesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_city import IikoTransportPublicApiContractsAddressCity as IikoTransportPublicApiContractsAddressCity
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_hints_address_hints_service_type import IikoTransportPublicApiContractsAddressHintsAddressHintsServiceType as IikoTransportPublicApiContractsAddressHintsAddressHintsServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_region import IikoTransportPublicApiContractsAddressRegion as IikoTransportPublicApiContractsAddressRegion
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_regions_request import IikoTransportPublicApiContractsAddressRegionsRequest as IikoTransportPublicApiContractsAddressRegionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_regions_response import IikoTransportPublicApiContractsAddressRegionsResponse as IikoTransportPublicApiContractsAddressRegionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_street import IikoTransportPublicApiContractsAddressStreet as IikoTransportPublicApiContractsAddressStreet
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_street_by_id import IikoTransportPublicApiContractsAddressStreetById as IikoTransportPublicApiContractsAddressStreetById
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_city_request import IikoTransportPublicApiContractsAddressStreetsByCityRequest as IikoTransportPublicApiContractsAddressStreetsByCityRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_id_request import IikoTransportPublicApiContractsAddressStreetsByIdRequest as IikoTransportPublicApiContractsAddressStreetsByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_id_response import IikoTransportPublicApiContractsAddressStreetsByIdResponse as IikoTransportPublicApiContractsAddressStreetsByIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_response import IikoTransportPublicApiContractsAddressStreetsResponse as IikoTransportPublicApiContractsAddressStreetsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_auth_get_access_token_request import IikoTransportPublicApiContractsAuthGetAccessTokenRequest as IikoTransportPublicApiContractsAuthGetAccessTokenRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_auth_get_access_token_response import IikoTransportPublicApiContractsAuthGetAccessTokenResponse as IikoTransportPublicApiContractsAuthGetAccessTokenResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_cause import IikoTransportPublicApiContractsCancelCausesCancelCause as IikoTransportPublicApiContractsCancelCausesCancelCause
-from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_causes_request import IikoTransportPublicApiContractsCancelCausesCancelCausesRequest as IikoTransportPublicApiContractsCancelCausesCancelCausesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_cancel_causes_cancel_causes_response import IikoTransportPublicApiContractsCancelCausesCancelCausesResponse as IikoTransportPublicApiContractsCancelCausesCancelCausesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_error_command_status import IikoTransportPublicApiContractsCommandsErrorCommandStatus as IikoTransportPublicApiContractsCommandsErrorCommandStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_request import IikoTransportPublicApiContractsCommandsGetCommandStatusRequest as IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_response import IikoTransportPublicApiContractsCommandsGetCommandStatusResponse as IikoTransportPublicApiContractsCommandsGetCommandStatusResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_in_progress_command_status import IikoTransportPublicApiContractsCommandsInProgressCommandStatus as IikoTransportPublicApiContractsCommandsInProgressCommandStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_success_command_status import IikoTransportPublicApiContractsCommandsSuccessCommandStatus as IikoTransportPublicApiContractsCommandsSuccessCommandStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse as IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_external_data import IikoTransportPublicApiContractsCommonExternalData as IikoTransportPublicApiContractsCommonExternalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_price_category import IikoTransportPublicApiContractsCommonPriceCategory as IikoTransportPublicApiContractsCommonPriceCategory
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_sort_direction import IikoTransportPublicApiContractsCommonSortDirection as IikoTransportPublicApiContractsCommonSortDirection
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_card_payment_additional_data import IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData as IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_cheque_additional_info import IikoTransportPublicApiContractsDeliveriesCommonChequeAdditionalInfo as IikoTransportPublicApiContractsDeliveriesCommonChequeAdditionalInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_coordinates import IikoTransportPublicApiContractsDeliveriesCommonCoordinates as IikoTransportPublicApiContractsDeliveriesCommonCoordinates
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_delivery_status import IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatus as IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_delivery_status_for_update import IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatusForUpdate as IikoTransportPublicApiContractsDeliveriesCommonDeliveryStatusForUpdate
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_external_payment_additional_data import IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData as IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_gender import IikoTransportPublicApiContractsDeliveriesCommonGender as IikoTransportPublicApiContractsDeliveriesCommonGender
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_iiko_card_search_scope import IikoTransportPublicApiContractsDeliveriesCommonIikoCardSearchScope as IikoTransportPublicApiContractsDeliveriesCommonIikoCardSearchScope
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_loyalty_card_payment_additional_data import IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData as IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_order_service_type import IikoTransportPublicApiContractsDeliveriesCommonOrderServiceType as IikoTransportPublicApiContractsDeliveriesCommonOrderServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_payment_additional_data import IikoTransportPublicApiContractsDeliveriesCommonPaymentAdditionalData as IikoTransportPublicApiContractsDeliveriesCommonPaymentAdditionalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_common_payment_type_kind import IikoTransportPublicApiContractsDeliveriesCommonPaymentTypeKind as IikoTransportPublicApiContractsDeliveriesCommonPaymentTypeKind
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_create_or_save_draft_response import IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse as IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_delivery_order_draft import IikoTransportPublicApiContractsDeliveriesDraftsDeliveryOrderDraft as IikoTransportPublicApiContractsDeliveriesDraftsDeliveryOrderDraft
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request import IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest as IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_response import IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse as IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_get_draft_response import IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse as IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_order_draft import IikoTransportPublicApiContractsDeliveriesDraftsOrderDraft as IikoTransportPublicApiContractsDeliveriesDraftsOrderDraft
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_order_draft_sort_property import IikoTransportPublicApiContractsDeliveriesDraftsOrderDraftSortProperty as IikoTransportPublicApiContractsDeliveriesDraftsOrderDraftSortProperty
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest as IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_add_order_items_request import IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest as IikoTransportPublicApiContractsDeliveriesRequestAddOrderItemsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_cancel_order_request import IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest as IikoTransportPublicApiContractsDeliveriesRequestCancelOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_cancel_table_order_request import IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest as IikoTransportPublicApiContractsDeliveriesRequestCancelTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_change_driver_info_request import IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest as IikoTransportPublicApiContractsDeliveriesRequestChangeDriverInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_close_delivery_order_request import IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest as IikoTransportPublicApiContractsDeliveriesRequestCloseDeliveryOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_close_table_order_request import IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest as IikoTransportPublicApiContractsDeliveriesRequestCloseTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_address import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddress as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddress
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_address_city import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_address_legacy import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_anonymous_customer import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAnonymousCustomer as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAnonymousCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_card_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_card_tips_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_cash_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_cash_tips_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_combo import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCombo as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCombo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_combo_item_information import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderComboItemInformation as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderComboItemInformation
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_compound_order_item import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_compound_order_item_component import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItemComponent as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItemComponent
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_customer import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCustomer as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_delivery_order import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryOrder as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_delivery_point import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryPoint as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDeliveryPoint
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_discount import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscount as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_discount_card import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountCard as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountCard
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_discounts_info import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountsInfo as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDiscountsInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_dynamic_discount import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDynamicDiscount as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderDynamicDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_external_data import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalData as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_external_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_external_tips_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_guests import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderGuests as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderGuests
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_iiko_card_discount import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_iiko_card_discount_item import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscountItem as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscountItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_loyalty_card_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_loyalty_info import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyInfo as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_modifier import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderModifier as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderModifier
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_order import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrder as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_order_item import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderItem as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_order_service_type import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderServiceType as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderOrderServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_product_order_item import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_regular_customer import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRegularCustomer as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRegularCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_request import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_rms_discount import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_street import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderStreet as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderStreet
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_create_order_tips_payment import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderTipsPayment as IikoTransportPublicApiContractsDeliveriesRequestCreateOrderTipsPayment
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_order_sort_property import IikoTransportPublicApiContractsDeliveriesRequestOrderSortProperty as IikoTransportPublicApiContractsDeliveriesRequestOrderSortProperty
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest as IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_print_bill_request import IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest as IikoTransportPublicApiContractsDeliveriesRequestPrintBillRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_print_delivery_bill_request import IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest as IikoTransportPublicApiContractsDeliveriesRequestPrintDeliveryBillRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_delivery_status_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateDeliveryStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_cancel_delivery_confirmation_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_complete_before_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeCompleteBeforeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_comment_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryCommentRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_operator_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_delivery_point_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeDeliveryPointRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_external_data_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeExternalDataRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangePaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_delivery_by_client import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_delivery_by_courier import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_change_service_type_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_confirm_delivery_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderConfirmDeliveryRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_courier_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderCourierRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_order_payment_item import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderOrderPaymentItem as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderOrderPaymentItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_payments_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderPaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_order_problem_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderProblemRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_update_tracking_link_request import IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest as IikoTransportPublicApiContractsDeliveriesRequestUpdateTrackingLinkRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_address import IikoTransportPublicApiContractsDeliveriesResponseOrderAddress as IikoTransportPublicApiContractsDeliveriesResponseOrderAddress
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_anonymous_customer import IikoTransportPublicApiContractsDeliveriesResponseOrderAnonymousCustomer as IikoTransportPublicApiContractsDeliveriesResponseOrderAnonymousCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_cancel_cause import IikoTransportPublicApiContractsDeliveriesResponseOrderCancelCause as IikoTransportPublicApiContractsDeliveriesResponseOrderCancelCause
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_cancel_info import IikoTransportPublicApiContractsDeliveriesResponseOrderCancelInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderCancelInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_city import IikoTransportPublicApiContractsDeliveriesResponseOrderCity as IikoTransportPublicApiContractsDeliveriesResponseOrderCity
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_combo_item_information import IikoTransportPublicApiContractsDeliveriesResponseOrderComboItemInformation as IikoTransportPublicApiContractsDeliveriesResponseOrderComboItemInformation
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_compound_item_template import IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundItemTemplate as IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundItemTemplate
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_compound_order_item import IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem as IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_compound_order_item_component import IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItemComponent as IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItemComponent
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_conception import IikoTransportPublicApiContractsDeliveriesResponseOrderConception as IikoTransportPublicApiContractsDeliveriesResponseOrderConception
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_courier_info import IikoTransportPublicApiContractsDeliveriesResponseOrderCourierInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderCourierInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_creation_status import IikoTransportPublicApiContractsDeliveriesResponseOrderCreationStatus as IikoTransportPublicApiContractsDeliveriesResponseOrderCreationStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_customer import IikoTransportPublicApiContractsDeliveriesResponseOrderCustomer as IikoTransportPublicApiContractsDeliveriesResponseOrderCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_deletion_method import IikoTransportPublicApiContractsDeliveriesResponseOrderDeletionMethod as IikoTransportPublicApiContractsDeliveriesResponseOrderDeletionMethod
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_delivery_point import IikoTransportPublicApiContractsDeliveriesResponseOrderDeliveryPoint as IikoTransportPublicApiContractsDeliveriesResponseOrderDeliveryPoint
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_discount_item import IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountItem as IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_discount_type import IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountType as IikoTransportPublicApiContractsDeliveriesResponseOrderDiscountType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_dynamic_discount import IikoTransportPublicApiContractsDeliveriesResponseOrderDynamicDiscount as IikoTransportPublicApiContractsDeliveriesResponseOrderDynamicDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_employee import IikoTransportPublicApiContractsDeliveriesResponseOrderEmployee as IikoTransportPublicApiContractsDeliveriesResponseOrderEmployee
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_external_courier_service import IikoTransportPublicApiContractsDeliveriesResponseOrderExternalCourierService as IikoTransportPublicApiContractsDeliveriesResponseOrderExternalCourierService
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_external_data import IikoTransportPublicApiContractsDeliveriesResponseOrderExternalData as IikoTransportPublicApiContractsDeliveriesResponseOrderExternalData
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_guests_info import IikoTransportPublicApiContractsDeliveriesResponseOrderGuestsInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderGuestsInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_identifier_code import IikoTransportPublicApiContractsDeliveriesResponseOrderIdentifierCode as IikoTransportPublicApiContractsDeliveriesResponseOrderIdentifierCode
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_item_deleted_info import IikoTransportPublicApiContractsDeliveriesResponseOrderItemDeletedInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderItemDeletedInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_loyalty_info import IikoTransportPublicApiContractsDeliveriesResponseOrderLoyaltyInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderLoyaltyInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_marketing_source import IikoTransportPublicApiContractsDeliveriesResponseOrderMarketingSource as IikoTransportPublicApiContractsDeliveriesResponseOrderMarketingSource
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order import IikoTransportPublicApiContractsDeliveriesResponseOrderOrder as IikoTransportPublicApiContractsDeliveriesResponseOrderOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_combo import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderCombo as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderCombo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_info import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderInfo as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_item import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItem as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_item_identifier_code import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemIdentifierCode as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemIdentifierCode
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_item_modifier import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemModifier as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemModifier
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_item_status import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemStatus as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderItemStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_status import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderStatus as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_order_type import IikoTransportPublicApiContractsDeliveriesResponseOrderOrderType as IikoTransportPublicApiContractsDeliveriesResponseOrderOrderType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_payment_item import IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentItem as IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_payment_type import IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentType as IikoTransportPublicApiContractsDeliveriesResponseOrderPaymentType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_position_with_sum import IikoTransportPublicApiContractsDeliveriesResponseOrderPositionWithSum as IikoTransportPublicApiContractsDeliveriesResponseOrderPositionWithSum
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_problem import IikoTransportPublicApiContractsDeliveriesResponseOrderProblem as IikoTransportPublicApiContractsDeliveriesResponseOrderProblem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_product import IikoTransportPublicApiContractsDeliveriesResponseOrderProduct as IikoTransportPublicApiContractsDeliveriesResponseOrderProduct
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_product_group import IikoTransportPublicApiContractsDeliveriesResponseOrderProductGroup as IikoTransportPublicApiContractsDeliveriesResponseOrderProductGroup
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_product_order_item import IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem as IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_product_size import IikoTransportPublicApiContractsDeliveriesResponseOrderProductSize as IikoTransportPublicApiContractsDeliveriesResponseOrderProductSize
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_region import IikoTransportPublicApiContractsDeliveriesResponseOrderRegion as IikoTransportPublicApiContractsDeliveriesResponseOrderRegion
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_regular_customer import IikoTransportPublicApiContractsDeliveriesResponseOrderRegularCustomer as IikoTransportPublicApiContractsDeliveriesResponseOrderRegularCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_removal_type import IikoTransportPublicApiContractsDeliveriesResponseOrderRemovalType as IikoTransportPublicApiContractsDeliveriesResponseOrderRemovalType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_response import IikoTransportPublicApiContractsDeliveriesResponseOrderResponse as IikoTransportPublicApiContractsDeliveriesResponseOrderResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_service_order_item import IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem as IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_street import IikoTransportPublicApiContractsDeliveriesResponseOrderStreet as IikoTransportPublicApiContractsDeliveriesResponseOrderStreet
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_tips_payment_item import IikoTransportPublicApiContractsDeliveriesResponseOrderTipsPaymentItem as IikoTransportPublicApiContractsDeliveriesResponseOrderTipsPaymentItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_tips_type import IikoTransportPublicApiContractsDeliveriesResponseOrderTipsType as IikoTransportPublicApiContractsDeliveriesResponseOrderTipsType
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_by_organization import IikoTransportPublicApiContractsDeliveriesResponseOrdersByOrganization as IikoTransportPublicApiContractsDeliveriesResponseOrdersByOrganization
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse as IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse as IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_action_on_validation_rejection import IikoTransportPublicApiContractsDeliveryRestrictionsActionOnValidationRejection as IikoTransportPublicApiContractsDeliveryRestrictionsActionOnValidationRejection
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_allowed_item_with_duration import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_delivery_restriction_reject_code import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_order_location import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsOrderLocation as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsOrderLocation
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_reject_item import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItem as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_reject_item_data import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItemData as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRejectItemData
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_restrictions_address import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsAddress as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsAddress
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_restrictions_order_item import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_restrictions_order_item_modifier import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier as IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_coordinates import IikoTransportPublicApiContractsDeliveryRestrictionsCoordinates as IikoTransportPublicApiContractsDeliveryRestrictionsCoordinates
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_geocode_service_type import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryGeocodeServiceType as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryGeocodeServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_restriction_item import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionItem as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_restrictions import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictions as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictions
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_restrictions_mode import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionsMode as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryRestrictionsMode
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_zone import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZone as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZone
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_delivery_zone_address_binding import IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZoneAddressBinding as IikoTransportPublicApiContractsDeliveryRestrictionsDeliveryZoneAddressBinding
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest as IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse as IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_houses_range import IikoTransportPublicApiContractsDeliveryRestrictionsHousesRange as IikoTransportPublicApiContractsDeliveryRestrictionsHousesRange
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_houses_range_type import IikoTransportPublicApiContractsDeliveryRestrictionsHousesRangeType as IikoTransportPublicApiContractsDeliveryRestrictionsHousesRangeType
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discount_card_mode import IikoTransportPublicApiContractsDiscountsDiscountCardMode as IikoTransportPublicApiContractsDiscountsDiscountCardMode
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discount_card_type_info import IikoTransportPublicApiContractsDiscountsDiscountCardTypeInfo as IikoTransportPublicApiContractsDiscountsDiscountCardTypeInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discounts_request import IikoTransportPublicApiContractsDiscountsDiscountsRequest as IikoTransportPublicApiContractsDiscountsDiscountsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_discounts_response import IikoTransportPublicApiContractsDiscountsDiscountsResponse as IikoTransportPublicApiContractsDiscountsDiscountsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_discounts_product_category_discount import IikoTransportPublicApiContractsDiscountsProductCategoryDiscount as IikoTransportPublicApiContractsDiscountsProductCategoryDiscount
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_location import IikoTransportPublicApiContractsEmployeesActiveCourierLocation as IikoTransportPublicApiContractsEmployeesActiveCourierLocation
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_locations_by_terminal_group_request import IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest as IikoTransportPublicApiContractsEmployeesActiveCourierLocationsByTerminalGroupRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_active_courier_locations_response import IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse as IikoTransportPublicApiContractsEmployeesActiveCourierLocationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_change_personal_session_response import IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse as IikoTransportPublicApiContractsEmployeesChangePersonalSessionResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_close_personal_session_request import IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest as IikoTransportPublicApiContractsEmployeesClosePersonalSessionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_coordinate_info import IikoTransportPublicApiContractsEmployeesCoordinateInfo as IikoTransportPublicApiContractsEmployeesCoordinateInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_courier_locations import IikoTransportPublicApiContractsEmployeesCourierLocations as IikoTransportPublicApiContractsEmployeesCourierLocations
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_request import IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest as IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_courier_locations_by_time_offset_response import IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse as IikoTransportPublicApiContractsEmployeesCourierLocationsByTimeOffsetResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_couriers_and_check_role_request import IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest as IikoTransportPublicApiContractsEmployeesCouriersAndCheckRoleRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_couriers_request import IikoTransportPublicApiContractsEmployeesCouriersRequest as IikoTransportPublicApiContractsEmployeesCouriersRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee import IikoTransportPublicApiContractsEmployeesEmployee as IikoTransportPublicApiContractsEmployeesEmployee
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_info import IikoTransportPublicApiContractsEmployeesEmployeeInfo as IikoTransportPublicApiContractsEmployeesEmployeeInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_info_request import IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest as IikoTransportPublicApiContractsEmployeesEmployeeInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_info_response import IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse as IikoTransportPublicApiContractsEmployeesEmployeeInfoResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employee_with_checked_role import IikoTransportPublicApiContractsEmployeesEmployeeWithCheckedRole as IikoTransportPublicApiContractsEmployeesEmployeeWithCheckedRole
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employees_response import IikoTransportPublicApiContractsEmployeesEmployeesResponse as IikoTransportPublicApiContractsEmployeesEmployeesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_employees_with_role_sign_response import IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse as IikoTransportPublicApiContractsEmployeesEmployeesWithRoleSignResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_personal_session_info_request import IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest as IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_personal_session_info_response import IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse as IikoTransportPublicApiContractsEmployeesGetPersonalSessionInfoResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_request import IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest as IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_get_terminal_groups_of_employee_response import IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse as IikoTransportPublicApiContractsEmployeesGetTerminalGroupsOfEmployeeResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_open_personal_session_request import IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest as IikoTransportPublicApiContractsEmployeesOpenPersonalSessionRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_personal_shift import IikoTransportPublicApiContractsEmployeesPersonalShift as IikoTransportPublicApiContractsEmployeesPersonalShift
-from iikocloud_client.models.iiko_transport_public_api_contracts_employees_role_check_result import IikoTransportPublicApiContractsEmployeesRoleCheckResult as IikoTransportPublicApiContractsEmployeesRoleCheckResult
-from iikocloud_client.models.iiko_transport_public_api_contracts_errors_error_code import IikoTransportPublicApiContractsErrorsErrorCode as IikoTransportPublicApiContractsErrorsErrorCode
-from iikocloud_client.models.iiko_transport_public_api_contracts_errors_error_info import IikoTransportPublicApiContractsErrorsErrorInfo as IikoTransportPublicApiContractsErrorsErrorInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_errors_error_response import IikoTransportPublicApiContractsErrorsErrorResponse as IikoTransportPublicApiContractsErrorsErrorResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_integration_web_hooks_filters_delivery_order_web_hooks_filter import IikoTransportPublicApiContractsIntegrationWebHooksFiltersDeliveryOrderWebHooksFilter as IikoTransportPublicApiContractsIntegrationWebHooksFiltersDeliveryOrderWebHooksFilter
-from iikocloud_client.models.iiko_transport_public_api_contracts_integration_web_hooks_filters_reserve_web_hook_filter import IikoTransportPublicApiContractsIntegrationWebHooksFiltersReserveWebHookFilter as IikoTransportPublicApiContractsIntegrationWebHooksFiltersReserveWebHookFilter
-from iikocloud_client.models.iiko_transport_public_api_contracts_integration_web_hooks_filters_table_order_web_hook_filter import IikoTransportPublicApiContractsIntegrationWebHooksFiltersTableOrderWebHookFilter as IikoTransportPublicApiContractsIntegrationWebHooksFiltersTableOrderWebHookFilter
-from iikocloud_client.models.iiko_transport_public_api_contracts_integration_web_hooks_filters_web_hook_short_filter import IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHookShortFilter as IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHookShortFilter
-from iikocloud_client.models.iiko_transport_public_api_contracts_integration_web_hooks_filters_web_hooks_filter import IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHooksFilter as IikoTransportPublicApiContractsIntegrationWebHooksFiltersWebHooksFilter
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_source import IikoTransportPublicApiContractsMarketingSourcesMarketingSource as IikoTransportPublicApiContractsMarketingSourcesMarketingSource
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest as IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_response import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse as IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_metrics_action_type import IikoTransportPublicApiContractsMetricsActionType as IikoTransportPublicApiContractsMetricsActionType
-from iikocloud_client.models.iiko_transport_public_api_contracts_metrics_call_center_action import IikoTransportPublicApiContractsMetricsCallCenterAction as IikoTransportPublicApiContractsMetricsCallCenterAction
-from iikocloud_client.models.iiko_transport_public_api_contracts_metrics_call_center_telemetry import IikoTransportPublicApiContractsMetricsCallCenterTelemetry as IikoTransportPublicApiContractsMetricsCallCenterTelemetry
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_child_modifier_info import IikoTransportPublicApiContractsNomenclatureChildModifierInfo as IikoTransportPublicApiContractsNomenclatureChildModifierInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_external_menu import IikoTransportPublicApiContractsNomenclatureExternalMenu as IikoTransportPublicApiContractsNomenclatureExternalMenu
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_group_modifier_info import IikoTransportPublicApiContractsNomenclatureGroupModifierInfo as IikoTransportPublicApiContractsNomenclatureGroupModifierInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menu_request import IikoTransportPublicApiContractsNomenclatureMenuRequest as IikoTransportPublicApiContractsNomenclatureMenuRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_menus_data_response import IikoTransportPublicApiContractsNomenclatureMenusDataResponse as IikoTransportPublicApiContractsNomenclatureMenusDataResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_request import IikoTransportPublicApiContractsNomenclatureNomenclatureRequest as IikoTransportPublicApiContractsNomenclatureNomenclatureRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_nomenclature_response import IikoTransportPublicApiContractsNomenclatureNomenclatureResponse as IikoTransportPublicApiContractsNomenclatureNomenclatureResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_order_item_type import IikoTransportPublicApiContractsNomenclatureOrderItemType as IikoTransportPublicApiContractsNomenclatureOrderItemType
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_price import IikoTransportPublicApiContractsNomenclaturePrice as IikoTransportPublicApiContractsNomenclaturePrice
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_price_category import IikoTransportPublicApiContractsNomenclaturePriceCategory as IikoTransportPublicApiContractsNomenclaturePriceCategory
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_product_category_info import IikoTransportPublicApiContractsNomenclatureProductCategoryInfo as IikoTransportPublicApiContractsNomenclatureProductCategoryInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_product_info import IikoTransportPublicApiContractsNomenclatureProductInfo as IikoTransportPublicApiContractsNomenclatureProductInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_products_group_info import IikoTransportPublicApiContractsNomenclatureProductsGroupInfo as IikoTransportPublicApiContractsNomenclatureProductsGroupInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_simple_modifier_info import IikoTransportPublicApiContractsNomenclatureSimpleModifierInfo as IikoTransportPublicApiContractsNomenclatureSimpleModifierInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_size import IikoTransportPublicApiContractsNomenclatureSize as IikoTransportPublicApiContractsNomenclatureSize
-from iikocloud_client.models.iiko_transport_public_api_contracts_nomenclature_size_price import IikoTransportPublicApiContractsNomenclatureSizePrice as IikoTransportPublicApiContractsNomenclatureSizePrice
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_delivery_attention_notification_request import IikoTransportPublicApiContractsNotificationsDeliveryAttentionNotificationRequest as IikoTransportPublicApiContractsNotificationsDeliveryAttentionNotificationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_external_courier_arrived_notification_request import IikoTransportPublicApiContractsNotificationsExternalCourierArrivedNotificationRequest as IikoTransportPublicApiContractsNotificationsExternalCourierArrivedNotificationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_external_courier_assigned_notification_request import IikoTransportPublicApiContractsNotificationsExternalCourierAssignedNotificationRequest as IikoTransportPublicApiContractsNotificationsExternalCourierAssignedNotificationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_order_attention_notification_request import IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest as IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_notifications_send_notification_request import IikoTransportPublicApiContractsNotificationsSendNotificationRequest as IikoTransportPublicApiContractsNotificationsSendNotificationRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_service_type import IikoTransportPublicApiContractsOrderTypesOrderServiceType as IikoTransportPublicApiContractsOrderTypesOrderServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_type import IikoTransportPublicApiContractsOrderTypesOrderType as IikoTransportPublicApiContractsOrderTypesOrderType
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_types_request import IikoTransportPublicApiContractsOrderTypesOrderTypesRequest as IikoTransportPublicApiContractsOrderTypesOrderTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_order_types_order_types_response import IikoTransportPublicApiContractsOrderTypesOrderTypesResponse as IikoTransportPublicApiContractsOrderTypesOrderTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_orders_common_add_order_payments_request import IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest as IikoTransportPublicApiContractsOrdersCommonAddOrderPaymentsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_orders_common_create_order_settings import IikoTransportPublicApiContractsOrdersCommonCreateOrderSettings as IikoTransportPublicApiContractsOrdersCommonCreateOrderSettings
-from iikocloud_client.models.iiko_transport_public_api_contracts_orders_common_create_order_settings_base import IikoTransportPublicApiContractsOrdersCommonCreateOrderSettingsBase as IikoTransportPublicApiContractsOrdersCommonCreateOrderSettingsBase
-from iikocloud_client.models.iiko_transport_public_api_contracts_orders_common_order_status import IikoTransportPublicApiContractsOrdersCommonOrderStatus as IikoTransportPublicApiContractsOrdersCommonOrderStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_address_format_type import IikoTransportPublicApiContractsOrganizationsAddressFormatType as IikoTransportPublicApiContractsOrganizationsAddressFormatType
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_delivery_order_payment_settings import IikoTransportPublicApiContractsOrganizationsDeliveryOrderPaymentSettings as IikoTransportPublicApiContractsOrganizationsDeliveryOrderPaymentSettings
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_delivery_settings_service_type import IikoTransportPublicApiContractsOrganizationsDeliverySettingsServiceType as IikoTransportPublicApiContractsOrganizationsDeliverySettingsServiceType
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_extended_organization_info import IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo as IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_request import IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest as IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_response import IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse as IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_simple_organizations_response import IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse as IikoTransportPublicApiContractsOrganizationsGetSimpleOrganizationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organization_info import IikoTransportPublicApiContractsOrganizationsOrganizationInfo as IikoTransportPublicApiContractsOrganizationsOrganizationInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organization_settings import IikoTransportPublicApiContractsOrganizationsOrganizationSettings as IikoTransportPublicApiContractsOrganizationsOrganizationSettings
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organization_settings_parameters import IikoTransportPublicApiContractsOrganizationsOrganizationSettingsParameters as IikoTransportPublicApiContractsOrganizationsOrganizationSettingsParameters
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organizations_settings_request import IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest as IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organizations_settings_response import IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse as IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_simple_organization_info import IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo as IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_processing_type import IikoTransportPublicApiContractsPaymentTypesPaymentProcessingType as IikoTransportPublicApiContractsPaymentTypesPaymentProcessingType
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_type import IikoTransportPublicApiContractsPaymentTypesPaymentType as IikoTransportPublicApiContractsPaymentTypesPaymentType
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_type_kind import IikoTransportPublicApiContractsPaymentTypesPaymentTypeKind as IikoTransportPublicApiContractsPaymentTypesPaymentTypeKind
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_types_request import IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest as IikoTransportPublicApiContractsPaymentTypesPaymentTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_payment_types_payment_types_response import IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse as IikoTransportPublicApiContractsPaymentTypesPaymentTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_payments_payment_link import IikoTransportPublicApiContractsPaymentsPaymentLink as IikoTransportPublicApiContractsPaymentsPaymentLink
-from iikocloud_client.models.iiko_transport_public_api_contracts_payments_payment_link_status import IikoTransportPublicApiContractsPaymentsPaymentLinkStatus as IikoTransportPublicApiContractsPaymentsPaymentLinkStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_removal_types_removal_type import IikoTransportPublicApiContractsRemovalTypesRemovalType as IikoTransportPublicApiContractsRemovalTypesRemovalType
-from iikocloud_client.models.iiko_transport_public_api_contracts_removal_types_removal_types_request import IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest as IikoTransportPublicApiContractsRemovalTypesRemovalTypesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_removal_types_removal_types_response import IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse as IikoTransportPublicApiContractsRemovalTypesRemovalTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest as IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest as IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_cancel_reserve_request import IikoTransportPublicApiContractsReservesCancelReserveRequest as IikoTransportPublicApiContractsReservesCancelReserveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request import IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest as IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request import IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest as IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_tables_request import IikoTransportPublicApiContractsReservesChangeReserveTablesRequest as IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_color import IikoTransportPublicApiContractsReservesColor as IikoTransportPublicApiContractsReservesColor
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_create_reserve_request import IikoTransportPublicApiContractsReservesCreateReserveRequest as IikoTransportPublicApiContractsReservesCreateReserveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_font import IikoTransportPublicApiContractsReservesFont as IikoTransportPublicApiContractsReservesFont
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_font_style import IikoTransportPublicApiContractsReservesFontStyle as IikoTransportPublicApiContractsReservesFontStyle
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest as IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse as IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest as IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse as IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_guests_info import IikoTransportPublicApiContractsReservesGuestsInfo as IikoTransportPublicApiContractsReservesGuestsInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_request_reserve_order import IikoTransportPublicApiContractsReservesRequestReserveOrder as IikoTransportPublicApiContractsReservesRequestReserveOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve import IikoTransportPublicApiContractsReservesReserve as IikoTransportPublicApiContractsReservesReserve
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_cancel_reason import IikoTransportPublicApiContractsReservesReserveCancelReason as IikoTransportPublicApiContractsReservesReserveCancelReason
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_in_workload import IikoTransportPublicApiContractsReservesReserveInWorkload as IikoTransportPublicApiContractsReservesReserveInWorkload
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_info import IikoTransportPublicApiContractsReservesReserveInfo as IikoTransportPublicApiContractsReservesReserveInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_response import IikoTransportPublicApiContractsReservesReserveResponse as IikoTransportPublicApiContractsReservesReserveResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_status import IikoTransportPublicApiContractsReservesReserveStatus as IikoTransportPublicApiContractsReservesReserveStatus
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_by_id_request import IikoTransportPublicApiContractsReservesReservesByIdRequest as IikoTransportPublicApiContractsReservesReservesByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_response import IikoTransportPublicApiContractsReservesReservesResponse as IikoTransportPublicApiContractsReservesReservesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_response_reserve_order import IikoTransportPublicApiContractsReservesResponseReserveOrder as IikoTransportPublicApiContractsReservesResponseReserveOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_restaurant_section import IikoTransportPublicApiContractsReservesRestaurantSection as IikoTransportPublicApiContractsReservesRestaurantSection
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_restaurant_section_ellipse import IikoTransportPublicApiContractsReservesRestaurantSectionEllipse as IikoTransportPublicApiContractsReservesRestaurantSectionEllipse
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_restaurant_section_mark import IikoTransportPublicApiContractsReservesRestaurantSectionMark as IikoTransportPublicApiContractsReservesRestaurantSectionMark
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_restaurant_section_rectangle import IikoTransportPublicApiContractsReservesRestaurantSectionRectangle as IikoTransportPublicApiContractsReservesRestaurantSectionRectangle
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_restaurant_section_table import IikoTransportPublicApiContractsReservesRestaurantSectionTable as IikoTransportPublicApiContractsReservesRestaurantSectionTable
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_section_schema import IikoTransportPublicApiContractsReservesSectionSchema as IikoTransportPublicApiContractsReservesSectionSchema
-from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_table import IikoTransportPublicApiContractsReservesTable as IikoTransportPublicApiContractsReservesTable
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_item import IikoTransportPublicApiContractsStopListsAddProductsToStopListItem as IikoTransportPublicApiContractsStopListsAddProductsToStopListItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_add_products_to_stop_list_request import IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest as IikoTransportPublicApiContractsStopListsAddProductsToStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_request import IikoTransportPublicApiContractsStopListsCheckStopListRequest as IikoTransportPublicApiContractsStopListsCheckStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_check_stop_list_response import IikoTransportPublicApiContractsStopListsCheckStopListResponse as IikoTransportPublicApiContractsStopListsCheckStopListResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_clear_stop_list_request import IikoTransportPublicApiContractsStopListsClearStopListRequest as IikoTransportPublicApiContractsStopListsClearStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_item import IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListItem as IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_remove_products_from_stop_list_request import IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest as IikoTransportPublicApiContractsStopListsRemoveProductsFromStopListRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_list_item import IikoTransportPublicApiContractsStopListsStopListItem as IikoTransportPublicApiContractsStopListsStopListItem
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_request import IikoTransportPublicApiContractsStopListsStopListsRequest as IikoTransportPublicApiContractsStopListsStopListsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_stop_lists_response import IikoTransportPublicApiContractsStopListsStopListsResponse as IikoTransportPublicApiContractsStopListsStopListsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_terminal_group_stop_list import IikoTransportPublicApiContractsStopListsTerminalGroupStopList as IikoTransportPublicApiContractsStopListsTerminalGroupStopList
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_terminal_group_stop_list_update import IikoTransportPublicApiContractsStopListsTerminalGroupStopListUpdate as IikoTransportPublicApiContractsStopListsTerminalGroupStopListUpdate
-from iikocloud_client.models.iiko_transport_public_api_contracts_stop_lists_web_hook_on_stop_list_change_data import IikoTransportPublicApiContractsStopListsWebHookOnStopListChangeData as IikoTransportPublicApiContractsStopListsWebHookOnStopListChangeData
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_add_customer_to_table_order_request import IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest as IikoTransportPublicApiContractsTableOrdersRequestAddCustomerToTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_add_items_to_table_order_request import IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest as IikoTransportPublicApiContractsTableOrdersRequestAddItemsToTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_add_table_order_items_settings import IikoTransportPublicApiContractsTableOrdersRequestAddTableOrderItemsSettings as IikoTransportPublicApiContractsTableOrdersRequestAddTableOrderItemsSettings
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_create_table_order_request import IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest as IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_create_table_order_settings import IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderSettings as IikoTransportPublicApiContractsTableOrdersRequestCreateTableOrderSettings
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_id_request import IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest as IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_get_table_orders_by_table_request import IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest as IikoTransportPublicApiContractsTableOrdersRequestGetTableOrdersByTableRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_guests_info import IikoTransportPublicApiContractsTableOrdersRequestGuestsInfo as IikoTransportPublicApiContractsTableOrdersRequestGuestsInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_init_table_order_by_pos_order_request import IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest as IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderByPosOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_init_table_order_request import IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest as IikoTransportPublicApiContractsTableOrdersRequestInitTableOrderRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_table_order import IikoTransportPublicApiContractsTableOrdersRequestTableOrder as IikoTransportPublicApiContractsTableOrdersRequestTableOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_request_table_order_customer import IikoTransportPublicApiContractsTableOrdersRequestTableOrderCustomer as IikoTransportPublicApiContractsTableOrdersRequestTableOrderCustomer
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_response_split_order_between_cash_registers import IikoTransportPublicApiContractsTableOrdersResponseSplitOrderBetweenCashRegisters as IikoTransportPublicApiContractsTableOrdersResponseSplitOrderBetweenCashRegisters
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_response_table_order import IikoTransportPublicApiContractsTableOrdersResponseTableOrder as IikoTransportPublicApiContractsTableOrdersResponseTableOrder
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_response_table_order_info import IikoTransportPublicApiContractsTableOrdersResponseTableOrderInfo as IikoTransportPublicApiContractsTableOrdersResponseTableOrderInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_response_table_order_response import IikoTransportPublicApiContractsTableOrdersResponseTableOrderResponse as IikoTransportPublicApiContractsTableOrdersResponseTableOrderResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_table_orders_response_table_orders_response import IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse as IikoTransportPublicApiContractsTableOrdersResponseTableOrdersResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_awake_terminal_groups_request import IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest as IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_awake_terminal_groups_response import IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse as IikoTransportPublicApiContractsTerminalsAwakeTerminalGroupsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request import IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest as IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_group import IikoTransportPublicApiContractsTerminalsTerminalGroup as IikoTransportPublicApiContractsTerminalsTerminalGroup
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_group_alive_info import IikoTransportPublicApiContractsTerminalsTerminalGroupAliveInfo as IikoTransportPublicApiContractsTerminalsTerminalGroupAliveInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_request import IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest as IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_is_alive_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse as IikoTransportPublicApiContractsTerminalsTerminalGroupsIsAliveResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_request import IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest as IikoTransportPublicApiContractsTerminalsTerminalGroupsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse as IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_tips_types_tips_type import IikoTransportPublicApiContractsTipsTypesTipsType as IikoTransportPublicApiContractsTipsTypesTipsType
-from iikocloud_client.models.iiko_transport_public_api_contracts_tips_types_tips_types_response import IikoTransportPublicApiContractsTipsTypesTipsTypesResponse as IikoTransportPublicApiContractsTipsTypesTipsTypesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_delivery_order_error_web_hook_event_info import IikoTransportPublicApiContractsWebHooksDeliveryOrderErrorWebHookEventInfo as IikoTransportPublicApiContractsWebHooksDeliveryOrderErrorWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_delivery_order_update_web_hook_event_info import IikoTransportPublicApiContractsWebHooksDeliveryOrderUpdateWebHookEventInfo as IikoTransportPublicApiContractsWebHooksDeliveryOrderUpdateWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_request import IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest as IikoTransportPublicApiContractsWebHooksGetWebHookSettingsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_get_web_hook_settings_response import IikoTransportPublicApiContractsWebHooksGetWebHookSettingsResponse as IikoTransportPublicApiContractsWebHooksGetWebHookSettingsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_personal_shift_web_hook_event_info import IikoTransportPublicApiContractsWebHooksPersonalShiftWebHookEventInfo as IikoTransportPublicApiContractsWebHooksPersonalShiftWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_reserve_error_web_hook_event_info import IikoTransportPublicApiContractsWebHooksReserveErrorWebHookEventInfo as IikoTransportPublicApiContractsWebHooksReserveErrorWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_reserve_update_web_hook_event_info import IikoTransportPublicApiContractsWebHooksReserveUpdateWebHookEventInfo as IikoTransportPublicApiContractsWebHooksReserveUpdateWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_stop_list_update_web_hook_event_info import IikoTransportPublicApiContractsWebHooksStopListUpdateWebHookEventInfo as IikoTransportPublicApiContractsWebHooksStopListUpdateWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_table_order_error_web_hook_event_info import IikoTransportPublicApiContractsWebHooksTableOrderErrorWebHookEventInfo as IikoTransportPublicApiContractsWebHooksTableOrderErrorWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_table_order_update_web_hook_event_info import IikoTransportPublicApiContractsWebHooksTableOrderUpdateWebHookEventInfo as IikoTransportPublicApiContractsWebHooksTableOrderUpdateWebHookEventInfo
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_update_web_hook_settings_request import IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest as IikoTransportPublicApiContractsWebHooksUpdateWebHookSettingsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_web_hooks_web_hook_event_type import IikoTransportPublicApiContractsWebHooksWebHookEventType as IikoTransportPublicApiContractsWebHooksWebHookEventType
+from iikocloud_client.models.integration_web_hooks_filters_delivery_order_web_hooks_filter import IntegrationWebHooksFiltersDeliveryOrderWebHooksFilter as IntegrationWebHooksFiltersDeliveryOrderWebHooksFilter
+from iikocloud_client.models.integration_web_hooks_filters_reserve_web_hook_filter import IntegrationWebHooksFiltersReserveWebHookFilter as IntegrationWebHooksFiltersReserveWebHookFilter
+from iikocloud_client.models.integration_web_hooks_filters_table_order_web_hook_filter import IntegrationWebHooksFiltersTableOrderWebHookFilter as IntegrationWebHooksFiltersTableOrderWebHookFilter
+from iikocloud_client.models.integration_web_hooks_filters_web_hook_short_filter import IntegrationWebHooksFiltersWebHookShortFilter as IntegrationWebHooksFiltersWebHookShortFilter
+from iikocloud_client.models.integration_web_hooks_filters_web_hooks_filter import IntegrationWebHooksFiltersWebHooksFilter as IntegrationWebHooksFiltersWebHooksFilter
 from iikocloud_client.models.interval_dto import IntervalDto as IntervalDto
 from iikocloud_client.models.interval_dto2 import IntervalDto2 as IntervalDto2
 from iikocloud_client.models.interval_dto3 import IntervalDto3 as IntervalDto3
 from iikocloud_client.models.label_dto import LabelDto as LabelDto
 from iikocloud_client.models.label_dto2 import LabelDto2 as LabelDto2
 from iikocloud_client.models.label_dto3 import LabelDto3 as LabelDto3
+from iikocloud_client.models.loyalty_result_available_combo import LoyaltyResultAvailableCombo as LoyaltyResultAvailableCombo
+from iikocloud_client.models.loyalty_result_available_payment import LoyaltyResultAvailablePayment as LoyaltyResultAvailablePayment
+from iikocloud_client.models.loyalty_result_calculate_checkin_request import LoyaltyResultCalculateCheckinRequest as LoyaltyResultCalculateCheckinRequest
+from iikocloud_client.models.loyalty_result_calculate_checkin_response import LoyaltyResultCalculateCheckinResponse as LoyaltyResultCalculateCheckinResponse
+from iikocloud_client.models.loyalty_result_calculate_combo_price_request import LoyaltyResultCalculateComboPriceRequest as LoyaltyResultCalculateComboPriceRequest
+from iikocloud_client.models.loyalty_result_calculate_combo_price_response import LoyaltyResultCalculateComboPriceResponse as LoyaltyResultCalculateComboPriceResponse
+from iikocloud_client.models.loyalty_result_combo_category import LoyaltyResultComboCategory as LoyaltyResultComboCategory
+from iikocloud_client.models.loyalty_result_combo_group import LoyaltyResultComboGroup as LoyaltyResultComboGroup
+from iikocloud_client.models.loyalty_result_combo_group_mapping import LoyaltyResultComboGroupMapping as LoyaltyResultComboGroupMapping
+from iikocloud_client.models.loyalty_result_combo_price_modification_type import LoyaltyResultComboPriceModificationType as LoyaltyResultComboPriceModificationType
+from iikocloud_client.models.loyalty_result_combo_product import LoyaltyResultComboProduct as LoyaltyResultComboProduct
+from iikocloud_client.models.loyalty_result_combo_specification import LoyaltyResultComboSpecification as LoyaltyResultComboSpecification
+from iikocloud_client.models.loyalty_result_coupon_info import LoyaltyResultCouponInfo as LoyaltyResultCouponInfo
+from iikocloud_client.models.loyalty_result_coupon_info_request import LoyaltyResultCouponInfoRequest as LoyaltyResultCouponInfoRequest
+from iikocloud_client.models.loyalty_result_coupon_info_response import LoyaltyResultCouponInfoResponse as LoyaltyResultCouponInfoResponse
+from iikocloud_client.models.loyalty_result_discount_operation import LoyaltyResultDiscountOperation as LoyaltyResultDiscountOperation
+from iikocloud_client.models.loyalty_result_dynamic_discount import LoyaltyResultDynamicDiscount as LoyaltyResultDynamicDiscount
+from iikocloud_client.models.loyalty_result_free_product import LoyaltyResultFreeProduct as LoyaltyResultFreeProduct
+from iikocloud_client.models.loyalty_result_free_product_size import LoyaltyResultFreeProductSize as LoyaltyResultFreeProductSize
+from iikocloud_client.models.loyalty_result_free_products_group import LoyaltyResultFreeProductsGroup as LoyaltyResultFreeProductsGroup
+from iikocloud_client.models.loyalty_result_get_combos_info_request import LoyaltyResultGetCombosInfoRequest as LoyaltyResultGetCombosInfoRequest
+from iikocloud_client.models.loyalty_result_get_combos_info_response import LoyaltyResultGetCombosInfoResponse as LoyaltyResultGetCombosInfoResponse
+from iikocloud_client.models.loyalty_result_get_counters_request import LoyaltyResultGetCountersRequest as LoyaltyResultGetCountersRequest
+from iikocloud_client.models.loyalty_result_get_counters_response import LoyaltyResultGetCountersResponse as LoyaltyResultGetCountersResponse
+from iikocloud_client.models.loyalty_result_get_manual_conditions_response import LoyaltyResultGetManualConditionsResponse as LoyaltyResultGetManualConditionsResponse
+from iikocloud_client.models.loyalty_result_guest_counter import LoyaltyResultGuestCounter as LoyaltyResultGuestCounter
+from iikocloud_client.models.loyalty_result_loyalty_program_result import LoyaltyResultLoyaltyProgramResult as LoyaltyResultLoyaltyProgramResult
+from iikocloud_client.models.loyalty_result_manual_condition_info import LoyaltyResultManualConditionInfo as LoyaltyResultManualConditionInfo
+from iikocloud_client.models.loyalty_result_not_activated_coupon import LoyaltyResultNotActivatedCoupon as LoyaltyResultNotActivatedCoupon
+from iikocloud_client.models.loyalty_result_not_activated_coupon_request import LoyaltyResultNotActivatedCouponRequest as LoyaltyResultNotActivatedCouponRequest
+from iikocloud_client.models.loyalty_result_not_activated_coupon_response import LoyaltyResultNotActivatedCouponResponse as LoyaltyResultNotActivatedCouponResponse
+from iikocloud_client.models.loyalty_result_operation_code import LoyaltyResultOperationCode as LoyaltyResultOperationCode
+from iikocloud_client.models.loyalty_result_series_with_not_activated_coupons import LoyaltyResultSeriesWithNotActivatedCoupons as LoyaltyResultSeriesWithNotActivatedCoupons
+from iikocloud_client.models.loyalty_result_series_with_not_activated_coupons_request import LoyaltyResultSeriesWithNotActivatedCouponsRequest as LoyaltyResultSeriesWithNotActivatedCouponsRequest
+from iikocloud_client.models.loyalty_result_series_with_not_activated_coupons_response import LoyaltyResultSeriesWithNotActivatedCouponsResponse as LoyaltyResultSeriesWithNotActivatedCouponsResponse
+from iikocloud_client.models.loyalty_result_upsale import LoyaltyResultUpsale as LoyaltyResultUpsale
+from iikocloud_client.models.loyalty_result_upsale_product import LoyaltyResultUpsaleProduct as LoyaltyResultUpsaleProduct
+from iikocloud_client.models.loyalty_result_wallet_info import LoyaltyResultWalletInfo as LoyaltyResultWalletInfo
+from iikocloud_client.models.loyalty_result_warning_info import LoyaltyResultWarningInfo as LoyaltyResultWarningInfo
+from iikocloud_client.models.marketing_sources_marketing_source import MarketingSourcesMarketingSource as MarketingSourcesMarketingSource
+from iikocloud_client.models.marketing_sources_marketing_sources_request import MarketingSourcesMarketingSourcesRequest as MarketingSourcesMarketingSourcesRequest
+from iikocloud_client.models.marketing_sources_marketing_sources_response import MarketingSourcesMarketingSourcesResponse as MarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.metrics_action_type import MetricsActionType as MetricsActionType
+from iikocloud_client.models.metrics_call_center_action import MetricsCallCenterAction as MetricsCallCenterAction
+from iikocloud_client.models.metrics_call_center_telemetry import MetricsCallCenterTelemetry as MetricsCallCenterTelemetry
 from iikocloud_client.models.modifier_restrictions_dto import ModifierRestrictionsDto as ModifierRestrictionsDto
 from iikocloud_client.models.modifier_restrictions_dto2 import ModifierRestrictionsDto2 as ModifierRestrictionsDto2
 from iikocloud_client.models.modifier_restrictions_dto3 import ModifierRestrictionsDto3 as ModifierRestrictionsDto3
@@ -1270,6 +1107,37 @@ from iikocloud_client.models.modifier_restrictions_dto5 import ModifierRestricti
 from iikocloud_client.models.modifier_restrictions_dto6 import ModifierRestrictionsDto6 as ModifierRestrictionsDto6
 from iikocloud_client.models.modifier_restrictions_dto7 import ModifierRestrictionsDto7 as ModifierRestrictionsDto7
 from iikocloud_client.models.modifier_restrictions_dto8 import ModifierRestrictionsDto8 as ModifierRestrictionsDto8
+from iikocloud_client.models.nomenclature_child_modifier_info import NomenclatureChildModifierInfo as NomenclatureChildModifierInfo
+from iikocloud_client.models.nomenclature_external_menu import NomenclatureExternalMenu as NomenclatureExternalMenu
+from iikocloud_client.models.nomenclature_group_modifier_info import NomenclatureGroupModifierInfo as NomenclatureGroupModifierInfo
+from iikocloud_client.models.nomenclature_menu_request import NomenclatureMenuRequest as NomenclatureMenuRequest
+from iikocloud_client.models.nomenclature_menus_data_response import NomenclatureMenusDataResponse as NomenclatureMenusDataResponse
+from iikocloud_client.models.nomenclature_nomenclature_request import NomenclatureNomenclatureRequest as NomenclatureNomenclatureRequest
+from iikocloud_client.models.nomenclature_nomenclature_response import NomenclatureNomenclatureResponse as NomenclatureNomenclatureResponse
+from iikocloud_client.models.nomenclature_order_item_type import NomenclatureOrderItemType as NomenclatureOrderItemType
+from iikocloud_client.models.nomenclature_price import NomenclaturePrice as NomenclaturePrice
+from iikocloud_client.models.nomenclature_price_category import NomenclaturePriceCategory as NomenclaturePriceCategory
+from iikocloud_client.models.nomenclature_product_category_info import NomenclatureProductCategoryInfo as NomenclatureProductCategoryInfo
+from iikocloud_client.models.nomenclature_product_info import NomenclatureProductInfo as NomenclatureProductInfo
+from iikocloud_client.models.nomenclature_products_group_info import NomenclatureProductsGroupInfo as NomenclatureProductsGroupInfo
+from iikocloud_client.models.nomenclature_simple_modifier_info import NomenclatureSimpleModifierInfo as NomenclatureSimpleModifierInfo
+from iikocloud_client.models.nomenclature_size import NomenclatureSize as NomenclatureSize
+from iikocloud_client.models.nomenclature_size_price import NomenclatureSizePrice as NomenclatureSizePrice
+from iikocloud_client.models.notification_check_sms_status_request import NotificationCheckSmsStatusRequest as NotificationCheckSmsStatusRequest
+from iikocloud_client.models.notification_check_sms_status_response import NotificationCheckSmsStatusResponse as NotificationCheckSmsStatusResponse
+from iikocloud_client.models.notification_notification_sending_capability_check_status import NotificationNotificationSendingCapabilityCheckStatus as NotificationNotificationSendingCapabilityCheckStatus
+from iikocloud_client.models.notification_send_email_request import NotificationSendEmailRequest as NotificationSendEmailRequest
+from iikocloud_client.models.notification_send_sms_request import NotificationSendSmsRequest as NotificationSendSmsRequest
+from iikocloud_client.models.notification_send_sms_response import NotificationSendSmsResponse as NotificationSendSmsResponse
+from iikocloud_client.models.notification_sms_sending_possibility_request import NotificationSmsSendingPossibilityRequest as NotificationSmsSendingPossibilityRequest
+from iikocloud_client.models.notification_sms_sending_possibility_response import NotificationSmsSendingPossibilityResponse as NotificationSmsSendingPossibilityResponse
+from iikocloud_client.models.notification_sms_sending_status import NotificationSmsSendingStatus as NotificationSmsSendingStatus
+from iikocloud_client.models.notification_sms_sending_status_info import NotificationSmsSendingStatusInfo as NotificationSmsSendingStatusInfo
+from iikocloud_client.models.notifications_delivery_attention_notification_request import NotificationsDeliveryAttentionNotificationRequest as NotificationsDeliveryAttentionNotificationRequest
+from iikocloud_client.models.notifications_external_courier_arrived_notification_request import NotificationsExternalCourierArrivedNotificationRequest as NotificationsExternalCourierArrivedNotificationRequest
+from iikocloud_client.models.notifications_external_courier_assigned_notification_request import NotificationsExternalCourierAssignedNotificationRequest as NotificationsExternalCourierAssignedNotificationRequest
+from iikocloud_client.models.notifications_order_attention_notification_request import NotificationsOrderAttentionNotificationRequest as NotificationsOrderAttentionNotificationRequest
+from iikocloud_client.models.notifications_send_notification_request import NotificationsSendNotificationRequest as NotificationsSendNotificationRequest
 from iikocloud_client.models.nutrition_info_dto import NutritionInfoDto as NutritionInfoDto
 from iikocloud_client.models.nutrition_info_dto2 import NutritionInfoDto2 as NutritionInfoDto2
 from iikocloud_client.models.nutrition_info_dto3 import NutritionInfoDto3 as NutritionInfoDto3
@@ -1278,25 +1146,94 @@ from iikocloud_client.models.nutrition_info_dto5 import NutritionInfoDto5 as Nut
 from iikocloud_client.models.nutrition_info_dto6 import NutritionInfoDto6 as NutritionInfoDto6
 from iikocloud_client.models.nutrition_info_dto7 import NutritionInfoDto7 as NutritionInfoDto7
 from iikocloud_client.models.nutrition_info_dto8 import NutritionInfoDto8 as NutritionInfoDto8
+from iikocloud_client.models.order_types_order_service_type import OrderTypesOrderServiceType as OrderTypesOrderServiceType
+from iikocloud_client.models.order_types_order_type import OrderTypesOrderType as OrderTypesOrderType
+from iikocloud_client.models.order_types_order_types_request import OrderTypesOrderTypesRequest as OrderTypesOrderTypesRequest
+from iikocloud_client.models.order_types_order_types_response import OrderTypesOrderTypesResponse as OrderTypesOrderTypesResponse
+from iikocloud_client.models.orders_common_add_order_payments_request import OrdersCommonAddOrderPaymentsRequest as OrdersCommonAddOrderPaymentsRequest
+from iikocloud_client.models.orders_common_create_order_settings import OrdersCommonCreateOrderSettings as OrdersCommonCreateOrderSettings
+from iikocloud_client.models.orders_common_create_order_settings_base import OrdersCommonCreateOrderSettingsBase as OrdersCommonCreateOrderSettingsBase
+from iikocloud_client.models.orders_common_order_status import OrdersCommonOrderStatus as OrdersCommonOrderStatus
+from iikocloud_client.models.organization_get_programs_request import OrganizationGetProgramsRequest as OrganizationGetProgramsRequest
+from iikocloud_client.models.organization_get_programs_response import OrganizationGetProgramsResponse as OrganizationGetProgramsResponse
+from iikocloud_client.models.organization_loyalty_program import OrganizationLoyaltyProgram as OrganizationLoyaltyProgram
+from iikocloud_client.models.organization_marketing_campaign_action_condition_binding_info import OrganizationMarketingCampaignActionConditionBindingInfo as OrganizationMarketingCampaignActionConditionBindingInfo
+from iikocloud_client.models.organization_marketing_campaign_info import OrganizationMarketingCampaignInfo as OrganizationMarketingCampaignInfo
+from iikocloud_client.models.organization_marketing_campaign_settings_info import OrganizationMarketingCampaignSettingsInfo as OrganizationMarketingCampaignSettingsInfo
+from iikocloud_client.models.organizations_address_format_type import OrganizationsAddressFormatType as OrganizationsAddressFormatType
+from iikocloud_client.models.organizations_delivery_order_payment_settings import OrganizationsDeliveryOrderPaymentSettings as OrganizationsDeliveryOrderPaymentSettings
+from iikocloud_client.models.organizations_delivery_settings_service_type import OrganizationsDeliverySettingsServiceType as OrganizationsDeliverySettingsServiceType
+from iikocloud_client.models.organizations_extended_organization_info import OrganizationsExtendedOrganizationInfo as OrganizationsExtendedOrganizationInfo
+from iikocloud_client.models.organizations_get_organizations_request import OrganizationsGetOrganizationsRequest as OrganizationsGetOrganizationsRequest
+from iikocloud_client.models.organizations_get_organizations_response import OrganizationsGetOrganizationsResponse as OrganizationsGetOrganizationsResponse
+from iikocloud_client.models.organizations_get_simple_organizations_response import OrganizationsGetSimpleOrganizationsResponse as OrganizationsGetSimpleOrganizationsResponse
+from iikocloud_client.models.organizations_organization_info import OrganizationsOrganizationInfo as OrganizationsOrganizationInfo
+from iikocloud_client.models.organizations_organization_settings import OrganizationsOrganizationSettings as OrganizationsOrganizationSettings
+from iikocloud_client.models.organizations_organization_settings_parameters import OrganizationsOrganizationSettingsParameters as OrganizationsOrganizationSettingsParameters
+from iikocloud_client.models.organizations_organizations_settings_request import OrganizationsOrganizationsSettingsRequest as OrganizationsOrganizationsSettingsRequest
+from iikocloud_client.models.organizations_organizations_settings_response import OrganizationsOrganizationsSettingsResponse as OrganizationsOrganizationsSettingsResponse
+from iikocloud_client.models.organizations_simple_organization_info import OrganizationsSimpleOrganizationInfo as OrganizationsSimpleOrganizationInfo
 from iikocloud_client.models.override_taxes_dto import OverrideTaxesDto as OverrideTaxesDto
 from iikocloud_client.models.override_taxes_dto2 import OverrideTaxesDto2 as OverrideTaxesDto2
+from iikocloud_client.models.payment_types_payment_processing_type import PaymentTypesPaymentProcessingType as PaymentTypesPaymentProcessingType
+from iikocloud_client.models.payment_types_payment_type import PaymentTypesPaymentType as PaymentTypesPaymentType
+from iikocloud_client.models.payment_types_payment_type_kind import PaymentTypesPaymentTypeKind as PaymentTypesPaymentTypeKind
+from iikocloud_client.models.payment_types_payment_types_request import PaymentTypesPaymentTypesRequest as PaymentTypesPaymentTypesRequest
+from iikocloud_client.models.payment_types_payment_types_response import PaymentTypesPaymentTypesResponse as PaymentTypesPaymentTypesResponse
+from iikocloud_client.models.payments_payment_link import PaymentsPaymentLink as PaymentsPaymentLink
+from iikocloud_client.models.payments_payment_link_status import PaymentsPaymentLinkStatus as PaymentsPaymentLinkStatus
 from iikocloud_client.models.period_schedule_dto import PeriodScheduleDto as PeriodScheduleDto
 from iikocloud_client.models.period_schedule_dto2 import PeriodScheduleDto2 as PeriodScheduleDto2
 from iikocloud_client.models.period_schedule_dto3 import PeriodScheduleDto3 as PeriodScheduleDto3
 from iikocloud_client.models.product_category_dto import ProductCategoryDto as ProductCategoryDto
 from iikocloud_client.models.product_category_dto2 import ProductCategoryDto2 as ProductCategoryDto2
 from iikocloud_client.models.product_category_dto3 import ProductCategoryDto3 as ProductCategoryDto3
+from iikocloud_client.models.program_type import ProgramType as ProgramType
+from iikocloud_client.models.removal_types_removal_type import RemovalTypesRemovalType as RemovalTypesRemovalType
+from iikocloud_client.models.removal_types_removal_types_request import RemovalTypesRemovalTypesRequest as RemovalTypesRemovalTypesRequest
+from iikocloud_client.models.removal_types_removal_types_response import RemovalTypesRemovalTypesResponse as RemovalTypesRemovalTypesResponse
+from iikocloud_client.models.report_certificate_counteragent_type import ReportCertificateCounteragentType as ReportCertificateCounteragentType
+from iikocloud_client.models.report_get_transactions_report_by_period_request import ReportGetTransactionsReportByPeriodRequest as ReportGetTransactionsReportByPeriodRequest
+from iikocloud_client.models.report_get_transactions_report_by_period_response import ReportGetTransactionsReportByPeriodResponse as ReportGetTransactionsReportByPeriodResponse
+from iikocloud_client.models.report_get_transactions_report_by_revision_request import ReportGetTransactionsReportByRevisionRequest as ReportGetTransactionsReportByRevisionRequest
+from iikocloud_client.models.report_get_transactions_report_by_revision_response import ReportGetTransactionsReportByRevisionResponse as ReportGetTransactionsReportByRevisionResponse
+from iikocloud_client.models.report_transaction_type import ReportTransactionType as ReportTransactionType
+from iikocloud_client.models.report_transport_transactions_certificate_report_item import ReportTransportTransactionsCertificateReportItem as ReportTransportTransactionsCertificateReportItem
+from iikocloud_client.models.report_transport_transactions_coupon_report_item import ReportTransportTransactionsCouponReportItem as ReportTransportTransactionsCouponReportItem
+from iikocloud_client.models.report_transport_transactions_report_item import ReportTransportTransactionsReportItem as ReportTransportTransactionsReportItem
+from iikocloud_client.models.reserves_add_order_items_to_banquet_request import ReservesAddOrderItemsToBanquetRequest as ReservesAddOrderItemsToBanquetRequest
+from iikocloud_client.models.reserves_add_order_payments_to_banquet_request import ReservesAddOrderPaymentsToBanquetRequest as ReservesAddOrderPaymentsToBanquetRequest
+from iikocloud_client.models.reserves_cancel_reserve_request import ReservesCancelReserveRequest as ReservesCancelReserveRequest
+from iikocloud_client.models.reserves_change_banquet_order_items_request import ReservesChangeBanquetOrderItemsRequest as ReservesChangeBanquetOrderItemsRequest
+from iikocloud_client.models.reserves_change_reserve_estimated_start_time_request import ReservesChangeReserveEstimatedStartTimeRequest as ReservesChangeReserveEstimatedStartTimeRequest
+from iikocloud_client.models.reserves_change_reserve_tables_request import ReservesChangeReserveTablesRequest as ReservesChangeReserveTablesRequest
+from iikocloud_client.models.reserves_color import ReservesColor as ReservesColor
+from iikocloud_client.models.reserves_create_reserve_request import ReservesCreateReserveRequest as ReservesCreateReserveRequest
+from iikocloud_client.models.reserves_font import ReservesFont as ReservesFont
+from iikocloud_client.models.reserves_font_style import ReservesFontStyle as ReservesFontStyle
+from iikocloud_client.models.reserves_get_restaurant_sections_request import ReservesGetRestaurantSectionsRequest as ReservesGetRestaurantSectionsRequest
+from iikocloud_client.models.reserves_get_restaurant_sections_response import ReservesGetRestaurantSectionsResponse as ReservesGetRestaurantSectionsResponse
+from iikocloud_client.models.reserves_get_restaurant_sections_workload_request import ReservesGetRestaurantSectionsWorkloadRequest as ReservesGetRestaurantSectionsWorkloadRequest
+from iikocloud_client.models.reserves_get_restaurant_sections_workload_response import ReservesGetRestaurantSectionsWorkloadResponse as ReservesGetRestaurantSectionsWorkloadResponse
+from iikocloud_client.models.reserves_guests_info import ReservesGuestsInfo as ReservesGuestsInfo
+from iikocloud_client.models.reserves_request_reserve_order import ReservesRequestReserveOrder as ReservesRequestReserveOrder
+from iikocloud_client.models.reserves_reserve import ReservesReserve as ReservesReserve
+from iikocloud_client.models.reserves_reserve_cancel_reason import ReservesReserveCancelReason as ReservesReserveCancelReason
+from iikocloud_client.models.reserves_reserve_in_workload import ReservesReserveInWorkload as ReservesReserveInWorkload
+from iikocloud_client.models.reserves_reserve_info import ReservesReserveInfo as ReservesReserveInfo
+from iikocloud_client.models.reserves_reserve_response import ReservesReserveResponse as ReservesReserveResponse
+from iikocloud_client.models.reserves_reserve_status import ReservesReserveStatus as ReservesReserveStatus
+from iikocloud_client.models.reserves_reserves_by_id_request import ReservesReservesByIdRequest as ReservesReservesByIdRequest
+from iikocloud_client.models.reserves_reserves_response import ReservesReservesResponse as ReservesReservesResponse
+from iikocloud_client.models.reserves_response_reserve_order import ReservesResponseReserveOrder as ReservesResponseReserveOrder
+from iikocloud_client.models.reserves_restaurant_section import ReservesRestaurantSection as ReservesRestaurantSection
+from iikocloud_client.models.reserves_restaurant_section_ellipse import ReservesRestaurantSectionEllipse as ReservesRestaurantSectionEllipse
+from iikocloud_client.models.reserves_restaurant_section_mark import ReservesRestaurantSectionMark as ReservesRestaurantSectionMark
+from iikocloud_client.models.reserves_restaurant_section_rectangle import ReservesRestaurantSectionRectangle as ReservesRestaurantSectionRectangle
+from iikocloud_client.models.reserves_restaurant_section_table import ReservesRestaurantSectionTable as ReservesRestaurantSectionTable
+from iikocloud_client.models.reserves_section_schema import ReservesSectionSchema as ReservesSectionSchema
+from iikocloud_client.models.reserves_table import ReservesTable as ReservesTable
 from iikocloud_client.models.retrieve_external_menu_request_dto import RetrieveExternalMenuRequestDto as RetrieveExternalMenuRequestDto
-from iikocloud_client.models.rms_items_response_wrapper_address_city import RmsItemsResponseWrapperAddressCity as RmsItemsResponseWrapperAddressCity
-from iikocloud_client.models.rms_items_response_wrapper_address_region import RmsItemsResponseWrapperAddressRegion as RmsItemsResponseWrapperAddressRegion
-from iikocloud_client.models.rms_items_response_wrapper_discounts_discount_card_type_info import RmsItemsResponseWrapperDiscountsDiscountCardTypeInfo as RmsItemsResponseWrapperDiscountsDiscountCardTypeInfo
-from iikocloud_client.models.rms_items_response_wrapper_employees_active_courier_location import RmsItemsResponseWrapperEmployeesActiveCourierLocation as RmsItemsResponseWrapperEmployeesActiveCourierLocation
-from iikocloud_client.models.rms_items_response_wrapper_employees_courier_locations import RmsItemsResponseWrapperEmployeesCourierLocations as RmsItemsResponseWrapperEmployeesCourierLocations
-from iikocloud_client.models.rms_items_response_wrapper_employees_employee import RmsItemsResponseWrapperEmployeesEmployee as RmsItemsResponseWrapperEmployeesEmployee
-from iikocloud_client.models.rms_items_response_wrapper_employees_employee_with_checked_role import RmsItemsResponseWrapperEmployeesEmployeeWithCheckedRole as RmsItemsResponseWrapperEmployeesEmployeeWithCheckedRole
-from iikocloud_client.models.rms_items_response_wrapper_order_types_order_type import RmsItemsResponseWrapperOrderTypesOrderType as RmsItemsResponseWrapperOrderTypesOrderType
-from iikocloud_client.models.rms_items_response_wrapper_stop_lists_terminal_group_stop_list import RmsItemsResponseWrapperStopListsTerminalGroupStopList as RmsItemsResponseWrapperStopListsTerminalGroupStopList
-from iikocloud_client.models.rms_items_response_wrapper_terminals_terminal_group import RmsItemsResponseWrapperTerminalsTerminalGroup as RmsItemsResponseWrapperTerminalsTerminalGroup
 from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag as SelectedCustomerTag
 from iikocloud_client.models.selected_customer_tag2 import SelectedCustomerTag2 as SelectedCustomerTag2
 from iikocloud_client.models.selected_customer_tag3 import SelectedCustomerTag3 as SelectedCustomerTag3
@@ -1305,10 +1242,73 @@ from iikocloud_client.models.selected_customer_tag5 import SelectedCustomerTag5 
 from iikocloud_client.models.selected_customer_tag6 import SelectedCustomerTag6 as SelectedCustomerTag6
 from iikocloud_client.models.selected_customer_tag7 import SelectedCustomerTag7 as SelectedCustomerTag7
 from iikocloud_client.models.selected_customer_tag8 import SelectedCustomerTag8 as SelectedCustomerTag8
+from iikocloud_client.models.stop_lists_add_products_to_stop_list_item import StopListsAddProductsToStopListItem as StopListsAddProductsToStopListItem
+from iikocloud_client.models.stop_lists_add_products_to_stop_list_request import StopListsAddProductsToStopListRequest as StopListsAddProductsToStopListRequest
+from iikocloud_client.models.stop_lists_check_stop_list_request import StopListsCheckStopListRequest as StopListsCheckStopListRequest
+from iikocloud_client.models.stop_lists_check_stop_list_response import StopListsCheckStopListResponse as StopListsCheckStopListResponse
+from iikocloud_client.models.stop_lists_clear_stop_list_request import StopListsClearStopListRequest as StopListsClearStopListRequest
+from iikocloud_client.models.stop_lists_remove_products_from_stop_list_item import StopListsRemoveProductsFromStopListItem as StopListsRemoveProductsFromStopListItem
+from iikocloud_client.models.stop_lists_remove_products_from_stop_list_request import StopListsRemoveProductsFromStopListRequest as StopListsRemoveProductsFromStopListRequest
+from iikocloud_client.models.stop_lists_stop_list_item import StopListsStopListItem as StopListsStopListItem
+from iikocloud_client.models.stop_lists_stop_lists_request import StopListsStopListsRequest as StopListsStopListsRequest
+from iikocloud_client.models.stop_lists_stop_lists_response import StopListsStopListsResponse as StopListsStopListsResponse
+from iikocloud_client.models.stop_lists_terminal_group_stop_list import StopListsTerminalGroupStopList as StopListsTerminalGroupStopList
+from iikocloud_client.models.stop_lists_terminal_group_stop_list_update import StopListsTerminalGroupStopListUpdate as StopListsTerminalGroupStopListUpdate
+from iikocloud_client.models.stop_lists_web_hook_on_stop_list_change_data import StopListsWebHookOnStopListChangeData as StopListsWebHookOnStopListChangeData
+from iikocloud_client.models.table_orders_request_add_customer_to_table_order_request import TableOrdersRequestAddCustomerToTableOrderRequest as TableOrdersRequestAddCustomerToTableOrderRequest
+from iikocloud_client.models.table_orders_request_add_items_to_table_order_request import TableOrdersRequestAddItemsToTableOrderRequest as TableOrdersRequestAddItemsToTableOrderRequest
+from iikocloud_client.models.table_orders_request_add_table_order_items_settings import TableOrdersRequestAddTableOrderItemsSettings as TableOrdersRequestAddTableOrderItemsSettings
+from iikocloud_client.models.table_orders_request_create_table_order_request import TableOrdersRequestCreateTableOrderRequest as TableOrdersRequestCreateTableOrderRequest
+from iikocloud_client.models.table_orders_request_create_table_order_settings import TableOrdersRequestCreateTableOrderSettings as TableOrdersRequestCreateTableOrderSettings
+from iikocloud_client.models.table_orders_request_get_table_orders_by_id_request import TableOrdersRequestGetTableOrdersByIdRequest as TableOrdersRequestGetTableOrdersByIdRequest
+from iikocloud_client.models.table_orders_request_get_table_orders_by_table_request import TableOrdersRequestGetTableOrdersByTableRequest as TableOrdersRequestGetTableOrdersByTableRequest
+from iikocloud_client.models.table_orders_request_guests_info import TableOrdersRequestGuestsInfo as TableOrdersRequestGuestsInfo
+from iikocloud_client.models.table_orders_request_init_table_order_by_pos_order_request import TableOrdersRequestInitTableOrderByPosOrderRequest as TableOrdersRequestInitTableOrderByPosOrderRequest
+from iikocloud_client.models.table_orders_request_init_table_order_request import TableOrdersRequestInitTableOrderRequest as TableOrdersRequestInitTableOrderRequest
+from iikocloud_client.models.table_orders_request_table_order import TableOrdersRequestTableOrder as TableOrdersRequestTableOrder
+from iikocloud_client.models.table_orders_request_table_order_customer import TableOrdersRequestTableOrderCustomer as TableOrdersRequestTableOrderCustomer
+from iikocloud_client.models.table_orders_response_split_order_between_cash_registers import TableOrdersResponseSplitOrderBetweenCashRegisters as TableOrdersResponseSplitOrderBetweenCashRegisters
+from iikocloud_client.models.table_orders_response_table_order import TableOrdersResponseTableOrder as TableOrdersResponseTableOrder
+from iikocloud_client.models.table_orders_response_table_order_info import TableOrdersResponseTableOrderInfo as TableOrdersResponseTableOrderInfo
+from iikocloud_client.models.table_orders_response_table_order_response import TableOrdersResponseTableOrderResponse as TableOrdersResponseTableOrderResponse
+from iikocloud_client.models.table_orders_response_table_orders_response import TableOrdersResponseTableOrdersResponse as TableOrdersResponseTableOrdersResponse
 from iikocloud_client.models.tag_dto import TagDto as TagDto
 from iikocloud_client.models.tag_dto2 import TagDto2 as TagDto2
 from iikocloud_client.models.tag_dto3 import TagDto3 as TagDto3
 from iikocloud_client.models.tax_category_dto import TaxCategoryDto as TaxCategoryDto
 from iikocloud_client.models.tax_category_dto2 import TaxCategoryDto2 as TaxCategoryDto2
 from iikocloud_client.models.tax_category_dto3 import TaxCategoryDto3 as TaxCategoryDto3
+from iikocloud_client.models.terminals_awake_terminal_groups_request import TerminalsAwakeTerminalGroupsRequest as TerminalsAwakeTerminalGroupsRequest
+from iikocloud_client.models.terminals_awake_terminal_groups_response import TerminalsAwakeTerminalGroupsResponse as TerminalsAwakeTerminalGroupsResponse
+from iikocloud_client.models.terminals_get_terminal_groups_by_organizations_request import TerminalsGetTerminalGroupsByOrganizationsRequest as TerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.terminals_terminal_group import TerminalsTerminalGroup as TerminalsTerminalGroup
+from iikocloud_client.models.terminals_terminal_group_alive_info import TerminalsTerminalGroupAliveInfo as TerminalsTerminalGroupAliveInfo
+from iikocloud_client.models.terminals_terminal_groups_is_alive_request import TerminalsTerminalGroupsIsAliveRequest as TerminalsTerminalGroupsIsAliveRequest
+from iikocloud_client.models.terminals_terminal_groups_is_alive_response import TerminalsTerminalGroupsIsAliveResponse as TerminalsTerminalGroupsIsAliveResponse
+from iikocloud_client.models.terminals_terminal_groups_request import TerminalsTerminalGroupsRequest as TerminalsTerminalGroupsRequest
+from iikocloud_client.models.terminals_terminal_groups_response import TerminalsTerminalGroupsResponse as TerminalsTerminalGroupsResponse
+from iikocloud_client.models.tips_types_tips_type import TipsTypesTipsType as TipsTypesTipsType
+from iikocloud_client.models.tips_types_tips_types_response import TipsTypesTipsTypesResponse as TipsTypesTipsTypesResponse
+from iikocloud_client.models.web_hooks_delivery_order_error_web_hook_event_info import WebHooksDeliveryOrderErrorWebHookEventInfo as WebHooksDeliveryOrderErrorWebHookEventInfo
+from iikocloud_client.models.web_hooks_delivery_order_update_web_hook_event_info import WebHooksDeliveryOrderUpdateWebHookEventInfo as WebHooksDeliveryOrderUpdateWebHookEventInfo
+from iikocloud_client.models.web_hooks_get_web_hook_settings_request import WebHooksGetWebHookSettingsRequest as WebHooksGetWebHookSettingsRequest
+from iikocloud_client.models.web_hooks_get_web_hook_settings_response import WebHooksGetWebHookSettingsResponse as WebHooksGetWebHookSettingsResponse
+from iikocloud_client.models.web_hooks_personal_shift_web_hook_event_info import WebHooksPersonalShiftWebHookEventInfo as WebHooksPersonalShiftWebHookEventInfo
+from iikocloud_client.models.web_hooks_reserve_error_web_hook_event_info import WebHooksReserveErrorWebHookEventInfo as WebHooksReserveErrorWebHookEventInfo
+from iikocloud_client.models.web_hooks_reserve_update_web_hook_event_info import WebHooksReserveUpdateWebHookEventInfo as WebHooksReserveUpdateWebHookEventInfo
+from iikocloud_client.models.web_hooks_stop_list_update_web_hook_event_info import WebHooksStopListUpdateWebHookEventInfo as WebHooksStopListUpdateWebHookEventInfo
+from iikocloud_client.models.web_hooks_table_order_error_web_hook_event_info import WebHooksTableOrderErrorWebHookEventInfo as WebHooksTableOrderErrorWebHookEventInfo
+from iikocloud_client.models.web_hooks_table_order_update_web_hook_event_info import WebHooksTableOrderUpdateWebHookEventInfo as WebHooksTableOrderUpdateWebHookEventInfo
+from iikocloud_client.models.web_hooks_update_web_hook_settings_request import WebHooksUpdateWebHookSettingsRequest as WebHooksUpdateWebHookSettingsRequest
+from iikocloud_client.models.web_hooks_web_hook_event_type import WebHooksWebHookEventType as WebHooksWebHookEventType
+from iikocloud_client.models.wrapper_address_city import WrapperAddressCity as WrapperAddressCity
+from iikocloud_client.models.wrapper_address_region import WrapperAddressRegion as WrapperAddressRegion
+from iikocloud_client.models.wrapper_discounts_discount_card_type_info import WrapperDiscountsDiscountCardTypeInfo as WrapperDiscountsDiscountCardTypeInfo
+from iikocloud_client.models.wrapper_employees_active_courier_location import WrapperEmployeesActiveCourierLocation as WrapperEmployeesActiveCourierLocation
+from iikocloud_client.models.wrapper_employees_courier_locations import WrapperEmployeesCourierLocations as WrapperEmployeesCourierLocations
+from iikocloud_client.models.wrapper_employees_employee import WrapperEmployeesEmployee as WrapperEmployeesEmployee
+from iikocloud_client.models.wrapper_employees_employee_with_checked_role import WrapperEmployeesEmployeeWithCheckedRole as WrapperEmployeesEmployeeWithCheckedRole
+from iikocloud_client.models.wrapper_order_types_order_type import WrapperOrderTypesOrderType as WrapperOrderTypesOrderType
+from iikocloud_client.models.wrapper_stop_lists_terminal_group_stop_list import WrapperStopListsTerminalGroupStopList as WrapperStopListsTerminalGroupStopList
+from iikocloud_client.models.wrapper_terminals_terminal_group import WrapperTerminalsTerminalGroup as WrapperTerminalsTerminalGroup
 

@@ -19,8 +19,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_request import IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_response import IikoTransportPublicApiContractsCommandsGetCommandStatusResponse
+from iikocloud_client.models.commands_get_command_status_request import CommandsGetCommandStatusRequest
+from iikocloud_client.models.commands_get_command_status_response import CommandsGetCommandStatusResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -44,7 +44,7 @@ class OperationsApi:
     async def commands_status_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
+        commands_get_command_status_request: Optional[CommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,15 +57,15 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommandsGetCommandStatusResponse:
+    ) -> CommandsGetCommandStatusResponse:
         """Get status of command.
 
         > Response code `410` means that the correlationId value specified in the method is no longer supported.  Please do not request methods that include such a value.   > Restriction group: `Commands`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_commands_get_command_status_request:
-        :type iiko_transport_public_api_contracts_commands_get_command_status_request: IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
+        :param commands_get_command_status_request:
+        :type commands_get_command_status_request: CommandsGetCommandStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class OperationsApi:
 
         _param = self._commands_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
+            commands_get_command_status_request=commands_get_command_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,12 +98,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommandsGetCommandStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '410': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommandsGetCommandStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
+            '410': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -120,7 +120,7 @@ class OperationsApi:
     async def commands_status_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
+        commands_get_command_status_request: Optional[CommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -133,15 +133,15 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommandsGetCommandStatusResponse]:
+    ) -> ApiResponse[CommandsGetCommandStatusResponse]:
         """Get status of command.
 
         > Response code `410` means that the correlationId value specified in the method is no longer supported.  Please do not request methods that include such a value.   > Restriction group: `Commands`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_commands_get_command_status_request:
-        :type iiko_transport_public_api_contracts_commands_get_command_status_request: IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
+        :param commands_get_command_status_request:
+        :type commands_get_command_status_request: CommandsGetCommandStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -166,7 +166,7 @@ class OperationsApi:
 
         _param = self._commands_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
+            commands_get_command_status_request=commands_get_command_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -174,12 +174,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommandsGetCommandStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '410': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommandsGetCommandStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
+            '410': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -196,7 +196,7 @@ class OperationsApi:
     async def commands_status_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_commands_get_command_status_request: Optional[IikoTransportPublicApiContractsCommandsGetCommandStatusRequest] = None,
+        commands_get_command_status_request: Optional[CommandsGetCommandStatusRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,8 +216,8 @@ class OperationsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_commands_get_command_status_request:
-        :type iiko_transport_public_api_contracts_commands_get_command_status_request: IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
+        :param commands_get_command_status_request:
+        :type commands_get_command_status_request: CommandsGetCommandStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -242,7 +242,7 @@ class OperationsApi:
 
         _param = self._commands_status_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request,
+            commands_get_command_status_request=commands_get_command_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,12 +250,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommandsGetCommandStatusResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '410': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommandsGetCommandStatusResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
+            '410': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -267,7 +267,7 @@ class OperationsApi:
     def _commands_status_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_commands_get_command_status_request,
+        commands_get_command_status_request,
         _request_auth,
         _content_type,
         _headers,
@@ -295,8 +295,8 @@ class OperationsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_commands_get_command_status_request is not None:
-            _body_params = iiko_transport_public_api_contracts_commands_get_command_status_request
+        if commands_get_command_status_request is not None:
+            _body_params = commands_get_command_status_request
 
 
         # set the HTTP header `Accept`

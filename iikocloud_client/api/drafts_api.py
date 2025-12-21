@@ -19,18 +19,18 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_create_or_save_draft_response import IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request import IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_response import IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_get_draft_response import IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request import IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_order_response import IikoTransportPublicApiContractsDeliveriesResponseOrderResponse
+from iikocloud_client.models.common_correlation_id_response import CommonCorrelationIdResponse
+from iikocloud_client.models.deliveries_drafts_commit_draft_request import DeliveriesDraftsCommitDraftRequest
+from iikocloud_client.models.deliveries_drafts_create_draft_request import DeliveriesDraftsCreateDraftRequest
+from iikocloud_client.models.deliveries_drafts_create_or_save_draft_response import DeliveriesDraftsCreateOrSaveDraftResponse
+from iikocloud_client.models.deliveries_drafts_delete_draft_request import DeliveriesDraftsDeleteDraftRequest
+from iikocloud_client.models.deliveries_drafts_filter_drafts_request import DeliveriesDraftsFilterDraftsRequest
+from iikocloud_client.models.deliveries_drafts_filter_drafts_response import DeliveriesDraftsFilterDraftsResponse
+from iikocloud_client.models.deliveries_drafts_get_draft_request import DeliveriesDraftsGetDraftRequest
+from iikocloud_client.models.deliveries_drafts_get_draft_response import DeliveriesDraftsGetDraftResponse
+from iikocloud_client.models.deliveries_drafts_lock_or_unlock_draft_request import DeliveriesDraftsLockOrUnlockDraftRequest
+from iikocloud_client.models.deliveries_drafts_save_draft_request import DeliveriesDraftsSaveDraftRequest
+from iikocloud_client.models.deliveries_response_order_response import DeliveriesResponseOrderResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -54,7 +54,7 @@ class DraftsApi:
     async def deliveries_drafts_by_filter_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest] = None,
+        deliveries_drafts_filter_drafts_request: Optional[DeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,15 +67,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse:
+    ) -> DeliveriesDraftsFilterDraftsResponse:
         """Retrieve order drafts list by parameters.
 
            > Restriction group: `Drafts: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest
+        :param deliveries_drafts_filter_drafts_request:
+        :type deliveries_drafts_filter_drafts_request: DeliveriesDraftsFilterDraftsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -100,7 +100,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request,
+            deliveries_drafts_filter_drafts_request=deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -108,11 +108,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsFilterDraftsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +129,7 @@ class DraftsApi:
     async def deliveries_drafts_by_filter_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest] = None,
+        deliveries_drafts_filter_drafts_request: Optional[DeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,15 +142,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse]:
+    ) -> ApiResponse[DeliveriesDraftsFilterDraftsResponse]:
         """Retrieve order drafts list by parameters.
 
            > Restriction group: `Drafts: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest
+        :param deliveries_drafts_filter_drafts_request:
+        :type deliveries_drafts_filter_drafts_request: DeliveriesDraftsFilterDraftsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -175,7 +175,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request,
+            deliveries_drafts_filter_drafts_request=deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -183,11 +183,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsFilterDraftsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -204,7 +204,7 @@ class DraftsApi:
     async def deliveries_drafts_by_filter_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest] = None,
+        deliveries_drafts_filter_drafts_request: Optional[DeliveriesDraftsFilterDraftsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -224,8 +224,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request: IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsRequest
+        :param deliveries_drafts_filter_drafts_request:
+        :type deliveries_drafts_filter_drafts_request: DeliveriesDraftsFilterDraftsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -250,7 +250,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_filter_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request=iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request,
+            deliveries_drafts_filter_drafts_request=deliveries_drafts_filter_drafts_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -258,11 +258,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsFilterDraftsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsFilterDraftsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -274,7 +274,7 @@ class DraftsApi:
     def _deliveries_drafts_by_filter_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request,
+        deliveries_drafts_filter_drafts_request,
         _request_auth,
         _content_type,
         _headers,
@@ -302,8 +302,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_filter_drafts_request
+        if deliveries_drafts_filter_drafts_request is not None:
+            _body_params = deliveries_drafts_filter_drafts_request
 
 
         # set the HTTP header `Accept`
@@ -355,7 +355,7 @@ class DraftsApi:
     async def deliveries_drafts_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest] = None,
+        deliveries_drafts_get_draft_request: Optional[DeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,15 +368,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse:
+    ) -> DeliveriesDraftsGetDraftResponse:
         """Retrieve order draft by ID.
 
            > Restriction group: `Drafts: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest
+        :param deliveries_drafts_get_draft_request:
+        :type deliveries_drafts_get_draft_request: DeliveriesDraftsGetDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -401,7 +401,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request,
+            deliveries_drafts_get_draft_request=deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -409,11 +409,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsGetDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -430,7 +430,7 @@ class DraftsApi:
     async def deliveries_drafts_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest] = None,
+        deliveries_drafts_get_draft_request: Optional[DeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -443,15 +443,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse]:
+    ) -> ApiResponse[DeliveriesDraftsGetDraftResponse]:
         """Retrieve order draft by ID.
 
            > Restriction group: `Drafts: receiving`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest
+        :param deliveries_drafts_get_draft_request:
+        :type deliveries_drafts_get_draft_request: DeliveriesDraftsGetDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -476,7 +476,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request,
+            deliveries_drafts_get_draft_request=deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -484,11 +484,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsGetDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -505,7 +505,7 @@ class DraftsApi:
     async def deliveries_drafts_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest] = None,
+        deliveries_drafts_get_draft_request: Optional[DeliveriesDraftsGetDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -525,8 +525,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsGetDraftRequest
+        :param deliveries_drafts_get_draft_request:
+        :type deliveries_drafts_get_draft_request: DeliveriesDraftsGetDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -551,7 +551,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request,
+            deliveries_drafts_get_draft_request=deliveries_drafts_get_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -559,11 +559,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsGetDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsGetDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -575,7 +575,7 @@ class DraftsApi:
     def _deliveries_drafts_by_id_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request,
+        deliveries_drafts_get_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -603,8 +603,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_get_draft_request
+        if deliveries_drafts_get_draft_request is not None:
+            _body_params = deliveries_drafts_get_draft_request
 
 
         # set the HTTP header `Accept`
@@ -656,7 +656,7 @@ class DraftsApi:
     async def deliveries_drafts_commit_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest] = None,
+        deliveries_drafts_commit_draft_request: Optional[DeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,15 +669,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesResponseOrderResponse:
+    ) -> DeliveriesResponseOrderResponse:
         """Admit order draft changes and send them to Front.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest
+        :param deliveries_drafts_commit_draft_request:
+        :type deliveries_drafts_commit_draft_request: DeliveriesDraftsCommitDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -702,7 +702,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request,
+            deliveries_drafts_commit_draft_request=deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -710,11 +710,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -731,7 +731,7 @@ class DraftsApi:
     async def deliveries_drafts_commit_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest] = None,
+        deliveries_drafts_commit_draft_request: Optional[DeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -744,15 +744,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesResponseOrderResponse]:
+    ) -> ApiResponse[DeliveriesResponseOrderResponse]:
         """Admit order draft changes and send them to Front.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest
+        :param deliveries_drafts_commit_draft_request:
+        :type deliveries_drafts_commit_draft_request: DeliveriesDraftsCommitDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -777,7 +777,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request,
+            deliveries_drafts_commit_draft_request=deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -785,11 +785,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -806,7 +806,7 @@ class DraftsApi:
     async def deliveries_drafts_commit_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest] = None,
+        deliveries_drafts_commit_draft_request: Optional[DeliveriesDraftsCommitDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -826,8 +826,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCommitDraftRequest
+        :param deliveries_drafts_commit_draft_request:
+        :type deliveries_drafts_commit_draft_request: DeliveriesDraftsCommitDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -852,7 +852,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_commit_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request,
+            deliveries_drafts_commit_draft_request=deliveries_drafts_commit_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -860,11 +860,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesResponseOrderResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesResponseOrderResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -876,7 +876,7 @@ class DraftsApi:
     def _deliveries_drafts_commit_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request,
+        deliveries_drafts_commit_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -904,8 +904,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_commit_draft_request
+        if deliveries_drafts_commit_draft_request is not None:
+            _body_params = deliveries_drafts_commit_draft_request
 
 
         # set the HTTP header `Accept`
@@ -957,7 +957,7 @@ class DraftsApi:
     async def deliveries_drafts_create_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest] = None,
+        deliveries_drafts_create_draft_request: Optional[DeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -970,15 +970,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse:
+    ) -> DeliveriesDraftsCreateOrSaveDraftResponse:
         """Create delivery order draft.
 
            > Restriction group: `Drafts: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest
+        :param deliveries_drafts_create_draft_request:
+        :type deliveries_drafts_create_draft_request: DeliveriesDraftsCreateDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1003,7 +1003,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request,
+            deliveries_drafts_create_draft_request=deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1011,11 +1011,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1032,7 +1032,7 @@ class DraftsApi:
     async def deliveries_drafts_create_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest] = None,
+        deliveries_drafts_create_draft_request: Optional[DeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1045,15 +1045,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse]:
+    ) -> ApiResponse[DeliveriesDraftsCreateOrSaveDraftResponse]:
         """Create delivery order draft.
 
            > Restriction group: `Drafts: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest
+        :param deliveries_drafts_create_draft_request:
+        :type deliveries_drafts_create_draft_request: DeliveriesDraftsCreateDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1078,7 +1078,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request,
+            deliveries_drafts_create_draft_request=deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1086,11 +1086,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1107,7 +1107,7 @@ class DraftsApi:
     async def deliveries_drafts_create_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest] = None,
+        deliveries_drafts_create_draft_request: Optional[DeliveriesDraftsCreateDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1127,8 +1127,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsCreateDraftRequest
+        :param deliveries_drafts_create_draft_request:
+        :type deliveries_drafts_create_draft_request: DeliveriesDraftsCreateDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1153,7 +1153,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_create_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request,
+            deliveries_drafts_create_draft_request=deliveries_drafts_create_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1161,11 +1161,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1177,7 +1177,7 @@ class DraftsApi:
     def _deliveries_drafts_create_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request,
+        deliveries_drafts_create_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1205,8 +1205,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_create_draft_request
+        if deliveries_drafts_create_draft_request is not None:
+            _body_params = deliveries_drafts_create_draft_request
 
 
         # set the HTTP header `Accept`
@@ -1258,7 +1258,7 @@ class DraftsApi:
     async def deliveries_drafts_delete_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest] = None,
+        deliveries_drafts_delete_draft_request: Optional[DeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1271,15 +1271,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Delete order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest
+        :param deliveries_drafts_delete_draft_request:
+        :type deliveries_drafts_delete_draft_request: DeliveriesDraftsDeleteDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1304,7 +1304,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request,
+            deliveries_drafts_delete_draft_request=deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1312,11 +1312,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1333,7 +1333,7 @@ class DraftsApi:
     async def deliveries_drafts_delete_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest] = None,
+        deliveries_drafts_delete_draft_request: Optional[DeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1346,15 +1346,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Delete order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest
+        :param deliveries_drafts_delete_draft_request:
+        :type deliveries_drafts_delete_draft_request: DeliveriesDraftsDeleteDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1379,7 +1379,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request,
+            deliveries_drafts_delete_draft_request=deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1387,11 +1387,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1408,7 +1408,7 @@ class DraftsApi:
     async def deliveries_drafts_delete_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest] = None,
+        deliveries_drafts_delete_draft_request: Optional[DeliveriesDraftsDeleteDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1428,8 +1428,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsDeleteDraftRequest
+        :param deliveries_drafts_delete_draft_request:
+        :type deliveries_drafts_delete_draft_request: DeliveriesDraftsDeleteDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1454,7 +1454,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_delete_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request,
+            deliveries_drafts_delete_draft_request=deliveries_drafts_delete_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1462,11 +1462,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1478,7 +1478,7 @@ class DraftsApi:
     def _deliveries_drafts_delete_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request,
+        deliveries_drafts_delete_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1506,8 +1506,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_delete_draft_request
+        if deliveries_drafts_delete_draft_request is not None:
+            _body_params = deliveries_drafts_delete_draft_request
 
 
         # set the HTTP header `Accept`
@@ -1559,7 +1559,7 @@ class DraftsApi:
     async def deliveries_drafts_lock_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1572,15 +1572,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Lock order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1605,7 +1605,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1613,11 +1613,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1634,7 +1634,7 @@ class DraftsApi:
     async def deliveries_drafts_lock_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1647,15 +1647,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Lock order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1680,7 +1680,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1688,11 +1688,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1709,7 +1709,7 @@ class DraftsApi:
     async def deliveries_drafts_lock_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1729,8 +1729,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1755,7 +1755,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_lock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1763,11 +1763,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1779,7 +1779,7 @@ class DraftsApi:
     def _deliveries_drafts_lock_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+        deliveries_drafts_lock_or_unlock_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1807,8 +1807,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request
+        if deliveries_drafts_lock_or_unlock_draft_request is not None:
+            _body_params = deliveries_drafts_lock_or_unlock_draft_request
 
 
         # set the HTTP header `Accept`
@@ -1860,7 +1860,7 @@ class DraftsApi:
     async def deliveries_drafts_save_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest] = None,
+        deliveries_drafts_save_draft_request: Optional[DeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1873,15 +1873,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse:
+    ) -> DeliveriesDraftsCreateOrSaveDraftResponse:
         """Update existing delivery order draft.
 
            > Restriction group: `Drafts: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest
+        :param deliveries_drafts_save_draft_request:
+        :type deliveries_drafts_save_draft_request: DeliveriesDraftsSaveDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1906,7 +1906,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request,
+            deliveries_drafts_save_draft_request=deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1914,11 +1914,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1935,7 +1935,7 @@ class DraftsApi:
     async def deliveries_drafts_save_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest] = None,
+        deliveries_drafts_save_draft_request: Optional[DeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1948,15 +1948,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse]:
+    ) -> ApiResponse[DeliveriesDraftsCreateOrSaveDraftResponse]:
         """Update existing delivery order draft.
 
            > Restriction group: `Drafts: creating`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest
+        :param deliveries_drafts_save_draft_request:
+        :type deliveries_drafts_save_draft_request: DeliveriesDraftsSaveDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1981,7 +1981,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request,
+            deliveries_drafts_save_draft_request=deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1989,11 +1989,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2010,7 +2010,7 @@ class DraftsApi:
     async def deliveries_drafts_save_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest] = None,
+        deliveries_drafts_save_draft_request: Optional[DeliveriesDraftsSaveDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2030,8 +2030,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsSaveDraftRequest
+        :param deliveries_drafts_save_draft_request:
+        :type deliveries_drafts_save_draft_request: DeliveriesDraftsSaveDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2056,7 +2056,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_save_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request,
+            deliveries_drafts_save_draft_request=deliveries_drafts_save_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2064,11 +2064,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsDeliveriesDraftsCreateOrSaveDraftResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "DeliveriesDraftsCreateOrSaveDraftResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2080,7 +2080,7 @@ class DraftsApi:
     def _deliveries_drafts_save_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request,
+        deliveries_drafts_save_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2108,8 +2108,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_save_draft_request
+        if deliveries_drafts_save_draft_request is not None:
+            _body_params = deliveries_drafts_save_draft_request
 
 
         # set the HTTP header `Accept`
@@ -2161,7 +2161,7 @@ class DraftsApi:
     async def deliveries_drafts_unlock_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2174,15 +2174,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsCommonCorrelationIdResponse:
+    ) -> CommonCorrelationIdResponse:
         """Unlock order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2207,7 +2207,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2215,11 +2215,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2236,7 +2236,7 @@ class DraftsApi:
     async def deliveries_drafts_unlock_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2249,15 +2249,15 @@ class DraftsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsCommonCorrelationIdResponse]:
+    ) -> ApiResponse[CommonCorrelationIdResponse]:
         """Unlock order draft.
 
            > Restriction group: `Drafts: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2282,7 +2282,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2290,11 +2290,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2311,7 +2311,7 @@ class DraftsApi:
     async def deliveries_drafts_unlock_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: Optional[IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest] = None,
+        deliveries_drafts_lock_or_unlock_draft_request: Optional[DeliveriesDraftsLockOrUnlockDraftRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2331,8 +2331,8 @@ class DraftsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request:
-        :type iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request: IikoTransportPublicApiContractsDeliveriesDraftsLockOrUnlockDraftRequest
+        :param deliveries_drafts_lock_or_unlock_draft_request:
+        :type deliveries_drafts_lock_or_unlock_draft_request: DeliveriesDraftsLockOrUnlockDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2357,7 +2357,7 @@ class DraftsApi:
 
         _param = self._deliveries_drafts_unlock_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request=iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+            deliveries_drafts_lock_or_unlock_draft_request=deliveries_drafts_lock_or_unlock_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2365,11 +2365,11 @@ class DraftsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsCommonCorrelationIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "CommonCorrelationIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2381,7 +2381,7 @@ class DraftsApi:
     def _deliveries_drafts_unlock_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request,
+        deliveries_drafts_lock_or_unlock_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2409,8 +2409,8 @@ class DraftsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request is not None:
-            _body_params = iiko_transport_public_api_contracts_deliveries_drafts_lock_or_unlock_draft_request
+        if deliveries_drafts_lock_or_unlock_draft_request is not None:
+            _body_params = deliveries_drafts_lock_or_unlock_draft_request
 
 
         # set the HTTP header `Accept`

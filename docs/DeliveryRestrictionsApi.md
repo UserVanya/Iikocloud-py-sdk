@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **delivery_restrictions_allowed_post**
-> IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse delivery_restrictions_allowed_post(timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+> DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse delivery_restrictions_allowed_post(timeout=timeout, delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
 
 Get suitable terminal groups for delivery restrictions.
 
@@ -25,8 +25,8 @@ Get suitable terminal groups for delivery restrictions.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -51,11 +51,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveryRestrictionsApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request = iikocloud_client.IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest() # IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest |  (optional)
+    delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request = iikocloud_client.DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest() # DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest |  (optional)
 
     try:
         # Get suitable terminal groups for delivery restrictions.
-        api_response = await api_instance.delivery_restrictions_allowed_post(timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+        api_response = await api_instance.delivery_restrictions_allowed_post(timeout=timeout, delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
         print("The response of DeliveryRestrictionsApi->delivery_restrictions_allowed_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,11 +70,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request** | [**IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest**](IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest.md)|  | [optional] 
+ **delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request** | [**DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest**](DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse**](IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse.md)
+[**DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse**](DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delivery_restrictions_post**
-> IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse delivery_restrictions_post(timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request)
+> DeliveryRestrictionsGetDeliveryRestrictionsResponse delivery_restrictions_post(timeout=timeout, delivery_restrictions_get_delivery_restrictions_request=delivery_restrictions_get_delivery_restrictions_request)
 
 Retrieve list of delivery restrictions.
 
@@ -114,8 +114,8 @@ Retrieve list of delivery restrictions.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_request import DeliveryRestrictionsGetDeliveryRestrictionsRequest
+from iikocloud_client.models.delivery_restrictions_get_delivery_restrictions_response import DeliveryRestrictionsGetDeliveryRestrictionsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -140,11 +140,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveryRestrictionsApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request = iikocloud_client.IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest() # IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest |  (optional)
+    delivery_restrictions_get_delivery_restrictions_request = iikocloud_client.DeliveryRestrictionsGetDeliveryRestrictionsRequest() # DeliveryRestrictionsGetDeliveryRestrictionsRequest |  (optional)
 
     try:
         # Retrieve list of delivery restrictions.
-        api_response = await api_instance.delivery_restrictions_post(timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request)
+        api_response = await api_instance.delivery_restrictions_post(timeout=timeout, delivery_restrictions_get_delivery_restrictions_request=delivery_restrictions_get_delivery_restrictions_request)
         print("The response of DeliveryRestrictionsApi->delivery_restrictions_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -159,11 +159,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request** | [**IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest**](IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest.md)|  | [optional] 
+ **delivery_restrictions_get_delivery_restrictions_request** | [**DeliveryRestrictionsGetDeliveryRestrictionsRequest**](DeliveryRestrictionsGetDeliveryRestrictionsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse**](IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse.md)
+[**DeliveryRestrictionsGetDeliveryRestrictionsResponse**](DeliveryRestrictionsGetDeliveryRestrictionsResponse.md)
 
 ### Authorization
 

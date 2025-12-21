@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **loyalty_iiko_customer_category_add_post**
-> object loyalty_iiko_customer_category_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request)
+> object loyalty_iiko_customer_category_add_post(timeout=timeout, customer_change_category_for_customer_request=customer_change_category_for_customer_request)
 
 Add category for customer.
 
@@ -24,7 +24,7 @@ Add specified category for customer.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request import IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+from iikocloud_client.models.customer_change_category_for_customer_request import CustomerChangeCategoryForCustomerRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -49,11 +49,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest() # IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest |  (optional)
+    customer_change_category_for_customer_request = iikocloud_client.CustomerChangeCategoryForCustomerRequest() # CustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Add category for customer.
-        api_response = await api_instance.loyalty_iiko_customer_category_add_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request)
+        api_response = await api_instance.loyalty_iiko_customer_category_add_post(timeout=timeout, customer_change_category_for_customer_request=customer_change_category_for_customer_request)
         print("The response of CustomerCategoriesApi->loyalty_iiko_customer_category_add_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,7 +68,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request** | [**IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest**](IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
+ **customer_change_category_for_customer_request** | [**CustomerChangeCategoryForCustomerRequest**](CustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_category_post**
-> IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse loyalty_iiko_customer_category_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request)
+> CustomerGetCategoriesResponse loyalty_iiko_customer_category_post(timeout=timeout, customer_get_categories_request=customer_get_categories_request)
 
 Get customer categories.
 
@@ -110,8 +110,8 @@ Get all organization's customer categories.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_get_categories_response import IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse
+from iikocloud_client.models.customer_get_categories_request import CustomerGetCategoriesRequest
+from iikocloud_client.models.customer_get_categories_response import CustomerGetCategoriesResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -136,11 +136,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest() # IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest |  (optional)
+    customer_get_categories_request = iikocloud_client.CustomerGetCategoriesRequest() # CustomerGetCategoriesRequest |  (optional)
 
     try:
         # Get customer categories.
-        api_response = await api_instance.loyalty_iiko_customer_category_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request=iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request)
+        api_response = await api_instance.loyalty_iiko_customer_category_post(timeout=timeout, customer_get_categories_request=customer_get_categories_request)
         print("The response of CustomerCategoriesApi->loyalty_iiko_customer_category_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,11 +155,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_get_categories_request** | [**IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest**](IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesRequest.md)|  | [optional] 
+ **customer_get_categories_request** | [**CustomerGetCategoriesRequest**](CustomerGetCategoriesRequest.md)|  | [optional] 
 
 ### Return type
 
-[**IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse**](IikoNetServiceContractsApiIikoTransportCustomerGetCategoriesResponse.md)
+[**CustomerGetCategoriesResponse**](CustomerGetCategoriesResponse.md)
 
 ### Authorization
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **loyalty_iiko_customer_category_remove_post**
-> object loyalty_iiko_customer_category_remove_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request)
+> object loyalty_iiko_customer_category_remove_post(timeout=timeout, customer_change_category_for_customer_request=customer_change_category_for_customer_request)
 
 Remove category for customer.
 
@@ -197,7 +197,7 @@ Remove specified category for customer.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request import IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest
+from iikocloud_client.models.customer_change_category_for_customer_request import CustomerChangeCategoryForCustomerRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -222,11 +222,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.CustomerCategoriesApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request = iikocloud_client.IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest() # IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest |  (optional)
+    customer_change_category_for_customer_request = iikocloud_client.CustomerChangeCategoryForCustomerRequest() # CustomerChangeCategoryForCustomerRequest |  (optional)
 
     try:
         # Remove category for customer.
-        api_response = await api_instance.loyalty_iiko_customer_category_remove_post(timeout=timeout, iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request=iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request)
+        api_response = await api_instance.loyalty_iiko_customer_category_remove_post(timeout=timeout, customer_change_category_for_customer_request=customer_change_category_for_customer_request)
         print("The response of CustomerCategoriesApi->loyalty_iiko_customer_category_remove_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -241,7 +241,7 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **iiko_net_service_contracts_api_iiko_transport_customer_change_category_for_customer_request** | [**IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest**](IikoNetServiceContractsApiIikoTransportCustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
+ **customer_change_category_for_customer_request** | [**CustomerChangeCategoryForCustomerRequest**](CustomerChangeCategoryForCustomerRequest.md)|  | [optional] 
 
 ### Return type
 

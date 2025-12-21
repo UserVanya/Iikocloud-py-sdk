@@ -19,14 +19,14 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_cities_request import IikoTransportPublicApiContractsAddressCitiesRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_cities_response import IikoTransportPublicApiContractsAddressCitiesResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_regions_request import IikoTransportPublicApiContractsAddressRegionsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_regions_response import IikoTransportPublicApiContractsAddressRegionsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_city_request import IikoTransportPublicApiContractsAddressStreetsByCityRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_id_request import IikoTransportPublicApiContractsAddressStreetsByIdRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_by_id_response import IikoTransportPublicApiContractsAddressStreetsByIdResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_address_streets_response import IikoTransportPublicApiContractsAddressStreetsResponse
+from iikocloud_client.models.address_cities_request import AddressCitiesRequest
+from iikocloud_client.models.address_cities_response import AddressCitiesResponse
+from iikocloud_client.models.address_regions_request import AddressRegionsRequest
+from iikocloud_client.models.address_regions_response import AddressRegionsResponse
+from iikocloud_client.models.address_streets_by_city_request import AddressStreetsByCityRequest
+from iikocloud_client.models.address_streets_by_id_request import AddressStreetsByIdRequest
+from iikocloud_client.models.address_streets_by_id_response import AddressStreetsByIdResponse
+from iikocloud_client.models.address_streets_response import AddressStreetsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -50,7 +50,7 @@ class AddressesApi:
     async def cities_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
+        address_cities_request: Optional[AddressCitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -63,15 +63,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsAddressCitiesResponse:
+    ) -> AddressCitiesResponse:
         """Cities.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_cities_request:
-        :type iiko_transport_public_api_contracts_address_cities_request: IikoTransportPublicApiContractsAddressCitiesRequest
+        :param address_cities_request:
+        :type address_cities_request: AddressCitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -96,7 +96,7 @@ class AddressesApi:
 
         _param = self._cities_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
+            address_cities_request=address_cities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -104,11 +104,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressCitiesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressCitiesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -125,7 +125,7 @@ class AddressesApi:
     async def cities_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
+        address_cities_request: Optional[AddressCitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -138,15 +138,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsAddressCitiesResponse]:
+    ) -> ApiResponse[AddressCitiesResponse]:
         """Cities.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_cities_request:
-        :type iiko_transport_public_api_contracts_address_cities_request: IikoTransportPublicApiContractsAddressCitiesRequest
+        :param address_cities_request:
+        :type address_cities_request: AddressCitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -171,7 +171,7 @@ class AddressesApi:
 
         _param = self._cities_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
+            address_cities_request=address_cities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,11 +179,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressCitiesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressCitiesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -200,7 +200,7 @@ class AddressesApi:
     async def cities_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_cities_request: Optional[IikoTransportPublicApiContractsAddressCitiesRequest] = None,
+        address_cities_request: Optional[AddressCitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -220,8 +220,8 @@ class AddressesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_cities_request:
-        :type iiko_transport_public_api_contracts_address_cities_request: IikoTransportPublicApiContractsAddressCitiesRequest
+        :param address_cities_request:
+        :type address_cities_request: AddressCitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -246,7 +246,7 @@ class AddressesApi:
 
         _param = self._cities_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_cities_request=iiko_transport_public_api_contracts_address_cities_request,
+            address_cities_request=address_cities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -254,11 +254,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressCitiesResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressCitiesResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -270,7 +270,7 @@ class AddressesApi:
     def _cities_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_address_cities_request,
+        address_cities_request,
         _request_auth,
         _content_type,
         _headers,
@@ -298,8 +298,8 @@ class AddressesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_address_cities_request is not None:
-            _body_params = iiko_transport_public_api_contracts_address_cities_request
+        if address_cities_request is not None:
+            _body_params = address_cities_request
 
 
         # set the HTTP header `Accept`
@@ -351,7 +351,7 @@ class AddressesApi:
     async def regions_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
+        address_regions_request: Optional[AddressRegionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -364,15 +364,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsAddressRegionsResponse:
+    ) -> AddressRegionsResponse:
         """Regions.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_regions_request:
-        :type iiko_transport_public_api_contracts_address_regions_request: IikoTransportPublicApiContractsAddressRegionsRequest
+        :param address_regions_request:
+        :type address_regions_request: AddressRegionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -397,7 +397,7 @@ class AddressesApi:
 
         _param = self._regions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
+            address_regions_request=address_regions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -405,11 +405,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressRegionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressRegionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -426,7 +426,7 @@ class AddressesApi:
     async def regions_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
+        address_regions_request: Optional[AddressRegionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -439,15 +439,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsAddressRegionsResponse]:
+    ) -> ApiResponse[AddressRegionsResponse]:
         """Regions.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_regions_request:
-        :type iiko_transport_public_api_contracts_address_regions_request: IikoTransportPublicApiContractsAddressRegionsRequest
+        :param address_regions_request:
+        :type address_regions_request: AddressRegionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -472,7 +472,7 @@ class AddressesApi:
 
         _param = self._regions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
+            address_regions_request=address_regions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -480,11 +480,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressRegionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressRegionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -501,7 +501,7 @@ class AddressesApi:
     async def regions_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_regions_request: Optional[IikoTransportPublicApiContractsAddressRegionsRequest] = None,
+        address_regions_request: Optional[AddressRegionsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -521,8 +521,8 @@ class AddressesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_regions_request:
-        :type iiko_transport_public_api_contracts_address_regions_request: IikoTransportPublicApiContractsAddressRegionsRequest
+        :param address_regions_request:
+        :type address_regions_request: AddressRegionsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -547,7 +547,7 @@ class AddressesApi:
 
         _param = self._regions_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_regions_request=iiko_transport_public_api_contracts_address_regions_request,
+            address_regions_request=address_regions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -555,11 +555,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressRegionsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressRegionsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -571,7 +571,7 @@ class AddressesApi:
     def _regions_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_address_regions_request,
+        address_regions_request,
         _request_auth,
         _content_type,
         _headers,
@@ -599,8 +599,8 @@ class AddressesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_address_regions_request is not None:
-            _body_params = iiko_transport_public_api_contracts_address_regions_request
+        if address_regions_request is not None:
+            _body_params = address_regions_request
 
 
         # set the HTTP header `Accept`
@@ -652,7 +652,7 @@ class AddressesApi:
     async def streets_by_city_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
+        address_streets_by_city_request: Optional[AddressStreetsByCityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,15 +665,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsAddressStreetsResponse:
+    ) -> AddressStreetsResponse:
         """Streets by city.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_city_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_city_request: IikoTransportPublicApiContractsAddressStreetsByCityRequest
+        :param address_streets_by_city_request:
+        :type address_streets_by_city_request: AddressStreetsByCityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -698,7 +698,7 @@ class AddressesApi:
 
         _param = self._streets_by_city_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
+            address_streets_by_city_request=address_streets_by_city_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -706,11 +706,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -727,7 +727,7 @@ class AddressesApi:
     async def streets_by_city_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
+        address_streets_by_city_request: Optional[AddressStreetsByCityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,15 +740,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsAddressStreetsResponse]:
+    ) -> ApiResponse[AddressStreetsResponse]:
         """Streets by city.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_city_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_city_request: IikoTransportPublicApiContractsAddressStreetsByCityRequest
+        :param address_streets_by_city_request:
+        :type address_streets_by_city_request: AddressStreetsByCityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -773,7 +773,7 @@ class AddressesApi:
 
         _param = self._streets_by_city_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
+            address_streets_by_city_request=address_streets_by_city_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -781,11 +781,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -802,7 +802,7 @@ class AddressesApi:
     async def streets_by_city_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_city_request: Optional[IikoTransportPublicApiContractsAddressStreetsByCityRequest] = None,
+        address_streets_by_city_request: Optional[AddressStreetsByCityRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -822,8 +822,8 @@ class AddressesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_city_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_city_request: IikoTransportPublicApiContractsAddressStreetsByCityRequest
+        :param address_streets_by_city_request:
+        :type address_streets_by_city_request: AddressStreetsByCityRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -848,7 +848,7 @@ class AddressesApi:
 
         _param = self._streets_by_city_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_city_request=iiko_transport_public_api_contracts_address_streets_by_city_request,
+            address_streets_by_city_request=address_streets_by_city_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -856,11 +856,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -872,7 +872,7 @@ class AddressesApi:
     def _streets_by_city_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_address_streets_by_city_request,
+        address_streets_by_city_request,
         _request_auth,
         _content_type,
         _headers,
@@ -900,8 +900,8 @@ class AddressesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_address_streets_by_city_request is not None:
-            _body_params = iiko_transport_public_api_contracts_address_streets_by_city_request
+        if address_streets_by_city_request is not None:
+            _body_params = address_streets_by_city_request
 
 
         # set the HTTP header `Accept`
@@ -953,7 +953,7 @@ class AddressesApi:
     async def streets_by_id_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
+        address_streets_by_id_request: Optional[AddressStreetsByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -966,15 +966,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsAddressStreetsByIdResponse:
+    ) -> AddressStreetsByIdResponse:
         """Streets by id or by classifierId.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_id_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_id_request: IikoTransportPublicApiContractsAddressStreetsByIdRequest
+        :param address_streets_by_id_request:
+        :type address_streets_by_id_request: AddressStreetsByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -999,7 +999,7 @@ class AddressesApi:
 
         _param = self._streets_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
+            address_streets_by_id_request=address_streets_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1007,11 +1007,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsByIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsByIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1028,7 +1028,7 @@ class AddressesApi:
     async def streets_by_id_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
+        address_streets_by_id_request: Optional[AddressStreetsByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1041,15 +1041,15 @@ class AddressesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsAddressStreetsByIdResponse]:
+    ) -> ApiResponse[AddressStreetsByIdResponse]:
         """Streets by id or by classifierId.
 
            > Restriction group: `Data: geo`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_id_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_id_request: IikoTransportPublicApiContractsAddressStreetsByIdRequest
+        :param address_streets_by_id_request:
+        :type address_streets_by_id_request: AddressStreetsByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1074,7 +1074,7 @@ class AddressesApi:
 
         _param = self._streets_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
+            address_streets_by_id_request=address_streets_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1082,11 +1082,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsByIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsByIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1103,7 +1103,7 @@ class AddressesApi:
     async def streets_by_id_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_address_streets_by_id_request: Optional[IikoTransportPublicApiContractsAddressStreetsByIdRequest] = None,
+        address_streets_by_id_request: Optional[AddressStreetsByIdRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1123,8 +1123,8 @@ class AddressesApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_address_streets_by_id_request:
-        :type iiko_transport_public_api_contracts_address_streets_by_id_request: IikoTransportPublicApiContractsAddressStreetsByIdRequest
+        :param address_streets_by_id_request:
+        :type address_streets_by_id_request: AddressStreetsByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1149,7 +1149,7 @@ class AddressesApi:
 
         _param = self._streets_by_id_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_address_streets_by_id_request=iiko_transport_public_api_contracts_address_streets_by_id_request,
+            address_streets_by_id_request=address_streets_by_id_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1157,11 +1157,11 @@ class AddressesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsAddressStreetsByIdResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "AddressStreetsByIdResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1173,7 +1173,7 @@ class AddressesApi:
     def _streets_by_id_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_address_streets_by_id_request,
+        address_streets_by_id_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1201,8 +1201,8 @@ class AddressesApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_address_streets_by_id_request is not None:
-            _body_params = iiko_transport_public_api_contracts_address_streets_by_id_request
+        if address_streets_by_id_request is not None:
+            _body_params = address_streets_by_id_request
 
 
         # set the HTTP header `Accept`

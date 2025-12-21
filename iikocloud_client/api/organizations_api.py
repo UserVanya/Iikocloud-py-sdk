@@ -19,10 +19,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_request import IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_response import IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organizations_settings_request import IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest
-from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_organizations_settings_response import IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse
+from iikocloud_client.models.organizations_get_organizations_request import OrganizationsGetOrganizationsRequest
+from iikocloud_client.models.organizations_get_organizations_response import OrganizationsGetOrganizationsResponse
+from iikocloud_client.models.organizations_organizations_settings_request import OrganizationsOrganizationsSettingsRequest
+from iikocloud_client.models.organizations_organizations_settings_response import OrganizationsOrganizationsSettingsResponse
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -46,7 +46,7 @@ class OrganizationsApi:
     async def organizations_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,15 +59,15 @@ class OrganizationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse:
+    ) -> OrganizationsGetOrganizationsResponse:
         """Returns organizations available to api-login user.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,7 +92,7 @@ class OrganizationsApi:
 
         _param = self._organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,11 +100,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +121,7 @@ class OrganizationsApi:
     async def organizations_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,15 +134,15 @@ class OrganizationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse]:
+    ) -> ApiResponse[OrganizationsGetOrganizationsResponse]:
         """Returns organizations available to api-login user.
 
            > Restriction group: `Data: dictionaries`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +167,7 @@ class OrganizationsApi:
 
         _param = self._organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,11 +175,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -196,7 +196,7 @@ class OrganizationsApi:
     async def organizations_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request: Optional[IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest] = None,
+        organizations_get_organizations_request: Optional[OrganizationsGetOrganizationsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,8 +216,8 @@ class OrganizationsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_get_organizations_request:
-        :type iiko_transport_public_api_contracts_organizations_get_organizations_request: IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+        :param organizations_get_organizations_request:
+        :type organizations_get_organizations_request: OrganizationsGetOrganizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -242,7 +242,7 @@ class OrganizationsApi:
 
         _param = self._organizations_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request,
+            organizations_get_organizations_request=organizations_get_organizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,11 +250,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsGetOrganizationsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -266,7 +266,7 @@ class OrganizationsApi:
     def _organizations_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_organizations_get_organizations_request,
+        organizations_get_organizations_request,
         _request_auth,
         _content_type,
         _headers,
@@ -294,8 +294,8 @@ class OrganizationsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_organizations_get_organizations_request is not None:
-            _body_params = iiko_transport_public_api_contracts_organizations_get_organizations_request
+        if organizations_get_organizations_request is not None:
+            _body_params = organizations_get_organizations_request
 
 
         # set the HTTP header `Accept`
@@ -347,7 +347,7 @@ class OrganizationsApi:
     async def organizations_settings_post(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_organizations_settings_request: Optional[IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest] = None,
+        organizations_organizations_settings_request: Optional[OrganizationsOrganizationsSettingsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -360,15 +360,15 @@ class OrganizationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse:
+    ) -> OrganizationsOrganizationsSettingsResponse:
         """Returns available to api-login user organizations specified settings.
 
            > Restriction group: `Organizations: settings`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_organizations_settings_request:
-        :type iiko_transport_public_api_contracts_organizations_organizations_settings_request: IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest
+        :param organizations_organizations_settings_request:
+        :type organizations_organizations_settings_request: OrganizationsOrganizationsSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -393,7 +393,7 @@ class OrganizationsApi:
 
         _param = self._organizations_settings_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request,
+            organizations_organizations_settings_request=organizations_organizations_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -401,11 +401,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsOrganizationsSettingsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -422,7 +422,7 @@ class OrganizationsApi:
     async def organizations_settings_post_with_http_info(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_organizations_settings_request: Optional[IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest] = None,
+        organizations_organizations_settings_request: Optional[OrganizationsOrganizationsSettingsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -435,15 +435,15 @@ class OrganizationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse]:
+    ) -> ApiResponse[OrganizationsOrganizationsSettingsResponse]:
         """Returns available to api-login user organizations specified settings.
 
            > Restriction group: `Organizations: settings`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_organizations_settings_request:
-        :type iiko_transport_public_api_contracts_organizations_organizations_settings_request: IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest
+        :param organizations_organizations_settings_request:
+        :type organizations_organizations_settings_request: OrganizationsOrganizationsSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -468,7 +468,7 @@ class OrganizationsApi:
 
         _param = self._organizations_settings_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request,
+            organizations_organizations_settings_request=organizations_organizations_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -476,11 +476,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsOrganizationsSettingsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -497,7 +497,7 @@ class OrganizationsApi:
     async def organizations_settings_post_without_preload_content(
         self,
         timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
-        iiko_transport_public_api_contracts_organizations_organizations_settings_request: Optional[IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest] = None,
+        organizations_organizations_settings_request: Optional[OrganizationsOrganizationsSettingsRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -517,8 +517,8 @@ class OrganizationsApi:
 
         :param timeout: Timeout in seconds.
         :type timeout: int
-        :param iiko_transport_public_api_contracts_organizations_organizations_settings_request:
-        :type iiko_transport_public_api_contracts_organizations_organizations_settings_request: IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsRequest
+        :param organizations_organizations_settings_request:
+        :type organizations_organizations_settings_request: OrganizationsOrganizationsSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -543,7 +543,7 @@ class OrganizationsApi:
 
         _param = self._organizations_settings_post_serialize(
             timeout=timeout,
-            iiko_transport_public_api_contracts_organizations_organizations_settings_request=iiko_transport_public_api_contracts_organizations_organizations_settings_request,
+            organizations_organizations_settings_request=organizations_organizations_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -551,11 +551,11 @@ class OrganizationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IikoTransportPublicApiContractsOrganizationsOrganizationsSettingsResponse",
-            '400': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '401': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '500': "IikoTransportPublicApiContractsErrorsErrorResponse",
-            '408': "IikoTransportPublicApiContractsErrorsErrorResponse",
+            '200': "OrganizationsOrganizationsSettingsResponse",
+            '400': "ErrorsErrorResponse",
+            '401': "ErrorsErrorResponse",
+            '500': "ErrorsErrorResponse",
+            '408': "ErrorsErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -567,7 +567,7 @@ class OrganizationsApi:
     def _organizations_settings_post_serialize(
         self,
         timeout,
-        iiko_transport_public_api_contracts_organizations_organizations_settings_request,
+        organizations_organizations_settings_request,
         _request_auth,
         _content_type,
         _headers,
@@ -595,8 +595,8 @@ class OrganizationsApi:
             _header_params['Timeout'] = timeout
         # process the form parameters
         # process the body parameter
-        if iiko_transport_public_api_contracts_organizations_organizations_settings_request is not None:
-            _body_params = iiko_transport_public_api_contracts_organizations_organizations_settings_request
+        if organizations_organizations_settings_request is not None:
+            _body_params = organizations_organizations_settings_request
 
 
         # set the HTTP header `Accept`
