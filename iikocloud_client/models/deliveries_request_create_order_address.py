@@ -25,8 +25,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy
     from iikocloud_client.models.deliveries_request_create_order_address_city import DeliveriesRequestCreateOrderAddressCity
     from iikocloud_client.models.deliveries_request_create_order_address_legacy import DeliveriesRequestCreateOrderAddressLegacy
 
@@ -49,7 +47,7 @@ class DeliveriesRequestCreateOrderAddress(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'city': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity','legacy': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy','Deliveries.Request.CreateOrder.AddressCity': 'DeliveriesRequestCreateOrderAddressCity','Deliveries.Request.CreateOrder.AddressLegacy': 'DeliveriesRequestCreateOrderAddressLegacy'
+        'city': 'DeliveriesRequestCreateOrderAddressCity','legacy': 'DeliveriesRequestCreateOrderAddressLegacy'
     }
 
     @classmethod
@@ -71,7 +69,7 @@ class DeliveriesRequestCreateOrderAddress(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy, DeliveriesRequestCreateOrderAddressCity, DeliveriesRequestCreateOrderAddressLegacy]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestCreateOrderAddressCity, DeliveriesRequestCreateOrderAddressLegacy]]:
         """Create an instance of DeliveriesRequestCreateOrderAddress from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -96,14 +94,10 @@ class DeliveriesRequestCreateOrderAddress(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy, DeliveriesRequestCreateOrderAddressCity, DeliveriesRequestCreateOrderAddressLegacy]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestCreateOrderAddressCity, DeliveriesRequestCreateOrderAddressLegacy]]:
         """Create an instance of DeliveriesRequestCreateOrderAddress from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressCity.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderAddressLegacy.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderAddressCity':
             return import_module("iikocloud_client.models.deliveries_request_create_order_address_city").DeliveriesRequestCreateOrderAddressCity.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderAddressLegacy':

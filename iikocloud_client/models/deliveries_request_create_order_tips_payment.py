@@ -28,9 +28,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment
     from iikocloud_client.models.deliveries_request_create_order_card_tips_payment import DeliveriesRequestCreateOrderCardTipsPayment
     from iikocloud_client.models.deliveries_request_create_order_cash_tips_payment import DeliveriesRequestCreateOrderCashTipsPayment
     from iikocloud_client.models.deliveries_request_create_order_external_tips_payment import DeliveriesRequestCreateOrderExternalTipsPayment
@@ -61,7 +58,7 @@ class DeliveriesRequestCreateOrderTipsPayment(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Card': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment','Cash': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment','External': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment','Deliveries.Request.CreateOrder.CardTipsPayment': 'DeliveriesRequestCreateOrderCardTipsPayment','Deliveries.Request.CreateOrder.CashTipsPayment': 'DeliveriesRequestCreateOrderCashTipsPayment','Deliveries.Request.CreateOrder.ExternalTipsPayment': 'DeliveriesRequestCreateOrderExternalTipsPayment'
+        'Card': 'DeliveriesRequestCreateOrderCardTipsPayment','Cash': 'DeliveriesRequestCreateOrderCashTipsPayment','External': 'DeliveriesRequestCreateOrderExternalTipsPayment'
     }
 
     @classmethod
@@ -83,7 +80,7 @@ class DeliveriesRequestCreateOrderTipsPayment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment, DeliveriesRequestCreateOrderCardTipsPayment, DeliveriesRequestCreateOrderCashTipsPayment, DeliveriesRequestCreateOrderExternalTipsPayment]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestCreateOrderCardTipsPayment, DeliveriesRequestCreateOrderCashTipsPayment, DeliveriesRequestCreateOrderExternalTipsPayment]]:
         """Create an instance of DeliveriesRequestCreateOrderTipsPayment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -116,16 +113,10 @@ class DeliveriesRequestCreateOrderTipsPayment(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment, DeliveriesRequestCreateOrderCardTipsPayment, DeliveriesRequestCreateOrderCashTipsPayment, DeliveriesRequestCreateOrderExternalTipsPayment]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestCreateOrderCardTipsPayment, DeliveriesRequestCreateOrderCashTipsPayment, DeliveriesRequestCreateOrderExternalTipsPayment]]:
         """Create an instance of DeliveriesRequestCreateOrderTipsPayment from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardTipsPayment.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashTipsPayment.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalTipsPayment.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderCardTipsPayment':
             return import_module("iikocloud_client.models.deliveries_request_create_order_card_tips_payment").DeliveriesRequestCreateOrderCardTipsPayment.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderCashTipsPayment':

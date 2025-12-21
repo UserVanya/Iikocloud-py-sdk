@@ -25,10 +25,8 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount
-    from iikocloud_client.models.deliveries_request_create_order_iiko_card_discount import DeliveriesRequestCreateOrderIikoCardDiscount
     from iikocloud_client.models.deliveries_request_create_order_rms_discount import DeliveriesRequestCreateOrderRmsDiscount
+    from iikocloud_client.models.deliveries_request_create_order_iiko_card_discount import DeliveriesRequestCreateOrderIikoCardDiscount
 
 class DeliveriesRequestCreateOrderDiscount(BaseModel):
     """
@@ -49,7 +47,7 @@ class DeliveriesRequestCreateOrderDiscount(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'RMS': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount','iikoCard': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount','Deliveries.Request.CreateOrder.IikoCardDiscount': 'DeliveriesRequestCreateOrderIikoCardDiscount','Deliveries.Request.CreateOrder.RmsDiscount': 'DeliveriesRequestCreateOrderRmsDiscount'
+        'RMS': 'DeliveriesRequestCreateOrderRmsDiscount','iikoCard': 'DeliveriesRequestCreateOrderIikoCardDiscount'
     }
 
     @classmethod
@@ -71,7 +69,7 @@ class DeliveriesRequestCreateOrderDiscount(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount, DeliveriesRequestCreateOrderIikoCardDiscount, DeliveriesRequestCreateOrderRmsDiscount]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestCreateOrderRmsDiscount, DeliveriesRequestCreateOrderIikoCardDiscount]]:
         """Create an instance of DeliveriesRequestCreateOrderDiscount from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -96,18 +94,14 @@ class DeliveriesRequestCreateOrderDiscount(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount, DeliveriesRequestCreateOrderIikoCardDiscount, DeliveriesRequestCreateOrderRmsDiscount]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestCreateOrderRmsDiscount, DeliveriesRequestCreateOrderIikoCardDiscount]]:
         """Create an instance of DeliveriesRequestCreateOrderDiscount from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderRmsDiscount.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderIikoCardDiscount.from_dict(obj)
-        if object_type ==  'DeliveriesRequestCreateOrderIikoCardDiscount':
-            return import_module("iikocloud_client.models.deliveries_request_create_order_iiko_card_discount").DeliveriesRequestCreateOrderIikoCardDiscount.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderRmsDiscount':
             return import_module("iikocloud_client.models.deliveries_request_create_order_rms_discount").DeliveriesRequestCreateOrderRmsDiscount.from_dict(obj)
+        if object_type ==  'DeliveriesRequestCreateOrderIikoCardDiscount':
+            return import_module("iikocloud_client.models.deliveries_request_create_order_iiko_card_discount").DeliveriesRequestCreateOrderIikoCardDiscount.from_dict(obj)
 
         raise ValueError("DeliveriesRequestCreateOrderDiscount failed to lookup discriminator value from " +
                             json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +

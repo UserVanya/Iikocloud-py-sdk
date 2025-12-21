@@ -29,9 +29,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem
     from iikocloud_client.models.deliveries_response_order_compound_order_item import DeliveriesResponseOrderCompoundOrderItem
     from iikocloud_client.models.deliveries_response_order_product_order_item import DeliveriesResponseOrderProductOrderItem
     from iikocloud_client.models.deliveries_response_order_service_order_item import DeliveriesResponseOrderServiceOrderItem
@@ -62,7 +59,7 @@ class DeliveriesResponseOrderOrderItem(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Compound': 'IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem','Product': 'IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem','Service': 'IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem','Deliveries.Response.Order.CompoundOrderItem': 'DeliveriesResponseOrderCompoundOrderItem','Deliveries.Response.Order.ProductOrderItem': 'DeliveriesResponseOrderProductOrderItem','Deliveries.Response.Order.ServiceOrderItem': 'DeliveriesResponseOrderServiceOrderItem'
+        'Compound': 'DeliveriesResponseOrderCompoundOrderItem','Product': 'DeliveriesResponseOrderProductOrderItem','Service': 'DeliveriesResponseOrderServiceOrderItem'
     }
 
     @classmethod
@@ -84,7 +81,7 @@ class DeliveriesResponseOrderOrderItem(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem, IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem, IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem, DeliveriesResponseOrderCompoundOrderItem, DeliveriesResponseOrderProductOrderItem, DeliveriesResponseOrderServiceOrderItem]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesResponseOrderCompoundOrderItem, DeliveriesResponseOrderProductOrderItem, DeliveriesResponseOrderServiceOrderItem]]:
         """Create an instance of DeliveriesResponseOrderOrderItem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -143,16 +140,10 @@ class DeliveriesResponseOrderOrderItem(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem, IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem, IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem, DeliveriesResponseOrderCompoundOrderItem, DeliveriesResponseOrderProductOrderItem, DeliveriesResponseOrderServiceOrderItem]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesResponseOrderCompoundOrderItem, DeliveriesResponseOrderProductOrderItem, DeliveriesResponseOrderServiceOrderItem]]:
         """Create an instance of DeliveriesResponseOrderOrderItem from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesResponseOrderCompoundOrderItem.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesResponseOrderProductOrderItem.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesResponseOrderServiceOrderItem.from_dict(obj)
         if object_type ==  'DeliveriesResponseOrderCompoundOrderItem':
             return import_module("iikocloud_client.models.deliveries_response_order_compound_order_item").DeliveriesResponseOrderCompoundOrderItem.from_dict(obj)
         if object_type ==  'DeliveriesResponseOrderProductOrderItem':

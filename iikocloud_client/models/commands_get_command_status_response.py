@@ -25,9 +25,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsCommandsErrorCommandStatus
-    from iikocloud_client.models. import IikoTransportPublicApiContractsCommandsInProgressCommandStatus
-    from iikocloud_client.models. import IikoTransportPublicApiContractsCommandsSuccessCommandStatus
     from iikocloud_client.models.commands_error_command_status import CommandsErrorCommandStatus
     from iikocloud_client.models.commands_in_progress_command_status import CommandsInProgressCommandStatus
     from iikocloud_client.models.commands_success_command_status import CommandsSuccessCommandStatus
@@ -51,7 +48,7 @@ class CommandsGetCommandStatusResponse(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Error': 'IikoTransportPublicApiContractsCommandsErrorCommandStatus','InProgress': 'IikoTransportPublicApiContractsCommandsInProgressCommandStatus','Success': 'IikoTransportPublicApiContractsCommandsSuccessCommandStatus','Commands.ErrorCommandStatus': 'CommandsErrorCommandStatus','Commands.InProgressCommandStatus': 'CommandsInProgressCommandStatus','Commands.SuccessCommandStatus': 'CommandsSuccessCommandStatus'
+        'Error': 'CommandsErrorCommandStatus','InProgress': 'CommandsInProgressCommandStatus','Success': 'CommandsSuccessCommandStatus'
     }
 
     @classmethod
@@ -73,7 +70,7 @@ class CommandsGetCommandStatusResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsCommandsErrorCommandStatus, IikoTransportPublicApiContractsCommandsInProgressCommandStatus, IikoTransportPublicApiContractsCommandsSuccessCommandStatus, CommandsErrorCommandStatus, CommandsInProgressCommandStatus, CommandsSuccessCommandStatus]]:
+    def from_json(cls, json_str: str) -> Optional[Union[CommandsErrorCommandStatus, CommandsInProgressCommandStatus, CommandsSuccessCommandStatus]]:
         """Create an instance of CommandsGetCommandStatusResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -98,16 +95,10 @@ class CommandsGetCommandStatusResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsCommandsErrorCommandStatus, IikoTransportPublicApiContractsCommandsInProgressCommandStatus, IikoTransportPublicApiContractsCommandsSuccessCommandStatus, CommandsErrorCommandStatus, CommandsInProgressCommandStatus, CommandsSuccessCommandStatus]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[CommandsErrorCommandStatus, CommandsInProgressCommandStatus, CommandsSuccessCommandStatus]]:
         """Create an instance of CommandsGetCommandStatusResponse from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsCommandsErrorCommandStatus':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsCommandsErrorCommandStatus.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsCommandsInProgressCommandStatus':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsCommandsInProgressCommandStatus.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsCommandsSuccessCommandStatus':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsCommandsSuccessCommandStatus.from_dict(obj)
         if object_type ==  'CommandsErrorCommandStatus':
             return import_module("iikocloud_client.models.commands_error_command_status").CommandsErrorCommandStatus.from_dict(obj)
         if object_type ==  'CommandsInProgressCommandStatus':

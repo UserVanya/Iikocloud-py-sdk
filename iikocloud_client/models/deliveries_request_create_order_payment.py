@@ -28,10 +28,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment
     from iikocloud_client.models.deliveries_request_create_order_card_payment import DeliveriesRequestCreateOrderCardPayment
     from iikocloud_client.models.deliveries_request_create_order_cash_payment import DeliveriesRequestCreateOrderCashPayment
     from iikocloud_client.models.deliveries_request_create_order_external_payment import DeliveriesRequestCreateOrderExternalPayment
@@ -62,7 +58,7 @@ class DeliveriesRequestCreateOrderPayment(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Card': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment','Cash': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment','External': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment','LoyaltyCard': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment','Deliveries.Request.CreateOrder.CardPayment': 'DeliveriesRequestCreateOrderCardPayment','Deliveries.Request.CreateOrder.CashPayment': 'DeliveriesRequestCreateOrderCashPayment','Deliveries.Request.CreateOrder.ExternalPayment': 'DeliveriesRequestCreateOrderExternalPayment','Deliveries.Request.CreateOrder.LoyaltyCardPayment': 'DeliveriesRequestCreateOrderLoyaltyCardPayment'
+        'Card': 'DeliveriesRequestCreateOrderCardPayment','Cash': 'DeliveriesRequestCreateOrderCashPayment','External': 'DeliveriesRequestCreateOrderExternalPayment','LoyaltyCard': 'DeliveriesRequestCreateOrderLoyaltyCardPayment'
     }
 
     @classmethod
@@ -84,7 +80,7 @@ class DeliveriesRequestCreateOrderPayment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment, DeliveriesRequestCreateOrderCardPayment, DeliveriesRequestCreateOrderCashPayment, DeliveriesRequestCreateOrderExternalPayment, DeliveriesRequestCreateOrderLoyaltyCardPayment]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestCreateOrderCardPayment, DeliveriesRequestCreateOrderCashPayment, DeliveriesRequestCreateOrderExternalPayment, DeliveriesRequestCreateOrderLoyaltyCardPayment]]:
         """Create an instance of DeliveriesRequestCreateOrderPayment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -117,18 +113,10 @@ class DeliveriesRequestCreateOrderPayment(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment, DeliveriesRequestCreateOrderCardPayment, DeliveriesRequestCreateOrderCashPayment, DeliveriesRequestCreateOrderExternalPayment, DeliveriesRequestCreateOrderLoyaltyCardPayment]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestCreateOrderCardPayment, DeliveriesRequestCreateOrderCashPayment, DeliveriesRequestCreateOrderExternalPayment, DeliveriesRequestCreateOrderLoyaltyCardPayment]]:
         """Create an instance of DeliveriesRequestCreateOrderPayment from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCardPayment.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCashPayment.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderExternalPayment.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderLoyaltyCardPayment.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderCardPayment':
             return import_module("iikocloud_client.models.deliveries_request_create_order_card_payment").DeliveriesRequestCreateOrderCardPayment.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderCashPayment':

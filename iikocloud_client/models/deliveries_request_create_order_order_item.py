@@ -28,8 +28,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem
     from iikocloud_client.models.deliveries_request_create_order_compound_order_item import DeliveriesRequestCreateOrderCompoundOrderItem
     from iikocloud_client.models.deliveries_request_create_order_product_order_item import DeliveriesRequestCreateOrderProductOrderItem
 
@@ -56,7 +54,7 @@ class DeliveriesRequestCreateOrderOrderItem(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Compound': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem','Product': 'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem','Deliveries.Request.CreateOrder.CompoundOrderItem': 'DeliveriesRequestCreateOrderCompoundOrderItem','Deliveries.Request.CreateOrder.ProductOrderItem': 'DeliveriesRequestCreateOrderProductOrderItem'
+        'Compound': 'DeliveriesRequestCreateOrderCompoundOrderItem','Product': 'DeliveriesRequestCreateOrderProductOrderItem'
     }
 
     @classmethod
@@ -78,7 +76,7 @@ class DeliveriesRequestCreateOrderOrderItem(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem, DeliveriesRequestCreateOrderCompoundOrderItem, DeliveriesRequestCreateOrderProductOrderItem]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestCreateOrderCompoundOrderItem, DeliveriesRequestCreateOrderProductOrderItem]]:
         """Create an instance of DeliveriesRequestCreateOrderOrderItem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -121,14 +119,10 @@ class DeliveriesRequestCreateOrderOrderItem(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem, IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem, DeliveriesRequestCreateOrderCompoundOrderItem, DeliveriesRequestCreateOrderProductOrderItem]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestCreateOrderCompoundOrderItem, DeliveriesRequestCreateOrderProductOrderItem]]:
         """Create an instance of DeliveriesRequestCreateOrderOrderItem from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderCompoundOrderItem.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestCreateOrderProductOrderItem.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderCompoundOrderItem':
             return import_module("iikocloud_client.models.deliveries_request_create_order_compound_order_item").DeliveriesRequestCreateOrderCompoundOrderItem.from_dict(obj)
         if object_type ==  'DeliveriesRequestCreateOrderProductOrderItem':

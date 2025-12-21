@@ -88,37 +88,61 @@ def fix_schema_prefixes(json_file: str) -> None:
     # Заменяем ссылки на схемы во всём файле
     refs_replaced = {'count': 0}
     
+    def process_schema_ref(ref_string: str) -> str:
+        """Обрабатывает ссылку на схему и возвращает обновлённую ссылку."""
+        if not ref_string.startswith('#/components/schemas/'):
+            return ref_string
+        
+        schema_name = ref_string[len('#/components/schemas/'):]
+        
+        # Сначала проверяем, была ли схема переименована (есть в mapping)
+        if schema_name in schema_mapping:
+            new_name = schema_mapping[schema_name]
+            return f"#/components/schemas/{new_name}"
+        else:
+            # Нормализуем имя схемы (на случай, если ссылка содержит префиксы)
+            normalized_name = normalize_schema_name(schema_name)
+            if normalized_name != schema_name:
+                # Проверяем, существует ли нормализованная схема
+                if normalized_name in current_schemas:
+                    return f"#/components/schemas/{normalized_name}"
+                # Если нормализованное имя не найдено, но есть в mapping (после нормализации)
+                # это означает, что схема была переименована, но ссылка указывает на старое имя с префиксом
+                elif normalized_name in schema_mapping.values():
+                    return f"#/components/schemas/{normalized_name}"
+        
+        return ref_string
+    
     def replace_refs(obj):
         """Рекурсивно заменяет ссылки на схемы в объекте."""
         if isinstance(obj, dict):
+            # Обрабатываем объекты с ключом $ref
             if '$ref' in obj and isinstance(obj['$ref'], str):
-                # Проверяем, является ли это ссылкой на схему
-                if obj['$ref'].startswith('#/components/schemas/'):
-                    schema_name = obj['$ref'][len('#/components/schemas/'):]
-                    original_ref = obj['$ref']
-                    
-                    # Сначала проверяем, была ли схема переименована (есть в mapping)
-                    if schema_name in schema_mapping:
-                        new_name = schema_mapping[schema_name]
-                        obj['$ref'] = f"#/components/schemas/{new_name}"
-                        refs_replaced['count'] += 1
-                    else:
-                        # Нормализуем имя схемы (на случай, если ссылка содержит префиксы)
-                        normalized_name = normalize_schema_name(schema_name)
-                        if normalized_name != schema_name:
-                            # Проверяем, существует ли нормализованная схема
-                            if normalized_name in current_schemas:
-                                obj['$ref'] = f"#/components/schemas/{normalized_name}"
-                                refs_replaced['count'] += 1
-                            # Если нормализованное имя не найдено, но есть в mapping (после нормализации)
-                            # это означает, что схема была переименована, но ссылка указывает на старое имя с префиксом
-                            elif normalized_name in schema_mapping.values():
-                                obj['$ref'] = f"#/components/schemas/{normalized_name}"
-                                refs_replaced['count'] += 1
-            else:
-                # Рекурсивно обрабатываем все значения словаря
-                for key, value in obj.items():
+                new_ref = process_schema_ref(obj['$ref'])
+                if new_ref != obj['$ref']:
+                    obj['$ref'] = new_ref
+                    refs_replaced['count'] += 1
+            
+            # Обрабатываем значения в mapping (discriminator.mapping и другие)
+            # где значения могут быть строками-ссылками
+            if 'mapping' in obj and isinstance(obj['mapping'], dict):
+                for key, value in obj['mapping'].items():
+                    if isinstance(value, str) and value.startswith('#/components/schemas/'):
+                        new_ref = process_schema_ref(value)
+                        if new_ref != value:
+                            obj['mapping'][key] = new_ref
+                            refs_replaced['count'] += 1
+            
+            # Рекурсивно обрабатываем все значения словаря
+            for key, value in obj.items():
+                # Пропускаем уже обработанные ключи, чтобы не обрабатывать их дважды
+                if key not in ('$ref', 'mapping'):
                     replace_refs(value)
+                # Для mapping нужно обработать рекурсивно, если значения - это объекты
+                elif key == 'mapping' and isinstance(value, dict):
+                    for map_key, map_value in value.items():
+                        if not (isinstance(map_value, str) and map_value.startswith('#/components/schemas/')):
+                            replace_refs(map_value)
         elif isinstance(obj, list):
             # Рекурсивно обрабатываем все элементы списка
             for item in obj:

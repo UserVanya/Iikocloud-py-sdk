@@ -26,8 +26,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
     from iikocloud_client.models.deliveries_request_update_order_change_service_type_delivery_by_client import DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient
     from iikocloud_client.models.deliveries_request_update_order_change_service_type_delivery_by_courier import DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
 
@@ -52,7 +50,7 @@ class DeliveriesRequestUpdateOrderChangeServiceTypeRequest(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'DeliveryByClient': 'IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient','DeliveryByCourier': 'IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier','Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByClient': 'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient','Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByCourier': 'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier'
+        'DeliveryByClient': 'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient','DeliveryByCourier': 'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier'
     }
 
     @classmethod
@@ -74,7 +72,7 @@ class DeliveriesRequestUpdateOrderChangeServiceTypeRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier]]:
         """Create an instance of DeliveriesRequestUpdateOrderChangeServiceTypeRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -99,14 +97,10 @@ class DeliveriesRequestUpdateOrderChangeServiceTypeRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient, DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier]]:
         """Create an instance of DeliveriesRequestUpdateOrderChangeServiceTypeRequest from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier.from_dict(obj)
         if object_type ==  'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient':
             return import_module("iikocloud_client.models.deliveries_request_update_order_change_service_type_delivery_by_client").DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByClient.from_dict(obj)
         if object_type ==  'DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier':

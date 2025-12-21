@@ -25,9 +25,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData
-    from iikocloud_client.models. import IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData
     from iikocloud_client.models.deliveries_common_card_payment_additional_data import DeliveriesCommonCardPaymentAdditionalData
     from iikocloud_client.models.deliveries_common_external_payment_additional_data import DeliveriesCommonExternalPaymentAdditionalData
     from iikocloud_client.models.deliveries_common_loyalty_card_payment_additional_data import DeliveriesCommonLoyaltyCardPaymentAdditionalData
@@ -51,7 +48,7 @@ class DeliveriesCommonPaymentAdditionalData(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Card': 'IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData','External': 'IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData','LoyaltyCard': 'IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData','Deliveries.Common.CardPaymentAdditionalData': 'DeliveriesCommonCardPaymentAdditionalData','Deliveries.Common.ExternalPaymentAdditionalData': 'DeliveriesCommonExternalPaymentAdditionalData','Deliveries.Common.LoyaltyCardPaymentAdditionalData': 'DeliveriesCommonLoyaltyCardPaymentAdditionalData'
+        'Card': 'DeliveriesCommonCardPaymentAdditionalData','External': 'DeliveriesCommonExternalPaymentAdditionalData','LoyaltyCard': 'DeliveriesCommonLoyaltyCardPaymentAdditionalData'
     }
 
     @classmethod
@@ -73,7 +70,7 @@ class DeliveriesCommonPaymentAdditionalData(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData, IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData, IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData, DeliveriesCommonCardPaymentAdditionalData, DeliveriesCommonExternalPaymentAdditionalData, DeliveriesCommonLoyaltyCardPaymentAdditionalData]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeliveriesCommonCardPaymentAdditionalData, DeliveriesCommonExternalPaymentAdditionalData, DeliveriesCommonLoyaltyCardPaymentAdditionalData]]:
         """Create an instance of DeliveriesCommonPaymentAdditionalData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -98,16 +95,10 @@ class DeliveriesCommonPaymentAdditionalData(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData, IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData, IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData, DeliveriesCommonCardPaymentAdditionalData, DeliveriesCommonExternalPaymentAdditionalData, DeliveriesCommonLoyaltyCardPaymentAdditionalData]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeliveriesCommonCardPaymentAdditionalData, DeliveriesCommonExternalPaymentAdditionalData, DeliveriesCommonLoyaltyCardPaymentAdditionalData]]:
         """Create an instance of DeliveriesCommonPaymentAdditionalData from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesCommonCardPaymentAdditionalData.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesCommonExternalPaymentAdditionalData.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsDeliveriesCommonLoyaltyCardPaymentAdditionalData.from_dict(obj)
         if object_type ==  'DeliveriesCommonCardPaymentAdditionalData':
             return import_module("iikocloud_client.models.deliveries_common_card_payment_additional_data").DeliveriesCommonCardPaymentAdditionalData.from_dict(obj)
         if object_type ==  'DeliveriesCommonExternalPaymentAdditionalData':

@@ -27,8 +27,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo
-    from iikocloud_client.models. import IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo
     from iikocloud_client.models.organizations_extended_organization_info import OrganizationsExtendedOrganizationInfo
     from iikocloud_client.models.organizations_simple_organization_info import OrganizationsSimpleOrganizationInfo
 
@@ -55,7 +53,7 @@ class OrganizationsOrganizationInfo(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'Extended': 'IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo','Simple': 'IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo','Organizations.ExtendedOrganizationInfo': 'OrganizationsExtendedOrganizationInfo','Organizations.SimpleOrganizationInfo': 'OrganizationsSimpleOrganizationInfo'
+        'Extended': 'OrganizationsExtendedOrganizationInfo','Simple': 'OrganizationsSimpleOrganizationInfo'
     }
 
     @classmethod
@@ -77,7 +75,7 @@ class OrganizationsOrganizationInfo(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo, IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo, OrganizationsExtendedOrganizationInfo, OrganizationsSimpleOrganizationInfo]]:
+    def from_json(cls, json_str: str) -> Optional[Union[OrganizationsExtendedOrganizationInfo, OrganizationsSimpleOrganizationInfo]]:
         """Create an instance of OrganizationsOrganizationInfo from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -124,14 +122,10 @@ class OrganizationsOrganizationInfo(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo, IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo, OrganizationsExtendedOrganizationInfo, OrganizationsSimpleOrganizationInfo]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[OrganizationsExtendedOrganizationInfo, OrganizationsSimpleOrganizationInfo]]:
         """Create an instance of OrganizationsOrganizationInfo from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsOrganizationsExtendedOrganizationInfo.from_dict(obj)
-        if object_type ==  'IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsOrganizationsSimpleOrganizationInfo.from_dict(obj)
         if object_type ==  'OrganizationsExtendedOrganizationInfo':
             return import_module("iikocloud_client.models.organizations_extended_organization_info").OrganizationsExtendedOrganizationInfo.from_dict(obj)
         if object_type ==  'OrganizationsSimpleOrganizationInfo':

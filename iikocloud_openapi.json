@@ -16934,11 +16934,11 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "phone": "#/components/schemas/iikoNet.Service.Contracts.Api.iikoTransport.Customer.GetCustomerInfoByPhoneRequest",
-            "cardTrack": "#/components/schemas/iikoNet.Service.Contracts.Api.iikoTransport.Customer.GetCustomerInfoByCardTrackRequest",
-            "cardNumber": "#/components/schemas/iikoNet.Service.Contracts.Api.iikoTransport.Customer.GetCustomerInfoByCardNumberRequest",
-            "email": "#/components/schemas/iikoNet.Service.Contracts.Api.iikoTransport.Customer.GetCustomerInfoByEmailRequest",
-            "id": "#/components/schemas/iikoNet.Service.Contracts.Api.iikoTransport.Customer.GetCustomerInfoByIdRequest"
+            "phone": "#/components/schemas/Customer.GetCustomerInfoByPhoneRequest",
+            "cardTrack": "#/components/schemas/Customer.GetCustomerInfoByCardTrackRequest",
+            "cardNumber": "#/components/schemas/Customer.GetCustomerInfoByCardNumberRequest",
+            "email": "#/components/schemas/Customer.GetCustomerInfoByEmailRequest",
+            "id": "#/components/schemas/Customer.GetCustomerInfoByIdRequest"
           }
         }
       },
@@ -19845,9 +19845,9 @@
         "discriminator": {
           "propertyName": "state",
           "mapping": {
-            "InProgress": "#/components/schemas/iikoTransport.PublicApi.Contracts.Commands.InProgressCommandStatus",
-            "Success": "#/components/schemas/iikoTransport.PublicApi.Contracts.Commands.SuccessCommandStatus",
-            "Error": "#/components/schemas/iikoTransport.PublicApi.Contracts.Commands.ErrorCommandStatus"
+            "InProgress": "#/components/schemas/Commands.InProgressCommandStatus",
+            "Success": "#/components/schemas/Commands.SuccessCommandStatus",
+            "Error": "#/components/schemas/Commands.ErrorCommandStatus"
           }
         }
       },
@@ -20160,9 +20160,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "LoyaltyCard": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Common.LoyaltyCardPaymentAdditionalData",
-            "Card": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Common.CardPaymentAdditionalData",
-            "External": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Common.ExternalPaymentAdditionalData"
+            "LoyaltyCard": "#/components/schemas/Deliveries.Common.LoyaltyCardPaymentAdditionalData",
+            "Card": "#/components/schemas/Deliveries.Common.CardPaymentAdditionalData",
+            "External": "#/components/schemas/Deliveries.Common.ExternalPaymentAdditionalData"
           }
         }
       },
@@ -21081,8 +21081,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "legacy": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.AddressLegacy",
-            "city": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.AddressCity"
+            "legacy": "#/components/schemas/Deliveries.Request.CreateOrder.AddressLegacy",
+            "city": "#/components/schemas/Deliveries.Request.CreateOrder.AddressCity"
           }
         }
       },
@@ -21474,8 +21474,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "regular": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.RegularCustomer",
-            "one-time": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.AnonymousCustomer"
+            "regular": "#/components/schemas/Deliveries.Request.CreateOrder.RegularCustomer",
+            "one-time": "#/components/schemas/Deliveries.Request.CreateOrder.AnonymousCustomer"
           }
         }
       },
@@ -21733,8 +21733,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "RMS": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.RmsDiscount",
-            "iikoCard": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.IikoCardDiscount"
+            "RMS": "#/components/schemas/Deliveries.Request.CreateOrder.RmsDiscount",
+            "iikoCard": "#/components/schemas/Deliveries.Request.CreateOrder.IikoCardDiscount"
           }
         }
       },
@@ -22253,8 +22253,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "Product": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ProductOrderItem",
-            "Compound": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CompoundOrderItem"
+            "Product": "#/components/schemas/Deliveries.Request.CreateOrder.ProductOrderItem",
+            "Compound": "#/components/schemas/Deliveries.Request.CreateOrder.CompoundOrderItem"
           }
         }
       },
@@ -22319,10 +22319,10 @@
         "discriminator": {
           "propertyName": "paymentTypeKind",
           "mapping": {
-            "Cash": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CashPayment",
-            "Card": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CardPayment",
-            "LoyaltyCard": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.LoyaltyCardPayment",
-            "External": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ExternalPayment"
+            "Cash": "#/components/schemas/Deliveries.Request.CreateOrder.CashPayment",
+            "Card": "#/components/schemas/Deliveries.Request.CreateOrder.CardPayment",
+            "LoyaltyCard": "#/components/schemas/Deliveries.Request.CreateOrder.LoyaltyCardPayment",
+            "External": "#/components/schemas/Deliveries.Request.CreateOrder.ExternalPayment"
           }
         }
       },
@@ -22565,9 +22565,9 @@
         "discriminator": {
           "propertyName": "paymentTypeKind",
           "mapping": {
-            "Cash": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CashTipsPayment",
-            "Card": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CardTipsPayment",
-            "External": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ExternalTipsPayment"
+            "Cash": "#/components/schemas/Deliveries.Request.CreateOrder.CashTipsPayment",
+            "Card": "#/components/schemas/Deliveries.Request.CreateOrder.CardTipsPayment",
+            "External": "#/components/schemas/Deliveries.Request.CreateOrder.ExternalTipsPayment"
           }
         }
       },
@@ -23363,8 +23363,8 @@
         "discriminator": {
           "propertyName": "newServiceType",
           "mapping": {
-            "DeliveryByCourier": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByCourier",
-            "DeliveryByClient": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByClient"
+            "DeliveryByCourier": "#/components/schemas/Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByCourier",
+            "DeliveryByClient": "#/components/schemas/Deliveries.Request.UpdateOrder.ChangeServiceTypeDeliveryByClient"
           }
         }
       },
@@ -23941,8 +23941,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "regular": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.RegularCustomer",
-            "one-time": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.AnonymousCustomer"
+            "regular": "#/components/schemas/Deliveries.Response.Order.RegularCustomer",
+            "one-time": "#/components/schemas/Deliveries.Response.Order.AnonymousCustomer"
           }
         }
       },
@@ -24866,9 +24866,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "Product": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.ProductOrderItem",
-            "Compound": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.CompoundOrderItem",
-            "Service": "#/components/schemas/iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.ServiceOrderItem"
+            "Product": "#/components/schemas/Deliveries.Response.Order.ProductOrderItem",
+            "Compound": "#/components/schemas/Deliveries.Response.Order.CompoundOrderItem",
+            "Service": "#/components/schemas/Deliveries.Response.Order.ServiceOrderItem"
           }
         }
       },
@@ -28863,7 +28863,7 @@
         "discriminator": {
           "propertyName": "messageType",
           "mapping": {
-            "order_attention": "#/components/schemas/iikoTransport.PublicApi.Contracts.Notifications.OrderAttentionNotificationRequest"
+            "order_attention": "#/components/schemas/Notifications.OrderAttentionNotificationRequest"
           }
         }
       },
@@ -29371,8 +29371,8 @@
         "discriminator": {
           "propertyName": "responseType",
           "mapping": {
-            "Simple": "#/components/schemas/iikoTransport.PublicApi.Contracts.Organizations.SimpleOrganizationInfo",
-            "Extended": "#/components/schemas/iikoTransport.PublicApi.Contracts.Organizations.ExtendedOrganizationInfo"
+            "Simple": "#/components/schemas/Organizations.SimpleOrganizationInfo",
+            "Extended": "#/components/schemas/Organizations.ExtendedOrganizationInfo"
           }
         }
       },

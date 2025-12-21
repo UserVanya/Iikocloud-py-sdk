@@ -26,11 +26,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest
-    from iikocloud_client.models. import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest
-    from iikocloud_client.models. import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest
-    from iikocloud_client.models. import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest
-    from iikocloud_client.models. import IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest
     from iikocloud_client.models.customer_get_customer_info_by_card_number_request import CustomerGetCustomerInfoByCardNumberRequest
     from iikocloud_client.models.customer_get_customer_info_by_card_track_request import CustomerGetCustomerInfoByCardTrackRequest
     from iikocloud_client.models.customer_get_customer_info_by_email_request import CustomerGetCustomerInfoByEmailRequest
@@ -57,7 +52,7 @@ class CustomerGetCustomerInfoRequest(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'cardNumber': 'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest','cardTrack': 'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest','email': 'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest','id': 'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest','phone': 'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest','Customer.GetCustomerInfoByCardNumberRequest': 'CustomerGetCustomerInfoByCardNumberRequest','Customer.GetCustomerInfoByCardTrackRequest': 'CustomerGetCustomerInfoByCardTrackRequest','Customer.GetCustomerInfoByEmailRequest': 'CustomerGetCustomerInfoByEmailRequest','Customer.GetCustomerInfoByIdRequest': 'CustomerGetCustomerInfoByIdRequest','Customer.GetCustomerInfoByPhoneRequest': 'CustomerGetCustomerInfoByPhoneRequest'
+        'cardNumber': 'CustomerGetCustomerInfoByCardNumberRequest','cardTrack': 'CustomerGetCustomerInfoByCardTrackRequest','email': 'CustomerGetCustomerInfoByEmailRequest','id': 'CustomerGetCustomerInfoByIdRequest','phone': 'CustomerGetCustomerInfoByPhoneRequest'
     }
 
     @classmethod
@@ -79,7 +74,7 @@ class CustomerGetCustomerInfoRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest, CustomerGetCustomerInfoByCardNumberRequest, CustomerGetCustomerInfoByCardTrackRequest, CustomerGetCustomerInfoByEmailRequest, CustomerGetCustomerInfoByIdRequest, CustomerGetCustomerInfoByPhoneRequest]]:
+    def from_json(cls, json_str: str) -> Optional[Union[CustomerGetCustomerInfoByCardNumberRequest, CustomerGetCustomerInfoByCardTrackRequest, CustomerGetCustomerInfoByEmailRequest, CustomerGetCustomerInfoByIdRequest, CustomerGetCustomerInfoByPhoneRequest]]:
         """Create an instance of CustomerGetCustomerInfoRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -104,20 +99,10 @@ class CustomerGetCustomerInfoRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest, IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest, CustomerGetCustomerInfoByCardNumberRequest, CustomerGetCustomerInfoByCardTrackRequest, CustomerGetCustomerInfoByEmailRequest, CustomerGetCustomerInfoByIdRequest, CustomerGetCustomerInfoByPhoneRequest]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[CustomerGetCustomerInfoByCardNumberRequest, CustomerGetCustomerInfoByCardTrackRequest, CustomerGetCustomerInfoByEmailRequest, CustomerGetCustomerInfoByIdRequest, CustomerGetCustomerInfoByPhoneRequest]]:
         """Create an instance of CustomerGetCustomerInfoRequest from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest':
-            return import_module("iikocloud_client.models.").IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardNumberRequest.from_dict(obj)
-        if object_type ==  'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest':
-            return import_module("iikocloud_client.models.").IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByCardTrackRequest.from_dict(obj)
-        if object_type ==  'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest':
-            return import_module("iikocloud_client.models.").IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByEmailRequest.from_dict(obj)
-        if object_type ==  'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest':
-            return import_module("iikocloud_client.models.").IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByIdRequest.from_dict(obj)
-        if object_type ==  'IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest':
-            return import_module("iikocloud_client.models.").IikoNetServiceContractsApiIikoTransportCustomerGetCustomerInfoByPhoneRequest.from_dict(obj)
         if object_type ==  'CustomerGetCustomerInfoByCardNumberRequest':
             return import_module("iikocloud_client.models.customer_get_customer_info_by_card_number_request").CustomerGetCustomerInfoByCardNumberRequest.from_dict(obj)
         if object_type ==  'CustomerGetCustomerInfoByCardTrackRequest':

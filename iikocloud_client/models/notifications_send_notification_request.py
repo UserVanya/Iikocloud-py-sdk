@@ -26,7 +26,6 @@ from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from iikocloud_client.models. import IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest
     from iikocloud_client.models.notifications_order_attention_notification_request import NotificationsOrderAttentionNotificationRequest
 
 class NotificationsSendNotificationRequest(BaseModel):
@@ -49,7 +48,7 @@ class NotificationsSendNotificationRequest(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'order_attention': 'IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest','Notifications.OrderAttentionNotificationRequest': 'NotificationsOrderAttentionNotificationRequest'
+        'order_attention': 'NotificationsOrderAttentionNotificationRequest'
     }
 
     @classmethod
@@ -71,7 +70,7 @@ class NotificationsSendNotificationRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest, NotificationsOrderAttentionNotificationRequest]]:
+    def from_json(cls, json_str: str) -> Optional[Union[NotificationsOrderAttentionNotificationRequest]]:
         """Create an instance of NotificationsSendNotificationRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -96,12 +95,10 @@ class NotificationsSendNotificationRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest, NotificationsOrderAttentionNotificationRequest]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[NotificationsOrderAttentionNotificationRequest]]:
         """Create an instance of NotificationsSendNotificationRequest from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest':
-            return import_module("iikocloud_client.models.").IikoTransportPublicApiContractsNotificationsOrderAttentionNotificationRequest.from_dict(obj)
         if object_type ==  'NotificationsOrderAttentionNotificationRequest':
             return import_module("iikocloud_client.models.notifications_order_attention_notification_request").NotificationsOrderAttentionNotificationRequest.from_dict(obj)
 
