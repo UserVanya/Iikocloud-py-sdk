@@ -11589,7 +11589,7 @@
             "default": ""
           },
           "isDeleted": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           }
         }
@@ -11613,7 +11613,7 @@
             "default": ""
           },
           "isDeleted": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           }
         }
@@ -11637,7 +11637,7 @@
             "default": ""
           },
           "isDeleted": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           }
         }
@@ -11661,7 +11661,7 @@
             "default": ""
           },
           "isDeleted": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           }
         }
@@ -11840,7 +11840,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid",
+            "type": "string",
             "description": "Category id(can be null)",
             "format": "uuid"
           },
@@ -11865,7 +11865,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid",
+            "type": "string",
             "description": "Category id(can be null)",
             "format": "uuid"
           },
@@ -11890,7 +11890,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid",
+            "type": "string",
             "description": "Category id(can be null)",
             "format": "uuid"
           },
@@ -11961,7 +11961,13 @@
             "description": "Available sizes for combo (can be empty)"
           },
           "priceStrategy": {
-            "type": "enum",
+            "type": "string",
+            "enum": [
+              "BY_COMPONENT",
+              "FIXED",
+              "CALCULATE"
+            ],
+            "format": "enum",
             "example": "{\"BY_COMPONENT\", \"FIXED\", \"CALCULATE\"}"
           },
           "startDate": {
@@ -12034,7 +12040,13 @@
             "description": "Available sizes for combo (can be empty)"
           },
           "priceStrategy": {
-            "type": "enum",
+            "type": "string",
+            "enum": [
+              "BY_COMPONENT",
+              "FIXED",
+              "CALCULATE"
+            ],
+            "format": "enum",
             "example": "{\"BY_COMPONENT\", \"FIXED\", \"CALCULATE\"}"
           },
           "startDate": {
@@ -12107,7 +12119,13 @@
             "description": "Available sizes for combo (can be empty)"
           },
           "priceStrategy": {
-            "type": "enum",
+            "type": "string",
+            "enum": [
+              "BY_COMPONENT",
+              "FIXED",
+              "CALCULATE"
+            ],
+            "format": "enum",
             "example": "{\"BY_COMPONENT\", \"FIXED\", \"CALCULATE\"}"
           },
           "startDate": {
@@ -12136,7 +12154,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -12166,7 +12185,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -12196,7 +12216,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -12226,7 +12247,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "uuid"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -13051,7 +13073,8 @@
           "sizeId": {
             "type": "string",
             "description": "Size GUID",
-            "example": "00000000-0000-0000-0000-000000000000"
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": true
           },
           "shortName": {
             "type": "string",
@@ -13132,13 +13155,16 @@
           "modifierSchemaId": {
             "type": "string",
             "description": "Modifier schema ID",
-            "example": "00000000-0000-0000-0000-000000000000"
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": true
           },
           "taxCategory": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TaxCategoryDto3"
-            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategoryDto3"
+              }
+            ],
+            "nullable": true,
             "description": "Tax category"
           },
           "modifierSchemaName": {
@@ -13149,14 +13175,15 @@
           "type": {
             "enum": [
               "DISH",
-              "COMBO"
+              "COMBO",
+              "SERVICE"
             ],
             "type": "string",
             "description": "Item type",
             "default": "DISH"
           },
           "canBeDivided": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           },
           "canSetOpenPrice": {
@@ -13273,7 +13300,8 @@
           "type": {
             "enum": [
               "DISH",
-              "COMBO"
+              "COMBO",
+              "SERVICE"
             ],
             "type": "string",
             "description": "Item type",
@@ -13373,7 +13401,7 @@
             "example": "00000000-0000-0000-0000-000000000000"
           },
           "splittable": {
-            "type": "bool"
+            "type": "boolean"
           }
         }
       },
@@ -13425,7 +13453,8 @@
           "type": {
             "enum": [
               "DISH",
-              "COMBO"
+              "COMBO",
+              "SERVICE"
             ],
             "type": "string",
             "description": "Item type",
@@ -13525,7 +13554,7 @@
             "example": "00000000-0000-0000-0000-000000000000"
           },
           "splittable": {
-            "type": "bool"
+            "type": "boolean"
           }
         }
       },
@@ -13572,13 +13601,11 @@
           "sizeId": {
             "type": "string",
             "description": "ID size, can be empty if the default size is selected and it is the only size in the list",
-            "example": "00000000-0000-0000-0000-000000000000"
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": true
           },
           "nutritionPerHundredGrams": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NutritionInfoDto"
-            },
+            "$ref": "#/components/schemas/NutritionInfoDto",
             "description": "Nutrition per 100 g of product"
           },
           "prices": {
@@ -13848,7 +13875,7 @@
             }
           },
           "canBeDivided": {
-            "type": "bool",
+            "type": "boolean",
             "default": "false"
           },
           "itemGroupId": {
@@ -13917,7 +13944,7 @@
             "default": ""
           },
           "splittable": {
-            "type": "bool"
+            "type": "boolean"
           },
           "id": {
             "type": "string",
@@ -13971,7 +13998,7 @@
             "default": ""
           },
           "splittable": {
-            "type": "bool"
+            "type": "boolean"
           },
           "id": {
             "type": "string",
@@ -14025,7 +14052,7 @@
             "default": ""
           },
           "splittable": {
-            "type": "bool"
+            "type": "boolean"
           },
           "id": {
             "type": "string",
@@ -14053,10 +14080,7 @@
             "default": ""
           },
           "restrictions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifierRestrictionsDto5"
-            },
+            "$ref": "#/components/schemas/ModifierRestrictionsDto5",
             "nullable": true
           },
           "allergenGroups": {
@@ -14066,10 +14090,7 @@
             }
           },
           "nutritionPerHundredGrams": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NutritionInfoDto5"
-            },
+            "$ref": "#/components/schemas/NutritionInfoDto5",
             "description": "Nutrition per 100 g of modifier product",
             "nullable": true
           },
@@ -15216,9 +15237,10 @@
             "default": 0
           },
           "byDefault": {
-            "type": "int",
+            "type": "integer",
             "description": "Default amount",
-            "default": "0"
+            "default": "0",
+            "format": "int32"
           },
           "hideIfDefaultQuantity": {
             "type": "boolean",
@@ -15252,8 +15274,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },
@@ -15283,8 +15306,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },
@@ -15314,8 +15338,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },
@@ -15338,9 +15363,10 @@
             "default": 0
           },
           "byDefault": {
-            "type": "int",
+            "type": "integer",
             "description": "Default amount",
-            "default": "0"
+            "default": "0",
+            "format": "int32"
           },
           "hideIfDefaultQuantity": {
             "type": "boolean",
@@ -15374,8 +15400,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },
@@ -15405,8 +15432,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },
@@ -15436,8 +15464,9 @@
             "default": false
           },
           "defaultQuantity": {
-            "type": "int",
-            "description": "Default amount"
+            "type": "integer",
+            "description": "Default amount",
+            "format": "int32"
           }
         }
       },

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **description** | **str** | Modifiers group description | [optional] [default to '']
 **restrictions** | [**ModifierRestrictionsDto**](ModifierRestrictionsDto.md) |  | [optional] 
 **items** | [**List[ExternalMenuModifierItem]**](ExternalMenuModifierItem.md) |  | [optional] 
-**can_be_divided** | [**bool**](Bool.md) |  | [optional] 
+**can_be_divided** | **bool** |  | [optional] [default to False]
 **item_group_id** | **str** |  | [optional] 
 **is_hidden** | **bool** |  | [optional] [default to False]
 **child_modifiers_have_min_max_restrictions** | **bool** | Whether child modifiers can have their own restrictions, or only group ones | [optional] [default to False]

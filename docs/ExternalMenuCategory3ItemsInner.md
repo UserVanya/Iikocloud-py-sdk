@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** | List of labels | [optional] 
 **tags** | **List[str]** | List of tags | [optional] 
 **id** | **str** | Product ID | 
-**splittable** | [**bool**](Bool.md) |  | 
+**splittable** | **bool** |  | 
 **sizes** | [**List[ExternalMenuComboItemSize]**](ExternalMenuComboItemSize.md) |  | 
 **groups** | [**List[ComboGroupDto4]**](ComboGroupDto4.md) |  | [optional] 
 **price_strategy** | **str** | Price strategy | [optional] [default to 'BY_COMPONENT']

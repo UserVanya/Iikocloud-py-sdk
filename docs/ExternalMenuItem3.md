@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** | List of labels | [optional] 
 **tags** | **List[str]** | List of tags | [optional] 
 **id** | **str** | Product ID | 
-**splittable** | [**bool**](Bool.md) |  | 
+**splittable** | **bool** |  | 
 
 ## Example
 

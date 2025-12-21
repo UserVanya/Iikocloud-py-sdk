@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from iikocloud_client.models.combo_dto3_image_inner import ComboDto3ImageInner
@@ -36,11 +36,18 @@ class ComboDto3(BaseModel):
     image: List[Optional[ComboDto3ImageInner]] = Field(description="Combo image")
     description: Optional[StrictStr] = Field(default='', description="Combo description")
     sizes: Optional[List[ComboSizeDto3]] = Field(default=None, description="Available sizes for combo (can be empty)")
-    price_strategy: Enum = Field(alias="priceStrategy")
+    price_strategy: StrictStr = Field(alias="priceStrategy")
     start_date: StrictStr = Field(description="The date when the combo will be available until", alias="startDate")
     expiration_date: StrictStr = Field(description="The date when the combo will be available until", alias="expirationDate")
     id: UUID = Field(description="Combo id")
     __properties: ClassVar[List[str]] = ["name", "price", "groups", "image", "description", "sizes", "priceStrategy", "startDate", "expirationDate", "id"]
+
+    @field_validator('price_strategy')
+    def price_strategy_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['BY_COMPONENT', 'FIXED', 'CALCULATE']):
+            raise ValueError("must be one of enum values ('BY_COMPONENT', 'FIXED', 'CALCULATE')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,9 +109,6 @@ class ComboDto3(BaseModel):
                 if _item_sizes:
                     _items.append(_item_sizes.to_dict())
             _dict['sizes'] = _items
-        # override the default output from pydantic by calling `to_dict()` of price_strategy
-        if self.price_strategy:
-            _dict['priceStrategy'] = self.price_strategy.to_dict()
         return _dict
 
     @classmethod
@@ -123,7 +127,7 @@ class ComboDto3(BaseModel):
             "image": [ComboDto3ImageInner.from_dict(_item) for _item in obj["image"]] if obj.get("image") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
             "sizes": [ComboSizeDto3.from_dict(_item) for _item in obj["sizes"]] if obj.get("sizes") is not None else None,
-            "priceStrategy": Enum.from_dict(obj["priceStrategy"]) if obj.get("priceStrategy") is not None else None,
+            "priceStrategy": obj.get("priceStrategy"),
             "startDate": obj.get("startDate"),
             "expirationDate": obj.get("expirationDate"),
             "id": obj.get("id")

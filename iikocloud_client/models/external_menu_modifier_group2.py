@@ -35,7 +35,7 @@ class ExternalMenuModifierGroup2(BaseModel):
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     child_modifiers_have_min_max_restrictions: Optional[StrictBool] = Field(default=False, description="Whether child modifiers can have their own restrictions, or only group ones", alias="childModifiersHaveMinMaxRestrictions")
     sku: Optional[StrictStr] = Field(default='', description="Modifiers group code")
-    splittable: bool
+    splittable: StrictBool
     id: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["name", "description", "restrictions", "items", "isHidden", "childModifiersHaveMinMaxRestrictions", "sku", "splittable", "id"]
 
@@ -88,9 +88,6 @@ class ExternalMenuModifierGroup2(BaseModel):
                 if _item_items:
                     _items.append(_item_items.to_dict())
             _dict['items'] = _items
-        # override the default output from pydantic by calling `to_dict()` of splittable
-        if self.splittable:
-            _dict['splittable'] = self.splittable.to_dict()
         # set to None if restrictions (nullable) is None
         # and model_fields_set contains the field
         if self.restrictions is None and "restrictions" in self.model_fields_set:
@@ -120,7 +117,7 @@ class ExternalMenuModifierGroup2(BaseModel):
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,
             "childModifiersHaveMinMaxRestrictions": obj.get("childModifiersHaveMinMaxRestrictions") if obj.get("childModifiersHaveMinMaxRestrictions") is not None else False,
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
-            "splittable": bool.from_dict(obj["splittable"]) if obj.get("splittable") is not None else None,
+            "splittable": obj.get("splittable"),
             "id": obj.get("id")
         })
         return _obj

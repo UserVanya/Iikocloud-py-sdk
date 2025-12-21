@@ -41,11 +41,11 @@ class ExternalMenuItem(BaseModel):
     labels: Optional[List[LabelDto2]] = None
     item_sizes: List[ExternalMenuItemSize] = Field(alias="itemSizes")
     item_id: Optional[StrictStr] = Field(default='', description="Product ID", alias="itemId")
-    modifier_schema_id: StrictStr = Field(description="Modifier schema ID", alias="modifierSchemaId")
-    tax_category: List[TaxCategoryDto3] = Field(description="Tax category", alias="taxCategory")
+    modifier_schema_id: Optional[StrictStr] = Field(description="Modifier schema ID", alias="modifierSchemaId")
+    tax_category: Optional[TaxCategoryDto3] = Field(alias="taxCategory")
     modifier_schema_name: Optional[StrictStr] = Field(default=None, description="Modifier schema name", alias="modifierSchemaName")
     type: Optional[StrictStr] = Field(default='DISH', description="Item type")
-    can_be_divided: Optional[bool] = Field(default=None, alias="canBeDivided")
+    can_be_divided: Optional[StrictBool] = Field(default=False, alias="canBeDivided")
     can_set_open_price: Optional[StrictBool] = Field(default=False, description="Can set open price flag", alias="canSetOpenPrice")
     use_balance_for_sell: Optional[StrictBool] = Field(default=False, alias="useBalanceForSell")
     measure_unit: Optional[StrictStr] = Field(default='', description="Measure unit", alias="measureUnit")
@@ -66,8 +66,8 @@ class ExternalMenuItem(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['DISH', 'COMBO']):
-            raise ValueError("must be one of enum values ('DISH', 'COMBO')")
+        if value not in set(['DISH', 'COMBO', 'SERVICE']):
+            raise ValueError("must be one of enum values ('DISH', 'COMBO', 'SERVICE')")
         return value
 
     @field_validator('order_item_type')
@@ -144,16 +144,9 @@ class ExternalMenuItem(BaseModel):
                 if _item_item_sizes:
                     _items.append(_item_item_sizes.to_dict())
             _dict['itemSizes'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in tax_category (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of tax_category
         if self.tax_category:
-            for _item_tax_category in self.tax_category:
-                if _item_tax_category:
-                    _items.append(_item_tax_category.to_dict())
-            _dict['taxCategory'] = _items
-        # override the default output from pydantic by calling `to_dict()` of can_be_divided
-        if self.can_be_divided:
-            _dict['canBeDivided'] = self.can_be_divided.to_dict()
+            _dict['taxCategory'] = self.tax_category.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in customer_tag_groups (list)
         _items = []
         if self.customer_tag_groups:
@@ -168,6 +161,16 @@ class ExternalMenuItem(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
+        # set to None if modifier_schema_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.modifier_schema_id is None and "modifier_schema_id" in self.model_fields_set:
+            _dict['modifierSchemaId'] = None
+
+        # set to None if tax_category (nullable) is None
+        # and model_fields_set contains the field
+        if self.tax_category is None and "tax_category" in self.model_fields_set:
+            _dict['taxCategory'] = None
+
         # set to None if modifier_schema_name (nullable) is None
         # and model_fields_set contains the field
         if self.modifier_schema_name is None and "modifier_schema_name" in self.model_fields_set:
@@ -219,10 +222,10 @@ class ExternalMenuItem(BaseModel):
             "itemSizes": [ExternalMenuItemSize.from_dict(_item) for _item in obj["itemSizes"]] if obj.get("itemSizes") is not None else None,
             "itemId": obj.get("itemId") if obj.get("itemId") is not None else '',
             "modifierSchemaId": obj.get("modifierSchemaId"),
-            "taxCategory": [TaxCategoryDto3.from_dict(_item) for _item in obj["taxCategory"]] if obj.get("taxCategory") is not None else None,
+            "taxCategory": TaxCategoryDto3.from_dict(obj["taxCategory"]) if obj.get("taxCategory") is not None else None,
             "modifierSchemaName": obj.get("modifierSchemaName"),
             "type": obj.get("type") if obj.get("type") is not None else 'DISH',
-            "canBeDivided": bool.from_dict(obj["canBeDivided"]) if obj.get("canBeDivided") is not None else None,
+            "canBeDivided": obj.get("canBeDivided") if obj.get("canBeDivided") is not None else False,
             "canSetOpenPrice": obj.get("canSetOpenPrice") if obj.get("canSetOpenPrice") is not None else False,
             "useBalanceForSell": obj.get("useBalanceForSell") if obj.get("useBalanceForSell") is not None else False,
             "measureUnit": obj.get("measureUnit") if obj.get("measureUnit") is not None else '',

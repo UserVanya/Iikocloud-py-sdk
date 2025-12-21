@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,7 @@ class AllergenGroupDto3(BaseModel):
     id: Optional[StrictStr] = ''
     code: Optional[StrictStr] = Field(default='', description="Allergen's code")
     name: Optional[StrictStr] = Field(default='', description="Allergen's name")
-    is_deleted: Optional[bool] = Field(default=None, alias="isDeleted")
+    is_deleted: Optional[StrictBool] = Field(default=False, alias="isDeleted")
     __properties: ClassVar[List[str]] = ["id", "code", "name", "isDeleted"]
 
     model_config = ConfigDict(
@@ -71,9 +71,6 @@ class AllergenGroupDto3(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of is_deleted
-        if self.is_deleted:
-            _dict['isDeleted'] = self.is_deleted.to_dict()
         return _dict
 
     @classmethod
@@ -89,7 +86,7 @@ class AllergenGroupDto3(BaseModel):
             "id": obj.get("id") if obj.get("id") is not None else '',
             "code": obj.get("code") if obj.get("code") is not None else '',
             "name": obj.get("name") if obj.get("name") is not None else '',
-            "isDeleted": bool.from_dict(obj["isDeleted"]) if obj.get("isDeleted") is not None else None
+            "isDeleted": obj.get("isDeleted") if obj.get("isDeleted") is not None else False
         })
         return _obj
 

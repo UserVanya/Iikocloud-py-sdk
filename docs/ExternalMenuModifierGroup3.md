@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **is_hidden** | **bool** |  | [optional] [default to False]
 **child_modifiers_have_min_max_restrictions** | **bool** | Whether child modifiers can have their own restrictions, or only group ones | [optional] [default to False]
 **sku** | **str** | Modifiers group code | [optional] [default to '']
-**splittable** | [**bool**](Bool.md) |  | 
+**splittable** | **bool** |  | 
 **id** | **str** |  | [optional] 
 
 ## Example

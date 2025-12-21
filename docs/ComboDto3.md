@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **image** | [**List[ComboDto3ImageInner]**](ComboDto3ImageInner.md) | Combo image | 
 **description** | **str** | Combo description | [optional] [default to '']
 **sizes** | [**List[ComboSizeDto3]**](ComboSizeDto3.md) | Available sizes for combo (can be empty) | [optional] 
-**price_strategy** | [**Enum**](Enum.md) |  | 
+**price_strategy** | **str** |  | 
 **start_date** | **str** | The date when the combo will be available until | 
 **expiration_date** | **str** | The date when the combo will be available until | 
 **id** | **UUID** | Combo id | 

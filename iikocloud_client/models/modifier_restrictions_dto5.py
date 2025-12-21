@@ -29,7 +29,7 @@ class ModifierRestrictionsDto5(BaseModel):
     min_quantity: Optional[StrictInt] = Field(default=0, description="Minimum amount", alias="minQuantity")
     max_quantity: Optional[StrictInt] = Field(default=1, description="Maximum  amount", alias="maxQuantity")
     free_quantity: Optional[StrictInt] = Field(default=0, description="Amount free of charge", alias="freeQuantity")
-    by_default: Optional[int] = Field(default=None, description="Default amount", alias="byDefault")
+    by_default: Optional[StrictInt] = Field(default=None, description="Default amount", alias="byDefault")
     hide_if_default_quantity: Optional[StrictBool] = Field(default=False, alias="hideIfDefaultQuantity")
     __properties: ClassVar[List[str]] = ["minQuantity", "maxQuantity", "freeQuantity", "byDefault", "hideIfDefaultQuantity"]
 
@@ -72,9 +72,6 @@ class ModifierRestrictionsDto5(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of by_default
-        if self.by_default:
-            _dict['byDefault'] = self.by_default.to_dict()
         return _dict
 
     @classmethod
@@ -90,7 +87,7 @@ class ModifierRestrictionsDto5(BaseModel):
             "minQuantity": obj.get("minQuantity") if obj.get("minQuantity") is not None else 0,
             "maxQuantity": obj.get("maxQuantity") if obj.get("maxQuantity") is not None else 1,
             "freeQuantity": obj.get("freeQuantity") if obj.get("freeQuantity") is not None else 0,
-            "byDefault": int.from_dict(obj["byDefault"]) if obj.get("byDefault") is not None else None,
+            "byDefault": obj.get("byDefault"),
             "hideIfDefaultQuantity": obj.get("hideIfDefaultQuantity") if obj.get("hideIfDefaultQuantity") is not None else False
         })
         return _obj

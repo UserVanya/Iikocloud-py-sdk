@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **item_sizes** | [**List[ExternalMenuItemSize]**](ExternalMenuItemSize.md) |  | 
 **item_id** | **str** | Product ID | [optional] [default to '']
 **modifier_schema_id** | **str** | Modifier schema ID | 
-**tax_category** | [**List[TaxCategoryDto3]**](TaxCategoryDto3.md) | Tax category | 
+**tax_category** | [**TaxCategoryDto3**](TaxCategoryDto3.md) |  | 
 **modifier_schema_name** | **str** | Modifier schema name | [optional] 
 **type** | **str** | Item type | [optional] [default to 'DISH']
-**can_be_divided** | [**bool**](Bool.md) |  | [optional] 
+**can_be_divided** | **bool** |  | [optional] [default to False]
 **can_set_open_price** | **bool** | Can set open price flag | [optional] [default to False]
 **use_balance_for_sell** | **bool** |  | [optional] [default to False]
 **measure_unit** | **str** | Measure unit | [optional] [default to '']

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from iikocloud_client.models.combo_dto3 import ComboDto3
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class ComboCategoryDto3(BaseModel):
     """
     ComboCategoryDto3
     """ # noqa: E501
-    id: Uuid = Field(description="Category id(can be null)")
+    id: UUID = Field(description="Category id(can be null)")
     name: Optional[StrictStr] = Field(default=None, description="Category name")
     combos: Optional[List[ComboDto3]] = Field(default=None, description="Combos in category")
     __properties: ClassVar[List[str]] = ["id", "name", "combos"]
@@ -71,9 +72,6 @@ class ComboCategoryDto3(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of id
-        if self.id:
-            _dict['id'] = self.id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in combos (list)
         _items = []
         if self.combos:
@@ -98,7 +96,7 @@ class ComboCategoryDto3(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": Uuid.from_dict(obj["id"]) if obj.get("id") is not None else None,
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "combos": [ComboDto3.from_dict(_item) for _item in obj["combos"]] if obj.get("combos") is not None else None
         })

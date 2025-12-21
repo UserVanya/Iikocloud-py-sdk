@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] [default to '']
 **code** | **str** | Allergen&#39;s code | [optional] [default to '']
 **name** | **str** | Allergen&#39;s name | [optional] [default to '']
-**is_deleted** | [**bool**](Bool.md) |  | [optional] 
+**is_deleted** | **bool** |  | [optional] [default to False]
 
 ## Example
 

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from iikocloud_client.models.combo_group_item_dto2 import ComboGroupItemDto2
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class ComboGroupDto2(BaseModel):
     """
     ComboGroupDto2
     """ # noqa: E501
-    id: Uuid
+    id: UUID
     name: StrictStr
     is_main_group: StrictBool = Field(description="Includes main dishes - these are the items around which the combo set is built. If a main dish is added to the order, the system can display a prompt 'build a combo set'.", alias="isMainGroup")
     items: Optional[List[ComboGroupItemDto2]] = None
@@ -73,9 +74,6 @@ class ComboGroupDto2(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of id
-        if self.id:
-            _dict['id'] = self.id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
@@ -95,7 +93,7 @@ class ComboGroupDto2(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": Uuid.from_dict(obj["id"]) if obj.get("id") is not None else None,
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "isMainGroup": obj.get("isMainGroup"),
             "items": [ComboGroupItemDto2.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,

@@ -32,7 +32,7 @@ class ExternalMenuModifierGroup(BaseModel):
     description: Optional[StrictStr] = Field(default='', description="Modifiers group description")
     restrictions: Optional[ModifierRestrictionsDto] = None
     items: Optional[List[ExternalMenuModifierItem]] = None
-    can_be_divided: Optional[bool] = Field(default=None, alias="canBeDivided")
+    can_be_divided: Optional[StrictBool] = Field(default=False, alias="canBeDivided")
     item_group_id: Optional[StrictStr] = Field(default=None, alias="itemGroupId")
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     child_modifiers_have_min_max_restrictions: Optional[StrictBool] = Field(default=False, description="Whether child modifiers can have their own restrictions, or only group ones", alias="childModifiersHaveMinMaxRestrictions")
@@ -88,9 +88,6 @@ class ExternalMenuModifierGroup(BaseModel):
                 if _item_items:
                     _items.append(_item_items.to_dict())
             _dict['items'] = _items
-        # override the default output from pydantic by calling `to_dict()` of can_be_divided
-        if self.can_be_divided:
-            _dict['canBeDivided'] = self.can_be_divided.to_dict()
         # set to None if restrictions (nullable) is None
         # and model_fields_set contains the field
         if self.restrictions is None and "restrictions" in self.model_fields_set:
@@ -117,7 +114,7 @@ class ExternalMenuModifierGroup(BaseModel):
             "description": obj.get("description") if obj.get("description") is not None else '',
             "restrictions": ModifierRestrictionsDto.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "items": [ExternalMenuModifierItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
-            "canBeDivided": bool.from_dict(obj["canBeDivided"]) if obj.get("canBeDivided") is not None else None,
+            "canBeDivided": obj.get("canBeDivided") if obj.get("canBeDivided") is not None else False,
             "itemGroupId": obj.get("itemGroupId"),
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,
             "childModifiersHaveMinMaxRestrictions": obj.get("childModifiersHaveMinMaxRestrictions") if obj.get("childModifiersHaveMinMaxRestrictions") is not None else False,

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | [**Uuid**](Uuid.md) |  | 
+**id** | **UUID** |  | 
 **name** | **str** |  | 
 **is_main_group** | **bool** | Includes main dishes - these are the items around which the combo set is built. If a main dish is added to the order, the system can display a prompt &#39;build a combo set&#39;. | 
 **items** | [**List[ComboGroupItemDto2]**](ComboGroupItemDto2.md) |  | [optional] 

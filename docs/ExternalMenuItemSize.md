@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **portion_weight_grams** | **float** | Size&#39;s weight | [optional] 
 **item_modifier_groups** | [**List[ExternalMenuModifierGroup]**](ExternalMenuModifierGroup.md) |  | 
 **size_id** | **str** | ID size, can be empty if the default size is selected and it is the only size in the list | 
-**nutrition_per_hundred_grams** | [**List[NutritionInfoDto]**](NutritionInfoDto.md) | Nutrition per 100 g of product | 
+**nutrition_per_hundred_grams** | [**NutritionInfoDto**](NutritionInfoDto.md) |  | 
 **prices** | [**List[ExternalMenuPriceByDepartmentsDto]**](ExternalMenuPriceByDepartmentsDto.md) |  | [optional] 
 **nutritions** | [**List[NutritionInfoDto]**](NutritionInfoDto.md) | Nutrition per 100 g of product grouped by departments | [optional] 
 **is_hidden** | **bool** |  | [optional] [default to False]

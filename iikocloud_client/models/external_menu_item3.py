@@ -53,7 +53,7 @@ class ExternalMenuItem3(BaseModel):
     labels: Optional[List[StrictStr]] = Field(default=None, description="List of labels")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags")
     id: StrictStr = Field(description="Product ID")
-    splittable: bool
+    splittable: StrictBool
     __properties: ClassVar[List[str]] = ["sku", "name", "description", "itemSizes", "modifierSchemaId", "modifierSchemaName", "type", "canSetOpenPrice", "useBalanceForSell", "measureUnit", "productCategoryId", "customerTagGroups", "paymentSubject", "paymentSubjectCode", "outerEanCode", "isMarked", "isHidden", "barcodes", "orderItemType", "taxCategoryId", "allergenGroupIds", "labels", "tags", "id", "splittable"]
 
     @field_validator('type')
@@ -62,8 +62,8 @@ class ExternalMenuItem3(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['DISH', 'COMBO']):
-            raise ValueError("must be one of enum values ('DISH', 'COMBO')")
+        if value not in set(['DISH', 'COMBO', 'SERVICE']):
+            raise ValueError("must be one of enum values ('DISH', 'COMBO', 'SERVICE')")
         return value
 
     @field_validator('order_item_type')
@@ -133,9 +133,6 @@ class ExternalMenuItem3(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
-        # override the default output from pydantic by calling `to_dict()` of splittable
-        if self.splittable:
-            _dict['splittable'] = self.splittable.to_dict()
         # set to None if modifier_schema_name (nullable) is None
         # and model_fields_set contains the field
         if self.modifier_schema_name is None and "modifier_schema_name" in self.model_fields_set:
@@ -207,7 +204,7 @@ class ExternalMenuItem3(BaseModel):
             "labels": obj.get("labels"),
             "tags": obj.get("tags"),
             "id": obj.get("id"),
-            "splittable": bool.from_dict(obj["splittable"]) if obj.get("splittable") is not None else None
+            "splittable": obj.get("splittable")
         })
         return _obj
 

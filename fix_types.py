@@ -4,6 +4,8 @@
 
 Заменяет недопустимые типы на корректные для OpenAPI 3.0:
 - "float" -> "number" с "format": "float"
+- "uuid" -> "string" с "format": "uuid"
+- "enum" -> "string" (enum должен быть определен через массив "enum", а не как тип)
 """
 
 import json
@@ -31,6 +33,40 @@ def fix_types(json_file: str) -> None:
             if 'type' in obj and obj['type'] == 'float':
                 obj['type'] = 'number'
                 obj['format'] = 'float'
+                changes_count += 1
+            elif 'type' in obj and obj['type'] == 'int':
+                obj['type'] = 'integer'
+                obj['format'] = 'int32'
+                changes_count += 1
+            # Проверяем, есть ли поле "type" со значением "uuid"
+            elif 'type' in obj and obj['type'] == 'uuid':
+                obj['type'] = 'string'
+                obj['format'] = 'uuid'
+                changes_count += 1
+            elif 'type' in obj and obj['type'] == 'bool':
+                obj['type'] = 'boolean'
+                changes_count += 1
+            # Проверяем, есть ли поле "type" со значением "enum"
+            elif 'type' in obj and obj['type'] == 'enum':
+                obj['type'] = 'string'
+                obj['format'] = 'enum'
+                # Если присутствует example, попробовать получить значения enum из example
+                example_val = obj.get('example')
+                # Обрабатываем пример вида "{\"BY_COMPONENT\", \"FIXED\", \"CALCULATE\"}"
+                enum_values = []
+                if example_val and isinstance(example_val, str) and example_val.startswith('{') and example_val.endswith('}'):
+                    # Вырезаем фигурные скобки и кавычки
+                    enum_str = example_val.strip('{} \n"')
+                    # Разбиваем по запятой
+                    for part in enum_str.split(','):
+                        # Удаляем кавычки и пробелы
+                        val = part.strip(' "')
+                        if val:
+                            enum_values.append(val)
+                if enum_values:
+                    obj['enum'] = enum_values
+                else:
+                    obj['enum'] = []
                 changes_count += 1
             # Рекурсивно обрабатываем все значения словаря
             for key, value in obj.items():

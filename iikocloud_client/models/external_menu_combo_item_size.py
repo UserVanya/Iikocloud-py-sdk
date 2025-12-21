@@ -27,7 +27,7 @@ class ExternalMenuComboItemSize(BaseModel):
     ExternalMenuComboItemSize
     """ # noqa: E501
     name: StrictStr = Field(description="Size name")
-    size_id: StrictStr = Field(description="Size GUID", alias="sizeId")
+    size_id: Optional[StrictStr] = Field(description="Size GUID", alias="sizeId")
     short_name: Optional[StrictStr] = Field(default='', description="Short size name", alias="shortName")
     is_hidden: Optional[StrictBool] = Field(default=False, description="Visibility flag", alias="isHidden")
     button_image_url: Optional[StrictStr] = Field(default=None, description="Link to image", alias="buttonImageUrl")
@@ -72,6 +72,11 @@ class ExternalMenuComboItemSize(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if size_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.size_id is None and "size_id" in self.model_fields_set:
+            _dict['sizeId'] = None
+
         # set to None if button_image_url (nullable) is None
         # and model_fields_set contains the field
         if self.button_image_url is None and "button_image_url" in self.model_fields_set:

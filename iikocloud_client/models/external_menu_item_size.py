@@ -35,8 +35,8 @@ class ExternalMenuItemSize(BaseModel):
     is_default: Optional[StrictBool] = Field(default=False, description="Whether it is a default size of the product. If the product has one size, then the parameter will be true, if the product has several sizes, none of them can be default.", alias="isDefault")
     portion_weight_grams: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Size's weight", alias="portionWeightGrams")
     item_modifier_groups: List[ExternalMenuModifierGroup] = Field(alias="itemModifierGroups")
-    size_id: StrictStr = Field(description="ID size, can be empty if the default size is selected and it is the only size in the list", alias="sizeId")
-    nutrition_per_hundred_grams: List[NutritionInfoDto] = Field(description="Nutrition per 100 g of product", alias="nutritionPerHundredGrams")
+    size_id: Optional[StrictStr] = Field(description="ID size, can be empty if the default size is selected and it is the only size in the list", alias="sizeId")
+    nutrition_per_hundred_grams: NutritionInfoDto = Field(alias="nutritionPerHundredGrams")
     prices: Optional[List[ExternalMenuPriceByDepartmentsDto]] = None
     nutritions: Optional[List[NutritionInfoDto]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
@@ -90,13 +90,9 @@ class ExternalMenuItemSize(BaseModel):
                 if _item_item_modifier_groups:
                     _items.append(_item_item_modifier_groups.to_dict())
             _dict['itemModifierGroups'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in nutrition_per_hundred_grams (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of nutrition_per_hundred_grams
         if self.nutrition_per_hundred_grams:
-            for _item_nutrition_per_hundred_grams in self.nutrition_per_hundred_grams:
-                if _item_nutrition_per_hundred_grams:
-                    _items.append(_item_nutrition_per_hundred_grams.to_dict())
-            _dict['nutritionPerHundredGrams'] = _items
+            _dict['nutritionPerHundredGrams'] = self.nutrition_per_hundred_grams.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in prices (list)
         _items = []
         if self.prices:
@@ -120,6 +116,11 @@ class ExternalMenuItemSize(BaseModel):
         # and model_fields_set contains the field
         if self.size_name is None and "size_name" in self.model_fields_set:
             _dict['sizeName'] = None
+
+        # set to None if size_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.size_id is None and "size_id" in self.model_fields_set:
+            _dict['sizeId'] = None
 
         # set to None if button_image_url (nullable) is None
         # and model_fields_set contains the field
@@ -145,7 +146,7 @@ class ExternalMenuItemSize(BaseModel):
             "portionWeightGrams": obj.get("portionWeightGrams"),
             "itemModifierGroups": [ExternalMenuModifierGroup.from_dict(_item) for _item in obj["itemModifierGroups"]] if obj.get("itemModifierGroups") is not None else None,
             "sizeId": obj.get("sizeId"),
-            "nutritionPerHundredGrams": [NutritionInfoDto.from_dict(_item) for _item in obj["nutritionPerHundredGrams"]] if obj.get("nutritionPerHundredGrams") is not None else None,
+            "nutritionPerHundredGrams": NutritionInfoDto.from_dict(obj["nutritionPerHundredGrams"]) if obj.get("nutritionPerHundredGrams") is not None else None,
             "prices": [ExternalMenuPriceByDepartmentsDto.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "nutritions": [NutritionInfoDto.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,

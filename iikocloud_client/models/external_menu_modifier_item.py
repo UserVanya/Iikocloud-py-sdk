@@ -39,9 +39,9 @@ class ExternalMenuModifierItem(BaseModel):
     sku: Optional[StrictStr] = Field(default='', description="Modifier's code")
     name: Optional[StrictStr] = Field(default='', description="Modifier's name")
     description: Optional[StrictStr] = Field(default='', description="Modifier's description")
-    restrictions: Optional[List[ModifierRestrictionsDto5]] = None
+    restrictions: Optional[ModifierRestrictionsDto5] = None
     allergen_groups: Optional[List[AllergenGroupDto4]] = Field(default=None, alias="allergenGroups")
-    nutrition_per_hundred_grams: Optional[List[NutritionInfoDto5]] = Field(default=None, description="Nutrition per 100 g of modifier product", alias="nutritionPerHundredGrams")
+    nutrition_per_hundred_grams: Optional[NutritionInfoDto5] = Field(default=None, alias="nutritionPerHundredGrams")
     portion_weight_grams: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Modifier's weight in gramms", alias="portionWeightGrams")
     tags: Optional[List[TagDto3]] = Field(default=None, description="List of tag names")
     labels: Optional[List[LabelDto3]] = Field(default=None, description="List of label names")
@@ -100,13 +100,9 @@ class ExternalMenuModifierItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in restrictions (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of restrictions
         if self.restrictions:
-            for _item_restrictions in self.restrictions:
-                if _item_restrictions:
-                    _items.append(_item_restrictions.to_dict())
-            _dict['restrictions'] = _items
+            _dict['restrictions'] = self.restrictions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in allergen_groups (list)
         _items = []
         if self.allergen_groups:
@@ -114,13 +110,9 @@ class ExternalMenuModifierItem(BaseModel):
                 if _item_allergen_groups:
                     _items.append(_item_allergen_groups.to_dict())
             _dict['allergenGroups'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in nutrition_per_hundred_grams (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of nutrition_per_hundred_grams
         if self.nutrition_per_hundred_grams:
-            for _item_nutrition_per_hundred_grams in self.nutrition_per_hundred_grams:
-                if _item_nutrition_per_hundred_grams:
-                    _items.append(_item_nutrition_per_hundred_grams.to_dict())
-            _dict['nutritionPerHundredGrams'] = _items
+            _dict['nutritionPerHundredGrams'] = self.nutrition_per_hundred_grams.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
@@ -156,16 +148,6 @@ class ExternalMenuModifierItem(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
-        # set to None if restrictions (nullable) is None
-        # and model_fields_set contains the field
-        if self.restrictions is None and "restrictions" in self.model_fields_set:
-            _dict['restrictions'] = None
-
-        # set to None if nutrition_per_hundred_grams (nullable) is None
-        # and model_fields_set contains the field
-        if self.nutrition_per_hundred_grams is None and "nutrition_per_hundred_grams" in self.model_fields_set:
-            _dict['nutritionPerHundredGrams'] = None
-
         # set to None if position (nullable) is None
         # and model_fields_set contains the field
         if self.position is None and "position" in self.model_fields_set:
@@ -216,9 +198,9 @@ class ExternalMenuModifierItem(BaseModel):
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
             "name": obj.get("name") if obj.get("name") is not None else '',
             "description": obj.get("description") if obj.get("description") is not None else '',
-            "restrictions": [ModifierRestrictionsDto5.from_dict(_item) for _item in obj["restrictions"]] if obj.get("restrictions") is not None else None,
+            "restrictions": ModifierRestrictionsDto5.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "allergenGroups": [AllergenGroupDto4.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
-            "nutritionPerHundredGrams": [NutritionInfoDto5.from_dict(_item) for _item in obj["nutritionPerHundredGrams"]] if obj.get("nutritionPerHundredGrams") is not None else None,
+            "nutritionPerHundredGrams": NutritionInfoDto5.from_dict(obj["nutritionPerHundredGrams"]) if obj.get("nutritionPerHundredGrams") is not None else None,
             "portionWeightGrams": obj.get("portionWeightGrams"),
             "tags": [TagDto3.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "labels": [LabelDto3.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
