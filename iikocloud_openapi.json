@@ -10789,6 +10789,14 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer token for authentication"
+      }
+    },
     "schemas": {
       "AllergenGroupDto": {
         "type": "object",
@@ -32887,9 +32895,9 @@
     }
   },
   "security": [
-        {
-            "Bearer": []
-        }
+    {
+      "Bearer": []
+    }
   ],
   "tags": [
     {
