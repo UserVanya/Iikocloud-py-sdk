@@ -6,7 +6,7 @@ Discount.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**discount_type** | [**DeliveriesResponseOrderDiscountType**](DeliveriesResponseOrderDiscountType.md) | Discount type.                 Can be obtained by &#x60;/discounts&#x60; operation. | 
+**discount_type** | [**DeliveriesResponseOrderDiscountType**](DeliveriesResponseOrderDiscountType.md) | Discount type.                 Can be obtained by &#x60;/api/1/discounts&#x60; operation. | 
 **sum** | **float** | Total. | 
 **selective_positions** | **List[UUID]** | Order item positions. | [optional] 
 **selective_positions_with_sum** | [**List[DeliveriesResponseOrderPositionWithSum]**](DeliveriesResponseOrderPositionWithSum.md) | Order item positions with position discount sum.   &gt; Allowed from version &#x60;8.5.6&#x60;. | [optional] 

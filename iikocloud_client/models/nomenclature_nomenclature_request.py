@@ -27,7 +27,7 @@ class NomenclatureNomenclatureRequest(BaseModel):
     """
     Request for stock list by organization.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     start_revision: Optional[StrictInt] = Field(default=None, description="The revision (version) of the menu saved on the integration side.  Use `0` for the first request for each organization. In every subsequent request,  the `startRevision` field should contain the value of the `revision` field received  in the response to the previous request.", alias="startRevision")
     __properties: ClassVar[List[str]] = ["organizationId", "startRevision"]
 

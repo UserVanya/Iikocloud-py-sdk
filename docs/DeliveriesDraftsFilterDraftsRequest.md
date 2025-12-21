@@ -6,7 +6,7 @@ Request for the list of order drafts by several filters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organization ID for which the order drafts search will be performed.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_ids** | **List[UUID]** | Organization ID for which the order drafts search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **date_from** | **str** | Draft creation time (UTC). Lower limit. | [optional] 
 **date_to** | **str** | Draft creation time (UTC). Upper limit. | [optional] 
 **phone** | **str** | Phone number. | [optional] 

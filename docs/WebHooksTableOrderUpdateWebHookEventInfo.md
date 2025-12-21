@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **event_type** | [**ConstantStringTableOrderUpdate**](ConstantStringTableOrderUpdate.md) | Event type. | [optional] 
 **event_time** | **str** | Event date and time (UTC). | [optional] 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | [optional] 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | [optional] 
 **correlation_id** | **UUID** | Operation ID. | [optional] 
 **event_info** | [**TableOrdersResponseTableOrderInfo**](TableOrdersResponseTableOrderInfo.md) | Event details. | [optional] 
 

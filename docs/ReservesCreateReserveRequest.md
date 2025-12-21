@@ -6,8 +6,8 @@ Banquet/reserve creation model.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID of a new banquet/reserve.                Can be obtained by &#x60;/organizations&#x60; operation. | 
-**terminal_group_id** | **UUID** | Front group ID an banquet/reserve must be sent to.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | [optional] 
+**organization_id** | **UUID** | Organization ID of a new banquet/reserve.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**terminal_group_id** | **UUID** | Front group ID an banquet/reserve must be sent to.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | [optional] 
 **id** | **UUID** | Banquet/reserve ID. Must be unique. | [optional] 
 **external_number** | **str** | Banquet/reserve external number.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 
 **order** | [**ReservesRequestReserveOrder**](ReservesRequestReserveOrder.md) | Order. Used only at a banquet. | [optional] 

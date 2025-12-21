@@ -28,7 +28,7 @@ class DeliveriesRequestCancelOrderRequest(BaseModel):
     """
     Request for cancel the order.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     moved_order_id: Optional[UUID] = Field(default=None, description="Fill this field with id of the new order if current order has been moved to the new RMS/terminal group.", alias="movedOrderId")
     cancel_cause_id: Optional[UUID] = Field(default=None, description="Cancel order dictionary item id.   > Allowed from version `7.7.1`.", alias="cancelCauseId")

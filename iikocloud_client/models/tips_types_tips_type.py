@@ -28,9 +28,9 @@ class TipsTypesTipsType(BaseModel):
     """
     Tips type.
     """ # noqa: E501
-    id: UUID = Field(description="Tips type ID.                Can be obtained by `/tips_types` operation.")
+    id: UUID = Field(description="Tips type ID.                Can be obtained by `/api/1/tips_types` operation.")
     name: StrictStr = Field(description="Tips type name.")
-    organization_ids: List[UUID] = Field(description="Supported organizations IDs.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Supported organizations IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     order_service_types: List[OrderTypesOrderServiceType] = Field(description="Supported order service types.", alias="orderServiceTypes")
     payment_types_ids: List[UUID] = Field(description="Supported payment types IDs.", alias="paymentTypesIds")
     __properties: ClassVar[List[str]] = ["id", "name", "organizationIds", "orderServiceTypes", "paymentTypesIds"]

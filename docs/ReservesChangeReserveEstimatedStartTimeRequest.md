@@ -6,7 +6,7 @@ Request to change reserve/banquet estimated start time.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **reserve_id** | **UUID** | Reserve/banquet ID. | 
 **new_estimated_start_time** | **str** | New estimated start time of reserve/banquet. | 
 

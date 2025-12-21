@@ -27,7 +27,7 @@ class DeliveriesRequestUpdateOrderCancelDeliveryConfirmationRequest(BaseModel):
     """
     Request for cancel delivery confirmation.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId"]
 

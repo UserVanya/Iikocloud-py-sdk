@@ -27,7 +27,7 @@ class RemovalTypesRemovalTypesRequest(BaseModel):
     """
     Request for organization's removal types (reasons for deletion).
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="Organizations ids which removal types needs to be returned.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organizations ids which removal types needs to be returned.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

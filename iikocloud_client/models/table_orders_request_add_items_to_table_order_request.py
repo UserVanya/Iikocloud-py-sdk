@@ -32,7 +32,7 @@ class TableOrdersRequestAddItemsToTableOrderRequest(BaseModel):
     """ # noqa: E501
     add_order_items_settings: Optional[TableOrdersRequestAddTableOrderItemsSettings] = Field(default=None, description="Add order items parameters.", alias="addOrderItemsSettings")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     items: List[DeliveriesRequestCreateOrderOrderItem] = Field(description="Order items (may include ProductOrderItem or CompoundOrderItem).")
     combos: Optional[List[DeliveriesRequestCreateOrderCombo]] = Field(default=None, description="Combos.   > Allowed from version `7.6.1`.")
     __properties: ClassVar[List[str]] = ["addOrderItemsSettings", "orderId", "organizationId", "items", "combos"]

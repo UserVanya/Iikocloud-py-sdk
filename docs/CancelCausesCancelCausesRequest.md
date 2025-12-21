@@ -6,7 +6,7 @@ Request for organization's delivery cancel causes.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organizations ids which delivery cancel causes needs to be returned.                 Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_ids** | **List[UUID]** | Organizations ids which delivery cancel causes needs to be returned.                 Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

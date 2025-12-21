@@ -29,7 +29,7 @@ class OrganizationsGetOrganizationsResponse(BaseModel):
     Response to request for organizations.
     """ # noqa: E501
     correlation_id: UUID = Field(description="Operation ID.", alias="correlationId")
-    organizations: List[OrganizationsOrganizationInfo] = Field(description="List of organizations.                Can be obtained by `/organizations` operation.")
+    organizations: List[OrganizationsOrganizationInfo] = Field(description="List of organizations.                Can be obtained by `/api/1/organizations` operation.")
     __properties: ClassVar[List[str]] = ["correlationId", "organizations"]
 
     model_config = ConfigDict(

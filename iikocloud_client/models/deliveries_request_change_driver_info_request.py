@@ -27,9 +27,9 @@ class DeliveriesRequestChangeDriverInfoRequest(BaseModel):
     """
     Request for change driver info.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
-    driver_id: Optional[UUID] = Field(default=None, description="Driver ID.                Can be obtained by `/employees/couriers` operation.", alias="driverId")
+    driver_id: Optional[UUID] = Field(default=None, description="Driver ID.                Can be obtained by `/api/1/employees/couriers` operation.", alias="driverId")
     estimated_time: Optional[StrictStr] = Field(default=None, description="Delivery estimated time.", alias="estimatedTime")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "driverId", "estimatedTime"]
 

@@ -4,10 +4,10 @@ All URIs are relative to *https://api-ru.iiko.services/api/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api2_menu_by_id_post**](MenuApi.md#api2_menu_by_id_post) | **POST** /api/2/menu/by_id | Retrieve external menu by ID.
-[**api2_menu_post**](MenuApi.md#api2_menu_post) | **POST** /api/2/menu | External menus with price categories.
 [**combo_calculate_post**](MenuApi.md#combo_calculate_post) | **POST** /combo/calculate | Calculate combo price
 [**combo_post**](MenuApi.md#combo_post) | **POST** /combo | Get combos info
+[**menu_by_id_post**](MenuApi.md#menu_by_id_post) | **POST** /menu/by_id | Retrieve external menu by ID.
+[**menu_post**](MenuApi.md#menu_post) | **POST** /menu | External menus with price categories.
 [**nomenclature_post**](MenuApi.md#nomenclature_post) | **POST** /nomenclature | Menu.
 [**stop_lists_add_post**](MenuApi.md#stop_lists_add_post) | **POST** /stop_lists/add | Add items to out-of-stock list.  (You should have extra rights to use this method).
 [**stop_lists_check_post**](MenuApi.md#stop_lists_check_post) | **POST** /stop_lists/check | Check items in out-of-stock list.
@@ -15,177 +15,6 @@ Method | HTTP request | Description
 [**stop_lists_post**](MenuApi.md#stop_lists_post) | **POST** /stop_lists | Out-of-stock items.
 [**stop_lists_remove_post**](MenuApi.md#stop_lists_remove_post) | **POST** /stop_lists/remove | Remove items from out-of-stock list.  (You should have extra rights to use this method).
 
-
-# **api2_menu_by_id_post**
-> Api2MenuByIdPost200Response api2_menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
-
-Retrieve external menu by ID.
-
-> Sourced from Web External menu.
-
- > Restriction group: `Data: menu`.
-
-### Example
-
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import iikocloud_client
-from iikocloud_client.models.api2_menu_by_id_post200_response import Api2MenuByIdPost200Response
-from iikocloud_client.models.nomenclature_menu_request import NomenclatureMenuRequest
-from iikocloud_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-async with iikocloud_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = iikocloud_client.MenuApi(api_client)
-    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    nomenclature_menu_request = {"externalMenuId":"15#3","organizationIds":["706e5f4a-3efa-49f0-8f1c-15a6c1603e1f"],"version":2} # NomenclatureMenuRequest |  (optional)
-
-    try:
-        # Retrieve external menu by ID.
-        api_response = await api_instance.api2_menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
-        print("The response of MenuApi->api2_menu_by_id_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MenuApi->api2_menu_by_id_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **nomenclature_menu_request** | [**NomenclatureMenuRequest**](NomenclatureMenuRequest.md)|  | [optional] 
-
-### Return type
-
-[**Api2MenuByIdPost200Response**](Api2MenuByIdPost200Response.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | success response |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**500** | Server Error |  -  |
-**408** | Request Timeout |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **api2_menu_post**
-> NomenclatureMenusDataResponse api2_menu_post(timeout=timeout)
-
-External menus with price categories.
-
-
-
- > Restriction group: `Data: menu`.
-
-### Example
-
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import iikocloud_client
-from iikocloud_client.models.nomenclature_menus_data_response import NomenclatureMenusDataResponse
-from iikocloud_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = iikocloud_client.Configuration(
-    host = "https://api-ru.iiko.services/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-async with iikocloud_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = iikocloud_client.MenuApi(api_client)
-    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-
-    try:
-        # External menus with price categories.
-        api_response = await api_instance.api2_menu_post(timeout=timeout)
-        print("The response of MenuApi->api2_menu_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MenuApi->api2_menu_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
-
-### Return type
-
-[**NomenclatureMenusDataResponse**](NomenclatureMenusDataResponse.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**500** | Server Error |  -  |
-**408** | Request Timeout |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **combo_calculate_post**
 > LoyaltyResultCalculateComboPriceResponse combo_calculate_post(timeout=timeout, loyalty_result_calculate_combo_price_request=loyalty_result_calculate_combo_price_request)
@@ -347,6 +176,177 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **menu_by_id_post**
+> MenuByIdPost200Response menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
+
+Retrieve external menu by ID.
+
+> Sourced from Web External menu.
+
+ > Restriction group: `Data: menu`.
+
+### Example
+
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.menu_by_id_post200_response import MenuByIdPost200Response
+from iikocloud_client.models.nomenclature_menu_request import NomenclatureMenuRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.MenuApi(api_client)
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    nomenclature_menu_request = {"externalMenuId":"15#3","organizationIds":["706e5f4a-3efa-49f0-8f1c-15a6c1603e1f"],"version":2} # NomenclatureMenuRequest |  (optional)
+
+    try:
+        # Retrieve external menu by ID.
+        api_response = await api_instance.menu_by_id_post(timeout=timeout, nomenclature_menu_request=nomenclature_menu_request)
+        print("The response of MenuApi->menu_by_id_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MenuApi->menu_by_id_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **nomenclature_menu_request** | [**NomenclatureMenuRequest**](NomenclatureMenuRequest.md)|  | [optional] 
+
+### Return type
+
+[**MenuByIdPost200Response**](MenuByIdPost200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | success response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **menu_post**
+> NomenclatureMenusDataResponse menu_post(timeout=timeout)
+
+External menus with price categories.
+
+
+
+ > Restriction group: `Data: menu`.
+
+### Example
+
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.nomenclature_menus_data_response import NomenclatureMenusDataResponse
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.MenuApi(api_client)
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+
+    try:
+        # External menus with price categories.
+        api_response = await api_instance.menu_post(timeout=timeout)
+        print("The response of MenuApi->menu_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MenuApi->menu_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+
+### Return type
+
+[**NomenclatureMenusDataResponse**](NomenclatureMenusDataResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details

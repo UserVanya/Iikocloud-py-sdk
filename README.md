@@ -190,10 +190,10 @@ Class | Method | HTTP request | Description
 *EmployeesApi* | [**employees_shift_is_open_post**](docs/EmployeesApi.md#employees_shift_is_open_post) | **POST** /employees/shift/is_open | Check if personal session is open.
 *EmployeesApi* | [**employees_shifts_by_courier_post**](docs/EmployeesApi.md#employees_shifts_by_courier_post) | **POST** /employees/shifts/by_courier | Get terminal groups where employee session is opened.
 *MarketingSourcesApi* | [**marketing_sources_post**](docs/MarketingSourcesApi.md#marketing_sources_post) | **POST** /marketing_sources | Marketing sources.
-*MenuApi* | [**api2_menu_by_id_post**](docs/MenuApi.md#api2_menu_by_id_post) | **POST** /api/2/menu/by_id | Retrieve external menu by ID.
-*MenuApi* | [**api2_menu_post**](docs/MenuApi.md#api2_menu_post) | **POST** /api/2/menu | External menus with price categories.
 *MenuApi* | [**combo_calculate_post**](docs/MenuApi.md#combo_calculate_post) | **POST** /combo/calculate | Calculate combo price
 *MenuApi* | [**combo_post**](docs/MenuApi.md#combo_post) | **POST** /combo | Get combos info
+*MenuApi* | [**menu_by_id_post**](docs/MenuApi.md#menu_by_id_post) | **POST** /menu/by_id | Retrieve external menu by ID.
+*MenuApi* | [**menu_post**](docs/MenuApi.md#menu_post) | **POST** /menu | External menus with price categories.
 *MenuApi* | [**nomenclature_post**](docs/MenuApi.md#nomenclature_post) | **POST** /nomenclature | Menu.
 *MenuApi* | [**stop_lists_add_post**](docs/MenuApi.md#stop_lists_add_post) | **POST** /stop_lists/add | Add items to out-of-stock list.  (You should have extra rights to use this method).
 *MenuApi* | [**stop_lists_check_post**](docs/MenuApi.md#stop_lists_check_post) | **POST** /stop_lists/check | Check items in out-of-stock list.
@@ -248,7 +248,6 @@ Class | Method | HTTP request | Description
  - [AllergenGroupDto2](docs/AllergenGroupDto2.md)
  - [AllergenGroupDto3](docs/AllergenGroupDto3.md)
  - [AllergenGroupDto4](docs/AllergenGroupDto4.md)
- - [Api2MenuByIdPost200Response](docs/Api2MenuByIdPost200Response.md)
  - [AuthGetAccessTokenRequest](docs/AuthGetAccessTokenRequest.md)
  - [AuthGetAccessTokenResponse](docs/AuthGetAccessTokenResponse.md)
  - [BarcodeDto](docs/BarcodeDto.md)
@@ -627,6 +626,7 @@ Class | Method | HTTP request | Description
  - [MarketingSourcesMarketingSource](docs/MarketingSourcesMarketingSource.md)
  - [MarketingSourcesMarketingSourcesRequest](docs/MarketingSourcesMarketingSourcesRequest.md)
  - [MarketingSourcesMarketingSourcesResponse](docs/MarketingSourcesMarketingSourcesResponse.md)
+ - [MenuByIdPost200Response](docs/MenuByIdPost200Response.md)
  - [MetricsActionType](docs/MetricsActionType.md)
  - [MetricsCallCenterAction](docs/MetricsCallCenterAction.md)
  - [MetricsCallCenterTelemetry](docs/MetricsCallCenterTelemetry.md)

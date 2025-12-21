@@ -30,7 +30,7 @@ class ReservesRestaurantSection(BaseModel):
     Restaurant section.
     """ # noqa: E501
     id: UUID = Field(description="Restaurant section ID.")
-    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
     name: StrictStr = Field(description="Name.")
     tables: List[ReservesTable] = Field(description="Tables.")
     var_schema: Optional[ReservesSectionSchema] = Field(default=None, description="Table layout.", alias="schema")

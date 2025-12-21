@@ -29,8 +29,8 @@ class TableOrdersRequestCreateTableOrderRequest(BaseModel):
     """
     Order creation model.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
-    terminal_group_id: UUID = Field(description="Front group ID an order must be sent to.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    terminal_group_id: UUID = Field(description="Front group ID an order must be sent to.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
     order: Optional[TableOrdersRequestTableOrder] = Field(default=None, description="Order.")
     create_order_settings: Optional[TableOrdersRequestCreateTableOrderSettings] = Field(default=None, description="Order creation parameters.", alias="createOrderSettings")
     __properties: ClassVar[List[str]] = ["organizationId", "terminalGroupId", "order", "createOrderSettings"]

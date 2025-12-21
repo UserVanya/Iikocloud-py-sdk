@@ -7,7 +7,7 @@ Street.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **classifier_id** | **str** | Street ID in classifier, e.g., address database.  \\n &gt; For using in the Russian Federation only. | [optional] 
-**id** | **UUID** | ID.                 Can be obtained by &#x60;/streets/by_city&#x60; operation. | [optional] 
+**id** | **UUID** | ID.                 Can be obtained by &#x60;/api/1/streets/by_city&#x60; operation. | [optional] 
 **name** | **str** | Name. | [optional] 
 **city** | **str** | City name. | [optional] 
 

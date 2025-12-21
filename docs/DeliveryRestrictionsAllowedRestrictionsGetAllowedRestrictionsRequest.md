@@ -7,7 +7,7 @@ Request to identify suitable terminal groups.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **organization_id** | **UUID** | Organization ID. Deprecated, use \&quot;organizationIds\&quot;. | [optional] 
-**organization_ids** | **List[UUID]** | Organization IDs.                Can be obtained by &#x60;/organizations&#x60; operation. | [optional] 
+**organization_ids** | **List[UUID]** | Organization IDs.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | [optional] 
 **delivery_address** | [**DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress**](DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress.md) | Delivery address. | [optional] 
 **order_location** | [**DeliveryRestrictionsAllowedRestrictionsOrderLocation**](DeliveryRestrictionsAllowedRestrictionsOrderLocation.md) | Order location. | [optional] 
 **order_items** | [**List[DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem]**](DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem.md) | Order list. | [optional] 

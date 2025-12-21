@@ -71,7 +71,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesActiveCourierLocationsResponse:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
@@ -146,7 +146,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesActiveCourierLocationsResponse]:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
@@ -221,7 +221,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers in specified   restaurant and are clocked in on specified delivery terminal.
 
@@ -286,7 +286,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -372,7 +375,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesActiveCourierLocationsResponse:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
@@ -447,7 +450,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesActiveCourierLocationsResponse]:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
@@ -522,7 +525,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns list of all active (courier session is opened) courier's locations which are delivery drivers   in specified restaurants.
 
@@ -587,7 +590,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -673,7 +679,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesEmployeesWithRoleSignResponse:
         """Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
@@ -748,7 +754,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesEmployeesWithRoleSignResponse]:
         """Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
@@ -823,7 +829,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns list of all employees which are delivery drivers in specified restaurants,   and checks whether each employee has passed role.
 
@@ -888,7 +894,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -974,7 +983,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesCourierLocationsByTimeOffsetResponse:
         """Method of obtaining drivers' coordinates history.
 
@@ -1049,7 +1058,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesCourierLocationsByTimeOffsetResponse]:
         """Method of obtaining drivers' coordinates history.
 
@@ -1124,7 +1133,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Method of obtaining drivers' coordinates history.
 
@@ -1189,7 +1198,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1275,7 +1287,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesEmployeesResponse:
         """Returns list of all employees which are delivery drivers in specified restaurants.
 
@@ -1350,7 +1362,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesEmployeesResponse]:
         """Returns list of all employees which are delivery drivers in specified restaurants.
 
@@ -1425,7 +1437,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns list of all employees which are delivery drivers in specified restaurants.
 
@@ -1490,7 +1502,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1576,7 +1591,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesEmployeeInfoResponse:
         """Returns employee info.
 
@@ -1651,7 +1666,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesEmployeeInfoResponse]:
         """Returns employee info.
 
@@ -1726,7 +1741,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns employee info.
 
@@ -1791,7 +1806,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1877,7 +1895,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesChangePersonalSessionResponse:
         """Open personal session.
 
@@ -1952,7 +1970,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesChangePersonalSessionResponse]:
         """Open personal session.
 
@@ -2027,7 +2045,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Open personal session.
 
@@ -2092,7 +2110,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2178,7 +2199,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesChangePersonalSessionResponse:
         """Close personal session.
 
@@ -2253,7 +2274,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesChangePersonalSessionResponse]:
         """Close personal session.
 
@@ -2328,7 +2349,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Close personal session.
 
@@ -2393,7 +2414,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2479,7 +2503,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesGetPersonalSessionInfoResponse:
         """Check if personal session is open.
 
@@ -2554,7 +2578,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesGetPersonalSessionInfoResponse]:
         """Check if personal session is open.
 
@@ -2629,7 +2653,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Check if personal session is open.
 
@@ -2694,7 +2718,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2780,7 +2807,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> EmployeesGetTerminalGroupsOfEmployeeResponse:
         """Get terminal groups where employee session is opened.
 
@@ -2855,7 +2882,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[EmployeesGetTerminalGroupsOfEmployeeResponse]:
         """Get terminal groups where employee session is opened.
 
@@ -2930,7 +2957,7 @@ class EmployeesApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Get terminal groups where employee session is opened.
 
@@ -2995,7 +3022,10 @@ class EmployeesApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }

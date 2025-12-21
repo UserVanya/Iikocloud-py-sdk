@@ -30,7 +30,7 @@ class ReservesAddOrderItemsToBanquetRequest(BaseModel):
     Request for add order items to banquet.
     """ # noqa: E501
     reserve_id: UUID = Field(description="Banquet ID.", alias="reserveId")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     items: List[DeliveriesRequestCreateOrderOrderItem] = Field(description="Order items (may include ProductOrderItem or CompoundOrderItem).")
     combos: Optional[List[DeliveriesRequestCreateOrderCombo]] = Field(default=None, description="Combos.   > Allowed from version `7.6.1`.")
     __properties: ClassVar[List[str]] = ["reserveId", "organizationId", "items", "combos"]

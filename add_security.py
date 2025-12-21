@@ -3,6 +3,8 @@
 Скрипт для добавления securitySchemes и security в OpenAPI JSON файл.
 
 Добавляет Bearer authentication схему и применяет её глобально.
+Также удаляет параметр Authorization из всех операций, так как
+аутентификация обрабатывается через security схемы.
 """
 
 import json
@@ -53,8 +55,42 @@ def add_security(json_file: str) -> None:
         changes_made = True
         print("  Добавлен глобальный security")
     
-    if not changes_made:
-        print("Security схемы уже присутствуют в файле.")
+    # Удаляем параметр Authorization из всех операций
+    auth_params_removed = {'count': 0}
+    
+    def remove_auth_params(obj):
+        """Рекурсивно удаляет параметр Authorization из операций."""
+        if isinstance(obj, dict):
+            # Если это операция с параметрами
+            if 'parameters' in obj and isinstance(obj['parameters'], list):
+                # Удаляем параметры с именем "Authorization"
+                original_count = len(obj['parameters'])
+                obj['parameters'] = [
+                    param for param in obj['parameters']
+                    if not (isinstance(param, dict) and param.get('name') == 'Authorization')
+                ]
+                removed = original_count - len(obj['parameters'])
+                if removed > 0:
+                    auth_params_removed['count'] += removed
+                    # Если список параметров стал пустым, можно его удалить (опционально)
+                    if not obj['parameters']:
+                        del obj['parameters']
+            
+            # Рекурсивно обрабатываем все значения словаря
+            for key, value in obj.items():
+                remove_auth_params(value)
+        elif isinstance(obj, list):
+            # Рекурсивно обрабатываем все элементы списка
+            for item in obj:
+                remove_auth_params(item)
+    
+    if 'paths' in data:
+        print("  Удаление параметра Authorization из операций...")
+        remove_auth_params(data['paths'])
+        print(f"  Удалено параметров Authorization: {auth_params_removed['count']}")
+    
+    if not changes_made and auth_params_removed['count'] == 0:
+        print("Security схемы уже присутствуют в файле, параметры Authorization не найдены.")
         return
     
     # Сохраняем исправленный файл
@@ -62,7 +98,7 @@ def add_security(json_file: str) -> None:
     with open(json_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     
-    print("Готово! Security схемы добавлены.")
+    print("Готово! Security схемы добавлены, параметры Authorization удалены.")
 
 
 if __name__ == '__main__':

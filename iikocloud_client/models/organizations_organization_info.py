@@ -37,7 +37,7 @@ class OrganizationsOrganizationInfo(BaseModel):
     Organization details.
     """ # noqa: E501
     response_type: StrictStr = Field(alias="responseType")
-    id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.")
+    id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.")
     name: Optional[StrictStr] = Field(description="Organization name.")
     code: Optional[StrictStr] = Field(default=None, description="Organization`s code.")
     external_data: Optional[List[CommonExternalData]] = Field(default=None, description="Organization`s external data.", alias="externalData")

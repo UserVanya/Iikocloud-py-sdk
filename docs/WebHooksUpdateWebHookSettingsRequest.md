@@ -6,7 +6,7 @@ Request to add or update webhooks settings for listed api logins of the specifie
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization UOC Id.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization UOC Id.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **web_hooks_uri** | **str** | Webhook handler url. | 
 **auth_token** | **str** | Authorization token to pass to the webhook handler. | [optional] 
 **web_hooks_filter** | [**IntegrationWebHooksFiltersWebHooksFilter**](IntegrationWebHooksFiltersWebHooksFilter.md) | Webhooks filter. | [optional] 

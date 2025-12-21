@@ -6,7 +6,7 @@ Request for change order's delivery point information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **order_id** | **UUID** | Order ID. | 
 **new_delivery_point** | [**DeliveriesRequestCreateOrderDeliveryPoint**](DeliveriesRequestCreateOrderDeliveryPoint.md) | New address of delivery. | 
 

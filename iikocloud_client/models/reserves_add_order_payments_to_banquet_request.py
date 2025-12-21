@@ -29,7 +29,7 @@ class ReservesAddOrderPaymentsToBanquetRequest(BaseModel):
     Request for add order payments to banquet.
     """ # noqa: E501
     reserve_id: UUID = Field(description="Reserve ID.", alias="reserveId")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     payments: List[DeliveriesRequestCreateOrderPayment] = Field(description="Order payments.")
     __properties: ClassVar[List[str]] = ["reserveId", "organizationId", "payments"]
 

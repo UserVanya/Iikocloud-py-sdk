@@ -28,7 +28,7 @@ class DeliveriesRequestCloseDeliveryOrderRequest(BaseModel):
     Request for close table order.
     """ # noqa: E501
     delivery_date: Optional[StrictStr] = Field(default=None, description="Actual delivery time. If empty local iikoFront time will used.   > Allowed from version `8.0.6`.", alias="deliveryDate")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     __properties: ClassVar[List[str]] = ["deliveryDate", "organizationId", "orderId"]
 

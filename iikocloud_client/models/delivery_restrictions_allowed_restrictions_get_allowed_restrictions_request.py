@@ -31,7 +31,7 @@ class DeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest(BaseM
     Request to identify suitable terminal groups.
     """ # noqa: E501
     organization_id: Optional[UUID] = Field(default=None, description="Organization ID. Deprecated, use \"organizationIds\".", alias="organizationId")
-    organization_ids: Optional[List[UUID]] = Field(default=None, description="Organization IDs.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: Optional[List[UUID]] = Field(default=None, description="Organization IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     delivery_address: Optional[DeliveryRestrictionsAllowedRestrictionsRestrictionsAddress] = Field(default=None, description="Delivery address.", alias="deliveryAddress")
     order_location: Optional[DeliveryRestrictionsAllowedRestrictionsOrderLocation] = Field(default=None, description="Order location.", alias="orderLocation")
     order_items: Optional[List[DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItem]] = Field(default=None, description="Order list.", alias="orderItems")

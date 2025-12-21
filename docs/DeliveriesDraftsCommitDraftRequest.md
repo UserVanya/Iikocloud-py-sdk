@@ -6,8 +6,8 @@ Delivery order draft commitment request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID of the new order.                Can be obtained by &#x60;/organizations&#x60; operation. | 
-**terminal_group_id** | **UUID** | Front group ID the order must be sent to.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | [optional] 
+**organization_id** | **UUID** | Organization ID of the new order.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**terminal_group_id** | **UUID** | Front group ID the order must be sent to.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | [optional] 
 **create_order_settings** | [**OrdersCommonCreateOrderSettings**](OrdersCommonCreateOrderSettings.md) | Order creation parameters. | [optional] 
 **order_id** | **UUID** | ID of the order. | 
 

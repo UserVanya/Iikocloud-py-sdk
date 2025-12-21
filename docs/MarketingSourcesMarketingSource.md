@@ -7,7 +7,7 @@ DTO for marketing source in iikoRMS.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | Marketing source ID. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **name** | **str** | Marketing source name. | 
 **external_revision** | **int** | External system revision number. | [optional] 
 **is_deleted** | **bool** | IsDeleted attribute of marketing source. | [optional] 

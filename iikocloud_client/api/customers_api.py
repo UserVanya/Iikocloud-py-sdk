@@ -72,7 +72,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> object:
         """Add card.
 
@@ -147,7 +147,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[object]:
         """Add card.
 
@@ -222,7 +222,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Add card.
 
@@ -287,7 +287,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -373,7 +376,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> object:
         """Delete card.
 
@@ -448,7 +451,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[object]:
         """Delete card.
 
@@ -523,7 +526,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Delete card.
 
@@ -588,7 +591,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -674,7 +680,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerCreateOrUpdateCustomerResponse:
         """Create or update customer.
 
@@ -749,7 +755,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerCreateOrUpdateCustomerResponse]:
         """Create or update customer.
 
@@ -824,7 +830,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Create or update customer.
 
@@ -889,7 +895,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -975,7 +984,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerGetCustomerInfoResponse:
         """Get customer info.
 
@@ -1050,7 +1059,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerGetCustomerInfoResponse]:
         """Get customer info.
 
@@ -1125,7 +1134,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Get customer info.
 
@@ -1190,7 +1199,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1276,7 +1288,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerAddCustomerToProgramResponse:
         """Add customer to program.
 
@@ -1351,7 +1363,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerAddCustomerToProgramResponse]:
         """Add customer to program.
 
@@ -1426,7 +1438,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Add customer to program.
 
@@ -1491,7 +1503,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1577,7 +1592,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> object:
         """Cancel hold money.
 
@@ -1652,7 +1667,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[object]:
         """Cancel hold money.
 
@@ -1727,7 +1742,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Cancel hold money.
 
@@ -1792,7 +1807,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -1878,7 +1896,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> object:
         """Withdraw balance.
 
@@ -1953,7 +1971,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[object]:
         """Withdraw balance.
 
@@ -2028,7 +2046,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Withdraw balance.
 
@@ -2093,7 +2111,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2179,7 +2200,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerHoldMoneyResponse:
         """Hold money.
 
@@ -2254,7 +2275,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerHoldMoneyResponse]:
         """Hold money.
 
@@ -2329,7 +2350,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Hold money.
 
@@ -2394,7 +2415,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2480,7 +2504,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> object:
         """Refill balance.
 
@@ -2555,7 +2579,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[object]:
         """Refill balance.
 
@@ -2630,7 +2654,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Refill balance.
 
@@ -2695,7 +2719,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -2781,7 +2808,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerDeleteCustomersResponse:
         """Logical deletion of customers.
 
@@ -2856,7 +2883,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerDeleteCustomersResponse]:
         """Logical deletion of customers.
 
@@ -2931,7 +2958,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Logical deletion of customers.
 
@@ -2996,7 +3023,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -3082,7 +3112,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> LoyaltyResultGetCountersResponse:
         """Get counters.
 
@@ -3157,7 +3187,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[LoyaltyResultGetCountersResponse]:
         """Get counters.
 
@@ -3232,7 +3262,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Get counters.
 
@@ -3297,7 +3327,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -3383,7 +3416,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> CustomerRestoreCustomersResponse:
         """Logical recovery of customers.
 
@@ -3458,7 +3491,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[CustomerRestoreCustomersResponse]:
         """Logical recovery of customers.
 
@@ -3533,7 +3566,7 @@ class CustomersApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Logical recovery of customers.
 
@@ -3598,7 +3631,10 @@ class CustomersApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }

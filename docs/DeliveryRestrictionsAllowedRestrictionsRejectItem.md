@@ -6,8 +6,8 @@ Rejected item info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terminal_group_id** | **UUID** | Terminal group ID.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**terminal_group_id** | **UUID** | Terminal group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **zone** | **str** | Delivery zone name which this TerminalGroupId belongs to. | [optional] 
 **reject_code** | [**DeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode**](DeliveryRestrictionsAllowedRestrictionsDeliveryRestrictionRejectCode.md) | Reject cause code. | 
 **reject_hint** | **str** | Reject hint. | 

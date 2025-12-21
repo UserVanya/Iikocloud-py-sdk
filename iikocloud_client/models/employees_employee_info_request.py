@@ -27,7 +27,7 @@ class EmployeesEmployeeInfoRequest(BaseModel):
     """
     Request for employee info.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     id: UUID = Field(description="Employee ID.")
     __properties: ClassVar[List[str]] = ["organizationId", "id"]
 

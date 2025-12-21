@@ -6,7 +6,7 @@ Request for list of drivers for organizations in OrganizationIds.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | List of organizations.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_ids** | **List[UUID]** | List of organizations.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **roles_to_check** | **List[str]** | Employee&#39;s roles for check. The short name of employee&#39;s position. | 
 
 ## Example

@@ -28,9 +28,9 @@ class DeliveriesDraftsCreateDraftRequest(BaseModel):
     """
     Draft creation model.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID of the new order.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID of the new order.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order: DeliveriesDraftsDeliveryOrderDraft = Field(description="Order item.")
-    terminal_group_id: Optional[UUID] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    terminal_group_id: Optional[UUID] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
     __properties: ClassVar[List[str]] = ["organizationId", "order", "terminalGroupId"]
 
     model_config = ConfigDict(

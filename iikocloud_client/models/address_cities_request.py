@@ -27,7 +27,7 @@ class AddressCitiesRequest(BaseModel):
     """
     Organization request DTO.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="IDs of organizations that require data return.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="IDs of organizations that require data return.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     include_deleted: Optional[StrictBool] = Field(default=None, description="Include deleted cities in response.", alias="includeDeleted")
     __properties: ClassVar[List[str]] = ["organizationIds", "includeDeleted"]
 

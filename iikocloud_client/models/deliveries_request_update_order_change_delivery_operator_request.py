@@ -27,7 +27,7 @@ class DeliveriesRequestUpdateOrderChangeDeliveryOperatorRequest(BaseModel):
     """
     Request for assign/change the order operator.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     operator_id: UUID = Field(description="Operator to assign the order to.", alias="operatorId")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "operatorId"]

@@ -27,7 +27,7 @@ class ReservesChangeReserveTablesRequest(BaseModel):
     """
     Request to change reserve/banquet tables.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     reserve_id: UUID = Field(description="Reserve ID.", alias="reserveId")
     table_ids: List[UUID] = Field(description="Table IDs.", alias="tableIds")
     __properties: ClassVar[List[str]] = ["organizationId", "reserveId", "tableIds"]

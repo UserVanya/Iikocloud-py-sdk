@@ -27,7 +27,7 @@ class CommandsGetCommandStatusRequest(BaseModel):
     """
     Request for command status obtaining.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization id which \"correlationId\" belongs to.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization id which \"correlationId\" belongs to.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     correlation_id: UUID = Field(description="Operation ID obtained from any command supporting operations.", alias="correlationId")
     __properties: ClassVar[List[str]] = ["organizationId", "correlationId"]
 

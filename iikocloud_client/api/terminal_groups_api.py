@@ -60,7 +60,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> TerminalsAwakeTerminalGroupsResponse:
         """Awake terminal groups from sleep mode.
 
@@ -135,7 +135,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[TerminalsAwakeTerminalGroupsResponse]:
         """Awake terminal groups from sleep mode.
 
@@ -210,7 +210,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Awake terminal groups from sleep mode.
 
@@ -275,7 +275,10 @@ class TerminalGroupsApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -361,7 +364,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> TerminalsTerminalGroupsIsAliveResponse:
         """Returns information on availability of group of terminals.
 
@@ -436,7 +439,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[TerminalsTerminalGroupsIsAliveResponse]:
         """Returns information on availability of group of terminals.
 
@@ -511,7 +514,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Returns information on availability of group of terminals.
 
@@ -576,7 +579,10 @@ class TerminalGroupsApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }
@@ -662,7 +668,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> TerminalsTerminalGroupsResponse:
         """Method that returns information on groups of delivery terminals.
 
@@ -737,7 +743,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> ApiResponse[TerminalsTerminalGroupsResponse]:
         """Method that returns information on groups of delivery terminals.
 
@@ -812,7 +818,7 @@ class TerminalGroupsApi:
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=1)] = 0,
     ) -> RESTResponseType:
         """Method that returns information on groups of delivery terminals.
 
@@ -877,7 +883,10 @@ class TerminalGroupsApi:
         _host_index,
     ) -> RequestSerialized:
 
-        _host = None
+        _hosts = [
+            'https://api-ru.iiko.services/api/1'
+        ]
+        _host = _hosts[_host_index]
 
         _collection_formats: Dict[str, str] = {
         }

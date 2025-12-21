@@ -27,8 +27,8 @@ class DeliveryRestrictionsAllowedRestrictionsAllowedItemWithDuration(BaseModel):
     """
     Suitable terminal group with delivery duration and other parameters.
     """ # noqa: E501
-    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     delivery_duration_in_minutes: StrictInt = Field(description="Delivery duration in minutes.", alias="deliveryDurationInMinutes")
     zone: Optional[StrictStr] = Field(description="Delivery zone name which this TerminalGroupId belongs to.")
     delivery_service_product_id: Optional[UUID] = Field(description="Link to \"delivery service payment\".", alias="deliveryServiceProductId")

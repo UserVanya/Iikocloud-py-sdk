@@ -6,7 +6,7 @@ Request for check restaurant sections workload.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**restaurant_section_ids** | **List[UUID]** | Collection of restaurant section ID.                Can be obtained by &#x60;/reserve/available_restaurant_sections&#x60; operation. | 
+**restaurant_section_ids** | **List[UUID]** | Collection of restaurant section ID.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | 
 **date_from** | **str** | Estimated start time (Local for the terminal). Lower limit.                Order details are stored for 90 days. | 
 **date_to** | **str** | Estimated start time (Local for the terminal). Upper limit. | [optional] 
 

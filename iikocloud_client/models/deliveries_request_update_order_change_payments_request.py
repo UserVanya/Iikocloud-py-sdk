@@ -29,7 +29,7 @@ class DeliveriesRequestUpdateOrderChangePaymentsRequest(BaseModel):
     """
     Change order's payments request.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     payments: List[DeliveriesRequestCreateOrderPayment] = Field(description="Order payments.")
     tips: Optional[List[DeliveriesRequestCreateOrderTipsPayment]] = Field(default=None, description="Order tips.")

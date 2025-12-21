@@ -27,9 +27,9 @@ class DeliveriesRequestUpdateOrderCourierRequest(BaseModel):
     """
     Request for order courier update.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
-    employee_id: UUID = Field(description="Courier ID.                Can be obtained by `/employees/couriers` operation.", alias="employeeId")
+    employee_id: UUID = Field(description="Courier ID.                Can be obtained by `/api/1/employees/couriers` operation.", alias="employeeId")
     __properties: ClassVar[List[str]] = ["organizationId", "orderId", "employeeId"]
 
     model_config = ConfigDict(

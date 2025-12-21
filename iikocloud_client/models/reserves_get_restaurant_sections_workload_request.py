@@ -27,7 +27,7 @@ class ReservesGetRestaurantSectionsWorkloadRequest(BaseModel):
     """
     Request for check restaurant sections workload.
     """ # noqa: E501
-    restaurant_section_ids: List[UUID] = Field(description="Collection of restaurant section ID.                Can be obtained by `/reserve/available_restaurant_sections` operation.", alias="restaurantSectionIds")
+    restaurant_section_ids: List[UUID] = Field(description="Collection of restaurant section ID.                Can be obtained by `/api/1/reserve/available_restaurant_sections` operation.", alias="restaurantSectionIds")
     date_from: StrictStr = Field(description="Estimated start time (Local for the terminal). Lower limit.                Order details are stored for 90 days.", alias="dateFrom")
     date_to: Optional[StrictStr] = Field(default=None, description="Estimated start time (Local for the terminal). Upper limit.", alias="dateTo")
     __properties: ClassVar[List[str]] = ["restaurantSectionIds", "dateFrom", "dateTo"]

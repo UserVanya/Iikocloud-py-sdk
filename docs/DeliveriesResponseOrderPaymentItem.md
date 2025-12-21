@@ -6,7 +6,7 @@ Delivery order payment component.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_type** | [**DeliveriesResponseOrderPaymentType**](DeliveriesResponseOrderPaymentType.md) | Payment type.                 Can be obtained by &#x60;/payment_types&#x60; operation. | 
+**payment_type** | [**DeliveriesResponseOrderPaymentType**](DeliveriesResponseOrderPaymentType.md) | Payment type.                 Can be obtained by &#x60;/api/1/payment_types&#x60; operation. | 
 **sum** | **float** | Amount due. | 
 **is_preliminary** | **bool** | Whether payment item is preliminary. | 
 **is_external** | **bool** | Payment item is external (created via biz.API). | 

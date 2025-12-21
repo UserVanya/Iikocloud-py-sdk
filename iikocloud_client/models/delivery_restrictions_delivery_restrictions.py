@@ -32,7 +32,7 @@ class DeliveryRestrictionsDeliveryRestrictions(BaseModel):
     """
     Delivery restrictions.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     delivery_geocode_service_type: DeliveryRestrictionsDeliveryGeocodeServiceType = Field(description="Geocoding service type.", alias="deliveryGeocodeServiceType")
     delivery_regions_map_url: Optional[StrictStr] = Field(description="Link to the map of delivery service regions.", alias="deliveryRegionsMapUrl")
     default_delivery_duration_in_minutes: StrictInt = Field(description="General standard of delivery time.", alias="defaultDeliveryDurationInMinutes")

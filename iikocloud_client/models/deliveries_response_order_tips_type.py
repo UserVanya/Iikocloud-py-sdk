@@ -27,7 +27,7 @@ class DeliveriesResponseOrderTipsType(BaseModel):
     """
     The tips type.
     """ # noqa: E501
-    id: UUID = Field(description="Tips type ID.                Can be obtained by `/tips_types` operation.")
+    id: UUID = Field(description="Tips type ID.                Can be obtained by `/api/1/tips_types` operation.")
     name: StrictStr = Field(description="Tips type name.")
     __properties: ClassVar[List[str]] = ["id", "name"]
 

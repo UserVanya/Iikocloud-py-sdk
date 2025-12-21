@@ -6,7 +6,7 @@ Orders grouped by organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **orders** | [**List[DeliveriesResponseOrderOrderInfo]**](DeliveriesResponseOrderOrderInfo.md) | List of orders by organization. | 
 
 ## Example

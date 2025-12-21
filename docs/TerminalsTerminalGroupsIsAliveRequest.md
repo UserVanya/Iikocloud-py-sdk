@@ -7,8 +7,8 @@ Request for terminal group availability details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **organization_id** | **UUID** | Organization ID. Deprecated, use \&quot;organizationIds\&quot;. | [optional] 
-**organization_ids** | **List[UUID]** |  Organization IDs.     Can be obtained by &#x60;/organizations&#x60; operation. | [optional] 
-**terminal_group_ids** | **List[UUID]** | List of terminal groups IDs.                 Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
+**organization_ids** | **List[UUID]** |  Organization IDs.     Can be obtained by &#x60;/api/1/organizations&#x60; operation. | [optional] 
+**terminal_group_ids** | **List[UUID]** | List of terminal groups IDs.                 Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
 
 ## Example
 

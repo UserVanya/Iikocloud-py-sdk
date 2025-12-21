@@ -28,7 +28,7 @@ class DeliveriesRequestCancelTableOrderRequest(BaseModel):
     """
     Request to cancel a table order.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     removal_type_id: Optional[UUID] = Field(default=None, description="Removal type (used during deletion of printed order items).", alias="removalTypeId")
     removal_comment: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Comment to the charge-off.", alias="removalComment")

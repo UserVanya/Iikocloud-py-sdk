@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **UUID** | Delivery order ID. | 
 **pos_id** | **UUID** | POS delivery order ID. | [optional] 
 **external_number** | **str** | Order external number. | [optional] 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **timestamp** | **int** | Timestamp of most recent order change that took place on iikoTransport server. | 
 **creation_status** | [**DeliveriesResponseOrderCreationStatus**](DeliveriesResponseOrderCreationStatus.md) | Order creation status. In case of asynchronous creation, it allows to track the instance an order was validated/created in iikoFront. | 
 **error_info** | [**ErrorsErrorInfo**](ErrorsErrorInfo.md) | Order creation error details.  &gt; Required only if \&quot;creationStatus\&quot;&#x3D;\&quot;Error\&quot;. | [optional] 

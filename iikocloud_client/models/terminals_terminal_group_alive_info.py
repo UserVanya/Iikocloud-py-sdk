@@ -28,8 +28,8 @@ class TerminalsTerminalGroupAliveInfo(BaseModel):
     DTO containing terminal group availability details.
     """ # noqa: E501
     is_alive: StrictBool = Field(description="Attribute that shows whether a terminal is available to request processing.", alias="isAlive")
-    terminal_group_id: UUID = Field(description="ID of front group of terminals.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
-    organization_id: UUID = Field(description="Organizations ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    terminal_group_id: UUID = Field(description="ID of front group of terminals.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: UUID = Field(description="Organizations ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     __properties: ClassVar[List[str]] = ["isAlive", "terminalGroupId", "organizationId"]
 
     model_config = ConfigDict(

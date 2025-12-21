@@ -82,17 +82,39 @@ def fix_schema_prefixes(json_file: str) -> None:
             if old_name in schemas:
                 schemas[new_name] = schemas.pop(old_name)
     
+    # Получаем актуальный список схем после переименования
+    current_schemas = set(data['components']['schemas'].keys())
+    
     # Заменяем ссылки на схемы во всём файле
+    refs_replaced = {'count': 0}
+    
     def replace_refs(obj):
         """Рекурсивно заменяет ссылки на схемы в объекте."""
         if isinstance(obj, dict):
             if '$ref' in obj and isinstance(obj['$ref'], str):
-                # Заменяем ссылку, если она указывает на переименованную схему
-                for old_name, new_name in schema_mapping.items():
-                    ref_path = f"#/components/schemas/{old_name}"
-                    if obj['$ref'] == ref_path:
+                # Проверяем, является ли это ссылкой на схему
+                if obj['$ref'].startswith('#/components/schemas/'):
+                    schema_name = obj['$ref'][len('#/components/schemas/'):]
+                    original_ref = obj['$ref']
+                    
+                    # Сначала проверяем, была ли схема переименована (есть в mapping)
+                    if schema_name in schema_mapping:
+                        new_name = schema_mapping[schema_name]
                         obj['$ref'] = f"#/components/schemas/{new_name}"
-                        break
+                        refs_replaced['count'] += 1
+                    else:
+                        # Нормализуем имя схемы (на случай, если ссылка содержит префиксы)
+                        normalized_name = normalize_schema_name(schema_name)
+                        if normalized_name != schema_name:
+                            # Проверяем, существует ли нормализованная схема
+                            if normalized_name in current_schemas:
+                                obj['$ref'] = f"#/components/schemas/{normalized_name}"
+                                refs_replaced['count'] += 1
+                            # Если нормализованное имя не найдено, но есть в mapping (после нормализации)
+                            # это означает, что схема была переименована, но ссылка указывает на старое имя с префиксом
+                            elif normalized_name in schema_mapping.values():
+                                obj['$ref'] = f"#/components/schemas/{normalized_name}"
+                                refs_replaced['count'] += 1
             else:
                 # Рекурсивно обрабатываем все значения словаря
                 for key, value in obj.items():
@@ -103,6 +125,7 @@ def fix_schema_prefixes(json_file: str) -> None:
                 replace_refs(item)
     
     replace_refs(data)
+    print(f"  Заменено ссылок: {refs_replaced['count']}")
     
     # Сохраняем исправленный файл
     print("Сохранение исправленного файла...")

@@ -29,9 +29,9 @@ class DeliveriesDraftsSaveDraftRequest(BaseModel):
     Draft editing model.
     """ # noqa: E501
     employee_id: UUID = Field(description="ID of the employee who wants to update order draft.", alias="employeeId")
-    organization_id: UUID = Field(description="Organization ID of the new order.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID of the new order.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order: DeliveriesDraftsDeliveryOrderDraft = Field(description="Order item.")
-    terminal_group_id: Optional[UUID] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    terminal_group_id: Optional[UUID] = Field(default=None, description="Front group ID the order must be sent to.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
     __properties: ClassVar[List[str]] = ["employeeId", "organizationId", "order", "terminalGroupId"]
 
     model_config = ConfigDict(

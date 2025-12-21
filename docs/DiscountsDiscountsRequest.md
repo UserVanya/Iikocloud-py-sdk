@@ -6,7 +6,7 @@ Request of discounts/surcharges.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organization IDs that require discounts return.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_ids** | **List[UUID]** | Organization IDs that require discounts return.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

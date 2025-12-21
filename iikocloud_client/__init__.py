@@ -67,7 +67,6 @@ __all__ = [
     "AllergenGroupDto2",
     "AllergenGroupDto3",
     "AllergenGroupDto4",
-    "Api2MenuByIdPost200Response",
     "AuthGetAccessTokenRequest",
     "AuthGetAccessTokenResponse",
     "BarcodeDto",
@@ -446,6 +445,7 @@ __all__ = [
     "MarketingSourcesMarketingSource",
     "MarketingSourcesMarketingSourcesRequest",
     "MarketingSourcesMarketingSourcesResponse",
+    "MenuByIdPost200Response",
     "MetricsActionType",
     "MetricsCallCenterAction",
     "MetricsCallCenterTelemetry",
@@ -717,7 +717,6 @@ from iikocloud_client.models.allergen_group_dto import AllergenGroupDto as Aller
 from iikocloud_client.models.allergen_group_dto2 import AllergenGroupDto2 as AllergenGroupDto2
 from iikocloud_client.models.allergen_group_dto3 import AllergenGroupDto3 as AllergenGroupDto3
 from iikocloud_client.models.allergen_group_dto4 import AllergenGroupDto4 as AllergenGroupDto4
-from iikocloud_client.models.api2_menu_by_id_post200_response import Api2MenuByIdPost200Response as Api2MenuByIdPost200Response
 from iikocloud_client.models.auth_get_access_token_request import AuthGetAccessTokenRequest as AuthGetAccessTokenRequest
 from iikocloud_client.models.auth_get_access_token_response import AuthGetAccessTokenResponse as AuthGetAccessTokenResponse
 from iikocloud_client.models.barcode_dto import BarcodeDto as BarcodeDto
@@ -1096,6 +1095,7 @@ from iikocloud_client.models.loyalty_result_warning_info import LoyaltyResultWar
 from iikocloud_client.models.marketing_sources_marketing_source import MarketingSourcesMarketingSource as MarketingSourcesMarketingSource
 from iikocloud_client.models.marketing_sources_marketing_sources_request import MarketingSourcesMarketingSourcesRequest as MarketingSourcesMarketingSourcesRequest
 from iikocloud_client.models.marketing_sources_marketing_sources_response import MarketingSourcesMarketingSourcesResponse as MarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.menu_by_id_post200_response import MenuByIdPost200Response as MenuByIdPost200Response
 from iikocloud_client.models.metrics_action_type import MetricsActionType as MetricsActionType
 from iikocloud_client.models.metrics_call_center_action import MetricsCallCenterAction as MetricsCallCenterAction
 from iikocloud_client.models.metrics_call_center_telemetry import MetricsCallCenterTelemetry as MetricsCallCenterTelemetry

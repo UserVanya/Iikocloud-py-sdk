@@ -6,7 +6,7 @@ Order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**table_ids** | **List[UUID]** | Table IDs.                Can be obtained by &#x60;/reserve/available_restaurant_sections&#x60; operation. | 
+**table_ids** | **List[UUID]** | Table IDs.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | 
 **customer** | [**DeliveriesResponseOrderRegularCustomer**](DeliveriesResponseOrderRegularCustomer.md) | Guest.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **phone** | **str** | Guest phone.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **status** | [**DeliveriesResponseOrderOrderStatus**](DeliveriesResponseOrderOrderStatus.md) | Order status. | 

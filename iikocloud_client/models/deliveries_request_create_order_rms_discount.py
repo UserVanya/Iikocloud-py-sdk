@@ -28,7 +28,7 @@ class DeliveriesRequestCreateOrderRmsDiscount(DeliveriesRequestCreateOrderDiscou
     """
     DeliveriesRequestCreateOrderRmsDiscount
     """ # noqa: E501
-    discount_type_id: UUID = Field(description="Discount type.                 Can be obtained by `/discounts` operation.", alias="discountTypeId")
+    discount_type_id: UUID = Field(description="Discount type.                 Can be obtained by `/api/1/discounts` operation.", alias="discountTypeId")
     sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Discount/surcharge sum.")
     selective_positions: Optional[List[UUID]] = Field(default=None, description="Order item positions.", alias="selectivePositions")
     __properties: ClassVar[List[str]] = ["type", "discountTypeId", "sum", "selectivePositions"]

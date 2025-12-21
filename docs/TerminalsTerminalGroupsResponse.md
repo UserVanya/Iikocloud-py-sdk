@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **correlation_id** | **UUID** | Operation ID. | 
 **terminal_groups** | [**List[WrapperTerminalsTerminalGroup]**](WrapperTerminalsTerminalGroup.md) | List of terminal groups broken down by organizations. | 
-**terminal_groups_in_sleep** | [**List[WrapperTerminalsTerminalGroup]**](WrapperTerminalsTerminalGroup.md) | Terminal groups are in sleep mode because they are not active.    Can be awakened by &#x60;/terminal_groups/awake&#x60; operation. | 
+**terminal_groups_in_sleep** | [**List[WrapperTerminalsTerminalGroup]**](WrapperTerminalsTerminalGroup.md) | Terminal groups are in sleep mode because they are not active.    Can be awakened by &#x60;/api/1/terminal_groups/awake&#x60; operation. | 
 
 ## Example
 

@@ -27,7 +27,7 @@ class AddressRegionsRequest(BaseModel):
     """
     Organization request DTO.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="IDs of organizations that require data return.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="IDs of organizations that require data return.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

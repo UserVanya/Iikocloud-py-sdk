@@ -7,7 +7,7 @@ Request for close table order.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cheque_additional_info** | [**DeliveriesCommonChequeAdditionalInfo**](DeliveriesCommonChequeAdditionalInfo.md) | Cheque additional information according to russian federal law #54. | [optional] 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **order_id** | **UUID** | Order ID. | 
 
 ## Example

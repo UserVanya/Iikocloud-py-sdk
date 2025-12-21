@@ -28,7 +28,7 @@ class DeliveriesRequestOrdersByRevisionRequest(BaseModel):
     Request for a list of edited orders starting from specified revision number.
     """ # noqa: E501
     start_revision: StrictInt = Field(description="Revision start number beginning from which (but not including) new/edited orders will be returned.                > Maximum revision offset to request - `3 hours`.", alias="startRevision")
-    organization_ids: List[UUID] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
     __properties: ClassVar[List[str]] = ["startRevision", "organizationIds", "sourceKeys"]
 

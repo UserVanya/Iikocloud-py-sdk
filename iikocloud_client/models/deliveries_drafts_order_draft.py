@@ -29,7 +29,7 @@ class DeliveriesDraftsOrderDraft(BaseModel):
     Order draft object.
     """ # noqa: E501
     id: UUID = Field(description="Order ID.")
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     locked_by_user: Optional[UUID] = Field(default=None, description="ID of the employee, who is editing this draft.", alias="lockedByUser")
     locked_at: Optional[StrictStr] = Field(default=None, description="Timestamp of when the draft was taken for editing (lock).", alias="lockedAt")
     order: DeliveriesDraftsDeliveryOrderDraft = Field(description="Order.")

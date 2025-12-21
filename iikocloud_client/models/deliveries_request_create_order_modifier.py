@@ -27,9 +27,9 @@ class DeliveriesRequestCreateOrderModifier(BaseModel):
     """
     Modifier.
     """ # noqa: E501
-    product_id: UUID = Field(description="Modifier item ID.                Can be obtained by `/nomenclature` operation.", alias="productId")
+    product_id: UUID = Field(description="Modifier item ID.                Can be obtained by `/api/1/nomenclature` operation.", alias="productId")
     amount: Union[StrictFloat, StrictInt] = Field(description="Quantity.")
-    product_group_id: Optional[UUID] = Field(default=None, description="Modifiers group ID (for group modifier). Required for a group modifier.                Can be obtained by `/nomenclature` operation.", alias="productGroupId")
+    product_group_id: Optional[UUID] = Field(default=None, description="Modifiers group ID (for group modifier). Required for a group modifier.                Can be obtained by `/api/1/nomenclature` operation.", alias="productGroupId")
     price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Unit price.")
     position_id: Optional[UUID] = Field(default=None, description="Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  > If sent null, it generates automatically on iikoTransport side.", alias="positionId")
     __properties: ClassVar[List[str]] = ["productId", "amount", "productGroupId", "price", "positionId"]

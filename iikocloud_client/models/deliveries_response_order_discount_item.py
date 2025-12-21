@@ -29,7 +29,7 @@ class DeliveriesResponseOrderDiscountItem(BaseModel):
     """
     Discount.
     """ # noqa: E501
-    discount_type: DeliveriesResponseOrderDiscountType = Field(description="Discount type.                 Can be obtained by `/discounts` operation.", alias="discountType")
+    discount_type: DeliveriesResponseOrderDiscountType = Field(description="Discount type.                 Can be obtained by `/api/1/discounts` operation.", alias="discountType")
     sum: Union[StrictFloat, StrictInt] = Field(description="Total.")
     selective_positions: Optional[List[UUID]] = Field(default=None, description="Order item positions.", alias="selectivePositions")
     selective_positions_with_sum: Optional[List[DeliveriesResponseOrderPositionWithSum]] = Field(default=None, description="Order item positions with position discount sum.   > Allowed from version `8.5.6`.", alias="selectivePositionsWithSum")

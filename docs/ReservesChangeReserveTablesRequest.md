@@ -6,7 +6,7 @@ Request to change reserve/banquet tables.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **reserve_id** | **UUID** | Reserve ID. | 
 **table_ids** | **List[UUID]** | Table IDs. | 
 

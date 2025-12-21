@@ -7,7 +7,7 @@ Order draft object.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | Order ID. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **locked_by_user** | **UUID** | ID of the employee, who is editing this draft. | [optional] 
 **locked_at** | **str** | Timestamp of when the draft was taken for editing (lock). | [optional] 
 **order** | [**DeliveriesDraftsDeliveryOrderDraft**](DeliveriesDraftsDeliveryOrderDraft.md) | Order. | 

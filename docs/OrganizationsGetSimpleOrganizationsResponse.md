@@ -7,7 +7,7 @@ Response to request for organizations.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **correlation_id** | **UUID** | Operation ID. | 
-**organizations** | [**List[OrganizationsSimpleOrganizationInfo]**](OrganizationsSimpleOrganizationInfo.md) | List of organizations.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organizations** | [**List[OrganizationsSimpleOrganizationInfo]**](OrganizationsSimpleOrganizationInfo.md) | List of organizations.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

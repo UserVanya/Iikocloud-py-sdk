@@ -42,7 +42,7 @@ class TableOrdersResponseTableOrder(BaseModel):
     """
     Order.
     """ # noqa: E501
-    table_ids: List[UUID] = Field(description="Table IDs.                Can be obtained by `/reserve/available_restaurant_sections` operation.", alias="tableIds")
+    table_ids: List[UUID] = Field(description="Table IDs.                Can be obtained by `/api/1/reserve/available_restaurant_sections` operation.", alias="tableIds")
     customer: Optional[DeliveriesResponseOrderRegularCustomer] = Field(default=None, description="Guest.   > Allowed from version `7.5.2`.")
     phone: Optional[StrictStr] = Field(default=None, description="Guest phone.   > Allowed from version `7.5.2`.")
     status: DeliveriesResponseOrderOrderStatus = Field(description="Order status.")

@@ -27,7 +27,7 @@ class PaymentTypesPaymentTypesRequest(BaseModel):
     """
     Request for payment types.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="Organizations IDs which payment types have to be returned.                 Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organizations IDs which payment types have to be returned.                 Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

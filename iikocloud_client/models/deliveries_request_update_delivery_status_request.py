@@ -28,7 +28,7 @@ class DeliveriesRequestUpdateDeliveryStatusRequest(BaseModel):
     """
     Request for delivery status update.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     delivery_status: DeliveriesCommonDeliveryStatusForUpdate = Field(description="Delivery status. Can be only switched between these three statuses.", alias="deliveryStatus")
     delivery_date: Optional[StrictStr] = Field(default=None, description="The date and time when the order was received by the guest (Local for delivery terminal).", alias="deliveryDate")

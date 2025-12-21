@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class DeliveriesResponseOrderPaymentType(BaseModel):
     """
-    Payment type.                 Can be obtained by `/payment_types` operation.
+    Payment type.                 Can be obtained by `/api/1/payment_types` operation.
     """ # noqa: E501
     id: UUID = Field(description="ID.")
     name: StrictStr = Field(description="Name.")

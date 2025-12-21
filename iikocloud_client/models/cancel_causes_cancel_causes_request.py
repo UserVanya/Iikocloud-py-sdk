@@ -27,7 +27,7 @@ class CancelCausesCancelCausesRequest(BaseModel):
     """
     Request for organization's delivery cancel causes.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="Organizations ids which delivery cancel causes needs to be returned.                 Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organizations ids which delivery cancel causes needs to be returned.                 Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     __properties: ClassVar[List[str]] = ["organizationIds"]
 
     model_config = ConfigDict(

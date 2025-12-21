@@ -7,8 +7,8 @@ DTO containing terminal group availability details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **is_alive** | **bool** | Attribute that shows whether a terminal is available to request processing. | 
-**terminal_group_id** | **UUID** | ID of front group of terminals.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | 
-**organization_id** | **UUID** | Organizations ID.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**terminal_group_id** | **UUID** | ID of front group of terminals.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**organization_id** | **UUID** | Organizations ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

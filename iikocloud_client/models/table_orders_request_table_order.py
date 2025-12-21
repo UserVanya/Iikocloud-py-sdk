@@ -40,7 +40,7 @@ class TableOrdersRequestTableOrder(BaseModel):
     """ # noqa: E501
     id: Optional[UUID] = Field(default=None, description="Order ID.")
     external_number: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="Order external number.   > Allowed from version `8.0.6`.", alias="externalNumber")
-    table_ids: Optional[List[UUID]] = Field(default=None, description="Table IDs.                Can be obtained by `/reserve/available_restaurant_sections` operation.", alias="tableIds")
+    table_ids: Optional[List[UUID]] = Field(default=None, description="Table IDs.                Can be obtained by `/api/1/reserve/available_restaurant_sections` operation.", alias="tableIds")
     customer: Optional[DeliveriesRequestCreateOrderRegularCustomer] = Field(default=None, description="Guest.   > Allowed from version `7.5.2`.")
     phone: Optional[StrictStr] = Field(default=None, description="Guest phone.   > Allowed from version `7.5.2`.")
     guest_count: Optional[StrictInt] = Field(default=None, description="Amount of guests in the order.   > Allowed from version `7.6.1`.", alias="guestCount")
@@ -55,7 +55,7 @@ class TableOrdersRequestTableOrder(BaseModel):
     source_key: Optional[StrictStr] = Field(default=None, description="The string key (marker) of the source (partner - api user) that created the order. Needed to limit the visibility of orders for external integration.", alias="sourceKey")
     discounts_info: Optional[DeliveriesRequestCreateOrderDiscountsInfo] = Field(default=None, description="Discounts/surcharges.", alias="discountsInfo")
     loyalty_info: Optional[DeliveriesRequestCreateOrderLoyaltyInfo] = Field(default=None, description="Information about Loyalty app.", alias="loyaltyInfo")
-    order_type_id: Optional[UUID] = Field(default=None, description="Order type ID.                 Can be obtained by `/deliveries/order_types` operation", alias="orderTypeId")
+    order_type_id: Optional[UUID] = Field(default=None, description="Order type ID.                 Can be obtained by `/api/1/deliveries/order_types` operation", alias="orderTypeId")
     cheque_additional_info: Optional[DeliveriesCommonChequeAdditionalInfo] = Field(default=None, description="Cheque additional information.", alias="chequeAdditionalInfo")
     external_data: Optional[List[DeliveriesRequestCreateOrderExternalData]] = Field(default=None, description="Order external data.   > Allowed from version `8.0.6`.", alias="externalData")
     __properties: ClassVar[List[str]] = ["id", "externalNumber", "tableIds", "customer", "phone", "guestCount", "guests", "tabName", "menuId", "priceCategoryId", "items", "combos", "payments", "tips", "sourceKey", "discountsInfo", "loyaltyInfo", "orderTypeId", "chequeAdditionalInfo", "externalData"]

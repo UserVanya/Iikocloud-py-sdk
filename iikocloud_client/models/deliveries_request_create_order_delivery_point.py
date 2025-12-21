@@ -30,7 +30,7 @@ class DeliveriesRequestCreateOrderDeliveryPoint(BaseModel):
     Delivery location details.
     """ # noqa: E501
     coordinates: Optional[DeliveriesCommonCoordinates] = Field(default=None, description="Delivery address coordinates.  > Allowed from version `7.7.3`.")
-    address: Optional[DeliveriesRequestCreateOrderAddress] = Field(default=None, description="Order delivery address.                > The use of type **City** is allowed if the parameter **addressFormatType == City**.                > Can be obtained by `/organizations` or `/organizations/settings` operations (`addressFormatType` parameter).")
+    address: Optional[DeliveriesRequestCreateOrderAddress] = Field(default=None, description="Order delivery address.                > The use of type **City** is allowed if the parameter **addressFormatType == City**.                > Can be obtained by `/api/1/organizations` or `/api/1/organizations/settings` operations (`addressFormatType` parameter).")
     external_cartography_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=100)]] = Field(default=None, description="Delivery location custom code in customer's API system.", alias="externalCartographyId")
     comment: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=500)]] = Field(default=None, description="Additional information.")
     __properties: ClassVar[List[str]] = ["coordinates", "address", "externalCartographyId", "comment"]

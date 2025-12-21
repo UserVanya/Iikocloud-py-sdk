@@ -27,7 +27,7 @@ class EmployeesCouriersAndCheckRoleRequest(BaseModel):
     """
     Request for list of drivers for organizations in OrganizationIds.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="List of organizations.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="List of organizations.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     roles_to_check: List[StrictStr] = Field(description="Employee's roles for check. The short name of employee's position.", alias="rolesToCheck")
     __properties: ClassVar[List[str]] = ["organizationIds", "rolesToCheck"]
 

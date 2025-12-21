@@ -37,7 +37,7 @@ class DiscountsDiscountCardTypeInfo(BaseModel):
     comment: Optional[StrictStr] = Field(default=None, description="Comment.")
     can_be_applied_selectively: StrictBool = Field(description="Whether discount allows for selected application to individual items at user's discretion.", alias="canBeAppliedSelectively")
     min_order_sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Minimum order amount required for discount application.  If order amount is less than specified threshold, discount does not apply.", alias="minOrderSum")
-    mode: DiscountsDiscountCardMode = Field(description="Discount type.     Can be obtained by `/discounts` operation.")
+    mode: DiscountsDiscountCardMode = Field(description="Discount type.     Can be obtained by `/api/1/discounts` operation.")
     sum: Union[StrictFloat, StrictInt] = Field(description="Fixed amount.  > Triggers if fixed amount has been specified.")
     can_apply_by_card_number: StrictBool = Field(description="Can be applied by card No.  > If true, it's enough to enter discount card No. (card swiping not required)", alias="canApplyByCardNumber")
     is_manual: StrictBool = Field(description="Created manually.", alias="isManual")

@@ -28,9 +28,9 @@ class DeliveriesRequestOrdersByDeliveryDateAndPhoneRequest(BaseModel):
     Request for a list of orders by phone number.
     """ # noqa: E501
     phone: Optional[StrictStr] = Field(description="Delivery order phone number.")
-    delivery_date_from: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Lower limit.                The guaranteed order availability period is the last 7 days. To access earlier orders, use the `/deliveries/history/by_delivery_date_and_phone` method.", alias="deliveryDateFrom")
+    delivery_date_from: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Lower limit.                The guaranteed order availability period is the last 7 days. To access earlier orders, use the `/api/1/deliveries/history/by_delivery_date_and_phone` method.", alias="deliveryDateFrom")
     delivery_date_to: Optional[StrictStr] = Field(default=None, description="Order delivery date (Local for delivery terminal). Upper limit.", alias="deliveryDateTo")
-    organization_ids: List[UUID] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organization ID for which an order search will be performed.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     start_revision: Optional[StrictInt] = Field(default=None, description="Revision start number beginning from which (but not including) new/edited orders will be returned.", alias="startRevision")
     source_keys: Optional[List[StrictStr]] = Field(default=None, description="Source keys.", alias="sourceKeys")
     rows_count: Optional[StrictInt] = Field(default=None, description="Maximum number of items returned.  <remarks>  If null, all items will be returned.  </remarks>", alias="rowsCount")

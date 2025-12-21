@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **comment** | **str** | Comment. | [optional] 
 **can_be_applied_selectively** | **bool** | Whether discount allows for selected application to individual items at user&#39;s discretion. | 
 **min_order_sum** | **float** | Minimum order amount required for discount application.  If order amount is less than specified threshold, discount does not apply. | [optional] 
-**mode** | [**DiscountsDiscountCardMode**](DiscountsDiscountCardMode.md) | Discount type.     Can be obtained by &#x60;/discounts&#x60; operation. | 
+**mode** | [**DiscountsDiscountCardMode**](DiscountsDiscountCardMode.md) | Discount type.     Can be obtained by &#x60;/api/1/discounts&#x60; operation. | 
 **sum** | **float** | Fixed amount.  &gt; Triggers if fixed amount has been specified. | 
 **can_apply_by_card_number** | **bool** | Can be applied by card No.  &gt; If true, it&#39;s enough to enter discount card No. (card swiping not required) | 
 **is_manual** | **bool** | Created manually. | 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**discount_type_id** | **UUID** | Discount type.                 Can be obtained by &#x60;/discounts&#x60; operation. | 
+**discount_type_id** | **UUID** | Discount type.                 Can be obtained by &#x60;/api/1/discounts&#x60; operation. | 
 **sum** | **float** | Discount/surcharge sum. | [optional] 
 **selective_positions** | **List[UUID]** | Order item positions. | [optional] 
 

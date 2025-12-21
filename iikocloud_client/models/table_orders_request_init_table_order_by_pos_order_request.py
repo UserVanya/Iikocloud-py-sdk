@@ -27,8 +27,8 @@ class TableOrdersRequestInitTableOrderByPosOrderRequest(BaseModel):
     """
     Request for init orders on table by POS orders.
     """ # noqa: E501
-    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/organizations` operation.", alias="organizationId")
-    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/terminal_groups` operation.", alias="terminalGroupId")
+    organization_id: UUID = Field(description="Organization ID.                Can be obtained by `/api/1/organizations` operation.", alias="organizationId")
+    terminal_group_id: UUID = Field(description="Terminal group ID.                Can be obtained by `/api/1/terminal_groups` operation.", alias="terminalGroupId")
     pos_order_ids: List[UUID] = Field(description="POS order IDs.", alias="posOrderIds")
     __properties: ClassVar[List[str]] = ["organizationId", "terminalGroupId", "posOrderIds"]
 

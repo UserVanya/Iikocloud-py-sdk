@@ -27,7 +27,7 @@ class TerminalsTerminalGroupsRequest(BaseModel):
     """
     Request for list of terminal groups.
     """ # noqa: E501
-    organization_ids: List[UUID] = Field(description="Organizations IDs for which information is requested.                 Can be obtained by `/organizations` operation.", alias="organizationIds")
+    organization_ids: List[UUID] = Field(description="Organizations IDs for which information is requested.                 Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
     include_disabled: Optional[StrictBool] = Field(default=None, description="Attribute that shows that response contains disabled terminal groups.", alias="includeDisabled")
     return_external_data: Optional[List[StrictStr]] = Field(default=None, description="External data keys that have to be returned.", alias="returnExternalData")
     __properties: ClassVar[List[str]] = ["organizationIds", "includeDisabled", "returnExternalData"]

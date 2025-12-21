@@ -6,9 +6,9 @@ DTO of out-of-stock lists request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organizations for which out-of-stock lists will be requested.                Can be obtained by &#x60;/organizations&#x60; operation. | 
+**organization_ids** | **List[UUID]** | Organizations for which out-of-stock lists will be requested.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **return_size** | **bool** | Flag indicating the need to return the sizes of the dish. | [optional] 
-**terminal_groups_ids** | **List[UUID]** | List of terminal groups for which you need to get out-of-stock lists.                Can be obtained by &#x60;/terminal_groups&#x60; operation. | [optional] 
+**terminal_groups_ids** | **List[UUID]** | List of terminal groups for which you need to get out-of-stock lists.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | [optional] 
 
 ## Example
 

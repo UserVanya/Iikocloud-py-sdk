@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **source_key** | **str** | The string key (marker) of the source (partner - api user) that created the order. Needed to limit the visibility of orders for external integration. | [optional] 
 **discounts_info** | [**DeliveriesRequestCreateOrderDiscountsInfo**](DeliveriesRequestCreateOrderDiscountsInfo.md) | Discounts/surcharges. | [optional] 
 **loyalty_info** | [**DeliveriesRequestCreateOrderLoyaltyInfo**](DeliveriesRequestCreateOrderLoyaltyInfo.md) | Information about Loyalty app. | [optional] 
-**order_type_id** | **UUID** | Order type ID.                 Can be obtained by &#x60;/deliveries/order_types&#x60; operation | [optional] 
+**order_type_id** | **UUID** | Order type ID.                 Can be obtained by &#x60;/api/1/deliveries/order_types&#x60; operation | [optional] 
 **cheque_additional_info** | [**DeliveriesCommonChequeAdditionalInfo**](DeliveriesCommonChequeAdditionalInfo.md) | Cheque additional information. | [optional] 
 **external_data** | [**List[DeliveriesRequestCreateOrderExternalData]**](DeliveriesRequestCreateOrderExternalData.md) | Order external data.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 
 
