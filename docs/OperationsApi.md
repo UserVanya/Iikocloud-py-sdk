@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **commands_status_post**
-> TransportCommandsGetCommandStatusResponse commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
+> IikoTransportPublicApiContractsCommandsGetCommandStatusResponse commands_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
 
 Get status of command.
 
@@ -19,12 +19,11 @@ Please do not request methods that include such a value.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_commands_get_command_status_request import TransportCommandsGetCommandStatusRequest
-from iikocloud_client.models.transport_commands_get_command_status_response import TransportCommandsGetCommandStatusResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_request import IikoTransportPublicApiContractsCommandsGetCommandStatusRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_commands_get_command_status_response import IikoTransportPublicApiContractsCommandsGetCommandStatusResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -34,26 +33,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.OperationsApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_commands_get_command_status_request = iikocloud_client.TransportCommandsGetCommandStatusRequest() # TransportCommandsGetCommandStatusRequest |  (optional)
+    iiko_transport_public_api_contracts_commands_get_command_status_request = iikocloud_client.IikoTransportPublicApiContractsCommandsGetCommandStatusRequest() # IikoTransportPublicApiContractsCommandsGetCommandStatusRequest |  (optional)
 
     try:
         # Get status of command.
-        api_response = await api_instance.commands_status_post(timeout=timeout, transport_commands_get_command_status_request=transport_commands_get_command_status_request)
+        api_response = await api_instance.commands_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_commands_get_command_status_request=iiko_transport_public_api_contracts_commands_get_command_status_request)
         print("The response of OperationsApi->commands_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,16 +58,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_commands_get_command_status_request** | [**TransportCommandsGetCommandStatusRequest**](TransportCommandsGetCommandStatusRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_commands_get_command_status_request** | [**IikoTransportPublicApiContractsCommandsGetCommandStatusRequest**](IikoTransportPublicApiContractsCommandsGetCommandStatusRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportCommandsGetCommandStatusResponse**](TransportCommandsGetCommandStatusResponse.md)
+[**IikoTransportPublicApiContractsCommandsGetCommandStatusResponse**](IikoTransportPublicApiContractsCommandsGetCommandStatusResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 

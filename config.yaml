@@ -11,7 +11,7 @@ additionalProperties:
   pythonAttrNoneIfUnset: true
 
   # Исключения по типам
-  useExceptionForAPIErrors: true # Генерировать исключения при ошибках API
+  useExceptionForAPIErrors: false # Генерировать исключения при ошибках API
 
   # Аутентификация
   useOneOfDiscriminatorLookup: true # Улучшает обработку аутентификации

@@ -10,13 +10,16 @@ Method | HTTP request | Description
 [**reserve_available_restaurant_sections_post**](BanquetsReservesApi.md#reserve_available_restaurant_sections_post) | **POST** /reserve/available_restaurant_sections | Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
 [**reserve_available_terminal_groups_post**](BanquetsReservesApi.md#reserve_available_terminal_groups_post) | **POST** /reserve/available_terminal_groups | Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
 [**reserve_cancel_post**](BanquetsReservesApi.md#reserve_cancel_post) | **POST** /reserve/cancel | Cancel reservation due to some reason.
+[**reserve_change_estimated_start_time_post**](BanquetsReservesApi.md#reserve_change_estimated_start_time_post) | **POST** /reserve/change_estimated_start_time | Change reserve/banquet estimated start time.
+[**reserve_change_items_post**](BanquetsReservesApi.md#reserve_change_items_post) | **POST** /reserve/change_items | Change order items.
+[**reserve_change_tables_post**](BanquetsReservesApi.md#reserve_change_tables_post) | **POST** /reserve/change_tables | Change reserve/banquet tables.
 [**reserve_create_post**](BanquetsReservesApi.md#reserve_create_post) | **POST** /reserve/create | Create banquet/reserve.
 [**reserve_restaurant_sections_workload_post**](BanquetsReservesApi.md#reserve_restaurant_sections_workload_post) | **POST** /reserve/restaurant_sections_workload | Returns all banquets/reserves for passed restaurant sections.
 [**reserve_status_by_id_post**](BanquetsReservesApi.md#reserve_status_by_id_post) | **POST** /reserve/status_by_id | Retrieve banquets/reserves statuses by IDs.
 
 
 # **reserve_add_items_post**
-> TransportCommonCorrelationIdResponse reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request)
 
 Add order items.
 
@@ -30,12 +33,11 @@ Available only for banquets.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iikocloud_client.models.transport_reserves_add_order_items_to_banquet_request import TransportReservesAddOrderItemsToBanquetRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -45,26 +47,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_add_order_items_to_banquet_request = iikocloud_client.TransportReservesAddOrderItemsToBanquetRequest() # TransportReservesAddOrderItemsToBanquetRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request = iikocloud_client.IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest() # IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest |  (optional)
 
     try:
         # Add order items.
-        api_response = await api_instance.reserve_add_items_post(timeout=timeout, transport_reserves_add_order_items_to_banquet_request=transport_reserves_add_order_items_to_banquet_request)
+        api_response = await api_instance.reserve_add_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request)
         print("The response of BanquetsReservesApi->reserve_add_items_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -78,16 +72,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_add_order_items_to_banquet_request** | [**TransportReservesAddOrderItemsToBanquetRequest**](TransportReservesAddOrderItemsToBanquetRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_add_order_items_to_banquet_request** | [**IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest**](IikoTransportPublicApiContractsReservesAddOrderItemsToBanquetRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportCommonCorrelationIdResponse**](TransportCommonCorrelationIdResponse.md)
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -107,7 +102,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_add_payments_post**
-> TransportCommonCorrelationIdResponse reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request)
 
 Add order payments.
 
@@ -121,12 +116,11 @@ Available only for banquets.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iikocloud_client.models.transport_reserves_add_order_payments_to_banquet_request import TransportReservesAddOrderPaymentsToBanquetRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request import IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -136,26 +130,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_add_order_payments_to_banquet_request = iikocloud_client.TransportReservesAddOrderPaymentsToBanquetRequest() # TransportReservesAddOrderPaymentsToBanquetRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request = iikocloud_client.IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest() # IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest |  (optional)
 
     try:
         # Add order payments.
-        api_response = await api_instance.reserve_add_payments_post(timeout=timeout, transport_reserves_add_order_payments_to_banquet_request=transport_reserves_add_order_payments_to_banquet_request)
+        api_response = await api_instance.reserve_add_payments_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request=iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request)
         print("The response of BanquetsReservesApi->reserve_add_payments_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -169,16 +155,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_add_order_payments_to_banquet_request** | [**TransportReservesAddOrderPaymentsToBanquetRequest**](TransportReservesAddOrderPaymentsToBanquetRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_add_order_payments_to_banquet_request** | [**IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest**](IikoTransportPublicApiContractsReservesAddOrderPaymentsToBanquetRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportCommonCorrelationIdResponse**](TransportCommonCorrelationIdResponse.md)
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -198,7 +185,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_available_organizations_post**
-> TransportOrganizationsGetOrganizationsResponse reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+> IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse reserve_available_organizations_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
 
 Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
 
@@ -210,12 +197,11 @@ Returns all organizations of current account (determined by Authorization reques
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_organizations_get_organizations_request import TransportOrganizationsGetOrganizationsRequest
-from iikocloud_client.models.transport_organizations_get_organizations_response import TransportOrganizationsGetOrganizationsResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_request import IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_organizations_get_organizations_response import IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -225,26 +211,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_organizations_get_organizations_request = iikocloud_client.TransportOrganizationsGetOrganizationsRequest() # TransportOrganizationsGetOrganizationsRequest |  (optional)
+    iiko_transport_public_api_contracts_organizations_get_organizations_request = iikocloud_client.IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest() # IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest |  (optional)
 
     try:
         # Returns all organizations of current account (determined by Authorization request header) for which banquet/reserve booking are available.
-        api_response = await api_instance.reserve_available_organizations_post(timeout=timeout, transport_organizations_get_organizations_request=transport_organizations_get_organizations_request)
+        api_response = await api_instance.reserve_available_organizations_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_organizations_get_organizations_request=iiko_transport_public_api_contracts_organizations_get_organizations_request)
         print("The response of BanquetsReservesApi->reserve_available_organizations_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -258,16 +236,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_organizations_get_organizations_request** | [**TransportOrganizationsGetOrganizationsRequest**](TransportOrganizationsGetOrganizationsRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_organizations_get_organizations_request** | [**IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest**](IikoTransportPublicApiContractsOrganizationsGetOrganizationsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportOrganizationsGetOrganizationsResponse**](TransportOrganizationsGetOrganizationsResponse.md)
+[**IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse**](IikoTransportPublicApiContractsOrganizationsGetOrganizationsResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -287,7 +266,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_available_restaurant_sections_post**
-> TransportReservesGetRestaurantSectionsResponse reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
+> IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse reserve_available_restaurant_sections_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request)
 
 Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
 
@@ -299,12 +278,11 @@ Returns all restaurant sections of specified terminal groups, for which banquet/
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_reserves_get_restaurant_sections_request import TransportReservesGetRestaurantSectionsRequest
-from iikocloud_client.models.transport_reserves_get_restaurant_sections_response import TransportReservesGetRestaurantSectionsResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -314,26 +292,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_get_restaurant_sections_request = iikocloud_client.TransportReservesGetRestaurantSectionsRequest() # TransportReservesGetRestaurantSectionsRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request = iikocloud_client.IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest() # IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest |  (optional)
 
     try:
         # Returns all restaurant sections of specified terminal groups, for which banquet/reserve booking are available.
-        api_response = await api_instance.reserve_available_restaurant_sections_post(timeout=timeout, transport_reserves_get_restaurant_sections_request=transport_reserves_get_restaurant_sections_request)
+        api_response = await api_instance.reserve_available_restaurant_sections_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request)
         print("The response of BanquetsReservesApi->reserve_available_restaurant_sections_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -347,16 +317,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_get_restaurant_sections_request** | [**TransportReservesGetRestaurantSectionsRequest**](TransportReservesGetRestaurantSectionsRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_get_restaurant_sections_request** | [**IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest**](IikoTransportPublicApiContractsReservesGetRestaurantSectionsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportReservesGetRestaurantSectionsResponse**](TransportReservesGetRestaurantSectionsResponse.md)
+[**IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse**](IikoTransportPublicApiContractsReservesGetRestaurantSectionsResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -376,7 +347,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_available_terminal_groups_post**
-> TransportTerminalsTerminalGroupsResponse reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
+> IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse reserve_available_terminal_groups_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request)
 
 Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
 
@@ -388,12 +359,11 @@ Returns all terminal groups of specified organizations, for which banquet/reserv
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_terminals_get_terminal_groups_by_organizations_request import TransportTerminalsGetTerminalGroupsByOrganizationsRequest
-from iikocloud_client.models.transport_terminals_terminal_groups_response import TransportTerminalsTerminalGroupsResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request import IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_terminals_terminal_groups_response import IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -403,26 +373,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_terminals_get_terminal_groups_by_organizations_request = iikocloud_client.TransportTerminalsGetTerminalGroupsByOrganizationsRequest() # TransportTerminalsGetTerminalGroupsByOrganizationsRequest |  (optional)
+    iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request = iikocloud_client.IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest() # IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest |  (optional)
 
     try:
         # Returns all terminal groups of specified organizations, for which banquet/reserve booking are available.
-        api_response = await api_instance.reserve_available_terminal_groups_post(timeout=timeout, transport_terminals_get_terminal_groups_by_organizations_request=transport_terminals_get_terminal_groups_by_organizations_request)
+        api_response = await api_instance.reserve_available_terminal_groups_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request=iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request)
         print("The response of BanquetsReservesApi->reserve_available_terminal_groups_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -436,16 +398,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_terminals_get_terminal_groups_by_organizations_request** | [**TransportTerminalsGetTerminalGroupsByOrganizationsRequest**](TransportTerminalsGetTerminalGroupsByOrganizationsRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_terminals_get_terminal_groups_by_organizations_request** | [**IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest**](IikoTransportPublicApiContractsTerminalsGetTerminalGroupsByOrganizationsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportTerminalsTerminalGroupsResponse**](TransportTerminalsTerminalGroupsResponse.md)
+[**IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse**](IikoTransportPublicApiContractsTerminalsTerminalGroupsResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -465,7 +428,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_cancel_post**
-> TransportCommonCorrelationIdResponse reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request)
 
 Cancel reservation due to some reason.
 
@@ -479,12 +442,11 @@ Available only for reserves with status 'New'.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_common_correlation_id_response import TransportCommonCorrelationIdResponse
-from iikocloud_client.models.transport_reserves_cancel_reserve_request import TransportReservesCancelReserveRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_cancel_reserve_request import IikoTransportPublicApiContractsReservesCancelReserveRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -494,26 +456,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_cancel_reserve_request = iikocloud_client.TransportReservesCancelReserveRequest() # TransportReservesCancelReserveRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_cancel_reserve_request = iikocloud_client.IikoTransportPublicApiContractsReservesCancelReserveRequest() # IikoTransportPublicApiContractsReservesCancelReserveRequest |  (optional)
 
     try:
         # Cancel reservation due to some reason.
-        api_response = await api_instance.reserve_cancel_post(timeout=timeout, transport_reserves_cancel_reserve_request=transport_reserves_cancel_reserve_request)
+        api_response = await api_instance.reserve_cancel_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_cancel_reserve_request=iiko_transport_public_api_contracts_reserves_cancel_reserve_request)
         print("The response of BanquetsReservesApi->reserve_cancel_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -527,16 +481,260 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_cancel_reserve_request** | [**TransportReservesCancelReserveRequest**](TransportReservesCancelReserveRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_cancel_reserve_request** | [**IikoTransportPublicApiContractsReservesCancelReserveRequest**](IikoTransportPublicApiContractsReservesCancelReserveRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportCommonCorrelationIdResponse**](TransportCommonCorrelationIdResponse.md)
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reserve_change_estimated_start_time_post**
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_change_estimated_start_time_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request)
+
+Change reserve/banquet estimated start time.
+
+
+
+ > Allowed from version `9.0.5`.
+
+ > This method is a command. Use `api/1/commands/status` method to get the progress status.
+
+### Example
+
+
+```python
+import iikocloud_client
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request import IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services/api/1"
+)
+
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request = iikocloud_client.IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest() # IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest |  (optional)
+
+    try:
+        # Change reserve/banquet estimated start time.
+        api_response = await api_instance.reserve_change_estimated_start_time_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request=iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request)
+        print("The response of BanquetsReservesApi->reserve_change_estimated_start_time_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BanquetsReservesApi->reserve_change_estimated_start_time_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **iiko_transport_public_api_contracts_reserves_change_reserve_estimated_start_time_request** | [**IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest**](IikoTransportPublicApiContractsReservesChangeReserveEstimatedStartTimeRequest.md)|  | [optional] 
+
+### Return type
+
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reserve_change_items_post**
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_change_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request)
+
+Change order items.
+
+Available only for banquets.
+
+ > Allowed from version `9.0.5`.
+
+ > This method is a command. Use `api/1/commands/status` method to get the progress status.
+
+### Example
+
+
+```python
+import iikocloud_client
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request import IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services/api/1"
+)
+
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request = iikocloud_client.IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest() # IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest |  (optional)
+
+    try:
+        # Change order items.
+        api_response = await api_instance.reserve_change_items_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request=iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request)
+        print("The response of BanquetsReservesApi->reserve_change_items_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BanquetsReservesApi->reserve_change_items_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **iiko_transport_public_api_contracts_reserves_change_banquet_order_items_request** | [**IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest**](IikoTransportPublicApiContractsReservesChangeBanquetOrderItemsRequest.md)|  | [optional] 
+
+### Return type
+
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**500** | Server Error |  -  |
+**408** | Request Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reserve_change_tables_post**
+> IikoTransportPublicApiContractsCommonCorrelationIdResponse reserve_change_tables_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request)
+
+Change reserve/banquet tables.
+
+
+
+ > Allowed from version `9.0.5`.
+
+ > This method is a command. Use `api/1/commands/status` method to get the progress status.
+
+### Example
+
+
+```python
+import iikocloud_client
+from iikocloud_client.models.iiko_transport_public_api_contracts_common_correlation_id_response import IikoTransportPublicApiContractsCommonCorrelationIdResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_change_reserve_tables_request import IikoTransportPublicApiContractsReservesChangeReserveTablesRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services/api/1"
+)
+
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
+    timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
+    iiko_transport_public_api_contracts_reserves_change_reserve_tables_request = iikocloud_client.IikoTransportPublicApiContractsReservesChangeReserveTablesRequest() # IikoTransportPublicApiContractsReservesChangeReserveTablesRequest |  (optional)
+
+    try:
+        # Change reserve/banquet tables.
+        api_response = await api_instance.reserve_change_tables_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_change_reserve_tables_request=iiko_transport_public_api_contracts_reserves_change_reserve_tables_request)
+        print("The response of BanquetsReservesApi->reserve_change_tables_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BanquetsReservesApi->reserve_change_tables_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
+ **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
+ **iiko_transport_public_api_contracts_reserves_change_reserve_tables_request** | [**IikoTransportPublicApiContractsReservesChangeReserveTablesRequest**](IikoTransportPublicApiContractsReservesChangeReserveTablesRequest.md)|  | [optional] 
+
+### Return type
+
+[**IikoTransportPublicApiContractsCommonCorrelationIdResponse**](IikoTransportPublicApiContractsCommonCorrelationIdResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -556,7 +754,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_create_post**
-> TransportReservesReserveResponse reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
+> IikoTransportPublicApiContractsReservesReserveResponse reserve_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request)
 
 Create banquet/reserve.
 
@@ -570,12 +768,11 @@ Create banquet/reserve.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_reserves_create_reserve_request import TransportReservesCreateReserveRequest
-from iikocloud_client.models.transport_reserves_reserve_response import TransportReservesReserveResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_create_reserve_request import IikoTransportPublicApiContractsReservesCreateReserveRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserve_response import IikoTransportPublicApiContractsReservesReserveResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -585,26 +782,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_create_reserve_request = iikocloud_client.TransportReservesCreateReserveRequest() # TransportReservesCreateReserveRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_create_reserve_request = iikocloud_client.IikoTransportPublicApiContractsReservesCreateReserveRequest() # IikoTransportPublicApiContractsReservesCreateReserveRequest |  (optional)
 
     try:
         # Create banquet/reserve.
-        api_response = await api_instance.reserve_create_post(timeout=timeout, transport_reserves_create_reserve_request=transport_reserves_create_reserve_request)
+        api_response = await api_instance.reserve_create_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_create_reserve_request=iiko_transport_public_api_contracts_reserves_create_reserve_request)
         print("The response of BanquetsReservesApi->reserve_create_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -618,16 +807,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_create_reserve_request** | [**TransportReservesCreateReserveRequest**](TransportReservesCreateReserveRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_create_reserve_request** | [**IikoTransportPublicApiContractsReservesCreateReserveRequest**](IikoTransportPublicApiContractsReservesCreateReserveRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportReservesReserveResponse**](TransportReservesReserveResponse.md)
+[**IikoTransportPublicApiContractsReservesReserveResponse**](IikoTransportPublicApiContractsReservesReserveResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -647,7 +837,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_restaurant_sections_workload_post**
-> TransportReservesGetRestaurantSectionsWorkloadResponse reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
+> IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse reserve_restaurant_sections_workload_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request)
 
 Returns all banquets/reserves for passed restaurant sections.
 
@@ -659,12 +849,11 @@ Returns all banquets/reserves for passed restaurant sections.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload_request import TransportReservesGetRestaurantSectionsWorkloadRequest
-from iikocloud_client.models.transport_reserves_get_restaurant_sections_workload_response import TransportReservesGetRestaurantSectionsWorkloadResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_response import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -674,26 +863,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_get_restaurant_sections_workload_request = iikocloud_client.TransportReservesGetRestaurantSectionsWorkloadRequest() # TransportReservesGetRestaurantSectionsWorkloadRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request = iikocloud_client.IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest() # IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest |  (optional)
 
     try:
         # Returns all banquets/reserves for passed restaurant sections.
-        api_response = await api_instance.reserve_restaurant_sections_workload_post(timeout=timeout, transport_reserves_get_restaurant_sections_workload_request=transport_reserves_get_restaurant_sections_workload_request)
+        api_response = await api_instance.reserve_restaurant_sections_workload_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request=iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request)
         print("The response of BanquetsReservesApi->reserve_restaurant_sections_workload_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -707,16 +888,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_get_restaurant_sections_workload_request** | [**TransportReservesGetRestaurantSectionsWorkloadRequest**](TransportReservesGetRestaurantSectionsWorkloadRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request** | [**IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest**](IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportReservesGetRestaurantSectionsWorkloadResponse**](TransportReservesGetRestaurantSectionsWorkloadResponse.md)
+[**IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse**](IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -736,7 +918,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reserve_status_by_id_post**
-> TransportReservesReservesResponse reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
+> IikoTransportPublicApiContractsReservesReservesResponse reserve_status_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request)
 
 Retrieve banquets/reserves statuses by IDs.
 
@@ -748,12 +930,11 @@ Retrieve banquets/reserves statuses by IDs.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_reserves_reserves_by_id_request import TransportReservesReservesByIdRequest
-from iikocloud_client.models.transport_reserves_reserves_response import TransportReservesReservesResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_by_id_request import IikoTransportPublicApiContractsReservesReservesByIdRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_reserves_response import IikoTransportPublicApiContractsReservesReservesResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -763,26 +944,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.BanquetsReservesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_reserves_reserves_by_id_request = iikocloud_client.TransportReservesReservesByIdRequest() # TransportReservesReservesByIdRequest |  (optional)
+    iiko_transport_public_api_contracts_reserves_reserves_by_id_request = iikocloud_client.IikoTransportPublicApiContractsReservesReservesByIdRequest() # IikoTransportPublicApiContractsReservesReservesByIdRequest |  (optional)
 
     try:
         # Retrieve banquets/reserves statuses by IDs.
-        api_response = await api_instance.reserve_status_by_id_post(timeout=timeout, transport_reserves_reserves_by_id_request=transport_reserves_reserves_by_id_request)
+        api_response = await api_instance.reserve_status_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_reserves_reserves_by_id_request=iiko_transport_public_api_contracts_reserves_reserves_by_id_request)
         print("The response of BanquetsReservesApi->reserve_status_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -796,16 +969,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_reserves_reserves_by_id_request** | [**TransportReservesReservesByIdRequest**](TransportReservesReservesByIdRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_reserves_reserves_by_id_request** | [**IikoTransportPublicApiContractsReservesReservesByIdRequest**](IikoTransportPublicApiContractsReservesReservesByIdRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportReservesReservesResponse**](TransportReservesReservesResponse.md)
+[**IikoTransportPublicApiContractsReservesReservesResponse**](IikoTransportPublicApiContractsReservesReservesResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 

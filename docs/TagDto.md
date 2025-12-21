@@ -1,12 +1,13 @@
 # TagDto
 
+List of tags
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
+**id** | **str** | Tag GUID | [optional] [default to '']
+**name** | **str** | Tag name | [optional] [default to '']
 
 ## Example
 

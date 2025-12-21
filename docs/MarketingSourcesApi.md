@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **marketing_sources_post**
-> TransportMarketingSourcesMarketingSourcesResponse marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
+> IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse marketing_sources_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
 
 Marketing sources.
 
@@ -20,12 +20,11 @@ Marketing sources.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_marketing_sources_marketing_sources_request import TransportMarketingSourcesMarketingSourcesRequest
-from iikocloud_client.models.transport_marketing_sources_marketing_sources_response import TransportMarketingSourcesMarketingSourcesResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_marketing_sources_marketing_sources_response import IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -35,26 +34,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.MarketingSourcesApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_marketing_sources_marketing_sources_request = iikocloud_client.TransportMarketingSourcesMarketingSourcesRequest() # TransportMarketingSourcesMarketingSourcesRequest |  (optional)
+    iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request = iikocloud_client.IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest() # IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest |  (optional)
 
     try:
         # Marketing sources.
-        api_response = await api_instance.marketing_sources_post(timeout=timeout, transport_marketing_sources_marketing_sources_request=transport_marketing_sources_marketing_sources_request)
+        api_response = await api_instance.marketing_sources_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request=iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request)
         print("The response of MarketingSourcesApi->marketing_sources_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,16 +59,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_marketing_sources_marketing_sources_request** | [**TransportMarketingSourcesMarketingSourcesRequest**](TransportMarketingSourcesMarketingSourcesRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_marketing_sources_marketing_sources_request** | [**IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest**](IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportMarketingSourcesMarketingSourcesResponse**](TransportMarketingSourcesMarketingSourcesResponse.md)
+[**IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse**](IikoTransportPublicApiContractsMarketingSourcesMarketingSourcesResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 

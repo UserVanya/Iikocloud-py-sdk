@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**code** | **str** | Allergen&#39;s code | [optional] 
-**name** | **str** | Allergen&#39;s name | [optional] 
+**id** | **str** |  | [optional] [default to '']
+**code** | **str** | Allergen&#39;s code | [optional] [default to '']
+**name** | **str** | Allergen&#39;s name | [optional] [default to '']
+**is_deleted** | [**bool**](Bool.md) |  | [optional] 
 
 ## Example
 

@@ -1,0 +1,32 @@
+# IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+
+Request for check restaurant sections workload.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**restaurant_section_ids** | **List[UUID]** | Collection of restaurant section ID.                Can be obtained by &#x60;/reserve/available_restaurant_sections&#x60; operation. | 
+**date_from** | **str** | Estimated start time (Local for the terminal). Lower limit.                Order details are stored for 90 days. | 
+**date_to** | **str** | Estimated start time (Local for the terminal). Upper limit. | [optional] 
+
+## Example
+
+```python
+from iikocloud_client.models.iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request import IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest from a JSON string
+iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request_instance = IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest.from_json(json)
+# print the JSON string representation of the object
+print(IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest.to_json())
+
+# convert the object into a dict
+iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request_dict = iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request_instance.to_dict()
+# create an instance of IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest from a dict
+iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request_from_dict = IikoTransportPublicApiContractsReservesGetRestaurantSectionsWorkloadRequest.from_dict(iiko_transport_public_api_contracts_reserves_get_restaurant_sections_workload_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

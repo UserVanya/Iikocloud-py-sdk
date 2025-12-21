@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **delivery_restrictions_allowed_post**
-> TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+> IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse delivery_restrictions_allowed_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
 
 Get suitable terminal groups for delivery restrictions.
 
@@ -21,12 +21,11 @@ Get suitable terminal groups for delivery restrictions.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
-from iikocloud_client.models.transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -36,26 +35,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveryRestrictionsApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request = iikocloud_client.TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest() # TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest |  (optional)
+    iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request = iikocloud_client.IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest() # IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest |  (optional)
 
     try:
         # Get suitable terminal groups for delivery restrictions.
-        api_response = await api_instance.delivery_restrictions_allowed_post(timeout=timeout, transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
+        api_response = await api_instance.delivery_restrictions_allowed_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request)
         print("The response of DeliveryRestrictionsApi->delivery_restrictions_allowed_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,16 +60,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request** | [**TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest**](TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_delivery_restrictions_allowed_restrictions_get_allowed_restrictions_request** | [**IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest**](IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse**](TransportDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse.md)
+[**IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse**](IikoTransportPublicApiContractsDeliveryRestrictionsAllowedRestrictionsGetAllowedRestrictionsResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -98,7 +90,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delivery_restrictions_post**
-> TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
+> IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse delivery_restrictions_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request)
 
 Retrieve list of delivery restrictions.
 
@@ -110,12 +102,11 @@ Retrieve list of delivery restrictions.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_delivery_restrictions_get_delivery_restrictions_request import TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest
-from iikocloud_client.models.transport_delivery_restrictions_get_delivery_restrictions_response import TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_response import IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -125,26 +116,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveryRestrictionsApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_delivery_restrictions_get_delivery_restrictions_request = iikocloud_client.TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest() # TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest |  (optional)
+    iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request = iikocloud_client.IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest() # IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest |  (optional)
 
     try:
         # Retrieve list of delivery restrictions.
-        api_response = await api_instance.delivery_restrictions_post(timeout=timeout, transport_delivery_restrictions_get_delivery_restrictions_request=transport_delivery_restrictions_get_delivery_restrictions_request)
+        api_response = await api_instance.delivery_restrictions_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request=iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request)
         print("The response of DeliveryRestrictionsApi->delivery_restrictions_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -158,16 +141,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_delivery_restrictions_get_delivery_restrictions_request** | [**TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest**](TransportDeliveryRestrictionsGetDeliveryRestrictionsRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_delivery_restrictions_get_delivery_restrictions_request** | [**IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest**](IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse**](TransportDeliveryRestrictionsGetDeliveryRestrictionsResponse.md)
+[**IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse**](IikoTransportPublicApiContractsDeliveryRestrictionsGetDeliveryRestrictionsResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 

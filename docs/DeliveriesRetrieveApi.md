@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **deliveries_by_delivery_date_and_phone_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
 
 Retrieve list of orders by telephone number, dates and revision.
 
@@ -23,12 +23,11 @@ Retrieve list of orders by telephone number, dates and revision.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -38,26 +37,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_phone_request=transport_deliveries_request_orders_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -71,16 +62,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_by_delivery_date_and_phone_request** | [**TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest**](TransportDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersWithRevisionResponse**](TransportDeliveriesResponseOrdersWithRevisionResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -100,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_source_key_and_filter_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_source_key_and_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
 
 Search orders by search text and additional filters (date, problem, statuses and other).
 
@@ -110,12 +102,11 @@ Search orders by search text and additional filters (date, problem, statuses and
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_filter_request import TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
-from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -125,26 +116,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest |  (optional)
 
     try:
         # Search orders by search text and additional filters (date, problem, statuses and other).
-        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_filter_request=transport_deliveries_request_orders_by_delivery_date_and_filter_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_source_key_and_filter_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_source_key_and_filter_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -158,16 +141,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_by_delivery_date_and_filter_request** | [**TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest**](TransportDeliveriesRequestOrdersByDeliveryDateAndFilterRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_filter_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndFilterRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersWithRevisionResponse**](TransportDeliveriesResponseOrdersWithRevisionResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -187,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_delivery_date_and_status_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_delivery_date_and_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
 
 Retrieve list of orders by statuses and dates.
 
@@ -197,12 +181,11 @@ Retrieve list of orders by statuses and dates.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_by_delivery_date_and_status_request import TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
-from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -212,26 +195,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest |  (optional)
 
     try:
         # Retrieve list of orders by statuses and dates.
-        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(timeout=timeout, transport_deliveries_request_orders_by_delivery_date_and_status_request=transport_deliveries_request_orders_by_delivery_date_and_status_request)
+        api_response = await api_instance.deliveries_by_delivery_date_and_status_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_delivery_date_and_status_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -245,16 +220,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_by_delivery_date_and_status_request** | [**TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest**](TransportDeliveriesRequestOrdersByDeliveryDateAndStatusRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_by_delivery_date_and_status_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByDeliveryDateAndStatusRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersWithRevisionResponse**](TransportDeliveriesResponseOrdersWithRevisionResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -274,7 +250,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_id_post**
-> TransportDeliveriesResponseOrdersResponse deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse deliveries_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
 
 Retrieve orders by IDs.
 
@@ -284,12 +260,11 @@ Retrieve orders by IDs.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_by_id_request import TransportDeliveriesRequestOrdersByIdRequest
-from iikocloud_client.models.transport_deliveries_response_orders_response import TransportDeliveriesResponseOrdersResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -299,26 +274,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_id_request = iikocloud_client.TransportDeliveriesRequestOrdersByIdRequest() # TransportDeliveriesRequestOrdersByIdRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest |  (optional)
 
     try:
         # Retrieve orders by IDs.
-        api_response = await api_instance.deliveries_by_id_post(timeout=timeout, transport_deliveries_request_orders_by_id_request=transport_deliveries_request_orders_by_id_request)
+        api_response = await api_instance.deliveries_by_id_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_id_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -332,16 +299,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_by_id_request** | [**TransportDeliveriesRequestOrdersByIdRequest**](TransportDeliveriesRequestOrdersByIdRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_by_id_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByIdRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersResponse**](TransportDeliveriesResponseOrdersResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -361,7 +329,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_by_revision_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_by_revision_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
 
 Retrieve list of orders changed from the time revision was passed.
 
@@ -371,12 +339,11 @@ Retrieve list of orders changed from the time revision was passed.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_by_revision_request import TransportDeliveriesRequestOrdersByRevisionRequest
-from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -386,26 +353,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_by_revision_request = iikocloud_client.TransportDeliveriesRequestOrdersByRevisionRequest() # TransportDeliveriesRequestOrdersByRevisionRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest |  (optional)
 
     try:
         # Retrieve list of orders changed from the time revision was passed.
-        api_response = await api_instance.deliveries_by_revision_post(timeout=timeout, transport_deliveries_request_orders_by_revision_request=transport_deliveries_request_orders_by_revision_request)
+        api_response = await api_instance.deliveries_by_revision_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request=iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request)
         print("The response of DeliveriesRetrieveApi->deliveries_by_revision_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -419,16 +378,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_by_revision_request** | [**TransportDeliveriesRequestOrdersByRevisionRequest**](TransportDeliveriesRequestOrdersByRevisionRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_by_revision_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersByRevisionRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersWithRevisionResponse**](TransportDeliveriesResponseOrdersWithRevisionResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -448,7 +408,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deliveries_history_by_delivery_date_and_phone_post**
-> TransportDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+> IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse deliveries_history_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
 
 Retrieve list of history orders by telephone number, dates and revision.
 
@@ -458,12 +418,11 @@ Retrieve list of history orders by telephone number, dates and revision.
 
 ### Example
 
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_deliveries_request_orders_history_by_delivery_date_and_phone_request import TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
-from iikocloud_client.models.transport_deliveries_response_orders_with_revision_response import TransportDeliveriesResponseOrdersWithRevisionResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request import IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_deliveries_response_orders_with_revision_response import IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -473,26 +432,18 @@ configuration = iikocloud_client.Configuration(
     host = "https://api-ru.iiko.services/api/1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = iikocloud_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.DeliveriesRetrieveApi(api_client)
+    authorization = 'Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw' # str | Authorization token.
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
+    iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request = iikocloud_client.IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest() # IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest |  (optional)
 
     try:
         # Retrieve list of history orders by telephone number, dates and revision.
-        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(timeout=timeout, transport_deliveries_request_orders_history_by_delivery_date_and_phone_request=transport_deliveries_request_orders_history_by_delivery_date_and_phone_request)
+        api_response = await api_instance.deliveries_history_by_delivery_date_and_phone_post(authorization, timeout=timeout, iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request=iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request)
         print("The response of DeliveriesRetrieveApi->deliveries_history_by_delivery_date_and_phone_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -506,16 +457,17 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| Authorization token. | 
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_deliveries_request_orders_history_by_delivery_date_and_phone_request** | [**TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest**](TransportDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_deliveries_request_orders_history_by_delivery_date_and_phone_request** | [**IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest**](IikoTransportPublicApiContractsDeliveriesRequestOrdersHistoryByDeliveryDateAndPhoneRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportDeliveriesResponseOrdersWithRevisionResponse**](TransportDeliveriesResponseOrdersWithRevisionResponse.md)
+[**IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse**](IikoTransportPublicApiContractsDeliveriesResponseOrdersWithRevisionResponse.md)
 
 ### Authorization
 
-[Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 

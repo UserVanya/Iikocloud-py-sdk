@@ -1,0 +1,31 @@
+# SelectedCustomerTag
+
+Customer tags
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**customer_tag_group_id** | **str** | Tag GUID | 
+**selected_tag_ids** | **List[object]** | Tag name | [optional] 
+
+## Example
+
+```python
+from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SelectedCustomerTag from a JSON string
+selected_customer_tag_instance = SelectedCustomerTag.from_json(json)
+# print the JSON string representation of the object
+print(SelectedCustomerTag.to_json())
+
+# convert the object into a dict
+selected_customer_tag_dict = selected_customer_tag_instance.to_dict()
+# create an instance of SelectedCustomerTag from a dict
+selected_customer_tag_from_dict = SelectedCustomerTag.from_dict(selected_customer_tag_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

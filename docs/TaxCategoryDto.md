@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**percentage** | **float** |  | [optional] 
+**id** | **str** |  | 
+**name** | **str** |  | 
+**percentage** | **float** |  | [optional] [default to 0]
 
 ## Example
 

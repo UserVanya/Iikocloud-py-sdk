@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **access_token_post**
-> TransportAuthGetAccessTokenResponse access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
+> IikoTransportPublicApiContractsAuthGetAccessTokenResponse access_token_post(timeout=timeout, iiko_transport_public_api_contracts_auth_get_access_token_request=iiko_transport_public_api_contracts_auth_get_access_token_request)
 
 Retrieve session key for API user.
 
@@ -17,8 +17,8 @@ Retrieve session key for API user.
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.transport_auth_get_access_token_request import TransportAuthGetAccessTokenRequest
-from iikocloud_client.models.transport_auth_get_access_token_response import TransportAuthGetAccessTokenResponse
+from iikocloud_client.models.iiko_transport_public_api_contracts_auth_get_access_token_request import IikoTransportPublicApiContractsAuthGetAccessTokenRequest
+from iikocloud_client.models.iiko_transport_public_api_contracts_auth_get_access_token_response import IikoTransportPublicApiContractsAuthGetAccessTokenResponse
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -34,11 +34,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = iikocloud_client.AuthorizationApi(api_client)
     timeout = 15 # int | Timeout in seconds. (optional) (default to 15)
-    transport_auth_get_access_token_request = iikocloud_client.TransportAuthGetAccessTokenRequest() # TransportAuthGetAccessTokenRequest |  (optional)
+    iiko_transport_public_api_contracts_auth_get_access_token_request = iikocloud_client.IikoTransportPublicApiContractsAuthGetAccessTokenRequest() # IikoTransportPublicApiContractsAuthGetAccessTokenRequest |  (optional)
 
     try:
         # Retrieve session key for API user.
-        api_response = await api_instance.access_token_post(timeout=timeout, transport_auth_get_access_token_request=transport_auth_get_access_token_request)
+        api_response = await api_instance.access_token_post(timeout=timeout, iiko_transport_public_api_contracts_auth_get_access_token_request=iiko_transport_public_api_contracts_auth_get_access_token_request)
         print("The response of AuthorizationApi->access_token_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -53,11 +53,11 @@ async with iikocloud_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timeout** | **int**| Timeout in seconds. | [optional] [default to 15]
- **transport_auth_get_access_token_request** | [**TransportAuthGetAccessTokenRequest**](TransportAuthGetAccessTokenRequest.md)|  | [optional] 
+ **iiko_transport_public_api_contracts_auth_get_access_token_request** | [**IikoTransportPublicApiContractsAuthGetAccessTokenRequest**](IikoTransportPublicApiContractsAuthGetAccessTokenRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TransportAuthGetAccessTokenResponse**](TransportAuthGetAccessTokenResponse.md)
+[**IikoTransportPublicApiContractsAuthGetAccessTokenResponse**](IikoTransportPublicApiContractsAuthGetAccessTokenResponse.md)
 
 ### Authorization
 
