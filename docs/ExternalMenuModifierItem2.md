@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **sku** | **str** | Modifier&#39;s code | [optional] [default to '']
 **name** | **str** | Modifier&#39;s name | [optional] [default to '']
 **description** | **str** | Modifier&#39;s description | [optional] [default to '']
-**restrictions** | [**List[ModifierRestrictionsDto6]**](ModifierRestrictionsDto6.md) |  | [optional] 
+**restrictions** | [**ModifierRestrictionsDto6**](ModifierRestrictionsDto6.md) |  | [optional] 
 **is_hidden** | **bool** |  | [optional] [default to False]
 **prices** | [**List[ExternalMenuPriceByDepartmentsDto2]**](ExternalMenuPriceByDepartmentsDto2.md) |  | [optional] 
 **nutritions** | [**List[NutritionInfoDto6]**](NutritionInfoDto6.md) | Nutrition per 100 g of product grouped by departments | [optional] 

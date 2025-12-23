@@ -12963,9 +12963,6 @@
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/ExternalMenuItem3"
-                },
-                {
-                  "$ref": "#/components/schemas/ExternalMenuComboItem"
                 }
               ]
             }
@@ -14215,10 +14212,7 @@
             "default": ""
           },
           "restrictions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifierRestrictionsDto6"
-            },
+            "$ref": "#/components/schemas/ModifierRestrictionsDto6",
             "nullable": true
           },
           "isHidden": {

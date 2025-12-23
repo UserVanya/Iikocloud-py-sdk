@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **item_sizes** | [**List[ExternalMenuItemSize3]**](ExternalMenuItemSize3.md) |  | 
 **modifier_schema_id** | **str** | Modifier schema ID | 
 **modifier_schema_name** | **str** | Modifier schema name | [optional] 
-**type** | **str** |  | 
+**type** | **str** | Item type | [optional] [default to 'DISH']
 **can_set_open_price** | **bool** | Can set open price flag | [optional] [default to False]
 **use_balance_for_sell** | **bool** |  | [optional] [default to False]
 **measure_unit** | **str** | Measure unit | [optional] [default to '']
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **outer_ean_code** | **str** |  | [optional] 
 **is_marked** | **bool** | Marking flag | [optional] [default to False]
 **is_hidden** | **bool** | Visibility flag | [optional] [default to False]
-**barcodes** | [**List[BarcodeDto4]**](BarcodeDto4.md) |  | [optional] 
+**barcodes** | [**List[BarcodeDto3]**](BarcodeDto3.md) |  | [optional] 
 **order_item_type** | **str** | Product or compound. Depends on modifiers scheme existence | 
 **tax_category_id** | **str** | Tax category GUID | [optional] 
 **allergen_group_ids** | **List[object]** | List of GUID groups of allergens | 
@@ -30,9 +30,6 @@ Name | Type | Description | Notes
 **tags** | **List[str]** | List of tags | [optional] 
 **id** | **str** | Product ID | 
 **splittable** | **bool** |  | 
-**sizes** | [**List[ExternalMenuComboItemSize]**](ExternalMenuComboItemSize.md) |  | 
-**groups** | [**List[ComboGroupDto4]**](ComboGroupDto4.md) |  | [optional] 
-**price_strategy** | **str** | Price strategy | [optional] [default to 'BY_COMPONENT']
 
 ## Example
 

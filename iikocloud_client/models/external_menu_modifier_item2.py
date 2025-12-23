@@ -36,7 +36,7 @@ class ExternalMenuModifierItem2(BaseModel):
     sku: Optional[StrictStr] = Field(default='', description="Modifier's code")
     name: Optional[StrictStr] = Field(default='', description="Modifier's name")
     description: Optional[StrictStr] = Field(default='', description="Modifier's description")
-    restrictions: Optional[List[ModifierRestrictionsDto6]] = None
+    restrictions: Optional[ModifierRestrictionsDto6] = None
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     prices: Optional[List[ExternalMenuPriceByDepartmentsDto2]] = None
     nutritions: Optional[List[NutritionInfoDto6]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
@@ -97,13 +97,9 @@ class ExternalMenuModifierItem2(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in restrictions (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of restrictions
         if self.restrictions:
-            for _item_restrictions in self.restrictions:
-                if _item_restrictions:
-                    _items.append(_item_restrictions.to_dict())
-            _dict['restrictions'] = _items
+            _dict['restrictions'] = self.restrictions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in prices (list)
         _items = []
         if self.prices:
@@ -132,11 +128,6 @@ class ExternalMenuModifierItem2(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
-        # set to None if restrictions (nullable) is None
-        # and model_fields_set contains the field
-        if self.restrictions is None and "restrictions" in self.model_fields_set:
-            _dict['restrictions'] = None
-
         # set to None if tax_category_id (nullable) is None
         # and model_fields_set contains the field
         if self.tax_category_id is None and "tax_category_id" in self.model_fields_set:
@@ -187,7 +178,7 @@ class ExternalMenuModifierItem2(BaseModel):
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
             "name": obj.get("name") if obj.get("name") is not None else '',
             "description": obj.get("description") if obj.get("description") is not None else '',
-            "restrictions": [ModifierRestrictionsDto6.from_dict(_item) for _item in obj["restrictions"]] if obj.get("restrictions") is not None else None,
+            "restrictions": ModifierRestrictionsDto6.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,
             "prices": [ExternalMenuPriceByDepartmentsDto2.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "nutritions": [NutritionInfoDto6.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
