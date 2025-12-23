@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class CustomerGetCustomerInfoByEmailRequest(CustomerGetCustomerInfoRequest):
     """
-    CustomerGetCustomerInfoByEmailRequest
+    Request to get customer by email.
     """ # noqa: E501
     email: Optional[StrictStr] = Field(default=None, description="Customer email.")
-    __properties: ClassVar[List[str]] = ["type", "organizationId", "email"]
+    __properties: ClassVar[List[str]] = ["type", "organizationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,7 @@ class CustomerGetCustomerInfoByEmailRequest(CustomerGetCustomerInfoRequest):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "organizationId": obj.get("organizationId"),
-            "email": obj.get("email")
+            "organizationId": obj.get("organizationId")
         })
         return _obj
 

@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class DeliveriesResponseOrderServiceOrderItem(DeliveriesResponseOrderOrderItem):
     """
-    DeliveriesResponseOrderServiceOrderItem
+    Order item: service.
     """ # noqa: E501
     service: DeliveriesResponseOrderProduct = Field(description="Item.")
     cost: Union[StrictFloat, StrictInt] = Field(description="Total cost per item without tax, discounts/surcharges.")
-    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation", "service", "cost"]
+    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,9 +84,6 @@ class DeliveriesResponseOrderServiceOrderItem(DeliveriesResponseOrderOrderItem):
         # override the default output from pydantic by calling `to_dict()` of combo_information
         if self.combo_information:
             _dict['comboInformation'] = self.combo_information.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of service
-        if self.service:
-            _dict['service'] = self.service.to_dict()
         # set to None if deleted (nullable) is None
         # and model_fields_set contains the field
         if self.deleted is None and "deleted" in self.model_fields_set:
@@ -131,9 +128,7 @@ class DeliveriesResponseOrderServiceOrderItem(DeliveriesResponseOrderOrderItem):
             "comment": obj.get("comment"),
             "whenPrinted": obj.get("whenPrinted"),
             "size": DeliveriesResponseOrderProductSize.from_dict(obj["size"]) if obj.get("size") is not None else None,
-            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None,
-            "service": DeliveriesResponseOrderProduct.from_dict(obj["service"]) if obj.get("service") is not None else None,
-            "cost": obj.get("cost")
+            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None
         })
         return _obj
 

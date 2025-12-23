@@ -37,7 +37,7 @@ class DeliveriesResponseOrderRegularCustomer(DeliveriesResponseOrderCustomer):
     in_blacklist: Optional[StrictBool] = Field(default=None, description="Is client in blacklist.", alias="inBlacklist")
     blacklist_reason: Optional[StrictStr] = Field(default=None, description="Reason why client was added to blacklist.", alias="blacklistReason")
     birthdate: Optional[StrictStr] = Field(default=None, description="Date of birth.   > Allowed from version `7.6.1`.")
-    __properties: ClassVar[List[str]] = ["type", "id", "name", "surname", "comment", "gender", "inBlacklist", "blacklistReason", "birthdate"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,26 +78,6 @@ class DeliveriesResponseOrderRegularCustomer(DeliveriesResponseOrderCustomer):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if surname (nullable) is None
-        # and model_fields_set contains the field
-        if self.surname is None and "surname" in self.model_fields_set:
-            _dict['surname'] = None
-
-        # set to None if comment (nullable) is None
-        # and model_fields_set contains the field
-        if self.comment is None and "comment" in self.model_fields_set:
-            _dict['comment'] = None
-
-        # set to None if blacklist_reason (nullable) is None
-        # and model_fields_set contains the field
-        if self.blacklist_reason is None and "blacklist_reason" in self.model_fields_set:
-            _dict['blacklistReason'] = None
-
-        # set to None if birthdate (nullable) is None
-        # and model_fields_set contains the field
-        if self.birthdate is None and "birthdate" in self.model_fields_set:
-            _dict['birthdate'] = None
-
         return _dict
 
     @classmethod
@@ -110,15 +90,7 @@ class DeliveriesResponseOrderRegularCustomer(DeliveriesResponseOrderCustomer):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "surname": obj.get("surname"),
-            "comment": obj.get("comment"),
-            "gender": obj.get("gender"),
-            "inBlacklist": obj.get("inBlacklist"),
-            "blacklistReason": obj.get("blacklistReason"),
-            "birthdate": obj.get("birthdate")
+            "type": obj.get("type")
         })
         return _obj
 

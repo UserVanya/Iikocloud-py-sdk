@@ -6,7 +6,7 @@ OrderItem's IdentifierCode.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id of order&#39;s position. | 
+**id** | **str** | Id of order&#39;s position. | 
 **code** | [**DeliveriesResponseOrderIdentifierCode**](DeliveriesResponseOrderIdentifierCode.md) | Product code. | 
 **flags** | **List[str]** | Application flags. | 
 

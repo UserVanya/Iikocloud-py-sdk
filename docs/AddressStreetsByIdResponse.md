@@ -7,7 +7,7 @@ Streets by ids response.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **streets** | [**List[AddressStreetById]**](AddressStreetById.md) | Found streets. | [optional] 
-**correlation_id** | **UUID** | Operation ID. | [optional] 
+**correlation_id** | **str** | Operation ID. | [optional] 
 
 ## Example
 

@@ -6,7 +6,7 @@ Organization request DTO.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | IDs of organizations that require data return.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | IDs of organizations that require data return.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

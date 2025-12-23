@@ -7,7 +7,7 @@ Calculate combo price request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **items** | [**List[DeliveriesRequestCreateOrderOrderItem]**](DeliveriesRequestCreateOrderOrderItem.md) | Items with modifiers included in combo. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

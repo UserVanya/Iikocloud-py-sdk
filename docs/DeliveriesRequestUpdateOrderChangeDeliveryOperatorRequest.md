@@ -6,9 +6,9 @@ Request for assign/change the order operator.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
-**operator_id** | **UUID** | Operator to assign the order to. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
+**operator_id** | **str** | Operator to assign the order to. | 
 
 ## Example
 

@@ -6,8 +6,8 @@ Cancel hold money request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **UUID** | Transaction id. | 
-**organization_id** | **UUID** | Organization id. | 
+**transaction_id** | **str** | Transaction id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

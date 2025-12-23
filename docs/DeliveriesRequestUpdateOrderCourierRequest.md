@@ -6,9 +6,9 @@ Request for order courier update.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
-**employee_id** | **UUID** | Courier ID.                Can be obtained by &#x60;/api/1/employees/couriers&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
+**employee_id** | **str** | Courier ID.                Can be obtained by &#x60;/api/1/employees/couriers&#x60; operation. | 
 
 ## Example
 

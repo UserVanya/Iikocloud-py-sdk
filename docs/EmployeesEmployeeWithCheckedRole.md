@@ -7,7 +7,7 @@ Employee DTO.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **check_roles_result** | [**List[EmployeesRoleCheckResult]**](EmployeesRoleCheckResult.md) | Result of check employee&#39;s roles. | [optional] 
-**id** | **UUID** | Employee ID. | 
+**id** | **str** | Employee ID. | 
 **first_name** | **str** | Name of user. | [optional] 
 **middle_name** | **str** | Second name. | [optional] 
 **last_name** | **str** | Last name. | [optional] 

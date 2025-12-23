@@ -6,7 +6,7 @@ Wrapping object (external) for return of delivery orders.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **max_revision** | **int** | Maximum revision value per all orders. | 
 **orders_by_organizations** | [**List[DeliveriesResponseOrdersByOrganization]**](DeliveriesResponseOrdersByOrganization.md) | Orders. | 
 

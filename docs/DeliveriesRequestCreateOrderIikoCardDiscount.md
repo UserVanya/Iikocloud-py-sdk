@@ -1,11 +1,12 @@
 # DeliveriesRequestCreateOrderIikoCardDiscount
 
+Card discount/surcharge.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**program_id** | **UUID** | Card program ID. | 
+**program_id** | **str** | Card program ID. | 
 **program_name** | **str** | Card program name. | 
 **discount_items** | [**List[DeliveriesRequestCreateOrderIikoCardDiscountItem]**](DeliveriesRequestCreateOrderIikoCardDiscountItem.md) | Discount information for order items. | 
 

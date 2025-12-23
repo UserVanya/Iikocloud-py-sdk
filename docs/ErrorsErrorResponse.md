@@ -6,7 +6,7 @@ Error response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **error_description** | **str** | Error text. | 
 **error** | **str** | Error code. | [optional] 
 

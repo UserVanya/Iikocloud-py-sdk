@@ -6,7 +6,7 @@ Response for check items in out-of-stock list.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **rejected_items** | [**List[StopListsStopListItem]**](StopListsStopListItem.md) | Set of items in out-of-stock list.                If null, none of requested items are in out-of-stock list.  &gt; Present in response only if **not null**. | [optional] 
 
 ## Example

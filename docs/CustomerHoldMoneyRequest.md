@@ -6,12 +6,12 @@ Hold money request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **UUID** | Predefined transaction id. Random if empty. | [optional] 
-**customer_id** | **UUID** | Customer id. | 
-**wallet_id** | **UUID** | Wallet id. | 
+**transaction_id** | **str** | Predefined transaction id. Random if empty. | [optional] 
+**customer_id** | **str** | Customer id. | 
+**wallet_id** | **str** | Wallet id. | 
 **sum** | **float** | Sum. | 
 **comment** | **str** | Additional information about holding. Can be null. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

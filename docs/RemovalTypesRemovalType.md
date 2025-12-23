@@ -6,7 +6,7 @@ Removal type (aka reason for deletion).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Identifier. | 
+**id** | **str** | Identifier. | 
 **name** | **str** | Name of removal type. | 
 **comment** | **str** | Comment. | [optional] 
 **can_writeoff_to_cafe** | **bool** | Can write off to cafe. | [optional] 

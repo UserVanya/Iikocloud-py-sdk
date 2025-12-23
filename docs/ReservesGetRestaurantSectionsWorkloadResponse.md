@@ -6,7 +6,7 @@ Response for check restaurant sections workload.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **reserves** | [**List[ReservesReserveInWorkload]**](ReservesReserveInWorkload.md) | Banquets/reserves. | 
 
 ## Example

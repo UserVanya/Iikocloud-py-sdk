@@ -6,7 +6,7 @@ City DTO.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | City ID in RMS. | 
+**id** | **str** | City ID in RMS. | 
 **name** | **str** | Name. | 
 **external_revision** | **int** | External revision. | [optional] 
 **is_deleted** | **bool** | Is-Deleted attribute. | 

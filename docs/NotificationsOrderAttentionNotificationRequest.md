@@ -1,12 +1,13 @@
 # NotificationsOrderAttentionNotificationRequest
 
+Request to notify external systems (iikoFront and iikoWeb) about an order requiring attention.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **order_source** | **str** | Order source. | 
-**order_id** | **UUID** | Order ID. | 
+**order_id** | **str** | Order ID. | 
 **additional_info** | **str** | Additional info about the problem. | 
 
 ## Example

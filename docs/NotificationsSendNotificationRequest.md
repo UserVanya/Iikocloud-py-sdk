@@ -7,7 +7,7 @@ Request to notify external systems (iikoFront and iikoWeb).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message_type** | **str** |  | 
-**organization_id** | **UUID** | Organization UOC Id. | 
+**organization_id** | **str** | Organization UOC Id. | 
 
 ## Example
 

@@ -1,5 +1,6 @@
 # CustomerGetCustomerInfoByPhoneRequest
 
+Request to get customer by phone number.
 
 ## Properties
 

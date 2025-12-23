@@ -6,7 +6,7 @@ Wrapping object (external) for a delivery order drafts return.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **drafts** | [**List[DeliveriesDraftsOrderDraft]**](DeliveriesDraftsOrderDraft.md) | Order drafts list. | 
 
 ## Example

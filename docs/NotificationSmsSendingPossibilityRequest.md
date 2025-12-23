@@ -6,7 +6,7 @@ Sms sending possibility request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

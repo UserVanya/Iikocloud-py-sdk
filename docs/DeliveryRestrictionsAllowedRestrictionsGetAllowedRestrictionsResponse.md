@@ -6,7 +6,7 @@ Response for a request to identify suitable terminal groups.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **is_allowed** | **bool** | A sign of successful verification. | 
 **reject_cause** | **str** | Reject cause. | 
 **address_external_id** | **str** | Delivery address ID in external mapping system. | 

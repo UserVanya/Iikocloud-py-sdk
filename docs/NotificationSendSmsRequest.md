@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **phone** | **str** | Customer&#39;s phone number. Can be null. | 
 **text** | **str** | Message text. Can be null. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

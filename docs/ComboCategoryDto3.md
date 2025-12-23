@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Category id(can be null) | 
+**id** | **str** | Category id(can be null) | 
 **name** | **str** | Category name | [optional] 
 **combos** | [**List[ComboDto3]**](ComboDto3.md) | Combos in category | [optional] 
 

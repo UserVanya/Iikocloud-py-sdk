@@ -6,7 +6,7 @@ Delivery cancellation reason.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Description. | 
 
 ## Example

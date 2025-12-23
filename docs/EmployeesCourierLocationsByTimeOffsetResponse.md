@@ -6,7 +6,7 @@ DTO containing driver coordinates details for the last N seconds.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **courier_locations** | [**List[WrapperEmployeesCourierLocations]**](WrapperEmployeesCourierLocations.md) | List of drivers&#39; coordinates broken down by organizations. | 
 
 ## Example

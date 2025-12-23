@@ -6,7 +6,7 @@ Guest counter.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**guest_id** | **UUID** | Guest id. | [optional] 
+**guest_id** | **str** | Guest id. | [optional] 
 **period** | [**IikoNetCommonEnumsCounterPeriod**](IikoNetCommonEnumsCounterPeriod.md) | Period. | [optional] 
 **metric** | [**IikoNetCommonEnumsCounterMetric**](IikoNetCommonEnumsCounterMetric.md) | Metric. | [optional] 
 **value** | **float** | Value. | [optional] 

@@ -6,11 +6,11 @@ Change user balance request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | [optional] 
-**wallet_id** | **UUID** | Wallet id. | [optional] 
+**customer_id** | **str** | Customer id. | [optional] 
+**wallet_id** | **str** | Wallet id. | [optional] 
 **sum** | **float** | Sum of balance change. Must be possible. | [optional] 
 **comment** | **str** | Comment. Can be null. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

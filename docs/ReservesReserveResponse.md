@@ -6,7 +6,7 @@ Wrapping object (external) for return of banquets/reserves.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** |  | 
+**correlation_id** | **str** |  | 
 **reserve_info** | [**ReservesReserveInfo**](ReservesReserveInfo.md) | Banquet/reserve. | 
 
 ## Example

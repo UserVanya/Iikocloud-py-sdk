@@ -6,12 +6,12 @@ Order draft object.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Order ID. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**locked_by_user** | **UUID** | ID of the employee, who is editing this draft. | [optional] 
+**id** | **str** | Order ID. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**locked_by_user** | **str** | ID of the employee, who is editing this draft. | [optional] 
 **locked_at** | **str** | Timestamp of when the draft was taken for editing (lock). | [optional] 
 **order** | [**DeliveriesDraftsDeliveryOrderDraft**](DeliveriesDraftsDeliveryOrderDraft.md) | Order. | 
-**terminal_group_id** | **UUID** | Terminal group ID. | [optional] 
+**terminal_group_id** | **str** | Terminal group ID. | [optional] 
 **created_at** | **str** | Draft creation time (UTC). | 
 
 ## Example

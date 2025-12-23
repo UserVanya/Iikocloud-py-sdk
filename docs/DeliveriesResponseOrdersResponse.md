@@ -6,7 +6,7 @@ Wrapping object (external) for return of delivery orders.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** |  | 
+**correlation_id** | **str** |  | 
 **orders** | [**List[DeliveriesResponseOrderOrderInfo]**](DeliveriesResponseOrderOrderInfo.md) | Orders. | 
 
 ## Example

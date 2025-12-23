@@ -1,5 +1,6 @@
 # DeliveriesCommonExternalPaymentAdditionalData
 
+Additional data for external payment item.
 
 ## Properties
 

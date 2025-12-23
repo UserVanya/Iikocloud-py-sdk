@@ -32,13 +32,13 @@ from typing_extensions import Self
 
 class DeliveriesResponseOrderCompoundOrderItem(DeliveriesResponseOrderOrderItem):
     """
-    DeliveriesResponseOrderCompoundOrderItem
+    Order item: composite item.
     """ # noqa: E501
     primary_component: DeliveriesResponseOrderCompoundOrderItemComponent = Field(description="Main component.", alias="primaryComponent")
     secondary_component: Optional[DeliveriesResponseOrderCompoundOrderItemComponent] = Field(default=None, description="Additional component.", alias="secondaryComponent")
     common_modifiers: Optional[List[DeliveriesResponseOrderOrderItemModifier]] = Field(default=None, description="Indivisible modifiers.", alias="commonModifiers")
     template: Optional[DeliveriesResponseOrderCompoundItemTemplate] = Field(default=None, description="Modifier scheme.")
-    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation", "primaryComponent", "secondaryComponent", "commonModifiers", "template"]
+    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,22 +88,6 @@ class DeliveriesResponseOrderCompoundOrderItem(DeliveriesResponseOrderOrderItem)
         # override the default output from pydantic by calling `to_dict()` of combo_information
         if self.combo_information:
             _dict['comboInformation'] = self.combo_information.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of primary_component
-        if self.primary_component:
-            _dict['primaryComponent'] = self.primary_component.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of secondary_component
-        if self.secondary_component:
-            _dict['secondaryComponent'] = self.secondary_component.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in common_modifiers (list)
-        _items = []
-        if self.common_modifiers:
-            for _item_common_modifiers in self.common_modifiers:
-                if _item_common_modifiers:
-                    _items.append(_item_common_modifiers.to_dict())
-            _dict['commonModifiers'] = _items
-        # override the default output from pydantic by calling `to_dict()` of template
-        if self.template:
-            _dict['template'] = self.template.to_dict()
         # set to None if deleted (nullable) is None
         # and model_fields_set contains the field
         if self.deleted is None and "deleted" in self.model_fields_set:
@@ -129,21 +113,6 @@ class DeliveriesResponseOrderCompoundOrderItem(DeliveriesResponseOrderOrderItem)
         if self.combo_information is None and "combo_information" in self.model_fields_set:
             _dict['comboInformation'] = None
 
-        # set to None if secondary_component (nullable) is None
-        # and model_fields_set contains the field
-        if self.secondary_component is None and "secondary_component" in self.model_fields_set:
-            _dict['secondaryComponent'] = None
-
-        # set to None if common_modifiers (nullable) is None
-        # and model_fields_set contains the field
-        if self.common_modifiers is None and "common_modifiers" in self.model_fields_set:
-            _dict['commonModifiers'] = None
-
-        # set to None if template (nullable) is None
-        # and model_fields_set contains the field
-        if self.template is None and "template" in self.model_fields_set:
-            _dict['template'] = None
-
         return _dict
 
     @classmethod
@@ -163,11 +132,7 @@ class DeliveriesResponseOrderCompoundOrderItem(DeliveriesResponseOrderOrderItem)
             "comment": obj.get("comment"),
             "whenPrinted": obj.get("whenPrinted"),
             "size": DeliveriesResponseOrderProductSize.from_dict(obj["size"]) if obj.get("size") is not None else None,
-            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None,
-            "primaryComponent": DeliveriesResponseOrderCompoundOrderItemComponent.from_dict(obj["primaryComponent"]) if obj.get("primaryComponent") is not None else None,
-            "secondaryComponent": DeliveriesResponseOrderCompoundOrderItemComponent.from_dict(obj["secondaryComponent"]) if obj.get("secondaryComponent") is not None else None,
-            "commonModifiers": [DeliveriesResponseOrderOrderItemModifier.from_dict(_item) for _item in obj["commonModifiers"]] if obj.get("commonModifiers") is not None else None,
-            "template": DeliveriesResponseOrderCompoundItemTemplate.from_dict(obj["template"]) if obj.get("template") is not None else None
+            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None
         })
         return _obj
 

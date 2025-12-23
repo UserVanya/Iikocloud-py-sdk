@@ -6,7 +6,7 @@ Request for list of terminal groups.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organizations IDs for which information is requested.                 Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organizations IDs for which information is requested.                 Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

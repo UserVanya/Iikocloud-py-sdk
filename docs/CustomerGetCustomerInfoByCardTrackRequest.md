@@ -1,5 +1,6 @@
 # CustomerGetCustomerInfoByCardTrackRequest
 
+Request to get customer by card track.
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # CustomerGetCustomerInfoByCardNumberRequest
 
+Request to get customer by card number.
 
 ## Properties
 

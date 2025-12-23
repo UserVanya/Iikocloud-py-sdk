@@ -6,9 +6,9 @@ Request for add order payments.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**order_id** | **UUID** | Order ID. | 
+**order_id** | **str** | Order ID. | 
 **tips** | [**List[DeliveriesRequestCreateOrderTipsPayment]**](DeliveriesRequestCreateOrderTipsPayment.md) | Order tips. | [optional] 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **payments** | [**List[DeliveriesRequestCreateOrderPayment]**](DeliveriesRequestCreateOrderPayment.md) | Order payments. | 
 
 ## Example

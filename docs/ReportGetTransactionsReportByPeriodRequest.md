@@ -6,12 +6,12 @@ Report request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | 
+**customer_id** | **str** | Customer id. | 
 **date_from** | **str** | Report since date in UTC. Included. | 
 **date_to** | **str** | Report till date in UTC. Included. | 
 **page_number** | **int** | Page number. Zero based. Previous pages will be skipped. | 
 **page_size** | **int** | Page size. Ignored if more than max page size on server. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

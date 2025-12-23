@@ -6,7 +6,7 @@ Price per item size.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**size_id** | **UUID** | Item size ID. | 
+**size_id** | **str** | Item size ID. | 
 **price** | [**NomenclaturePrice**](NomenclaturePrice.md) | Price per this item size. | 
 
 ## Example

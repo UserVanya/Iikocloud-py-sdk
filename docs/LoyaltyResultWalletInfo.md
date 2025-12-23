@@ -6,7 +6,7 @@ Wallet info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Wallet id. | [optional] 
+**id** | **str** | Wallet id. | [optional] 
 **max_sum** | **float** | Max sum for payment from the wallet. | [optional] 
 **can_hold_money** | **bool** | Can hold money. | [optional] 
 

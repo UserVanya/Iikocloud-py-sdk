@@ -6,7 +6,7 @@ Product category discount details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**category_id** | **UUID** | Category ID. | 
+**category_id** | **str** | Category ID. | 
 **category_name** | **str** | Category name. | 
 **percent** | **float** | This category discount %. | 
 

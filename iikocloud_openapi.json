@@ -14882,9 +14882,12 @@
             "description": "Customer tag groups"
           },
           "overrideTaxCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OverrideTaxesDto"
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OverrideTaxesDto"
+              }
             },
             "description": "Tax benefits"
           },
@@ -14976,9 +14979,12 @@
             "description": "Customer tag groups"
           },
           "overrideTaxCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OverrideTaxesDto2"
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OverrideTaxesDto2"
+              }
             },
             "description": "Tax benefits"
           },

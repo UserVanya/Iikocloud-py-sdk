@@ -1,5 +1,6 @@
 # DeliveriesResponseOrderProductOrderItem
 
+Order item: item.
 
 ## Properties
 
@@ -11,7 +12,7 @@ Name | Type | Description | Notes
 **price** | **float** | Price per item unit. Can be sent different from the price in the base menu. | 
 **cost** | **float** | Total cost per item without tax, discounts/surcharges. | 
 **price_predefined** | **bool** | Whether price is predefined. | 
-**position_id** | **UUID** | Unique identifier of the item in the order and for the whole system. | [optional] 
+**position_id** | **str** | Unique identifier of the item in the order and for the whole system. | [optional] 
 **tax_percent** | **float** | Tax rate. | [optional] 
 **result_sum** | **float** | Total amount per item including tax, discounts/surcharges. | [optional] 
 

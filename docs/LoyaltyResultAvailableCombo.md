@@ -6,7 +6,7 @@ Available combo.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**specification_id** | **UUID** | Id of combo specification, describing combo content. | [optional] 
+**specification_id** | **str** | Id of combo specification, describing combo content. | [optional] 
 **group_mapping** | [**List[LoyaltyResultComboGroupMapping]**](LoyaltyResultComboGroupMapping.md) | Groups contained in combo. If null - there is no suitable product in order yet for that group. | [optional] 
 
 ## Example

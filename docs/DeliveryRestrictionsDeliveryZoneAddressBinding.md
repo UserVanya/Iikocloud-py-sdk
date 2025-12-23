@@ -6,7 +6,7 @@ Delivery zone polygon, defined by the combination of street, index and house num
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**street_id** | **UUID** | ID of the delivery zone&#39;s street. | 
+**street_id** | **str** | ID of the delivery zone&#39;s street. | 
 **postcode** | **str** | Postcode. | 
 **houses** | [**DeliveryRestrictionsHousesRange**](DeliveryRestrictionsHousesRange.md) | Range of house numbers in the delivery zone. | 
 

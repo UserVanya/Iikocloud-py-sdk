@@ -6,7 +6,7 @@ Response to get webhooks settings for specified organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **api_login_name** | **str** | Api login name. | 
 **web_hooks_uri** | **str** | Webhook handler url. | 
 **auth_token** | **str** | Authorization token to pass to the webhook handler. | [optional] 

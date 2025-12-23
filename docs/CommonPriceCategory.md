@@ -6,7 +6,7 @@ Price category of the order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id of price category. | 
+**id** | **str** | Id of price category. | 
 **name** | **str** | Name of price category. | [optional] 
 
 ## Example

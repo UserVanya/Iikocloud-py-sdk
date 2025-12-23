@@ -6,7 +6,7 @@ Delivery district (part of delivery address).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Name. | 
 
 ## Example

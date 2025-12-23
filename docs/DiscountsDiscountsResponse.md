@@ -6,7 +6,7 @@ Response with list of discounts/surcharges.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **discounts** | [**List[WrapperDiscountsDiscountCardTypeInfo]**](WrapperDiscountsDiscountCardTypeInfo.md) | List of discounts/surcharges. | 
 
 ## Example

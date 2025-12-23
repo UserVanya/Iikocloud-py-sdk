@@ -27,12 +27,12 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderIikoCardDiscount(DeliveriesRequestCreateOrderDiscount):
     """
-    DeliveriesRequestCreateOrderIikoCardDiscount
+    Card discount/surcharge.
     """ # noqa: E501
     program_id: UUID = Field(description="Card program ID.", alias="programId")
     program_name: StrictStr = Field(description="Card program name.", alias="programName")
     discount_items: List[DeliveriesRequestCreateOrderIikoCardDiscountItem] = Field(description="Discount information for order items.", alias="discountItems")
-    __properties: ClassVar[List[str]] = ["type", "programId", "programName", "discountItems"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,13 +73,6 @@ class DeliveriesRequestCreateOrderIikoCardDiscount(DeliveriesRequestCreateOrderD
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in discount_items (list)
-        _items = []
-        if self.discount_items:
-            for _item_discount_items in self.discount_items:
-                if _item_discount_items:
-                    _items.append(_item_discount_items.to_dict())
-            _dict['discountItems'] = _items
         return _dict
 
     @classmethod
@@ -92,10 +85,7 @@ class DeliveriesRequestCreateOrderIikoCardDiscount(DeliveriesRequestCreateOrderD
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "programId": obj.get("programId"),
-            "programName": obj.get("programName"),
-            "discountItems": [DeliveriesRequestCreateOrderIikoCardDiscountItem.from_dict(_item) for _item in obj["discountItems"]] if obj.get("discountItems") is not None else None
+            "type": obj.get("type")
         })
         return _obj
 

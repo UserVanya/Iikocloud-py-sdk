@@ -6,8 +6,8 @@ Marketing campaign info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Marketing campaign id. | [optional] 
-**program_id** | **UUID** | Loyalty program id. | [optional] 
+**id** | **str** | Marketing campaign id. | [optional] 
+**program_id** | **str** | Loyalty program id. | [optional] 
 **name** | **str** | Loyalty program name. Can be null. | [optional] 
 **description** | **str** | Marketing campaign description. Can be null. | [optional] 
 **is_active** | **bool** | Marketing campaign is active. | [optional] 

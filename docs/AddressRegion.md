@@ -6,7 +6,7 @@ Delivery district DTO.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Region ID in RMS. | 
+**id** | **str** | Region ID in RMS. | 
 **name** | **str** | Name. | 
 **external_revision** | **int** | External revision. | [optional] 
 **is_deleted** | **bool** | Is-Deleted attribute. | 

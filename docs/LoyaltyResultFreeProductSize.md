@@ -6,7 +6,7 @@ Free item size info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id of size. | [optional] 
+**id** | **str** | Id of size. | [optional] 
 **name** | **str** | Name. Can be null. | [optional] 
 
 ## Example

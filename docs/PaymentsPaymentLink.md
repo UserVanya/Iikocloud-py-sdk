@@ -6,7 +6,7 @@ Payment link information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Unique key. | 
+**id** | **str** | Unique key. | 
 **integration_type** | **str** | Integration type code. | [optional] 
 **status** | [**PaymentsPaymentLinkStatus**](PaymentsPaymentLinkStatus.md) | Payment link transport status. | 
 **url** | **str** | Payload. | [optional] 

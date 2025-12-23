@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class CustomerGetCustomerInfoByCardTrackRequest(CustomerGetCustomerInfoRequest):
     """
-    CustomerGetCustomerInfoByCardTrackRequest
+    Request to get customer by card track.
     """ # noqa: E501
     card_track: Optional[StrictStr] = Field(default=None, description="Customer card track.", alias="cardTrack")
-    __properties: ClassVar[List[str]] = ["type", "organizationId", "cardTrack"]
+    __properties: ClassVar[List[str]] = ["type", "organizationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,7 @@ class CustomerGetCustomerInfoByCardTrackRequest(CustomerGetCustomerInfoRequest):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "organizationId": obj.get("organizationId"),
-            "cardTrack": obj.get("cardTrack")
+            "organizationId": obj.get("organizationId")
         })
         return _obj
 

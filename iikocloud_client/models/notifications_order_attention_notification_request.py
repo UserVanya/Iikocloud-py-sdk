@@ -26,12 +26,12 @@ from typing_extensions import Self
 
 class NotificationsOrderAttentionNotificationRequest(NotificationsSendNotificationRequest):
     """
-    NotificationsOrderAttentionNotificationRequest
+    Request to notify external systems (iikoFront and iikoWeb) about an order requiring attention.
     """ # noqa: E501
     order_source: StrictStr = Field(description="Order source.", alias="orderSource")
     order_id: UUID = Field(description="Order ID.", alias="orderId")
     additional_info: StrictStr = Field(description="Additional info about the problem.", alias="additionalInfo")
-    __properties: ClassVar[List[str]] = ["messageType", "organizationId", "orderSource", "orderId", "additionalInfo"]
+    __properties: ClassVar[List[str]] = ["messageType", "organizationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,10 +85,7 @@ class NotificationsOrderAttentionNotificationRequest(NotificationsSendNotificati
 
         _obj = cls.model_validate({
             "messageType": obj.get("messageType"),
-            "organizationId": obj.get("organizationId"),
-            "orderSource": obj.get("orderSource"),
-            "orderId": obj.get("orderId"),
-            "additionalInfo": obj.get("additionalInfo")
+            "organizationId": obj.get("organizationId")
         })
         return _obj
 

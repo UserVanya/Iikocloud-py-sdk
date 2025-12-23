@@ -6,8 +6,8 @@ Wrapping object (external) for a delivery order draft creation/update return.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
-**order_id** | **UUID** | Order draft order ID. | 
+**correlation_id** | **str** | Operation ID. | 
+**order_id** | **str** | Order draft order ID. | 
 
 ## Example
 

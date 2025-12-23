@@ -6,7 +6,7 @@ Marketing campaign binding info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **stop_further_execution** | **bool** | Loyalty processing stop after successful execution of binding. So means order of bindings affects. | [optional] 
 **actions** | [**List[OrganizationMarketingCampaignSettingsInfo]**](OrganizationMarketingCampaignSettingsInfo.md) | Marketing actions. | [optional] 
 **conditions** | [**List[OrganizationMarketingCampaignSettingsInfo]**](OrganizationMarketingCampaignSettingsInfo.md) | Marketing conditions. | [optional] 

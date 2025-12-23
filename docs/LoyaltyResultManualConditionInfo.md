@@ -6,7 +6,7 @@ Manual condition.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **caption** | **str** | Name of manual condition. | [optional] 
 **is_dynamic_discount** | **bool** | Arbitrary discount attribute. | [optional] 
 **is_applicable_on_cashier_screen** | **bool** | Flag of applicability on the cashier screen.. | [optional] 

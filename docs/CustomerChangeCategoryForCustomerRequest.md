@@ -6,9 +6,9 @@ Change category for customer request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | 
-**category_id** | **UUID** | Guest category id. | 
-**organization_id** | **UUID** | Organization id. | 
+**customer_id** | **str** | Customer id. | 
+**category_id** | **str** | Guest category id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

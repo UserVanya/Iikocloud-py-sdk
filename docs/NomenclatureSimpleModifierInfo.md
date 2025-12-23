@@ -6,7 +6,7 @@ Modifier details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **default_amount** | **int** | Default quantity. | [optional] 
 **min_amount** | **int** | Minimum quantity. | 
 **max_amount** | **int** | Maximum quantity. | 

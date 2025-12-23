@@ -6,9 +6,9 @@ Request for change driver info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
-**driver_id** | **UUID** | Driver ID.                Can be obtained by &#x60;/api/1/employees/couriers&#x60; operation. | [optional] 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
+**driver_id** | **str** | Driver ID.                Can be obtained by &#x60;/api/1/employees/couriers&#x60; operation. | [optional] 
 **estimated_time** | **str** | Delivery estimated time. | [optional] 
 
 ## Example

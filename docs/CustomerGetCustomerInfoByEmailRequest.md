@@ -1,5 +1,6 @@
 # CustomerGetCustomerInfoByEmailRequest
 
+Request to get customer by email.
 
 ## Properties
 

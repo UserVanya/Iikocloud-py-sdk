@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **price_strategy** | **str** |  | 
 **start_date** | **str** | The date when the combo will be available until | 
 **expiration_date** | **str** | The date when the combo will be available until | 
-**id** | **UUID** | Combo id | 
+**id** | **str** | Combo id | 
 
 ## Example
 

@@ -6,7 +6,7 @@ Order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**table_ids** | **List[UUID]** | Table IDs.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | 
+**table_ids** | **List[str]** | Table IDs.                Can be obtained by &#x60;/api/1/reserve/available_restaurant_sections&#x60; operation. | 
 **customer** | [**DeliveriesResponseOrderRegularCustomer**](DeliveriesResponseOrderRegularCustomer.md) | Guest.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **phone** | **str** | Guest phone.   &gt; Allowed from version &#x60;7.5.2&#x60;. | [optional] 
 **status** | [**DeliveriesResponseOrderOrderStatus**](DeliveriesResponseOrderOrderStatus.md) | Order status. | 
@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **tips** | [**List[DeliveriesResponseOrderTipsPaymentItem]**](DeliveriesResponseOrderTipsPaymentItem.md) | Tips. | [optional] 
 **discounts** | [**List[DeliveriesResponseOrderDiscountItem]**](DeliveriesResponseOrderDiscountItem.md) | Discounts. | [optional] 
 **order_type** | [**DeliveriesResponseOrderOrderType**](DeliveriesResponseOrderOrderType.md) | Order type. | 
-**terminal_group_id** | **UUID** | ID of the terminal group where the order is located. | 
+**terminal_group_id** | **str** | ID of the terminal group where the order is located. | 
 **processed_payments_sum** | **float** | The amount of processed payments.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt;   &gt; Allowed from version &#x60;7.6.0&#x60;. | 
 **loyalty_info** | [**DeliveriesResponseOrderLoyaltyInfo**](DeliveriesResponseOrderLoyaltyInfo.md) | Information about Loyalty app.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt; | [optional] 
 **external_data** | [**List[DeliveriesResponseOrderExternalData]**](DeliveriesResponseOrderExternalData.md) | Order external data.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 

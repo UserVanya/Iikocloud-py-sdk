@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class DeliveriesResponseOrderAnonymousCustomer(DeliveriesResponseOrderCustomer):
     """
-    DeliveriesResponseOrderAnonymousCustomer
+    'One-time' customer:  - should be used if a customer does not agree to take part in the store's loyalty programs or an aggregator (external system) does not provide customer details  - customer details will NOT be added to the store's customer database and will be used ONLY to complete the current order
     """ # noqa: E501
     name: StrictStr = Field(description="Customer name.")
-    __properties: ClassVar[List[str]] = ["type", "name"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,8 +81,7 @@ class DeliveriesResponseOrderAnonymousCustomer(DeliveriesResponseOrderCustomer):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "name": obj.get("name")
+            "type": obj.get("type")
         })
         return _obj
 

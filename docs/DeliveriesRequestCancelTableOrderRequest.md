@@ -6,11 +6,11 @@ Request to cancel a table order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
-**removal_type_id** | **UUID** | Removal type (used during deletion of printed order items). | [optional] 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
+**removal_type_id** | **str** | Removal type (used during deletion of printed order items). | [optional] 
 **removal_comment** | **str** | Comment to the charge-off. | [optional] 
-**user_id_for_writeoff** | **UUID** | User for writeoff (used during deletion of printed order items). | [optional] 
+**user_id_for_writeoff** | **str** | User for writeoff (used during deletion of printed order items). | [optional] 
 
 ## Example
 

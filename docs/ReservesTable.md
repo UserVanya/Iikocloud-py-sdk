@@ -6,13 +6,13 @@ Table.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Table ID. | 
+**id** | **str** | Table ID. | 
 **number** | **int** | Number of table. | 
 **name** | **str** | Table name specified in the organization settings. | 
 **seating_capacity** | **int** | Seating capacity of the table. | 
 **revision** | **int** | Last modified time. | 
 **is_deleted** | **bool** | Is table deleted. | 
-**pos_id** | **UUID** | POS table Id. | 
+**pos_id** | **str** | POS table Id. | 
 
 ## Example
 

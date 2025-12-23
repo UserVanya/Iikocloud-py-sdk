@@ -1,5 +1,6 @@
 # DeliveriesRequestCreateOrderAddressLegacy
 
+Order delivery legacy address.
 
 ## Properties
 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 **entrance** | **str** | Entrance. | [optional] 
 **floor** | **str** | Floor. | [optional] 
 **doorphone** | **str** | Intercom. | [optional] 
-**region_id** | **UUID** | Delivery area ID. | [optional] 
+**region_id** | **str** | Delivery area ID. | [optional] 
 
 ## Example
 

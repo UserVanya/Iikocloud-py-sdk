@@ -6,7 +6,7 @@ Create or update customer response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Customer id. | [optional] 
+**id** | **str** | Customer id. | [optional] 
 
 ## Example
 

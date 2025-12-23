@@ -7,7 +7,7 @@ Payments details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **sum** | **float** | Amount due | 
-**payment_type_id** | **UUID** | Payment type ID. | 
+**payment_type_id** | **str** | Payment type ID. | 
 **is_processed_externally** | **bool** | Payment item is processed by external payment system. | 
 
 ## Example

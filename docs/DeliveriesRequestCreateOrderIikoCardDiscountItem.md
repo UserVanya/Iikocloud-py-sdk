@@ -6,7 +6,7 @@ Card discount/surcharge item.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**position_id** | **UUID** | Position ID of order item. | 
+**position_id** | **str** | Position ID of order item. | 
 **sum** | **float** | Discount/surcharge sum. | 
 **amount** | **float** | Amount. | 
 

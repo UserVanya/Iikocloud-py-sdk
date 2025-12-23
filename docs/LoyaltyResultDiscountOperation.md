@@ -7,8 +7,8 @@ Discount operation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | [**LoyaltyResultOperationCode**](LoyaltyResultOperationCode.md) | Operation Type Code.  &lt;br&gt;0 - fixed discount for the entire order,&lt;br /&gt;1 - fixed discount for the item,&lt;br /&gt;2 - free product,&lt;br /&gt;3 - other type of discounts. | [optional] 
-**order_item_id** | **UUID** | Deprecated, use positionId. | [optional] 
-**position_id** | **UUID** | Id of item the discount is applied to. If null - discount applied to whole orders. | [optional] 
+**order_item_id** | **str** | Deprecated, use positionId. | [optional] 
+**position_id** | **str** | Id of item the discount is applied to. If null - discount applied to whole orders. | [optional] 
 **discount_sum** | **float** | Discount sum. | [optional] 
 **amount** | **float** | Amount. | [optional] 
 **comment** | **str** | Comment. Can be null. | [optional] 

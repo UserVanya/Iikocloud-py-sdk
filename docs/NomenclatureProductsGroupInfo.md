@@ -7,11 +7,11 @@ DTO for outside transferring of external menu group details.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image_links** | **List[str]** | Links to images. | 
-**parent_group** | **UUID** | Parent group. | [optional] 
+**parent_group** | **str** | Parent group. | [optional] 
 **order** | **int** | Group&#39;s order (priority) in menu. | 
 **is_included_in_menu** | **bool** | On-the-menu attribute. | 
 **is_group_modifier** | **bool** | Is group modifier attribute.  * true - group modifier.  * false - external menu group. | 
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **code** | **str** | SKU. | [optional] 
 **name** | **str** | Name. | 
 **description** | **str** | Description. | [optional] 

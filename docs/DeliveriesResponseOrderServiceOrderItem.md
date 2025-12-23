@@ -1,5 +1,6 @@
 # DeliveriesResponseOrderServiceOrderItem
 
+Order item: service.
 
 ## Properties
 

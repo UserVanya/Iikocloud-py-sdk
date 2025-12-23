@@ -6,7 +6,7 @@ Service response with list of streets.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **streets** | [**List[AddressStreet]**](AddressStreet.md) | List of streets. | 
 
 ## Example

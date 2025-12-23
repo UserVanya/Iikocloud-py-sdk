@@ -6,7 +6,7 @@ Free item to be added to order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id of product. | [optional] 
+**id** | **str** | Id of product. | [optional] 
 **code** | **str** | Code of product. Can be null. | [optional] 
 **size** | **List[str]** | Sizes available for that product. | [optional] 
 **sizes** | [**List[LoyaltyResultFreeProductSize]**](LoyaltyResultFreeProductSize.md) | Sizes with IDs available for that product. | [optional] 

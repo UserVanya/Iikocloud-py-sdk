@@ -6,10 +6,10 @@ Get counters request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**guest_ids** | **List[UUID]** | Guest ids. | [optional] 
+**guest_ids** | **List[str]** | Guest ids. | [optional] 
 **periods** | [**List[IikoNetCommonEnumsCounterPeriod]**](IikoNetCommonEnumsCounterPeriod.md) | Periods. | [optional] 
 **metrics** | [**List[IikoNetCommonEnumsCounterMetric]**](IikoNetCommonEnumsCounterMetric.md) | Metrics. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

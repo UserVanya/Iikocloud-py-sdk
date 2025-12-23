@@ -6,9 +6,9 @@ Delivery order draft lock or unlock request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | ID of the order. | 
-**employee_id** | **UUID** | ID of the employee. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | ID of the order. | 
+**employee_id** | **str** | ID of the employee. | 
 
 ## Example
 

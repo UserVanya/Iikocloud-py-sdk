@@ -6,7 +6,7 @@ DTO containing terminal group availability details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **is_alive_status** | [**List[TerminalsTerminalGroupAliveInfo]**](TerminalsTerminalGroupAliveInfo.md) | Availability attribute of each requested terminal. | 
 
 ## Example

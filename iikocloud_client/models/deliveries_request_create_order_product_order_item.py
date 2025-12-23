@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderProductOrderItem(DeliveriesRequestCreateOrderOrderItem):
     """
-    DeliveriesRequestCreateOrderProductOrderItem
+    Order item: item.
     """ # noqa: E501
     product_id: UUID = Field(description="ID of menu item.                Can be obtained by `/api/1/nomenclature` operation.", alias="productId")
     modifiers: Optional[List[DeliveriesRequestCreateOrderModifier]] = Field(default=None, description="Modifiers.")
     price: Union[StrictFloat, StrictInt] = Field(description="Price per item unit. Can be sent different from the price in the base menu.")
     position_id: Optional[UUID] = Field(default=None, description="Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  > If sent null, it generates automatically on iikoTransport side.", alias="positionId")
-    __properties: ClassVar[List[str]] = ["type", "amount", "productSizeId", "comboInformation", "comment", "productId", "modifiers", "price", "positionId"]
+    __properties: ClassVar[List[str]] = ["type", "amount", "productSizeId", "comboInformation", "comment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,13 +78,6 @@ class DeliveriesRequestCreateOrderProductOrderItem(DeliveriesRequestCreateOrderO
         # override the default output from pydantic by calling `to_dict()` of combo_information
         if self.combo_information:
             _dict['comboInformation'] = self.combo_information.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in modifiers (list)
-        _items = []
-        if self.modifiers:
-            for _item_modifiers in self.modifiers:
-                if _item_modifiers:
-                    _items.append(_item_modifiers.to_dict())
-            _dict['modifiers'] = _items
         # set to None if product_size_id (nullable) is None
         # and model_fields_set contains the field
         if self.product_size_id is None and "product_size_id" in self.model_fields_set:
@@ -99,16 +92,6 @@ class DeliveriesRequestCreateOrderProductOrderItem(DeliveriesRequestCreateOrderO
         # and model_fields_set contains the field
         if self.comment is None and "comment" in self.model_fields_set:
             _dict['comment'] = None
-
-        # set to None if modifiers (nullable) is None
-        # and model_fields_set contains the field
-        if self.modifiers is None and "modifiers" in self.model_fields_set:
-            _dict['modifiers'] = None
-
-        # set to None if position_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.position_id is None and "position_id" in self.model_fields_set:
-            _dict['positionId'] = None
 
         return _dict
 
@@ -126,11 +109,7 @@ class DeliveriesRequestCreateOrderProductOrderItem(DeliveriesRequestCreateOrderO
             "amount": obj.get("amount"),
             "productSizeId": obj.get("productSizeId"),
             "comboInformation": DeliveriesRequestCreateOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None,
-            "comment": obj.get("comment"),
-            "productId": obj.get("productId"),
-            "modifiers": [DeliveriesRequestCreateOrderModifier.from_dict(_item) for _item in obj["modifiers"]] if obj.get("modifiers") is not None else None,
-            "price": obj.get("price"),
-            "positionId": obj.get("positionId")
+            "comment": obj.get("comment")
         })
         return _obj
 

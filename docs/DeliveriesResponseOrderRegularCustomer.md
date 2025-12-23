@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Customer ID. | 
+**id** | **str** | Customer ID. | 
 **name** | **str** | Name. | 
 **surname** | **str** | Last name. | [optional] 
 **comment** | **str** | Comment. | [optional] 

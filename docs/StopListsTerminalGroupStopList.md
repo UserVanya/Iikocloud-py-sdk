@@ -6,7 +6,7 @@ Out-of-stock list status for a group of front terminals.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terminal_group_id** | **UUID** | Terminal ID. | [optional] 
+**terminal_group_id** | **str** | Terminal ID. | [optional] 
 **items** | [**List[StopListsStopListItem]**](StopListsStopListItem.md) | Out-of-stock list. | 
 
 ## Example

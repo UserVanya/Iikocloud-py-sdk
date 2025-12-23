@@ -6,8 +6,8 @@ Delete customers request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_ids** | **List[UUID]** | Customer IDs for logical deletion. | 
-**organization_id** | **UUID** | Organization id. | 
+**customer_ids** | **List[str]** | Customer IDs for logical deletion. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

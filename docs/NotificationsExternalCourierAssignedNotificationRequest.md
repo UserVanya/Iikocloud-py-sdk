@@ -7,11 +7,11 @@ Request to notify external systems (iikoFront and iikoWeb) about an external cou
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **order_source** | **str** | Order source. | 
-**order_id** | **UUID** | Order ID. | 
+**order_id** | **str** | Order ID. | 
 **courier_name** | **str** | Courier name. | [optional] 
 **courier_car** | **str** | Courier car&#39;s model and number. | [optional] 
 **courier_phone** | **str** | Courier phone. | [optional] 
-**organization_id** | **UUID** | Organization UOC Id. | 
+**organization_id** | **str** | Organization UOC Id. | 
 
 ## Example
 

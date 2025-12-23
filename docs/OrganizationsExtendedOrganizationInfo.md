@@ -1,5 +1,6 @@
 # OrganizationsExtendedOrganizationInfo
 
+Organization details.
 
 ## Properties
 
@@ -15,11 +16,11 @@ Name | Type | Description | Notes
 **currency_minimum_denomination** | **float** | Value rounding of position. | 
 **country_phone_code** | **str** | Country dialing code. | 
 **marketing_source_required_in_delivery** | **bool** | Require mandatory marketing source input when creating a delivery. | 
-**default_delivery_city_id** | **UUID** | Default delivery city. | 
-**delivery_city_ids** | **List[UUID]** | Delivery cities. | 
+**default_delivery_city_id** | **str** | Default delivery city. | 
+**delivery_city_ids** | **List[str]** | Delivery cities. | 
 **delivery_service_type** | [**OrganizationsDeliverySettingsServiceType**](OrganizationsDeliverySettingsServiceType.md) | Delivery type. | 
 **delivery_order_payment_settings** | [**OrganizationsDeliveryOrderPaymentSettings**](OrganizationsDeliveryOrderPaymentSettings.md) | Delivery order payment settings. | [optional] 
-**default_call_center_payment_type_id** | **UUID** | Default payment type for CallCenter. | 
+**default_call_center_payment_type_id** | **str** | Default payment type for CallCenter. | 
 **order_item_comment_enabled** | **bool** | Allow text comments for order items (in all restaurant sections). | 
 **inn** | **str** | Restaurant&#x60;s INN (Taxpayer Identification Number). | 
 **address_format_type** | [**OrganizationsAddressFormatType**](OrganizationsAddressFormatType.md) | Address format type. | 

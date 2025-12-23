@@ -1,5 +1,6 @@
 # DeliveriesRequestCreateOrderCardPayment
 
+Bank card payment.
 
 ## Properties
 

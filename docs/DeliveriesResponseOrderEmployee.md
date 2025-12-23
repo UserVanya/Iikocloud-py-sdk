@@ -6,7 +6,7 @@ Employee.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Name. | 
 **phone** | **str** | Phone. | [optional] 
 

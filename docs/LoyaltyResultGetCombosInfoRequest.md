@@ -7,7 +7,7 @@ Get combos info request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **extra_data** | **bool** | Extra data. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

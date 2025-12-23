@@ -7,8 +7,8 @@ Out-of-stock list.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **balance** | **float** | Product balance. | 
-**product_id** | **UUID** | Out-of-stock list product ID. | 
-**size_id** | **UUID** | Product size. | [optional] 
+**product_id** | **str** | Out-of-stock list product ID. | 
+**size_id** | **str** | Product size. | [optional] 
 **sku** | **str** | Stock keeping unit. | [optional] 
 **date_add** | **str** | Date the product was added to the out-of-stock list (UTC). | [optional] 
 

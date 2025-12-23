@@ -1,5 +1,6 @@
 # DeliveriesRequestCreateOrderCardTipsPayment
 
+Bank card tips payment.
 
 ## Properties
 

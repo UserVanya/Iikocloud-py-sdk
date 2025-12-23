@@ -6,7 +6,7 @@ Free item to be added to order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_action_id** | **UUID** | Id of action that caused the suggestion. | [optional] 
+**source_action_id** | **str** | Id of action that caused the suggestion. | [optional] 
 **description_for_user** | **str** | Description for user. Can be null. | [optional] 
 **products** | [**List[LoyaltyResultFreeProduct]**](LoyaltyResultFreeProduct.md) | Products that should be added to order. | [optional] 
 

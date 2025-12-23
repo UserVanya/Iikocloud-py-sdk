@@ -6,8 +6,8 @@ Item for remove from out-of-stock list.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **UUID** | Out-of-stock list product ID. | 
-**size_id** | **UUID** | Out-of-stock list product size ID. | [optional] 
+**product_id** | **str** | Out-of-stock list product ID. | 
+**size_id** | **str** | Out-of-stock list product size ID. | [optional] 
 
 ## Example
 

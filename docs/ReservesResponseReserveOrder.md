@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **tips** | [**List[DeliveriesResponseOrderTipsPaymentItem]**](DeliveriesResponseOrderTipsPaymentItem.md) | Tips. | [optional] 
 **discounts** | [**List[DeliveriesResponseOrderDiscountItem]**](DeliveriesResponseOrderDiscountItem.md) | Discounts. | [optional] 
 **order_type** | [**DeliveriesResponseOrderOrderType**](DeliveriesResponseOrderOrderType.md) | Order type. | 
-**terminal_group_id** | **UUID** | ID of the terminal group where the order is located. | 
+**terminal_group_id** | **str** | ID of the terminal group where the order is located. | 
 **processed_payments_sum** | **float** | The amount of processed payments.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt;   &gt; Allowed from version &#x60;7.6.0&#x60;. | 
 **loyalty_info** | [**DeliveriesResponseOrderLoyaltyInfo**](DeliveriesResponseOrderLoyaltyInfo.md) | Information about Loyalty app.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt; | [optional] 
 **external_data** | [**List[DeliveriesResponseOrderExternalData]**](DeliveriesResponseOrderExternalData.md) | Order external data.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 

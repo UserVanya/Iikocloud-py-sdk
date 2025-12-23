@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **series** | **str** | Series. Can be null. | 
 **page_size** | **int** | Page size. | [optional] 
 **page** | **int** | Page. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

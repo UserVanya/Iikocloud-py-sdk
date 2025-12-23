@@ -6,9 +6,9 @@ Information on order item to combo relation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combo_id** | **UUID** | New combo ID. | 
-**combo_source_id** | **UUID** | Action ID that defines combo. | 
-**group_id** | **UUID** | Combo group ID to which item belongs. | 
+**combo_id** | **str** | New combo ID. | 
+**combo_source_id** | **str** | Action ID that defines combo. | 
+**group_id** | **str** | Combo group ID to which item belongs. | 
 **group_name** | **str** | Combo group name to which item belongs. | [optional] 
 
 ## Example

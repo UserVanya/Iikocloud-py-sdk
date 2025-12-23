@@ -6,7 +6,7 @@ Product that suggested to be added to order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id of product. | [optional] 
+**id** | **str** | Id of product. | [optional] 
 **code** | **str** | Code of product. | [optional] 
 
 ## Example

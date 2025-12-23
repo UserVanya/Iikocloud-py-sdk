@@ -6,7 +6,7 @@ Guest category info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Category id. | [optional] 
+**id** | **str** | Category id. | [optional] 
 **name** | **str** | Category name. | [optional] 
 **is_active** | **bool** | Is category active or not. | [optional] 
 **is_default_for_new_guests** | **bool** | Is category default for new guests or not. | [optional] 

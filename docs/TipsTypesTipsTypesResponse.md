@@ -6,7 +6,7 @@ Response to request for tips types by api-login`s rms group.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **tips_types** | [**List[TipsTypesTipsType]**](TipsTypesTipsType.md) | List of tips types for rms group. | 
 
 ## Example

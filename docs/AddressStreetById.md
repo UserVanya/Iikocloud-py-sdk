@@ -6,9 +6,9 @@ Street by id response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Street id. | 
+**id** | **str** | Street id. | 
 **classifier_id** | **str** | Street classifierId. | [optional] 
-**city_id** | **UUID** | City id. | 
+**city_id** | **str** | City id. | 
 **city_name** | **str** | City name. | 
 **street_name** | **str** | Street name. | 
 

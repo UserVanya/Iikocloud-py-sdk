@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class CustomerGetCustomerInfoByCardNumberRequest(CustomerGetCustomerInfoRequest):
     """
-    CustomerGetCustomerInfoByCardNumberRequest
+    Request to get customer by card number.
     """ # noqa: E501
     card_number: Optional[StrictStr] = Field(default=None, description="Customer card number.", alias="cardNumber")
-    __properties: ClassVar[List[str]] = ["type", "organizationId", "cardNumber"]
+    __properties: ClassVar[List[str]] = ["type", "organizationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,7 @@ class CustomerGetCustomerInfoByCardNumberRequest(CustomerGetCustomerInfoRequest)
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "organizationId": obj.get("organizationId"),
-            "cardNumber": obj.get("cardNumber")
+            "organizationId": obj.get("organizationId")
         })
         return _obj
 

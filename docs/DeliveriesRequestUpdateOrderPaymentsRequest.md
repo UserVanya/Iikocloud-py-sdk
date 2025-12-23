@@ -6,8 +6,8 @@ Request for order payment update.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
 **payment_items** | [**List[DeliveriesRequestUpdateOrderOrderPaymentItem]**](DeliveriesRequestUpdateOrderOrderPaymentItem.md) | Payment details. | [optional] 
 
 ## Example

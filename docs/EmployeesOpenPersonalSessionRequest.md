@@ -6,10 +6,10 @@ Open personal session request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**terminal_group_id** | **UUID** | Delivery group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
-**employee_id** | **UUID** | Employee ID. | 
-**role_id** | **UUID** | Employee role ID.                Must be null if the restaurant doesn&#39;t use roles, otherwise not-null role must be specified. | [optional] 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**terminal_group_id** | **str** | Delivery group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**employee_id** | **str** | Employee ID. | 
+**role_id** | **str** | Employee role ID.                Must be null if the restaurant doesn&#39;t use roles, otherwise not-null role must be specified. | [optional] 
 
 ## Example
 

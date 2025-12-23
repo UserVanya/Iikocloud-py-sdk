@@ -6,7 +6,7 @@ Information about combos group.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **name** | **str** | Name. | [optional] 
 **is_main_group** | **bool** | Is main group. | [optional] 
 **products** | [**List[LoyaltyResultComboProduct]**](LoyaltyResultComboProduct.md) | Products. | [optional] 

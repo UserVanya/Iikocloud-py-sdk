@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **carbohydrates_full_amount** | **float** | Carbohydrate per item. | [optional] 
 **energy_full_amount** | **float** | Calories per item. | [optional] 
 **weight** | **float** | Item weight. | [optional] 
-**group_id** | **UUID** | Stock list group in RMS. | [optional] 
-**product_category_id** | **UUID** | Product category in RMS. | [optional] 
+**group_id** | **str** | Stock list group in RMS. | [optional] 
+**product_category_id** | **str** | Product category in RMS. | [optional] 
 **type** | **str** | dish | good | modifier. | [optional] 
 **order_item_type** | [**NomenclatureOrderItemType**](NomenclatureOrderItemType.md) | Product or compound. Depends on modifiers scheme existence. | [optional] 
-**modifier_schema_id** | **UUID** | Modifier schema&#39;s ID. | [optional] 
+**modifier_schema_id** | **str** | Modifier schema&#39;s ID. | [optional] 
 **modifier_schema_name** | **str** | Modifier schema&#39;s name. | [optional] 
 **splittable** | **bool** | Is product splittable. | 
 **measure_unit** | **str** | Item&#39;s unit of measurement. | [optional] 
@@ -28,13 +28,13 @@ Name | Type | Description | Notes
 **group_modifiers** | [**List[NomenclatureGroupModifierInfo]**](NomenclatureGroupModifierInfo.md) | Modifier groups. | [optional] 
 **image_links** | **List[str]** | Links to images. | [optional] 
 **do_not_print_in_cheque** | **bool** | Do not print on bill. | [optional] 
-**parent_group** | **UUID** | External menu group. | [optional] 
+**parent_group** | **str** | External menu group. | [optional] 
 **order** | **int** | Product&#39;s order (priority) in menu. | [optional] 
 **full_name_english** | **str** | Full name in a foreign language. | [optional] 
 **use_balance_for_sell** | **bool** | Weighed product. | 
 **can_set_open_price** | **bool** | Open price. | 
 **payment_subject** | **str** | Payment subject. | [optional] 
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **code** | **str** | SKU. | [optional] 
 **name** | **str** | Name. | 
 **description** | **str** | Description. | [optional] 

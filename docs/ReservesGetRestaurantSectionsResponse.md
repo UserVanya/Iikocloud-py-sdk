@@ -6,7 +6,7 @@ Response which contains all restaurant sections of specified terminal groups for
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **restaurant_sections** | [**List[ReservesRestaurantSection]**](ReservesRestaurantSection.md) | Restaurant sections. | 
 **revision** | **int** | Items list revision. | 
 

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **price_predefined** | **bool** | Whether price is predefined. | 
 **result_sum** | **float** | Total amount per item including tax, discounts/surcharges. | 
 **deleted** | [**DeliveriesResponseOrderItemDeletedInfo**](DeliveriesResponseOrderItemDeletedInfo.md) | Item deletion details. If specified, the item is deleted. | [optional] 
-**position_id** | **UUID** | Unique identifier of the item in the order and for the whole system. | [optional] 
+**position_id** | **str** | Unique identifier of the item in the order and for the whole system. | [optional] 
 **default_amount** | **int** | Default amount. | [optional] 
 **hide_if_default_amount** | **bool** | Hide modifier in UI if \&quot;amount\&quot; equals \&quot;defaultAmount\&quot;. | [optional] 
 **tax_percent** | **float** | Tax rate. | [optional] 

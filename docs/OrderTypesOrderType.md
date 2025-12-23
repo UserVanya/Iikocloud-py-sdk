@@ -6,7 +6,7 @@ Order type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Order type ID in RMS. | 
+**id** | **str** | Order type ID in RMS. | 
 **name** | **str** | Order type name. | 
 **order_service_type** | [**OrderTypesOrderServiceType**](OrderTypesOrderServiceType.md) | Service type. | 
 **is_deleted** | **bool** | IsDeleted attribute of order type. | [optional] 

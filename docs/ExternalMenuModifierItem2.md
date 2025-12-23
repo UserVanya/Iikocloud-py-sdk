@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **allergen_group_ids** | **List[object]** |  | 
 **labels** | **List[object]** | List of label names | 
 **tags** | **List[object]** | List of tag names | 
-**id** | **UUID** |  | 
+**id** | **str** |  | 
 **weight** | **float** |  | 
 
 ## Example

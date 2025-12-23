@@ -1,13 +1,14 @@
 # DeliveriesRequestCreateOrderRmsDiscount
 
+RMS discount/surcharge.  <remarks>  Amount must be specified only if discount has \"assign amount\" setting enabled.  In any other case, amount must not be specified.   </remarks>
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**discount_type_id** | **UUID** | Discount type.                 Can be obtained by &#x60;/api/1/discounts&#x60; operation. | 
+**discount_type_id** | **str** | Discount type.                 Can be obtained by &#x60;/api/1/discounts&#x60; operation. | 
 **sum** | **float** | Discount/surcharge sum. | [optional] 
-**selective_positions** | **List[UUID]** | Order item positions. | [optional] 
+**selective_positions** | **List[str]** | Order item positions. | [optional] 
 
 ## Example
 

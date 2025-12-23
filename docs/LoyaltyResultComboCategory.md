@@ -6,7 +6,7 @@ Information about combos of organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Category id. | [optional] 
+**id** | **str** | Category id. | [optional] 
 **name** | **str** | Category name. | [optional] 
 
 ## Example

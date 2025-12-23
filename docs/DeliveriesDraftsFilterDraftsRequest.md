@@ -6,19 +6,19 @@ Request for the list of order drafts by several filters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organization ID for which the order drafts search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organization ID for which the order drafts search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **date_from** | **str** | Draft creation time (UTC). Lower limit. | [optional] 
 **date_to** | **str** | Draft creation time (UTC). Upper limit. | [optional] 
 **phone** | **str** | Phone number. | [optional] 
 **limit** | **int** | Desirable size of result set (50 by default). | [optional] 
 **offset** | **int** | Offset from the beginning of full result set for paging. | [optional] 
 **source_keys** | **List[str]** | Delivery sources (DeliveryClub, PH and etc.) | [optional] 
-**terminal_group_ids** | **List[UUID]** | List of terminal groups IDs. | [optional] 
+**terminal_group_ids** | **List[str]** | List of terminal groups IDs. | [optional] 
 **search_text** | **str** | Value for search. Used for prefix search. | [optional] 
 **sort_property** | [**DeliveriesDraftsOrderDraftSortProperty**](DeliveriesDraftsOrderDraftSortProperty.md) | Sorting property. | [optional] 
 **sort_direction** | [**CommonSortDirection**](CommonSortDirection.md) | Sorting direction. | [optional] 
-**operator_ids** | **List[UUID]** | List of drafts operator IDs. | [optional] 
-**order_type_ids** | **List[UUID]** | List of drafts order type IDs. | [optional] 
+**operator_ids** | **List[str]** | List of drafts operator IDs. | [optional] 
+**order_type_ids** | **List[str]** | List of drafts order type IDs. | [optional] 
 
 ## Example
 

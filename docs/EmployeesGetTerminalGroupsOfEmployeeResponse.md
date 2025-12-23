@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terminal_group_ids** | **List[UUID]** |  | 
+**terminal_group_ids** | **List[str]** |  | 
 
 ## Example
 

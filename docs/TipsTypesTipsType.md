@@ -6,11 +6,11 @@ Tips type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Tips type ID.                Can be obtained by &#x60;/api/1/tips_types&#x60; operation. | 
+**id** | **str** | Tips type ID.                Can be obtained by &#x60;/api/1/tips_types&#x60; operation. | 
 **name** | **str** | Tips type name. | 
-**organization_ids** | **List[UUID]** | Supported organizations IDs.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Supported organizations IDs.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **order_service_types** | [**List[OrderTypesOrderServiceType]**](OrderTypesOrderServiceType.md) | Supported order service types. | 
-**payment_types_ids** | **List[UUID]** | Supported payment types IDs. | 
+**payment_types_ids** | **List[str]** | Supported payment types IDs. | 
 
 ## Example
 

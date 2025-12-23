@@ -6,8 +6,8 @@ Response for request to awake terminal groups from sleep mode.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**successfully_processed** | **List[UUID]** | Identifiers of successfully processed terminal groups. | [optional] 
-**failed_processed** | **List[UUID]** | Identifiers of terminal groups whose processing failed. | [optional] 
+**successfully_processed** | **List[str]** | Identifiers of successfully processed terminal groups. | [optional] 
+**failed_processed** | **List[str]** | Identifiers of terminal groups whose processing failed. | [optional] 
 
 ## Example
 

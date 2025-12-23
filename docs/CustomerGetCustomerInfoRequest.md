@@ -7,7 +7,7 @@ Base class for customer info request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
-**organization_id** | **UUID** | Organization id. | [optional] 
+**organization_id** | **str** | Organization id. | [optional] 
 
 ## Example
 

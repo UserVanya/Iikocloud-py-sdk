@@ -6,7 +6,7 @@ Service response with list of cities.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **cities** | [**List[WrapperAddressCity]**](WrapperAddressCity.md) | List of cities. | 
 
 ## Example

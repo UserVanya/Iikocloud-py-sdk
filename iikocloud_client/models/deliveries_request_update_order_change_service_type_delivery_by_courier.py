@@ -26,10 +26,10 @@ from typing_extensions import Self
 
 class DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(DeliveriesRequestUpdateOrderChangeServiceTypeRequest):
     """
-    DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
+    Change order's delivery type to DeliveryByCourier.
     """ # noqa: E501
     delivery_point: DeliveriesRequestCreateOrderDeliveryPoint = Field(description="Address of delivery.", alias="deliveryPoint")
-    __properties: ClassVar[List[str]] = ["newServiceType", "organizationId", "orderId", "deliveryPoint"]
+    __properties: ClassVar[List[str]] = ["newServiceType", "organizationId", "orderId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,9 +70,6 @@ class DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(DeliveriesR
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of delivery_point
-        if self.delivery_point:
-            _dict['deliveryPoint'] = self.delivery_point.to_dict()
         return _dict
 
     @classmethod
@@ -87,8 +84,7 @@ class DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier(DeliveriesR
         _obj = cls.model_validate({
             "newServiceType": obj.get("newServiceType"),
             "organizationId": obj.get("organizationId"),
-            "orderId": obj.get("orderId"),
-            "deliveryPoint": DeliveriesRequestCreateOrderDeliveryPoint.from_dict(obj["deliveryPoint"]) if obj.get("deliveryPoint") is not None else None
+            "orderId": obj.get("orderId")
         })
         return _obj
 

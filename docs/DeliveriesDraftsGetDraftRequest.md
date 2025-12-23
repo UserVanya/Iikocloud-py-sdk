@@ -6,8 +6,8 @@ Request for an order draft by ID.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID for which the order search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
+**organization_id** | **str** | Organization ID for which the order search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
 
 ## Example
 

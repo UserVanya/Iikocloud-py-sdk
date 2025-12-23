@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderAddressLegacy(DeliveriesRequestCreateOrderAddress):
     """
-    DeliveriesRequestCreateOrderAddressLegacy
+    Order delivery legacy address.
     """ # noqa: E501
     street: DeliveriesRequestCreateOrderStreet = Field(description="Street.  > It's required specify only \"classifierId\" or \"id\" or \"name\" and \"city\".")
     index: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Postcode.")
@@ -39,7 +39,7 @@ class DeliveriesRequestCreateOrderAddressLegacy(DeliveriesRequestCreateOrderAddr
     floor: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Floor.")
     doorphone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Intercom.")
     region_id: Optional[UUID] = Field(default=None, description="Delivery area ID.", alias="regionId")
-    __properties: ClassVar[List[str]] = ["type", "street", "index", "house", "building", "flat", "entrance", "floor", "doorphone", "regionId"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,44 +80,6 @@ class DeliveriesRequestCreateOrderAddressLegacy(DeliveriesRequestCreateOrderAddr
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of street
-        if self.street:
-            _dict['street'] = self.street.to_dict()
-        # set to None if index (nullable) is None
-        # and model_fields_set contains the field
-        if self.index is None and "index" in self.model_fields_set:
-            _dict['index'] = None
-
-        # set to None if building (nullable) is None
-        # and model_fields_set contains the field
-        if self.building is None and "building" in self.model_fields_set:
-            _dict['building'] = None
-
-        # set to None if flat (nullable) is None
-        # and model_fields_set contains the field
-        if self.flat is None and "flat" in self.model_fields_set:
-            _dict['flat'] = None
-
-        # set to None if entrance (nullable) is None
-        # and model_fields_set contains the field
-        if self.entrance is None and "entrance" in self.model_fields_set:
-            _dict['entrance'] = None
-
-        # set to None if floor (nullable) is None
-        # and model_fields_set contains the field
-        if self.floor is None and "floor" in self.model_fields_set:
-            _dict['floor'] = None
-
-        # set to None if doorphone (nullable) is None
-        # and model_fields_set contains the field
-        if self.doorphone is None and "doorphone" in self.model_fields_set:
-            _dict['doorphone'] = None
-
-        # set to None if region_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.region_id is None and "region_id" in self.model_fields_set:
-            _dict['regionId'] = None
-
         return _dict
 
     @classmethod
@@ -130,16 +92,7 @@ class DeliveriesRequestCreateOrderAddressLegacy(DeliveriesRequestCreateOrderAddr
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "street": DeliveriesRequestCreateOrderStreet.from_dict(obj["street"]) if obj.get("street") is not None else None,
-            "index": obj.get("index"),
-            "house": obj.get("house"),
-            "building": obj.get("building"),
-            "flat": obj.get("flat"),
-            "entrance": obj.get("entrance"),
-            "floor": obj.get("floor"),
-            "doorphone": obj.get("doorphone"),
-            "regionId": obj.get("regionId")
+            "type": obj.get("type")
         })
         return _obj
 

@@ -6,7 +6,7 @@ DTO for outside transferring of product category details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Product category ID. | 
+**id** | **str** | Product category ID. | 
 **name** | **str** | Name. | 
 **is_deleted** | **bool** | Is deleted attribute. | 
 

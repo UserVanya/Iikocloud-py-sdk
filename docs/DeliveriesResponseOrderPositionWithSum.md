@@ -6,7 +6,7 @@ Order item positions with position discount sum.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**position_id** | **UUID** | Order item position ID. | 
+**position_id** | **str** | Order item position ID. | 
 **sum** | **float** | Position discount sum. | 
 
 ## Example

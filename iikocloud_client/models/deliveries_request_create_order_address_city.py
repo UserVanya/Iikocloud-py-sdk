@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderAddressCity(DeliveriesRequestCreateOrderAddress):
     """
-    DeliveriesRequestCreateOrderAddressCity
+    Order delivery address.
     """ # noqa: E501
     line1: Annotated[str, Field(min_length=0, strict=True, max_length=250)] = Field(description="Address line 1.  Contains the primary address information.   > Allowed from version `8.7.6`.")
     flat: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Apartment.")
@@ -35,7 +35,7 @@ class DeliveriesRequestCreateOrderAddressCity(DeliveriesRequestCreateOrderAddres
     floor: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Floor.")
     doorphone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=10)]] = Field(default=None, description="Intercom.")
     region_id: Optional[UUID] = Field(default=None, description="Delivery area ID.", alias="regionId")
-    __properties: ClassVar[List[str]] = ["type", "line1", "flat", "entrance", "floor", "doorphone", "regionId"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,31 +76,6 @@ class DeliveriesRequestCreateOrderAddressCity(DeliveriesRequestCreateOrderAddres
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if flat (nullable) is None
-        # and model_fields_set contains the field
-        if self.flat is None and "flat" in self.model_fields_set:
-            _dict['flat'] = None
-
-        # set to None if entrance (nullable) is None
-        # and model_fields_set contains the field
-        if self.entrance is None and "entrance" in self.model_fields_set:
-            _dict['entrance'] = None
-
-        # set to None if floor (nullable) is None
-        # and model_fields_set contains the field
-        if self.floor is None and "floor" in self.model_fields_set:
-            _dict['floor'] = None
-
-        # set to None if doorphone (nullable) is None
-        # and model_fields_set contains the field
-        if self.doorphone is None and "doorphone" in self.model_fields_set:
-            _dict['doorphone'] = None
-
-        # set to None if region_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.region_id is None and "region_id" in self.model_fields_set:
-            _dict['regionId'] = None
-
         return _dict
 
     @classmethod
@@ -113,13 +88,7 @@ class DeliveriesRequestCreateOrderAddressCity(DeliveriesRequestCreateOrderAddres
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "line1": obj.get("line1"),
-            "flat": obj.get("flat"),
-            "entrance": obj.get("entrance"),
-            "floor": obj.get("floor"),
-            "doorphone": obj.get("doorphone"),
-            "regionId": obj.get("regionId")
+            "type": obj.get("type")
         })
         return _obj
 

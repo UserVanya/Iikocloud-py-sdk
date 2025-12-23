@@ -6,7 +6,7 @@ Wrapping object to retrieve list of active courier locations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **active_courier_locations** | [**List[WrapperEmployeesActiveCourierLocation]**](WrapperEmployeesActiveCourierLocation.md) | List of courier&#39;s locations. | 
 
 ## Example

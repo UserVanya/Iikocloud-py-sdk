@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combo_size_id** | **UUID** | The size ID of the combo that is mapped to the size from the sizeId field | 
-**size_id** | **UUID** | The size ID of the item | [optional] 
+**combo_size_id** | **str** | The size ID of the combo that is mapped to the size from the sizeId field | 
+**size_id** | **str** | The size ID of the item | [optional] 
 **name** | **str** | The size name of the item | [optional] [default to '']
 **short_name** | **str** | The size short name of the item | [optional] [default to '']
 **prices** | [**List[ExternalMenuPriceByDepartmentsDto6]**](ExternalMenuPriceByDepartmentsDto6.md) |  | [optional] 

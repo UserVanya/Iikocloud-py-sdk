@@ -6,7 +6,7 @@ Available payment.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Marketing campaign id. | [optional] 
+**id** | **str** | Marketing campaign id. | [optional] 
 **max_sum** | **float** | Max sum. | [optional] 
 **order** | **int** | Payment order. In case of partial payment, payments with lesser order should be filled first. | [optional] 
 **wallet_infos** | [**List[LoyaltyResultWalletInfo]**](LoyaltyResultWalletInfo.md) | Wallet infos. | [optional] 

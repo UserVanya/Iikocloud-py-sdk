@@ -6,7 +6,7 @@ Status of out-of-stock lists for a specified organization
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **terminal_group_stop_lists** | [**List[WrapperStopListsTerminalGroupStopList]**](WrapperStopListsTerminalGroupStopList.md) | Set of out-of-stock lists | 
 
 ## Example

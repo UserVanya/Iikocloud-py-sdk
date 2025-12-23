@@ -6,7 +6,7 @@ Driver location details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**courier_id** | **UUID** | Driver ID. | 
+**courier_id** | **str** | Driver ID. | 
 **locations** | [**List[EmployeesCoordinateInfo]**](EmployeesCoordinateInfo.md) | List of locations. | 
 
 ## Example

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **city** | **str** | City. | [optional] 
 **street_name** | **str** | Street. | [optional] 
-**street_id** | **UUID** | Street ID. | [optional] 
+**street_id** | **str** | Street ID. | [optional] 
 **house** | **str** | House. | [optional] 
 **building** | **str** | Building. | [optional] 
 **index** | **str** | Post index. | [optional] 

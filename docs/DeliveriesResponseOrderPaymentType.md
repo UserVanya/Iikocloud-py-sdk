@@ -6,7 +6,7 @@ Payment type.                 Can be obtained by `/api/1/payment_types` operatio
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Name. | 
 **kind** | [**DeliveriesCommonPaymentTypeKind**](DeliveriesCommonPaymentTypeKind.md) | Payment type classifier. | 
 

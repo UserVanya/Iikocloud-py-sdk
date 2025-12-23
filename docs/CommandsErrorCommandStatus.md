@@ -1,5 +1,6 @@
 # CommandsErrorCommandStatus
 
+Command completed with error.
 
 ## Properties
 

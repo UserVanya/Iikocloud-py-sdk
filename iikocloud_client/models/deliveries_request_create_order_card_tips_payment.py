@@ -26,10 +26,10 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderCardTipsPayment(DeliveriesRequestCreateOrderTipsPayment):
     """
-    DeliveriesRequestCreateOrderCardTipsPayment
+    Bank card tips payment.
     """ # noqa: E501
     number: Optional[StrictStr] = Field(default=None, description="Card No.  > In iikoFront, it is possible to make card payment without card No.")
-    __properties: ClassVar[List[str]] = ["paymentTypeKind", "tipsTypeId", "sum", "paymentTypeId", "isProcessedExternally", "paymentAdditionalData", "isFiscalizedExternally", "isPrepay", "number"]
+    __properties: ClassVar[List[str]] = ["paymentTypeKind", "tipsTypeId", "sum", "paymentTypeId", "isProcessedExternally", "paymentAdditionalData", "isFiscalizedExternally", "isPrepay"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,11 +78,6 @@ class DeliveriesRequestCreateOrderCardTipsPayment(DeliveriesRequestCreateOrderTi
         if self.payment_additional_data is None and "payment_additional_data" in self.model_fields_set:
             _dict['paymentAdditionalData'] = None
 
-        # set to None if number (nullable) is None
-        # and model_fields_set contains the field
-        if self.number is None and "number" in self.model_fields_set:
-            _dict['number'] = None
-
         return _dict
 
     @classmethod
@@ -102,8 +97,7 @@ class DeliveriesRequestCreateOrderCardTipsPayment(DeliveriesRequestCreateOrderTi
             "isProcessedExternally": obj.get("isProcessedExternally"),
             "paymentAdditionalData": DeliveriesCommonPaymentAdditionalData.from_dict(obj["paymentAdditionalData"]) if obj.get("paymentAdditionalData") is not None else None,
             "isFiscalizedExternally": obj.get("isFiscalizedExternally"),
-            "isPrepay": obj.get("isPrepay"),
-            "number": obj.get("number")
+            "isPrepay": obj.get("isPrepay")
         })
         return _obj
 

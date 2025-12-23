@@ -6,7 +6,7 @@ Request for list of drivers for organizations in OrganizationIds.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | List of organizations. | 
+**organization_ids** | **List[str]** | List of organizations. | 
 
 ## Example
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transactions** | [**List[ReportTransportTransactionsReportItem]**](ReportTransportTransactionsReportItem.md) | Transactions. | [optional] 
 **last_revision** | **int** | Last known transaction revision. | [optional] 
-**last_transaction_id** | **UUID** | Last known transaction id. | [optional] 
+**last_transaction_id** | **str** | Last known transaction id. | [optional] 
 **page_size** | **int** | Page size. | [optional] 
 
 ## Example

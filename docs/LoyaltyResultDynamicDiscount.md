@@ -6,7 +6,7 @@ Manual discount.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**manual_condition_id** | **UUID** | Manual discount condition identifier. | [optional] 
+**manual_condition_id** | **str** | Manual discount condition identifier. | [optional] 
 **sum** | **float** | Discount amount. | [optional] 
 
 ## Example

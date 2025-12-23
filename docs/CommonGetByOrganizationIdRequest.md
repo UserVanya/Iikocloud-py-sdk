@@ -6,7 +6,7 @@ Get request only by organization id
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization id. | [optional] 
+**organization_id** | **str** | Organization id. | [optional] 
 
 ## Example
 

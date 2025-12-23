@@ -6,8 +6,8 @@ Request to update tracking link of a delivery order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | OrganizationId. | 
-**order_id** | **UUID** | Delivery order id. | 
+**organization_id** | **str** | OrganizationId. | 
+**order_id** | **str** | Delivery order id. | 
 **tracking_link** | **str** | Tracking link of a delivery order. | [optional] 
 
 ## Example

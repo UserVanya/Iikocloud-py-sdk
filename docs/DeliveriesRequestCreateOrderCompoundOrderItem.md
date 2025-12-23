@@ -1,5 +1,6 @@
 # DeliveriesRequestCreateOrderCompoundOrderItem
 
+Order item: composite item.
 
 ## Properties
 

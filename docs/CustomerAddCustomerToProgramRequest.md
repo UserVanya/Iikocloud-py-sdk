@@ -6,9 +6,9 @@ Add customer to program request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | [optional] 
-**program_id** | **UUID** | Program id. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**customer_id** | **str** | Customer id. | [optional] 
+**program_id** | **str** | Program id. | [optional] 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

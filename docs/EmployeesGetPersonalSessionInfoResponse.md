@@ -6,7 +6,7 @@ Personal session info response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **is_session_opened** | **bool** | Is personal session opened. | [optional] 
 **error** | **str** | Error details. | [optional] 
 

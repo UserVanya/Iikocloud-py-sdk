@@ -6,12 +6,12 @@ Loyalty result for order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**marketing_campaign_id** | **UUID** | Program marketing campaign id. | [optional] 
+**marketing_campaign_id** | **str** | Program marketing campaign id. | [optional] 
 **name** | **str** | Program name. | [optional] 
 **discounts** | [**List[LoyaltyResultDiscountOperation]**](LoyaltyResultDiscountOperation.md) | Discount operations applied to order items. | [optional] 
 **upsales** | [**List[LoyaltyResultUpsale]**](LoyaltyResultUpsale.md) | Suggested items to add or advices for customer. | [optional] 
 **free_products** | [**List[LoyaltyResultFreeProductsGroup]**](LoyaltyResultFreeProductsGroup.md) | Program free products. | [optional] 
-**available_combo_specifications** | **List[UUID]** | Ids of combo specification available in current order. | [optional] 
+**available_combo_specifications** | **List[str]** | Ids of combo specification available in current order. | [optional] 
 **available_combos** | [**List[LoyaltyResultAvailableCombo]**](LoyaltyResultAvailableCombo.md) | Partially added combos, available for assembly. | [optional] 
 **need_to_activate_certificate** | **bool** | Certificate number is required for activation. | [optional] 
 

@@ -6,7 +6,7 @@ Wrapping object to retrieve list of drivers from iikoRMS.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **employees** | [**List[WrapperEmployeesEmployee]**](WrapperEmployeesEmployee.md) | List of drivers. | 
 
 ## Example

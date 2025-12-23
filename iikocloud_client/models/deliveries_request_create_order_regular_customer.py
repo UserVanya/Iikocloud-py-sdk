@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderRegularCustomer(DeliveriesRequestCreateOrderCustomer):
     """
-    DeliveriesRequestCreateOrderRegularCustomer
+    'Regular' customer:  - can be used only if a customer agrees to take part in the store's loyalty programs  - customer details will be added (updated) to the store's customer database  - benefits (accumulation of rewards, etc.) of active loyalty programs will be made available to the customer
     """ # noqa: E501
     id: Optional[UUID] = Field(default=None, description="Existing customer ID in RMS.   > If null - the phone number is searched in database, otherwise the new customer is created in RMS.")
     name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=60)]] = Field(default=None, description="Name of customer.  > Required for new customers (i.e. if \"id\" == null)  > Not required if \"id\" specified.")
@@ -39,7 +39,7 @@ class DeliveriesRequestCreateOrderRegularCustomer(DeliveriesRequestCreateOrderCu
     should_receive_promo_actions_info: Optional[StrictBool] = Field(default=None, description="Deprecated, use \"shouldReceiveOrderStatusNotifications\" instead.", alias="shouldReceivePromoActionsInfo")
     should_receive_order_status_notifications: Optional[StrictBool] = Field(default=None, description="Whether customer receives order status notification messages.", alias="shouldReceiveOrderStatusNotifications")
     gender: Optional[DeliveriesCommonGender] = Field(default=None, description="Gender.")
-    __properties: ClassVar[List[str]] = ["type", "id", "name", "surname", "comment", "birthdate", "email", "shouldReceivePromoActionsInfo", "shouldReceiveOrderStatusNotifications", "gender"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,46 +80,6 @@ class DeliveriesRequestCreateOrderRegularCustomer(DeliveriesRequestCreateOrderCu
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if id (nullable) is None
-        # and model_fields_set contains the field
-        if self.id is None and "id" in self.model_fields_set:
-            _dict['id'] = None
-
-        # set to None if name (nullable) is None
-        # and model_fields_set contains the field
-        if self.name is None and "name" in self.model_fields_set:
-            _dict['name'] = None
-
-        # set to None if surname (nullable) is None
-        # and model_fields_set contains the field
-        if self.surname is None and "surname" in self.model_fields_set:
-            _dict['surname'] = None
-
-        # set to None if comment (nullable) is None
-        # and model_fields_set contains the field
-        if self.comment is None and "comment" in self.model_fields_set:
-            _dict['comment'] = None
-
-        # set to None if birthdate (nullable) is None
-        # and model_fields_set contains the field
-        if self.birthdate is None and "birthdate" in self.model_fields_set:
-            _dict['birthdate'] = None
-
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
-        # set to None if should_receive_promo_actions_info (nullable) is None
-        # and model_fields_set contains the field
-        if self.should_receive_promo_actions_info is None and "should_receive_promo_actions_info" in self.model_fields_set:
-            _dict['shouldReceivePromoActionsInfo'] = None
-
-        # set to None if should_receive_order_status_notifications (nullable) is None
-        # and model_fields_set contains the field
-        if self.should_receive_order_status_notifications is None and "should_receive_order_status_notifications" in self.model_fields_set:
-            _dict['shouldReceiveOrderStatusNotifications'] = None
-
         return _dict
 
     @classmethod
@@ -132,16 +92,7 @@ class DeliveriesRequestCreateOrderRegularCustomer(DeliveriesRequestCreateOrderCu
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "surname": obj.get("surname"),
-            "comment": obj.get("comment"),
-            "birthdate": obj.get("birthdate"),
-            "email": obj.get("email"),
-            "shouldReceivePromoActionsInfo": obj.get("shouldReceivePromoActionsInfo"),
-            "shouldReceiveOrderStatusNotifications": obj.get("shouldReceiveOrderStatusNotifications"),
-            "gender": obj.get("gender")
+            "type": obj.get("type")
         })
         return _obj
 

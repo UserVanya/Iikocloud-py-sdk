@@ -6,8 +6,8 @@ Mapping combo's group to OrderItem.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group_id** | **UUID** | Id of combo group. | [optional] 
-**item_id** | **UUID** | Id of item, suitable for group. | [optional] 
+**group_id** | **str** | Id of combo group. | [optional] 
+**item_id** | **str** | Id of item, suitable for group. | [optional] 
 
 ## Example
 

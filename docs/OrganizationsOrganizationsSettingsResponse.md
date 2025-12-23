@@ -6,7 +6,7 @@ Response to request for organizations specified settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **organizations** | [**List[OrganizationsOrganizationSettings]**](OrganizationsOrganizationSettings.md) | List of organizations with specified settings. | 
 
 ## Example

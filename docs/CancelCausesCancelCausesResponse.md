@@ -6,7 +6,7 @@ Response with delivery cancel causes (reasons for deletion) list.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **cancel_causes** | [**List[CancelCausesCancelCause]**](CancelCausesCancelCause.md) | List of delivery cancel causes. | 
 
 ## Example

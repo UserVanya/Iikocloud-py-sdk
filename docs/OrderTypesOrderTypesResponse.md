@@ -6,7 +6,7 @@ Response to request for order types by organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **order_types** | [**List[WrapperOrderTypesOrderType]**](WrapperOrderTypesOrderType.md) | List of order types. | 
 
 ## Example

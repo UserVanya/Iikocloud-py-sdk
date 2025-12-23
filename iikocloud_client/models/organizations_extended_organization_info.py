@@ -31,7 +31,7 @@ from typing_extensions import Self
 
 class OrganizationsExtendedOrganizationInfo(OrganizationsOrganizationInfo):
     """
-    OrganizationsExtendedOrganizationInfo
+    Organization details.
     """ # noqa: E501
     country: Optional[StrictStr] = Field(description="Country.")
     restaurant_address: Optional[StrictStr] = Field(description="Restaurant address.", alias="restaurantAddress")
@@ -56,7 +56,7 @@ class OrganizationsExtendedOrganizationInfo(OrganizationsOrganizationInfo):
     is_cloud: StrictBool = Field(description="Determines whether organization is hosted in iikoCloud.", alias="isCloud")
     is_anonymous_guests_allowed: Optional[StrictBool] = Field(default=None, description="If the store allows orders for anonymous guests, then it is not necessary to transfer  information about the guest as part of the delivery order. You can only transfer  the phone number and optionally name of the guest, which will not be stored in the guest base  and will only be used for the delivery of a current delivery order.", alias="isAnonymousGuestsAllowed")
     address_lookup: List[AddressHintsAddressHintsServiceType] = Field(description="Available address lookup services.", alias="addressLookup")
-    __properties: ClassVar[List[str]] = ["responseType", "id", "name", "code", "externalData", "country", "restaurantAddress", "latitude", "longitude", "useUaeAddressingSystem", "version", "currencyIsoName", "currencyMinimumDenomination", "countryPhoneCode", "marketingSourceRequiredInDelivery", "defaultDeliveryCityId", "deliveryCityIds", "deliveryServiceType", "deliveryOrderPaymentSettings", "defaultCallCenterPaymentTypeId", "orderItemCommentEnabled", "inn", "addressFormatType", "isConfirmationEnabled", "confirmAllowedIntervalInMinutes", "isCloud", "isAnonymousGuestsAllowed", "addressLookup"]
+    __properties: ClassVar[List[str]] = ["responseType", "id", "name", "code", "externalData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,81 +119,6 @@ class OrganizationsExtendedOrganizationInfo(OrganizationsOrganizationInfo):
         if self.external_data is None and "external_data" in self.model_fields_set:
             _dict['externalData'] = None
 
-        # set to None if country (nullable) is None
-        # and model_fields_set contains the field
-        if self.country is None and "country" in self.model_fields_set:
-            _dict['country'] = None
-
-        # set to None if restaurant_address (nullable) is None
-        # and model_fields_set contains the field
-        if self.restaurant_address is None and "restaurant_address" in self.model_fields_set:
-            _dict['restaurantAddress'] = None
-
-        # set to None if currency_iso_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.currency_iso_name is None and "currency_iso_name" in self.model_fields_set:
-            _dict['currencyIsoName'] = None
-
-        # set to None if currency_minimum_denomination (nullable) is None
-        # and model_fields_set contains the field
-        if self.currency_minimum_denomination is None and "currency_minimum_denomination" in self.model_fields_set:
-            _dict['currencyMinimumDenomination'] = None
-
-        # set to None if country_phone_code (nullable) is None
-        # and model_fields_set contains the field
-        if self.country_phone_code is None and "country_phone_code" in self.model_fields_set:
-            _dict['countryPhoneCode'] = None
-
-        # set to None if marketing_source_required_in_delivery (nullable) is None
-        # and model_fields_set contains the field
-        if self.marketing_source_required_in_delivery is None and "marketing_source_required_in_delivery" in self.model_fields_set:
-            _dict['marketingSourceRequiredInDelivery'] = None
-
-        # set to None if default_delivery_city_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.default_delivery_city_id is None and "default_delivery_city_id" in self.model_fields_set:
-            _dict['defaultDeliveryCityId'] = None
-
-        # set to None if delivery_city_ids (nullable) is None
-        # and model_fields_set contains the field
-        if self.delivery_city_ids is None and "delivery_city_ids" in self.model_fields_set:
-            _dict['deliveryCityIds'] = None
-
-        # set to None if delivery_service_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.delivery_service_type is None and "delivery_service_type" in self.model_fields_set:
-            _dict['deliveryServiceType'] = None
-
-        # set to None if delivery_order_payment_settings (nullable) is None
-        # and model_fields_set contains the field
-        if self.delivery_order_payment_settings is None and "delivery_order_payment_settings" in self.model_fields_set:
-            _dict['deliveryOrderPaymentSettings'] = None
-
-        # set to None if default_call_center_payment_type_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.default_call_center_payment_type_id is None and "default_call_center_payment_type_id" in self.model_fields_set:
-            _dict['defaultCallCenterPaymentTypeId'] = None
-
-        # set to None if order_item_comment_enabled (nullable) is None
-        # and model_fields_set contains the field
-        if self.order_item_comment_enabled is None and "order_item_comment_enabled" in self.model_fields_set:
-            _dict['orderItemCommentEnabled'] = None
-
-        # set to None if inn (nullable) is None
-        # and model_fields_set contains the field
-        if self.inn is None and "inn" in self.model_fields_set:
-            _dict['inn'] = None
-
-        # set to None if is_confirmation_enabled (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_confirmation_enabled is None and "is_confirmation_enabled" in self.model_fields_set:
-            _dict['isConfirmationEnabled'] = None
-
-        # set to None if confirm_allowed_interval_in_minutes (nullable) is None
-        # and model_fields_set contains the field
-        if self.confirm_allowed_interval_in_minutes is None and "confirm_allowed_interval_in_minutes" in self.model_fields_set:
-            _dict['confirmAllowedIntervalInMinutes'] = None
-
         return _dict
 
     @classmethod
@@ -210,30 +135,7 @@ class OrganizationsExtendedOrganizationInfo(OrganizationsOrganizationInfo):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "code": obj.get("code"),
-            "externalData": [CommonExternalData.from_dict(_item) for _item in obj["externalData"]] if obj.get("externalData") is not None else None,
-            "country": obj.get("country"),
-            "restaurantAddress": obj.get("restaurantAddress"),
-            "latitude": obj.get("latitude"),
-            "longitude": obj.get("longitude"),
-            "useUaeAddressingSystem": obj.get("useUaeAddressingSystem"),
-            "version": obj.get("version"),
-            "currencyIsoName": obj.get("currencyIsoName"),
-            "currencyMinimumDenomination": obj.get("currencyMinimumDenomination"),
-            "countryPhoneCode": obj.get("countryPhoneCode"),
-            "marketingSourceRequiredInDelivery": obj.get("marketingSourceRequiredInDelivery"),
-            "defaultDeliveryCityId": obj.get("defaultDeliveryCityId"),
-            "deliveryCityIds": obj.get("deliveryCityIds"),
-            "deliveryServiceType": obj.get("deliveryServiceType"),
-            "deliveryOrderPaymentSettings": obj.get("deliveryOrderPaymentSettings"),
-            "defaultCallCenterPaymentTypeId": obj.get("defaultCallCenterPaymentTypeId"),
-            "orderItemCommentEnabled": obj.get("orderItemCommentEnabled"),
-            "inn": obj.get("inn"),
-            "addressFormatType": obj.get("addressFormatType"),
-            "isConfirmationEnabled": obj.get("isConfirmationEnabled"),
-            "confirmAllowedIntervalInMinutes": obj.get("confirmAllowedIntervalInMinutes"),
-            "isCloud": obj.get("isCloud"),
-            "isAnonymousGuestsAllowed": obj.get("isAnonymousGuestsAllowed"),
-            "addressLookup": obj.get("addressLookup")
+            "externalData": [CommonExternalData.from_dict(_item) for _item in obj["externalData"]] if obj.get("externalData") is not None else None
         })
         return _obj
 

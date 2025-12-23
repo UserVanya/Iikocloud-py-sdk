@@ -6,7 +6,7 @@ Dynamic discount.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**manual_condition_id** | **UUID** | Applied manual condition ID. | 
+**manual_condition_id** | **str** | Applied manual condition ID. | 
 **sum** | **float** | Discount sum. | 
 
 ## Example

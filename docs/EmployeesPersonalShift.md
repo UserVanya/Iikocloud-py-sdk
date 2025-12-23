@@ -6,10 +6,10 @@ Employee personal shift info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Employee ID. | 
-**role_id** | **UUID** | Employee Role ID. | [optional] 
+**id** | **str** | Employee ID. | 
+**role_id** | **str** | Employee Role ID. | [optional] 
 **opened** | **bool** | Personal shift state flag (true - shift is opened, false - shift is closed). | 
-**terminal_group_id** | **UUID** | ID of the terminal group where the personal shift is opened/closed. | 
+**terminal_group_id** | **str** | ID of the terminal group where the personal shift is opened/closed. | 
 
 ## Example
 

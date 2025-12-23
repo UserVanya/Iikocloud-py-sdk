@@ -6,7 +6,7 @@ Order details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**parent_delivery_id** | **UUID** | ID of delivery serving as source for splitting by FCRs. | [optional] 
+**parent_delivery_id** | **str** | ID of delivery serving as source for splitting by FCRs. | [optional] 
 **customer** | [**DeliveriesResponseOrderCustomer**](DeliveriesResponseOrderCustomer.md) | Delivery customer. | [optional] 
 **phone** | **str** | Delivery phone number. | 
 **phone_extension** | **str** | Extension delivery phone number. | [optional] 
@@ -31,13 +31,13 @@ Name | Type | Description | Notes
 **is_deleted** | **bool** | Order is deleted. | [optional] 
 **when_received_by_api** | **str** | Moment of time when CloudAPI received the request to create the order (UTC). | [optional] 
 **when_received_from_front** | **str** | Moment of time when the order first received and saved from iikoFront (UTC). | [optional] 
-**moved_from_delivery_id** | **UUID** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
-**moved_from_terminal_group_id** | **UUID** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
-**moved_from_organization_id** | **UUID** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
+**moved_from_delivery_id** | **str** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
+**moved_from_terminal_group_id** | **str** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
+**moved_from_organization_id** | **str** | Tells that this delivery has been moved from terminal group  with id *MovedFromTerminalGroupId* by cancelling delivery with deliveryId *MovedFromDeliveryId*.   &gt; Allowed from version &#x60;7.5.4&#x60;. | [optional] 
 **external_courier_service** | [**DeliveriesResponseOrderExternalCourierService**](DeliveriesResponseOrderExternalCourierService.md) | ECS info.   &gt; Allowed from version &#x60;7.7.7&#x60;. | [optional] 
-**moved_to_delivery_id** | **UUID** | Tells that this delivery has been canceled and moved to terminal group  with id *MovedToTerminalGroupId*. | [optional] 
-**moved_to_terminal_group_id** | **UUID** |  | [optional] 
-**moved_to_organization_id** | **UUID** |  | [optional] 
+**moved_to_delivery_id** | **str** | Tells that this delivery has been canceled and moved to terminal group  with id *MovedToTerminalGroupId*. | [optional] 
+**moved_to_terminal_group_id** | **str** |  | [optional] 
+**moved_to_organization_id** | **str** |  | [optional] 
 **menu_id** | **str** | External menu ID. | [optional] 
 **delivery_zone** | **str** | Name of delivery zone. | [optional] 
 **locked_at** | **str** | Timestamp of when the order was taken for editing (lock). | [optional] 
@@ -59,7 +59,7 @@ Name | Type | Description | Notes
 **tips** | [**List[DeliveriesResponseOrderTipsPaymentItem]**](DeliveriesResponseOrderTipsPaymentItem.md) | Tips. | [optional] 
 **discounts** | [**List[DeliveriesResponseOrderDiscountItem]**](DeliveriesResponseOrderDiscountItem.md) | Discounts. | [optional] 
 **order_type** | [**DeliveriesResponseOrderOrderType**](DeliveriesResponseOrderOrderType.md) | Order type. | 
-**terminal_group_id** | **UUID** | ID of the terminal group where the order is located. | 
+**terminal_group_id** | **str** | ID of the terminal group where the order is located. | 
 **processed_payments_sum** | **float** | The amount of processed payments.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt;   &gt; Allowed from version &#x60;7.6.0&#x60;. | 
 **loyalty_info** | [**DeliveriesResponseOrderLoyaltyInfo**](DeliveriesResponseOrderLoyaltyInfo.md) | Information about Loyalty app.  &lt;remarks&gt;  null - only for unsupported POS versions.  &lt;/remarks&gt; | [optional] 
 **external_data** | [**List[DeliveriesResponseOrderExternalData]**](DeliveriesResponseOrderExternalData.md) | Order external data.   &gt; Allowed from version &#x60;8.0.6&#x60;. | [optional] 

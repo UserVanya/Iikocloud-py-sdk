@@ -6,7 +6,7 @@ Personal session change response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **error** | **str** | Error details. | [optional] 
 
 ## Example

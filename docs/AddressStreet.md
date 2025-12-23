@@ -6,7 +6,7 @@ Street DTO in iikoRMS
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Name. | 
 **external_revision** | **int** | External system revision No. | [optional] 
 **classifier_id** | **str** | ID in classifier, e.g., address database. | [optional] 

@@ -6,8 +6,8 @@ Banquet/reserve.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Banquet/reserve ID. | 
-**table_ids** | **List[UUID]** | Reserved tables. | 
+**id** | **str** | Banquet/reserve ID. | 
+**table_ids** | **List[str]** | Reserved tables. | 
 **estimated_start_time** | **str** | Estimated time when reserve will be closed or banquet will be started (Local for the terminal). | 
 **duration_in_minutes** | **int** | Estimated banquet duration. | 
 **guests_count** | **int** | Number of guests. | 

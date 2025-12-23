@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **combo_categories** | [**List[ComboCategoryDto3]**](ComboCategoryDto3.md) |  | 
 **tax_categories** | [**List[TaxCategoryDto2]**](TaxCategoryDto2.md) | Tax Categories | [optional] 
 **allergen_groups** | [**List[AllergenGroupDto2]**](AllergenGroupDto2.md) | Allergen groups | [optional] 
-**override_tax_categories** | [**List[OverrideTaxesDto2]**](OverrideTaxesDto2.md) | Tax benefits | [optional] 
+**override_tax_categories** | **Dict[str, List[OverrideTaxesDto2]]** | Tax benefits | [optional] 
 **item_groups** | [**List[ExternalMenuCategory3]**](ExternalMenuCategory3.md) |  | 
 
 ## Example

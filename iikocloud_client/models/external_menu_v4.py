@@ -38,7 +38,7 @@ class ExternalMenuV4(BaseModel):
     product_categories: Optional[List[ProductCategoryDto3]] = Field(default=None, description="Product categories", alias="productCategories")
     allergen_groups: Optional[List[AllergenGroupDto2]] = Field(default=None, description="Allergen groups", alias="allergenGroups")
     customer_tag_groups: Optional[List[CustomerTagGroup3]] = Field(default=None, description="Customer tag groups", alias="customerTagGroups")
-    override_tax_categories: Optional[List[OverrideTaxesDto2]] = Field(default=None, description="Tax benefits", alias="overrideTaxCategories")
+    override_tax_categories: Optional[Dict[str, List[OverrideTaxesDto2]]] = Field(default=None, description="Tax benefits", alias="overrideTaxCategories")
     revision: Optional[StrictInt] = Field(default=None, description="Menu revision")
     format_version: Optional[StrictInt] = Field(default=2, description="Menu version", alias="formatVersion")
     id: StrictInt = Field(description="ID of the external menu")
@@ -117,13 +117,15 @@ class ExternalMenuV4(BaseModel):
                 if _item_customer_tag_groups:
                     _items.append(_item_customer_tag_groups.to_dict())
             _dict['customerTagGroups'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in override_tax_categories (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of each value in override_tax_categories (dict of array)
+        _field_dict_of_array = {}
         if self.override_tax_categories:
-            for _item_override_tax_categories in self.override_tax_categories:
-                if _item_override_tax_categories:
-                    _items.append(_item_override_tax_categories.to_dict())
-            _dict['overrideTaxCategories'] = _items
+            for _key_override_tax_categories in self.override_tax_categories:
+                if self.override_tax_categories[_key_override_tax_categories] is not None:
+                    _field_dict_of_array[_key_override_tax_categories] = [
+                        _item.to_dict() for _item in self.override_tax_categories[_key_override_tax_categories]
+                    ]
+            _dict['overrideTaxCategories'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each item in intervals (list)
         _items = []
         if self.intervals:
@@ -176,7 +178,14 @@ class ExternalMenuV4(BaseModel):
             "productCategories": [ProductCategoryDto3.from_dict(_item) for _item in obj["productCategories"]] if obj.get("productCategories") is not None else None,
             "allergenGroups": [AllergenGroupDto2.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
             "customerTagGroups": [CustomerTagGroup3.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
-            "overrideTaxCategories": [OverrideTaxesDto2.from_dict(_item) for _item in obj["overrideTaxCategories"]] if obj.get("overrideTaxCategories") is not None else None,
+            "overrideTaxCategories": dict(
+                (_k,
+                        [OverrideTaxesDto2.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("overrideTaxCategories", {}).items()
+            ),
             "revision": obj.get("revision"),
             "formatVersion": obj.get("formatVersion") if obj.get("formatVersion") is not None else 2,
             "id": obj.get("id"),

@@ -6,7 +6,7 @@ Wrapping object to retrieve list of drivers from iikoRMS with checked role.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **employees_with_check_roles** | [**List[WrapperEmployeesEmployeeWithCheckedRole]**](WrapperEmployeesEmployeeWithCheckedRole.md) | List of drivers. | 
 
 ## Example

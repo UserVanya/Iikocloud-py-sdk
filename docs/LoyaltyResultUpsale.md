@@ -6,7 +6,7 @@ user tip.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_action_id** | **UUID** | Id of action that caused the suggestion. | [optional] 
+**source_action_id** | **str** | Id of action that caused the suggestion. | [optional] 
 **suggestion_text** | **str** | Suggestion text. | [optional] 
 **description_for_user** | **str** | Description for user. | [optional] 
 **product_codes** | **List[str]** | Codes of products that suggested to be added to order. | [optional] 

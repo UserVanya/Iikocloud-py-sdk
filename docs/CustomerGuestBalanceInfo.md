@@ -6,7 +6,7 @@ Information about guest balance.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Wallet id. | [optional] 
+**id** | **str** | Wallet id. | [optional] 
 **name** | **str** | Wallet name. | [optional] 
 **type** | [**ProgramType**](ProgramType.md) | Wallet type.  &lt;br&gt;0 - deposit or corporate nutrition,&lt;br /&gt;1 - bonus program,&lt;br /&gt;2 - products program,&lt;br /&gt;3 - discount program,&lt;br /&gt;4 - certificate program. | [optional] 
 **balance** | **float** | Wallet balance. | [optional] 

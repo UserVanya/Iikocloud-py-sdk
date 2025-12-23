@@ -6,13 +6,13 @@ Combo in order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Combo ID.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid(). | 
+**id** | **str** | Combo ID.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid(). | 
 **name** | **str** | Name of combo. | 
 **amount** | **int** | Quantity. | 
 **price** | **float** | Price of one combo. | 
-**source_id** | **UUID** | Combo validity ID. | 
-**program_id** | **UUID** | Card program ID.   &gt; Allowed from version &#x60;7.6.1&#x60;. | [optional] 
-**size_id** | **UUID** | Size ID. Required if combo has a size scale.   &gt; Allowed from version &#x60;8.5.6&#x60;. | [optional] 
+**source_id** | **str** | Combo validity ID. | 
+**program_id** | **str** | Card program ID.   &gt; Allowed from version &#x60;7.6.1&#x60;. | [optional] 
+**size_id** | **str** | Size ID. Required if combo has a size scale.   &gt; Allowed from version &#x60;8.5.6&#x60;. | [optional] 
 
 ## Example
 

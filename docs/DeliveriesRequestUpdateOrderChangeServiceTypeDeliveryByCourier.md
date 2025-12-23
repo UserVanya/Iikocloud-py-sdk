@@ -1,5 +1,6 @@
 # DeliveriesRequestUpdateOrderChangeServiceTypeDeliveryByCourier
 
+Change order's delivery type to DeliveryByCourier.
 
 ## Properties
 

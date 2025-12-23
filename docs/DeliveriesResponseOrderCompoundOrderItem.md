@@ -1,5 +1,6 @@
 # DeliveriesResponseOrderCompoundOrderItem
 
+Order item: composite item.
 
 ## Properties
 

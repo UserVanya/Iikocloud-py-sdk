@@ -6,7 +6,7 @@ Sms sending status info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sms_id** | **UUID** | Sms id. | 
+**sms_id** | **str** | Sms id. | 
 **status** | [**NotificationSmsSendingStatus**](NotificationSmsSendingStatus.md) | Sms sending status. | 
 **internal_error** | **str** | Sms sending internal error. Can be null. | [optional] 
 

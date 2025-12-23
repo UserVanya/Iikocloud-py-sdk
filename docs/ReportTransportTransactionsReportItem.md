@@ -18,25 +18,25 @@ Name | Type | Description | Notes
 **coupon** | [**ReportTransportTransactionsCouponReportItem**](ReportTransportTransactionsCouponReportItem.md) | Coupon. | [optional] 
 **emitent_name** | **str** | Emitent name. Can be null. | [optional] 
 **loyalty_user** | **str** | Loyalty user. Can be null. | [optional] 
-**marketing_campaign_id** | **UUID** | Marketing campaign id. | [optional] 
+**marketing_campaign_id** | **str** | Marketing campaign id. | [optional] 
 **nominal** | **float** | Nominal. | [optional] 
 **order_number** | **int** | Order number. | [optional] 
 **order_sum** | **float** | Order sum. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 **pos_balance_before** | **float** | Pos balance before. | [optional] 
-**program_id** | **UUID** | Program id. | [optional] 
+**program_id** | **str** | Program id. | [optional] 
 **sum** | **float** | Sum. | [optional] 
 **type** | [**ReportTransactionType**](ReportTransactionType.md) | Type. | [optional] 
 **type_name** | **str** | Type name. Can be null. | [optional] 
-**wallet_id** | **UUID** | Wallet id. | [optional] 
+**wallet_id** | **str** | Wallet id. | [optional] 
 **when_created** | **datetime** | When created. | [optional] 
 **when_created_order** | **datetime** | When created order. | [optional] 
-**id** | **UUID** | Id. | 
+**id** | **str** | Id. | 
 **is_delivery** | **bool** | Is delivery. | [optional] 
 **is_ignored** | **bool** | Is ignored. | [optional] 
-**pos_order_id** | **UUID** | Pos order id. | [optional] 
+**pos_order_id** | **str** | Pos order id. | [optional] 
 **revision** | **int** | Revision. | 
-**terminal_group_id** | **UUID** | Terminal group id. | [optional] 
+**terminal_group_id** | **str** | Terminal group id. | [optional] 
 
 ## Example
 

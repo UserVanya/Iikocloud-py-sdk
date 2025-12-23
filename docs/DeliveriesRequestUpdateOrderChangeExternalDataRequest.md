@@ -6,8 +6,8 @@ Request for change of delivery or table order external data.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID. | 
-**order_id** | **UUID** | Order ID. | 
+**organization_id** | **str** | Organization ID. | 
+**order_id** | **str** | Order ID. | 
 **external_data** | [**List[DeliveriesRequestCreateOrderExternalData]**](DeliveriesRequestCreateOrderExternalData.md) | External data to change. | 
 
 ## Example

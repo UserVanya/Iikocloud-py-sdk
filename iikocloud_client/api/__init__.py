@@ -1,6 +1,38 @@
 # flake8: noqa
 
-# import apis into api package
+if __import__("typing").TYPE_CHECKING:
+    # import apis into api package
+    from iikocloud_client.api.addresses_api import AddressesApi
+    from iikocloud_client.api.authorization_api import AuthorizationApi
+    from iikocloud_client.api.banquets_reserves_api import BanquetsReservesApi
+    from iikocloud_client.api.customer_categories_api import CustomerCategoriesApi
+    from iikocloud_client.api.customers_api import CustomersApi
+    from iikocloud_client.api.deliveries_create_and_update_api import DeliveriesCreateAndUpdateApi
+    from iikocloud_client.api.deliveries_retrieve_api import DeliveriesRetrieveApi
+    from iikocloud_client.api.delivery_restrictions_api import DeliveryRestrictionsApi
+    from iikocloud_client.api.deprecated_api import DeprecatedApi
+    from iikocloud_client.api.dictionaries_api import DictionariesApi
+    from iikocloud_client.api.discounts_and_promotions_api import DiscountsAndPromotionsApi
+    from iikocloud_client.api.drafts_api import DraftsApi
+    from iikocloud_client.api.employees_api import EmployeesApi
+    from iikocloud_client.api.marketing_sources_api import MarketingSourcesApi
+    from iikocloud_client.api.menu_api import MenuApi
+    from iikocloud_client.api.messages_api import MessagesApi
+    from iikocloud_client.api.notifications_api import NotificationsApi
+    from iikocloud_client.api.operations_api import OperationsApi
+    from iikocloud_client.api.orders_api import OrdersApi
+    from iikocloud_client.api.organizations_api import OrganizationsApi
+    from iikocloud_client.api.report_api import ReportApi
+    from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
+    from iikocloud_client.api.webhooks_api import WebhooksApi
+    
+else:
+    from lazy_imports import LazyModule, as_package, load
+
+    load(
+        LazyModule(
+            *as_package(__file__),
+            """# import apis into api package
 from iikocloud_client.api.addresses_api import AddressesApi
 from iikocloud_client.api.authorization_api import AuthorizationApi
 from iikocloud_client.api.banquets_reserves_api import BanquetsReservesApi
@@ -25,3 +57,8 @@ from iikocloud_client.api.report_api import ReportApi
 from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
 from iikocloud_client.api.webhooks_api import WebhooksApi
 
+""",
+            name=__name__,
+            doc=__doc__,
+        )
+    )

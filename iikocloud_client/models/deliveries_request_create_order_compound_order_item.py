@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderCompoundOrderItem(DeliveriesRequestCreateOrderOrderItem):
     """
-    DeliveriesRequestCreateOrderCompoundOrderItem
+    Order item: composite item.
     """ # noqa: E501
     primary_component: DeliveriesRequestCreateOrderCompoundOrderItemComponent = Field(description="Main component.", alias="primaryComponent")
     secondary_component: Optional[DeliveriesRequestCreateOrderCompoundOrderItemComponent] = Field(default=None, description="Minor component.", alias="secondaryComponent")
     common_modifiers: Optional[List[DeliveriesRequestCreateOrderModifier]] = Field(default=None, description="Indivisible modifiers.", alias="commonModifiers")
-    __properties: ClassVar[List[str]] = ["type", "amount", "productSizeId", "comboInformation", "comment", "primaryComponent", "secondaryComponent", "commonModifiers"]
+    __properties: ClassVar[List[str]] = ["type", "amount", "productSizeId", "comboInformation", "comment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,19 +77,6 @@ class DeliveriesRequestCreateOrderCompoundOrderItem(DeliveriesRequestCreateOrder
         # override the default output from pydantic by calling `to_dict()` of combo_information
         if self.combo_information:
             _dict['comboInformation'] = self.combo_information.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of primary_component
-        if self.primary_component:
-            _dict['primaryComponent'] = self.primary_component.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of secondary_component
-        if self.secondary_component:
-            _dict['secondaryComponent'] = self.secondary_component.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in common_modifiers (list)
-        _items = []
-        if self.common_modifiers:
-            for _item_common_modifiers in self.common_modifiers:
-                if _item_common_modifiers:
-                    _items.append(_item_common_modifiers.to_dict())
-            _dict['commonModifiers'] = _items
         # set to None if product_size_id (nullable) is None
         # and model_fields_set contains the field
         if self.product_size_id is None and "product_size_id" in self.model_fields_set:
@@ -104,16 +91,6 @@ class DeliveriesRequestCreateOrderCompoundOrderItem(DeliveriesRequestCreateOrder
         # and model_fields_set contains the field
         if self.comment is None and "comment" in self.model_fields_set:
             _dict['comment'] = None
-
-        # set to None if secondary_component (nullable) is None
-        # and model_fields_set contains the field
-        if self.secondary_component is None and "secondary_component" in self.model_fields_set:
-            _dict['secondaryComponent'] = None
-
-        # set to None if common_modifiers (nullable) is None
-        # and model_fields_set contains the field
-        if self.common_modifiers is None and "common_modifiers" in self.model_fields_set:
-            _dict['commonModifiers'] = None
 
         return _dict
 
@@ -131,10 +108,7 @@ class DeliveriesRequestCreateOrderCompoundOrderItem(DeliveriesRequestCreateOrder
             "amount": obj.get("amount"),
             "productSizeId": obj.get("productSizeId"),
             "comboInformation": DeliveriesRequestCreateOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None,
-            "comment": obj.get("comment"),
-            "primaryComponent": DeliveriesRequestCreateOrderCompoundOrderItemComponent.from_dict(obj["primaryComponent"]) if obj.get("primaryComponent") is not None else None,
-            "secondaryComponent": DeliveriesRequestCreateOrderCompoundOrderItemComponent.from_dict(obj["secondaryComponent"]) if obj.get("secondaryComponent") is not None else None,
-            "commonModifiers": [DeliveriesRequestCreateOrderModifier.from_dict(_item) for _item in obj["commonModifiers"]] if obj.get("commonModifiers") is not None else None
+            "comment": obj.get("comment")
         })
         return _obj
 

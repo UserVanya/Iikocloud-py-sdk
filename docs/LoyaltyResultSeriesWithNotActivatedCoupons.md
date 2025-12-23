@@ -6,7 +6,7 @@ Series with not activated coupons.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **number** | **str** | Number. Can be null. | [optional] 
 
 ## Example

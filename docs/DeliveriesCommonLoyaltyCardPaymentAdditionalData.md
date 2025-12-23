@@ -1,5 +1,6 @@
 # DeliveriesCommonLoyaltyCardPaymentAdditionalData
 
+Additional data for LoyaltyApp payment item.
 
 ## Properties
 

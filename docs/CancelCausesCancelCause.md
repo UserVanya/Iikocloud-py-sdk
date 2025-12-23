@@ -6,7 +6,7 @@ Delivery cancel cause.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Identifier. | 
+**id** | **str** | Identifier. | 
 **name** | **str** | Name. | 
 **is_deleted** | **bool** | Is deleted sign. | [optional] 
 

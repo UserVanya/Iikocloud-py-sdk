@@ -1,5 +1,6 @@
 # DeliveriesResponseOrderAnonymousCustomer
 
+'One-time' customer:  - should be used if a customer does not agree to take part in the store's loyalty programs or an aggregator (external system) does not provide customer details  - customer details will NOT be added to the store's customer database and will be used ONLY to complete the current order
 
 ## Properties
 

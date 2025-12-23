@@ -6,8 +6,8 @@ Restore customers request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_ids** | **List[UUID]** | Customer IDs to recover. | 
-**organization_id** | **UUID** | Organization id. | 
+**customer_ids** | **List[str]** | Customer IDs to recover. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

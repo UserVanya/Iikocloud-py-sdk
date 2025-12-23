@@ -1,11 +1,12 @@
 # DeliveriesRequestCreateOrderRegularCustomer
 
+'Regular' customer:  - can be used only if a customer agrees to take part in the store's loyalty programs  - customer details will be added (updated) to the store's customer database  - benefits (accumulation of rewards, etc.) of active loyalty programs will be made available to the customer
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Existing customer ID in RMS.   &gt; If null - the phone number is searched in database, otherwise the new customer is created in RMS. | [optional] 
+**id** | **str** | Existing customer ID in RMS.   &gt; If null - the phone number is searched in database, otherwise the new customer is created in RMS. | [optional] 
 **name** | **str** | Name of customer.  &gt; Required for new customers (i.e. if \&quot;id\&quot; &#x3D;&#x3D; null)  &gt; Not required if \&quot;id\&quot; specified. | [optional] 
 **surname** | **str** | Last name. | [optional] 
 **comment** | **str** | Comment. | [optional] 

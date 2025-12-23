@@ -6,7 +6,7 @@ Not empty `phone` or `magnetCardTrack` or `id` is required for successful import
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Customer id. | [optional] 
+**id** | **str** | Customer id. | [optional] 
 **phone** | **str** | Customer phone. Can be null. | [optional] 
 **card_track** | **str** | Card track. Required if cardNumber set. Can be null. | [optional] 
 **card_number** | **str** | Card number. Required if cardTrack set. Can be null. | [optional] 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **referrer_id** | **str** | Id for referrer guest. Null for old integrations, Guid.Empty - for referrer deletion. Can be null. | [optional] 
 **user_data** | **str** | Customer user data. Can be null. | [optional] 
 **is_deleted** | **bool** | Customer logical deletion flag. | [optional] 
-**organization_id** | **UUID** | Customer organization id. | 
+**organization_id** | **str** | Customer organization id. | 
 
 ## Example
 

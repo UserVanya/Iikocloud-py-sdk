@@ -6,7 +6,7 @@ Out-of-stock list update for a group of front terminals.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Terminal ID. | 
+**id** | **str** | Terminal ID. | 
 **is_full** | **bool** | Whether out-of-stock list is fully updated. | 
 
 ## Example

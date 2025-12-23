@@ -6,7 +6,7 @@ Delivery restrictions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **delivery_geocode_service_type** | [**DeliveryRestrictionsDeliveryGeocodeServiceType**](DeliveryRestrictionsDeliveryGeocodeServiceType.md) | Geocoding service type. | 
 **delivery_regions_map_url** | **str** | Link to the map of delivery service regions. | 
 **default_delivery_duration_in_minutes** | **int** | General standard of delivery time. | 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **reject_on_geocoding_error** | **bool** | Reject delivery if we could not geocode the address. | 
 **add_delivery_service_cost** | **bool** | Add shipping cost to order. | 
 **use_same_delivery_service_product** | **bool** | Indication that the cost is the same for all points of delivery. | 
-**default_delivery_service_product_id** | **UUID** | Link to \&quot;delivery service payment\&quot;. | 
+**default_delivery_service_product_id** | **str** | Link to \&quot;delivery service payment\&quot;. | 
 **use_external_assignation_service** | **bool** | Use external delivery distribution service. | 
 **front_trusts_call_center_check** | **bool** | Indication whether or not to trust on the fronts the call center mapping restrictions from the call center  if the composition of the order has not changed since the last check. If true, then trust. | 
 **external_assignation_service_url** | **str** | Address of external delivery distribution service. | 

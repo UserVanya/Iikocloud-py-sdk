@@ -26,11 +26,11 @@ from typing_extensions import Self
 
 class DeliveriesCommonLoyaltyCardPaymentAdditionalData(DeliveriesCommonPaymentAdditionalData):
     """
-    DeliveriesCommonLoyaltyCardPaymentAdditionalData
+    Additional data for LoyaltyApp payment item.
     """ # noqa: E501
     credential: StrictStr = Field(description="Guest credential, authorizing payment.")
     search_scope: DeliveriesCommonIikoCardSearchScope = Field(description="Guest credential search scope.", alias="searchScope")
-    __properties: ClassVar[List[str]] = ["type", "credential", "searchScope"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +83,7 @@ class DeliveriesCommonLoyaltyCardPaymentAdditionalData(DeliveriesCommonPaymentAd
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "credential": obj.get("credential"),
-            "searchScope": obj.get("searchScope")
+            "type": obj.get("type")
         })
         return _obj
 

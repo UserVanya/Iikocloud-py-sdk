@@ -6,12 +6,12 @@ Request for information about orders.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organization ID for which an order search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organization ID for which an order search will be performed.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **delivery_date_from** | **str** | Order delivery date (Local for delivery terminal). Lower limit.                The guaranteed order availability period is the last 7 days. To access earlier orders, use the &#x60;/api/1/deliveries/history/by_delivery_date_and_phone&#x60; method. | 
 **delivery_date_to** | **str** | Order delivery date (Local for delivery terminal). Upper limit. | [optional] 
 **statuses** | [**List[DeliveriesCommonDeliveryStatus]**](DeliveriesCommonDeliveryStatus.md) | Allowed order statuses. | [optional] 
 **source_keys** | **List[str]** | Source keys. | [optional] 
-**courier_ids** | **List[UUID]** | List of driver IDs. | [optional] 
+**courier_ids** | **List[str]** | List of driver IDs. | [optional] 
 
 ## Example
 

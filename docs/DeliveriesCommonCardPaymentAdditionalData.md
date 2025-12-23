@@ -1,5 +1,6 @@
 # DeliveriesCommonCardPaymentAdditionalData
 
+Additional data for Card payment item.
 
 ## Properties
 

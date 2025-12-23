@@ -33,7 +33,7 @@ from typing_extensions import Self
 
 class DeliveriesResponseOrderProductOrderItem(DeliveriesResponseOrderOrderItem):
     """
-    DeliveriesResponseOrderProductOrderItem
+    Order item: item.
     """ # noqa: E501
     product: DeliveriesResponseOrderProduct = Field(description="Item.")
     modifiers: Optional[List[DeliveriesResponseOrderOrderItemModifier]] = Field(default=None, description="Modifiers.")
@@ -44,7 +44,7 @@ class DeliveriesResponseOrderProductOrderItem(DeliveriesResponseOrderOrderItem):
     position_id: Optional[UUID] = Field(default=None, description="Unique identifier of the item in the order and for the whole system.", alias="positionId")
     tax_percent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Tax rate.", alias="taxPercent")
     result_sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total amount per item including tax, discounts/surcharges.", alias="resultSum")
-    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation", "product", "modifiers", "codes", "price", "cost", "pricePredefined", "positionId", "taxPercent", "resultSum"]
+    __properties: ClassVar[List[str]] = ["type", "status", "deleted", "amount", "comment", "whenPrinted", "size", "comboInformation"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,25 +94,6 @@ class DeliveriesResponseOrderProductOrderItem(DeliveriesResponseOrderOrderItem):
         # override the default output from pydantic by calling `to_dict()` of combo_information
         if self.combo_information:
             _dict['comboInformation'] = self.combo_information.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of product
-        if self.product:
-            _dict['product'] = self.product.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in modifiers (list)
-        _items = []
-        if self.modifiers:
-            for _item_modifiers in self.modifiers:
-                if _item_modifiers:
-                    _items.append(_item_modifiers.to_dict())
-            _dict['modifiers'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in codes (list of list)
-        _items = []
-        if self.codes:
-            for _item_codes in self.codes:
-                if _item_codes:
-                    _items.append(
-                         [_inner_item.to_dict() for _inner_item in _item_codes if _inner_item is not None]
-                    )
-            _dict['codes'] = _items
         # set to None if deleted (nullable) is None
         # and model_fields_set contains the field
         if self.deleted is None and "deleted" in self.model_fields_set:
@@ -138,26 +119,6 @@ class DeliveriesResponseOrderProductOrderItem(DeliveriesResponseOrderOrderItem):
         if self.combo_information is None and "combo_information" in self.model_fields_set:
             _dict['comboInformation'] = None
 
-        # set to None if modifiers (nullable) is None
-        # and model_fields_set contains the field
-        if self.modifiers is None and "modifiers" in self.model_fields_set:
-            _dict['modifiers'] = None
-
-        # set to None if codes (nullable) is None
-        # and model_fields_set contains the field
-        if self.codes is None and "codes" in self.model_fields_set:
-            _dict['codes'] = None
-
-        # set to None if position_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.position_id is None and "position_id" in self.model_fields_set:
-            _dict['positionId'] = None
-
-        # set to None if tax_percent (nullable) is None
-        # and model_fields_set contains the field
-        if self.tax_percent is None and "tax_percent" in self.model_fields_set:
-            _dict['taxPercent'] = None
-
         return _dict
 
     @classmethod
@@ -177,19 +138,7 @@ class DeliveriesResponseOrderProductOrderItem(DeliveriesResponseOrderOrderItem):
             "comment": obj.get("comment"),
             "whenPrinted": obj.get("whenPrinted"),
             "size": DeliveriesResponseOrderProductSize.from_dict(obj["size"]) if obj.get("size") is not None else None,
-            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None,
-            "product": DeliveriesResponseOrderProduct.from_dict(obj["product"]) if obj.get("product") is not None else None,
-            "modifiers": [DeliveriesResponseOrderOrderItemModifier.from_dict(_item) for _item in obj["modifiers"]] if obj.get("modifiers") is not None else None,
-            "codes": [
-                    [DeliveriesResponseOrderOrderItemIdentifierCode.from_dict(_inner_item) for _inner_item in _item]
-                    for _item in obj["codes"]
-                ] if obj.get("codes") is not None else None,
-            "price": obj.get("price"),
-            "cost": obj.get("cost"),
-            "pricePredefined": obj.get("pricePredefined"),
-            "positionId": obj.get("positionId"),
-            "taxPercent": obj.get("taxPercent"),
-            "resultSum": obj.get("resultSum")
+            "comboInformation": DeliveriesResponseOrderComboItemInformation.from_dict(obj["comboInformation"]) if obj.get("comboInformation") is not None else None
         })
         return _obj
 

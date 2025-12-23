@@ -6,7 +6,7 @@ Wrapping object (external) for return of orders.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **orders** | [**List[TableOrdersResponseTableOrderInfo]**](TableOrdersResponseTableOrderInfo.md) | Orders. | 
 
 ## Example

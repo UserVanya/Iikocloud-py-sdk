@@ -6,7 +6,7 @@ Order type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **name** | **str** | Name. | 
 **order_service_type** | [**DeliveriesCommonOrderServiceType**](DeliveriesCommonOrderServiceType.md) | Order type. | 
 

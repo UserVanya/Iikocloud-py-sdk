@@ -6,7 +6,7 @@ Courier's location.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**courier_id** | **UUID** | Employee ID. | [optional] 
+**courier_id** | **str** | Employee ID. | [optional] 
 **last_active_latitude** | **float** | Latitude. | [optional] 
 **last_active_longitude** | **float** | Longitude. | [optional] 
 **last_active_client_date** | **str** | Client date and time. | [optional] 

@@ -6,7 +6,7 @@ Item size.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | [optional] 
+**id** | **str** | ID. | [optional] 
 **name** | **str** | Name. | [optional] 
 **priority** | **int** | Priority (serial number) of the size in the size scale. | [optional] 
 **is_default** | **bool** | Is the default size in the size scale. | [optional] 

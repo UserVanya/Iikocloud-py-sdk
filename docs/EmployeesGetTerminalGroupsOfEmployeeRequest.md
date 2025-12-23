@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**employee_id** | **UUID** |  | 
+**employee_id** | **str** |  | 
 
 ## Example
 

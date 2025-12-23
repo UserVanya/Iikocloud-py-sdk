@@ -6,7 +6,7 @@ Response with removal types (reasons for deletion) list.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **removal_types** | [**List[RemovalTypesRemovalType]**](RemovalTypesRemovalType.md) | List of removal types. | 
 
 ## Example

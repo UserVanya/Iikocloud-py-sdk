@@ -6,7 +6,7 @@ Hold money response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **UUID** | Holding money transaction id. | [optional] 
+**transaction_id** | **str** | Holding money transaction id. | [optional] 
 
 ## Example
 

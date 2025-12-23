@@ -1,5 +1,6 @@
 # CustomerGetCustomerInfoByIdRequest
 
+Request to get customer by Id.
 
 ## Properties
 

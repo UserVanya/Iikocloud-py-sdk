@@ -6,7 +6,7 @@ Order item modifier.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Product ID. | 
+**id** | **str** | Product ID. | 
 **product** | **str** | Product. | [optional] 
 **amount** | **float** | Amount. | 
 

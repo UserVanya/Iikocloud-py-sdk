@@ -7,7 +7,7 @@ Get programs request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **without_marketing_campaigns** | **bool** | Determines if marketing campaigns not required. | [optional] 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

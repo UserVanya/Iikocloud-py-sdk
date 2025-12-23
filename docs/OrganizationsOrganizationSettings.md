@@ -6,7 +6,7 @@ Organization settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Organization ID. | 
+**id** | **str** | Organization ID. | 
 **prices_vat_inclusive** | **bool** | Determines whether organization prices include VAT.                Available if &#x60;VAT&#x60; requested. | [optional] 
 **loyalty_discount_affects_vat** | **bool** | Determines whether organization loyalty discounts affects VAT.                &gt; Working only if \&quot;pricesVatInclusive\&quot; &#x3D; false                Available if &#x60;VAT&#x60; requested. | [optional] 
 **version** | **str** | RMS version.                Available if &#x60;Version&#x60; requested. | [optional] 
@@ -20,11 +20,11 @@ Name | Type | Description | Notes
 **use_uae_addressing_system** | **bool** | Regional setting \&quot;Use the UAE Addressing System\&quot;.                Available if &#x60;UseUaeAddressingSystem&#x60; requested. | [optional] 
 **country_phone_code** | **str** | Country dialing code.                Available if &#x60;CountryPhoneCode&#x60; requested. | [optional] 
 **marketing_source_required_in_delivery** | **bool** | Require mandatory marketing source input when creating a delivery.                Available if &#x60;MarketingSourceRequiredInDelivery&#x60; requested. | [optional] 
-**default_delivery_city_id** | **UUID** | Default delivery city.                Available if &#x60;DefaultDeliveryCityId&#x60; requested. | [optional] 
-**delivery_city_ids** | **List[UUID]** | Delivery cities.                Available if &#x60;DeliveryCityIds&#x60; requested. | [optional] 
+**default_delivery_city_id** | **str** | Default delivery city.                Available if &#x60;DefaultDeliveryCityId&#x60; requested. | [optional] 
+**delivery_city_ids** | **List[str]** | Delivery cities.                Available if &#x60;DeliveryCityIds&#x60; requested. | [optional] 
 **delivery_service_type** | [**OrganizationsDeliverySettingsServiceType**](OrganizationsDeliverySettingsServiceType.md) | Delivery type.                Available if &#x60;DeliveryServiceType&#x60; requested. | [optional] 
 **delivery_order_payment_settings** | [**OrganizationsDeliveryOrderPaymentSettings**](OrganizationsDeliveryOrderPaymentSettings.md) | Delivery order payment settings.                Available if &#x60;DeliveryOrderPaymentSettings&#x60; requested. | [optional] 
-**default_call_center_payment_type_id** | **UUID** | Default payment type for CallCenter.                Available if &#x60;DefaultCallCenterPaymentTypeId&#x60; requested. | [optional] 
+**default_call_center_payment_type_id** | **str** | Default payment type for CallCenter.                Available if &#x60;DefaultCallCenterPaymentTypeId&#x60; requested. | [optional] 
 **order_item_comment_enabled** | **bool** | Allow text comments for order items (in all restaurant sections).                Available if &#x60;OrderItemCommentEnabled&#x60; requested. | [optional] 
 **is_confirmation_enabled** | **bool** | Determines whether to use delivery confirmation.                Available if &#x60;IsConfirmationEnabled&#x60; requested. | [optional] 
 **confirm_allowed_interval_in_minutes** | **int** | Confirm orders time interval.                Available if &#x60;ConfirmAllowedIntervalInMinutes&#x60; requested. | [optional] 

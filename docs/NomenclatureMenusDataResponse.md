@@ -6,7 +6,7 @@ Response with stock lists.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **external_menus** | [**List[NomenclatureExternalMenu]**](NomenclatureExternalMenu.md) | External menu. | [optional] 
 **price_categories** | [**List[NomenclaturePriceCategory]**](NomenclaturePriceCategory.md) | Price category. | [optional] 
 

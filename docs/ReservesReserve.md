@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **should_remind** | **bool** | Whether to remind staff to prepare table beforehand. | 
 **status** | [**ReservesReserveStatus**](ReservesReserveStatus.md) | Status of the reserve or banquet. | 
 **cancel_reason** | [**ReservesReserveCancelReason**](ReservesReserveCancelReason.md) | The reserve cancellation reason or null if the reserve hasn&#39;t been canceled. | [optional] 
-**table_ids** | **List[UUID]** | Reserved table IDs. | 
+**table_ids** | **List[str]** | Reserved table IDs. | 
 **estimated_start_time** | **str** | Estimated time when reserve will be closed or banquet will be started. | 
 **guests_coming_time** | **str** | Time when guests came and reserve was closed or banquet was started. | [optional] 
 **phone** | **str** | Telephone number. | [optional] 

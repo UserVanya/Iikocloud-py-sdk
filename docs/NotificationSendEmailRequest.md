@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **receiver** | **str** | Email address. Can be null. | 
 **subject** | **str** | Message subject. Can be null. | 
 **body** | **str** | Message body. Can be null. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

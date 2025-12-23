@@ -6,7 +6,7 @@ Order item.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Product ID. | 
+**id** | **str** | Product ID. | 
 **product** | **str** | Product. | 
 **amount** | **float** | Amount. | 
 **modifiers** | [**List[DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier]**](DeliveryRestrictionsAllowedRestrictionsRestrictionsOrderItemModifier.md) | Modifiers (absolute amount). | [optional] 

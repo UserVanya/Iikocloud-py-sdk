@@ -6,7 +6,7 @@ Add customer to program response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_wallet_id** | **UUID** | User wallet id. | [optional] 
+**user_wallet_id** | **str** | User wallet id. | [optional] 
 
 ## Example
 

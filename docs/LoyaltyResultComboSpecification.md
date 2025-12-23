@@ -6,8 +6,8 @@ Information about combos of organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_action_id** | **UUID** | Id of action that added the combo. | [optional] 
-**category_id** | **UUID** | Combo&#39;s category id. | [optional] 
+**source_action_id** | **str** | Id of action that added the combo. | [optional] 
+**category_id** | **str** | Combo&#39;s category id. | [optional] 
 **name** | **str** | Name. Can be null. | [optional] 
 **price_modification_type** | [**LoyaltyResultComboPriceModificationType**](LoyaltyResultComboPriceModificationType.md) | Price modification type.  &lt;br&gt;0 - fixed combo price,&lt;br /&gt;1 - fixed position price,&lt;br /&gt;2 - cheapest position discount,&lt;br /&gt;3 - most expensive position discount,&lt;br /&gt;4 - percentage discount for each position. | [optional] 
 **price_modification** | **float** | Price modification. | [optional] 

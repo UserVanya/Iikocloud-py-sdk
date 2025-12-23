@@ -6,7 +6,7 @@ Employee info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Employee ID. | 
+**id** | **str** | Employee ID. | 
 **first_name** | **str** | Name of employee. | [optional] 
 **middle_name** | **str** | Second name. | [optional] 
 **last_name** | **str** | Last name. | [optional] 

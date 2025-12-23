@@ -6,10 +6,10 @@ Item component
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **UUID** | Item ID. | 
+**product_id** | **str** | Item ID. | 
 **modifiers** | [**List[DeliveriesRequestCreateOrderModifier]**](DeliveriesRequestCreateOrderModifier.md) | Modifiers. | [optional] 
 **price** | **float** | Price. | [optional] 
-**position_id** | **UUID** | Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  &gt; If sent null, it generates automatically on iikoTransport side. | [optional] 
+**position_id** | **str** | Unique identifier of the item in the order.  MUST be unique for the whole system. Therefore it must be generated with Guid.NewGuid().  &gt; If sent null, it generates automatically on iikoTransport side. | [optional] 
 
 ## Example
 

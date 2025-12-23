@@ -6,7 +6,7 @@ Response to request for payment types by organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** |  | 
+**correlation_id** | **str** |  | 
 **payment_types** | [**List[PaymentTypesPaymentType]**](PaymentTypesPaymentType.md) | List of payment types and terminal groups where they are available. | 
 
 ## Example

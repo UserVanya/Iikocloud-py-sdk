@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
 **amount** | **float** | Quantity. | 
-**product_size_id** | **UUID** | Size ID. Required if a stock list item has a size scale. | [optional] 
+**product_size_id** | **str** | Size ID. Required if a stock list item has a size scale. | [optional] 
 **combo_information** | [**DeliveriesRequestCreateOrderComboItemInformation**](DeliveriesRequestCreateOrderComboItemInformation.md) | Combo details if combo includes order item. | [optional] 
 **comment** | **str** | Comment. | [optional] 
 

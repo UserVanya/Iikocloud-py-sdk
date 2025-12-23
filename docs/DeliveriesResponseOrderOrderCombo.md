@@ -6,11 +6,11 @@ Combo in order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Combo ID. | 
+**id** | **str** | Combo ID. | 
 **name** | **str** | Name of combo. | 
 **amount** | **int** | Number of combos. | 
 **price** | **float** | Price of combo. Given for 1 combo, without regard to amount. | 
-**source_id** | **UUID** | Combo action ID. | 
+**source_id** | **str** | Combo action ID. | 
 **size** | [**DeliveriesResponseOrderProductSize**](DeliveriesResponseOrderProductSize.md) | Size. | [optional] 
 
 ## Example

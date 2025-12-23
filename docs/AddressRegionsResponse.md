@@ -6,7 +6,7 @@ Service response with list of districts.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **regions** | [**List[WrapperAddressRegion]**](WrapperAddressRegion.md) | List of districts. | 
 
 ## Example

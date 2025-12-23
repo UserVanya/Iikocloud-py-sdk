@@ -6,7 +6,7 @@ Response to authentication token request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **token** | **str** | Authentication token. The standard token lifetime is 1 hour. | 
 
 ## Example

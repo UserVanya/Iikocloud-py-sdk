@@ -6,7 +6,7 @@ Information on group of modifiers.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ID. | 
+**id** | **str** | ID. | 
 **min_amount** | **int** | Minimum quantity. | 
 **max_amount** | **int** | Maximum quantity. | 
 **required** | **bool** | Required availability. | 

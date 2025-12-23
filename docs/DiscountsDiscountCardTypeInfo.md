@@ -6,7 +6,7 @@ Discount/surcharge DTO.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Discount ID in RMS. | 
+**id** | **str** | Discount ID in RMS. | 
 **name** | **str** | Discount name. | 
 **percent** | **float** | Total discount rate.  &gt; Ignored if \&quot;isCategorisedDiscount\&quot; specified. | 
 **is_categorised_discount** | **bool** | Whether it is category discount or not.  &gt; If true, \&quot;productCategoryDiscounts\&quot; discounts will apply. | 

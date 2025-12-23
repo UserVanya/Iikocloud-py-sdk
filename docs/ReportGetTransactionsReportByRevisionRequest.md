@@ -6,11 +6,11 @@ Report request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | 
+**customer_id** | **str** | Customer id. | 
 **revision** | **int** | Report since revision. Included if LastTransactionId set.. | [optional] 
-**last_transaction_id** | **UUID** | Report since transaction. Excluded. Can&#39;t be used without revision.. | [optional] 
+**last_transaction_id** | **str** | Report since transaction. Excluded. Can&#39;t be used without revision.. | [optional] 
 **page_size** | **int** | Page size. Ignored if more than max size on server.. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

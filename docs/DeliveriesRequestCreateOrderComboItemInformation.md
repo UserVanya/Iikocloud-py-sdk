@@ -6,9 +6,9 @@ Combo details if order item belongs to combo
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combo_id** | **UUID** | Created combo ID.  Must be one of combos.id generated values. | 
-**combo_source_id** | **UUID** | Action ID that defines combo. | 
-**combo_group_id** | **UUID** | Combo group ID to which item belongs. | 
+**combo_id** | **str** | Created combo ID.  Must be one of combos.id generated values. | 
+**combo_source_id** | **str** | Action ID that defines combo. | 
+**combo_group_id** | **str** | Combo group ID to which item belongs. | 
 **combo_group_name** | **str** | Combo group name to which item belongs. | [optional] 
 
 ## Example

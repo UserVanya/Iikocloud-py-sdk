@@ -6,7 +6,7 @@ Request for organizations specified settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organizations IDs which have to be returned. By default - all organizations from apiLogin. | [optional] 
+**organization_ids** | **List[str]** | Organizations IDs which have to be returned. By default - all organizations from apiLogin. | [optional] 
 **include_disabled** | **bool** | Attribute that shows that response contains disabled organizations. | [optional] 
 **parameters** | [**List[OrganizationsOrganizationSettingsParameters]**](OrganizationsOrganizationSettingsParameters.md) | Parameters of information to be present in response. | [optional] 
 **return_external_data** | **List[str]** | External data keys that have to be returned. | [optional] 

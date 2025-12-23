@@ -6,7 +6,7 @@ Send sms response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sms_id** | **UUID** | Sms id. | [optional] 
+**sms_id** | **str** | Sms id. | [optional] 
 
 ## Example
 

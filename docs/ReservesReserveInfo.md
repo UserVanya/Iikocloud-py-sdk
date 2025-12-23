@@ -6,9 +6,9 @@ Banquet/reserve.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Banquet/reserve ID. | 
+**id** | **str** | Banquet/reserve ID. | 
 **external_number** | **str** | Banquet/reserve external number. | [optional] 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **timestamp** | **int** | Timestamp of most recent banquet/reserve change that took place on iikoTransport server. | 
 **creation_status** | [**DeliveriesResponseOrderCreationStatus**](DeliveriesResponseOrderCreationStatus.md) | Banquet/reserve creation status. In case of asynchronous creation, it allows to track the instance an banquet/reserve was validated/created in iikoFront. | 
 **error_info** | [**ErrorsErrorInfo**](ErrorsErrorInfo.md) | Banquet/reserve creation error details.  &gt; Required only if \&quot;creationStatus\&quot;&#x3D;\&quot;Error\&quot;. | [optional] 

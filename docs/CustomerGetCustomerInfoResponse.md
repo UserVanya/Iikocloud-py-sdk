@@ -6,8 +6,8 @@ Get customer info response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Guest id. | [optional] 
-**referrer_id** | **UUID** | Guest referrer id. | [optional] 
+**id** | **str** | Guest id. | [optional] 
+**referrer_id** | **str** | Guest referrer id. | [optional] 
 **name** | **str** | Guest name. Can be null. | [optional] 
 **surname** | **str** | Guest surname. Can be null. | [optional] 
 **middle_name** | **str** | Guest middle name. Can be null. | [optional] 
@@ -34,8 +34,8 @@ Name | Type | Description | Notes
 **when_registered** | **str** | Registration date. | [optional] 
 **last_processed_order_date** | **str** | Last order date. | [optional] 
 **first_order_date** | **str** | First order date. | [optional] 
-**last_visited_organization_id** | **UUID** | Guest last visited organization id. | [optional] 
-**registration_organization_id** | **UUID** | Guest registration organization id. | [optional] 
+**last_visited_organization_id** | **str** | Guest last visited organization id. | [optional] 
+**registration_organization_id** | **str** | Guest registration organization id. | [optional] 
 
 ## Example
 

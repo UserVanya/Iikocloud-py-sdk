@@ -6,7 +6,7 @@ Cloud Call Center actions metrics information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**employee_id** | **UUID** | Cloud Call Center operator id. | 
+**employee_id** | **str** | Cloud Call Center operator id. | 
 **actions** | [**List[MetricsCallCenterAction]**](MetricsCallCenterAction.md) |  | 
 
 ## Example

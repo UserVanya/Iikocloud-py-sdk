@@ -6,8 +6,8 @@ DTO containing terminal groups details
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Delivery group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
-**organization_id** | **UUID** | Organization ID to which delivery group belongs.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**id** | **str** | Delivery group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**organization_id** | **str** | Organization ID to which delivery group belongs.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **name** | **str** | Terminal group name. | 
 **address** | **str** | Group address. Not used. | 
 **time_zone** | **str** | Terminal group time zone. | 

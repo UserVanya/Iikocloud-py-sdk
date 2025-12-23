@@ -6,7 +6,7 @@ Restaurant section table.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**table_id** | **UUID** | Table ID. | 
+**table_id** | **str** | Table ID. | 
 **x** | **int** | X coordinate of left point of item. | 
 **y** | **int** | Y coordinate of top point of item. | 
 **z** | **int** | Z-index of item. | 

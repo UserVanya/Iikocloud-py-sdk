@@ -6,8 +6,8 @@ Request for canceling the reservation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID of the reserve.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**reserve_id** | **UUID** | Reserve ID to cancel. | 
+**organization_id** | **str** | Organization ID of the reserve.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**reserve_id** | **str** | Reserve ID to cancel. | 
 **cancel_reason** | [**ReservesReserveCancelReason**](ReservesReserveCancelReason.md) | Reason to cancel planned event. | 
 
 ## Example

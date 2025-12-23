@@ -6,8 +6,8 @@ Request to print delivery bill.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID. | 
-**order_id** | **UUID** | Order ID. | 
+**organization_id** | **str** | Organization ID. | 
+**order_id** | **str** | Order ID. | 
 
 ## Example
 

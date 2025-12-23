@@ -6,10 +6,10 @@ Combo product.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **UUID** | Product id. | [optional] 
+**product_id** | **str** | Product id. | [optional] 
 **size_name** | **str** | Size name. Can be null. | [optional] 
-**size_id** | **UUID** | Size id. | [optional] 
-**forbidden_modifiers** | **List[UUID]** | Forbidden modifiers. | [optional] 
+**size_id** | **str** | Size id. | [optional] 
+**forbidden_modifiers** | **List[str]** | Forbidden modifiers. | [optional] 
 **price_modification_amount** | **float** | Price modification amount. | [optional] 
 
 ## Example

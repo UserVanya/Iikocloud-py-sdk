@@ -6,8 +6,8 @@ Request for command status obtaining.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization id which \&quot;correlationId\&quot; belongs to.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**correlation_id** | **UUID** | Operation ID obtained from any command supporting operations. | 
+**organization_id** | **str** | Organization id which \&quot;correlationId\&quot; belongs to.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**correlation_id** | **str** | Operation ID obtained from any command supporting operations. | 
 
 ## Example
 

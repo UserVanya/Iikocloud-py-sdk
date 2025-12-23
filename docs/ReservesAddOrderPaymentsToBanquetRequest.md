@@ -6,8 +6,8 @@ Request for add order payments to banquet.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reserve_id** | **UUID** | Reserve ID. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**reserve_id** | **str** | Reserve ID. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **payments** | [**List[DeliveriesRequestCreateOrderPayment]**](DeliveriesRequestCreateOrderPayment.md) | Order payments. | 
 
 ## Example

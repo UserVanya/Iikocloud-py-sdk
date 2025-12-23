@@ -7,7 +7,7 @@ Calculate combo price response.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **price** | **float** | Calculated price of combo item. | [optional] 
-**incorrectly_filled_groups** | **List[UUID]** | Ids of incorrectly filled groups. If not empty - price will be 0. | [optional] 
+**incorrectly_filled_groups** | **List[str]** | Ids of incorrectly filled groups. If not empty - price will be 0. | [optional] 
 
 ## Example
 

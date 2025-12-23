@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **product_categories** | [**List[ProductCategoryDto3]**](ProductCategoryDto3.md) | Product categories | [optional] 
 **allergen_groups** | [**List[AllergenGroupDto2]**](AllergenGroupDto2.md) | Allergen groups | [optional] 
 **customer_tag_groups** | [**List[CustomerTagGroup3]**](CustomerTagGroup3.md) | Customer tag groups | [optional] 
-**override_tax_categories** | [**List[OverrideTaxesDto2]**](OverrideTaxesDto2.md) | Tax benefits | [optional] 
+**override_tax_categories** | **Dict[str, List[OverrideTaxesDto2]]** | Tax benefits | [optional] 
 **revision** | **int** | Menu revision | [optional] 
 **format_version** | **int** | Menu version | [optional] [default to 2]
 **id** | **int** | ID of the external menu | 

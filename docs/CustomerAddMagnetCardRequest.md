@@ -6,10 +6,10 @@ Add magnet card request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_id** | **UUID** | Customer id. | 
+**customer_id** | **str** | Customer id. | 
 **card_track** | **str** | Card track. Can be null. | 
 **card_number** | **str** | Card number. Can be null. | 
-**organization_id** | **UUID** | Organization id. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 

@@ -7,8 +7,8 @@ Request for add order items to table order.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **add_order_items_settings** | [**TableOrdersRequestAddTableOrderItemsSettings**](TableOrdersRequestAddTableOrderItemsSettings.md) | Add order items parameters. | [optional] 
-**order_id** | **UUID** | Order ID. | 
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 **items** | [**List[DeliveriesRequestCreateOrderOrderItem]**](DeliveriesRequestCreateOrderOrderItem.md) | Order items (may include ProductOrderItem or CompoundOrderItem). | 
 **combos** | [**List[DeliveriesRequestCreateOrderCombo]**](DeliveriesRequestCreateOrderCombo.md) | Combos.   &gt; Allowed from version &#x60;7.6.1&#x60;. | [optional] 
 

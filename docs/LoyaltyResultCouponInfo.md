@@ -6,10 +6,10 @@ Coupon info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **number** | **str** | Number. Can be null. | [optional] 
 **series_name** | **str** | Series name. Can be null. | [optional] 
-**series_id** | **UUID** | Series id. | [optional] 
+**series_id** | **str** | Series id. | [optional] 
 **when_activated** | **str** | When activated. | [optional] 
 **is_deleted** | **bool** | Is deleted. | [optional] 
 

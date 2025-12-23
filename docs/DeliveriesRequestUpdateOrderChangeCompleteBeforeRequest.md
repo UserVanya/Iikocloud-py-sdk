@@ -6,8 +6,8 @@ Request for change time when client wants the order to be delivered.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
-**order_id** | **UUID** | Order ID. | 
+**organization_id** | **str** | Organization ID.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**order_id** | **str** | Order ID. | 
 **new_complete_before** | **str** | New time when client wants the order to be delivered (Local for delivery terminal). | 
 
 ## Example

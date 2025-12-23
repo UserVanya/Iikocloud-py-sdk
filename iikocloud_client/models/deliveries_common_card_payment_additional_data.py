@@ -25,12 +25,12 @@ from typing_extensions import Self
 
 class DeliveriesCommonCardPaymentAdditionalData(DeliveriesCommonPaymentAdditionalData):
     """
-    DeliveriesCommonCardPaymentAdditionalData
+    Additional data for Card payment item.
     """ # noqa: E501
     number: Optional[StrictStr] = Field(default=None, description="Card No.  > In iikoFront, it is possible to make card payment without card No.  If this property is set, the above `number` property is ignored.")
     custom_data: Optional[StrictStr] = Field(default=None, description="Custom data.   > Allowed from version `8.8.6`.", alias="customData")
     card_type: Optional[StrictStr] = Field(default=None, description="Card type (VISA, MasterCard, etc...).   > Allowed from version `9.3.6`.", alias="cardType")
-    __properties: ClassVar[List[str]] = ["type", "number", "customData", "cardType"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,21 +71,6 @@ class DeliveriesCommonCardPaymentAdditionalData(DeliveriesCommonPaymentAdditiona
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if number (nullable) is None
-        # and model_fields_set contains the field
-        if self.number is None and "number" in self.model_fields_set:
-            _dict['number'] = None
-
-        # set to None if custom_data (nullable) is None
-        # and model_fields_set contains the field
-        if self.custom_data is None and "custom_data" in self.model_fields_set:
-            _dict['customData'] = None
-
-        # set to None if card_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.card_type is None and "card_type" in self.model_fields_set:
-            _dict['cardType'] = None
-
         return _dict
 
     @classmethod
@@ -98,10 +83,7 @@ class DeliveriesCommonCardPaymentAdditionalData(DeliveriesCommonPaymentAdditiona
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "number": obj.get("number"),
-            "customData": obj.get("customData"),
-            "cardType": obj.get("cardType")
+            "type": obj.get("type")
         })
         return _obj
 

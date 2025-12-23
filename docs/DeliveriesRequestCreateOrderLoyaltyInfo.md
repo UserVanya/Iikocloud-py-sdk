@@ -7,7 +7,7 @@ Information about Loyalty app.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **coupon** | **str** | Coupon No. that was considered when calculating loyalty program. | [optional] 
-**applicable_manual_conditions** | **List[UUID]** | Information about applied manual conditions. | [optional] 
+**applicable_manual_conditions** | **List[str]** | Information about applied manual conditions. | [optional] 
 **dynamic_discounts** | [**List[DeliveriesRequestCreateOrderDynamicDiscount]**](DeliveriesRequestCreateOrderDynamicDiscount.md) | Dynamic discounts.   &gt; Allowed from version &#x60;9.4.6&#x60;. | [optional] 
 
 ## Example

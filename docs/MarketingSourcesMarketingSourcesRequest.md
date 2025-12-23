@@ -6,7 +6,7 @@ Request for marketing sources.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_ids** | **List[UUID]** | Organizations IDs which marketing sources have to be returned.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
+**organization_ids** | **List[str]** | Organizations IDs which marketing sources have to be returned.                Can be obtained by &#x60;/api/1/organizations&#x60; operation. | 
 
 ## Example
 

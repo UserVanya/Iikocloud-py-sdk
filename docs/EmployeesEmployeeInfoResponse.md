@@ -6,7 +6,7 @@ Response for employee info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **employee_info** | [**EmployeesEmployeeInfo**](EmployeesEmployeeInfo.md) | Employee info. | 
 
 ## Example

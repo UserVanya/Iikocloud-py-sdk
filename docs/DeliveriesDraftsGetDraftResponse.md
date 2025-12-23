@@ -6,12 +6,12 @@ Wrapping object (external) for an order draft.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** | Operation ID. | 
+**correlation_id** | **str** | Operation ID. | 
 **order** | [**DeliveriesDraftsDeliveryOrderDraft**](DeliveriesDraftsDeliveryOrderDraft.md) | Order draft object. | 
-**locked_by_user** | **UUID** | ID of the employee who is currently editing this draft. | [optional] 
+**locked_by_user** | **str** | ID of the employee who is currently editing this draft. | [optional] 
 **locked_at** | **str** | Timestamp of when the draft was taken for editing (lock). | [optional] 
-**organization_id** | **UUID** | Organization ID. | 
-**terminal_group_id** | **UUID** | Terminal group ID. | [optional] 
+**organization_id** | **str** | Organization ID. | 
+**terminal_group_id** | **str** | Terminal group ID. | [optional] 
 **created_at** | **str** | Draft creation time (UTC). | 
 
 ## Example

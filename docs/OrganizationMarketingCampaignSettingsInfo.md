@@ -6,7 +6,7 @@ Marketing campaign settings info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Id. | [optional] 
+**id** | **str** | Id. | [optional] 
 **settings** | **str** | Action/condition settings. Stored as Json. Can be null. | [optional] 
 **type_name** | **str** | Action/condition type name. Can be null. | [optional] 
 **check_sum** | **str** | Hash value of checksum. Can be null. | [optional] 

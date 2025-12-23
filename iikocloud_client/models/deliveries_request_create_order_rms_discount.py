@@ -26,12 +26,12 @@ from typing_extensions import Self
 
 class DeliveriesRequestCreateOrderRmsDiscount(DeliveriesRequestCreateOrderDiscount):
     """
-    DeliveriesRequestCreateOrderRmsDiscount
+    RMS discount/surcharge.  <remarks>  Amount must be specified only if discount has \"assign amount\" setting enabled.  In any other case, amount must not be specified.   </remarks>
     """ # noqa: E501
     discount_type_id: UUID = Field(description="Discount type.                 Can be obtained by `/api/1/discounts` operation.", alias="discountTypeId")
     sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Discount/surcharge sum.")
     selective_positions: Optional[List[UUID]] = Field(default=None, description="Order item positions.", alias="selectivePositions")
-    __properties: ClassVar[List[str]] = ["type", "discountTypeId", "sum", "selectivePositions"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,11 +72,6 @@ class DeliveriesRequestCreateOrderRmsDiscount(DeliveriesRequestCreateOrderDiscou
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if selective_positions (nullable) is None
-        # and model_fields_set contains the field
-        if self.selective_positions is None and "selective_positions" in self.model_fields_set:
-            _dict['selectivePositions'] = None
-
         return _dict
 
     @classmethod
@@ -89,10 +84,7 @@ class DeliveriesRequestCreateOrderRmsDiscount(DeliveriesRequestCreateOrderDiscou
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "discountTypeId": obj.get("discountTypeId"),
-            "sum": obj.get("sum"),
-            "selectivePositions": obj.get("selectivePositions")
+            "type": obj.get("type")
         })
         return _obj
 

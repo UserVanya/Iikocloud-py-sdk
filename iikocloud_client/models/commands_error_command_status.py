@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class CommandsErrorCommandStatus(CommandsGetCommandStatusResponse):
     """
-    CommandsErrorCommandStatus
+    Command completed with error.
     """ # noqa: E501
     exception: Optional[Any] = Field(default=None, description="Occured exception details.")
     error_reason: Optional[StrictStr] = Field(default=None, description="Error reason.", alias="errorReason")
-    __properties: ClassVar[List[str]] = ["state", "exception", "errorReason"]
+    __properties: ClassVar[List[str]] = ["state"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,16 +70,6 @@ class CommandsErrorCommandStatus(CommandsGetCommandStatusResponse):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if exception (nullable) is None
-        # and model_fields_set contains the field
-        if self.exception is None and "exception" in self.model_fields_set:
-            _dict['exception'] = None
-
-        # set to None if error_reason (nullable) is None
-        # and model_fields_set contains the field
-        if self.error_reason is None and "error_reason" in self.model_fields_set:
-            _dict['errorReason'] = None
-
         return _dict
 
     @classmethod
@@ -92,9 +82,7 @@ class CommandsErrorCommandStatus(CommandsGetCommandStatusResponse):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "state": obj.get("state"),
-            "exception": obj.get("exception"),
-            "errorReason": obj.get("errorReason")
+            "state": obj.get("state")
         })
         return _obj
 

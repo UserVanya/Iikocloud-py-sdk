@@ -6,7 +6,7 @@ ECS info (external courier service).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | ECS setting record id. Unique through all organizations. | 
+**id** | **str** | ECS setting record id. Unique through all organizations. | 
 **name** | **str** | ECS name. | 
 
 ## Example

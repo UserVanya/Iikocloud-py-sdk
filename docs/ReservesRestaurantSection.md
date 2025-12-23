@@ -6,8 +6,8 @@ Restaurant section.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Restaurant section ID. | 
-**terminal_group_id** | **UUID** | Terminal group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
+**id** | **str** | Restaurant section ID. | 
+**terminal_group_id** | **str** | Terminal group ID.                Can be obtained by &#x60;/api/1/terminal_groups&#x60; operation. | 
 **name** | **str** | Name. | 
 **tables** | [**List[ReservesTable]**](ReservesTable.md) | Tables. | 
 **var_schema** | [**ReservesSectionSchema**](ReservesSectionSchema.md) | Table layout. | [optional] 

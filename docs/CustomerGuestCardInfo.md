@@ -6,7 +6,7 @@ Guest card info.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Card id. | [optional] 
+**id** | **str** | Card id. | [optional] 
 **track** | **str** | Card track. | [optional] 
 **number** | **str** | Card number. | [optional] 
 **valid_to_date** | **str** | Card valid to date. | [optional] 

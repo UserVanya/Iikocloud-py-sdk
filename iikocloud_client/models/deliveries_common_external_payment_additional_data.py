@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class DeliveriesCommonExternalPaymentAdditionalData(DeliveriesCommonPaymentAdditionalData):
     """
-    DeliveriesCommonExternalPaymentAdditionalData
+    Additional data for external payment item.
     """ # noqa: E501
     custom_data: StrictStr = Field(description="Payment custom data.", alias="customData")
-    __properties: ClassVar[List[str]] = ["type", "customData"]
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,8 +81,7 @@ class DeliveriesCommonExternalPaymentAdditionalData(DeliveriesCommonPaymentAddit
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "customData": obj.get("customData")
+            "type": obj.get("type")
         })
         return _obj
 

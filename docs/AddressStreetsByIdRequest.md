@@ -6,8 +6,8 @@ Organization and city request DTO.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_id** | **UUID** | Organization Id. | 
-**ids** | **List[UUID]** | Street Ids. | [optional] 
+**organization_id** | **str** | Organization Id. | 
+**ids** | **List[str]** | Street Ids. | [optional] 
 **classifier_ids** | **List[str]** | Street classifierIds. | [optional] 
 
 ## Example

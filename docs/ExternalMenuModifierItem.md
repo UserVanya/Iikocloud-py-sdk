@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **portion_weight_grams** | **float** | Modifier&#39;s weight in gramms | [optional] 
 **tags** | [**List[TagDto3]**](TagDto3.md) | List of tag names | [optional] 
 **labels** | [**List[LabelDto3]**](LabelDto3.md) | List of label names | [optional] 
-**item_id** | **UUID** | Modifier&#39;s Id | [optional] 
+**item_id** | **str** | Modifier&#39;s Id | [optional] 
 **is_hidden** | **bool** |  | [optional] [default to False]
 **prices** | [**List[ExternalMenuPriceByDepartmentsDto]**](ExternalMenuPriceByDepartmentsDto.md) |  | [optional] 
 **position** | **int** |  | [optional] 

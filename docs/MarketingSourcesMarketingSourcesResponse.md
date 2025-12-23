@@ -6,7 +6,7 @@ Response to request for marketing sources by organization.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**correlation_id** | **UUID** |  | 
+**correlation_id** | **str** |  | 
 **marketing_sources** | [**List[MarketingSourcesMarketingSource]**](MarketingSourcesMarketingSource.md) | List of marketing sources. | 
 
 ## Example

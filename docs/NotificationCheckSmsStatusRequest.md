@@ -6,8 +6,8 @@ Check sms status request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sms_ids** | **List[UUID]** | Sms IDs for checking. | 
-**organization_id** | **UUID** | Organization id. | 
+**sms_ids** | **List[str]** | Sms IDs for checking. | 
+**organization_id** | **str** | Organization id. | 
 
 ## Example
 
