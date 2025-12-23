@@ -64,3 +64,15 @@ target/
 
 # Ipython Notebook
 .ipynb_checkpoints
+
+
+add_security.py
+fix_paths_and_servers.py
+fix_schema_names.py
+fix_schema_prefixes.py
+fix_types.py
+prepare_openapi.sh
+main.py
+response_text.json
+test_menu_by_id.py
+test_saved_menu_by_id.py
