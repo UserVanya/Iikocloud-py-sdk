@@ -40,7 +40,7 @@ class ExternalMenuItemSize3(BaseModel):
     measure_unit_type: Optional[StrictStr] = Field(default='GRAM', alias="measureUnitType")
     button_image_url: Optional[StrictStr] = Field(default=None, description="links to images", alias="buttonImageUrl")
     weight: Union[StrictFloat, StrictInt]
-    id: StrictStr
+    id: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["sku", "sizeCode", "sizeName", "isDefault", "itemModifierGroups", "prices", "nutritions", "isHidden", "measureUnitType", "buttonImageUrl", "weight", "id"]
 
     model_config = ConfigDict(
@@ -117,6 +117,11 @@ class ExternalMenuItemSize3(BaseModel):
         # and model_fields_set contains the field
         if self.button_image_url is None and "button_image_url" in self.model_fields_set:
             _dict['buttonImageUrl'] = None
+
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
 
         return _dict
 
