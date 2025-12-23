@@ -29,7 +29,7 @@ class ExternalMenuComboItem(BaseModel):
     """
     ExternalMenuComboItem
     """ # noqa: E501
-    sizes: List[ExternalMenuComboItemSize]
+    sizes: Optional[List[ExternalMenuComboItemSize]]
     groups: Optional[List[ComboGroupDto4]] = None
     price_strategy: Optional[StrictStr] = Field(default='BY_COMPONENT', description="Price strategy", alias="priceStrategy")
     sku: Optional[StrictStr] = Field(default='', description="Product code")
@@ -111,6 +111,11 @@ class ExternalMenuComboItem(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
+        # set to None if sizes (nullable) is None
+        # and model_fields_set contains the field
+        if self.sizes is None and "sizes" in self.model_fields_set:
+            _dict['sizes'] = None
+
         # set to None if barcodes (nullable) is None
         # and model_fields_set contains the field
         if self.barcodes is None and "barcodes" in self.model_fields_set:

@@ -33,7 +33,7 @@ class ExternalMenuItem2(BaseModel):
     name: Optional[StrictStr] = Field(default='', description="Product name")
     description: Optional[StrictStr] = Field(default='', description="Product description")
     item_sizes: List[ExternalMenuItemSize2] = Field(alias="itemSizes")
-    modifier_schema_id: StrictStr = Field(description="Modifier schema ID", alias="modifierSchemaId")
+    modifier_schema_id: Optional[StrictStr] = Field(description="Modifier schema ID", alias="modifierSchemaId")
     modifier_schema_name: Optional[StrictStr] = Field(default=None, description="Modifier schema name", alias="modifierSchemaName")
     type: Optional[StrictStr] = Field(default='DISH', description="Item type")
     can_set_open_price: Optional[StrictBool] = Field(default=False, description="Can set open price flag", alias="canSetOpenPrice")
@@ -133,6 +133,11 @@ class ExternalMenuItem2(BaseModel):
                 if _item_barcodes:
                     _items.append(_item_barcodes.to_dict())
             _dict['barcodes'] = _items
+        # set to None if modifier_schema_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.modifier_schema_id is None and "modifier_schema_id" in self.model_fields_set:
+            _dict['modifierSchemaId'] = None
+
         # set to None if modifier_schema_name (nullable) is None
         # and model_fields_set contains the field
         if self.modifier_schema_name is None and "modifier_schema_name" in self.model_fields_set:

@@ -13003,7 +13003,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExternalMenuComboItemSize"
-            }
+            },
+            "nullable": true
           },
           "groups": {
             "type": "array",
@@ -13290,7 +13291,8 @@
           "modifierSchemaId": {
             "type": "string",
             "description": "Modifier schema ID",
-            "example": "00000000-0000-0000-0000-000000000000"
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": true
           },
           "modifierSchemaName": {
             "type": "string",
@@ -13443,7 +13445,8 @@
           "modifierSchemaId": {
             "type": "string",
             "description": "Modifier schema ID",
-            "example": "00000000-0000-0000-0000-000000000000"
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": true
           },
           "modifierSchemaName": {
             "type": "string",
