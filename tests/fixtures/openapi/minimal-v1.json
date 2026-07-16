@@ -1,0 +1,10 @@
+{
+  "openapi": "3.0.1",
+  "info": {"title": "Fixture", "version": "1"},
+  "paths": {
+    "/api/1/ping": {
+      "post": {"responses": {"200": {"description": "ok"}}}
+    }
+  },
+  "components": {"schemas": {"Ping": {"type": "object", "properties": {}}}}
+}
