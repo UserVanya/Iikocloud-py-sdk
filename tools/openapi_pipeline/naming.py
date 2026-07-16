@@ -58,6 +58,11 @@ def normalize_model_name(raw: str) -> str:
     name = "".join(word[:1].upper() + word[1:] for word in words)
     if name[0].isdigit():
         name = f"Model{name}"
+    if not _is_python_identifier(name):
+        raise ValidationError(
+            f"Invalid auto-normalized model name for {raw}: {name!r}; "
+            "add an explicit override"
+        )
     return name
 
 

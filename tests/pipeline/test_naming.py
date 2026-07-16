@@ -147,6 +147,21 @@ def test_explicit_override_can_name_an_otherwise_unnormalizable_schema() -> None
     ) == {"Namespace.---": "DashPlaceholder"}
 
 
+@pytest.mark.parametrize(
+    "raw",
+    ["Namespace.None", "Namespace.True", "Namespace.False"],
+)
+def test_auto_normalized_python_keywords_require_explicit_override(raw: str) -> None:
+    with pytest.raises(ValidationError, match="add an explicit override"):
+        build_model_mappings({raw: {}}, {})
+
+
+def test_explicit_override_can_replace_an_auto_normalized_python_keyword() -> None:
+    assert build_model_mappings(
+        {"Namespace.None": {}}, {"Namespace.None": "NoneValue"}
+    ) == {"Namespace.None": "NoneValue"}
+
+
 def test_stale_model_overrides_fail_in_sorted_order() -> None:
     with pytest.raises(
         ValidationError,
