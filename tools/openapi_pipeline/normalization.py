@@ -6,6 +6,7 @@ import re
 from typing import Any
 
 from .io import canonical_json_bytes, sha256_bytes
+from .schema import iter_schema_objects
 
 DIRECT_TYPES: dict[str, dict[str, Any]] = {
     "bool": {"type": "boolean"},
@@ -60,58 +61,49 @@ def build_types_overlay(document: dict[str, Any]) -> dict[str, Any]:
     actions: list[dict[str, Any]] = []
     correction_number = 0
 
-    def visit(value: Any, path: tuple[str | int, ...]) -> None:
-        nonlocal correction_number
+    for path, schema in iter_schema_objects(working):
+        raw_type = schema.get("type")
+        if not isinstance(raw_type, str):
+            continue
+        correction = correction_for_type(raw_type)
+        if correction is None:
+            continue
 
-        if isinstance(value, dict):
-            raw_type = value.get("type")
-            if isinstance(raw_type, str):
-                correction = correction_for_type(raw_type)
-                if correction is not None:
-                    correction_number += 1
-                    issue_prefix = f"normalize-pseudo-type-{correction_number}"
+        correction_number += 1
+        issue_prefix = f"normalize-pseudo-type-{correction_number}"
 
-                    keys_to_clear = list(_NORMALIZED_KEYS)
-                    if "enum" in correction:
-                        keys_to_clear.append("enum")
-                    for key in keys_to_clear:
-                        if key not in value:
-                            continue
-                        previous = copy.deepcopy(value[key])
-                        actions.append(
-                            {
-                                "target": _jsonpath((*path, key)),
-                                "description": (
-                                    f"Clear {key!r} before normalizing iiko pseudo type "
-                                    f"{raw_type!r}"
-                                ),
-                                "x-iiko-sdk-guard": _guard(
-                                    f"{issue_prefix}-clear-{key}", previous
-                                ),
-                                "remove": True,
-                            }
-                        )
-                        del value[key]
+        keys_to_clear = list(_NORMALIZED_KEYS)
+        if "enum" in correction:
+            keys_to_clear.append("enum")
+        for key in keys_to_clear:
+            if key not in schema:
+                continue
+            previous = copy.deepcopy(schema[key])
+            actions.append(
+                {
+                    "target": _jsonpath((*path, key)),
+                    "description": (
+                        f"Clear {key!r} before normalizing iiko pseudo type {raw_type!r}"
+                    ),
+                    "x-iiko-sdk-guard": _guard(
+                        f"{issue_prefix}-clear-{key}", previous
+                    ),
+                    "remove": True,
+                }
+            )
+            del schema[key]
 
-                    actions.append(
-                        {
-                            "target": _jsonpath(path),
-                            "description": f"Normalize iiko pseudo type {raw_type!r}",
-                            "x-iiko-sdk-guard": _guard(
-                                f"{issue_prefix}-apply", copy.deepcopy(value)
-                            ),
-                            "update": copy.deepcopy(correction),
-                        }
-                    )
-                    value.update(copy.deepcopy(correction))
-
-            for key in sorted(value):
-                visit(value[key], (*path, key))
-        elif isinstance(value, list):
-            for index, child in enumerate(value):
-                visit(child, (*path, index))
-
-    visit(working, ())
+        actions.append(
+            {
+                "target": _jsonpath(path),
+                "description": f"Normalize iiko pseudo type {raw_type!r}",
+                "x-iiko-sdk-guard": _guard(
+                    f"{issue_prefix}-apply", copy.deepcopy(schema)
+                ),
+                "update": copy.deepcopy(correction),
+            }
+        )
+        schema.update(copy.deepcopy(correction))
     return {
         "overlay": "1.1.0",
         "info": {"title": "Normalize iiko pseudo types", "version": "1.0.0"},

@@ -1,13 +1,16 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any
 from urllib.parse import unquote
 
 from .errors import ValidationError
 from .inventory import HTTP_METHODS
+from .schema import iter_schema_objects
 
 VALID_TYPES = {"array", "boolean", "integer", "number", "object", "string"}
+_ARRAY_INDEX = re.compile(r"(?:0|[1-9][0-9]*)")
 
 
 @dataclass(frozen=True, order=True)
@@ -43,7 +46,7 @@ def _resolve_ref(document: dict[str, Any], ref: str) -> Any:
         if isinstance(value, dict):
             value = value[token]
         elif isinstance(value, list):
-            if not token.isdigit():
+            if _ARRAY_INDEX.fullmatch(token) is None:
                 raise KeyError(ref)
             value = value[int(token)]
         else:
@@ -92,21 +95,11 @@ def _sort_key(value: Any) -> tuple[str, str]:
     return type(value).__name__, repr(value)
 
 
-def _looks_like_schema(value: dict[Any, Any]) -> bool:
-    return bool(
-        {
-            "$ref",
-            "allOf",
-            "anyOf",
-            "enum",
-            "format",
-            "items",
-            "oneOf",
-            "properties",
-            "type",
-        }
-        & value.keys()
-    )
+def _path_from_parts(parts: tuple[str | int, ...]) -> str:
+    path = "#"
+    for part in parts:
+        path = _pointer(path, part)
+    return path
 
 
 def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
@@ -130,13 +123,6 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
                 if not isinstance(key, str):
                     add("invalid-object-key", path, f"object key must be a string: {key!r}")
 
-            if "type" in value:
-                raw_type = value["type"]
-                if not isinstance(raw_type, str) or raw_type not in VALID_TYPES:
-                    add("invalid-type", path, repr(raw_type))
-            else:
-                raw_type = None
-
             if "$ref" in value:
                 ref = value["$ref"]
                 if not isinstance(ref, str):
@@ -146,45 +132,6 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
                         _resolve_ref(document, ref)
                     except (IndexError, KeyError, TypeError, ValueError):
                         add("broken-ref", path, ref)
-
-            if "properties" in value and not isinstance(value["properties"], dict):
-                add("invalid-properties", path, "properties must be an object")
-
-            all_of = value.get("allOf")
-            if "allOf" in value and not isinstance(all_of, list):
-                add("invalid-allof", path, "allOf must be an array")
-            elif isinstance(all_of, list):
-                for index, branch in enumerate(all_of):
-                    if not isinstance(branch, dict):
-                        add(
-                            "invalid-allof-branch",
-                            _pointer(_pointer(path, "allOf"), index),
-                            "allOf branch must be an object",
-                        )
-
-            if "required" in value:
-                required = value["required"]
-                schema_required = isinstance(required, list) or _looks_like_schema(value)
-                if schema_required:
-                    if not isinstance(required, list) or not all(
-                        isinstance(name, str) and bool(name) for name in required
-                    ):
-                        add(
-                            "invalid-required",
-                            path,
-                            "schema required must be an array of non-empty strings",
-                        )
-                    if isinstance(required, list):
-                        names = {name for name in required if isinstance(name, str) and name}
-                        missing = sorted(names - _properties(document, value, set()))
-                        if missing:
-                            add("required-not-defined", path, ", ".join(missing))
-
-            if raw_type == "array":
-                if "items" not in value:
-                    add("array-without-items", path, "items is required")
-                elif not isinstance(value["items"], dict):
-                    add("invalid-items", path, "array items must be an object")
 
             for key in sorted(value, key=_sort_key):
                 visit(value[key], _pointer(path, key), child_ancestors)
@@ -198,6 +145,52 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
                 visit(child, _pointer(path, index), child_ancestors)
 
     visit(document, "#", frozenset())
+
+    for parts, schema in iter_schema_objects(document):
+        path = _path_from_parts(parts)
+        if "type" in schema:
+            raw_type = schema["type"]
+            if not isinstance(raw_type, str) or raw_type not in VALID_TYPES:
+                add("invalid-type", path, repr(raw_type))
+        else:
+            raw_type = None
+
+        if "properties" in schema and not isinstance(schema["properties"], dict):
+            add("invalid-properties", path, "properties must be an object")
+
+        all_of = schema.get("allOf")
+        if "allOf" in schema and not isinstance(all_of, list):
+            add("invalid-allof", path, "allOf must be an array")
+        elif isinstance(all_of, list):
+            for index, branch in enumerate(all_of):
+                if not isinstance(branch, dict):
+                    add(
+                        "invalid-allof-branch",
+                        _pointer(_pointer(path, "allOf"), index),
+                        "allOf branch must be an object",
+                    )
+
+        if "required" in schema:
+            required = schema["required"]
+            if not isinstance(required, list) or not all(
+                isinstance(name, str) and bool(name) for name in required
+            ):
+                add(
+                    "invalid-required",
+                    path,
+                    "schema required must be an array of non-empty strings",
+                )
+            if isinstance(required, list):
+                names = {name for name in required if isinstance(name, str) and name}
+                missing = sorted(names - _properties(document, schema, set()))
+                if missing:
+                    add("required-not-defined", path, ", ".join(missing))
+
+        if raw_type == "array":
+            if "items" not in schema:
+                add("array-without-items", path, "items is required")
+            elif not isinstance(schema["items"], dict):
+                add("invalid-items", path, "array items must be an object")
 
     paths = document.get("paths")
     if not isinstance(paths, dict):

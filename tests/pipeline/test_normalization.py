@@ -133,12 +133,12 @@ def test_constant_correction_replaces_an_existing_enum() -> None:
 
 def test_jsonpath_quotes_object_keys_and_guard_hashes_are_canonical() -> None:
     key = "quote' slash/ tilde~ backslash\\"
-    document = {key: {"type": "bool"}}
+    document = {"components": {"schemas": {key: {"type": "bool"}}}}
 
     overlay = build_types_overlay(document)
     effective = apply_overlay(document, overlay)
 
-    assert effective == {key: {"type": "boolean"}}
+    assert effective == {"components": {"schemas": {key: {"type": "boolean"}}}}
     first_action = overlay["actions"][0]
     assert first_action["target"].startswith("$[")
     assert first_action["x-iiko-sdk-guard"]["expected-sha256"] == sha256_bytes(
@@ -154,3 +154,95 @@ def test_document_without_known_corrections_produces_reviewable_empty_overlay() 
         "info": {"title": "Normalize iiko pseudo types", "version": "1.0.0"},
         "actions": [],
     }
+
+
+def test_payload_and_example_type_fields_are_not_treated_as_schema_objects() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Payload": {
+                    "type": "object",
+                    "properties": {"actual": {"type": "int"}},
+                    "example": {"type": "int", "nested": {"type": "bool"}},
+                }
+            },
+            "examples": {
+                "PayloadExample": {
+                    "value": {"type": "int", "nested": {"type": "bool"}}
+                }
+            },
+        }
+    }
+
+    effective = apply_overlay(document, build_types_overlay(document))
+
+    assert effective["components"]["schemas"]["Payload"]["properties"]["actual"] == {
+        "type": "integer"
+    }
+    assert effective["components"]["schemas"]["Payload"]["example"] == {
+        "type": "int",
+        "nested": {"type": "bool"},
+    }
+    assert effective["components"]["examples"]["PayloadExample"]["value"] == {
+        "type": "int",
+        "nested": {"type": "bool"},
+    }
+
+
+def test_only_schema_roots_and_nested_schema_keywords_are_normalized() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Nested": {
+                    "type": "object",
+                    "properties": {"property": {"type": "bool"}},
+                    "additionalProperties": {"type": "int"},
+                    "allOf": [{"type": "uuid"}],
+                    "oneOf": [{"type": "float"}],
+                    "anyOf": [{"type": "string <uuid>"}],
+                    "not": {"type": "enum", "enum": ["forbidden"]},
+                },
+                "Array": {"type": "array", "items": {"type": "integer <int32>"}},
+            },
+            "parameters": {"Limit": {"schema": {"type": "int"}}},
+            "headers": {"RequestId": {"schema": {"type": "uuid"}}},
+        },
+        "paths": {
+            "/payload": {
+                "post": {
+                    "requestBody": {
+                        "content": {
+                            "application/json": {"schema": {"type": "bool"}}
+                        }
+                    }
+                }
+            }
+        },
+        "arbitrary": {"type": "int"},
+    }
+
+    effective = apply_overlay(document, build_types_overlay(document))
+    nested = effective["components"]["schemas"]["Nested"]
+
+    assert nested["properties"]["property"]["type"] == "boolean"
+    assert nested["additionalProperties"]["type"] == "integer"
+    assert nested["allOf"][0] == {"type": "string", "format": "uuid"}
+    assert nested["oneOf"][0] == {"type": "number", "format": "float"}
+    assert nested["anyOf"][0] == {"type": "string", "format": "uuid"}
+    assert nested["not"] == {"type": "string", "enum": ["forbidden"]}
+    assert effective["components"]["schemas"]["Array"]["items"] == {
+        "type": "integer",
+        "format": "int32",
+    }
+    assert effective["components"]["parameters"]["Limit"]["schema"] == {
+        "type": "integer"
+    }
+    assert effective["components"]["headers"]["RequestId"]["schema"] == {
+        "type": "string",
+        "format": "uuid",
+    }
+    request_schema = effective["paths"]["/payload"]["post"]["requestBody"]["content"][
+        "application/json"
+    ]["schema"]
+    assert request_schema == {"type": "boolean"}
+    assert effective["arbitrary"] == {"type": "int"}

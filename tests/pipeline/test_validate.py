@@ -126,6 +126,49 @@ def test_request_body_required_boolean_is_not_mistaken_for_schema_required() -> 
     ensure_valid_effective_schema(document)
 
 
+def test_security_scheme_type_is_not_mistaken_for_schema_type() -> None:
+    document = valid_document()
+    document["components"]["securitySchemes"] = {
+        "Bearer": {"type": "http", "scheme": "bearer"}
+    }
+
+    ensure_valid_effective_schema(document)
+
+
+def test_schema_checks_still_apply_to_schema_fields_outside_components_schemas() -> None:
+    document = valid_document()
+    document["components"]["parameters"] = {
+        "Broken": {"schema": {"type": "bool"}}
+    }
+
+    with pytest.raises(ValidationError, match="invalid-type"):
+        ensure_valid_effective_schema(document)
+
+
+@pytest.mark.parametrize("token", ["00", "01", "٠", "１"])
+def test_json_pointer_array_indices_must_be_canonical_ascii(token: str) -> None:
+    document = valid_document()
+    document["x-targets"] = [{"type": "string"}, {"type": "integer"}]
+    document["components"]["schemas"]["Reference"] = {
+        "$ref": f"#/x-targets/{token}"
+    }
+
+    issues = lint_effective_schema(document)
+
+    assert any(issue.code == "broken-ref" for issue in issues)
+
+
+@pytest.mark.parametrize("token", ["0", "1"])
+def test_json_pointer_canonical_array_indices_resolve(token: str) -> None:
+    document = valid_document()
+    document["x-targets"] = [{"type": "string"}, {"type": "integer"}]
+    document["components"]["schemas"]["Reference"] = {
+        "$ref": f"#/x-targets/{token}"
+    }
+
+    assert not any(issue.code == "broken-ref" for issue in lint_effective_schema(document))
+
+
 def test_only_http_methods_are_operations_and_operation_ids_are_nonempty_unique() -> None:
     document = valid_document()
     document["paths"] = {
