@@ -83,6 +83,15 @@ def test_changed_match_count_makes_overlay_stale() -> None:
         apply_overlay(source_document(), overlay)
 
 
+def test_guard_cannot_accept_zero_expected_matches() -> None:
+    overlay = overlay_document(guarded_action("$.missing", [], update="new-value"))
+
+    with pytest.raises(
+        ValidationError, match="Overlay guard.expected-matches must be a positive integer"
+    ):
+        apply_overlay(source_document(), overlay)
+
+
 def test_actions_are_applied_sequentially() -> None:
     source = {"value": "first"}
     overlay = overlay_document(
@@ -92,6 +101,18 @@ def test_actions_are_applied_sequentially() -> None:
 
     assert apply_overlay(source, overlay) == {"value": "third"}
     assert source == {"value": "first"}
+
+
+def test_update_applies_to_each_sibling_match() -> None:
+    source = {"schemas": [{"type": "bool"}, {"type": "bool"}]}
+    overlay = overlay_document(
+        guarded_action("$.schemas[*].type", ["bool", "bool"], update="boolean")
+    )
+
+    assert apply_overlay(source, overlay) == {
+        "schemas": [{"type": "boolean"}, {"type": "boolean"}]
+    }
+    assert source == {"schemas": [{"type": "bool"}, {"type": "bool"}]}
 
 
 def test_update_merges_objects_appends_arrays_and_copy_is_independent() -> None:
@@ -225,7 +246,7 @@ def test_overlay_schema_is_validated(overlay: Any, message: str) -> None:
                 "update": "3.1.0",
                 "x-iiko-sdk-guard": {"issue": "bad-count", "expected-matches": True},
             },
-            "Overlay guard.expected-matches must be a non-negative integer",
+            "Overlay guard.expected-matches must be a positive integer",
         ),
         (
             {
@@ -272,6 +293,16 @@ def test_copy_requires_exactly_one_source() -> None:
     )
 
     with pytest.raises(ValidationError, match="Overlay copy must select exactly one source node"):
+        apply_overlay(source, overlay)
+
+
+def test_invalid_copy_jsonpath_is_actionable() -> None:
+    source = {"destination": {}}
+    overlay = overlay_document(
+        guarded_action("$.destination", [source["destination"]], copy="not-jsonpath")
+    )
+
+    with pytest.raises(ValidationError, match="Invalid overlay copy JSONPath"):
         apply_overlay(source, overlay)
 
 

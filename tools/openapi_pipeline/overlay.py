@@ -44,9 +44,9 @@ def _guard(action: dict[str, Any], values: list[Any]) -> None:
     if (
         not isinstance(expected_matches, int)
         or isinstance(expected_matches, bool)
-        or expected_matches < 0
+        or expected_matches < 1
     ):
-        raise ValidationError("Overlay guard.expected-matches must be a non-negative integer")
+        raise ValidationError("Overlay guard.expected-matches must be a positive integer")
 
     expected_hash = guard.get("expected-sha256")
     if expected_hash is not None and (
