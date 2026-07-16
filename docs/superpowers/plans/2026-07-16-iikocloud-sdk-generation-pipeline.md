@@ -154,7 +154,7 @@ Expected: collection fails because `tools.openapi_pipeline.cli` and `paths` do n
 
 - [ ] **Step 3: Add pipeline dependencies and test configuration**
 
-Add these exact entries to `pyproject.toml`, keeping current runtime dependencies until the first successful full regeneration in Task 11:
+Set `project.requires-python = ">=3.10"` now so the resolver does not attempt the unsupported Python 3.9 split; keep the current runtime dependencies until the first successful full regeneration in Task 11. Add these exact entries to `pyproject.toml`:
 
 ```toml
 [dependency-groups]
