@@ -1,0 +1,12 @@
+additionalProperties:
+  packageName: iikocloud_client
+  projectName: iikocloud-client
+  packageVersion: 0.1.0
+  library: httpx
+  generateSourceCodeOnly: true
+  supportHttpxSync: false
+  hideGenerationTimestamp: true
+  lazyImports: false
+  disallowAdditionalPropertiesIfNotPresent: false
+  useOneOfDiscriminatorLookup: false
+  setEnsureAsciiToFalse: true
