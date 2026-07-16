@@ -1,0 +1,156 @@
+import copy
+
+from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
+from tools.openapi_pipeline.normalization import build_types_overlay, correction_for_type
+from tools.openapi_pipeline.overlay import apply_overlay
+
+
+def test_known_iiko_pseudo_types_have_unambiguous_openapi_replacements() -> None:
+    assert correction_for_type("bool") == {"type": "boolean"}
+    assert correction_for_type("int") == {"type": "integer"}
+    assert correction_for_type("float") == {"type": "number", "format": "float"}
+    assert correction_for_type("uuid") == {"type": "string", "format": "uuid"}
+    assert correction_for_type("integer <int64>") == {
+        "type": "integer",
+        "format": "int64",
+    }
+    assert correction_for_type("Array of strings <uuid>") == {
+        "type": "array",
+        "items": {"type": "string", "format": "uuid"},
+    }
+    assert correction_for_type("constant string 'OrderUpdate'") == {
+        "type": "string",
+        "enum": ["OrderUpdate"],
+    }
+
+
+def test_unknown_pseudo_type_is_not_guessed() -> None:
+    assert correction_for_type("mystery") is None
+
+
+def test_corrections_are_deeply_independent() -> None:
+    first = correction_for_type("Array of strings <uuid>")
+    second = correction_for_type("Array of strings <uuid>")
+
+    assert first is not None
+    assert second is not None
+    first["items"]["format"] = "changed"
+
+    assert second == {
+        "type": "array",
+        "items": {"type": "string", "format": "uuid"},
+    }
+    assert correction_for_type("Array of strings <uuid>") == second
+
+
+def test_types_overlay_is_deterministic_guarded_and_does_not_mutate_input() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Zulu": {"type": "bool"},
+                "Alpha": {
+                    "type": "Array of strings <uuid>",
+                    "format": "legacy",
+                    "items": {"type": "mystery", "format": "legacy-item"},
+                },
+            }
+        }
+    }
+    reordered = {
+        "components": {
+            "schemas": {
+                "Alpha": {
+                    "items": {"format": "legacy-item", "type": "mystery"},
+                    "format": "legacy",
+                    "type": "Array of strings <uuid>",
+                },
+                "Zulu": {"type": "bool"},
+            }
+        }
+    }
+    original = copy.deepcopy(document)
+
+    overlay = build_types_overlay(document)
+
+    assert document == original
+    assert overlay == build_types_overlay(reordered)
+    assert overlay["actions"]
+    for action in overlay["actions"]:
+        guard = action["x-iiko-sdk-guard"]
+        assert guard["expected-matches"] == 1
+        assert len(guard["expected-sha256"]) == 64
+
+    effective = apply_overlay(document, overlay)
+    assert effective["components"]["schemas"]["Alpha"] == {
+        "type": "array",
+        "items": {"type": "string", "format": "uuid"},
+    }
+    assert effective["components"]["schemas"]["Zulu"] == {"type": "boolean"}
+    assert document == original
+
+
+def test_overlay_guards_match_each_intermediate_sequential_value() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Value": {
+                    "description": "keep",
+                    "type": "uuid",
+                    "format": "incorrect",
+                    "items": {"type": "bool"},
+                    "enum": ["first", "second"],
+                }
+            }
+        }
+    }
+
+    overlay = build_types_overlay(document)
+    effective = apply_overlay(document, overlay)
+
+    assert effective["components"]["schemas"]["Value"] == {
+        "description": "keep",
+        "type": "string",
+        "format": "uuid",
+        "enum": ["first", "second"],
+    }
+
+
+def test_constant_correction_replaces_an_existing_enum() -> None:
+    document = {
+        "schema": {
+            "type": "constant string 'OrderUpdate'",
+            "enum": ["stale"],
+        }
+    }
+
+    overlay = build_types_overlay(document)
+
+    assert apply_overlay(document, overlay)["schema"] == {
+        "type": "string",
+        "enum": ["OrderUpdate"],
+    }
+
+
+def test_jsonpath_quotes_object_keys_and_guard_hashes_are_canonical() -> None:
+    key = "quote' slash/ tilde~ backslash\\"
+    document = {key: {"type": "bool"}}
+
+    overlay = build_types_overlay(document)
+    effective = apply_overlay(document, overlay)
+
+    assert effective == {key: {"type": "boolean"}}
+    first_action = overlay["actions"][0]
+    assert first_action["target"].startswith("$[")
+    assert first_action["x-iiko-sdk-guard"]["expected-sha256"] == sha256_bytes(
+        canonical_json_bytes("bool")
+    )
+
+
+def test_document_without_known_corrections_produces_reviewable_empty_overlay() -> None:
+    document = {"schema": {"type": "string"}}
+
+    assert build_types_overlay(document) == {
+        "overlay": "1.1.0",
+        "info": {"title": "Normalize iiko pseudo types", "version": "1.0.0"},
+        "actions": [],
+    }
