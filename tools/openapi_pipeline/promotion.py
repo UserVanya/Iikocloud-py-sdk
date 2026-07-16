@@ -4,6 +4,7 @@ import json
 import os
 import re
 import shutil
+import stat
 import uuid
 from contextlib import suppress
 from dataclasses import dataclass
@@ -30,6 +31,45 @@ _REPOSITORY_CONTROL_DIRECTORIES = {
 class PromotionItem:
     staged: Path
     target: Path
+
+
+def regular_tree_files(root: Path, *, label: str) -> tuple[Path, ...]:
+    """Return sorted regular files while rejecting links and special entries."""
+
+    try:
+        root_mode = root.lstat().st_mode
+    except OSError as error:
+        raise PipelineError(f"Cannot inspect {label}: {root}") from error
+    if stat.S_ISLNK(root_mode):
+        raise PipelineError(f"{label} must not be a symlink: {root}")
+    if not stat.S_ISDIR(root_mode):
+        raise PipelineError(f"{label} is not a regular directory: {root}")
+
+    files: list[Path] = []
+
+    def visit(directory: Path) -> None:
+        try:
+            with os.scandir(directory) as iterator:
+                entries = sorted(iterator, key=lambda entry: entry.name)
+        except OSError as error:
+            raise PipelineError(f"Cannot walk {label}: {directory}") from error
+        for entry in entries:
+            path = Path(entry.path)
+            try:
+                mode = entry.stat(follow_symlinks=False).st_mode
+            except OSError as error:
+                raise PipelineError(f"Cannot inspect {label} entry: {path}") from error
+            if stat.S_ISLNK(mode):
+                raise PipelineError(f"{label} contains a symlink: {path}")
+            if stat.S_ISDIR(mode):
+                visit(path)
+            elif stat.S_ISREG(mode):
+                files.append(path)
+            else:
+                raise PipelineError(f"{label} contains a non-regular entry: {path}")
+
+    visit(root)
+    return tuple(files)
 
 
 def _common_control_root(items: list[PromotionItem]) -> Path:
@@ -160,19 +200,22 @@ def promote_transaction(items: list[PromotionItem], *, root: Path | None = None)
             original.add_note("Promotion rollback problems: " + "; ".join(rollback_errors))
         raise
     else:
-        for backup, _target in backups:
-            _remove(backup)
+        # Every replacement above is the transaction's commit point.  Backup
+        # deletion is post-commit housekeeping and must not make a successful
+        # transaction look failed.  A failed deletion is labelled for a later,
+        # explicit cleanup pass while cleanup of the remaining backups continues.
+        for backup, target in backups:
+            try:
+                _remove(backup)
+            except Exception:
+                orphan = target.with_name(f".{target.name}.orphaned-backup-{token}")
+                with suppress(Exception):
+                    os.replace(backup, orphan)
 
 
 def _regular_file_hashes(package: Path) -> dict[str, str]:
-    if package.is_symlink() or not package.is_dir():
-        raise PipelineError(f"Generated package is not a regular directory: {package}")
     result: dict[str, str] = {}
-    for path in sorted(package.rglob("*")):
-        if path.is_symlink():
-            raise PipelineError(f"Generated package contains a symlink: {path}")
-        if not path.is_file():
-            continue
+    for path in regular_tree_files(package, label="Generated package"):
         relative = (Path(package.name) / path.relative_to(package)).as_posix()
         result[relative] = sha256_bytes(path.read_bytes())
     return result

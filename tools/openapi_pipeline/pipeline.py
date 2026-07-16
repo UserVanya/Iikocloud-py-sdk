@@ -24,15 +24,15 @@ from .io import (
 from .naming import build_model_mappings, inject_operation_ids, normalize_model_name
 from .normalization import build_types_overlay
 from .overlay import apply_overlay, apply_overlay_files
+from .package_checks import verify_generated_contracts, verify_root_wheel
 from .package_checks import verify_package as check_package
-from .package_checks import verify_root_wheel
 from .paths import RepoPaths
 from .promotion import (
     PromotionItem,
     build_generated_manifest,
     load_generated_manifest,
     promote_transaction,
-    write_generated_manifest,
+    regular_tree_files,
 )
 from .reports import write_upstream_reports
 from .validate import ensure_valid_effective_schema
@@ -65,6 +65,7 @@ class PipelineDependencies:
     validate: Callable[[dict[str, Any]], None]
     generate: Callable[[dict[str, str]], Path]
     verify_package: Callable[[Path], None]
+    verify_contracts: Callable[[Path], None]
     promote: Callable[[list[PromotionItem]], None] = promote_transaction
     verify_root_package: Callable[[Path], None] = verify_root_wheel
 
@@ -237,6 +238,12 @@ def _stage_generated_outputs(
     model_mappings: dict[str, str],
 ) -> tuple[list[PromotionItem], Path]:
     generated_package = dependencies.generate(model_mappings)
+    toolchain = Toolchain.load(dependencies.paths.root / "generator/toolchain.lock")
+    manifest = build_generated_manifest(
+        generated_package,
+        effective_schema_sha256=sha256_bytes(canonical_json_bytes(effective)),
+        toolchain=toolchain,
+    )
     promotion_root = dependencies.paths.build / "promotion"
     staged_snapshot = promotion_root / "iikocloud.openapi.json"
     staged_package = promotion_root / "iikocloud_client"
@@ -244,16 +251,18 @@ def _stage_generated_outputs(
     _clean_staging(promotion_root, dependencies.paths.root)
     promotion_root.mkdir(parents=True)
     shutil.copy2(snapshot, staged_snapshot)
-    shutil.copytree(generated_package, staged_package)
-    toolchain = Toolchain.load(dependencies.paths.root / "generator/toolchain.lock")
-    write_generated_manifest(
-        generated_package,
-        staged_manifest,
-        effective_schema_sha256=sha256_bytes(canonical_json_bytes(effective)),
+    shutil.copytree(generated_package, staged_package, symlinks=True)
+    staged_manifest_check = build_generated_manifest(
+        staged_package,
+        effective_schema_sha256=manifest["effective_schema_sha256"],
         toolchain=toolchain,
     )
+    if staged_manifest_check != manifest:
+        raise PipelineError("Generated package changed while it was copied to staging")
+    write_json_atomic(staged_manifest, manifest)
     _copy_manual_files(dependencies.paths, staged_package)
     dependencies.verify_package(staged_package)
+    dependencies.verify_contracts(staged_package)
     return (
         [
             PromotionItem(staged_snapshot, dependencies.paths.upstream),
@@ -295,11 +304,7 @@ def _verify_committed_tree(
         raise PipelineError("Committed generated package is missing")
     manual_names = {path.as_posix() for path in manual_paths}
     actual: dict[str, str] = {}
-    for path in sorted(package.rglob("*")):
-        if path.is_symlink():
-            raise PipelineError(f"Committed generated package contains a symlink: {path}")
-        if not path.is_file():
-            continue
+    for path in regular_tree_files(package, label="Committed generated package"):
         relative = (Path("iikocloud_client") / path.relative_to(package)).as_posix()
         actual[relative] = sha256_bytes(path.read_bytes())
     missing_manual = sorted(manual_names - set(actual))
@@ -334,6 +339,7 @@ def verify(dependencies: PipelineDependencies) -> None:
     )
     _copy_manual_files(dependencies.paths, generated_package)
     dependencies.verify_package(generated_package)
+    dependencies.verify_contracts(generated_package)
     dependencies.verify_root_package(dependencies.paths.root)
     if current_manifest != committed_manifest:
         raise PipelineError("Generated manifest differs from committed generated-manifest.json")
@@ -609,6 +615,7 @@ def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> Pi
             package_version,
         ),
         verify_package=lambda package: check_package(package, build_root=repo_paths.build),
+        verify_contracts=lambda package: verify_generated_contracts(repo_paths.root, package),
         promote=lambda items: promote_transaction(items, root=repo_paths.root),
         verify_root_package=verify_root_wheel,
     )

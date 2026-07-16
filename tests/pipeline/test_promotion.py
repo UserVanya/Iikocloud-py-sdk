@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from tools.openapi_pipeline import promotion as promotion_module
 from tools.openapi_pipeline.errors import PipelineError
 from tools.openapi_pipeline.generator import Toolchain
 from tools.openapi_pipeline.io import sha256_bytes
@@ -58,6 +59,47 @@ def test_promotion_rolls_back_files_and_directories_when_replace_fails(
     assert (old_tree / "old.py").read_text(encoding="utf-8") == "old"
     assert not (old_tree / "new.py").exists()
     assert not list(tmp_path.rglob("*.backup-*"))
+
+
+@pytest.mark.parametrize("failed_cleanup", [1, 2])
+def test_promotion_cleanup_failure_after_commit_is_relabelled_and_does_not_fail(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    failed_cleanup: int,
+) -> None:
+    targets = [tmp_path / "target/first.txt", tmp_path / "target/second.txt"]
+    staged = [tmp_path / "staging/first.txt", tmp_path / "staging/second.txt"]
+    targets[0].parent.mkdir()
+    staged[0].parent.mkdir()
+    for index, path in enumerate(targets):
+        path.write_text(f"old-{index}", encoding="utf-8")
+    for index, path in enumerate(staged):
+        path.write_text(f"new-{index}", encoding="utf-8")
+
+    real_remove = promotion_module._remove
+    cleanup_calls = 0
+
+    def fail_one_backup(path: Path) -> None:
+        nonlocal cleanup_calls
+        if ".backup-" in path.name:
+            cleanup_calls += 1
+            if cleanup_calls == failed_cleanup:
+                raise OSError("simulated post-commit cleanup failure")
+        real_remove(path)
+
+    monkeypatch.setattr(promotion_module, "_remove", fail_one_backup)
+
+    promote_transaction(
+        [PromotionItem(source, target) for source, target in zip(staged, targets, strict=True)],
+        root=tmp_path,
+    )
+
+    assert [path.read_text(encoding="utf-8") for path in targets] == ["new-0", "new-1"]
+    assert cleanup_calls == 2
+    assert not list(tmp_path.rglob("*.backup-*"))
+    orphans = list(tmp_path.rglob("*.orphaned-backup-*"))
+    assert len(orphans) == 1
+    assert orphans[0].read_text(encoding="utf-8") == f"old-{failed_cleanup - 1}"
 
 
 @pytest.mark.parametrize(
@@ -146,6 +188,26 @@ def test_generated_manifest_hashes_only_raw_generator_files_in_sorted_order(
         },
     }
     assert list(manifest["files"]) == sorted(manifest["files"])
+
+
+def test_generated_manifest_rejects_special_files_instead_of_silently_skipping(
+    tmp_path: Path,
+) -> None:
+    package = tmp_path / "iikocloud_client"
+    package.mkdir()
+    os.mkfifo(package / "generator-output.fifo")
+
+    with pytest.raises(PipelineError, match=r"non-regular.*generator-output\.fifo"):
+        write_generated_manifest(
+            package,
+            tmp_path / "generated-manifest.json",
+            effective_schema_sha256="a" * 64,
+            toolchain=Toolchain(
+                "openapitools/openapi-generator-cli",
+                "v7.22.0",
+                "sha256:" + "b" * 64,
+            ),
+        )
 
 
 def test_generated_manifest_loader_rejects_unsorted_or_extra_metadata(tmp_path: Path) -> None:

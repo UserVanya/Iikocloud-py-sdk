@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -40,15 +41,17 @@ def fake_dependencies(tmp_path: Path) -> PipelineDependencies:
         '"version":"v7.22.0","digest":"sha256:' + "a" * 64 + '"}\n',
         encoding="utf-8",
     )
-    return PipelineDependencies(
+    dependencies = PipelineDependencies(
         paths=paths,
         fetch=Mock(return_value=FetchResult("a" * 64, paths.candidate, True)),
         apply_corrections=Mock(return_value=({}, {})),
         validate=Mock(),
         generate=Mock(return_value=generated),
         verify_package=Mock(),
+        verify_contracts=Mock(),
         promote=Mock(),
     )
+    return dependencies
 
 
 def test_sync_does_not_mutate_committed_outputs_when_overlay_is_stale(
@@ -87,11 +90,20 @@ def test_sync_checks_staged_package_before_single_promotion(
         events.append("generate") or generated
     )
     fake_dependencies.verify_package.side_effect = lambda package: events.append("package")
+    fake_dependencies.verify_contracts.side_effect = lambda package: events.append("contracts")
     fake_dependencies.promote.side_effect = lambda items: events.append("promote")
 
     sync(fake_dependencies)
 
-    assert events == ["fetch", "correct", "validate", "generate", "package", "promote"]
+    assert events == [
+        "fetch",
+        "correct",
+        "validate",
+        "generate",
+        "package",
+        "contracts",
+        "promote",
+    ]
     promoted = fake_dependencies.promote.call_args.args[0]
     assert [item.target for item in promoted] == [
         fake_dependencies.paths.upstream,
@@ -142,6 +154,61 @@ def test_sync_package_failure_leaves_committed_outputs_and_staging_for_diagnosis
     fake_dependencies.promote.assert_not_called()
 
 
+def test_sync_contract_failure_leaves_committed_outputs_untouched(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    upstream = fake_dependencies.paths.upstream
+    upstream.parent.mkdir(parents=True)
+    old_snapshot = b'{"openapi":"3.0.1","info":{},"paths":{}}\n'
+    upstream.write_bytes(old_snapshot)
+    committed = tmp_path / "src/iikocloud_client/old.py"
+    committed.parent.mkdir(parents=True)
+    committed.write_text("old", encoding="utf-8")
+    fake_dependencies.verify_contracts.side_effect = PipelineError("contract failed")
+
+    with pytest.raises(PipelineError, match="contract failed"):
+        sync(fake_dependencies)
+
+    assert upstream.read_bytes() == old_snapshot
+    assert committed.read_text(encoding="utf-8") == "old"
+    fake_dependencies.verify_package.assert_called_once()
+    fake_dependencies.promote.assert_not_called()
+
+
+def test_sync_rejects_raw_generated_symlink_before_copying_external_bytes(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    sentinel = tmp_path / "outside-sentinel.txt"
+    sentinel.write_bytes(b"must-never-enter-staging")
+    generated = fake_dependencies.paths.build / "generated/iikocloud_client"
+    (generated / "escaped.py").symlink_to(sentinel)
+
+    with pytest.raises(PipelineError, match="symlink"):
+        sync(fake_dependencies)
+
+    promotion = fake_dependencies.paths.build / "promotion"
+    regular_files = [
+        path for path in promotion.rglob("*") if path.is_file() and not path.is_symlink()
+    ]
+    assert all(path.read_bytes() != sentinel.read_bytes() for path in regular_files)
+    fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.promote.assert_not_called()
+
+
+def test_sync_rejects_raw_generated_special_file_as_pipeline_error_before_copy(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    generated = fake_dependencies.paths.build / "generated/iikocloud_client"
+    os.mkfifo(generated / "generator-output.fifo")
+
+    with pytest.raises(PipelineError, match=r"non-regular.*generator-output\.fifo"):
+        sync(fake_dependencies)
+
+    assert not (fake_dependencies.paths.build / "promotion/iikocloud_client").exists()
+    fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.promote.assert_not_called()
+
+
 def test_sync_rejects_unsafe_manual_allowlist_before_package_check(
     tmp_path: Path, fake_dependencies: PipelineDependencies
 ) -> None:
@@ -184,6 +251,7 @@ def test_verify_regenerates_without_fetch_and_checks_both_wheels(tmp_path: Path)
 
     dependencies.fetch.assert_not_called()
     dependencies.verify_package.assert_called_once()
+    dependencies.verify_contracts.assert_called_once()
     dependencies.verify_root_package.assert_called_once_with(tmp_path)
     dependencies.promote.assert_not_called()
 
@@ -194,6 +262,17 @@ def test_verify_detects_committed_generated_drift(tmp_path: Path) -> None:
 
     with pytest.raises(PipelineError, match="generated files differ"):
         verify(dependencies)
+
+
+def test_verify_contract_failure_stops_before_root_wheel_check(tmp_path: Path) -> None:
+    dependencies = _prepare_verify_fixture(tmp_path)
+    dependencies.verify_contracts.side_effect = PipelineError("contract failed")
+
+    with pytest.raises(PipelineError, match="contract failed"):
+        verify(dependencies)
+
+    dependencies.verify_package.assert_called_once()
+    dependencies.verify_root_package.assert_not_called()
 
 
 def test_upstream_check_only_fetches_and_writes_ignored_reports(
@@ -394,6 +473,7 @@ def test_bootstrap_accept_checks_then_promotes_all_outputs_once(
     fake_dependencies.fetch.assert_not_called()
     fake_dependencies.validate.assert_called_once()
     fake_dependencies.verify_package.assert_called_once()
+    fake_dependencies.verify_contracts.assert_called_once()
     fake_dependencies.promote.assert_called_once()
     targets = [item.target for item in fake_dependencies.promote.call_args.args[0]]
     assert targets == [
@@ -446,6 +526,38 @@ def test_bootstrap_accept_package_failure_preserves_reviewed_candidates(
 
     after = {path.name: path.read_bytes() for path in (tmp_path / "build/bootstrap").iterdir()}
     assert after == before
+    fake_dependencies.promote.assert_not_called()
+
+
+def test_bootstrap_accept_contract_failure_preserves_candidates_and_destinations(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    document: dict[str, object] = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {"schemas": {}},
+    }
+    _write_bootstrap_candidates(fake_dependencies, document)
+    types_target = tmp_path / "openapi/overlays/types.overlay.yaml"
+    types_target.parent.mkdir(parents=True, exist_ok=True)
+    types_target.write_text("old overlay\n", encoding="utf-8")
+    registry_target = tmp_path / "openapi/operation-ids.yaml"
+    registry_before = registry_target.read_bytes()
+    candidates_before = {
+        path.name: path.read_bytes() for path in (tmp_path / "build/bootstrap").iterdir()
+    }
+    fake_dependencies.verify_contracts.side_effect = PipelineError("contract failed")
+
+    with pytest.raises(PipelineError, match="contract failed"):
+        bootstrap(fake_dependencies, accept_current_upstream=True)
+
+    assert types_target.read_text(encoding="utf-8") == "old overlay\n"
+    assert registry_target.read_bytes() == registry_before
+    assert {
+        path.name: path.read_bytes() for path in (tmp_path / "build/bootstrap").iterdir()
+    } == candidates_before
+    fake_dependencies.verify_package.assert_called_once()
     fake_dependencies.promote.assert_not_called()
 
 
