@@ -55,8 +55,18 @@ def _resolve_ref(document: dict[str, Any], ref: str) -> Any:
 
 
 def _properties(
-    document: dict[str, Any], schema: dict[str, Any], seen: set[str]
+    document: dict[str, Any],
+    schema: dict[str, Any],
+    seen_refs: set[str],
+    seen_schemas: frozenset[int] | None = None,
 ) -> set[str]:
+    if seen_schemas is None:
+        seen_schemas = frozenset()
+    identity = id(schema)
+    if identity in seen_schemas:
+        return set()
+    child_seen_schemas = seen_schemas | {identity}
+
     raw_properties = schema.get("properties")
     result = set(raw_properties) if isinstance(raw_properties, dict) else set()
     all_of = schema.get("allOf")
@@ -68,17 +78,26 @@ def _properties(
             continue
         ref = branch.get("$ref")
         if isinstance(ref, str):
-            if ref in seen:
+            if ref in seen_refs:
                 continue
-            seen.add(ref)
             try:
                 resolved = _resolve_ref(document, ref)
             except (IndexError, KeyError, TypeError, ValueError):
                 continue
             if isinstance(resolved, dict):
-                result |= _properties(document, resolved, seen)
+                result |= _properties(
+                    document,
+                    resolved,
+                    seen_refs | {ref},
+                    child_seen_schemas,
+                )
             continue
-        result |= _properties(document, branch, seen)
+        result |= _properties(
+            document,
+            branch,
+            seen_refs,
+            child_seen_schemas,
+        )
     return result
 
 

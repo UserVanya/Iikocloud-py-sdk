@@ -82,6 +82,42 @@ def test_required_resolves_local_refs_with_json_pointer_escaping_and_cycles() ->
     ensure_valid_effective_schema(document)
 
 
+@pytest.mark.parametrize("cycle_kind", ["self", "mutual"])
+def test_inline_allof_object_cycles_are_reported_without_recursion_error(
+    cycle_kind: str,
+) -> None:
+    document = valid_document()
+    root: dict[str, Any] = {
+        "type": "object",
+        "required": ["root", "branch"],
+        "properties": {"root": {"type": "string"}},
+    }
+    sibling = {
+        "type": "object",
+        "properties": {"branch": {"type": "string"}},
+    }
+    if cycle_kind == "self":
+        root["allOf"] = [root, sibling]
+    else:
+        other: dict[str, Any] = {
+            "type": "object",
+            "properties": {"other": {"type": "string"}},
+            "allOf": [root],
+        }
+        root["required"].append("other")
+        root["allOf"] = [other, sibling]
+    document["components"]["schemas"]["Cyclic"] = root
+
+    first = lint_effective_schema(document)
+    second = lint_effective_schema(document)
+
+    assert first == second
+    assert "cyclic-object" in {issue.code for issue in first}
+    assert "required-not-defined" not in {issue.code for issue in first}
+    with pytest.raises(ValidationError, match="cyclic-object"):
+        ensure_valid_effective_schema(document)
+
+
 @pytest.mark.parametrize(
     ("schema", "codes"),
     [
