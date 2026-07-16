@@ -1,0 +1,614 @@
+from __future__ import annotations
+
+import copy
+import keyword
+import re
+import shutil
+from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+from .errors import PipelineError
+from .fetch import FetchResult, fetch_candidate
+from .generator import Toolchain, run_generator
+from .io import (
+    canonical_json_bytes,
+    load_json,
+    sha256_bytes,
+    write_bytes_atomic,
+    write_json_atomic,
+)
+from .naming import build_model_mappings, inject_operation_ids, normalize_model_name
+from .normalization import build_types_overlay
+from .overlay import apply_overlay, apply_overlay_files
+from .package_checks import verify_package as check_package
+from .package_checks import verify_root_wheel
+from .paths import RepoPaths
+from .promotion import (
+    PromotionItem,
+    build_generated_manifest,
+    load_generated_manifest,
+    promote_transaction,
+    write_generated_manifest,
+)
+from .reports import write_upstream_reports
+from .validate import ensure_valid_effective_schema
+
+UPSTREAM_SCHEMA_URL = "https://api-ru.iiko.services/api-docs/docs"
+_OPERATION_VERBS = {
+    "add",
+    "authenticate",
+    "cancel",
+    "change",
+    "close",
+    "create",
+    "delete",
+    "get",
+    "list",
+    "open",
+    "remove",
+    "retrieve",
+    "send",
+    "set",
+    "update",
+}
+
+
+@dataclass
+class PipelineDependencies:
+    paths: RepoPaths
+    fetch: Callable[[], FetchResult]
+    apply_corrections: Callable[[dict[str, Any]], tuple[dict[str, Any], dict[str, str]]]
+    validate: Callable[[dict[str, Any]], None]
+    generate: Callable[[dict[str, str]], Path]
+    verify_package: Callable[[Path], None]
+    promote: Callable[[list[PromotionItem]], None] = promote_transaction
+    verify_root_package: Callable[[Path], None] = verify_root_wheel
+
+
+def _clean_staging(path: Path, root: Path) -> None:
+    resolved = path.resolve(strict=False)
+    controlled = root.resolve(strict=True)
+    if path.is_symlink() or not resolved.is_relative_to(controlled) or resolved == controlled:
+        raise PipelineError(f"Refusing to clean unsafe staging path: {path}")
+    if path.exists():
+        if path.is_dir():
+            shutil.rmtree(path)
+        else:
+            path.unlink()
+
+
+def _manual_paths(path: Path) -> tuple[Path, ...]:
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as error:
+        raise PipelineError(f"Cannot read manual file allowlist: {path}") from error
+    result: list[Path] = []
+    for line in lines:
+        value = line.strip()
+        if not value or value.startswith("#"):
+            continue
+        relative = Path(value)
+        if (
+            relative.is_absolute()
+            or "\\" in value
+            or relative.parts[:1] != ("iikocloud_client",)
+            or any(part in {"", ".", ".."} for part in relative.parts)
+            or relative.as_posix() != value
+        ):
+            raise PipelineError(f"Unsafe manual file allowlist entry: {value!r}")
+        if relative in result:
+            raise PipelineError(f"Duplicate manual file allowlist entry: {value}")
+        result.append(relative)
+    return tuple(result)
+
+
+def _copy_manual_files(paths: RepoPaths, staged_package: Path) -> None:
+    for relative in _manual_paths(paths.root / "generator/manual-files.txt"):
+        package_relative = relative.relative_to("iikocloud_client")
+        source = paths.root / "src/iikocloud_client" / package_relative
+        destination = staged_package / package_relative
+        if destination.exists() or destination.is_symlink():
+            raise PipelineError(f"Generated/manual file collision: {relative.as_posix()}")
+        if source.exists():
+            if source.is_symlink() or not source.is_file():
+                raise PipelineError(f"Manual file must be a regular file: {source}")
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+
+
+def _load_document(path: Path, *, label: str) -> dict[str, Any]:
+    try:
+        value = load_json(path)
+    except (OSError, UnicodeError, ValueError) as error:
+        raise PipelineError(f"Cannot load {label}: {path}") from error
+    if not isinstance(value, dict):
+        raise PipelineError(f"{label.capitalize()} must be a JSON object")
+    return value
+
+
+def _load_yaml(path: Path, *, label: str) -> Any:
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, yaml.YAMLError) as error:
+        raise PipelineError(f"Cannot load {label}: {path}") from error
+
+
+def _write_yaml(path: Path, value: Any) -> None:
+    body = yaml.safe_dump(
+        value,
+        allow_unicode=True,
+        default_flow_style=False,
+        sort_keys=True,
+    ).encode("utf-8")
+    write_bytes_atomic(path, body)
+
+
+def _load_string_registry(path: Path, key: str) -> dict[str, str]:
+    value = _load_yaml(path, label=f"{key} registry")
+    if not isinstance(value, dict) or set(value) != {key} or not isinstance(value[key], dict):
+        raise PipelineError(f"{path} must contain exactly a {key} mapping")
+    registry = value[key]
+    if not all(
+        isinstance(source, str)
+        and bool(source.strip())
+        and isinstance(target, str)
+        and bool(target.strip())
+        for source, target in registry.items()
+    ):
+        raise PipelineError(f"{path} {key} entries must map non-empty strings")
+    return dict(sorted(registry.items()))
+
+
+def _semantic_overlays(root: Path, *, exclude_types: bool = False) -> list[Path]:
+    directory = root / "openapi/overlays"
+    if not directory.exists():
+        return []
+    if directory.is_symlink() or not directory.is_dir():
+        raise PipelineError("openapi/overlays must be a regular directory")
+    return [
+        path
+        for path in sorted(directory.glob("*.overlay.yaml"))
+        if not (exclude_types and path.name == "types.overlay.yaml")
+    ]
+
+
+def _apply_mechanical_overlay(document: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
+    info = overlay.get("info")
+    actions = overlay.get("actions")
+    if (
+        overlay.get("overlay") != "1.1.0"
+        or not isinstance(info, dict)
+        or any(
+            not isinstance(info.get(key), str) or not info[key].strip()
+            for key in ("title", "version")
+        )
+        or not isinstance(actions, list)
+    ):
+        raise PipelineError(
+            "Mechanical overlay must be a valid Overlay 1.1.0 document with info and actions"
+        )
+    if actions == []:
+        return copy.deepcopy(document)
+    return apply_overlay(document, overlay)
+
+
+def _model_schemas(document: dict[str, Any]) -> dict[str, Any]:
+    components = document.get("components", {})
+    schemas = components.get("schemas", {}) if isinstance(components, dict) else {}
+    if not isinstance(schemas, dict):
+        raise PipelineError("OpenAPI components.schemas must be an object")
+    return schemas
+
+
+def _apply_committed_corrections(
+    paths: RepoPaths, document: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, str]]:
+    mechanical_path = paths.root / "openapi/overlays/types.overlay.yaml"
+    mechanical = _load_yaml(mechanical_path, label="committed mechanical overlay")
+    if not isinstance(mechanical, dict):
+        raise PipelineError("Committed mechanical overlay must be an object")
+    effective = _apply_mechanical_overlay(document, mechanical)
+    effective = apply_overlay_files(
+        effective,
+        _semantic_overlays(paths.root, exclude_types=True),
+    )
+    operations = _load_string_registry(paths.root / "openapi/operation-ids.yaml", "operations")
+    effective = inject_operation_ids(effective, operations)
+    models = _load_string_registry(paths.root / "openapi/model-name-overrides.yaml", "models")
+    mappings = build_model_mappings(_model_schemas(effective), models)
+    return effective, mappings
+
+
+def _load_committed_for_report(paths: RepoPaths) -> dict[str, Any] | None:
+    if not paths.upstream.exists():
+        return None
+    return _load_document(paths.upstream, label="committed upstream snapshot")
+
+
+def _stage_generated_outputs(
+    dependencies: PipelineDependencies,
+    *,
+    snapshot: Path,
+    effective: dict[str, Any],
+    model_mappings: dict[str, str],
+) -> tuple[list[PromotionItem], Path]:
+    generated_package = dependencies.generate(model_mappings)
+    promotion_root = dependencies.paths.build / "promotion"
+    staged_snapshot = promotion_root / "iikocloud.openapi.json"
+    staged_package = promotion_root / "iikocloud_client"
+    staged_manifest = promotion_root / "generated-manifest.json"
+    _clean_staging(promotion_root, dependencies.paths.root)
+    promotion_root.mkdir(parents=True)
+    shutil.copy2(snapshot, staged_snapshot)
+    shutil.copytree(generated_package, staged_package)
+    toolchain = Toolchain.load(dependencies.paths.root / "generator/toolchain.lock")
+    write_generated_manifest(
+        generated_package,
+        staged_manifest,
+        effective_schema_sha256=sha256_bytes(canonical_json_bytes(effective)),
+        toolchain=toolchain,
+    )
+    _copy_manual_files(dependencies.paths, staged_package)
+    dependencies.verify_package(staged_package)
+    return (
+        [
+            PromotionItem(staged_snapshot, dependencies.paths.upstream),
+            PromotionItem(staged_package, dependencies.paths.root / "src/iikocloud_client"),
+            PromotionItem(
+                staged_manifest,
+                dependencies.paths.root / "generator/generated-manifest.json",
+            ),
+        ],
+        generated_package,
+    )
+
+
+def sync(dependencies: PipelineDependencies) -> None:
+    fetched = dependencies.fetch()
+    candidate = _load_document(fetched.path, label="candidate OpenAPI document")
+    write_upstream_reports(
+        _load_committed_for_report(dependencies.paths),
+        candidate,
+        dependencies.paths.build / "reports",
+    )
+    effective, model_mappings = dependencies.apply_corrections(candidate)
+    dependencies.validate(effective)
+    write_json_atomic(dependencies.paths.effective, effective)
+    items, _raw_generated = _stage_generated_outputs(
+        dependencies,
+        snapshot=fetched.path,
+        effective=effective,
+        model_mappings=model_mappings,
+    )
+    dependencies.promote(items)
+
+
+def _verify_committed_tree(
+    paths: RepoPaths, manifest: dict[str, Any], manual_paths: tuple[Path, ...]
+) -> None:
+    package = paths.root / "src/iikocloud_client"
+    if package.is_symlink() or not package.is_dir():
+        raise PipelineError("Committed generated package is missing")
+    manual_names = {path.as_posix() for path in manual_paths}
+    actual: dict[str, str] = {}
+    for path in sorted(package.rglob("*")):
+        if path.is_symlink():
+            raise PipelineError(f"Committed generated package contains a symlink: {path}")
+        if not path.is_file():
+            continue
+        relative = (Path("iikocloud_client") / path.relative_to(package)).as_posix()
+        actual[relative] = sha256_bytes(path.read_bytes())
+    missing_manual = sorted(manual_names - set(actual))
+    if missing_manual:
+        raise PipelineError("Manual files are missing: " + ", ".join(missing_manual))
+    generated = {name: digest for name, digest in actual.items() if name not in manual_names}
+    if generated != manifest["files"]:
+        raise PipelineError("Committed generated files differ from generated-manifest.json")
+
+    canonical_contract = paths.root / "contracts/rate-limits.yaml"
+    contract_relative = "iikocloud_client/_contracts/rate-limits.yaml"
+    if contract_relative in manual_names and canonical_contract.exists():
+        committed_contract = paths.root / "src" / contract_relative
+        if committed_contract.read_bytes() != canonical_contract.read_bytes():
+            raise PipelineError("Manual rate-limits contract differs from canonical contract")
+
+
+def verify(dependencies: PipelineDependencies) -> None:
+    document = _load_document(dependencies.paths.upstream, label="committed upstream snapshot")
+    effective, model_mappings = dependencies.apply_corrections(document)
+    dependencies.validate(effective)
+    write_json_atomic(dependencies.paths.effective, effective)
+    generated_package = dependencies.generate(model_mappings)
+    toolchain = Toolchain.load(dependencies.paths.root / "generator/toolchain.lock")
+    current_manifest = build_generated_manifest(
+        generated_package,
+        effective_schema_sha256=sha256_bytes(canonical_json_bytes(effective)),
+        toolchain=toolchain,
+    )
+    committed_manifest = load_generated_manifest(
+        dependencies.paths.root / "generator/generated-manifest.json"
+    )
+    _copy_manual_files(dependencies.paths, generated_package)
+    dependencies.verify_package(generated_package)
+    dependencies.verify_root_package(dependencies.paths.root)
+    if current_manifest != committed_manifest:
+        raise PipelineError("Generated manifest differs from committed generated-manifest.json")
+    _verify_committed_tree(
+        dependencies.paths,
+        committed_manifest,
+        _manual_paths(dependencies.paths.root / "generator/manual-files.txt"),
+    )
+
+
+def upstream_check(dependencies: PipelineDependencies) -> None:
+    fetched = dependencies.fetch()
+    candidate = _load_document(fetched.path, label="candidate OpenAPI document")
+    write_upstream_reports(
+        _load_committed_for_report(dependencies.paths),
+        candidate,
+        dependencies.paths.build / "reports",
+    )
+
+
+def _words(value: str) -> list[str]:
+    return [
+        word.lower() for word in re.findall(r"[A-Z]+(?=[A-Z][a-z]|$)|[A-Z]?[a-z]+|[0-9]+", value)
+    ]
+
+
+def _request_schema_name(operation: dict[str, Any]) -> str | None:
+    request_body = operation.get("requestBody")
+    if not isinstance(request_body, dict):
+        return None
+    content = request_body.get("content")
+    if not isinstance(content, dict):
+        return None
+    for media_type in sorted(content):
+        media = content[media_type]
+        if not isinstance(media, dict) or not isinstance(media.get("schema"), dict):
+            continue
+        reference = media["schema"].get("$ref")
+        if isinstance(reference, str):
+            leaf = reference.rsplit("/", 1)[-1]
+            if leaf.endswith("Request"):
+                return leaf.removesuffix("Request")
+    return None
+
+
+def _operation_base(path: str, operation: dict[str, Any]) -> str:
+    schema_name = _request_schema_name(operation)
+    if schema_name is not None:
+        words = _words(schema_name)
+        for index, word in enumerate(words):
+            if word in _OPERATION_VERBS:
+                return "_".join(words[index:])
+
+    segments = [segment for segment in path.strip("/").split("/") if segment]
+    if len(segments) >= 2 and segments[0].lower() == "api":
+        segments = segments[2:]
+    normalized = "_".join(
+        part
+        for segment in segments
+        for part in re.sub(r"[^A-Za-z0-9]+", "_", segment).strip("_").lower().split("_")
+        if part
+    )
+    if not normalized:
+        normalized = "operation"
+    if normalized[0].isdigit() or keyword.iskeyword(normalized):
+        normalized = f"operation_{normalized}"
+    return normalized
+
+
+def _operation_candidates(document: dict[str, Any]) -> dict[str, str]:
+    candidates: list[tuple[str, str, str]] = []
+    paths = document.get("paths", {})
+    if not isinstance(paths, dict):
+        raise PipelineError("OpenAPI paths must be an object")
+    for path, path_item in sorted(paths.items()):
+        if not isinstance(path, str) or not isinstance(path_item, dict):
+            raise PipelineError("OpenAPI path items must be objects")
+        for method, operation in sorted(path_item.items()):
+            if method.lower() not in {
+                "get",
+                "put",
+                "post",
+                "delete",
+                "patch",
+                "head",
+                "options",
+                "trace",
+            }:
+                continue
+            if not isinstance(operation, dict):
+                raise PipelineError(f"Operation {method.upper()} {path} must be an object")
+            candidates.append(
+                (f"{method.upper()} {path}", method.lower(), _operation_base(path, operation))
+            )
+    counts: dict[str, int] = {}
+    for _key, _method, base in candidates:
+        counts[base] = counts.get(base, 0) + 1
+    result: dict[str, str] = {}
+    used: set[str] = set()
+    for key, method, base in candidates:
+        value = f"{method}_{base}" if counts[base] > 1 else base
+        if value in used:
+            raise PipelineError(f"Cannot deterministically resolve operationId collision: {value}")
+        used.add(value)
+        result[key] = value
+    return dict(sorted(result.items()))
+
+
+def _model_collisions(document: dict[str, Any]) -> dict[str, list[str]]:
+    groups: dict[str, list[str]] = {}
+    for raw in sorted(_model_schemas(document)):
+        normalized = normalize_model_name(raw)
+        groups.setdefault(normalized, []).append(raw)
+    return {normalized: values for normalized, values in sorted(groups.items()) if len(values) > 1}
+
+
+def _bootstrap_preview(dependencies: PipelineDependencies) -> None:
+    fetched = dependencies.fetch()
+    document = _load_document(fetched.path, label="candidate OpenAPI document")
+    bootstrap_root = dependencies.paths.build / "bootstrap"
+    bootstrap_root.mkdir(parents=True, exist_ok=True)
+    collisions = _model_collisions(document)
+    _write_yaml(bootstrap_root / "types.overlay.yaml", build_types_overlay(document))
+    _write_yaml(
+        bootstrap_root / "operation-ids.yaml",
+        {"operations": _operation_candidates(document)},
+    )
+    _write_yaml(bootstrap_root / "model-collisions.yaml", {"collisions": collisions})
+    write_upstream_reports(
+        _load_committed_for_report(dependencies.paths),
+        document,
+        dependencies.paths.build / "reports",
+        include_json=False,
+    )
+    if collisions:
+        raise PipelineError(
+            "Bootstrap has unresolved model collisions; review model-collisions.yaml"
+        )
+
+
+def _assert_empty_operation_registry(path: Path) -> None:
+    if not path.exists():
+        return
+    try:
+        body = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise PipelineError(f"Cannot read operation registry: {path}") from error
+    if not body.strip():
+        return
+    operations = _load_string_registry(path, "operations")
+    if operations:
+        raise PipelineError("Bootstrap refuses to overwrite a non-empty operation registry")
+
+
+def _bootstrap_overrides(paths: RepoPaths) -> dict[str, str]:
+    committed = paths.root / "openapi/model-name-overrides.yaml"
+    result = _load_string_registry(committed, "models") if committed.exists() else {}
+    candidate = paths.build / "bootstrap/model-name-overrides.yaml"
+    if candidate.exists():
+        result.update(_load_string_registry(candidate, "models"))
+    return dict(sorted(result.items()))
+
+
+def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
+    paths = dependencies.paths
+    _assert_empty_operation_registry(paths.root / "openapi/operation-ids.yaml")
+    bootstrap_root = paths.build / "bootstrap"
+    types_candidate = bootstrap_root / "types.overlay.yaml"
+    operations_candidate = bootstrap_root / "operation-ids.yaml"
+    collisions_candidate = bootstrap_root / "model-collisions.yaml"
+    for candidate in (
+        paths.candidate,
+        types_candidate,
+        operations_candidate,
+        collisions_candidate,
+    ):
+        if candidate.is_symlink() or not candidate.is_file():
+            raise PipelineError(f"Reviewed bootstrap candidate is missing: {candidate}")
+    collision_data = _load_yaml(collisions_candidate, label="model collision candidates")
+    if (
+        not isinstance(collision_data, dict)
+        or set(collision_data) != {"collisions"}
+        or not isinstance(collision_data["collisions"], dict)
+    ):
+        raise PipelineError("model-collisions.yaml has an invalid shape")
+    if not all(
+        isinstance(name, str)
+        and bool(name)
+        and isinstance(raw_names, list)
+        and all(isinstance(raw, str) and bool(raw) for raw in raw_names)
+        for name, raw_names in collision_data["collisions"].items()
+    ):
+        raise PipelineError("model-collisions.yaml contains invalid collision entries")
+
+    document = _load_document(paths.candidate, label="candidate OpenAPI document")
+    overlay = _load_yaml(types_candidate, label="mechanical type overlay")
+    if not isinstance(overlay, dict):
+        raise PipelineError("Bootstrap type overlay must be an object")
+    effective = _apply_mechanical_overlay(document, overlay)
+    effective = apply_overlay_files(
+        effective,
+        _semantic_overlays(paths.root, exclude_types=True),
+    )
+    effective = inject_operation_ids(
+        effective,
+        _load_string_registry(operations_candidate, "operations"),
+    )
+    mappings = build_model_mappings(_model_schemas(effective), _bootstrap_overrides(paths))
+    dependencies.validate(effective)
+    write_json_atomic(paths.effective, effective)
+    items, _raw_generated = _stage_generated_outputs(
+        dependencies,
+        snapshot=paths.candidate,
+        effective=effective,
+        model_mappings=mappings,
+    )
+    mechanical_items = [
+        PromotionItem(types_candidate, paths.root / "openapi/overlays/types.overlay.yaml"),
+        PromotionItem(operations_candidate, paths.root / "openapi/operation-ids.yaml"),
+    ]
+    model_candidate = bootstrap_root / "model-name-overrides.yaml"
+    if model_candidate.exists():
+        mechanical_items.append(
+            PromotionItem(model_candidate, paths.root / "openapi/model-name-overrides.yaml")
+        )
+    dependencies.promote([items[0], *mechanical_items, *items[1:]])
+
+
+def bootstrap(
+    dependencies: PipelineDependencies, *, accept_current_upstream: bool = False
+) -> None:
+    if accept_current_upstream:
+        _accept_bootstrap(dependencies)
+    else:
+        _bootstrap_preview(dependencies)
+
+
+def _project_version(root: Path) -> str:
+    try:
+        import tomllib
+
+        document = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))
+        version = document["project"]["version"]
+    except (OSError, UnicodeError, ValueError, KeyError, TypeError) as error:
+        raise PipelineError("Cannot read project version from pyproject.toml") from error
+    if not isinstance(version, str) or not version.strip():
+        raise PipelineError("Project version must be a non-empty string")
+    return version
+
+
+def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> PipelineDependencies:
+    repo_paths = paths or RepoPaths.discover()
+
+    def fetch() -> FetchResult:
+        if not offline:
+            return fetch_candidate(UPSTREAM_SCHEMA_URL, repo_paths.candidate)
+        if not repo_paths.upstream.is_file() or repo_paths.upstream.is_symlink():
+            raise PipelineError("Offline sync requires a committed upstream snapshot")
+        body = repo_paths.upstream.read_bytes()
+        return FetchResult(sha256_bytes(body), repo_paths.upstream, False)
+
+    toolchain = Toolchain.load(repo_paths.root / "generator/toolchain.lock")
+    package_version = _project_version(repo_paths.root)
+    return PipelineDependencies(
+        paths=repo_paths,
+        fetch=fetch,
+        apply_corrections=lambda document: _apply_committed_corrections(repo_paths, document),
+        validate=ensure_valid_effective_schema,
+        generate=lambda mappings: run_generator(
+            repo_paths.root,
+            toolchain,
+            mappings,
+            package_version,
+        ),
+        verify_package=lambda package: check_package(package, build_root=repo_paths.build),
+        promote=lambda items: promote_transaction(items, root=repo_paths.root),
+        verify_root_package=verify_root_wheel,
+    )

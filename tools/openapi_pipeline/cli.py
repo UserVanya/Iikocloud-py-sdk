@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from collections.abc import Sequence
 
 from .errors import PipelineError
@@ -23,10 +24,39 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m tools.openapi_pipeline")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for command in COMMANDS:
-        subparsers.add_parser(command)
+        command_parser = subparsers.add_parser(command)
+        if command == "bootstrap":
+            command_parser.add_argument("--accept-current-upstream", action="store_true")
+        elif command == "sync":
+            command_parser.add_argument("--offline", action="store_true")
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    raise PipelineError(f"Command is not implemented yet: {args.command}")
+    try:
+        from . import pipeline
+
+        if args.command == "bootstrap":
+            dependencies = pipeline.default_dependencies(
+                offline=bool(args.accept_current_upstream)
+            )
+            pipeline.bootstrap(
+                dependencies,
+                accept_current_upstream=bool(args.accept_current_upstream),
+            )
+        elif args.command == "sync":
+            dependencies = pipeline.default_dependencies(offline=bool(args.offline))
+            pipeline.sync(dependencies)
+        elif args.command == "verify":
+            dependencies = pipeline.default_dependencies(offline=True)
+            pipeline.verify(dependencies)
+        elif args.command == "upstream-check":
+            dependencies = pipeline.default_dependencies(offline=False)
+            pipeline.upstream_check(dependencies)
+        else:
+            raise PipelineError(f"Command is not implemented yet: {args.command}")
+    except PipelineError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 2
+    return 0
