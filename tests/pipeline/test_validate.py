@@ -169,6 +169,73 @@ def test_json_pointer_canonical_array_indices_resolve(token: str) -> None:
     assert not any(issue.code == "broken-ref" for issue in lint_effective_schema(document))
 
 
+def test_schema_data_payloads_are_opaque_to_reference_validation() -> None:
+    document = valid_document()
+    document["components"]["schemas"]["Payload"] = {
+        "type": "object",
+        "properties": {},
+        "example": {"$ref": "#/missing/example"},
+        "default": {"$ref": "#/missing/default"},
+        "enum": [{"$ref": "#/missing/enum"}],
+    }
+
+    ensure_valid_effective_schema(document)
+
+
+def test_nested_extension_payload_is_opaque_to_reference_validation() -> None:
+    document = valid_document()
+    document["x-private-payload"] = {
+        "nested": {
+            "$ref": "#/missing/extension",
+            "schema": {"$ref": "#/missing/extension-schema"},
+        }
+    }
+
+    ensure_valid_effective_schema(document)
+
+
+def test_example_value_is_opaque_but_example_reference_object_is_structural() -> None:
+    document = valid_document()
+    document["components"]["examples"] = {
+        "Inline": {"value": {"$ref": "#/missing/example-value"}},
+        "Alias": {"$ref": "#/components/examples/Missing"},
+    }
+
+    broken_refs = [
+        issue for issue in lint_effective_schema(document) if issue.code == "broken-ref"
+    ]
+
+    assert broken_refs == [
+        LintIssue(
+            "broken-ref",
+            "#/components/examples/Alias",
+            "#/components/examples/Missing",
+        )
+    ]
+
+
+def test_broken_structural_response_reference_is_still_rejected() -> None:
+    document = valid_document()
+    document["components"]["responses"] = {
+        "x-alias": {"$ref": "#/components/responses/Missing"}
+    }
+
+    with pytest.raises(ValidationError, match="broken-ref@#/components/responses/x-alias"):
+        ensure_valid_effective_schema(document)
+
+
+def test_default_response_reference_is_structural_not_default_data() -> None:
+    document = valid_document()
+    document["paths"]["/ping"]["post"]["responses"]["default"] = {
+        "$ref": "#/components/responses/Missing"
+    }
+
+    with pytest.raises(
+        ValidationError, match="broken-ref@#/paths/~1ping/post/responses/default"
+    ):
+        ensure_valid_effective_schema(document)
+
+
 def test_only_http_methods_are_operations_and_operation_ids_are_nonempty_unique() -> None:
     document = valid_document()
     document["paths"] = {

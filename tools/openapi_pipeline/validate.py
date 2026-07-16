@@ -7,7 +7,7 @@ from urllib.parse import unquote
 
 from .errors import ValidationError
 from .inventory import HTTP_METHODS
-from .schema import iter_schema_objects
+from .schema import iter_schema_objects, iter_structural_references
 
 VALID_TYPES = {"array", "boolean", "integer", "number", "object", "string"}
 _ARRAY_INDEX = re.compile(r"(?:0|[1-9][0-9]*)")
@@ -123,16 +123,6 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
                 if not isinstance(key, str):
                     add("invalid-object-key", path, f"object key must be a string: {key!r}")
 
-            if "$ref" in value:
-                ref = value["$ref"]
-                if not isinstance(ref, str):
-                    add("invalid-ref", path, "$ref must be a string")
-                else:
-                    try:
-                        _resolve_ref(document, ref)
-                    except (IndexError, KeyError, TypeError, ValueError):
-                        add("broken-ref", path, ref)
-
             for key in sorted(value, key=_sort_key):
                 visit(value[key], _pointer(path, key), child_ancestors)
         elif isinstance(value, list):
@@ -145,6 +135,16 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
                 visit(child, _pointer(path, index), child_ancestors)
 
     visit(document, "#", frozenset())
+
+    for parts, ref in iter_structural_references(document):
+        path = _path_from_parts(parts)
+        if not isinstance(ref, str):
+            add("invalid-ref", path, "$ref must be a string")
+            continue
+        try:
+            _resolve_ref(document, ref)
+        except (IndexError, KeyError, TypeError, ValueError):
+            add("broken-ref", path, ref)
 
     for parts, schema in iter_schema_objects(document):
         path = _path_from_parts(parts)
