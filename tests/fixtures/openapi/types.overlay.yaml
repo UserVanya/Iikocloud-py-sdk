@@ -1,0 +1,12 @@
+overlay: 1.1.0
+info:
+  title: Normalize fixture bool
+  version: 1.0.0
+actions:
+  - target: $.components.schemas.Ping.properties.enabled.type
+    description: iiko emits bool instead of boolean
+    x-iiko-sdk-guard:
+      issue: upstream-invalid-bool
+      expected-matches: 1
+      expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
+    update: boolean
