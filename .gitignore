@@ -48,6 +48,13 @@ venv/
 .venv/
 .python-version
 .pytest_cache
+.env
+.env.local
+.state/
+.worktrees/
+private/*
+!private/.gitignore
+!private/README.md
 
 # Translations
 *.mo
