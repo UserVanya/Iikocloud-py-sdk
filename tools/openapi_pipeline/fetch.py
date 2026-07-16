@@ -31,8 +31,17 @@ def _urlopen(url: str, timeout: float, *, max_bytes: int = DEFAULT_MAX_RESPONSE_
         if response.status != 200:
             raise ValidationError(f"Upstream returned HTTP status {response.status}; expected 200")
         content_length = response.headers.get("Content-Length")
-        if content_length is not None and int(content_length) > max_bytes:
-            _raise_oversized_response(max_bytes)
+        if content_length is not None:
+            try:
+                declared_length = int(content_length)
+            except ValueError as exc:
+                raise ValidationError(
+                    "Upstream returned an invalid Content-Length header"
+                ) from exc
+            if declared_length < 0:
+                raise ValidationError("Upstream returned an invalid Content-Length header")
+            if declared_length > max_bytes:
+                _raise_oversized_response(max_bytes)
         body = response.read(max_bytes + 1)
         if len(body) > max_bytes:
             _raise_oversized_response(max_bytes)
@@ -55,7 +64,8 @@ def fetch_candidate(
     if len(body) > max_bytes:
         _raise_oversized_response(max_bytes)
     try:
-        document = json.loads(body)
+        text = body.decode("utf-8")
+        document = json.loads(text)
     except UnicodeDecodeError as exc:
         raise ValidationError("Upstream response is not valid UTF-8 JSON") from exc
     except json.JSONDecodeError as exc:
@@ -70,6 +80,12 @@ def fetch_candidate(
         raise ValidationError("Upstream OpenAPI root field 'paths' must be an object")
     if "components" in document and not isinstance(document["components"], dict):
         raise ValidationError("Upstream OpenAPI root field 'components' must be an object")
+    for path, path_item in document["paths"].items():
+        if not isinstance(path_item, dict):
+            raise ValidationError(f"Upstream OpenAPI path item '{path}' must be an object")
+    components = document.get("components", {})
+    if "schemas" in components and not isinstance(components["schemas"], dict):
+        raise ValidationError("Upstream OpenAPI field 'components.schemas' must be an object")
     digest = sha256_bytes(body)
     changed = not destination.exists() or sha256_bytes(destination.read_bytes()) != digest
     write_bytes_atomic(destination, body)

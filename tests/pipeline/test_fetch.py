@@ -128,6 +128,28 @@ def test_default_reader_rejects_oversized_content_length_before_body_read(
     assert response.exited is True
 
 
+def test_default_reader_rejects_malformed_content_length_without_mutation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    headers = Message()
+    headers["Content-Length"] = "not-a-number"
+    response = FakeResponse(VALID_OPENAPI, headers=headers)
+    urlopen = FakeUrlOpen(response)
+    monkeypatch.setattr(urllib.request, "urlopen", urlopen)
+    destination = tmp_path / "candidate.json"
+    original = b"existing candidate\n"
+    destination.write_bytes(original)
+
+    with pytest.raises(ValidationError, match="Content-Length"):
+        fetch_candidate("https://example.invalid/schema", destination)
+
+    assert destination.read_bytes() == original
+    assert response.read_sizes == []
+    assert response.entered is True
+    assert response.exited is True
+
+
 def test_default_reader_bounds_unknown_length_and_rejects_oversized_body(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -227,6 +249,47 @@ def test_fetch_candidate_rejects_wrong_openapi_root_types_without_mutation(
     assert destination.read_bytes() == original
 
 
+def test_fetch_candidate_rejects_non_object_path_item_without_mutation(tmp_path: Path) -> None:
+    document = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {"/x": None},
+    }
+    destination = tmp_path / "candidate.json"
+    original = b"existing candidate\n"
+    destination.write_bytes(original)
+
+    with pytest.raises(ValidationError, match=r"path item '/x'.*object"):
+        fetch_candidate(
+            "https://example.invalid/schema",
+            destination,
+            opener=lambda _url, _timeout: json.dumps(document).encode(),
+        )
+
+    assert destination.read_bytes() == original
+
+
+def test_fetch_candidate_rejects_non_object_schemas_without_mutation(tmp_path: Path) -> None:
+    document = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {"schemas": None},
+    }
+    destination = tmp_path / "candidate.json"
+    original = b"existing candidate\n"
+    destination.write_bytes(original)
+
+    with pytest.raises(ValidationError, match=r"'components.schemas'.*object"):
+        fetch_candidate(
+            "https://example.invalid/schema",
+            destination,
+            opener=lambda _url, _timeout: json.dumps(document).encode(),
+        )
+
+    assert destination.read_bytes() == original
+
+
 def test_fetch_candidate_rejects_invalid_utf8_without_mutation(tmp_path: Path) -> None:
     destination = tmp_path / "candidate.json"
     original = b"existing candidate\n"
@@ -237,6 +300,22 @@ def test_fetch_candidate_rejects_invalid_utf8_without_mutation(tmp_path: Path) -
             "https://example.invalid/schema",
             destination,
             opener=lambda _url, _timeout: b"\xff",
+        )
+
+    assert destination.read_bytes() == original
+
+
+def test_fetch_candidate_rejects_utf16_json_without_mutation(tmp_path: Path) -> None:
+    destination = tmp_path / "candidate.json"
+    original = b"existing candidate\n"
+    destination.write_bytes(original)
+    utf16_body = VALID_OPENAPI.decode("utf-8").encode("utf-16")
+
+    with pytest.raises(ValidationError, match="UTF-8 JSON"):
+        fetch_candidate(
+            "https://example.invalid/schema",
+            destination,
+            opener=lambda _url, _timeout: utf16_body,
         )
 
     assert destination.read_bytes() == original
