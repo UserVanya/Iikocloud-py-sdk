@@ -1,0 +1,63 @@
+actions:
+- target: $
+  update:
+    servers:
+    - url: https://api-ru.iiko.services
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ed8f7d2482b96c337c19161ea383ca8f749ee599af10c2acde7abac33bb4cd4d
+    issue: iiko-root-server
+- target: $.components
+  update:
+    securitySchemes:
+      BearerAuth:
+        scheme: bearer
+        type: http
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 10db0b0e028b7d13b4c777548cb68f62e6976f78f22894b31706fee39c1a45a1
+    issue: iiko-bearer-scheme
+- remove: true
+  target: $.paths.*.*.parameters[?@.in == "header" && @.name == "Authorization"]
+  x-iiko-sdk-guard:
+    expected-matches: 130
+    expected-sha256: 0941deabd0163868c50acdbea07128a45e54856dae0f11435c7fa604ea15c65f
+    issue: remove-raw-authorization-parameters
+- target: $.paths.*["delete","get","head","options","patch","post","put","trace"]
+  update:
+    security:
+    - BearerAuth: []
+  x-iiko-sdk-guard:
+    expected-matches: 225
+    expected-sha256: 4d12cb76744358bebf301725559d69ef80473a3c6610bd38781762275474dc81
+    issue: require-bearer-authentication
+- remove: true
+  target: $.paths["/api/1/access_token"].post.security
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 51fb15f6c687b94455573657bb06f530f641ef40392c60b1cc0de361a01e9550
+    issue: remove-bearer-from-post-/api/1/access_token
+- target: $.paths["/api/1/access_token"].post
+  update:
+    security: []
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 94e390264b30c11196ff6661044ccc92192c20d8521ac1074b8a94b7a78d9ae3
+    issue: mark-post-/api/1/access_token-public
+- remove: true
+  target: $.paths["/api/v2/access_token"].post.security
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 51fb15f6c687b94455573657bb06f530f641ef40392c60b1cc0de361a01e9550
+    issue: remove-bearer-from-post-/api/v2/access_token
+- target: $.paths["/api/v2/access_token"].post
+  update:
+    security: []
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 0400c18538ab81320a876fbd2cdcb17a407989f4b9f3a5c9c22e9986fe05b9a2
+    issue: mark-post-/api/v2/access_token-public
+info:
+  title: iiko Cloud bearer authentication contract
+  version: 1.0.0
+overlay: 1.1.0

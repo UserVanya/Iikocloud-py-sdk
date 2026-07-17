@@ -251,6 +251,19 @@ def _model_schemas(document: dict[str, Any]) -> dict[str, Any]:
     return schemas
 
 
+def _apply_correction_overlays(
+    root: Path,
+    document: dict[str, Any],
+    mechanical: dict[str, Any],
+) -> dict[str, Any]:
+    semantic = _semantic_overlays(root, exclude_types=True)
+    contracts = [path for path in semantic if path.name == "contracts.overlay.yaml"]
+    remaining = [path for path in semantic if path.name != "contracts.overlay.yaml"]
+    effective = apply_overlay_files(document, contracts)
+    effective = _apply_mechanical_overlay(effective, mechanical)
+    return apply_overlay_files(effective, remaining)
+
+
 def _apply_committed_corrections(
     paths: RepoPaths, document: dict[str, Any]
 ) -> tuple[dict[str, Any], dict[str, str]]:
@@ -258,11 +271,7 @@ def _apply_committed_corrections(
     mechanical = _load_yaml(mechanical_path, label="committed mechanical overlay")
     if not isinstance(mechanical, dict):
         raise PipelineError("Committed mechanical overlay must be an object")
-    effective = _apply_mechanical_overlay(document, mechanical)
-    effective = apply_overlay_files(
-        effective,
-        _semantic_overlays(paths.root, exclude_types=True),
-    )
+    effective = _apply_correction_overlays(paths.root, document, mechanical)
     operations = _load_string_registry(paths.root / "openapi/operation-ids.yaml", "operations")
     effective = inject_operation_ids(effective, operations)
     models = _load_string_registry(paths.root / "openapi/model-name-overrides.yaml", "models")
@@ -603,11 +612,7 @@ def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
     overlay = _load_yaml(types_candidate, label="mechanical type overlay")
     if not isinstance(overlay, dict):
         raise PipelineError("Bootstrap type overlay must be an object")
-    effective = _apply_mechanical_overlay(document, overlay)
-    effective = apply_overlay_files(
-        effective,
-        _semantic_overlays(paths.root, exclude_types=True),
-    )
+    effective = _apply_correction_overlays(paths.root, document, overlay)
     effective = inject_operation_ids(
         effective,
         _load_string_registry(operations_candidate, "operations"),
@@ -672,7 +677,10 @@ def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> Pi
         paths=repo_paths,
         fetch=fetch,
         apply_corrections=lambda document: _apply_committed_corrections(repo_paths, document),
-        validate=ensure_valid_effective_schema,
+        validate=lambda document: ensure_valid_effective_schema(
+            document,
+            require_iikocloud_contracts=True,
+        ),
         generate=lambda mappings: run_generator(
             repo_paths.root,
             toolchain,

@@ -9,7 +9,8 @@ import pytest
 import yaml
 
 from tools.openapi_pipeline import pipeline as pipeline_module
-from tools.openapi_pipeline.errors import PipelineError, StaleOverlayError
+from tools.openapi_pipeline.contracts import build_contracts_overlay
+from tools.openapi_pipeline.errors import PipelineError, StaleOverlayError, ValidationError
 from tools.openapi_pipeline.fetch import FetchResult
 from tools.openapi_pipeline.generator import Toolchain
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes, write_json_atomic
@@ -594,6 +595,67 @@ def test_committed_mechanical_overlay_applies_to_original_upstream_once(tmp_path
     assert document["components"]["schemas"]["BooleanValue"]["type"] == "bool"
 
 
+def test_contract_overlay_applies_to_raw_before_mechanical_type_corrections(
+    tmp_path: Path,
+) -> None:
+    document = {
+        "openapi": "3.0.1",
+        "info": {"title": "fixture", "version": "1"},
+        "paths": {
+            "/api/1/access_token": {"post": {"responses": {}}},
+            "/api/1/ping": {
+                "post": {
+                    "parameters": [
+                        {"in": "header", "name": "Authorization", "schema": {}}
+                    ],
+                    "responses": {},
+                }
+            },
+            "/api/v2/access_token": {"post": {"responses": {}}},
+        },
+        "components": {"schemas": {"BooleanValue": {"type": "bool"}}},
+    }
+    openapi = tmp_path / "openapi"
+    overlays = openapi / "overlays"
+    overlays.mkdir(parents=True)
+    (overlays / "types.overlay.yaml").write_text(
+        yaml.safe_dump(pipeline_module.build_types_overlay(document), sort_keys=True),
+        encoding="utf-8",
+    )
+    (overlays / "contracts.overlay.yaml").write_text(
+        yaml.safe_dump(build_contracts_overlay(document), sort_keys=True),
+        encoding="utf-8",
+    )
+    (openapi / "operation-ids.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "operations": {
+                    "POST /api/1/access_token": "authenticate",
+                    "POST /api/1/ping": "ping",
+                    "POST /api/v2/access_token": "authenticate_v2",
+                }
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    (openapi / "model-name-overrides.yaml").write_text(
+        "models: {}\n", encoding="utf-8"
+    )
+
+    effective, mappings = _apply_committed_corrections(RepoPaths(tmp_path), document)
+
+    assert effective["components"]["schemas"]["BooleanValue"]["type"] == "boolean"
+    assert effective["servers"] == [{"url": "https://api-ru.iiko.services"}]
+    assert effective["paths"]["/api/1/ping"]["post"]["parameters"] == []
+    assert effective["paths"]["/api/1/ping"]["post"]["security"] == [
+        {"BearerAuth": []}
+    ]
+    assert effective["paths"]["/api/1/access_token"]["post"]["security"] == []
+    assert effective["paths"]["/api/v2/access_token"]["post"]["security"] == []
+    assert mappings == {"BooleanValue": "BooleanValue"}
+
+
 def test_valid_empty_committed_mechanical_overlay_is_noop(tmp_path: Path) -> None:
     _write_valid_empty_registries(tmp_path)
     document = {"openapi": "3.0.1", "info": {}, "paths": {}}
@@ -775,3 +837,27 @@ def test_default_online_fetch_uses_only_exact_production_schema_url(
     assert UPSTREAM_SCHEMA_URL == "https://api-ru.iiko.services/api-docs/docs"
     assert captured == [(UPSTREAM_SCHEMA_URL, tmp_path / "build/upstream/candidate.json")]
     assert "api-ru.iiko.services/docs" not in UPSTREAM_SCHEMA_URL
+
+
+def test_default_pipeline_enables_iikocloud_contract_lint(tmp_path: Path) -> None:
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "fixture"\nversion = "1.0.0"\n', encoding="utf-8"
+    )
+    generator = tmp_path / "generator"
+    generator.mkdir()
+    (generator / "toolchain.lock").write_text(
+        '{"image":"openapitools/openapi-generator-cli",'
+        '"version":"v7.22.0","digest":"sha256:' + "a" * 64 + '"}\n',
+        encoding="utf-8",
+    )
+    dependencies = default_dependencies(offline=True, paths=RepoPaths(tmp_path))
+    generic_document = {
+        "openapi": "3.0.1",
+        "info": {"title": "fixture", "version": "1"},
+        "servers": [{"url": "https://api.example.invalid"}],
+        "paths": {},
+        "components": {"schemas": {}},
+    }
+
+    with pytest.raises(ValidationError, match="iiko-root-server"):
+        dependencies.validate(generic_document)

@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 from urllib.parse import unquote
 
+from .contracts import IIKO_AUTH_OPERATIONS, IIKO_ROOT_SERVER_URL
 from .errors import ValidationError
 from .inventory import HTTP_METHODS
 from .schema import iter_schema_objects, iter_structural_references
@@ -121,7 +122,9 @@ def _path_from_parts(parts: tuple[str | int, ...]) -> str:
     return path
 
 
-def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
+def lint_effective_schema(
+    document: dict[str, Any], *, require_iikocloud_contracts: bool = False
+) -> list[LintIssue]:
     if not isinstance(document, dict):
         return [LintIssue("invalid-document", "#", "document must be an object")]
 
@@ -266,11 +269,99 @@ def lint_effective_schema(document: dict[str, Any]) -> list[LintIssue]:
             if not isinstance(url, str) or not url.strip():
                 add("invalid-server", path, "server url must be a non-empty string")
 
+    if require_iikocloud_contracts:
+        if servers != [{"url": IIKO_ROOT_SERVER_URL}]:
+            add(
+                "iiko-root-server",
+                "#/servers",
+                f"servers must be exactly [{{'url': '{IIKO_ROOT_SERVER_URL}'}}]",
+            )
+
+        components = document.get("components")
+        security_schemes = (
+            components.get("securitySchemes") if isinstance(components, dict) else None
+        )
+        if security_schemes != {
+            "BearerAuth": {"type": "http", "scheme": "bearer"}
+        }:
+            add(
+                "iiko-bearer-scheme",
+                "#/components/securitySchemes",
+                "exactly one HTTP bearer scheme named BearerAuth is required",
+            )
+
+        if isinstance(paths, dict):
+            for route in sorted(paths, key=_sort_key):
+                path_item = paths[route]
+                if not isinstance(route, str) or not isinstance(path_item, dict):
+                    continue
+
+                path_parameters = path_item.get("parameters")
+                if isinstance(path_parameters, list):
+                    for index, parameter in enumerate(path_parameters):
+                        if _is_raw_authorization_parameter(parameter):
+                            parameter_path = _pointer(
+                                _pointer(_pointer("#/paths", route), "parameters"), index
+                            )
+                            add(
+                                "iiko-raw-authorization",
+                                parameter_path,
+                                "raw Authorization header parameters are forbidden",
+                            )
+
+                for method in sorted(path_item, key=_sort_key):
+                    if not isinstance(method, str) or method.lower() not in HTTP_METHODS:
+                        continue
+                    operation = path_item[method]
+                    if not isinstance(operation, dict):
+                        continue
+                    location = f"{method.upper()} {route}"
+                    security = operation.get("security")
+                    operation_key = (route, method.lower())
+                    if operation_key in IIKO_AUTH_OPERATIONS:
+                        if security != []:
+                            add(
+                                "iiko-auth-security",
+                                location,
+                                "authentication operations must declare security: []",
+                            )
+                    elif security != [{"BearerAuth": []}]:
+                        add(
+                            "iiko-bearer-required",
+                            location,
+                            "non-authentication operations must require BearerAuth",
+                        )
+
+                    operation_parameters = operation.get("parameters")
+                    if isinstance(operation_parameters, list):
+                        for index, parameter in enumerate(operation_parameters):
+                            if _is_raw_authorization_parameter(parameter):
+                                add(
+                                    "iiko-raw-authorization",
+                                    f"{location}/parameters/{index}",
+                                    "raw Authorization header parameters are forbidden",
+                                )
+
     return sorted(set(issues))
 
 
-def ensure_valid_effective_schema(document: dict[str, Any]) -> None:
-    issues = lint_effective_schema(document)
+def _is_raw_authorization_parameter(value: Any) -> bool:
+    return (
+        isinstance(value, dict)
+        and isinstance(value.get("in"), str)
+        and value["in"].casefold() == "header"
+        and isinstance(value.get("name"), str)
+        and value["name"].casefold() == "authorization"
+    )
+
+
+def ensure_valid_effective_schema(
+    document: dict[str, Any], *, require_iikocloud_contracts: bool = False
+) -> None:
+    issues = lint_effective_schema(
+        document,
+        require_iikocloud_contracts=require_iikocloud_contracts,
+    )
     if issues:
         summary = "; ".join(f"{issue.code}@{issue.path}: {issue.message}" for issue in issues)
         raise ValidationError(summary)
