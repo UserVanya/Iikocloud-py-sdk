@@ -249,7 +249,9 @@ def test_operation_hash_resolves_percent_encoded_local_uri_fragment_tokens() -> 
                         "200": {
                             "content": {
                                 "application/json": {
-                                    "schema": {"$ref": "#/components/schemas/Slash%2FName~0Value"}
+                                    "schema": {
+                                        "$ref": ("#/components%2Fschemas%2FSlash%7E1Name~0Value")
+                                    }
                                 }
                             }
                         }
@@ -276,4 +278,43 @@ def test_operation_hash_resolves_percent_encoded_local_uri_fragment_tokens() -> 
     )
     assert diff_inventory(before, collect_inventory(encoded_changed)).changed_operations == (
         "GET /encoded",
+    )
+
+
+def test_operation_hash_tracks_nested_percent_encoded_local_reference() -> None:
+    before_document = {
+        "openapi": "3.0.1",
+        "paths": {
+            "/nested": {
+                "get": {
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {"$ref": "#/components/schemas/Envelope"}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "Envelope": {
+                    "type": "object",
+                    "properties": {
+                        "payload": {"$ref": ("#/components%2Fschemas%2FSlash%7E1Name~0Value")}
+                    },
+                },
+                "Slash/Name~Value": {"type": "integer"},
+            }
+        },
+    }
+    before = collect_inventory(before_document)
+    after_document = copy.deepcopy(before_document)
+    after_document["components"]["schemas"]["Slash/Name~Value"]["format"] = "int64"  # type: ignore[index]
+
+    assert diff_inventory(before, collect_inventory(after_document)).changed_operations == (
+        "GET /nested",
     )

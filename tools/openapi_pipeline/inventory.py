@@ -12,9 +12,10 @@ HTTP_METHODS = {"get", "put", "post", "delete", "patch", "head", "options", "tra
 def _resolve_local_reference(document: dict[str, Any], reference: str) -> Any:
     if not reference.startswith("#/"):
         return None
+    pointer = unquote(reference[1:])
     current: Any = document
-    for encoded in reference[2:].split("/"):
-        part = unquote(encoded).replace("~1", "/").replace("~0", "~")
+    for encoded in pointer[1:].split("/"):
+        part = encoded.replace("~1", "/").replace("~0", "~")
         if not isinstance(current, dict) or part not in current:
             return None
         current = current[part]
