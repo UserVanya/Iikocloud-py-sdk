@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import struct
 from collections.abc import Mapping
 from typing import Any
 
@@ -55,6 +56,7 @@ _UUID_FORMAT = re.compile(
     r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z"
 )
 _BROKEN_COMBO_COMPONENT = "ExternalMenuComboItem"
+_ITEM_COMPONENT = "ExternalMenuItem3"
 _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     {
         "allergenGroupIds",
@@ -87,6 +89,7 @@ class MenuEvidenceValidator:
             )
             for version in sorted(_VERSIONS)
         }
+        self._item_schema = self._component(_ITEM_COMPONENT)
         self._broken_combo_schema = self._component(_BROKEN_COMBO_COMPONENT)
         category = self._component("ExternalMenuCategory3")
         properties = category.get("properties")
@@ -190,6 +193,39 @@ class MenuEvidenceValidator:
         nullable = schema.get("nullable")
         if nullable is not None and type(nullable) is not bool:
             raise SafetyError("Evidence schema nullable flag is invalid")
+        if (
+            any(
+                keyword in schema for keyword in ("properties", "required", "additionalProperties")
+            )
+            and schema_type != "object"
+        ):
+            raise SafetyError("Evidence schema object keywords require type object")
+        if "items" in schema and schema_type != "array":
+            raise SafetyError("Evidence schema items keyword requires type array")
+        if schema_type == "array" and "items" not in schema:
+            raise SafetyError("Evidence schema array contract requires items")
+        if "items" in schema and type(schema["items"]) is not dict:
+            raise SafetyError("Evidence schema items contract must be an object")
+        if any(keyword in schema for keyword in ("minLength", "maxLength")) and (
+            schema_type != "string"
+        ):
+            raise SafetyError("Evidence schema length keywords require type string")
+        if nullable is not None and schema_type is None and "oneOf" not in schema:
+            raise SafetyError("Evidence schema nullable placement has drifted")
+        if "oneOf" in schema and set(schema).intersection(
+            {
+                "additionalProperties",
+                "enum",
+                "format",
+                "items",
+                "maxLength",
+                "minLength",
+                "properties",
+                "required",
+                "type",
+            }
+        ):
+            raise SafetyError("Evidence schema oneOf placement has drifted")
         for annotation in ("description", "format", "title"):
             if annotation in schema and type(schema[annotation]) is not str:
                 raise SafetyError("Evidence schema annotation shape has drifted")
@@ -224,8 +260,7 @@ class MenuEvidenceValidator:
         elif undefined_required:
             raise SafetyError("Evidence schema contains an unsupported undefined required field")
 
-        additional = schema.get("additionalProperties", True)
-        if type(additional) is not bool:
+        if "additionalProperties" in schema and schema["additionalProperties"] is not False:
             raise SafetyError("Evidence schema additionalProperties contract is unsupported")
         for keyword in ("minLength", "maxLength"):
             value = schema.get(keyword)
@@ -239,6 +274,8 @@ class MenuEvidenceValidator:
             raise SafetyError("Evidence schema string length bounds are inverted")
         enum = schema.get("enum")
         if enum is not None:
+            if schema_type is None:
+                raise SafetyError("Evidence schema enum requires an explicit type")
             if type(enum) is not list or not enum:
                 raise SafetyError("Evidence schema enum contract is invalid")
             encoded = [canonical_json_bytes(value) for value in enum]
@@ -345,6 +382,8 @@ class MenuEvidenceValidator:
         schema_type = schema.get("type")
         if schema_type is not None and not _matches_type(value, schema_type):
             raise SafetyError("Evidence value does not match its reviewed schema type")
+        if schema_type is None and type(value) in {dict, list}:
+            raise SafetyError("Evidence untyped schema cannot accept a container value")
         _validate_format(value, schema.get("format"))
         enum = schema.get("enum")
         if enum is not None and not any(_type_strict_equal(value, item) for item in enum):
@@ -364,14 +403,14 @@ class MenuEvidenceValidator:
                 required -= _BROKEN_COMBO_UNDEFINED_REQUIRED
             if not required.issubset(value):
                 raise SafetyError("Evidence object is missing a reviewed required property")
-            if schema.get("additionalProperties") is False and not set(value).issubset(properties):
-                raise SafetyError("Evidence object contains an unreviewed additional property")
+            unknown = set(value) - set(properties)
             if is_broken_combo:
-                unknown = set(value) - set(properties)
                 if not unknown.issubset(_BROKEN_COMBO_UNDEFINED_REQUIRED):
                     raise SafetyError(
                         "ExternalMenuComboItem contains an unreviewed undefined property"
                     )
+            elif unknown:
+                raise SafetyError("Evidence object contains an undeclared property")
             for name, child in value.items():
                 property_schema = properties.get(name)
                 if property_schema is not None:
@@ -399,16 +438,27 @@ class MenuEvidenceValidator:
         component_name: str | None,
     ) -> None:
         branches = schema["oneOf"]
-        if schema is self._known_item_union and type(value) is dict:
-            combo = self._broken_combo_schema
-            combo_defined_required = set(combo["required"]) - _BROKEN_COMBO_UNDEFINED_REQUIRED
-            if combo_defined_required.issubset(value):
-                self._validate_instance(
-                    value,
-                    combo,
-                    path=path,
-                    component_name=_BROKEN_COMBO_COMPONENT,
+        if schema is self._known_item_union:
+            if type(value) is not dict:
+                raise SafetyError("Evidence V4 item discriminator requires an object")
+            discriminator = value.get("type")
+            if discriminator == "COMBO":
+                selected = self._broken_combo_schema
+                selected_name = _BROKEN_COMBO_COMPONENT
+            elif discriminator == "DISH":
+                selected = self._item_schema
+                selected_name = _ITEM_COMPONENT
+            else:
+                raise SafetyError(
+                    "Evidence V4 item discriminator must select exactly one DISH or COMBO branch"
                 )
+            self._validate_instance(
+                value,
+                selected,
+                path=path,
+                component_name=selected_name,
+            )
+            return
         matches = 0
         for branch in branches:
             try:
@@ -421,10 +471,6 @@ class MenuEvidenceValidator:
             except SafetyError:
                 continue
             matches += 1
-        if schema is self._known_item_union:
-            if matches < 1:
-                raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
-            return
         if matches != 1:
             raise SafetyError("Evidence value does not match exactly one reviewed schema branch")
 
@@ -531,7 +577,19 @@ def _matches_type(value: object, schema_type: object) -> bool:
 
 
 def _validate_format(value: object, schema_format: object) -> None:
-    if schema_format is None or schema_format in {"enum", "float"}:
+    if schema_format is None:
+        return
+    if type(schema_format) is not str:
+        raise SafetyError("Evidence value uses an invalid runtime format")
+    if schema_format == "enum":
+        return
+    if schema_format == "float":
+        try:
+            converted = struct.unpack("!f", struct.pack("!f", value))[0]
+        except (OverflowError, struct.error, TypeError):
+            raise SafetyError("Evidence number is outside its reviewed float range") from None
+        if not math.isfinite(converted) or (value != 0 and converted == 0.0):
+            raise SafetyError("Evidence number is outside its reviewed float range")
         return
     if schema_format == "uuid":
         if type(value) is not str or _UUID_FORMAT.fullmatch(value) is None:

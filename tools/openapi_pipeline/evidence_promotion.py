@@ -39,6 +39,10 @@ _UUID_ANY = re.compile(
     r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-"
     r"[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
 )
+_UUID_LIKE_KEY = re.compile(
+    r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-"
+    r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+)
 _SAFE_REDACTIONS = frozenset(
     {
         "<redacted:email>",
@@ -239,8 +243,7 @@ class CaptureEvidenceReader:
                         "Evidence schema validator rejected a capture pair"
                     ) from None
                 _require_synchronous_none(result)
-            if not lock.held:
-                raise SafetyError("Canonical live process lock was released during evidence read")
+            lock.assert_current_binding()
             return MappingProxyType(dict(sorted(collected.items())))
         finally:
             _close_fd(reopened_root_fd)
@@ -356,6 +359,7 @@ def _validate_canonical_lock(
         raise SafetyError("Evidence reader requires the canonical repository live lock")
     if not lock.held:
         raise SafetyError("A held canonical live process lock is required for evidence reads")
+    lock.assert_current_binding()
 
 
 def _validate_canonical_capture_root(repository_root: Path, capture_root: Path) -> None:
@@ -724,7 +728,7 @@ def _scan_for_secret_or_pii(value: Any, *, key: str | None = None) -> None:
         raise SafetyError("Evidence capture failed the generic secret/PII scan")
     if type(value) is dict:
         for child_key, child in value.items():
-            _scan_text(child_key)
+            _scan_text(child_key, object_key=True)
             _scan_for_secret_or_pii(child, key=child_key)
         return
     if type(value) is list:
@@ -735,13 +739,14 @@ def _scan_for_secret_or_pii(value: Any, *, key: str | None = None) -> None:
         _scan_text(value)
 
 
-def _scan_text(value: str) -> None:
+def _scan_text(value: str, *, object_key: bool = False) -> None:
     if value in _SAFE_REDACTIONS:
         return
     normalized = unicodedata.normalize("NFKC", value)
     without_uuids = _UUID_ANY.sub("", normalized)
     if (
-        _JWT.search(normalized)
+        (object_key and _UUID_LIKE_KEY.search(normalized))
+        or _JWT.search(normalized)
         or _BEARER.search(normalized)
         or _EMAIL.search(normalized)
         or _PHONE.search(without_uuids)

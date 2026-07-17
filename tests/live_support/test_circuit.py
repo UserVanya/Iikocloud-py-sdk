@@ -347,6 +347,27 @@ def test_lock_rejects_second_independent_fd_in_same_process(tmp_path: Path) -> N
     assert not first.held
 
 
+def test_lock_public_binding_check_rejects_replaced_current_inode(tmp_path: Path) -> None:
+    path = tmp_path / "live.lock"
+    displaced = tmp_path / "displaced.lock"
+    first = LiveProcessLock(path)
+    replacement = LiveProcessLock(path)
+    first.acquire()
+    try:
+        assert callable(getattr(first, "assert_current_binding", None))
+        first.assert_current_binding()
+        path.rename(displaced)
+        replacement.acquire()
+        try:
+            replacement.assert_current_binding()
+            with pytest.raises(SafetyError, match="binding|inode|changed"):
+                first.assert_current_binding()
+        finally:
+            replacement.release()
+    finally:
+        first.release()
+
+
 def test_lock_is_exclusive_across_processes(tmp_path: Path) -> None:
     path = tmp_path / "live.lock"
     with LiveProcessLock(path):

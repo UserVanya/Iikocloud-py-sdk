@@ -413,6 +413,29 @@ def test_capture_writer_rejects_non_json_body_before_filesystem_mutation(
     assert not root.exists()
 
 
+@pytest.mark.parametrize(
+    "sensitive_key",
+    [
+        "11111111-1111-4111-8111-111111111111",
+        "aaaaaaaa-aaaa-0000-0000-aaaaaaaaaaaa",
+    ],
+)
+def test_capture_writer_rejects_uuid_like_object_key_before_filesystem_mutation(
+    tmp_path: Path,
+    sensitive_key: str,
+) -> None:
+    root = tmp_path / "captures"
+
+    with pytest.raises(SafetyError, match="object key|sensitive") as caught:
+        _write_pair(
+            CaptureWriter(root),
+            response_json={sensitive_key: "value"},
+        )
+
+    assert sensitive_key not in str(caught.value)
+    assert not root.exists()
+
+
 def test_final_scan_catches_escaped_and_normalized_secret_before_writes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

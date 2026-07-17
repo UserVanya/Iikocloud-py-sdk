@@ -14,7 +14,6 @@ from collections.abc import Mapping, Set
 from contextlib import suppress
 from dataclasses import dataclass
 from enum import Enum, auto
-from itertools import combinations
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -52,6 +51,10 @@ _UUID_TEXT = (
 )
 _UUID = re.compile(_UUID_TEXT + r"\Z")
 _UUID_ANY = re.compile(_UUID_TEXT)
+_UUID_LIKE_KEY = re.compile(
+    r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-"
+    r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+)
 _CAPTURE_UUID_ALIAS = re.compile(r"00000000-0000-4000-8000-[0-9]{12}\Z")
 _JWT = re.compile(
     r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\."
@@ -681,6 +684,18 @@ class Sanitizer:
         normalized_value = unicodedata.normalize("NFKC", value)
         return any(secret in normalized_value for secret in self._normalized_secrets)
 
+    def _reject_sensitive_object_key(self, key: str) -> None:
+        normalized = unicodedata.normalize("NFKC", key)
+        if (
+            self._contains_known_secret(key)
+            or _UUID_LIKE_KEY.search(normalized)
+            or _JWT.search(normalized)
+            or _BEARER.search(normalized)
+            or _EMAIL.search(normalized)
+            or _PHONE.search(normalized)
+        ):
+            raise SafetyError("Capture object key contains sensitive text")
+
     def sanitize(
         self,
         value: Any,
@@ -719,6 +734,8 @@ class Sanitizer:
         if normalized_key in PHONE_KEYS:
             return "<redacted:phone>"
         if type(value) is dict:
+            for child_key in value:
+                self._reject_sensitive_object_key(child_key)
             return {
                 child_key: self._sanitize(
                     child_value,
@@ -770,19 +787,28 @@ class Sanitizer:
             return frozenset()
         if path in values_by_path:
             return values_by_path[path]
-        string_positions = [index for index, token in enumerate(path) if type(token) is str]
-        for replacement_count in range(1, len(string_positions) + 1):
-            matches: list[frozenset[str]] = []
-            for positions in combinations(string_positions, replacement_count):
-                candidate = list(path)
-                for index in positions:
-                    candidate[index] = OBJECT_VALUE
-                candidate_path = tuple(candidate)
-                if candidate_path in values_by_path:
-                    matches.append(values_by_path[candidate_path])
-            if matches:
-                return frozenset().union(*matches)
-        return frozenset()
+        best_wildcard_count: int | None = None
+        matches: list[frozenset[str]] = []
+        for candidate, allowed_values in values_by_path.items():
+            if len(candidate) != len(path):
+                continue
+            wildcard_count = 0
+            for actual, expected in zip(path, candidate, strict=True):
+                if expected is OBJECT_VALUE:
+                    if type(actual) is not str:
+                        break
+                    wildcard_count += 1
+                elif expected != actual:
+                    break
+            else:
+                if wildcard_count == 0:
+                    continue
+                if best_wildcard_count is None or wildcard_count < best_wildcard_count:
+                    best_wildcard_count = wildcard_count
+                    matches = [allowed_values]
+                elif wildcard_count == best_wildcard_count:
+                    matches.append(allowed_values)
+        return frozenset().union(*matches)
 
 
 def _safe_path(value: object) -> str:

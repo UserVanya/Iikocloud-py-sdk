@@ -1,10 +1,18 @@
 import copy
+import subprocess
+import sys
 import unicodedata
 from dataclasses import dataclass
 
 import pytest
 
-from tools.openapi_pipeline.capture import Sanitizer
+from tools.openapi_pipeline.capture import (
+    ARRAY_ITEM,
+    OBJECT_VALUE,
+    HintPath,
+    PathValues,
+    Sanitizer,
+)
 from tools.openapi_pipeline.errors import SafetyError
 
 
@@ -154,3 +162,63 @@ def test_sanitizer_detects_unicode_normalized_secret_substrings() -> None:
     )
 
     assert result["type"] == "<redacted:secret>"
+
+
+@pytest.mark.parametrize(
+    "sensitive_key",
+    [
+        "prefix-known-secret-suffix",
+        "11111111-1111-4111-8111-111111111111",
+        "aaaaaaaa-aaaa-0000-0000-aaaaaaaaaaaa",
+        "person@example.com",
+        "+79991234567",
+        "aaaaaaaa.bbbbbbbb.cccccccc",
+        "Bearer opaque-credential",
+    ],
+)
+def test_first_pass_sanitizer_rejects_sensitive_text_in_object_keys(
+    sensitive_key: str,
+) -> None:
+    with pytest.raises(SafetyError, match="object key|sensitive") as caught:
+        Sanitizer(known_secrets=("known-secret",)).sanitize({sensitive_key: "value"})
+
+    assert sensitive_key not in str(caught.value)
+
+
+def test_allowed_values_preserve_exact_minimum_wildcard_and_tie_union_semantics() -> None:
+    path: HintPath = ("root", "tenant", ARRAY_ITEM, "type")
+    exact: PathValues = {
+        path: frozenset({"EXACT"}),
+        ("root", OBJECT_VALUE, ARRAY_ITEM, "type"): frozenset({"ONE"}),
+    }
+    tied: PathValues = {
+        (OBJECT_VALUE, "tenant", ARRAY_ITEM, "type"): frozenset({"LEFT"}),
+        ("root", OBJECT_VALUE, ARRAY_ITEM, "type"): frozenset({"RIGHT"}),
+        (OBJECT_VALUE, OBJECT_VALUE, ARRAY_ITEM, "type"): frozenset({"BROAD"}),
+        ("root", "tenant", OBJECT_VALUE, "type"): frozenset({"NOT_ARRAY"}),
+    }
+
+    assert Sanitizer._allowed_values(path, exact) == frozenset({"EXACT"})
+    assert Sanitizer._allowed_values(path, tied) == frozenset({"LEFT", "RIGHT"})
+
+
+def test_allowed_values_depth_64_matching_is_bounded() -> None:
+    script = """
+from tools.openapi_pipeline.capture import OBJECT_VALUE, Sanitizer
+path = tuple(f"key-{index}" for index in range(64))
+hints = {tuple(OBJECT_VALUE for _ in path): frozenset({"SAFE"})}
+assert Sanitizer._allowed_values(path, hints) == frozenset({"SAFE"})
+"""
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-c", script],
+            cwd=".",
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except subprocess.TimeoutExpired:
+        pytest.fail("depth-64 wildcard matching exceeded the generous five-second bound")
+
+    assert completed.returncode == 0, completed.stderr

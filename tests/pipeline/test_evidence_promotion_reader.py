@@ -34,6 +34,7 @@ def _effective_schema() -> dict[str, Any]:
         groups_name = "itemCategories" if version == 2 else "itemGroups"
         properties: dict[str, Any] = {
             "comboCategories": {"type": "array", "items": {"type": "object"}},
+            "floatValue": {"format": "float", "type": "number"},
             "formatVersion": {"default": 2, "type": "integer"},
             "id": {"type": "string"},
             "int32Value": {"format": "int32", "type": "integer"},
@@ -750,6 +751,79 @@ def test_reader_rejects_a_held_noncanonical_lock_before_capture_access(
     assert not opened
 
 
+def test_reader_rejects_replaced_lock_inode_before_capture_access(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    path = repository_root / ".state/live.lock"
+    displaced = repository_root / ".state/displaced.lock"
+    first = LiveProcessLock(path)
+    replacement = LiveProcessLock(path)
+    opened = False
+    real_open = promotion_module._open_absolute_private_root
+
+    def track_open(capture_root: Path) -> int:
+        nonlocal opened
+        opened = True
+        return real_open(capture_root)
+
+    first.acquire()
+    try:
+        path.rename(displaced)
+        replacement.acquire()
+        monkeypatch.setattr(promotion_module, "_open_absolute_private_root", track_open)
+        with pytest.raises(SafetyError, match="binding|inode|changed"):
+            CaptureEvidenceReader(
+                repository_root,
+                _effective_schema(),
+                process_lock=first,
+            ).read_menu_pairs()
+    finally:
+        replacement.release()
+        first.release()
+
+    assert not opened
+
+
+def test_reader_rechecks_lock_inode_after_validation_before_return(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    path = repository_root / ".state/live.lock"
+    displaced = repository_root / ".state/displaced.lock"
+    first = LiveProcessLock(path)
+    replacement = LiveProcessLock(path)
+    original_validate = MenuEvidenceValidator.validate
+
+    def replace_after_last_validation(
+        validator: MenuEvidenceValidator,
+        version: int,
+        request: Mapping[str, Any],
+        response: Mapping[str, Any],
+    ) -> None:
+        original_validate(validator, version, request, response)
+        if version == 4:
+            path.rename(displaced)
+            replacement.acquire()
+
+    monkeypatch.setattr(MenuEvidenceValidator, "validate", replace_after_last_validation)
+    first.acquire()
+    try:
+        with pytest.raises(SafetyError, match="binding|inode|changed"):
+            CaptureEvidenceReader(
+                repository_root,
+                _effective_schema(),
+                process_lock=first,
+            ).read_menu_pairs()
+    finally:
+        replacement.release()
+        first.release()
+
+
 @pytest.mark.parametrize("alias_kind", ["relative", "dotdot", "symlink", "capture-root"])
 def test_reader_rejects_noncanonical_repository_alias_before_capture_access(
     tmp_path: Path,
@@ -854,7 +928,7 @@ def test_reader_rejects_non_fixed_point_opaque_schema_string(tmp_path: Path) -> 
     response["body"]["privateName"] = "opaque customer value"
     _replace_json(paths[2][1], response)
 
-    with pytest.raises(SafetyError, match="fixed.point|schema-aware"):
+    with pytest.raises(SafetyError, match="fixed.point|schema-aware|undeclared"):
         _read(root)
 
 
@@ -893,6 +967,16 @@ def test_reviewed_combo_exception_hashes_are_computed_from_canonical_fragments()
         "unknown-format",
         "format-type-mismatch",
         "enum-format-without-enum",
+        "properties-on-string",
+        "required-on-string",
+        "additional-properties-on-string",
+        "items-on-string",
+        "array-items-missing",
+        "array-items-null",
+        "length-on-integer",
+        "nullable-without-type-or-one-of",
+        "one-of-with-type",
+        "open-additional-properties",
         "ref-sibling",
         "external-ref",
         "broken-ref",
@@ -916,6 +1000,26 @@ def test_concrete_validator_fails_closed_on_reviewed_schema_drift(
         components["ExternalMenuV2"]["properties"]["name"]["format"] = "int32"
     elif mutation == "enum-format-without-enum":
         components["ExternalMenuV2"]["properties"]["name"]["format"] = "enum"
+    elif mutation == "properties-on-string":
+        components["ExternalMenuV2"]["properties"]["name"]["properties"] = {}
+    elif mutation == "required-on-string":
+        components["ExternalMenuV2"]["properties"]["name"]["required"] = []
+    elif mutation == "additional-properties-on-string":
+        components["ExternalMenuV2"]["properties"]["name"]["additionalProperties"] = False
+    elif mutation == "items-on-string":
+        components["ExternalMenuV2"]["properties"]["name"]["items"] = {}
+    elif mutation == "array-items-missing":
+        components["ExternalMenuV2"]["properties"]["comboCategories"].pop("items")
+    elif mutation == "array-items-null":
+        components["ExternalMenuV2"]["properties"]["comboCategories"]["items"] = None
+    elif mutation == "length-on-integer":
+        components["ExternalMenuV2"]["properties"]["formatVersion"]["minLength"] = 0
+    elif mutation == "nullable-without-type-or-one-of":
+        components["ExternalMenuV2"]["properties"]["name"] = {"nullable": True}
+    elif mutation == "one-of-with-type":
+        components["ExternalMenuV2"]["properties"]["name"]["oneOf"] = [{"type": "string"}]
+    elif mutation == "open-additional-properties":
+        components["ExternalMenuV2"]["additionalProperties"] = True
     elif mutation == "ref-sibling":
         schema["paths"]["/api/2/menu/by_id"]["post"]["requestBody"]["content"]["application/json"][
             "schema"
@@ -960,6 +1064,20 @@ def test_combo_required_exception_applies_only_to_exact_reviewed_component() -> 
         )
 
 
+def test_concrete_preflight_rejects_non_object_array_items_contract() -> None:
+    validator = MenuEvidenceValidator(_effective_schema())
+
+    with pytest.raises(SafetyError, match="items"):
+        validator._preflight_schema(  # noqa: SLF001 - placement regression
+            {"type": "array", "items": None},
+            path="synthetic-array",
+            component_name=None,
+            visited=set(),
+            active=set(),
+            depth=0,
+        )
+
+
 @pytest.mark.parametrize(
     ("target", "invalid_value"),
     [
@@ -988,6 +1106,107 @@ def test_concrete_validator_enforces_supported_format_semantics(
 
     with pytest.raises(SafetyError, match="format|uuid|range"):
         _read(root)
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        0,
+        1.25,
+        float.fromhex("0x1.fffffep+127"),
+        -float.fromhex("0x1.fffffep+127"),
+    ],
+)
+def test_float_format_accepts_finite_binary32_values(tmp_path: Path, value: float) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[2][1]
+    response = _load(response_path)
+    response["body"]["floatValue"] = value
+    _replace_json(response_path, response)
+
+    assert tuple(_read(root)) == (2, 3, 4)
+
+
+@pytest.mark.parametrize("value", [1e100, -1e100, 1e-100, -1e-100])
+def test_float_format_rejects_binary32_out_of_range(tmp_path: Path, value: float) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[2][1]
+    response = _load(response_path)
+    response["body"]["floatValue"] = value
+    _replace_json(response_path, response)
+
+    with pytest.raises(SafetyError, match="float|range|format"):
+        _read(root)
+
+
+@pytest.mark.parametrize(
+    "shape",
+    ["shared-item-combo-without-sizes", "redacted-type", "dish-on-combo-shape"],
+)
+def test_category3_item_union_enforces_raw_discriminator_and_exact_branch(
+    tmp_path: Path,
+    shape: str,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[4][1]
+    response = _load(response_path)
+    item: dict[str, Any]
+    if shape == "shared-item-combo-without-sizes":
+        item = {
+            "allergenGroupIds": [],
+            "id": "00000000-0000-4000-8000-000000000099",
+            "itemSizes": [],
+            "modifierSchemaId": None,
+            "orderItemType": "Product",
+            "splittable": False,
+            "type": "COMBO",
+        }
+    else:
+        item = response["body"]["itemGroups"][0]["items"][0]
+        item["type"] = "<redacted:string>" if shape == "redacted-type" else "DISH"
+    response["body"]["itemGroups"][0]["items"] = [item]
+    _replace_json(response_path, response)
+
+    with pytest.raises(SafetyError, match="discriminator|DISH|COMBO|required|branch"):
+        _read(root)
+
+
+def test_ordinary_schema_object_rejects_fixed_point_unknown_key(tmp_path: Path) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[2][1]
+    response = _load(response_path)
+    response["body"]["unknown"] = "<redacted:string>"
+    _replace_json(response_path, response)
+
+    with pytest.raises(SafetyError, match="undeclared|additional|property"):
+        _read(root)
+
+
+@pytest.mark.parametrize(
+    "sensitive_key",
+    [
+        "11111111-1111-4111-8111-111111111111",
+        "aaaaaaaa-aaaa-0000-0000-aaaaaaaaaaaa",
+    ],
+)
+def test_reader_generic_scan_rejects_uuid_like_object_key(
+    tmp_path: Path,
+    sensitive_key: str,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[2][1]
+    response = _load(response_path)
+    response["body"][sensitive_key] = "<redacted:string>"
+    _replace_json(response_path, response)
+
+    with pytest.raises(SafetyError, match="secret/PII") as caught:
+        _read(root)
+    assert sensitive_key not in str(caught.value)
 
 
 @pytest.mark.parametrize(
