@@ -1,0 +1,271 @@
+from __future__ import annotations
+
+import hashlib
+import os
+import re
+import stat
+from dataclasses import dataclass, field
+from io import StringIO
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlsplit
+
+from dotenv import dotenv_values
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 compatibility
+    import tomli as tomllib  # type: ignore[import-not-found,no-redef]
+
+from ..errors import SafetyError
+from ..io import canonical_json_bytes
+from .lock import validate_private_regular_file
+
+_ENV_NAME = re.compile(r"[A-Z_][A-Z0-9_]{0,127}\Z")
+_PROFILE_NAME = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
+_DNS_LABEL = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\Z")
+_MAX_PROFILE_BYTES = 64 * 1024
+_MAX_ENV_BYTES = 1024 * 1024
+_REQUIRED_FIELDS = {
+    "name",
+    "base_url",
+    "api_login_env",
+    "organization_id_env",
+    "external_menu_id_env",
+    "allow_write",
+    "allowed_organization_ids",
+}
+_OPTIONAL_FIELDS = {"terminal_group_id_env", "write_product_id_env"}
+
+
+@dataclass(frozen=True)
+class ResolvedLiveProfile:
+    name: str
+    base_url: str
+    api_login: str = field(repr=False)
+    organization_id: str
+    external_menu_id: str
+    terminal_group_id: str | None
+    write_product_id: str | None
+    allow_write: bool
+    allowed_organization_ids: tuple[str, ...]
+    fingerprint: str
+
+
+def is_safe_profile_name(value: object) -> bool:
+    return isinstance(value, str) and _PROFILE_NAME.fullmatch(value) is not None
+
+
+def _private_text(path: Path, *, label: str, maximum: int) -> str:
+    try:
+        expected = validate_private_regular_file(path, label=label)
+    except FileNotFoundError as error:
+        raise SafetyError(f"{label} is missing: {path}") from error
+    flags = os.O_RDONLY | os.O_CLOEXEC | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as error:
+        raise SafetyError(f"Cannot open {label.lower()} safely: {path}") from error
+    try:
+        actual = os.fstat(descriptor)
+        if not stat.S_ISREG(actual.st_mode):
+            raise SafetyError(f"{label} is not a regular file: {path}")
+        if (actual.st_dev, actual.st_ino) != (expected.st_dev, expected.st_ino):
+            raise SafetyError(f"{label} changed while it was being opened")
+        chunks: list[bytes] = []
+        remaining = maximum + 1
+        while remaining:
+            chunk = os.read(descriptor, min(65536, remaining))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        body = b"".join(chunks)
+    finally:
+        os.close(descriptor)
+    if len(body) > maximum:
+        raise SafetyError(f"{label} is larger than {maximum} bytes")
+    try:
+        return body.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise SafetyError(f"{label} is not valid UTF-8") from error
+
+
+def _strict_string(value: object, *, label: str, maximum: int = 512) -> str:
+    if (
+        not isinstance(value, str)
+        or not value
+        or len(value) > maximum
+        or value != value.strip()
+        or any(ord(character) < 32 or ord(character) == 127 for character in value)
+    ):
+        raise SafetyError(f"{label} must be a non-empty safe string")
+    return value
+
+
+def _env_name(value: object, *, label: str) -> str:
+    if not isinstance(value, str) or _ENV_NAME.fullmatch(value) is None:
+        raise SafetyError(f"{label} must be an uppercase environment variable name")
+    return value
+
+
+def _base_url(value: object) -> str:
+    raw = _strict_string(value, label="base_url", maximum=2048)
+    if "\\" in raw:
+        raise SafetyError("Live base_url contains an unsafe character")
+    try:
+        parsed = urlsplit(raw)
+        port = parsed.port
+    except ValueError as error:
+        raise SafetyError("Live base_url is invalid") from error
+    hostname = parsed.hostname
+    if (
+        parsed.scheme != "https"
+        or not parsed.netloc
+        or hostname is None
+        or parsed.username is not None
+        or parsed.password is not None
+        or port is not None
+        or parsed.query
+        or parsed.fragment
+        or parsed.path not in {"", "/"}
+    ):
+        raise SafetyError("Live base_url must be a credential-free HTTPS origin")
+    labels = hostname.split(".")
+    if (
+        hostname.lower() == "localhost"
+        or len(labels) < 2
+        or len(hostname) > 253
+        or any(_DNS_LABEL.fullmatch(label) is None for label in labels)
+    ):
+        raise SafetyError("Live base_url hostname is unsafe")
+    return f"https://{hostname.lower()}"
+
+
+def _load_toml(path: Path) -> dict[str, Any]:
+    text = _private_text(path, label="Live profile", maximum=_MAX_PROFILE_BYTES)
+    try:
+        value = tomllib.loads(text)
+    except (tomllib.TOMLDecodeError, ValueError) as error:
+        raise SafetyError("Live profile is not valid strict TOML") from error
+    if not isinstance(value, dict):  # pragma: no cover - tomllib always returns dict
+        raise SafetyError("Live profile root must be a table")
+    keys = set(value)
+    if not _REQUIRED_FIELDS.issubset(keys) or not keys.issubset(
+        _REQUIRED_FIELDS | _OPTIONAL_FIELDS
+    ):
+        wanted = ", ".join(sorted(_REQUIRED_FIELDS | _OPTIONAL_FIELDS))
+        raise SafetyError(f"Live profile fields must be the documented fields: {wanted}")
+    if ("terminal_group_id_env" in value) != ("write_product_id_env" in value):
+        raise SafetyError("Live profile write environment fields must appear together")
+    return value
+
+
+def _load_env_file(path: Path | None) -> dict[str, str | None]:
+    if path is None:
+        return {}
+    text = _private_text(path, label="Environment file", maximum=_MAX_ENV_BYTES)
+    try:
+        values = dotenv_values(stream=StringIO(text), interpolate=False)
+    except (OSError, ValueError) as error:
+        raise SafetyError("Environment file cannot be parsed safely") from error
+    result: dict[str, str | None] = {}
+    for name, value in values.items():
+        if not isinstance(name, str):
+            raise SafetyError("Environment file contains an invalid variable name")
+        result[name] = value
+    return result
+
+
+def _required_env(name: str, file_values: dict[str, str | None]) -> str:
+    if name in os.environ:
+        raw: object = os.environ[name]
+    else:
+        raw = file_values.get(name)
+    try:
+        return _strict_string(raw, label=f"Environment variable {name}", maximum=4096)
+    except SafetyError as error:
+        raise SafetyError(f"Required environment variable is missing or unsafe: {name}") from error
+
+
+def _string_list(value: object, *, label: str) -> tuple[str, ...]:
+    if not isinstance(value, list):
+        raise SafetyError(f"{label} must be an array of strings")
+    result = tuple(_strict_string(item, label=label) for item in value)
+    if len(set(result)) != len(result):
+        raise SafetyError(f"{label} must not contain duplicates")
+    return result
+
+
+def load_profile(
+    path: Path,
+    *,
+    env_file: Path | None = None,
+    required_api_login_env: str | None = None,
+) -> ResolvedLiveProfile:
+    data = _load_toml(path)
+    name = data["name"]
+    if not is_safe_profile_name(name):
+        raise SafetyError("Live profile name must use lowercase letters, digits, and hyphens")
+    base_url = _base_url(data["base_url"])
+    if type(data["allow_write"]) is not bool:
+        raise SafetyError("allow_write must be a boolean")
+    allow_write = data["allow_write"]
+    allowed_organization_ids = _string_list(
+        data["allowed_organization_ids"], label="allowed_organization_ids"
+    )
+
+    api_login_env = _env_name(data["api_login_env"], label="api_login_env")
+    if required_api_login_env is not None and api_login_env != required_api_login_env:
+        raise SafetyError(f"Live profile api_login_env must be exactly {required_api_login_env}")
+    organization_id_env = _env_name(data["organization_id_env"], label="organization_id_env")
+    external_menu_id_env = _env_name(data["external_menu_id_env"], label="external_menu_id_env")
+    terminal_env = (
+        _env_name(data["terminal_group_id_env"], label="terminal_group_id_env")
+        if "terminal_group_id_env" in data
+        else None
+    )
+    product_env = (
+        _env_name(data["write_product_id_env"], label="write_product_id_env")
+        if "write_product_id_env" in data
+        else None
+    )
+    if allow_write and (terminal_env is None or product_env is None):
+        raise SafetyError("Write-enabled profile requires dedicated terminal and product fields")
+
+    file_values = _load_env_file(env_file)
+    api_login = _required_env(api_login_env, file_values)
+    organization_id = _required_env(organization_id_env, file_values)
+    external_menu_id = _required_env(external_menu_id_env, file_values)
+    if allow_write:
+        assert terminal_env is not None
+        assert product_env is not None
+        terminal_group_id = _required_env(terminal_env, file_values)
+        write_product_id = _required_env(product_env, file_values)
+    else:
+        terminal_group_id = None
+        write_product_id = None
+
+    fingerprint_context = {
+        "allow_write": allow_write,
+        "allowed_organization_ids": sorted(allowed_organization_ids),
+        "base_url": base_url,
+        "external_menu_id": external_menu_id,
+        "name": name,
+        "organization_id": organization_id,
+        "terminal_group_id": terminal_group_id,
+        "write_product_id": write_product_id,
+    }
+    fingerprint = hashlib.sha256(canonical_json_bytes(fingerprint_context)).hexdigest()
+    return ResolvedLiveProfile(
+        name=name,
+        base_url=base_url,
+        api_login=api_login,
+        organization_id=organization_id,
+        external_menu_id=external_menu_id,
+        terminal_group_id=terminal_group_id,
+        write_product_id=write_product_id,
+        allow_write=allow_write,
+        allowed_organization_ids=allowed_organization_ids,
+        fingerprint=fingerprint,
+    )
