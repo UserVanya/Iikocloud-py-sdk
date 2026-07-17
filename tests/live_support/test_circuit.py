@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 import sys
+from dataclasses import FrozenInstanceError, is_dataclass, replace
 from pathlib import Path
 from typing import NoReturn
 
@@ -366,6 +367,62 @@ def test_lock_public_binding_check_rejects_replaced_current_inode(tmp_path: Path
             replacement.release()
     finally:
         first.release()
+
+
+def test_lock_binding_token_is_immutable_unforgeable_and_acquisition_scoped(
+    tmp_path: Path,
+) -> None:
+    lock = LiveProcessLock(tmp_path / "live.lock")
+    lock.acquire()
+    try:
+        assert callable(getattr(lock, "capture_binding_token", None))
+        assert callable(getattr(lock, "assert_binding_token", None))
+        first = lock.capture_binding_token()
+        assert is_dataclass(first)
+        with pytest.raises((FrozenInstanceError, AttributeError)):
+            first._generation = -1  # type: ignore[misc]
+
+        forged = replace(first)
+        assert forged == first
+        assert forged is not first
+        with pytest.raises(SafetyError, match="binding|token|acquisition") as caught:
+            lock.assert_binding_token(forged)
+        assert "-1" not in str(caught.value)
+        raw_marker = "raw-token-secret"
+
+        class ForgedToken:
+            def __repr__(self) -> str:
+                return raw_marker
+
+        with pytest.raises(SafetyError, match="binding|token|acquisition") as caught:
+            lock.assert_binding_token(ForgedToken())
+        assert raw_marker not in str(caught.value)
+        lock.assert_binding_token(first)
+    finally:
+        lock.release()
+
+    lock.acquire()
+    try:
+        second = lock.capture_binding_token()
+        assert second != first
+        with pytest.raises(SafetyError, match="binding|token|acquisition"):
+            lock.assert_binding_token(first)
+        lock.assert_binding_token(second)
+    finally:
+        lock.release()
+
+
+def test_lock_acquire_and_release_keep_supporting_relative_paths(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    lock = LiveProcessLock(Path("state/live.lock"))
+
+    assert lock.acquire() is lock
+    assert lock.held
+    lock.release()
+    assert not lock.held
 
 
 def test_lock_is_exclusive_across_processes(tmp_path: Path) -> None:

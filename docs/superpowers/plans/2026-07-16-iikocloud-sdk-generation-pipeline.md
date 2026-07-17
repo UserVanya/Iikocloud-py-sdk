@@ -2621,6 +2621,13 @@ The command refuses promotion unless:
 - at least one combo item exists when deriving `ExternalMenuComboItem` properties;
 - no secret/PII scanner finding exists.
 
+The raw evidence reader deliberately does not infer a mapping between the
+`DISH`/`COMBO` literal and either structurally reviewed `oneOf` branch. It only
+requires a raw literal and at least one matching branch. The next evidence
+promotion analyzer must establish branch-to-literal consistency before it may
+write a semantic candidate or allow `--accept`; until then the capture is raw
+evidence, not a promotable contract.
+
 It writes candidates to `build/evidence-candidates/`, including minimized synthetic fixtures and overlay actions guarded by the original schema fragment hash. After human inspection, rerun with `--accept` to copy them to `tests/fixtures/contracts/` and `openapi/overlays/`.
 
 - [ ] **Step 7: Add the generated union contract test**

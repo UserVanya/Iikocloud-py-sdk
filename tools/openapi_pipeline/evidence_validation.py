@@ -56,7 +56,7 @@ _UUID_FORMAT = re.compile(
     r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z"
 )
 _BROKEN_COMBO_COMPONENT = "ExternalMenuComboItem"
-_ITEM_COMPONENT = "ExternalMenuItem3"
+_RAW_ITEM_TYPES = frozenset({"DISH", "COMBO"})
 _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     {
         "allergenGroupIds",
@@ -89,7 +89,6 @@ class MenuEvidenceValidator:
             )
             for version in sorted(_VERSIONS)
         }
-        self._item_schema = self._component(_ITEM_COMPONENT)
         self._broken_combo_schema = self._component(_BROKEN_COMBO_COMPONENT)
         category = self._component("ExternalMenuCategory3")
         properties = category.get("properties")
@@ -442,23 +441,10 @@ class MenuEvidenceValidator:
             if type(value) is not dict:
                 raise SafetyError("Evidence V4 item discriminator requires an object")
             discriminator = value.get("type")
-            if discriminator == "COMBO":
-                selected = self._broken_combo_schema
-                selected_name = _BROKEN_COMBO_COMPONENT
-            elif discriminator == "DISH":
-                selected = self._item_schema
-                selected_name = _ITEM_COMPONENT
-            else:
+            if type(discriminator) is not str or discriminator not in _RAW_ITEM_TYPES:
                 raise SafetyError(
-                    "Evidence V4 item discriminator must select exactly one DISH or COMBO branch"
+                    "Evidence V4 item discriminator must be a raw DISH or COMBO literal"
                 )
-            self._validate_instance(
-                value,
-                selected,
-                path=path,
-                component_name=selected_name,
-            )
-            return
         matches = 0
         for branch in branches:
             try:
@@ -471,6 +457,13 @@ class MenuEvidenceValidator:
             except SafetyError:
                 continue
             matches += 1
+        if schema is self._known_item_union:
+            # Raw evidence proves only that a reviewed branch accepts the item. The
+            # promotion analyzer must establish branch-to-literal consistency before
+            # producing or accepting any semantic candidate.
+            if matches < 1:
+                raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
+            return
         if matches != 1:
             raise SafetyError("Evidence value does not match exactly one reviewed schema branch")
 

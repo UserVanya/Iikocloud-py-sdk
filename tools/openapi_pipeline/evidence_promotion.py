@@ -118,6 +118,7 @@ class CaptureEvidenceReader:
         lock = self.process_lock
         _validate_canonical_lock(self.repository_root, lock)
         assert lock is not None
+        binding_token = lock.capture_binding_token()
         if self.operation != _APPROVED_OPERATION:
             raise SafetyError("Evidence operation is not explicitly approved")
         _validate_canonical_capture_root(self.repository_root, self.root)
@@ -243,7 +244,7 @@ class CaptureEvidenceReader:
                         "Evidence schema validator rejected a capture pair"
                     ) from None
                 _require_synchronous_none(result)
-            lock.assert_current_binding()
+            lock.assert_binding_token(binding_token)
             return MappingProxyType(dict(sorted(collected.items())))
         finally:
             _close_fd(reopened_root_fd)

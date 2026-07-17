@@ -824,6 +824,80 @@ def test_reader_rechecks_lock_inode_after_validation_before_return(
         first.release()
 
 
+def test_reader_rejects_release_and_reacquire_of_same_lock_object(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    lock = _lock_for(repository_root)
+    original_validate = MenuEvidenceValidator.validate
+
+    def reacquire_after_last_validation(
+        validator: MenuEvidenceValidator,
+        version: int,
+        request: Mapping[str, Any],
+        response: Mapping[str, Any],
+    ) -> None:
+        original_validate(validator, version, request, response)
+        if version == 4:
+            lock.release()
+            lock.acquire()
+
+    monkeypatch.setattr(MenuEvidenceValidator, "validate", reacquire_after_last_validation)
+    with lock, pytest.raises(SafetyError, match="binding|token|acquisition"):
+        CaptureEvidenceReader(
+            repository_root,
+            _effective_schema(),
+            process_lock=lock,
+        ).read_menu_pairs()
+
+
+def test_reader_rejects_lock_path_rename_restore_aba(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    path = repository_root / ".state/live.lock"
+    displaced = repository_root / ".state/displaced.lock"
+    first = LiveProcessLock(path)
+    replacement = LiveProcessLock(path)
+    original_validate = MenuEvidenceValidator.validate
+
+    def restore_original_inode_after_last_validation(
+        validator: MenuEvidenceValidator,
+        version: int,
+        request: Mapping[str, Any],
+        response: Mapping[str, Any],
+    ) -> None:
+        original_validate(validator, version, request, response)
+        if version == 4:
+            path.rename(displaced)
+            replacement.acquire()
+            replacement.release()
+            path.unlink()
+            displaced.rename(path)
+            first.assert_current_binding()
+
+    monkeypatch.setattr(
+        MenuEvidenceValidator,
+        "validate",
+        restore_original_inode_after_last_validation,
+    )
+    first.acquire()
+    try:
+        with pytest.raises(SafetyError, match="binding|token|acquisition|changed"):
+            CaptureEvidenceReader(
+                repository_root,
+                _effective_schema(),
+                process_lock=first,
+            ).read_menu_pairs()
+    finally:
+        replacement.release()
+        first.release()
+
+
 @pytest.mark.parametrize("alias_kind", ["relative", "dotdot", "symlink", "capture-root"])
 def test_reader_rejects_noncanonical_repository_alias_before_capture_access(
     tmp_path: Path,
@@ -1141,11 +1215,8 @@ def test_float_format_rejects_binary32_out_of_range(tmp_path: Path, value: float
         _read(root)
 
 
-@pytest.mark.parametrize(
-    "shape",
-    ["shared-item-combo-without-sizes", "redacted-type", "dish-on-combo-shape"],
-)
-def test_category3_item_union_enforces_raw_discriminator_and_exact_branch(
+@pytest.mark.parametrize("shape", ["dish-shape-combo-literal", "combo-shape-dish-literal"])
+def test_category3_item_union_does_not_guess_branch_from_raw_discriminator(
     tmp_path: Path,
     shape: str,
 ) -> None:
@@ -1154,7 +1225,7 @@ def test_category3_item_union_enforces_raw_discriminator_and_exact_branch(
     response_path = paths[4][1]
     response = _load(response_path)
     item: dict[str, Any]
-    if shape == "shared-item-combo-without-sizes":
+    if shape == "dish-shape-combo-literal":
         item = {
             "allergenGroupIds": [],
             "id": "00000000-0000-4000-8000-000000000099",
@@ -1166,7 +1237,27 @@ def test_category3_item_union_enforces_raw_discriminator_and_exact_branch(
         }
     else:
         item = response["body"]["itemGroups"][0]["items"][0]
-        item["type"] = "<redacted:string>" if shape == "redacted-type" else "DISH"
+        item["type"] = "DISH"
+    response["body"]["itemGroups"][0]["items"] = [item]
+    _replace_json(response_path, response)
+
+    assert tuple(_read(root)) == (2, 3, 4)
+
+
+@pytest.mark.parametrize("shape", ["redacted-type", "no-reviewed-branch"])
+def test_category3_item_union_rejects_unsafe_literal_or_zero_structural_branches(
+    tmp_path: Path,
+    shape: str,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[4][1]
+    response = _load(response_path)
+    if shape == "redacted-type":
+        item = response["body"]["itemGroups"][0]["items"][0]
+        item["type"] = "<redacted:string>"
+    else:
+        item = {"type": "DISH"}
     response["body"]["itemGroups"][0]["items"] = [item]
     _replace_json(response_path, response)
 
@@ -1217,7 +1308,7 @@ def test_reader_generic_scan_rejects_uuid_like_object_key(
         ("enum-sentinel", "enum"),
         ("missing-combo-sizes", "required|branch"),
         ("missing-combo-id", "required|branch"),
-        ("missing-combo-type", "required|branch"),
+        ("missing-combo-type", "discriminator|DISH|COMBO"),
     ],
 )
 def test_concrete_validator_enforces_selected_root_and_defined_combo_contract(
@@ -1277,7 +1368,7 @@ def test_exact_five_undefined_combo_fields_are_optional_but_validated_if_present
 
     combo["sixthUnknown"] = "<redacted:string>"
     _replace_json(response_path, response)
-    with pytest.raises(SafetyError, match="undefined property"):
+    with pytest.raises(SafetyError, match="undefined property|reviewed schema branch"):
         _read(root)
 
 

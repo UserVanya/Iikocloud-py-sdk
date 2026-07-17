@@ -4,6 +4,7 @@ import errno
 import fcntl
 import os
 import stat
+from dataclasses import dataclass, field
 from pathlib import Path
 from types import TracebackType
 
@@ -31,6 +32,43 @@ def _validate_private_regular_metadata(current: os.stat_result, *, label: str) -
         raise SafetyError(f"{label} is not owned by the current user")
     if current.st_nlink != 1:
         raise SafetyError(f"{label} must not have multiple hard links")
+
+
+def _stable_file_metadata(value: os.stat_result) -> tuple[int, ...]:
+    return (
+        value.st_dev,
+        value.st_ino,
+        value.st_mode,
+        value.st_uid,
+        value.st_gid,
+        value.st_nlink,
+        value.st_size,
+        value.st_mtime_ns,
+        value.st_ctime_ns,
+    )
+
+
+def _stable_parent_metadata(value: os.stat_result) -> tuple[int, ...]:
+    return (
+        value.st_dev,
+        value.st_ino,
+        value.st_mode,
+        value.st_uid,
+        value.st_gid,
+        value.st_nlink,
+        value.st_mtime_ns,
+        value.st_ctime_ns,
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class _LiveProcessLockBindingToken:
+    _issuer: object = field(repr=False)
+    _generation: int = field(repr=False)
+    _owner_pid: int = field(repr=False)
+    _owner_uid: int = field(repr=False)
+    _held_metadata: tuple[int, ...] = field(repr=False)
+    _parent_metadata: tuple[int, ...] = field(repr=False)
 
 
 def _open_absolute_parent_nofollow(path: Path) -> int:
@@ -119,6 +157,9 @@ class LiveProcessLock:
         self.path = path
         self._fd: int | None = None
         self._owner_pid: int | None = None
+        self._token_issuer = object()
+        self._acquisition_generation = 0
+        self._binding_token: _LiveProcessLockBindingToken | None = None
 
     @property
     def held(self) -> bool:
@@ -175,11 +216,11 @@ class LiveProcessLock:
 
         self._fd = fd
         self._owner_pid = os.getpid()
+        self._acquisition_generation += 1
+        self._binding_token = None
         return self
 
-    def assert_current_binding(self) -> None:
-        """Prove this held fd is still the private file at the current lock path."""
-
+    def _current_binding_metadata(self) -> tuple[tuple[int, ...], tuple[int, ...]]:
         if not self.held or self._fd is None:
             raise SafetyError(
                 "live process lock was released or is not held by the current process"
@@ -188,6 +229,7 @@ class LiveProcessLock:
         reopened_fd: int | None = None
         try:
             parent_fd = _open_absolute_parent_nofollow(self.path)
+            parent_before = os.fstat(parent_fd)
             name = self.path.name
             if not name or name in {".", ".."}:
                 raise SafetyError("Live process lock path is not canonical")
@@ -203,12 +245,16 @@ class LiveProcessLock:
             current = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
             held = os.fstat(self._fd)
             _validate_private_regular_metadata(held, label="Held live process lock")
+            parent_after = os.fstat(parent_fd)
             if not (
                 _same_identity(expected, reopened)
                 and _same_identity(reopened, current)
                 and _same_identity(current, held)
             ):
                 raise SafetyError("Live process lock binding changed to another inode")
+            if _stable_parent_metadata(parent_before) != _stable_parent_metadata(parent_after):
+                raise SafetyError("Live process lock parent changed during revalidation")
+            return _stable_file_metadata(held), _stable_parent_metadata(parent_after)
         except OSError as error:
             raise SafetyError("Cannot revalidate live process lock binding safely") from error
         finally:
@@ -216,6 +262,58 @@ class LiveProcessLock:
                 os.close(reopened_fd)
             if parent_fd is not None:
                 os.close(parent_fd)
+
+    def assert_current_binding(self) -> None:
+        """Prove this held fd is still the private file at the current lock path."""
+
+        self._current_binding_metadata()
+
+    def capture_binding_token(self) -> _LiveProcessLockBindingToken:
+        """Return the opaque immutable token for this exact acquisition."""
+
+        token = self._binding_token
+        if token is None:
+            generation = self._acquisition_generation
+            owner_pid = self._owner_pid
+            held_metadata, parent_metadata = self._current_binding_metadata()
+            if (
+                not self.held
+                or owner_pid is None
+                or self._owner_pid != owner_pid
+                or self._acquisition_generation != generation
+            ):
+                raise SafetyError("Live process lock acquisition changed while binding")
+            token = _LiveProcessLockBindingToken(
+                self._token_issuer,
+                generation,
+                owner_pid,
+                os.getuid(),
+                held_metadata,
+                parent_metadata,
+            )
+            self._binding_token = token
+        else:
+            self.assert_binding_token(token)
+        return token
+
+    def assert_binding_token(self, token: object) -> None:
+        """Prove a token still represents this exact uninterrupted acquisition."""
+
+        current = self._binding_token
+        if (
+            type(token) is not _LiveProcessLockBindingToken
+            or token is not current
+            or token._issuer is not self._token_issuer
+            or token._generation != self._acquisition_generation
+            or token._owner_pid != self._owner_pid
+            or token._owner_uid != os.getuid()
+        ):
+            raise SafetyError(
+                "Live process lock was released or its acquisition binding token is invalid"
+            )
+        held_metadata, parent_metadata = self._current_binding_metadata()
+        if token._held_metadata != held_metadata or token._parent_metadata != parent_metadata:
+            raise SafetyError("Live process lock acquisition binding changed")
 
     def release(self) -> None:
         if self._fd is None:
@@ -225,6 +323,7 @@ class LiveProcessLock:
         fd = self._fd
         self._fd = None
         self._owner_pid = None
+        self._binding_token = None
         try:
             fcntl.flock(fd, fcntl.LOCK_UN)
         finally:
