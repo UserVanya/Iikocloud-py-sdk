@@ -49,6 +49,15 @@ dev = [
   "tomli>=2.2,<3; python_version < '3.11'",
   "types-pyyaml>=6.0.12,<7",
 ]
+package-check = [
+  "httpx==0.28.1",
+  "pydantic==2.12.5",
+  "python-dateutil==2.9.0.post0",
+  "typing-extensions==4.15.0",
+]
+
+[tool.uv]
+default-groups = ["dev", "package-check"]
 
 
 [build-system]

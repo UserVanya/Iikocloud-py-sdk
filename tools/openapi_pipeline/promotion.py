@@ -72,6 +72,44 @@ def regular_tree_files(root: Path, *, label: str) -> tuple[Path, ...]:
     return tuple(files)
 
 
+def copy_regular_tree(source: Path, destination: Path, *, label: str) -> None:
+    """Copy a validated tree without following links or accepting special entries."""
+
+    regular_tree_files(source, label=label)
+    if destination.exists() or destination.is_symlink():
+        raise PipelineError(f"{label} destination already exists: {destination}")
+
+    def copy_directory(source_directory: Path, destination_directory: Path) -> None:
+        destination_directory.mkdir()
+        try:
+            with os.scandir(source_directory) as iterator:
+                entries = sorted(iterator, key=lambda entry: entry.name)
+        except OSError as error:
+            raise PipelineError(f"Cannot copy {label}: {source_directory}") from error
+        for entry in entries:
+            source_path = Path(entry.path)
+            destination_path = destination_directory / entry.name
+            try:
+                mode = entry.stat(follow_symlinks=False).st_mode
+            except OSError as error:
+                raise PipelineError(f"Cannot inspect {label} entry: {source_path}") from error
+            if stat.S_ISLNK(mode):
+                raise PipelineError(f"{label} contains a symlink: {source_path}")
+            if stat.S_ISDIR(mode):
+                copy_directory(source_path, destination_path)
+            elif stat.S_ISREG(mode):
+                try:
+                    shutil.copy2(source_path, destination_path, follow_symlinks=False)
+                except OSError as error:
+                    raise PipelineError(f"Cannot copy {label} file: {source_path}") from error
+            else:
+                raise PipelineError(f"{label} contains a non-regular entry: {source_path}")
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    copy_directory(source, destination)
+    regular_tree_files(destination, label=f"Copied {label}")
+
+
 def _common_control_root(items: list[PromotionItem]) -> Path:
     paths = [path.absolute() for item in items for path in (item.staged, item.target)]
     try:

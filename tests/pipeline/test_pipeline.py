@@ -175,6 +175,32 @@ def test_sync_contract_failure_leaves_committed_outputs_untouched(
     fake_dependencies.promote.assert_not_called()
 
 
+def test_sync_contract_gate_receives_disposable_copy_and_cannot_mutate_staging(
+    fake_dependencies: PipelineDependencies,
+) -> None:
+    checked_packages: list[Path] = []
+
+    def mutate_checked_copy(package: Path) -> None:
+        checked_packages.append(package)
+        (package / "__init__.py").write_text("mutated\n", encoding="utf-8")
+        cache = package / "__pycache__"
+        cache.mkdir()
+        (cache / "leak.pyc").write_bytes(b"cache")
+
+    fake_dependencies.verify_contracts.side_effect = mutate_checked_copy
+
+    sync(fake_dependencies)
+
+    promoted = fake_dependencies.promote.call_args.args[0]
+    staged_package = promoted[1].staged
+    assert checked_packages == [
+        fake_dependencies.paths.build / "contract-check/src/iikocloud_client"
+    ]
+    assert checked_packages[0] != staged_package
+    assert (staged_package / "__init__.py").read_text(encoding="utf-8") == ""
+    assert not (staged_package / "__pycache__").exists()
+
+
 def test_sync_rejects_raw_generated_symlink_before_copying_external_bytes(
     tmp_path: Path, fake_dependencies: PipelineDependencies
 ) -> None:
@@ -220,6 +246,30 @@ def test_sync_rejects_unsafe_manual_allowlist_before_package_check(
         sync(fake_dependencies)
 
     fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.promote.assert_not_called()
+
+
+def test_sync_rejects_symlinked_manual_parent_before_external_bytes_reach_staging(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    (tmp_path / "generator/manual-files.txt").write_text(
+        "iikocloud_client/_contracts/manual.yaml\n", encoding="utf-8"
+    )
+    package_root = tmp_path / "src/iikocloud_client"
+    package_root.mkdir(parents=True)
+    outside = tmp_path / "outside-contracts"
+    outside.mkdir()
+    (outside / "manual.yaml").write_bytes(b"external-sentinel")
+    (package_root / "_contracts").symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(PipelineError, match="Manual.*symlink|symlink.*Manual"):
+        sync(fake_dependencies)
+
+    staged = tmp_path / "build/promotion/iikocloud_client/_contracts/manual.yaml"
+    assert not staged.exists()
+    assert (outside / "manual.yaml").read_bytes() == b"external-sentinel"
+    fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.verify_contracts.assert_not_called()
     fake_dependencies.promote.assert_not_called()
 
 
@@ -273,6 +323,24 @@ def test_verify_contract_failure_stops_before_root_wheel_check(tmp_path: Path) -
 
     dependencies.verify_package.assert_called_once()
     dependencies.verify_root_package.assert_not_called()
+
+
+def test_verify_contract_gate_mutation_does_not_change_generated_candidate(
+    tmp_path: Path,
+) -> None:
+    dependencies = _prepare_verify_fixture(tmp_path)
+    generated = dependencies.paths.build / "generated/iikocloud_client"
+
+    def mutate_checked_copy(package: Path) -> None:
+        (package / "__init__.py").write_text("mutated\n", encoding="utf-8")
+
+    dependencies.verify_contracts.side_effect = mutate_checked_copy
+
+    verify(dependencies)
+
+    assert (generated / "__init__.py").read_text(encoding="utf-8") == ""
+    checked = dependencies.verify_contracts.call_args.args[0]
+    assert checked == tmp_path / "build/contract-check/src/iikocloud_client"
 
 
 def test_upstream_check_only_fetches_and_writes_ignored_reports(

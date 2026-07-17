@@ -4,6 +4,7 @@ import copy
 import keyword
 import re
 import shutil
+import stat
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
@@ -30,6 +31,7 @@ from .paths import RepoPaths
 from .promotion import (
     PromotionItem,
     build_generated_manifest,
+    copy_regular_tree,
     load_generated_manifest,
     promote_transaction,
     regular_tree_files,
@@ -108,17 +110,58 @@ def _manual_paths(path: Path) -> tuple[Path, ...]:
 
 
 def _copy_manual_files(paths: RepoPaths, staged_package: Path) -> None:
+    package_root = paths.root / "src/iikocloud_client"
     for relative in _manual_paths(paths.root / "generator/manual-files.txt"):
         package_relative = relative.relative_to("iikocloud_client")
-        source = paths.root / "src/iikocloud_client" / package_relative
+        source = _validated_manual_source(package_root, package_relative)
+        if source is None:
+            continue
         destination = staged_package / package_relative
         if destination.exists() or destination.is_symlink():
             raise PipelineError(f"Generated/manual file collision: {relative.as_posix()}")
-        if source.exists():
-            if source.is_symlink() or not source.is_file():
-                raise PipelineError(f"Manual file must be a regular file: {source}")
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, destination)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination, follow_symlinks=False)
+
+
+def _validated_manual_source(package_root: Path, relative: Path) -> Path | None:
+    current = package_root
+    components = (
+        package_root,
+        *(
+            package_root / Path(*relative.parts[:index])
+            for index in range(1, len(relative.parts) + 1)
+        ),
+    )
+    resolved_root: Path | None = None
+    for index, component in enumerate(components):
+        current = component
+        try:
+            mode = current.lstat().st_mode
+        except FileNotFoundError:
+            return None
+        except OSError as error:
+            raise PipelineError(f"Cannot inspect manual file source: {current}") from error
+        if stat.S_ISLNK(mode):
+            raise PipelineError(f"Manual file source contains a symlink: {current}")
+        is_leaf = index == len(components) - 1
+        if is_leaf:
+            if not stat.S_ISREG(mode):
+                raise PipelineError(f"Manual file source is not a regular file: {current}")
+        elif not stat.S_ISDIR(mode):
+            raise PipelineError(f"Manual file source parent is not a directory: {current}")
+        if index == 0:
+            resolved_root = current.resolve(strict=True)
+    if resolved_root is None or not current.resolve(strict=True).is_relative_to(resolved_root):
+        raise PipelineError(f"Manual file source escapes package root: {current}")
+    return current
+
+
+def _verify_contract_copy(dependencies: PipelineDependencies, package: Path) -> None:
+    check_root = dependencies.paths.build / "contract-check"
+    _clean_staging(check_root, dependencies.paths.root)
+    checked_package = check_root / "src/iikocloud_client"
+    copy_regular_tree(package, checked_package, label="Generated contract package")
+    dependencies.verify_contracts(checked_package)
 
 
 def _load_document(path: Path, *, label: str) -> dict[str, Any]:
@@ -262,7 +305,7 @@ def _stage_generated_outputs(
     write_json_atomic(staged_manifest, manifest)
     _copy_manual_files(dependencies.paths, staged_package)
     dependencies.verify_package(staged_package)
-    dependencies.verify_contracts(staged_package)
+    _verify_contract_copy(dependencies, staged_package)
     return (
         [
             PromotionItem(staged_snapshot, dependencies.paths.upstream),
@@ -339,7 +382,7 @@ def verify(dependencies: PipelineDependencies) -> None:
     )
     _copy_manual_files(dependencies.paths, generated_package)
     dependencies.verify_package(generated_package)
-    dependencies.verify_contracts(generated_package)
+    _verify_contract_copy(dependencies, generated_package)
     dependencies.verify_root_package(dependencies.paths.root)
     if current_manifest != committed_manifest:
         raise PipelineError("Generated manifest differs from committed generated-manifest.json")
@@ -614,7 +657,11 @@ def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> Pi
             mappings,
             package_version,
         ),
-        verify_package=lambda package: check_package(package, build_root=repo_paths.build),
+        verify_package=lambda package: check_package(
+            package,
+            build_root=repo_paths.build,
+            project_root=repo_paths.root,
+        ),
         verify_contracts=lambda package: verify_generated_contracts(repo_paths.root, package),
         promote=lambda items: promote_transaction(items, root=repo_paths.root),
         verify_root_package=verify_root_wheel,

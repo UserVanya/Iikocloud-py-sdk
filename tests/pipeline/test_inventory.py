@@ -1,3 +1,4 @@
+import copy
 import json
 from pathlib import Path
 
@@ -151,3 +152,75 @@ def test_markdown_escapes_untrusted_names_and_renders_changed_entries() -> None:
     assert "\x01" not in markdown
     assert "POST /value\\u0060\\n\\u0023\\u0023 injected\\u0001" in markdown
     assert "Tick\\u0060Schema" in markdown
+
+
+def _operation_context_document() -> dict[str, object]:
+    return {
+        "openapi": "3.0.1",
+        "servers": [{"url": "https://example.invalid"}],
+        "security": [{"ApiKey": []}],
+        "paths": {
+            "/same": {
+                "parameters": [{"$ref": "#/components/parameters/TenantHeader"}],
+                "post": {
+                    "requestBody": {"$ref": "#/components/requestBodies/Payload"},
+                    "responses": {"200": {"$ref": "#/components/responses/Ok"}},
+                },
+            }
+        },
+        "components": {
+            "parameters": {
+                "TenantHeader": {
+                    "name": "X-Tenant",
+                    "in": "header",
+                    "schema": {"type": "string"},
+                }
+            },
+            "requestBodies": {
+                "Payload": {
+                    "content": {
+                        "application/json": {"schema": {"$ref": "#/components/schemas/Input"}}
+                    }
+                }
+            },
+            "responses": {
+                "Ok": {
+                    "description": "ok",
+                    "content": {
+                        "application/json": {"schema": {"$ref": "#/components/schemas/Output"}}
+                    },
+                }
+            },
+            "schemas": {
+                "Input": {"type": "object", "properties": {"id": {"type": "string"}}},
+                "Output": {"type": "object"},
+            },
+            "securitySchemes": {"ApiKey": {"type": "apiKey", "in": "header", "name": "X-Api-Key"}},
+        },
+    }
+
+
+def test_operation_hash_includes_path_context_and_transitive_component_contracts() -> None:
+    before_document = _operation_context_document()
+    variants = []
+
+    path_parameter_changed = copy.deepcopy(before_document)
+    path_parameter_changed["components"]["parameters"]["TenantHeader"]["description"] = "new"  # type: ignore[index]
+    variants.append(path_parameter_changed)
+
+    request_body_schema_changed = copy.deepcopy(before_document)
+    request_body_schema_changed["components"]["schemas"]["Input"]["required"] = ["id"]  # type: ignore[index]
+    variants.append(request_body_schema_changed)
+
+    security_scheme_changed = copy.deepcopy(before_document)
+    security_scheme_changed["components"]["securitySchemes"]["ApiKey"]["name"] = "X-New-Key"  # type: ignore[index]
+    variants.append(security_scheme_changed)
+
+    root_server_changed = copy.deepcopy(before_document)
+    root_server_changed["servers"][0]["url"] = "https://changed.invalid"  # type: ignore[index]
+    variants.append(root_server_changed)
+
+    before = collect_inventory(before_document)
+    for variant in variants:
+        difference = diff_inventory(before, collect_inventory(variant))
+        assert difference.changed_operations == ("POST /same",)

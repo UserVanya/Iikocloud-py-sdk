@@ -7,6 +7,11 @@ import sys
 from collections.abc import Callable, Sequence
 from pathlib import Path
 
+if sys.version_info >= (3, 11):
+    import tomllib
+else:  # pragma: no cover - exercised on supported Python 3.10
+    import tomli as tomllib
+
 from .errors import PipelineError
 from .io import write_bytes_atomic
 from .promotion import regular_tree_files
@@ -24,18 +29,17 @@ RUNTIME_DEPENDENCIES = (
 # temporary project metadata with the generated client's final dependency set.
 LOCKED_RUNTIME_REQUIREMENTS = (
     "annotated-types==0.7.0",
-    "anyio==4.11.0",
+    "anyio==4.14.2",
     "certifi==2026.6.17",
     "exceptiongroup==1.3.1",
     "h11==0.16.0",
     "httpcore==1.0.9",
     "httpx==0.28.1",
     "idna==3.11",
-    "pydantic-core==2.41.5",
     "pydantic==2.12.5",
+    "pydantic-core==2.41.5",
     "python-dateutil==2.9.0.post0",
     "six==1.17.0",
-    "sniffio==1.3.1",
     "typing-extensions==4.15.0",
     "typing-inspection==0.4.2",
 )
@@ -66,6 +70,36 @@ if not any(package_file.is_relative_to(root) for root in site_roots):
     raise RuntimeError(
         f"installed import escaped isolated site-packages: {{package_file}}"
     )
+""".strip()
+
+_CONTRACT_TEST_SCRIPT = """
+from pathlib import Path
+import sys
+
+package_parent = Path(sys.argv[1]).resolve(strict=True)
+checked_package = Path(sys.argv[2]).resolve(strict=True)
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(package_parent))
+
+import iikocloud_client
+
+package_file = Path(iikocloud_client.__file__).resolve(strict=True)
+if not package_file.is_relative_to(checked_package):
+    raise RuntimeError(
+        f"contract import escaped checked package: {package_file}"
+    )
+
+import pytest
+
+raise SystemExit(
+    pytest.main([
+        "-q",
+        "--import-mode=importlib",
+        "-p",
+        "no:cacheprovider",
+        *sys.argv[3:],
+    ])
+)
 """.strip()
 
 _UNSAFE_ENVIRONMENT_KEYS = {
@@ -157,6 +191,61 @@ def _minimal_pyproject() -> bytes:
     ).encode()
 
 
+def locked_runtime_requirements(root: Path) -> tuple[str, ...]:
+    try:
+        lock = tomllib.loads((root / "uv.lock").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError) as error:
+        raise PipelineError(f"Cannot read package-check lock: {root / 'uv.lock'}") from error
+    raw_packages = lock.get("package")
+    if not isinstance(raw_packages, list):
+        raise PipelineError("uv.lock has no package table")
+    packages: dict[str, list[dict[str, object]]] = {}
+    project_package: dict[str, object] | None = None
+    for raw in raw_packages:
+        if not isinstance(raw, dict) or not isinstance(raw.get("name"), str):
+            raise PipelineError("uv.lock contains an invalid package entry")
+        name = raw["name"]
+        packages.setdefault(name, []).append(raw)
+        source = raw.get("source")
+        if isinstance(source, dict) and source.get("editable") == ".":
+            project_package = raw
+    if project_package is None:
+        raise PipelineError("uv.lock has no editable project package")
+    groups = project_package.get("dev-dependencies")
+    package_check = groups.get("package-check") if isinstance(groups, dict) else None
+    if not isinstance(package_check, list):
+        raise PipelineError("uv.lock has no package-check dependency group")
+    pending = [entry.get("name") for entry in package_check if isinstance(entry, dict)]
+    if not pending or not all(isinstance(name, str) for name in pending):
+        raise PipelineError("uv.lock package-check group is invalid")
+
+    closure: dict[str, str] = {}
+    while pending:
+        name = pending.pop()
+        assert isinstance(name, str)
+        if name in closure:
+            continue
+        entries = packages.get(name, [])
+        if len(entries) != 1 or not isinstance(entries[0].get("version"), str):
+            raise PipelineError(f"uv.lock does not select one package-check version for {name}")
+        entry = entries[0]
+        closure[name] = entry["version"]  # type: ignore[assignment]
+        dependencies = entry.get("dependencies", [])
+        if not isinstance(dependencies, list):
+            raise PipelineError(f"uv.lock dependencies are invalid for {name}")
+        for dependency in dependencies:
+            if not isinstance(dependency, dict) or not isinstance(dependency.get("name"), str):
+                raise PipelineError(f"uv.lock dependency is invalid for {name}")
+            pending.append(dependency["name"])
+    return tuple(f"{name}=={closure[name]}" for name in sorted(closure))
+
+
+def _assert_runtime_lock(root: Path) -> None:
+    actual = locked_runtime_requirements(root)
+    if actual != LOCKED_RUNTIME_REQUIREMENTS:
+        raise PipelineError("Package-check runtime pins differ from the recursive uv.lock closure")
+
+
 def _install_and_verify_wheel(
     wheel: Path,
     *,
@@ -223,6 +312,7 @@ def verify_package(
     package: Path,
     *,
     build_root: Path | None = None,
+    project_root: Path | None = None,
     runner: Runner | None = None,
 ) -> None:
     if package.is_symlink() or not package.is_dir() or package.name != "iikocloud_client":
@@ -232,6 +322,8 @@ def verify_package(
     if requested_build.is_symlink():
         raise PipelineError(f"Package-check build root must not be a symlink: {requested_build}")
     controlled_build = requested_build.resolve(strict=False)
+    if project_root is not None:
+        _assert_runtime_lock(project_root.resolve(strict=True))
     command_runner = runner or subprocess.run
     check_root = controlled_build / "package-check"
     _clean_directory(check_root, controlled_root=controlled_build)
@@ -272,6 +364,7 @@ def verify_package(
 
 def verify_root_wheel(root: Path, *, runner: Runner | None = None) -> None:
     resolved_root = root.resolve(strict=True)
+    _assert_runtime_lock(resolved_root)
     command_runner = runner or subprocess.run
     build_root = resolved_root / "build"
     if build_root.is_symlink():
@@ -333,10 +426,23 @@ def verify_generated_contracts(
         raise PipelineError("Generated contract package must be a regular directory")
     regular_tree_files(package, label="Generated contract package")
     environment = _sanitized_environment()
-    environment["PYTHONPATH"] = str(package.parent.resolve(strict=True))
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    contract_root = resolved_root / "build/contract-check"
+    if contract_root.is_symlink():
+        raise PipelineError(f"Contract-check root must not be a symlink: {contract_root}")
+    run_root = contract_root / "run"
+    _clean_directory(run_root, controlled_root=contract_root)
     _run(
-        [sys.executable, "-m", "pytest", "-q", *selected],
-        cwd=resolved_root,
+        [
+            sys.executable,
+            "-I",
+            "-c",
+            _CONTRACT_TEST_SCRIPT,
+            str(package.parent.resolve(strict=True)),
+            str(package.resolve(strict=True)),
+            *(str((resolved_root / relative).resolve(strict=True)) for relative in selected),
+        ],
+        cwd=run_root,
         purpose="Generated contract tests",
         runner=runner or subprocess.run,
         env=environment,

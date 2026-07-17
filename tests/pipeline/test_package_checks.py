@@ -7,10 +7,12 @@ from typing import Any
 from unittest.mock import Mock
 
 import pytest
+import tomllib
 
 from tools.openapi_pipeline import package_checks as package_checks_module
 from tools.openapi_pipeline.errors import PipelineError
 from tools.openapi_pipeline.package_checks import (
+    LOCKED_RUNTIME_REQUIREMENTS,
     RUNTIME_DEPENDENCIES,
     verify_package,
     verify_root_wheel,
@@ -41,6 +43,21 @@ def test_runtime_dependencies_are_exact_task_11_dependencies() -> None:
         "pydantic>=2.11,<3",
         "python-dateutil>=2.9,<3",
         "typing-extensions>=4.12,<5",
+    )
+
+
+def test_package_check_group_and_recursive_lock_match_runtime_closure() -> None:
+    project = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+
+    assert tuple(project["dependency-groups"]["package-check"]) == (
+        "httpx==0.28.1",
+        "pydantic==2.12.5",
+        "python-dateutil==2.9.0.post0",
+        "typing-extensions==4.15.0",
+    )
+    assert project["tool"]["uv"]["default-groups"] == ["dev", "package-check"]
+    assert package_checks_module.locked_runtime_requirements(Path.cwd()) == (
+        LOCKED_RUNTIME_REQUIREMENTS
     )
 
 
@@ -237,6 +254,7 @@ def test_installed_import_smoke_cannot_fall_back_to_healthy_checkout(
 def test_root_wheel_smoke_uses_same_offline_isolated_install(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    (tmp_path / "uv.lock").write_bytes(Path("uv.lock").read_bytes())
     monkeypatch.setenv("PYTHONPATH", "/poisoned/source")
     monkeypatch.setenv("PIP_INDEX_URL", "https://credentials.invalid/simple")
     calls: list[tuple[list[str], dict[str, Any]]] = []
@@ -302,16 +320,22 @@ def test_generated_contract_gate_runs_present_offline_test_paths_against_staging
 
     command = runner.call_args.args[0]
     kwargs = runner.call_args.kwargs
-    assert command == [
-        command[0],
-        "-m",
-        "pytest",
-        "-q",
-        "tests/contracts",
-        "tests/generated",
+    assert command[:3] == [sys.executable, "-I", "-c"]
+    wrapper = command[3]
+    assert "sys.path.insert(0" in wrapper
+    assert "import iikocloud_client" in wrapper
+    assert "iikocloud_client.__file__" in wrapper
+    assert "--import-mode=importlib" in wrapper
+    assert command[4:] == [
+        str(package.parent.resolve()),
+        str(package.resolve()),
+        str(contract_tests.resolve()),
+        str(generated_tests.resolve()),
     ]
-    assert kwargs["cwd"] == tmp_path
-    assert kwargs["env"]["PYTHONPATH"] == str(package.parent)
+    assert kwargs["cwd"] == tmp_path / "build/contract-check/run"
+    assert list(kwargs["cwd"].iterdir()) == []
+    assert "PYTHONPATH" not in kwargs["env"]
+    assert kwargs["env"]["PYTHONDONTWRITEBYTECODE"] == "1"
     assert "PIP_INDEX_URL" not in kwargs["env"]
 
 
@@ -324,3 +348,27 @@ def test_generated_contract_gate_wraps_offline_test_failure(tmp_path: Path) -> N
 
     with pytest.raises(PipelineError, match="Generated contract tests"):
         package_checks_module.verify_generated_contracts(tmp_path, package, runner=runner)
+
+
+def test_generated_contract_gate_cannot_import_healthy_legacy_checkout(
+    tmp_path: Path,
+) -> None:
+    legacy = tmp_path / "iikocloud_client"
+    legacy.mkdir()
+    (legacy / "__init__.py").write_text("HEALTHY = True\n", encoding="utf-8")
+    checked = tmp_path / "build/contract-check/src/iikocloud_client"
+    checked.mkdir(parents=True)
+    (checked / "__init__.py").write_text(
+        'raise RuntimeError("broken checked package")\n', encoding="utf-8"
+    )
+    tests = tmp_path / "tests/generated"
+    tests.mkdir(parents=True)
+    (tests / "test_import.py").write_text(
+        "import iikocloud_client\n\ndef test_import():\n    assert iikocloud_client.HEALTHY\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(PipelineError, match="Generated contract tests"):
+        package_checks_module.verify_generated_contracts(tmp_path, checked)
+
+    assert not list(checked.rglob("__pycache__"))
