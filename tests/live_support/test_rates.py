@@ -139,16 +139,57 @@ def test_catalog_load_rejects_duplicate_yaml_keys(tmp_path: Path) -> None:
 
 
 def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
-    catalog = RateCatalog.load(Path("contracts/rate-limits.yaml"))
-    for operation_id in (
-        "authenticate",
-        "get_organizations",
-        "get_external_menus",
-        "get_external_menu_by_id",
-        "get_stop_lists",
-        "add_products_to_stop_list",
-        "remove_products_from_stop_list",
-    ):
+    path = Path("contracts/rate-limits.yaml")
+    value = yaml.safe_load(path.read_text(encoding="utf-8"))
+    expected_operations = {
+        "authenticate": {
+            "server_limit": {"calls": 1, "per_seconds": 5},
+            "source": "existing-manager-configuration",
+            "verified": False,
+        },
+        "get_organizations": {
+            "server_limit": {"calls": 1, "per_seconds": 10},
+            "source": "existing-manager-configuration",
+            "verified": False,
+        },
+        "get_external_menus": {
+            "server_limit": {"calls": 1, "per_seconds": 1800},
+            "source": "existing-manager-configuration",
+            "verified": False,
+        },
+        "get_external_menu_by_id": {
+            "server_limit": {"calls": 5, "per_seconds": 60},
+            "source": "existing-manager-configuration",
+            "verified": False,
+        },
+        "get_stop_lists": {
+            "server_limit": {"calls": 10, "per_seconds": 60},
+            "source": "existing-manager-configuration",
+            "verified": False,
+        },
+        "add_products_to_stop_list": {
+            "server_limit": {"calls": 1, "per_seconds": 60},
+            "source": "conservative-unverified",
+            "verified": False,
+        },
+        "remove_products_from_stop_list": {
+            "server_limit": {"calls": 1, "per_seconds": 60},
+            "source": "conservative-unverified",
+            "verified": False,
+        },
+    }
+    assert value == {
+        "version": 1,
+        "defaults": {
+            "utilization": 0.20,
+            "global_min_interval_seconds": 15,
+            "max_calls_per_operation_per_run": 1,
+        },
+        "operations": expected_operations,
+    }
+
+    catalog = RateCatalog.load(path)
+    for operation_id in expected_operations:
         with pytest.raises(SafetyError, match="not verified"):
             catalog.operation_budget(operation_id)
 
@@ -170,6 +211,8 @@ def test_committed_live_operation_contract_is_exact() -> None:
             "remove_products_from_stop_list": {"kind": "cleanup", "cleanup": None},
         },
     }
+    rate_value = yaml.safe_load(Path("contracts/rate-limits.yaml").read_text(encoding="utf-8"))
+    assert set(value["operations"]) == set(rate_value["operations"])
 
 
 @pytest.mark.parametrize(

@@ -97,6 +97,34 @@ async def test_guard_requires_held_process_lock_before_other_checks(tmp_path: Pa
     assert not (tmp_path / "live.json").exists()
 
 
+def test_state_accepts_only_the_exact_canonical_process_lock_path(tmp_path: Path) -> None:
+    store = LiveStateStore(tmp_path / "live.json")
+
+    for alternate in ("a.lock", "b.lock"):
+        with pytest.raises(SafetyError, match="canonical.*live.lock"):
+            store.bind_process_lock(LiveProcessLock(tmp_path / alternate))
+
+    canonical = LiveProcessLock(tmp_path / "live.lock")
+    store.bind_process_lock(canonical)
+    with canonical:
+        store.assert_circuit_closed("profile-hash", now=100)
+
+
+def test_state_rejects_canonical_lock_path_through_symlink_before_io(
+    tmp_path: Path,
+) -> None:
+    target = tmp_path / "target.lock"
+    target.touch(mode=0o600)
+    canonical = tmp_path / "live.lock"
+    canonical.symlink_to(target)
+    store = LiveStateStore(tmp_path / "live.json")
+
+    with pytest.raises(SafetyError, match="symlink"):
+        store.bind_process_lock(LiveProcessLock(canonical))
+
+    assert not (tmp_path / "live.json").exists()
+
+
 @pytest.mark.asyncio
 async def test_unknown_and_unverified_operations_do_not_sleep_or_mutate(tmp_path: Path) -> None:
     fake = FakeTime()

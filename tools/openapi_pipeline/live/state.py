@@ -66,9 +66,37 @@ class LiveStateStore:
         if process_lock is not None:
             self._validate_lock_location(process_lock)
 
+    @staticmethod
+    def _reject_symlink_components(path: Path, *, label: str) -> None:
+        absolute = Path(os.path.abspath(path))
+        current = Path(absolute.anchor)
+        for part in absolute.parts[1:]:
+            current /= part
+            try:
+                metadata = current.lstat()
+            except FileNotFoundError:
+                return
+            if stat.S_ISLNK(metadata.st_mode):
+                raise SafetyError(f"{label} contains a symlink: {current}")
+
     def _validate_lock_location(self, lock: LiveProcessLock) -> None:
-        if lock.path.parent.absolute() != self.path.parent.absolute():
-            raise SafetyError("live state and process lock must use the same private directory")
+        expected = self.path.with_name("live.lock")
+        if lock.path != expected:
+            raise SafetyError(f"live process lock must use canonical path {expected}")
+
+        expected_absolute = Path(os.path.abspath(expected))
+        actual_absolute = Path(os.path.abspath(lock.path))
+        if actual_absolute != expected_absolute:
+            raise SafetyError(f"live process lock must use canonical path {expected}")
+
+        self._reject_symlink_components(self.path.parent, label="live state directory")
+        self._reject_symlink_components(self.path, label="live state path")
+        self._reject_symlink_components(lock.path, label="live process lock path")
+        if (
+            lock.path.resolve(strict=False) != expected.resolve(strict=False)
+            or lock.path.resolve(strict=False) != actual_absolute
+        ):
+            raise SafetyError(f"live process lock must resolve to canonical path {expected}")
 
     def bind_process_lock(self, lock: LiveProcessLock) -> None:
         self._validate_lock_location(lock)
