@@ -83,6 +83,11 @@ class GeneratedLiveSdk:
         except ApiException as error:
             status = self._normalize_api_exception_status(error.status)
             self._record_status(operation_id, status)
+            if status == 0:
+                self._unusable = True
+                raise SafetyError(
+                    "Generated SDK exception has no usable HTTP status"
+                ) from None
             if status == 429:
                 self._unusable = True
                 raise SafetyError("iiko returned 429; live circuit opened") from None
@@ -91,6 +96,9 @@ class GeneratedLiveSdk:
             self._unusable = True
             raise SafetyError("Generated SDK invocation failed without a retry") from None
 
+        if not isinstance(response, ApiResponse):
+            self._unusable = True
+            raise SafetyError("Generated SDK invocation returned an invalid response") from None
         self._record_status(operation_id, response.status_code)
         if response.status_code == 429:
             self._unusable = True

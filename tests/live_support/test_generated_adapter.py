@@ -95,6 +95,22 @@ class PrivateMalformedStatus:
         return self.marker
 
 
+class PrivateNonApiResponse:
+    def __init__(self, marker: str) -> None:
+        self.marker = marker
+        self.accessed: list[str] = []
+
+    @property
+    def status_code(self) -> int:
+        self.accessed.append("status_code")
+        raise RuntimeError(self.marker)
+
+    @property
+    def data(self) -> object:
+        self.accessed.append("data")
+        raise RuntimeError(self.marker)
+
+
 @pytest.fixture(autouse=True)
 def _forbid_network(monkeypatch: pytest.MonkeyPatch) -> None:
     real_socket = socket.socket
@@ -561,3 +577,71 @@ async def test_malformed_api_exception_status_is_safely_rejected(
     assert state.statuses == []
     assert invocations == 1
     await _assert_next_call_is_blocked_before_work(adapter, guard)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("status", [None, 0], ids=["missing", "zero"])
+async def test_statusless_api_exception_records_zero_then_poison_adapter(
+    status: int | None,
+) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    capture = StubCapture("get_organizations")
+    adapter = _adapter(guard=guard, state=state, capture=capture)
+    private_detail = "private-statusless-marker"
+    api_error = ApiException(status=status, reason=private_detail, body=private_detail)
+    invocations = 0
+
+    async def invoke() -> ApiResponse[object]:
+        nonlocal invocations
+        invocations += 1
+        raise api_error
+
+    with pytest.raises(SafetyError) as caught:
+        await adapter.call_generated("get_organizations", {}, invoke)
+
+    assert str(caught.value) == "Generated SDK exception has no usable HTTP status"
+    assert caught.value.__cause__ is None
+    assert caught.value.__suppress_context__
+    assert private_detail not in "".join(traceback.format_exception(caught.value))
+    assert capture.selections == ["get_organizations"]
+    assert capture.write_attempts == []
+    assert capture.pairs == []
+    assert guard.acquired == ["get_organizations"]
+    assert guard.statuses == [("get_organizations", 0)]
+    assert state.statuses == [("f" * 64, "get_organizations", 0)]
+    assert invocations == 1
+    await _assert_next_call_is_blocked_before_work(adapter, guard, capture)
+
+
+@pytest.mark.asyncio
+async def test_non_api_response_is_rejected_before_status_capture_or_data_access() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    capture = StubCapture("get_organizations")
+    adapter = _adapter(guard=guard, state=state, capture=capture)
+    private_detail = "private-invalid-response-marker"
+    invalid_response = PrivateNonApiResponse(private_detail)
+    invocations = 0
+
+    async def invoke() -> ApiResponse[object]:
+        nonlocal invocations
+        invocations += 1
+        return cast(ApiResponse[object], invalid_response)
+
+    with pytest.raises(SafetyError) as caught:
+        await adapter.call_generated("get_organizations", {}, invoke)
+
+    assert str(caught.value) == "Generated SDK invocation returned an invalid response"
+    assert caught.value.__cause__ is None
+    assert caught.value.__suppress_context__
+    assert private_detail not in "".join(traceback.format_exception(caught.value))
+    assert invalid_response.accessed == []
+    assert capture.selections == ["get_organizations"]
+    assert capture.write_attempts == []
+    assert capture.pairs == []
+    assert guard.acquired == ["get_organizations"]
+    assert guard.statuses == []
+    assert state.statuses == []
+    assert invocations == 1
+    await _assert_next_call_is_blocked_before_work(adapter, guard, capture)
