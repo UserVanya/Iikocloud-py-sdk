@@ -1,0 +1,203 @@
+from __future__ import annotations
+
+import copy
+from types import MappingProxyType
+from typing import Any
+
+import pytest
+
+from tools.openapi_pipeline.capture import RedactionHints, Sanitizer
+from tools.openapi_pipeline.errors import SafetyError
+
+
+def _effective_schema() -> dict[str, Any]:
+    return {
+        "openapi": "3.1.0",
+        "paths": {
+            "/api/2/menu/by_id": {
+                "post": {
+                    "operationId": "get_external_menu_by_id",
+                    "requestBody": {"$ref": "#/components/requestBodies/MenuRequest"},
+                    "responses": {
+                        "200": {"$ref": "#/components/responses/MenuResponse"},
+                        "202": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {"properties": {"queued": {"enum": ["QUEUED"]}}}
+                                }
+                            }
+                        },
+                    },
+                }
+            }
+        },
+        "components": {
+            "requestBodies": {
+                "MenuRequest": {
+                    "content": {
+                        "application/json": {
+                            "schema": {"$ref": "#/components/schemas/MenuRequest"}
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "MenuResponse": {
+                    "content": {
+                        "application/json": {
+                            "schema": {"$ref": "#/components/schemas/MenuEnvelope"}
+                        }
+                    }
+                }
+            },
+            "schemas": {
+                "MenuRequest": {
+                    "type": "object",
+                    "properties": {
+                        "mode": {"const": "FULL"},
+                        "name": {"type": "string"},
+                        "escaped": {"$ref": "#%2Fcomponents%2Fschemas%2Fmenu~1branch~0x"},
+                    },
+                },
+                "menu/branch~x": {"type": "string", "enum": ["ESCAPED"]},
+                "MenuEnvelope": {
+                    "oneOf": [
+                        {"$ref": "#/components/schemas/Dish"},
+                        {"$ref": "#/components/schemas/Group"},
+                    ],
+                    "discriminator": {
+                        "propertyName": "type",
+                        "mapping": {
+                            "DISH": "#/components/schemas/Dish",
+                            "GROUP": "#/components/schemas/Group",
+                        },
+                    },
+                },
+                "Base": {
+                    "type": "object",
+                    "properties": {
+                        "state": {"enum": ["ACTIVE", "HIDDEN"]},
+                    },
+                },
+                "Dish": {
+                    "allOf": [
+                        {"$ref": "#/components/schemas/Base"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "type": {"const": "DISH"},
+                                "name": {"type": "string"},
+                                "comment": {"type": "string"},
+                                "children": {
+                                    "type": "array",
+                                    "items": {"$ref": "#/components/schemas/MenuEnvelope"},
+                                },
+                            },
+                        },
+                    ]
+                },
+                "Group": {
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {"type": {"enum": ["GROUP"]}},
+                        }
+                    ]
+                },
+            },
+        },
+    }
+
+
+def test_redaction_hints_resolve_json_request_success_branches_and_cycles() -> None:
+    hints = RedactionHints.for_operation(_effective_schema(), "get_external_menu_by_id")
+
+    assert hints.operation_id == "get_external_menu_by_id"
+    assert hints.enum_keys == frozenset({"escaped", "mode", "queued", "state", "type"})
+    assert hints.enum_values == MappingProxyType(
+        {
+            "escaped": frozenset({"ESCAPED"}),
+            "mode": frozenset({"FULL"}),
+            "queued": frozenset({"QUEUED"}),
+            "state": frozenset({"ACTIVE", "HIDDEN"}),
+            "type": frozenset({"DISH", "GROUP"}),
+        }
+    )
+
+
+def test_menu_discriminator_is_retained_but_adjacent_strings_are_redacted() -> None:
+    hints = RedactionHints.for_operation(_effective_schema(), "get_external_menu_by_id")
+    value = {
+        "type": "DISH",
+        "name": "Private venue",
+        "comment": "customer text",
+        "children": [{"type": "NOT_IN_SCHEMA", "state": "ACTIVE", "name": "Private child"}],
+    }
+
+    sanitized = Sanitizer().sanitize(value, enum_values=hints.enum_values)
+
+    assert sanitized["type"] == "DISH"
+    assert sanitized["name"] == "<redacted:string>"
+    assert sanitized["comment"] == "<redacted:string>"
+    assert sanitized["children"][0] == {
+        "type": "<redacted:string>",
+        "state": "ACTIVE",
+        "name": "<redacted:string>",
+    }
+
+
+def test_redaction_hints_are_immutable_and_do_not_infer_observed_values() -> None:
+    hints = RedactionHints.for_operation(_effective_schema(), "get_external_menu_by_id")
+
+    with pytest.raises(TypeError):
+        hints.enum_values["type"] = frozenset({"OBSERVED"})  # type: ignore[index]
+    assert "OBSERVED" not in hints.enum_values["type"]
+
+
+def test_redaction_hints_reject_unknown_or_duplicate_operation() -> None:
+    schema = _effective_schema()
+    with pytest.raises(SafetyError, match="Unknown capture operation"):
+        RedactionHints.for_operation(schema, "missing")
+
+    schema["paths"]["/duplicate"] = copy.deepcopy(schema["paths"]["/api/2/menu/by_id"])
+    with pytest.raises(SafetyError, match="multiple"):
+        RedactionHints.for_operation(schema, "get_external_menu_by_id")
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "broken-request-ref",
+        "remote-response-ref",
+        "malformed-one-of",
+        "broken-discriminator-ref",
+        "non-json-response",
+        "no-success-response",
+    ],
+)
+def test_redaction_hints_fail_closed_on_broken_or_unknown_traversal(
+    mutation: str,
+) -> None:
+    schema = _effective_schema()
+    operation = schema["paths"]["/api/2/menu/by_id"]["post"]
+    if mutation == "broken-request-ref":
+        operation["requestBody"]["$ref"] = "#/components/requestBodies/Missing"
+    elif mutation == "remote-response-ref":
+        operation["responses"]["200"]["$ref"] = "https://example.invalid/schema"
+    elif mutation == "malformed-one-of":
+        schema["components"]["schemas"]["MenuEnvelope"]["oneOf"] = {}
+    elif mutation == "broken-discriminator-ref":
+        schema["components"]["schemas"]["MenuEnvelope"]["discriminator"]["mapping"]["DISH"] = (
+            "#/components/schemas/Missing"
+        )
+    elif mutation == "non-json-response":
+        operation["responses"] = {
+            "200": {"content": {"application/octet-stream": {"schema": {"type": "string"}}}}
+        }
+    elif mutation == "no-success-response":
+        operation["responses"] = {
+            "400": {"content": {"application/json": {"schema": {"type": "object"}}}}
+        }
+
+    with pytest.raises(SafetyError):
+        RedactionHints.for_operation(schema, "get_external_menu_by_id")

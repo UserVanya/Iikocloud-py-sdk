@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from urllib.parse import unquote, urlsplit
 
 import httpx
@@ -19,9 +19,13 @@ from .profile import ResolvedLiveProfile
 from .receipt import LiveReceipt
 from .state import LiveStateStore
 
+if TYPE_CHECKING:
+    from ..capture import LiveCapture
+
 _OPERATION_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}\Z")
 _METHODS = {"GET", "POST"}
 _MAX_TOKEN_BODY = 64 * 1024
+_MAX_CAPTURE_BODY = 64 * 1024 * 1024
 
 
 @dataclass(frozen=True)
@@ -171,6 +175,7 @@ class SafeLiveSession:
         operation_contract: Mapping[str, LiveOperation] | None = None,
         receipt: LiveReceipt | None = None,
         receipt_path: Path | None = None,
+        capture: LiveCapture | None = None,
     ) -> None:
         if state is not None and getattr(guard, "state", state) is not state:
             raise SafetyError("Live session state must be the guard's state store")
@@ -194,6 +199,13 @@ class SafeLiveSession:
         self._operations = MappingProxyType(dict(operation_contract))
         self._receipt = receipt
         self._receipt_path = receipt_path
+        if capture is not None:
+            from ..capture import LiveCapture
+
+            if not isinstance(capture, LiveCapture):
+                raise SafetyError("Live session capture must be a LiveCapture")
+            capture.add_known_secret(profile.api_login)
+        self._capture = capture
         self._access_token: str | None = None
         self._auth_attempted = False
         self._unusable = False
@@ -315,6 +327,13 @@ class SafeLiveSession:
             self._unusable = True
             raise SafetyError("Live authentication response contains an invalid token")
         self._access_token = token
+        if self._capture is not None:
+            try:
+                self._capture.add_known_secret(token)
+            except Exception:
+                self._unusable = True
+                self._access_token = None
+                raise SafetyError("Live capture secret binding failed") from None
 
     async def request_json(
         self,
@@ -346,6 +365,12 @@ class SafeLiveSession:
             json.dumps(payload, allow_nan=False)
         except (TypeError, ValueError):
             raise SafetyError("Live JSON payload is not strictly serializable") from None
+        if self._capture is not None:
+            self._capture.assert_selected(
+                operation_id,
+                method=method,
+                path=safe_path,
+            )
         await self._reserve(operation_id)
         response = await self._request_once(
             method,
@@ -354,7 +379,44 @@ class SafeLiveSession:
             headers={"Authorization": f"Bearer {self._access_token}"},
         )
         self._record_response(operation_id, response)
+        if self._capture is not None:
+            self._capture_read(operation_id, payload, response)
         return response
+
+    def _capture_read(
+        self,
+        operation_id: str,
+        payload: Mapping[str, Any],
+        response: httpx.Response,
+    ) -> None:
+        assert self._capture is not None
+        try:
+            if not 200 <= response.status_code <= 299:
+                raise SafetyError("Capture requires a successful response")
+            if len(response.content) > _MAX_CAPTURE_BODY:
+                raise SafetyError("Capture response is too large")
+            content_type = (
+                response.headers.get("content-type", "").split(";", 1)[0].strip().lower()
+            )
+            if content_type != "application/json":
+                raise SafetyError("Capture response is not JSON")
+            response_json = json.loads(
+                response.content.decode("utf-8"),
+                object_pairs_hook=_unique_json,
+                parse_constant=_reject_constant,
+            )
+            self._capture.write_model_pair(
+                operation_id,
+                dict(payload),
+                response_json,
+                metadata={
+                    "status": response.status_code,
+                    "headers": dict(response.headers),
+                },
+            )
+        except Exception:
+            self._unusable = True
+            raise SafetyError("Live capture failed after response without retry") from None
 
     async def close(self) -> None:
         if self._closed:
