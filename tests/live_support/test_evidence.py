@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import copy
 import inspect
+import json
 from collections.abc import Mapping
 from dataclasses import replace
 from pathlib import Path
@@ -9,7 +11,7 @@ from typing import Any, cast
 import pytest
 
 from tools.openapi_pipeline import evidence as evidence_module
-from tools.openapi_pipeline.capture import CaptureWriter, LiveCapture, RedactionHints
+from tools.openapi_pipeline.capture import ARRAY_ITEM, CaptureWriter, LiveCapture, RedactionHints
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.evidence import (
     CaptureEvidenceDependencies,
@@ -111,9 +113,70 @@ def _schema() -> dict[str, Any]:
                         "content": {"application/json": {"schema": {"type": "object"}}}
                     },
                     "responses": {
-                        "200": {"content": {"application/json": {"schema": {"type": "object"}}}}
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "oneOf": [
+                                            {"$ref": "#/components/schemas/ExternalMenuV2"},
+                                            {"$ref": "#/components/schemas/ExternalMenuV3"},
+                                            {"$ref": "#/components/schemas/ExternalMenuV4"},
+                                        ]
+                                    }
+                                }
+                            }
+                        }
                     },
                 }
+            }
+        },
+        "components": {
+            "schemas": {
+                "ExternalMenuV2": {"type": "object"},
+                "ExternalMenuV3": {"type": "object"},
+                "ExternalMenuV4": {
+                    "type": "object",
+                    "properties": {
+                        "itemGroups": {
+                            "type": "array",
+                            "items": {"$ref": "#/components/schemas/ExternalMenuCategory3"},
+                        }
+                    },
+                },
+                "ExternalMenuCategory3": {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                                    {"$ref": "#/components/schemas/ExternalMenuComboItem"},
+                                ]
+                            },
+                        }
+                    },
+                },
+                "ExternalMenuItem3": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": ["DISH", "COMBO"],
+                            "type": "string",
+                            "description": "Item type",
+                            "default": "DISH",
+                        },
+                        "name": {"type": "string"},
+                    },
+                },
+                "ExternalMenuComboItem": {
+                    "required": ["type"],
+                    "type": "object",
+                    "properties": {
+                        "type": {"type": "string"},
+                        "comment": {"type": "string"},
+                    },
+                },
             }
         },
     }
@@ -144,7 +207,8 @@ def _dependencies(
         candidate_composer=lambda paths: events.append("candidate:compose") or (_schema(), {}),
         operation_contract_loader=lambda path: events.append("operations:load") or _operations(),
         hints_builder=lambda schema, operation: (
-            events.append("hints:build") or RedactionHints.for_operation(schema, operation)
+            events.append("hints:build")
+            or evidence_module.build_evidence_redaction_hints(schema, operation)
         ),
         lock_factory=lambda path: cast(LiveProcessLock, StubLock(path, events)),
         profile_resolver=lambda *args, **kwargs: events.append("profile:resolve") or _profile(),
@@ -162,6 +226,166 @@ def _dependencies(
         run_id_factory=lambda: "20260717T120000Z-a1b2c3d4",
     )
     return dependencies, session
+
+
+_ITEM_TYPE_PATH = (
+    "itemGroups",
+    ARRAY_ITEM,
+    "items",
+    ARRAY_ITEM,
+    "type",
+)
+
+
+def test_generic_hints_keep_one_of_with_unconstrained_branch_redacted() -> None:
+    hints = RedactionHints.for_operation(_schema(), "get_external_menu_by_id")
+
+    assert hints.response_values_for_status(200)[_ITEM_TYPE_PATH] == frozenset()
+
+
+def test_evidence_hints_preserve_only_declared_item_types_at_exact_capture_path(
+    tmp_path: Path,
+) -> None:
+    hints = evidence_module.build_evidence_redaction_hints(_schema(), "get_external_menu_by_id")
+    capture = LiveCapture(
+        writer=CaptureWriter(tmp_path),
+        run_id="run",
+        selected_operation="get_external_menu_by_id",
+        operation_catalog=_operations(),
+        hints=hints,
+    )
+
+    _request_path, response_path = capture.write_model_pair(
+        "get_external_menu_by_id",
+        {},
+        {
+            "type": "DISH",
+            "itemGroups": [
+                {
+                    "type": "COMBO",
+                    "items": [
+                        {"type": "DISH", "name": "private dish"},
+                        {"type": "COMBO", "comment": "private combo"},
+                        {"type": "ARBITRARY"},
+                        {"nested": {"type": "DISH"}},
+                    ],
+                }
+            ],
+        },
+        metadata={"status": 200},
+    )
+
+    response = json.loads(response_path.read_text(encoding="utf-8"))["body"]
+    assert response["type"] == "<redacted:string>"
+    assert response["itemGroups"][0]["type"] == "<redacted:string>"
+    assert response["itemGroups"][0]["items"] == [
+        {"name": "<redacted:string>", "type": "DISH"},
+        {"comment": "<redacted:string>", "type": "COMBO"},
+        {"type": "<redacted:string>"},
+        {"nested": {"type": "<redacted:string>"}},
+    ]
+
+
+def test_evidence_hints_derive_exact_values_from_upstream_enum() -> None:
+    schema = _schema()
+    item_type = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
+    item_type["enum"] = ["MEAL", "SET"]
+    item_type["default"] = "MEAL"
+
+    hints = evidence_module.build_evidence_redaction_hints(schema, "get_external_menu_by_id")
+
+    assert hints.response_values_for_status(200)[_ITEM_TYPE_PATH] == frozenset({"MEAL", "SET"})
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "unexpected-operation",
+        "unexpected-success-status",
+        "missing-v4-ref",
+        "drifted-category-ref",
+        "drifted-item-one-of",
+        "drifted-combo-type",
+        "empty-enum",
+        "empty-enum-value",
+        "non-string-enum",
+        "duplicate-enum",
+    ],
+)
+def test_evidence_hints_fail_closed_on_schema_chain_drift(mutation: str) -> None:
+    schema = _schema()
+    operation_id = "get_external_menu_by_id"
+    operation = schema["paths"]["/api/2/menu/by_id"]["post"]
+    if mutation == "unexpected-operation":
+        operation_id = "get_organizations"
+    elif mutation == "unexpected-success-status":
+        operation["responses"]["202"] = copy.deepcopy(operation["responses"]["200"])
+    elif mutation == "missing-v4-ref":
+        operation["responses"]["200"]["content"]["application/json"]["schema"]["oneOf"] = [
+            {"$ref": "#/components/schemas/ExternalMenuV2"},
+            {"$ref": "#/components/schemas/ExternalMenuV3"},
+        ]
+    elif mutation == "drifted-category-ref":
+        schema["components"]["schemas"]["ExternalMenuV4"]["properties"]["itemGroups"]["items"] = {
+            "$ref": "#/components/schemas/ExternalMenuCategory2"
+        }
+    elif mutation == "drifted-item-one-of":
+        schema["components"]["schemas"]["ExternalMenuCategory3"]["properties"]["items"]["items"][
+            "oneOf"
+        ].append({"type": "string"})
+    elif mutation == "drifted-combo-type":
+        schema["components"]["schemas"]["ExternalMenuComboItem"]["properties"]["type"] = {
+            "enum": ["COMBO"],
+            "type": "string",
+        }
+    else:
+        enum = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
+        if mutation == "empty-enum":
+            enum.clear()
+        elif mutation == "empty-enum-value":
+            enum[0] = ""
+        elif mutation == "non-string-enum":
+            enum[0] = 1
+        elif mutation == "duplicate-enum":
+            enum[1] = enum[0]
+
+    with pytest.raises(SafetyError):
+        evidence_module.build_evidence_redaction_hints(schema, operation_id)
+
+
+@pytest.mark.asyncio
+async def test_capture_evidence_rejects_hint_schema_drift_before_private_setup(
+    tmp_path: Path,
+) -> None:
+    events: list[str] = []
+    dependencies, _session = _dependencies(tmp_path, events)
+    drifted = _schema()
+    drifted["components"]["schemas"]["ExternalMenuComboItem"]["properties"]["type"] = {
+        "enum": ["COMBO"],
+        "type": "string",
+    }
+    dependencies = replace(
+        dependencies,
+        candidate_composer=lambda paths: events.append("candidate:compose") or (drifted, {}),
+    )
+
+    with pytest.raises(SafetyError, match="combo type shape"):
+        await capture_evidence(
+            live_profile="test-server",
+            env_file=".env",
+            operation="get_external_menu_by_id",
+            menu_version=4,
+            dependencies=dependencies,
+        )
+
+    assert events == [
+        "catalog:load",
+        "budget:authenticate",
+        "budget:get_external_menu_by_id",
+        "candidate:compose",
+        "operations:load",
+        "hints:build",
+    ]
 
 
 @pytest.mark.asyncio
@@ -386,7 +610,7 @@ def test_default_capture_dependencies_use_canonical_guarded_primitives(tmp_path:
     assert dependencies.writer_factory is CaptureWriter
     assert dependencies.capture_factory is LiveCapture
     assert dependencies.session_factory is SafeLiveSession
-    assert dependencies.hints_builder == RedactionHints.for_operation
+    assert dependencies.hints_builder is evidence_module.build_evidence_redaction_hints
     source = inspect.getsource(evidence_module)
     assert "IIKO_API_KEY_2" not in source
     assert '".state/live.lock"' in source

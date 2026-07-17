@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .capture import CaptureWriter, LiveCapture, RedactionHints
+from .capture import ARRAY_ITEM, CaptureWriter, LiveCapture, RedactionHints
 from .errors import SafetyError
 from .live.lock import LiveProcessLock
 from .live.profile import ResolvedLiveProfile
@@ -20,6 +20,121 @@ from .pipeline import compose_reviewed_bootstrap_candidate
 
 _EVIDENCE_OPERATION = "get_external_menu_by_id"
 _EVIDENCE_VERSIONS = frozenset({2, 3, 4})
+_EVIDENCE_PATH = "/api/2/menu/by_id"
+_ITEM_TYPE_HINT_PATH = (
+    "itemGroups",
+    ARRAY_ITEM,
+    "items",
+    ARRAY_ITEM,
+    "type",
+)
+
+
+def _evidence_component(document: dict[str, Any], name: str) -> dict[str, Any]:
+    components = document.get("components")
+    schemas = components.get("schemas") if type(components) is dict else None
+    schema = schemas.get(name) if type(schemas) is dict else None
+    if type(schema) is not dict:
+        raise SafetyError(f"Evidence schema component {name!r} is missing or invalid")
+    return schema
+
+
+def build_evidence_redaction_hints(
+    effective_schema: dict[str, Any], operation_id: str
+) -> RedactionHints:
+    """Build the one reviewed exception needed by external-menu evidence captures."""
+
+    if operation_id != _EVIDENCE_OPERATION:
+        raise SafetyError("Evidence redaction hints operation is not approved")
+    hints = RedactionHints.for_operation(effective_schema, operation_id)
+    if set(hints.response_values_by_status) != {200}:
+        raise SafetyError("Evidence redaction hints require exactly the 200 success response")
+
+    paths = effective_schema.get("paths")
+    path_item = paths.get(_EVIDENCE_PATH) if type(paths) is dict else None
+    operation = path_item.get("post") if type(path_item) is dict else None
+    if type(operation) is not dict or operation.get("operationId") != operation_id:
+        raise SafetyError("Evidence redaction hints endpoint contract has drifted")
+    responses = operation.get("responses")
+    response = responses.get("200") if type(responses) is dict else None
+    content = response.get("content") if type(response) is dict else None
+    media = content.get("application/json") if type(content) is dict else None
+    response_schema = media.get("schema") if type(media) is dict else None
+    expected_response_schema = {
+        "oneOf": [
+            {"$ref": "#/components/schemas/ExternalMenuV2"},
+            {"$ref": "#/components/schemas/ExternalMenuV3"},
+            {"$ref": "#/components/schemas/ExternalMenuV4"},
+        ]
+    }
+    if response_schema != expected_response_schema:
+        raise SafetyError("Evidence external-menu V4 response reference chain has drifted")
+
+    menu_v4 = _evidence_component(effective_schema, "ExternalMenuV4")
+    menu_v4_properties = menu_v4.get("properties")
+    item_groups = (
+        menu_v4_properties.get("itemGroups") if type(menu_v4_properties) is dict else None
+    )
+    if item_groups != {
+        "type": "array",
+        "items": {"$ref": "#/components/schemas/ExternalMenuCategory3"},
+    }:
+        raise SafetyError("Evidence external-menu V4 category reference has drifted")
+
+    category = _evidence_component(effective_schema, "ExternalMenuCategory3")
+    category_properties = category.get("properties")
+    category_items = (
+        category_properties.get("items") if type(category_properties) is dict else None
+    )
+    if category_items != {
+        "type": "array",
+        "items": {
+            "oneOf": [
+                {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                {"$ref": "#/components/schemas/ExternalMenuComboItem"},
+            ]
+        },
+    }:
+        raise SafetyError("Evidence external-menu item oneOf reference chain has drifted")
+
+    combo = _evidence_component(effective_schema, "ExternalMenuComboItem")
+    combo_required = combo.get("required")
+    combo_properties = combo.get("properties")
+    combo_type = combo_properties.get("type") if type(combo_properties) is dict else None
+    if (
+        type(combo_required) is not list
+        or combo_required.count("type") != 1
+        or combo_type != {"type": "string"}
+    ):
+        raise SafetyError("Evidence external-menu combo type shape has drifted")
+
+    item = _evidence_component(effective_schema, "ExternalMenuItem3")
+    item_properties = item.get("properties")
+    item_type = item_properties.get("type") if type(item_properties) is dict else None
+    if type(item_type) is not dict or set(item_type) != {
+        "enum",
+        "type",
+        "description",
+        "default",
+    }:
+        raise SafetyError("Evidence external-menu item type shape has drifted")
+    enum = item_type.get("enum")
+    if (
+        item_type.get("type") != "string"
+        or type(enum) is not list
+        or not enum
+        or any(type(value) is not str or not value for value in enum)
+        or len(set(enum)) != len(enum)
+    ):
+        raise SafetyError("Evidence external-menu item type enum is invalid")
+
+    response_values = {
+        selector: dict(values) for selector, values in hints.response_values_by_status.items()
+    }
+    if response_values[200].get(_ITEM_TYPE_HINT_PATH, frozenset()):
+        raise SafetyError("Evidence item type path is already constrained unexpectedly")
+    response_values[200][_ITEM_TYPE_HINT_PATH] = frozenset(enum)
+    return RedactionHints(hints.operation_id, hints.request_values, response_values)
 
 
 @dataclass(frozen=True)
@@ -52,7 +167,7 @@ def default_capture_evidence_dependencies(
         rate_catalog_loader=RateCatalog.load,
         candidate_composer=compose_reviewed_bootstrap_candidate,
         operation_contract_loader=load_operation_contract,
-        hints_builder=RedactionHints.for_operation,
+        hints_builder=build_evidence_redaction_hints,
         lock_factory=LiveProcessLock,
         profile_resolver=resolve_locked_live_profile,
         state_factory=LiveStateStore,
