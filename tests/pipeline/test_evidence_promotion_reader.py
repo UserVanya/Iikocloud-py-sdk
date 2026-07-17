@@ -760,7 +760,6 @@ def test_reader_rejects_replaced_lock_inode_before_capture_access(
     path = repository_root / ".state/live.lock"
     displaced = repository_root / ".state/displaced.lock"
     first = LiveProcessLock(path)
-    replacement = LiveProcessLock(path)
     opened = False
     real_open = promotion_module._open_absolute_private_root
 
@@ -772,7 +771,8 @@ def test_reader_rejects_replaced_lock_inode_before_capture_access(
     first.acquire()
     try:
         path.rename(displaced)
-        replacement.acquire()
+        path.touch(mode=0o600)
+        path.chmod(0o600)
         monkeypatch.setattr(promotion_module, "_open_absolute_private_root", track_open)
         with pytest.raises(SafetyError, match="binding|inode|changed"):
             CaptureEvidenceReader(
@@ -781,7 +781,10 @@ def test_reader_rejects_replaced_lock_inode_before_capture_access(
                 process_lock=first,
             ).read_menu_pairs()
     finally:
-        replacement.release()
+        if path.exists():
+            path.unlink()
+        if displaced.exists():
+            displaced.rename(path)
         first.release()
 
     assert not opened
@@ -796,7 +799,6 @@ def test_reader_rechecks_lock_inode_after_validation_before_return(
     path = repository_root / ".state/live.lock"
     displaced = repository_root / ".state/displaced.lock"
     first = LiveProcessLock(path)
-    replacement = LiveProcessLock(path)
     original_validate = MenuEvidenceValidator.validate
 
     def replace_after_last_validation(
@@ -808,7 +810,8 @@ def test_reader_rechecks_lock_inode_after_validation_before_return(
         original_validate(validator, version, request, response)
         if version == 4:
             path.rename(displaced)
-            replacement.acquire()
+            path.touch(mode=0o600)
+            path.chmod(0o600)
 
     monkeypatch.setattr(MenuEvidenceValidator, "validate", replace_after_last_validation)
     first.acquire()
@@ -820,7 +823,10 @@ def test_reader_rechecks_lock_inode_after_validation_before_return(
                 process_lock=first,
             ).read_menu_pairs()
     finally:
-        replacement.release()
+        if path.exists():
+            path.unlink()
+        if displaced.exists():
+            displaced.rename(path)
         first.release()
 
 
@@ -853,7 +859,7 @@ def test_reader_rejects_release_and_reacquire_of_same_lock_object(
         ).read_menu_pairs()
 
 
-def test_reader_rejects_lock_path_rename_restore_aba(
+def test_reader_continues_after_conforming_replacement_is_blocked_and_path_restored(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -874,10 +880,18 @@ def test_reader_rejects_lock_path_rename_restore_aba(
         original_validate(validator, version, request, response)
         if version == 4:
             path.rename(displaced)
-            replacement.acquire()
-            replacement.release()
-            path.unlink()
-            displaced.rename(path)
+            try:
+                with pytest.raises(
+                    SafetyError,
+                    match="another live test process is active",
+                ):
+                    replacement.acquire()
+            finally:
+                replacement.release()
+                if path.exists():
+                    path.unlink()
+                if displaced.exists():
+                    displaced.rename(path)
             first.assert_current_binding()
 
     monkeypatch.setattr(
@@ -887,15 +901,16 @@ def test_reader_rejects_lock_path_rename_restore_aba(
     )
     first.acquire()
     try:
-        with pytest.raises(SafetyError, match="binding|token|acquisition|changed"):
-            CaptureEvidenceReader(
-                repository_root,
-                _effective_schema(),
-                process_lock=first,
-            ).read_menu_pairs()
+        pairs = CaptureEvidenceReader(
+            repository_root,
+            _effective_schema(),
+            process_lock=first,
+        ).read_menu_pairs()
     finally:
         replacement.release()
         first.release()
+
+    assert tuple(pairs) == (2, 3, 4)
 
 
 @pytest.mark.parametrize("alias_kind", ["relative", "dotdot", "symlink", "capture-root"])

@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import errno
 import json
 import os
+import stat
 import subprocess
 import sys
 from dataclasses import FrozenInstanceError, is_dataclass, replace
 from pathlib import Path
-from typing import NoReturn
+from typing import Any, NoReturn
 
 import pytest
 
+import tools.openapi_pipeline.live.lock as lock_module
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.io import canonical_json_bytes
 from tools.openapi_pipeline.live.lock import LiveProcessLock
@@ -348,24 +351,35 @@ def test_lock_rejects_second_independent_fd_in_same_process(tmp_path: Path) -> N
     assert not first.held
 
 
-def test_lock_public_binding_check_rejects_replaced_current_inode(tmp_path: Path) -> None:
+def test_lock_parent_scope_blocks_a_different_lock_name_in_the_same_directory(
+    tmp_path: Path,
+) -> None:
+    first = LiveProcessLock(tmp_path / "live.lock")
+    second = LiveProcessLock(tmp_path / "alternate.lock")
+
+    with first:
+        with pytest.raises(SafetyError, match="another live test process is active"):
+            second.acquire()
+        assert not second.held
+
+
+def test_lock_parent_exclusion_blocks_replacement_after_path_rename(tmp_path: Path) -> None:
     path = tmp_path / "live.lock"
     displaced = tmp_path / "displaced.lock"
     first = LiveProcessLock(path)
     replacement = LiveProcessLock(path)
     first.acquire()
     try:
-        assert callable(getattr(first, "assert_current_binding", None))
-        first.assert_current_binding()
         path.rename(displaced)
-        replacement.acquire()
-        try:
-            replacement.assert_current_binding()
-            with pytest.raises(SafetyError, match="binding|inode|changed"):
-                first.assert_current_binding()
-        finally:
-            replacement.release()
+        with pytest.raises(SafetyError, match="another live test process is active"):
+            replacement.acquire()
+        assert not replacement.held
     finally:
+        replacement.release()
+        if path.exists():
+            path.unlink()
+        if displaced.exists():
+            displaced.rename(path)
         first.release()
 
 
@@ -412,6 +426,29 @@ def test_lock_binding_token_is_immutable_unforgeable_and_acquisition_scoped(
         lock.release()
 
 
+def test_lock_binding_token_rejects_reacquire_inside_metadata_snapshot(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    lock = LiveProcessLock(tmp_path / "live.lock")
+    lock.acquire()
+    token = lock.capture_binding_token()
+    original_snapshot = lock._current_binding_metadata  # noqa: SLF001 - race injection
+
+    def snapshot_then_reacquire() -> tuple[tuple[int, ...], tuple[int, ...]]:
+        metadata = original_snapshot()
+        lock.release()
+        lock.acquire()
+        return metadata
+
+    monkeypatch.setattr(lock, "_current_binding_metadata", snapshot_then_reacquire)
+    try:
+        with pytest.raises(SafetyError, match="binding|token|acquisition|changed"):
+            lock.assert_binding_token(token)
+    finally:
+        lock.release()
+
+
 def test_lock_acquire_and_release_keep_supporting_relative_paths(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -423,6 +460,100 @@ def test_lock_acquire_and_release_keep_supporting_relative_paths(
     assert lock.held
     lock.release()
     assert not lock.held
+
+
+def test_lock_double_acquire_fails_and_release_is_idempotent(tmp_path: Path) -> None:
+    path = tmp_path / "live.lock"
+    lock = LiveProcessLock(path)
+    lock.acquire()
+    with pytest.raises(SafetyError, match="already held"):
+        lock.acquire()
+    lock.release()
+    lock.release()
+
+    with LiveProcessLock(path) as recovered:
+        assert recovered.held
+
+
+def test_lock_inherited_owner_cannot_release_after_fork(tmp_path: Path) -> None:
+    lock = LiveProcessLock(tmp_path / "live.lock")
+    lock.acquire()
+    child_pid = os.fork()
+    if child_pid == 0:
+        try:
+            if lock.held:
+                os._exit(2)
+            try:
+                lock.release()
+            except SafetyError:
+                os._exit(0)
+            os._exit(3)
+        except BaseException:
+            os._exit(4)
+
+    try:
+        _, status = os.waitpid(child_pid, 0)
+        assert os.waitstatus_to_exitcode(status) == 0
+        assert lock.held
+    finally:
+        lock.release()
+
+
+@pytest.mark.parametrize(
+    "phase",
+    ["parent-open", "parent-flock", "file-create", "file-open", "file-flock"],
+)
+def test_lock_acquire_failure_cleans_all_fds_and_allows_recovery(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    phase: str,
+) -> None:
+    path = tmp_path / "state/live.lock"
+    if phase == "file-open":
+        path.parent.mkdir(mode=0o700)
+        path.touch(mode=0o600)
+        path.chmod(0o600)
+    lock = LiveProcessLock(path)
+    before_fd_count = len(os.listdir("/proc/self/fd"))
+    real_open = lock_module.os.open
+    real_flock = lock_module.fcntl.flock
+
+    def injected_open(
+        path_value: Any,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        is_directory_open = bool(flags & os.O_DIRECTORY)
+        is_lock_file = dir_fd is not None and os.fspath(path_value) == "live.lock"
+        if phase == "parent-open" and is_directory_open and dir_fd is not None:
+            raise OSError(errno.EIO, "injected parent open failure")
+        if phase == "file-create" and is_lock_file and flags & os.O_CREAT:
+            raise OSError(errno.EIO, "injected file create failure")
+        if phase == "file-open" and is_lock_file and not flags & os.O_CREAT:
+            raise OSError(errno.EIO, "injected file open failure")
+        return real_open(path_value, flags, mode, dir_fd=dir_fd)
+
+    def injected_flock(fd: int, operation: int) -> None:
+        mode = os.fstat(fd).st_mode
+        exclusive = operation == (lock_module.fcntl.LOCK_EX | lock_module.fcntl.LOCK_NB)
+        if phase == "parent-flock" and exclusive and stat.S_ISDIR(mode):
+            raise OSError(errno.EIO, "injected parent flock failure")
+        if phase == "file-flock" and exclusive and stat.S_ISREG(mode):
+            raise OSError(errno.EIO, "injected file flock failure")
+        real_flock(fd, operation)
+
+    with monkeypatch.context() as injected:
+        injected.setattr(lock_module.os, "open", injected_open)
+        injected.setattr(lock_module.fcntl, "flock", injected_flock)
+        with pytest.raises(SafetyError, match="lock|open|acquire"):
+            lock.acquire()
+
+    assert not lock.held
+    assert len(os.listdir("/proc/self/fd")) == before_fd_count
+    with LiveProcessLock(path) as recovered:
+        assert recovered.held
 
 
 def test_lock_is_exclusive_across_processes(tmp_path: Path) -> None:
