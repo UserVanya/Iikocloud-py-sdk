@@ -90,6 +90,8 @@ ARRAY_ITEM = _HintWildcard.ARRAY_ITEM
 OBJECT_VALUE = _HintWildcard.OBJECT_VALUE
 HintPath = tuple[str | _HintWildcard, ...]
 PathValues = Mapping[HintPath, frozenset[str]]
+ResponseSelector = int | str
+ResponsePathValues = Mapping[ResponseSelector, PathValues]
 _Constraint = frozenset[str] | None
 _ConstraintMap = dict[HintPath, _Constraint]
 _DIRECTORY_FLAGS = os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
@@ -184,13 +186,17 @@ class RedactionHints:
 
     operation_id: str
     request_values: PathValues
-    response_values: PathValues
+    response_values_by_status: ResponsePathValues
 
     def __post_init__(self) -> None:
         if type(self.operation_id) is not str or _CAPTURE_ID.fullmatch(self.operation_id) is None:
             raise SafetyError("Capture redaction hints operation ID is invalid")
         object.__setattr__(self, "request_values", self._freeze_values(self.request_values))
-        object.__setattr__(self, "response_values", self._freeze_values(self.response_values))
+        object.__setattr__(
+            self,
+            "response_values_by_status",
+            self._freeze_response_values(self.response_values_by_status),
+        )
 
     @staticmethod
     def _freeze_values(values_by_path: PathValues) -> PathValues:
@@ -212,12 +218,38 @@ class RedactionHints:
         return MappingProxyType(copied)
 
     @classmethod
+    def _freeze_response_values(cls, values_by_status: ResponsePathValues) -> ResponsePathValues:
+        if not isinstance(values_by_status, Mapping):
+            raise SafetyError("Capture response redaction hints must be a mapping")
+        copied: dict[ResponseSelector, PathValues] = {}
+        for selector, values in values_by_status.items():
+            if (
+                not (
+                    (type(selector) is int and 200 <= selector <= 299)
+                    or (type(selector) is str and selector in {"2XX", "default"})
+                )
+                or selector in copied
+            ):
+                raise SafetyError("Capture response redaction hint selector is invalid")
+            copied[selector] = cls._freeze_values(values)
+        return MappingProxyType(copied)
+
+    def response_values_for_status(self, status: object) -> PathValues:
+        if type(status) is not int or not 200 <= status <= 299:
+            raise SafetyError("Capture response status must be an integer from 200 to 299")
+        for selector in (status, "2XX", "default"):
+            values = self.response_values_by_status.get(selector)
+            if values is not None:
+                return values
+        raise SafetyError("Capture schema has no response hints for status")
+
+    @classmethod
     def for_operation(cls, effective_schema: dict[str, Any], operation_id: str) -> RedactionHints:
         if type(effective_schema) is not dict or type(operation_id) is not str:
             raise SafetyError("Capture schema and operation ID are invalid")
         operation = cls._find_operation(effective_schema, operation_id)
         request_values: dict[HintPath, set[str]] = {}
-        response_values: dict[HintPath, set[str]] = {}
+        response_values_by_status: dict[ResponseSelector, PathValues] = {}
 
         request_body = operation.get("requestBody")
         if request_body is not None:
@@ -228,22 +260,37 @@ class RedactionHints:
         responses = operation.get("responses")
         if type(responses) is not dict:
             raise SafetyError("Capture operation responses must be an object")
-        success_responses: list[dict[str, Any]] = []
+        success_responses: list[tuple[ResponseSelector, dict[str, Any]]] = []
         for status, response in responses.items():
             if type(status) is not str:
                 raise SafetyError("Capture response status keys must be strings")
+            selector: ResponseSelector | None = None
             if re.fullmatch(r"2[0-9]{2}", status):
-                success_responses.append(_dereference_object(effective_schema, response))
+                selector = int(status)
+            elif status.casefold() == "2xx":
+                selector = "2XX"
+            elif status == "default":
+                selector = status
+            if selector is not None:
+                if any(existing == selector for existing, _response in success_responses):
+                    raise SafetyError("Capture operation has duplicate response selectors")
+                success_responses.append(
+                    (selector, _dereference_object(effective_schema, response))
+                )
         if not success_responses:
             raise SafetyError("Capture operation has no 2xx response")
-        for response in success_responses:
+        for selector, response in success_responses:
             response_schema = cls._json_content_schema(response, label="response")
+            response_values: dict[HintPath, set[str]] = {}
             cls._walk_schema(effective_schema, response_schema, response_values)
+            response_values_by_status[selector] = {
+                path: frozenset(values) for path, values in response_values.items()
+            }
 
         return cls(
             operation_id,
             {path: frozenset(values) for path, values in request_values.items()},
-            {path: frozenset(values) for path, values in response_values.items()},
+            response_values_by_status,
         )
 
     @staticmethod
@@ -542,6 +589,7 @@ class LiveCapture:
             raise SafetyError("Live capture method does not match operation catalog")
         if supplied_path is not None and supplied_path != operation.path:
             raise SafetyError("Live capture path does not match operation catalog")
+        response_path_values = self.hints.response_values_for_status(metadata.get("status"))
         full_metadata = dict(metadata)
         full_metadata["method"] = operation.method
         full_metadata["path"] = operation.path
@@ -555,7 +603,7 @@ class LiveCapture:
             response_json=response_json,
             metadata=full_metadata,
             request_path_values=self.hints.request_values,
-            response_path_values=self.hints.response_values,
+            response_path_values=response_path_values,
         )
 
     @staticmethod

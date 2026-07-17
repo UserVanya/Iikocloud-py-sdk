@@ -120,9 +120,10 @@ def test_redaction_hints_resolve_json_request_success_branches_and_cycles() -> N
     assert hints.request_values[("escaped",)] == frozenset({"ESCAPED"})
     assert hints.request_values[("mode",)] == frozenset({"FULL"})
     assert ("type",) not in hints.request_values
-    assert hints.response_values[("queued",)] == frozenset({"QUEUED"})
-    assert hints.response_values[("state",)] == frozenset()
-    assert hints.response_values[("type",)] == frozenset({"DISH", "GROUP"})
+    assert hints.response_values_for_status(202)[("queued",)] == frozenset({"QUEUED"})
+    response_values = hints.response_values_for_status(200)
+    assert response_values[("state",)] == frozenset()
+    assert response_values[("type",)] == frozenset({"DISH", "GROUP"})
 
 
 def test_menu_discriminator_is_retained_but_adjacent_strings_are_redacted() -> None:
@@ -134,7 +135,7 @@ def test_menu_discriminator_is_retained_but_adjacent_strings_are_redacted() -> N
         "children": [{"type": "NOT_IN_SCHEMA", "state": "ACTIVE", "name": "Private child"}],
     }
 
-    sanitized = Sanitizer().sanitize(value, path_values=hints.response_values)
+    sanitized = Sanitizer().sanitize(value, path_values=hints.response_values_for_status(200))
 
     assert sanitized["type"] == "DISH"
     assert sanitized["name"] == "<redacted:string>"
@@ -148,10 +149,41 @@ def test_menu_discriminator_is_retained_but_adjacent_strings_are_redacted() -> N
 
 def test_redaction_hints_are_immutable_and_do_not_infer_observed_values() -> None:
     hints = RedactionHints.for_operation(_effective_schema(), "get_external_menu_by_id")
+    response_values = hints.response_values_for_status(200)
 
     with pytest.raises(TypeError):
-        hints.response_values[("type",)] = frozenset({"OBSERVED"})  # type: ignore[index]
-    assert "OBSERVED" not in hints.response_values[("type",)]
+        response_values[("type",)] = frozenset({"OBSERVED"})  # type: ignore[index]
+    with pytest.raises(TypeError):
+        hints.response_values_by_status[200] = {}  # type: ignore[index]
+    assert "OBSERVED" not in response_values[("type",)]
+
+
+def test_response_hint_selector_prefers_exact_then_range_then_default() -> None:
+    schema = _effective_schema()
+    responses = schema["paths"]["/api/2/menu/by_id"]["post"]["responses"]
+    responses["2XX"] = {
+        "content": {
+            "application/json": {"schema": {"properties": {"fallback": {"enum": ["RANGE"]}}}}
+        }
+    }
+    responses["default"] = {
+        "content": {
+            "application/json": {"schema": {"properties": {"fallback": {"enum": ["DEFAULT"]}}}}
+        }
+    }
+    hints = RedactionHints.for_operation(schema, "get_external_menu_by_id")
+
+    assert hints.response_values_for_status(202)[("queued",)] == frozenset({"QUEUED"})
+    assert hints.response_values_for_status(203)[("fallback",)] == frozenset({"RANGE"})
+
+    del responses["2XX"]
+    default_hints = RedactionHints.for_operation(schema, "get_external_menu_by_id")
+    assert default_hints.response_values_for_status(203)[("fallback",)] == frozenset({"DEFAULT"})
+
+    del responses["default"]
+    exact_hints = RedactionHints.for_operation(schema, "get_external_menu_by_id")
+    with pytest.raises(SafetyError, match="response.*status|status.*response"):
+        exact_hints.response_values_for_status(203)
 
 
 def test_path_hints_separate_colliding_names_request_response_arrays_and_maps() -> None:
@@ -227,7 +259,8 @@ def test_path_hints_separate_colliding_names_request_response_arrays_and_maps() 
     hints = RedactionHints.for_operation(schema, "collision")
 
     assert hints.request_values[("branch", "kind")] == frozenset({"REQUEST"})
-    assert hints.response_values[("branch", "kind")] == frozenset({"RESPONSE"})
+    response_values = hints.response_values_for_status(200)
+    assert response_values[("branch", "kind")] == frozenset({"RESPONSE"})
     assert hints.request_values[("items", ARRAY_ITEM, "kind")] == frozenset({"ITEM"})
     assert hints.request_values[("mapped", OBJECT_VALUE, "kind")] == frozenset({"DYNAMIC"})
 
@@ -245,7 +278,7 @@ def test_path_hints_separate_colliding_names_request_response_arrays_and_maps() 
     )
     response = Sanitizer().sanitize(
         {"branch": {"kind": "RESPONSE"}},
-        path_values=hints.response_values,
+        path_values=response_values,
     )
 
     assert request["branch"]["kind"] == "REQUEST"
@@ -351,13 +384,14 @@ def test_compositions_preserve_only_branch_safe_string_constraints() -> None:
         },
     }
     hints = RedactionHints.for_operation(schema, "composition")
+    response_values = hints.response_values_for_status(200)
 
-    assert hints.response_values[("choice", "name")] == frozenset()
-    assert hints.response_values[("choice", "kind")] == frozenset({"A", "B"})
-    assert hints.response_values[("choice", "code")] == frozenset({"X", "Y"})
-    assert hints.response_values[("intersection", "mode")] == frozenset({"B"})
-    assert hints.response_values[("intersection", "label")] == frozenset({"SAFE"})
-    assert hints.response_values[("items", ARRAY_ITEM)] == frozenset()
+    assert response_values[("choice", "name")] == frozenset()
+    assert response_values[("choice", "kind")] == frozenset({"A", "B"})
+    assert response_values[("choice", "code")] == frozenset({"X", "Y"})
+    assert response_values[("intersection", "mode")] == frozenset({"B"})
+    assert response_values[("intersection", "label")] == frozenset({"SAFE"})
+    assert response_values[("items", ARRAY_ITEM)] == frozenset()
 
     sanitized = Sanitizer().sanitize(
         {
@@ -365,7 +399,7 @@ def test_compositions_preserve_only_branch_safe_string_constraints() -> None:
             "intersection": {"mode": "B", "label": "SAFE"},
             "items": ["ITEM"],
         },
-        path_values=hints.response_values,
+        path_values=response_values,
     )
     assert sanitized["choice"] == {
         "name": "<redacted:string>",

@@ -140,6 +140,57 @@ def test_live_capture_accepts_strict_json_values_for_safe_session(tmp_path: Path
     assert response_path.exists()
 
 
+def test_live_capture_selects_response_hints_by_status_without_union(
+    tmp_path: Path,
+) -> None:
+    schema = _schema()
+    responses = schema["paths"]["/api/1/organizations"]["post"]["responses"]
+    responses["200"]["content"]["application/json"]["schema"]["properties"]["name"] = {
+        "enum": ["STANDARD"]
+    }
+    responses["202"] = {
+        "content": {"application/json": {"schema": {"properties": {"name": {"type": "string"}}}}}
+    }
+    hints = RedactionHints.for_operation(schema, "get_organizations")
+
+    bodies: dict[int, dict[str, object]] = {}
+    for status in (200, 202):
+        capture = LiveCapture(
+            writer=CaptureWriter(tmp_path / str(status)),
+            run_id="run",
+            selected_operation="get_organizations",
+            operation_catalog=_catalog(),
+            hints=hints,
+        )
+        request_path, response_path = capture.write_model_pair(
+            "get_organizations",
+            {"mode": "FULL"},
+            {"name": "STANDARD"},
+            metadata={"status": status},
+        )
+        assert json.loads(request_path.read_text())["body"]["mode"] == "FULL"
+        bodies[status] = json.loads(response_path.read_text())["body"]
+
+    assert bodies[200]["name"] == "STANDARD"
+    assert bodies[202]["name"] == "<redacted:string>"
+
+    unmapped = LiveCapture(
+        writer=CaptureWriter(tmp_path / "unmapped"),
+        run_id="run",
+        selected_operation="get_organizations",
+        operation_catalog=_catalog(),
+        hints=hints,
+    )
+    with pytest.raises(SafetyError, match="response.*status|status.*response"):
+        unmapped.write_model_pair(
+            "get_organizations",
+            {"mode": "FULL"},
+            {"name": "STANDARD"},
+            metadata={"status": 201},
+        )
+    assert not (tmp_path / "unmapped").exists()
+
+
 def test_live_capture_copies_catalog_and_is_immutable(tmp_path: Path) -> None:
     catalog = _catalog()
     capture = LiveCapture(
