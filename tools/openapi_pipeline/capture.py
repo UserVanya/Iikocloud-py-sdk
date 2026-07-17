@@ -1,15 +1,20 @@
 from __future__ import annotations
 
+import ctypes
+import errno
 import json
 import math
 import os
 import re
-import tempfile
+import secrets
+import stat
 import unicodedata
 import uuid
 from collections.abc import Mapping, Set
 from contextlib import suppress
 from dataclasses import dataclass
+from enum import Enum, auto
+from itertools import combinations
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -18,11 +23,7 @@ from urllib.parse import unquote, unquote_to_bytes, urlsplit
 from pydantic import BaseModel
 
 from .errors import SafetyError
-from .io import canonical_json_bytes, write_json_atomic
-from .live.lock import (
-    ensure_private_directory,
-    validate_private_regular_file,
-)
+from .io import canonical_json_bytes
 
 SECRET_KEYS = {
     "authorization",
@@ -78,6 +79,20 @@ _HTTP_METHODS = {
     "trace",
 }
 _HEX = frozenset("0123456789abcdefABCDEF")
+
+
+class _HintWildcard(Enum):
+    ARRAY_ITEM = auto()
+    OBJECT_VALUE = auto()
+
+
+ARRAY_ITEM = _HintWildcard.ARRAY_ITEM
+OBJECT_VALUE = _HintWildcard.OBJECT_VALUE
+HintPath = tuple[str | _HintWildcard, ...]
+PathValues = Mapping[HintPath, frozenset[str]]
+_DIRECTORY_FLAGS = os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
+_FILE_FLAGS = os.O_WRONLY | os.O_CLOEXEC | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+_RENAME_NOREPLACE = 1
 
 
 def _iter_strings(value: Any) -> list[str]:
@@ -166,40 +181,47 @@ class RedactionHints:
     """Immutable schema-declared string values safe to preserve for one operation."""
 
     operation_id: str
-    enum_values: Mapping[str, frozenset[str]]
+    request_values: PathValues
+    response_values: PathValues
 
     def __post_init__(self) -> None:
         if type(self.operation_id) is not str or _CAPTURE_ID.fullmatch(self.operation_id) is None:
             raise SafetyError("Capture redaction hints operation ID is invalid")
-        if not isinstance(self.enum_values, Mapping):
+        object.__setattr__(self, "request_values", self._freeze_values(self.request_values))
+        object.__setattr__(self, "response_values", self._freeze_values(self.response_values))
+
+    @staticmethod
+    def _freeze_values(values_by_path: PathValues) -> PathValues:
+        if not isinstance(values_by_path, Mapping):
             raise SafetyError("Capture redaction hints values must be a mapping")
-        copied: dict[str, frozenset[str]] = {}
-        for key, values in self.enum_values.items():
+        copied: dict[HintPath, frozenset[str]] = {}
+        for path, values in values_by_path.items():
             if (
-                type(key) is not str
+                type(path) is not tuple
+                or any(
+                    type(token) is not str and token not in {ARRAY_ITEM, OBJECT_VALUE}
+                    for token in path
+                )
                 or not isinstance(values, Set)
                 or any(type(value) is not str for value in values)
             ):
                 raise SafetyError("Capture redaction hints values are invalid")
-            copied[key] = frozenset(values)
-        object.__setattr__(self, "enum_values", MappingProxyType(dict(sorted(copied.items()))))
-
-    @property
-    def enum_keys(self) -> frozenset[str]:
-        return frozenset(self.enum_values)
+            copied[path] = frozenset(values)
+        return MappingProxyType(copied)
 
     @classmethod
     def for_operation(cls, effective_schema: dict[str, Any], operation_id: str) -> RedactionHints:
         if type(effective_schema) is not dict or type(operation_id) is not str:
             raise SafetyError("Capture schema and operation ID are invalid")
         operation = cls._find_operation(effective_schema, operation_id)
-        collected: dict[str, set[str]] = {}
+        request_values: dict[HintPath, set[str]] = {}
+        response_values: dict[HintPath, set[str]] = {}
 
         request_body = operation.get("requestBody")
         if request_body is not None:
             request = _dereference_object(effective_schema, request_body)
             request_schema = cls._json_content_schema(request, label="request")
-            cls._walk_schema(effective_schema, request_schema, collected)
+            cls._walk_schema(effective_schema, request_schema, request_values)
 
         responses = operation.get("responses")
         if type(responses) is not dict:
@@ -214,12 +236,13 @@ class RedactionHints:
             raise SafetyError("Capture operation has no 2xx response")
         for response in success_responses:
             response_schema = cls._json_content_schema(response, label="response")
-            cls._walk_schema(effective_schema, response_schema, collected)
+            cls._walk_schema(effective_schema, response_schema, response_values)
 
-        frozen = {
-            key: frozenset(sorted(values)) for key, values in sorted(collected.items()) if values
-        }
-        return cls(operation_id, MappingProxyType(frozen))
+        return cls(
+            operation_id,
+            {path: frozenset(values) for path, values in request_values.items()},
+            {path: frozenset(values) for path, values in response_values.items()},
+        )
 
     @staticmethod
     def _find_operation(document: dict[str, Any], operation_id: str) -> dict[str, Any]:
@@ -260,101 +283,111 @@ class RedactionHints:
     def _walk_schema(
         document: dict[str, Any],
         root: dict[str, Any],
-        collected: dict[str, set[str]],
+        collected: dict[HintPath, set[str]],
     ) -> None:
-        visited_refs: set[str] = set()
-        visited_objects: set[int] = set()
+        active_refs: set[str] = set()
+        active_objects: set[int] = set()
 
-        def add(property_name: str | None, values: object) -> None:
-            if property_name is None:
-                return
+        def add(path: HintPath, values: object) -> None:
             if type(values) is not list:
                 raise SafetyError("Capture schema enum must be an array")
             strings = {item for item in values if type(item) is str}
-            if strings:
-                collected.setdefault(property_name, set()).update(strings)
+            collected.setdefault(path, set()).update(strings)
 
-        def walk(schema: object, property_name: str | None = None) -> None:
+        def walk(schema: object, path: HintPath = ()) -> None:
             if type(schema) is not dict:
                 raise SafetyError("Capture schema traversal reached a non-object")
+            collected.setdefault(path, set())
             identity = id(schema)
-            if identity in visited_objects:
+            if identity in active_objects:
                 return
-            visited_objects.add(identity)
-
-            if "$ref" in schema:
-                reference = schema["$ref"]
-                if type(reference) is not str:
-                    raise SafetyError("Capture schema $ref must be a string")
-                target = _resolve_local_reference(document, reference)
-                if type(target) is not dict:
-                    raise SafetyError("Capture schema $ref target must be an object")
-                if reference not in visited_refs:
-                    visited_refs.add(reference)
-                    walk(target, property_name)
-
-            if "enum" in schema:
-                add(property_name, schema["enum"])
-            if "const" in schema and property_name is not None:
-                constant = schema["const"]
-                if type(constant) is str:
-                    collected.setdefault(property_name, set()).add(constant)
-
-            properties = schema.get("properties")
-            if properties is not None:
-                if type(properties) is not dict:
-                    raise SafetyError("Capture schema properties must be an object")
-                for name, child in properties.items():
-                    if type(name) is not str or type(child) is not dict:
-                        raise SafetyError("Capture schema property is invalid")
-                    walk(child, name)
-
-            for keyword in ("allOf", "anyOf", "oneOf"):
-                if keyword not in schema:
-                    continue
-                branches = schema[keyword]
-                if type(branches) is not list:
-                    raise SafetyError(f"Capture schema {keyword} must be an array")
-                for branch in branches:
-                    if type(branch) is not dict:
-                        raise SafetyError(f"Capture schema {keyword} branch is invalid")
-                    walk(branch, property_name)
-
-            if "items" in schema:
-                items = schema["items"]
-                if type(items) is not dict:
-                    raise SafetyError("Capture schema items must be an object")
-                walk(items, property_name)
-
-            if "additionalProperties" in schema:
-                additional = schema["additionalProperties"]
-                if type(additional) is dict:
-                    walk(additional)
-                elif type(additional) is not bool:
-                    raise SafetyError(
-                        "Capture schema additionalProperties must be a boolean or object"
-                    )
-
-            if "discriminator" in schema:
-                discriminator = schema["discriminator"]
-                if type(discriminator) is not dict:
-                    raise SafetyError("Capture schema discriminator must be an object")
-                discriminator_name = discriminator.get("propertyName")
-                if type(discriminator_name) is not str or not discriminator_name:
-                    raise SafetyError("Capture schema discriminator propertyName is invalid")
-                mapping = discriminator.get("mapping", {})
-                if type(mapping) is not dict:
-                    raise SafetyError("Capture schema discriminator mapping is invalid")
-                for discriminator_value, reference in mapping.items():
-                    if type(discriminator_value) is not str or type(reference) is not str:
-                        raise SafetyError("Capture schema discriminator entry is invalid")
+            active_objects.add(identity)
+            try:
+                if "$ref" in schema:
+                    reference = schema["$ref"]
+                    if type(reference) is not str:
+                        raise SafetyError("Capture schema $ref must be a string")
                     target = _resolve_local_reference(document, reference)
                     if type(target) is not dict:
-                        raise SafetyError("Capture schema discriminator target must be an object")
-                    collected.setdefault(discriminator_name, set()).add(discriminator_value)
-                    if reference not in visited_refs:
-                        visited_refs.add(reference)
-                        walk(target)
+                        raise SafetyError("Capture schema $ref target must be an object")
+                    if reference not in active_refs:
+                        active_refs.add(reference)
+                        try:
+                            walk(target, path)
+                        finally:
+                            active_refs.remove(reference)
+
+                if "enum" in schema:
+                    add(path, schema["enum"])
+                if "const" in schema:
+                    constant = schema["const"]
+                    if type(constant) is str:
+                        collected[path].add(constant)
+
+                properties = schema.get("properties")
+                if properties is not None:
+                    if type(properties) is not dict:
+                        raise SafetyError("Capture schema properties must be an object")
+                    for name, child in properties.items():
+                        if type(name) is not str or type(child) is not dict:
+                            raise SafetyError("Capture schema property is invalid")
+                        walk(child, (*path, name))
+
+                for keyword in ("allOf", "anyOf", "oneOf"):
+                    if keyword not in schema:
+                        continue
+                    branches = schema[keyword]
+                    if type(branches) is not list:
+                        raise SafetyError(f"Capture schema {keyword} must be an array")
+                    for branch in branches:
+                        if type(branch) is not dict:
+                            raise SafetyError(f"Capture schema {keyword} branch is invalid")
+                        walk(branch, path)
+
+                if "items" in schema:
+                    items = schema["items"]
+                    if type(items) is not dict:
+                        raise SafetyError("Capture schema items must be an object")
+                    walk(items, (*path, ARRAY_ITEM))
+
+                if "additionalProperties" in schema:
+                    additional = schema["additionalProperties"]
+                    if type(additional) is dict:
+                        walk(additional, (*path, OBJECT_VALUE))
+                    elif type(additional) is not bool:
+                        raise SafetyError(
+                            "Capture schema additionalProperties must be a boolean or object"
+                        )
+
+                if "discriminator" in schema:
+                    discriminator = schema["discriminator"]
+                    if type(discriminator) is not dict:
+                        raise SafetyError("Capture schema discriminator must be an object")
+                    discriminator_name = discriminator.get("propertyName")
+                    if type(discriminator_name) is not str or not discriminator_name:
+                        raise SafetyError("Capture schema discriminator propertyName is invalid")
+                    discriminator_path = (*path, discriminator_name)
+                    collected.setdefault(discriminator_path, set())
+                    mapping = discriminator.get("mapping", {})
+                    if type(mapping) is not dict:
+                        raise SafetyError("Capture schema discriminator mapping is invalid")
+                    for discriminator_value, reference in mapping.items():
+                        if type(discriminator_value) is not str or type(reference) is not str:
+                            raise SafetyError("Capture schema discriminator entry is invalid")
+                        target = _resolve_local_reference(document, reference)
+                        if type(target) is not dict:
+                            raise SafetyError(
+                                "Capture schema discriminator target must be an object"
+                            )
+                        collected[discriminator_path].add(discriminator_value)
+                        if reference not in active_refs:
+                            active_refs.add(reference)
+                            try:
+                                walk(target, path)
+                            finally:
+                                active_refs.remove(reference)
+            finally:
+                active_objects.remove(identity)
 
         walk(root)
 
@@ -476,7 +509,8 @@ class LiveCapture:
             request_json=request_json,
             response_json=response_json,
             metadata=full_metadata,
-            enum_values=self.hints.enum_values,
+            request_path_values=self.hints.request_values,
+            response_path_values=self.hints.response_values,
         )
 
     @staticmethod
@@ -548,29 +582,20 @@ class Sanitizer:
         value: Any,
         *,
         enum_keys: Set[str] = frozenset(),
-        enum_values: Mapping[str, Set[str]] | None = None,
+        path_values: PathValues | None = None,
     ) -> Any:
         if any(type(key) is not str for key in enum_keys):
             raise SafetyError("Capture enum keys must be strings")
-        safe_enum_values: dict[str, frozenset[str]] | None = None
-        if enum_values is not None:
-            if not isinstance(enum_values, Mapping):
-                raise SafetyError("Capture enum values must be a mapping")
-            safe_enum_values = {}
-            for enum_key, values in enum_values.items():
-                if (
-                    type(enum_key) is not str
-                    or not isinstance(values, Set)
-                    or any(type(item) is not str for item in values)
-                ):
-                    raise SafetyError("Capture enum values must contain only strings")
-                safe_enum_values[enum_key] = frozenset(values)
+        safe_path_values = (
+            RedactionHints._freeze_values(path_values) if path_values is not None else None
+        )
         copied = _strict_json_copy(value)
         return self._sanitize(
             copied,
             key=None,
             enum_keys=frozenset(enum_keys),
-            enum_values=safe_enum_values,
+            path_values=safe_path_values,
+            path=(),
         )
 
     def _sanitize(
@@ -579,7 +604,8 @@ class Sanitizer:
         *,
         key: str | None,
         enum_keys: frozenset[str],
-        enum_values: dict[str, frozenset[str]] | None,
+        path_values: PathValues | None,
+        path: HintPath,
     ) -> Any:
         normalized_key = key.casefold() if key is not None else None
         if normalized_key in SECRET_KEYS:
@@ -594,7 +620,8 @@ class Sanitizer:
                     child_value,
                     key=child_key,
                     enum_keys=enum_keys,
-                    enum_values=enum_values,
+                    path_values=path_values,
+                    path=(*path, child_key),
                 )
                 for child_key, child_value in value.items()
             }
@@ -604,7 +631,8 @@ class Sanitizer:
                     item,
                     key=key,
                     enum_keys=enum_keys,
-                    enum_values=enum_values,
+                    path_values=path_values,
+                    path=(*path, ARRAY_ITEM),
                 )
                 for item in value
             ]
@@ -625,12 +653,30 @@ class Sanitizer:
             return "<redacted:email>"
         if _PHONE.search(value):
             return "<redacted:phone>"
-        if key is not None and (
-            (enum_values is None and key in enum_keys)
-            or (enum_values is not None and value in enum_values.get(key, ()))
-        ):
+        allowed_values = self._allowed_values(path, path_values)
+        if (key is not None and key in enum_keys) or value in allowed_values:
             return value
         return "<redacted:string>"
+
+    @staticmethod
+    def _allowed_values(path: HintPath, values_by_path: PathValues | None) -> frozenset[str]:
+        if values_by_path is None:
+            return frozenset()
+        if path in values_by_path:
+            return values_by_path[path]
+        string_positions = [index for index, token in enumerate(path) if type(token) is str]
+        for replacement_count in range(1, len(string_positions) + 1):
+            matches: list[frozenset[str]] = []
+            for positions in combinations(string_positions, replacement_count):
+                candidate = list(path)
+                for index in positions:
+                    candidate[index] = OBJECT_VALUE
+                candidate_path = tuple(candidate)
+                if candidate_path in values_by_path:
+                    matches.append(values_by_path[candidate_path])
+            if matches:
+                return frozenset().union(*matches)
+        return frozenset()
 
 
 def _safe_path(value: object) -> str:
@@ -651,6 +697,205 @@ def _safe_path(value: object) -> str:
     ):
         raise SafetyError("Capture path contains unsafe segments")
     return decoded
+
+
+def _validate_directory_fd(fd: int, *, private: bool) -> None:
+    metadata = os.fstat(fd)
+    if not stat.S_ISDIR(metadata.st_mode):
+        raise SafetyError("Capture path component is not a directory")
+    if private and (stat.S_IMODE(metadata.st_mode) != 0o700 or metadata.st_uid != os.getuid()):
+        raise SafetyError(
+            "Private capture directory must be owned by the current user with mode 0700"
+        )
+
+
+def _open_absolute_private_root(root: Path) -> int:
+    if getattr(os, "O_NOFOLLOW", 0) == 0 or not root.is_absolute():
+        raise SafetyError("Secure capture directory traversal is unavailable")
+    components = root.parts[1:]
+    if not components or any(component in {"", ".", ".."} for component in components):
+        raise SafetyError("Capture root path is invalid")
+    try:
+        current_fd = os.open("/", _DIRECTORY_FLAGS)
+    except OSError as error:
+        raise SafetyError("Cannot open capture filesystem root safely") from error
+    try:
+        for index, component in enumerate(components):
+            created = False
+            try:
+                next_fd = os.open(component, _DIRECTORY_FLAGS, dir_fd=current_fd)
+            except FileNotFoundError:
+                try:
+                    os.mkdir(component, 0o700, dir_fd=current_fd)
+                    created = True
+                except FileExistsError:
+                    pass
+                except OSError as error:
+                    raise SafetyError("Cannot create private capture directory") from error
+                try:
+                    next_fd = os.open(component, _DIRECTORY_FLAGS, dir_fd=current_fd)
+                except OSError as error:
+                    raise SafetyError("Capture path component is not a safe directory") from error
+            except OSError as error:
+                raise SafetyError("Capture path component is not a safe directory") from error
+            try:
+                _validate_directory_fd(
+                    next_fd,
+                    private=index >= len(components) - 2,
+                )
+                if created:
+                    os.fsync(current_fd)
+            except BaseException:
+                os.close(next_fd)
+                raise
+            os.close(current_fd)
+            current_fd = next_fd
+        return current_fd
+    except BaseException:
+        os.close(current_fd)
+        raise
+
+
+def _open_or_create_private_child(parent_fd: int, name: str) -> int:
+    try:
+        os.mkdir(name, 0o700, dir_fd=parent_fd)
+    except FileExistsError:
+        pass
+    except OSError as error:
+        raise SafetyError("Cannot create private capture child directory") from error
+    else:
+        os.fsync(parent_fd)
+    try:
+        child_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
+    except OSError as error:
+        raise SafetyError("Capture child path is not a safe directory or is a symlink") from error
+    try:
+        _validate_directory_fd(child_fd, private=True)
+    except BaseException:
+        os.close(child_fd)
+        raise
+    return child_fd
+
+
+def _entry_exists(parent_fd: int, name: str) -> bool:
+    try:
+        os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+    except FileNotFoundError:
+        return False
+    except OSError as error:
+        raise SafetyError("Cannot inspect capture operation path safely") from error
+    return True
+
+
+def _create_staging_directory(parent_fd: int, operation_id: str) -> tuple[str, int]:
+    for _attempt in range(32):
+        name = f".{operation_id}.tmp-{secrets.token_hex(12)}"
+        try:
+            os.mkdir(name, 0o700, dir_fd=parent_fd)
+        except FileExistsError:
+            continue
+        except OSError as error:
+            raise SafetyError("Cannot create capture staging directory") from error
+        os.fsync(parent_fd)
+        try:
+            staging_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
+        except OSError as error:
+            with suppress(OSError):
+                os.rmdir(name, dir_fd=parent_fd)
+            raise SafetyError("Cannot open capture staging directory safely") from error
+        try:
+            _validate_directory_fd(staging_fd, private=True)
+        except BaseException:
+            os.close(staging_fd)
+            with suppress(OSError):
+                os.rmdir(name, dir_fd=parent_fd)
+            raise
+        return name, staging_fd
+    raise SafetyError("Cannot allocate a unique capture staging directory")
+
+
+def _validate_private_file_fd(fd: int) -> None:
+    metadata = os.fstat(fd)
+    if (
+        not stat.S_ISREG(metadata.st_mode)
+        or stat.S_IMODE(metadata.st_mode) != 0o600
+        or metadata.st_uid != os.getuid()
+        or metadata.st_nlink != 1
+    ):
+        raise SafetyError("Capture file is not a private regular 0600 file")
+
+
+def _write_file_at(directory_fd: int, name: str, body: bytes) -> None:
+    try:
+        fd = os.open(name, _FILE_FLAGS, 0o600, dir_fd=directory_fd)
+    except OSError as error:
+        raise SafetyError("Cannot create private capture file safely") from error
+    try:
+        os.fchmod(fd, 0o600)
+        offset = 0
+        while offset < len(body):
+            written = os.write(fd, body[offset:])
+            if written <= 0:
+                raise OSError("short capture write")
+            offset += written
+        os.fsync(fd)
+        _validate_private_file_fd(fd)
+    finally:
+        os.close(fd)
+
+
+def _validate_file_at(directory_fd: int, name: str) -> None:
+    flags = os.O_RDONLY | os.O_CLOEXEC | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        fd = os.open(name, flags, dir_fd=directory_fd)
+    except OSError as error:
+        raise SafetyError("Cannot validate published capture file safely") from error
+    try:
+        _validate_private_file_fd(fd)
+    finally:
+        os.close(fd)
+
+
+def _rename_directory_noreplace(
+    parent_fd: int,
+    source: str,
+    destination: str,
+) -> None:
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise SafetyError("Atomic no-replace capture publication is unavailable")
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    result = renameat2(
+        parent_fd,
+        os.fsencode(source),
+        parent_fd,
+        os.fsencode(destination),
+        _RENAME_NOREPLACE,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.EEXIST, errno.ENOTEMPTY}:
+        raise SafetyError("Capture refuses to overwrite an operation directory")
+    raise SafetyError("Atomic no-replace capture publication failed") from OSError(
+        error_number, os.strerror(error_number)
+    )
+
+
+def _cleanup_staging_at(parent_fd: int, staging_fd: int, staging_name: str) -> None:
+    for name in ("request.json", "response.json"):
+        with suppress(FileNotFoundError):
+            os.unlink(name, dir_fd=staging_fd)
+    with suppress(FileNotFoundError):
+        os.rmdir(staging_name, dir_fd=parent_fd)
 
 
 class CaptureWriter:
@@ -676,7 +921,8 @@ class CaptureWriter:
         response_json: Any,
         metadata: Mapping[str, Any],
         enum_keys: Set[str] = frozenset(),
-        enum_values: Mapping[str, Set[str]] | None = None,
+        request_path_values: PathValues | None = None,
+        response_path_values: PathValues | None = None,
     ) -> tuple[Path, Path]:
         if kind == "auth":
             raise SafetyError("Capture refuses an auth body")
@@ -704,12 +950,12 @@ class CaptureWriter:
         request_body = self._sanitizer.sanitize(
             request_json,
             enum_keys=enum_keys,
-            enum_values=enum_values,
+            path_values=request_path_values,
         )
         response_body = self._sanitizer.sanitize(
             response_json,
             enum_keys=enum_keys,
-            enum_values=enum_values,
+            path_values=response_path_values,
         )
         safe_metadata = {
             "method": method,
@@ -732,30 +978,43 @@ class CaptureWriter:
         self._scan(request_bytes)
         self._scan(response_bytes)
 
-        run_path, operation_path = self._prepare_parent(run_id, operation_id)
-        staging_path = Path(tempfile.mkdtemp(prefix=f".{operation_id}.tmp-", dir=run_path))
-        os.chmod(staging_path, 0o700, follow_symlinks=False)
-        ensure_private_directory(staging_path)
+        root_fd: int | None = None
+        run_fd: int | None = None
+        staging_fd: int | None = None
+        staging_name: str | None = None
+        published_name: str | None = None
+        complete = False
         try:
-            staged_request = staging_path / "request.json"
-            staged_response = staging_path / "response.json"
-            write_json_atomic(staged_request, request_value, mode=0o600)
-            write_json_atomic(staged_response, response_value, mode=0o600)
-            validate_private_regular_file(staged_request, label="Capture request")
-            validate_private_regular_file(staged_response, label="Capture response")
-            if self._lexists(operation_path):
+            root_fd = _open_absolute_private_root(self.root)
+            run_fd = _open_or_create_private_child(root_fd, run_id)
+            if _entry_exists(run_fd, operation_id):
                 raise SafetyError("Capture refuses to overwrite an operation directory")
-            try:
-                os.rename(staging_path, operation_path)
-            except FileExistsError as error:
-                raise SafetyError("Capture refuses to overwrite an operation directory") from error
+            staging_name, staging_fd = _create_staging_directory(run_fd, operation_id)
+            _write_file_at(staging_fd, "request.json", request_bytes)
+            _write_file_at(staging_fd, "response.json", response_bytes)
+            os.fsync(staging_fd)
+            _validate_directory_fd(staging_fd, private=True)
+            _validate_file_at(staging_fd, "request.json")
+            _validate_file_at(staging_fd, "response.json")
+            _rename_directory_noreplace(run_fd, staging_name, operation_id)
+            published_name = operation_id
+            os.fsync(run_fd)
+            complete = True
         finally:
-            self._cleanup_staging(staging_path)
-        ensure_private_directory(operation_path)
+            if staging_fd is not None:
+                if not complete:
+                    assert run_fd is not None
+                    cleanup_name = published_name or staging_name
+                    assert cleanup_name is not None
+                    _cleanup_staging_at(run_fd, staging_fd, cleanup_name)
+                os.close(staging_fd)
+            if run_fd is not None:
+                os.close(run_fd)
+            if root_fd is not None:
+                os.close(root_fd)
+        operation_path = self.root / run_id / operation_id
         request_path = operation_path / "request.json"
         response_path = operation_path / "response.json"
-        validate_private_regular_file(request_path, label="Capture request")
-        validate_private_regular_file(response_path, label="Capture response")
         return request_path, response_path
 
     def _sanitize_path(self, path: str) -> str:
@@ -792,63 +1051,12 @@ class CaptureWriter:
             if normalized in {"accept", "content-type"} and _MEDIA_TYPE.fullmatch(header_value):
                 safe_value = self._sanitizer.sanitize(
                     {normalized: header_value},
-                    enum_values={normalized: frozenset({header_value})},
+                    enum_keys={normalized},
                 )[normalized]
             else:
                 safe_value = self._sanitizer.sanitize({normalized: header_value})[normalized]
             result[normalized] = safe_value
         return result
-
-    def _prepare_parent(self, run_id: str, operation_id: str) -> tuple[Path, Path]:
-        self._ensure_private_root()
-        run_path = self.root / run_id
-        ensure_private_directory(run_path)
-        operation_path = run_path / operation_id
-        if self._lexists(operation_path):
-            raise SafetyError("Capture refuses to overwrite an operation directory")
-        return run_path, operation_path
-
-    def _ensure_private_root(self) -> None:
-        missing: list[Path] = []
-        current = self.root
-        while not self._lexists(current):
-            missing.append(current)
-            parent = current.parent
-            if parent == current:
-                raise SafetyError("Capture root has no existing private parent")
-            current = parent
-        if not missing:
-            ensure_private_directory(self.root)
-            return
-        ensure_private_directory(current)
-        for directory in reversed(missing):
-            try:
-                directory.mkdir(mode=0o700)
-            except FileExistsError:
-                pass
-            else:
-                os.chmod(directory, 0o700, follow_symlinks=False)
-            ensure_private_directory(directory)
-
-    @staticmethod
-    def _lexists(path: Path) -> bool:
-        try:
-            path.lstat()
-        except FileNotFoundError:
-            return False
-        return True
-
-    @staticmethod
-    def _cleanup_staging(path: Path) -> None:
-        try:
-            children = list(path.iterdir())
-        except FileNotFoundError:
-            return
-        for child in children:
-            with suppress(FileNotFoundError):
-                child.unlink()
-        with suppress(FileNotFoundError):
-            path.rmdir()
 
     def _scan(self, body: bytes) -> None:
         text = body.decode("utf-8")

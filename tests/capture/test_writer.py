@@ -77,17 +77,17 @@ def test_capture_writer_publishes_pair_as_one_directory_transaction(
 ) -> None:
     root = tmp_path / "captures"
     writer = CaptureWriter(root)
-    real_write = capture_module.write_json_atomic
+    real_write = capture_module._write_file_at
     writes = 0
 
-    def fail_second_write(path: Path, value: object, mode: int = 0o644) -> None:
+    def fail_second_write(directory_fd: int, name: str, body: bytes) -> None:
         nonlocal writes
         writes += 1
         if writes == 2:
             raise OSError("synthetic second-file failure")
-        real_write(path, value, mode)
+        real_write(directory_fd, name, body)
 
-    monkeypatch.setattr(capture_module, "write_json_atomic", fail_second_write)
+    monkeypatch.setattr(capture_module, "_write_file_at", fail_second_write)
 
     with pytest.raises(OSError, match="synthetic"):
         _write_pair(writer)
@@ -258,6 +258,95 @@ def test_capture_writer_rejects_wide_symlink_and_existing_operation_paths(
     operation.mkdir(mode=0o700)
     with pytest.raises(SafetyError, match="overwrite"):
         _write_pair(CaptureWriter(root))
+
+
+def test_capture_writer_rejects_existing_root_below_symlinked_ancestor(
+    tmp_path: Path,
+) -> None:
+    external = tmp_path / "external"
+    real_private = external / "private"
+    real_root = real_private / "captures"
+    real_root.mkdir(parents=True, mode=0o700)
+    real_private.chmod(0o700)
+    real_root.chmod(0o700)
+    linked_parent = tmp_path / "linked-private"
+    linked_parent.symlink_to(real_private, target_is_directory=True)
+
+    with pytest.raises(SafetyError, match="symlink|ancestor|directory"):
+        _write_pair(CaptureWriter(linked_parent / "captures"))
+
+    assert not list(external.rglob("*.json"))
+    assert not (real_root / "run").exists()
+
+
+def test_capture_writer_rejects_wide_immediate_private_parent_before_writes(
+    tmp_path: Path,
+) -> None:
+    private = tmp_path / "private"
+    root = private / "captures"
+    private.mkdir(mode=0o700)
+    root.mkdir(mode=0o700)
+    private.chmod(0o755)
+
+    with pytest.raises(SafetyError, match="0700"):
+        _write_pair(CaptureWriter(root))
+
+    assert not (root / "run").exists()
+    assert not list(root.rglob("*.json"))
+
+
+def test_atomic_publish_refuses_concurrent_empty_operation_directory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "captures"
+    real_rename = capture_module._rename_directory_noreplace
+
+    def race_publish(parent_fd: int, source: str, destination: str) -> None:
+        os.mkdir(destination, 0o700, dir_fd=parent_fd)
+        real_rename(parent_fd, source, destination)
+
+    monkeypatch.setattr(
+        capture_module,
+        "_rename_directory_noreplace",
+        race_publish,
+    )
+
+    with pytest.raises(SafetyError, match="overwrite"):
+        _write_pair(CaptureWriter(root))
+
+    operation = root / "run/get_organizations"
+    assert operation.is_dir()
+    assert not list(operation.iterdir())
+    assert not list(root.rglob("*.json"))
+    assert not list(root.rglob("*.tmp-*"))
+
+
+def test_held_directory_fds_prevent_parent_symlink_swap_escape(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "captures"
+    root.mkdir(mode=0o700)
+    moved = tmp_path / "moved-captures"
+    external = tmp_path / "external"
+    external.mkdir(mode=0o700)
+    real_create = capture_module._create_staging_directory
+
+    def swap_then_create(parent_fd: int, operation_id: str) -> tuple[str, int]:
+        root.rename(moved)
+        root.symlink_to(external, target_is_directory=True)
+        return real_create(parent_fd, operation_id)
+
+    monkeypatch.setattr(
+        capture_module,
+        "_create_staging_directory",
+        swap_then_create,
+    )
+
+    _write_pair(CaptureWriter(root))
+
+    assert not list(external.rglob("*.json"))
+    assert (moved / "run/get_organizations/request.json").is_file()
+    assert (moved / "run/get_organizations/response.json").is_file()
 
 
 @pytest.mark.parametrize(

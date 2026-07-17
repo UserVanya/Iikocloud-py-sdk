@@ -174,7 +174,7 @@ def test_live_capture_refuses_auth_unknown_and_mismatched_hints_at_binding(
     hints_operation: str,
     message: str,
 ) -> None:
-    hints = RedactionHints(hints_operation, {})
+    hints = RedactionHints(hints_operation, {}, {})
     with pytest.raises(SafetyError, match=message):
         LiveCapture(
             writer=CaptureWriter(tmp_path),

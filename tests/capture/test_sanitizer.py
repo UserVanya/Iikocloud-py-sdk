@@ -43,8 +43,10 @@ def test_sanitizer_preserves_only_explicitly_allowed_schema_strings() -> None:
             "wrong": {"type": "CUSTOMER NAME"},
             "sameNameElsewhere": {"type": "OTHER"},
         },
-        enum_keys={"type"},
-        enum_values={"type": frozenset({"DISH", "OTHER"})},
+        path_values={
+            ("valid", "type"): frozenset({"DISH"}),
+            ("sameNameElsewhere", "type"): frozenset({"OTHER"}),
+        },
     )
 
     assert sanitized["valid"]["type"] == "DISH"
