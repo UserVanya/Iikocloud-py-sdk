@@ -409,6 +409,50 @@ def test_bootstrap_preview_writes_deterministic_candidates_without_promotion(
     fake_dependencies.promote.assert_not_called()
 
 
+def test_bootstrap_preview_falls_back_to_paths_for_duplicate_request_phrases(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    request_schema = {
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {"$ref": "#/components/schemas/CustomerChangeUserBalanceRequest"}
+                }
+            }
+        }
+    }
+    document = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {
+            "/api/1/loyalty/iiko/customer/wallet/chargeoff": {
+                "post": request_schema,
+            },
+            "/api/1/loyalty/iiko/customer/wallet/topup": {
+                "post": request_schema,
+            },
+        },
+        "components": {"schemas": {"CustomerChangeUserBalanceRequest": {"type": "object"}}},
+    }
+    write_json_atomic(fake_dependencies.paths.candidate, document)
+
+    bootstrap(fake_dependencies, accept_current_upstream=False)
+
+    registry = yaml.safe_load(
+        (tmp_path / "build/bootstrap/operation-ids.yaml").read_text(encoding="utf-8")
+    )
+    assert registry == {
+        "operations": {
+            "POST /api/1/loyalty/iiko/customer/wallet/chargeoff": (
+                "loyalty_iiko_customer_wallet_chargeoff"
+            ),
+            "POST /api/1/loyalty/iiko/customer/wallet/topup": (
+                "loyalty_iiko_customer_wallet_topup"
+            ),
+        }
+    }
+
+
 def test_bootstrap_preview_stops_on_model_collisions_but_preserves_candidates(
     tmp_path: Path, fake_dependencies: PipelineDependencies
 ) -> None:

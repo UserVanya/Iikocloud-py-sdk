@@ -428,14 +428,7 @@ def _request_schema_name(operation: dict[str, Any]) -> str | None:
     return None
 
 
-def _operation_base(path: str, operation: dict[str, Any]) -> str:
-    schema_name = _request_schema_name(operation)
-    if schema_name is not None:
-        words = _words(schema_name)
-        for index, word in enumerate(words):
-            if word in _OPERATION_VERBS:
-                return "_".join(words[index:])
-
+def _path_operation_base(path: str) -> str:
     segments = [segment for segment in path.strip("/").split("/") if segment]
     if len(segments) >= 2 and segments[0].lower() == "api":
         segments = segments[2:]
@@ -452,8 +445,18 @@ def _operation_base(path: str, operation: dict[str, Any]) -> str:
     return normalized
 
 
+def _operation_base(path: str, operation: dict[str, Any]) -> str:
+    schema_name = _request_schema_name(operation)
+    if schema_name is not None:
+        words = _words(schema_name)
+        for index, word in enumerate(words):
+            if word in _OPERATION_VERBS:
+                return "_".join(words[index:])
+    return _path_operation_base(path)
+
+
 def _operation_candidates(document: dict[str, Any]) -> dict[str, str]:
-    candidates: list[tuple[str, str, str]] = []
+    candidates: list[tuple[str, str, str, str]] = []
     paths = document.get("paths", {})
     if not isinstance(paths, dict):
         raise PipelineError("OpenAPI paths must be an object")
@@ -475,15 +478,27 @@ def _operation_candidates(document: dict[str, Any]) -> dict[str, str]:
             if not isinstance(operation, dict):
                 raise PipelineError(f"Operation {method.upper()} {path} must be an object")
             candidates.append(
-                (f"{method.upper()} {path}", method.lower(), _operation_base(path, operation))
+                (
+                    f"{method.upper()} {path}",
+                    method.lower(),
+                    _operation_base(path, operation),
+                    _path_operation_base(path),
+                )
             )
-    counts: dict[str, int] = {}
-    for _key, _method, base in candidates:
-        counts[base] = counts.get(base, 0) + 1
+    preferred_counts: dict[str, int] = {}
+    for _key, _method, preferred, _path_base in candidates:
+        preferred_counts[preferred] = preferred_counts.get(preferred, 0) + 1
+    resolved = [
+        (key, method, path_base if preferred_counts[preferred] > 1 else preferred)
+        for key, method, preferred, path_base in candidates
+    ]
+    resolved_counts: dict[str, int] = {}
+    for _key, _method, base in resolved:
+        resolved_counts[base] = resolved_counts.get(base, 0) + 1
     result: dict[str, str] = {}
     used: set[str] = set()
-    for key, method, base in candidates:
-        value = f"{method}_{base}" if counts[base] > 1 else base
+    for key, method, base in resolved:
+        value = f"{method}_{base}" if resolved_counts[base] > 1 else base
         if value in used:
             raise PipelineError(f"Cannot deterministically resolve operationId collision: {value}")
         used.add(value)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 import subprocess
 from pathlib import Path
@@ -72,6 +73,21 @@ def test_repository_generator_assets_are_exact_and_loadable() -> None:
         "iikocloud_client/_contracts/__init__.py",
         "iikocloud_client/_contracts/rate-limits.yaml",
     ]
+
+
+def test_repository_hand_owned_contracts_are_seeded_and_canonical() -> None:
+    init_path = Path("src/iikocloud_client/_contracts/__init__.py")
+    contract_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
+    canonical_contract = Path("contracts/rate-limits.yaml")
+
+    module = ast.parse(init_path.read_text(encoding="utf-8"))
+
+    assert len(module.body) == 1
+    assert isinstance(module.body[0], ast.Expr)
+    assert isinstance(module.body[0].value, ast.Constant)
+    assert isinstance(module.body[0].value.value, str)
+    assert module.body[0].value.value
+    assert contract_path.read_bytes() == canonical_contract.read_bytes()
 
 
 def test_toolchain_load_accepts_only_the_exact_pinned_toolchain(tmp_path: Path) -> None:
