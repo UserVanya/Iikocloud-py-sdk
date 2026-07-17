@@ -568,17 +568,64 @@ def _assert_empty_operation_registry(path: Path) -> None:
         raise PipelineError("Bootstrap refuses to overwrite a non-empty operation registry")
 
 
-def _bootstrap_overrides(paths: RepoPaths) -> dict[str, str]:
+def _preflight_optional_model_overrides(paths: RepoPaths) -> Path | None:
+    candidate = paths.build / "bootstrap/model-name-overrides.yaml"
+    label = "Bootstrap model-name-overrides candidate"
+    lexical_root = paths.root.absolute()
+    lexical_candidate = candidate.absolute()
+    if lexical_candidate == lexical_root or not lexical_candidate.is_relative_to(
+        lexical_root
+    ):
+        raise PipelineError(f"{label} escapes the controlled repository root: {candidate}")
+
+    try:
+        relative = lexical_candidate.relative_to(lexical_root)
+        controlled_root = paths.root.resolve(strict=True)
+    except (OSError, ValueError) as error:
+        raise PipelineError(
+            f"Cannot establish controlled path for {label}: {candidate}"
+        ) from error
+
+    current = paths.root
+    for index, part in enumerate(relative.parts):
+        current /= part
+        try:
+            mode = current.lstat().st_mode
+        except FileNotFoundError:
+            return None
+        except OSError as error:
+            raise PipelineError(f"Cannot inspect {label}: {current}") from error
+        if stat.S_ISLNK(mode):
+            raise PipelineError(f"{label} path contains a symlink: {current}")
+        is_leaf = index == len(relative.parts) - 1
+        if is_leaf:
+            if not stat.S_ISREG(mode):
+                raise PipelineError(f"{label} must be a regular file: {candidate}")
+        elif not stat.S_ISDIR(mode):
+            raise PipelineError(f"{label} parent must be a directory: {current}")
+
+    try:
+        resolved = candidate.resolve(strict=True)
+    except OSError as error:
+        raise PipelineError(f"Cannot resolve {label}: {candidate}") from error
+    if not resolved.is_relative_to(controlled_root):
+        raise PipelineError(f"{label} escapes the controlled repository root: {candidate}")
+    return candidate
+
+
+def _bootstrap_overrides(
+    paths: RepoPaths, model_candidate: Path | None
+) -> dict[str, str]:
     committed = paths.root / "openapi/model-name-overrides.yaml"
     result = _load_string_registry(committed, "models") if committed.exists() else {}
-    candidate = paths.build / "bootstrap/model-name-overrides.yaml"
-    if candidate.exists():
-        result.update(_load_string_registry(candidate, "models"))
+    if model_candidate is not None:
+        result.update(_load_string_registry(model_candidate, "models"))
     return dict(sorted(result.items()))
 
 
 def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
     paths = dependencies.paths
+    model_candidate = _preflight_optional_model_overrides(paths)
     _assert_empty_operation_registry(paths.root / "openapi/operation-ids.yaml")
     bootstrap_root = paths.build / "bootstrap"
     types_candidate = bootstrap_root / "types.overlay.yaml"
@@ -617,7 +664,10 @@ def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
         effective,
         _load_string_registry(operations_candidate, "operations"),
     )
-    mappings = build_model_mappings(_model_schemas(effective), _bootstrap_overrides(paths))
+    mappings = build_model_mappings(
+        _model_schemas(effective),
+        _bootstrap_overrides(paths, model_candidate),
+    )
     dependencies.validate(effective)
     write_json_atomic(paths.effective, effective)
     items, _raw_generated = _stage_generated_outputs(
@@ -630,8 +680,7 @@ def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
         PromotionItem(types_candidate, paths.root / "openapi/overlays/types.overlay.yaml"),
         PromotionItem(operations_candidate, paths.root / "openapi/operation-ids.yaml"),
     ]
-    model_candidate = bootstrap_root / "model-name-overrides.yaml"
-    if model_candidate.exists():
+    if model_candidate is not None:
         mechanical_items.append(
             PromotionItem(model_candidate, paths.root / "openapi/model-name-overrides.yaml")
         )

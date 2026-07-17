@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import keyword
 import os
+import stat
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -755,6 +756,103 @@ def test_bootstrap_accept_uses_reviewed_model_override_to_resolve_collision(
     )
     targets = [item.target for item in fake_dependencies.promote.call_args.args[0]]
     assert tmp_path / "openapi/model-name-overrides.yaml" in targets
+
+
+@pytest.mark.parametrize("unsafe_kind", ["symlink", "fifo", "directory"])
+def test_bootstrap_accept_preflights_unsafe_optional_model_override(
+    tmp_path: Path,
+    fake_dependencies: PipelineDependencies,
+    monkeypatch: pytest.MonkeyPatch,
+    unsafe_kind: str,
+) -> None:
+    document: dict[str, object] = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {"schemas": {}},
+    }
+    _write_bootstrap_candidates(fake_dependencies, document)
+    bootstrap_root = tmp_path / "build/bootstrap"
+    override = bootstrap_root / "model-name-overrides.yaml"
+    sentinel = tmp_path / "outside-model-overrides.yaml"
+    if unsafe_kind == "symlink":
+        sentinel.write_text("models: {}\n", encoding="utf-8")
+        override.symlink_to(sentinel)
+    elif unsafe_kind == "fifo":
+        os.mkfifo(override)
+    else:
+        override.mkdir()
+        (override / "sentinel.txt").write_text("unchanged\n", encoding="utf-8")
+    candidate_bytes = {
+        path.name: path.read_bytes()
+        for path in bootstrap_root.iterdir()
+        if path.name != override.name
+    }
+    load_yaml = Mock(side_effect=AssertionError("candidate content was read"))
+    load_document = Mock(side_effect=AssertionError("candidate document was read"))
+    monkeypatch.setattr(pipeline_module, "_load_yaml", load_yaml)
+    monkeypatch.setattr(pipeline_module, "_load_document", load_document)
+
+    with pytest.raises(PipelineError, match="model-name-overrides.*(symlink|regular file)"):
+        bootstrap(fake_dependencies, accept_current_upstream=True)
+
+    assert {
+        path.name: path.read_bytes()
+        for path in bootstrap_root.iterdir()
+        if path.name != override.name
+    } == candidate_bytes
+    if unsafe_kind == "symlink":
+        assert override.is_symlink()
+        assert sentinel.read_text(encoding="utf-8") == "models: {}\n"
+    elif unsafe_kind == "fifo":
+        assert stat.S_ISFIFO(override.lstat().st_mode)
+    else:
+        assert override.is_dir()
+        assert (override / "sentinel.txt").read_text(encoding="utf-8") == "unchanged\n"
+    load_yaml.assert_not_called()
+    load_document.assert_not_called()
+    fake_dependencies.fetch.assert_not_called()
+    fake_dependencies.apply_corrections.assert_not_called()
+    fake_dependencies.validate.assert_not_called()
+    fake_dependencies.generate.assert_not_called()
+    fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.verify_contracts.assert_not_called()
+    fake_dependencies.promote.assert_not_called()
+
+
+def test_bootstrap_accept_rejects_symlinked_optional_override_parent(
+    tmp_path: Path,
+    fake_dependencies: PipelineDependencies,
+) -> None:
+    document: dict[str, object] = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {"schemas": {}},
+    }
+    _write_bootstrap_candidates(fake_dependencies, document)
+    bootstrap_root = tmp_path / "build/bootstrap"
+    outside = tmp_path / "outside-bootstrap"
+    bootstrap_root.rename(outside)
+    (outside / "model-name-overrides.yaml").write_text(
+        "models: {}\n", encoding="utf-8"
+    )
+    bootstrap_root.symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(PipelineError, match="model-name-overrides.*symlink"):
+        bootstrap(fake_dependencies, accept_current_upstream=True)
+
+    assert bootstrap_root.is_symlink()
+    assert (outside / "model-name-overrides.yaml").read_text(encoding="utf-8") == (
+        "models: {}\n"
+    )
+    fake_dependencies.fetch.assert_not_called()
+    fake_dependencies.apply_corrections.assert_not_called()
+    fake_dependencies.validate.assert_not_called()
+    fake_dependencies.generate.assert_not_called()
+    fake_dependencies.verify_package.assert_not_called()
+    fake_dependencies.verify_contracts.assert_not_called()
+    fake_dependencies.promote.assert_not_called()
 
 
 def test_bootstrap_accept_package_failure_preserves_reviewed_candidates(
