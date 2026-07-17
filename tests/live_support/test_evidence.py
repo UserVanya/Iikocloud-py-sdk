@@ -296,6 +296,84 @@ async def test_capture_evidence_runtime_rejects_unapproved_selection_before_load
     assert events == []
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "authenticate",
+    [
+        LiveOperation("read", None, "POST", "/api/1/access_token"),
+        LiveOperation("auth", "cleanup", "POST", "/api/1/access_token"),
+        LiveOperation("auth", None, "GET", "/api/1/access_token"),
+        LiveOperation("auth", None, "POST", "/api/1/organizations"),
+    ],
+)
+async def test_capture_evidence_rejects_drifted_auth_contract_before_private_setup(
+    tmp_path: Path,
+    authenticate: LiveOperation,
+) -> None:
+    events: list[str] = []
+    dependencies, _session = _dependencies(tmp_path, events)
+    drifted = {**_operations(), "authenticate": authenticate}
+    dependencies = replace(
+        dependencies,
+        operation_contract_loader=lambda path: events.append("operations:load") or drifted,
+    )
+
+    with pytest.raises(SafetyError, match="authentication.*contract|auth.*contract"):
+        await capture_evidence(
+            live_profile="test-server",
+            env_file=".env",
+            operation="get_external_menu_by_id",
+            menu_version=2,
+            dependencies=dependencies,
+        )
+
+    assert events == [
+        "catalog:load",
+        "budget:authenticate",
+        "budget:get_external_menu_by_id",
+        "candidate:compose",
+        "operations:load",
+    ]
+
+
+@pytest.mark.asyncio
+async def test_capture_evidence_rejects_menu_cleanup_contract_before_private_setup(
+    tmp_path: Path,
+) -> None:
+    events: list[str] = []
+    dependencies, _session = _dependencies(tmp_path, events)
+    drifted = {
+        **_operations(),
+        "get_external_menu_by_id": LiveOperation(
+            "read",
+            "cleanup",
+            "POST",
+            "/api/2/menu/by_id",
+        ),
+    }
+    dependencies = replace(
+        dependencies,
+        operation_contract_loader=lambda path: events.append("operations:load") or drifted,
+    )
+
+    with pytest.raises(SafetyError, match="read endpoint"):
+        await capture_evidence(
+            live_profile="test-server",
+            env_file=".env",
+            operation="get_external_menu_by_id",
+            menu_version=2,
+            dependencies=dependencies,
+        )
+
+    assert events == [
+        "catalog:load",
+        "budget:authenticate",
+        "budget:get_external_menu_by_id",
+        "candidate:compose",
+        "operations:load",
+    ]
+
+
 def test_default_capture_dependencies_use_canonical_guarded_primitives(tmp_path: Path) -> None:
     dependencies = default_capture_evidence_dependencies(RepoPaths(tmp_path))
 

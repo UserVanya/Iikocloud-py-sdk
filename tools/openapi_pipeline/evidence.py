@@ -94,10 +94,20 @@ async def capture_evidence(
     operation_catalog = selected.operation_contract_loader(
         paths.root / "contracts/live-operations.yaml"
     )
+    authentication = operation_catalog.get("authenticate")
+    if (
+        authentication is None
+        or authentication.kind != "auth"
+        or authentication.cleanup is not None
+        or authentication.method != "POST"
+        or authentication.path != "/api/1/access_token"
+    ):
+        raise SafetyError("Evidence authentication contract is not the approved endpoint")
     contract = operation_catalog.get(selected_operation)
     if (
         contract is None
         or contract.kind != "read"
+        or contract.cleanup is not None
         or contract.method != "POST"
         or contract.path != "/api/2/menu/by_id"
     ):
