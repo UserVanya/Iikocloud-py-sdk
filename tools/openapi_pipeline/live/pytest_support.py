@@ -156,6 +156,7 @@ def finalize_live_receipt(
         and clients_closed
         and mutation_journals_clean
         and not receipt.had_429
+        and receipt.has_required_read_canary
     ):
         return False
     completed = receipt.as_completed()

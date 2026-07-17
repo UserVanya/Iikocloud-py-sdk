@@ -25,6 +25,7 @@ _FIELDS = {
     "completed",
 }
 _MAX_RECEIPT_BYTES = 1024 * 1024
+_REQUIRED_READ_CANARY = ("authenticate", "get_organizations")
 
 
 @dataclass(frozen=True)
@@ -73,10 +74,18 @@ class LiveReceipt:
             raise SafetyError("Live receipt operations are invalid")
         if len(set(self.operations)) != len(self.operations):
             raise SafetyError("Live receipt operations must not contain duplicates")
+        if self.operations and self.operations[0] != "authenticate":
+            raise SafetyError("Live receipt operations must start with authenticate")
         if type(self.had_429) is not bool or type(self.completed) is not bool:
             raise SafetyError("Live receipt flags must be booleans")
-        if self.completed and not self.operations:
-            raise SafetyError("A completed live receipt must contain operations")
+        if self.completed and not self.has_required_read_canary:
+            raise SafetyError(
+                "A completed live receipt requires authenticate and get_organizations"
+            )
+
+    @property
+    def has_required_read_canary(self) -> bool:
+        return all(operation_id in self.operations for operation_id in _REQUIRED_READ_CANARY)
 
     def to_json(self) -> dict[str, Any]:
         value = asdict(self)
@@ -137,6 +146,10 @@ class LiveReceipt:
     def as_completed(self) -> LiveReceipt:
         if self.had_429:
             raise SafetyError("A live receipt with 429 cannot be completed")
+        if not self.has_required_read_canary:
+            raise SafetyError(
+                "A live receipt requires get_organizations before it can be completed"
+            )
         return replace(self, completed=True)
 
     def matches(
@@ -148,6 +161,7 @@ class LiveReceipt:
         return (
             self.completed
             and not self.had_429
+            and self.has_required_read_canary
             and self.profile_fingerprint == profile_fingerprint
             and self.effective_schema_sha256 == effective_schema_sha256
             and self.generated_tree_sha256 == generated_tree_sha256
@@ -197,17 +211,26 @@ def verify_live_artifacts(root: Path) -> LiveArtifactHashes:
         effective_hash = sha256_bytes(expected_effective)
 
         manifest_path = root / "generator/generated-manifest.json"
-        manifest_raw = _regular_bytes(manifest_path, label="Generated manifest")
+        _regular_bytes(manifest_path, label="Generated manifest")
         manifest = load_generated_manifest(manifest_path)
         if manifest["effective_schema_sha256"] != effective_hash:
             raise SafetyError("Generated manifest is stale for the effective OpenAPI artifact")
         manual_paths = pipeline_module._manual_paths(root / "generator/manual-files.txt")
         pipeline_module._verify_committed_tree(paths, manifest, manual_paths)
+        published_files = dict(manifest["files"])
+        for relative in manual_paths:
+            published_files[relative.as_posix()] = sha256_bytes(
+                _regular_bytes(
+                    paths.root / "src" / relative,
+                    label=f"Manual generated-tree file {relative.as_posix()}",
+                )
+            )
+        published_files = dict(sorted(published_files.items()))
     except SafetyError:
         raise
     except PipelineError as error:
         raise SafetyError("Live artifact verification failed; run offline verify") from error
     return LiveArtifactHashes(
         effective_schema_sha256=effective_hash,
-        generated_tree_sha256=sha256_bytes(manifest_raw),
+        generated_tree_sha256=sha256_bytes(canonical_json_bytes(published_files)),
     )

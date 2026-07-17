@@ -27,7 +27,7 @@ from tools.openapi_pipeline.live.receipt import (
     LiveReceipt,
     verify_live_artifacts,
 )
-from tools.openapi_pipeline.promotion import build_generated_manifest
+from tools.openapi_pipeline.promotion import build_generated_manifest, load_generated_manifest
 
 
 def _synthetic_artifacts(
@@ -50,7 +50,10 @@ def _synthetic_artifacts(
     (package / "__init__.py").write_text("# generated\n", encoding="utf-8")
     generator = root / "generator"
     generator.mkdir()
-    (generator / "manual-files.txt").write_text("", encoding="utf-8")
+    (generator / "manual-files.txt").write_text(
+        "iikocloud_client/_contracts/rate-limits.yaml\n",
+        encoding="utf-8",
+    )
     manifest = build_generated_manifest(
         package,
         effective_schema_sha256=sha256_bytes(canonical_json_bytes(effective)),
@@ -61,6 +64,9 @@ def _synthetic_artifacts(
         ),
     )
     write_json_atomic(generator / "generated-manifest.json", manifest)
+    manual = package / "_contracts/rate-limits.yaml"
+    manual.parent.mkdir()
+    manual.write_text("manual-v1\n", encoding="utf-8")
     monkeypatch.setattr(
         pipeline_module,
         "_load_document",
@@ -83,10 +89,49 @@ def test_live_artifact_hashes_recompute_effective_and_verify_exact_tree(
     hashes = verify_live_artifacts(tmp_path)
 
     assert hashes.effective_schema_sha256 == sha256_bytes(canonical_json_bytes(effective))
-    assert hashes.generated_tree_sha256 == sha256_bytes(manifest.read_bytes())
+    manifest_value = load_generated_manifest(manifest)
+    published_files = {
+        **manifest_value["files"],
+        "iikocloud_client/_contracts/rate-limits.yaml": sha256_bytes(
+            (tmp_path / "src/iikocloud_client/_contracts/rate-limits.yaml").read_bytes()
+        ),
+    }
+    assert hashes.generated_tree_sha256 == sha256_bytes(
+        canonical_json_bytes(dict(sorted(published_files.items())))
+    )
+    assert hashes.generated_tree_sha256 != sha256_bytes(manifest.read_bytes())
 
 
-@pytest.mark.parametrize("target", ["effective", "tree", "manifest"])
+def test_manual_file_change_changes_logical_published_tree_hash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _effective, package = _synthetic_artifacts(tmp_path, monkeypatch)
+    first = verify_live_artifacts(tmp_path)
+    receipt = LiveReceipt(
+        run_id="20260716T180000Z-a1b2c3d4",
+        profile_fingerprint="a" * 64,
+        effective_schema_sha256=first.effective_schema_sha256,
+        generated_tree_sha256=first.generated_tree_sha256,
+        operations=("authenticate", "get_organizations"),
+        had_429=False,
+        completed=True,
+    )
+
+    (package / "_contracts/rate-limits.yaml").write_text("manual-v2\n", encoding="utf-8")
+    second = verify_live_artifacts(tmp_path)
+
+    assert second.generated_tree_sha256 != first.generated_tree_sha256
+    assert not receipt.matches(
+        "a" * 64,
+        second.effective_schema_sha256,
+        second.generated_tree_sha256,
+    )
+
+
+@pytest.mark.parametrize(
+    "target",
+    ["effective", "tree", "manifest", "manual-missing", "manual-symlink"],
+)
 def test_live_artifacts_fail_closed_when_missing_or_stale_before_http(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, target: str
 ) -> None:
@@ -95,8 +140,14 @@ def test_live_artifacts_fail_closed_when_missing_or_stale_before_http(
         (tmp_path / "build/openapi/effective.json").write_text("{}\n", encoding="utf-8")
     elif target == "tree":
         (package / "__init__.py").write_text("changed\n", encoding="utf-8")
-    else:
+    elif target == "manifest":
         (tmp_path / "generator/generated-manifest.json").unlink()
+    elif target == "manual-missing":
+        (package / "_contracts/rate-limits.yaml").unlink()
+    else:
+        manual = package / "_contracts/rate-limits.yaml"
+        manual.unlink()
+        manual.symlink_to(package / "__init__.py")
 
     with pytest.raises(SafetyError, match="artifact|verification"):
         verify_live_artifacts(tmp_path)
@@ -200,6 +251,19 @@ def test_receipt_completion_requires_every_teardown_gate(tmp_path: Path) -> None
         gates[failed_gate] = False
         assert not finalize_live_receipt(receipt, path, **gates)
         assert not LiveReceipt.load(path).completed
+
+    assert not finalize_live_receipt(
+        receipt,
+        path,
+        live_reports_passed=True,
+        circuit_closed=True,
+        clients_closed=True,
+        mutation_journals_clean=True,
+    )
+    assert not LiveReceipt.load(path).completed
+
+    receipt = receipt.with_operation("get_organizations")
+    receipt.write(path)
 
     assert finalize_live_receipt(
         receipt,

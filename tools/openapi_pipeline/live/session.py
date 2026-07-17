@@ -4,6 +4,7 @@ import asyncio
 import json
 import re
 from collections.abc import Mapping
+from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -21,6 +22,14 @@ from .state import LiveStateStore
 _OPERATION_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}\Z")
 _METHODS = {"GET", "POST"}
 _MAX_TOKEN_BODY = 64 * 1024
+
+
+@dataclass(frozen=True)
+class LiveOperation:
+    kind: str
+    cleanup: str | None
+    method: str
+    path: str
 
 
 class _UniqueKeySafeLoader(yaml.SafeLoader):
@@ -50,7 +59,7 @@ _UniqueKeySafeLoader.add_constructor(
 )
 
 
-def load_operation_kinds(path: Path) -> Mapping[str, str]:
+def load_operation_contract(path: Path) -> Mapping[str, LiveOperation]:
     try:
         body = path.read_bytes()
         if len(body) > 1024 * 1024:
@@ -65,21 +74,51 @@ def load_operation_kinds(path: Path) -> Mapping[str, str]:
     operations = value["operations"]
     if not isinstance(operations, dict):
         raise SafetyError("Live operation contract operations must be an object")
-    result: dict[str, str] = {}
+    result: dict[str, LiveOperation] = {}
     for operation_id, entry in operations.items():
         if not isinstance(operation_id, str) or _OPERATION_ID.fullmatch(operation_id) is None:
             raise SafetyError("Live operation contract contains an invalid operation ID")
-        if not isinstance(entry, dict) or set(entry) != {"kind", "cleanup"}:
+        if not isinstance(entry, dict) or set(entry) != {
+            "kind",
+            "cleanup",
+            "method",
+            "path",
+        }:
             raise SafetyError(f"Live operation {operation_id!r} has invalid fields")
         kind = entry["kind"]
         cleanup = entry["cleanup"]
-        if kind not in {"auth", "read", "compensating", "cleanup"}:
+        method = entry["method"]
+        endpoint_path = entry["path"]
+        if not isinstance(kind, str) or kind not in {
+            "auth",
+            "read",
+            "compensating",
+            "cleanup",
+        }:
             raise SafetyError(f"Live operation {operation_id!r} has an invalid kind")
         if cleanup is not None and (
             not isinstance(cleanup, str) or _OPERATION_ID.fullmatch(cleanup) is None
         ):
             raise SafetyError(f"Live operation {operation_id!r} has an invalid cleanup")
-        result[operation_id] = kind
+        if not isinstance(method, str) or method not in _METHODS:
+            raise SafetyError(
+                f"Live operation {operation_id!r} method must be uppercase GET or POST"
+            )
+        try:
+            safe_path = _safe_relative_path(endpoint_path)
+        except SafetyError as error:
+            raise SafetyError(f"Live operation {operation_id!r} has an unsafe path") from error
+        result[operation_id] = LiveOperation(kind, cleanup, method, safe_path)
+    auth = result.get("authenticate")
+    if auth is None or auth.kind != "auth":
+        raise SafetyError("Live operation contract must define authenticate as auth")
+    for operation_id, operation in result.items():
+        if operation.kind == "auth" and operation_id != "authenticate":
+            raise SafetyError("Only authenticate may be classified as auth")
+        if operation.cleanup is not None:
+            cleanup = result.get(operation.cleanup)
+            if cleanup is None or cleanup.kind != "cleanup":
+                raise SafetyError(f"Live operation {operation_id!r} references an invalid cleanup")
     return MappingProxyType(result)
 
 
@@ -103,6 +142,8 @@ def _safe_relative_path(value: object) -> str:
         or value.startswith("//")
         or len(value) > 2048
         or "\\" in value
+        or "{" in value
+        or "}" in value
         or any(ord(character) < 32 or ord(character) == 127 for character in value)
     ):
         raise SafetyError("Live request path is unsafe")
@@ -127,7 +168,7 @@ class SafeLiveSession:
         guard: Any,
         state: LiveStateStore | None = None,
         transport: httpx.AsyncBaseTransport | None = None,
-        operation_kinds: Mapping[str, str] | None = None,
+        operation_contract: Mapping[str, LiveOperation] | None = None,
         receipt: LiveReceipt | None = None,
         receipt_path: Path | None = None,
     ) -> None:
@@ -137,13 +178,20 @@ class SafeLiveSession:
             raise SafetyError("Live session receipt and path must be supplied together")
         if receipt is not None and receipt.completed:
             raise SafetyError("Live session receipt must start incomplete")
-        if operation_kinds is None:
+        if operation_contract is None:
             root = RepoPaths.discover().root
-            operation_kinds = load_operation_kinds(root / "contracts/live-operations.yaml")
+            operation_contract = load_operation_contract(root / "contracts/live-operations.yaml")
         self.profile = profile
         self.guard = guard
         self.state = state
-        self._operation_kinds = MappingProxyType(dict(operation_kinds))
+        if not isinstance(operation_contract, Mapping) or any(
+            not isinstance(operation_id, str)
+            or _OPERATION_ID.fullmatch(operation_id) is None
+            or not isinstance(operation, LiveOperation)
+            for operation_id, operation in operation_contract.items()
+        ):
+            raise SafetyError("Live session operation contract is invalid")
+        self._operations = MappingProxyType(dict(operation_contract))
         self._receipt = receipt
         self._receipt_path = receipt_path
         self._access_token: str | None = None
@@ -224,13 +272,14 @@ class SafeLiveSession:
         self._assert_usable()
         if self._auth_attempted:
             raise SafetyError("Live authentication may be attempted only once per session")
-        if self._operation_kinds.get("authenticate") != "auth":
+        operation = self._operations.get("authenticate")
+        if operation is None or operation.kind != "auth":
             raise SafetyError("Live authentication operation is not explicitly allowed")
         self._auth_attempted = True
         await self._reserve("authenticate")
         response = await self._request_once(
-            "POST",
-            "/api/1/access_token",
+            operation.method,
+            operation.path,
             json={"apiLogin": self.profile.api_login},
         )
         self._record_response("authenticate", response)
@@ -279,14 +328,18 @@ class SafeLiveSession:
             raise SafetyError("Live session must authenticate before API requests")
         if not isinstance(operation_id, str) or _OPERATION_ID.fullmatch(operation_id) is None:
             raise SafetyError("Live operation ID is invalid")
-        kind = self._operation_kinds.get(operation_id)
-        if kind is None:
+        operation = self._operations.get(operation_id)
+        if operation is None:
             raise SafetyError(f"Unknown live operation {operation_id!r}")
-        if kind != "read":
+        if operation.kind != "read":
             raise SafetyError(f"Safe live session refuses non-read operation {operation_id!r}")
         if not isinstance(method, str) or method not in _METHODS:
             raise SafetyError("Live request method must be uppercase GET or POST")
         safe_path = _safe_relative_path(path)
+        if method != operation.method or safe_path != operation.path:
+            raise SafetyError(
+                f"Live operation {operation_id!r} endpoint does not match its contract"
+            )
         if not isinstance(payload, Mapping):
             raise SafetyError("Live JSON payload must be an object")
         try:

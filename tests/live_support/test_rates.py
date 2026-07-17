@@ -199,16 +199,48 @@ def test_committed_live_operation_contract_is_exact() -> None:
     assert value == {
         "version": 1,
         "operations": {
-            "authenticate": {"kind": "auth", "cleanup": None},
-            "get_organizations": {"kind": "read", "cleanup": None},
-            "get_external_menus": {"kind": "read", "cleanup": None},
-            "get_external_menu_by_id": {"kind": "read", "cleanup": None},
-            "get_stop_lists": {"kind": "read", "cleanup": None},
+            "authenticate": {
+                "kind": "auth",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/1/access_token",
+            },
+            "get_organizations": {
+                "kind": "read",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/1/organizations",
+            },
+            "get_external_menus": {
+                "kind": "read",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/2/menu",
+            },
+            "get_external_menu_by_id": {
+                "kind": "read",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/2/menu/by_id",
+            },
+            "get_stop_lists": {
+                "kind": "read",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/1/stop_lists",
+            },
             "add_products_to_stop_list": {
                 "kind": "compensating",
                 "cleanup": "remove_products_from_stop_list",
+                "method": "POST",
+                "path": "/api/1/stop_lists/add",
             },
-            "remove_products_from_stop_list": {"kind": "cleanup", "cleanup": None},
+            "remove_products_from_stop_list": {
+                "kind": "cleanup",
+                "cleanup": None,
+                "method": "POST",
+                "path": "/api/1/stop_lists/remove",
+            },
         },
     }
     rate_value = yaml.safe_load(Path("contracts/rate-limits.yaml").read_text(encoding="utf-8"))

@@ -1,11 +1,37 @@
 version: 1
 operations:
-  authenticate: {kind: auth, cleanup: null}
-  get_organizations: {kind: read, cleanup: null}
-  get_external_menus: {kind: read, cleanup: null}
-  get_external_menu_by_id: {kind: read, cleanup: null}
-  get_stop_lists: {kind: read, cleanup: null}
+  authenticate:
+    kind: auth
+    cleanup: null
+    method: POST
+    path: /api/1/access_token
+  get_organizations:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/organizations
+  get_external_menus:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/2/menu
+  get_external_menu_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/2/menu/by_id
+  get_stop_lists:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/stop_lists
   add_products_to_stop_list:
     kind: compensating
     cleanup: remove_products_from_stop_list
-  remove_products_from_stop_list: {kind: cleanup, cleanup: null}
+    method: POST
+    path: /api/1/stop_lists/add
+  remove_products_from_stop_list:
+    kind: cleanup
+    cleanup: null
+    method: POST
+    path: /api/1/stop_lists/remove

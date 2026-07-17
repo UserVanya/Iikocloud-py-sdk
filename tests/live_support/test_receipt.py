@@ -36,7 +36,7 @@ def _receipt(*, completed: bool = False, had_429: bool = False) -> LiveReceipt:
         profile_fingerprint="a" * 64,
         effective_schema_sha256="b" * 64,
         generated_tree_sha256="c" * 64,
-        operations=("authenticate",) if completed else (),
+        operations=("authenticate", "get_organizations") if completed else (),
         had_429=had_429,
         completed=completed,
     )
@@ -48,6 +48,10 @@ def test_receipt_records_operation_before_completion_and_429_is_terminal(tmp_pat
     receipt.write(path)
     assert LiveReceipt.load(path).operations == ("authenticate",)
 
+    with pytest.raises(SafetyError, match="get_organizations"):
+        receipt.as_completed()
+
+    receipt = receipt.with_operation("get_organizations")
     completed = receipt.as_completed()
     assert completed.matches("a" * 64, "b" * 64, "c" * 64)
 

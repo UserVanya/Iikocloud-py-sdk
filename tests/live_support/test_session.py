@@ -1,14 +1,17 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import httpx
 import pytest
+import yaml
 
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.rates import LiveRateGuard, RateCatalog
 from tools.openapi_pipeline.live.receipt import LiveReceipt
-from tools.openapi_pipeline.live.session import SafeLiveSession
+from tools.openapi_pipeline.live.session import SafeLiveSession, load_operation_contract
 from tools.openapi_pipeline.live.state import LiveStateStore
 
 
@@ -39,6 +42,10 @@ def _profile() -> ResolvedLiveProfile:
     )
 
 
+def _operation_contract():
+    return load_operation_contract(Path("contracts/live-operations.yaml"))
+
+
 @pytest.mark.asyncio
 async def test_session_never_retries_429_and_opens_circuit() -> None:
     calls: list[str] = []
@@ -54,7 +61,7 @@ async def test_session_never_retries_429_and_opens_circuit() -> None:
         profile=_profile(),
         guard=guard,
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth", "get_organizations": "read"},
+        operation_contract=_operation_contract(),
     ) as session:
         await session.authenticate()
         with pytest.raises(SafetyError, match="429"):
@@ -118,7 +125,7 @@ async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
             guard=guard,
             state=state,
             transport=httpx.MockTransport(handler),
-            operation_kinds={"authenticate": "auth", "get_organizations": "read"},
+            operation_contract=_operation_contract(),
         ) as session:
             await session.authenticate()
             with pytest.raises(SafetyError, match="429"):
@@ -153,7 +160,7 @@ async def test_authentication_requires_one_strict_token_response(
         profile=_profile(),
         guard=StubGuard(),
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth"},
+        operation_contract=_operation_contract(),
     )
     with pytest.raises(SafetyError, match="authentication response"):
         await session.authenticate()
@@ -176,7 +183,7 @@ async def test_auth_http_failure_is_single_attempt_and_sanitizes_login() -> None
         profile=ResolvedLiveProfile(**{**_profile().__dict__, "api_login": secret}),
         guard=StubGuard(),
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth"},
+        operation_contract=_operation_contract(),
     )
     with pytest.raises(SafetyError) as caught:
         await session.authenticate()
@@ -200,7 +207,7 @@ async def test_redirect_is_not_followed() -> None:
         profile=_profile(),
         guard=StubGuard(),
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth"},
+        operation_contract=_operation_contract(),
     ) as session:
         with pytest.raises(SafetyError, match="HTTP 302"):
             await session.authenticate()
@@ -221,16 +228,12 @@ async def test_request_rejects_unknown_write_method_path_and_payload_before_acqu
         profile=_profile(),
         guard=guard,
         transport=httpx.MockTransport(handler),
-        operation_kinds={
-            "authenticate": "auth",
-            "get_organizations": "read",
-            "write_operation": "compensating",
-        },
+        operation_contract=_operation_contract(),
     ) as session:
         await session.authenticate()
         bad_calls = [
             ("missing", "POST", "/api/1/organizations", {}),
-            ("write_operation", "POST", "/api/1/write", {}),
+            ("add_products_to_stop_list", "POST", "/api/1/stop_lists/add", {}),
             ("get_organizations", "post", "/api/1/organizations", {}),
             ("get_organizations", "DELETE", "/api/1/organizations", {}),
             ("get_organizations", "POST", "https://evil.invalid/steal", {}),
@@ -272,7 +275,7 @@ async def test_receipt_persists_reserved_operation_before_http(tmp_path) -> None
         profile=_profile(),
         guard=StubGuard(),
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth", "get_organizations": "read"},
+        operation_contract=_operation_contract(),
         receipt=receipt,
         receipt_path=receipt_path,
     ) as session:
@@ -296,7 +299,7 @@ async def test_transport_failure_is_sanitized_without_retry_and_close_is_idempot
         profile=ResolvedLiveProfile(**{**_profile().__dict__, "api_login": secret}),
         guard=StubGuard(),
         transport=httpx.MockTransport(handler),
-        operation_kinds={"authenticate": "auth"},
+        operation_contract=_operation_contract(),
     )
     with pytest.raises(SafetyError) as caught:
         await session.authenticate()
@@ -305,3 +308,100 @@ async def test_transport_failure_is_sanitized_without_retry_and_close_is_idempot
     await session.close()
     await session.close()
     assert session.is_closed
+
+
+def test_committed_operation_contract_binds_exact_methods_and_paths() -> None:
+    operations = load_operation_contract(Path("contracts/live-operations.yaml"))
+    assert operations["authenticate"].method == "POST"
+    assert operations["authenticate"].path == "/api/1/access_token"
+    assert operations["get_organizations"].method == "POST"
+    assert operations["get_organizations"].path == "/api/1/organizations"
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("method", "post", "uppercase"),
+        ("method", True, "uppercase"),
+        ("path", "/api/1/organizations?x=1", "unsafe path"),
+        ("path", "/api/{version}/organizations", "unsafe path"),
+        ("path", "/api/../organizations", "unsafe path"),
+        ("kind", True, "kind"),
+    ],
+)
+def test_operation_contract_rejects_wrong_endpoint_types_and_values(
+    tmp_path: Path, field: str, value: object, message: str
+) -> None:
+    contract = yaml.safe_load(Path("contracts/live-operations.yaml").read_text(encoding="utf-8"))
+    contract["operations"]["get_organizations"][field] = value
+    path = tmp_path / "operations.yaml"
+    path.write_text(yaml.safe_dump(contract, sort_keys=False), encoding="utf-8")
+
+    with pytest.raises(SafetyError, match=message):
+        load_operation_contract(path)
+
+
+def test_operation_contract_rejects_missing_extra_and_duplicate_fields(tmp_path: Path) -> None:
+    original = Path("contracts/live-operations.yaml").read_text(encoding="utf-8")
+    path = tmp_path / "operations.yaml"
+
+    path.write_text(original.replace("    method: POST\n", "", 1), encoding="utf-8")
+    with pytest.raises(SafetyError, match="invalid fields"):
+        load_operation_contract(path)
+
+    path.write_text(
+        original.replace("    method: POST\n", "    method: POST\n    extra: true\n", 1),
+        encoding="utf-8",
+    )
+    with pytest.raises(SafetyError, match="invalid fields"):
+        load_operation_contract(path)
+
+    path.write_text(
+        original.replace("    method: POST\n", "    method: POST\n    method: POST\n", 1),
+        encoding="utf-8",
+    )
+    with pytest.raises(SafetyError, match="strict live operation contract"):
+        load_operation_contract(path)
+
+
+@pytest.mark.asyncio
+async def test_operation_endpoint_mismatch_fails_before_guard_receipt_or_http(
+    tmp_path: Path,
+) -> None:
+    calls: list[str] = []
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        return httpx.Response(200, json={"token": "token"})
+
+    receipt_path = tmp_path / "runs/20260716T180000Z-a1b2c3d4.json"
+    receipt = LiveReceipt(
+        run_id="20260716T180000Z-a1b2c3d4",
+        profile_fingerprint="f" * 64,
+        effective_schema_sha256="a" * 64,
+        generated_tree_sha256="b" * 64,
+        operations=(),
+        had_429=False,
+        completed=False,
+    )
+    receipt.write(receipt_path)
+    guard = StubGuard()
+    async with SafeLiveSession(
+        profile=_profile(),
+        guard=guard,
+        transport=httpx.MockTransport(handler),
+        operation_contract=load_operation_contract(Path("contracts/live-operations.yaml")),
+        receipt=receipt,
+        receipt_path=receipt_path,
+    ) as session:
+        await session.authenticate()
+        for method, path in (
+            ("GET", "/api/1/organizations"),
+            ("POST", "/api/1/organizations/other"),
+        ):
+            with pytest.raises(SafetyError, match="endpoint"):
+                await session.request_json("get_organizations", method, path, {})
+
+    assert guard.acquired == ["authenticate"]
+    assert LiveReceipt.load(receipt_path).operations == ("authenticate",)
+    assert calls == ["/api/1/access_token"]

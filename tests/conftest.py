@@ -23,7 +23,7 @@ from tools.openapi_pipeline.live.pytest_support import (
 )
 from tools.openapi_pipeline.live.rates import LiveRateGuard
 from tools.openapi_pipeline.live.receipt import LiveReceipt
-from tools.openapi_pipeline.live.session import SafeLiveSession, load_operation_kinds
+from tools.openapi_pipeline.live.session import SafeLiveSession, load_operation_contract
 from tools.openapi_pipeline.live.state import LiveStateStore
 from tools.openapi_pipeline.paths import RepoPaths
 
@@ -154,7 +154,7 @@ async def live_session(
         profile=live_profile,
         guard=guard,
         state=state,
-        operation_kinds=load_operation_kinds(root / "contracts/live-operations.yaml"),
+        operation_contract=load_operation_contract(root / "contracts/live-operations.yaml"),
         receipt=context.receipt,
         receipt_path=context.receipt_path,
     )
