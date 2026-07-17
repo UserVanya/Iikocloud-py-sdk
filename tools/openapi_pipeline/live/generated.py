@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Awaitable, Callable
 from typing import TypeVar
 
@@ -34,6 +35,35 @@ class GeneratedLiveSdk:
         self.guard = guard
         self.state = state
         self.capture = capture
+        self._unusable = False
+
+    def _assert_usable(self) -> None:
+        if self._unusable:
+            raise SafetyError("Generated live SDK is unusable after a failed live call")
+
+    def _record_status(self, operation_id: str, status: int) -> None:
+        try:
+            self.guard.record_status(operation_id, status)
+        except Exception:
+            self._unusable = True
+            raise SafetyError("Generated SDK status recording failed without a retry") from None
+
+    def _normalize_api_exception_status(self, status: object) -> int:
+        if status is None:
+            return 0
+        if type(status) is int and 0 <= status <= 599:
+            return status
+        if (
+            type(status) is str
+            and len(status) == 3
+            and status.isascii()
+            and status.isdecimal()
+        ):
+            normalized = int(status)
+            if 100 <= normalized <= 599:
+                return normalized
+        self._unusable = True
+        raise SafetyError("Generated SDK exception has an invalid HTTP status") from None
 
     async def call_generated(
         self,
@@ -41,21 +71,41 @@ class GeneratedLiveSdk:
         request_model: object,
         invoke: Callable[[], Awaitable[ApiResponse[T]]],
     ) -> T:
+        self._assert_usable()
+        if self.capture is not None:
+            self.capture.assert_selected(operation_id)
         await self.guard.acquire(operation_id)
         try:
             response = await invoke()
-        except ApiException as error:
-            self.guard.record_status(operation_id, int(error.status or 0))
-            if error.status == 429:
-                raise SafetyError("iiko returned 429; live circuit opened") from error
+        except asyncio.CancelledError:
+            self._unusable = True
             raise
+        except ApiException as error:
+            status = self._normalize_api_exception_status(error.status)
+            self._record_status(operation_id, status)
+            if status == 429:
+                self._unusable = True
+                raise SafetyError("iiko returned 429; live circuit opened") from None
+            raise
+        except Exception:
+            self._unusable = True
+            raise SafetyError("Generated SDK invocation failed without a retry") from None
 
-        self.guard.record_status(operation_id, response.status_code)
+        self._record_status(operation_id, response.status_code)
+        if response.status_code == 429:
+            self._unusable = True
+            raise SafetyError("iiko returned 429; live circuit opened") from None
         if self.capture is not None:
-            self.capture.write_model_pair(
-                operation_id,
-                request_model,
-                response.data,
-                metadata={"status": response.status_code},
-            )
+            try:
+                self.capture.write_model_pair(
+                    operation_id,
+                    request_model,
+                    response.data,
+                    metadata={"status": response.status_code},
+                )
+            except Exception:
+                self._unusable = True
+                raise SafetyError(
+                    "Generated SDK capture failed after response without a retry"
+                ) from None
         return response.data
