@@ -90,6 +90,8 @@ ARRAY_ITEM = _HintWildcard.ARRAY_ITEM
 OBJECT_VALUE = _HintWildcard.OBJECT_VALUE
 HintPath = tuple[str | _HintWildcard, ...]
 PathValues = Mapping[HintPath, frozenset[str]]
+_Constraint = frozenset[str] | None
+_ConstraintMap = dict[HintPath, _Constraint]
 _DIRECTORY_FLAGS = os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
 _FILE_FLAGS = os.O_WRONLY | os.O_CLOEXEC | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
 _RENAME_NOREPLACE = 1
@@ -288,21 +290,45 @@ class RedactionHints:
         active_refs: set[str] = set()
         active_objects: set[int] = set()
 
-        def add(path: HintPath, values: object) -> None:
+        def enum_values(values: object) -> frozenset[str]:
             if type(values) is not list:
                 raise SafetyError("Capture schema enum must be an array")
-            strings = {item for item in values if type(item) is str}
-            collected.setdefault(path, set()).update(strings)
+            return frozenset(item for item in values if type(item) is str)
 
-        def walk(schema: object, path: HintPath = ()) -> None:
+        def intersect(parts: list[_ConstraintMap]) -> _ConstraintMap:
+            result: _ConstraintMap = {}
+            for path in set().union(*(part.keys() for part in parts)):
+                explicit = [value for part in parts if (value := part.get(path)) is not None]
+                if not explicit:
+                    result[path] = None
+                    continue
+                allowed = explicit[0]
+                for values in explicit[1:]:
+                    allowed = allowed.intersection(values)
+                result[path] = allowed
+            return result
+
+        def alternatives(parts: list[_ConstraintMap], path: HintPath) -> _ConstraintMap:
+            if not parts:
+                return {path: None}
+            result: _ConstraintMap = {}
+            for candidate in set().union(*(part.keys() for part in parts)):
+                values = [part.get(candidate) for part in parts]
+                if any(value is None for value in values):
+                    result[candidate] = None
+                else:
+                    result[candidate] = frozenset().union(*values)  # type: ignore[arg-type]
+            return result
+
+        def walk(schema: object, path: HintPath = ()) -> _ConstraintMap:
             if type(schema) is not dict:
                 raise SafetyError("Capture schema traversal reached a non-object")
-            collected.setdefault(path, set())
             identity = id(schema)
             if identity in active_objects:
-                return
+                return {path: None}
             active_objects.add(identity)
             try:
+                parts: list[_ConstraintMap] = [{path: None}]
                 if "$ref" in schema:
                     reference = schema["$ref"]
                     if type(reference) is not str:
@@ -310,19 +336,22 @@ class RedactionHints:
                     target = _resolve_local_reference(document, reference)
                     if type(target) is not dict:
                         raise SafetyError("Capture schema $ref target must be an object")
-                    if reference not in active_refs:
+                    if reference in active_refs:
+                        parts.append({path: None})
+                    else:
                         active_refs.add(reference)
                         try:
-                            walk(target, path)
+                            parts.append(walk(target, path))
                         finally:
                             active_refs.remove(reference)
 
                 if "enum" in schema:
-                    add(path, schema["enum"])
+                    parts.append({path: enum_values(schema["enum"])})
                 if "const" in schema:
                     constant = schema["const"]
-                    if type(constant) is str:
-                        collected[path].add(constant)
+                    parts.append(
+                        {path: frozenset({constant}) if type(constant) is str else frozenset()}
+                    )
 
                 properties = schema.get("properties")
                 if properties is not None:
@@ -331,7 +360,7 @@ class RedactionHints:
                     for name, child in properties.items():
                         if type(name) is not str or type(child) is not dict:
                             raise SafetyError("Capture schema property is invalid")
-                        walk(child, (*path, name))
+                        parts.append(walk(child, (*path, name)))
 
                 for keyword in ("allOf", "anyOf", "oneOf"):
                     if keyword not in schema:
@@ -339,21 +368,27 @@ class RedactionHints:
                     branches = schema[keyword]
                     if type(branches) is not list:
                         raise SafetyError(f"Capture schema {keyword} must be an array")
+                    branch_maps: list[_ConstraintMap] = []
                     for branch in branches:
                         if type(branch) is not dict:
                             raise SafetyError(f"Capture schema {keyword} branch is invalid")
-                        walk(branch, path)
+                        branch_maps.append(walk(branch, path))
+                    parts.append(
+                        intersect(branch_maps)
+                        if keyword == "allOf"
+                        else alternatives(branch_maps, path)
+                    )
 
                 if "items" in schema:
                     items = schema["items"]
                     if type(items) is not dict:
                         raise SafetyError("Capture schema items must be an object")
-                    walk(items, (*path, ARRAY_ITEM))
+                    parts.append(walk(items, (*path, ARRAY_ITEM)))
 
                 if "additionalProperties" in schema:
                     additional = schema["additionalProperties"]
                     if type(additional) is dict:
-                        walk(additional, (*path, OBJECT_VALUE))
+                        parts.append(walk(additional, (*path, OBJECT_VALUE)))
                     elif type(additional) is not bool:
                         raise SafetyError(
                             "Capture schema additionalProperties must be a boolean or object"
@@ -367,10 +402,11 @@ class RedactionHints:
                     if type(discriminator_name) is not str or not discriminator_name:
                         raise SafetyError("Capture schema discriminator propertyName is invalid")
                     discriminator_path = (*path, discriminator_name)
-                    collected.setdefault(discriminator_path, set())
                     mapping = discriminator.get("mapping", {})
                     if type(mapping) is not dict:
                         raise SafetyError("Capture schema discriminator mapping is invalid")
+                    discriminator_values: set[str] = set()
+                    target_maps: list[_ConstraintMap] = []
                     for discriminator_value, reference in mapping.items():
                         if type(discriminator_value) is not str or type(reference) is not str:
                             raise SafetyError("Capture schema discriminator entry is invalid")
@@ -379,17 +415,26 @@ class RedactionHints:
                             raise SafetyError(
                                 "Capture schema discriminator target must be an object"
                             )
-                        collected[discriminator_path].add(discriminator_value)
-                        if reference not in active_refs:
+                        discriminator_values.add(discriminator_value)
+                        if reference in active_refs:
+                            target_maps.append({path: None})
+                        else:
                             active_refs.add(reference)
                             try:
-                                walk(target, path)
+                                target_maps.append(walk(target, path))
                             finally:
                                 active_refs.remove(reference)
+                    parts.append({discriminator_path: frozenset(discriminator_values)})
+                    if target_maps:
+                        parts.append(alternatives(target_maps, path))
+                return intersect(parts)
             finally:
                 active_objects.remove(identity)
 
-        walk(root)
+        for path, values in walk(root).items():
+            destination = collected.setdefault(path, set())
+            if values is not None:
+                destination.update(values)
 
 
 @dataclass(frozen=True)
@@ -709,7 +754,13 @@ def _validate_directory_fd(fd: int, *, private: bool) -> None:
         )
 
 
-def _open_absolute_private_root(root: Path) -> int:
+def _close_fd_best_effort(fd: int | None) -> None:
+    if fd is not None:
+        with suppress(OSError):
+            os.close(fd)
+
+
+def _open_absolute_private_root(root: Path, *, create_missing: bool = True) -> int:
     if getattr(os, "O_NOFOLLOW", 0) == 0 or not root.is_absolute():
         raise SafetyError("Secure capture directory traversal is unavailable")
     components = root.parts[1:]
@@ -724,7 +775,9 @@ def _open_absolute_private_root(root: Path) -> int:
             created = False
             try:
                 next_fd = os.open(component, _DIRECTORY_FLAGS, dir_fd=current_fd)
-            except FileNotFoundError:
+            except FileNotFoundError as error:
+                if not create_missing:
+                    raise SafetyError("Capture published path ancestry is missing") from error
                 try:
                     os.mkdir(component, 0o700, dir_fd=current_fd)
                     created = True
@@ -746,14 +799,27 @@ def _open_absolute_private_root(root: Path) -> int:
                 if created:
                     os.fsync(current_fd)
             except BaseException:
-                os.close(next_fd)
+                _close_fd_best_effort(next_fd)
                 raise
-            os.close(current_fd)
+            _close_fd_best_effort(current_fd)
             current_fd = next_fd
         return current_fd
     except BaseException:
-        os.close(current_fd)
+        _close_fd_best_effort(current_fd)
         raise
+
+
+def _open_existing_private_child(parent_fd: int, name: str) -> int:
+    try:
+        child_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
+    except OSError as error:
+        raise SafetyError("Capture child path is not a safe directory or is a symlink") from error
+    try:
+        _validate_directory_fd(child_fd, private=True)
+    except BaseException:
+        _close_fd_best_effort(child_fd)
+        raise
+    return child_fd
 
 
 def _open_or_create_private_child(parent_fd: int, name: str) -> int:
@@ -765,16 +831,7 @@ def _open_or_create_private_child(parent_fd: int, name: str) -> int:
         raise SafetyError("Cannot create private capture child directory") from error
     else:
         os.fsync(parent_fd)
-    try:
-        child_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
-    except OSError as error:
-        raise SafetyError("Capture child path is not a safe directory or is a symlink") from error
-    try:
-        _validate_directory_fd(child_fd, private=True)
-    except BaseException:
-        os.close(child_fd)
-        raise
-    return child_fd
+    return _open_existing_private_child(parent_fd, name)
 
 
 def _entry_exists(parent_fd: int, name: str) -> bool:
@@ -796,21 +853,24 @@ def _create_staging_directory(parent_fd: int, operation_id: str) -> tuple[str, i
             continue
         except OSError as error:
             raise SafetyError("Cannot create capture staging directory") from error
-        os.fsync(parent_fd)
         try:
-            staging_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
-        except OSError as error:
-            with suppress(OSError):
-                os.rmdir(name, dir_fd=parent_fd)
-            raise SafetyError("Cannot open capture staging directory safely") from error
-        try:
-            _validate_directory_fd(staging_fd, private=True)
+            os.fsync(parent_fd)
+            try:
+                staging_fd = os.open(name, _DIRECTORY_FLAGS, dir_fd=parent_fd)
+            except OSError as error:
+                raise SafetyError("Cannot open capture staging directory safely") from error
+            try:
+                _validate_directory_fd(staging_fd, private=True)
+            except BaseException:
+                _close_fd_best_effort(staging_fd)
+                raise
+            return name, staging_fd
         except BaseException:
-            os.close(staging_fd)
             with suppress(OSError):
                 os.rmdir(name, dir_fd=parent_fd)
+            with suppress(OSError):
+                os.fsync(parent_fd)
             raise
-        return name, staging_fd
     raise SafetyError("Cannot allocate a unique capture staging directory")
 
 
@@ -892,10 +952,46 @@ def _rename_directory_noreplace(
 
 def _cleanup_staging_at(parent_fd: int, staging_fd: int, staging_name: str) -> None:
     for name in ("request.json", "response.json"):
-        with suppress(FileNotFoundError):
+        with suppress(OSError):
             os.unlink(name, dir_fd=staging_fd)
-    with suppress(FileNotFoundError):
+    with suppress(OSError):
         os.rmdir(staging_name, dir_fd=parent_fd)
+
+
+def _same_directory(left_fd: int, right_fd: int) -> bool:
+    left = os.fstat(left_fd)
+    right = os.fstat(right_fd)
+    return (left.st_dev, left.st_ino) == (right.st_dev, right.st_ino)
+
+
+def _revalidate_published_capture(
+    root: Path,
+    run_id: str,
+    operation_id: str,
+    *,
+    root_fd: int,
+    run_fd: int,
+    operation_fd: int,
+) -> None:
+    reopened_root_fd: int | None = None
+    reopened_run_fd: int | None = None
+    reopened_operation_fd: int | None = None
+    try:
+        reopened_root_fd = _open_absolute_private_root(root, create_missing=False)
+        if not _same_directory(reopened_root_fd, root_fd):
+            raise SafetyError("Capture published path ancestry changed during publication")
+        reopened_run_fd = _open_existing_private_child(reopened_root_fd, run_id)
+        if not _same_directory(reopened_run_fd, run_fd):
+            raise SafetyError("Capture published run directory changed during publication")
+        reopened_operation_fd = _open_existing_private_child(reopened_run_fd, operation_id)
+        if not _same_directory(reopened_operation_fd, operation_fd):
+            raise SafetyError("Capture published operation directory changed during publication")
+        _validate_file_at(reopened_operation_fd, "request.json")
+        _validate_file_at(reopened_operation_fd, "response.json")
+    finally:
+        _close_fd_best_effort(reopened_operation_fd)
+        _close_fd_best_effort(reopened_run_fd)
+        _close_fd_best_effort(reopened_root_fd)
 
 
 class CaptureWriter:
@@ -999,19 +1095,26 @@ class CaptureWriter:
             _rename_directory_noreplace(run_fd, staging_name, operation_id)
             published_name = operation_id
             os.fsync(run_fd)
+            _revalidate_published_capture(
+                self.root,
+                run_id,
+                operation_id,
+                root_fd=root_fd,
+                run_fd=run_fd,
+                operation_fd=staging_fd,
+            )
             complete = True
         finally:
-            if staging_fd is not None:
-                if not complete:
+            try:
+                if staging_fd is not None and not complete:
                     assert run_fd is not None
                     cleanup_name = published_name or staging_name
                     assert cleanup_name is not None
                     _cleanup_staging_at(run_fd, staging_fd, cleanup_name)
-                os.close(staging_fd)
-            if run_fd is not None:
-                os.close(run_fd)
-            if root_fd is not None:
-                os.close(root_fd)
+            finally:
+                _close_fd_best_effort(staging_fd)
+                _close_fd_best_effort(run_fd)
+                _close_fd_best_effort(root_fd)
         operation_path = self.root / run_id / operation_id
         request_path = operation_path / "request.json"
         response_path = operation_path / "response.json"

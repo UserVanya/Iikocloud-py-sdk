@@ -121,7 +121,7 @@ def test_redaction_hints_resolve_json_request_success_branches_and_cycles() -> N
     assert hints.request_values[("mode",)] == frozenset({"FULL"})
     assert ("type",) not in hints.request_values
     assert hints.response_values[("queued",)] == frozenset({"QUEUED"})
-    assert hints.response_values[("state",)] == frozenset({"ACTIVE", "HIDDEN"})
+    assert hints.response_values[("state",)] == frozenset()
     assert hints.response_values[("type",)] == frozenset({"DISH", "GROUP"})
 
 
@@ -257,6 +257,123 @@ def test_path_hints_separate_colliding_names_request_response_arrays_and_maps() 
     assert request["mapped"]["fixed"]["kind"] == "<redacted:string>"
     assert request["mapped"]["arbitrary"]["kind"] == "DYNAMIC"
     assert response["branch"]["kind"] == "RESPONSE"
+
+
+def test_compositions_preserve_only_branch_safe_string_constraints() -> None:
+    schema = {
+        "openapi": "3.1.0",
+        "paths": {
+            "/composition": {
+                "post": {
+                    "operationId": "composition",
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "properties": {
+                                            "choice": {
+                                                "oneOf": [
+                                                    {
+                                                        "properties": {
+                                                            "name": {"enum": ["STANDARD"]},
+                                                            "kind": {"const": "A"},
+                                                            "code": {"enum": ["X"]},
+                                                        }
+                                                    },
+                                                    {
+                                                        "properties": {
+                                                            "name": {"type": "string"},
+                                                            "kind": {"const": "B"},
+                                                            "code": {"enum": ["Y"]},
+                                                        }
+                                                    },
+                                                ],
+                                                "discriminator": {
+                                                    "propertyName": "kind",
+                                                    "mapping": {
+                                                        "A": "#/components/schemas/A",
+                                                        "B": "#/components/schemas/B",
+                                                    },
+                                                },
+                                            },
+                                            "intersection": {
+                                                "allOf": [
+                                                    {
+                                                        "properties": {
+                                                            "mode": {"enum": ["A", "B"]},
+                                                            "label": {"enum": ["SAFE"]},
+                                                        }
+                                                    },
+                                                    {
+                                                        "properties": {
+                                                            "mode": {"enum": ["B", "C"]},
+                                                            "label": {"type": "string"},
+                                                        }
+                                                    },
+                                                ]
+                                            },
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "anyOf": [
+                                                        {"enum": ["ITEM"]},
+                                                        {"type": "string"},
+                                                    ]
+                                                },
+                                            },
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "A": {
+                    "properties": {
+                        "name": {"enum": ["STANDARD"]},
+                        "kind": {"const": "A"},
+                        "code": {"enum": ["X"]},
+                    }
+                },
+                "B": {
+                    "properties": {
+                        "name": {"type": "string"},
+                        "kind": {"const": "B"},
+                        "code": {"enum": ["Y"]},
+                    }
+                },
+            }
+        },
+    }
+    hints = RedactionHints.for_operation(schema, "composition")
+
+    assert hints.response_values[("choice", "name")] == frozenset()
+    assert hints.response_values[("choice", "kind")] == frozenset({"A", "B"})
+    assert hints.response_values[("choice", "code")] == frozenset({"X", "Y"})
+    assert hints.response_values[("intersection", "mode")] == frozenset({"B"})
+    assert hints.response_values[("intersection", "label")] == frozenset({"SAFE"})
+    assert hints.response_values[("items", ARRAY_ITEM)] == frozenset()
+
+    sanitized = Sanitizer().sanitize(
+        {
+            "choice": {"name": "STANDARD", "kind": "A", "code": "X"},
+            "intersection": {"mode": "B", "label": "SAFE"},
+            "items": ["ITEM"],
+        },
+        path_values=hints.response_values,
+    )
+    assert sanitized["choice"] == {
+        "name": "<redacted:string>",
+        "kind": "A",
+        "code": "X",
+    }
+    assert sanitized["intersection"] == {"mode": "B", "label": "SAFE"}
+    assert sanitized["items"] == ["<redacted:string>"]
 
 
 def test_redaction_hints_reject_unknown_or_duplicate_operation() -> None:

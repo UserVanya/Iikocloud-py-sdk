@@ -97,6 +97,122 @@ def test_capture_writer_publishes_pair_as_one_directory_transaction(
     assert not list(root.rglob("*.tmp-*"))
 
 
+@pytest.mark.parametrize("failure", ["parent-fsync", "staging-open"])
+def test_staging_creation_failure_removes_new_directory_and_preserves_cause(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+) -> None:
+    parent = tmp_path / "run"
+    parent.mkdir(mode=0o700)
+    parent_fd = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+    real_open = capture_module.os.open
+
+    if failure == "parent-fsync":
+
+        def fail_fsync(_fd: int) -> None:
+            raise OSError("synthetic staging parent fsync failure")
+
+        monkeypatch.setattr(capture_module.os, "fsync", fail_fsync)
+    else:
+
+        def fail_staging_open(
+            path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+            flags: int,
+            mode: int = 0o777,
+            *,
+            dir_fd: int | None = None,
+        ) -> int:
+            if type(path) is str and path.startswith(".operation.tmp-"):
+                raise OSError("synthetic staging open failure")
+            return real_open(path, flags, mode, dir_fd=dir_fd)
+
+        monkeypatch.setattr(capture_module.os, "open", fail_staging_open)
+
+    try:
+        with pytest.raises((OSError, SafetyError)) as caught:
+            capture_module._create_staging_directory(parent_fd, "operation")
+    finally:
+        os.close(parent_fd)
+
+    failure_chain = f"{caught.value} {caught.value.__cause__}"
+    assert "synthetic staging" in failure_chain
+    assert list(parent.iterdir()) == []
+
+
+def test_cleanup_failure_preserves_primary_error_closes_all_directories_and_continues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "captures"
+    tracked_fds: list[int] = []
+    unlink_attempts: list[str] = []
+    rmdir_attempts: list[str] = []
+    real_root_open = capture_module._open_absolute_private_root
+    real_child_open = capture_module._open_or_create_private_child
+    real_staging_open = capture_module._create_staging_directory
+    real_write = capture_module._write_file_at
+    real_unlink = capture_module.os.unlink
+    real_rmdir = capture_module.os.rmdir
+    writes = 0
+
+    def track_root(path: Path) -> int:
+        fd = real_root_open(path)
+        tracked_fds.append(fd)
+        return fd
+
+    def track_child(parent_fd: int, name: str) -> int:
+        fd = real_child_open(parent_fd, name)
+        tracked_fds.append(fd)
+        return fd
+
+    def track_staging(parent_fd: int, operation_id: str) -> tuple[str, int]:
+        name, fd = real_staging_open(parent_fd, operation_id)
+        tracked_fds.append(fd)
+        return name, fd
+
+    def fail_second_write(directory_fd: int, name: str, body: bytes) -> None:
+        nonlocal writes
+        writes += 1
+        if writes == 2:
+            raise OSError("synthetic primary write failure")
+        real_write(directory_fd, name, body)
+
+    def fail_request_unlink(
+        path: str | bytes,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        if dir_fd is not None and type(path) is str and path.endswith(".json"):
+            unlink_attempts.append(path)
+            if path == "request.json":
+                raise OSError("synthetic cleanup unlink failure")
+        real_unlink(path, dir_fd=dir_fd)
+
+    def fail_staging_rmdir(
+        path: str | bytes,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        if dir_fd is not None and type(path) is str and ".tmp-" in path:
+            rmdir_attempts.append(path)
+            raise OSError("synthetic cleanup rmdir failure")
+        real_rmdir(path, dir_fd=dir_fd)
+
+    monkeypatch.setattr(capture_module, "_open_absolute_private_root", track_root)
+    monkeypatch.setattr(capture_module, "_open_or_create_private_child", track_child)
+    monkeypatch.setattr(capture_module, "_create_staging_directory", track_staging)
+    monkeypatch.setattr(capture_module, "_write_file_at", fail_second_write)
+    monkeypatch.setattr(capture_module.os, "unlink", fail_request_unlink)
+    monkeypatch.setattr(capture_module.os, "rmdir", fail_staging_rmdir)
+
+    with pytest.raises(OSError, match="synthetic primary write failure"):
+        _write_pair(CaptureWriter(root))
+
+    assert unlink_attempts == ["request.json", "response.json"]
+    assert len(rmdir_attempts) == 1
+    for fd in tracked_fds:
+        with pytest.raises(OSError):
+            os.fstat(fd)
+
+
 def test_capture_writer_rejects_overwrite_and_preserves_first_pair(tmp_path: Path) -> None:
     root = tmp_path / "captures"
     writer = CaptureWriter(root)
@@ -342,11 +458,11 @@ def test_held_directory_fds_prevent_parent_symlink_swap_escape(
         swap_then_create,
     )
 
-    _write_pair(CaptureWriter(root))
+    with pytest.raises(SafetyError, match="path|ancestor|directory"):
+        _write_pair(CaptureWriter(root))
 
     assert not list(external.rglob("*.json"))
-    assert (moved / "run/get_organizations/request.json").is_file()
-    assert (moved / "run/get_organizations/response.json").is_file()
+    assert not list(moved.rglob("*.json"))
 
 
 @pytest.mark.parametrize(
