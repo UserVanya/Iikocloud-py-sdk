@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import keyword
 import os
 from pathlib import Path
 from unittest.mock import Mock
@@ -451,6 +452,80 @@ def test_bootstrap_preview_falls_back_to_paths_for_duplicate_request_phrases(
             ),
         }
     }
+
+
+def test_bootstrap_preview_preserves_complete_candidates_when_naming_fails(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    bootstrap_root = tmp_path / "build/bootstrap"
+    bootstrap_root.mkdir(parents=True)
+    previous = {
+        "types.overlay.yaml": b"old types\n",
+        "operation-ids.yaml": b"old operations\n",
+        "model-collisions.yaml": b"old collisions\n",
+    }
+    for name, body in previous.items():
+        (bootstrap_root / name).write_bytes(body)
+    report = tmp_path / "build/reports/upstream-diff.md"
+    report.parent.mkdir(parents=True)
+    report.write_bytes(b"old report\n")
+    document = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {
+            "/api/1/foo-bar": {"post": {}},
+            "/api/1/foo_bar": {"post": {}},
+        },
+        "components": {"schemas": {"BooleanValue": {"type": "bool"}}},
+    }
+    write_json_atomic(fake_dependencies.paths.candidate, document)
+
+    with pytest.raises(PipelineError, match="operationId collision"):
+        bootstrap(fake_dependencies, accept_current_upstream=False)
+
+    assert {
+        path.name: path.read_bytes() for path in sorted(bootstrap_root.iterdir())
+    } == previous
+    assert report.read_bytes() == b"old report\n"
+
+
+def test_operation_candidates_use_http_method_as_final_collision_tier() -> None:
+    document = {
+        "paths": {
+            "/api/1/status": {
+                "get": {},
+                "post": {},
+            }
+        }
+    }
+
+    assert pipeline_module._operation_candidates(document) == {
+        "GET /api/1/status": "get_status",
+        "POST /api/1/status": "post_status",
+    }
+
+
+def test_operation_candidates_ignore_insertion_order_and_are_valid_identifiers() -> None:
+    forward_paths = {
+        "/api/1/class": {"post": {}},
+        "/api/1/status": {"get": {}, "post": {}},
+    }
+    reversed_paths = {
+        path: dict(reversed(list(path_item.items())))
+        for path, path_item in reversed(list(forward_paths.items()))
+    }
+
+    forward = pipeline_module._operation_candidates({"paths": forward_paths})
+    reversed_result = pipeline_module._operation_candidates({"paths": reversed_paths})
+
+    assert forward == reversed_result == {
+        "GET /api/1/status": "get_status",
+        "POST /api/1/class": "operation_class",
+        "POST /api/1/status": "post_status",
+    }
+    assert list(forward) == sorted(forward)
+    assert len(set(forward.values())) == len(forward)
+    assert all(value.isidentifier() and not keyword.iskeyword(value) for value in forward.values())
 
 
 def test_bootstrap_preview_stops_on_model_collisions_but_preserves_candidates(

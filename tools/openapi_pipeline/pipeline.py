@@ -36,7 +36,7 @@ from .promotion import (
     promote_transaction,
     regular_tree_files,
 )
-from .reports import write_upstream_reports
+from .reports import build_upstream_report, render_upstream_markdown, write_upstream_reports
 from .validate import ensure_valid_effective_schema
 
 UPSTREAM_SCHEMA_URL = "https://api-ru.iiko.services/api-docs/docs"
@@ -181,14 +181,17 @@ def _load_yaml(path: Path, *, label: str) -> Any:
         raise PipelineError(f"Cannot load {label}: {path}") from error
 
 
-def _write_yaml(path: Path, value: Any) -> None:
-    body = yaml.safe_dump(
+def _yaml_bytes(value: Any) -> bytes:
+    return yaml.safe_dump(
         value,
         allow_unicode=True,
         default_flow_style=False,
         sort_keys=True,
     ).encode("utf-8")
-    write_bytes_atomic(path, body)
+
+
+def _write_yaml(path: Path, value: Any) -> None:
+    write_bytes_atomic(path, _yaml_bytes(value))
 
 
 def _load_string_registry(path: Path, key: str) -> dict[str, str]:
@@ -517,20 +520,24 @@ def _model_collisions(document: dict[str, Any]) -> dict[str, list[str]]:
 def _bootstrap_preview(dependencies: PipelineDependencies) -> None:
     fetched = dependencies.fetch()
     document = _load_document(fetched.path, label="candidate OpenAPI document")
-    bootstrap_root = dependencies.paths.build / "bootstrap"
-    bootstrap_root.mkdir(parents=True, exist_ok=True)
     collisions = _model_collisions(document)
-    _write_yaml(bootstrap_root / "types.overlay.yaml", build_types_overlay(document))
-    _write_yaml(
-        bootstrap_root / "operation-ids.yaml",
-        {"operations": _operation_candidates(document)},
-    )
-    _write_yaml(bootstrap_root / "model-collisions.yaml", {"collisions": collisions})
-    write_upstream_reports(
+    types_body = _yaml_bytes(build_types_overlay(document))
+    operations_body = _yaml_bytes({"operations": _operation_candidates(document)})
+    collisions_body = _yaml_bytes({"collisions": collisions})
+    report = build_upstream_report(
         _load_committed_for_report(dependencies.paths),
         document,
-        dependencies.paths.build / "reports",
-        include_json=False,
+    )
+    report_body = render_upstream_markdown(report).encode("utf-8")
+
+    bootstrap_root = dependencies.paths.build / "bootstrap"
+    bootstrap_root.mkdir(parents=True, exist_ok=True)
+    write_bytes_atomic(bootstrap_root / "types.overlay.yaml", types_body)
+    write_bytes_atomic(bootstrap_root / "operation-ids.yaml", operations_body)
+    write_bytes_atomic(bootstrap_root / "model-collisions.yaml", collisions_body)
+    write_bytes_atomic(
+        dependencies.paths.build / "reports/upstream-diff.md",
+        report_body,
     )
     if collisions:
         raise PipelineError(
