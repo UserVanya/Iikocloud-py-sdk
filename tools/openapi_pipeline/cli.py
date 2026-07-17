@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import sys
 from collections.abc import Sequence
 
@@ -29,6 +30,20 @@ def build_parser() -> argparse.ArgumentParser:
             command_parser.add_argument("--accept-current-upstream", action="store_true")
         elif command == "sync":
             command_parser.add_argument("--offline", action="store_true")
+        elif command == "capture-evidence":
+            command_parser.add_argument("--live-profile", required=True)
+            command_parser.add_argument("--env-file", required=True)
+            command_parser.add_argument(
+                "--operation",
+                required=True,
+                choices=("get_external_menu_by_id",),
+            )
+            command_parser.add_argument(
+                "--menu-version",
+                required=True,
+                type=int,
+                choices=(2, 3, 4),
+            )
     return parser
 
 
@@ -54,6 +69,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "upstream-check":
             dependencies = pipeline.default_dependencies(offline=False)
             pipeline.upstream_check(dependencies)
+        elif args.command == "capture-evidence":
+            from . import evidence
+
+            asyncio.run(
+                evidence.capture_evidence(
+                    live_profile=args.live_profile,
+                    env_file=args.env_file,
+                    operation=args.operation,
+                    menu_version=args.menu_version,
+                )
+            )
         else:
             raise PipelineError(f"Command is not implemented yet: {args.command}")
     except PipelineError as error:

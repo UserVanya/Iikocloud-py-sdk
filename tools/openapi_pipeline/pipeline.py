@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import copy
+import json
 import keyword
+import os
 import re
 import shutil
 import stat
 from collections.abc import Callable
+from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -40,6 +43,8 @@ from .reports import build_upstream_report, render_upstream_markdown, write_upst
 from .validate import ensure_valid_effective_schema
 
 UPSTREAM_SCHEMA_URL = "https://api-ru.iiko.services/api-docs/docs"
+_MAX_REVIEWED_JSON_BYTES = 32 * 1024 * 1024
+_MAX_REVIEWED_YAML_BYTES = 8 * 1024 * 1024
 _OPERATION_VERBS = {
     "add",
     "authenticate",
@@ -179,6 +184,208 @@ def _load_yaml(path: Path, *, label: str) -> Any:
         return yaml.safe_load(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, yaml.YAMLError) as error:
         raise PipelineError(f"Cannot load {label}: {path}") from error
+
+
+class _UniqueKeySafeLoader(yaml.SafeLoader):
+    pass
+
+
+def _construct_unique_mapping(
+    loader: _UniqueKeySafeLoader,
+    node: yaml.nodes.MappingNode,
+    deep: bool = False,
+) -> dict[object, object]:
+    result: dict[object, object] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            duplicate = key in result
+        except TypeError as error:
+            raise yaml.constructor.ConstructorError(
+                "while constructing a mapping",
+                node.start_mark,
+                "found an unhashable key",
+                key_node.start_mark,
+            ) from error
+        if duplicate:
+            raise yaml.constructor.ConstructorError(
+                "while constructing a mapping",
+                node.start_mark,
+                "found duplicate key",
+                key_node.start_mark,
+            )
+        result[key] = loader.construct_object(value_node, deep=deep)
+    return result
+
+
+_UniqueKeySafeLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    _construct_unique_mapping,
+)
+
+
+def _read_fd_limited(descriptor: int, maximum: int, *, label: str) -> bytes:
+    chunks: list[bytes] = []
+    remaining = maximum + 1
+    while remaining > 0:
+        chunk = os.read(descriptor, min(65536, remaining))
+        if not chunk:
+            break
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    body = b"".join(chunks)
+    if len(body) > maximum:
+        raise PipelineError(f"{label} exceeds its reviewed size limit")
+    return body
+
+
+def _reviewed_regular_bytes(
+    root: Path,
+    path: Path,
+    *,
+    label: str,
+    maximum: int,
+    required: bool = True,
+) -> bytes | None:
+    """Read one repository-owned reviewed file without following path links."""
+    lexical_root = Path(os.path.abspath(root))
+    lexical_path = Path(os.path.abspath(path))
+    try:
+        relative = lexical_path.relative_to(lexical_root)
+    except ValueError as error:
+        raise PipelineError(f"{label} escapes the controlled repository root") from error
+    if not relative.parts:
+        raise PipelineError(f"{label} must be a reviewed regular file")
+
+    directory_flags = os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
+    file_flags = os.O_RDONLY | os.O_CLOEXEC | getattr(os, "O_NOFOLLOW", 0)
+    descriptors: list[int] = []
+    try:
+        try:
+            descriptors.append(os.open(lexical_root, directory_flags))
+        except OSError as error:
+            raise PipelineError("Controlled repository root is not a safe directory") from error
+        parent_fd = descriptors[-1]
+        for part in relative.parts[:-1]:
+            try:
+                metadata = os.stat(part, dir_fd=parent_fd, follow_symlinks=False)
+            except FileNotFoundError as error:
+                if not required:
+                    return None
+                raise PipelineError(f"{label} is missing") from error
+            except OSError as error:
+                raise PipelineError(f"Cannot inspect reviewed parent for {label}") from error
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+                raise PipelineError(f"{label} parent is not a non-symlink directory")
+            try:
+                parent_fd = os.open(part, directory_flags, dir_fd=parent_fd)
+            except OSError as error:
+                raise PipelineError(f"Cannot open reviewed parent for {label}") from error
+            descriptors.append(parent_fd)
+
+        leaf = relative.parts[-1]
+        try:
+            expected = os.stat(leaf, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError as error:
+            if not required:
+                return None
+            raise PipelineError(f"{label} is missing") from error
+        except OSError as error:
+            raise PipelineError(f"Cannot inspect {label}") from error
+        if stat.S_ISLNK(expected.st_mode):
+            raise PipelineError(f"{label} is a symlink")
+        if not stat.S_ISREG(expected.st_mode):
+            raise PipelineError(f"{label} must be a reviewed regular file")
+        if expected.st_nlink != 1:
+            raise PipelineError(f"{label} must not have multiple hard links")
+        try:
+            descriptor = os.open(leaf, file_flags, dir_fd=parent_fd)
+        except OSError as error:
+            raise PipelineError(f"Cannot open {label} safely") from error
+        descriptors.append(descriptor)
+        opened = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or opened.st_nlink != 1
+            or (opened.st_dev, opened.st_ino) != (expected.st_dev, expected.st_ino)
+        ):
+            raise PipelineError(f"{label} changed while it was opened")
+        first = _read_fd_limited(descriptor, maximum, label=label)
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        second = _read_fd_limited(descriptor, maximum, label=label)
+        current = os.stat(leaf, dir_fd=parent_fd, follow_symlinks=False)
+        if (
+            first != second
+            or (current.st_dev, current.st_ino) != (opened.st_dev, opened.st_ino)
+            or current.st_nlink != 1
+        ):
+            raise PipelineError(f"{label} changed while it was reviewed")
+        return first
+    finally:
+        for descriptor in reversed(descriptors):
+            with suppress(OSError):
+                os.close(descriptor)
+
+
+def _reviewed_directory_names(root: Path, path: Path, *, label: str) -> tuple[str, ...]:
+    lexical_root = Path(os.path.abspath(root))
+    lexical_path = Path(os.path.abspath(path))
+    try:
+        relative = lexical_path.relative_to(lexical_root)
+    except ValueError as error:
+        raise PipelineError(f"{label} escapes the controlled repository root") from error
+    directory_flags = os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
+    descriptors: list[int] = []
+    try:
+        descriptors.append(os.open(lexical_root, directory_flags))
+        current_fd = descriptors[-1]
+        for part in relative.parts:
+            metadata = os.stat(part, dir_fd=current_fd, follow_symlinks=False)
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+                raise PipelineError(f"{label} must be a non-symlink directory")
+            current_fd = os.open(part, directory_flags, dir_fd=current_fd)
+            descriptors.append(current_fd)
+        return tuple(sorted(os.listdir(current_fd)))
+    except (FileNotFoundError, OSError) as error:
+        if isinstance(error, PipelineError):
+            raise
+        raise PipelineError(f"Cannot inspect {label}") from error
+    finally:
+        for descriptor in reversed(descriptors):
+            with suppress(OSError):
+                os.close(descriptor)
+
+
+def _strict_reviewed_json(body: bytes, *, label: str) -> dict[str, Any]:
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate JSON key")
+            result[key] = value
+        return result
+
+    def reject_constant(value: str) -> None:
+        raise ValueError(f"non-finite JSON number {value}")
+
+    try:
+        value = json.loads(
+            body.decode("utf-8"),
+            object_pairs_hook=unique_object,
+            parse_constant=reject_constant,
+        )
+    except (UnicodeError, ValueError) as error:
+        raise PipelineError(f"{label} is not strict UTF-8 JSON") from error
+    if not isinstance(value, dict):
+        raise PipelineError(f"{label} must be a JSON object")
+    return value
+
+
+def _strict_reviewed_yaml(body: bytes, *, label: str) -> Any:
+    try:
+        return yaml.load(body.decode("utf-8"), Loader=_UniqueKeySafeLoader)
+    except (UnicodeError, yaml.YAMLError) as error:
+        raise PipelineError(f"{label} is not strict UTF-8 YAML") from error
 
 
 def _yaml_bytes(value: Any) -> bytes:
@@ -526,6 +733,151 @@ def _model_collisions(document: dict[str, Any]) -> dict[str, list[str]]:
     return {normalized: values for normalized, values in sorted(groups.items()) if len(values) > 1}
 
 
+def _reviewed_registry(value: object, key: str, *, label: str) -> dict[str, str]:
+    if not isinstance(value, dict) or set(value) != {key} or not isinstance(value[key], dict):
+        raise PipelineError(f"{label} must contain exactly a {key} mapping")
+    registry = value[key]
+    if not all(
+        isinstance(source, str)
+        and bool(source.strip())
+        and isinstance(target, str)
+        and bool(target.strip())
+        for source, target in registry.items()
+    ):
+        raise PipelineError(f"{label} entries must map non-empty strings")
+    return dict(sorted(registry.items()))
+
+
+def compose_reviewed_bootstrap_candidate(
+    paths: RepoPaths,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    """Compose a reviewed pre-accept candidate without fetching, writing, or validating it."""
+    root = paths.root
+    bootstrap_root = paths.build / "bootstrap"
+    raw_body = _reviewed_regular_bytes(
+        root,
+        paths.candidate,
+        label="Reviewed upstream candidate",
+        maximum=_MAX_REVIEWED_JSON_BYTES,
+    )
+    assert raw_body is not None
+    document = _strict_reviewed_json(raw_body, label="Reviewed upstream candidate")
+
+    types_body = _reviewed_regular_bytes(
+        root,
+        bootstrap_root / "types.overlay.yaml",
+        label="Reviewed bootstrap type candidate",
+        maximum=_MAX_REVIEWED_YAML_BYTES,
+    )
+    operations_body = _reviewed_regular_bytes(
+        root,
+        bootstrap_root / "operation-ids.yaml",
+        label="Reviewed bootstrap operation candidate",
+        maximum=_MAX_REVIEWED_YAML_BYTES,
+    )
+    collisions_body = _reviewed_regular_bytes(
+        root,
+        bootstrap_root / "model-collisions.yaml",
+        label="Reviewed bootstrap collision candidate",
+        maximum=_MAX_REVIEWED_YAML_BYTES,
+    )
+    assert types_body is not None
+    assert operations_body is not None
+    assert collisions_body is not None
+    mechanical = _strict_reviewed_yaml(types_body, label="Reviewed bootstrap type candidate")
+    operations_value = _strict_reviewed_yaml(
+        operations_body,
+        label="Reviewed bootstrap operation candidate",
+    )
+    collisions_value = _strict_reviewed_yaml(
+        collisions_body,
+        label="Reviewed bootstrap collision candidate",
+    )
+    if mechanical != build_types_overlay(document):
+        raise PipelineError("Reviewed bootstrap type candidate was not derived from raw candidate")
+    operations = _reviewed_registry(
+        operations_value,
+        "operations",
+        label="Reviewed bootstrap operation candidate",
+    )
+    expected_collisions = {"collisions": _model_collisions(document)}
+    if collisions_value != expected_collisions:
+        raise PipelineError(
+            "Reviewed bootstrap collision candidate was not derived from raw candidate"
+        )
+
+    overlay_root = root / "openapi/overlays"
+    overlay_names = tuple(
+        name
+        for name in _reviewed_directory_names(
+            root,
+            overlay_root,
+            label="Reviewed semantic overlay directory",
+        )
+        if name.endswith(".overlay.yaml") and name != "types.overlay.yaml"
+    )
+    if "contracts.overlay.yaml" not in overlay_names:
+        raise PipelineError("Reviewed contracts overlay is missing")
+    overlay_values: dict[str, dict[str, Any]] = {}
+    for name in overlay_names:
+        body = _reviewed_regular_bytes(
+            root,
+            overlay_root / name,
+            label=f"Reviewed semantic overlay {name}",
+            maximum=_MAX_REVIEWED_YAML_BYTES,
+        )
+        assert body is not None
+        value = _strict_reviewed_yaml(body, label=f"Reviewed semantic overlay {name}")
+        if not isinstance(value, dict):
+            raise PipelineError(f"Reviewed semantic overlay {name} must be an object")
+        overlay_values[name] = value
+
+    effective = apply_overlay(document, overlay_values["contracts.overlay.yaml"])
+    if not isinstance(mechanical, dict):
+        raise PipelineError("Reviewed bootstrap type candidate must be an object")
+    effective = _apply_mechanical_overlay(effective, mechanical)
+    for name in overlay_names:
+        if name != "contracts.overlay.yaml":
+            effective = apply_overlay(effective, overlay_values[name])
+    effective = inject_operation_ids(effective, operations)
+
+    committed_body = _reviewed_regular_bytes(
+        root,
+        root / "openapi/model-name-overrides.yaml",
+        label="Reviewed committed model override registry",
+        maximum=_MAX_REVIEWED_YAML_BYTES,
+    )
+    optional_body = _reviewed_regular_bytes(
+        root,
+        bootstrap_root / "model-name-overrides.yaml",
+        label="Reviewed bootstrap model override candidate",
+        maximum=_MAX_REVIEWED_YAML_BYTES,
+        required=False,
+    )
+    assert committed_body is not None
+    overrides = _reviewed_registry(
+        _strict_reviewed_yaml(
+            committed_body,
+            label="Reviewed committed model override registry",
+        ),
+        "models",
+        label="Reviewed committed model override registry",
+    )
+    if optional_body is not None:
+        overrides.update(
+            _reviewed_registry(
+                _strict_reviewed_yaml(
+                    optional_body,
+                    label="Reviewed bootstrap model override candidate",
+                ),
+                "models",
+                label="Reviewed bootstrap model override candidate",
+            )
+        )
+    mappings = build_model_mappings(_model_schemas(effective), dict(sorted(overrides.items())))
+    return effective, mappings
+
+
 def _bootstrap_preview(dependencies: PipelineDependencies) -> None:
     fetched = dependencies.fetch()
     document = _load_document(fetched.path, label="candidate OpenAPI document")
@@ -573,9 +925,7 @@ def _preflight_optional_model_overrides(paths: RepoPaths) -> Path | None:
     label = "Bootstrap model-name-overrides candidate"
     lexical_root = paths.root.absolute()
     lexical_candidate = candidate.absolute()
-    if lexical_candidate == lexical_root or not lexical_candidate.is_relative_to(
-        lexical_root
-    ):
+    if lexical_candidate == lexical_root or not lexical_candidate.is_relative_to(lexical_root):
         raise PipelineError(f"{label} escapes the controlled repository root: {candidate}")
 
     try:
@@ -613,9 +963,7 @@ def _preflight_optional_model_overrides(paths: RepoPaths) -> Path | None:
     return candidate
 
 
-def _bootstrap_overrides(
-    paths: RepoPaths, model_candidate: Path | None
-) -> dict[str, str]:
+def _bootstrap_overrides(paths: RepoPaths, model_candidate: Path | None) -> dict[str, str]:
     committed = paths.root / "openapi/model-name-overrides.yaml"
     result = _load_string_registry(committed, "models") if committed.exists() else {}
     if model_candidate is not None:

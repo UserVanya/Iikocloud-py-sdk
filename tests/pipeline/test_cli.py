@@ -33,8 +33,62 @@ def test_cli_pipeline_arguments_are_exact() -> None:
     assert parser.parse_args(["sync", "--offline"]).offline is True
     assert parser.parse_args(["verify"]).command == "verify"
     assert parser.parse_args(["upstream-check"]).command == "upstream-check"
+    capture = parser.parse_args(
+        [
+            "capture-evidence",
+            "--live-profile",
+            "test-server",
+            "--env-file",
+            ".env",
+            "--operation",
+            "get_external_menu_by_id",
+            "--menu-version",
+            "4",
+        ]
+    )
+    assert vars(capture) == {
+        "command": "capture-evidence",
+        "live_profile": "test-server",
+        "env_file": ".env",
+        "operation": "get_external_menu_by_id",
+        "menu_version": 4,
+    }
     with pytest.raises(SystemExit):
         parser.parse_args(["verify", "--offline"])
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        (),
+        ("--live-profile", "test-server"),
+        (
+            "--live-profile",
+            "test-server",
+            "--env-file",
+            ".env",
+            "--operation",
+            "get_organizations",
+            "--menu-version",
+            "2",
+        ),
+        (
+            "--live-profile",
+            "test-server",
+            "--env-file",
+            ".env",
+            "--operation",
+            "get_external_menu_by_id",
+            "--menu-version",
+            "1",
+        ),
+    ],
+)
+def test_capture_evidence_rejects_missing_or_unapproved_arguments(
+    arguments: tuple[str, ...],
+) -> None:
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(("capture-evidence", *arguments))
 
 
 def test_main_lazy_dispatches_exact_sync_args(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -74,3 +128,44 @@ def test_main_catches_only_pipeline_errors(
     )
     with pytest.raises(ValueError, match="offline=True"):
         main(["verify"])
+
+
+def test_main_dispatches_capture_evidence_and_handles_pipeline_error(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    from tools.openapi_pipeline import evidence
+
+    calls: list[dict[str, object]] = []
+
+    async def capture(**kwargs: object) -> None:
+        calls.append(kwargs)
+
+    monkeypatch.setattr(evidence, "capture_evidence", capture)
+    arguments = [
+        "capture-evidence",
+        "--live-profile",
+        "test-server",
+        "--env-file",
+        ".env",
+        "--operation",
+        "get_external_menu_by_id",
+        "--menu-version",
+        "3",
+    ]
+
+    assert main(arguments) == 0
+    assert calls == [
+        {
+            "live_profile": "test-server",
+            "env_file": ".env",
+            "operation": "get_external_menu_by_id",
+            "menu_version": 3,
+        }
+    ]
+
+    async def fail(**kwargs: object) -> None:
+        raise PipelineError("evidence is disabled")
+
+    monkeypatch.setattr(evidence, "capture_evidence", fail)
+    assert main(arguments) == 2
+    assert capsys.readouterr().err == "error: evidence is disabled\n"
