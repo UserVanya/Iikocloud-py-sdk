@@ -246,3 +246,122 @@ def test_only_schema_roots_and_nested_schema_keywords_are_normalized() -> None:
     ]["schema"]
     assert request_schema == {"type": "boolean"}
     assert effective["arbitrary"] == {"type": "int"}
+
+
+def test_exact_iiko_scalar_required_marker_is_removed_for_native_and_pseudo_types() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Native": {
+                    "description": "keep",
+                    "type": "string",
+                    "required": ["true"],
+                },
+                "Pseudo": {"type": "bool", "required": ["true"]},
+                "Constant": {
+                    "type": "constant string 'fixed'",
+                    "required": ["true"],
+                },
+            }
+        }
+    }
+
+    effective = apply_overlay(document, build_types_overlay(document))
+
+    assert effective["components"]["schemas"] == {
+        "Native": {"description": "keep", "type": "string"},
+        "Pseudo": {"type": "boolean"},
+        "Constant": {"type": "string", "enum": ["fixed"]},
+    }
+
+
+def test_scalar_required_cleanup_is_deterministic_guarded_and_non_mutating() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Zulu": {"type": "number", "required": ["true"]},
+                "Alpha": {"type": "integer", "required": ["true"]},
+            }
+        }
+    }
+    reordered = {
+        "components": {
+            "schemas": {
+                "Alpha": {"required": ["true"], "type": "integer"},
+                "Zulu": {"required": ["true"], "type": "number"},
+            }
+        }
+    }
+    original = copy.deepcopy(document)
+
+    overlay = build_types_overlay(document)
+
+    assert document == original
+    assert overlay == build_types_overlay(reordered)
+    assert [action["target"] for action in overlay["actions"]] == [
+        '$["components"]["schemas"]["Alpha"]["required"]',
+        '$["components"]["schemas"]["Zulu"]["required"]',
+    ]
+    assert [
+        action["x-iiko-sdk-guard"]["issue"] for action in overlay["actions"]
+    ] == [
+        "remove-malformed-scalar-required-1",
+        "remove-malformed-scalar-required-2",
+    ]
+    for action in overlay["actions"]:
+        assert action["remove"] is True
+        guard = action["x-iiko-sdk-guard"]
+        assert guard["expected-matches"] == 1
+        assert guard["expected-sha256"] == sha256_bytes(
+            canonical_json_bytes(["true"])
+        )
+    assert apply_overlay(document, overlay)["components"]["schemas"] == {
+        "Alpha": {"type": "integer"},
+        "Zulu": {"type": "number"},
+    }
+
+
+def test_scalar_required_cleanup_does_not_guess_other_malformed_forms() -> None:
+    document = {
+        "components": {
+            "schemas": {
+                "Object": {
+                    "type": "object",
+                    "properties": {"true": {"type": "string"}},
+                    "required": ["true"],
+                },
+                "Array": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "required": ["true"],
+                },
+                "PseudoArray": {
+                    "type": "Array of strings <uuid>",
+                    "required": ["true"],
+                },
+                "Unknown": {"type": "mystery", "required": ["true"]},
+                "NoType": {"required": ["true"]},
+                "DifferentMarker": {"type": "string", "required": ["false"]},
+                "MixedMarker": {
+                    "type": "boolean",
+                    "required": ["true", "other"],
+                },
+                "WrongShape": {"type": "number", "required": "true"},
+            }
+        }
+    }
+
+    effective = apply_overlay(document, build_types_overlay(document))
+
+    assert effective["components"]["schemas"]["Object"]["required"] == ["true"]
+    assert effective["components"]["schemas"]["Array"]["required"] == ["true"]
+    assert effective["components"]["schemas"]["PseudoArray"]["required"] == ["true"]
+    assert effective["components"]["schemas"]["PseudoArray"]["type"] == "array"
+    assert effective["components"]["schemas"]["Unknown"]["required"] == ["true"]
+    assert effective["components"]["schemas"]["NoType"]["required"] == ["true"]
+    assert effective["components"]["schemas"]["DifferentMarker"]["required"] == ["false"]
+    assert effective["components"]["schemas"]["MixedMarker"]["required"] == [
+        "true",
+        "other",
+    ]
+    assert effective["components"]["schemas"]["WrongShape"]["required"] == "true"

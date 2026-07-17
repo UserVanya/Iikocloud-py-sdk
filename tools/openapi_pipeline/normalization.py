@@ -25,6 +25,7 @@ DIRECT_TYPES: dict[str, dict[str, Any]] = {
 }
 
 _NORMALIZED_KEYS = ("type", "format", "items")
+_SCALAR_TYPES = frozenset({"boolean", "integer", "number", "string"})
 
 
 def correction_for_type(value: str) -> dict[str, Any] | None:
@@ -56,15 +57,42 @@ def _guard(issue: str, value: Any) -> dict[str, Any]:
     }
 
 
+def _normalizes_to_scalar(raw_type: str) -> bool:
+    if raw_type in _SCALAR_TYPES:
+        return True
+    correction = correction_for_type(raw_type)
+    return correction is not None and correction.get("type") in _SCALAR_TYPES
+
+
 def build_types_overlay(document: dict[str, Any]) -> dict[str, Any]:
     working = copy.deepcopy(document)
     actions: list[dict[str, Any]] = []
     correction_number = 0
+    scalar_required_number = 0
 
     for path, schema in iter_schema_objects(working):
         raw_type = schema.get("type")
         if not isinstance(raw_type, str):
             continue
+
+        if schema.get("required") == ["true"] and _normalizes_to_scalar(raw_type):
+            scalar_required_number += 1
+            previous_required = copy.deepcopy(schema["required"])
+            actions.append(
+                {
+                    "target": _jsonpath((*path, "required")),
+                    "description": (
+                        "Remove malformed iiko scalar-schema required marker"
+                    ),
+                    "x-iiko-sdk-guard": _guard(
+                        f"remove-malformed-scalar-required-{scalar_required_number}",
+                        previous_required,
+                    ),
+                    "remove": True,
+                }
+            )
+            del schema["required"]
+
         correction = correction_for_type(raw_type)
         if correction is None:
             continue
