@@ -224,3 +224,56 @@ def test_operation_hash_includes_path_context_and_transitive_component_contracts
     for variant in variants:
         difference = diff_inventory(before, collect_inventory(variant))
         assert difference.changed_operations == ("POST /same",)
+
+
+def test_operation_hash_resolves_percent_encoded_local_uri_fragment_tokens() -> None:
+    before_document = {
+        "openapi": "3.0.1",
+        "paths": {
+            "/space": {
+                "get": {
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {"$ref": "#/components/schemas/Foo%20Bar"}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/encoded": {
+                "get": {
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {"$ref": "#/components/schemas/Slash%2FName~0Value"}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        },
+        "components": {
+            "schemas": {
+                "Foo Bar": {"type": "string"},
+                "Slash/Name~Value": {"type": "integer"},
+            }
+        },
+    }
+    before = collect_inventory(before_document)
+
+    space_changed = copy.deepcopy(before_document)
+    space_changed["components"]["schemas"]["Foo Bar"]["format"] = "uuid"  # type: ignore[index]
+    encoded_changed = copy.deepcopy(before_document)
+    encoded_changed["components"]["schemas"]["Slash/Name~Value"]["format"] = "int64"  # type: ignore[index]
+
+    assert diff_inventory(before, collect_inventory(space_changed)).changed_operations == (
+        "GET /space",
+    )
+    assert diff_inventory(before, collect_inventory(encoded_changed)).changed_operations == (
+        "GET /encoded",
+    )

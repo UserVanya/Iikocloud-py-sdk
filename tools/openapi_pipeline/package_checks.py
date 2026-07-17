@@ -4,8 +4,16 @@ import os
 import shutil
 import subprocess
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
+
+from packaging.markers import (
+    InvalidMarker,
+    Marker,
+    UndefinedComparison,
+    UndefinedEnvironmentName,
+    default_environment,
+)
 
 if sys.version_info >= (3, 11):
     import tomllib
@@ -27,21 +35,27 @@ RUNTIME_DEPENDENCIES = (
 # complete runtime closure is installed exactly as reviewed, with uv forced offline and
 # dependency traversal disabled.  Keep these pins in sync when Task 11 replaces the
 # temporary project metadata with the generated client's final dependency set.
-LOCKED_RUNTIME_REQUIREMENTS = (
-    "annotated-types==0.7.0",
-    "anyio==4.14.2",
-    "certifi==2026.6.17",
-    "exceptiongroup==1.3.1",
-    "h11==0.16.0",
-    "httpcore==1.0.9",
-    "httpx==0.28.1",
-    "idna==3.11",
-    "pydantic==2.12.5",
-    "pydantic-core==2.41.5",
-    "python-dateutil==2.9.0.post0",
-    "six==1.17.0",
-    "typing-extensions==4.15.0",
-    "typing-inspection==0.4.2",
+_LOCKED_RUNTIME_PINS = {
+    "annotated-types": "0.7.0",
+    "anyio": "4.14.2",
+    "certifi": "2026.6.17",
+    "exceptiongroup": "1.3.1",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.11",
+    "pydantic": "2.12.5",
+    "pydantic-core": "2.41.5",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "typing-extensions": "4.15.0",
+    "typing-inspection": "0.4.2",
+}
+_EXCEPTIONGROUP_MARKER = Marker("python_full_version < '3.11'")
+LOCKED_RUNTIME_REQUIREMENTS = tuple(
+    f"{name}=={version}"
+    for name, version in sorted(_LOCKED_RUNTIME_PINS.items())
+    if name != "exceptiongroup" or _EXCEPTIONGROUP_MARKER.evaluate()
 )
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]
@@ -191,7 +205,11 @@ def _minimal_pyproject() -> bytes:
     ).encode()
 
 
-def locked_runtime_requirements(root: Path) -> tuple[str, ...]:
+def locked_runtime_requirements(
+    root: Path,
+    *,
+    marker_environment: Mapping[str, str] | None = None,
+) -> tuple[str, ...]:
     try:
         lock = tomllib.loads((root / "uv.lock").read_text(encoding="utf-8"))
     except (OSError, UnicodeError, tomllib.TOMLDecodeError) as error:
@@ -215,28 +233,108 @@ def locked_runtime_requirements(root: Path) -> tuple[str, ...]:
     package_check = groups.get("package-check") if isinstance(groups, dict) else None
     if not isinstance(package_check, list):
         raise PipelineError("uv.lock has no package-check dependency group")
-    pending = [entry.get("name") for entry in package_check if isinstance(entry, dict)]
-    if not pending or not all(isinstance(name, str) for name in pending):
+    if not package_check:
         raise PipelineError("uv.lock package-check group is invalid")
 
+    environment: dict[str, str] = {
+        key: value for key, value in default_environment().items() if isinstance(value, str)
+    }
+    if marker_environment is not None:
+        if not all(
+            isinstance(key, str) and isinstance(value, str)
+            for key, value in marker_environment.items()
+        ):
+            raise PipelineError("Package-check marker environment is invalid")
+        environment.update(marker_environment)
+
     closure: dict[str, str] = {}
-    while pending:
-        name = pending.pop()
+    visiting: list[str] = []
+
+    def active_edge(dependency: object, *, parent: str) -> tuple[str, str | None] | None:
+        if not isinstance(dependency, dict) or not isinstance(dependency.get("name"), str):
+            raise PipelineError(f"uv.lock dependency is invalid for {parent}")
+        name = dependency["name"]
         assert isinstance(name, str)
-        if name in closure:
-            continue
+        raw_marker = dependency.get("marker")
+        if raw_marker is not None:
+            if not isinstance(raw_marker, str):
+                raise PipelineError(f"Invalid marker on dependency {parent} -> {name}")
+            try:
+                applies = Marker(raw_marker).evaluate(environment=environment)
+            except (InvalidMarker, UndefinedComparison, UndefinedEnvironmentName) as error:
+                raise PipelineError(
+                    f"Invalid marker on dependency {parent} -> {name}: {raw_marker!r}"
+                ) from error
+            if not applies:
+                return None
+        raw_version = dependency.get("version")
+        if raw_version is not None and not isinstance(raw_version, str):
+            raise PipelineError(f"uv.lock dependency version is invalid for {parent} -> {name}")
+        return name, raw_version
+
+    def select_package(name: str, requested_version: str | None) -> tuple[str, dict[str, object]]:
         entries = packages.get(name, [])
-        if len(entries) != 1 or not isinstance(entries[0].get("version"), str):
-            raise PipelineError(f"uv.lock does not select one package-check version for {name}")
-        entry = entries[0]
-        closure[name] = entry["version"]  # type: ignore[assignment]
+        if not entries:
+            raise PipelineError(f"uv.lock has no package-check artifact for {name}")
+        versions: list[str] = []
+        for entry in entries:
+            version = entry.get("version")
+            if not isinstance(version, str):
+                raise PipelineError(f"uv.lock package-check version is invalid for {name}")
+            versions.append(version)
+        selected_versions = sorted(set(versions))
+        if requested_version is None:
+            if len(selected_versions) != 1:
+                raise PipelineError(
+                    f"uv.lock has conflicting versions for package-check dependency {name}: "
+                    + ", ".join(selected_versions)
+                )
+            selected_version = selected_versions[0]
+        else:
+            selected_version = requested_version
+            if selected_version not in selected_versions:
+                raise PipelineError(
+                    f"uv.lock has no package-check artifact for {name}=={selected_version}"
+                )
+        selected = [entry for entry in entries if entry.get("version") == selected_version]
+        if len(selected) != 1:
+            raise PipelineError(
+                f"uv.lock selects multiple package-check artifacts for {name}=={selected_version}"
+            )
+        return selected_version, selected[0]
+
+    def visit(name: str, requested_version: str | None) -> None:
+        if name in visiting:
+            cycle_start = visiting.index(name)
+            cycle = (*visiting[cycle_start:], name)
+            raise PipelineError("Package-check dependency cycle: " + " -> ".join(cycle))
+        version, entry = select_package(name, requested_version)
+        selected_version = closure.get(name)
+        if selected_version is not None:
+            if selected_version != version:
+                raise PipelineError(
+                    f"uv.lock has conflicting active versions for package-check dependency "
+                    f"{name}: {selected_version}, {version}"
+                )
+            return
+
+        visiting.append(name)
         dependencies = entry.get("dependencies", [])
         if not isinstance(dependencies, list):
             raise PipelineError(f"uv.lock dependencies are invalid for {name}")
         for dependency in dependencies:
-            if not isinstance(dependency, dict) or not isinstance(dependency.get("name"), str):
-                raise PipelineError(f"uv.lock dependency is invalid for {name}")
-            pending.append(dependency["name"])
+            active = active_edge(dependency, parent=name)
+            if active is not None:
+                dependency_name, dependency_version = active
+                visit(dependency_name, dependency_version)
+        visiting.pop()
+        closure[name] = version
+
+    for dependency in package_check:
+        active = active_edge(dependency, parent="package-check")
+        if active is not None:
+            name, version = active
+            visit(name, version)
     return tuple(f"{name}=={closure[name]}" for name in sorted(closure))
 
 

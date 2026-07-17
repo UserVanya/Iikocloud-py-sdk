@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from typing import Any
+from urllib.parse import unquote
 
 from .io import canonical_json_bytes, sha256_bytes
 
@@ -13,7 +14,7 @@ def _resolve_local_reference(document: dict[str, Any], reference: str) -> Any:
         return None
     current: Any = document
     for encoded in reference[2:].split("/"):
-        part = encoded.replace("~1", "/").replace("~0", "~")
+        part = unquote(encoded).replace("~1", "/").replace("~0", "~")
         if not isinstance(current, dict) or part not in current:
             return None
         current = current[part]

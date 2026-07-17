@@ -8,6 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 import tomllib
+from packaging.markers import default_environment
 
 from tools.openapi_pipeline import package_checks as package_checks_module
 from tools.openapi_pipeline.errors import PipelineError
@@ -56,9 +57,61 @@ def test_package_check_group_and_recursive_lock_match_runtime_closure() -> None:
         "typing-extensions==4.15.0",
     )
     assert project["tool"]["uv"]["default-groups"] == ["dev", "package-check"]
+    assert "packaging==26.2" in project["dependency-groups"]["dev"]
     assert package_checks_module.locked_runtime_requirements(Path.cwd()) == (
         LOCKED_RUNTIME_REQUIREMENTS
     )
+    assert "exceptiongroup==1.3.1" not in LOCKED_RUNTIME_REQUIREMENTS
+
+
+def test_recursive_lock_closure_evaluates_markers_for_simulated_python_310() -> None:
+    environment = default_environment()
+    environment.update(python_version="3.10", python_full_version="3.10.0")
+
+    closure = package_checks_module.locked_runtime_requirements(
+        Path.cwd(), marker_environment=environment
+    )
+
+    assert "exceptiongroup==1.3.1" in closure
+
+
+def _write_synthetic_lock(root: Path, dependency: str) -> None:
+    (root / "uv.lock").write_text(
+        "version = 1\n"
+        'requires-python = ">=3.10"\n\n'
+        "[[package]]\n"
+        'name = "fixture"\n'
+        'source = { editable = "." }\n'
+        "[package.dev-dependencies]\n"
+        'package-check = [{ name = "root" }]\n\n'
+        "[[package]]\n"
+        'name = "root"\n'
+        'version = "1.0"\n'
+        f"dependencies = [{dependency}]\n\n"
+        "[[package]]\n"
+        'name = "conditional"\n'
+        'version = "2.0"\n',
+        encoding="utf-8",
+    )
+
+
+def test_recursive_lock_closure_rejects_malformed_marker_actionably(tmp_path: Path) -> None:
+    _write_synthetic_lock(
+        tmp_path,
+        '{ name = "conditional", marker = "python_version << \'3.11\'" }',
+    )
+
+    with pytest.raises(PipelineError, match="Invalid marker.*root.*conditional"):
+        package_checks_module.locked_runtime_requirements(tmp_path)
+
+
+def test_recursive_lock_closure_rejects_dependency_cycles_actionably(tmp_path: Path) -> None:
+    _write_synthetic_lock(tmp_path, '{ name = "conditional" }')
+    with (tmp_path / "uv.lock").open("a", encoding="utf-8") as lock:
+        lock.write('dependencies = [{ name = "root" }]\n')
+
+    with pytest.raises(PipelineError, match=r"cycle.*root.*conditional.*root"):
+        package_checks_module.locked_runtime_requirements(tmp_path)
 
 
 def test_broken_generated_import_fails_before_wheel_build(
