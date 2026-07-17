@@ -140,6 +140,24 @@ def test_live_capture_accepts_strict_json_values_for_safe_session(tmp_path: Path
     assert response_path.exists()
 
 
+def test_live_capture_preserves_only_the_exact_catalog_path(
+    tmp_path: Path,
+) -> None:
+    request_path, response_path = _capture(tmp_path).write_model_pair(
+        "get_organizations",
+        {"mode": "/api/1/organizations"},
+        {"name": "/api/1/organizations"},
+        metadata={"status": 200},
+    )
+
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    response = json.loads(response_path.read_text(encoding="utf-8"))
+    assert request["metadata"]["path"] == "/api/1/organizations"
+    assert response["metadata"]["path"] == "/api/1/organizations"
+    assert request["body"]["mode"] == "<redacted:string>"
+    assert response["body"]["name"] == "<redacted:string>"
+
+
 def test_live_capture_selects_response_hints_by_status_without_union(
     tmp_path: Path,
 ) -> None:

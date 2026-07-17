@@ -55,6 +55,17 @@ def test_capture_writer_sanitizes_before_writing_mode_0600(tmp_path: Path) -> No
     assert "Private venue" not in contents
 
 
+def test_capture_writer_redacts_metadata_path_without_explicit_approval(
+    tmp_path: Path,
+) -> None:
+    request_path, _response_path = _write_pair(CaptureWriter(tmp_path))
+
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    assert request["metadata"]["path"] == (
+        "/<redacted:string>/<redacted:string>/<redacted:string>"
+    )
+
+
 def _write_pair(writer: CaptureWriter, **overrides: object) -> tuple[Path, Path]:
     arguments: dict[str, object] = {
         "run_id": "run",
@@ -70,6 +81,45 @@ def _write_pair(writer: CaptureWriter, **overrides: object) -> tuple[Path, Path]
     }
     arguments.update(overrides)
     return writer.write(**arguments)  # type: ignore[arg-type]
+
+
+def test_capture_writer_rejects_mismatched_approved_path_before_filesystem_mutation(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "captures"
+
+    with pytest.raises(SafetyError, match="approved path"):
+        _write_pair(
+            CaptureWriter(root),
+            approved_path="/api/1/other",
+        )
+
+    assert not root.exists()
+
+
+@pytest.mark.parametrize(
+    "approved_path",
+    [
+        "/api/1/{organizationId}",
+        "/api/1/organizations?token=x",
+        "https://example.invalid/api/1/organizations",
+        "/api/../organizations",
+    ],
+)
+def test_capture_writer_rejects_unsafe_approved_path_before_filesystem_mutation(
+    tmp_path: Path,
+    approved_path: str,
+) -> None:
+    root = tmp_path / "captures"
+
+    with pytest.raises(SafetyError, match="approved path|relative path|unsafe segments"):
+        _write_pair(
+            CaptureWriter(root),
+            metadata={"method": "POST", "path": approved_path, "status": 200},
+            approved_path=approved_path,
+        )
+
+    assert not root.exists()
 
 
 def test_capture_writer_publishes_pair_as_one_directory_transaction(

@@ -604,6 +604,7 @@ class LiveCapture:
             metadata=full_metadata,
             request_path_values=self.hints.request_values,
             response_path_values=response_path_values,
+            approved_path=operation.path,
         )
 
     @staticmethod
@@ -790,6 +791,17 @@ def _safe_path(value: object) -> str:
     ):
         raise SafetyError("Capture path contains unsafe segments")
     return decoded
+
+
+def _approved_static_path(value: object, *, metadata_path: object) -> str:
+    if type(value) is not str:
+        raise SafetyError("Capture approved path must be an exact static relative path")
+    safe_path = _safe_path(value)
+    if safe_path != value or "{" in safe_path or "}" in safe_path:
+        raise SafetyError("Capture approved path must be an exact static relative path")
+    if value != metadata_path:
+        raise SafetyError("Capture approved path does not match metadata path")
+    return safe_path
 
 
 def _validate_directory_fd(fd: int, *, private: bool) -> None:
@@ -1067,6 +1079,7 @@ class CaptureWriter:
         enum_keys: Set[str] = frozenset(),
         request_path_values: PathValues | None = None,
         response_path_values: PathValues | None = None,
+        approved_path: str | None = None,
     ) -> tuple[Path, Path]:
         if kind == "auth":
             raise SafetyError("Capture refuses an auth body")
@@ -1089,7 +1102,13 @@ class CaptureWriter:
             raise SafetyError("Capture method is invalid")
         if type(status) is not int or not 100 <= status <= 599:
             raise SafetyError("Capture status is invalid")
-        path = self._sanitize_path(_safe_path(metadata["path"]))
+        raw_path = metadata["path"]
+        safe_path = _safe_path(raw_path)
+        path = (
+            self._sanitize_path(safe_path)
+            if approved_path is None
+            else _approved_static_path(approved_path, metadata_path=raw_path)
+        )
 
         request_body = self._sanitizer.sanitize(
             request_json,
