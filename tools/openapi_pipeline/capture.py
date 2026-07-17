@@ -794,7 +794,11 @@ def _safe_path(value: object) -> str:
 
 
 def _approved_static_path(value: object, *, metadata_path: object) -> str:
-    if type(value) is not str:
+    if (
+        type(value) is not str
+        or "%" in value
+        or any(ord(character) <= 32 or ord(character) == 127 for character in value)
+    ):
         raise SafetyError("Capture approved path must be an exact static relative path")
     safe_path = _safe_path(value)
     if safe_path != value or "{" in safe_path or "}" in safe_path:

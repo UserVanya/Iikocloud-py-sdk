@@ -122,6 +122,42 @@ def test_capture_writer_rejects_unsafe_approved_path_before_filesystem_mutation(
     assert not root.exists()
 
 
+@pytest.mark.parametrize(
+    "approved_path",
+    [
+        pytest.param("/api/1/%", id="truncated-percent-escape"),
+        pytest.param("/api/1/%GG", id="non-hex-percent-escape"),
+        pytest.param("/api/1/org%61nizations", id="percent-encoded-letter"),
+        pytest.param(
+            "/api/1/%7BorganizationId%7D",
+            id="percent-encoded-template-braces",
+        ),
+        pytest.param("/api/1/organization name", id="space"),
+        pytest.param("/api/1/organization\tname", id="tab"),
+        pytest.param("/api/1/organization\nname", id="line-feed"),
+        pytest.param("/api/1/organization\vname", id="vertical-tab"),
+        pytest.param("/api/1/organization\fname", id="form-feed"),
+        pytest.param("/api/1/organization\rname", id="carriage-return"),
+        pytest.param("/api/1/organization\x00name", id="nul-control"),
+        pytest.param("/api/1/organization\x7fname", id="del-control"),
+    ],
+)
+def test_capture_writer_rejects_noncanonical_approved_path_before_filesystem_mutation(
+    tmp_path: Path,
+    approved_path: str,
+) -> None:
+    root = tmp_path / "captures"
+
+    with pytest.raises(SafetyError, match="approved path|relative path|unsafe segments"):
+        _write_pair(
+            CaptureWriter(root),
+            metadata={"method": "POST", "path": approved_path, "status": 200},
+            approved_path=approved_path,
+        )
+
+    assert not root.exists()
+
+
 def test_capture_writer_publishes_pair_as_one_directory_transaction(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
