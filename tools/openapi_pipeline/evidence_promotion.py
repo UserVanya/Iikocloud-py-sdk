@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import math
 import os
@@ -12,10 +13,11 @@ from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any
+from typing import Any, cast
 
 from .capture import EMAIL_KEYS, PHONE_KEYS, SECRET_KEYS
 from .errors import SafetyError
+from .evidence_validation import MenuEvidenceValidator
 from .io import canonical_json_bytes
 from .live.lock import LiveProcessLock
 
@@ -58,7 +60,6 @@ _FILE_FLAGS = (
 FrozenJson = (
     None | bool | int | float | str | tuple["FrozenJson", ...] | Mapping[str, "FrozenJson"]
 )
-EvidenceValidator = Callable[[int, Mapping[str, FrozenJson], Mapping[str, FrozenJson]], None]
 
 
 @dataclass(frozen=True)
@@ -97,27 +98,25 @@ class CaptureEvidenceReader:
 
     def __init__(
         self,
-        root: Path,
+        repository_root: Path,
+        effective_schema: dict[str, Any],
         operation: str = _APPROVED_OPERATION,
         *,
         process_lock: LiveProcessLock | None = None,
-        validator: EvidenceValidator | None = None,
     ) -> None:
-        if not isinstance(root, Path):
-            raise SafetyError("Evidence capture root must be a filesystem path")
-        if validator is not None and not callable(validator):
-            raise SafetyError("Evidence schema validator must be callable")
-        self.root = root.absolute()
+        self.repository_root = _validate_canonical_repository_root(repository_root)
+        self.root = self.repository_root / "private/captures"
         self.operation = operation
         self.process_lock = process_lock
-        self.validator = validator
+        self._validator = MenuEvidenceValidator(effective_schema)
 
     def read_menu_pairs(self) -> Mapping[int, EvidencePair]:
         lock = self.process_lock
-        if not isinstance(lock, LiveProcessLock) or not lock.held:
-            raise SafetyError("A held canonical live process lock is required for evidence reads")
+        _validate_canonical_lock(self.repository_root, lock)
+        assert lock is not None
         if self.operation != _APPROVED_OPERATION:
             raise SafetyError("Evidence operation is not explicitly approved")
+        _validate_canonical_capture_root(self.repository_root, self.root)
 
         root_fd: int | None = None
         reopened_root_fd: int | None = None
@@ -221,17 +220,25 @@ class CaptureEvidenceReader:
 
             if set(collected) != _APPROVED_VERSIONS or len(collected) != 3:
                 raise SafetyError("Evidence requires exactly one capture for versions 2, 3, and 4")
-            if self.validator is not None:
-                for version in sorted(collected):
-                    pair = collected[version]
-                    try:
-                        self.validator(version, pair.request, pair.response)
-                    except SafetyError:
-                        raise
-                    except Exception:
-                        raise SafetyError(
-                            "Evidence schema validator rejected a capture pair"
-                        ) from None
+            for version in sorted(collected):
+                pair = collected[version]
+                try:
+                    validate = cast(
+                        Callable[[int, Mapping[str, Any], Mapping[str, Any]], object],
+                        self._validator.validate,
+                    )
+                    result = validate(
+                        version,
+                        pair.request,
+                        pair.response,
+                    )
+                except SafetyError:
+                    raise
+                except Exception:
+                    raise SafetyError(
+                        "Evidence schema validator rejected a capture pair"
+                    ) from None
+                _require_synchronous_none(result)
             if not lock.held:
                 raise SafetyError("Canonical live process lock was released during evidence read")
             return MappingProxyType(dict(sorted(collected.items())))
@@ -274,6 +281,101 @@ def _close_fd(fd: int | None) -> None:
     if fd is not None:
         with suppress(OSError):
             os.close(fd)
+
+
+def _reject_symlink_components(path: Path, *, label: str) -> None:
+    current = Path(path.anchor)
+    for part in path.parts[1:]:
+        current /= part
+        try:
+            metadata = current.lstat()
+        except FileNotFoundError:
+            return
+        except OSError as error:
+            raise SafetyError(f"Cannot inspect {label} safely") from error
+        if stat.S_ISLNK(metadata.st_mode):
+            raise SafetyError(f"{label} contains a symlink component")
+
+
+def _validate_lexical_canonical_path(path: object, *, label: str) -> Path:
+    if not isinstance(path, Path) or not path.is_absolute():
+        raise SafetyError(f"{label} must be an absolute canonical path")
+    absolute = Path(os.path.abspath(path))
+    if path != absolute or any(part in {"", ".", ".."} for part in path.parts[1:]):
+        raise SafetyError(f"{label} must not contain lexical aliases")
+    _reject_symlink_components(path, label=label)
+    try:
+        resolved = path.resolve(strict=False)
+    except (OSError, RuntimeError) as error:
+        raise SafetyError(f"Cannot resolve {label} safely") from error
+    if resolved != absolute:
+        raise SafetyError(f"{label} must resolve to its canonical absolute path")
+    return absolute
+
+
+def _validate_canonical_repository_root(path: object) -> Path:
+    root = _validate_lexical_canonical_path(path, label="Evidence repository root")
+    try:
+        metadata = root.lstat()
+    except OSError as error:
+        raise SafetyError("Evidence repository root is missing or inaccessible") from error
+    if not stat.S_ISDIR(metadata.st_mode):
+        raise SafetyError("Evidence repository root must be a directory")
+    marker = root / "pyproject.toml"
+    try:
+        expected = marker.lstat()
+    except OSError as error:
+        raise SafetyError("Evidence repository root lacks its canonical project marker") from error
+    if not stat.S_ISREG(expected.st_mode):
+        raise SafetyError("Evidence repository project marker is unsafe")
+    flags = os.O_RDONLY | os.O_CLOEXEC | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        fd = os.open(marker, flags)
+    except OSError as error:
+        raise SafetyError("Cannot open evidence repository project marker safely") from error
+    try:
+        actual = os.fstat(fd)
+        if not _same_stable_metadata(expected, actual):
+            raise SafetyError("Evidence repository project marker changed while opening")
+    finally:
+        os.close(fd)
+    return root
+
+
+def _validate_canonical_lock(
+    repository_root: Path,
+    lock: LiveProcessLock | None,
+) -> None:
+    expected = repository_root / ".state/live.lock"
+    if not isinstance(lock, LiveProcessLock):
+        raise SafetyError("A held canonical live process lock is required for evidence reads")
+    if lock.path != expected:
+        raise SafetyError("Evidence reader requires the canonical repository live lock")
+    actual = _validate_lexical_canonical_path(lock.path, label="Evidence live lock path")
+    if actual != expected or lock.path.resolve(strict=False) != expected:
+        raise SafetyError("Evidence reader requires the canonical repository live lock")
+    if not lock.held:
+        raise SafetyError("A held canonical live process lock is required for evidence reads")
+
+
+def _validate_canonical_capture_root(repository_root: Path, capture_root: Path) -> None:
+    expected = repository_root / "private/captures"
+    if capture_root != expected:
+        raise SafetyError("Evidence capture root is not repository-derived")
+    actual = _validate_lexical_canonical_path(capture_root, label="Evidence capture root")
+    if actual != expected:
+        raise SafetyError("Evidence capture root is not canonical")
+
+
+def _require_synchronous_none(result: object) -> None:
+    if inspect.isawaitable(result):
+        close = getattr(result, "close", None)
+        if callable(close):
+            with suppress(Exception):
+                close()
+        raise SafetyError("Evidence schema validator must be synchronous")
+    if result is not None:
+        raise SafetyError("Evidence schema validator must return exactly None")
 
 
 def _same_identity(left: os.stat_result, right: os.stat_result) -> bool:
@@ -576,7 +678,7 @@ def _validate_pair_contract(
         raise SafetyError("Evidence envelopes must contain exactly body and metadata")
     request_metadata = _validate_metadata(request["metadata"], run_id=run_id)
     response_metadata = _validate_metadata(response["metadata"], run_id=run_id)
-    if request_metadata != response_metadata:
+    if canonical_json_bytes(request_metadata) != canonical_json_bytes(response_metadata):
         raise SafetyError("Evidence request and response metadata must be identical")
 
     request_body = request["body"]

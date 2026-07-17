@@ -133,6 +133,17 @@ def test_uuid_links_are_stable_across_separate_sanitize_calls() -> None:
     assert request["id"] == "00000000-0000-4000-8000-000000000001"
 
 
+def test_first_pass_sanitizer_never_trusts_alias_shaped_raw_uuid() -> None:
+    alias_shaped_raw = "00000000-0000-4000-8000-000000000042"
+
+    first_pass = Sanitizer().sanitize({"id": alias_shaped_raw})
+    validation_pass = Sanitizer.for_fixed_point_validation().sanitize({"id": alias_shaped_raw})
+
+    assert first_pass["id"] == "00000000-0000-4000-8000-000000000001"
+    assert first_pass["id"] != alias_shaped_raw
+    assert validation_pass["id"] == alias_shaped_raw
+
+
 def test_sanitizer_detects_unicode_normalized_secret_substrings() -> None:
     known = "Caf\u00e9-secret"
     equivalent = unicodedata.normalize("NFD", known)

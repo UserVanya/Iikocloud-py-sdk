@@ -3,10 +3,10 @@ from __future__ import annotations
 import copy
 import inspect
 import json
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import replace
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 
 import pytest
 
@@ -29,6 +29,13 @@ from tools.openapi_pipeline.live.session import (
 )
 from tools.openapi_pipeline.live.state import LiveStateStore
 from tools.openapi_pipeline.paths import RepoPaths
+
+_T = TypeVar("_T")
+
+
+def _event_result(events: list[str], event: str, factory: Callable[[], _T]) -> _T:
+    events.append(event)
+    return factory()
 
 
 class StubCatalog:
@@ -132,15 +139,26 @@ def _schema() -> dict[str, Any]:
         },
         "components": {
             "schemas": {
-                "ExternalMenuV2": {"type": "object"},
-                "ExternalMenuV3": {"type": "object"},
+                "ExternalMenuV2": {
+                    "type": "object",
+                    "properties": {
+                        "mode": {"type": "string", "enum": ["V2"]},
+                    },
+                },
+                "ExternalMenuV3": {
+                    "type": "object",
+                    "properties": {
+                        "mode": {"type": "string", "enum": ["V3"]},
+                    },
+                },
                 "ExternalMenuV4": {
                     "type": "object",
                     "properties": {
+                        "mode": {"type": "string", "enum": ["V4"]},
                         "itemGroups": {
                             "type": "array",
                             "items": {"$ref": "#/components/schemas/ExternalMenuCategory3"},
-                        }
+                        },
                     },
                 },
                 "ExternalMenuCategory3": {
@@ -160,6 +178,12 @@ def _schema() -> dict[str, Any]:
                 "ExternalMenuItem3": {
                     "type": "object",
                     "properties": {
+                        "orderItemType": {
+                            "description": "Product or compound",
+                            "enum": ["Product", "Compound"],
+                            "format": "enum",
+                            "type": "string",
+                        },
                         "type": {
                             "enum": ["DISH", "COMBO"],
                             "type": "string",
@@ -173,6 +197,12 @@ def _schema() -> dict[str, Any]:
                     "required": ["type"],
                     "type": "object",
                     "properties": {
+                        "priceStrategy": {
+                            "default": "BY_COMPONENT",
+                            "description": "Price strategy",
+                            "enum": ["BY_COMPONENT"],
+                            "type": "string",
+                        },
                         "type": {"type": "string"},
                         "comment": {"type": "string"},
                     },
@@ -200,28 +230,46 @@ def _dependencies(
     base = default_capture_evidence_dependencies(RepoPaths(tmp_path))
     dependencies = replace(
         base,
-        rate_catalog_loader=lambda path: (
-            events.append("catalog:load")
-            or cast(RateCatalog, StubCatalog(events, fail_on=fail_budget))
+        rate_catalog_loader=lambda path: _event_result(
+            events,
+            "catalog:load",
+            lambda: cast(RateCatalog, StubCatalog(events, fail_on=fail_budget)),
         ),
-        candidate_composer=lambda paths: events.append("candidate:compose") or (_schema(), {}),
-        operation_contract_loader=lambda path: events.append("operations:load") or _operations(),
-        hints_builder=lambda schema, operation: (
-            events.append("hints:build")
-            or evidence_module.build_evidence_redaction_hints(schema, operation)
+        candidate_composer=lambda paths: _event_result(
+            events,
+            "candidate:compose",
+            lambda: (_schema(), {}),
+        ),
+        operation_contract_loader=lambda path: _event_result(
+            events,
+            "operations:load",
+            _operations,
+        ),
+        hints_builder=lambda schema, operation, version: _event_result(
+            events,
+            f"hints:build:{version}",
+            lambda: evidence_module.build_versioned_evidence_redaction_hints(
+                schema, operation, version
+            ),
         ),
         lock_factory=lambda path: cast(LiveProcessLock, StubLock(path, events)),
-        profile_resolver=lambda *args, **kwargs: events.append("profile:resolve") or _profile(),
-        state_factory=lambda *args, **kwargs: events.append("state:create") or object(),
-        guard_factory=lambda *args, **kwargs: events.append("guard:create") or object(),
-        writer_factory=lambda path: (
-            events.append("writer:create") or cast(CaptureWriter, object())
+        profile_resolver=lambda *args, **kwargs: _event_result(
+            events, "profile:resolve", _profile
         ),
-        capture_factory=lambda **kwargs: (
-            events.append("capture:create") or cast(LiveCapture, object())
+        state_factory=lambda *args, **kwargs: _event_result(
+            events, "state:create", lambda: cast(LiveStateStore, object())
         ),
-        session_factory=lambda **kwargs: (
-            events.append("session:create") or cast(SafeLiveSession, session)
+        guard_factory=lambda *args, **kwargs: _event_result(
+            events, "guard:create", lambda: cast(LiveRateGuard, object())
+        ),
+        writer_factory=lambda path: _event_result(
+            events, "writer:create", lambda: cast(CaptureWriter, object())
+        ),
+        capture_factory=lambda **kwargs: _event_result(
+            events, "capture:create", lambda: cast(LiveCapture, object())
+        ),
+        session_factory=lambda **kwargs: _event_result(
+            events, "session:create", lambda: cast(SafeLiveSession, session)
         ),
         run_id_factory=lambda: "20260717T120000Z-a1b2c3d4",
     )
@@ -235,6 +283,8 @@ _ITEM_TYPE_PATH = (
     ARRAY_ITEM,
     "type",
 )
+_ITEM_ORDER_TYPE_PATH = (*_ITEM_TYPE_PATH[:-1], "orderItemType")
+_ITEM_PRICE_STRATEGY_PATH = (*_ITEM_TYPE_PATH[:-1], "priceStrategy")
 
 
 def test_generic_hints_keep_one_of_with_unconstrained_branch_redacted() -> None:
@@ -295,6 +345,73 @@ def test_evidence_hints_derive_exact_values_from_upstream_enum() -> None:
     hints = evidence_module.build_evidence_redaction_hints(schema, "get_external_menu_by_id")
 
     assert hints.response_values_for_status(200)[_ITEM_TYPE_PATH] == frozenset({"MEAL", "SET"})
+
+
+@pytest.mark.parametrize(
+    ("menu_version", "expected"),
+    [(2, "V2"), (3, "V3"), (4, "V4")],
+)
+def test_versioned_evidence_hints_select_only_requested_response_root(
+    menu_version: int,
+    expected: str,
+) -> None:
+    hints = evidence_module.build_versioned_evidence_redaction_hints(
+        _schema(),
+        "get_external_menu_by_id",
+        menu_version,
+    )
+
+    values = hints.response_values_for_status(200)
+    assert values[("mode",)] == frozenset({expected})
+    assert all(version not in values[("mode",)] for version in {"V2", "V3", "V4"} - {expected})
+    if menu_version == 4:
+        assert values[_ITEM_ORDER_TYPE_PATH] == frozenset({"Product", "Compound"})
+        assert values[_ITEM_PRICE_STRATEGY_PATH] == frozenset({"BY_COMPONENT"})
+
+
+@pytest.mark.parametrize("menu_version", [1, True])
+def test_versioned_evidence_hints_reject_unapproved_version(menu_version: object) -> None:
+    with pytest.raises(SafetyError, match="version"):
+        evidence_module.build_versioned_evidence_redaction_hints(
+            _schema(),
+            "get_external_menu_by_id",
+            cast(int, menu_version),
+        )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "combo-defines-order-item-type",
+        "missing-item-order-item-type-enum",
+        "item-order-item-type-redaction-sentinel",
+        "missing-combo-price-strategy-enum",
+        "combo-price-strategy-redaction-sentinel",
+    ],
+)
+def test_versioned_v4_hints_fail_closed_on_ambiguous_enum_schema(
+    mutation: str,
+) -> None:
+    schema = _schema()
+    item_properties = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]
+    combo_properties = schema["components"]["schemas"]["ExternalMenuComboItem"]["properties"]
+    if mutation == "combo-defines-order-item-type":
+        combo_properties["orderItemType"] = copy.deepcopy(item_properties["orderItemType"])
+    elif mutation == "missing-item-order-item-type-enum":
+        del item_properties["orderItemType"]["enum"]
+    elif mutation == "item-order-item-type-redaction-sentinel":
+        item_properties["orderItemType"]["enum"] = ["<redacted:string>"]
+    elif mutation == "missing-combo-price-strategy-enum":
+        del combo_properties["priceStrategy"]["enum"]
+    elif mutation == "combo-price-strategy-redaction-sentinel":
+        combo_properties["priceStrategy"]["enum"] = ["<redacted:string>"]
+
+    with pytest.raises(SafetyError, match="orderItemType|priceStrategy"):
+        evidence_module.build_versioned_evidence_redaction_hints(
+            schema,
+            "get_external_menu_by_id",
+            4,
+        )
 
 
 @pytest.mark.parametrize(
@@ -366,7 +483,11 @@ async def test_capture_evidence_rejects_hint_schema_drift_before_private_setup(
     }
     dependencies = replace(
         dependencies,
-        candidate_composer=lambda paths: events.append("candidate:compose") or (drifted, {}),
+        candidate_composer=lambda paths: _event_result(
+            events,
+            "candidate:compose",
+            lambda: (drifted, {}),
+        ),
     )
 
     with pytest.raises(SafetyError, match="combo type shape"):
@@ -384,7 +505,7 @@ async def test_capture_evidence_rejects_hint_schema_drift_before_private_setup(
         "budget:get_external_menu_by_id",
         "candidate:compose",
         "operations:load",
-        "hints:build",
+        "hints:build:4",
     ]
 
 
@@ -447,7 +568,7 @@ async def test_capture_evidence_calls_auth_and_menu_once_with_exact_payload_in_o
         "budget:get_external_menu_by_id",
         "candidate:compose",
         "operations:load",
-        "hints:build",
+        "hints:build:4",
         "lock:enter",
         "profile:resolve",
         "state:create",
@@ -539,7 +660,11 @@ async def test_capture_evidence_rejects_drifted_auth_contract_before_private_set
     drifted = {**_operations(), "authenticate": authenticate}
     dependencies = replace(
         dependencies,
-        operation_contract_loader=lambda path: events.append("operations:load") or drifted,
+        operation_contract_loader=lambda path: _event_result(
+            events,
+            "operations:load",
+            lambda: drifted,
+        ),
     )
 
     with pytest.raises(SafetyError, match="authentication.*contract|auth.*contract"):
@@ -577,7 +702,11 @@ async def test_capture_evidence_rejects_menu_cleanup_contract_before_private_set
     }
     dependencies = replace(
         dependencies,
-        operation_contract_loader=lambda path: events.append("operations:load") or drifted,
+        operation_contract_loader=lambda path: _event_result(
+            events,
+            "operations:load",
+            lambda: drifted,
+        ),
     )
 
     with pytest.raises(SafetyError, match="read endpoint"):
@@ -610,7 +739,7 @@ def test_default_capture_dependencies_use_canonical_guarded_primitives(tmp_path:
     assert dependencies.writer_factory is CaptureWriter
     assert dependencies.capture_factory is LiveCapture
     assert dependencies.session_factory is SafeLiveSession
-    assert dependencies.hints_builder is evidence_module.build_evidence_redaction_hints
+    assert dependencies.hints_builder is evidence_module.build_versioned_evidence_redaction_hints
     source = inspect.getsource(evidence_module)
     assert "IIKO_API_KEY_2" not in source
     assert '".state/live.lock"' in source

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import secrets
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
@@ -28,6 +29,9 @@ _ITEM_TYPE_HINT_PATH = (
     ARRAY_ITEM,
     "type",
 )
+_ITEM_ORDER_TYPE_HINT_PATH = (*_ITEM_TYPE_HINT_PATH[:-1], "orderItemType")
+_ITEM_PRICE_STRATEGY_HINT_PATH = (*_ITEM_TYPE_HINT_PATH[:-1], "priceStrategy")
+_REDACTED_STRING_SENTINEL = "<redacted:string>"
 
 
 def _evidence_component(document: dict[str, Any], name: str) -> dict[str, Any]:
@@ -37,6 +41,41 @@ def _evidence_component(document: dict[str, Any], name: str) -> dict[str, Any]:
     if type(schema) is not dict:
         raise SafetyError(f"Evidence schema component {name!r} is missing or invalid")
     return schema
+
+
+def _evidence_string_enum(
+    component: dict[str, Any],
+    property_name: str,
+    *,
+    expected_keys: frozenset[str],
+    expected_format: str | None = None,
+) -> frozenset[str]:
+    properties = component.get("properties")
+    property_schema = properties.get(property_name) if type(properties) is dict else None
+    if type(property_schema) is not dict or set(property_schema) != expected_keys:
+        raise SafetyError(f"Evidence {property_name} enum shape has drifted")
+    enum = property_schema.get("enum")
+    if (
+        property_schema.get("type") != "string"
+        or type(enum) is not list
+        or not enum
+        or any(
+            type(value) is not str or not value.strip() or value == _REDACTED_STRING_SENTINEL
+            for value in enum
+        )
+        or len(set(enum)) != len(enum)
+        or (expected_format is not None and property_schema.get("format") != expected_format)
+        or (
+            "description" in expected_keys
+            and (
+                type(property_schema.get("description")) is not str
+                or not property_schema["description"].strip()
+            )
+        )
+        or ("default" in expected_keys and property_schema.get("default") not in enum)
+    ):
+        raise SafetyError(f"Evidence {property_name} enum is invalid")
+    return frozenset(enum)
 
 
 def build_evidence_redaction_hints(
@@ -137,13 +176,83 @@ def build_evidence_redaction_hints(
     return RedactionHints(hints.operation_id, hints.request_values, response_values)
 
 
+def build_versioned_evidence_redaction_hints(
+    effective_schema: dict[str, Any],
+    operation_id: str,
+    menu_version: int,
+) -> RedactionHints:
+    """Build fail-closed response hints for one explicitly selected menu version."""
+
+    if type(menu_version) is not int or menu_version not in _EVIDENCE_VERSIONS:
+        raise SafetyError("Evidence redaction hint version must be exactly 2, 3, or 4")
+    reviewed = build_evidence_redaction_hints(effective_schema, operation_id)
+    item = _evidence_component(effective_schema, "ExternalMenuItem3")
+    combo = _evidence_component(effective_schema, "ExternalMenuComboItem")
+    item_properties = item.get("properties")
+    combo_properties = combo.get("properties")
+    if (
+        type(item_properties) is not dict
+        or "priceStrategy" in item_properties
+        or type(combo_properties) is not dict
+        or "orderItemType" in combo_properties
+    ):
+        raise SafetyError("Evidence orderItemType/priceStrategy oneOf exception has drifted")
+    item_order_types = _evidence_string_enum(
+        item,
+        "orderItemType",
+        expected_keys=frozenset({"description", "enum", "format", "type"}),
+        expected_format="enum",
+    )
+    combo_price_strategies = _evidence_string_enum(
+        combo,
+        "priceStrategy",
+        expected_keys=frozenset({"default", "description", "enum", "type"}),
+    )
+    selected_schema = copy.deepcopy(effective_schema)
+    paths = selected_schema.get("paths")
+    path_item = paths.get(_EVIDENCE_PATH) if type(paths) is dict else None
+    operation = path_item.get("post") if type(path_item) is dict else None
+    responses = operation.get("responses") if type(operation) is dict else None
+    response = responses.get("200") if type(responses) is dict else None
+    content = response.get("content") if type(response) is dict else None
+    media = content.get("application/json") if type(content) is dict else None
+    if type(media) is not dict:
+        raise SafetyError("Evidence versioned response contract has drifted")
+    component = {2: "ExternalMenuV2", 3: "ExternalMenuV3", 4: "ExternalMenuV4"}[menu_version]
+    media["schema"] = {"$ref": f"#/components/schemas/{component}"}
+    selected = RedactionHints.for_operation(selected_schema, operation_id)
+    if selected.request_values != reviewed.request_values:
+        raise SafetyError("Evidence versioned request redaction hints have drifted")
+    if set(selected.response_values_by_status) != {200}:
+        raise SafetyError("Evidence versioned hints require exactly the 200 response")
+
+    response_values = dict(selected.response_values_by_status[200])
+    if menu_version == 4:
+        reviewed_item_types = reviewed.response_values_by_status[200].get(_ITEM_TYPE_HINT_PATH)
+        selected_item_types = response_values.get(_ITEM_TYPE_HINT_PATH, frozenset())
+        if reviewed_item_types is None or (
+            selected_item_types and selected_item_types != reviewed_item_types
+        ):
+            raise SafetyError("Evidence V4 item type redaction hints have drifted")
+        response_values[_ITEM_TYPE_HINT_PATH] = reviewed_item_types
+        for path, expected_values in (
+            (_ITEM_ORDER_TYPE_HINT_PATH, item_order_types),
+            (_ITEM_PRICE_STRATEGY_HINT_PATH, combo_price_strategies),
+        ):
+            selected_values = response_values.get(path, frozenset())
+            if selected_values and selected_values != expected_values:
+                raise SafetyError("Evidence V4 item enum redaction hints have drifted")
+            response_values[path] = expected_values
+    return RedactionHints(operation_id, selected.request_values, {200: response_values})
+
+
 @dataclass(frozen=True)
 class CaptureEvidenceDependencies:
     paths: RepoPaths
     rate_catalog_loader: Callable[[Path], RateCatalog]
     candidate_composer: Callable[[RepoPaths], tuple[dict[str, Any], dict[str, str]]]
     operation_contract_loader: Callable[[Path], Mapping[str, LiveOperation]]
-    hints_builder: Callable[[dict[str, Any], str], RedactionHints]
+    hints_builder: Callable[[dict[str, Any], str, int], RedactionHints]
     lock_factory: Callable[[Path], LiveProcessLock]
     profile_resolver: Callable[..., ResolvedLiveProfile]
     state_factory: Callable[..., LiveStateStore]
@@ -167,7 +276,7 @@ def default_capture_evidence_dependencies(
         rate_catalog_loader=RateCatalog.load,
         candidate_composer=compose_reviewed_bootstrap_candidate,
         operation_contract_loader=load_operation_contract,
-        hints_builder=build_evidence_redaction_hints,
+        hints_builder=build_versioned_evidence_redaction_hints,
         lock_factory=LiveProcessLock,
         profile_resolver=resolve_locked_live_profile,
         state_factory=LiveStateStore,
@@ -227,7 +336,7 @@ async def capture_evidence(
         or contract.path != "/api/2/menu/by_id"
     ):
         raise SafetyError("Evidence operation contract is not the approved read endpoint")
-    hints = selected.hints_builder(effective_schema, selected_operation)
+    hints = selected.hints_builder(effective_schema, selected_operation, selected_version)
 
     process_lock = selected.lock_factory(paths.root / ".state/live.lock")
     with process_lock:

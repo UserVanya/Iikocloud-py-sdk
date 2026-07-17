@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import dataclasses
+import gc
 import hashlib
 import json
 import os
+import warnings
 from collections.abc import Mapping
 from pathlib import Path
 from types import MappingProxyType
@@ -12,21 +14,276 @@ from typing import Any
 import pytest
 
 import tools.openapi_pipeline.evidence_promotion as promotion_module
+import tools.openapi_pipeline.evidence_validation as validation_module
 from tools.openapi_pipeline.capture import CaptureWriter
 from tools.openapi_pipeline.errors import SafetyError
+from tools.openapi_pipeline.evidence import build_versioned_evidence_redaction_hints
 from tools.openapi_pipeline.evidence_promotion import (
     CaptureEvidenceReader,
     EvidencePair,
-    EvidenceValidator,
 )
+from tools.openapi_pipeline.evidence_validation import MenuEvidenceValidator
 from tools.openapi_pipeline.io import canonical_json_bytes
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 
 OPERATION = "get_external_menu_by_id"
 
 
-def _write_menu_pair(root: Path, version: int, *, run_id: str | None = None) -> tuple[Path, Path]:
-    return CaptureWriter(root).write(
+def _effective_schema() -> dict[str, Any]:
+    def root_schema(version: int) -> dict[str, Any]:
+        groups_name = "itemCategories" if version == 2 else "itemGroups"
+        properties: dict[str, Any] = {
+            "comboCategories": {"type": "array", "items": {"type": "object"}},
+            "formatVersion": {"default": 2, "type": "integer"},
+            "id": {"type": "string"},
+            "int32Value": {"format": "int32", "type": "integer"},
+            "int64Value": {"format": "int64", "type": "integer"},
+            "mode": {"enum": [f"V{version}"], "type": "string"},
+            groups_name: {"type": "array", "items": {"type": "object"}},
+            "name": {"type": "string"},
+        }
+        if version == 4:
+            properties["itemGroups"] = {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/ExternalMenuCategory3"},
+            }
+        return {
+            "type": "object",
+            "required": ["id", groups_name, "comboCategories", "mode"],
+            "properties": properties,
+        }
+
+    return {
+        "openapi": "3.1.0",
+        "paths": {
+            "/api/2/menu/by_id": {
+                "post": {
+                    "operationId": OPERATION,
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": (
+                                        "#/components/schemas/"
+                                        "iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest"
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "oneOf": [
+                                            {"$ref": "#/components/schemas/ExternalMenuV2"},
+                                            {"$ref": "#/components/schemas/ExternalMenuV3"},
+                                            {"$ref": "#/components/schemas/ExternalMenuV4"},
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest": {
+                    "additionalProperties": False,
+                    "type": "object",
+                    "required": ["externalMenuId", "organizationIds"],
+                    "properties": {
+                        "externalMenuId": {"type": "string"},
+                        "organizationIds": {
+                            "type": "array",
+                            "items": {"format": "uuid", "type": "string"},
+                        },
+                        "version": {"nullable": True, "type": "integer"},
+                    },
+                },
+                "ExternalMenuV2": root_schema(2),
+                "ExternalMenuV3": root_schema(3),
+                "ExternalMenuV4": root_schema(4),
+                "ExternalMenuCategory3": {
+                    "type": "object",
+                    "required": ["items"],
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                                    {"$ref": "#/components/schemas/ExternalMenuComboItem"},
+                                ]
+                            },
+                        }
+                    },
+                },
+                "ExternalMenuItem3": {
+                    "type": "object",
+                    "required": [
+                        "itemSizes",
+                        "modifierSchemaId",
+                        "orderItemType",
+                        "allergenGroupIds",
+                        "id",
+                        "splittable",
+                    ],
+                    "properties": {
+                        "allergenGroupIds": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "id": {"type": "string"},
+                        "itemSizes": {"type": "array", "items": {}},
+                        "modifierSchemaId": {"nullable": True, "type": "string"},
+                        "orderItemType": {
+                            "description": "Product or compound",
+                            "enum": ["Product", "Compound"],
+                            "format": "enum",
+                            "type": "string",
+                        },
+                        "splittable": {"type": "boolean"},
+                        "type": {
+                            "enum": ["DISH", "COMBO"],
+                            "type": "string",
+                            "description": "Item type",
+                            "default": "DISH",
+                        },
+                        "name": {"type": "string"},
+                    },
+                },
+                "ExternalMenuComboItem": {
+                    "properties": {
+                        "barcodes": {
+                            "items": {"$ref": "#/components/schemas/BarcodeDto4"},
+                            "nullable": True,
+                            "type": "array",
+                        },
+                        "description": {
+                            "default": "",
+                            "description": "Product description",
+                            "example": (
+                                "Delicate taste, juicy chicken fillet, mushrooms, Cheddar "
+                                "cheese and Mozzarella cheese, oregano, Parmegiano sauce"
+                            ),
+                            "type": "string",
+                        },
+                        "groups": {
+                            "items": {"$ref": "#/components/schemas/ComboGroupDto4"},
+                            "type": "array",
+                        },
+                        "id": {
+                            "description": "Product ID",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string",
+                        },
+                        "isMarked": {
+                            "default": False,
+                            "description": "Marking flag",
+                            "type": "boolean",
+                        },
+                        "name": {
+                            "default": "",
+                            "description": "Product name",
+                            "example": "Chicken Parmegiano",
+                            "type": "string",
+                        },
+                        "priceStrategy": {
+                            "default": "BY_COMPONENT",
+                            "description": "Price strategy",
+                            "enum": ["BY_COMPONENT"],
+                            "type": "string",
+                        },
+                        "sizes": {
+                            "type": "array",
+                            "items": {"$ref": "#/components/schemas/ExternalMenuComboItemSize"},
+                        },
+                        "sku": {
+                            "default": "",
+                            "description": "Product code",
+                            "example": "002345-35cm",
+                            "type": "string",
+                        },
+                        "type": {"type": "string"},
+                    },
+                    "required": [
+                        "sizes",
+                        "itemSizes",
+                        "modifierSchemaId",
+                        "type",
+                        "orderItemType",
+                        "allergenGroupIds",
+                        "id",
+                        "splittable",
+                    ],
+                    "type": "object",
+                },
+                "ExternalMenuComboItemSize": {
+                    "type": "object",
+                    "required": ["name", "sizeId"],
+                    "properties": {
+                        "name": {"type": "string"},
+                        "sizeId": {"type": "string"},
+                    },
+                },
+                "BarcodeDto4": {},
+                "ComboGroupDto4": {},
+            }
+        },
+    }
+
+
+def _response_body(version: int) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "comboCategories": [],
+        "formatVersion": version,
+        "id": "33333333-3333-4333-8333-333333333333",
+        "mode": f"V{version}",
+    }
+    if version == 2:
+        result["itemCategories"] = []
+    elif version == 3:
+        result["itemGroups"] = []
+    else:
+        result["itemGroups"] = [
+            {
+                "items": [
+                    {
+                        "id": "44444444-4444-4444-8444-444444444444",
+                        "sizes": [],
+                        "type": "COMBO",
+                    }
+                ]
+            }
+        ]
+    return result
+
+
+def _capture_root(repository_root: Path) -> Path:
+    return repository_root / "private/captures"
+
+
+def _make_repository(repository_root: Path) -> None:
+    repository_root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    marker = repository_root / "pyproject.toml"
+    if not marker.exists():
+        marker.write_text('[project]\nname = "synthetic-evidence-test"\n', encoding="utf-8")
+
+
+def _write_menu_pair(
+    repository_root: Path,
+    version: int,
+    *,
+    run_id: str | None = None,
+) -> tuple[Path, Path]:
+    _make_repository(repository_root)
+    schema = _effective_schema()
+    hints = build_versioned_evidence_redaction_hints(schema, OPERATION, version)
+    return CaptureWriter(_capture_root(repository_root)).write(
         run_id=run_id or f"run-v{version}",
         operation_id=OPERATION,
         kind="read",
@@ -35,9 +292,11 @@ def _write_menu_pair(root: Path, version: int, *, run_id: str | None = None) -> 
             "organizationIds": ["22222222-2222-4222-8222-222222222222"],
             "version": version,
         },
-        response_json={"formatVersion": version, "itemCategories": []},
+        response_json=_response_body(version),
         metadata={"method": "POST", "path": "/api/2/menu/by_id", "status": 200},
         approved_path="/api/2/menu/by_id",
+        request_path_values=hints.request_values,
+        response_path_values=hints.response_values_for_status(200),
     )
 
 
@@ -56,21 +315,21 @@ def _replace_json(path: Path, value: object) -> None:
     path.chmod(0o600)
 
 
-def _lock_for(root: Path) -> LiveProcessLock:
-    return LiveProcessLock(root.parent / ".state/live.lock")
+def _lock_for(repository_root: Path) -> LiveProcessLock:
+    return LiveProcessLock(repository_root / ".state/live.lock")
 
 
 def _read(
-    root: Path,
+    repository_root: Path,
     *,
-    validator: EvidenceValidator | None = None,
+    effective_schema: dict[str, Any] | None = None,
 ) -> Mapping[int, EvidencePair]:
-    lock = _lock_for(root)
+    lock = _lock_for(repository_root)
     with lock:
         return CaptureEvidenceReader(
-            root,
+            repository_root,
+            effective_schema or _effective_schema(),
             process_lock=lock,
-            validator=validator,
         ).read_menu_pairs()
 
 
@@ -112,13 +371,19 @@ def test_reader_collects_one_immutable_canonical_pair_per_version_without_writes
 def test_reader_accepts_an_injected_held_canonical_live_lock(tmp_path: Path) -> None:
     root = tmp_path / "captures"
     _complete_tree(root)
-    lock = LiveProcessLock(tmp_path / ".state/live.lock")
+    lock = _lock_for(root)
 
     with pytest.raises(SafetyError, match="held"):
-        CaptureEvidenceReader(root, process_lock=lock).read_menu_pairs()
+        CaptureEvidenceReader(root, _effective_schema(), process_lock=lock).read_menu_pairs()
 
     with lock:
-        assert tuple(CaptureEvidenceReader(root, process_lock=lock).read_menu_pairs()) == (2, 3, 4)
+        assert tuple(
+            CaptureEvidenceReader(
+                root,
+                _effective_schema(),
+                process_lock=lock,
+            ).read_menu_pairs()
+        ) == (2, 3, 4)
 
 
 @pytest.mark.parametrize("missing_version", [2, 3, 4])
@@ -277,7 +542,11 @@ def test_reader_rejects_oversize_wide_or_wrong_owner_entries(
         actual_uid = os.getuid()
         monkeypatch.setattr(promotion_module.os, "getuid", lambda: actual_uid + 1)
         with pytest.raises(SafetyError, match="owned"):
-            CaptureEvidenceReader(owner_root, process_lock=lock).read_menu_pairs()
+            CaptureEvidenceReader(
+                owner_root,
+                _effective_schema(),
+                process_lock=lock,
+            ).read_menu_pairs()
 
 
 @pytest.mark.parametrize("component", ["root", "run", "operation"])
@@ -287,7 +556,7 @@ def test_reader_requires_mode_0700_on_every_private_directory(
     root = tmp_path / "captures"
     paths = _complete_tree(root)
     target = {
-        "root": root,
+        "root": _capture_root(root),
         "run": paths[2][0].parent.parent,
         "operation": paths[2][0].parent,
     }[component]
@@ -309,7 +578,7 @@ def test_reader_rejects_symlinked_directory_and_unsafe_root_entries(tmp_path: Pa
 
     other_root = tmp_path / "other-captures"
     _complete_tree(other_root)
-    extra = other_root / "not-a-run"
+    extra = _capture_root(other_root) / "not-a-run"
     extra.write_bytes(b"unsafe\n")
     extra.chmod(0o600)
     with pytest.raises(SafetyError, match="run.*directory"):
@@ -317,15 +586,20 @@ def test_reader_rejects_symlinked_directory_and_unsafe_root_entries(tmp_path: Pa
 
 
 def test_reader_rejects_a_symlinked_capture_root_ancestor(tmp_path: Path) -> None:
-    real_root = tmp_path / "real/private/captures"
-    _complete_tree(real_root)
-    linked_private = tmp_path / "linked-private"
-    linked_private.symlink_to(real_root.parent, target_is_directory=True)
-    linked_root = linked_private / "captures"
-    lock = LiveProcessLock(tmp_path / ".state/live.lock")
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    private = repository_root / "private"
+    moved_private = tmp_path / "moved-private"
+    private.rename(moved_private)
+    private.symlink_to(moved_private, target_is_directory=True)
+    lock = LiveProcessLock(repository_root / ".state/live.lock")
 
     with lock, pytest.raises(SafetyError, match="symlink|ancestry"):
-        CaptureEvidenceReader(linked_root, process_lock=lock).read_menu_pairs()
+        CaptureEvidenceReader(
+            repository_root,
+            _effective_schema(),
+            process_lock=lock,
+        ).read_menu_pairs()
 
 
 def test_reader_double_read_detects_a_concurrent_file_swap(
@@ -402,12 +676,16 @@ def test_reader_fails_if_the_injected_lock_is_released_mid_read(
     monkeypatch.setattr(promotion_module, "_directory_entries", release_after_first_snapshot)
     try:
         with pytest.raises(SafetyError, match="released"):
-            CaptureEvidenceReader(root, process_lock=lock).read_menu_pairs()
+            CaptureEvidenceReader(
+                root,
+                _effective_schema(),
+                process_lock=lock,
+            ).read_menu_pairs()
     finally:
         lock.release()
 
 
-def test_reader_runs_generic_scan_and_injected_schema_validator(tmp_path: Path) -> None:
+def test_reader_runs_generic_scan_and_concrete_schema_validator(tmp_path: Path) -> None:
     root = tmp_path / "captures"
     paths = _complete_tree(root)
     response_path = paths[2][1]
@@ -420,32 +698,413 @@ def test_reader_runs_generic_scan_and_injected_schema_validator(tmp_path: Path) 
 
     clean_root = tmp_path / "clean"
     _complete_tree(clean_root)
-    validated: list[int] = []
-
-    def validator(version: int, request: object, response: object) -> None:
-        assert request is not response
-        validated.append(version)
-
-    pairs = _read(clean_root, validator=validator)
+    pairs = _read(clean_root)
     assert tuple(pairs) == (2, 3, 4)
-    assert validated == [2, 3, 4]
 
 
 def test_reader_requires_a_held_lock_before_filesystem_access(tmp_path: Path) -> None:
-    root = tmp_path / "missing"
+    root = tmp_path
+    _make_repository(root)
     with pytest.raises(SafetyError, match="held.*lock"):
-        CaptureEvidenceReader(root).read_menu_pairs()
-    assert not root.exists()
+        CaptureEvidenceReader(root, _effective_schema()).read_menu_pairs()
+    assert not _capture_root(root).exists()
 
 
 def test_reader_rejects_an_unapproved_operation_before_filesystem_access(tmp_path: Path) -> None:
-    root = tmp_path / "missing"
+    root = tmp_path
+    _make_repository(root)
     lock = _lock_for(root)
     with lock, pytest.raises(SafetyError, match="approved"):
         CaptureEvidenceReader(
             root,
+            _effective_schema(),
             operation="authenticate",
             process_lock=lock,
         ).read_menu_pairs()
 
-    assert not root.exists()
+    assert not _capture_root(root).exists()
+
+
+def test_reader_rejects_a_held_noncanonical_lock_before_capture_access(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "captures"
+    _complete_tree(root)
+    wrong_lock = LiveProcessLock(tmp_path / "wrong-state/live.lock")
+    opened = False
+    real_open = promotion_module._open_absolute_private_root
+
+    def track_open(path: Path) -> int:
+        nonlocal opened
+        opened = True
+        return real_open(path)
+
+    monkeypatch.setattr(promotion_module, "_open_absolute_private_root", track_open)
+    with wrong_lock, pytest.raises(SafetyError, match="canonical.*lock"):
+        CaptureEvidenceReader(
+            root,
+            _effective_schema(),
+            process_lock=wrong_lock,
+        ).read_menu_pairs()
+
+    assert not opened
+
+
+@pytest.mark.parametrize("alias_kind", ["relative", "dotdot", "symlink", "capture-root"])
+def test_reader_rejects_noncanonical_repository_alias_before_capture_access(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    alias_kind: str,
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    if alias_kind == "relative":
+        monkeypatch.chdir(tmp_path)
+        supplied = Path("repository")
+    elif alias_kind == "dotdot":
+        (repository_root / "nested").mkdir(mode=0o700)
+        supplied = repository_root / "nested/.."
+    elif alias_kind == "symlink":
+        supplied = tmp_path / "linked-repository"
+        supplied.symlink_to(repository_root, target_is_directory=True)
+    else:
+        supplied = _capture_root(repository_root)
+
+    opened = False
+
+    def fail_if_opened(path: Path) -> int:
+        nonlocal opened
+        opened = True
+        raise AssertionError("capture root was accessed")
+
+    monkeypatch.setattr(promotion_module, "_open_absolute_private_root", fail_if_opened)
+    with pytest.raises(SafetyError, match="repository|canonical|alias|marker|symlink"):
+        CaptureEvidenceReader(supplied, _effective_schema())
+    assert not opened
+
+
+def test_reader_rejects_noncanonical_or_symlinked_lock_path_before_capture_access(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    lexical_lock = _lock_for(repository_root)
+    opened = False
+
+    def fail_if_opened(path: Path) -> int:
+        nonlocal opened
+        opened = True
+        raise AssertionError("capture root was accessed")
+
+    monkeypatch.setattr(promotion_module, "_open_absolute_private_root", fail_if_opened)
+    lexical_lock.acquire()
+    lexical_lock.path = repository_root / ".state/../.state/live.lock"
+    try:
+        with pytest.raises(SafetyError, match="canonical.*lock"):
+            CaptureEvidenceReader(
+                repository_root,
+                _effective_schema(),
+                process_lock=lexical_lock,
+            ).read_menu_pairs()
+    finally:
+        lexical_lock.release()
+    assert not opened
+
+    canonical_lock = _lock_for(repository_root)
+    canonical_lock.acquire()
+    state = repository_root / ".state"
+    moved_state = repository_root / "moved-state"
+    state.rename(moved_state)
+    state.symlink_to(moved_state, target_is_directory=True)
+    try:
+        with pytest.raises(SafetyError, match="symlink|canonical"):
+            CaptureEvidenceReader(
+                repository_root,
+                _effective_schema(),
+                process_lock=canonical_lock,
+            ).read_menu_pairs()
+    finally:
+        canonical_lock.release()
+    assert not opened
+
+
+def test_reader_rejects_symlinked_repository_marker_before_capture_access(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repository_root = tmp_path / "repository"
+    _complete_tree(repository_root)
+    marker = repository_root / "pyproject.toml"
+    moved_marker = repository_root / "real-pyproject.toml"
+    marker.rename(moved_marker)
+    marker.symlink_to(moved_marker)
+    monkeypatch.setattr(
+        promotion_module,
+        "_open_absolute_private_root",
+        lambda path: (_ for _ in ()).throw(AssertionError("capture root was accessed")),
+    )
+
+    with pytest.raises(SafetyError, match="marker|symlink"):
+        CaptureEvidenceReader(repository_root, _effective_schema())
+
+
+def test_reader_rejects_non_fixed_point_opaque_schema_string(tmp_path: Path) -> None:
+    root = tmp_path / "captures"
+    paths = _complete_tree(root)
+    response = _load(paths[2][1])
+    response["body"]["privateName"] = "opaque customer value"
+    _replace_json(paths[2][1], response)
+
+    with pytest.raises(SafetyError, match="fixed.point|schema-aware"):
+        _read(root)
+
+
+def test_reader_compares_metadata_with_type_strict_identity(tmp_path: Path) -> None:
+    root = tmp_path / "captures"
+    paths = _complete_tree(root)
+    request = _load(paths[2][0])
+    response = _load(paths[2][1])
+    request["metadata"]["duration"] = 1
+    response["metadata"]["duration"] = 1.0
+    _replace_json(paths[2][0], request)
+    _replace_json(paths[2][1], response)
+
+    with pytest.raises(SafetyError, match="metadata.*identical"):
+        _read(root)
+
+
+def test_reviewed_combo_exception_hashes_are_computed_from_canonical_fragments() -> None:
+    schema = _effective_schema()
+    components = schema["components"]["schemas"]
+    combo = components["ExternalMenuComboItem"]
+    item_union = components["ExternalMenuCategory3"]["properties"]["items"]["items"]
+
+    assert hashlib.sha256(canonical_json_bytes(combo)).hexdigest() == (
+        validation_module._REVIEWED_COMBO_SHA256
+    )
+    assert hashlib.sha256(canonical_json_bytes(item_union)).hexdigest() == (
+        validation_module._REVIEWED_ITEM_UNION_SHA256
+    )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "unknown-keyword",
+        "unknown-format",
+        "format-type-mismatch",
+        "enum-format-without-enum",
+        "ref-sibling",
+        "external-ref",
+        "broken-ref",
+        "reference-cycle",
+        "combo-fragment",
+        "item-union-fragment",
+        "sixth-undefined-required",
+    ],
+)
+def test_concrete_validator_fails_closed_on_reviewed_schema_drift(
+    tmp_path: Path, mutation: str
+) -> None:
+    _make_repository(tmp_path)
+    schema = _effective_schema()
+    components = schema["components"]["schemas"]
+    if mutation == "unknown-keyword":
+        components["ExternalMenuV2"]["properties"]["name"]["pattern"] = ".*"
+    elif mutation == "unknown-format":
+        components["ExternalMenuV2"]["properties"]["name"]["format"] = "email"
+    elif mutation == "format-type-mismatch":
+        components["ExternalMenuV2"]["properties"]["name"]["format"] = "int32"
+    elif mutation == "enum-format-without-enum":
+        components["ExternalMenuV2"]["properties"]["name"]["format"] = "enum"
+    elif mutation == "ref-sibling":
+        schema["paths"]["/api/2/menu/by_id"]["post"]["requestBody"]["content"]["application/json"][
+            "schema"
+        ]["description"] = "drift"
+    elif mutation == "external-ref":
+        schema["paths"]["/api/2/menu/by_id"]["post"]["requestBody"]["content"]["application/json"][
+            "schema"
+        ] = {"$ref": "https://example.invalid/schema.json"}
+    elif mutation == "broken-ref":
+        components["ExternalMenuV2"]["properties"]["missing"] = {
+            "$ref": "#/components/schemas/Missing"
+        }
+    elif mutation == "reference-cycle":
+        components["ExternalMenuV2"]["properties"]["cycle"] = {
+            "$ref": "#/components/schemas/ExternalMenuV2"
+        }
+    elif mutation == "combo-fragment":
+        components["ExternalMenuComboItem"]["properties"]["description"]["default"] = None
+    elif mutation == "item-union-fragment":
+        components["ExternalMenuCategory3"]["properties"]["items"]["items"]["oneOf"].reverse()
+    else:
+        components["ExternalMenuComboItem"]["required"].append("sixthUnknown")
+
+    with pytest.raises(SafetyError, match="schema|reference|fragment|defect|drift"):
+        CaptureEvidenceReader(tmp_path, schema)
+
+
+def test_combo_required_exception_applies_only_to_exact_reviewed_component() -> None:
+    validator = MenuEvidenceValidator(_effective_schema())
+    inline_child_schema = {
+        "type": "object",
+        "required": ["orderItemType"],
+        "properties": {"orderItemType": {"type": "string"}},
+    }
+
+    with pytest.raises(SafetyError, match="required"):
+        validator._validate_instance(  # noqa: SLF001 - exact exception-scope regression
+            {},
+            inline_child_schema,
+            path="synthetic-inline-child",
+            component_name="ExternalMenuComboItem",
+        )
+
+
+@pytest.mark.parametrize(
+    ("target", "invalid_value"),
+    [
+        ("request-uuid", "<redacted:string>"),
+        ("response-int32", 2**31),
+        ("response-int64", 2**63),
+    ],
+)
+def test_concrete_validator_enforces_supported_format_semantics(
+    tmp_path: Path,
+    target: str,
+    invalid_value: object,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    if target == "request-uuid":
+        path = paths[2][0]
+        envelope = _load(path)
+        envelope["body"]["organizationIds"] = [invalid_value]
+    else:
+        path = paths[2][1]
+        envelope = _load(path)
+        property_name = "int32Value" if target == "response-int32" else "int64Value"
+        envelope["body"][property_name] = invalid_value
+    _replace_json(path, envelope)
+
+    with pytest.raises(SafetyError, match="format|uuid|range"):
+        _read(root)
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("missing-root-required", "required"),
+        ("wrong-root-type", "type"),
+        ("enum-sentinel", "enum"),
+        ("missing-combo-sizes", "required|branch"),
+        ("missing-combo-id", "required|branch"),
+        ("missing-combo-type", "required|branch"),
+    ],
+)
+def test_concrete_validator_enforces_selected_root_and_defined_combo_contract(
+    tmp_path: Path,
+    mutation: str,
+    message: str,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    version = (
+        2
+        if mutation
+        in {
+            "missing-root-required",
+            "wrong-root-type",
+            "enum-sentinel",
+        }
+        else 4
+    )
+    response_path = paths[version][1]
+    response = _load(response_path)
+    body = response["body"]
+    if mutation == "missing-root-required":
+        del body["id"]
+    elif mutation == "wrong-root-type":
+        body["comboCategories"] = {}
+    elif mutation == "enum-sentinel":
+        body["mode"] = "<redacted:string>"
+    else:
+        combo = body["itemGroups"][0]["items"][0]
+        del combo[mutation.removeprefix("missing-combo-")]
+    _replace_json(response_path, response)
+
+    with pytest.raises(SafetyError, match=message):
+        _read(root)
+
+
+def test_exact_five_undefined_combo_fields_are_optional_but_validated_if_present(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[4][1]
+    response = _load(response_path)
+    combo = response["body"]["itemGroups"][0]["items"][0]
+    combo.update(
+        {
+            "allergenGroupIds": [],
+            "itemSizes": [],
+            "modifierSchemaId": "<redacted:string>",
+            "orderItemType": "<redacted:string>",
+            "splittable": False,
+        }
+    )
+    _replace_json(response_path, response)
+    assert tuple(_read(root)) == (2, 3, 4)
+
+    combo["sixthUnknown"] = "<redacted:string>"
+    _replace_json(response_path, response)
+    with pytest.raises(SafetyError, match="undefined property"):
+        _read(root)
+
+
+def test_reader_has_no_injectable_validator_escape_hatch(tmp_path: Path) -> None:
+    root = tmp_path / "repository"
+    _complete_tree(root)
+    lock = _lock_for(root)
+
+    with pytest.raises(TypeError, match="validator"):
+        CaptureEvidenceReader(
+            root,
+            _effective_schema(),
+            process_lock=lock,
+            validator=lambda version, request, response: None,  # type: ignore[call-arg]
+        )
+
+
+def test_reader_rejects_non_none_validator_result(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "repository"
+    _complete_tree(root)
+    monkeypatch.setattr(MenuEvidenceValidator, "validate", lambda *args, **kwargs: True)
+
+    with pytest.raises(SafetyError, match="return exactly None"):
+        _read(root)
+
+
+def test_reader_rejects_and_closes_awaitable_validator_result_without_warning(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "repository"
+    _complete_tree(root)
+
+    async def asynchronous_result() -> None:
+        return None
+
+    monkeypatch.setattr(
+        MenuEvidenceValidator,
+        "validate",
+        lambda *args, **kwargs: asynchronous_result(),
+    )
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        with pytest.raises(SafetyError, match="synchronous"):
+            _read(root)
+        gc.collect()
+
+    assert not [warning for warning in caught if "never awaited" in str(warning.message)]

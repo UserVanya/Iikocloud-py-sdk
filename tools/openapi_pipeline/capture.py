@@ -52,6 +52,7 @@ _UUID_TEXT = (
 )
 _UUID = re.compile(_UUID_TEXT + r"\Z")
 _UUID_ANY = re.compile(_UUID_TEXT)
+_CAPTURE_UUID_ALIAS = re.compile(r"00000000-0000-4000-8000-[0-9]{12}\Z")
 _JWT = re.compile(
     r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\."
     r"[A-Za-z0-9_-]{8,}(?![A-Za-z0-9_-])"
@@ -660,6 +661,15 @@ class Sanitizer:
             unicodedata.normalize("NFKC", secret) for secret in known_secrets
         }
         self._uuid_aliases: dict[str, str] = {}
+        self._fixed_point_validation = False
+
+    @classmethod
+    def for_fixed_point_validation(cls) -> Sanitizer:
+        """Create a second-pass validator for already-sanitized capture UUID aliases."""
+
+        sanitizer = cls()
+        sanitizer._fixed_point_validation = True
+        return sanitizer
 
     def add_known_secret(self, secret: str) -> None:
         if type(secret) is not str or not secret:
@@ -734,6 +744,8 @@ class Sanitizer:
             return value
         if self._contains_known_secret(value):
             return "<redacted:secret>"
+        if self._fixed_point_validation and _CAPTURE_UUID_ALIAS.fullmatch(value):
+            return value
         if _UUID.fullmatch(value):
             canonical = str(uuid.UUID(value))
             alias = self._uuid_aliases.get(canonical)
