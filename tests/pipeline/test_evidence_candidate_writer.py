@@ -71,6 +71,9 @@ def _repository(tmp_path: Path) -> RepoPaths:
     root = tmp_path / "repository"
     root.mkdir(mode=0o755)
     (root / "pyproject.toml").write_text("[project]\nname='test'\n", encoding="utf-8")
+    build = root / "build"
+    build.mkdir(mode=0o755)
+    build.chmod(0o755)
     return RepoPaths(root)
 
 
@@ -152,6 +155,56 @@ def _assert_sanitized(error: SafetyError) -> None:
     assert SENSITIVE_MARKER not in repr(error)
     assert error.__cause__ is None
     assert error.__context__ is None
+
+
+def _assert_empty_build(paths: RepoPaths) -> None:
+    assert paths.build.is_dir()
+    assert stat.S_IMODE(os.lstat(paths.build).st_mode) == 0o755
+    assert list(paths.build.iterdir()) == []
+
+
+def _single_staging_residue(paths: RepoPaths) -> Path:
+    residues = list(paths.build.glob(".evidence-candidates.tmp-*"))
+    assert len(residues) == 1
+    return residues[0]
+
+
+def _assert_public_staging_subset(
+    staging: Path,
+    result: EvidenceCandidateManifestResult,
+) -> None:
+    expected_files = _expected_files(result)
+    expected_directories = {
+        "openapi",
+        "openapi/overlays",
+        "tests",
+        "tests/fixtures",
+        "tests/fixtures/contracts",
+    }
+    root_metadata = os.lstat(staging)
+    assert stat.S_ISDIR(root_metadata.st_mode)
+    assert stat.S_IMODE(root_metadata.st_mode) == 0o755
+    for path in staging.rglob("*"):
+        metadata = os.lstat(path)
+        relative = path.relative_to(staging).as_posix()
+        if stat.S_ISDIR(metadata.st_mode):
+            assert relative in expected_directories
+            assert stat.S_IMODE(metadata.st_mode) == 0o755
+            continue
+        assert stat.S_ISREG(metadata.st_mode)
+        assert relative in expected_files
+        assert stat.S_IMODE(metadata.st_mode) == 0o644
+        assert path.read_bytes() == expected_files[relative]
+
+
+def _assert_complete_staging(
+    staging: Path,
+    result: EvidenceCandidateManifestResult,
+) -> None:
+    _assert_public_staging_subset(staging, result)
+    assert {
+        path.relative_to(staging).as_posix() for path in staging.rglob("*") if path.is_file()
+    } == set(_expected_files(result))
 
 
 def test_writer_atomically_publishes_exact_candidate_tree(tmp_path: Path) -> None:
@@ -306,7 +359,7 @@ def test_writer_rejects_forged_result_before_filesystem_mutation(
     with pytest.raises(SafetyError):
         write_evidence_candidate_tree(forge(_result()), paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_requires_exact_result_and_paths_types_before_mutation(tmp_path: Path) -> None:
@@ -330,7 +383,7 @@ def test_writer_requires_exact_result_and_paths_types_before_mutation(tmp_path: 
     with pytest.raises(SafetyError, match="exact"):
         write_evidence_candidate_tree(result, PathsSubclass(paths.root))
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_reparses_and_reencodes_every_payload_before_mutation(tmp_path: Path) -> None:
@@ -349,7 +402,7 @@ def test_writer_reparses_and_reencodes_every_payload_before_mutation(tmp_path: P
         with pytest.raises(SafetyError, match="canonical"):
             write_evidence_candidate_tree(forged, paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_rescans_self_consistent_secret_bearing_payload_before_mutation(
@@ -369,7 +422,7 @@ def test_writer_rescans_self_consistent_secret_bearing_payload_before_mutation(
         write_evidence_candidate_tree(forged, paths)
 
     _assert_sanitized(caught.value)
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_sanitizes_caller_mapping_exception_and_does_not_mutate(
@@ -390,7 +443,7 @@ def test_writer_sanitizes_caller_mapping_exception_and_does_not_mutate(
         write_evidence_candidate_tree(forged, paths)
 
     _assert_sanitized(caught.value)
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_snapshots_all_result_fields_before_caller_callback(tmp_path: Path) -> None:
@@ -442,7 +495,7 @@ def test_writer_does_not_swallow_caller_base_exceptions(
     with pytest.raises(exception_type):
         write_evidence_candidate_tree(forged, paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_does_not_mask_trusted_internal_errors(
@@ -461,7 +514,7 @@ def test_writer_does_not_mask_trusted_internal_errors(
         write_evidence_candidate_tree(_result(), paths)
 
     assert caught.value is sentinel
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 @pytest.mark.parametrize("state", ["different", "partial", "extra"])
@@ -606,7 +659,7 @@ def test_writer_rejects_symlinked_repository_root_without_external_writes(
     with pytest.raises(SafetyError, match="symlink|canonical|directory"):
         write_evidence_candidate_tree(_result(), RepoPaths(alias))
 
-    assert not real_paths.build.exists()
+    _assert_empty_build(real_paths)
 
 
 @pytest.mark.parametrize("kind", ["build", "candidate"])
@@ -618,9 +671,9 @@ def test_writer_rejects_symlinked_build_or_candidate_without_external_writes(
     outside = tmp_path / "outside"
     outside.mkdir(mode=0o755)
     if kind == "build":
+        paths.build.rmdir()
         paths.build.symlink_to(outside, target_is_directory=True)
     else:
-        paths.build.mkdir(mode=0o755)
         (paths.build / "evidence-candidates").symlink_to(
             outside,
             target_is_directory=True,
@@ -647,6 +700,35 @@ def test_writer_requires_existing_canonical_repository_with_project_marker(
     assert not (root / "build").exists()
 
 
+def test_writer_requires_preexisting_build_without_trying_to_create_it(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    paths.build.rmdir()
+    real_mkdir = writer_module.os.mkdir
+    fixed_build_mkdir_calls = 0
+
+    def observe_mkdir(
+        path: str | bytes,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        nonlocal fixed_build_mkdir_calls
+        if path == "build" and dir_fd is not None:
+            fixed_build_mkdir_calls += 1
+        real_mkdir(path, mode, dir_fd=dir_fd)
+
+    monkeypatch.setattr(writer_module.os, "mkdir", observe_mkdir)
+
+    with pytest.raises(SafetyError, match="build|missing|safe"):
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert fixed_build_mkdir_calls == 0
+    assert not paths.build.exists()
+
+
 def test_writer_rejects_path_subclass_callback_before_mutation(tmp_path: Path) -> None:
     paths = _repository(tmp_path)
 
@@ -660,14 +742,13 @@ def test_writer_rejects_path_subclass_callback_before_mutation(tmp_path: Path) -
         write_evidence_candidate_tree(_result(), RepoPaths(forged_root))
 
     _assert_sanitized(caught.value)
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_rejects_existing_build_with_wrong_mode_without_repair(
     tmp_path: Path,
 ) -> None:
     paths = _repository(tmp_path)
-    paths.build.mkdir(mode=0o700)
     paths.build.chmod(0o700)
 
     with pytest.raises(SafetyError, match="0755|mode"):
@@ -677,45 +758,94 @@ def test_writer_rejects_existing_build_with_wrong_mode_without_repair(
     assert list(paths.build.iterdir()) == []
 
 
-def test_writer_never_chmods_or_writes_to_swapped_just_created_build(
+def test_writer_never_calls_mkdir_for_fixed_build_at_syscall_boundary(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     paths = _repository(tmp_path)
-    real_mkdir = writer_module._safe_mkdir_at
-    displaced = paths.root / "writer-created-build"
-    foreign_before: os.stat_result | None = None
-    sentinel = b"foreign-build-content"
+    result = _result()
+    real_mkdir = writer_module.os.mkdir
+    original = os.lstat(paths.build)
+    displaced = paths.root / "displaced-build"
+    fixed_build_mkdir_calls = 0
 
-    def swap_after_create(parent_fd: int, name: str, mode: int) -> Any:
-        nonlocal foreign_before
-        created = real_mkdir(parent_fd, name, mode)
-        if name == "build" and created:
+    def swap_if_fixed_build_is_created(
+        path: str | bytes,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        nonlocal fixed_build_mkdir_calls
+        if path == "build" and dir_fd is not None:
+            fixed_build_mkdir_calls += 1
             paths.build.rename(displaced)
-            paths.build.mkdir(mode=0o700)
-            paths.build.chmod(0o700)
-            marker = paths.build / "foreign-sentinel"
-            marker.write_bytes(sentinel)
-            marker.chmod(0o600)
-            foreign_before = os.lstat(paths.build)
-        return created
+            real_mkdir("build", 0o700, dir_fd=dir_fd)
+            return
+        real_mkdir(path, mode, dir_fd=dir_fd)
 
-    monkeypatch.setattr(writer_module, "_safe_mkdir_at", swap_after_create)
+    monkeypatch.setattr(writer_module.os, "mkdir", swap_if_fixed_build_is_created)
 
-    with pytest.raises(SafetyError, match="changed|binding|mode|safe"):
+    written = write_evidence_candidate_tree(result, paths)
+
+    current = os.lstat(paths.build)
+    assert fixed_build_mkdir_calls == 0
+    assert (current.st_dev, current.st_ino, stat.S_IMODE(current.st_mode)) == (
+        original.st_dev,
+        original.st_ino,
+        0o755,
+    )
+    assert written.changed is True
+    assert not displaced.exists()
+
+
+def test_writer_rejects_swapped_preexisting_build_before_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    real_open = writer_module._open_public_directory_from_metadata
+    displaced = paths.root / "displaced-build"
+    holder: dict[str, os.stat_result] = {}
+
+    def swap_before_open(
+        parent_fd: int,
+        name: str,
+        expected: os.stat_result,
+        *,
+        label: str,
+        validate_mode: bool = True,
+    ) -> int:
+        if label == "Evidence build root":
+            paths.build.rename(displaced)
+            paths.build.mkdir(mode=0o755)
+            paths.build.chmod(0o755)
+            holder["foreign"] = os.lstat(paths.build)
+        return real_open(
+            parent_fd,
+            name,
+            expected,
+            label=label,
+            validate_mode=validate_mode,
+        )
+
+    monkeypatch.setattr(
+        writer_module,
+        "_open_public_directory_from_metadata",
+        swap_before_open,
+    )
+
+    with pytest.raises(SafetyError, match="changed|binding"):
         write_evidence_candidate_tree(_result(), paths)
 
-    assert foreign_before is not None
-    foreign_after = os.lstat(paths.build)
-    assert (foreign_after.st_dev, foreign_after.st_ino, stat.S_IMODE(foreign_after.st_mode)) == (
-        foreign_before.st_dev,
-        foreign_before.st_ino,
-        0o700,
+    foreign = holder["foreign"]
+    current = os.lstat(paths.build)
+    assert (current.st_dev, current.st_ino, stat.S_IMODE(current.st_mode)) == (
+        foreign.st_dev,
+        foreign.st_ino,
+        0o755,
     )
-    assert (paths.build / "foreign-sentinel").read_bytes() == sentinel
-    assert not (paths.build / "evidence-candidates").exists()
-    assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
     assert displaced.is_dir()
+    assert not list(paths.build.iterdir())
 
 
 def test_existing_file_reads_are_nofollow_nonblocking_and_bounded(
@@ -761,32 +891,6 @@ def test_existing_file_reads_are_nofollow_nonblocking_and_bounded(
     assert read_sizes
 
 
-def test_filesystem_marker_error_is_sanitized_before_mutation(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    paths = _repository(tmp_path)
-    real_mkdir = writer_module.os.mkdir
-
-    def fail_build(
-        path: str | bytes,
-        mode: int = 0o777,
-        *,
-        dir_fd: int | None = None,
-    ) -> None:
-        if path == "build" and dir_fd is not None:
-            raise OSError(SENSITIVE_MARKER)
-        real_mkdir(path, mode, dir_fd=dir_fd)
-
-    monkeypatch.setattr(writer_module.os, "mkdir", fail_build)
-
-    with pytest.raises(SafetyError) as caught:
-        write_evidence_candidate_tree(_result(), paths)
-
-    _assert_sanitized(caught.value)
-    assert not paths.build.exists()
-
-
 def test_filesystem_fstat_marker_error_is_sanitized_and_fds_close(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -808,7 +912,7 @@ def test_filesystem_fstat_marker_error_is_sanitized_and_fds_close(
         write_evidence_candidate_tree(_result(), paths)
 
     _assert_sanitized(caught.value)
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 @pytest.mark.parametrize("primitive", ["nofollow", "renameat2"])
@@ -826,7 +930,7 @@ def test_writer_requires_secure_publication_primitives_before_mutation(
     with pytest.raises(SafetyError, match="unavailable"):
         write_evidence_candidate_tree(_result(), paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 def test_writer_probes_renameat2_kernel_support_before_mutation(
@@ -844,7 +948,7 @@ def test_writer_probes_renameat2_kernel_support_before_mutation(
     with pytest.raises(SafetyError, match="unavailable"):
         write_evidence_candidate_tree(_result(), paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 @pytest.mark.parametrize("error_number", [errno.EPERM, errno.EACCES, errno.EIO])
@@ -864,7 +968,7 @@ def test_writer_rejects_ambiguous_renameat2_probe_before_mutation(
     with pytest.raises(SafetyError, match="unavailable"):
         write_evidence_candidate_tree(_result(), paths)
 
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
 
 
 @pytest.mark.parametrize(
@@ -890,7 +994,7 @@ def test_renameat2_probe_accepts_only_precise_ebadf(
 
 
 @pytest.mark.parametrize("failure", ["write", "fsync", "rename"])
-def test_writer_cleans_staging_and_never_publishes_on_injected_failure(
+def test_writer_preserves_safe_staging_and_primary_on_prerename_failure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     failure: str,
@@ -898,6 +1002,15 @@ def test_writer_cleans_staging_and_never_publishes_on_injected_failure(
     paths = _repository(tmp_path)
     result = _result()
     sentinel = OSError(f"synthetic {failure} failure")
+    real_open = writer_module.os.open
+    opened: list[int] = []
+
+    def tracking_open(*args: Any, **kwargs: Any) -> int:
+        fd = real_open(*args, **kwargs)
+        opened.append(fd)
+        return fd
+
+    monkeypatch.setattr(writer_module.os, "open", tracking_open)
     if failure == "write":
         real_write = writer_module._write_file_at
         calls = 0
@@ -932,11 +1045,14 @@ def test_writer_cleans_staging_and_never_publishes_on_injected_failure(
 
     assert caught.value is sentinel
     assert not (paths.build / "evidence-candidates").exists()
-    assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
+    _assert_public_staging_subset(_single_staging_residue(paths), result)
+    for fd in opened:
+        with pytest.raises(OSError):
+            os.fstat(fd)
 
 
 @pytest.mark.parametrize("exception_type", [KeyboardInterrupt, SystemExit])
-def test_writer_cleans_staging_and_preserves_injected_base_exception(
+def test_writer_preserves_safe_staging_and_injected_base_exception(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     exception_type: type[BaseException],
@@ -948,69 +1064,130 @@ def test_writer_cleans_staging_and_preserves_injected_base_exception(
 
     monkeypatch.setattr(writer_module, "_write_file_at", fail)
 
-    with pytest.raises(exception_type):
-        write_evidence_candidate_tree(_result(), paths)
+    result = _result()
+    with pytest.raises(exception_type) as caught:
+        write_evidence_candidate_tree(result, paths)
 
+    assert caught.value.args == (SENSITIVE_MARKER,)
     assert not (paths.build / "evidence-candidates").exists()
-    assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
+    _assert_public_staging_subset(_single_staging_residue(paths), result)
 
 
-def test_writer_cleanup_failure_never_masks_primary_error(
+def test_writer_never_calls_unlink_or_rmdir_on_failure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     paths = _repository(tmp_path)
+    result = _result()
     primary = RuntimeError("synthetic primary failure")
+    removal_calls: list[str] = []
 
-    def fail_write(*_args: Any, **_kwargs: Any) -> None:
+    def fail_rename(*_args: Any, **_kwargs: Any) -> None:
         raise primary
 
-    def fail_cleanup(*_args: Any, **_kwargs: Any) -> bool:
-        raise OSError("synthetic cleanup failure")
+    def forbidden_unlink(*_args: Any, **_kwargs: Any) -> None:
+        removal_calls.append("unlink")
+        raise AssertionError("writer must never unlink a staging entry")
 
-    monkeypatch.setattr(writer_module, "_write_file_at", fail_write)
-    monkeypatch.setattr(writer_module, "_cleanup_fixed_tree", fail_cleanup)
+    def forbidden_rmdir(*_args: Any, **_kwargs: Any) -> None:
+        removal_calls.append("rmdir")
+        raise AssertionError("writer must never remove a staging directory")
+
+    monkeypatch.setattr(writer_module, "_rename_directory_noreplace", fail_rename)
+    monkeypatch.setattr(writer_module.os, "unlink", forbidden_unlink)
+    monkeypatch.setattr(writer_module.os, "rmdir", forbidden_rmdir)
 
     with pytest.raises(RuntimeError) as caught:
-        write_evidence_candidate_tree(_result(), paths)
+        write_evidence_candidate_tree(result, paths)
 
     assert caught.value is primary
+    assert removal_calls == []
     assert not (paths.build / "evidence-candidates").exists()
+    _assert_complete_staging(_single_staging_residue(paths), result)
 
 
-def test_writer_closes_child_fd_when_post_open_permission_step_fails(
+def test_writer_never_fchmods_a_created_directory(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     paths = _repository(tmp_path)
-    real_open = writer_module.os.open
-    real_fchmod = writer_module._fchmod_fd
-    opened: list[int] = []
-    sentinel = RuntimeError("synthetic nested fchmod failure")
+    real_fchmod = writer_module.os.fchmod
+    directory_calls: list[int] = []
 
-    def tracking_open(*args: Any, **kwargs: Any) -> int:
-        fd = real_open(*args, **kwargs)
-        opened.append(fd)
-        return fd
-
-    def fail_nested(fd: int, mode: int) -> None:
-        target = os.readlink(f"/proc/self/fd/{fd}")
-        if ".evidence-candidates.tmp-" in target and target.endswith("/openapi"):
-            raise sentinel
+    def reject_directory_fchmod(fd: int, mode: int) -> None:
+        if stat.S_ISDIR(os.fstat(fd).st_mode):
+            directory_calls.append(fd)
+            raise AssertionError("created directories must never be repaired with fchmod")
         real_fchmod(fd, mode)
 
-    monkeypatch.setattr(writer_module.os, "open", tracking_open)
-    monkeypatch.setattr(writer_module, "_fchmod_fd", fail_nested)
+    monkeypatch.setattr(writer_module.os, "fchmod", reject_directory_fchmod)
 
-    with pytest.raises(RuntimeError) as caught:
+    written = write_evidence_candidate_tree(_result(), paths)
+
+    assert written.changed is True
+    assert directory_calls == []
+
+
+def test_writer_rejects_umask_narrowed_staging_mode_without_repair(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    previous_umask = os.umask(0o077)
+    try:
+        with pytest.raises(SafetyError, match="0755|mode"):
+            write_evidence_candidate_tree(_result(), paths)
+    finally:
+        os.umask(previous_umask)
+
+    assert not (paths.build / "evidence-candidates").exists()
+    staging = _single_staging_residue(paths)
+    assert stat.S_IMODE(os.lstat(staging).st_mode) == 0o700
+
+
+def test_writer_rejects_current_staging_mode_change_before_first_child(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    real_stat = writer_module._safe_stat_at
+    real_mkdir = writer_module.os.mkdir
+    child_mkdir_calls = 0
+
+    def narrow_mode_before_current_stat(
+        parent_fd: int,
+        name: str,
+        *,
+        message: str,
+    ) -> os.stat_result:
+        if message == "Cannot revalidate Evidence candidate staging root safely":
+            os.chmod(
+                name,
+                0o700,
+                dir_fd=parent_fd,
+                follow_symlinks=False,
+            )
+        return real_stat(parent_fd, name, message=message)
+
+    def observe_mkdir(
+        path: str | bytes,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        nonlocal child_mkdir_calls
+        if path == "openapi":
+            child_mkdir_calls += 1
+        real_mkdir(path, mode, dir_fd=dir_fd)
+
+    monkeypatch.setattr(writer_module, "_safe_stat_at", narrow_mode_before_current_stat)
+    monkeypatch.setattr(writer_module.os, "mkdir", observe_mkdir)
+
+    with pytest.raises(SafetyError, match="0755|mode"):
         write_evidence_candidate_tree(_result(), paths)
 
-    assert caught.value is sentinel
-    assert not (paths.build / "evidence-candidates").exists()
-    assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
-    for fd in opened:
-        with pytest.raises(OSError):
-            os.fstat(fd)
+    assert child_mkdir_calls == 0
+    staging = _single_staging_residue(paths)
+    assert stat.S_IMODE(os.lstat(staging).st_mode) == 0o700
 
 
 @pytest.mark.parametrize("registration", ["root", "child"])
@@ -1050,13 +1227,10 @@ def test_writer_closes_unregistered_directory_fd_on_memory_error(
 
     assert caught.value.args == (SENSITIVE_MARKER,)
     assert not (paths.build / "evidence-candidates").exists()
-    staging = list(paths.build.glob(".evidence-candidates.tmp-*"))
-    assert len(staging) <= 1
-    if staging:
-        assert staging[0].is_dir()
-        assert staging[0].stat().st_mode & 0o777 == 0o755
-        assert not list(staging[0].rglob("*.json"))
-        assert not list(staging[0].rglob("*.yaml"))
+    staging = _single_staging_residue(paths)
+    _assert_public_staging_subset(staging, _result())
+    assert not list(staging.rglob("*.json"))
+    assert not list(staging.rglob("*.yaml"))
     assert opened
     for fd in opened:
         with pytest.raises(OSError):
@@ -1080,22 +1254,23 @@ def test_writer_handles_concurrent_no_replace_winner_without_clobber(
 
     monkeypatch.setattr(writer_module, "_rename_directory_noreplace", race_publish)
 
-    if winner == "identical":
-        written = write_evidence_candidate_tree(result, paths)
-        assert written.changed is False
-    else:
-        with pytest.raises(SafetyError):
-            write_evidence_candidate_tree(result, paths)
+    expected_error = (
+        "Concurrent evidence candidate publication preserved staging residue"
+        if winner == "identical"
+        else None
+    )
+    with pytest.raises(SafetyError, match=expected_error):
+        write_evidence_candidate_tree(result, paths)
 
     root = paths.build / "evidence-candidates"
     expected_manifest = result.canonical_json_bytes
     if winner == "different":
         expected_manifest += b"\n"
     assert (root / "candidate-manifest.json").read_bytes() == expected_manifest
-    assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
+    _assert_complete_staging(_single_staging_residue(paths), result)
 
 
-def test_postrename_revalidation_rejects_byte_identical_inode_replacement(
+def test_postrename_revalidation_preserves_complete_final_name_and_fails_closed(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1107,7 +1282,7 @@ def test_postrename_revalidation_rejects_byte_identical_inode_replacement(
     def replace_then_revalidate(*args: Any, **kwargs: Any) -> None:
         root = paths.build / "evidence-candidates"
         root.rename(displaced)
-        _write_tree_directly(paths, result)
+        _write_tree_directly(paths, result, changed_path="candidate-manifest.json")
         real_revalidate(*args, **kwargs)
 
     monkeypatch.setattr(
@@ -1120,11 +1295,15 @@ def test_postrename_revalidation_rejects_byte_identical_inode_replacement(
         write_evidence_candidate_tree(result, paths)
 
     replacement = paths.build / "evidence-candidates"
-    assert (replacement / "candidate-manifest.json").read_bytes() == (result.canonical_json_bytes)
+    assert (replacement / "candidate-manifest.json").read_bytes() == (
+        result.canonical_json_bytes + b"\n"
+    )
     assert displaced.is_dir()
+    with pytest.raises(SafetyError):
+        write_evidence_candidate_tree(result, paths)
 
 
-def test_cleanup_preserves_primary_and_never_deletes_foreign_staging_replacement(
+def test_failure_preserves_primary_and_foreign_staging_replacement(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1218,96 +1397,46 @@ def test_staging_open_failure_does_not_delete_swapped_foreign_directory(
     assert not (paths.build / "evidence-candidates").exists()
 
 
-@pytest.mark.parametrize("replacement", ["root", "manifest"])
-def test_cleanup_rechecks_each_owned_entry_before_deletion(
+def test_writer_revalidates_staging_name_binding_immediately_before_rename(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
-    replacement: str,
 ) -> None:
     paths = _repository(tmp_path)
-    primary = RuntimeError(f"synthetic {replacement} cleanup trigger")
-    real_create = writer_module._create_staging_directory
-    real_same = writer_module._same_identity
-    holder: dict[str, Any] = {}
+    result = _result()
+    real_create_tree = writer_module._create_staging_tree
+    holder: dict[str, Path] = {}
 
-    def track_staging(build_fd: int) -> tuple[str, int]:
-        name, fd = real_create(build_fd)
-        root = Path(os.readlink(f"/proc/self/fd/{fd}"))
-        metadata = os.fstat(fd)
-        holder.update(root=root, identity=(metadata.st_dev, metadata.st_ino))
-        return name, fd
+    def swap_after_complete_tree(*args: Any, **kwargs: Any) -> None:
+        real_create_tree(*args, **kwargs)
+        directory_fds = cast(dict[str, int], args[0])
+        staging = Path(os.readlink(f"/proc/self/fd/{directory_fds['']}"))
+        displaced = staging.with_name(staging.name + "-writer-owned")
+        staging.rename(displaced)
+        staging.mkdir(mode=0o755)
+        staging.chmod(0o755)
+        holder.update(foreign=staging, displaced=displaced)
 
-    def swap_after_initial_root_check(
-        left: os.stat_result,
-        right: os.stat_result,
-    ) -> bool:
-        matched = real_same(left, right)
-        identity = holder.get("identity")
-        if (
-            matched
-            and identity is not None
-            and (left.st_dev, left.st_ino) == identity
-            and "foreign" not in holder
-        ):
-            root = cast(Path, holder["root"])
-            if replacement == "root":
-                displaced = root.with_name(root.name + "-writer-owned")
-                root.rename(displaced)
-                root.mkdir(mode=0o755)
-                root.chmod(0o755)
-                holder.update(
-                    foreign=root,
-                    foreign_metadata=os.lstat(root),
-                    displaced=displaced,
-                )
-            else:
-                manifest = root / "candidate-manifest.json"
-                displaced = root / "candidate-manifest.writer-owned"
-                manifest.rename(displaced)
-                manifest.write_bytes(b"foreign-manifest")
-                manifest.chmod(0o644)
-                holder.update(
-                    foreign=manifest,
-                    foreign_metadata=os.lstat(manifest),
-                    displaced=displaced,
-                )
-        return matched
+    monkeypatch.setattr(writer_module, "_create_staging_tree", swap_after_complete_tree)
 
-    def fail_rename(*_args: Any, **_kwargs: Any) -> None:
-        raise primary
+    with pytest.raises(SafetyError, match="binding|changed|revalidate"):
+        write_evidence_candidate_tree(result, paths)
 
-    monkeypatch.setattr(writer_module, "_create_staging_directory", track_staging)
-    monkeypatch.setattr(writer_module, "_same_identity", swap_after_initial_root_check)
-    monkeypatch.setattr(writer_module, "_rename_directory_noreplace", fail_rename)
-
-    with pytest.raises(RuntimeError) as caught:
-        write_evidence_candidate_tree(_result(), paths)
-
-    assert caught.value is primary
-    foreign = cast(Path, holder["foreign"])
-    expected = cast(os.stat_result, holder["foreign_metadata"])
-    current = os.lstat(foreign)
-    assert (current.st_dev, current.st_ino, stat.S_IMODE(current.st_mode)) == (
-        expected.st_dev,
-        expected.st_ino,
-        stat.S_IMODE(expected.st_mode),
-    )
-    if replacement == "manifest":
-        assert foreign.read_bytes() == b"foreign-manifest"
-    displaced = cast(Path, holder["displaced"])
-    assert displaced.exists()
+    foreign = holder["foreign"]
+    displaced = holder["displaced"]
+    assert foreign.is_dir()
+    assert list(foreign.iterdir()) == []
+    _assert_complete_staging(displaced, result)
     assert not (paths.build / "evidence-candidates").exists()
 
 
 @pytest.mark.parametrize("swap", ["repository", "build"])
-def test_held_directory_fds_prevent_parent_swap_escape_and_cleanup_publish(
+def test_held_directory_fds_prevent_escape_and_preserve_postrename_tree(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     swap: str,
 ) -> None:
     paths = _repository(tmp_path)
-    if swap == "build":
-        paths.build.mkdir(mode=0o755)
+    result = _result()
     outside = tmp_path / "outside"
     outside.mkdir(mode=0o755)
     moved = tmp_path / f"moved-{swap}"
@@ -1325,12 +1454,13 @@ def test_held_directory_fds_prevent_parent_swap_escape_and_cleanup_publish(
     monkeypatch.setattr(writer_module, "_create_staging_directory", swap_then_create)
 
     with pytest.raises(SafetyError, match="changed|ancestry|binding|missing|safe|symlink"):
-        write_evidence_candidate_tree(_result(), paths)
+        write_evidence_candidate_tree(result, paths)
 
     assert not list(outside.rglob("candidate-manifest.json"))
     assert not list(outside.rglob(".evidence-candidates.tmp-*"))
     moved_build = moved / "build" if swap == "repository" else moved
-    assert not (moved_build / "evidence-candidates").exists()
+    published = moved_build / "evidence-candidates"
+    _assert_complete_staging(published, result)
     assert not list(moved_build.glob(".evidence-candidates.tmp-*"))
 
 
@@ -1376,7 +1506,7 @@ def test_writer_has_no_caller_controlled_relative_destination(tmp_path: Path) ->
         write_evidence_candidate_tree(forged, paths)
 
     _assert_sanitized(caught.value)
-    assert not paths.build.exists()
+    _assert_empty_build(paths)
     assert not (tmp_path / SENSITIVE_MARKER).exists()
 
 
