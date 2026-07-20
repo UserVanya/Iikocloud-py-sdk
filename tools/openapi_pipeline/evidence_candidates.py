@@ -19,18 +19,25 @@ from .evidence_analysis import (
     MenuEvidenceAnalysis,
     analyze_menu_evidence,
 )
+from .evidence_candidate_store import _candidate_manifest_document
 from .evidence_candidate_synthesis import build_and_validate_synthetic_fixtures
 from .evidence_promotion import EvidencePair, FrozenJson
 from .io import canonical_json_bytes, sha256_bytes
 from .overlay import apply_overlay
 from .validate import ensure_valid_effective_schema
 
+EVIDENCE_OPERATION_ID = "get_external_menu_by_id"
 OPERATIONS_OVERLAY_PATH = "openapi/overlays/operations.overlay.yaml"
 POLYMORPHISM_OVERLAY_PATH = "openapi/overlays/polymorphism.overlay.yaml"
 _FIXTURE_PATHS = {
     version: f"tests/fixtures/contracts/external-menu-v{version}.json" for version in (2, 3, 4)
 }
 _VERSIONS = (2, 3, 4)
+EVIDENCE_CANDIDATE_PAYLOAD_PATHS = (
+    OPERATIONS_OVERLAY_PATH,
+    POLYMORPHISM_OVERLAY_PATH,
+    *(_FIXTURE_PATHS[version] for version in _VERSIONS),
+)
 _ITEM3 = "ExternalMenuItem3"
 _COMBO = "ExternalMenuComboItem"
 _CATEGORY3 = "ExternalMenuCategory3"
@@ -61,6 +68,11 @@ _UUID_ANY = re.compile(
 class EvidenceCandidateBundle:
     """A deeply immutable, deterministic set of five in-memory promotion candidates."""
 
+    operation_id: str
+    effective_schema_sha256: str
+    evidence_analysis_sha256: str
+    evidence_provenance: Mapping[int, EvidenceProvenance]
+    integrity_sha256: str
     operations_overlay: Mapping[str, Any]
     polymorphism_overlay: Mapping[str, Any]
     fixtures: Mapping[int, Mapping[str, Any]]
@@ -79,7 +91,9 @@ def build_evidence_candidate_bundle(
     schema = _strict_document_copy(effective_schema)
     stable_pairs = _snapshot_pairs(pairs)
     fresh_analysis = analyze_menu_evidence(stable_pairs, schema)
-    if _analysis_bytes(analysis) != _analysis_bytes(fresh_analysis):
+    supplied_analysis_body = _analysis_bytes(analysis)
+    fresh_analysis_body = _analysis_bytes(fresh_analysis)
+    if supplied_analysis_body != fresh_analysis_body:
         raise SafetyError("Evidence candidate analysis is forged, stale, or mismatched")
 
     operations, after_operations = _build_operations_overlay(schema)
@@ -115,7 +129,31 @@ def build_evidence_candidate_bundle(
     frozen_hashes = MappingProxyType(
         {path: sha256_bytes(body) for path, body in sorted(bodies.items())}
     )
+    frozen_provenance = MappingProxyType(
+        {
+            version: EvidenceProvenance(
+                fresh_analysis.provenance[version].request_sha256,
+                fresh_analysis.provenance[version].response_sha256,
+            )
+            for version in _VERSIONS
+        }
+    )
+    effective_schema_sha256 = sha256_bytes(canonical_json_bytes(schema))
+    evidence_analysis_sha256 = sha256_bytes(fresh_analysis_body)
+    integrity_value = _candidate_manifest_document(
+        operation_id=EVIDENCE_OPERATION_ID,
+        effective_schema_sha256=effective_schema_sha256,
+        evidence_analysis_sha256=evidence_analysis_sha256,
+        provenance=frozen_provenance,
+        files=frozen_hashes,
+        payload_paths=EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
+    )
     return EvidenceCandidateBundle(
+        operation_id=EVIDENCE_OPERATION_ID,
+        effective_schema_sha256=effective_schema_sha256,
+        evidence_analysis_sha256=evidence_analysis_sha256,
+        evidence_provenance=frozen_provenance,
+        integrity_sha256=sha256_bytes(canonical_json_bytes(integrity_value)),
         operations_overlay=frozen_operations,
         polymorphism_overlay=frozen_polymorphism,
         fixtures=frozen_fixtures,

@@ -25,6 +25,8 @@ import tools.openapi_pipeline.evidence_promotion as promotion_module
 from tools.openapi_pipeline.errors import SafetyError, StaleOverlayError
 from tools.openapi_pipeline.evidence_analysis import MenuEvidenceAnalysis, analyze_menu_evidence
 from tools.openapi_pipeline.evidence_candidates import (
+    EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
+    EVIDENCE_OPERATION_ID,
     OPERATIONS_OVERLAY_PATH,
     POLYMORPHISM_OVERLAY_PATH,
     EvidenceCandidateBundle,
@@ -103,6 +105,44 @@ def _retained_items() -> list[dict[str, Any]]:
 
 def _mutable(value: Any) -> Any:
     return _plain(value)
+
+
+def test_bundle_binds_payloads_to_schema_analysis_and_exact_provenance() -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items(), order=(4, 2, 3))
+    analysis = analyze_menu_evidence(pairs, schema)
+
+    bundle = build_evidence_candidate_bundle(
+        analysis=analysis,
+        pairs=pairs,
+        effective_schema=schema,
+    )
+
+    assert bundle.operation_id == EVIDENCE_OPERATION_ID == "get_external_menu_by_id"
+    assert bundle.effective_schema_sha256 == sha256_bytes(canonical_json_bytes(schema))
+    assert bundle.evidence_analysis_sha256 == sha256_bytes(
+        candidate_module._analysis_bytes(analysis)
+    )
+    assert tuple(bundle.evidence_provenance) == (2, 3, 4)
+    assert {
+        version: (
+            provenance.request_sha256,
+            provenance.response_sha256,
+        )
+        for version, provenance in bundle.evidence_provenance.items()
+    } == {
+        version: (pair.request_sha256, pair.response_sha256)
+        for version, pair in sorted(pairs.items())
+    }
+    assert bundle.evidence_provenance is not analysis.provenance
+    assert EVIDENCE_CANDIDATE_PAYLOAD_PATHS == (
+        "openapi/overlays/operations.overlay.yaml",
+        "openapi/overlays/polymorphism.overlay.yaml",
+        "tests/fixtures/contracts/external-menu-v2.json",
+        "tests/fixtures/contracts/external-menu-v3.json",
+        "tests/fixtures/contracts/external-menu-v4.json",
+    )
+    assert tuple(bundle.canonical_bytes) == EVIDENCE_CANDIDATE_PAYLOAD_PATHS
 
 
 def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> None:
@@ -324,6 +364,10 @@ def test_bundle_is_deeply_immutable() -> None:
         bundle.fixtures[4]["formatVersion"] = 9  # type: ignore[index]
     with pytest.raises(TypeError):
         bundle.canonical_bytes[OPERATIONS_OVERLAY_PATH] = b"changed"  # type: ignore[index]
+    with pytest.raises(TypeError):
+        bundle.evidence_provenance[2] = bundle.evidence_provenance[3]  # type: ignore[index]
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        bundle.operation_id = "changed"  # type: ignore[misc]
     with pytest.raises(dataclasses.FrozenInstanceError):
         bundle.sha256 = MappingProxyType({})  # type: ignore[misc]
 
