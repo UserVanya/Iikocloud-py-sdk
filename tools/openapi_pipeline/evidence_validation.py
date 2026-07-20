@@ -125,6 +125,8 @@ class MenuEvidenceValidator:
         response_body = response_value.get("body")
         if type(request_body) is not dict or type(response_body) is not dict:
             raise SafetyError("Evidence validator bodies must be strict JSON objects")
+        if type(request_body.get("version")) is not int or request_body.get("version") != version:
+            raise SafetyError("Evidence request body does not match the selected menu version")
 
         self._validate_instance(request_body, self._request_schema, path="request")
         self._validate_instance(

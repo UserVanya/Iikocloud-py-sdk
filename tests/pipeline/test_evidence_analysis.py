@@ -9,11 +9,13 @@ from typing import Any
 import pytest
 from test_evidence_promotion_reader import _effective_schema, _response_body
 
+import tools.openapi_pipeline.evidence_promotion as promotion_module
 from tools.openapi_pipeline.capture import Sanitizer
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.evidence import build_versioned_evidence_redaction_hints
 from tools.openapi_pipeline.evidence_analysis import analyze_menu_evidence
 from tools.openapi_pipeline.evidence_promotion import EvidencePair
+from tools.openapi_pipeline.evidence_validation import MenuEvidenceValidator
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.paths import RepoPaths
 from tools.openapi_pipeline.pipeline import compose_reviewed_bootstrap_candidate
@@ -96,8 +98,15 @@ def _pair_from_bodies(
         response_body,
         path_values=hints.response_values_for_status(200),
     )
-    request = {"body": sanitized_request}
-    response = {"body": sanitized_response}
+    metadata = {
+        "method": "POST",
+        "operationId": OPERATION,
+        "path": "/api/2/menu/by_id",
+        "runId": f"synthetic-v{version}",
+        "status": 200,
+    }
+    request = {"body": sanitized_request, "metadata": dict(metadata)}
+    response = {"body": sanitized_response, "metadata": dict(metadata)}
     return EvidencePair(
         version=version,
         request=request,
@@ -203,6 +212,23 @@ def _plain(value: Any) -> Any:
     if type(value) is tuple:
         return [_plain(child) for child in value]
     return value
+
+
+def _replace_pair(
+    pair: EvidencePair,
+    *,
+    request: dict[str, Any] | None = None,
+    response: dict[str, Any] | None = None,
+) -> EvidencePair:
+    request_value = request if request is not None else _plain(pair.request)
+    response_value = response if response is not None else _plain(pair.response)
+    return EvidencePair(
+        version=pair.version,
+        request=request_value,
+        response=response_value,
+        request_sha256=sha256_bytes(canonical_json_bytes(request_value)),
+        response_sha256=sha256_bytes(canonical_json_bytes(response_value)),
+    )
 
 
 def test_analyzer_derives_normal_mapping_counts_and_sorted_provenance() -> None:
@@ -453,6 +479,94 @@ def test_analyzer_outputs_are_deeply_immutable() -> None:
         result.combo_fields["orderItemType"].property_schema["type"] = "number"  # type: ignore[index]
 
 
+def test_public_reader_contract_revalidator_accepts_a_valid_frozen_pair() -> None:
+    schema = _effective_schema()
+    pair = _pairs(schema, [_dish(), _combo()])[4]
+
+    version = promotion_module.revalidate_evidence_pair_contract(
+        pair.request,
+        pair.response,
+    )
+
+    assert version == 4
+    assert isinstance(pair.request, MappingProxyType)
+    assert isinstance(pair.request["metadata"], MappingProxyType)
+
+
+def test_analyzer_rejects_request_version_mismatch_with_fresh_valid_hashes() -> None:
+    schema = _effective_schema()
+    pairs = dict(_pairs(schema, [_dish(), _combo()]))
+    request = _plain(pairs[2].request)
+    request["body"]["version"] = 3
+    pairs[2] = _replace_pair(pairs[2], request=request)
+
+    with pytest.raises(SafetyError, match="version|contract"):
+        analyze_menu_evidence(pairs, schema)
+
+
+def test_concrete_validator_binds_request_version_to_selected_version() -> None:
+    schema = _effective_schema()
+    pair = _pairs(schema, [_dish(), _combo()])[2]
+    request = _plain(pair.request)
+    response = _plain(pair.response)
+    request["body"]["version"] = 3
+
+    with pytest.raises(SafetyError, match="request.*version|selected.*version"):
+        MenuEvidenceValidator(schema).validate(2, request, response)
+
+
+def test_analyzer_rejects_extra_envelope_field_with_fresh_valid_hash() -> None:
+    schema = _effective_schema()
+    pairs = dict(_pairs(schema, [_dish(), _combo()]))
+    response = _plain(pairs[3].response)
+    response["extra"] = "<redacted:string>"
+    pairs[3] = _replace_pair(pairs[3], response=response)
+
+    with pytest.raises(SafetyError, match="envelope|contract|metadata"):
+        analyze_menu_evidence(pairs, schema)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["wrong-path", "different-run-id", "duration-type-mismatch"],
+)
+def test_analyzer_rejects_wrong_or_type_different_metadata_with_fresh_hashes(
+    mutation: str,
+) -> None:
+    schema = _effective_schema()
+    pairs = dict(_pairs(schema, [_dish(), _combo()]))
+    request = _plain(pairs[3].request)
+    response = _plain(pairs[3].response)
+    if mutation == "wrong-path":
+        request["metadata"]["path"] = "/api/2/menu/other"
+        response["metadata"]["path"] = "/api/2/menu/other"
+    elif mutation == "different-run-id":
+        response["metadata"]["runId"] = "synthetic-other"
+    else:
+        request["metadata"]["duration"] = 1
+        response["metadata"]["duration"] = 1.0
+    pairs[3] = _replace_pair(pairs[3], request=request, response=response)
+
+    with pytest.raises(SafetyError, match="metadata|runId|contract"):
+        analyze_menu_evidence(pairs, schema)
+
+
+def test_analyzer_generic_scan_rejects_unsafe_metadata_without_echoing_it() -> None:
+    schema = _effective_schema()
+    pairs = dict(_pairs(schema, [_dish(), _combo()]))
+    request = _plain(pairs[4].request)
+    response = _plain(pairs[4].response)
+    marker = "Bearer synthetic-sensitive-marker"
+    request["metadata"]["headers"] = {"x-correlation-id": marker}
+    response["metadata"]["headers"] = {"x-correlation-id": marker}
+    pairs[4] = _replace_pair(pairs[4], request=request, response=response)
+
+    with pytest.raises(SafetyError, match="secret/PII|contract") as caught:
+        analyze_menu_evidence(pairs, schema)
+
+    assert marker not in str(caught.value)
+
+
 def test_analyzer_rejects_tampered_pair_provenance() -> None:
     schema = _effective_schema()
     pairs = dict(_pairs(schema, [_dish(), _combo()]))
@@ -492,6 +606,8 @@ def test_analyzer_smoke_uses_the_locally_composed_reviewed_schema_without_fetch(
         response_body = _minimal_schema_value(schema, components[f"ExternalMenuV{version}"])
         assert isinstance(request_body, dict)
         assert isinstance(response_body, dict)
+        request_body["externalMenuId"] = "40000000-0000-4000-8000-000000000004"
+        request_body["organizationIds"] = ["50000000-0000-4000-8000-000000000005"]
         request_body["version"] = version
         response_body["formatVersion"] = version
         if version == 4:

@@ -267,9 +267,11 @@ class CaptureEvidenceReader:
 
         request = _load_strict_canonical_json(request_bytes, label="Evidence request")
         response = _load_strict_canonical_json(response_bytes, label="Evidence response")
-        version = _validate_pair_contract(request, response, run_id=run_id)
-        _scan_for_secret_or_pii(request)
-        _scan_for_secret_or_pii(response)
+        version = revalidate_evidence_pair_contract(
+            request,
+            response,
+            expected_run_id=run_id,
+        )
 
         pair = EvidencePair(
             version=version,
@@ -717,6 +719,86 @@ def _validate_pair_contract(
     if type(format_version) is not int or format_version != version:
         raise SafetyError("Evidence response formatVersion must exactly match request version")
     return version
+
+
+def revalidate_evidence_pair_contract(
+    request: Mapping[str, FrozenJson],
+    response: Mapping[str, FrozenJson],
+    *,
+    expected_run_id: str | None = None,
+) -> int:
+    """Reapply the pure reader envelope, metadata, payload, and PII contract."""
+
+    try:
+        request_value = _thaw_evidence_json(request)
+        response_value = _thaw_evidence_json(response)
+    except SafetyError:
+        raise
+    except Exception:
+        raise SafetyError("Evidence pair cannot be safely copied for revalidation") from None
+    if type(request_value) is not dict or type(response_value) is not dict:
+        raise SafetyError("Evidence pair envelopes must be strict objects")
+    request_metadata = request_value.get("metadata")
+    response_metadata = response_value.get("metadata")
+    if type(request_metadata) is not dict or type(response_metadata) is not dict:
+        raise SafetyError("Evidence pair runId metadata is missing or invalid")
+    request_run_id = request_metadata.get("runId")
+    response_run_id = response_metadata.get("runId")
+    if (
+        type(request_run_id) is not str
+        or _CAPTURE_ID.fullmatch(request_run_id) is None
+        or type(response_run_id) is not str
+        or response_run_id != request_run_id
+    ):
+        raise SafetyError("Evidence pair runId metadata is missing or inconsistent")
+    if expected_run_id is not None and (
+        type(expected_run_id) is not str
+        or _CAPTURE_ID.fullmatch(expected_run_id) is None
+        or request_run_id != expected_run_id
+    ):
+        raise SafetyError("Evidence pair runId does not match its capture directory")
+    version = _validate_pair_contract(
+        request_value,
+        response_value,
+        run_id=request_run_id,
+    )
+    _scan_for_secret_or_pii(request_value)
+    _scan_for_secret_or_pii(response_value)
+    return version
+
+
+def _thaw_evidence_json(
+    value: object,
+    *,
+    depth: int = 0,
+    active: set[int] | None = None,
+) -> Any:
+    if depth > _MAX_JSON_DEPTH:
+        raise SafetyError("Evidence pair exceeds the maximum nesting depth")
+    if value is None or type(value) in {bool, int, str}:
+        return value
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise SafetyError("Evidence pair contains a non-finite number")
+        return value
+    if not isinstance(value, (Mapping, tuple, list)):
+        raise SafetyError("Evidence pair accepts only strict JSON values")
+    seen = active if active is not None else set()
+    identity = id(value)
+    if identity in seen:
+        raise SafetyError("Evidence pair contains a container cycle")
+    seen.add(identity)
+    try:
+        if isinstance(value, Mapping):
+            if any(type(key) is not str for key in value):
+                raise SafetyError("Evidence pair object keys must be strings")
+            return {
+                key: _thaw_evidence_json(child, depth=depth + 1, active=seen)
+                for key, child in value.items()
+            }
+        return [_thaw_evidence_json(child, depth=depth + 1, active=seen) for child in value]
+    finally:
+        seen.remove(identity)
 
 
 def _scan_for_secret_or_pii(value: Any, *, key: str | None = None) -> None:

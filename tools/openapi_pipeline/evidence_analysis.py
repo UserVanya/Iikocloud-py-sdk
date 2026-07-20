@@ -9,7 +9,11 @@ from types import MappingProxyType
 from typing import Any, Literal, cast
 
 from .errors import SafetyError
-from .evidence_promotion import EvidencePair, FrozenJson
+from .evidence_promotion import (
+    EvidencePair,
+    FrozenJson,
+    revalidate_evidence_pair_contract,
+)
 from .evidence_validation import MenuEvidenceValidator
 from .io import canonical_json_bytes, sha256_bytes
 
@@ -145,6 +149,14 @@ def _validate_pairs(
         response_hash = _canonical_mapping_hash(pair.response)
         if request_hash != pair.request_sha256 or response_hash != pair.response_sha256:
             raise SafetyError("Evidence analysis capture pair provenance hash is invalid")
+        try:
+            contract_version = revalidate_evidence_pair_contract(pair.request, pair.response)
+        except SafetyError:
+            raise
+        except Exception:
+            raise SafetyError("Evidence analysis reader contract validation failed") from None
+        if contract_version != version:
+            raise SafetyError("Evidence analysis reader contract version is inconsistent")
         try:
             validate = cast(
                 Callable[[int, Mapping[str, Any], Mapping[str, Any]], object],
