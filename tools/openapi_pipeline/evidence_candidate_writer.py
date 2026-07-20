@@ -92,6 +92,18 @@ class _CandidateTree:
     manifest_sha256: str
 
 
+@dataclass(frozen=True)
+class _DirectoryCreation:
+    created: bool
+    metadata: os.stat_result
+
+
+@dataclass(frozen=True)
+class _OwnedIdentity:
+    device: int
+    inode: int
+
+
 class _DestinationExists(Exception):
     pass
 
@@ -122,6 +134,7 @@ def write_evidence_candidate_tree(
     candidate_fd: int | None = None
     staging_name: str | None = None
     directory_fds: dict[str, int] = {}
+    owned_files: dict[str, _OwnedIdentity] = {}
     published = False
     complete = False
     try:
@@ -145,8 +158,12 @@ def write_evidence_candidate_tree(
             return _write_result_with_changed(output, changed=False)
 
         staging_name, staging_fd = _create_staging_directory(build_fd)
-        directory_fds[""] = staging_fd
-        _create_staging_tree(directory_fds, tree.files)
+        try:
+            _register_directory_fd(directory_fds, "", staging_fd)
+        except BaseException:
+            _close_fd(staging_fd)
+            raise
+        _create_staging_tree(directory_fds, owned_files, tree.files)
         _validate_exact_tree(staging_fd, tree.files)
         collision = False
         try:
@@ -177,6 +194,7 @@ def write_evidence_candidate_tree(
                 staging_fd,
                 staging_name,
                 directory_fds,
+                owned_files,
             ):
                 raise SafetyError("Cannot clean evidence candidate staging directory") from None
             complete = True
@@ -202,6 +220,7 @@ def write_evidence_candidate_tree(
                     directory_fds[""],
                     cleanup_name,
                     directory_fds,
+                    owned_files,
                 )
         raise
     finally:
@@ -614,11 +633,7 @@ def _probe_renameat2(renameat2: Any) -> bool:
         _RENAME_NOREPLACE,
     )
     error_number = ctypes.get_errno()
-    return result == -1 and error_number not in {
-        errno.ENOSYS,
-        errno.EINVAL,
-        errno.EOPNOTSUPP,
-    }
+    return result == -1 and error_number == errno.EBADF
 
 
 def _open_repository_root(root: Path) -> int:
@@ -692,18 +707,29 @@ def _validate_repository_marker(repository_fd: int) -> None:
 
 
 def _open_or_create_build(repository_fd: int) -> int:
-    created = _safe_mkdir_at(repository_fd, "build", 0o755)
-    build_fd = _open_required_public_directory(
+    creation = _safe_mkdir_at(repository_fd, "build", 0o755)
+    if not creation.created:
+        _validate_public_directory(creation.metadata, label="Evidence build root")
+    elif not stat.S_ISDIR(creation.metadata.st_mode) or stat.S_ISLNK(creation.metadata.st_mode):
+        raise SafetyError("Evidence build root is a symlink or non-directory")
+    build_fd = _open_public_directory_from_metadata(
         repository_fd,
         "build",
+        creation.metadata,
         label="Evidence build root",
-        validate_mode=not created,
+        validate_mode=not creation.created,
     )
     try:
-        if created:
+        if creation.created:
             _fchmod_fd(build_fd, 0o755)
             _validate_public_directory(
                 _safe_fstat(build_fd, message="Cannot inspect evidence build root safely"),
+                label="Evidence build root",
+            )
+            _revalidate_directory_binding(
+                repository_fd,
+                "build",
+                build_fd,
                 label="Evidence build root",
             )
             _fsync_fd(build_fd)
@@ -792,14 +818,15 @@ def _open_public_directory_from_metadata(
 def _create_staging_directory(build_fd: int) -> tuple[str, int]:
     for _attempt in range(32):
         name = f".{_CANDIDATE_DIRECTORY}.tmp-{secrets.token_hex(12)}"
-        created = _safe_mkdir_at(build_fd, name, 0o755)
-        if not created:
+        creation = _safe_mkdir_at(build_fd, name, 0o755)
+        if not creation.created:
             continue
         staging_fd: int | None = None
         try:
-            staging_fd = _open_required_public_directory(
+            staging_fd = _open_public_directory_from_metadata(
                 build_fd,
                 name,
+                creation.metadata,
                 label="Evidence candidate staging root",
                 validate_mode=False,
             )
@@ -811,14 +838,20 @@ def _create_staging_directory(build_fd: int) -> tuple[str, int]:
                 ),
                 label="Evidence candidate staging root",
             )
+            _revalidate_directory_binding(
+                build_fd,
+                name,
+                staging_fd,
+                label="Evidence candidate staging root",
+            )
             _fsync_fd(staging_fd)
             _fsync_fd(build_fd)
             return name, staging_fd
         except BaseException:
             _close_fd(staging_fd)
-            with suppress(OSError):
-                os.rmdir(name, dir_fd=build_fd)
-            with suppress(OSError):
+            with suppress(BaseException):
+                _cleanup_created_empty_directory(build_fd, name, creation.metadata)
+            with suppress(BaseException):
                 os.fsync(build_fd)
             raise
     raise SafetyError("Cannot allocate a unique evidence candidate staging directory")
@@ -826,36 +859,55 @@ def _create_staging_directory(build_fd: int) -> tuple[str, int]:
 
 def _create_staging_tree(
     directory_fds: dict[str, int],
+    owned_files: dict[str, _OwnedIdentity],
     files: Mapping[str, bytes],
 ) -> None:
     for relative in _DIRECTORY_PATHS[1:]:
         parent, name = _split_relative(relative)
         parent_fd = directory_fds[parent]
-        if not _safe_mkdir_at(parent_fd, name, 0o755):
+        creation = _safe_mkdir_at(parent_fd, name, 0o755)
+        if not creation.created:
             raise SafetyError("Evidence candidate staging directory unexpectedly exists")
-        child_fd = _open_required_public_directory(
-            parent_fd,
-            name,
-            label="Evidence candidate staging directory",
-            validate_mode=False,
-        )
-        directory_fds[relative] = child_fd
-        _fchmod_fd(child_fd, 0o755)
-        _validate_public_directory(
-            _safe_fstat(
-                child_fd,
-                message="Cannot inspect evidence candidate staging directory safely",
-            ),
-            label="Evidence candidate staging directory",
-        )
+        child_fd: int | None = None
+        try:
+            child_fd = _open_public_directory_from_metadata(
+                parent_fd,
+                name,
+                creation.metadata,
+                label="Evidence candidate staging directory",
+                validate_mode=False,
+            )
+            registered_fd = child_fd
+            _register_directory_fd(directory_fds, relative, registered_fd)
+            child_fd = None
+            _fchmod_fd(registered_fd, 0o755)
+            _validate_public_directory(
+                _safe_fstat(
+                    registered_fd,
+                    message="Cannot inspect evidence candidate staging directory safely",
+                ),
+                label="Evidence candidate staging directory",
+            )
+            _revalidate_directory_binding(
+                parent_fd,
+                name,
+                registered_fd,
+                label="Evidence candidate staging directory",
+            )
+        finally:
+            _close_fd(child_fd)
     for relative in _FILE_PATHS:
         parent, name = _split_relative(relative)
-        _write_file_at(directory_fds[parent], name, files[relative])
+        owned_files[relative] = _write_file_at(
+            directory_fds[parent],
+            name,
+            files[relative],
+        )
     for relative in reversed(_DIRECTORY_PATHS):
         _fsync_fd(directory_fds[relative])
 
 
-def _write_file_at(directory_fd: int, name: str, body: bytes) -> None:
+def _write_file_at(directory_fd: int, name: str, body: bytes) -> _OwnedIdentity:
     fd = _safe_open(
         name,
         os.O_WRONLY | os.O_CLOEXEC | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
@@ -881,6 +933,14 @@ def _write_file_at(directory_fd: int, name: str, body: bytes) -> None:
         _validate_public_file(metadata, label="Evidence candidate file")
         if metadata.st_size != len(body):
             raise SafetyError("Evidence candidate file write was incomplete")
+        current = _safe_stat_at(
+            directory_fd,
+            name,
+            message="Cannot revalidate evidence candidate file safely",
+        )
+        if not _same_identity(metadata, current):
+            raise SafetyError("Evidence candidate file changed while writing")
+        return _owned_identity(metadata)
     finally:
         _close_fd(fd)
 
@@ -1051,6 +1111,7 @@ def _cleanup_fixed_tree(
     root_fd: int,
     root_name: str,
     directory_fds: Mapping[str, int],
+    owned_files: Mapping[str, _OwnedIdentity],
 ) -> bool:
     try:
         current = os.stat(root_name, dir_fd=build_fd, follow_symlinks=False)
@@ -1064,9 +1125,23 @@ def _cleanup_fixed_tree(
         return False
     clean = True
     for relative in _FILE_PATHS:
+        identity = owned_files.get(relative)
+        if identity is None:
+            continue
         parent, name = _split_relative(relative)
         parent_fd = directory_fds.get(parent)
         if parent_fd is None:
+            clean = False
+            continue
+        try:
+            current = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            continue
+        except OSError:
+            clean = False
+            continue
+        if not _matches_owned_identity(current, identity):
+            clean = False
             continue
         try:
             os.unlink(name, dir_fd=parent_fd)
@@ -1077,7 +1152,24 @@ def _cleanup_fixed_tree(
     for relative in reversed(_DIRECTORY_PATHS[1:]):
         parent, name = _split_relative(relative)
         parent_fd = directory_fds.get(parent)
-        if parent_fd is None:
+        child_fd = directory_fds.get(relative)
+        if parent_fd is None or child_fd is None:
+            clean = False
+            continue
+        try:
+            current = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            continue
+        except OSError:
+            clean = False
+            continue
+        try:
+            held = os.fstat(child_fd)
+        except OSError:
+            clean = False
+            continue
+        if not _same_identity(current, held):
+            clean = False
             continue
         try:
             os.rmdir(name, dir_fd=parent_fd)
@@ -1085,12 +1177,30 @@ def _cleanup_fixed_tree(
             pass
         except OSError:
             clean = False
+    final_current: os.stat_result | None
     try:
-        os.rmdir(root_name, dir_fd=build_fd)
+        final_current = os.stat(root_name, dir_fd=build_fd, follow_symlinks=False)
     except FileNotFoundError:
-        pass
+        final_current = None
     except OSError:
+        final_current = None
         clean = False
+    final_held: os.stat_result | None
+    try:
+        final_held = os.fstat(root_fd)
+    except OSError:
+        final_held = None
+        clean = False
+    if final_current is not None and final_held is not None:
+        if _same_identity(final_current, final_held):
+            try:
+                os.rmdir(root_name, dir_fd=build_fd)
+            except FileNotFoundError:
+                pass
+            except OSError:
+                clean = False
+        else:
+            clean = False
     with suppress(OSError):
         os.fsync(build_fd)
     try:
@@ -1100,6 +1210,24 @@ def _cleanup_fixed_tree(
     except OSError:
         return False
     return False
+
+
+def _cleanup_created_empty_directory(
+    parent_fd: int,
+    name: str,
+    expected: os.stat_result,
+) -> bool:
+    try:
+        current = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+    except OSError:
+        return False
+    if (current.st_dev, current.st_ino) != (expected.st_dev, expected.st_ino):
+        return False
+    try:
+        os.rmdir(name, dir_fd=parent_fd)
+    except OSError:
+        return False
+    return True
 
 
 def _validate_public_directory(metadata: os.stat_result, *, label: str) -> None:
@@ -1168,7 +1296,7 @@ def _safe_fstat(fd: int, *, message: str) -> os.stat_result:
     return metadata
 
 
-def _safe_mkdir_at(parent_fd: int, name: str, mode: int) -> bool:
+def _safe_mkdir_at(parent_fd: int, name: str, mode: int) -> _DirectoryCreation:
     exists = False
     failed = False
     try:
@@ -1179,7 +1307,12 @@ def _safe_mkdir_at(parent_fd: int, name: str, mode: int) -> bool:
         failed = True
     if failed:
         raise SafetyError("Cannot create evidence candidate directory safely") from None
-    return not exists
+    metadata = _safe_stat_at(
+        parent_fd,
+        name,
+        message="Cannot inspect evidence candidate directory after creation",
+    )
+    return _DirectoryCreation(created=not exists, metadata=metadata)
 
 
 def _safe_listdir(directory_fd: int) -> tuple[str, ...]:
@@ -1223,6 +1356,40 @@ def _close_fd(fd: int | None) -> None:
 def _close_directory_fds(directory_fds: Mapping[str, int]) -> None:
     for relative in reversed(_DIRECTORY_PATHS):
         _close_fd(directory_fds.get(relative))
+
+
+def _register_directory_fd(
+    directory_fds: dict[str, int],
+    relative: str,
+    fd: int,
+) -> None:
+    directory_fds[relative] = fd
+
+
+def _revalidate_directory_binding(
+    parent_fd: int,
+    name: str,
+    fd: int,
+    *,
+    label: str,
+) -> None:
+    held = _safe_fstat(fd, message=f"Cannot inspect {label} safely")
+    current = _safe_stat_at(parent_fd, name, message=f"Cannot revalidate {label} safely")
+    _validate_public_directory(held, label=label)
+    _validate_public_directory(current, label=label)
+    if not _same_identity(held, current):
+        raise SafetyError(f"{label} binding changed")
+
+
+def _owned_identity(metadata: os.stat_result) -> _OwnedIdentity:
+    return _OwnedIdentity(device=metadata.st_dev, inode=metadata.st_ino)
+
+
+def _matches_owned_identity(
+    metadata: os.stat_result,
+    identity: _OwnedIdentity,
+) -> bool:
+    return (metadata.st_dev, metadata.st_ino) == (identity.device, identity.inode)
 
 
 def _same_identity(left: os.stat_result, right: os.stat_result) -> bool:
