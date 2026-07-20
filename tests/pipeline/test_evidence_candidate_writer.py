@@ -572,6 +572,10 @@ def test_public_process_lock_documents_python_fork_boundary() -> None:
     documentation = (writer_module.EvidenceCandidateProcessLock.__doc__ or "").lower()
 
     assert "os.fork" in documentation
+    assert "completed acquisitions" in documentation
+    assert "reentrant fork" in documentation
+    assert "acquire" in documentation
+    assert "release" in documentation
     assert "raw libc" in documentation
     assert "out of scope" in documentation
 

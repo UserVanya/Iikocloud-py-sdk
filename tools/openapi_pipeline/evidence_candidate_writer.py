@@ -217,8 +217,10 @@ class EvidenceCandidateProcessLock:
 
     All official candidate writers and acceptors must hold this lock. A malicious
     non-cooperating process running as the repository owner remains out of scope.
-    On POSIX, acquisitions inherited through Python's ``os.fork`` are invalidated
-    and closed in the child. Raw libc forks outside Python are out of scope.
+    On POSIX, completed acquisitions inherited through Python's ``os.fork`` are
+    invalidated and closed in the child. A reentrant fork from a signal, audit, or
+    injected callback while ``acquire`` or ``release`` is executing, and raw libc
+    forks outside Python, are out of scope.
     """
 
     def __init__(self, paths: RepoPaths) -> None:
