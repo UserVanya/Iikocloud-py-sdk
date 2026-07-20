@@ -325,6 +325,7 @@ def test_profile_env_and_receipt_require_held_canonical_lock(
 
 
 def test_pytest_options_and_offline_collection_do_not_need_private_files() -> None:
+    bytecode_before = set(Path("src/iikocloud_client").rglob("*.pyc"))
     environment = os.environ.copy()
     for name in (
         "IIKO_API_KEY",
@@ -363,3 +364,4 @@ def test_pytest_options_and_offline_collection_do_not_need_private_files() -> No
     )
     assert collection.returncode == 0, collection.stderr
     assert "test_canonical_json_bytes_sorts_keys_and_emits_utf8_newline" in collection.stdout
+    assert set(Path("src/iikocloud_client").rglob("*.pyc")) == bytecode_before

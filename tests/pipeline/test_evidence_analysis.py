@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import dataclasses
 from collections.abc import Mapping
-from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
 import pytest
+from reviewed_baseline import has_complete_bootstrap_candidate
 from test_evidence_promotion_reader import _effective_schema, _response_body
 
 import tools.openapi_pipeline.evidence_promotion as promotion_module
@@ -648,8 +648,8 @@ def test_analyzer_rejects_reviewed_schema_fragment_drift() -> None:
 
 
 @pytest.mark.skipif(
-    not Path("build/upstream/candidate.json").is_file(),
-    reason="ignored reviewed bootstrap candidate is absent in a clean checkout",
+    not has_complete_bootstrap_candidate(RepoPaths.discover()),
+    reason="complete ignored reviewed bootstrap candidate set is absent",
 )
 def test_analyzer_smoke_uses_the_locally_composed_reviewed_schema_without_fetch() -> None:
     schema, _mappings = compose_reviewed_bootstrap_candidate(RepoPaths.discover())

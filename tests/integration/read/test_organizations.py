@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from uuid import UUID
 
 import pytest
 
-from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
+
+if TYPE_CHECKING:
+    from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
 
 
 def contains_value(value: Any, expected: str) -> bool:
@@ -18,6 +20,7 @@ def contains_value(value: Any, expected: str) -> bool:
 
 
 @pytest.mark.live_read_smoke
+@pytest.mark.asyncio(loop_scope="session")
 async def test_generated_sdk_lists_target_organization(
     live_sdk: GeneratedLiveSdk,
     live_profile: ResolvedLiveProfile,

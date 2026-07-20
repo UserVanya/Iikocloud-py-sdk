@@ -5,6 +5,7 @@ from functools import lru_cache
 from typing import Any
 
 import pytest
+from reviewed_baseline import compose_current_evidence_base
 
 import tools.openapi_pipeline.evidence_schema_repairs as repair_module
 from tools.openapi_pipeline.capture import ARRAY_ITEM, Sanitizer
@@ -17,12 +18,11 @@ from tools.openapi_pipeline.evidence_validation import MenuEvidenceValidator
 from tools.openapi_pipeline.io import canonical_json_bytes
 from tools.openapi_pipeline.overlay import apply_overlay
 from tools.openapi_pipeline.paths import RepoPaths
-from tools.openapi_pipeline.pipeline import compose_reviewed_evidence_base_candidate
 
 
 @lru_cache(maxsize=1)
 def _public_schema() -> dict[str, Any]:
-    schema, _mappings = compose_reviewed_evidence_base_candidate(RepoPaths.discover())
+    schema, _mappings = compose_current_evidence_base(RepoPaths.discover())
     return schema
 
 

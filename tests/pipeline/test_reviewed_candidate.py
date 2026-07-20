@@ -7,6 +7,11 @@ from typing import Any
 
 import pytest
 import yaml
+from reviewed_baseline import (
+    compose_current_reviewed_source,
+    current_reviewed_source_path,
+    has_current_reviewed_source,
+)
 
 import tools.openapi_pipeline.pipeline as pipeline_module
 from tools.openapi_pipeline.capture import RedactionHints
@@ -348,14 +353,15 @@ def test_reviewed_candidate_does_not_mutate_input_object_helpers(tmp_path: Path)
 
 
 @pytest.mark.skipif(
-    not Path("build/upstream/candidate.json").is_file(),
-    reason="ignored reviewed bootstrap candidate is absent in a clean checkout",
+    not has_current_reviewed_source(RepoPaths.discover()),
+    reason="neither a complete bootstrap candidate nor committed baseline is present",
 )
 def test_current_reviewed_candidate_composes_locally_without_mutating_raw() -> None:
     paths = RepoPaths.discover()
-    raw_before = paths.candidate.read_bytes()
+    source = current_reviewed_source_path(paths)
+    raw_before = source.read_bytes()
 
-    effective, mappings = compose_reviewed_bootstrap_candidate(paths)
+    effective, mappings = compose_current_reviewed_source(paths)
 
     menu = effective["paths"]["/api/2/menu/by_id"]["post"]
     assert menu["operationId"] == "get_external_menu_by_id"
@@ -364,4 +370,4 @@ def test_current_reviewed_candidate_composes_locally_without_mutating_raw() -> N
         == "get_external_menu_by_id"
     )
     assert len(mappings) == len(effective["components"]["schemas"])
-    assert paths.candidate.read_bytes() == raw_before
+    assert source.read_bytes() == raw_before

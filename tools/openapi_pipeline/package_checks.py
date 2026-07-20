@@ -79,6 +79,11 @@ import site
 {_IMPORT_SCRIPT}
 
 package_file = Path(iikocloud_client.__file__).resolve(strict=True)
+typing_marker = package_file.parent / "py.typed"
+if typing_marker.is_symlink() or not typing_marker.is_file():
+    raise RuntimeError("installed package has no regular py.typed marker")
+if typing_marker.read_bytes() != b"":
+    raise RuntimeError("installed package py.typed marker is not empty")
 site_roots = []
 for value in site.getsitepackages():
     try:
@@ -207,7 +212,9 @@ def _minimal_pyproject() -> bytes:
         'requires = ["setuptools>=77,<82"]\n'
         'build-backend = "setuptools.build_meta"\n\n'
         "[tool.setuptools.packages.find]\n"
-        'where = ["src"]\n'
+        'where = ["src"]\n\n'
+        "[tool.setuptools.package-data]\n"
+        'iikocloud_client = ["py.typed", "_contracts/*.yaml"]\n'
     ).encode()
 
 

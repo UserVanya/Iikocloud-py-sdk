@@ -1,37 +1,18 @@
 [project]
-name = "iikocloud_client"
+name = "iikocloud-client"
 version = "0.1.0"
-description = "iikoCloud API"
-authors = [
-  {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
-]
+description = "Generated async Python SDK for iiko Cloud API"
 readme = "README.md"
-keywords = ["OpenAPI", "OpenAPI-Generator", "iikoCloud API"]
 requires-python = ">=3.10"
-
 dependencies = [
-  "urllib3 (>=2.1.0,<3.0.0)",
-  "python-dateutil (>=2.8.2)",
-  "aiohttp (>=3.8.4)",
-  "aiohttp-retry (>=2.8.3)",
-  "pydantic (>=2)",
-  "typing-extensions (>=4.7.1)",
-  "lazy-imports (>=1,<2)"
+  "httpx>=0.28,<1",
+  "pydantic>=2.11,<3",
+  "python-dateutil>=2.9,<3",
+  "typing-extensions>=4.12,<5",
 ]
 
 [project.urls]
-Repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-
-[tool.poetry]
-requires-poetry = ">=2.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = ">= 7.2.1"
-pytest-cov = ">= 2.8.1"
-tox = ">= 3.9.0"
-flake8 = ">= 4.0.0"
-types-python-dateutil = ">= 2.8.19.14"
-mypy = ">= 1.5"
+Repository = "https://github.com/UserVanya/Iikocloud-py-sdk"
 
 [dependency-groups]
 dev = [
@@ -62,17 +43,18 @@ default-groups = ["dev", "package-check"]
 
 
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=77,<82"]
 build-backend = "setuptools.build_meta"
 
-[tool.pylint.'MESSAGES CONTROL']
-extension-pkg-whitelist = "pydantic"
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+iikocloud_client = ["py.typed", "_contracts/*.yaml"]
 
 [tool.mypy]
 files = [
-  "iikocloud_client",
-  #"test",  # auto-generated tests
-  "tests", # hand-written tests
+  "tools/openapi_pipeline",
 ]
 # TODO: enable "strict" once all these individual checks are passing
 # strict = true
@@ -125,6 +107,7 @@ warn_return_any = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 asyncio_mode = "auto"
 markers = [
   "docker: requires the pinned OpenAPI Generator image",

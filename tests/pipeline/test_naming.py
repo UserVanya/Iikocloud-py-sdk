@@ -5,14 +5,17 @@ from typing import Any, cast
 
 import pytest
 import yaml
+from reviewed_baseline import compose_current_reviewed_source
 
 import tools.openapi_pipeline.naming as naming_module
 from tools.openapi_pipeline.errors import ValidationError
+from tools.openapi_pipeline.inventory import HTTP_METHODS
 from tools.openapi_pipeline.naming import (
     build_model_mappings,
     inject_operation_ids,
     normalize_model_name,
 )
+from tools.openapi_pipeline.paths import RepoPaths
 
 _CLR_GENERIC_SCHEMA = (
     "Namespace.RmsItemsResponseWrapper`1[[Namespace.Item, "
@@ -426,11 +429,51 @@ def test_normalized_names_are_valid_python_identifiers() -> None:
         assert not keyword.iskeyword(name)
 
 
-def test_registry_files_have_stable_empty_bootstrap_shapes() -> None:
+def test_registry_files_have_populated_canonical_shapes_and_cover_current_source() -> None:
     operation_ids = Path("openapi/operation-ids.yaml")
     model_overrides = Path("openapi/model-name-overrides.yaml")
 
-    assert operation_ids.read_text(encoding="utf-8") == "operations: {}\n"
-    assert model_overrides.read_text(encoding="utf-8") == "models: {}\n"
-    assert yaml.safe_load(operation_ids.read_text(encoding="utf-8")) == {"operations": {}}
-    assert yaml.safe_load(model_overrides.read_text(encoding="utf-8")) == {"models": {}}
+    operations_value = yaml.safe_load(operation_ids.read_text(encoding="utf-8"))
+    models_value = yaml.safe_load(model_overrides.read_text(encoding="utf-8"))
+    assert isinstance(operations_value, dict) and set(operations_value) == {"operations"}
+    assert isinstance(models_value, dict) and set(models_value) == {"models"}
+    operations = operations_value["operations"]
+    models = models_value["models"]
+    assert isinstance(operations, dict) and operations
+    assert isinstance(models, dict) and models
+    assert all(
+        isinstance(key, str)
+        and key
+        and isinstance(value, str)
+        and value.isidentifier()
+        and not keyword.iskeyword(value)
+        for key, value in operations.items()
+    )
+    assert all(
+        isinstance(key, str)
+        and key
+        and isinstance(value, str)
+        and value.isidentifier()
+        and not keyword.iskeyword(value)
+        for key, value in models.items()
+    )
+    assert len(set(operations.values())) == len(operations)
+    assert len(set(models.values())) == len(models)
+
+    effective, mappings = compose_current_reviewed_source(RepoPaths.discover())
+    paths = effective["paths"]
+    assert isinstance(paths, dict)
+    current_operations = {
+        f"{method.upper()} {path}"
+        for path, path_item in paths.items()
+        if isinstance(path, str) and isinstance(path_item, dict)
+        for method in path_item
+        if method.lower() in HTTP_METHODS
+    }
+    assert set(operations) == current_operations
+    schemas = effective["components"]
+    assert isinstance(schemas, dict)
+    schema_values = schemas["schemas"]
+    assert isinstance(schema_values, dict)
+    assert set(mappings) == set(schema_values)
+    assert len(set(mappings.values())) == len(mappings)

@@ -1,1 +1,82 @@
-models: {}
+models:
+  ErrorResponse: GenericErrorResponse
+  iikoNet.Service.Contracts.Api.iikoTransport.LoyaltyResult.DynamicDiscount: LoyaltyDynamicDiscount
+  iikoTransport.PublicApi.Contracts.Address.City: AddressDirectoryCity
+  iikoTransport.PublicApi.Contracts.Address.Region: AddressRegion
+  iikoTransport.PublicApi.Contracts.Address.Street: AddressStreet
+  iikoTransport.PublicApi.Contracts.CancelCauses.CancelCause: CancelCauseDefinition
+  iikoTransport.PublicApi.Contracts.Common.ExternalData: CommonExternalData
+  iikoTransport.PublicApi.Contracts.Common.PriceCategory: CommonPriceCategory
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsCityItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsRegionItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsDiscountCardTypeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsActiveCourierLocationItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsCourierLocationsItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeWithCheckedRoleItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsOrderTypeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupStopListItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupItemsResponse
+  iikoTransport.PublicApi.Contracts.Deliveries.Common.Coordinates: DeliveryCoordinates
+  iikoTransport.PublicApi.Contracts.Deliveries.Common.OrderServiceType: DeliveryServiceType
+  iikoTransport.PublicApi.Contracts.Deliveries.Common.PaymentTypeKind: DeliveryPaymentTypeKind
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.Address: DeliveryOrderCreateAddress
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.AnonymousCustomer: DeliveryOrderCreateAnonymousCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ComboItemInformation: DeliveryOrderCreateComboItemInformation
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CompoundOrderItem: DeliveryOrderCreateCompoundItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.CompoundOrderItemComponent: DeliveryOrderCreateCompoundItemComponent
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.Customer: DeliveryOrderCreateCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.DeliveryPoint: DeliveryOrderCreatePoint
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.DynamicDiscount: DeliveryOrderCreateDynamicDiscount
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ExternalData: DeliveryOrderCreateExternalData
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.LoyaltyInfo: DeliveryOrderCreateLoyaltyInfo
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.Order: DeliveryOrderCreatePayload
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.OrderItem: DeliveryOrderCreateItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.OrderServiceType: DeliveryOrderCreateServiceType
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.ProductOrderItem: DeliveryOrderCreateProductItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.RegularCustomer: DeliveryOrderCreateRegularCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Request.CreateOrder.Street: DeliveryOrderCreateStreet
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Address: DeliveryOrderResponseAddress
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.AnonymousCustomer: DeliveryOrderResponseAnonymousCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.CancelCause: DeliveryOrderResponseCancelCause
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.City: DeliveryOrderResponseCity
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.ComboItemInformation: DeliveryOrderResponseComboItemInformation
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.CompoundOrderItem: DeliveryOrderResponseCompoundItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.CompoundOrderItemComponent: DeliveryOrderResponseCompoundItemComponent
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Customer: DeliveryOrderResponseCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.DeliveryPoint: DeliveryOrderResponsePoint
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.DynamicDiscount: DeliveryOrderResponseDynamicDiscount
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Employee: DeliveryOrderResponseEmployee
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.ExternalData: DeliveryOrderResponseExternalData
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.GuestsInfo: DeliveryOrderResponseGuestsInfo
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.LoyaltyInfo: DeliveryOrderResponseLoyaltyInfo
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.MarketingSource: DeliveryOrderResponseMarketingSource
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Order: DeliveryOrderResponsePayload
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.OrderItem: DeliveryOrderResponseItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.OrderStatus: DeliveryOrderResponseStatus
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.OrderType: DeliveryOrderResponseType
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.PaymentType: DeliveryOrderResponsePaymentType
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.ProductOrderItem: DeliveryOrderResponseProductItem
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Region: DeliveryOrderResponseRegion
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.RegularCustomer: DeliveryOrderResponseRegularCustomer
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.RemovalType: DeliveryOrderResponseRemovalType
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.Street: DeliveryOrderResponseStreet
+  iikoTransport.PublicApi.Contracts.Deliveries.Response.Order.TipsType: DeliveryOrderResponseTipsType
+  iikoTransport.PublicApi.Contracts.DeliveryRestrictions.Coordinates: DeliveryRestrictionCoordinates
+  iikoTransport.PublicApi.Contracts.Employees.Employee: EmployeeDirectoryEntry
+  iikoTransport.PublicApi.Contracts.Errors.ErrorResponse: IikoErrorResponse
+  iikoTransport.PublicApi.Contracts.MarketingSources.MarketingSource: MarketingSourceDefinition
+  iikoTransport.PublicApi.Contracts.Nomenclature.PriceCategory: NomenclaturePriceCategory
+  iikoTransport.PublicApi.Contracts.Orders.Common.OrderStatus: OrderStatus
+  iikoTransport.PublicApi.Contracts.OrderTypes.OrderServiceType: OrderTypeServiceType
+  iikoTransport.PublicApi.Contracts.OrderTypes.OrderType: OrderTypeDefinition
+  iikoTransport.PublicApi.Contracts.PaymentTypes.PaymentType: PaymentTypeDefinition
+  iikoTransport.PublicApi.Contracts.PaymentTypes.PaymentTypeKind: PaymentTypeKindDefinition
+  iikoTransport.PublicApi.Contracts.RemovalTypes.RemovalType: RemovalTypeDefinition
+  iikoTransport.PublicApi.Contracts.Reserves.GuestsInfo: ReserveGuestsInfo
+  iikoTransport.PublicApi.Contracts.Reserves.Request.ReserveOrder: ReserveOrderRequest
+  iikoTransport.PublicApi.Contracts.Reserves.Response.ReserveOrder: ReserveOrderResponse
+  iikoTransport.PublicApi.Contracts.TableOrders.Request.GuestsInfo: TableOrderGuestsInfo
+  iikoTransport.PublicApi.Contracts.TableOrders.Request.TableOrder: TableOrderRequest
+  iikoTransport.PublicApi.Contracts.TableOrders.Response.TableOrder: TableOrderResponsePayload
+  iikoTransport.PublicApi.Contracts.TipsTypes.TipsType: TipsTypeDefinition

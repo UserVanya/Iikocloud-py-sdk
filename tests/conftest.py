@@ -1,19 +1,23 @@
+# ruff: noqa: E402
 from __future__ import annotations
 
 import importlib.util
 import secrets
+import stat
+import sys
 from collections.abc import AsyncIterator, Iterator
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import pytest
+# Project imports below must not populate the manifest-controlled generated tree.
+sys.dont_write_bytecode = True
 
-from iikocloud_client.api_client import ApiClient
-from iikocloud_client.configuration import Configuration
+import pytest
+import pytest_asyncio
+
 from tools.openapi_pipeline.errors import SafetyError
-from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile, is_safe_profile_name
 from tools.openapi_pipeline.live.pytest_support import (
@@ -60,6 +64,57 @@ class _LiveEnvironment:
     lock: LiveProcessLock
     state: LiveStateStore
     context: _LiveRunContext
+
+
+@dataclass(frozen=True)
+class _GeneratedRuntime:
+    configuration: Any
+    api_client: Any
+    adapter: Any
+
+
+def _assert_generated_package_origin(root: Path) -> None:
+    expected = root / "src/iikocloud_client/__init__.py"
+    try:
+        expected_metadata = expected.lstat()
+        expected_resolved = expected.resolve(strict=True)
+        spec = importlib.util.find_spec("iikocloud_client")
+    except (ImportError, OSError, ValueError):
+        raise SafetyError("Generated package origin is not the exact src package") from None
+    origin = spec.origin if spec is not None else None
+    if (
+        stat.S_ISLNK(expected_metadata.st_mode)
+        or not stat.S_ISREG(expected_metadata.st_mode)
+        or expected_resolved != expected
+        or not isinstance(origin, str)
+        or not origin
+    ):
+        raise SafetyError("Generated package origin is not the exact src package")
+    origin_path = Path(origin)
+    try:
+        origin_metadata = origin_path.lstat()
+        origin_resolved = origin_path.resolve(strict=True)
+    except OSError:
+        raise SafetyError("Generated package origin is not the exact src package") from None
+    if (
+        stat.S_ISLNK(origin_metadata.st_mode)
+        or not stat.S_ISREG(origin_metadata.st_mode)
+        or origin_path != expected
+        or origin_resolved != expected
+    ):
+        raise SafetyError("Generated package origin is not the exact src package")
+
+
+def _load_generated_runtime() -> _GeneratedRuntime:
+    from iikocloud_client.api_client import ApiClient
+    from iikocloud_client.configuration import Configuration
+    from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
+
+    return _GeneratedRuntime(
+        configuration=Configuration,
+        api_client=ApiClient,
+        adapter=GeneratedLiveSdk,
+    )
 
 
 def _is_live_item(item: pytest.Item) -> bool:
@@ -112,6 +167,7 @@ def _live_environment(request: pytest.FixtureRequest) -> Iterator[_LiveEnvironme
         root,
         invocation_args=request.config.invocation_params.args,
     )
+    _assert_generated_package_origin(root)
     state_root = root / ".state"
     lock = LiveProcessLock(state_root / "live.lock")
     with lock:
@@ -144,7 +200,7 @@ def _new_run_id() -> str:
     return f"{timestamp}-{secrets.token_hex(4)}"
 
 
-@pytest.fixture(scope="session")
+@pytest_asyncio.fixture(scope="session", loop_scope="session")
 async def live_session(
     _live_environment: _LiveEnvironment,
 ) -> AsyncIterator[SafeLiveSession]:
@@ -191,11 +247,11 @@ async def live_session(
             context.mutation_journals_clean = mutation_journals_absent(state_root)
 
 
-@pytest.fixture(scope="session")
+@pytest_asyncio.fixture(scope="session", loop_scope="session")
 async def live_sdk(
     _live_environment: _LiveEnvironment,
     live_session: SafeLiveSession,
-) -> AsyncIterator[GeneratedLiveSdk]:
+) -> AsyncIterator[Any]:
     profile = _live_environment.profile
     state = _live_environment.state
     context = _live_environment.context
@@ -205,15 +261,16 @@ async def live_sdk(
     if receipt is None:
         raise SafetyError("Generated live SDK requires the authenticated live receipt")
 
-    configuration = Configuration(
+    runtime = _load_generated_runtime()
+    configuration = runtime.configuration(
         host=profile.base_url,
         access_token=live_session.access_token,
     )
     context.generated_client_required = True
-    api_client = ApiClient(configuration)
-    adapter: GeneratedLiveSdk | None = None
+    api_client = runtime.api_client(configuration)
+    adapter: Any | None = None
     try:
-        adapter = GeneratedLiveSdk(
+        adapter = runtime.adapter(
             api_client=api_client,
             profile=profile,
             guard=live_session.guard,

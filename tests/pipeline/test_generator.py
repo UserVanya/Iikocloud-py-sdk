@@ -72,6 +72,7 @@ def test_repository_generator_assets_are_exact_and_loadable() -> None:
     assert manual_files == [
         "iikocloud_client/_contracts/__init__.py",
         "iikocloud_client/_contracts/rate-limits.yaml",
+        "iikocloud_client/py.typed",
     ]
 
 
@@ -79,6 +80,7 @@ def test_repository_hand_owned_contracts_are_seeded_and_canonical() -> None:
     init_path = Path("src/iikocloud_client/_contracts/__init__.py")
     contract_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     canonical_contract = Path("contracts/rate-limits.yaml")
+    typing_marker = Path("src/iikocloud_client/py.typed")
 
     module = ast.parse(init_path.read_text(encoding="utf-8"))
 
@@ -88,6 +90,9 @@ def test_repository_hand_owned_contracts_are_seeded_and_canonical() -> None:
     assert isinstance(module.body[0].value.value, str)
     assert module.body[0].value.value
     assert contract_path.read_bytes() == canonical_contract.read_bytes()
+    assert typing_marker.is_file()
+    assert not typing_marker.is_symlink()
+    assert typing_marker.read_bytes() == b""
 
 
 def test_toolchain_load_accepts_only_the_exact_pinned_toolchain(tmp_path: Path) -> None:

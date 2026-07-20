@@ -121,10 +121,15 @@ def test_sync_preserves_exact_snapshot_and_excludes_manual_files_from_manifest(
     candidate = b'{ "openapi": "3.0.1", "info": {}, "paths": {} }\n'
     fake_dependencies.paths.candidate.write_bytes(candidate)
     manual_list = tmp_path / "generator/manual-files.txt"
-    manual_list.write_text("iikocloud_client/_contracts/manual.yaml\n", encoding="utf-8")
+    manual_list.write_text(
+        "iikocloud_client/_contracts/manual.yaml\niikocloud_client/py.typed\n",
+        encoding="utf-8",
+    )
     manual_source = tmp_path / "src/iikocloud_client/_contracts/manual.yaml"
     manual_source.parent.mkdir(parents=True)
     manual_source.write_bytes(b"manual\n")
+    typing_marker = tmp_path / "src/iikocloud_client/py.typed"
+    typing_marker.write_bytes(b"")
 
     sync(fake_dependencies)
 
@@ -133,7 +138,9 @@ def test_sync_preserves_exact_snapshot_and_excludes_manual_files_from_manifest(
     manifest = yaml.safe_load(items[2].staged.read_text(encoding="utf-8"))
     assert "iikocloud_client/__init__.py" in manifest["files"]
     assert "iikocloud_client/_contracts/manual.yaml" not in manifest["files"]
+    assert "iikocloud_client/py.typed" not in manifest["files"]
     assert (items[1].staged / "_contracts/manual.yaml").read_bytes() == b"manual\n"
+    assert (items[1].staged / "py.typed").read_bytes() == b""
 
 
 def test_sync_package_failure_leaves_committed_outputs_and_staging_for_diagnosis(

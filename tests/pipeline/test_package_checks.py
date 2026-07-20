@@ -36,6 +36,7 @@ def _write_generated_fixture(package: Path, *, broken: bool = False) -> None:
         encoding="utf-8",
     )
     (package / "models/ping.py").write_text("class Ping: pass\n", encoding="utf-8")
+    (package / "py.typed").write_bytes(b"")
 
 
 def test_runtime_dependencies_are_exact_task_11_dependencies() -> None:
@@ -45,6 +46,39 @@ def test_runtime_dependencies_are_exact_task_11_dependencies() -> None:
         "python-dateutil>=2.9,<3",
         "typing-extensions>=4.12,<5",
     )
+
+
+def test_root_project_uses_exact_task_11_src_packaging_metadata() -> None:
+    project = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+
+    assert project["project"] == {
+        "name": "iikocloud-client",
+        "version": "0.1.0",
+        "description": "Generated async Python SDK for iiko Cloud API",
+        "readme": "README.md",
+        "requires-python": ">=3.10",
+        "dependencies": [
+            "httpx>=0.28,<1",
+            "pydantic>=2.11,<3",
+            "python-dateutil>=2.9,<3",
+            "typing-extensions>=4.12,<5",
+        ],
+        "urls": {"Repository": "https://github.com/UserVanya/Iikocloud-py-sdk"},
+    }
+    assert project["build-system"] == {
+        "requires": ["setuptools>=77,<82"],
+        "build-backend": "setuptools.build_meta",
+    }
+    assert project["tool"]["setuptools"] == {
+        "packages": {"find": {"where": ["src"]}},
+        "package-data": {
+            "iikocloud_client": ["py.typed", "_contracts/*.yaml"],
+        },
+    }
+    assert project["tool"]["mypy"]["files"] == ["tools/openapi_pipeline"]
+    assert project["tool"]["pytest"]["ini_options"]["pythonpath"] == ["."]
+    assert "poetry" not in project["tool"]
+    assert "pylint" not in project["tool"]
 
 
 def test_package_check_group_and_recursive_lock_match_runtime_closure() -> None:
@@ -177,6 +211,7 @@ def test_package_check_uses_clean_tree_argv_and_isolated_wheel_install(
     assert not stale.exists()
     pyproject = (build_root / "package-check/pyproject.toml").read_text(encoding="utf-8")
     assert all(dependency in pyproject for dependency in RUNTIME_DEPENDENCIES)
+    assert 'iikocloud_client = ["py.typed", "_contracts/*.yaml"]' in pyproject
     assert [command[:2] for command, _ in calls] == [
         [command_python := calls[0][0][0], "-c"],
         [command_python, "-m"],
@@ -338,6 +373,7 @@ def test_installed_import_smoke_ignores_missing_reported_site_root(
         "class ApiClient: pass\nclass Configuration: pass\n",
         encoding="utf-8",
     )
+    (installed / "py.typed").write_bytes(b"")
     missing_site_root = tmp_path / "guaranteed-missing-site-root"
     smoke = tmp_path / "smoke"
     smoke.mkdir()
@@ -352,6 +388,58 @@ def test_installed_import_smoke_ignores_missing_reported_site_root(
         [str(isolated_python), "-I", "-c", script],
         cwd=smoke,
         purpose="Installed missing-root regression imports",
+        runner=subprocess.run,
+        env=package_checks_module._sanitized_environment(),
+    )
+
+
+def test_installed_import_smoke_requires_empty_py_typed_marker(tmp_path: Path) -> None:
+    environment = tmp_path / "venv"
+    subprocess.run(
+        [sys.executable, "-m", "venv", "--without-pip", str(environment)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    isolated_python = environment / (
+        "Scripts/python.exe" if sys.platform == "win32" else "bin/python"
+    )
+    site_packages = Path(
+        subprocess.run(
+            [
+                str(isolated_python),
+                "-I",
+                "-c",
+                "import site; print(site.getsitepackages()[0])",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    installed = site_packages / "iikocloud_client"
+    installed.mkdir()
+    (installed / "__init__.py").write_text(
+        "class ApiClient: pass\nclass Configuration: pass\n",
+        encoding="utf-8",
+    )
+    smoke = tmp_path / "smoke"
+    smoke.mkdir()
+
+    with pytest.raises(PipelineError, match="Installed marker regression imports"):
+        package_checks_module._run(
+            [str(isolated_python), "-I", "-c", package_checks_module._INSTALLED_IMPORT_SCRIPT],
+            cwd=smoke,
+            purpose="Installed marker regression imports",
+            runner=subprocess.run,
+            env=package_checks_module._sanitized_environment(),
+        )
+
+    (installed / "py.typed").write_bytes(b"")
+    package_checks_module._run(
+        [str(isolated_python), "-I", "-c", package_checks_module._INSTALLED_IMPORT_SCRIPT],
+        cwd=smoke,
+        purpose="Installed marker regression imports",
         runner=subprocess.run,
         env=package_checks_module._sanitized_environment(),
     )

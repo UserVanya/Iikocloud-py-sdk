@@ -9,6 +9,7 @@ from typing import Any
 
 import pytest
 import yaml
+from reviewed_baseline import has_complete_bootstrap_candidate
 from test_evidence_analysis import (
     _combo,
     _dish,
@@ -769,8 +770,8 @@ def test_fixtures_never_copy_capture_redactions_ids_or_schema_example_defaults()
 
 
 @pytest.mark.skipif(
-    not Path("build/upstream/candidate.json").is_file(),
-    reason="ignored reviewed bootstrap candidate is absent in a clean checkout",
+    not has_complete_bootstrap_candidate(RepoPaths.discover()),
+    reason="complete ignored reviewed bootstrap candidate set is absent",
 )
 def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() -> None:
     schema, _mappings = compose_reviewed_bootstrap_candidate(RepoPaths.discover())
