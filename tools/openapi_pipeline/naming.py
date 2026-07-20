@@ -9,6 +9,7 @@ from urllib.parse import unquote
 
 from .errors import ValidationError
 from .inventory import HTTP_METHODS
+from .schema import SchemaPath, iter_structural_references
 
 _PYTHON_IDENTIFIER = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 _GENERATOR_SCHEMA_NAME = re.compile(r"[a-zA-Z0-9.\-_]+")
@@ -48,6 +49,8 @@ def _component_schema_ref(name: str) -> str:
 
 
 def _local_component_schema_name(ref: str) -> str | None:
+    if not ref.startswith("#"):
+        return None
     decoded = unquote(ref)
     if not decoded.startswith(_COMPONENT_SCHEMA_REF_PREFIX):
         return None
@@ -57,33 +60,37 @@ def _local_component_schema_name(ref: str) -> str | None:
     return _decode_pointer_token(token)
 
 
-def _rewrite_schema_refs(value: Any, replacements: dict[str, str]) -> None:
-    if isinstance(value, dict):
-        for key, child in value.items():
-            if key == "$ref" and isinstance(child, str):
-                raw_name = _local_component_schema_name(child)
-                if raw_name in replacements:
-                    value[key] = _component_schema_ref(replacements[raw_name])
-            else:
-                _rewrite_schema_refs(child, replacements)
-    elif isinstance(value, list):
-        for child in value:
-            _rewrite_schema_refs(child, replacements)
+def _object_at_path(document: dict[str, Any], path: SchemaPath) -> dict[str, Any]:
+    current: Any = document
+    for part in path:
+        if isinstance(current, list):
+            if not isinstance(part, int):
+                raise ValidationError("Cannot resolve structural OpenAPI reference path")
+            current = current[part]
+            continue
+        if not isinstance(current, dict):
+            raise ValidationError("Cannot resolve structural OpenAPI reference path")
+        current = current[part]
+    if not isinstance(current, dict):
+        raise ValidationError("Structural OpenAPI reference owner must be an object")
+    return current
 
 
-def _remaining_schema_refs(value: Any, old_names: frozenset[str]) -> list[str]:
+def _rewrite_schema_refs(document: dict[str, Any], replacements: dict[str, str]) -> None:
+    for path, ref in iter_structural_references(document):
+        if not isinstance(ref, str):
+            continue
+        raw_name = _local_component_schema_name(ref)
+        if raw_name in replacements:
+            owner = _object_at_path(document, path)
+            owner["$ref"] = _component_schema_ref(replacements[raw_name])
+
+
+def _remaining_schema_refs(document: dict[str, Any], old_names: frozenset[str]) -> list[str]:
     remaining: list[str] = []
-    if isinstance(value, dict):
-        for key, child in value.items():
-            if key == "$ref" and isinstance(child, str):
-                raw_name = _local_component_schema_name(child)
-                if raw_name in old_names:
-                    remaining.append(child)
-            else:
-                remaining.extend(_remaining_schema_refs(child, old_names))
-    elif isinstance(value, list):
-        for child in value:
-            remaining.extend(_remaining_schema_refs(child, old_names))
+    for _path, ref in iter_structural_references(document):
+        if isinstance(ref, str) and _local_component_schema_name(ref) in old_names:
+            remaining.append(ref)
     return remaining
 
 

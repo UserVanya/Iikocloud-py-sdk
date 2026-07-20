@@ -297,6 +297,91 @@ def test_generator_invalid_schema_ref_rewrite_is_rfc6901_safe() -> None:
     assert mappings == {"Holder": "Holder", "SafeName": "SafeName"}
 
 
+def test_schema_ref_rewrite_requires_a_literal_local_fragment_marker() -> None:
+    old_ref = f"#/components/schemas/{_CLR_GENERIC_SCHEMA}"
+    encoded_fragment = old_ref.replace("#", "%23", 1)
+    external_ref = f"https://example.invalid/openapi.json{old_ref}"
+    relative_ref = f"other.json{old_ref}"
+    document = {
+        "components": {
+            "schemas": {
+                _CLR_GENERIC_SCHEMA: {"type": "object"},
+                "Holder": {
+                    "properties": {
+                        "local": {"$ref": old_ref},
+                        "encoded": {"$ref": encoded_fragment},
+                        "external": {"$ref": external_ref},
+                        "relative": {"$ref": relative_ref},
+                    }
+                },
+            }
+        }
+    }
+
+    corrected, _mappings = _normalize_generator_schema_names(
+        document, {_CLR_GENERIC_SCHEMA: "SafeResponse"}
+    )
+
+    properties = corrected["components"]["schemas"]["Holder"]["properties"]
+    assert properties["local"]["$ref"] == "#/components/schemas/SafeResponse"
+    assert properties["encoded"]["$ref"] == encoded_fragment
+    assert properties["external"]["$ref"] == external_ref
+    assert properties["relative"]["$ref"] == relative_ref
+
+
+def test_schema_ref_rewrite_skips_literal_data_but_keeps_semantic_map_keys() -> None:
+    old_ref = f"#/components/schemas/{_CLR_GENERIC_SCHEMA}"
+    literal_ref = {"$ref": old_ref}
+    document = {
+        "openapi": "3.0.3",
+        "paths": {
+            "/items": {
+                "get": {
+                    "responses": {
+                        "default": {"content": {"application/json": {"schema": {"$ref": old_ref}}}}
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                _CLR_GENERIC_SCHEMA: {"type": "object"},
+                "Payload": {
+                    "type": "object",
+                    "properties": {"example": {"$ref": old_ref}},
+                    "example": copy.deepcopy(literal_ref),
+                    "default": copy.deepcopy(literal_ref),
+                    "enum": [copy.deepcopy(literal_ref)],
+                    "const": copy.deepcopy(literal_ref),
+                    "x-literal": copy.deepcopy(literal_ref),
+                },
+            }
+        },
+        "x-root-literal": copy.deepcopy(literal_ref),
+    }
+    original = copy.deepcopy(document)
+
+    corrected, _mappings = _normalize_generator_schema_names(
+        document, {_CLR_GENERIC_SCHEMA: "SafeResponse"}
+    )
+
+    payload = corrected["components"]["schemas"]["Payload"]
+    assert payload["properties"]["example"]["$ref"] == ("#/components/schemas/SafeResponse")
+    assert (
+        corrected["paths"]["/items"]["get"]["responses"]["default"]["content"]["application/json"][
+            "schema"
+        ]["$ref"]
+        == "#/components/schemas/SafeResponse"
+    )
+    assert payload["example"] == literal_ref
+    assert payload["default"] == literal_ref
+    assert payload["enum"] == [literal_ref]
+    assert payload["const"] == literal_ref
+    assert payload["x-literal"] == literal_ref
+    assert corrected["x-root-literal"] == literal_ref
+    assert document == original
+
+
 def test_generator_invalid_schema_requires_explicit_reviewed_override() -> None:
     document = {"components": {"schemas": {_CLR_GENERIC_SCHEMA: {}}}}
 
