@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, Any
 
 from .capture import ARRAY_ITEM, OBJECT_VALUE, CaptureWriter, LiveCapture, RedactionHints
 from .errors import SafetyError
+from .evidence_schema_repairs import is_reviewed_dynamic_map_schema
 from .live.lock import LiveProcessLock
 from .live.profile import ResolvedLiveProfile
 from .live.pytest_support import resolve_locked_live_profile
@@ -99,7 +100,7 @@ def _assert_reviewed_override_tax_array_shape(
         "description": "Tax benefits",
         "items": {"$ref": f"#/components/schemas/{item_component}"},
         "type": "array",
-    }:
+    } and not is_reviewed_dynamic_map_schema(override_tax_categories):
         raise SafetyError(
             "Evidence overrideTaxCategories broken array shape has drifted"
         )
@@ -257,9 +258,10 @@ def build_versioned_evidence_redaction_hints(
 
     response_values = dict(selected.response_values_by_status[200])
     if menu_version in {3, 4}:
-        if _OVERRIDE_TAX_CATEGORIES_HINT_PATH in response_values:
+        existing_override_values = response_values.get(_OVERRIDE_TAX_CATEGORIES_HINT_PATH)
+        if existing_override_values not in {None, frozenset()}:
             raise SafetyError(
-                "Evidence overrideTaxCategories map exception is already schema-declared"
+                "Evidence overrideTaxCategories map redaction values have drifted"
             )
         response_values[_OVERRIDE_TAX_CATEGORIES_HINT_PATH] = frozenset()
     if menu_version == 4:

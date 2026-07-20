@@ -154,7 +154,12 @@ def _effective_schema() -> dict[str, Any]:
                         },
                         "id": {"type": "string"},
                         "itemSizes": {"type": "array", "items": {}},
-                        "modifierSchemaId": {"nullable": True, "type": "string"},
+                        "modifierSchemaId": {
+                            "description": "Modifier schema ID",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "nullable": True,
+                            "type": "string",
+                        },
                         "orderItemType": {
                             "description": "Product or compound",
                             "enum": ["Product", "Compound"],

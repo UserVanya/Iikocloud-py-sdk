@@ -10,6 +10,11 @@ from typing import Any, cast
 from .capture import _CAPTURE_UUID_ALIAS, RedactionHints, Sanitizer
 from .errors import SafetyError
 from .evidence import build_versioned_evidence_redaction_hints
+from .evidence_schema_repairs import (
+    build_reviewed_external_menu_validation_schema,
+    is_reviewed_dynamic_map_schema,
+    is_reviewed_null_only_property_hash,
+)
 from .io import canonical_json_bytes, sha256_bytes
 
 _OPERATION = "get_external_menu_by_id"
@@ -18,10 +23,6 @@ _VERSION_COMPONENTS = {
     2: "ExternalMenuV2",
     3: "ExternalMenuV3",
     4: "ExternalMenuV4",
-}
-_OVERRIDE_TAX_ITEM_COMPONENTS = {
-    3: "OverrideTaxesDto",
-    4: "OverrideTaxesDto2",
 }
 _MENU_REQUEST_COMPONENT = "iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest"
 _COMPONENT_PREFIX = "#/components/schemas/"
@@ -81,7 +82,7 @@ class MenuEvidenceValidator:
     """Concrete, immutable validation contract derived from one reviewed effective schema."""
 
     def __init__(self, effective_schema: dict[str, Any]) -> None:
-        self._schema = _strict_document_copy(effective_schema)
+        self._schema = build_reviewed_external_menu_validation_schema(effective_schema)
         self._components = _schema_components(self._schema)
         self._request_schema = _reviewed_request_schema(self._schema)
         self._root_schemas = {
@@ -133,16 +134,8 @@ class MenuEvidenceValidator:
             raise SafetyError("Evidence request body does not match the selected menu version")
 
         self._validate_instance(request_body, self._request_schema, path="request")
-        schema_response_body = response_body
-        if version in _OVERRIDE_TAX_ITEM_COMPONENTS and "overrideTaxCategories" in response_body:
-            self._validate_reviewed_override_tax_map(
-                version,
-                response_body["overrideTaxCategories"],
-            )
-            schema_response_body = dict(response_body)
-            del schema_response_body["overrideTaxCategories"]
         self._validate_instance(
-            schema_response_body,
+            response_body,
             self._root_schemas[version],
             path=f"response-v{version}",
             component_name=_VERSION_COMPONENTS[version],
@@ -158,24 +151,6 @@ class MenuEvidenceValidator:
             hints=self._hints[version],
         )
         return None
-
-    def _validate_reviewed_override_tax_map(self, version: int, value: object) -> None:
-        if type(value) is not dict:
-            raise SafetyError("Evidence overrideTaxCategories must be a reviewed object map")
-        item_component = _OVERRIDE_TAX_ITEM_COMPONENTS[version]
-        item_schema = self._component(item_component)
-        for key, items in value.items():
-            if type(key) is not str or _CAPTURE_UUID_ALIAS.fullmatch(key) is None:
-                raise SafetyError("Evidence overrideTaxCategories key is not a capture UUID alias")
-            if type(items) is not list:
-                raise SafetyError("Evidence overrideTaxCategories values must be lists")
-            for index, item in enumerate(items):
-                self._validate_instance(
-                    item,
-                    item_schema,
-                    path=f"response-v{version}.overrideTaxCategories.value[{index}]",
-                    component_name=item_component,
-                )
 
     def match_v4_item_branches(self, item: Mapping[str, Any]) -> tuple[str, ...]:
         """Return the reviewed structural V4 branches accepting one raw item."""
@@ -350,7 +325,15 @@ class MenuEvidenceValidator:
         elif undefined_required:
             raise SafetyError("Evidence schema contains an unsupported undefined required field")
 
-        if "additionalProperties" in schema and schema["additionalProperties"] is not False:
+        additional_properties = schema.get("additionalProperties")
+        if (
+            additional_properties is not None
+            and additional_properties is not False
+            and (
+                type(additional_properties) is not dict
+                or not is_reviewed_dynamic_map_schema(schema)
+            )
+        ):
             raise SafetyError("Evidence schema additionalProperties contract is unsupported")
         for keyword in ("minLength", "maxLength"):
             value = schema.get(keyword)
@@ -410,6 +393,15 @@ class MenuEvidenceValidator:
             self._preflight_schema(
                 items,
                 path=f"{path}.items",
+                component_name=component_name,
+                visited=visited,
+                active=active,
+                depth=depth + 1,
+            )
+        if type(additional_properties) is dict:
+            self._preflight_schema(
+                additional_properties,
+                path=f"{path}.additionalProperties",
                 component_name=component_name,
                 visited=visited,
                 active=active,
@@ -502,7 +494,28 @@ class MenuEvidenceValidator:
                         "ExternalMenuComboItem contains an unreviewed undefined property"
                     )
             elif unknown:
-                raise SafetyError("Evidence object contains an undeclared property")
+                additional_properties = schema.get("additionalProperties")
+                if type(additional_properties) is dict and is_reviewed_dynamic_map_schema(schema):
+                    for name in sorted(unknown):
+                        if _CAPTURE_UUID_ALIAS.fullmatch(name) is None:
+                            raise SafetyError(
+                                "Evidence overrideTaxCategories key is not a capture UUID alias"
+                            )
+                        self._validate_instance(
+                            value[name],
+                            additional_properties,
+                            path=f"{path}.additionalProperties",
+                            component_name=component_name,
+                        )
+                elif not all(
+                    is_reviewed_null_only_property_hash(
+                        component_name=component_name or "",
+                        property_name_sha256=sha256_bytes(canonical_json_bytes(name)),
+                        value=value[name],
+                    )
+                    for name in unknown
+                ):
+                    raise SafetyError("Evidence object contains an undeclared property")
             for name, child in value.items():
                 property_schema = properties.get(name)
                 if property_schema is not None:
