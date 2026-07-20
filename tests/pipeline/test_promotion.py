@@ -62,7 +62,7 @@ def test_promotion_rolls_back_files_and_directories_when_replace_fails(
     assert not list(tmp_path.rglob("*.backup-*"))
 
 
-def test_promotion_rolls_back_directory_when_mkdir_succeeds_then_interrupts(
+def test_promotion_preserves_ambiguous_directory_when_mkdir_succeeds_then_interrupts(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -85,7 +85,35 @@ def test_promotion_rolls_back_directory_when_mkdir_succeeds_then_interrupts(
 
     assert staged.read_text(encoding="utf-8") == "new"
     assert not target.exists()
-    assert not interrupted_directory.exists()
+    assert interrupted_directory.is_dir()
+    assert list(interrupted_directory.iterdir()) == []
+    assert not list(tmp_path.rglob("*.backup-*"))
+
+
+def test_promotion_preserves_competitor_parent_when_mkdir_loses_race(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    staged = tmp_path / "staged.txt"
+    staged.write_text("new", encoding="utf-8")
+    competitor_parent = tmp_path / "competitor-parent"
+    target = competitor_parent / "target.txt"
+    real_mkdir = Path.mkdir
+
+    def competitor_wins(path: Path, *args: object, **kwargs: object) -> None:
+        if path == competitor_parent:
+            real_mkdir(path, *args, **kwargs)  # type: ignore[arg-type]
+        real_mkdir(path, *args, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(Path, "mkdir", competitor_wins)
+
+    with pytest.raises(PipelineError, match="Cannot create promotion target parent safely"):
+        promote_transaction([PromotionItem(staged, target)], root=tmp_path)
+
+    assert competitor_parent.is_dir()
+    assert list(competitor_parent.iterdir()) == []
+    assert staged.read_text(encoding="utf-8") == "new"
+    assert not target.exists()
     assert not list(tmp_path.rglob("*.backup-*"))
 
 

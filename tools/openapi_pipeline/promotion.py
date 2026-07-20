@@ -177,7 +177,11 @@ def _preflight(items: list[PromotionItem], root: Path | None) -> tuple[Path, lis
     return controlled_root, normalized
 
 
-def _create_parent(path: Path, root: Path, created: list[Path]) -> None:
+def _create_parent(
+    path: Path,
+    root: Path,
+    created: list[tuple[Path, tuple[int, int] | None]],
+) -> None:
     missing: list[Path] = []
     current = path.parent
     while current != root and not current.exists():
@@ -186,15 +190,25 @@ def _create_parent(path: Path, root: Path, created: list[Path]) -> None:
     if current.is_symlink():
         raise PipelineError(f"Promotion target parent must not be a symlink: {current}")
     for directory in reversed(missing):
-        created.append(directory)
+        created.append((directory, None))
         try:
             directory.mkdir(mode=0o755)
+            created_metadata = directory.lstat()
+            created[-1] = (
+                directory,
+                (created_metadata.st_dev, created_metadata.st_ino),
+            )
             directory.chmod(0o755, follow_symlinks=False)
             metadata = directory.lstat()
         except OSError as error:
             raise PipelineError("Cannot create promotion target parent safely") from error
         if (
-            stat.S_ISLNK(metadata.st_mode)
+            stat.S_ISLNK(created_metadata.st_mode)
+            or not stat.S_ISDIR(created_metadata.st_mode)
+            or created_metadata.st_uid != os.getuid()
+            or (metadata.st_dev, metadata.st_ino)
+            != (created_metadata.st_dev, created_metadata.st_ino)
+            or stat.S_ISLNK(metadata.st_mode)
             or not stat.S_ISDIR(metadata.st_mode)
             or stat.S_IMODE(metadata.st_mode) != 0o755
             or metadata.st_uid != os.getuid()
@@ -214,7 +228,7 @@ def promote_transaction(items: list[PromotionItem], *, root: Path | None = None)
     token = uuid.uuid4().hex
     backups: list[tuple[Path, Path]] = []
     promoted: list[PromotionItem] = []
-    created: list[Path] = []
+    created: list[tuple[Path, tuple[int, int] | None]] = []
 
     try:
         for item in normalized:
@@ -243,7 +257,19 @@ def promote_transaction(items: list[PromotionItem], *, root: Path | None = None)
                     os.replace(backup, target)
             except BaseException as rollback_error:
                 rollback_errors.append(f"restore target {target}: {rollback_error!r}")
-        for directory in reversed(created):
+        for directory, binding in reversed(created):
+            if binding is None:
+                continue
+            try:
+                metadata = directory.lstat()
+            except OSError:
+                continue
+            if (
+                stat.S_ISLNK(metadata.st_mode)
+                or not stat.S_ISDIR(metadata.st_mode)
+                or (metadata.st_dev, metadata.st_ino) != binding
+            ):
+                continue
             with suppress(OSError):
                 directory.rmdir()
         if rollback_errors and hasattr(original, "add_note"):
