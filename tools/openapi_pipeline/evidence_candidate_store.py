@@ -29,9 +29,14 @@ _MAX_DEPTH = 128
 
 @dataclass(frozen=True)
 class EvidenceCandidateManifestResult:
-    """A deeply immutable canonical manifest and its detached digest."""
+    """Deeply immutable, detached inputs for a future candidate writer.
+
+    Writers must persist only ``canonical_payloads`` and ``canonical_json_bytes`` from
+    this result. They must not reread the caller-retained candidate bundle.
+    """
 
     manifest: Mapping[str, FrozenJson]
+    canonical_payloads: Mapping[str, bytes]
     canonical_json_bytes: bytes
     sha256: str
 
@@ -44,6 +49,8 @@ def build_evidence_candidate_manifest(
     This checksum does not authenticate the source. A later accept command must recompose
     authoritative evidence under the live lock and require byte-identical payloads and
     manifest. Passing this pure validator alone never authorizes persistence or promotion.
+    A future writer must consume only the returned detached payload and manifest bytes,
+    never reread the caller-retained bundle after validation.
     """
 
     if type(bundle) is not EvidenceCandidateBundle:
@@ -113,8 +120,12 @@ def build_evidence_candidate_manifest(
     frozen = _freeze_json(manifest_value)
     if not isinstance(frozen, Mapping):
         raise SafetyError("Evidence candidate manifest root is invalid")
+    frozen_payloads = MappingProxyType(
+        {path: bodies[path] for path in EVIDENCE_CANDIDATE_PAYLOAD_PATHS}
+    )
     return EvidenceCandidateManifestResult(
         manifest=frozen,
+        canonical_payloads=frozen_payloads,
         canonical_json_bytes=body,
         sha256=digest,
     )

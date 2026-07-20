@@ -144,6 +144,58 @@ def test_manifest_result_is_deeply_immutable() -> None:
         result.sha256 = "0" * 64  # type: ignore[misc]
 
 
+def test_manifest_result_retains_detached_ordered_payload_snapshot() -> None:
+    original = _bundle()
+    payload_backing = dict(original.canonical_bytes)
+    expected_payloads = {path: payload_backing[path] for path in EVIDENCE_CANDIDATE_PAYLOAD_PATHS}
+    bundle = dataclasses.replace(
+        original,
+        canonical_bytes=MappingProxyType(payload_backing),
+    )
+
+    result = build_evidence_candidate_manifest(bundle)
+    changed_path = EVIDENCE_CANDIDATE_PAYLOAD_PATHS[0]
+    payload_backing[changed_path] = b'{"mutated":"after-return"}\n'
+
+    assert bundle.canonical_bytes[changed_path] != expected_payloads[changed_path]
+    assert tuple(result.canonical_payloads) == EVIDENCE_CANDIDATE_PAYLOAD_PATHS
+    assert dict(result.canonical_payloads) == expected_payloads
+    assert all(type(body) is bytes for body in result.canonical_payloads.values())
+    files = result.manifest["files"]
+    assert isinstance(files, Mapping)
+    assert {
+        path: sha256_bytes(result.canonical_payloads[path]) for path in result.canonical_payloads
+    } == dict(files)
+    assert result.canonical_json_bytes not in result.canonical_payloads.values()
+
+    with pytest.raises(TypeError):
+        result.canonical_payloads[changed_path] = b"changed"  # type: ignore[index]
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        result.canonical_payloads = MappingProxyType({})  # type: ignore[misc]
+
+
+def test_manifest_result_payload_snapshot_survives_validation_callback_mutation() -> None:
+    original = _bundle()
+    changed_path = EVIDENCE_CANDIDATE_PAYLOAD_PATHS[0]
+    payload_backing = dict(original.canonical_bytes)
+    expected_body = payload_backing[changed_path]
+
+    def mutate_payload_backing() -> None:
+        payload_backing[changed_path] = b'{"mutated":"during-validation"}\n'
+
+    bundle = dataclasses.replace(
+        original,
+        canonical_bytes=MappingProxyType(payload_backing),
+        sha256=MappingProxyType(_CallbackMapping(original.sha256, mutate_payload_backing)),
+    )
+
+    result = build_evidence_candidate_manifest(bundle)
+
+    assert bundle.canonical_bytes[changed_path] != expected_body
+    assert result.canonical_payloads[changed_path] == expected_body
+    assert tuple(result.canonical_payloads) == EVIDENCE_CANDIDATE_PAYLOAD_PATHS
+
+
 def test_manifest_is_deterministic_across_all_bundle_mapping_orders() -> None:
     bundle = _bundle()
     reordered = dataclasses.replace(
