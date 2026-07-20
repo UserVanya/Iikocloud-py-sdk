@@ -5,22 +5,23 @@ import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Any, cast
-
-import yaml
+from typing import Any, cast
 
 from .errors import SafetyError
 from .evidence_analysis import EvidenceProvenance
+from .evidence_candidate_contract import (
+    EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
+    EVIDENCE_OPERATION_ID,
+    canonical_evidence_candidate_payloads,
+    evidence_candidate_manifest_document,
+)
+from .evidence_candidate_contract import (
+    EVIDENCE_VERSIONS as _VERSIONS,
+)
+from .evidence_candidates import EvidenceCandidateBundle
 from .evidence_promotion import FrozenJson
 from .io import canonical_json_bytes, sha256_bytes
 
-if TYPE_CHECKING:
-    from .evidence_candidates import EvidenceCandidateBundle
-
-_MANIFEST_SCHEMA_VERSION = 1
-_TOOL_NAME = "iikocloud-evidence-candidates"
-_TOOL_VERSION = 1
-_VERSIONS = (2, 3, 4)
 _SHA256 = re.compile(r"[a-f0-9]{64}\Z")
 _MAPPING_PROXY_TYPE: type[Any] = type(MappingProxyType({}))
 _MAX_DEPTH = 128
@@ -38,59 +39,77 @@ class EvidenceCandidateManifestResult:
 def build_evidence_candidate_manifest(
     bundle: EvidenceCandidateBundle,
 ) -> EvidenceCandidateManifestResult:
-    """Validate an in-memory candidate bundle and build its canonical manifest."""
+    """Build an unkeyed consistency manifest that does not authorize acceptance.
 
-    from .evidence_candidates import (
-        EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
-        EVIDENCE_OPERATION_ID,
-        OPERATIONS_OVERLAY_PATH,
-        POLYMORPHISM_OVERLAY_PATH,
-        EvidenceCandidateBundle,
-    )
+    This checksum does not authenticate the source. A later accept command must recompose
+    authoritative evidence under the live lock and require byte-identical payloads and
+    manifest. Passing this pure validator alone never authorizes persistence or promotion.
+    """
 
     if type(bundle) is not EvidenceCandidateBundle:
         raise SafetyError("Evidence candidate manifest requires an exact bundle")
-    if type(bundle.operation_id) is not str or bundle.operation_id != EVIDENCE_OPERATION_ID:
+    (
+        operation_id,
+        effective_schema_binding,
+        evidence_analysis_binding,
+        evidence_provenance,
+        manifest_binding,
+        operations_overlay,
+        polymorphism_overlay,
+        fixtures,
+        canonical_payloads,
+        payload_hashes,
+    ) = (
+        bundle.operation_id,
+        bundle.effective_schema_sha256,
+        bundle.evidence_analysis_sha256,
+        bundle.evidence_provenance,
+        bundle.manifest_sha256,
+        bundle.operations_overlay,
+        bundle.polymorphism_overlay,
+        bundle.fixtures,
+        bundle.canonical_bytes,
+        bundle.sha256,
+    )
+    if type(operation_id) is not str or operation_id != EVIDENCE_OPERATION_ID:
         raise SafetyError("Evidence candidate manifest operation binding is invalid")
     effective_schema_sha256 = _require_sha256(
-        bundle.effective_schema_sha256,
+        effective_schema_binding,
         "Evidence candidate manifest schema binding is invalid",
     )
     evidence_analysis_sha256 = _require_sha256(
-        bundle.evidence_analysis_sha256,
+        evidence_analysis_binding,
         "Evidence candidate manifest analysis binding is invalid",
     )
-    integrity_sha256 = _require_sha256(
-        bundle.integrity_sha256,
-        "Evidence candidate manifest integrity binding is invalid",
+    manifest_sha256 = _require_sha256(
+        manifest_binding,
+        "Evidence candidate manifest checksum is invalid",
     )
-    provenance = _validated_provenance(bundle.evidence_provenance)
+    provenance = _validated_provenance(evidence_provenance)
     bodies, recomputed_hashes = _validated_payloads(
-        bundle.canonical_bytes,
-        bundle.sha256,
+        canonical_payloads,
+        payload_hashes,
         EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
     )
     expected_bodies = _canonical_semantic_payloads(
-        bundle,
-        operations_path=OPERATIONS_OVERLAY_PATH,
-        polymorphism_path=POLYMORPHISM_OVERLAY_PATH,
-        payload_paths=EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
+        operations_overlay,
+        polymorphism_overlay,
+        fixtures,
     )
     if any(bodies[path] != expected_bodies[path] for path in EVIDENCE_CANDIDATE_PAYLOAD_PATHS):
         raise SafetyError("Evidence candidate manifest payload body is inconsistent")
 
-    manifest_value = _candidate_manifest_document(
-        operation_id=bundle.operation_id,
+    manifest_value = evidence_candidate_manifest_document(
+        operation_id=operation_id,
         effective_schema_sha256=effective_schema_sha256,
         evidence_analysis_sha256=evidence_analysis_sha256,
         provenance=provenance,
         files=recomputed_hashes,
-        payload_paths=EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
     )
     body = canonical_json_bytes(manifest_value)
     digest = sha256_bytes(body)
-    if digest != integrity_sha256:
-        raise SafetyError("Evidence candidate manifest integrity binding is invalid")
+    if digest != manifest_sha256:
+        raise SafetyError("Evidence candidate manifest checksum is invalid")
     frozen = _freeze_json(manifest_value)
     if not isinstance(frozen, Mapping):
         raise SafetyError("Evidence candidate manifest root is invalid")
@@ -99,32 +118,6 @@ def build_evidence_candidate_manifest(
         canonical_json_bytes=body,
         sha256=digest,
     )
-
-
-def _candidate_manifest_document(
-    *,
-    operation_id: str,
-    effective_schema_sha256: str,
-    evidence_analysis_sha256: str,
-    provenance: Mapping[int, EvidenceProvenance],
-    files: Mapping[str, str],
-    payload_paths: tuple[str, ...],
-) -> dict[str, Any]:
-    return {
-        "schema_version": _MANIFEST_SCHEMA_VERSION,
-        "tool": {"name": _TOOL_NAME, "version": _TOOL_VERSION},
-        "operation_id": operation_id,
-        "effective_schema_sha256": effective_schema_sha256,
-        "evidence_analysis_sha256": evidence_analysis_sha256,
-        "evidence_provenance": {
-            str(version): {
-                "request_sha256": provenance[version].request_sha256,
-                "response_sha256": provenance[version].response_sha256,
-            }
-            for version in _VERSIONS
-        },
-        "files": {path: files[path] for path in payload_paths},
-    }
 
 
 def _validated_provenance(value: object) -> dict[int, EvidenceProvenance]:
@@ -190,24 +183,22 @@ def _validated_payloads(
 
 
 def _canonical_semantic_payloads(
-    bundle: EvidenceCandidateBundle,
-    *,
-    operations_path: str,
-    polymorphism_path: str,
-    payload_paths: tuple[str, ...],
+    operations_value: object,
+    polymorphism_value: object,
+    fixtures_value: object,
 ) -> dict[str, bytes]:
     operations = _materialize_immutable_json(
-        bundle.operations_overlay,
+        operations_value,
         message="Evidence candidate manifest operations overlay is invalid",
     )
     polymorphism = _materialize_immutable_json(
-        bundle.polymorphism_overlay,
+        polymorphism_value,
         message="Evidence candidate manifest polymorphism overlay is invalid",
     )
     if type(operations) is not dict or type(polymorphism) is not dict:
         raise SafetyError("Evidence candidate manifest overlay root is invalid")
     fixture_entries = _immutable_mapping_entries(
-        bundle.fixtures,
+        fixtures_value,
         message="Evidence candidate manifest fixtures must be immutable",
     )
     if (
@@ -227,19 +218,11 @@ def _canonical_semantic_payloads(
             raise SafetyError("Evidence candidate manifest fixture root is invalid")
         fixtures[version] = fixture
 
-    expected = {
-        operations_path: _canonical_yaml_bytes(operations),
-        polymorphism_path: _canonical_yaml_bytes(polymorphism),
-        **{
-            f"tests/fixtures/contracts/external-menu-v{version}.json": canonical_json_bytes(
-                fixtures[version]
-            )
-            for version in _VERSIONS
-        },
-    }
-    if tuple(sorted(expected)) != tuple(sorted(payload_paths)):
-        raise SafetyError("Evidence candidate manifest semantic payload scope is invalid")
-    return expected
+    return canonical_evidence_candidate_payloads(
+        operations_overlay=operations,
+        polymorphism_overlay=polymorphism,
+        fixtures=fixtures,
+    )
 
 
 def _immutable_mapping_entries(
@@ -253,7 +236,7 @@ def _immutable_mapping_entries(
     traversal_failed = False
     try:
         keys = tuple(mapping)
-    except (SafetyError, MemoryError):
+    except MemoryError:
         raise
     except Exception:
         traversal_failed = True
@@ -265,7 +248,7 @@ def _immutable_mapping_entries(
         lookup_failed = False
         try:
             child = mapping[key]
-        except (SafetyError, MemoryError):
+        except MemoryError:
             raise
         except Exception:
             lookup_failed = True
@@ -343,15 +326,6 @@ def _materialize_immutable_json(
         ]
     finally:
         seen.remove(identity)
-
-
-def _canonical_yaml_bytes(value: Any) -> bytes:
-    return yaml.safe_dump(
-        value,
-        allow_unicode=True,
-        default_flow_style=False,
-        sort_keys=True,
-    ).encode("utf-8")
 
 
 def _freeze_json(value: Any, *, depth: int = 0) -> FrozenJson:

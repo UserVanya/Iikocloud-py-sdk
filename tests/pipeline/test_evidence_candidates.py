@@ -770,3 +770,23 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
 
     assert len(bundle.canonical_bytes) == 5
     assert bundle.fixtures[4]["formatVersion"] == 4
+    assert (
+        dict(bundle.sha256)
+        == {
+            "openapi/overlays/operations.overlay.yaml": (
+                "31314f53dbeccf67f14a0a33fd0fbe5912df04acb813b8bbe2dad10f02ed93b8"  # pragma: allowlist secret  # noqa: E501
+            ),
+            "openapi/overlays/polymorphism.overlay.yaml": (
+                "6b236b2f836ec9bdbc3cec1dbf6eda0d985ed00956bc69af8ee12bc1c5725f3e"  # pragma: allowlist secret  # noqa: E501
+            ),
+            "tests/fixtures/contracts/external-menu-v2.json": (
+                "b248e8d075e4d39ed1bed3824c686e32dc0b3b7438356ddd2eb8a590ab6252d8"  # pragma: allowlist secret  # noqa: E501
+            ),
+            "tests/fixtures/contracts/external-menu-v3.json": (
+                "f93b39f9a80e050c92b18d006eb2fccada4d7f9139d9cb8565f108afbc46d4bd"  # pragma: allowlist secret  # noqa: E501
+            ),
+            "tests/fixtures/contracts/external-menu-v4.json": (
+                "9f1a4e892d82f35eba50cb38d0bf2af5d340346bf3a3248d5e57732bd9abaa42"  # pragma: allowlist secret  # noqa: E501
+            ),
+        }
+    )

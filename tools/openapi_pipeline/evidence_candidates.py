@@ -9,9 +9,6 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any
 
-import yaml
-
-from .capture import EMAIL_KEYS, PHONE_KEYS, SECRET_KEYS
 from .errors import SafetyError, ValidationError
 from .evidence_analysis import (
     ComboFieldDecision,
@@ -19,25 +16,32 @@ from .evidence_analysis import (
     MenuEvidenceAnalysis,
     analyze_menu_evidence,
 )
-from .evidence_candidate_store import _candidate_manifest_document
+from .evidence_candidate_contract import (
+    EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
+    EVIDENCE_OPERATION_ID,
+    OPERATIONS_OVERLAY_PATH,
+    POLYMORPHISM_OVERLAY_PATH,
+    canonical_evidence_candidate_payloads,
+    evidence_candidate_manifest_document,
+)
+from .evidence_candidate_contract import (
+    EVIDENCE_VERSIONS as _VERSIONS,
+)
 from .evidence_candidate_synthesis import build_and_validate_synthetic_fixtures
 from .evidence_promotion import EvidencePair, FrozenJson
 from .io import canonical_json_bytes, sha256_bytes
 from .overlay import apply_overlay
 from .validate import ensure_valid_effective_schema
 
-EVIDENCE_OPERATION_ID = "get_external_menu_by_id"
-OPERATIONS_OVERLAY_PATH = "openapi/overlays/operations.overlay.yaml"
-POLYMORPHISM_OVERLAY_PATH = "openapi/overlays/polymorphism.overlay.yaml"
-_FIXTURE_PATHS = {
-    version: f"tests/fixtures/contracts/external-menu-v{version}.json" for version in (2, 3, 4)
-}
-_VERSIONS = (2, 3, 4)
-EVIDENCE_CANDIDATE_PAYLOAD_PATHS = (
-    OPERATIONS_OVERLAY_PATH,
-    POLYMORPHISM_OVERLAY_PATH,
-    *(_FIXTURE_PATHS[version] for version in _VERSIONS),
-)
+__all__ = [
+    "EVIDENCE_CANDIDATE_PAYLOAD_PATHS",
+    "EVIDENCE_OPERATION_ID",
+    "OPERATIONS_OVERLAY_PATH",
+    "POLYMORPHISM_OVERLAY_PATH",
+    "EvidenceCandidateBundle",
+    "build_evidence_candidate_bundle",
+]
+
 _ITEM3 = "ExternalMenuItem3"
 _COMBO = "ExternalMenuComboItem"
 _CATEGORY3 = "ExternalMenuCategory3"
@@ -50,29 +54,21 @@ _EXACT_FIVE = (
 )
 _COMPONENT_PREFIX = "#/components/schemas/"
 _MAX_DEPTH = 128
-_REDACTION = re.compile(r"<redacted:[^>]*>", re.IGNORECASE)
-_JWT = re.compile(
-    r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\."
-    r"[A-Za-z0-9_-]{8,}(?![A-Za-z0-9_-])"
-)
-_BEARER = re.compile(r"\bbearer\s+\S+", re.IGNORECASE)
-_EMAIL = re.compile(r"(?<![\w.+-])[\w.+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?!\w)")
-_PHONE = re.compile(r"(?<!\w)\+?\d(?:[ ().-]*\d){9,14}(?!\w)")
-_UUID_ANY = re.compile(
-    r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-"
-    r"[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
-)
 
 
 @dataclass(frozen=True)
 class EvidenceCandidateBundle:
-    """A deeply immutable, deterministic set of five in-memory promotion candidates."""
+    """Five candidates with an unkeyed consistency checksum.
+
+    The checksum detects accidental inconsistency only. It does not authenticate evidence
+    or authorize candidate acceptance.
+    """
 
     operation_id: str
     effective_schema_sha256: str
     evidence_analysis_sha256: str
     evidence_provenance: Mapping[int, EvidenceProvenance]
-    integrity_sha256: str
+    manifest_sha256: str
     operations_overlay: Mapping[str, Any]
     polymorphism_overlay: Mapping[str, Any]
     fixtures: Mapping[int, Mapping[str, Any]]
@@ -107,19 +103,13 @@ def build_evidence_candidate_bundle(
         raise SafetyError("Evidence candidate patched schema failed strict lint") from error
 
     fixtures = build_and_validate_synthetic_fixtures(patched, fresh_analysis)
-    _reject_candidate_leaks(operations, polymorphism, fixtures, stable_pairs, patched)
+    _reject_captured_value_leaks(fixtures, stable_pairs, patched)
 
-    operations_body = _yaml_bytes(operations)
-    polymorphism_body = _yaml_bytes(polymorphism)
-    bodies = {
-        OPERATIONS_OVERLAY_PATH: operations_body,
-        POLYMORPHISM_OVERLAY_PATH: polymorphism_body,
-        **{
-            _FIXTURE_PATHS[version]: canonical_json_bytes(fixtures[version])
-            for version in _VERSIONS
-        },
-    }
-    _scan_bytes(bodies.values())
+    bodies = canonical_evidence_candidate_payloads(
+        operations_overlay=operations,
+        polymorphism_overlay=polymorphism,
+        fixtures=fixtures,
+    )
     frozen_operations = _freeze_mapping(operations)
     frozen_polymorphism = _freeze_mapping(polymorphism)
     frozen_fixtures = MappingProxyType(
@@ -140,20 +130,19 @@ def build_evidence_candidate_bundle(
     )
     effective_schema_sha256 = sha256_bytes(canonical_json_bytes(schema))
     evidence_analysis_sha256 = sha256_bytes(fresh_analysis_body)
-    integrity_value = _candidate_manifest_document(
+    manifest_value = evidence_candidate_manifest_document(
         operation_id=EVIDENCE_OPERATION_ID,
         effective_schema_sha256=effective_schema_sha256,
         evidence_analysis_sha256=evidence_analysis_sha256,
         provenance=frozen_provenance,
         files=frozen_hashes,
-        payload_paths=EVIDENCE_CANDIDATE_PAYLOAD_PATHS,
     )
     return EvidenceCandidateBundle(
         operation_id=EVIDENCE_OPERATION_ID,
         effective_schema_sha256=effective_schema_sha256,
         evidence_analysis_sha256=evidence_analysis_sha256,
         evidence_provenance=frozen_provenance,
-        integrity_sha256=sha256_bytes(canonical_json_bytes(integrity_value)),
+        manifest_sha256=sha256_bytes(canonical_json_bytes(manifest_value)),
         operations_overlay=frozen_operations,
         polymorphism_overlay=frozen_polymorphism,
         fixtures=frozen_fixtures,
@@ -585,14 +574,11 @@ def _append_action(
     return next_document
 
 
-def _reject_candidate_leaks(
-    operations: dict[str, Any],
-    polymorphism: dict[str, Any],
+def _reject_captured_value_leaks(
     fixtures: dict[int, dict[str, Any]],
     pairs: Mapping[int, EvidencePair],
     schema: dict[str, Any],
 ) -> None:
-    _scan_json_strings((operations, polymorphism, fixtures))
     captured = {
         text
         for version in _VERSIONS
@@ -604,60 +590,6 @@ def _reject_candidate_leaks(
         for value in _leaf_strings(fixture):
             if value in captured and value not in allowed:
                 raise SafetyError("Evidence candidate fixture contains a captured string value")
-
-
-def _scan_json_strings(values: Any) -> None:
-    sensitive_keys = SECRET_KEYS | EMAIL_KEYS | PHONE_KEYS
-    if any(key.casefold() in sensitive_keys for key in _all_mapping_keys(values)):
-        raise SafetyError("Evidence candidate failed the secret/PII key scan")
-    for value in _all_strings(values):
-        without_uuids = _UUID_ANY.sub("", value)
-        if (
-            _REDACTION.search(value)
-            or _JWT.search(value)
-            or _BEARER.search(value)
-            or _EMAIL.search(value)
-            or _PHONE.search(without_uuids)
-        ):
-            raise SafetyError("Evidence candidate failed the secret/PII/redaction scan")
-
-
-def _all_mapping_keys(value: Any) -> tuple[str, ...]:
-    if isinstance(value, Mapping):
-        return tuple(
-            key
-            for candidate, child in value.items()
-            for key in (
-                *((candidate,) if type(candidate) is str else ()),
-                *_all_mapping_keys(child),
-            )
-        )
-    if isinstance(value, (list, tuple)):
-        return tuple(key for child in value for key in _all_mapping_keys(child))
-    return ()
-
-
-def _scan_bytes(bodies: Any) -> None:
-    for body in bodies:
-        try:
-            text = body.decode("utf-8")
-        except (AttributeError, UnicodeError) as error:
-            raise SafetyError("Evidence candidate bytes are not UTF-8") from error
-        _scan_json_strings(text)
-
-
-def _all_strings(value: Any) -> tuple[str, ...]:
-    if type(value) is str:
-        return (value,)
-    if isinstance(value, Mapping):
-        return tuple(
-            text
-            for key, child in value.items()
-            for text in ((*((key,) if type(key) is str else ()), *_all_strings(child)))
-        )
-    if isinstance(value, (list, tuple)):
-        return tuple(text for child in value for text in _all_strings(child))
-    return ()
 
 
 def _leaf_strings(value: Any) -> tuple[str, ...]:
@@ -842,15 +774,6 @@ def _overlay(title: str, actions: list[dict[str, Any]]) -> dict[str, Any]:
 
 def _kebab(value: str) -> str:
     return re.sub(r"(?<!^)(?=[A-Z])", "-", value).lower()
-
-
-def _yaml_bytes(value: Any) -> bytes:
-    return yaml.safe_dump(
-        value,
-        allow_unicode=True,
-        default_flow_style=False,
-        sort_keys=True,
-    ).encode("utf-8")
 
 
 def _strict_document_copy(value: Any) -> dict[str, Any]:

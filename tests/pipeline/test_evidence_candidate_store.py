@@ -3,10 +3,10 @@ from __future__ import annotations
 import dataclasses
 from collections.abc import Callable, Iterator, Mapping
 from types import MappingProxyType
-from typing import Any, cast
+from typing import Any, cast, get_type_hints
 
 import pytest
-from test_evidence_analysis import _pairs
+from test_evidence_analysis import _pairs, _plain
 from test_evidence_candidates import _retained_items, _reviewed_schema
 
 import tools.openapi_pipeline.evidence_candidate_store as store_module
@@ -27,6 +27,25 @@ from tools.openapi_pipeline.evidence_candidates import (
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 
 SENSITIVE_MARKER = "private-capture-raw-value"
+
+
+class _CallbackMapping(Mapping[Any, Any]):
+    def __init__(self, values: Mapping[Any, Any], callback: Callable[[], None]) -> None:
+        self._values = values
+        self._callback = callback
+        self._fired = False
+
+    def __iter__(self) -> Iterator[Any]:
+        if not self._fired:
+            self._fired = True
+            self._callback()
+        return iter(self._values)
+
+    def __getitem__(self, key: Any) -> Any:
+        return self._values[key]
+
+    def __len__(self) -> int:
+        return len(self._values)
 
 
 def _bundle() -> EvidenceCandidateBundle:
@@ -101,6 +120,13 @@ def test_manifest_has_exact_canonical_shape_bytes_and_hash() -> None:
     assert "sha256" not in result.manifest
 
 
+def test_manifest_builder_runtime_type_hints_resolve_exact_bundle() -> None:
+    hints = get_type_hints(build_evidence_candidate_manifest)
+
+    assert hints["bundle"] is EvidenceCandidateBundle
+    assert hints["return"] is EvidenceCandidateManifestResult
+
+
 def test_manifest_result_is_deeply_immutable() -> None:
     result = build_evidence_candidate_manifest(_bundle())
     tool = result.manifest["tool"]
@@ -143,9 +169,9 @@ def test_manifest_is_deterministic_across_all_bundle_mapping_orders() -> None:
         lambda bundle: dataclasses.replace(bundle, operation_id=SENSITIVE_MARKER),
         lambda bundle: dataclasses.replace(bundle, effective_schema_sha256="0" * 64),
         lambda bundle: dataclasses.replace(bundle, evidence_analysis_sha256="1" * 64),
-        lambda bundle: dataclasses.replace(bundle, integrity_sha256="2" * 64),
+        lambda bundle: dataclasses.replace(bundle, manifest_sha256="2" * 64),
     ],
-    ids=["operation", "schema-hash", "analysis-hash", "binding-hash"],
+    ids=["operation", "schema-hash", "analysis-hash", "manifest-checksum"],
 )
 def test_manifest_rejects_forged_bundle_metadata_without_echoing_it(
     forge: Callable[[EvidenceCandidateBundle], EvidenceCandidateBundle],
@@ -176,6 +202,78 @@ def test_manifest_rejects_forged_body_even_with_matching_payload_hash() -> None:
         build_evidence_candidate_manifest(forged)
 
     _assert_sanitized(caught.value)
+
+
+def test_manifest_rejects_self_consistent_secret_bearing_fixture() -> None:
+    bundle = _bundle()
+    fixture_path = "tests/fixtures/contracts/external-menu-v2.json"
+    forged_fixture = MappingProxyType({**dict(bundle.fixtures[2]), "api_key": SENSITIVE_MARKER})
+    forged_fixtures = MappingProxyType({**dict(bundle.fixtures), 2: forged_fixture})
+    forged_body = canonical_json_bytes(_plain(forged_fixture))
+    forged_bodies = _replace_mapping(
+        bundle.canonical_bytes,
+        lambda values: values.__setitem__(fixture_path, forged_body),
+    )
+    forged_hashes = _replace_mapping(
+        bundle.sha256,
+        lambda values: values.__setitem__(fixture_path, sha256_bytes(forged_body)),
+    )
+    preliminary = dataclasses.replace(
+        bundle,
+        fixtures=forged_fixtures,
+        canonical_bytes=forged_bodies,
+        sha256=forged_hashes,
+    )
+    forged = dataclasses.replace(
+        preliminary,
+        manifest_sha256=sha256_bytes(canonical_json_bytes(_expected_manifest(preliminary))),
+    )
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_manifest(forged)
+
+    _assert_sanitized(caught.value)
+
+
+def test_manifest_checksum_is_consistency_only_not_accept_authorization() -> None:
+    bundle = _bundle()
+    fixture_path = "tests/fixtures/contracts/external-menu-v2.json"
+    changed_fixture = MappingProxyType(
+        {**dict(bundle.fixtures[2]), "syntheticNote": "synthetic-safe-value"}
+    )
+    changed_fixtures = MappingProxyType({**dict(bundle.fixtures), 2: changed_fixture})
+    changed_body = canonical_json_bytes(_plain(changed_fixture))
+    changed_bodies = _replace_mapping(
+        bundle.canonical_bytes,
+        lambda values: values.__setitem__(fixture_path, changed_body),
+    )
+    changed_hashes = _replace_mapping(
+        bundle.sha256,
+        lambda values: values.__setitem__(fixture_path, sha256_bytes(changed_body)),
+    )
+    preliminary = dataclasses.replace(
+        bundle,
+        fixtures=changed_fixtures,
+        canonical_bytes=changed_bodies,
+        sha256=changed_hashes,
+    )
+    changed_manifest = _expected_manifest(preliminary)
+    changed = dataclasses.replace(
+        preliminary,
+        manifest_sha256=sha256_bytes(canonical_json_bytes(changed_manifest)),
+    )
+
+    result = build_evidence_candidate_manifest(changed)
+
+    assert result.manifest == changed_manifest
+    assert result.sha256 == changed.manifest_sha256
+    assert result.sha256 != bundle.manifest_sha256
+    bundle_doc = EvidenceCandidateBundle.__doc__
+    builder_doc = build_evidence_candidate_manifest.__doc__
+    assert bundle_doc is not None
+    assert builder_doc is not None
+    assert "unkeyed" in bundle_doc.casefold()
+    assert "does not authorize acceptance" in builder_doc.casefold()
 
 
 def test_manifest_rejects_recorded_hash_that_does_not_match_exact_body() -> None:
@@ -241,7 +339,7 @@ def test_manifest_rejects_forged_provenance_digest() -> None:
         ),
     )
 
-    with pytest.raises(SafetyError, match="integrity"):
+    with pytest.raises(SafetyError, match="checksum"):
         build_evidence_candidate_manifest(forged)
 
 
@@ -349,6 +447,160 @@ def test_manifest_sanitizes_untrusted_mapping_traversal_failure() -> None:
         build_evidence_candidate_manifest(forged)
 
     _assert_sanitized(caught.value)
+
+
+@pytest.mark.parametrize("callback", ["iteration", "lookup"])
+def test_manifest_sanitizes_caller_safety_error_from_mapping_callback(
+    callback: str,
+) -> None:
+    sentinel = SafetyError(SENSITIVE_MARKER)
+
+    class RaisingMapping(Mapping[str, bytes]):
+        def __iter__(self) -> Iterator[str]:
+            if callback == "iteration":
+                raise sentinel
+            return iter(EVIDENCE_CANDIDATE_PAYLOAD_PATHS)
+
+        def __getitem__(self, key: str) -> bytes:
+            raise sentinel
+
+        def __len__(self) -> int:
+            return len(EVIDENCE_CANDIDATE_PAYLOAD_PATHS)
+
+    bundle = _bundle()
+    forged = dataclasses.replace(
+        bundle,
+        canonical_bytes=MappingProxyType(RaisingMapping()),
+    )
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_manifest(forged)
+
+    assert caught.value is not sentinel
+    _assert_sanitized(caught.value)
+
+
+def test_manifest_preserves_memory_error_from_mapping_callback() -> None:
+    sentinel = MemoryError(SENSITIVE_MARKER)
+
+    class RaisingMapping(Mapping[str, bytes]):
+        def __iter__(self) -> Iterator[str]:
+            raise sentinel
+
+        def __getitem__(self, key: str) -> bytes:
+            raise sentinel
+
+        def __len__(self) -> int:
+            raise sentinel
+
+    bundle = _bundle()
+    forged = dataclasses.replace(
+        bundle,
+        canonical_bytes=MappingProxyType(RaisingMapping()),
+    )
+
+    with pytest.raises(MemoryError) as caught:
+        build_evidence_candidate_manifest(forged)
+
+    assert caught.value is sentinel
+
+
+@pytest.mark.parametrize(
+    "callback_field",
+    ["canonical_bytes", "evidence_provenance"],
+)
+def test_manifest_snapshots_bundle_fields_before_mapping_callbacks(
+    callback_field: str,
+) -> None:
+    original = _bundle()
+    forged_manifest = _expected_manifest(original)
+    forged_manifest["operation_id"] = SENSITIVE_MARKER
+    holder: dict[str, EvidenceCandidateBundle] = {}
+
+    def mutate_bundle() -> None:
+        object.__setattr__(holder["bundle"], "operation_id", SENSITIVE_MARKER)
+
+    callback_value = MappingProxyType(
+        _CallbackMapping(getattr(original, callback_field), mutate_bundle)
+    )
+    forged = dataclasses.replace(
+        original,
+        manifest_sha256=sha256_bytes(canonical_json_bytes(forged_manifest)),
+        **cast(Any, {callback_field: callback_value}),
+    )
+    holder["bundle"] = forged
+
+    try:
+        result = build_evidence_candidate_manifest(forged)
+    except SafetyError as error:
+        _assert_sanitized(error)
+    else:
+        assert result.manifest["operation_id"] == "get_external_menu_by_id"
+        assert SENSITIVE_MARKER.encode() not in result.canonical_json_bytes
+
+
+def test_manifest_uses_all_original_top_level_references_after_callback() -> None:
+    original = _bundle()
+    expected = build_evidence_candidate_manifest(original)
+    holder: dict[str, EvidenceCandidateBundle] = {}
+
+    def mutate_all_top_level_fields() -> None:
+        target = holder["bundle"]
+        for field in dataclasses.fields(target):
+            if field.name != "canonical_bytes":
+                object.__setattr__(target, field.name, SENSITIVE_MARKER)
+        object.__setattr__(target, "canonical_bytes", MappingProxyType({}))
+
+    forged = dataclasses.replace(
+        original,
+        canonical_bytes=MappingProxyType(
+            _CallbackMapping(original.canonical_bytes, mutate_all_top_level_fields)
+        ),
+    )
+    holder["bundle"] = forged
+
+    result = build_evidence_candidate_manifest(forged)
+
+    assert result == expected
+    assert SENSITIVE_MARKER.encode() not in result.canonical_json_bytes
+
+
+def test_manifest_fails_closed_when_callback_mutates_other_backing_map() -> None:
+    original = _bundle()
+    path = EVIDENCE_CANDIDATE_PAYLOAD_PATHS[0]
+    hash_backing = dict(original.sha256)
+
+    def mutate_hash_backing() -> None:
+        hash_backing[path] = SENSITIVE_MARKER
+
+    forged = dataclasses.replace(
+        original,
+        canonical_bytes=MappingProxyType(
+            _CallbackMapping(original.canonical_bytes, mutate_hash_backing)
+        ),
+        sha256=MappingProxyType(hash_backing),
+    )
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_manifest(forged)
+
+    _assert_sanitized(caught.value)
+
+
+def test_manifest_preserves_trusted_internal_safety_error_identity(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    sentinel = SafetyError("trusted internal validation failed")
+
+    def fail(*args: Any, **kwargs: Any) -> Any:
+        raise sentinel
+
+    monkeypatch.setattr(store_module, "_require_sha256", fail)
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_manifest(_bundle())
+
+    assert caught.value is sentinel
 
 
 @pytest.mark.parametrize("exception_type", [KeyboardInterrupt, SystemExit])
