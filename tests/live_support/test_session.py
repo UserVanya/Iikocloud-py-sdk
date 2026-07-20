@@ -81,7 +81,7 @@ async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
             "version": 1,
             "defaults": {
                 "utilization": 0.2,
-                "global_min_interval_seconds": 15,
+                "global_min_interval_seconds": 30,
                 "max_calls_per_operation_per_run": 1,
             },
             "operations": {

@@ -1,7 +1,7 @@
 version: 1
 defaults:
   utilization: 0.20
-  global_min_interval_seconds: 15
+  global_min_interval_seconds: 30
   max_calls_per_operation_per_run: 1
 operations:
   authenticate:

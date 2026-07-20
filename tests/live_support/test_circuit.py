@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any, NoReturn
 
 import pytest
+import yaml
 
 import tools.openapi_pipeline.live.lock as lock_module
 from tools.openapi_pipeline.errors import SafetyError
@@ -35,7 +36,7 @@ def _catalog(*, verified: bool = True) -> RateCatalog:
             "version": 1,
             "defaults": {
                 "utilization": 0.20,
-                "global_min_interval_seconds": 15,
+                "global_min_interval_seconds": 30,
                 "max_calls_per_operation_per_run": 1,
             },
             "operations": {
@@ -166,7 +167,53 @@ async def test_guard_persists_global_and_operation_intervals_across_instances(
         await _guard(tmp_path, fake, lock).acquire("slow")
         await _guard(tmp_path, fake, lock).acquire("fast")
         await _guard(tmp_path, fake, lock).acquire("slow")
-    assert fake.sleeps == [15.0, 285.0]
+    assert fake.sleeps == [30.0, 270.0]
+
+
+@pytest.mark.asyncio
+async def test_three_evidence_runs_reserve_every_live_call_thirty_seconds_apart(
+    tmp_path: Path,
+) -> None:
+    catalog_data = yaml.safe_load(Path("contracts/rate-limits.yaml").read_text(encoding="utf-8"))
+    for operation_id in ("authenticate", "get_external_menu_by_id"):
+        catalog_data["operations"][operation_id]["verified"] = True
+    catalog = RateCatalog.from_mapping(catalog_data)
+    fake = FakeTime(0.0)
+    reservations: list[float] = []
+
+    for _version in (2, 3, 4):
+        lock = LiveProcessLock(tmp_path / "live.lock")
+        with lock:
+            guard = LiveRateGuard(
+                profile_fingerprint="profile-hash",
+                catalog=catalog,
+                state=LiveStateStore(tmp_path / "live.json"),
+                process_lock=lock,
+                wall_clock=fake.wall_clock,
+                monotonic_clock=fake.monotonic_clock,
+                sleeper=fake.sleep,
+            )
+            await guard.acquire("authenticate")
+            reservations.append(fake.wall)
+            await guard.acquire("get_external_menu_by_id")
+            reservations.append(fake.wall)
+
+    assert reservations == [0.0, 30.0, 60.0, 90.0, 120.0, 150.0]
+    assert fake.sleeps == [30.0] * 5
+
+
+def test_state_rejects_intervals_below_thirty_second_floor(tmp_path: Path) -> None:
+    lock = LiveProcessLock(tmp_path / "live.lock")
+    store = LiveStateStore(tmp_path / "live.json", process_lock=lock)
+
+    with lock, pytest.raises(SafetyError, match="safety floor"):
+        store.required_wait(
+            "profile-hash",
+            "authenticate",
+            now=0.0,
+            global_interval_seconds=29.99,
+            operation_interval_seconds=30.0,
+        )
 
 
 @pytest.mark.asyncio

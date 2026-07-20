@@ -193,7 +193,7 @@ def test_unverified_auth_catalog_fails_before_profile_or_artifact_access(tmp_pat
         "version: 1\n"
         "defaults:\n"
         "  utilization: 0.20\n"
-        "  global_min_interval_seconds: 15\n"
+        "  global_min_interval_seconds: 30\n"
         "  max_calls_per_operation_per_run: 1\n"
         "operations:\n"
         "  authenticate:\n"

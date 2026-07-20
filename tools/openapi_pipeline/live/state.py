@@ -313,7 +313,7 @@ class LiveStateStore:
         checked_now = _timestamp(now, label="wall clock")
         global_interval = _timestamp(global_interval_seconds, label="global interval")
         operation_interval = _timestamp(operation_interval_seconds, label="operation interval")
-        if global_interval < 15 or operation_interval < global_interval:
+        if global_interval < 30 or operation_interval < global_interval:
             raise SafetyError("live call intervals are below the configured safety floor")
         if lock is None and self._process_lock is None:
             raise SafetyError("persistent rate calculation requires a shared held process lock")

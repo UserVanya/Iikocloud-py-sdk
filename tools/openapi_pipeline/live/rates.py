@@ -104,8 +104,8 @@ class RatePolicy:
         )
         if not 0 < utilization <= 0.20:
             raise SafetyError("utilization must be greater than 0 and no more than 0.20")
-        if floor < 15:
-            raise SafetyError("global minimum interval must be at least 15 seconds")
+        if floor < 30:
+            raise SafetyError("global minimum interval must be at least 30 seconds")
         object.__setattr__(self, "utilization", utilization)
         object.__setattr__(self, "global_min_interval_seconds", floor)
 

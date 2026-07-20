@@ -12,13 +12,13 @@ from tools.openapi_pipeline.live.rates import RateCatalog, RateLimit, RatePolicy
 
 
 def test_safe_interval_uses_twenty_percent_and_global_floor() -> None:
-    policy = RatePolicy(utilization=0.20, global_min_interval_seconds=15)
+    policy = RatePolicy(utilization=0.20, global_min_interval_seconds=30)
     assert policy.safe_interval(RateLimit(calls=1, per_seconds=60)) == 300
-    assert policy.safe_interval(RateLimit(calls=100, per_seconds=60)) == 15
+    assert policy.safe_interval(RateLimit(calls=100, per_seconds=60)) == 30
 
 
 def test_unverified_operation_is_disabled() -> None:
-    policy = RatePolicy(utilization=0.20, global_min_interval_seconds=15)
+    policy = RatePolicy(utilization=0.20, global_min_interval_seconds=30)
     with pytest.raises(SafetyError, match="not verified"):
         policy.operation_budget(
             "unsafe_operation",
@@ -31,7 +31,7 @@ def _catalog_data(*, verified: bool = True) -> dict[str, object]:
         "version": 1,
         "defaults": {
             "utilization": 0.20,
-            "global_min_interval_seconds": 15,
+            "global_min_interval_seconds": 30,
             "max_calls_per_operation_per_run": 1,
         },
         "operations": {
@@ -72,7 +72,7 @@ def test_catalog_rejects_unverified_operation() -> None:
         (("defaults", "utilization"), 0.0, "utilization"),
         (("defaults", "utilization"), 0.200001, "utilization"),
         (("defaults", "utilization"), math.inf, "utilization"),
-        (("defaults", "global_min_interval_seconds"), 14.99, "global"),
+        (("defaults", "global_min_interval_seconds"), 29.99, "global"),
         (("defaults", "global_min_interval_seconds"), True, "global"),
         (("defaults", "max_calls_per_operation_per_run"), 2, "exactly 1"),
         (("defaults", "max_calls_per_operation_per_run"), True, "exactly 1"),
@@ -140,6 +140,8 @@ def test_catalog_load_rejects_duplicate_yaml_keys(tmp_path: Path) -> None:
 
 def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
     path = Path("contracts/rate-limits.yaml")
+    packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
+    assert path.read_bytes() == packaged_path.read_bytes()
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     expected_operations = {
         "authenticate": {
@@ -182,7 +184,7 @@ def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
         "version": 1,
         "defaults": {
             "utilization": 0.20,
-            "global_min_interval_seconds": 15,
+            "global_min_interval_seconds": 30,
             "max_calls_per_operation_per_run": 1,
         },
         "operations": expected_operations,
@@ -257,6 +259,6 @@ def test_committed_live_operation_contract_is_exact() -> None:
     ],
 )
 def test_rate_limit_rejects_bool_nonpositive_and_nonfinite(limit: RateLimit) -> None:
-    policy = RatePolicy(utilization=0.2, global_min_interval_seconds=15)
+    policy = RatePolicy(utilization=0.2, global_min_interval_seconds=30)
     with pytest.raises(SafetyError, match="server limit"):
         policy.safe_interval(limit)
