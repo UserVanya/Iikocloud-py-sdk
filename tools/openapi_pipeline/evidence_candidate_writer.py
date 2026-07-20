@@ -168,7 +168,8 @@ def _note_process_lock_cleanup_failures(
     if not callable(add_note):
         return
     for failure in failures:
-        add_note(f"Additional process-lock cleanup failure: {type(failure).__name__}")
+        with suppress(BaseException):
+            add_note(f"Additional process-lock cleanup failure: {type(failure).__name__}")
 
 
 def _raise_process_lock_cleanup_failure(failures: tuple[BaseException, ...]) -> None:
@@ -177,6 +178,13 @@ def _raise_process_lock_cleanup_failure(failures: tuple[BaseException, ...]) -> 
     primary, *follow_ups = failures
     _note_process_lock_cleanup_failures(primary, tuple(follow_ups))
     raise primary
+
+
+def _finalize_process_lock_acquisition(
+    acquisition: _EvidenceCandidateProcessLockAcquisition,
+) -> None:
+    with suppress(BaseException), _PROCESS_LOCK_FORK_GATE:
+        _drain_process_lock_acquisition(acquisition)
 
 
 def _before_process_lock_fork() -> None:
@@ -221,6 +229,13 @@ class EvidenceCandidateProcessLock:
         self._acquisition = acquisition
         with _PROCESS_LOCK_FORK_GATE:
             _PROCESS_LOCK_ACQUISITION_STATES.add(acquisition)
+            finalizer = weakref.finalize(
+                self,
+                _finalize_process_lock_acquisition,
+                acquisition,
+            )
+            cast(Any, finalizer).atexit = False
+            self._finalizer = finalizer
 
     @property
     def path(self) -> Path:
@@ -250,9 +265,14 @@ class EvidenceCandidateProcessLock:
                 raise SafetyError("Evidence candidate process lock is already acquired")
 
             try:
-                acquisition.repository_fd = _open_repository_root(self._repository_root)
-                acquisition.build_fd = _open_build(acquisition.repository_fd)
-                acquisition.lock_fd = _open_and_lock_writer(acquisition.build_fd)
+                repository_fd = _open_repository_root(self._repository_root)
+                acquisition.repository_fd = repository_fd
+                build_fd = _open_build(repository_fd)
+                acquisition.build_fd = build_fd
+                lock_fd = _open_or_create_writer_lock(build_fd)
+                acquisition.lock_fd = lock_fd
+                _acquire_writer_lock(lock_fd)
+                _revalidate_writer_lock_binding(build_fd, lock_fd)
                 acquisition.binding_token = _new_process_lock_binding_token()
                 acquisition.owner_pid = os.getpid()
                 return self
@@ -332,7 +352,12 @@ class EvidenceCandidateProcessLock:
         _exception: BaseException | None,
         _traceback: TracebackType | None,
     ) -> None:
-        self.release()
+        try:
+            self.release()
+        except BaseException as cleanup_failure:
+            if _exception is None:
+                raise
+            _note_process_lock_cleanup_failures(_exception, (cleanup_failure,))
 
 
 def assert_evidence_candidate_tree_matches(
@@ -969,17 +994,6 @@ def _open_build(repository_fd: int) -> int:
         "build",
         label="Evidence build root",
     )
-
-
-def _open_and_lock_writer(build_fd: int) -> int:
-    lock_fd = _open_or_create_writer_lock(build_fd)
-    try:
-        _acquire_writer_lock(lock_fd)
-        _revalidate_writer_lock_binding(build_fd, lock_fd)
-        return lock_fd
-    except BaseException:
-        _close_fd(lock_fd)
-        raise
 
 
 def _open_or_create_writer_lock(build_fd: int) -> int:

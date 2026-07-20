@@ -441,6 +441,133 @@ def test_public_process_lock_child_drops_inherited_flock_while_remaining_alive(
     assert os.waitstatus_to_exitcode(child_status) == 0
 
 
+@pytest.mark.skipif(not hasattr(os, "fork"), reason="descriptor cleanup requires POSIX fork")
+def test_partial_acquire_records_flock_before_fork_child_can_inherit_it(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    real_acquire = writer_module._acquire_writer_lock
+    ready_read, ready_write = os.pipe()
+    finish_read, finish_write = os.pipe()
+    child_pid: int | None = None
+
+    def fork_immediately_after_flock(lock_fd: int) -> None:
+        nonlocal child_pid
+        real_acquire(lock_fd)
+        forked = os.fork()
+        if forked == 0:
+            os.close(ready_read)
+            os.close(finish_write)
+            try:
+                os.write(ready_write, b"1")
+                os.read(finish_read, 1)
+            finally:
+                os.close(ready_write)
+                os.close(finish_read)
+                os._exit(0)
+        child_pid = forked
+        os.close(ready_write)
+        os.close(finish_read)
+
+    monkeypatch.setattr(
+        writer_module,
+        "_acquire_writer_lock",
+        fork_immediately_after_flock,
+    )
+    child_status: int | None = None
+    try:
+        process_lock.acquire()
+        assert os.read(ready_read, 1) == b"1"
+        assert child_pid is not None
+        assert os.waitpid(child_pid, os.WNOHANG) == (0, 0)
+        monkeypatch.setattr(writer_module, "_acquire_writer_lock", real_acquire)
+        process_lock.release()
+
+        with writer_module.EvidenceCandidateProcessLock(paths) as fresh_lock:
+            assert fresh_lock.held is True
+    finally:
+        process_lock.release()
+        with suppress(OSError):
+            os.write(finish_write, b"1")
+        with suppress(OSError):
+            os.close(ready_read)
+        with suppress(OSError):
+            os.close(finish_write)
+        if child_pid is not None:
+            _waited_pid, child_status = os.waitpid(child_pid, 0)
+
+    assert child_status is not None
+    assert os.waitstatus_to_exitcode(child_status) == 0
+
+
+@pytest.mark.skipif(not hasattr(os, "fork"), reason="descriptor cleanup requires POSIX fork")
+def test_held_wrapper_gc_releases_parent_and_child_flock_without_retention(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    registry = writer_module._PROCESS_LOCK_ACQUISITION_STATES
+    baseline = len(tuple(registry))
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    process_lock.acquire()
+    finalizer = getattr(process_lock, "_finalizer", None)
+    acquisition = process_lock._acquisition
+    descriptors = (
+        acquisition.repository_fd,
+        acquisition.build_fd,
+        acquisition.lock_fd,
+    )
+    wrapper_reference = weakref.ref(process_lock)
+    acquisition_reference = weakref.ref(acquisition)
+    del acquisition
+    ready_read, ready_write = os.pipe()
+    finish_read, finish_write = os.pipe()
+    child_pid = os.fork()
+    if child_pid == 0:
+        os.close(ready_read)
+        os.close(finish_write)
+        try:
+            os.write(ready_write, b"1")
+            os.read(finish_read, 1)
+        finally:
+            os.close(ready_write)
+            os.close(finish_read)
+            os._exit(0)
+
+    os.close(ready_write)
+    os.close(finish_read)
+    child_status: int | None = None
+    try:
+        assert os.read(ready_read, 1) == b"1"
+        assert os.waitpid(child_pid, os.WNOHANG) == (0, 0)
+        del process_lock
+        gc.collect()
+
+        assert wrapper_reference() is None
+        assert acquisition_reference() is None
+        with writer_module.EvidenceCandidateProcessLock(paths) as fresh_lock:
+            assert fresh_lock.held is True
+        del fresh_lock
+        gc.collect()
+        assert finalizer is not None
+        assert finalizer.atexit is False
+        assert len(tuple(registry)) <= baseline
+    finally:
+        for descriptor in descriptors:
+            if descriptor is not None:
+                with suppress(OSError):
+                    os.close(descriptor)
+        with suppress(OSError):
+            os.write(finish_write, b"1")
+        os.close(ready_read)
+        os.close(finish_write)
+        _waited_pid, child_status = os.waitpid(child_pid, 0)
+
+    assert child_status is not None
+    assert os.waitstatus_to_exitcode(child_status) == 0
+
+
 def test_public_process_lock_documents_python_fork_boundary() -> None:
     documentation = (writer_module.EvidenceCandidateProcessLock.__doc__ or "").lower()
 
@@ -537,6 +664,68 @@ def test_public_process_lock_release_base_exception_drains_lock_last(
         monkeypatch.setattr(writer_module.os, "close", real_close)
         with writer_module.EvidenceCandidateProcessLock(paths) as fresh_lock:
             assert fresh_lock.held is True
+    finally:
+        monkeypatch.setattr(writer_module.os, "close", real_close)
+        for descriptor in target_by_descriptor:
+            with suppress(OSError):
+                real_close(descriptor)
+
+
+def test_process_lock_context_preserves_body_exception_over_release_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    real_close = writer_module.os.close
+    body_error = RuntimeError("body-primary")
+    cleanup_error = KeyboardInterrupt(SENSITIVE_MARKER)
+    target_by_descriptor: dict[int, str] = {}
+    close_attempts: list[int] = []
+
+    def fail_first_close(descriptor: int) -> None:
+        close_attempts.append(descriptor)
+        if len(close_attempts) == 1:
+            raise cleanup_error
+        real_close(descriptor)
+
+    observed: BaseException | None = None
+    try:
+        try:
+            with process_lock:
+                for entry in os.listdir("/proc/self/fd"):
+                    with suppress(OSError, ValueError):
+                        descriptor = int(entry)
+                        target = os.readlink(f"/proc/self/fd/{descriptor}")
+                        if target in {
+                            str(paths.root),
+                            str(paths.build),
+                            str(process_lock.path),
+                        }:
+                            target_by_descriptor[descriptor] = target
+                monkeypatch.setattr(writer_module.os, "close", fail_first_close)
+                raise body_error
+        except BaseException as error:
+            observed = error
+
+        assert set(target_by_descriptor.values()) == {
+            str(paths.root),
+            str(paths.build),
+            str(process_lock.path),
+        }
+        assert [target_by_descriptor[value] for value in close_attempts] == [
+            str(paths.build),
+            str(paths.root),
+            str(process_lock.path),
+        ]
+        monkeypatch.setattr(writer_module.os, "close", real_close)
+        with writer_module.EvidenceCandidateProcessLock(paths) as fresh_lock:
+            assert fresh_lock.held is True
+
+        assert observed is body_error
+        notes = getattr(body_error, "__notes__", ())
+        assert any("KeyboardInterrupt" in note for note in notes)
+        assert all(SENSITIVE_MARKER not in note for note in notes)
     finally:
         monkeypatch.setattr(writer_module.os, "close", real_close)
         for descriptor in target_by_descriptor:
