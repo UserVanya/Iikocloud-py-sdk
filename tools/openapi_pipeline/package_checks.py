@@ -79,7 +79,13 @@ import site
 {_IMPORT_SCRIPT}
 
 package_file = Path(iikocloud_client.__file__).resolve(strict=True)
-site_roots = [Path(value).resolve(strict=True) for value in site.getsitepackages()]
+site_roots = []
+for value in site.getsitepackages():
+    try:
+        site_root = Path(value).resolve(strict=True)
+    except FileNotFoundError:
+        continue
+    site_roots.append(site_root)
 if not any(package_file.is_relative_to(root) for root in site_roots):
     raise RuntimeError(
         f"installed import escaped isolated site-packages: {{package_file}}"

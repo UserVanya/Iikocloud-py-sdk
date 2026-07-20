@@ -65,7 +65,9 @@ def test_package_check_group_and_recursive_lock_match_runtime_closure() -> None:
 
 
 def test_recursive_lock_closure_evaluates_markers_for_simulated_python_310() -> None:
-    environment = default_environment()
+    environment: dict[str, str] = {
+        key: value for key, value in default_environment().items() if isinstance(value, str)
+    }
     environment.update(python_version="3.10", python_full_version="3.10.0")
 
     closure = package_checks_module.locked_runtime_requirements(
@@ -302,6 +304,57 @@ def test_installed_import_smoke_cannot_fall_back_to_healthy_checkout(
             runner=subprocess.run,
             env=package_checks_module._sanitized_environment(),
         )
+
+
+def test_installed_import_smoke_ignores_missing_reported_site_root(
+    tmp_path: Path,
+) -> None:
+    environment = tmp_path / "venv"
+    subprocess.run(
+        [sys.executable, "-m", "venv", "--without-pip", str(environment)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    isolated_python = environment / (
+        "Scripts/python.exe" if sys.platform == "win32" else "bin/python"
+    )
+    site_packages = Path(
+        subprocess.run(
+            [
+                str(isolated_python),
+                "-I",
+                "-c",
+                "import site; print(site.getsitepackages()[0])",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    installed = site_packages / "iikocloud_client"
+    installed.mkdir()
+    (installed / "__init__.py").write_text(
+        "class ApiClient: pass\nclass Configuration: pass\n",
+        encoding="utf-8",
+    )
+    missing_site_root = tmp_path / "guaranteed-missing-site-root"
+    smoke = tmp_path / "smoke"
+    smoke.mkdir()
+    script = (
+        "import site\n"
+        f"site.getsitepackages = lambda: [{str(site_packages)!r}, "
+        f"{str(missing_site_root)!r}]\n"
+        f"{package_checks_module._INSTALLED_IMPORT_SCRIPT}"
+    )
+
+    package_checks_module._run(
+        [str(isolated_python), "-I", "-c", script],
+        cwd=smoke,
+        purpose="Installed missing-root regression imports",
+        runner=subprocess.run,
+        env=package_checks_module._sanitized_environment(),
+    )
 
 
 def test_root_wheel_smoke_uses_same_offline_isolated_install(
