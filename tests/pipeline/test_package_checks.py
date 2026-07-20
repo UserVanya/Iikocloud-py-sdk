@@ -392,6 +392,38 @@ def test_generated_contract_gate_runs_present_offline_test_paths_against_staging
     assert "PIP_INDEX_URL" not in kwargs["env"]
 
 
+def test_generated_contract_gate_resolves_repo_fixtures_from_test_file(tmp_path: Path) -> None:
+    package = tmp_path / "build/generated/iikocloud_client"
+    models = package / "models"
+    models.mkdir(parents=True)
+    (package / "__init__.py").write_text("", encoding="utf-8")
+    (models / "__init__.py").write_text("", encoding="utf-8")
+    (models / "external_menu_response.py").write_text(
+        "import json\n"
+        "from types import SimpleNamespace\n\n"
+        "class ExternalMenuResponse:\n"
+        "    @classmethod\n"
+        "    def from_json(cls, body):\n"
+        "        data = json.loads(body)\n"
+        "        instance = SimpleNamespace(format_version=data['formatVersion'])\n"
+        "        return SimpleNamespace(actual_instance=instance)\n",
+        encoding="utf-8",
+    )
+    generated_tests = tmp_path / "tests/generated"
+    generated_tests.mkdir(parents=True)
+    union_test = Path(__file__).parents[1] / "generated/test_external_menu_response.py"
+    (generated_tests / union_test.name).write_bytes(union_test.read_bytes())
+    fixtures = tmp_path / "tests/fixtures/contracts"
+    fixtures.mkdir(parents=True)
+    for version in (2, 3, 4):
+        (fixtures / f"external-menu-v{version}.json").write_text(
+            f'{{"formatVersion": {version}}}\n',
+            encoding="utf-8",
+        )
+
+    package_checks_module.verify_generated_contracts(tmp_path, package)
+
+
 def test_generated_contract_gate_wraps_offline_test_failure(tmp_path: Path) -> None:
     package = tmp_path / "build/generated/iikocloud_client"
     package.mkdir(parents=True)
