@@ -27,6 +27,8 @@ from tools.openapi_pipeline.io import canonical_json_bytes
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 
 OPERATION = "get_external_menu_by_id"
+CAPTURE_UUID_ALIAS = "00000000-0000-4000-8000-000000000001"
+RAW_UUID_KEY = "11111111-1111-4111-8111-111111111111"
 
 
 def _effective_schema() -> dict[str, Any]:
@@ -713,6 +715,176 @@ def test_reader_runs_generic_scan_and_concrete_schema_validator(tmp_path: Path) 
     _complete_tree(clean_root)
     pairs = _read(clean_root)
     assert tuple(pairs) == (2, 3, 4)
+
+
+@pytest.mark.parametrize("version", [3, 4])
+def test_pair_revalidator_allows_capture_alias_keys_only_in_reviewed_response_map(
+    tmp_path: Path,
+    version: int,
+) -> None:
+    root = tmp_path / "repository"
+    request_path, response_path = _write_menu_pair(root, version)
+    request = _load(request_path)
+    response = _load(response_path)
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: []}
+
+    assert (
+        promotion_module.revalidate_evidence_pair_contract(
+            request,
+            response,
+            expected_run_id=f"run-v{version}",
+        )
+        == version
+    )
+
+
+@pytest.mark.parametrize(
+    ("version", "mutation"),
+    [
+        (2, "reviewed-path"),
+        (3, "other-response-path"),
+        (3, "raw-uuid-at-reviewed-path"),
+        (4, "list-item-alias-key"),
+        (4, "nested-alias-key"),
+    ],
+)
+def test_pair_revalidator_rejects_uuid_keys_outside_exact_reviewed_alias_scope(
+    tmp_path: Path,
+    version: int,
+    mutation: str,
+) -> None:
+    root = tmp_path / "repository"
+    request_path, response_path = _write_menu_pair(root, version)
+    request = _load(request_path)
+    response = _load(response_path)
+    if mutation == "other-response-path":
+        response["body"]["otherMap"] = {CAPTURE_UUID_ALIAS: []}
+        sensitive_key = CAPTURE_UUID_ALIAS
+    elif mutation == "raw-uuid-at-reviewed-path":
+        response["body"]["overrideTaxCategories"] = {RAW_UUID_KEY: []}
+        sensitive_key = RAW_UUID_KEY
+    elif mutation == "nested-alias-key":
+        response["body"]["overrideTaxCategories"] = {
+            CAPTURE_UUID_ALIAS: [{CAPTURE_UUID_ALIAS: []}]
+        }
+        sensitive_key = CAPTURE_UUID_ALIAS
+    elif mutation == "list-item-alias-key":
+        response["body"]["overrideTaxCategories"] = [{CAPTURE_UUID_ALIAS: []}]
+        sensitive_key = CAPTURE_UUID_ALIAS
+    else:
+        response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: []}
+        sensitive_key = CAPTURE_UUID_ALIAS
+
+    with pytest.raises(SafetyError, match="secret/PII") as caught:
+        promotion_module.revalidate_evidence_pair_contract(
+            request,
+            response,
+            expected_run_id=f"run-v{version}",
+        )
+
+    assert sensitive_key not in str(caught.value)
+
+
+def test_generic_scanner_does_not_allow_response_alias_exception_for_request_data() -> None:
+    request_shaped_value: dict[str, Any] = {
+        "body": {"overrideTaxCategories": {CAPTURE_UUID_ALIAS: []}}
+    }
+
+    with pytest.raises(SafetyError, match="secret/PII"):
+        promotion_module._scan_for_secret_or_pii(  # noqa: SLF001 - exception-scope regression
+            request_shaped_value
+        )
+
+
+@pytest.mark.parametrize("version", [3, 4])
+def test_reader_preserves_reviewed_override_tax_map_and_validates_its_items(
+    tmp_path: Path,
+    version: int,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[version][1]
+    response = _load(response_path)
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{}]}
+    _replace_json(response_path, response)
+    before = response_path.read_bytes()
+
+    pairs = _read(root)
+
+    response_body = pairs[version].response["body"]
+    assert isinstance(response_body, Mapping)
+    override_tax_categories = response_body["overrideTaxCategories"]
+    assert isinstance(override_tax_categories, Mapping)
+    assert tuple(override_tax_categories) == (CAPTURE_UUID_ALIAS,)
+    assert override_tax_categories[CAPTURE_UUID_ALIAS] == (MappingProxyType({}),)
+    assert response_path.read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    ("version", "valid_marker", "invalid_marker"),
+    [
+        (3, "v3Marker", "v4Marker"),
+        (4, "v4Marker", "v3Marker"),
+    ],
+)
+def test_validator_uses_the_version_specific_override_tax_item_component(
+    tmp_path: Path,
+    version: int,
+    valid_marker: str,
+    invalid_marker: str,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    request = _load(paths[version][0])
+    response = _load(paths[version][1])
+    schema = _effective_schema()
+    components = schema["components"]["schemas"]
+    components["OverrideTaxesDto"] = {
+        "properties": {"v3Marker": {"type": "boolean"}},
+        "required": ["v3Marker"],
+        "type": "object",
+    }
+    components["OverrideTaxesDto2"] = {
+        "properties": {"v4Marker": {"type": "boolean"}},
+        "required": ["v4Marker"],
+        "type": "object",
+    }
+    validator = MenuEvidenceValidator(schema)
+    response["body"]["overrideTaxCategories"] = {
+        CAPTURE_UUID_ALIAS: [{valid_marker: True}]
+    }
+
+    validator.validate(version, request, response)
+
+    response["body"]["overrideTaxCategories"] = {
+        CAPTURE_UUID_ALIAS: [{invalid_marker: True}]
+    }
+    with pytest.raises(SafetyError, match="required|undeclared|override"):
+        validator.validate(version, request, response)
+
+
+@pytest.mark.parametrize(
+    ("version", "invalid_map"),
+    [
+        (2, {CAPTURE_UUID_ALIAS: []}),
+        (3, {RAW_UUID_KEY: []}),
+        (3, {CAPTURE_UUID_ALIAS: {}}),
+        (4, {CAPTURE_UUID_ALIAS: ["not-an-object"]}),
+    ],
+)
+def test_validator_rejects_override_tax_maps_outside_reviewed_shape(
+    tmp_path: Path,
+    version: int,
+    invalid_map: object,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    request = _load(paths[version][0])
+    response = _load(paths[version][1])
+    response["body"]["overrideTaxCategories"] = invalid_map
+
+    with pytest.raises(SafetyError, match="type|alias|list|undeclared|property"):
+        MenuEvidenceValidator(_effective_schema()).validate(version, request, response)
 
 
 def test_reader_requires_a_held_lock_before_filesystem_access(tmp_path: Path) -> None:

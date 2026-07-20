@@ -15,7 +15,7 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, cast
 
-from .capture import EMAIL_KEYS, PHONE_KEYS, SECRET_KEYS
+from .capture import _CAPTURE_UUID_ALIAS, EMAIL_KEYS, PHONE_KEYS, SECRET_KEYS
 from .errors import SafetyError
 from .evidence_validation import MenuEvidenceValidator
 from .io import canonical_json_bytes
@@ -763,7 +763,10 @@ def revalidate_evidence_pair_contract(
         run_id=request_run_id,
     )
     _scan_for_secret_or_pii(request_value)
-    _scan_for_secret_or_pii(response_value)
+    _scan_for_secret_or_pii(
+        response_value,
+        allow_override_tax_alias_keys=version in {3, 4},
+    )
     return version
 
 
@@ -801,7 +804,13 @@ def _thaw_evidence_json(
         seen.remove(identity)
 
 
-def _scan_for_secret_or_pii(value: Any, *, key: str | None = None) -> None:
+def _scan_for_secret_or_pii(
+    value: Any,
+    *,
+    key: str | None = None,
+    path: tuple[str, ...] = (),
+    allow_override_tax_alias_keys: bool = False,
+) -> None:
     normalized_key = key.casefold() if key is not None else None
     if normalized_key in SECRET_KEYS and value != "<redacted:secret>":
         raise SafetyError("Evidence capture failed the generic secret/PII scan")
@@ -811,12 +820,28 @@ def _scan_for_secret_or_pii(value: Any, *, key: str | None = None) -> None:
         raise SafetyError("Evidence capture failed the generic secret/PII scan")
     if type(value) is dict:
         for child_key, child in value.items():
-            _scan_text(child_key, object_key=True)
-            _scan_for_secret_or_pii(child, key=child_key)
+            reviewed_alias_key = (
+                allow_override_tax_alias_keys
+                and path == ("body", "overrideTaxCategories")
+                and _CAPTURE_UUID_ALIAS.fullmatch(child_key) is not None
+            )
+            if not reviewed_alias_key:
+                _scan_text(child_key, object_key=True)
+            _scan_for_secret_or_pii(
+                child,
+                key=child_key,
+                path=(*path, child_key),
+                allow_override_tax_alias_keys=allow_override_tax_alias_keys,
+            )
         return
     if type(value) is list:
         for child in value:
-            _scan_for_secret_or_pii(child, key=key)
+            _scan_for_secret_or_pii(
+                child,
+                key=key,
+                path=(*path, "[]"),
+                allow_override_tax_alias_keys=allow_override_tax_alias_keys,
+            )
         return
     if type(value) is str:
         _scan_text(value)

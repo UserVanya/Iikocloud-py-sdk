@@ -7,7 +7,7 @@ import struct
 from collections.abc import Mapping
 from typing import Any, cast
 
-from .capture import RedactionHints, Sanitizer
+from .capture import _CAPTURE_UUID_ALIAS, RedactionHints, Sanitizer
 from .errors import SafetyError
 from .evidence import build_versioned_evidence_redaction_hints
 from .io import canonical_json_bytes, sha256_bytes
@@ -18,6 +18,10 @@ _VERSION_COMPONENTS = {
     2: "ExternalMenuV2",
     3: "ExternalMenuV3",
     4: "ExternalMenuV4",
+}
+_OVERRIDE_TAX_ITEM_COMPONENTS = {
+    3: "OverrideTaxesDto",
+    4: "OverrideTaxesDto2",
 }
 _MENU_REQUEST_COMPONENT = "iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest"
 _COMPONENT_PREFIX = "#/components/schemas/"
@@ -129,8 +133,16 @@ class MenuEvidenceValidator:
             raise SafetyError("Evidence request body does not match the selected menu version")
 
         self._validate_instance(request_body, self._request_schema, path="request")
+        schema_response_body = response_body
+        if version in _OVERRIDE_TAX_ITEM_COMPONENTS and "overrideTaxCategories" in response_body:
+            self._validate_reviewed_override_tax_map(
+                version,
+                response_body["overrideTaxCategories"],
+            )
+            schema_response_body = dict(response_body)
+            del schema_response_body["overrideTaxCategories"]
         self._validate_instance(
-            response_body,
+            schema_response_body,
             self._root_schemas[version],
             path=f"response-v{version}",
             component_name=_VERSION_COMPONENTS[version],
@@ -146,6 +158,24 @@ class MenuEvidenceValidator:
             hints=self._hints[version],
         )
         return None
+
+    def _validate_reviewed_override_tax_map(self, version: int, value: object) -> None:
+        if type(value) is not dict:
+            raise SafetyError("Evidence overrideTaxCategories must be a reviewed object map")
+        item_component = _OVERRIDE_TAX_ITEM_COMPONENTS[version]
+        item_schema = self._component(item_component)
+        for key, items in value.items():
+            if type(key) is not str or _CAPTURE_UUID_ALIAS.fullmatch(key) is None:
+                raise SafetyError("Evidence overrideTaxCategories key is not a capture UUID alias")
+            if type(items) is not list:
+                raise SafetyError("Evidence overrideTaxCategories values must be lists")
+            for index, item in enumerate(items):
+                self._validate_instance(
+                    item,
+                    item_schema,
+                    path=f"response-v{version}.overrideTaxCategories.value[{index}]",
+                    component_name=item_component,
+                )
 
     def match_v4_item_branches(self, item: Mapping[str, Any]) -> tuple[str, ...]:
         """Return the reviewed structural V4 branches accepting one raw item."""
