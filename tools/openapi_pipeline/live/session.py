@@ -15,7 +15,7 @@ import yaml
 
 from ..errors import SafetyError
 from ..paths import RepoPaths
-from .profile import ResolvedLiveProfile
+from .profile import ResolvedDiscoveryProfile, ResolvedLiveProfile
 from .receipt import LiveReceipt
 from .state import LiveStateStore
 
@@ -168,7 +168,7 @@ class SafeLiveSession:
     def __init__(
         self,
         *,
-        profile: ResolvedLiveProfile,
+        profile: ResolvedLiveProfile | ResolvedDiscoveryProfile,
         guard: Any,
         state: LiveStateStore | None = None,
         transport: httpx.AsyncBaseTransport | None = None,

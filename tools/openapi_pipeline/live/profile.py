@@ -52,6 +52,14 @@ class ResolvedLiveProfile:
     fingerprint: str
 
 
+@dataclass(frozen=True)
+class ResolvedDiscoveryProfile:
+    name: str
+    base_url: str
+    api_login: str = field(repr=False)
+    fingerprint: str
+
+
 def is_safe_profile_name(value: object) -> bool:
     return isinstance(value, str) and _PROFILE_NAME.fullmatch(value) is not None
 
@@ -197,6 +205,47 @@ def _string_list(value: object, *, label: str) -> tuple[str, ...]:
     return result
 
 
+def _profile_fingerprint(name: str, base_url: str) -> str:
+    return hashlib.sha256(
+        canonical_json_bytes({"base_url": base_url, "name": name})
+    ).hexdigest()
+
+
+def load_discovery_profile(
+    path: Path,
+    *,
+    env_file: Path | None = None,
+    required_api_login_env: str | None = None,
+) -> ResolvedDiscoveryProfile:
+    """Resolve only the credentials needed to discover read-only target IDs."""
+
+    data = _load_toml(path)
+    name = data["name"]
+    if not is_safe_profile_name(name):
+        raise SafetyError("Live profile name must use lowercase letters, digits, and hyphens")
+    base_url = _base_url(data["base_url"])
+    if data["allow_write"] is not False:
+        raise SafetyError("Discovery live profile must set allow_write=false")
+    _string_list(data["allowed_organization_ids"], label="allowed_organization_ids")
+
+    api_login_env = _env_name(data["api_login_env"], label="api_login_env")
+    if required_api_login_env is not None and api_login_env != required_api_login_env:
+        raise SafetyError(f"Live profile api_login_env must be exactly {required_api_login_env}")
+    _env_name(data["organization_id_env"], label="organization_id_env")
+    _env_name(data["external_menu_id_env"], label="external_menu_id_env")
+    if "terminal_group_id_env" in data:
+        _env_name(data["terminal_group_id_env"], label="terminal_group_id_env")
+        _env_name(data["write_product_id_env"], label="write_product_id_env")
+
+    api_login = _required_env(api_login_env, _load_env_file(env_file))
+    return ResolvedDiscoveryProfile(
+        name=name,
+        base_url=base_url,
+        api_login=api_login,
+        fingerprint=_profile_fingerprint(name, base_url),
+    )
+
+
 def load_profile(
     path: Path,
     *,
@@ -246,17 +295,7 @@ def load_profile(
         terminal_group_id = None
         write_product_id = None
 
-    fingerprint_context = {
-        "allow_write": allow_write,
-        "allowed_organization_ids": sorted(allowed_organization_ids),
-        "base_url": base_url,
-        "external_menu_id": external_menu_id,
-        "name": name,
-        "organization_id": organization_id,
-        "terminal_group_id": terminal_group_id,
-        "write_product_id": write_product_id,
-    }
-    fingerprint = hashlib.sha256(canonical_json_bytes(fingerprint_context)).hexdigest()
+    fingerprint = _profile_fingerprint(name, base_url)
     return ResolvedLiveProfile(
         name=name,
         base_url=base_url,

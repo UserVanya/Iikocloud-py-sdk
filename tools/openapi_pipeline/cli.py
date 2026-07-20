@@ -14,6 +14,7 @@ COMMANDS = (
     "verify",
     "upstream-check",
     "capture-evidence",
+    "discover-read-targets",
     "promote-evidence",
     "cleanup-orphans",
     "reset-circuit",
@@ -45,6 +46,9 @@ def build_parser() -> argparse.ArgumentParser:
                 type=int,
                 choices=(2, 3, 4),
             )
+        elif command == "discover-read-targets":
+            command_parser.add_argument("--live-profile", required=True)
+            command_parser.add_argument("--env-file", required=True)
         elif command == "promote-evidence":
             command_parser.add_argument(
                 "--operation",
@@ -88,6 +92,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                     menu_version=args.menu_version,
                 )
             )
+        elif args.command == "discover-read-targets":
+            from . import discovery
+
+            result = asyncio.run(
+                discovery.discover_read_targets(
+                    live_profile=args.live_profile,
+                    env_file=args.env_file,
+                )
+            )
+            print(discovery.render_discovery_result(result))
         elif args.command == "promote-evidence":
             from . import evidence, evidence_candidate_accept
 

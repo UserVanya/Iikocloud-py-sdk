@@ -1,7 +1,12 @@
 """Fail-closed support for explicitly opted-in live API checks."""
 
 from .lock import LiveProcessLock
-from .profile import ResolvedLiveProfile, load_profile
+from .profile import (
+    ResolvedDiscoveryProfile,
+    ResolvedLiveProfile,
+    load_discovery_profile,
+    load_profile,
+)
 from .rates import LiveRateGuard, OperationBudget, RateCatalog, RateLimit, RatePolicy
 from .receipt import LiveReceipt
 from .session import SafeLiveSession
@@ -17,6 +22,8 @@ __all__ = [
     "RateLimit",
     "RatePolicy",
     "ResolvedLiveProfile",
+    "ResolvedDiscoveryProfile",
     "SafeLiveSession",
+    "load_discovery_profile",
     "load_profile",
 ]

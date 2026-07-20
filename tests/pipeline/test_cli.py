@@ -22,6 +22,7 @@ def test_cli_exposes_only_explicit_pipeline_commands() -> None:
         "verify",
         "upstream-check",
         "capture-evidence",
+        "discover-read-targets",
         "promote-evidence",
         "cleanup-orphans",
         "reset-circuit",
@@ -58,6 +59,20 @@ def test_cli_pipeline_arguments_are_exact() -> None:
         "env_file": ".env",
         "operation": "get_external_menu_by_id",
         "menu_version": 4,
+    }
+    discovery = parser.parse_args(
+        [
+            "discover-read-targets",
+            "--live-profile",
+            "test-server",
+            "--env-file",
+            ".env",
+        ]
+    )
+    assert vars(discovery) == {
+        "command": "discover-read-targets",
+        "live_profile": "test-server",
+        "env_file": ".env",
     }
     promote = parser.parse_args(
         ["promote-evidence", "--operation", "get_external_menu_by_id"]
@@ -116,6 +131,22 @@ def test_capture_evidence_rejects_missing_or_unapproved_arguments(
 ) -> None:
     with pytest.raises(SystemExit):
         build_parser().parse_args(("capture-evidence", *arguments))
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        (),
+        ("--live-profile", "test-server"),
+        ("--env-file", ".env"),
+        ("--live-profile", "test-server", "--env-file", ".env", "--extra"),
+    ],
+)
+def test_discover_read_targets_requires_exact_arguments(
+    arguments: tuple[str, ...],
+) -> None:
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(("discover-read-targets", *arguments))
 
 
 @pytest.mark.parametrize(
@@ -228,6 +259,51 @@ def test_main_dispatches_capture_evidence_and_handles_pipeline_error(
     monkeypatch.setattr(evidence, "capture_evidence", fail)
     assert main(arguments) == 2
     assert capsys.readouterr().err == "error: evidence is disabled\n"
+
+
+def test_main_dispatches_discovery_and_renders_only_fixed_json(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    from tools.openapi_pipeline import discovery
+
+    result = discovery.DiscoveryResult(
+        organizations=(
+            discovery.DiscoveredOrganization(
+                id="org-1",
+                name="Организация",
+                terminal_groups=(
+                    discovery.DiscoveredTerminalGroup(
+                        id="terminal-1",
+                        name="Касса",
+                        is_sleeping=False,
+                    ),
+                ),
+            ),
+        ),
+        external_menus=(discovery.DiscoveredNamedTarget(id="menu-1", name="Меню"),),
+    )
+    calls: list[dict[str, object]] = []
+
+    async def discover(**kwargs: object) -> discovery.DiscoveryResult:
+        calls.append(kwargs)
+        return result
+
+    monkeypatch.setattr(discovery, "discover_read_targets", discover)
+
+    assert (
+        main(
+            [
+                "discover-read-targets",
+                "--live-profile",
+                "test-server",
+                "--env-file",
+                ".env",
+            ]
+        )
+        == 0
+    )
+    assert calls == [{"live_profile": "test-server", "env_file": ".env"}]
+    assert capsys.readouterr().out == discovery.render_discovery_result(result) + "\n"
 
 
 def test_main_builds_only_a_detached_evidence_candidate(

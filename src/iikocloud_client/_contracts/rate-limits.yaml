@@ -11,11 +11,15 @@ operations:
   get_organizations:
     server_limit: {calls: 1, per_seconds: 10}
     source: existing-manager-configuration
-    verified: false
+    verified: true
+  get_terminal_groups:
+    server_limit: {calls: 10, per_seconds: 60}
+    source: existing-manager-configuration
+    verified: true
   get_external_menus:
     server_limit: {calls: 1, per_seconds: 1800}
     source: existing-manager-configuration
-    verified: false
+    verified: true
   get_external_menu_by_id:
     server_limit: {calls: 5, per_seconds: 60}
     source: existing-manager-configuration

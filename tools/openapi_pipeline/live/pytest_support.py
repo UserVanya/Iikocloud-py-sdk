@@ -9,7 +9,13 @@ from pathlib import Path
 
 from ..errors import SafetyError
 from .lock import LiveProcessLock, ensure_private_directory
-from .profile import ResolvedLiveProfile, is_safe_profile_name, load_profile
+from .profile import (
+    ResolvedDiscoveryProfile,
+    ResolvedLiveProfile,
+    is_safe_profile_name,
+    load_discovery_profile,
+    load_profile,
+)
 from .rates import RateCatalog
 from .receipt import LiveArtifactHashes, LiveReceipt, verify_live_artifacts
 
@@ -124,6 +130,24 @@ def resolve_locked_live_profile(
     profile_path = profile_path_for_name(root, profile_name)
     env_file = explicit_env_path(root, env_file_option, cwd=cwd)
     return load_profile(
+        profile_path,
+        env_file=env_file,
+        required_api_login_env="IIKO_API_KEY",
+    )
+
+
+def resolve_locked_discovery_profile(
+    root: Path,
+    *,
+    process_lock: LiveProcessLock,
+    profile_name: object,
+    env_file_option: object,
+    cwd: Path | None = None,
+) -> ResolvedDiscoveryProfile:
+    _assert_canonical_held_lock(root, process_lock)
+    profile_path = profile_path_for_name(root, profile_name)
+    env_file = explicit_env_path(root, env_file_option, cwd=cwd)
+    return load_discovery_profile(
         profile_path,
         env_file=env_file,
         required_api_login_env="IIKO_API_KEY",

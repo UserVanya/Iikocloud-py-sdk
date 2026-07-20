@@ -10,6 +10,11 @@ operations:
     cleanup: null
     method: POST
     path: /api/1/organizations
+  get_terminal_groups:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/terminal_groups
   get_external_menus:
     kind: read
     cleanup: null

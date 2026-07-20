@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from tools.openapi_pipeline.errors import SafetyError
-from tools.openapi_pipeline.live.profile import load_profile
+from tools.openapi_pipeline.live.profile import load_discovery_profile, load_profile
 
 
 def _write_profile(path: Path, *, allow_write: bool = False) -> None:
@@ -222,7 +222,7 @@ def test_dotenv_interpolation_is_disabled(tmp_path: Path, monkeypatch: pytest.Mo
     assert "secondary-secret" not in repr(resolved)
 
 
-def test_fingerprint_ignores_login_value_and_login_variable_name_but_binds_context(
+def test_fingerprint_binds_only_stable_profile_name_and_base_url(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     profile = tmp_path / "profile.toml"
@@ -244,7 +244,44 @@ def test_fingerprint_ignores_login_value_and_login_variable_name_but_binds_conte
     assert load_profile(alternate).fingerprint == first.fingerprint
 
     monkeypatch.setenv("IIKO_MENU", "different-menu")
-    assert load_profile(profile).fingerprint != first.fingerprint
+    monkeypatch.setenv("IIKO_ORG", "different-organization")
+    assert load_profile(profile).fingerprint == first.fingerprint
+
+    changed_name = tmp_path / "changed-name.toml"
+    changed_name.write_text(
+        profile.read_text(encoding="utf-8").replace('name = "test"', 'name = "other"'),
+        encoding="utf-8",
+    )
+    changed_name.chmod(0o600)
+    assert load_profile(changed_name).fingerprint != first.fingerprint
+
+
+def test_discovery_profile_requires_only_primary_login_and_refuses_write_profile(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    env_file = tmp_path / ".env"
+    env_file.write_text("IIKO_API_KEY=discovery-login\n", encoding="utf-8")
+    env_file.chmod(0o600)
+    monkeypatch.delenv("IIKO_API_KEY", raising=False)
+    monkeypatch.delenv("IIKO_ORG", raising=False)
+    monkeypatch.delenv("IIKO_MENU", raising=False)
+
+    resolved = load_discovery_profile(
+        profile,
+        env_file=env_file,
+        required_api_login_env="IIKO_API_KEY",
+    )
+
+    assert resolved.name == "test"
+    assert resolved.base_url == "https://api.example.invalid"
+    assert resolved.api_login == "discovery-login"
+    assert "discovery-login" not in repr(resolved)
+
+    _write_profile(profile, allow_write=True)
+    with pytest.raises(SafetyError, match="allow_write=false"):
+        load_discovery_profile(profile, env_file=env_file)
 
 
 def test_profile_can_require_the_production_primary_login_name(
