@@ -1,0 +1,436 @@
+actions:
+- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto"]["properties"]
+  update:
+    organizationId:
+      format: uuid
+      type: string
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 14dfe6ad05a1752370850fb33a977adfcbb7b690ee8764d18f68b55f8752c46e
+    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto-properties-organizationId
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["taxCategory"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8a0ae24ffc6f2f578ca7797b39b12fb09d470ee733a6dde1eba5accacd1589e0
+    issue: external-menu-schema-ExternalMenuItem-properties-taxCategory-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["taxCategory"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuItem-properties-taxCategory-type-remove
+- target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["taxCategory"]
+  update:
+    nullable: true
+    oneOf:
+    - $ref: '#/components/schemas/TaxCategoryDto3'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 75374a8e926d1ba9cfea917e95f0e85ec7cfc53df8e54717bbdc2cd312cad35f
+    issue: external-menu-schema-ExternalMenuItem-properties-taxCategory
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["nutritionPerHundredGrams"]["description"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: c514b963b1f8072ccd1fc1b9dc7078d1eccbacb7f1a392b94977cb89193eb388
+    issue: external-menu-schema-ExternalMenuItemSize-properties-nutritionPerHundredGrams-description-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["nutritionPerHundredGrams"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 5cb42a1328b3f5662b2c4f9aa087d474ed505d65b805630b5f6b48356a3501f6
+    issue: external-menu-schema-ExternalMenuItemSize-properties-nutritionPerHundredGrams-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["nutritionPerHundredGrams"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuItemSize-properties-nutritionPerHundredGrams-type-remove
+- target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["nutritionPerHundredGrams"]
+  update:
+    $ref: '#/components/schemas/NutritionInfoDto'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
+    issue: external-menu-schema-ExternalMenuItemSize-properties-nutritionPerHundredGrams
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 3ba8df3cf8bc36e9ad2ada1ae175a040e85b9d5439921abb1c83ae946f4fb64a
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-nutritionPerHundredGrams-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-nutritionPerHundredGrams-type-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]
+  update:
+    oneOf:
+    - $ref: '#/components/schemas/NutritionInfoDto5'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 552f938c9b66965d8a4396c5009ef349e52a5eb24711301710c242d89cc59f7c
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-nutritionPerHundredGrams
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: d525dfbb2ebf8fe823742366cfd49e82e9f4d4498330634f45cd31aef2914fe9
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-restrictions-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-restrictions-type-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]
+  update:
+    oneOf:
+    - $ref: '#/components/schemas/ModifierRestrictionsDto5'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
+    issue: external-menu-schema-ExternalMenuModifierItem-properties-restrictions
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 9d92bc628b201e25488de0cad2f33125e730f1f84184f08c80d769c37ec0ee20
+    issue: external-menu-schema-ExternalMenuModifierItem2-properties-restrictions-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuModifierItem2-properties-restrictions-type-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]
+  update:
+    oneOf:
+    - $ref: '#/components/schemas/ModifierRestrictionsDto6'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
+    issue: external-menu-schema-ExternalMenuModifierItem2-properties-restrictions
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: e9944a2858fa60898fdf024b8c8c780703f13f750f1982d7f5769942434a6e7d
+    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions-items-remove
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]["type"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions-type-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]
+  update:
+    oneOf:
+    - $ref: '#/components/schemas/ModifierRestrictionsDto7'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
+    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ec8f68e7e40c14332968fd694583c3c988ba773d226330132af274ba6d33b08f
+    issue: external-menu-schema-ExternalMenuV3-properties-overrideTaxCategories-items-remove
+- target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]
+  update:
+    additionalProperties:
+      items:
+        $ref: '#/components/schemas/OverrideTaxesDto'
+      type: array
+    type: object
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 45ad7315b2ab36ceb8ca0b3af11d5f93345fb1f3fd4471bcaf7b0278869439d2
+    issue: external-menu-schema-ExternalMenuV3-properties-overrideTaxCategories
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]["items"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 6aed45ee5a051bff1c429cde497d1b83019cc81d1cf386ce77d2eca8eaeebbc4
+    issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories-items-remove
+- target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]
+  update:
+    additionalProperties:
+      items:
+        $ref: '#/components/schemas/OverrideTaxesDto2'
+      type: array
+    type: object
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 45ad7315b2ab36ceb8ca0b3af11d5f93345fb1f3fd4471bcaf7b0278869439d2
+    issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["type"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 92980196b141f63b371b29cc7fa39c1f1b7567339ad674bdf8d5b7eaac64f8a3
+    issue: external-menu-schema-ExternalMenuItem-properties-type-enum-remove
+- target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["type"]
+  update:
+    enum:
+    - DISH
+    - COMBO
+    - SERVICE
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
+    issue: external-menu-schema-ExternalMenuItem-properties-type
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 92980196b141f63b371b29cc7fa39c1f1b7567339ad674bdf8d5b7eaac64f8a3
+    issue: external-menu-schema-ExternalMenuItem2-properties-type-enum-remove
+- target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]
+  update:
+    enum:
+    - DISH
+    - COMBO
+    - SERVICE
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
+    issue: external-menu-schema-ExternalMenuItem2-properties-type
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 92980196b141f63b371b29cc7fa39c1f1b7567339ad674bdf8d5b7eaac64f8a3
+    issue: external-menu-schema-ExternalMenuItem3-properties-type-enum-remove
+- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
+  update:
+    enum:
+    - DISH
+    - COMBO
+    - SERVICE
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
+    issue: external-menu-schema-ExternalMenuItem3-properties-type
+- target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["modifierSchemaId"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741
+    issue: external-menu-schema-ExternalMenuItem-properties-modifierSchemaId
+- target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["modifierSchemaId"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741
+    issue: external-menu-schema-ExternalMenuItem2-properties-modifierSchemaId
+- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["modifierSchemaId"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741
+    issue: external-menu-schema-ExternalMenuItem3-properties-modifierSchemaId
+- target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["sizeId"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 4c1ebbf65069d8f4c1f76100167f9d8676ae1b67fd2272fee67267d2f2650f5f
+    issue: external-menu-schema-ExternalMenuItemSize-properties-sizeId
+- target: $["components"]["schemas"]["ExternalMenuItemSize2"]["properties"]["id"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d
+    issue: external-menu-schema-ExternalMenuItemSize2-properties-id
+- target: $["components"]["schemas"]["ExternalMenuItemSize3"]["properties"]["id"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d
+    issue: external-menu-schema-ExternalMenuItemSize3-properties-id
+- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto"]["properties"]["price"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
+    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto-properties-price
+- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto2"]["properties"]["price"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
+    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto2-properties-price
+- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto3"]["properties"]["price"]
+  update:
+    nullable: true
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
+    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto3-properties-price
+- target: $["components"]["schemas"]["ExternalMenuV2"]["properties"]["formatVersion"]
+  update:
+    default: 2
+    enum:
+    - 2
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ae9f05d4efe54fea4a39cc0af9803cfef0e8c4f59f193ce7edf5cab4b4bb0836
+    issue: external-menu-v2-format-version
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV2"]["required"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 5d6ba08f5186d992274417a5d7a8bcedbdc7ec8a10b39f36c6e08f3b62c35b03
+    issue: external-menu-v2-required-remove
+- target: $["components"]["schemas"]["ExternalMenuV2"]
+  update:
+    required:
+    - id
+    - itemCategories
+    - comboCategories
+    - formatVersion
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: af31599aa967e0f78528d63a70062e7f566c79578ea2657caf053d73b70f34f2
+    issue: external-menu-v2-required
+- target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["formatVersion"]
+  update:
+    default: 3
+    enum:
+    - 3
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ae9f05d4efe54fea4a39cc0af9803cfef0e8c4f59f193ce7edf5cab4b4bb0836
+    issue: external-menu-v3-format-version
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV3"]["required"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 57f1f7cc6601eecbd21da590ab49b127e0d701f0f14d15a51a09d6ad2142df08
+    issue: external-menu-v3-required-remove
+- target: $["components"]["schemas"]["ExternalMenuV3"]
+  update:
+    required:
+    - id
+    - comboCategories
+    - itemGroups
+    - formatVersion
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 9e2d31a249885956b3a7f1494c59350b87c267410436b1370013a10fba432d63
+    issue: external-menu-v3-required
+- target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["formatVersion"]
+  update:
+    default: 4
+    enum:
+    - 4
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ae9f05d4efe54fea4a39cc0af9803cfef0e8c4f59f193ce7edf5cab4b4bb0836
+    issue: external-menu-v4-format-version
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV4"]["required"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 57f1f7cc6601eecbd21da590ab49b127e0d701f0f14d15a51a09d6ad2142df08
+    issue: external-menu-v4-required-remove
+- target: $["components"]["schemas"]["ExternalMenuV4"]
+  update:
+    required:
+    - id
+    - comboCategories
+    - itemGroups
+    - formatVersion
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: e4c781076642998ec2bddf9631699ddc39d85b3caadb6bb6d6ebfb58e0327821
+    issue: external-menu-v4-required
+- target: $["components"]["schemas"]["ExternalMenuCategory3"]["properties"]["items"]["items"]
+  update:
+    discriminator:
+      mapping:
+        COMBO: '#/components/schemas/ExternalMenuComboItem'
+        DISH: '#/components/schemas/ExternalMenuItem3'
+        SERVICE: '#/components/schemas/ExternalMenuItem3'
+      propertyName: type
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: a4bcd95a4d376a2e0d0cb7e7f19e2b97a48379cfea7219c79f5287eba3d32af0
+    issue: external-menu-v4-discriminator
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: f2084de6bb9db3dac016a52c6b99839595803fc08ea4c1fe357dcd6980928a05
+    issue: external-menu-item3-type-enum-remove
+- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
+  update:
+    default: DISH
+    enum:
+    - DISH
+    - SERVICE
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
+    issue: external-menu-item3-type
+- target: $["components"]["schemas"]["ExternalMenuComboItem"]["properties"]["type"]
+  update:
+    default: COMBO
+    enum:
+    - COMBO
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 85803e087e684bdab3e5d6c2dd1af627da83382db625be9a42aea3d4d06539be
+    issue: external-menu-combo-item-type
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuItem3"]["required"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 34903f8d418a836ee0e3a661f9cfa804546343a0db324c0ffa8113570ab7fd5e
+    issue: external-menu-item3-required-remove
+- target: $["components"]["schemas"]["ExternalMenuItem3"]
+  update:
+    required:
+    - itemSizes
+    - modifierSchemaId
+    - orderItemType
+    - allergenGroupIds
+    - id
+    - splittable
+    - type
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: ef3b4dfa6b1e1ce6324899c164cea4b385f67eab9d3c4f846b2905a0abeacb5d
+    issue: external-menu-item3-required
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuComboItem"]["required"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 20e4286b4c95269a8c3bae059510f86de03c094fc4be4a467453b2610a72786f
+    issue: external-menu-combo-required-remove
+- target: $["components"]["schemas"]["ExternalMenuComboItem"]
+  update:
+    required:
+    - sizes
+    - type
+    - id
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: a085ca3d2faae22ccf7438f10f6417df1f9a8a5a3be2350ce469db3462ecb455
+    issue: external-menu-combo-required
+info:
+  title: iiko Cloud external menu polymorphism contract
+  version: 1.0.0
+overlay: 1.1.0

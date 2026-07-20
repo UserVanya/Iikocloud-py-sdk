@@ -1,0 +1,12 @@
+actions:
+- target: $["paths"]["/api/2/menu/by_id"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
+  update:
+    title: ExternalMenuResponse
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: f7ef9cdf2ee02544b0fb8e98263a76fe44ed191799d29833993928c16045920d
+    issue: external-menu-response-title
+info:
+  title: iiko Cloud external menu response model contract
+  version: 1.0.0
+overlay: 1.1.0
