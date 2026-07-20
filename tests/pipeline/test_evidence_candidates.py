@@ -43,6 +43,34 @@ EXACT_FIVE = (
     "orderItemType",
     "splittable",
 )
+SENSITIVE_MARKER = "synthetic-sensitive-marker"
+
+
+class _RaisingMapping(Mapping[Any, Any]):
+    def __iter__(self) -> Iterator[Any]:
+        raise RuntimeError(SENSITIVE_MARKER)
+
+    def __getitem__(self, key: Any) -> Any:
+        raise RuntimeError(SENSITIVE_MARKER)
+
+    def __len__(self) -> int:
+        raise RuntimeError(SENSITIVE_MARKER)
+
+
+class _RaisingDict(dict[str, Any]):
+    def __iter__(self) -> Iterator[str]:
+        raise RuntimeError(SENSITIVE_MARKER)
+
+    def items(self) -> Any:
+        raise RuntimeError(SENSITIVE_MARKER)
+
+
+def _assert_sanitized_error(error: SafetyError, message: str) -> None:
+    assert str(error) == message
+    assert SENSITIVE_MARKER not in str(error)
+    assert SENSITIVE_MARKER not in repr(error)
+    assert error.__cause__ is None
+    assert error.__context__ is None
 
 
 def _reviewed_schema() -> dict[str, Any]:
@@ -366,6 +394,149 @@ def test_builder_snapshots_pair_mapping_before_revalidation_and_scanning() -> No
     )
 
     assert len(bundle.canonical_bytes) == 5
+
+
+@pytest.mark.parametrize("field", ["provenance", "branch_to_literal"])
+def test_builder_sanitizes_nested_analysis_mapping_failures_without_mutation(
+    field: str,
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+    poisoned = (
+        dataclasses.replace(analysis, provenance=_RaisingMapping())
+        if field == "provenance"
+        else dataclasses.replace(analysis, branch_to_literal=_RaisingMapping())
+    )
+    before_schema = canonical_json_bytes(schema)
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=poisoned,
+            pairs=pairs,
+            effective_schema=schema,
+        )
+
+    _assert_sanitized_error(
+        caught.value,
+        "Evidence candidate analysis cannot be canonicalized",
+    )
+    assert canonical_json_bytes(schema) == before_schema
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_builder_sanitizes_top_level_pair_mapping_failure_without_mutation(
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+    before_schema = canonical_json_bytes(schema)
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=_RaisingMapping(),
+            effective_schema=schema,
+        )
+
+    _assert_sanitized_error(caught.value, "Evidence candidate pair mapping is invalid")
+    assert canonical_json_bytes(schema) == before_schema
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_builder_sanitizes_nested_exact_pair_failure_without_mutation(
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = dict(_pairs(schema, _retained_items()))
+    analysis = analyze_menu_evidence(pairs, schema)
+    poisoned = pairs[2]
+    object.__setattr__(poisoned, "request", _RaisingMapping())
+    before_schema = canonical_json_bytes(schema)
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=pairs,
+            effective_schema=schema,
+        )
+
+    _assert_sanitized_error(
+        caught.value,
+        "Evidence candidate pair cannot be safely snapshotted",
+    )
+    assert canonical_json_bytes(schema) == before_schema
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_builder_sanitizes_effective_schema_traversal_failure_without_mutation(
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+    poisoned = dict(schema)
+    poisoned["components"] = _RaisingDict(schema["components"])
+    before_hashes = tuple((pair.request_sha256, pair.response_sha256) for pair in pairs.values())
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=pairs,
+            effective_schema=poisoned,
+        )
+
+    _assert_sanitized_error(
+        caught.value,
+        "Evidence candidate schema is not strict canonical JSON",
+    )
+    assert (
+        tuple((pair.request_sha256, pair.response_sha256) for pair in pairs.values())
+        == before_hashes
+    )
+    assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.parametrize("exception_type", [KeyboardInterrupt, SystemExit])
+def test_builder_does_not_swallow_pair_mapping_base_exceptions(
+    exception_type: type[BaseException],
+) -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+
+    class RaisingBaseMapping(_RaisingMapping):
+        def __iter__(self) -> Iterator[Any]:
+            raise exception_type(SENSITIVE_MARKER)
+
+    with pytest.raises(exception_type):
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=RaisingBaseMapping(),
+            effective_schema=schema,
+        )
+
+
+def test_builder_preserves_intentional_safety_error_identity() -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+    intentional = SafetyError("intentional caller safety failure")
+
+    class RaisingSafetyMapping(_RaisingMapping):
+        def __iter__(self) -> Iterator[Any]:
+            raise intentional
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=RaisingSafetyMapping(),
+            effective_schema=schema,
+        )
+
+    assert caught.value is intentional
 
 
 def test_builder_rejects_a_secret_named_required_fixture_field() -> None:

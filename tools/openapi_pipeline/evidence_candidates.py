@@ -127,9 +127,15 @@ def build_evidence_candidate_bundle(
 def _snapshot_pairs(pairs: Mapping[int, EvidencePair]) -> Mapping[int, EvidencePair]:
     if not isinstance(pairs, Mapping):
         raise SafetyError("Evidence candidate pairs must be a mapping")
+    mapping_failed = False
     try:
         keys = tuple(pairs)
+    except SafetyError:
+        raise
     except Exception:
+        mapping_failed = True
+        keys = ()
+    if mapping_failed:
         raise SafetyError("Evidence candidate pair mapping is invalid") from None
     if (
         len(keys) != len(_VERSIONS)
@@ -139,19 +145,36 @@ def _snapshot_pairs(pairs: Mapping[int, EvidencePair]) -> Mapping[int, EvidenceP
         raise SafetyError("Evidence candidate requires exactly versions 2, 3, and 4")
     copied: dict[int, EvidencePair] = {}
     for version in _VERSIONS:
+        lookup_failed = False
         try:
             pair = pairs[version]
+        except SafetyError:
+            raise
         except Exception:
+            lookup_failed = True
+            pair = None
+        if lookup_failed:
             raise SafetyError("Evidence candidate pair mapping changed during snapshot") from None
         if type(pair) is not EvidencePair or pair.version != version:
             raise SafetyError("Evidence candidate pair version is inconsistent")
-        copied[version] = EvidencePair(
-            version=pair.version,
-            request=pair.request,
-            response=pair.response,
-            request_sha256=pair.request_sha256,
-            response_sha256=pair.response_sha256,
-        )
+        reconstruction_failed = False
+        try:
+            copied_pair = EvidencePair(
+                version=pair.version,
+                request=pair.request,
+                response=pair.response,
+                request_sha256=pair.request_sha256,
+                response_sha256=pair.response_sha256,
+            )
+        except SafetyError:
+            raise
+        except Exception:
+            reconstruction_failed = True
+            copied_pair = None
+        if reconstruction_failed:
+            raise SafetyError("Evidence candidate pair cannot be safely snapshotted") from None
+        assert copied_pair is not None
+        copied[version] = copied_pair
     return MappingProxyType(copied)
 
 
@@ -542,6 +565,8 @@ def _schema_enum_strings(value: Any) -> frozenset[str]:
 def _analysis_bytes(value: MenuEvidenceAnalysis) -> bytes:
     if type(value) is not MenuEvidenceAnalysis:
         raise SafetyError("Evidence candidate requires an exact analysis result")
+    canonical: bytes | None = None
+    traversal_failed = False
     try:
         provenance: dict[str, Any] = {}
         if set(value.provenance) != set(_VERSIONS):
@@ -581,11 +606,15 @@ def _analysis_bytes(value: MenuEvidenceAnalysis) -> bytes:
             "totalItemCount": value.total_item_count,
             "unambiguousCounts": dict(value.unambiguous_counts),
         }
-        return canonical_json_bytes(semantic)
+        canonical = canonical_json_bytes(semantic)
     except SafetyError:
         raise
-    except (KeyError, TypeError, ValueError, RecursionError):
+    except Exception:
+        traversal_failed = True
+    if traversal_failed:
         raise SafetyError("Evidence candidate analysis cannot be canonicalized") from None
+    assert canonical is not None
+    return canonical
 
 
 def _required_with(value: Any, additions: tuple[str, ...]) -> list[str]:
@@ -645,11 +674,17 @@ def _yaml_bytes(value: Any) -> bytes:
 
 
 def _strict_document_copy(value: Any) -> dict[str, Any]:
+    copied: Any = None
+    traversal_failed = False
     try:
         body = canonical_json_bytes(value)
         copied = json.loads(body)
-    except (TypeError, ValueError, RecursionError) as error:
-        raise SafetyError("Evidence candidate schema is not strict canonical JSON") from error
+    except SafetyError:
+        raise
+    except Exception:
+        traversal_failed = True
+    if traversal_failed:
+        raise SafetyError("Evidence candidate schema is not strict canonical JSON") from None
     if type(copied) is not dict:
         raise SafetyError("Evidence candidate schema must be an object")
     return copied
