@@ -30,6 +30,8 @@ def build_parser() -> argparse.ArgumentParser:
         command_parser = subparsers.add_parser(command)
         if command == "bootstrap":
             command_parser.add_argument("--accept-current-upstream", action="store_true")
+        elif command == "upstream-check":
+            command_parser.add_argument("--fail-on-drift", action="store_true")
         elif command == "sync":
             command_parser.add_argument("--offline", action="store_true")
         elif command == "capture-evidence":
@@ -88,7 +90,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             pipeline.verify(dependencies)
         elif args.command == "upstream-check":
             dependencies = pipeline.default_dependencies(offline=False)
-            pipeline.upstream_check(dependencies)
+            drift_detected = pipeline.upstream_check(dependencies)
+            if args.fail_on_drift and drift_detected:
+                raise PipelineError(
+                    "Upstream OpenAPI drift detected; review build/reports/upstream-diff.*"
+                )
         elif args.command == "capture-evidence":
             from . import evidence
 

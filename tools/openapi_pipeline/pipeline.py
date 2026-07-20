@@ -622,13 +622,27 @@ def verify(dependencies: PipelineDependencies) -> None:
     )
 
 
-def upstream_check(dependencies: PipelineDependencies) -> None:
+def upstream_check(dependencies: PipelineDependencies) -> bool:
     fetched = dependencies.fetch()
     candidate = _load_document(fetched.path, label="candidate OpenAPI document")
-    write_upstream_reports(
+    report = write_upstream_reports(
         _load_committed_for_report(dependencies.paths),
         candidate,
         dependencies.paths.build / "reports",
+    )
+    difference = report["diff"]
+    return any(
+        difference[key]
+        for key in (
+            "added_paths",
+            "removed_paths",
+            "added_operations",
+            "removed_operations",
+            "changed_operations",
+            "added_schemas",
+            "removed_schemas",
+            "changed_schemas",
+        )
     )
 
 

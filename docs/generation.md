@@ -27,9 +27,10 @@ generator config или тестируемом pipeline-коде.
 
 ## Предварительные условия
 
-Нужны Python 3.10+, `uv`, Git и запущенный Docker Engine с локально доступным
-image из `generator/toolchain.lock`. Генератор запускается по digest, с
-отключённой сетью контейнера.
+Публикуемая библиотека поддерживает Python 3.10+, но для выполнения этого
+операторского pipeline нужен Python 3.12. Также нужны `uv`, Git и запущенный
+Docker Engine с локально доступным image из `generator/toolchain.lock`.
+Генератор запускается по digest, с отключённой сетью контейнера.
 
 ```bash
 uv sync --frozen --group dev
@@ -52,6 +53,18 @@ uv run --frozen python -m tools.openapi_pipeline upstream-check
 отчёт под ignored `build/`, но не меняет tracked snapshot или generated SDK.
 Проверьте как минимум `build/reports/upstream-diff.md` и raw candidate перед
 любой попыткой принять обновление.
+
+Показанная ручная команда работает в report-only режиме: даже при drift она
+сначала записывает оба `build/reports/upstream-diff.*` отчёта и завершается с
+кодом 0. Scheduled workflow запускает только эту же команду с отдельным
+`--fail-on-drift`: при drift отчёты уже записаны, после чего job получает
+ненулевой сигнал; при неизменном inventory код остаётся 0. Artifact upload в
+workflow выполняется с `if: always()`, поэтому отчёты сохраняются в обоих
+случаях. Флаг `--fail-on-drift` существует только у `upstream-check`.
+
+`upstream-check` не принимает snapshot и не перегенерирует SDK. `sync`,
+напротив, собирает и продвигает reviewed tracked состояние; сетевую форму
+`sync` нельзя использовать вместо review отчёта `upstream-check`.
 
 ### Подготовить bootstrap-кандидаты
 
@@ -102,6 +115,14 @@ calls. Для ad-hoc импортов generated package используйте
 дерева будет корректно считаться незаявленным изменением; восстановить чистое
 дерево можно повторным атомарным `sync --offline`.
 
+Известный длинный прогон recursive evidence/schema tests может исчерпать native
+stack CPython и завершиться с code 139. Не считайте повторный монолитный
+`pytest -q` достаточной проверкой: используйте fresh-process split из строки
+troubleshooting ledger от 2026-07-20 про native stack exhaustion. Каждый
+указанный там test group запускается отдельным процессом; это offline
+workaround и он не разрешает live markers. Точный executable partition также
+зафиксирован в `.github/workflows/python.yml`.
+
 ## Как исправлять дефекты upstream
 
 1. Не меняйте raw snapshot и generated Python.
@@ -140,12 +161,21 @@ Live-запуск разрешён только через project commands/pyte
 install -d -m 0700 private/profiles
 cp config/live-profile.example.toml private/profiles/test-server.toml
 chmod 0600 private/profiles/test-server.toml .env
+test "$(stat -c '%a:%u' .env)" = "600:$(id -u)"
+test "$(stat -c '%a:%u' private/profiles/test-server.toml)" = "600:$(id -u)"
 ```
 
 В profile остаются только имена environment variables и разрешённые target
 settings. Значения API login и IDs находятся в process environment или в
 явно переданном `.env`; их нельзя печатать, копировать в docs или коммитить.
 Полные правила находятся в `private/README.md`.
+
+Live entrypoints принимают только точный корневой `--env-file .env` и не
+подхватывают файл неявно. Process environment имеет приоритет над этим файлом.
+Для API login профиль обязан ссылаться на основной `IIKO_API_KEY`; наличие
+`IIKO_API_KEY_2` не включает fallback. Перед каждым запуском заново проверьте,
+что `.env` и private profile принадлежат текущему пользователю и имеют mode
+`0600`.
 
 Получить guarded список доступных организаций, terminal groups и external
 menus с именами:
@@ -166,6 +196,25 @@ uv run --frozen --offline pytest -m live_read_smoke -n0 \
 Эти entrypoints создают process lock, используют persistent rate state,
 аутентифицируются один раз и не делают retry HTTP-вызова. Один live process
 может выполнить не больше одного вызова конкретной operation за run.
+
+### Как подтвердить rate limit
+
+Не меняйте `verified: false` экспериментом с учащением запросов. Сначала
+подтвердите server limit по авторитетному источнику или отдельно согласованному
+наблюдению, сохраните его безопасное описание в поле `source` и оставьте test
+budget не выше 20% server limit при глобальном минимуме 30 секунд. Затем:
+
+1. добавьте или обновите offline tests каталога и убедитесь, что неизвестная
+   operation и неподтверждённый budget продолжают fail closed;
+2. выделите эксклюзивное окно для одного API login и получите отдельное явное
+   разрешение на один контролируемый live checkpoint;
+3. выполните только один guarded serial run без параллелизма и retry;
+4. меняйте `verified` на `true` только после проверки источника, budget и
+   результата без `429`, в отдельном reviewable diff.
+
+Локальный state не координирует тот же login на другой машине или в другом
+приложении. Пока эксклюзивность и реальный limit не подтверждены, operation
+остаётся `verified: false` и live command должна остановиться до HTTP.
 
 ## JSON evidence для external menu
 
@@ -251,6 +300,35 @@ authentication проверяются rate budgets операций `get`, `add`
 флаг без проверенного server limit и отдельного решения на контролируемый
 запуск.
 
+### Запрещённый шаблон реального write-запуска
+
+Следующий блок является исполняемым шаблоном, но запускать его сейчас
+**запрещено**. Он предназначен только для будущего отдельно авторизованного
+контролируемого запуска; это не команда для текущей проверки документации.
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest -m live_write -n0 \
+  tests/integration/write/test_stop_list.py::test_stop_list_add_is_accepted_and_removed \
+  --live-profile test-server \
+  --env-file .env \
+  --target-organization "${IIKO_TEST_ORGANIZATION_ID:?required}" \
+  --allow-live-write \
+  --allow-audit-residue
+```
+
+Шаблон остаётся запрещённым, пока одновременно не выполнены все условия:
+
+- для `get_stop_lists`, `add_products_to_stop_list` и
+  `remove_products_from_stop_list` проверены реальные server rates и выставлен
+  `verified: true`;
+- в write-enabled private profile и allowlist настроены выделенные целевые
+  organization, terminal group и единственный test product;
+- получена отдельная явная авторизация именно на этот live-write запуск.
+
+Даже после выполнения этих условий безопасный placeholder
+`IIKO_TEST_ORGANIZATION_ID` должен быть явно задан точным UUID выделенной
+organization; сам текст шаблона не содержит live identifier.
+
 До `add` test атомарно сохраняет cleanup payload в ignored
 `.state/mutations/<run-id>.json` с mode `0600`. Cleanup выполняется LIFO в
 `finally`; незавершённый журнал сохраняется и блокирует успешный live receipt.
@@ -304,6 +382,14 @@ Bootstrap получает tracked filenames самостоятельно, за�
 перезаписи существующего baseline. В audit помечайте false positive только
 после проверки; настоящую учётную запись нужно удалить из Git и ротировать, а
 не добавлять в исключения. Не копируйте audit output в issue, логи или docs.
+
+Если scanner нашёл настоящий API login, остановите commit/publish и не
+печатайте совпадение. Отзовите и замените login в iiko, удалите его из
+worktree и index (а если он уже опубликован — отдельно согласуйте очистку Git
+history), затем обновите локальный `.env` с mode `0600`. После ротации заново
+запустите обычный `verify-no-secrets` и убедитесь, что audited baseline не
+изменился. Настоящий secret никогда не помечается false positive и не
+добавляется в baseline.
 
 `.env`, `.env.local`, captures, receipts, rate state, mutation journals и
 прочие runtime-файлы под `private/`, `.state/` и `build/` никогда не должны
@@ -372,3 +458,31 @@ write-тесты можно только собирать, но нельзя з�
 проверки server limits и явного контролируемого решения. CLI-имя
 `reset-circuit` также остаётся зарезервированным и не должно использоваться как
 фиктивный способ обойти открытый circuit.
+
+## Проверка Git tag в downstream без изменения manager
+
+Этот pipeline не изменяет `/home/ivan/programming/Iikocloud-manager`. После
+того как tag действительно опубликован, его можно проверить из каталога
+manager в изолированном окружении без изменения `pyproject.toml`, `uv.lock` и
+рабочего дерева:
+
+```bash
+cd /home/ivan/programming/Iikocloud-manager
+uv run --isolated --no-project \
+  --with "iikocloud-client @ git+ssh://git@github.com/UserVanya/Iikocloud-py-sdk.git@v0.1.0" \
+  python -c "from iikocloud_client import ApiClient, Configuration; print(ApiClient.__name__, Configuration.__name__)"
+```
+
+Замените `v0.1.0` на созданный release tag. Постоянное закрепление зависимости
+в manager выполняется отдельным migration change после этой проверки; не
+подменяйте tag веткой.
+
+## Как пополнять troubleshooting ledger
+
+Запись добавляется только когда один и тот же детерминированный failure pattern
+повторился, root cause установлена, а workaround проверен. В той же change set
+добавьте одну строку в `docs/troubleshooting.md`: дата, sanitized context,
+симптом, причина, безопасный workaround, профилактика и способ проверки. Не
+записывайте предположения, `.env` values, login/token, private payload,
+capture, receipt или mutation journal. Если причина или решение ещё не
+подтверждены, ledger не меняется.

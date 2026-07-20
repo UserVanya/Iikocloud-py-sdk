@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -9,7 +10,10 @@ import tools.openapi_pipeline.cli as cli_module
 from tools.openapi_pipeline import pipeline
 from tools.openapi_pipeline.cli import build_parser, main
 from tools.openapi_pipeline.errors import PipelineError
+from tools.openapi_pipeline.fetch import FetchResult
 from tools.openapi_pipeline.paths import RepoPaths
+
+OPENAPI_FIXTURES = Path(__file__).resolve().parents[1] / "fixtures/openapi"
 
 
 def test_cli_exposes_only_explicit_pipeline_commands() -> None:
@@ -39,7 +43,14 @@ def test_cli_pipeline_arguments_are_exact() -> None:
     assert parser.parse_args(["sync"]).offline is False
     assert parser.parse_args(["sync", "--offline"]).offline is True
     assert parser.parse_args(["verify"]).command == "verify"
-    assert parser.parse_args(["upstream-check"]).command == "upstream-check"
+    assert vars(parser.parse_args(["upstream-check"])) == {
+        "command": "upstream-check",
+        "fail_on_drift": False,
+    }
+    assert vars(parser.parse_args(["upstream-check", "--fail-on-drift"])) == {
+        "command": "upstream-check",
+        "fail_on_drift": True,
+    }
     capture = parser.parse_args(
         [
             "capture-evidence",
@@ -139,6 +150,109 @@ def test_cli_pipeline_arguments_are_exact() -> None:
     }
     with pytest.raises(SystemExit):
         parser.parse_args(["verify", "--offline"])
+
+    subparsers: Any = parser._subparsers
+    choices = subparsers._group_actions[0].choices
+    assert "--fail-on-drift" in choices["upstream-check"]._option_string_actions
+    assert all(
+        "--fail-on-drift" not in command_parser._option_string_actions
+        for command, command_parser in choices.items()
+        if command != "upstream-check"
+    )
+
+
+def _offline_upstream_dependencies(
+    tmp_path: Path,
+    *,
+    committed_fixture: str,
+    candidate_fixture: str,
+) -> SimpleNamespace:
+    paths = RepoPaths(tmp_path)
+    paths.upstream.parent.mkdir(parents=True)
+    paths.upstream.write_bytes((OPENAPI_FIXTURES / committed_fixture).read_bytes())
+    candidate = OPENAPI_FIXTURES / candidate_fixture
+    return SimpleNamespace(
+        paths=paths,
+        fetch=lambda: FetchResult("0" * 64, candidate, True),
+    )
+
+
+def test_upstream_check_manual_drift_writes_reports_without_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    dependencies = _offline_upstream_dependencies(
+        tmp_path,
+        committed_fixture="minimal-v1.json",
+        candidate_fixture="minimal-v2.json",
+    )
+    monkeypatch.setattr(
+        pipeline,
+        "default_dependencies",
+        lambda *, offline: dependencies,
+    )
+
+    assert main(["upstream-check"]) == 0
+
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
+    assert (tmp_path / "build/reports/upstream-diff.json").is_file()
+    assert (tmp_path / "build/reports/upstream-diff.md").is_file()
+
+
+def test_upstream_check_fail_on_drift_writes_reports_before_sanitized_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    dependencies = _offline_upstream_dependencies(
+        tmp_path,
+        committed_fixture="minimal-v1.json",
+        candidate_fixture="minimal-v2.json",
+    )
+    monkeypatch.setattr(
+        pipeline,
+        "default_dependencies",
+        lambda *, offline: dependencies,
+    )
+
+    assert main(["upstream-check", "--fail-on-drift"]) == 2
+
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == (
+        "error: Upstream OpenAPI drift detected; review build/reports/upstream-diff.*\n"
+    )
+    assert (tmp_path / "build/reports/upstream-diff.json").is_file()
+    assert (tmp_path / "build/reports/upstream-diff.md").is_file()
+
+
+def test_upstream_check_fail_on_drift_succeeds_for_unchanged_fixture(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    dependencies = _offline_upstream_dependencies(
+        tmp_path,
+        committed_fixture="minimal-v1.json",
+        candidate_fixture="minimal-v1.json",
+    )
+    monkeypatch.setattr(
+        pipeline,
+        "default_dependencies",
+        lambda *, offline: dependencies,
+    )
+
+    assert main(["upstream-check", "--fail-on-drift"]) == 0
+
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
+    assert (tmp_path / "build/reports/upstream-diff.json").is_file()
+    markdown = (tmp_path / "build/reports/upstream-diff.md").read_text(encoding="utf-8")
+    assert markdown.count("- No changes") == 3
 
 
 @pytest.mark.parametrize(

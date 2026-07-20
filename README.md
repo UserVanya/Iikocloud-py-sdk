@@ -5,7 +5,9 @@
 через проверяемые overlays, реестры имён и синтетические contract fixtures.
 Generated-код в `src/iikocloud_client` вручную не редактируется.
 
-Требуется Python 3.10 или новее.
+Библиотеке требуется Python 3.10 или новее. Операторские команды генерации и
+release выполняются на Python 3.12; остальные prerequisites и безопасная
+последовательность описаны в runbook ниже.
 
 ## Установка из Git tag
 
@@ -107,4 +109,3 @@ uv run --frozen --offline python -m tools.openapi_pipeline verify
 Профили, `.env`, captures, receipts и state являются локальными данными и не
 должны попадать в Git. Любой `429` прекращает весь live-run без retry и без
 переключения на второй API login.
-
