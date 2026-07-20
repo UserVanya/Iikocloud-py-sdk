@@ -412,21 +412,32 @@ class SafeLiveSession:
         response: httpx.Response,
     ) -> None:
         assert self._capture is not None
+        if not 200 <= response.status_code <= 299:
+            self._unusable = True
+            raise SafetyError(
+                f"Live capture failed: non-success HTTP {response.status_code}; no retry"
+            ) from None
+        if len(response.content) > _MAX_CAPTURE_BODY:
+            self._unusable = True
+            raise SafetyError("Live capture failed: response too large; no retry") from None
+        content_type = (
+            response.headers.get("content-type", "").split(";", 1)[0].strip().lower()
+        )
+        if content_type != "application/json":
+            self._unusable = True
+            raise SafetyError(
+                "Live capture failed: response content type is not JSON; no retry"
+            ) from None
         try:
-            if not 200 <= response.status_code <= 299:
-                raise SafetyError("Capture requires a successful response")
-            if len(response.content) > _MAX_CAPTURE_BODY:
-                raise SafetyError("Capture response is too large")
-            content_type = (
-                response.headers.get("content-type", "").split(";", 1)[0].strip().lower()
-            )
-            if content_type != "application/json":
-                raise SafetyError("Capture response is not JSON")
             response_json = json.loads(
                 response.content.decode("utf-8"),
                 object_pairs_hook=_unique_json,
                 parse_constant=_reject_constant,
             )
+        except (UnicodeError, ValueError, RecursionError):
+            self._unusable = True
+            raise SafetyError("Live capture failed: invalid JSON response; no retry") from None
+        try:
             self._capture.write_model_pair(
                 operation_id,
                 dict(payload),
@@ -438,7 +449,7 @@ class SafeLiveSession:
             )
         except Exception:
             self._unusable = True
-            raise SafetyError("Live capture failed after response without retry") from None
+            raise SafetyError("Live capture failed: final capture processing; no retry") from None
 
     async def close(self) -> None:
         if self._closed:

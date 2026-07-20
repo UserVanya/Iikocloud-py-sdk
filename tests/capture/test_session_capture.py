@@ -7,6 +7,7 @@ from typing import Any
 import httpx
 import pytest
 
+import tools.openapi_pipeline.live.session as session_module
 from tools.openapi_pipeline.capture import CaptureWriter, LiveCapture, RedactionHints
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
@@ -19,6 +20,7 @@ from tools.openapi_pipeline.live.session import (
 _API_LOGIN = "synthetic-api-login"
 _TOKEN = "synthetic-active-token"
 _CORRELATION_ID = "00000000-0000-0000-0000-000000000001"
+_RESPONSE_SECRET = "never-leak-response-secret"
 
 
 def _auth_response() -> dict[str, str]:
@@ -155,17 +157,58 @@ async def test_safe_session_captures_only_complete_parsed_read_and_wires_secrets
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ("content", "content_type"),
+    ("failure", "status", "content", "content_type", "expected_message"),
     [
-        (b"not-json", "application/json"),
-        (b'{"type":"ORGANIZATION","type":"OTHER"}', "application/json"),
-        (b"binary", "application/octet-stream"),
+        (
+            "non-success",
+            503,
+            _RESPONSE_SECRET.encode(),
+            "application/json",
+            "Live capture failed: non-success HTTP 503; no retry",
+        ),
+        (
+            "too-large",
+            200,
+            f'{{"value":"{_RESPONSE_SECRET}"}}'.encode(),
+            "application/json",
+            "Live capture failed: response too large; no retry",
+        ),
+        (
+            "non-json",
+            200,
+            _RESPONSE_SECRET.encode(),
+            f"application/{_RESPONSE_SECRET}",
+            "Live capture failed: response content type is not JSON; no retry",
+        ),
+        (
+            "invalid-json",
+            200,
+            _RESPONSE_SECRET.encode(),
+            "application/json",
+            "Live capture failed: invalid JSON response; no retry",
+        ),
+        (
+            "final-processing",
+            200,
+            f'{{"{_RESPONSE_SECRET}@example.com":"value"}}'.encode(),
+            "application/json",
+            "Live capture failed: final capture processing; no retry",
+        ),
     ],
 )
-async def test_capture_rejects_unparsed_or_non_json_response_without_retry(
-    tmp_path: Path, content: bytes, content_type: str
+async def test_capture_reports_only_sanitized_failure_class_without_retry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    failure: str,
+    status: int,
+    content: bytes,
+    content_type: str,
+    expected_message: str,
 ) -> None:
     calls = 0
+
+    if failure == "too-large":
+        monkeypatch.setattr(session_module, "_MAX_CAPTURE_BODY", len(content) - 1)
 
     async def handler(request: httpx.Request) -> httpx.Response:
         nonlocal calls
@@ -173,9 +216,12 @@ async def test_capture_rejects_unparsed_or_non_json_response_without_retry(
         if request.url.path == "/api/1/access_token":
             return httpx.Response(200, json=_auth_response())
         return httpx.Response(
-            200,
+            status,
             content=content,
-            headers={"content-type": content_type},
+            headers={
+                "content-type": content_type,
+                "x-private": _RESPONSE_SECRET,
+            },
         )
 
     root = tmp_path / "captures"
@@ -187,8 +233,10 @@ async def test_capture_rejects_unparsed_or_non_json_response_without_retry(
         capture=_capture(root),
     )
     await session.authenticate()
-    with pytest.raises(SafetyError, match="capture"):
+    with pytest.raises(SafetyError) as caught:
         await session.request_json("get_organizations", "POST", "/api/1/organizations", {})
+    assert str(caught.value) == expected_message
+    assert _RESPONSE_SECRET not in str(caught.value)
     with pytest.raises(SafetyError, match="unusable"):
         await session.request_json("get_organizations", "POST", "/api/1/organizations", {})
     await session.close()
