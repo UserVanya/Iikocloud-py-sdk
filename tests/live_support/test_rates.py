@@ -138,7 +138,7 @@ def test_catalog_load_rejects_duplicate_yaml_keys(tmp_path: Path) -> None:
         RateCatalog.load(path)
 
 
-def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
+def test_committed_rate_catalog_is_exact_and_enables_only_evidence_operations() -> None:
     path = Path("contracts/rate-limits.yaml")
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
@@ -147,7 +147,7 @@ def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
         "authenticate": {
             "server_limit": {"calls": 1, "per_seconds": 5},
             "source": "existing-manager-configuration",
-            "verified": False,
+            "verified": True,
         },
         "get_organizations": {
             "server_limit": {"calls": 1, "per_seconds": 10},
@@ -162,7 +162,7 @@ def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
         "get_external_menu_by_id": {
             "server_limit": {"calls": 5, "per_seconds": 60},
             "source": "existing-manager-configuration",
-            "verified": False,
+            "verified": True,
         },
         "get_stop_lists": {
             "server_limit": {"calls": 10, "per_seconds": 60},
@@ -189,9 +189,17 @@ def test_committed_rate_catalog_is_exact_and_disabled_by_default() -> None:
         },
         "operations": expected_operations,
     }
+    assert {
+        operation_id
+        for operation_id, operation in value["operations"].items()
+        if operation["verified"] is True
+    } == {"authenticate", "get_external_menu_by_id"}
 
     catalog = RateCatalog.load(path)
-    for operation_id in expected_operations:
+    for operation_id, operation in expected_operations.items():
+        if operation["verified"] is True:
+            catalog.operation_budget(operation_id)
+            continue
         with pytest.raises(SafetyError, match="not verified"):
             catalog.operation_budget(operation_id)
 

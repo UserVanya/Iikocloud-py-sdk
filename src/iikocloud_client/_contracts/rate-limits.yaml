@@ -7,7 +7,7 @@ operations:
   authenticate:
     server_limit: {calls: 1, per_seconds: 5}
     source: existing-manager-configuration
-    verified: false
+    verified: true
   get_organizations:
     server_limit: {calls: 1, per_seconds: 10}
     source: existing-manager-configuration
@@ -19,7 +19,7 @@ operations:
   get_external_menu_by_id:
     server_limit: {calls: 5, per_seconds: 60}
     source: existing-manager-configuration
-    verified: false
+    verified: true
   get_stop_lists:
     server_limit: {calls: 10, per_seconds: 60}
     source: existing-manager-configuration

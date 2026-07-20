@@ -175,8 +175,12 @@ async def test_three_evidence_runs_reserve_every_live_call_thirty_seconds_apart(
     tmp_path: Path,
 ) -> None:
     catalog_data = yaml.safe_load(Path("contracts/rate-limits.yaml").read_text(encoding="utf-8"))
-    for operation_id in ("authenticate", "get_external_menu_by_id"):
-        catalog_data["operations"][operation_id]["verified"] = True
+    enabled_operations = {
+        operation_id
+        for operation_id, operation in catalog_data["operations"].items()
+        if operation["verified"] is True
+    }
+    assert enabled_operations == {"authenticate", "get_external_menu_by_id"}
     catalog = RateCatalog.from_mapping(catalog_data)
     fake = FakeTime(0.0)
     reservations: list[float] = []
