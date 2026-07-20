@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 import tools.openapi_pipeline.capture as capture_module
-from tools.openapi_pipeline.capture import CaptureWriter
+from tools.openapi_pipeline.capture import OBJECT_VALUE, CaptureWriter
 from tools.openapi_pipeline.errors import SafetyError
 
 
@@ -53,6 +53,28 @@ def test_capture_writer_sanitizes_before_writing_mode_0600(tmp_path: Path) -> No
     assert response_path.stat().st_mode & 0o777 == 0o600
     assert "secret-token" not in contents
     assert "Private venue" not in contents
+
+
+def test_capture_writer_aliases_schema_backed_v3_dynamic_uuid_map(tmp_path: Path) -> None:
+    source_uuid = "11111111-1111-4111-8111-111111111111"
+
+    _request_path, response_path = _write_pair(
+        CaptureWriter(tmp_path),
+        response_json={"overrideTaxCategories": {source_uuid: source_uuid}},
+        response_path_values={
+            ("overrideTaxCategories", OBJECT_VALUE): frozenset(),
+        },
+    )
+
+    serialized = response_path.read_text(encoding="utf-8")
+    response = json.loads(serialized)
+    sanitized_map = response["body"]["overrideTaxCategories"]
+    assert source_uuid not in serialized
+    assert sanitized_map == {
+        "00000000-0000-4000-8000-000000000001": (
+            "00000000-0000-4000-8000-000000000001"
+        )
+    }
 
 
 def test_capture_writer_redacts_metadata_path_without_explicit_approval(

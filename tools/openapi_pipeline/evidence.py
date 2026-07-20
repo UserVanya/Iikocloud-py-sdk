@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from .capture import ARRAY_ITEM, CaptureWriter, LiveCapture, RedactionHints
+from .capture import ARRAY_ITEM, OBJECT_VALUE, CaptureWriter, LiveCapture, RedactionHints
 from .errors import SafetyError
 from .live.lock import LiveProcessLock
 from .live.profile import ResolvedLiveProfile
@@ -34,6 +34,7 @@ _ITEM_TYPE_HINT_PATH = (
 )
 _ITEM_ORDER_TYPE_HINT_PATH = (*_ITEM_TYPE_HINT_PATH[:-1], "orderItemType")
 _ITEM_PRICE_STRATEGY_HINT_PATH = (*_ITEM_TYPE_HINT_PATH[:-1], "priceStrategy")
+_OVERRIDE_TAX_CATEGORIES_HINT_PATH = ("overrideTaxCategories", OBJECT_VALUE)
 _REDACTED_STRING_SENTINEL = "<redacted:string>"
 
 
@@ -79,6 +80,29 @@ def _evidence_string_enum(
     ):
         raise SafetyError(f"Evidence {property_name} enum is invalid")
     return frozenset(enum)
+
+
+def _assert_reviewed_override_tax_array_shape(
+    document: dict[str, Any],
+    menu_version: int,
+) -> None:
+    component_name, item_component = {
+        3: ("ExternalMenuV3", "OverrideTaxesDto"),
+        4: ("ExternalMenuV4", "OverrideTaxesDto2"),
+    }[menu_version]
+    component = _evidence_component(document, component_name)
+    properties = component.get("properties")
+    override_tax_categories = (
+        properties.get("overrideTaxCategories") if type(properties) is dict else None
+    )
+    if override_tax_categories != {
+        "description": "Tax benefits",
+        "items": {"$ref": f"#/components/schemas/{item_component}"},
+        "type": "array",
+    }:
+        raise SafetyError(
+            "Evidence overrideTaxCategories broken array shape has drifted"
+        )
 
 
 def build_evidence_redaction_hints(
@@ -188,6 +212,8 @@ def build_versioned_evidence_redaction_hints(
 
     if type(menu_version) is not int or menu_version not in _EVIDENCE_VERSIONS:
         raise SafetyError("Evidence redaction hint version must be exactly 2, 3, or 4")
+    if menu_version in {3, 4}:
+        _assert_reviewed_override_tax_array_shape(effective_schema, menu_version)
     reviewed = build_evidence_redaction_hints(effective_schema, operation_id)
     item = _evidence_component(effective_schema, "ExternalMenuItem3")
     combo = _evidence_component(effective_schema, "ExternalMenuComboItem")
@@ -230,6 +256,12 @@ def build_versioned_evidence_redaction_hints(
         raise SafetyError("Evidence versioned hints require exactly the 200 response")
 
     response_values = dict(selected.response_values_by_status[200])
+    if menu_version in {3, 4}:
+        if _OVERRIDE_TAX_CATEGORIES_HINT_PATH in response_values:
+            raise SafetyError(
+                "Evidence overrideTaxCategories map exception is already schema-declared"
+            )
+        response_values[_OVERRIDE_TAX_CATEGORIES_HINT_PATH] = frozenset()
     if menu_version == 4:
         reviewed_item_types = reviewed.response_values_by_status[200].get(_ITEM_TYPE_HINT_PATH)
         selected_item_types = response_values.get(_ITEM_TYPE_HINT_PATH, frozenset())

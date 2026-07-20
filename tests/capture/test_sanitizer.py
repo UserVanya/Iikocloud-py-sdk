@@ -152,6 +152,51 @@ def test_first_pass_sanitizer_never_trusts_alias_shaped_raw_uuid() -> None:
     assert validation_pass["id"] == alias_shaped_raw
 
 
+def test_schema_backed_uuid_map_keys_alias_with_matching_values_and_reach_fixed_point() -> None:
+    source_uuid = "11111111-1111-4111-8111-111111111111"
+    path_values: PathValues = {
+        ("overrideTaxCategories", OBJECT_VALUE): frozenset(),
+    }
+
+    sanitized = Sanitizer().sanitize(
+        {"overrideTaxCategories": {source_uuid: source_uuid}},
+        path_values=path_values,
+    )
+
+    expected_alias = "00000000-0000-4000-8000-000000000001"
+    assert sanitized == {
+        "overrideTaxCategories": {expected_alias: expected_alias},
+    }
+    assert (
+        Sanitizer.for_fixed_point_validation().sanitize(
+            sanitized,
+            path_values=path_values,
+        )
+        == sanitized
+    )
+
+
+def test_schema_backed_uuid_map_key_alias_collision_fails_closed() -> None:
+    canonical = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+    alternate_spelling = canonical.upper()
+    path_values: PathValues = {
+        ("overrideTaxCategories", OBJECT_VALUE): frozenset(),
+    }
+
+    with pytest.raises(SafetyError, match="collid") as caught:
+        Sanitizer().sanitize(
+            {
+                "overrideTaxCategories": {
+                    canonical: "first",
+                    alternate_spelling: "second",
+                }
+            },
+            path_values=path_values,
+        )
+
+    assert canonical not in str(caught.value).lower()
+
+
 def test_sanitizer_detects_unicode_normalized_secret_substrings() -> None:
     known = "Caf\u00e9-secret"
     equivalent = unicodedata.normalize("NFD", known)
@@ -168,7 +213,7 @@ def test_sanitizer_detects_unicode_normalized_secret_substrings() -> None:
     "sensitive_key",
     [
         "prefix-known-secret-suffix",
-        "11111111-1111-4111-8111-111111111111",
+        "prefix-11111111-1111-4111-8111-111111111111-suffix",
         "aaaaaaaa-aaaa-0000-0000-aaaaaaaaaaaa",
         "person@example.com",
         "+79991234567",
@@ -180,7 +225,12 @@ def test_first_pass_sanitizer_rejects_sensitive_text_in_object_keys(
     sensitive_key: str,
 ) -> None:
     with pytest.raises(SafetyError, match="object key|sensitive") as caught:
-        Sanitizer(known_secrets=("known-secret",)).sanitize({sensitive_key: "value"})
+        Sanitizer(known_secrets=("known-secret",)).sanitize(
+            {"overrideTaxCategories": {sensitive_key: "value"}},
+            path_values={
+                ("overrideTaxCategories", OBJECT_VALUE): frozenset(),
+            },
+        )
 
     assert sensitive_key not in str(caught.value)
 

@@ -11,7 +11,13 @@ from typing import Any, TypeVar, cast
 import pytest
 
 from tools.openapi_pipeline import evidence as evidence_module
-from tools.openapi_pipeline.capture import ARRAY_ITEM, CaptureWriter, LiveCapture, RedactionHints
+from tools.openapi_pipeline.capture import (
+    ARRAY_ITEM,
+    OBJECT_VALUE,
+    CaptureWriter,
+    LiveCapture,
+    RedactionHints,
+)
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.evidence import (
     CaptureEvidenceDependencies,
@@ -149,12 +155,22 @@ def _schema() -> dict[str, Any]:
                     "type": "object",
                     "properties": {
                         "mode": {"type": "string", "enum": ["V3"]},
+                        "overrideTaxCategories": {
+                            "description": "Tax benefits",
+                            "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
+                            "type": "array",
+                        },
                     },
                 },
                 "ExternalMenuV4": {
                     "type": "object",
                     "properties": {
                         "mode": {"type": "string", "enum": ["V4"]},
+                        "overrideTaxCategories": {
+                            "description": "Tax benefits",
+                            "items": {"$ref": "#/components/schemas/OverrideTaxesDto2"},
+                            "type": "array",
+                        },
                         "itemGroups": {
                             "type": "array",
                             "items": {"$ref": "#/components/schemas/ExternalMenuCategory3"},
@@ -207,6 +223,8 @@ def _schema() -> dict[str, Any]:
                         "comment": {"type": "string"},
                     },
                 },
+                "OverrideTaxesDto": {"type": "object"},
+                "OverrideTaxesDto2": {"type": "object"},
             }
         },
     }
@@ -285,6 +303,7 @@ _ITEM_TYPE_PATH = (
 )
 _ITEM_ORDER_TYPE_PATH = (*_ITEM_TYPE_PATH[:-1], "orderItemType")
 _ITEM_PRICE_STRATEGY_PATH = (*_ITEM_TYPE_PATH[:-1], "priceStrategy")
+_OVERRIDE_TAX_CATEGORIES_PATH = ("overrideTaxCategories", OBJECT_VALUE)
 
 
 def test_generic_hints_keep_one_of_with_unconstrained_branch_redacted() -> None:
@@ -367,6 +386,60 @@ def test_versioned_evidence_hints_select_only_requested_response_root(
     if menu_version == 4:
         assert values[_ITEM_ORDER_TYPE_PATH] == frozenset({"Product", "Compound"})
         assert values[_ITEM_PRICE_STRATEGY_PATH] == frozenset({"BY_COMPONENT"})
+
+
+@pytest.mark.parametrize(
+    ("menu_version", "expected"),
+    [(2, False), (3, True), (4, True)],
+)
+def test_versioned_evidence_hints_add_only_reviewed_override_tax_map_exception(
+    menu_version: int,
+    expected: bool,
+) -> None:
+    hints = evidence_module.build_versioned_evidence_redaction_hints(
+        _schema(),
+        "get_external_menu_by_id",
+        menu_version,
+    )
+
+    values = hints.response_values_for_status(200)
+    assert (_OVERRIDE_TAX_CATEGORIES_PATH in values) is expected
+    if expected:
+        assert values[_OVERRIDE_TAX_CATEGORIES_PATH] == frozenset()
+
+
+@pytest.mark.parametrize("menu_version", [3, 4])
+@pytest.mark.parametrize("mutation", ["missing-description", "wrong-ref", "extra-field"])
+def test_versioned_override_tax_exception_fails_closed_on_broken_shape_drift(
+    menu_version: int,
+    mutation: str,
+) -> None:
+    schema = _schema()
+    component = {3: "ExternalMenuV3", 4: "ExternalMenuV4"}[menu_version]
+    property_schema = schema["components"]["schemas"][component]["properties"][
+        "overrideTaxCategories"
+    ]
+    if mutation == "missing-description":
+        del property_schema["description"]
+    elif mutation == "wrong-ref":
+        alternate = {3: "OverrideTaxesDto2", 4: "OverrideTaxesDto"}[menu_version]
+        property_schema["items"]["$ref"] = f"#/components/schemas/{alternate}"
+    else:
+        property_schema["nullable"] = True
+
+    with pytest.raises(SafetyError, match="overrideTaxCategories|tax categor"):
+        evidence_module.build_versioned_evidence_redaction_hints(
+            schema,
+            "get_external_menu_by_id",
+            menu_version,
+        )
+
+    v2_values = evidence_module.build_versioned_evidence_redaction_hints(
+        schema,
+        "get_external_menu_by_id",
+        2,
+    ).response_values_for_status(200)
+    assert _OVERRIDE_TAX_CATEGORIES_PATH not in v2_values
 
 
 @pytest.mark.parametrize("menu_version", [1, True])

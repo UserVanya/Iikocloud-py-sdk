@@ -684,17 +684,58 @@ class Sanitizer:
         normalized_value = unicodedata.normalize("NFKC", value)
         return any(secret in normalized_value for secret in self._normalized_secrets)
 
-    def _reject_sensitive_object_key(self, key: str) -> None:
+    def _uuid_alias(self, value: str) -> str:
+        if self._fixed_point_validation and _CAPTURE_UUID_ALIAS.fullmatch(value):
+            return value
+        canonical = str(uuid.UUID(value))
+        alias = self._uuid_aliases.get(canonical)
+        if alias is None:
+            alias = f"00000000-0000-4000-8000-{len(self._uuid_aliases) + 1:012d}"
+            self._uuid_aliases[canonical] = alias
+        return alias
+
+    @staticmethod
+    def _schema_allows_dynamic_key(
+        path: HintPath,
+        values_by_path: PathValues | None,
+    ) -> bool:
+        if values_by_path is None:
+            return False
+        for candidate in values_by_path:
+            if len(candidate) <= len(path) or candidate[len(path)] is not OBJECT_VALUE:
+                continue
+            for actual, expected in zip(path, candidate[: len(path)], strict=True):
+                if expected is OBJECT_VALUE:
+                    if type(actual) is not str:
+                        break
+                elif expected != actual:
+                    break
+            else:
+                return True
+        return False
+
+    def _sanitize_object_key(
+        self,
+        key: str,
+        *,
+        path: HintPath,
+        path_values: PathValues | None,
+    ) -> str:
         normalized = unicodedata.normalize("NFKC", key)
         if (
             self._contains_known_secret(key)
-            or _UUID_LIKE_KEY.search(normalized)
             or _JWT.search(normalized)
             or _BEARER.search(normalized)
             or _EMAIL.search(normalized)
-            or _PHONE.search(normalized)
         ):
             raise SafetyError("Capture object key contains sensitive text")
+        if _UUID.fullmatch(normalized):
+            if self._schema_allows_dynamic_key(path, path_values):
+                return self._uuid_alias(normalized)
+            raise SafetyError("Capture object key contains sensitive text")
+        if _UUID_LIKE_KEY.search(normalized) or _PHONE.search(normalized):
+            raise SafetyError("Capture object key contains sensitive text")
+        return key
 
     def sanitize(
         self,
@@ -734,18 +775,23 @@ class Sanitizer:
         if normalized_key in PHONE_KEYS:
             return "<redacted:phone>"
         if type(value) is dict:
-            for child_key in value:
-                self._reject_sensitive_object_key(child_key)
-            return {
-                child_key: self._sanitize(
+            result: dict[str, Any] = {}
+            for child_key, child_value in value.items():
+                sanitized_key = self._sanitize_object_key(
+                    child_key,
+                    path=path,
+                    path_values=path_values,
+                )
+                if sanitized_key in result:
+                    raise SafetyError("Capture object keys collide after sanitization")
+                result[sanitized_key] = self._sanitize(
                     child_value,
-                    key=child_key,
+                    key=sanitized_key,
                     enum_keys=enum_keys,
                     path_values=path_values,
-                    path=(*path, child_key),
+                    path=(*path, sanitized_key),
                 )
-                for child_key, child_value in value.items()
-            }
+            return result
         if type(value) is list:
             return [
                 self._sanitize(
@@ -761,15 +807,8 @@ class Sanitizer:
             return value
         if self._contains_known_secret(value):
             return "<redacted:secret>"
-        if self._fixed_point_validation and _CAPTURE_UUID_ALIAS.fullmatch(value):
-            return value
         if _UUID.fullmatch(value):
-            canonical = str(uuid.UUID(value))
-            alias = self._uuid_aliases.get(canonical)
-            if alias is None:
-                alias = f"00000000-0000-4000-8000-{len(self._uuid_aliases) + 1:012d}"
-                self._uuid_aliases[canonical] = alias
-            return alias
+            return self._uuid_alias(value)
         if _JWT.search(value) or _BEARER.search(value):
             return "<redacted:secret>"
         if _EMAIL.search(value):

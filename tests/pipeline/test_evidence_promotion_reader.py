@@ -43,6 +43,16 @@ def _effective_schema() -> dict[str, Any]:
             groups_name: {"type": "array", "items": {"type": "object"}},
             "name": {"type": "string"},
         }
+        if version in {3, 4}:
+            item_component = {
+                3: "OverrideTaxesDto",
+                4: "OverrideTaxesDto2",
+            }[version]
+            properties["overrideTaxCategories"] = {
+                "description": "Tax benefits",
+                "items": {"$ref": f"#/components/schemas/{item_component}"},
+                "type": "array",
+            }
         if version == 4:
             properties["itemGroups"] = {
                 "type": "array",
@@ -108,6 +118,8 @@ def _effective_schema() -> dict[str, Any]:
                 "ExternalMenuV2": root_schema(2),
                 "ExternalMenuV3": root_schema(3),
                 "ExternalMenuV4": root_schema(4),
+                "OverrideTaxesDto": {"type": "object"},
+                "OverrideTaxesDto2": {"type": "object"},
                 "ExternalMenuCategory3": {
                     "type": "object",
                     "required": ["items"],
