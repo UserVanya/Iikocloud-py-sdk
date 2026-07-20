@@ -4,6 +4,7 @@ import asyncio
 import socket
 import traceback
 from collections.abc import Mapping
+from pathlib import Path
 from typing import Any, cast
 
 import pytest
@@ -16,6 +17,7 @@ from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.rates import LiveRateGuard
+from tools.openapi_pipeline.live.receipt import LiveReceipt
 from tools.openapi_pipeline.live.state import LiveStateStore
 
 
@@ -144,6 +146,8 @@ def _adapter(
     guard: StubGuard,
     state: StubState,
     capture: StubCapture | None = None,
+    receipt: LiveReceipt | None = None,
+    receipt_path: Path | None = None,
 ) -> GeneratedLiveSdk:
     return GeneratedLiveSdk(
         api_client=cast(ApiClient, object()),
@@ -151,7 +155,23 @@ def _adapter(
         guard=cast(LiveRateGuard, guard),
         state=cast(LiveStateStore, state),
         capture=cast(LiveCapture, capture) if capture is not None else None,
+        receipt=receipt,
+        receipt_path=receipt_path,
     )
+
+
+def _auth_receipt(path: Path) -> LiveReceipt:
+    receipt = LiveReceipt(
+        run_id="20260720T120000Z-a1b2c3d4",
+        profile_fingerprint="f" * 64,
+        effective_schema_sha256="a" * 64,
+        generated_tree_sha256="b" * 64,
+        operations=("authenticate",),
+        had_429=False,
+        completed=False,
+    )
+    receipt.write(path)
+    return receipt
 
 
 async def _assert_next_call_is_blocked_before_work(
@@ -207,6 +227,138 @@ async def test_success_acquires_invokes_records_and_returns_data_once() -> None:
     assert guard.statuses == [("get_organizations", 200)]
     assert invocations == 1
     assert state.statuses == [("f" * 64, "get_organizations", 200)]
+
+
+@pytest.mark.asyncio
+async def test_success_persists_generated_operation_in_live_receipt(tmp_path: Path) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    receipt_path = tmp_path / "live-runs/receipt.json"
+    receipt = _auth_receipt(receipt_path)
+    adapter = _adapter(
+        guard=guard,
+        state=state,
+        receipt=receipt,
+        receipt_path=receipt_path,
+    )
+
+    async def invoke() -> ApiResponse[dict[str, object]]:
+        recorded = adapter.receipt
+        assert recorded is not None
+        assert recorded.operations == ("authenticate", "get_organizations")
+        assert LiveReceipt.load(receipt_path) == recorded
+        return ApiResponse(
+            status_code=200,
+            headers=None,
+            data={"organizations": []},
+            raw_data=b'{"organizations":[]}',
+        )
+
+    await adapter.call_generated("get_organizations", {}, invoke)
+
+    recorded = adapter.receipt
+    assert recorded is not None
+    assert recorded.operations == ("authenticate", "get_organizations")
+    assert LiveReceipt.load(receipt_path) == recorded
+
+
+@pytest.mark.asyncio
+async def test_429_persists_failed_generated_operation_and_receipt_flag(
+    tmp_path: Path,
+) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    receipt_path = tmp_path / "live-runs/receipt.json"
+    receipt = _auth_receipt(receipt_path)
+    adapter = _adapter(
+        guard=guard,
+        state=state,
+        receipt=receipt,
+        receipt_path=receipt_path,
+    )
+
+    async def invoke() -> ApiResponse[object]:
+        raise ApiException(status=429, reason="synthetic")
+
+    with pytest.raises(SafetyError, match="circuit opened"):
+        await adapter.call_generated("get_organizations", {}, invoke)
+
+    recorded = adapter.receipt
+    assert recorded is not None
+    assert recorded.operations == ("authenticate", "get_organizations")
+    assert recorded.had_429
+    assert LiveReceipt.load(receipt_path) == recorded
+
+
+@pytest.mark.asyncio
+async def test_429_still_opens_circuit_when_receipt_flag_write_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    receipt_path = tmp_path / "live-runs/receipt.json"
+    receipt = _auth_receipt(receipt_path)
+    adapter = _adapter(
+        guard=guard,
+        state=state,
+        receipt=receipt,
+        receipt_path=receipt_path,
+    )
+    original_write = LiveReceipt.write
+
+    def fail_429_write(self: LiveReceipt, path: Path) -> None:
+        if self.had_429:
+            raise RuntimeError("synthetic receipt failure")
+        original_write(self, path)
+
+    monkeypatch.setattr(LiveReceipt, "write", fail_429_write)
+
+    async def invoke() -> ApiResponse[object]:
+        raise ApiException(status=429, reason="synthetic")
+
+    with pytest.raises(SafetyError, match="429 receipt recording failed"):
+        await adapter.call_generated("get_organizations", {}, invoke)
+
+    assert guard.statuses == [("get_organizations", 429)]
+    assert state.circuit_open
+    await _assert_next_call_is_blocked_before_work(adapter, guard)
+
+
+def test_constructor_rejects_incomplete_receipt_binding(tmp_path: Path) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    receipt_path = tmp_path / "live-runs/receipt.json"
+    receipt = _auth_receipt(receipt_path)
+
+    with pytest.raises(SafetyError, match="receipt and path"):
+        _adapter(guard=guard, state=state, receipt=receipt)
+    with pytest.raises(SafetyError, match="receipt and path"):
+        _adapter(guard=guard, state=state, receipt_path=receipt_path)
+
+
+def test_constructor_rejects_receipt_for_another_profile(tmp_path: Path) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    receipt_path = tmp_path / "live-runs/receipt.json"
+    receipt = LiveReceipt(
+        run_id="20260720T120000Z-a1b2c3d4",
+        profile_fingerprint="e" * 64,
+        effective_schema_sha256="a" * 64,
+        generated_tree_sha256="b" * 64,
+        operations=("authenticate",),
+        had_429=False,
+        completed=False,
+    )
+    receipt.write(receipt_path)
+
+    with pytest.raises(SafetyError, match="profile"):
+        _adapter(
+            guard=guard,
+            state=state,
+            receipt=receipt,
+            receipt_path=receipt_path,
+        )
 
 
 @pytest.mark.asyncio

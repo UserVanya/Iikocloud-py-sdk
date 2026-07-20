@@ -10,7 +10,10 @@ from typing import Any
 
 import pytest
 
+from iikocloud_client.api_client import ApiClient
+from iikocloud_client.configuration import Configuration
 from tools.openapi_pipeline.errors import SafetyError
+from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile, is_safe_profile_name
 from tools.openapi_pipeline.live.pytest_support import (
@@ -38,8 +41,16 @@ class _LiveRunContext:
     live_calls_passed: int = 0
     live_failed: bool = False
     circuit_closed: bool = False
-    clients_closed: bool = False
+    session_client_closed: bool = False
+    generated_client_required: bool = False
+    generated_client_closed: bool = False
     mutation_journals_clean: bool = False
+
+    @property
+    def clients_closed(self) -> bool:
+        return self.session_client_closed and (
+            not self.generated_client_required or self.generated_client_closed
+        )
 
 
 @dataclass
@@ -162,16 +173,64 @@ async def live_session(
         await session.authenticate()
         yield session
     finally:
+        session_client_closed = False
         try:
             await session.close()
+            session_client_closed = session.is_closed
         finally:
-            context.receipt = session.receipt or context.receipt
-            context.clients_closed = session.is_closed
+            session_receipt = session.receipt
+            if session_receipt is not None and len(session_receipt.operations) > len(
+                context.receipt.operations
+            ):
+                context.receipt = session_receipt
+            context.session_client_closed = session_client_closed
             context.circuit_closed = not state.circuit_is_open(
                 live_profile.fingerprint,
                 lock=lock,
             )
             context.mutation_journals_clean = mutation_journals_absent(state_root)
+
+
+@pytest.fixture(scope="session")
+async def live_sdk(
+    _live_environment: _LiveEnvironment,
+    live_session: SafeLiveSession,
+) -> AsyncIterator[GeneratedLiveSdk]:
+    profile = _live_environment.profile
+    state = _live_environment.state
+    context = _live_environment.context
+    if live_session.profile is not profile or live_session.state is not state:
+        raise SafetyError("Generated live SDK must share the authenticated live session")
+    receipt = live_session.receipt
+    if receipt is None:
+        raise SafetyError("Generated live SDK requires the authenticated live receipt")
+
+    configuration = Configuration(
+        host=profile.base_url,
+        access_token=live_session.access_token,
+    )
+    context.generated_client_required = True
+    api_client = ApiClient(configuration)
+    adapter: GeneratedLiveSdk | None = None
+    try:
+        adapter = GeneratedLiveSdk(
+            api_client=api_client,
+            profile=profile,
+            guard=live_session.guard,
+            state=state,
+            receipt=receipt,
+            receipt_path=context.receipt_path,
+        )
+        yield adapter
+    finally:
+        generated_client_closed = False
+        try:
+            await api_client.close()
+            generated_client_closed = True
+        finally:
+            context.generated_client_closed = generated_client_closed
+            if adapter is not None and adapter.receipt is not None:
+                context.receipt = adapter.receipt
 
 
 def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
