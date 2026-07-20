@@ -6,7 +6,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .capture import ARRAY_ITEM, CaptureWriter, LiveCapture, RedactionHints
 from .errors import SafetyError
@@ -18,6 +18,9 @@ from .live.session import LiveOperation, SafeLiveSession, load_operation_contrac
 from .live.state import LiveStateStore
 from .paths import RepoPaths
 from .pipeline import compose_reviewed_bootstrap_candidate
+
+if TYPE_CHECKING:
+    from .evidence_candidate_writer import EvidenceCandidateWriteResult
 
 _EVIDENCE_OPERATION = "get_external_menu_by_id"
 _EVIDENCE_VERSIONS = frozenset({2, 3, 4})
@@ -294,6 +297,44 @@ def _validate_selection(operation: object, menu_version: object) -> tuple[str, i
     if type(menu_version) is not int or menu_version not in _EVIDENCE_VERSIONS:
         raise SafetyError("Evidence menu version must be exactly 2, 3, or 4")
     return _EVIDENCE_OPERATION, menu_version
+
+
+def build_evidence_candidate(
+    paths: RepoPaths,
+    *,
+    operation: str,
+) -> EvidenceCandidateWriteResult:
+    """Build one detached candidate from reviewed local evidence without accepting it."""
+
+    if type(paths) is not RepoPaths:
+        raise SafetyError("Evidence candidate build requires exact repository paths")
+    if type(operation) is not str or operation != _EVIDENCE_OPERATION:
+        raise SafetyError("Evidence operation is not explicitly approved")
+
+    from .evidence_analysis import analyze_menu_evidence
+    from .evidence_candidate_store import build_evidence_candidate_manifest
+    from .evidence_candidate_writer import write_evidence_candidate_tree
+    from .evidence_candidates import build_evidence_candidate_bundle
+    from .evidence_promotion import CaptureEvidenceReader
+    from .pipeline import compose_reviewed_evidence_base_candidate
+
+    effective_schema, _model_mappings = compose_reviewed_evidence_base_candidate(paths)
+    with LiveProcessLock(paths.state / "live.lock") as process_lock:
+        pairs = CaptureEvidenceReader(
+            paths.root,
+            effective_schema,
+            operation,
+            process_lock=process_lock,
+        ).read_menu_pairs()
+
+    analysis = analyze_menu_evidence(pairs, effective_schema)
+    bundle = build_evidence_candidate_bundle(
+        analysis=analysis,
+        pairs=pairs,
+        effective_schema=effective_schema,
+    )
+    manifest = build_evidence_candidate_manifest(bundle)
+    return write_evidence_candidate_tree(manifest, paths)
 
 
 async def capture_evidence(

@@ -6,6 +6,7 @@ import sys
 from collections.abc import Sequence
 
 from .errors import PipelineError
+from .paths import RepoPaths
 
 COMMANDS = (
     "bootstrap",
@@ -44,6 +45,13 @@ def build_parser() -> argparse.ArgumentParser:
                 type=int,
                 choices=(2, 3, 4),
             )
+        elif command == "promote-evidence":
+            command_parser.add_argument(
+                "--operation",
+                required=True,
+                choices=("get_external_menu_by_id",),
+            )
+            command_parser.add_argument("--accept", action="store_true")
     return parser
 
 
@@ -80,6 +88,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                     menu_version=args.menu_version,
                 )
             )
+        elif args.command == "promote-evidence":
+            from . import evidence, evidence_candidate_accept
+
+            paths = RepoPaths.discover()
+            if args.accept:
+                evidence_candidate_accept.accept_evidence_candidate(paths)
+                print("reviewed evidence accepted into tracked overlays and fixtures")
+            else:
+                evidence.build_evidence_candidate(paths, operation=args.operation)
+                print(
+                    "evidence candidate ready for review at build/evidence-candidates; "
+                    "tracked files unchanged"
+                )
         else:
             raise PipelineError(f"Command is not implemented yet: {args.command}")
     except PipelineError as error:
