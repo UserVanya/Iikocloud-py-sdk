@@ -10,6 +10,7 @@ import pytest
 
 from tools.openapi_pipeline.discovery import (
     DiscoveryDependencies,
+    _organizations,
     discover_read_targets,
 )
 from tools.openapi_pipeline.errors import SafetyError
@@ -67,10 +68,21 @@ def _dependencies(
     )
 
 
-def _payload(request: httpx.Request) -> Mapping[str, Any]:
+def _payload(request: httpx.Request) -> Mapping[str, Any] | None:
+    if not request.content:
+        return None
     value = json.loads(request.content)
     assert isinstance(value, dict)
     return value
+
+
+def test_organization_parser_preserves_documented_nullable_name() -> None:
+    response = httpx.Response(
+        200,
+        json={"organizations": [{"id": "org-1", "name": None}]},
+    )
+
+    assert _organizations(response)[0].name is None
 
 
 @pytest.mark.asyncio
@@ -78,7 +90,7 @@ async def test_discovery_makes_one_guarded_call_per_operation_and_sanitizes_outp
     tmp_path: Path,
 ) -> None:
     clock = [0.0]
-    observed: list[tuple[float, str, Mapping[str, Any]]] = []
+    observed: list[tuple[float, str, Mapping[str, Any] | None]] = []
 
     async def handler(request: httpx.Request) -> httpx.Response:
         observed.append((clock[0], request.url.path, _payload(request)))
@@ -146,7 +158,7 @@ async def test_discovery_makes_one_guarded_call_per_operation_and_sanitizes_outp
         (0.0, "/api/1/access_token", {"apiLogin": "private-login"}),
         (30.0, "/api/1/organizations", {}),
         (60.0, "/api/1/terminal_groups", {"organizationIds": ["org-1"]}),
-        (90.0, "/api/2/menu", {}),
+        (90.0, "/api/2/menu", None),
     ]
     assert result.to_dict() == {
         "organizations": [

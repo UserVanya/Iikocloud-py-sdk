@@ -340,7 +340,7 @@ class SafeLiveSession:
         operation_id: str,
         method: str,
         path: str,
-        payload: Mapping[str, Any],
+        payload: Mapping[str, Any] | None,
     ) -> httpx.Response:
         self._assert_usable()
         if self._access_token is None:
@@ -359,27 +359,35 @@ class SafeLiveSession:
             raise SafetyError(
                 f"Live operation {operation_id!r} endpoint does not match its contract"
             )
-        if not isinstance(payload, Mapping):
-            raise SafetyError("Live JSON payload must be an object")
-        try:
-            json.dumps(payload, allow_nan=False)
-        except (TypeError, ValueError):
-            raise SafetyError("Live JSON payload is not strictly serializable") from None
+        if payload is not None:
+            if not isinstance(payload, Mapping):
+                raise SafetyError("Live JSON payload must be an object or explicitly omitted")
+            try:
+                json.dumps(payload, allow_nan=False)
+            except (TypeError, ValueError):
+                raise SafetyError("Live JSON payload is not strictly serializable") from None
         if self._capture is not None:
+            if payload is None:
+                raise SafetyError("Live capture requires a JSON object payload")
             self._capture.assert_selected(
                 operation_id,
                 method=method,
                 path=safe_path,
             )
         await self._reserve(operation_id)
+        request_options: dict[str, Any] = {
+            "headers": {"Authorization": f"Bearer {self._access_token}"}
+        }
+        if payload is not None:
+            request_options["json"] = dict(payload)
         response = await self._request_once(
             method,
             safe_path,
-            json=dict(payload),
-            headers={"Authorization": f"Bearer {self._access_token}"},
+            **request_options,
         )
         self._record_response(operation_id, response)
         if self._capture is not None:
+            assert payload is not None
             self._capture_read(operation_id, payload, response)
         return response
 

@@ -45,7 +45,7 @@ class DiscoveredTerminalGroup:
 @dataclass(frozen=True, slots=True)
 class DiscoveredOrganization:
     id: str
-    name: str
+    name: str | None
     terminal_groups: tuple[DiscoveredTerminalGroup, ...]
 
 
@@ -171,13 +171,28 @@ def _named_target(value: object, *, label: str) -> DiscoveredNamedTarget:
     )
 
 
-def _organizations(response: httpx.Response) -> tuple[DiscoveredNamedTarget, ...]:
+def _organizations(response: httpx.Response) -> tuple[DiscoveredOrganization, ...]:
     root = _response_object(response, label="organization")
     items = _safe_list(root.get("organizations"), label="organizations")
-    result = tuple(_named_target(item, label="organization") for item in items)
+    result: list[DiscoveredOrganization] = []
+    for item in items:
+        if type(item) is not dict or "name" not in item:
+            raise SafetyError("organization must be an object with a name")
+        raw_name = item["name"]
+        result.append(
+            DiscoveredOrganization(
+                id=_safe_id(item.get("id"), label="organization ID"),
+                name=(
+                    None
+                    if raw_name is None
+                    else _safe_name(raw_name, label="organization name")
+                ),
+                terminal_groups=(),
+            )
+        )
     if len({item.id for item in result}) != len(result):
         raise SafetyError("organization IDs must be unique")
-    return result
+    return tuple(result)
 
 
 def _terminal_groups(
@@ -305,7 +320,7 @@ async def discover_read_targets(
                 "get_external_menus",
                 approved["get_external_menus"].method,
                 approved["get_external_menus"].path,
-                {},
+                None,
             )
             menus = _external_menus(menu_response)
             return DiscoveryResult(
