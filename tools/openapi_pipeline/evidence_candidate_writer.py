@@ -22,7 +22,7 @@ from collections.abc import Mapping
 from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
-from types import MappingProxyType
+from types import MappingProxyType, TracebackType
 from typing import Any, cast
 
 import yaml
@@ -108,6 +108,195 @@ class _DestinationExists(Exception):
     pass
 
 
+class _EvidenceCandidateProcessLockBinding:
+    """Opaque identity for one process-local lock acquisition."""
+
+
+def _new_process_lock_binding_token() -> object:
+    return _EvidenceCandidateProcessLockBinding()
+
+
+class EvidenceCandidateProcessLock:
+    """Nonblocking cooperative lock for the canonical evidence-candidate tree.
+
+    All official candidate writers and acceptors must hold this lock. A malicious
+    non-cooperating process running as the repository owner remains out of scope.
+    """
+
+    def __init__(self, paths: RepoPaths) -> None:
+        repository_root = _validated_repository_path(paths)
+        self._repository_root = repository_root
+        self._path = repository_root / "build" / _LOCK_FILE
+        self._repository_fd: int | None = None
+        self._build_fd: int | None = None
+        self._lock_fd: int | None = None
+        self._owner_pid: int | None = None
+        self._binding_token: object | None = None
+
+    @property
+    def path(self) -> Path:
+        """Return the canonical persistent lock path."""
+        return self._path
+
+    @property
+    def held(self) -> bool:
+        """Whether this acquisition is active in the current process."""
+        return self._lock_fd is not None and self._owner_pid == os.getpid()
+
+    def acquire(self) -> EvidenceCandidateProcessLock:
+        """Acquire the fixed lock without waiting."""
+        if any(
+            descriptor is not None
+            for descriptor in (self._repository_fd, self._build_fd, self._lock_fd)
+        ):
+            raise SafetyError("Evidence candidate process lock is already acquired")
+
+        repository_fd: int | None = None
+        build_fd: int | None = None
+        lock_fd: int | None = None
+        try:
+            repository_fd = _open_repository_root(self._repository_root)
+            build_fd = _open_build(repository_fd)
+            lock_fd = _open_and_lock_writer(build_fd)
+            binding_token = _new_process_lock_binding_token()
+            self._repository_fd = repository_fd
+            self._build_fd = build_fd
+            self._lock_fd = lock_fd
+            self._owner_pid = os.getpid()
+            self._binding_token = binding_token
+            return self
+        except BaseException:
+            _close_fd(build_fd)
+            _close_fd(repository_fd)
+            _close_fd(lock_fd)
+            raise
+
+    def release(self) -> None:
+        """Invalidate this acquisition and close the lock descriptor last."""
+        repository_fd = self._repository_fd
+        build_fd = self._build_fd
+        lock_fd = self._lock_fd
+        self._repository_fd = None
+        self._build_fd = None
+        self._lock_fd = None
+        self._owner_pid = None
+        self._binding_token = None
+        _close_fd(build_fd)
+        _close_fd(repository_fd)
+        _close_fd(lock_fd)
+
+    def capture_binding(self) -> object:
+        """Capture an opaque token for the current acquisition and path bindings."""
+        token = self._binding_token
+        self._assert_current_binding(token)
+        assert token is not None
+        return token
+
+    def assert_binding(self, token: object) -> None:
+        """Require ``token`` to identify this still-current acquisition."""
+        self._assert_current_binding(token)
+
+    def assert_no_staging_residue(self) -> None:
+        """Fail closed if the fixed hidden candidate staging prefix is present."""
+        token = self.capture_binding()
+        _repository_fd, build_fd = self._bound_descriptors(token)
+        _reject_staging_residue(build_fd)
+        self.assert_binding(token)
+
+    def _assert_current_binding(self, token: object | None) -> None:
+        if (
+            type(token) is not _EvidenceCandidateProcessLockBinding
+            or token is not self._binding_token
+            or not self.held
+        ):
+            raise SafetyError("Evidence candidate process lock binding is not current")
+        repository_fd = self._repository_fd
+        build_fd = self._build_fd
+        lock_fd = self._lock_fd
+        assert repository_fd is not None
+        assert build_fd is not None
+        assert lock_fd is not None
+
+        reopened_repository_fd: int | None = None
+        reopened_build_fd: int | None = None
+        try:
+            reopened_repository_fd = _open_repository_root(self._repository_root)
+            if not _same_identity_fds(reopened_repository_fd, repository_fd):
+                raise SafetyError("Evidence repository binding changed while lock was held")
+            reopened_build_fd = _open_build(reopened_repository_fd)
+            if not _same_identity_fds(reopened_build_fd, build_fd):
+                raise SafetyError("Evidence build binding changed while lock was held")
+            _revalidate_writer_lock_binding(build_fd, lock_fd)
+            _revalidate_writer_lock_binding(reopened_build_fd, lock_fd)
+        finally:
+            _close_fd(reopened_build_fd)
+            _close_fd(reopened_repository_fd)
+
+    def _bound_descriptors(self, token: object) -> tuple[int, int]:
+        self.assert_binding(token)
+        repository_fd = self._repository_fd
+        build_fd = self._build_fd
+        assert repository_fd is not None
+        assert build_fd is not None
+        return repository_fd, build_fd
+
+    def __enter__(self) -> EvidenceCandidateProcessLock:
+        return self.acquire()
+
+    def __exit__(
+        self,
+        _exception_type: type[BaseException] | None,
+        _exception: BaseException | None,
+        _traceback: TracebackType | None,
+    ) -> None:
+        self.release()
+
+
+def assert_evidence_candidate_tree_matches(
+    result: EvidenceCandidateManifestResult,
+    paths: RepoPaths,
+    *,
+    process_lock: EvidenceCandidateProcessLock,
+) -> None:
+    """Require the fixed candidate tree to equal a freshly supplied D1 snapshot.
+
+    The caller must already hold the exact canonical process lock. This check is
+    read-only: it neither creates missing state nor repairs or removes residue.
+    Disk manifest digests are consistency metadata, never authority over the
+    detached expected bytes supplied by ``result``.
+    """
+
+    tree = _snapshot_candidate_tree(result)
+    repository_root = _validated_repository_path(paths)
+    if type(process_lock) is not EvidenceCandidateProcessLock:
+        raise SafetyError("Evidence candidate matcher requires an exact process lock")
+    expected_lock_path = repository_root / "build" / _LOCK_FILE
+    if process_lock.path != expected_lock_path:
+        raise SafetyError("Evidence candidate process lock is for another canonical repository")
+
+    binding = process_lock.capture_binding()
+    process_lock.assert_no_staging_residue()
+    repository_fd, build_fd = process_lock._bound_descriptors(binding)
+    candidate_fd: int | None = None
+    try:
+        candidate_fd = _open_required_public_directory(
+            build_fd,
+            _CANDIDATE_DIRECTORY,
+            label="Evidence candidate root",
+        )
+        _validate_exact_tree(candidate_fd, tree.files)
+        _revalidate_published_candidate(
+            repository_root,
+            repository_fd=repository_fd,
+            build_fd=build_fd,
+            candidate_fd=candidate_fd,
+            files=tree.files,
+        )
+        process_lock.assert_binding(binding)
+    finally:
+        _close_fd(candidate_fd)
+
+
 def write_evidence_candidate_tree(
     result: EvidenceCandidateManifestResult,
     paths: RepoPaths,
@@ -136,86 +325,83 @@ def write_evidence_candidate_tree(
         changed=True,
     )
 
-    repository_fd: int | None = None
-    build_fd: int | None = None
-    lock_fd: int | None = None
     candidate_fd: int | None = None
     directory_fds: dict[str, int] = {}
-    try:
-        repository_fd = _open_repository_root(repository_root)
-        build_fd = _open_build(repository_fd)
-        lock_fd = _open_and_lock_writer(build_fd)
-        _reject_staging_residue(build_fd)
-        candidate_fd = _open_optional_public_directory(
-            build_fd,
-            _CANDIDATE_DIRECTORY,
-            label="Evidence candidate root",
-        )
-        if candidate_fd is not None:
-            _validate_exact_tree(candidate_fd, tree.files)
-            _revalidate_published_candidate(
-                repository_root,
-                repository_fd=repository_fd,
-                build_fd=build_fd,
-                candidate_fd=candidate_fd,
-                files=tree.files,
+    with EvidenceCandidateProcessLock(paths) as process_lock:
+        binding = process_lock.capture_binding()
+        process_lock.assert_no_staging_residue()
+        repository_fd, build_fd = process_lock._bound_descriptors(binding)
+        try:
+            candidate_fd = _open_optional_public_directory(
+                build_fd,
+                _CANDIDATE_DIRECTORY,
+                label="Evidence candidate root",
             )
-            return _write_result_with_changed(output, changed=False)
+            if candidate_fd is not None:
+                _validate_exact_tree(candidate_fd, tree.files)
+                _revalidate_published_candidate(
+                    repository_root,
+                    repository_fd=repository_fd,
+                    build_fd=build_fd,
+                    candidate_fd=candidate_fd,
+                    files=tree.files,
+                )
+                process_lock.assert_binding(binding)
+                return _write_result_with_changed(output, changed=False)
 
-        staging_name, staging_fd = _create_staging_directory(build_fd)
-        try:
-            _register_directory_fd(directory_fds, "", staging_fd)
-        except BaseException:
-            _close_fd(staging_fd)
-            raise
-        _create_staging_tree(directory_fds, tree.files)
-        _validate_exact_tree(staging_fd, tree.files)
-        _revalidate_directory_binding(
-            build_fd,
-            staging_name,
-            staging_fd,
-            label="Evidence candidate staging root",
-        )
-        try:
-            _rename_directory_noreplace(
+            staging_name, staging_fd = _create_staging_directory(build_fd)
+            try:
+                _register_directory_fd(directory_fds, "", staging_fd)
+            except BaseException:
+                _close_fd(staging_fd)
+                raise
+            _create_staging_tree(directory_fds, tree.files)
+            _validate_exact_tree(staging_fd, tree.files)
+            _revalidate_directory_binding(
                 build_fd,
                 staging_name,
-                _CANDIDATE_DIRECTORY,
-                renameat2,
+                staging_fd,
+                label="Evidence candidate staging root",
             )
-        except _DestinationExists:
-            candidate_fd = _open_required_public_directory(
-                build_fd,
-                _CANDIDATE_DIRECTORY,
-                label="Concurrent evidence candidate root",
-            )
-            _validate_exact_tree(candidate_fd, tree.files)
+            try:
+                _rename_directory_noreplace(
+                    build_fd,
+                    staging_name,
+                    _CANDIDATE_DIRECTORY,
+                    renameat2,
+                )
+            except _DestinationExists:
+                candidate_fd = _open_required_public_directory(
+                    build_fd,
+                    _CANDIDATE_DIRECTORY,
+                    label="Concurrent evidence candidate root",
+                )
+                _validate_exact_tree(candidate_fd, tree.files)
+                _revalidate_published_candidate(
+                    repository_root,
+                    repository_fd=repository_fd,
+                    build_fd=build_fd,
+                    candidate_fd=candidate_fd,
+                    files=tree.files,
+                )
+                process_lock.assert_binding(binding)
+                raise SafetyError(
+                    "Concurrent evidence candidate publication preserved staging residue"
+                ) from None
+
+            _fsync_fd(build_fd)
             _revalidate_published_candidate(
                 repository_root,
                 repository_fd=repository_fd,
                 build_fd=build_fd,
-                candidate_fd=candidate_fd,
+                candidate_fd=staging_fd,
                 files=tree.files,
             )
-            raise SafetyError(
-                "Concurrent evidence candidate publication preserved staging residue"
-            ) from None
-
-        _fsync_fd(build_fd)
-        _revalidate_published_candidate(
-            repository_root,
-            repository_fd=repository_fd,
-            build_fd=build_fd,
-            candidate_fd=staging_fd,
-            files=tree.files,
-        )
-        return output
-    finally:
-        _close_directory_fds(directory_fds)
-        _close_fd(candidate_fd)
-        _close_fd(build_fd)
-        _close_fd(repository_fd)
-        _close_fd(lock_fd)
+            process_lock.assert_binding(binding)
+            return output
+        finally:
+            _close_directory_fds(directory_fds)
+            _close_fd(candidate_fd)
 
 
 def _write_result_with_changed(

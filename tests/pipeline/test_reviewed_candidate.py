@@ -8,6 +8,7 @@ from typing import Any
 import pytest
 import yaml
 
+import tools.openapi_pipeline.pipeline as pipeline_module
 from tools.openapi_pipeline.capture import RedactionHints
 from tools.openapi_pipeline.errors import PipelineError
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
@@ -85,6 +86,118 @@ def _reviewed_repo(root: Path) -> RepoPaths:
     _write_yaml(root / "build/bootstrap/model-collisions.yaml", {"collisions": {}})
     _write_yaml(root / "openapi/model-name-overrides.yaml", {"models": {}})
     return RepoPaths(root)
+
+
+def _reviewed_repo_with_all_semantic_overlays(root: Path) -> RepoPaths:
+    paths = _reviewed_repo(root)
+    raw = _raw_document()
+    contracts = yaml.safe_load(
+        (root / "openapi/overlays/contracts.overlay.yaml").read_text(encoding="utf-8")
+    )
+    after_contracts = apply_overlay(raw, contracts)
+    types = yaml.safe_load(
+        (root / "build/bootstrap/types.overlay.yaml").read_text(encoding="utf-8")
+    )
+    after_types = apply_overlay(after_contracts, types)
+    extra = {
+        "overlay": "1.1.0",
+        "info": {"title": "synthetic", "version": "1"},
+        "actions": [
+            {
+                "target": "$.info",
+                "update": {"x-other-reviewed": True},
+                "x-iiko-sdk-guard": {
+                    "issue": "synthetic-other-overlay",
+                    "expected-matches": 1,
+                    "expected-sha256": sha256_bytes(canonical_json_bytes(after_types["info"])),
+                },
+            }
+        ],
+    }
+    after_extra = apply_overlay(after_types, extra)
+    operations = _guarded_root_update(
+        after_extra,
+        {"x-evidence-operations": True},
+    )
+    after_operations = apply_overlay(after_extra, operations)
+    polymorphism = _guarded_root_update(
+        after_operations,
+        {"x-evidence-polymorphism": True},
+    )
+    _write_yaml(root / "openapi/overlays/operations-extra.overlay.yaml", extra)
+    _write_yaml(root / "openapi/overlays/operations.overlay.yaml", operations)
+    _write_yaml(root / "openapi/overlays/polymorphism.overlay.yaml", polymorphism)
+    return paths
+
+
+def test_reviewed_evidence_base_excludes_exactly_two_evidence_owned_overlays(
+    tmp_path: Path,
+) -> None:
+    paths = _reviewed_repo_with_all_semantic_overlays(tmp_path)
+    composer = getattr(pipeline_module, "compose_reviewed_evidence_base_candidate", None)
+    assert callable(composer)
+
+    effective, mappings = composer(paths)
+    bootstrap, bootstrap_mappings = compose_reviewed_bootstrap_candidate(paths)
+
+    assert effective["x-stage-contracts"] is True
+    assert effective["info"]["x-other-reviewed"] is True
+    assert "x-evidence-operations" not in effective
+    assert "x-evidence-polymorphism" not in effective
+    assert effective["components"]["schemas"]["Raw.Bool"]["type"] == "boolean"
+    assert effective["paths"]["/api/2/menu/by_id"]["post"]["operationId"] == "menu_by_id"
+    assert mappings == {"Raw.Bool": "Bool"}
+    assert bootstrap["x-evidence-operations"] is True
+    assert bootstrap["x-evidence-polymorphism"] is True
+    assert bootstrap["info"]["x-other-reviewed"] is True
+    assert bootstrap_mappings == mappings
+
+
+def test_reviewed_evidence_base_is_identical_before_and_after_evidence_accept(
+    tmp_path: Path,
+) -> None:
+    paths = _reviewed_repo_with_all_semantic_overlays(tmp_path)
+    overlay_root = paths.root / "openapi/overlays"
+    candidate_root = paths.build / "evidence-candidates/openapi/overlays"
+    candidate_root.mkdir(parents=True)
+    evidence_names = ("operations.overlay.yaml", "polymorphism.overlay.yaml")
+    for name in evidence_names:
+        (overlay_root / name).replace(candidate_root / name)
+
+    before_accept, before_mappings = pipeline_module.compose_reviewed_evidence_base_candidate(
+        paths
+    )
+    bootstrap_before, _ = compose_reviewed_bootstrap_candidate(paths)
+    assert "x-evidence-operations" not in bootstrap_before
+    assert "x-evidence-polymorphism" not in bootstrap_before
+
+    for name in evidence_names:
+        (candidate_root / name).replace(overlay_root / name)
+    after_accept, after_mappings = pipeline_module.compose_reviewed_evidence_base_candidate(paths)
+    bootstrap_after, _ = compose_reviewed_bootstrap_candidate(paths)
+
+    assert after_accept == before_accept
+    assert after_mappings == before_mappings
+    assert bootstrap_after["x-evidence-operations"] is True
+    assert bootstrap_after["x-evidence-polymorphism"] is True
+
+
+def test_reviewed_evidence_base_ignores_effective_cache_and_exposes_raw_drift(
+    tmp_path: Path,
+) -> None:
+    paths = _reviewed_repo_with_all_semantic_overlays(tmp_path)
+    effective_cache = paths.effective
+    effective_cache.parent.mkdir(parents=True, exist_ok=True)
+    effective_cache.write_bytes(canonical_json_bytes({"x-untrusted-effective-cache": True}))
+
+    effective, _mappings = pipeline_module.compose_reviewed_evidence_base_candidate(paths)
+
+    assert "x-untrusted-effective-cache" not in effective
+    raw = _raw_document()
+    raw["components"]["schemas"]["Raw.Bool"]["type"] = "string"
+    paths.candidate.write_bytes(canonical_json_bytes(raw))
+    with pytest.raises(PipelineError, match="type.*candidate.*raw|raw.*type"):
+        pipeline_module.compose_reviewed_evidence_base_candidate(paths)
 
 
 def test_reviewed_candidate_applies_stages_without_accepting_or_writing(tmp_path: Path) -> None:

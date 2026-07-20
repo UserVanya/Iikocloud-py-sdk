@@ -45,6 +45,7 @@ from .validate import ensure_valid_effective_schema
 UPSTREAM_SCHEMA_URL = "https://api-ru.iiko.services/api-docs/docs"
 _MAX_REVIEWED_JSON_BYTES = 32 * 1024 * 1024
 _MAX_REVIEWED_YAML_BYTES = 8 * 1024 * 1024
+_EVIDENCE_OWNED_OVERLAY_NAMES = frozenset({"operations.overlay.yaml", "polymorphism.overlay.yaml"})
 _OPERATION_VERBS = {
     "add",
     "authenticate",
@@ -752,6 +753,30 @@ def compose_reviewed_bootstrap_candidate(
     paths: RepoPaths,
 ) -> tuple[dict[str, Any], dict[str, str]]:
     """Compose a reviewed pre-accept candidate without fetching, writing, or validating it."""
+    return _compose_reviewed_candidate(paths, excluded_semantic_overlays=frozenset())
+
+
+def compose_reviewed_evidence_base_candidate(
+    paths: RepoPaths,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    """Compose the authoritative base before applying evidence-owned candidates.
+
+    The raw upstream candidate, reviewed bootstrap inputs, contracts overlay, and
+    every non-evidence semantic overlay remain authoritative. The two tracked
+    evidence-owned overlays are deliberately excluded whether or not they have
+    already been accepted. ``build/openapi/effective.json`` is never read.
+    """
+    return _compose_reviewed_candidate(
+        paths,
+        excluded_semantic_overlays=_EVIDENCE_OWNED_OVERLAY_NAMES,
+    )
+
+
+def _compose_reviewed_candidate(
+    paths: RepoPaths,
+    *,
+    excluded_semantic_overlays: frozenset[str],
+) -> tuple[dict[str, Any], dict[str, str]]:
     root = paths.root
     bootstrap_root = paths.build / "bootstrap"
     raw_body = _reviewed_regular_bytes(
@@ -814,7 +839,9 @@ def compose_reviewed_bootstrap_candidate(
             overlay_root,
             label="Reviewed semantic overlay directory",
         )
-        if name.endswith(".overlay.yaml") and name != "types.overlay.yaml"
+        if name.endswith(".overlay.yaml")
+        and name != "types.overlay.yaml"
+        and name not in excluded_semantic_overlays
     )
     if "contracts.overlay.yaml" not in overlay_names:
         raise PipelineError("Reviewed contracts overlay is missing")

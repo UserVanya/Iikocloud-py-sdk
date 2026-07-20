@@ -235,6 +235,656 @@ def _assert_complete_staging(
     } == set(_expected_files(result))
 
 
+def test_public_process_lock_context_exposes_canonical_path_and_lifecycle(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock_type = getattr(writer_module, "EvidenceCandidateProcessLock", None)
+    assert process_lock_type is not None
+    process_lock = process_lock_type(paths)
+
+    assert process_lock.path == paths.build / LOCK_NAME
+    assert process_lock.held is False
+    with process_lock as entered:
+        assert entered is process_lock
+        assert process_lock.held is True
+        assert process_lock.path == paths.build / LOCK_NAME
+        assert _assert_lock_only_build(paths) == process_lock.path
+    assert process_lock.held is False
+
+
+def test_public_process_lock_acquisition_is_nonblocking(tmp_path: Path) -> None:
+    paths = _repository(tmp_path)
+    first = writer_module.EvidenceCandidateProcessLock(paths)
+    second = writer_module.EvidenceCandidateProcessLock(paths)
+
+    with first:
+        with pytest.raises(
+            SafetyError,
+            match="^Evidence candidate writer lock is already held$",
+        ):
+            second.acquire()
+        assert first.held is True
+        assert second.held is False
+    assert first.held is False
+
+
+def test_public_process_lock_binding_token_and_residue_gate(tmp_path: Path) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    capture_binding = getattr(process_lock, "capture_binding", None)
+    assert callable(capture_binding)
+    assert callable(getattr(process_lock, "assert_binding", None))
+    assert callable(getattr(process_lock, "assert_no_staging_residue", None))
+
+    with process_lock:
+        token = capture_binding()
+        process_lock.assert_binding(token)
+        process_lock.assert_no_staging_residue()
+        residue = paths.build / f"{STAGING_PREFIX}operator-review"
+        residue.mkdir(mode=0o755)
+        with pytest.raises(
+            SafetyError,
+            match="^Evidence candidate staging residue requires operator resolution$",
+        ):
+            process_lock.assert_no_staging_residue()
+        process_lock.assert_binding(token)
+
+
+def test_public_process_lock_release_and_reacquire_invalidate_old_token(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    process_lock.acquire()
+    old_token = process_lock.capture_binding()
+
+    process_lock.release()
+    with pytest.raises(SafetyError, match="binding|held|acquisition"):
+        process_lock.assert_binding(old_token)
+
+    process_lock.acquire()
+    try:
+        new_token = process_lock.capture_binding()
+        assert new_token is not old_token
+        with pytest.raises(SafetyError, match="binding|held|acquisition"):
+            process_lock.assert_binding(old_token)
+        process_lock.assert_binding(new_token)
+    finally:
+        process_lock.release()
+
+
+@pytest.mark.parametrize("binding", ["repository", "build", "lock"])
+def test_public_process_lock_binding_token_rejects_rebound_canonical_name(
+    tmp_path: Path,
+    binding: str,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    process_lock.acquire()
+    token = process_lock.capture_binding()
+    try:
+        if binding == "repository":
+            displaced = tmp_path / "displaced-repository"
+            paths.root.rename(displaced)
+            paths.root.mkdir(mode=0o755)
+            (paths.root / "pyproject.toml").write_text(
+                "[project]\nname='replacement'\n",
+                encoding="utf-8",
+            )
+            paths.build.mkdir(mode=0o755)
+        elif binding == "build":
+            displaced = paths.root / "displaced-build"
+            paths.build.rename(displaced)
+            paths.build.mkdir(mode=0o755)
+        else:
+            displaced = paths.build / "displaced-lock"
+            process_lock.path.rename(displaced)
+            process_lock.path.write_bytes(b"")
+            process_lock.path.chmod(0o644)
+
+        with pytest.raises(SafetyError, match="binding|changed|lock"):
+            process_lock.assert_binding(token)
+    finally:
+        process_lock.release()
+
+
+@pytest.mark.skipif(not hasattr(os, "fork"), reason="process binding requires POSIX fork")
+def test_public_process_lock_binding_is_invalid_in_forked_child(tmp_path: Path) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    with process_lock:
+        token = process_lock.capture_binding()
+        child_pid = os.fork()
+        if child_pid == 0:
+            exit_code = 3
+            try:
+                if process_lock.held:
+                    exit_code = 2
+                else:
+                    with pytest.raises(SafetyError, match="process|binding|held|acquisition"):
+                        process_lock.assert_binding(token)
+                    exit_code = 0
+            finally:
+                os._exit(exit_code)
+        waited_pid, status = os.waitpid(child_pid, 0)
+        assert waited_pid == child_pid
+        assert os.waitstatus_to_exitcode(status) == 0
+        process_lock.assert_binding(token)
+
+
+def test_public_process_lock_memory_error_during_binding_allocation_closes_fds(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    real_open = writer_module.os.open
+    opened: list[int] = []
+
+    def track_open(*args: Any, **kwargs: Any) -> int:
+        descriptor = real_open(*args, **kwargs)
+        opened.append(descriptor)
+        return descriptor
+
+    def fail_binding_allocation() -> object:
+        raise MemoryError(SENSITIVE_MARKER)
+
+    assert hasattr(writer_module, "_new_process_lock_binding_token")
+    monkeypatch.setattr(writer_module.os, "open", track_open)
+    monkeypatch.setattr(
+        writer_module,
+        "_new_process_lock_binding_token",
+        fail_binding_allocation,
+    )
+
+    with pytest.raises(MemoryError) as caught:
+        process_lock.acquire()
+
+    assert caught.value.args == (SENSITIVE_MARKER,)
+    assert process_lock.held is False
+    assert opened
+    for descriptor in opened:
+        with pytest.raises(OSError):
+            os.fstat(descriptor)
+
+
+def test_writer_uses_public_process_lock_and_its_residue_gate(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock_type = writer_module.EvidenceCandidateProcessLock
+    real_acquire = process_lock_type.acquire
+    real_release = process_lock_type.release
+    real_residue_gate = process_lock_type.assert_no_staging_residue
+    events: list[str] = []
+
+    def observe_acquire(self: Any) -> Any:
+        events.append("acquire")
+        return real_acquire(self)
+
+    def observe_residue_gate(self: Any) -> None:
+        events.append("residue")
+        real_residue_gate(self)
+
+    def observe_release(self: Any) -> None:
+        events.append("release")
+        real_release(self)
+
+    monkeypatch.setattr(process_lock_type, "acquire", observe_acquire)
+    monkeypatch.setattr(
+        process_lock_type,
+        "assert_no_staging_residue",
+        observe_residue_gate,
+    )
+    monkeypatch.setattr(process_lock_type, "release", observe_release)
+
+    write_evidence_candidate_tree(_result(), paths)
+
+    assert events == ["acquire", "residue", "release"]
+
+
+def _filesystem_snapshot(root: Path) -> dict[str, tuple[tuple[int, ...], bytes | None]]:
+    snapshot: dict[str, tuple[tuple[int, ...], bytes | None]] = {}
+    for path in (root, *root.rglob("*")):
+        metadata = os.lstat(path)
+        relative = path.relative_to(root).as_posix() or "."
+        stable = (
+            metadata.st_dev,
+            metadata.st_ino,
+            metadata.st_mode,
+            metadata.st_uid,
+            metadata.st_nlink,
+            metadata.st_size,
+            metadata.st_mtime_ns,
+            metadata.st_ctime_ns,
+        )
+        body = path.read_bytes() if stat.S_ISREG(metadata.st_mode) else None
+        snapshot[relative] = (stable, body)
+    return snapshot
+
+
+def test_candidate_matcher_is_read_only_and_compares_the_exact_snapshot(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    written = write_evidence_candidate_tree(result, paths)
+    matcher = getattr(writer_module, "assert_evidence_candidate_tree_matches", None)
+    assert callable(matcher)
+
+    with writer_module.EvidenceCandidateProcessLock(paths) as process_lock:
+        before = _filesystem_snapshot(paths.root)
+        assert matcher(result, paths, process_lock=process_lock) is None
+        after = _filesystem_snapshot(paths.root)
+
+    assert after == before
+    assert written.root == paths.build / "evidence-candidates"
+
+
+@pytest.mark.parametrize("mutation", ["tamper", "extra", "missing"])
+def test_candidate_matcher_rejects_inexact_tree_without_repair(
+    tmp_path: Path,
+    mutation: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    root = _write_tree_directly(paths, result)
+    if mutation == "tamper":
+        target = root / EVIDENCE_CANDIDATE_PAYLOAD_PATHS[0]
+        target.write_bytes(target.read_bytes() + b"\n")
+        target.chmod(0o644)
+    elif mutation == "extra":
+        target = root / "unexpected.txt"
+        target.write_bytes(b"untouched")
+        target.chmod(0o644)
+    else:
+        target = root / EVIDENCE_CANDIDATE_PAYLOAD_PATHS[-1]
+        target.unlink()
+    mutated_tree = _filesystem_snapshot(root)
+
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(SafetyError, match="tree|entry|differs|missing|partial"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+    assert _filesystem_snapshot(root) == mutated_tree
+
+
+@pytest.mark.parametrize("unsafe_kind", ["mode", "owner", "hardlink"])
+def test_candidate_matcher_rejects_unsafe_candidate_metadata(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    unsafe_kind: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    root = _write_tree_directly(paths, result)
+    target = root / "candidate-manifest.json"
+    if unsafe_kind == "mode":
+        target.chmod(0o600)
+    elif unsafe_kind == "hardlink":
+        (tmp_path / "manifest-hardlink").hardlink_to(target)
+    else:
+        real_stat = writer_module._safe_stat_at
+
+        def report_foreign_candidate_owner(
+            parent_fd: int,
+            name: str,
+            *,
+            message: str,
+        ) -> os.stat_result:
+            metadata = real_stat(parent_fd, name, message=message)
+            if name != "candidate-manifest.json":
+                return metadata
+            values = list(metadata)
+            values[4] = metadata.st_uid + 1
+            return os.stat_result(values)
+
+        monkeypatch.setattr(
+            writer_module,
+            "_safe_stat_at",
+            report_foreign_candidate_owner,
+        )
+
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(SafetyError, match="mode|owned|owner|hard link"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+
+@pytest.mark.parametrize("unsafe_kind", ["symlink", "fifo", "socket"])
+def test_candidate_matcher_rejects_special_candidate_file_without_blocking(
+    tmp_path: Path,
+    unsafe_kind: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    root = _write_tree_directly(paths, result)
+    target = root / "candidate-manifest.json"
+    target.unlink()
+    socket_handle: socket.socket | None = None
+    if unsafe_kind == "symlink":
+        outside = tmp_path / "outside-manifest"
+        outside.write_bytes(result.canonical_json_bytes)
+        target.symlink_to(outside)
+    elif unsafe_kind == "fifo":
+        os.mkfifo(target, mode=0o644)
+    else:
+        socket_handle = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        previous_cwd = Path.cwd()
+        try:
+            os.chdir(root)
+            socket_handle.bind(target.name)
+        finally:
+            os.chdir(previous_cwd)
+
+    try:
+        with (
+            writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+            pytest.raises(SafetyError, match="regular|symlink|unsafe|file"),
+        ):
+            writer_module.assert_evidence_candidate_tree_matches(
+                result,
+                paths,
+                process_lock=process_lock,
+            )
+    finally:
+        if socket_handle is not None:
+            socket_handle.close()
+
+
+def test_candidate_matcher_rejects_residue_before_reading_candidate(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    _write_tree_directly(paths, result)
+    residue = paths.build / f"{STAGING_PREFIX}operator-review"
+    residue.mkdir(mode=0o755)
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> None:
+        raise AssertionError("candidate tree must not be read before the residue gate")
+
+    monkeypatch.setattr(writer_module, "_validate_exact_tree", forbidden)
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(
+            SafetyError,
+            match="^Evidence candidate staging residue requires operator resolution$",
+        ),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+
+def test_candidate_matcher_requires_held_lock_for_the_same_canonical_repository(
+    tmp_path: Path,
+) -> None:
+    expected_parent = tmp_path / "expected"
+    other_parent = tmp_path / "other"
+    expected_parent.mkdir()
+    other_parent.mkdir()
+    paths = _repository(expected_parent)
+    other_paths = _repository(other_parent)
+    result = _result()
+    _write_tree_directly(paths, result)
+    released = writer_module.EvidenceCandidateProcessLock(paths)
+
+    with pytest.raises(SafetyError, match="held|binding|acquisition"):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=released,
+        )
+
+    with (
+        writer_module.EvidenceCandidateProcessLock(other_paths) as wrong_lock,
+        pytest.raises(SafetyError, match="canonical|repository|lock"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=wrong_lock,
+        )
+
+
+def test_candidate_matcher_requires_exact_process_lock_type(tmp_path: Path) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    _write_tree_directly(paths, result)
+
+    class ProcessLockSubclass(writer_module.EvidenceCandidateProcessLock):
+        pass
+
+    with (
+        ProcessLockSubclass(paths) as process_lock,
+        pytest.raises(SafetyError, match="exact.*process lock|process lock.*exact"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+
+@pytest.mark.parametrize("forged_kind", ["result", "paths"])
+def test_candidate_matcher_requires_exact_result_and_paths_types(
+    tmp_path: Path,
+    forged_kind: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    _write_tree_directly(paths, result)
+
+    class ResultSubclass(EvidenceCandidateManifestResult):
+        pass
+
+    class PathsSubclass(RepoPaths):
+        pass
+
+    supplied_result: EvidenceCandidateManifestResult = result
+    supplied_paths: RepoPaths = paths
+    if forged_kind == "result":
+        supplied_result = ResultSubclass(
+            manifest=result.manifest,
+            canonical_payloads=result.canonical_payloads,
+            canonical_json_bytes=result.canonical_json_bytes,
+            sha256=result.sha256,
+        )
+    else:
+        supplied_paths = PathsSubclass(paths.root)
+
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(SafetyError, match="exact.*manifest result|exact.*repository paths"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            supplied_result,
+            supplied_paths,
+            process_lock=process_lock,
+        )
+
+
+def test_candidate_matcher_runtime_type_hints_are_exact() -> None:
+    hints = get_type_hints(writer_module.assert_evidence_candidate_tree_matches)
+
+    assert hints == {
+        "result": EvidenceCandidateManifestResult,
+        "paths": RepoPaths,
+        "process_lock": writer_module.EvidenceCandidateProcessLock,
+        "return": type(None),
+    }
+
+
+def test_candidate_matcher_requires_the_same_current_acquisition_token(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    _write_tree_directly(paths, result)
+    process_lock_type = writer_module.EvidenceCandidateProcessLock
+    real_capture = process_lock_type.capture_binding
+    calls = 0
+
+    def stale_capture(self: Any) -> object:
+        nonlocal calls
+        token = real_capture(self)
+        calls += 1
+        if calls == 1:
+            self.release()
+            self.acquire()
+        return token
+
+    monkeypatch.setattr(process_lock_type, "capture_binding", stale_capture)
+    with (
+        process_lock_type(paths) as process_lock,
+        pytest.raises(SafetyError, match="binding|current|acquisition"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+
+def test_candidate_matcher_reads_every_file_nofollow_nonblocking_and_bounded(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    _write_tree_directly(paths, result)
+    real_open = writer_module.os.open
+    real_read = writer_module.os.read
+    flags: list[int] = []
+    read_sizes: list[int] = []
+    expected_files = _expected_files(result)
+
+    def observe_open(*args: Any, **kwargs: Any) -> int:
+        descriptor = real_open(*args, **kwargs)
+        target = os.readlink(f"/proc/self/fd/{descriptor}")
+        if "/evidence-candidates/" in target and target.endswith((".json", ".yaml")):
+            flags.append(args[1])
+        return descriptor
+
+    def observe_read(descriptor: int, size: int) -> bytes:
+        target = os.readlink(f"/proc/self/fd/{descriptor}")
+        if "/evidence-candidates/" in target:
+            relative = target.split("/evidence-candidates/", maxsplit=1)[1]
+            assert size <= len(expected_files[relative]) + 1
+            read_sizes.append(size)
+        return real_read(descriptor, size)
+
+    monkeypatch.setattr(writer_module.os, "open", observe_open)
+    monkeypatch.setattr(writer_module.os, "read", observe_read)
+    with writer_module.EvidenceCandidateProcessLock(paths) as process_lock:
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+    assert len(flags) >= len(expected_files)
+    assert all(value & os.O_NOFOLLOW for value in flags)
+    assert all(value & os.O_NONBLOCK for value in flags)
+    assert len(read_sizes) >= len(expected_files)
+
+
+def test_candidate_matcher_rejects_self_consistent_disk_manifest_tamper(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    root = _write_tree_directly(paths, result)
+    relative = EVIDENCE_CANDIDATE_PAYLOAD_PATHS[0]
+    payload = root / relative
+    tampered_body = payload.read_bytes() + b"\n"
+    payload.write_bytes(tampered_body)
+    payload.chmod(0o644)
+    manifest_path = root / "candidate-manifest.json"
+    manifest = json.loads(manifest_path.read_bytes())
+    manifest["files"][relative] = sha256_bytes(tampered_body)
+    manifest_path.write_bytes(canonical_json_bytes(manifest))
+    manifest_path.chmod(0o644)
+
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(SafetyError, match="differs|snapshot"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+
+@pytest.mark.parametrize("binding", ["candidate", "lock"])
+def test_candidate_matcher_fails_closed_on_binding_race(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    binding: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    root = _write_tree_directly(paths, result)
+    real_validate = writer_module._validate_exact_tree
+    validations = 0
+
+    def swap_after_first_validation(
+        root_fd: int,
+        files: Mapping[str, bytes],
+    ) -> None:
+        nonlocal validations
+        real_validate(root_fd, files)
+        validations += 1
+        if validations != 1:
+            return
+        if binding == "candidate":
+            displaced = paths.build / "displaced-candidate"
+            root.rename(displaced)
+            root.mkdir(mode=0o755)
+        else:
+            displaced = paths.build / "displaced-lock"
+            lock_path = paths.build / LOCK_NAME
+            lock_path.rename(displaced)
+            lock_path.write_bytes(b"")
+            lock_path.chmod(0o644)
+
+    monkeypatch.setattr(
+        writer_module,
+        "_validate_exact_tree",
+        swap_after_first_validation,
+    )
+    with (
+        writer_module.EvidenceCandidateProcessLock(paths) as process_lock,
+        pytest.raises(SafetyError, match="binding|changed|tree|entry|candidate|lock"),
+    ):
+        writer_module.assert_evidence_candidate_tree_matches(
+            result,
+            paths,
+            process_lock=process_lock,
+        )
+
+    assert validations == (1 if binding == "candidate" else 2)
+
+
 def test_writer_atomically_publishes_exact_candidate_tree(tmp_path: Path) -> None:
     result = _result()
     paths = _repository(tmp_path)
