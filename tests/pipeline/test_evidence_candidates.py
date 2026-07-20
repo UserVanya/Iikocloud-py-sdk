@@ -33,6 +33,11 @@ from tools.openapi_pipeline.evidence_candidates import (
     build_evidence_candidate_bundle,
 )
 from tools.openapi_pipeline.evidence_promotion import EvidencePair
+from tools.openapi_pipeline.evidence_schema_repairs import (
+    REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS,
+    REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES,
+    build_reviewed_external_menu_validation_schema,
+)
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.overlay import apply_overlay
 from tools.openapi_pipeline.paths import RepoPaths
@@ -165,6 +170,14 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
         assert all(
             action["x-iiko-sdk-guard"]["expected-matches"] == 1 for action in overlay["actions"]
         )
+    assert not any(
+        action["x-iiko-sdk-guard"]["issue"].startswith("external-menu-schema-")
+        for action in bundle.operations_overlay["actions"]
+    )
+    assert any(
+        action["x-iiko-sdk-guard"]["issue"].startswith("external-menu-schema-")
+        for action in bundle.polymorphism_overlay["actions"]
+    )
 
     with_operations = apply_overlay(schema, _mutable(bundle.operations_overlay))
     patched = apply_overlay(with_operations, _mutable(bundle.polymorphism_overlay))
@@ -174,6 +187,15 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
     assert response_schema["title"] == "ExternalMenuResponse"
 
     components = patched["components"]["schemas"]
+    for version, item_component in ((3, "OverrideTaxesDto"), (4, "OverrideTaxesDto2")):
+        assert components[f"ExternalMenuV{version}"]["properties"]["overrideTaxCategories"] == {
+            "additionalProperties": {
+                "items": {"$ref": f"#/components/schemas/{item_component}"},
+                "type": "array",
+            },
+            "description": "Tax benefits",
+            "type": "object",
+        }
     for version in (2, 3, 4):
         component = components[f"ExternalMenuV{version}"]
         assert component["properties"]["formatVersion"]["enum"] == [version]
@@ -186,9 +208,10 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
         "mapping": {
             "COMBO": "#/components/schemas/ExternalMenuComboItem",
             "DISH": "#/components/schemas/ExternalMenuItem3",
+            "SERVICE": "#/components/schemas/ExternalMenuItem3",
         },
     }
-    assert components[ITEM3]["properties"]["type"]["enum"] == ["DISH"]
+    assert components[ITEM3]["properties"]["type"]["enum"] == ["DISH", "SERVICE"]
     assert components[ITEM3]["properties"]["type"]["default"] == "DISH"
     assert components[ITEM3]["required"].count("type") == 1
     assert components[COMBO]["properties"]["type"]["enum"] == ["COMBO"]
@@ -206,7 +229,9 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
         "splittable",
     ]
     for field in EXACT_FIVE:
-        assert combo["properties"][field] == components[ITEM3]["properties"][field]
+        assert combo["properties"][field] == candidate_module._without_examples(  # noqa: SLF001
+            components[ITEM3]["properties"][field]
+        )
 
     assert tuple(bundle.fixtures) == (2, 3, 4)
     assert bundle.fixtures[2]["formatVersion"] == 2
@@ -229,9 +254,9 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
     assert all(len(digest) == 64 for digest in bundle.sha256.values())
 
 
-def test_builder_supports_inverse_mapping_and_all_remove_decisions() -> None:
+def test_builder_uses_reviewed_mapping_and_all_remove_decisions() -> None:
     schema = _reviewed_schema()
-    pairs = _pairs(schema, [_dish("COMBO"), _combo("DISH")])
+    pairs = _pairs(schema, [_dish(), _combo()])
 
     bundle = build_evidence_candidate_bundle(
         analysis=analyze_menu_evidence(pairs, schema),
@@ -246,17 +271,35 @@ def test_builder_supports_inverse_mapping_and_all_remove_decisions() -> None:
         "mapping"
     ]
     assert mapping == {
-        "COMBO": "#/components/schemas/ExternalMenuItem3",
-        "DISH": "#/components/schemas/ExternalMenuComboItem",
+        "COMBO": "#/components/schemas/ExternalMenuComboItem",
+        "DISH": "#/components/schemas/ExternalMenuItem3",
+        "SERVICE": "#/components/schemas/ExternalMenuItem3",
     }
     assert [item["type"] for item in bundle.fixtures[4]["itemGroups"][0]["items"]] == [
-        "COMBO",
         "DISH",
+        "COMBO",
     ]
     combo = components[COMBO]
     assert combo["required"] == ["sizes", "type", "id"]
     assert set(combo["properties"]).isdisjoint(EXACT_FIVE)
     assert set(bundle.fixtures[4]["itemGroups"][0]["items"][1]).isdisjoint(EXACT_FIVE)
+
+
+def test_builder_without_combo_observation_does_not_invent_combo_fixture() -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, [_dish()])
+    analysis = analyze_menu_evidence(pairs, schema)
+
+    bundle = build_evidence_candidate_bundle(
+        analysis=analysis,
+        pairs=pairs,
+        effective_schema=schema,
+    )
+
+    items = bundle.fixtures[4]["itemGroups"][0]["items"]
+    assert len(items) == 1
+    assert items[0]["type"] == "DISH"
+    assert analysis.combo_observation_count == 0
 
 
 def test_builder_replaces_existing_lists_without_duplicates() -> None:
@@ -770,6 +813,32 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
 
     assert len(bundle.canonical_bytes) == 5
     assert bundle.fixtures[4]["formatVersion"] == 4
+    patched = apply_overlay(schema, _mutable(bundle.operations_overlay))
+    patched = apply_overlay(patched, _mutable(bundle.polymorphism_overlay))
+    corrected = build_reviewed_external_menu_validation_schema(schema)
+    for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
+        if repair.path == (
+            "components",
+            "schemas",
+            ITEM3,
+            "properties",
+            "type",
+        ):
+            continue
+        assert candidate_module._at(patched, repair.path) == candidate_module._at(  # noqa: SLF001
+            corrected,
+            repair.path,
+        )
+    assert patched["components"]["schemas"][ITEM3]["properties"]["type"]["enum"] == [
+        "DISH",
+        "SERVICE",
+    ]
+    for missing_repair in REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES:
+        path = (*missing_repair.parent_path, missing_repair.property_name)
+        assert candidate_module._at(patched, path) == candidate_module._at(  # noqa: SLF001
+            corrected,
+            path,
+        )
     assert (
         dict(bundle.sha256)
         == {
@@ -777,7 +846,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
                 "31314f53dbeccf67f14a0a33fd0fbe5912df04acb813b8bbe2dad10f02ed93b8"  # pragma: allowlist secret  # noqa: E501
             ),
             "openapi/overlays/polymorphism.overlay.yaml": (
-                "6b236b2f836ec9bdbc3cec1dbf6eda0d985ed00956bc69af8ee12bc1c5725f3e"  # pragma: allowlist secret  # noqa: E501
+                "9425021d34feafe9837c75b11e38d5590e97d2947b8dae343c4bbac3075eceb8"  # pragma: allowlist secret  # noqa: E501
             ),
             "tests/fixtures/contracts/external-menu-v2.json": (
                 "b248e8d075e4d39ed1bed3824c686e32dc0b3b7438356ddd2eb8a590ab6252d8"  # pragma: allowlist secret  # noqa: E501
@@ -786,7 +855,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
                 "f93b39f9a80e050c92b18d006eb2fccada4d7f9139d9cb8565f108afbc46d4bd"  # pragma: allowlist secret  # noqa: E501
             ),
             "tests/fixtures/contracts/external-menu-v4.json": (
-                "9f1a4e892d82f35eba50cb38d0bf2af5d340346bf3a3248d5e57732bd9abaa42"  # pragma: allowlist secret  # noqa: E501
+                "0e7068358b25a0d9c0a839e1b63c979d99d4e760d906df4f875395058d1bae46"  # pragma: allowlist secret  # noqa: E501
             ),
         }
     )

@@ -10,7 +10,10 @@ from typing import TYPE_CHECKING, Any
 
 from .capture import ARRAY_ITEM, OBJECT_VALUE, CaptureWriter, LiveCapture, RedactionHints
 from .errors import SafetyError
-from .evidence_schema_repairs import is_reviewed_dynamic_map_schema
+from .evidence_schema_repairs import (
+    build_reviewed_external_menu_hint_schema,
+    is_reviewed_dynamic_map_schema,
+)
 from .live.lock import LiveProcessLock
 from .live.profile import ResolvedLiveProfile
 from .live.pytest_support import resolve_locked_live_profile
@@ -101,9 +104,7 @@ def _assert_reviewed_override_tax_array_shape(
         "items": {"$ref": f"#/components/schemas/{item_component}"},
         "type": "array",
     } and not is_reviewed_dynamic_map_schema(override_tax_categories):
-        raise SafetyError(
-            "Evidence overrideTaxCategories broken array shape has drifted"
-        )
+        raise SafetyError("Evidence overrideTaxCategories broken array shape has drifted")
 
 
 def build_evidence_redaction_hints(
@@ -213,6 +214,7 @@ def build_versioned_evidence_redaction_hints(
 
     if type(menu_version) is not int or menu_version not in _EVIDENCE_VERSIONS:
         raise SafetyError("Evidence redaction hint version must be exactly 2, 3, or 4")
+    effective_schema = build_reviewed_external_menu_hint_schema(effective_schema)
     if menu_version in {3, 4}:
         _assert_reviewed_override_tax_array_shape(effective_schema, menu_version)
     reviewed = build_evidence_redaction_hints(effective_schema, operation_id)
@@ -260,9 +262,7 @@ def build_versioned_evidence_redaction_hints(
     if menu_version in {3, 4}:
         existing_override_values = response_values.get(_OVERRIDE_TAX_CATEGORIES_HINT_PATH)
         if existing_override_values not in {None, frozenset()}:
-            raise SafetyError(
-                "Evidence overrideTaxCategories map redaction values have drifted"
-            )
+            raise SafetyError("Evidence overrideTaxCategories map redaction values have drifted")
         response_values[_OVERRIDE_TAX_CATEGORIES_HINT_PATH] = frozenset()
     if menu_version == 4:
         reviewed_item_types = reviewed.response_values_by_status[200].get(_ITEM_TYPE_HINT_PATH)

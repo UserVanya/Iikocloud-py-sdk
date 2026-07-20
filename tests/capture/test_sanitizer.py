@@ -152,6 +152,42 @@ def test_first_pass_sanitizer_never_trusts_alias_shaped_raw_uuid() -> None:
     assert validation_pass["id"] == alias_shaped_raw
 
 
+@pytest.mark.parametrize(
+    "token",
+    [
+        "<redacted:email>",
+        "<redacted:phone>",
+        "<redacted:secret>",
+        "<redacted:string>",
+    ],
+)
+def test_fixed_point_sanitizer_preserves_only_exact_existing_redaction_tokens(
+    token: str,
+) -> None:
+    fixed_point = Sanitizer.for_fixed_point_validation().sanitize({"value": token})
+    first_pass = Sanitizer().sanitize({"value": token})
+
+    assert fixed_point["value"] == token
+    assert first_pass["value"] == "<redacted:string>"
+
+
+@pytest.mark.parametrize(
+    "marker",
+    [
+        "<redacted:other>",
+        "<redacted:phone >",
+        "prefix<redacted:phone>",
+        "<REDACTED:phone>",
+    ],
+)
+def test_fixed_point_sanitizer_does_not_trust_similar_or_arbitrary_markers(
+    marker: str,
+) -> None:
+    assert Sanitizer.for_fixed_point_validation().sanitize({"value": marker}) == {
+        "value": "<redacted:string>"
+    }
+
+
 def test_schema_backed_uuid_map_keys_alias_with_matching_values_and_reach_fixed_point() -> None:
     source_uuid = "11111111-1111-4111-8111-111111111111"
     path_values: PathValues = {

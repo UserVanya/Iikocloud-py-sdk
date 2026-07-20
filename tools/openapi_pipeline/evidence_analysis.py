@@ -19,9 +19,7 @@ from .io import canonical_json_bytes, sha256_bytes
 
 _VERSIONS = (2, 3, 4)
 _BRANCHES = ("ExternalMenuItem3", "ExternalMenuComboItem")
-_ITEM3 = "ExternalMenuItem3"
 _COMBO = "ExternalMenuComboItem"
-_LITERALS = frozenset({"DISH", "COMBO"})
 _EXACT_FIVE = (
     "allergenGroupIds",
     "itemSizes",
@@ -85,7 +83,11 @@ def analyze_menu_evidence(
     validator = MenuEvidenceValidator(effective_schema)
     ordered_pairs, provenance = _validate_pairs(pairs, validator)
     observations = _inspect_v4_items(ordered_pairs[4], validator)
-    branch_to_literal, literal_to_branch, counts = _derive_discriminator_mapping(observations)
+    branch_to_literal, literal_to_branch, counts = _derive_discriminator_mapping(
+        observations,
+        literal_to_branch=dict(validator.reviewed_v4_literal_mapping()),
+        primary_literals_by_branch=dict(validator.reviewed_v4_primary_literals()),
+    )
 
     combo_items: list[Mapping[str, FrozenJson]] = []
     ambiguous_count = 0
@@ -189,8 +191,8 @@ def _inspect_v4_items(
         for item in items:
             if not isinstance(item, Mapping):
                 raise SafetyError("Evidence V4 item shape is invalid")
-            literal = item.get("type")
-            if type(literal) is not str or literal not in _LITERALS:
+            literal = validator.reviewed_v4_item_literal(cast(Mapping[str, Any], item))
+            if literal not in validator.reviewed_v4_literal_mapping():
                 raise SafetyError("Evidence V4 item discriminator literal is unsafe")
             try:
                 branches = validator.match_v4_item_branches(cast(Mapping[str, Any], item))
@@ -210,35 +212,25 @@ def _inspect_v4_items(
 
 def _derive_discriminator_mapping(
     observations: tuple[_ItemObservation, ...],
+    *,
+    literal_to_branch: dict[str, str],
+    primary_literals_by_branch: dict[str, str],
 ) -> tuple[dict[str, str], dict[str, str], dict[str, int]]:
-    literals_by_branch: dict[str, set[str]] = {branch: set() for branch in _BRANCHES}
     counts = {branch: 0 for branch in _BRANCHES}
+    if not observations:
+        raise SafetyError("Evidence requires at least one reviewed V4 item observation")
     for observation in observations:
-        if len(observation.branches) != 1:
-            continue
-        branch = observation.branches[0]
-        if branch not in literals_by_branch:
-            raise SafetyError("Evidence V4 structural branch result is unsafe")
-        literals_by_branch[branch].add(observation.literal)
-        counts[branch] += 1
-    if any(counts[branch] < 1 for branch in _BRANCHES):
-        raise SafetyError("Evidence requires unambiguous observations of both V4 item branches")
-    if any(len(literals_by_branch[branch]) != 1 for branch in _BRANCHES):
-        raise SafetyError("Evidence V4 branch literals do not form a consistent mapping")
-    branch_to_literal = {branch: next(iter(literals_by_branch[branch])) for branch in _BRANCHES}
-    if set(branch_to_literal.values()) != _LITERALS:
-        raise SafetyError("Evidence V4 branch literals must form a distinct complete mapping")
-    literal_to_branch = {literal: branch for branch, literal in branch_to_literal.items()}
-    if len(literal_to_branch) != len(_BRANCHES):
-        raise SafetyError("Evidence V4 branch literals must be distinct")
-    for observation in observations:
-        if len(observation.branches) == 1 and (
-            literal_to_branch.get(observation.literal) != observation.branches[0]
-        ):
-            raise SafetyError("Evidence V4 item literal conflicts with its structural branch")
-        if len(observation.branches) > 1 and observation.literal not in literal_to_branch:
-            raise SafetyError("Ambiguous Evidence V4 item literal cannot be resolved safely")
-    return branch_to_literal, literal_to_branch, counts
+        expected_branch = literal_to_branch.get(observation.literal)
+        if expected_branch not in observation.branches:
+            raise SafetyError("Evidence V4 item literal conflicts with the reviewed mapping")
+        if len(observation.branches) == 1:
+            counts[expected_branch] += 1
+    if set(primary_literals_by_branch) != set(_BRANCHES) or any(
+        literal_to_branch.get(literal) != branch
+        for branch, literal in primary_literals_by_branch.items()
+    ):
+        raise SafetyError("Reviewed V4 discriminator mapping is inconsistent")
+    return primary_literals_by_branch, literal_to_branch, counts
 
 
 def _analyze_combo_field(

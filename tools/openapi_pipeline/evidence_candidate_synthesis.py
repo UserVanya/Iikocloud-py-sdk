@@ -64,18 +64,27 @@ def build_and_validate_synthetic_fixtures(
                 document,
                 {"$ref": f"{_COMPONENT_PREFIX}{_CATEGORY3}"},
             )
-            dish = _synthesize(
-                document,
-                {"$ref": f"{_COMPONENT_PREFIX}{_ITEM3}"},
-            )
-            combo = _synthesize(
-                document,
-                {"$ref": f"{_COMPONENT_PREFIX}{_COMBO}"},
-                nonempty_properties=retained,
-            )
-            if type(category) is not dict or type(dish) is not dict or type(combo) is not dict:
-                raise SafetyError("Evidence synthetic V4 branches are not objects")
-            category["items"] = [dish, combo]
+            if type(category) is not dict:
+                raise SafetyError("Evidence synthetic V4 category is not an object")
+            items: list[dict[str, Any]] = []
+            if analysis.total_item_count > analysis.combo_observation_count:
+                dish = _synthesize(
+                    document,
+                    {"$ref": f"{_COMPONENT_PREFIX}{_ITEM3}"},
+                )
+                if type(dish) is not dict:
+                    raise SafetyError("Evidence synthetic V4 item branch is not an object")
+                items.append(dish)
+            if analysis.combo_observation_count > 0:
+                combo = _synthesize(
+                    document,
+                    {"$ref": f"{_COMPONENT_PREFIX}{_COMBO}"},
+                    nonempty_properties=retained,
+                )
+                if type(combo) is not dict:
+                    raise SafetyError("Evidence synthetic V4 combo branch is not an object")
+                items.append(combo)
+            category["items"] = items
             root["itemGroups"] = [category]
         fixtures[version] = root
     _validate_fixtures(document, fixtures, analysis)
@@ -317,9 +326,13 @@ def _validate_v4_items(
         if type(literal) is not str or mapping.get(literal) != matches[0]:
             raise SafetyError("Evidence synthetic V4 item conflicts with discriminator mapping")
         matched_branches.add(matches[0])
-    expected = {f"{_COMPONENT_PREFIX}{branch}" for branch in analysis.branch_to_literal}
+    expected: set[str] = set()
+    if analysis.total_item_count > analysis.combo_observation_count:
+        expected.add(f"{_COMPONENT_PREFIX}{_ITEM3}")
+    if analysis.combo_observation_count > 0:
+        expected.add(f"{_COMPONENT_PREFIX}{_COMBO}")
     if matched_branches != expected:
-        raise SafetyError("Evidence synthetic V4 fixture must contain both item branches")
+        raise SafetyError("Evidence synthetic V4 fixture branch coverage is inconsistent")
 
 
 def _matching_refs(document: dict[str, Any], value: Any, branches: list[Any]) -> tuple[str, ...]:

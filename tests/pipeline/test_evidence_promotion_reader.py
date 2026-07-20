@@ -14,6 +14,7 @@ from typing import Any
 import pytest
 
 import tools.openapi_pipeline.evidence_promotion as promotion_module
+import tools.openapi_pipeline.evidence_schema_repairs as repair_module
 import tools.openapi_pipeline.evidence_validation as validation_module
 from tools.openapi_pipeline.capture import CaptureWriter
 from tools.openapi_pipeline.errors import SafetyError
@@ -855,15 +856,11 @@ def test_validator_uses_the_version_specific_override_tax_item_component(
         "type": "object",
     }
     validator = MenuEvidenceValidator(schema)
-    response["body"]["overrideTaxCategories"] = {
-        CAPTURE_UUID_ALIAS: [{valid_marker: True}]
-    }
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{valid_marker: True}]}
 
     validator.validate(version, request, response)
 
-    response["body"]["overrideTaxCategories"] = {
-        CAPTURE_UUID_ALIAS: [{invalid_marker: True}]
-    }
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{invalid_marker: True}]}
     with pytest.raises(SafetyError, match="required|undeclared|override"):
         validator.validate(version, request, response)
 
@@ -1234,7 +1231,7 @@ def test_reviewed_combo_exception_hashes_are_computed_from_canonical_fragments()
         validation_module._REVIEWED_COMBO_SHA256
     )
     assert hashlib.sha256(canonical_json_bytes(item_union)).hexdigest() == (
-        validation_module._REVIEWED_ITEM_UNION_SHA256
+        repair_module.REVIEWED_V4_DISCRIMINATOR_CONTRACT.broken_union_sha256
     )
 
 
@@ -1400,8 +1397,26 @@ def test_concrete_validator_type_mismatch_reports_only_the_safe_schema_path(
         MenuEvidenceValidator(_effective_schema()).validate(2, request, response)
 
     assert str(caught.value) == (
-        "Evidence value at response-v2.comboCategories "
-        "does not match its reviewed schema type"
+        "Evidence value at response-v2.comboCategories does not match its reviewed schema type"
+    )
+    assert secret_like_value not in str(caught.value)
+
+
+def test_concrete_validator_enum_mismatch_reports_only_the_safe_schema_path(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    request = _load(paths[2][0])
+    response = _load(paths[2][1])
+    secret_like_value = "Bearer synthetic-secret-value"
+    response["body"]["mode"] = secret_like_value
+
+    with pytest.raises(SafetyError) as caught:
+        MenuEvidenceValidator(_effective_schema()).validate(2, request, response)
+
+    assert str(caught.value) == (
+        "Evidence value at response-v2.mode does not match its reviewed schema enum"
     )
     assert secret_like_value not in str(caught.value)
 
@@ -1463,6 +1478,29 @@ def test_category3_item_union_does_not_guess_branch_from_raw_discriminator(
         item = response["body"]["itemGroups"][0]["items"][0]
         item["type"] = "DISH"
     response["body"]["itemGroups"][0]["items"] = [item]
+    _replace_json(response_path, response)
+
+    assert tuple(_read(root)) == (2, 3, 4)
+
+
+def test_category3_item_union_accepts_exact_legacy_service_marker_for_item3(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    response_path = paths[4][1]
+    response = _load(response_path)
+    response["body"]["itemGroups"][0]["items"] = [
+        {
+            "allergenGroupIds": [],
+            "id": "00000000-0000-4000-8000-000000000099",
+            "itemSizes": [],
+            "modifierSchemaId": None,
+            "orderItemType": "Product",
+            "splittable": False,
+            "type": "<redacted:string>",
+        }
+    ]
     _replace_json(response_path, response)
 
     assert tuple(_read(root)) == (2, 3, 4)

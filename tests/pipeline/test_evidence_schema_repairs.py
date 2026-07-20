@@ -7,12 +7,15 @@ from typing import Any
 import pytest
 
 import tools.openapi_pipeline.evidence_schema_repairs as repair_module
-from tools.openapi_pipeline.errors import SafetyError
+from tools.openapi_pipeline.capture import ARRAY_ITEM
+from tools.openapi_pipeline.errors import SafetyError, StaleOverlayError
+from tools.openapi_pipeline.evidence import build_versioned_evidence_redaction_hints
 from tools.openapi_pipeline.evidence_schema_repairs import (
     build_reviewed_external_menu_validation_schema,
 )
 from tools.openapi_pipeline.evidence_validation import MenuEvidenceValidator
 from tools.openapi_pipeline.io import canonical_json_bytes
+from tools.openapi_pipeline.overlay import apply_overlay
 from tools.openapi_pipeline.paths import RepoPaths
 from tools.openapi_pipeline.pipeline import compose_reviewed_evidence_base_candidate
 
@@ -99,6 +102,12 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
         ("ExternalMenuPriceByDepartmentsDto3", "price"),
     ):
         assert _property(corrected, component, name)["nullable"] is True
+    for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3"):
+        assert _property(corrected, component, "type")["enum"] == [
+            "DISH",
+            "COMBO",
+            "SERVICE",
+        ]
     assert _property(
         corrected,
         "ExternalMenuPriceByDepartmentsDto",
@@ -107,6 +116,45 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
 
     already_correct = build_reviewed_external_menu_validation_schema(corrected)
     assert canonical_json_bytes(already_correct) == canonical_json_bytes(corrected)
+
+
+@pytest.mark.parametrize(
+    ("version", "groups_name"),
+    ((2, "itemCategories"), (3, "itemGroups"), (4, "itemGroups")),
+)
+def test_corrected_hints_preserve_historical_public_service_literal(
+    version: int,
+    groups_name: str,
+) -> None:
+    hints = build_versioned_evidence_redaction_hints(
+        _schema(),
+        "get_external_menu_by_id",
+        version,
+    )
+
+    assert hints.response_values_for_status(200)[
+        (groups_name, ARRAY_ITEM, "items", ARRAY_ITEM, "type")
+    ] == frozenset({"DISH", "COMBO", "SERVICE"})
+
+
+def test_legacy_service_marker_is_exact_to_three_reviewed_item_components() -> None:
+    validator = MenuEvidenceValidator(_schema())
+
+    for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3"):
+        type_schema = validator._component(component)["properties"]["type"]  # noqa: SLF001
+        validator._validate_instance(  # noqa: SLF001
+            "<redacted:string>",
+            type_schema,
+            path=f"components.schemas.{component}.properties.type",
+            component_name=component,
+        )
+        with pytest.raises(SafetyError, match="reviewed schema enum"):
+            validator._validate_instance(  # noqa: SLF001
+                "<redacted:other>",
+                type_schema,
+                path=f"components.schemas.{component}.properties.type",
+                component_name=component,
+            )
 
 
 def test_registry_rejects_stale_third_shape_with_only_static_schema_path() -> None:
@@ -151,22 +199,25 @@ def test_corrected_additional_properties_map_is_preflighted_and_validated() -> N
 
 
 def test_barcode_null_only_exception_is_exact_and_component_scoped() -> None:
-    reviewed_hash = repair_module.REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS[
-        0
-    ].property_name_sha256
+    reviewed_hash = repair_module.REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS[0].property_name_sha256
 
-    assert repair_module.is_reviewed_null_only_property_hash(
-        component_name="BarcodeDto",
-        property_name_sha256=reviewed_hash,
-        value=None,
-    )
+    assert {
+        exception.component_name
+        for exception in repair_module.REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS
+    } == {"BarcodeDto", "BarcodeDto2", "BarcodeDto3"}
+    for component in ("BarcodeDto", "BarcodeDto2", "BarcodeDto3"):
+        assert repair_module.is_reviewed_null_only_property_hash(
+            component_name=component,
+            property_name_sha256=reviewed_hash,
+            value=None,
+        )
+        assert not repair_module.is_reviewed_null_only_property_hash(
+            component_name=component,
+            property_name_sha256=reviewed_hash,
+            value="non-null",
+        )
     assert not repair_module.is_reviewed_null_only_property_hash(
-        component_name="BarcodeDto",
-        property_name_sha256=reviewed_hash,
-        value="non-null",
-    )
-    assert not repair_module.is_reviewed_null_only_property_hash(
-        component_name="BarcodeDto2",
+        component_name="BarcodeDto4",
         property_name_sha256=reviewed_hash,
         value=None,
     )
@@ -175,3 +226,31 @@ def test_barcode_null_only_exception_is_exact_and_component_scoped() -> None:
         property_name_sha256="0" * 64,
         value=None,
     )
+
+
+def test_registry_emits_guarded_reproducible_overlay_actions() -> None:
+    builder = getattr(
+        repair_module,
+        "build_reviewed_external_menu_overlay_repairs",
+        None,
+    )
+    assert callable(builder)
+    schema = _schema()
+
+    corrected, actions = builder(schema)
+
+    assert actions
+    assert all(action["x-iiko-sdk-guard"]["expected-matches"] == 1 for action in actions)
+    overlay = {
+        "overlay": "1.1.0",
+        "info": {"title": "reviewed repairs", "version": "1.0.0"},
+        "actions": copy.deepcopy(list(actions)),
+    }
+    assert apply_overlay(schema, overlay) == corrected
+    assert corrected == build_reviewed_external_menu_validation_schema(schema)
+
+    already_correct, no_op_actions = builder(corrected)
+    assert already_correct == corrected
+    assert no_op_actions == ()
+    with pytest.raises(StaleOverlayError):
+        apply_overlay(corrected, overlay)

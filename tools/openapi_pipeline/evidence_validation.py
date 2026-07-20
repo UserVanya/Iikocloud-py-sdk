@@ -14,6 +14,8 @@ from .evidence_schema_repairs import (
     build_reviewed_external_menu_validation_schema,
     is_reviewed_dynamic_map_schema,
     is_reviewed_null_only_property_hash,
+    reviewed_redacted_enum_literal,
+    reviewed_v4_discriminator_contract,
 )
 from .io import canonical_json_bytes, sha256_bytes
 
@@ -62,8 +64,6 @@ _UUID_FORMAT = re.compile(
 )
 _BROKEN_COMBO_COMPONENT = "ExternalMenuComboItem"
 _ITEM3_COMPONENT = "ExternalMenuItem3"
-_V4_ITEM_BRANCHES = (_ITEM3_COMPONENT, _BROKEN_COMBO_COMPONENT)
-_RAW_ITEM_TYPES = frozenset({"DISH", "COMBO"})
 _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     {
         "allergenGroupIds",
@@ -75,7 +75,6 @@ _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
 )
 _MAX_SCHEMA_DEPTH = 256
 _REVIEWED_COMBO_SHA256 = "dcc5f6184a905905df5a1ba2818157da41603a9b488dc178bc8ae4401635d6b2"
-_REVIEWED_ITEM_UNION_SHA256 = "a4bcd95a4d376a2e0d0cb7e7f19e2b97a48379cfea7219c79f5287eba3d32af0"
 
 
 class MenuEvidenceValidator:
@@ -104,14 +103,11 @@ class MenuEvidenceValidator:
         if type(known_item_union) is not dict:
             raise SafetyError("Evidence V4 item union is missing after reviewed hint validation")
         self._known_item_union = cast(dict[str, Any], known_item_union)
+        self._discriminator_contract = reviewed_v4_discriminator_contract(self._schema)
         if sha256_bytes(canonical_json_bytes(self._broken_combo_schema)) != (
             _REVIEWED_COMBO_SHA256
         ):
             raise SafetyError("Reviewed ExternalMenuComboItem defect fragment has drifted")
-        if sha256_bytes(canonical_json_bytes(self._known_item_union)) != (
-            _REVIEWED_ITEM_UNION_SHA256
-        ):
-            raise SafetyError("Reviewed ExternalMenuCategory3 item union has drifted")
         self._preflight_contract()
 
     def validate(
@@ -133,16 +129,20 @@ class MenuEvidenceValidator:
         if type(request_body.get("version")) is not int or request_body.get("version") != version:
             raise SafetyError("Evidence request body does not match the selected menu version")
 
-        self._validate_instance(request_body, self._request_schema, path="request")
+        validation_request_body = _mutable_json_copy(request_body)
+        validation_response_body = _mutable_json_copy(response_body)
+        assert type(validation_request_body) is dict
+        assert type(validation_response_body) is dict
+        self._validate_instance(validation_request_body, self._request_schema, path="request")
         self._validate_instance(
-            response_body,
+            validation_response_body,
             self._root_schemas[version],
             path=f"response-v{version}",
             component_name=_VERSION_COMPONENTS[version],
         )
         if (
-            type(response_body.get("formatVersion")) is not int
-            or response_body.get("formatVersion") != version
+            type(validation_response_body.get("formatVersion")) is not int
+            or validation_response_body.get("formatVersion") != version
         ):
             raise SafetyError("Evidence response root does not match the selected menu version")
         self._require_sanitizer_fixed_point(
@@ -159,17 +159,26 @@ class MenuEvidenceValidator:
         if type(value) is not dict:
             raise SafetyError("Evidence V4 item branch matching requires an object")
         discriminator = value.get("type")
-        if type(discriminator) is not str or discriminator not in _RAW_ITEM_TYPES:
-            raise SafetyError("Evidence V4 item discriminator must be a raw DISH or COMBO literal")
+        legacy_literal = reviewed_redacted_enum_literal(
+            component_name=_ITEM3_COMPONENT,
+            schema=self._component(_ITEM3_COMPONENT)["properties"]["type"],
+            value=discriminator,
+        )
+        if legacy_literal is None and (
+            type(discriminator) is not str
+            or discriminator not in self._discriminator_contract.literal_to_branch
+        ):
+            raise SafetyError("Evidence V4 item discriminator is not a reviewed public literal")
         branches = self._known_item_union.get("oneOf")
-        if type(branches) is not list or len(branches) != len(_V4_ITEM_BRANCHES):
+        reviewed_branches = self._discriminator_contract.branches
+        if type(branches) is not list or len(branches) != len(reviewed_branches):
             raise SafetyError("Reviewed Evidence V4 item branches have drifted")
         matches: list[str] = []
         for index, branch in enumerate(branches):
             if type(branch) is not dict or set(branch) != {"$ref"}:
                 raise SafetyError("Reviewed Evidence V4 item branch has drifted")
             branch_name, target = self._resolve_reference(branch["$ref"])
-            if branch_name != _V4_ITEM_BRANCHES[index]:
+            if branch_name != reviewed_branches[index]:
                 raise SafetyError("Reviewed Evidence V4 item branch order has drifted")
             try:
                 self._validate_instance(
@@ -183,7 +192,39 @@ class MenuEvidenceValidator:
             matches.append(branch_name)
         if not matches:
             raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
+        if legacy_literal is not None and matches != [
+            self._discriminator_contract.literal_to_branch[legacy_literal]
+        ]:
+            raise SafetyError(
+                "Evidence V4 legacy item discriminator does not match its reviewed branch"
+            )
         return tuple(matches)
+
+    def reviewed_v4_item_literal(self, item: Mapping[str, Any]) -> str:
+        """Return one reviewed public V4 item literal without exposing raw evidence."""
+
+        discriminator = item.get("type")
+        mapping = self._discriminator_contract.literal_to_branch
+        if type(discriminator) is str and discriminator in mapping:
+            return discriminator
+        normalized = reviewed_redacted_enum_literal(
+            component_name=_ITEM3_COMPONENT,
+            schema=self._component(_ITEM3_COMPONENT)["properties"]["type"],
+            value=discriminator,
+        )
+        if normalized is None or self.match_v4_item_branches(item) != (mapping[normalized],):
+            raise SafetyError("Evidence V4 item discriminator is not a reviewed public literal")
+        return normalized
+
+    def reviewed_v4_literal_mapping(self) -> Mapping[str, str]:
+        """Return the exact immutable reviewed V4 discriminator mapping."""
+
+        return self._discriminator_contract.literal_to_branch
+
+    def reviewed_v4_primary_literals(self) -> Mapping[str, str]:
+        """Return the primary literal selected for each reviewed V4 branch."""
+
+        return self._discriminator_contract.primary_literals_by_branch
 
     def validate_v4_item3_property(
         self,
@@ -444,6 +485,13 @@ class MenuEvidenceValidator:
         path: str,
         component_name: str | None = None,
     ) -> None:
+        normalized = reviewed_redacted_enum_literal(
+            component_name=component_name or "",
+            schema=schema,
+            value=value,
+        )
+        if normalized is not None:
+            value = normalized
         if value is None and schema.get("nullable") is True:
             return
         reference = schema.get("$ref")
@@ -463,15 +511,13 @@ class MenuEvidenceValidator:
 
         schema_type = schema.get("type")
         if schema_type is not None and not _matches_type(value, schema_type):
-            raise SafetyError(
-                f"Evidence value at {path} does not match its reviewed schema type"
-            )
+            raise SafetyError(f"Evidence value at {path} does not match its reviewed schema type")
         if schema_type is None and type(value) in {dict, list}:
             raise SafetyError("Evidence untyped schema cannot accept a container value")
         _validate_format(value, schema.get("format"))
         enum = schema.get("enum")
         if enum is not None and not any(_type_strict_equal(value, item) for item in enum):
-            raise SafetyError("Evidence value does not match its reviewed schema enum")
+            raise SafetyError(f"Evidence value at {path} does not match its reviewed schema enum")
         if type(value) is str:
             minimum = schema.get("minLength")
             maximum = schema.get("maxLength")
@@ -526,11 +572,11 @@ class MenuEvidenceValidator:
                         component_name=component_name,
                     )
         if type(value) is list and "items" in schema:
-            for index, item in enumerate(value):
+            for item in value:
                 self._validate_instance(
                     item,
                     schema["items"],
-                    path=f"{path}[{index}]",
+                    path=f"{path}.items",
                     component_name=component_name,
                 )
 

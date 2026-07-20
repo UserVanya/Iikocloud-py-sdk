@@ -29,6 +29,10 @@ from .evidence_candidate_contract import (
 )
 from .evidence_candidate_synthesis import build_and_validate_synthetic_fixtures
 from .evidence_promotion import EvidencePair, FrozenJson
+from .evidence_schema_repairs import (
+    build_reviewed_external_menu_overlay_repairs,
+    reviewed_v4_discriminator_contract,
+)
 from .io import canonical_json_bytes, sha256_bytes
 from .overlay import apply_overlay
 from .validate import ensure_valid_effective_schema
@@ -342,6 +346,13 @@ def _build_polymorphism_overlay(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     actions: list[dict[str, Any]] = []
     working = copy.deepcopy(schema)
+    working, schema_repair_actions = build_reviewed_external_menu_overlay_repairs(working)
+    actions.extend(copy.deepcopy(list(schema_repair_actions)))
+    discriminator_contract = reviewed_v4_discriminator_contract(working)
+    if dict(analysis.literal_to_branch) != dict(discriminator_contract.literal_to_branch) or dict(
+        analysis.branch_to_literal
+    ) != dict(discriminator_contract.primary_literals_by_branch):
+        raise SafetyError("Evidence analysis conflicts with the reviewed discriminator mapping")
     for version in _VERSIONS:
         component_name = f"ExternalMenuV{version}"
         working = _replace_enum_default(
@@ -374,21 +385,9 @@ def _build_polymorphism_overlay(
     union = _at(working, union_parts)
     if type(union) is not dict:
         raise SafetyError("Evidence candidate V4 item union has drifted")
-    if "discriminator" in union:
-        discriminator = union["discriminator"]
-        working = _append_action(
-            actions,
-            working,
-            target=_jsonpath(*union_parts, "discriminator"),
-            value=discriminator,
-            issue="external-menu-v4-discriminator-remove",
-            remove=True,
-        )
-        union = _at(working, union_parts)
-        assert type(union) is dict
     mapping = {
         literal: f"{_COMPONENT_PREFIX}{branch}"
-        for literal, branch in sorted(analysis.literal_to_branch.items())
+        for literal, branch in sorted(discriminator_contract.literal_to_branch.items())
     }
     working = _append_action(
         actions,
@@ -400,7 +399,14 @@ def _build_polymorphism_overlay(
     )
 
     for component_name in (_ITEM3, _COMBO):
-        literal = analysis.branch_to_literal[component_name]
+        literal = discriminator_contract.primary_literals_by_branch[component_name]
+        additional_literals = tuple(
+            sorted(
+                candidate
+                for candidate, branch in discriminator_contract.literal_to_branch.items()
+                if branch == component_name and candidate != literal
+            )
+        )
         working = _replace_enum_default(
             actions,
             working,
@@ -408,6 +414,7 @@ def _build_polymorphism_overlay(
             property_name="type",
             literal=literal,
             issue=f"{_kebab(component_name)}-type",
+            additional_literals=additional_literals,
         )
 
     item_required = _required_with(_component(working, _ITEM3).get("required"), ("type",))
@@ -435,7 +442,7 @@ def _build_polymorphism_overlay(
         if decision.required_action == "retain-required":
             if decision.property_schema is None:
                 raise SafetyError("Evidence retained combo field lacks a reviewed schema")
-            copied = _thaw_json(decision.property_schema)
+            copied = _without_examples(_thaw_json(decision.property_schema))
             existing = combo_properties.get(field)
             if existing is not None and canonical_json_bytes(existing) != canonical_json_bytes(
                 copied
@@ -487,6 +494,7 @@ def _replace_enum_default(
     property_name: str,
     literal: str | int,
     issue: str,
+    additional_literals: tuple[str, ...] = (),
 ) -> dict[str, Any]:
     parts = ("components", "schemas", component_name, "properties", property_name)
     property_schema = _at(working, parts)
@@ -509,7 +517,7 @@ def _replace_enum_default(
         target=_jsonpath(*parts),
         value=property_schema,
         issue=issue,
-        update={"default": literal, "enum": [literal]},
+        update={"default": literal, "enum": [literal, *additional_literals]},
     )
 
 
@@ -600,6 +608,14 @@ def _leaf_strings(value: Any) -> tuple[str, ...]:
     if isinstance(value, (list, tuple)):
         return tuple(text for child in value for text in _leaf_strings(child))
     return ()
+
+
+def _without_examples(value: Any) -> Any:
+    if type(value) is dict:
+        return {key: _without_examples(child) for key, child in value.items() if key != "example"}
+    if type(value) is list:
+        return [_without_examples(child) for child in value]
+    return copy.deepcopy(value)
 
 
 def _schema_enum_strings(value: Any) -> frozenset[str]:

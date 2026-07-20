@@ -241,7 +241,11 @@ def test_analyzer_derives_normal_mapping_counts_and_sorted_provenance() -> None:
     assert result.provenance[4].request_sha256 == pairs[4].request_sha256
     assert result.provenance[4].response_sha256 == pairs[4].response_sha256
     assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
-    assert dict(result.literal_to_branch) == {"COMBO": COMBO, "DISH": ITEM3}
+    assert dict(result.literal_to_branch) == {
+        "COMBO": COMBO,
+        "DISH": ITEM3,
+        "SERVICE": ITEM3,
+    }
     assert dict(result.unambiguous_counts) == {COMBO: 1, ITEM3: 1}
     assert result.ambiguous_count == 0
     assert result.total_item_count == 2
@@ -249,30 +253,78 @@ def test_analyzer_derives_normal_mapping_counts_and_sorted_provenance() -> None:
     assert tuple(result.combo_fields) == EXACT_FIVE
 
 
-def test_analyzer_supports_inverse_literal_mapping_without_hardcoding() -> None:
+def test_analyzer_rejects_observations_conflicting_with_reviewed_mapping() -> None:
     schema = _effective_schema()
 
-    result = analyze_menu_evidence(_pairs(schema, [_dish("COMBO"), _combo("DISH")]), schema)
-
-    assert dict(result.branch_to_literal) == {COMBO: "DISH", ITEM3: "COMBO"}
-    assert dict(result.literal_to_branch) == {"COMBO": ITEM3, "DISH": COMBO}
+    with pytest.raises(SafetyError, match="reviewed.*mapping|literal.*branch"):
+        analyze_menu_evidence(_pairs(schema, [_dish("COMBO"), _combo("DISH")]), schema)
 
 
-@pytest.mark.parametrize(
-    "items",
-    [
-        [_combo()],
-        [_dish()],
-    ],
-    ids=["missing-dish", "missing-combo"],
-)
-def test_analyzer_requires_an_unambiguous_observation_of_both_branches(
-    items: list[dict[str, Any]],
-) -> None:
+def test_analyzer_routes_reviewed_service_to_item3_without_changing_primary_mapping() -> None:
+    schema = _effective_schema()
+    items = [
+        _dish(),
+        _combo(),
+        _dish("SERVICE"),
+    ]
+
+    result = analyze_menu_evidence(_pairs(schema, items), schema)
+
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.literal_to_branch) == {
+        "COMBO": COMBO,
+        "DISH": ITEM3,
+        "SERVICE": ITEM3,
+    }
+    assert result.total_item_count == 3
+    assert result.combo_observation_count == 1
+
+
+def test_analyzer_uses_exact_reviewed_mapping_without_combo_observation() -> None:
     schema = _effective_schema()
 
-    with pytest.raises(SafetyError, match="unambiguous.*branches|both.*branches"):
-        analyze_menu_evidence(_pairs(schema, items), schema)
+    result = analyze_menu_evidence(_pairs(schema, [_dish(), _dish("SERVICE")]), schema)
+
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.literal_to_branch) == {
+        "COMBO": COMBO,
+        "DISH": ITEM3,
+        "SERVICE": ITEM3,
+    }
+    assert dict(result.unambiguous_counts) == {COMBO: 0, ITEM3: 2}
+    assert result.combo_observation_count == 0
+    assert {decision.reason_code for decision in result.combo_fields.values()} == {
+        "missing-observation"
+    }
+
+
+@pytest.mark.parametrize("mutation", ["branch", "enum"])
+def test_analyzer_rejects_reviewed_discriminator_fragment_drift(mutation: str) -> None:
+    schema = _effective_schema()
+    if mutation == "branch":
+        union = schema["components"]["schemas"]["ExternalMenuCategory3"]["properties"]["items"][
+            "items"
+        ]
+        union["oneOf"].reverse()
+    else:
+        schema["components"]["schemas"][ITEM3]["properties"]["type"]["enum"] = [
+            "DISH",
+            "COMBO",
+            "UNKNOWN",
+        ]
+
+    with pytest.raises(SafetyError, match="drift|fragment|repair"):
+        analyze_menu_evidence(_pairs(_effective_schema(), [_dish()]), schema)
+
+
+def test_validator_rejects_unknown_v4_literal_without_echoing_it() -> None:
+    validator = MenuEvidenceValidator(_effective_schema())
+    marker = "unknown-sensitive-literal"
+
+    with pytest.raises(SafetyError, match="reviewed public literal") as caught:
+        validator.reviewed_v4_item_literal(_dish(marker))
+
+    assert marker not in str(caught.value)
 
 
 def test_analyzer_rejects_conflicting_literals_for_one_branch() -> None:
@@ -290,7 +342,7 @@ def test_analyzer_rejects_the_same_literal_for_both_branches() -> None:
         analyze_menu_evidence(_pairs(schema, [_dish("DISH"), _combo("DISH")]), schema)
 
 
-def test_analyzer_rejects_ambiguous_only_evidence() -> None:
+def test_analyzer_resolves_ambiguous_only_evidence_with_reviewed_mapping() -> None:
     schema = _ambiguous_schema()
     ambiguous = _combo(
         "COMBO",
@@ -301,8 +353,11 @@ def test_analyzer_rejects_ambiguous_only_evidence() -> None:
         splittable=False,
     )
 
-    with pytest.raises(SafetyError, match="unambiguous.*branches|both.*branches"):
-        analyze_menu_evidence(_pairs(schema, [ambiguous]), schema)
+    result = analyze_menu_evidence(_pairs(schema, [ambiguous]), schema)
+
+    assert result.ambiguous_count == 1
+    assert result.combo_observation_count == 1
+    assert dict(result.unambiguous_counts) == {COMBO: 0, ITEM3: 0}
 
 
 def test_analyzer_resolves_ambiguous_items_after_mapping_regardless_of_item_order() -> None:

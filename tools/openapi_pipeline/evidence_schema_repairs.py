@@ -9,6 +9,7 @@ from typing import Any, TypeAlias
 
 from .errors import SafetyError
 from .io import canonical_json_bytes, sha256_bytes
+from .overlay import apply_overlay
 
 FrozenJson: TypeAlias = (
     None | bool | int | float | str | tuple["FrozenJson", ...] | Mapping[str, "FrozenJson"]
@@ -20,6 +21,7 @@ class ReviewedSchemaPropertyRepair:
     path: tuple[str, ...]
     broken_sha256: str
     corrected: Mapping[str, FrozenJson]
+    legacy_redaction_literal: str | None = None
 
 
 @dataclass(frozen=True)
@@ -34,6 +36,15 @@ class ReviewedMissingPropertyRepair:
 class ReviewedNullOnlyPropertyException:
     component_name: str
     property_name_sha256: str
+
+
+@dataclass(frozen=True)
+class ReviewedV4DiscriminatorContract:
+    union_path: tuple[str, ...]
+    broken_union_sha256: str
+    branches: tuple[str, ...]
+    primary_literals_by_branch: Mapping[str, str]
+    literal_to_branch: Mapping[str, str]
 
 
 def _freeze(value: Any) -> FrozenJson:
@@ -57,11 +68,14 @@ def _property_repair(
     property_name: str,
     broken_sha256: str,
     corrected: dict[str, Any],
+    *,
+    legacy_redaction_literal: str | None = None,
 ) -> ReviewedSchemaPropertyRepair:
     return ReviewedSchemaPropertyRepair(
         path=("components", "schemas", component, "properties", property_name),
         broken_sha256=broken_sha256,
         corrected=_frozen_mapping(corrected),
+        legacy_redaction_literal=legacy_redaction_literal,
     )
 
 
@@ -148,6 +162,21 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
     *(
         _property_repair(
             component,
+            "type",
+            "bc7159be4a85f7672959cb1db82eb5cef2f0ae225b8edcc9111d423126d3cf89",
+            {
+                "default": "DISH",
+                "description": "Item type",
+                "enum": ["DISH", "COMBO", "SERVICE"],
+                "type": "string",
+            },
+            legacy_redaction_literal="SERVICE",
+        )
+        for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3")
+    ),
+    *(
+        _property_repair(
+            component,
             "modifierSchemaId",
             "8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741",
             {
@@ -220,21 +249,46 @@ REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES: tuple[ReviewedMissingPropertyRepair, 
             "properties",
         ),
         property_name="organizationId",
-        broken_parent_sha256=(
-            "14dfe6ad05a1752370850fb33a977adfcbb7b690ee8764d18f68b55f8752c46e"
-        ),
+        broken_parent_sha256=("14dfe6ad05a1752370850fb33a977adfcbb7b690ee8764d18f68b55f8752c46e"),
         corrected=_frozen_mapping({"format": "uuid", "type": "string"}),
     ),
 )
 
-REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS: tuple[
-    ReviewedNullOnlyPropertyException, ...
-] = (
-    ReviewedNullOnlyPropertyException(
-        component_name="BarcodeDto",
-        property_name_sha256="f00dac0f630fb4eb437debc2e71c866f7e0eac502c02ece2b753fc92e3ae8c64",
+REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS: tuple[ReviewedNullOnlyPropertyException, ...] = (
+    *(
+        ReviewedNullOnlyPropertyException(
+            component_name=component,
+            property_name_sha256=(
+                "f00dac0f630fb4eb437debc2e71c866f7e0eac502c02ece2b753fc92e3ae8c64"
+            ),
+        )
+        for component in ("BarcodeDto", "BarcodeDto2", "BarcodeDto3")
     ),
 )
+
+REVIEWED_V4_DISCRIMINATOR_CONTRACT = ReviewedV4DiscriminatorContract(
+    union_path=(
+        "components",
+        "schemas",
+        "ExternalMenuCategory3",
+        "properties",
+        "items",
+        "items",
+    ),
+    broken_union_sha256=("a4bcd95a4d376a2e0d0cb7e7f19e2b97a48379cfea7219c79f5287eba3d32af0"),
+    branches=("ExternalMenuItem3", "ExternalMenuComboItem"),
+    primary_literals_by_branch=MappingProxyType(
+        {"ExternalMenuItem3": "DISH", "ExternalMenuComboItem": "COMBO"}
+    ),
+    literal_to_branch=MappingProxyType(
+        {
+            "DISH": "ExternalMenuItem3",
+            "COMBO": "ExternalMenuComboItem",
+            "SERVICE": "ExternalMenuItem3",
+        }
+    ),
+)
+
 
 def build_reviewed_external_menu_validation_schema(
     effective_schema: dict[str, Any],
@@ -242,8 +296,67 @@ def build_reviewed_external_menu_validation_schema(
     """Return a corrected, caller-independent view of exact reviewed menu defects."""
 
     document = _strict_document_copy(effective_schema)
-    for missing_repair in REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES:
+    _apply_reviewed_repairs(document, actions=None, require_all_components=False)
+    return document
+
+
+def build_reviewed_external_menu_hint_schema(
+    effective_schema: dict[str, Any],
+) -> dict[str, Any]:
+    """Return a detached view with only reviewed public enum hint repairs."""
+
+    document = _strict_document_copy(effective_schema)
+    hint_repairs = tuple(
+        repair
+        for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
+        if repair.legacy_redaction_literal is not None
+    )
+    _apply_reviewed_repairs(
+        document,
+        actions=None,
+        require_all_components=False,
+        missing_repairs=(),
+        property_repairs=hint_repairs,
+    )
+    return document
+
+
+def build_reviewed_external_menu_overlay_repairs(
+    effective_schema: dict[str, Any],
+) -> tuple[dict[str, Any], tuple[dict[str, Any], ...]]:
+    """Return the corrected view and its exact guarded semantic-overlay actions."""
+
+    source = _strict_document_copy(effective_schema)
+    document = _strict_document_copy(effective_schema)
+    actions: list[dict[str, Any]] = []
+    _apply_reviewed_repairs(document, actions=actions, require_all_components=False)
+    if actions:
+        overlay = {
+            "overlay": "1.1.0",
+            "info": {"title": "reviewed evidence repairs", "version": "1.0.0"},
+            "actions": actions,
+        }
+        if apply_overlay(source, overlay) != document:
+            raise SafetyError("Reviewed evidence schema repairs are not reproducible")
+    return document, tuple(actions)
+
+
+def _apply_reviewed_repairs(
+    document: dict[str, Any],
+    *,
+    actions: list[dict[str, Any]] | None,
+    require_all_components: bool,
+    missing_repairs: tuple[ReviewedMissingPropertyRepair, ...] = (
+        REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES
+    ),
+    property_repairs: tuple[ReviewedSchemaPropertyRepair, ...] = (
+        REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
+    ),
+) -> None:
+    for missing_repair in missing_repairs:
         if not _has_component(document, missing_repair.parent_path[2]):
+            if require_all_components:
+                _raise_drift((*missing_repair.parent_path, missing_repair.property_name))
             continue
         parent = _at(document, missing_repair.parent_path)
         if type(parent) is not dict:
@@ -253,15 +366,25 @@ def build_reviewed_external_menu_validation_schema(
             if not _canonical_equal(parent[missing_repair.property_name], corrected):
                 _raise_drift((*missing_repair.parent_path, missing_repair.property_name))
             continue
-        if (
-            sha256_bytes(canonical_json_bytes(parent))
-            != missing_repair.broken_parent_sha256
-        ):
+        if sha256_bytes(canonical_json_bytes(parent)) != missing_repair.broken_parent_sha256:
             _raise_drift((*missing_repair.parent_path, missing_repair.property_name))
+        if actions is not None:
+            actions.append(
+                _guarded_action(
+                    target=missing_repair.parent_path,
+                    value=parent,
+                    issue=_repair_issue(
+                        (*missing_repair.parent_path, missing_repair.property_name)
+                    ),
+                    update={missing_repair.property_name: corrected},
+                )
+            )
         parent[missing_repair.property_name] = corrected
 
-    for property_repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
+    for property_repair in property_repairs:
         if not _has_component(document, property_repair.path[2]):
+            if require_all_components:
+                _raise_drift(property_repair.path)
             continue
         actual = _at(document, property_repair.path)
         corrected = _thaw(property_repair.corrected)
@@ -276,8 +399,40 @@ def build_reviewed_external_menu_validation_schema(
         parent = _at(document, property_repair.path[:-1])
         if type(parent) is not dict:
             _raise_drift(property_repair.path)
+        if actions is not None:
+            if type(actual) is not dict or type(corrected) is not dict:
+                _raise_drift(property_repair.path)
+            replace_keys = {
+                key
+                for key in set(actual).intersection(corrected)
+                if type(actual[key]) in {dict, list}
+                and not _canonical_equal(actual[key], corrected[key])
+            }
+            for key in sorted((set(actual) - set(corrected)) | replace_keys):
+                actions.append(
+                    _guarded_action(
+                        target=(*property_repair.path, key),
+                        value=actual[key],
+                        issue=f"{_repair_issue(property_repair.path)}-{key}-remove",
+                        remove=True,
+                    )
+                )
+                del actual[key]
+            update = {
+                key: value
+                for key, value in corrected.items()
+                if key not in actual or not _canonical_equal(actual[key], value)
+            }
+            if update:
+                actions.append(
+                    _guarded_action(
+                        target=property_repair.path,
+                        value=actual,
+                        issue=_repair_issue(property_repair.path),
+                        update=update,
+                    )
+                )
         parent[property_repair.path[-1]] = corrected
-    return document
 
 
 def is_reviewed_dynamic_map_schema(schema: object) -> bool:
@@ -301,6 +456,60 @@ def is_reviewed_null_only_property_hash(
         and exception.property_name_sha256 == property_name_sha256
         for exception in REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS
     )
+
+
+def reviewed_redacted_enum_literal(
+    *,
+    component_name: str,
+    schema: object,
+    value: object,
+) -> str | None:
+    if value != "<redacted:string>":
+        return None
+    for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
+        if (
+            repair.path[2] == component_name
+            and repair.legacy_redaction_literal is not None
+            and _canonical_equal(schema, _thaw(repair.corrected))
+        ):
+            return repair.legacy_redaction_literal
+    return None
+
+
+def reviewed_v4_discriminator_contract(
+    corrected_schema: dict[str, Any],
+) -> ReviewedV4DiscriminatorContract:
+    contract = REVIEWED_V4_DISCRIMINATOR_CONTRACT
+    union = _at(corrected_schema, contract.union_path)
+    try:
+        union_sha256 = sha256_bytes(canonical_json_bytes(union))
+    except (TypeError, ValueError):
+        _raise_drift(contract.union_path)
+    if union_sha256 != contract.broken_union_sha256:
+        _raise_drift(contract.union_path)
+
+    item_type_path = (
+        "components",
+        "schemas",
+        "ExternalMenuItem3",
+        "properties",
+        "type",
+    )
+    item_type = _at(corrected_schema, item_type_path)
+    item_type_repair = next(
+        (
+            repair
+            for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
+            if repair.path == item_type_path
+        ),
+        None,
+    )
+    if item_type_repair is None or not _canonical_equal(
+        item_type,
+        _thaw(item_type_repair.corrected),
+    ):
+        _raise_drift(item_type_path)
+    return contract
 
 
 def _strict_document_copy(value: object) -> dict[str, Any]:
@@ -329,6 +538,44 @@ def _has_component(document: dict[str, Any], component_name: str) -> bool:
     components = document.get("components")
     schemas = components.get("schemas") if type(components) is dict else None
     return type(schemas) is dict and component_name in schemas
+
+
+def _guarded_action(
+    *,
+    target: tuple[str, ...],
+    value: object,
+    issue: str,
+    update: dict[str, Any] | None = None,
+    remove: bool = False,
+) -> dict[str, Any]:
+    action: dict[str, Any] = {
+        "target": _jsonpath(target),
+        "x-iiko-sdk-guard": {
+            "issue": issue,
+            "expected-matches": 1,
+            "expected-sha256": sha256_bytes(canonical_json_bytes(value)),
+        },
+    }
+    if remove:
+        action["remove"] = True
+    else:
+        action["update"] = _strict_json_copy(update)
+    return action
+
+
+def _jsonpath(path: tuple[str, ...]) -> str:
+    return "$" + "".join(f"[{json.dumps(part)}]" for part in path)
+
+
+def _repair_issue(path: tuple[str, ...]) -> str:
+    return "external-menu-schema-" + "-".join(part.replace("_", "-") for part in path[2:])
+
+
+def _strict_json_copy(value: object) -> Any:
+    try:
+        return json.loads(canonical_json_bytes(value))
+    except (TypeError, ValueError, json.JSONDecodeError, RecursionError) as error:
+        raise SafetyError("Reviewed evidence overlay update is not strict JSON") from error
 
 
 def _raise_drift(path: tuple[str, ...]) -> None:

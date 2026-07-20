@@ -56,6 +56,14 @@ _UUID_LIKE_KEY = re.compile(
     r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
 )
 _CAPTURE_UUID_ALIAS = re.compile(r"00000000-0000-4000-8000-[0-9]{12}\Z")
+_FIXED_POINT_SAFE_REDACTIONS = frozenset(
+    {
+        "<redacted:email>",
+        "<redacted:phone>",
+        "<redacted:secret>",
+        "<redacted:string>",
+    }
+)
 _JWT = re.compile(
     r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\."
     r"[A-Za-z0-9_-]{8,}(?![A-Za-z0-9_-])"
@@ -815,6 +823,8 @@ class Sanitizer:
             return "<redacted:email>"
         if _PHONE.search(value):
             return "<redacted:phone>"
+        if self._fixed_point_validation and value in _FIXED_POINT_SAFE_REDACTIONS:
+            return value
         allowed_values = self._allowed_values(path, path_values)
         if (key is not None and key in enum_keys) or value in allowed_values:
             return value
