@@ -21,7 +21,7 @@ class ReviewedSchemaPropertyRepair:
     path: tuple[str, ...]
     broken_sha256: str
     corrected: Mapping[str, FrozenJson]
-    legacy_redaction_literal: str | None = None
+    include_in_redaction_hints: bool = False
 
 
 @dataclass(frozen=True)
@@ -69,13 +69,13 @@ def _property_repair(
     broken_sha256: str,
     corrected: dict[str, Any],
     *,
-    legacy_redaction_literal: str | None = None,
+    include_in_redaction_hints: bool = False,
 ) -> ReviewedSchemaPropertyRepair:
     return ReviewedSchemaPropertyRepair(
         path=("components", "schemas", component, "properties", property_name),
         broken_sha256=broken_sha256,
         corrected=_frozen_mapping(corrected),
-        legacy_redaction_literal=legacy_redaction_literal,
+        include_in_redaction_hints=include_in_redaction_hints,
     )
 
 
@@ -170,7 +170,7 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
                 "enum": ["DISH", "COMBO", "SERVICE"],
                 "type": "string",
             },
-            legacy_redaction_literal="SERVICE",
+            include_in_redaction_hints=True,
         )
         for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3")
     ),
@@ -296,7 +296,7 @@ def build_reviewed_external_menu_validation_schema(
     """Return a corrected, caller-independent view of exact reviewed menu defects."""
 
     document = _strict_document_copy(effective_schema)
-    _apply_reviewed_repairs(document, actions=None, require_all_components=False)
+    _apply_reviewed_repairs(document, actions=None, require_all_components=True)
     return document
 
 
@@ -309,7 +309,7 @@ def build_reviewed_external_menu_hint_schema(
     hint_repairs = tuple(
         repair
         for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
-        if repair.legacy_redaction_literal is not None
+        if repair.include_in_redaction_hints
     )
     _apply_reviewed_repairs(
         document,
@@ -329,7 +329,7 @@ def build_reviewed_external_menu_overlay_repairs(
     source = _strict_document_copy(effective_schema)
     document = _strict_document_copy(effective_schema)
     actions: list[dict[str, Any]] = []
-    _apply_reviewed_repairs(document, actions=actions, require_all_components=False)
+    _apply_reviewed_repairs(document, actions=actions, require_all_components=True)
     if actions:
         overlay = {
             "overlay": "1.1.0",
@@ -435,14 +435,17 @@ def _apply_reviewed_repairs(
         parent[property_repair.path[-1]] = corrected
 
 
-def is_reviewed_dynamic_map_schema(schema: object) -> bool:
-    if not isinstance(schema, Mapping):
+def is_reviewed_dynamic_map_schema(*, schema_path: str, schema: object) -> bool:
+    if type(schema_path) is not str or not isinstance(schema, Mapping):
+        return False
+    expected_digest = _REVIEWED_DYNAMIC_MAP_HASHES_BY_PATH.get(schema_path)
+    if expected_digest is None:
         return False
     try:
         digest = sha256_bytes(canonical_json_bytes(schema))
     except (TypeError, ValueError):
         return False
-    return digest in _REVIEWED_DYNAMIC_MAP_HASHES
+    return digest == expected_digest
 
 
 def is_reviewed_null_only_property_hash(
@@ -456,24 +459,6 @@ def is_reviewed_null_only_property_hash(
         and exception.property_name_sha256 == property_name_sha256
         for exception in REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS
     )
-
-
-def reviewed_redacted_enum_literal(
-    *,
-    component_name: str,
-    schema: object,
-    value: object,
-) -> str | None:
-    if value != "<redacted:string>":
-        return None
-    for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
-        if (
-            repair.path[2] == component_name
-            and repair.legacy_redaction_literal is not None
-            and _canonical_equal(schema, _thaw(repair.corrected))
-        ):
-            return repair.legacy_redaction_literal
-    return None
 
 
 def reviewed_v4_discriminator_contract(
@@ -601,8 +586,10 @@ def _thaw(value: FrozenJson) -> Any:
     raise SafetyError("Reviewed evidence schema repair contains invalid JSON")
 
 
-_REVIEWED_DYNAMIC_MAP_HASHES = frozenset(
-    sha256_bytes(canonical_json_bytes(_thaw(repair.corrected)))
-    for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
-    if repair.path[-1] == "overrideTaxCategories"
+_REVIEWED_DYNAMIC_MAP_HASHES_BY_PATH: Mapping[str, str] = MappingProxyType(
+    {
+        ".".join(repair.path): sha256_bytes(canonical_json_bytes(_thaw(repair.corrected)))
+        for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
+        if repair.path[-1] == "overrideTaxCategories"
+    }
 )

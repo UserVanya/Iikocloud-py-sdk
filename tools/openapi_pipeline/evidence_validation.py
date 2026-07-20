@@ -14,7 +14,6 @@ from .evidence_schema_repairs import (
     build_reviewed_external_menu_validation_schema,
     is_reviewed_dynamic_map_schema,
     is_reviewed_null_only_property_hash,
-    reviewed_redacted_enum_literal,
     reviewed_v4_discriminator_contract,
 )
 from .io import canonical_json_bytes, sha256_bytes
@@ -133,11 +132,19 @@ class MenuEvidenceValidator:
         validation_response_body = _mutable_json_copy(response_body)
         assert type(validation_request_body) is dict
         assert type(validation_response_body) is dict
-        self._validate_instance(validation_request_body, self._request_schema, path="request")
+        self._validate_instance(
+            validation_request_body,
+            self._request_schema,
+            path="request",
+            schema_path=(
+                "paths./api/2/menu/by_id.post.requestBody.content.application/json.schema"
+            ),
+        )
         self._validate_instance(
             validation_response_body,
             self._root_schemas[version],
             path=f"response-v{version}",
+            schema_path=f"components.schemas.{_VERSION_COMPONENTS[version]}",
             component_name=_VERSION_COMPONENTS[version],
         )
         if (
@@ -159,12 +166,7 @@ class MenuEvidenceValidator:
         if type(value) is not dict:
             raise SafetyError("Evidence V4 item branch matching requires an object")
         discriminator = value.get("type")
-        legacy_literal = reviewed_redacted_enum_literal(
-            component_name=_ITEM3_COMPONENT,
-            schema=self._component(_ITEM3_COMPONENT)["properties"]["type"],
-            value=discriminator,
-        )
-        if legacy_literal is None and (
+        if (
             type(discriminator) is not str
             or discriminator not in self._discriminator_contract.literal_to_branch
         ):
@@ -185,6 +187,7 @@ class MenuEvidenceValidator:
                     value,
                     target,
                     path="response-v4.item",
+                    schema_path=f"components.schemas.{branch_name}",
                     component_name=branch_name,
                 )
             except SafetyError:
@@ -192,12 +195,6 @@ class MenuEvidenceValidator:
             matches.append(branch_name)
         if not matches:
             raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
-        if legacy_literal is not None and matches != [
-            self._discriminator_contract.literal_to_branch[legacy_literal]
-        ]:
-            raise SafetyError(
-                "Evidence V4 legacy item discriminator does not match its reviewed branch"
-            )
         return tuple(matches)
 
     def reviewed_v4_item_literal(self, item: Mapping[str, Any]) -> str:
@@ -207,14 +204,7 @@ class MenuEvidenceValidator:
         mapping = self._discriminator_contract.literal_to_branch
         if type(discriminator) is str and discriminator in mapping:
             return discriminator
-        normalized = reviewed_redacted_enum_literal(
-            component_name=_ITEM3_COMPONENT,
-            schema=self._component(_ITEM3_COMPONENT)["properties"]["type"],
-            value=discriminator,
-        )
-        if normalized is None or self.match_v4_item_branches(item) != (mapping[normalized],):
-            raise SafetyError("Evidence V4 item discriminator is not a reviewed public literal")
-        return normalized
+        raise SafetyError("Evidence V4 item discriminator is not a reviewed public literal")
 
     def reviewed_v4_literal_mapping(self) -> Mapping[str, str]:
         """Return the exact immutable reviewed V4 discriminator mapping."""
@@ -245,6 +235,7 @@ class MenuEvidenceValidator:
             copied_value,
             schema,
             path=f"response-v4.item.{property_name}",
+            schema_path=(f"components.schemas.{_ITEM3_COMPONENT}.properties.{property_name}"),
             component_name=_ITEM3_COMPONENT,
         )
         return _mutable_json_copy(schema)
@@ -372,7 +363,7 @@ class MenuEvidenceValidator:
             and additional_properties is not False
             and (
                 type(additional_properties) is not dict
-                or not is_reviewed_dynamic_map_schema(schema)
+                or not is_reviewed_dynamic_map_schema(schema_path=path, schema=schema)
             )
         ):
             raise SafetyError("Evidence schema additionalProperties contract is unsupported")
@@ -483,15 +474,9 @@ class MenuEvidenceValidator:
         schema: dict[str, Any],
         *,
         path: str,
+        schema_path: str,
         component_name: str | None = None,
     ) -> None:
-        normalized = reviewed_redacted_enum_literal(
-            component_name=component_name or "",
-            schema=schema,
-            value=value,
-        )
-        if normalized is not None:
-            value = normalized
         if value is None and schema.get("nullable") is True:
             return
         reference = schema.get("$ref")
@@ -501,12 +486,19 @@ class MenuEvidenceValidator:
                 value,
                 target,
                 path=path,
+                schema_path=f"components.schemas.{target_name}",
                 component_name=target_name,
             )
             return
         one_of = schema.get("oneOf")
         if one_of is not None:
-            self._validate_one_of(value, schema, path=path, component_name=component_name)
+            self._validate_one_of(
+                value,
+                schema,
+                path=path,
+                schema_path=schema_path,
+                component_name=component_name,
+            )
             return
 
         schema_type = schema.get("type")
@@ -541,7 +533,10 @@ class MenuEvidenceValidator:
                     )
             elif unknown:
                 additional_properties = schema.get("additionalProperties")
-                if type(additional_properties) is dict and is_reviewed_dynamic_map_schema(schema):
+                if type(additional_properties) is dict and is_reviewed_dynamic_map_schema(
+                    schema_path=schema_path,
+                    schema=schema,
+                ):
                     for name in sorted(unknown):
                         if _CAPTURE_UUID_ALIAS.fullmatch(name) is None:
                             raise SafetyError(
@@ -551,6 +546,7 @@ class MenuEvidenceValidator:
                             value[name],
                             additional_properties,
                             path=f"{path}.additionalProperties",
+                            schema_path=f"{schema_path}.additionalProperties",
                             component_name=component_name,
                         )
                 elif not all(
@@ -569,6 +565,7 @@ class MenuEvidenceValidator:
                         child,
                         property_schema,
                         path=f"{path}.{name}",
+                        schema_path=f"{schema_path}.properties.{name}",
                         component_name=component_name,
                     )
         if type(value) is list and "items" in schema:
@@ -577,6 +574,7 @@ class MenuEvidenceValidator:
                     item,
                     schema["items"],
                     path=f"{path}.items",
+                    schema_path=f"{schema_path}.items",
                     component_name=component_name,
                 )
 
@@ -586,6 +584,7 @@ class MenuEvidenceValidator:
         schema: dict[str, Any],
         *,
         path: str,
+        schema_path: str,
         component_name: str | None,
     ) -> None:
         branches = schema["oneOf"]
@@ -593,12 +592,13 @@ class MenuEvidenceValidator:
             self.match_v4_item_branches(value)
             return
         matches = 0
-        for branch in branches:
+        for index, branch in enumerate(branches):
             try:
                 self._validate_instance(
                     value,
                     branch,
                     path=path,
+                    schema_path=f"{schema_path}.oneOf.{index}",
                     component_name=component_name,
                 )
             except SafetyError:

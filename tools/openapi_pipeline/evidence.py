@@ -103,7 +103,10 @@ def _assert_reviewed_override_tax_array_shape(
         "description": "Tax benefits",
         "items": {"$ref": f"#/components/schemas/{item_component}"},
         "type": "array",
-    } and not is_reviewed_dynamic_map_schema(override_tax_categories):
+    } and not is_reviewed_dynamic_map_schema(
+        schema_path=(f"components.schemas.{component_name}.properties.overrideTaxCategories"),
+        schema=override_tax_categories,
+    ):
         raise SafetyError("Evidence overrideTaxCategories broken array shape has drifted")
 
 

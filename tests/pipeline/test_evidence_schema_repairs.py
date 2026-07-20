@@ -7,7 +7,7 @@ from typing import Any
 import pytest
 
 import tools.openapi_pipeline.evidence_schema_repairs as repair_module
-from tools.openapi_pipeline.capture import ARRAY_ITEM
+from tools.openapi_pipeline.capture import ARRAY_ITEM, Sanitizer
 from tools.openapi_pipeline.errors import SafetyError, StaleOverlayError
 from tools.openapi_pipeline.evidence import build_versioned_evidence_redaction_hints
 from tools.openapi_pipeline.evidence_schema_repairs import (
@@ -132,29 +132,96 @@ def test_corrected_hints_preserve_historical_public_service_literal(
         version,
     )
 
-    assert hints.response_values_for_status(200)[
-        (groups_name, ARRAY_ITEM, "items", ARRAY_ITEM, "type")
-    ] == frozenset({"DISH", "COMBO", "SERVICE"})
+    response_values = hints.response_values_for_status(200)
+    assert response_values[(groups_name, ARRAY_ITEM, "items", ARRAY_ITEM, "type")] == frozenset(
+        {"DISH", "COMBO", "SERVICE"}
+    )
+    sanitized = Sanitizer().sanitize(
+        {
+            groups_name: [
+                {
+                    "items": [
+                        {"type": "SERVICE"},
+                        {"type": "FUTURE_PUBLIC_ITEM_TYPE"},
+                    ]
+                }
+            ]
+        },
+        path_values=response_values,
+    )
+    assert sanitized[groups_name][0]["items"] == [
+        {"type": "SERVICE"},
+        {"type": "<redacted:string>"},
+    ]
 
 
-def test_legacy_service_marker_is_exact_to_three_reviewed_item_components() -> None:
+def test_redacted_string_marker_is_rejected_for_all_reviewed_item_type_enums() -> None:
     validator = MenuEvidenceValidator(_schema())
 
     for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3"):
         type_schema = validator._component(component)["properties"]["type"]  # noqa: SLF001
-        validator._validate_instance(  # noqa: SLF001
-            "<redacted:string>",
-            type_schema,
-            path=f"components.schemas.{component}.properties.type",
-            component_name=component,
+        for marker in ("<redacted:string>", "<redacted:other>"):
+            with pytest.raises(SafetyError, match="reviewed schema enum"):
+                validator._validate_instance(  # noqa: SLF001
+                    marker,
+                    type_schema,
+                    path=f"components.schemas.{component}.properties.type",
+                    schema_path=f"components.schemas.{component}.properties.type",
+                    component_name=component,
+                )
+
+
+@pytest.mark.parametrize(
+    "builder_name",
+    [
+        "build_reviewed_external_menu_validation_schema",
+        "build_reviewed_external_menu_overlay_repairs",
+    ],
+)
+@pytest.mark.parametrize("mutation", ["delete", "rename"])
+def test_full_schema_entrypoints_require_every_reviewed_target(
+    builder_name: str,
+    mutation: str,
+) -> None:
+    schema = _schema()
+    schemas = schema["components"]["schemas"]
+    component = "ExternalMenuModifierItem3"
+    if mutation == "delete":
+        del schemas[component]
+    else:
+        schemas[f"Renamed{component}"] = schemas.pop(component)
+
+    builder = getattr(repair_module, builder_name)
+    with pytest.raises(
+        SafetyError,
+        match=(
+            r"^Reviewed evidence schema repair drifted at components\.schemas\."
+            r"ExternalMenuModifierItem3\.properties\.restrictions$"
+        ),
+    ):
+        builder(schema)
+
+
+def test_dynamic_map_approval_is_bound_to_its_exact_reviewed_property_path() -> None:
+    schema = _schema()
+    corrected = build_reviewed_external_menu_validation_schema(schema)
+    copied_map = copy.deepcopy(_property(corrected, "ExternalMenuV3", "overrideTaxCategories"))
+    schema["components"]["schemas"]["ExternalMenuV2"]["properties"]["unrelatedDynamicMap"] = (
+        copied_map
+    )
+
+    with pytest.raises(SafetyError, match="additionalProperties contract"):
+        MenuEvidenceValidator(schema)
+
+    validator = MenuEvidenceValidator(_schema())
+    with pytest.raises(SafetyError, match="undeclared property"):
+        validator._validate_instance(  # noqa: SLF001 - runtime path binding regression
+            {"00000000-0000-4000-8000-000000000001": []},
+            copied_map,
+            path="response-v2.unrelatedDynamicMap",
+            schema_path="components.schemas.ExternalMenuV2.properties.unrelatedDynamicMap",
+            component_name="ExternalMenuV2",
         )
-        with pytest.raises(SafetyError, match="reviewed schema enum"):
-            validator._validate_instance(  # noqa: SLF001
-                "<redacted:other>",
-                type_schema,
-                path=f"components.schemas.{component}.properties.type",
-                component_name=component,
-            )
 
 
 def test_registry_rejects_stale_third_shape_with_only_static_schema_path() -> None:
@@ -186,6 +253,7 @@ def test_corrected_additional_properties_map_is_preflighted_and_validated() -> N
         {"00000000-0000-4000-8000-000000000001": [value]},
         map_schema,
         path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
+        schema_path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
         component_name="ExternalMenuV3",
     )
     with pytest.raises(SafetyError, match="reviewed schema type") as caught:
@@ -193,6 +261,7 @@ def test_corrected_additional_properties_map_is_preflighted_and_validated() -> N
             {"00000000-0000-4000-8000-000000000001": [None]},
             map_schema,
             path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
+            schema_path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
             component_name="ExternalMenuV3",
         )
     assert "00000000-0000-4000-8000-000000000001" not in str(caught.value)

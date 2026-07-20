@@ -33,6 +33,51 @@ RAW_UUID_KEY = "11111111-1111-4111-8111-111111111111"
 
 
 def _effective_schema() -> dict[str, Any]:
+    def reviewed_repair_components() -> dict[str, Any]:
+        def thaw(value: object) -> Any:
+            if isinstance(value, Mapping):
+                return {key: thaw(child) for key, child in value.items()}
+            if type(value) is tuple:
+                return [thaw(child) for child in value]
+            return value
+
+        def references(value: object) -> set[str]:
+            if isinstance(value, Mapping):
+                references_found = {
+                    reference.removeprefix("#/components/schemas/")
+                    for reference in [value.get("$ref")]
+                    if type(reference) is str and reference.startswith("#/components/schemas/")
+                }
+                for child in value.values():
+                    references_found.update(references(child))
+                return references_found
+            if type(value) is list:
+                references_found = set()
+                for child in value:
+                    references_found.update(references(child))
+                return references_found
+            return set()
+
+        components: dict[str, Any] = {}
+        for property_repair in repair_module.REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
+            component = components.setdefault(
+                property_repair.path[2],
+                {"properties": {}, "type": "object"},
+            )
+            component["properties"][property_repair.path[-1]] = thaw(property_repair.corrected)
+        for missing_repair in repair_module.REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES:
+            component = components.setdefault(
+                missing_repair.parent_path[2],
+                {"properties": {}, "type": "object"},
+            )
+            component["properties"][missing_repair.property_name] = thaw(missing_repair.corrected)
+        referenced_components: set[str] = set()
+        for component in components.values():
+            referenced_components.update(references(component))
+        for component_name in referenced_components:
+            components.setdefault(component_name, {})
+        return components
+
     def root_schema(version: int) -> dict[str, Any]:
         groups_name = "itemCategories" if version == 2 else "itemGroups"
         properties: dict[str, Any] = {
@@ -105,6 +150,7 @@ def _effective_schema() -> dict[str, Any]:
         },
         "components": {
             "schemas": {
+                **reviewed_repair_components(),
                 "iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest": {
                     "additionalProperties": False,
                     "type": "object",
@@ -1335,6 +1381,7 @@ def test_combo_required_exception_applies_only_to_exact_reviewed_component() -> 
             {},
             inline_child_schema,
             path="synthetic-inline-child",
+            schema_path="synthetic-inline-child",
             component_name="ExternalMenuComboItem",
         )
 
@@ -1483,7 +1530,7 @@ def test_category3_item_union_does_not_guess_branch_from_raw_discriminator(
     assert tuple(_read(root)) == (2, 3, 4)
 
 
-def test_category3_item_union_accepts_exact_legacy_service_marker_for_item3(
+def test_category3_item_union_rejects_exact_redaction_marker_for_item3(
     tmp_path: Path,
 ) -> None:
     root = tmp_path / "repository"
@@ -1503,10 +1550,11 @@ def test_category3_item_union_accepts_exact_legacy_service_marker_for_item3(
     ]
     _replace_json(response_path, response)
 
-    assert tuple(_read(root)) == (2, 3, 4)
+    with pytest.raises(SafetyError, match="discriminator|enum|branch"):
+        _read(root)
 
 
-@pytest.mark.parametrize("shape", ["redacted-type", "no-reviewed-branch"])
+@pytest.mark.parametrize("shape", ["future-type", "no-reviewed-branch"])
 def test_category3_item_union_rejects_unsafe_literal_or_zero_structural_branches(
     tmp_path: Path,
     shape: str,
@@ -1515,9 +1563,9 @@ def test_category3_item_union_rejects_unsafe_literal_or_zero_structural_branches
     paths = _complete_tree(root)
     response_path = paths[4][1]
     response = _load(response_path)
-    if shape == "redacted-type":
+    if shape == "future-type":
         item = response["body"]["itemGroups"][0]["items"][0]
-        item["type"] = "<redacted:string>"
+        item["type"] = "FUTURE_PUBLIC_ITEM_TYPE"
     else:
         item = {"type": "DISH"}
     response["body"]["itemGroups"][0]["items"] = [item]
