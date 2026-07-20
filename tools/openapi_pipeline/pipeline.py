@@ -25,7 +25,11 @@ from .io import (
     write_bytes_atomic,
     write_json_atomic,
 )
-from .naming import build_model_mappings, inject_operation_ids, normalize_model_name
+from .naming import (
+    inject_operation_ids,
+    normalize_generator_schema_names,
+    normalize_model_name,
+)
 from .normalization import build_types_overlay
 from .overlay import apply_overlay, apply_overlay_files
 from .package_checks import verify_generated_contracts, verify_root_wheel
@@ -459,6 +463,12 @@ def _model_schemas(document: dict[str, Any]) -> dict[str, Any]:
     return schemas
 
 
+def _apply_model_name_registry(
+    document: dict[str, Any], overrides: dict[str, str]
+) -> tuple[dict[str, Any], dict[str, str]]:
+    return normalize_generator_schema_names(document, overrides)
+
+
 def _apply_correction_overlays(
     root: Path,
     document: dict[str, Any],
@@ -483,8 +493,7 @@ def _apply_committed_corrections(
     operations = _load_string_registry(paths.root / "openapi/operation-ids.yaml", "operations")
     effective = inject_operation_ids(effective, operations)
     models = _load_string_registry(paths.root / "openapi/model-name-overrides.yaml", "models")
-    mappings = build_model_mappings(_model_schemas(effective), models)
-    return effective, mappings
+    return _apply_model_name_registry(effective, models)
 
 
 def _load_committed_for_report(paths: RepoPaths) -> dict[str, Any] | None:
@@ -901,8 +910,7 @@ def _compose_reviewed_candidate(
                 label="Reviewed bootstrap model override candidate",
             )
         )
-    mappings = build_model_mappings(_model_schemas(effective), dict(sorted(overrides.items())))
-    return effective, mappings
+    return _apply_model_name_registry(effective, dict(sorted(overrides.items())))
 
 
 def _bootstrap_preview(dependencies: PipelineDependencies) -> None:
@@ -1039,8 +1047,8 @@ def _accept_bootstrap(dependencies: PipelineDependencies) -> None:
         effective,
         _load_string_registry(operations_candidate, "operations"),
     )
-    mappings = build_model_mappings(
-        _model_schemas(effective),
+    effective, mappings = _apply_model_name_registry(
+        effective,
         _bootstrap_overrides(paths, model_candidate),
     )
     dependencies.validate(effective)

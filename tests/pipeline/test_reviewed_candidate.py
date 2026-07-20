@@ -64,9 +64,9 @@ def _write_yaml(path: Path, value: object) -> None:
     path.write_text(yaml.safe_dump(value, sort_keys=True), encoding="utf-8")
 
 
-def _reviewed_repo(root: Path) -> RepoPaths:
+def _reviewed_repo(root: Path, *, raw_document: dict[str, Any] | None = None) -> RepoPaths:
     (root / "pyproject.toml").write_text("[project]\nname='synthetic'\n", encoding="utf-8")
-    raw = _raw_document()
+    raw = copy.deepcopy(raw_document) if raw_document is not None else _raw_document()
     candidate = root / "build/upstream/candidate.json"
     candidate.parent.mkdir(parents=True)
     candidate.write_bytes(canonical_json_bytes(raw))
@@ -222,6 +222,44 @@ def test_reviewed_candidate_applies_stages_without_accepting_or_writing(tmp_path
         if path.is_file()
     }
     assert after == before
+
+
+def test_reviewed_candidate_normalizes_generator_invalid_schema_names(
+    tmp_path: Path,
+) -> None:
+    raw = _raw_document()
+    invalid = "Namespace.Wrapper`1[[Namespace.Item, Assembly]]"
+    old_ref = f"#/components/schemas/{invalid}"
+    raw["components"]["schemas"] = {
+        invalid: raw["components"]["schemas"]["Raw.Bool"],
+        "Holder": {"properties": {"value": {"$ref": old_ref}}},
+    }
+    raw["paths"]["/api/2/menu/by_id"]["post"]["responses"]["200"]["content"]["application/json"][
+        "schema"
+    ] = {"$ref": old_ref}
+    paths = _reviewed_repo(tmp_path, raw_document=raw)
+    _write_yaml(
+        tmp_path / "build/bootstrap/model-name-overrides.yaml",
+        {"models": {invalid: "ReviewedResponse"}},
+    )
+
+    effective, mappings = compose_reviewed_bootstrap_candidate(paths)
+
+    schemas = effective["components"]["schemas"]
+    assert invalid not in schemas
+    assert schemas["Holder"]["properties"]["value"]["$ref"] == (
+        "#/components/schemas/ReviewedResponse"
+    )
+    assert (
+        effective["paths"]["/api/2/menu/by_id"]["post"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]["$ref"]
+        == "#/components/schemas/ReviewedResponse"
+    )
+    assert mappings == {
+        "Holder": "Holder",
+        "ReviewedResponse": "ReviewedResponse",
+    }
 
 
 def test_reviewed_candidate_rejects_candidate_not_derived_from_raw(tmp_path: Path) -> None:

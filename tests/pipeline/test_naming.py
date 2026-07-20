@@ -6,12 +6,39 @@ from typing import Any, cast
 import pytest
 import yaml
 
+import tools.openapi_pipeline.naming as naming_module
 from tools.openapi_pipeline.errors import ValidationError
 from tools.openapi_pipeline.naming import (
     build_model_mappings,
     inject_operation_ids,
     normalize_model_name,
 )
+
+_CLR_GENERIC_SCHEMA = (
+    "Namespace.RmsItemsResponseWrapper`1[[Namespace.Item, "
+    "Assembly, Version=1.0.0.0, Culture=neutral]]"
+)
+
+
+def _normalize_generator_schema_names(
+    document: dict[str, Any], overrides: dict[str, str]
+) -> tuple[dict[str, Any], dict[str, str]]:
+    normalizer = getattr(naming_module, "normalize_generator_schema_names", None)
+    assert callable(normalizer), "generator-invalid schema normalizer is missing"
+    return normalizer(document, overrides)
+
+
+def _all_refs(value: Any) -> list[str]:
+    refs: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            if key == "$ref" and isinstance(child, str):
+                refs.append(child)
+            refs.extend(_all_refs(child))
+    elif isinstance(value, list):
+        for child in value:
+            refs.extend(_all_refs(child))
+    return refs
 
 
 def test_operation_registry_is_total_and_stable() -> None:
@@ -29,10 +56,7 @@ def test_operation_registry_is_total_and_stable() -> None:
     result = inject_operation_ids(document, registry)
 
     assert result["paths"]["/api/1/access_token"]["post"]["operationId"] == "authenticate"
-    assert (
-        result["paths"]["/api/1/organizations"]["post"]["operationId"]
-        == "get_organizations"
-    )
+    assert result["paths"]["/api/1/organizations"]["post"]["operationId"] == "get_organizations"
 
 
 def test_missing_operation_registry_entry_fails() -> None:
@@ -142,9 +166,9 @@ def test_model_mapping_is_sorted_normalized_and_does_not_mutate_inputs() -> None
 
 
 def test_explicit_override_can_name_an_otherwise_unnormalizable_schema() -> None:
-    assert build_model_mappings(
-        {"Namespace.---": {}}, {"Namespace.---": "DashPlaceholder"}
-    ) == {"Namespace.---": "DashPlaceholder"}
+    assert build_model_mappings({"Namespace.---": {}}, {"Namespace.---": "DashPlaceholder"}) == {
+        "Namespace.---": "DashPlaceholder"
+    }
 
 
 @pytest.mark.parametrize(
@@ -157,9 +181,9 @@ def test_auto_normalized_python_keywords_require_explicit_override(raw: str) -> 
 
 
 def test_explicit_override_can_replace_an_auto_normalized_python_keyword() -> None:
-    assert build_model_mappings(
-        {"Namespace.None": {}}, {"Namespace.None": "NoneValue"}
-    ) == {"Namespace.None": "NoneValue"}
+    assert build_model_mappings({"Namespace.None": {}}, {"Namespace.None": "NoneValue"}) == {
+        "Namespace.None": "NoneValue"
+    }
 
 
 def test_stale_model_overrides_fail_in_sorted_order() -> None:
@@ -193,6 +217,120 @@ def test_duplicate_override_targets_fail_deterministically() -> None:
         match="SharedModel: Namespace.Alpha, Namespace.Zed",
     ):
         build_model_mappings(schemas, overrides)
+
+
+def test_generator_invalid_schema_key_is_physically_renamed_with_exact_refs() -> None:
+    old_ref = f"#/components/schemas/{_CLR_GENERIC_SCHEMA}"
+    document = {
+        "openapi": "3.0.3",
+        "paths": {
+            "/items": {
+                "get": {
+                    "responses": {
+                        "200": {"content": {"application/json": {"schema": {"$ref": old_ref}}}}
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                _CLR_GENERIC_SCHEMA: {
+                    "type": "object",
+                    "properties": {"next": {"$ref": old_ref}},
+                },
+                "Envelope": {
+                    "type": "object",
+                    "properties": {"payload": {"$ref": old_ref}},
+                    "description": f"unrelated substring {old_ref} stays",
+                },
+                "Namespace.Valid": {"type": "object"},
+            }
+        },
+        "x-unrelated": old_ref,
+    }
+    overrides = {
+        _CLR_GENERIC_SCHEMA: "RmsItemResponse",
+        "Namespace.Valid": "DomainValid",
+    }
+    original_document = copy.deepcopy(document)
+    original_overrides = overrides.copy()
+
+    corrected, mappings = _normalize_generator_schema_names(document, overrides)
+    repeated, repeated_mappings = _normalize_generator_schema_names(document, overrides)
+
+    schemas = corrected["components"]["schemas"]
+    assert list(schemas) == sorted(schemas)
+    assert _CLR_GENERIC_SCHEMA not in schemas
+    assert "RmsItemResponse" in schemas
+    assert "Namespace.Valid" in schemas
+    assert "DomainValid" not in schemas
+    assert _all_refs(corrected).count("#/components/schemas/RmsItemResponse") == 3
+    assert old_ref not in _all_refs(corrected)
+    assert corrected["x-unrelated"] == old_ref
+    assert schemas["Envelope"]["description"] == f"unrelated substring {old_ref} stays"
+    assert mappings == {
+        "Envelope": "Envelope",
+        "Namespace.Valid": "DomainValid",
+        "RmsItemResponse": "RmsItemResponse",
+    }
+    assert corrected == repeated
+    assert mappings == repeated_mappings
+    assert document == original_document
+    assert overrides == original_overrides
+
+
+def test_generator_invalid_schema_ref_rewrite_is_rfc6901_safe() -> None:
+    raw = "Namespace/Bad~Name"
+    old_ref = "#/components/schemas/Namespace~1Bad~0Name"
+    document = {
+        "components": {
+            "schemas": {
+                raw: {"type": "object"},
+                "Holder": {"properties": {"item": {"$ref": old_ref}}},
+            }
+        }
+    }
+
+    corrected, mappings = _normalize_generator_schema_names(document, {raw: "SafeName"})
+
+    assert _all_refs(corrected) == ["#/components/schemas/SafeName"]
+    assert mappings == {"Holder": "Holder", "SafeName": "SafeName"}
+
+
+def test_generator_invalid_schema_requires_explicit_reviewed_override() -> None:
+    document = {"components": {"schemas": {_CLR_GENERIC_SCHEMA: {}}}}
+
+    with pytest.raises(ValidationError, match="explicit reviewed model-name override"):
+        _normalize_generator_schema_names(document, {})
+
+
+@pytest.mark.parametrize("target", ["Bad Target", "bad-target", "class"])
+def test_generator_invalid_schema_rejects_invalid_physical_target(target: str) -> None:
+    document = {"components": {"schemas": {_CLR_GENERIC_SCHEMA: {}}}}
+
+    with pytest.raises(ValidationError, match="physical schema target"):
+        _normalize_generator_schema_names(document, {_CLR_GENERIC_SCHEMA: target})
+
+
+def test_generator_invalid_schema_rejects_target_collision_with_untouched_key() -> None:
+    document = {"components": {"schemas": {_CLR_GENERIC_SCHEMA: {}, "ExistingSchema": {}}}}
+
+    with pytest.raises(ValidationError, match="physical schema target collision"):
+        _normalize_generator_schema_names(document, {_CLR_GENERIC_SCHEMA: "ExistingSchema"})
+
+
+def test_generator_invalid_schemas_reject_duplicate_physical_targets() -> None:
+    other_invalid = "Namespace.Other`1[[Namespace.Item, Assembly]]"
+    document = {"components": {"schemas": {_CLR_GENERIC_SCHEMA: {}, other_invalid: {}}}}
+
+    with pytest.raises(ValidationError, match="duplicate physical schema target"):
+        _normalize_generator_schema_names(
+            document,
+            {
+                _CLR_GENERIC_SCHEMA: "SharedResponse",
+                other_invalid: "SharedResponse",
+            },
+        )
 
 
 def test_normalized_names_are_valid_python_identifiers() -> None:

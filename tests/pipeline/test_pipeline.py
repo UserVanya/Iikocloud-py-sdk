@@ -485,9 +485,7 @@ def test_bootstrap_preview_preserves_complete_candidates_when_naming_fails(
     with pytest.raises(PipelineError, match="operationId collision"):
         bootstrap(fake_dependencies, accept_current_upstream=False)
 
-    assert {
-        path.name: path.read_bytes() for path in sorted(bootstrap_root.iterdir())
-    } == previous
+    assert {path.name: path.read_bytes() for path in sorted(bootstrap_root.iterdir())} == previous
     assert report.read_bytes() == b"old report\n"
 
 
@@ -520,11 +518,15 @@ def test_operation_candidates_ignore_insertion_order_and_are_valid_identifiers()
     forward = pipeline_module._operation_candidates({"paths": forward_paths})
     reversed_result = pipeline_module._operation_candidates({"paths": reversed_paths})
 
-    assert forward == reversed_result == {
-        "GET /api/1/status": "get_status",
-        "POST /api/1/class": "operation_class",
-        "POST /api/1/status": "post_status",
-    }
+    assert (
+        forward
+        == reversed_result
+        == {
+            "GET /api/1/status": "get_status",
+            "POST /api/1/class": "operation_class",
+            "POST /api/1/status": "post_status",
+        }
+    )
     assert list(forward) == sorted(forward)
     assert len(set(forward.values())) == len(forward)
     assert all(value.isidentifier() and not keyword.iskeyword(value) for value in forward.values())
@@ -576,6 +578,27 @@ def _write_valid_empty_registries(root: Path) -> None:
     (openapi / "model-name-overrides.yaml").write_text("models: {}\n", encoding="utf-8")
 
 
+_GENERATOR_INVALID_SCHEMA = "Namespace.Wrapper`1[[Namespace.Item, Assembly]]"
+
+
+def _document_with_generator_invalid_schema() -> dict[str, object]:
+    old_ref = f"#/components/schemas/{_GENERATOR_INVALID_SCHEMA}"
+    return {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {
+            "schemas": {
+                _GENERATOR_INVALID_SCHEMA: {"type": "object"},
+                "Holder": {
+                    "type": "object",
+                    "properties": {"value": {"$ref": old_ref}},
+                },
+            }
+        },
+    }
+
+
 def test_committed_mechanical_overlay_applies_to_original_upstream_once(tmp_path: Path) -> None:
     _write_valid_empty_registries(tmp_path)
     document = {
@@ -596,6 +619,38 @@ def test_committed_mechanical_overlay_applies_to_original_upstream_once(tmp_path
     assert document["components"]["schemas"]["BooleanValue"]["type"] == "bool"
 
 
+def test_committed_corrections_normalize_generator_invalid_schema_names(
+    tmp_path: Path,
+) -> None:
+    document = _document_with_generator_invalid_schema()
+    _write_valid_empty_registries(tmp_path)
+    (tmp_path / "openapi/model-name-overrides.yaml").write_text(
+        yaml.safe_dump(
+            {"models": {_GENERATOR_INVALID_SCHEMA: "ReviewedResponse"}},
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    overlay_path = tmp_path / "openapi/overlays/types.overlay.yaml"
+    overlay_path.parent.mkdir()
+    overlay_path.write_text(
+        yaml.safe_dump(pipeline_module.build_types_overlay(document), sort_keys=True),
+        encoding="utf-8",
+    )
+
+    effective, mappings = _apply_committed_corrections(RepoPaths(tmp_path), document)
+
+    schemas = effective["components"]["schemas"]
+    assert _GENERATOR_INVALID_SCHEMA not in schemas
+    assert schemas["Holder"]["properties"]["value"]["$ref"] == (
+        "#/components/schemas/ReviewedResponse"
+    )
+    assert mappings == {
+        "Holder": "Holder",
+        "ReviewedResponse": "ReviewedResponse",
+    }
+
+
 def test_contract_overlay_applies_to_raw_before_mechanical_type_corrections(
     tmp_path: Path,
 ) -> None:
@@ -606,9 +661,7 @@ def test_contract_overlay_applies_to_raw_before_mechanical_type_corrections(
             "/api/1/access_token": {"post": {"responses": {}}},
             "/api/1/ping": {
                 "post": {
-                    "parameters": [
-                        {"in": "header", "name": "Authorization", "schema": {}}
-                    ],
+                    "parameters": [{"in": "header", "name": "Authorization", "schema": {}}],
                     "responses": {},
                 }
             },
@@ -640,18 +693,14 @@ def test_contract_overlay_applies_to_raw_before_mechanical_type_corrections(
         ),
         encoding="utf-8",
     )
-    (openapi / "model-name-overrides.yaml").write_text(
-        "models: {}\n", encoding="utf-8"
-    )
+    (openapi / "model-name-overrides.yaml").write_text("models: {}\n", encoding="utf-8")
 
     effective, mappings = _apply_committed_corrections(RepoPaths(tmp_path), document)
 
     assert effective["components"]["schemas"]["BooleanValue"]["type"] == "boolean"
     assert effective["servers"] == [{"url": "https://api-ru.iiko.services"}]
     assert effective["paths"]["/api/1/ping"]["post"]["parameters"] == []
-    assert effective["paths"]["/api/1/ping"]["post"]["security"] == [
-        {"BearerAuth": []}
-    ]
+    assert effective["paths"]["/api/1/ping"]["post"]["security"] == [{"BearerAuth": []}]
     assert effective["paths"]["/api/1/access_token"]["post"]["security"] == []
     assert effective["paths"]["/api/v2/access_token"]["post"]["security"] == []
     assert mappings == {"BooleanValue": "BooleanValue"}
@@ -758,6 +807,33 @@ def test_bootstrap_accept_uses_reviewed_model_override_to_resolve_collision(
     assert tmp_path / "openapi/model-name-overrides.yaml" in targets
 
 
+def test_bootstrap_accept_normalizes_schema_names_before_validation_and_generation(
+    tmp_path: Path, fake_dependencies: PipelineDependencies
+) -> None:
+    document = _document_with_generator_invalid_schema()
+    _write_bootstrap_candidates(fake_dependencies, document)
+    override = tmp_path / "build/bootstrap/model-name-overrides.yaml"
+    override.write_text(
+        yaml.safe_dump(
+            {"models": {_GENERATOR_INVALID_SCHEMA: "ReviewedResponse"}},
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    bootstrap(fake_dependencies, accept_current_upstream=True)
+
+    effective = fake_dependencies.validate.call_args.args[0]
+    schemas = effective["components"]["schemas"]
+    assert _GENERATOR_INVALID_SCHEMA not in schemas
+    assert schemas["Holder"]["properties"]["value"]["$ref"] == (
+        "#/components/schemas/ReviewedResponse"
+    )
+    fake_dependencies.generate.assert_called_once_with(
+        {"Holder": "Holder", "ReviewedResponse": "ReviewedResponse"}
+    )
+
+
 @pytest.mark.parametrize("unsafe_kind", ["symlink", "fifo", "directory"])
 def test_bootstrap_accept_preflights_unsafe_optional_model_override(
     tmp_path: Path,
@@ -834,18 +910,14 @@ def test_bootstrap_accept_rejects_symlinked_optional_override_parent(
     bootstrap_root = tmp_path / "build/bootstrap"
     outside = tmp_path / "outside-bootstrap"
     bootstrap_root.rename(outside)
-    (outside / "model-name-overrides.yaml").write_text(
-        "models: {}\n", encoding="utf-8"
-    )
+    (outside / "model-name-overrides.yaml").write_text("models: {}\n", encoding="utf-8")
     bootstrap_root.symlink_to(outside, target_is_directory=True)
 
     with pytest.raises(PipelineError, match="model-name-overrides.*symlink"):
         bootstrap(fake_dependencies, accept_current_upstream=True)
 
     assert bootstrap_root.is_symlink()
-    assert (outside / "model-name-overrides.yaml").read_text(encoding="utf-8") == (
-        "models: {}\n"
-    )
+    assert (outside / "model-name-overrides.yaml").read_text(encoding="utf-8") == ("models: {}\n")
     fake_dependencies.fetch.assert_not_called()
     fake_dependencies.apply_corrections.assert_not_called()
     fake_dependencies.validate.assert_not_called()
