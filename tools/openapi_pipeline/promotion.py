@@ -186,8 +186,20 @@ def _create_parent(path: Path, root: Path, created: list[Path]) -> None:
     if current.is_symlink():
         raise PipelineError(f"Promotion target parent must not be a symlink: {current}")
     for directory in reversed(missing):
-        directory.mkdir()
         created.append(directory)
+        try:
+            directory.mkdir(mode=0o755)
+            directory.chmod(0o755, follow_symlinks=False)
+            metadata = directory.lstat()
+        except OSError as error:
+            raise PipelineError("Cannot create promotion target parent safely") from error
+        if (
+            stat.S_ISLNK(metadata.st_mode)
+            or not stat.S_ISDIR(metadata.st_mode)
+            or stat.S_IMODE(metadata.st_mode) != 0o755
+            or metadata.st_uid != os.getuid()
+        ):
+            raise PipelineError("Promotion-created target parent is unsafe")
 
 
 def _remove(path: Path) -> None:
@@ -211,10 +223,10 @@ def promote_transaction(items: list[PromotionItem], *, root: Path | None = None)
                 backup = item.target.with_name(f".{item.target.name}.backup-{token}")
                 if backup.exists() or backup.is_symlink():
                     raise PipelineError(f"Promotion backup path already exists: {backup}")
-                os.replace(item.target, backup)
                 backups.append((backup, item.target))
-            os.replace(item.staged, item.target)
+                os.replace(item.target, backup)
             promoted.append(item)
+            os.replace(item.staged, item.target)
     except BaseException as original:
         rollback_errors: list[str] = []
         for item in reversed(promoted):

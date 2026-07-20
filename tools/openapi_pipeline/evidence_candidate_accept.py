@@ -115,7 +115,16 @@ def accept_evidence_candidate(paths: RepoPaths) -> EvidenceCandidateAcceptResult
         ]
         candidate_lock.assert_binding(candidate_token)
         live_lock.assert_binding_token(live_token)
-        promote_transaction(items, root=paths.root)
+        try:
+            promote_transaction(items, root=paths.root)
+        except BaseException:
+            try:
+                committed = _preflight_targets(paths, expected.canonical_payloads)
+            except BaseException:
+                committed = False
+            if committed:
+                raise SafetyError(_COMMITTED_ERROR) from None
+            raise
 
         try:
             if not _preflight_targets(paths, expected.canonical_payloads):

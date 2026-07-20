@@ -316,6 +316,35 @@ def test_accept_full_real_pipeline_promotes_exact_five_and_reruns_as_noop(
     assert _candidate_snapshot(candidate_root) == before
 
 
+@pytest.mark.parametrize("mask", (0o077, 0o000))
+def test_first_accept_creates_missing_contract_parent_as_owned_mode_0755(
+    tmp_path: Path,
+    mask: int,
+) -> None:
+    paths, expected = _prepared_repository(tmp_path)
+    candidate_root = paths.build / "evidence-candidates"
+    candidate_before = _candidate_snapshot(candidate_root)
+    contracts = paths.root / "tests/fixtures/contracts"
+    contracts.rmdir()
+
+    previous = os.umask(mask)
+    try:
+        accepted = accept_evidence_candidate(paths)
+    finally:
+        os.umask(previous)
+
+    metadata = contracts.lstat()
+    assert accepted.changed is True
+    assert stat.S_ISDIR(metadata.st_mode)
+    assert not stat.S_ISLNK(metadata.st_mode)
+    assert stat.S_IMODE(metadata.st_mode) == 0o755
+    assert metadata.st_uid == os.getuid()
+    for relative in EVIDENCE_CANDIDATE_PAYLOAD_PATHS:
+        assert (paths.root / relative).read_bytes() == expected.canonical_payloads[relative]
+    assert _candidate_snapshot(candidate_root) == candidate_before
+    assert not list(paths.build.glob(".evidence-accept.tmp-*"))
+
+
 def test_candidate_lock_contention_happens_before_live_state_creation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -692,3 +721,97 @@ def test_postcommit_orphan_is_reported_as_committed_with_residue(
     ]
     assert len(orphaned) == len(EVIDENCE_CANDIDATE_PAYLOAD_PATHS)
     assert len(list(paths.build.glob(".evidence-accept.tmp-*"))) == 1
+
+
+def test_interrupt_after_backup_removal_commit_is_sanitized_and_blocks_retry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    detached_result: EvidenceCandidateManifestResult,
+) -> None:
+    paths = _repository(tmp_path)
+    candidate_root = _write_candidate_direct(paths, detached_result)
+    candidate_before = _candidate_snapshot(candidate_root)
+    _write_targets(paths, detached_result, body=b"reviewed old target\n")
+    _stub_authority(monkeypatch, detached_result)
+    real_remove = promotion_module._remove
+    interrupted = False
+
+    def interrupt_after_remove(path: Path) -> None:
+        nonlocal interrupted
+        real_remove(path)
+        if not interrupted and ".backup-" in path.name:
+            interrupted = True
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(promotion_module, "_remove", interrupt_after_remove)
+
+    with pytest.raises(
+        SafetyError,
+        match=("^Evidence acceptance committed with residue; operator resolution is required$"),
+    ) as raised:
+        accept_evidence_candidate(paths)
+
+    assert interrupted is True
+    assert raised.value.__cause__ is None
+    for relative in EVIDENCE_CANDIDATE_PAYLOAD_PATHS:
+        assert (paths.root / relative).read_bytes() == detached_result.canonical_payloads[relative]
+    assert _candidate_snapshot(candidate_root) == candidate_before
+    assert len(list(paths.build.glob(".evidence-accept.tmp-*"))) == 1
+    with pytest.raises(
+        SafetyError,
+        match="^Evidence acceptance residue requires operator resolution$",
+    ):
+        accept_evidence_candidate(paths)
+
+
+def test_interrupt_after_orphan_rename_commit_is_sanitized_and_blocks_retry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    detached_result: EvidenceCandidateManifestResult,
+) -> None:
+    paths = _repository(tmp_path)
+    candidate_root = _write_candidate_direct(paths, detached_result)
+    candidate_before = _candidate_snapshot(candidate_root)
+    _write_targets(paths, detached_result, body=b"reviewed old target\n")
+    _stub_authority(monkeypatch, detached_result)
+    real_remove = promotion_module._remove
+    real_replace = promotion_module.os.replace
+    interrupted = False
+
+    def force_orphan(path: Path) -> None:
+        if ".backup-" in path.name:
+            raise OSError("injected cleanup failure")
+        real_remove(path)
+
+    def interrupt_after_orphan(source: Any, target: Any) -> None:
+        nonlocal interrupted
+        real_replace(source, target)
+        if (
+            not interrupted
+            and ".backup-" in Path(source).name
+            and ".orphaned-backup-" in Path(target).name
+        ):
+            interrupted = True
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(promotion_module, "_remove", force_orphan)
+    monkeypatch.setattr(promotion_module.os, "replace", interrupt_after_orphan)
+
+    with pytest.raises(
+        SafetyError,
+        match=("^Evidence acceptance committed with residue; operator resolution is required$"),
+    ) as raised:
+        accept_evidence_candidate(paths)
+
+    assert interrupted is True
+    assert raised.value.__cause__ is None
+    for relative in EVIDENCE_CANDIDATE_PAYLOAD_PATHS:
+        assert (paths.root / relative).read_bytes() == detached_result.canonical_payloads[relative]
+    assert _candidate_snapshot(candidate_root) == candidate_before
+    assert list(paths.root.rglob("*.orphaned-backup-*"))
+    assert len(list(paths.build.glob(".evidence-accept.tmp-*"))) == 1
+    with pytest.raises(
+        SafetyError,
+        match="^Evidence acceptance residue requires operator resolution$",
+    ):
+        accept_evidence_candidate(paths)

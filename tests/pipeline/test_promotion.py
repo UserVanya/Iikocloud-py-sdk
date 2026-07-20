@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -58,6 +59,89 @@ def test_promotion_rolls_back_files_and_directories_when_replace_fails(
     assert old_file.read_text(encoding="utf-8") == "old-first"
     assert (old_tree / "old.py").read_text(encoding="utf-8") == "old"
     assert not (old_tree / "new.py").exists()
+    assert not list(tmp_path.rglob("*.backup-*"))
+
+
+def test_promotion_rolls_back_directory_when_mkdir_succeeds_then_interrupts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    staged = tmp_path / "staging/payload.txt"
+    staged.parent.mkdir()
+    staged.write_text("new", encoding="utf-8")
+    target = tmp_path / "missing/parent/payload.txt"
+    interrupted_directory = tmp_path / "missing"
+    real_mkdir = Path.mkdir
+
+    def interrupt_after_mkdir(path: Path, *args: object, **kwargs: object) -> None:
+        real_mkdir(path, *args, **kwargs)  # type: ignore[arg-type]
+        if path == interrupted_directory:
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(Path, "mkdir", interrupt_after_mkdir)
+
+    with pytest.raises(KeyboardInterrupt):
+        promote_transaction([PromotionItem(staged, target)], root=tmp_path)
+
+    assert staged.read_text(encoding="utf-8") == "new"
+    assert not target.exists()
+    assert not interrupted_directory.exists()
+    assert not list(tmp_path.rglob("*.backup-*"))
+
+
+def test_promotion_rolls_back_backup_when_replace_succeeds_then_interrupts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "target.txt"
+    target.write_text("old", encoding="utf-8")
+    staged = tmp_path / "staged.txt"
+    staged.write_text("new", encoding="utf-8")
+    real_replace = os.replace
+
+    def interrupt_after_backup(source: str | Path, destination: str | Path) -> None:
+        real_replace(source, destination)
+        if Path(source) == target and ".backup-" in Path(destination).name:
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(promotion_module.os, "replace", interrupt_after_backup)
+
+    with pytest.raises(KeyboardInterrupt):
+        promote_transaction([PromotionItem(staged, target)], root=tmp_path)
+
+    assert target.read_text(encoding="utf-8") == "old"
+    assert staged.read_text(encoding="utf-8") == "new"
+    assert not list(tmp_path.rglob("*.backup-*"))
+
+
+@pytest.mark.parametrize("target_existed", [False, True])
+def test_promotion_restores_staged_file_when_replace_succeeds_then_interrupts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    target_existed: bool,
+) -> None:
+    target = tmp_path / "target.txt"
+    if target_existed:
+        target.write_text("old", encoding="utf-8")
+    staged = tmp_path / "staged.txt"
+    staged.write_text("new", encoding="utf-8")
+    real_replace = os.replace
+
+    def interrupt_after_promotion(source: str | Path, destination: str | Path) -> None:
+        real_replace(source, destination)
+        if Path(source) == staged and Path(destination) == target:
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(promotion_module.os, "replace", interrupt_after_promotion)
+
+    with pytest.raises(KeyboardInterrupt):
+        promote_transaction([PromotionItem(staged, target)], root=tmp_path)
+
+    assert staged.read_text(encoding="utf-8") == "new"
+    if target_existed:
+        assert target.read_text(encoding="utf-8") == "old"
+    else:
+        assert not target.exists()
     assert not list(tmp_path.rglob("*.backup-*"))
 
 
@@ -212,7 +296,7 @@ def test_generated_manifest_rejects_special_files_instead_of_silently_skipping(
 
 def test_generated_manifest_loader_rejects_unsorted_or_extra_metadata(tmp_path: Path) -> None:
     manifest = tmp_path / "manifest.json"
-    value = {
+    value: dict[str, Any] = {
         "effective_schema_sha256": "a" * 64,
         "generator": {
             "image": "openapitools/openapi-generator-cli",
