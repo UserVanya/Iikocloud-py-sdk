@@ -119,8 +119,43 @@ def test_cli_pipeline_arguments_are_exact() -> None:
         "operation": "get_external_menu_by_id",
         "accept": True,
     }
+    assert vars(parser.parse_args(["verify-no-secrets"])) == {
+        "command": "verify-no-secrets",
+        "create_baseline": False,
+    }
+    assert vars(parser.parse_args(["verify-no-secrets", "--create-baseline"])) == {
+        "command": "verify-no-secrets",
+        "create_baseline": True,
+    }
+    assert vars(parser.parse_args(["publish", "--version", "1.2.3"])) == {
+        "command": "publish",
+        "version": "1.2.3",
+        "push": False,
+    }
+    assert vars(parser.parse_args(["publish", "--version", "1.2.3", "--push"])) == {
+        "command": "publish",
+        "version": "1.2.3",
+        "push": True,
+    }
     with pytest.raises(SystemExit):
         parser.parse_args(["verify", "--offline"])
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ("verify-no-secrets", "--force"),
+        ("publish",),
+        ("publish", "--push"),
+        ("publish", "--version", "1.2.3", "--force"),
+        ("publish", "--version", "1.2.3", "--allow-protected-branch"),
+    ],
+)
+def test_security_and_publish_commands_reject_unapproved_arguments(
+    arguments: tuple[str, ...],
+) -> None:
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(arguments)
 
 
 @pytest.mark.parametrize(
@@ -481,3 +516,67 @@ def test_main_sanitizes_promote_evidence_pipeline_errors(
     output = capsys.readouterr()
     assert output.out == ""
     assert output.err == "error: reviewed evidence is unavailable\n"
+
+
+def test_main_dispatches_secret_verification_and_baseline_creation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from tools.openapi_pipeline import secrets
+
+    paths = RepoPaths(tmp_path)
+    calls: list[tuple[str, object]] = []
+    known_secrets = ("known-secret",)
+
+    def load_known_secrets(root: Path) -> tuple[str, ...]:
+        calls.append(("load", root))
+        return known_secrets
+
+    monkeypatch.setattr(cli_module.RepoPaths, "discover", lambda: paths)
+    monkeypatch.setattr(
+        secrets,
+        "load_known_secrets",
+        load_known_secrets,
+    )
+    monkeypatch.setattr(
+        secrets,
+        "verify_no_secrets",
+        lambda root, values: calls.append(("verify", (root, values))),
+    )
+    monkeypatch.setattr(
+        secrets,
+        "create_secrets_baseline",
+        lambda root: calls.append(("baseline", root)),
+    )
+
+    assert main(["verify-no-secrets"]) == 0
+    assert calls == [
+        ("load", tmp_path),
+        ("verify", (tmp_path, known_secrets)),
+    ]
+    assert capsys.readouterr().out == "secret verification passed\n"
+
+    calls.clear()
+    assert main(["verify-no-secrets", "--create-baseline"]) == 0
+    assert calls == [("baseline", tmp_path)]
+    assert capsys.readouterr().out == "secret baseline created; audit it before use\n"
+
+
+def test_main_dispatches_publish_with_only_version_and_push(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from tools.openapi_pipeline import publish as publish_module
+
+    paths = RepoPaths(tmp_path)
+    calls: list[tuple[Path, str, bool]] = []
+    monkeypatch.setattr(cli_module.RepoPaths, "discover", lambda: paths)
+    monkeypatch.setattr(
+        publish_module,
+        "publish",
+        lambda root, *, version, push=False: calls.append((root, version, push)),
+    )
+
+    assert main(["publish", "--version", "1.2.3", "--push"]) == 0
+    assert calls == [(tmp_path, "1.2.3", True)]

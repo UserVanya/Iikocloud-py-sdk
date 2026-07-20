@@ -1,8 +1,8 @@
 # Генерация и проверка SDK
 
-Эта инструкция описывает только команды, реализованные к Task 11. Она нужна
-оператору, который обновляет OpenAPI snapshot, проверяет overlays, генерирует
-SDK и при необходимости выполняет строго ограниченные read-only live checks.
+Эта инструкция описывает текущий операторский pipeline: обновление OpenAPI
+snapshot, review overlays, воспроизводимую генерацию SDK, строго ограниченные
+live checks, проверку секретов и allowlisted Git-публикацию.
 
 ## Что является источником истины
 
@@ -269,9 +269,106 @@ generated-схему payload и точное совпадение organization, 
 после `429`, не переключайте API login и не удаляйте journal вручную. При
 текущих unverified stop-list limits команда также корректно завершится до HTTP.
 
-## Ещё не реализовано
+## Проверка секретов
 
-В CLI help зарезервированы будущие команды `reset-circuit`,
-`verify-no-secrets` и `publish`, но текущий dispatcher возвращает для них
-`Command is not implemented yet`. Автоматический secret scan, публикация tag и
-реальный write-run с верифицированными stop-list limits ещё не готовы.
+Перед review, commit или публикацией запустите обычный read-only режим:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline \
+  python -m tools.openapi_pipeline verify-no-secrets
+```
+
+Команда сама получает NUL-delimited списки tracked и staged файлов, проверяет
+worktree и точные stage-0 blobs через audited `.secrets.baseline`, а затем ищет
+точные непустые значения активных `IIKO_API_KEY` и `IIKO_API_KEY_2`. Detector
+получает временную копию baseline, поэтому обычная проверка не может изменить
+аудированный файл. Два значения загружаются только из process environment и,
+если ключ отсутствует там, из корневого `.env` без вывода значения в
+диагностику. Отсутствующий ключ просто пропускается.
+
+Нормальная проверка никогда не изменяет baseline. Для его первоначального
+создания используйте отдельный bootstrap-режим, затем вручную проаудируйте
+каждую находку и снова запустите обычную проверку:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline \
+  python -m tools.openapi_pipeline verify-no-secrets --create-baseline
+uv run --frozen --offline detect-secrets audit .secrets.baseline
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline \
+  python -m tools.openapi_pipeline verify-no-secrets
+```
+
+Bootstrap получает tracked filenames самостоятельно, запускает
+`detect-secrets scan --no-verify` без shell и атомарно создаёт новый baseline
+только после успешной команды и разбора JSON. Он не предназначен для
+перезаписи существующего baseline. В audit помечайте false positive только
+после проверки; настоящую учётную запись нужно удалить из Git и ротировать, а
+не добавлять в исключения. Не копируйте audit output в issue, логи или docs.
+
+`.env`, `.env.local`, captures, receipts, rate state, mutation journals и
+прочие runtime-файлы под `private/`, `.state/` и `build/` никогда не должны
+быть tracked или staged. Из `private/` допустимы только hand-owned
+`private/.gitignore` и `private/README.md`; secret scan fail closed на остальных
+private paths.
+
+## Allowlisted публикация
+
+`publish` — mutating operator command, а не способ проверить реализацию. Не
+запускайте её в текущем checkout как часть тестов: publish-тесты используют
+только временный Git repository. Release version должна быть подготовлена до
+generation и live receipt, потому что она встроена в generated runtime и его
+hash. Последовательность для новой версии:
+
+1. Измените точную строку `[project] version = "..."` в `pyproject.toml`.
+2. Выполните `uv lock --offline --no-config`, затем `sync --offline`.
+3. Проведите guarded live-read для получившегося generated tree.
+4. Оставьте release diff unstaged: `publish` требует пустой Git index.
+5. Передайте ту же уже подготовленную версию в `publish`.
+
+Без `--push` команда создаёт commit и annotated tag, но не меняет release
+version после live receipt:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline \
+  python -m tools.openapi_pipeline publish --version 0.1.0
+```
+
+`--version` обязателен и должен совпадать с `pyproject.toml`, generated
+`__version__`, User-Agent/debug report и `uv.lock`. Для отдельной, явно
+подтверждённой публикации commit и tag в `origin` добавьте `--push`:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline \
+  python -m tools.openapi_pipeline publish --version 0.1.0 --push
+```
+
+На `main` и `master` команда по умолчанию запрещена. Единственный локальный
+opt-in — ignored файл `private/publish.toml` с точным
+`allow_protected_branch = true`; CLI-флага для обхода этого gate нет.
+
+До изменения Git publish требует одновременно:
+
+- только dirty paths из `openapi/`, `contracts/`, `generator/`,
+  `src/iikocloud_client/`, `tests/fixtures/contracts/`, `tests/generated/` или
+  точные файлы `docs/generation.md`, `docs/known-upstream-issues.md`,
+  `README.md`, `pyproject.toml`, `uv.lock`, при полностью пустом Git index;
+- совпадение requested, project и generated runtime version, актуальный
+  `uv.lock`, успешный полный `verify` и completed live receipt, совпадающий с
+  текущими artifact hashes;
+- закрытый persistent circuit для profile fingerprint из receipt и полное
+  отсутствие mutation journals;
+- успешный secret scan до staging.
+
+После gates команда повторяет wheel smoke, показывает sanitized dirty-path
+list и `git diff --stat`, выполняет `git add --` только для разрешённых путей и
+повторяет secret scan уже по точным staged blobs. Затем создаются ровно один commit
+`chore(sdk): sync iiko OpenAPI YYYY-MM-DD` и annotated tag `v{version}`. С
+`--push` выполняются только non-force push текущего `HEAD`, затем отдельный
+non-force push тега.
+
+Publish gates не разрешают live write. Записи stop-list операций `get`, `add`
+и `remove` в `contracts/rate-limits.yaml` всё ещё имеют `verified: false`;
+write-тесты можно только собирать, но нельзя запускать live до отдельной
+проверки server limits и явного контролируемого решения. CLI-имя
+`reset-circuit` также остаётся зарезервированным и не должно использоваться как
+фиктивный способ обойти открытый circuit.

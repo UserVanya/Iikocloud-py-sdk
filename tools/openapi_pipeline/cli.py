@@ -59,6 +59,11 @@ def build_parser() -> argparse.ArgumentParser:
                 choices=("get_external_menu_by_id",),
             )
             command_parser.add_argument("--accept", action="store_true")
+        elif command == "verify-no-secrets":
+            command_parser.add_argument("--create-baseline", action="store_true")
+        elif command == "publish":
+            command_parser.add_argument("--version", required=True)
+            command_parser.add_argument("--push", action="store_true")
     return parser
 
 
@@ -127,6 +132,22 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "evidence candidate ready for review at build/evidence-candidates; "
                     "tracked files unchanged"
                 )
+        elif args.command == "verify-no-secrets":
+            from . import secrets
+
+            root = RepoPaths.discover().root
+            if args.create_baseline:
+                secrets.create_secrets_baseline(root)
+                print("secret baseline created; audit it before use")
+            else:
+                known_secrets = secrets.load_known_secrets(root)
+                secrets.verify_no_secrets(root, known_secrets)
+                print("secret verification passed")
+        elif args.command == "publish":
+            from . import publish as publish_module
+
+            root = RepoPaths.discover().root
+            publish_module.publish(root, version=args.version, push=args.push)
         else:
             raise PipelineError(f"Command is not implemented yet: {args.command}")
     except PipelineError as error:
