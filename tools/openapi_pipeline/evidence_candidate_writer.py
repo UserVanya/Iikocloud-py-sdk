@@ -18,6 +18,8 @@ import os
 import re
 import secrets
 import stat
+import threading
+import weakref
 from collections.abc import Mapping
 from contextlib import suppress
 from dataclasses import dataclass
@@ -116,22 +118,109 @@ def _new_process_lock_binding_token() -> object:
     return _EvidenceCandidateProcessLockBinding()
 
 
+@dataclass(eq=False)
+class _EvidenceCandidateProcessLockAcquisition:
+    repository_fd: int | None = None
+    build_fd: int | None = None
+    lock_fd: int | None = None
+    owner_pid: int | None = None
+    binding_token: object | None = None
+
+
+_PROCESS_LOCK_FORK_GATE = threading.RLock()
+_PROCESS_LOCK_ACQUISITION_STATES: weakref.WeakSet[_EvidenceCandidateProcessLockAcquisition] = (
+    weakref.WeakSet()
+)
+
+
+def _drain_process_lock_acquisition(
+    acquisition: _EvidenceCandidateProcessLockAcquisition,
+) -> tuple[BaseException, ...]:
+    descriptors = (
+        acquisition.build_fd,
+        acquisition.repository_fd,
+        acquisition.lock_fd,
+    )
+    acquisition.repository_fd = None
+    acquisition.build_fd = None
+    acquisition.lock_fd = None
+    acquisition.owner_pid = None
+    acquisition.binding_token = None
+
+    failures: list[BaseException] = []
+    for descriptor in descriptors:
+        if descriptor is None:
+            continue
+        try:
+            os.close(descriptor)
+        except OSError:
+            pass
+        except BaseException as error:
+            failures.append(error)
+    return tuple(failures)
+
+
+def _note_process_lock_cleanup_failures(
+    primary: BaseException,
+    failures: tuple[BaseException, ...],
+) -> None:
+    add_note = getattr(primary, "add_note", None)
+    if not callable(add_note):
+        return
+    for failure in failures:
+        add_note(f"Additional process-lock cleanup failure: {type(failure).__name__}")
+
+
+def _raise_process_lock_cleanup_failure(failures: tuple[BaseException, ...]) -> None:
+    if not failures:
+        return
+    primary, *follow_ups = failures
+    _note_process_lock_cleanup_failures(primary, tuple(follow_ups))
+    raise primary
+
+
+def _before_process_lock_fork() -> None:
+    _PROCESS_LOCK_FORK_GATE.acquire()
+
+
+def _after_process_lock_fork_parent() -> None:
+    _PROCESS_LOCK_FORK_GATE.release()
+
+
+def _after_process_lock_fork_child() -> None:
+    try:
+        for acquisition in _PROCESS_LOCK_ACQUISITION_STATES:
+            _drain_process_lock_acquisition(acquisition)
+    finally:
+        with suppress(RuntimeError):
+            _PROCESS_LOCK_FORK_GATE.release()
+
+
+if hasattr(os, "register_at_fork"):
+    os.register_at_fork(
+        before=_before_process_lock_fork,
+        after_in_parent=_after_process_lock_fork_parent,
+        after_in_child=_after_process_lock_fork_child,
+    )
+
+
 class EvidenceCandidateProcessLock:
     """Nonblocking cooperative lock for the canonical evidence-candidate tree.
 
     All official candidate writers and acceptors must hold this lock. A malicious
     non-cooperating process running as the repository owner remains out of scope.
+    On POSIX, acquisitions inherited through Python's ``os.fork`` are invalidated
+    and closed in the child. Raw libc forks outside Python are out of scope.
     """
 
     def __init__(self, paths: RepoPaths) -> None:
         repository_root = _validated_repository_path(paths)
         self._repository_root = repository_root
         self._path = repository_root / "build" / _LOCK_FILE
-        self._repository_fd: int | None = None
-        self._build_fd: int | None = None
-        self._lock_fd: int | None = None
-        self._owner_pid: int | None = None
-        self._binding_token: object | None = None
+        acquisition = _EvidenceCandidateProcessLockAcquisition()
+        self._acquisition = acquisition
+        with _PROCESS_LOCK_FORK_GATE:
+            _PROCESS_LOCK_ACQUISITION_STATES.add(acquisition)
 
     @property
     def path(self) -> Path:
@@ -141,53 +230,46 @@ class EvidenceCandidateProcessLock:
     @property
     def held(self) -> bool:
         """Whether this acquisition is active in the current process."""
-        return self._lock_fd is not None and self._owner_pid == os.getpid()
+        acquisition = self._acquisition
+        return acquisition.lock_fd is not None and acquisition.owner_pid == os.getpid()
 
     def acquire(self) -> EvidenceCandidateProcessLock:
         """Acquire the fixed lock without waiting."""
-        if any(
-            descriptor is not None
-            for descriptor in (self._repository_fd, self._build_fd, self._lock_fd)
-        ):
-            raise SafetyError("Evidence candidate process lock is already acquired")
+        acquisition = self._acquisition
+        with _PROCESS_LOCK_FORK_GATE:
+            if any(
+                value is not None
+                for value in (
+                    acquisition.repository_fd,
+                    acquisition.build_fd,
+                    acquisition.lock_fd,
+                    acquisition.owner_pid,
+                    acquisition.binding_token,
+                )
+            ):
+                raise SafetyError("Evidence candidate process lock is already acquired")
 
-        repository_fd: int | None = None
-        build_fd: int | None = None
-        lock_fd: int | None = None
-        try:
-            repository_fd = _open_repository_root(self._repository_root)
-            build_fd = _open_build(repository_fd)
-            lock_fd = _open_and_lock_writer(build_fd)
-            binding_token = _new_process_lock_binding_token()
-            self._repository_fd = repository_fd
-            self._build_fd = build_fd
-            self._lock_fd = lock_fd
-            self._owner_pid = os.getpid()
-            self._binding_token = binding_token
-            return self
-        except BaseException:
-            _close_fd(build_fd)
-            _close_fd(repository_fd)
-            _close_fd(lock_fd)
-            raise
+            try:
+                acquisition.repository_fd = _open_repository_root(self._repository_root)
+                acquisition.build_fd = _open_build(acquisition.repository_fd)
+                acquisition.lock_fd = _open_and_lock_writer(acquisition.build_fd)
+                acquisition.binding_token = _new_process_lock_binding_token()
+                acquisition.owner_pid = os.getpid()
+                return self
+            except BaseException as primary:
+                cleanup_failures = _drain_process_lock_acquisition(acquisition)
+                _note_process_lock_cleanup_failures(primary, cleanup_failures)
+                raise
 
     def release(self) -> None:
         """Invalidate this acquisition and close the lock descriptor last."""
-        repository_fd = self._repository_fd
-        build_fd = self._build_fd
-        lock_fd = self._lock_fd
-        self._repository_fd = None
-        self._build_fd = None
-        self._lock_fd = None
-        self._owner_pid = None
-        self._binding_token = None
-        _close_fd(build_fd)
-        _close_fd(repository_fd)
-        _close_fd(lock_fd)
+        with _PROCESS_LOCK_FORK_GATE:
+            failures = _drain_process_lock_acquisition(self._acquisition)
+        _raise_process_lock_cleanup_failure(failures)
 
     def capture_binding(self) -> object:
         """Capture an opaque token for the current acquisition and path bindings."""
-        token = self._binding_token
+        token = self._acquisition.binding_token
         self._assert_current_binding(token)
         assert token is not None
         return token
@@ -204,15 +286,16 @@ class EvidenceCandidateProcessLock:
         self.assert_binding(token)
 
     def _assert_current_binding(self, token: object | None) -> None:
+        acquisition = self._acquisition
         if (
             type(token) is not _EvidenceCandidateProcessLockBinding
-            or token is not self._binding_token
+            or token is not acquisition.binding_token
             or not self.held
         ):
             raise SafetyError("Evidence candidate process lock binding is not current")
-        repository_fd = self._repository_fd
-        build_fd = self._build_fd
-        lock_fd = self._lock_fd
+        repository_fd = acquisition.repository_fd
+        build_fd = acquisition.build_fd
+        lock_fd = acquisition.lock_fd
         assert repository_fd is not None
         assert build_fd is not None
         assert lock_fd is not None
@@ -234,8 +317,8 @@ class EvidenceCandidateProcessLock:
 
     def _bound_descriptors(self, token: object) -> tuple[int, int]:
         self.assert_binding(token)
-        repository_fd = self._repository_fd
-        build_fd = self._build_fd
+        repository_fd = self._acquisition.repository_fd
+        build_fd = self._acquisition.build_fd
         assert repository_fd is not None
         assert build_fd is not None
         return repository_fd, build_fd

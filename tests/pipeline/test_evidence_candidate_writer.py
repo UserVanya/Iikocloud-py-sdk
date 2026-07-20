@@ -4,11 +4,14 @@ import ctypes
 import dataclasses
 import errno
 import fcntl
+import gc
 import json
 import os
 import socket
 import stat
+import weakref
 from collections.abc import Callable, Iterator, Mapping
+from contextlib import suppress
 from pathlib import Path, PosixPath
 from types import MappingProxyType
 from typing import Any, cast, get_type_hints
@@ -371,6 +374,195 @@ def test_public_process_lock_binding_is_invalid_in_forked_child(tmp_path: Path) 
         assert waited_pid == child_pid
         assert os.waitstatus_to_exitcode(status) == 0
         process_lock.assert_binding(token)
+
+
+@pytest.mark.skipif(not hasattr(os, "fork"), reason="descriptor cleanup requires POSIX fork")
+def test_public_process_lock_child_drops_inherited_flock_while_remaining_alive(
+    tmp_path: Path,
+) -> None:
+    first_parent = tmp_path / "first"
+    second_parent = tmp_path / "second"
+    first_parent.mkdir()
+    second_parent.mkdir()
+    paths = (_repository(first_parent), _repository(second_parent))
+    process_locks = tuple(writer_module.EvidenceCandidateProcessLock(item) for item in paths)
+    for process_lock in process_locks:
+        process_lock.acquire()
+    tokens = tuple(process_lock.capture_binding() for process_lock in process_locks)
+    ready_read, ready_write = os.pipe()
+    finish_read, finish_write = os.pipe()
+    child_pid = os.fork()
+    if child_pid == 0:
+        os.close(ready_read)
+        os.close(finish_write)
+        exit_code = 4
+        try:
+            if any(process_lock.held for process_lock in process_locks):
+                exit_code = 2
+            else:
+                rejected = 0
+                for process_lock, token in zip(process_locks, tokens, strict=True):
+                    try:
+                        process_lock.assert_binding(token)
+                    except SafetyError:
+                        rejected += 1
+                exit_code = 0 if rejected == len(process_locks) else 3
+            os.write(ready_write, b"1")
+            os.read(finish_read, 1)
+        finally:
+            os.close(ready_write)
+            os.close(finish_read)
+            os._exit(exit_code)
+
+    os.close(ready_write)
+    os.close(finish_read)
+    child_status: int | None = None
+    try:
+        assert os.read(ready_read, 1) == b"1"
+        for process_lock, token in zip(process_locks, tokens, strict=True):
+            process_lock.assert_binding(token)
+        assert os.waitpid(child_pid, os.WNOHANG) == (0, 0)
+        for process_lock in process_locks:
+            process_lock.release()
+
+        for item in paths:
+            with writer_module.EvidenceCandidateProcessLock(item) as fresh_lock:
+                assert fresh_lock.held is True
+    finally:
+        for process_lock in process_locks:
+            process_lock.release()
+        with suppress(OSError):
+            os.write(finish_write, b"1")
+        os.close(ready_read)
+        os.close(finish_write)
+        _waited_pid, child_status = os.waitpid(child_pid, 0)
+
+    assert child_status is not None
+    assert os.waitstatus_to_exitcode(child_status) == 0
+
+
+def test_public_process_lock_documents_python_fork_boundary() -> None:
+    documentation = (writer_module.EvidenceCandidateProcessLock.__doc__ or "").lower()
+
+    assert "os.fork" in documentation
+    assert "raw libc" in documentation
+    assert "out of scope" in documentation
+
+
+def test_public_process_lock_acquire_base_exception_is_atomic_and_retryable(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    primary = KeyboardInterrupt(SENSITIVE_MARKER)
+    real_getpid = writer_module.os.getpid
+    real_open = writer_module.os.open
+    getpid_calls = 0
+    opened: list[int] = []
+
+    def fail_first_getpid() -> int:
+        nonlocal getpid_calls
+        getpid_calls += 1
+        if getpid_calls == 1:
+            raise primary
+        return real_getpid()
+
+    def track_open(*args: Any, **kwargs: Any) -> int:
+        descriptor = real_open(*args, **kwargs)
+        opened.append(descriptor)
+        return descriptor
+
+    monkeypatch.setattr(writer_module.os, "getpid", fail_first_getpid)
+    monkeypatch.setattr(writer_module.os, "open", track_open)
+
+    with pytest.raises(KeyboardInterrupt) as caught:
+        process_lock.acquire()
+
+    assert caught.value is primary
+    assert process_lock.held is False
+    with pytest.raises(SafetyError, match="binding|current|held|acquisition"):
+        process_lock.capture_binding()
+    with process_lock:
+        assert process_lock.held is True
+    assert opened
+    for descriptor in opened:
+        with pytest.raises(OSError):
+            os.fstat(descriptor)
+
+
+def test_public_process_lock_release_base_exception_drains_lock_last(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+    process_lock.acquire()
+    real_close = writer_module.os.close
+    primary = KeyboardInterrupt(SENSITIVE_MARKER)
+    target_by_descriptor: dict[int, str] = {}
+    for entry in os.listdir("/proc/self/fd"):
+        with suppress(OSError, ValueError):
+            descriptor = int(entry)
+            target = os.readlink(f"/proc/self/fd/{descriptor}")
+            if target in {str(paths.root), str(paths.build), str(process_lock.path)}:
+                target_by_descriptor[descriptor] = target
+    assert set(target_by_descriptor.values()) == {
+        str(paths.root),
+        str(paths.build),
+        str(process_lock.path),
+    }
+    close_attempts: list[int] = []
+
+    def fail_first_close(descriptor: int) -> None:
+        close_attempts.append(descriptor)
+        if len(close_attempts) == 1:
+            raise primary
+        real_close(descriptor)
+
+    monkeypatch.setattr(writer_module.os, "close", fail_first_close)
+    try:
+        with pytest.raises(KeyboardInterrupt) as caught:
+            process_lock.release()
+
+        assert caught.value is primary
+        assert process_lock.held is False
+        with pytest.raises(SafetyError, match="binding|current|held|acquisition"):
+            process_lock.capture_binding()
+        assert [target_by_descriptor[value] for value in close_attempts] == [
+            str(paths.build),
+            str(paths.root),
+            str(process_lock.path),
+        ]
+        monkeypatch.setattr(writer_module.os, "close", real_close)
+        with writer_module.EvidenceCandidateProcessLock(paths) as fresh_lock:
+            assert fresh_lock.held is True
+    finally:
+        monkeypatch.setattr(writer_module.os, "close", real_close)
+        for descriptor in target_by_descriptor:
+            with suppress(OSError):
+                real_close(descriptor)
+
+
+def test_public_process_lock_registry_does_not_retain_repeated_lock_instances(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    registry = getattr(writer_module, "_PROCESS_LOCK_ACQUISITION_STATES", None)
+    assert registry is not None
+    baseline = len(tuple(registry))
+    references: list[weakref.ReferenceType[Any]] = []
+
+    for _index in range(8):
+        process_lock = writer_module.EvidenceCandidateProcessLock(paths)
+        with process_lock:
+            assert process_lock.held is True
+        references.append(weakref.ref(process_lock))
+    del process_lock
+    gc.collect()
+
+    assert all(reference() is None for reference in references)
+    assert len(tuple(registry)) <= baseline
 
 
 def test_public_process_lock_memory_error_during_binding_allocation_closes_fds(
