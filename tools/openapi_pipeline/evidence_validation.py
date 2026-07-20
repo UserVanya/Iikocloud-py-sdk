@@ -5,7 +5,7 @@ import math
 import re
 import struct
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, cast
 
 from .capture import RedactionHints, Sanitizer
 from .errors import SafetyError
@@ -56,6 +56,8 @@ _UUID_FORMAT = re.compile(
     r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z"
 )
 _BROKEN_COMBO_COMPONENT = "ExternalMenuComboItem"
+_ITEM3_COMPONENT = "ExternalMenuItem3"
+_V4_ITEM_BRANCHES = (_ITEM3_COMPONENT, _BROKEN_COMBO_COMPONENT)
 _RAW_ITEM_TYPES = frozenset({"DISH", "COMBO"})
 _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     {
@@ -93,9 +95,10 @@ class MenuEvidenceValidator:
         category = self._component("ExternalMenuCategory3")
         properties = category.get("properties")
         items = properties.get("items") if type(properties) is dict else None
-        self._known_item_union = items.get("items") if type(items) is dict else None
-        if type(self._known_item_union) is not dict:
+        known_item_union = items.get("items") if type(items) is dict else None
+        if type(known_item_union) is not dict:
             raise SafetyError("Evidence V4 item union is missing after reviewed hint validation")
+        self._known_item_union = cast(dict[str, Any], known_item_union)
         if sha256_bytes(canonical_json_bytes(self._broken_combo_schema)) != (
             _REVIEWED_COMBO_SHA256
         ):
@@ -141,6 +144,62 @@ class MenuEvidenceValidator:
             hints=self._hints[version],
         )
         return None
+
+    def match_v4_item_branches(self, item: Mapping[str, Any]) -> tuple[str, ...]:
+        """Return the reviewed structural V4 branches accepting one raw item."""
+
+        value = _mutable_json_copy(item)
+        if type(value) is not dict:
+            raise SafetyError("Evidence V4 item branch matching requires an object")
+        discriminator = value.get("type")
+        if type(discriminator) is not str or discriminator not in _RAW_ITEM_TYPES:
+            raise SafetyError("Evidence V4 item discriminator must be a raw DISH or COMBO literal")
+        branches = self._known_item_union.get("oneOf")
+        if type(branches) is not list or len(branches) != len(_V4_ITEM_BRANCHES):
+            raise SafetyError("Reviewed Evidence V4 item branches have drifted")
+        matches: list[str] = []
+        for index, branch in enumerate(branches):
+            if type(branch) is not dict or set(branch) != {"$ref"}:
+                raise SafetyError("Reviewed Evidence V4 item branch has drifted")
+            branch_name, target = self._resolve_reference(branch["$ref"])
+            if branch_name != _V4_ITEM_BRANCHES[index]:
+                raise SafetyError("Reviewed Evidence V4 item branch order has drifted")
+            try:
+                self._validate_instance(
+                    value,
+                    target,
+                    path="response-v4.item",
+                    component_name=branch_name,
+                )
+            except SafetyError:
+                continue
+            matches.append(branch_name)
+        if not matches:
+            raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
+        return tuple(matches)
+
+    def validate_v4_item3_property(
+        self,
+        property_name: str,
+        value: object,
+    ) -> dict[str, Any]:
+        """Validate one exact-five value and return its reviewed sibling schema copy."""
+
+        if property_name not in _BROKEN_COMBO_UNDEFINED_REQUIRED:
+            raise SafetyError("Evidence combo inference property is outside the exact-five scope")
+        item = self._component(_ITEM3_COMPONENT)
+        properties = item.get("properties")
+        schema = properties.get(property_name) if type(properties) is dict else None
+        if type(schema) is not dict:
+            raise SafetyError("Evidence combo sibling property schema is missing or invalid")
+        copied_value = _mutable_json_copy(value)
+        self._validate_instance(
+            copied_value,
+            schema,
+            path=f"response-v4.item.{property_name}",
+            component_name=_ITEM3_COMPONENT,
+        )
+        return _mutable_json_copy(schema)
 
     def _component(self, name: str) -> dict[str, Any]:
         value = self._components.get(name)
@@ -438,13 +497,8 @@ class MenuEvidenceValidator:
     ) -> None:
         branches = schema["oneOf"]
         if schema is self._known_item_union:
-            if type(value) is not dict:
-                raise SafetyError("Evidence V4 item discriminator requires an object")
-            discriminator = value.get("type")
-            if type(discriminator) is not str or discriminator not in _RAW_ITEM_TYPES:
-                raise SafetyError(
-                    "Evidence V4 item discriminator must be a raw DISH or COMBO literal"
-                )
+            self.match_v4_item_branches(value)
+            return
         matches = 0
         for branch in branches:
             try:
@@ -457,13 +511,6 @@ class MenuEvidenceValidator:
             except SafetyError:
                 continue
             matches += 1
-        if schema is self._known_item_union:
-            # Raw evidence proves only that a reviewed branch accepts the item. The
-            # promotion analyzer must establish branch-to-literal consistency before
-            # producing or accepting any semantic candidate.
-            if matches < 1:
-                raise SafetyError("Evidence V4 item does not match a reviewed schema branch")
-            return
         if matches != 1:
             raise SafetyError("Evidence value does not match exactly one reviewed schema branch")
 
