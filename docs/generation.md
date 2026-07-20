@@ -231,11 +231,47 @@ synthetic fixtures.
 реализация не завершена; эта инструкция намеренно не предлагает фиктивную
 команду сброса.
 
+## Write-тест и восстановление cleanup
+
+Reversible stop-list round-trip существует как отдельный `live_write` test,
+но не входит ни в один обычный test run. Безопасно проверить только его
+collection-контракт:
+
+```bash
+uv run --frozen --offline pytest -m live_write -n0 \
+  tests/integration/write --collect-only -q
+```
+
+Реальный запуск требует одновременно `--allow-live-write`,
+`--allow-audit-residue`, точный `--target-organization`, write-enabled private
+profile, allowlist, отдельные terminal group/product и `-n0`. Перед
+authentication проверяются rate budgets операций `get`, `add` и `remove`.
+Сейчас эти три stop-list записи в `contracts/rate-limits.yaml` намеренно имеют
+`verified: false`, поэтому live write останавливается до HTTP. Не меняйте этот
+флаг без проверенного server limit и отдельного решения на контролируемый
+запуск.
+
+До `add` test атомарно сохраняет cleanup payload в ignored
+`.state/mutations/<run-id>.json` с mode `0600`. Cleanup выполняется LIFO в
+`finally`; незавершённый журнал сохраняется и блокирует успешный live receipt.
+Для ручного восстановления существует только интерактивная команда:
+
+```bash
+uv run --frozen python -m tools.openapi_pipeline cleanup-orphans \
+  --live-profile test-server --env-file .env
+```
+
+Она до authentication проверяет каждый journal, каждый cleanup budget,
+generated-схему payload и точное совпадение organization, terminal group и
+единственного dedicated product с выбранным write-профилем. Команда не
+показывает payload/UUID, выводит только fingerprints и operation IDs, затем
+требует точное подтверждение `cleanup N actions [y/N]`. Не повторяйте команду
+после `429`, не переключайте API login и не удаляйте journal вручную. При
+текущих unverified stop-list limits команда также корректно завершится до HTTP.
+
 ## Ещё не реализовано
 
-В CLI help зарезервированы будущие команды `cleanup-orphans`,
-`reset-circuit`, `verify-no-secrets` и `publish`, но текущий dispatcher
-возвращает для них `Command is not implemented yet`. Write round-trip,
-mutation journal, автоматический secret scan и публикация tag также не готовы.
-Не используйте эти имена как operational guarantee и не запускайте write API
-по read-only инструкции.
+В CLI help зарезервированы будущие команды `reset-circuit`,
+`verify-no-secrets` и `publish`, но текущий dispatcher возвращает для них
+`Command is not implemented yet`. Автоматический secret scan, публикация tag и
+реальный write-run с верифицированными stop-list limits ещё не готовы.

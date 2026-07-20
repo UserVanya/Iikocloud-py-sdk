@@ -1,6 +1,7 @@
 # ruff: noqa: E402
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import secrets
 import stat
@@ -22,19 +23,25 @@ from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile, is_safe_profile_name
 from tools.openapi_pipeline.live.pytest_support import (
     LivePreflight,
+    assert_serial_live_invocation,
     finalize_live_receipt,
     initialize_receipt,
     mutation_journals_absent,
     prepare_live_preflight,
     resolve_locked_live_profile,
 )
-from tools.openapi_pipeline.live.rates import LiveRateGuard
+from tools.openapi_pipeline.live.rates import LiveRateGuard, RateCatalog
 from tools.openapi_pipeline.live.receipt import LiveReceipt
 from tools.openapi_pipeline.live.session import SafeLiveSession, load_operation_contract
 from tools.openapi_pipeline.live.state import LiveStateStore
 from tools.openapi_pipeline.paths import RepoPaths
 
 _LIVE_MARKERS = ("live_read_smoke", "live_read_full", "live_write")
+_WRITE_OPERATION_IDS = (
+    "get_stop_lists",
+    "add_products_to_stop_list",
+    "remove_products_from_stop_list",
+)
 
 
 @dataclass
@@ -71,6 +78,12 @@ class _GeneratedRuntime:
     configuration: Any
     api_client: Any
     adapter: Any
+
+
+@dataclass(frozen=True)
+class _LiveWritePreflight:
+    operation_ids: tuple[str, ...]
+    target_organization_fingerprint: str
 
 
 def _assert_generated_package_origin(root: Path) -> None:
@@ -121,6 +134,53 @@ def _is_live_item(item: pytest.Item) -> bool:
     return any(item.get_closest_marker(marker) is not None for marker in _LIVE_MARKERS)
 
 
+def _assert_live_write_cli_gates(
+    config: pytest.Config,
+    *,
+    audit_residue: bool,
+) -> None:
+    if config.getoption("--allow-live-write") is not True:
+        raise pytest.UsageError("live_write requires explicit --allow-live-write")
+    target = config.getoption("--target-organization")
+    if not isinstance(target, str) or not target:
+        raise pytest.UsageError("live_write requires explicit --target-organization")
+    if audit_residue and config.getoption("--allow-audit-residue") is not True:
+        raise pytest.UsageError("audit_residue requires explicit --allow-audit-residue")
+    try:
+        assert_serial_live_invocation(config.invocation_params.args)
+    except SafetyError as error:
+        raise pytest.UsageError(str(error)) from None
+
+
+def _prepare_live_write_setup(
+    config: pytest.Config,
+    profile: ResolvedLiveProfile,
+    catalog: RateCatalog,
+) -> _LiveWritePreflight:
+    if config.getoption("--allow-live-write") is not True:
+        raise SafetyError("live_write requires explicit --allow-live-write")
+    if profile.allow_write is not True:
+        raise SafetyError("Live profile must set allow_write=true for live_write")
+    target = config.getoption("--target-organization")
+    if target != profile.organization_id:
+        raise SafetyError("Target organization does not match the selected live profile")
+    if profile.organization_id not in profile.allowed_organization_ids:
+        raise SafetyError("Target organization is not in the live profile allowlist")
+    if profile.terminal_group_id is None:
+        raise SafetyError("Live write profile requires a terminal group")
+    if profile.write_product_id is None:
+        raise SafetyError("Live write profile requires a dedicated write product")
+    assert_serial_live_invocation(config.invocation_params.args)
+    for operation_id in _WRITE_OPERATION_IDS:
+        catalog.operation_budget(operation_id)
+    return _LiveWritePreflight(
+        operation_ids=_WRITE_OPERATION_IDS,
+        target_organization_fingerprint=hashlib.sha256(
+            profile.organization_id.encode("utf-8")
+        ).hexdigest(),
+    )
+
+
 def pytest_addoption(parser: pytest.Parser) -> None:
     group = parser.getgroup("iiko live safety")
     if importlib.util.find_spec("xdist") is None:
@@ -134,13 +194,29 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     group.addoption("--capture-operation", action="store")
 
 
+def pytest_configure(config: pytest.Config) -> None:
+    config.addinivalue_line(
+        "markers",
+        "audit_residue: write test whose compensating cleanup can leave an audit trail",
+    )
+
+
+@pytest.hookimpl(trylast=True)
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     live_profile = config.getoption("--live-profile")
     if live_profile is not None and not is_safe_profile_name(live_profile):
         raise pytest.UsageError("--live-profile must be a safe lowercase profile name")
+    live_write_selected = False
     for item in items:
         if _is_live_item(item) and not live_profile:
             item.add_marker(pytest.mark.skip(reason="live tests require --live-profile"))
+            continue
+        if item.get_closest_marker("live_write") is not None:
+            audit_residue = item.get_closest_marker("audit_residue") is not None
+            _assert_live_write_cli_gates(config, audit_residue=audit_residue)
+            item.add_marker(pytest.mark.usefixtures("_live_environment"))
+            live_write_selected = True
+    config._iiko_live_write_selected = live_write_selected  # type: ignore[attr-defined]
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -177,6 +253,18 @@ def _live_environment(request: pytest.FixtureRequest) -> Iterator[_LiveEnvironme
             profile_name=request.config.getoption("--live-profile"),
             env_file_option=request.config.getoption("--env-file"),
         )
+        if getattr(request.config, "_iiko_live_write_selected", False):
+            write_preflight = _prepare_live_write_setup(
+                request.config,
+                profile,
+                preflight.catalog,
+            )
+            print(
+                "live-write preflight: operations="
+                + ",".join(write_preflight.operation_ids)
+                + "; target-organization-sha256="
+                + write_preflight.target_organization_fingerprint
+            )
         state = LiveStateStore(state_root / "live-rate-limits.json", process_lock=lock)
         receipt, receipt_path = initialize_receipt(
             state_root,
@@ -288,6 +376,36 @@ async def live_sdk(
             context.generated_client_closed = generated_client_closed
             if adapter is not None and adapter.receipt is not None:
                 context.receipt = adapter.receipt
+
+
+@pytest_asyncio.fixture(loop_scope="session")
+async def mutation_journal(
+    request: pytest.FixtureRequest,
+    _live_environment: _LiveEnvironment,
+) -> AsyncIterator[Any]:
+    if request.node.get_closest_marker("live_write") is None:
+        raise SafetyError("Mutation journals are available only to live_write tests")
+
+    from tools.openapi_pipeline.mutations import MutationJournal
+
+    environment = _live_environment
+    journal = MutationJournal.create(
+        RepoPaths.discover().root / ".state",
+        environment.context.receipt.run_id,
+        environment.profile.fingerprint,
+    )
+    try:
+        yield journal
+    finally:
+        if journal.pending_count == 0 and journal.path.exists():
+
+            async def reject_unexpected_cleanup(
+                _operation_id: str,
+                _payload: dict[str, Any],
+            ) -> None:
+                raise SafetyError("Empty mutation journal unexpectedly requested cleanup")
+
+            await journal.cleanup(reject_unexpected_cleanup)
 
 
 def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:

@@ -2,12 +2,18 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable
+from contextlib import suppress
 from pathlib import Path
 from typing import TypeVar
+from uuid import UUID
 
+from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
+from iikocloud_client.models.remove_products_from_stop_list_request import (
+    RemoveProductsFromStopListRequest,
+)
 
 from ..capture import LiveCapture
 from ..errors import SafetyError
@@ -17,6 +23,53 @@ from .receipt import LiveReceipt
 from .state import LiveStateStore
 
 T = TypeVar("T")
+_CLEANUP_OPERATION_ID = "remove_products_from_stop_list"
+_PROFILE_BOUNDARY_ERROR = "Generated cleanup request is outside the selected write profile"
+
+
+def validate_generated_cleanup_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> RemoveProductsFromStopListRequest:
+    """Validate one generated cleanup request against its selected write profile."""
+
+    if type(operation_id) is not str or operation_id != _CLEANUP_OPERATION_ID:
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+
+    request: RemoveProductsFromStopListRequest | None = None
+    with suppress(Exception):
+        request = RemoveProductsFromStopListRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated cleanup payload is invalid") from None
+
+    expected_ids: tuple[UUID, frozenset[UUID], UUID, UUID] | None = None
+    if isinstance(profile, ResolvedLiveProfile):
+        with suppress(Exception):
+            if profile.terminal_group_id is not None and profile.write_product_id is not None:
+                expected_ids = (
+                    UUID(profile.organization_id),
+                    frozenset(UUID(value) for value in profile.allowed_organization_ids),
+                    UUID(profile.terminal_group_id),
+                    UUID(profile.write_product_id),
+                )
+    if expected_ids is None:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = expected_ids
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            profile.allow_write is True
+            and request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and request.terminal_group_id == terminal_group_id
+            and len(request.items) == 1
+            and request.items[0].product_id == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
 
 
 class GeneratedLiveSdk:
@@ -95,6 +148,20 @@ class GeneratedLiveSdk:
                 return normalized
         self._unusable = True
         raise SafetyError("Generated SDK exception has an invalid HTTP status") from None
+
+    async def execute_cleanup(self, operation_id: str, payload: object) -> None:
+        self._assert_usable()
+        request = validate_generated_cleanup_request(operation_id, payload, self.profile)
+
+        api = MenuApi(self.api_client)
+        await self.call_generated(
+            operation_id,
+            request,
+            lambda: api.remove_products_from_stop_list_with_http_info(
+                remove_products_from_stop_list_request=request,
+                _request_timeout=(10.0, 30.0),
+            ),
+        )
 
     async def call_generated(
         self,

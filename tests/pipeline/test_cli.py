@@ -74,9 +74,33 @@ def test_cli_pipeline_arguments_are_exact() -> None:
         "live_profile": "test-server",
         "env_file": ".env",
     }
-    promote = parser.parse_args(
-        ["promote-evidence", "--operation", "get_external_menu_by_id"]
+    cleanup = parser.parse_args(
+        [
+            "cleanup-orphans",
+            "--live-profile",
+            "test-server",
+        ]
     )
+    assert vars(cleanup) == {
+        "command": "cleanup-orphans",
+        "live_profile": "test-server",
+        "env_file": None,
+    }
+    cleanup_with_env = parser.parse_args(
+        [
+            "cleanup-orphans",
+            "--live-profile",
+            "test-server",
+            "--env-file",
+            ".env",
+        ]
+    )
+    assert vars(cleanup_with_env) == {
+        "command": "cleanup-orphans",
+        "live_profile": "test-server",
+        "env_file": ".env",
+    }
+    promote = parser.parse_args(["promote-evidence", "--operation", "get_external_menu_by_id"])
     assert vars(promote) == {
         "command": "promote-evidence",
         "operation": "get_external_menu_by_id",
@@ -147,6 +171,22 @@ def test_discover_read_targets_requires_exact_arguments(
 ) -> None:
     with pytest.raises(SystemExit):
         build_parser().parse_args(("discover-read-targets", *arguments))
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        (),
+        ("--env-file", ".env"),
+        ("--live-profile", "test-server", "--env-file"),
+        ("--live-profile", "test-server", "--extra"),
+    ],
+)
+def test_cleanup_orphans_requires_exact_arguments(
+    arguments: tuple[str, ...],
+) -> None:
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(("cleanup-orphans", *arguments))
 
 
 @pytest.mark.parametrize(
@@ -306,6 +346,43 @@ def test_main_dispatches_discovery_and_renders_only_fixed_json(
     assert capsys.readouterr().out == discovery.render_discovery_result(result) + "\n"
 
 
+def test_main_dispatches_cleanup_orphans_without_rendering_private_state(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from tools.openapi_pipeline import orphan_cleanup
+
+    calls: list[dict[str, object]] = []
+
+    async def cleanup(**kwargs: object) -> int:
+        calls.append(kwargs)
+        return 2
+
+    monkeypatch.setattr(orphan_cleanup, "cleanup_orphans_command", cleanup)
+    arguments = [
+        "cleanup-orphans",
+        "--live-profile",
+        "test-server",
+        "--env-file",
+        ".env",
+    ]
+
+    assert main(arguments) == 0
+    assert calls == [{"live_profile": "test-server", "env_file": ".env"}]
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
+
+    async def fail(**_kwargs: object) -> int:
+        raise PipelineError("orphan cleanup unavailable")
+
+    monkeypatch.setattr(orphan_cleanup, "cleanup_orphans_command", fail)
+    assert main(arguments) == 2
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == "error: orphan cleanup unavailable\n"
+
+
 def test_main_builds_only_a_detached_evidence_candidate(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -328,10 +405,7 @@ def test_main_builds_only_a_detached_evidence_candidate(
         lambda _paths: (_ for _ in ()).throw(AssertionError("accept must not run")),
     )
 
-    assert (
-        main(["promote-evidence", "--operation", "get_external_menu_by_id"])
-        == 0
-    )
+    assert main(["promote-evidence", "--operation", "get_external_menu_by_id"]) == 0
     output = capsys.readouterr()
     assert calls == [("get_external_menu_by_id", paths)]
     assert output.out == (

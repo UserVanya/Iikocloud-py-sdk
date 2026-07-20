@@ -49,6 +49,9 @@ def build_parser() -> argparse.ArgumentParser:
         elif command == "discover-read-targets":
             command_parser.add_argument("--live-profile", required=True)
             command_parser.add_argument("--env-file", required=True)
+        elif command == "cleanup-orphans":
+            command_parser.add_argument("--live-profile", required=True)
+            command_parser.add_argument("--env-file")
         elif command == "promote-evidence":
             command_parser.add_argument(
                 "--operation",
@@ -102,6 +105,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             )
             print(discovery.render_discovery_result(result))
+        elif args.command == "cleanup-orphans":
+            from . import orphan_cleanup
+
+            asyncio.run(
+                orphan_cleanup.cleanup_orphans_command(
+                    live_profile=args.live_profile,
+                    env_file=args.env_file,
+                )
+            )
         elif args.command == "promote-evidence":
             from . import evidence, evidence_candidate_accept
 
