@@ -1381,6 +1381,26 @@ def test_concrete_validator_enforces_supported_format_semantics(
         _read(root)
 
 
+def test_concrete_validator_type_mismatch_reports_only_the_safe_schema_path(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "repository"
+    paths = _complete_tree(root)
+    request = _load(paths[2][0])
+    response = _load(paths[2][1])
+    secret_like_value = "Bearer synthetic-secret-value"
+    response["body"]["comboCategories"] = secret_like_value
+
+    with pytest.raises(SafetyError) as caught:
+        MenuEvidenceValidator(_effective_schema()).validate(2, request, response)
+
+    assert str(caught.value) == (
+        "Evidence value at response-v2.comboCategories "
+        "does not match its reviewed schema type"
+    )
+    assert secret_like_value not in str(caught.value)
+
+
 @pytest.mark.parametrize(
     "value",
     [

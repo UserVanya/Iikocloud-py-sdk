@@ -471,7 +471,9 @@ class MenuEvidenceValidator:
 
         schema_type = schema.get("type")
         if schema_type is not None and not _matches_type(value, schema_type):
-            raise SafetyError("Evidence value does not match its reviewed schema type")
+            raise SafetyError(
+                f"Evidence value at {path} does not match its reviewed schema type"
+            )
         if schema_type is None and type(value) in {dict, list}:
             raise SafetyError("Evidence untyped schema cannot accept a container value")
         _validate_format(value, schema.get("format"))
