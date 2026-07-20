@@ -1,7 +1,17 @@
+"""Fail-safe persistence for detached evidence-candidate trees.
+
+All official evidence-candidate writers, including the D3 persistence step, must
+cooperate on the fixed build-root lock before inspecting or changing publication
+state. A non-cooperating same-UID process is out of scope: it can already mutate
+the checkout directly, so this API serializes supported writers without claiming
+to defend against a malicious peer with the repository owner's authority.
+"""
+
 from __future__ import annotations
 
 import ctypes
 import errno
+import fcntl
 import json
 import math
 import os
@@ -37,6 +47,8 @@ from .io import canonical_json_bytes, sha256_bytes
 from .paths import RepoPaths
 
 _CANDIDATE_DIRECTORY = "evidence-candidates"
+_LOCK_FILE = ".evidence-candidates.lock"
+_STAGING_PREFIX = ".evidence-candidates.tmp-"
 _MANIFEST_PATH = "candidate-manifest.json"
 _RENAME_NOREPLACE = 1
 _SHA256 = re.compile(r"[a-f0-9]{64}\Z")
@@ -104,9 +116,13 @@ def write_evidence_candidate_tree(
 
     The canonical mode-0755 ``build/`` directory must already exist. Publication into
     that ignored directory is a consistency operation only and does not authorize
-    acceptance into tracked overlays or fixtures. Any failure after staging allocation
-    deliberately leaves the hidden staging or complete published tree untouched; the
-    writer only closes file descriptors and never attempts name-based cleanup.
+    acceptance into tracked overlays or fixtures. All official writers cooperate on
+    the persistent lock; the lock is held from residue inventory through descriptor
+    closure. Any staging residue blocks publication until an operator resolves it.
+    Any failure after staging allocation deliberately leaves the hidden staging or
+    complete published tree untouched; the writer only closes file descriptors and
+    never attempts name-based cleanup. A non-cooperating same-UID process is out of
+    scope because it can already mutate the checkout directly.
     """
 
     tree = _snapshot_candidate_tree(result)
@@ -122,11 +138,14 @@ def write_evidence_candidate_tree(
 
     repository_fd: int | None = None
     build_fd: int | None = None
+    lock_fd: int | None = None
     candidate_fd: int | None = None
     directory_fds: dict[str, int] = {}
     try:
         repository_fd = _open_repository_root(repository_root)
         build_fd = _open_build(repository_fd)
+        lock_fd = _open_and_lock_writer(build_fd)
+        _reject_staging_residue(build_fd)
         candidate_fd = _open_optional_public_directory(
             build_fd,
             _CANDIDATE_DIRECTORY,
@@ -196,6 +215,7 @@ def write_evidence_candidate_tree(
         _close_fd(candidate_fd)
         _close_fd(build_fd)
         _close_fd(repository_fd)
+        _close_fd(lock_fd)
 
 
 def _write_result_with_changed(
@@ -680,6 +700,111 @@ def _open_build(repository_fd: int) -> int:
         "build",
         label="Evidence build root",
     )
+
+
+def _open_and_lock_writer(build_fd: int) -> int:
+    lock_fd = _open_or_create_writer_lock(build_fd)
+    try:
+        _acquire_writer_lock(lock_fd)
+        _revalidate_writer_lock_binding(build_fd, lock_fd)
+        return lock_fd
+    except BaseException:
+        _close_fd(lock_fd)
+        raise
+
+
+def _open_or_create_writer_lock(build_fd: int) -> int:
+    flags = os.O_RDWR | os.O_CLOEXEC | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_NONBLOCK
+    exists = False
+    failed = False
+    lock_fd = -1
+    try:
+        lock_fd = os.open(_LOCK_FILE, flags, 0o644, dir_fd=build_fd)
+    except FileExistsError:
+        exists = True
+    except OSError:
+        failed = True
+    if exists:
+        return _open_existing_writer_lock(build_fd)
+    if failed:
+        raise SafetyError("Cannot create evidence candidate writer lock safely") from None
+
+    try:
+        _fchmod_fd(lock_fd, 0o644)
+        _revalidate_writer_lock_binding(build_fd, lock_fd)
+        _fsync_fd(lock_fd)
+        _fsync_fd(build_fd)
+        return lock_fd
+    except BaseException:
+        _close_fd(lock_fd)
+        raise
+
+
+def _open_existing_writer_lock(build_fd: int) -> int:
+    expected = _safe_stat_at(
+        build_fd,
+        _LOCK_FILE,
+        message="Cannot inspect evidence candidate writer lock safely",
+    )
+    _validate_public_file(expected, label="Evidence candidate writer lock")
+    lock_fd = _safe_open(
+        _LOCK_FILE,
+        os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW | os.O_NONBLOCK,
+        dir_fd=build_fd,
+        message="Cannot open evidence candidate writer lock safely",
+    )
+    try:
+        actual = _safe_fstat(
+            lock_fd,
+            message="Cannot inspect evidence candidate writer lock safely",
+        )
+        _validate_public_file(actual, label="Evidence candidate writer lock")
+        if not _same_stable_metadata(expected, actual):
+            raise SafetyError("Evidence candidate writer lock changed while opening")
+        _revalidate_writer_lock_binding(build_fd, lock_fd)
+        return lock_fd
+    except BaseException:
+        _close_fd(lock_fd)
+        raise
+
+
+def _acquire_writer_lock(lock_fd: int) -> None:
+    contended = False
+    failed = False
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        contended = True
+    except OSError as error:
+        if error.errno in {errno.EACCES, errno.EAGAIN, errno.EWOULDBLOCK}:
+            contended = True
+        else:
+            failed = True
+    if contended:
+        raise SafetyError("Evidence candidate writer lock is already held") from None
+    if failed:
+        raise SafetyError("Cannot acquire evidence candidate writer lock safely") from None
+
+
+def _revalidate_writer_lock_binding(build_fd: int, lock_fd: int) -> None:
+    held = _safe_fstat(
+        lock_fd,
+        message="Cannot inspect evidence candidate writer lock safely",
+    )
+    current = _safe_stat_at(
+        build_fd,
+        _LOCK_FILE,
+        message="Cannot revalidate evidence candidate writer lock safely",
+    )
+    _validate_public_file(held, label="Evidence candidate writer lock")
+    _validate_public_file(current, label="Evidence candidate writer lock")
+    if not _same_stable_metadata(held, current):
+        raise SafetyError("Evidence candidate writer lock binding changed")
+
+
+def _reject_staging_residue(build_fd: int) -> None:
+    if any(name.startswith(_STAGING_PREFIX) for name in _safe_listdir(build_fd)):
+        raise SafetyError("Evidence candidate staging residue requires operator resolution")
 
 
 def _open_optional_public_directory(

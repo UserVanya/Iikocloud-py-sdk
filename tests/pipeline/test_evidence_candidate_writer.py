@@ -3,6 +3,7 @@ from __future__ import annotations
 import ctypes
 import dataclasses
 import errno
+import fcntl
 import json
 import os
 import socket
@@ -38,6 +39,8 @@ from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.paths import RepoPaths
 
 SENSITIVE_MARKER = "caller-private-sensitive-marker"
+LOCK_NAME = ".evidence-candidates.lock"
+STAGING_PREFIX = ".evidence-candidates.tmp-"
 
 
 class _CallbackMapping(Mapping[Any, Any]):
@@ -163,6 +166,31 @@ def _assert_empty_build(paths: RepoPaths) -> None:
     assert list(paths.build.iterdir()) == []
 
 
+def _metadata_signature(path: Path) -> tuple[int, ...]:
+    metadata = os.lstat(path)
+    return (
+        metadata.st_dev,
+        metadata.st_ino,
+        metadata.st_mode,
+        metadata.st_uid,
+        metadata.st_nlink,
+        metadata.st_size,
+        metadata.st_mtime_ns,
+        metadata.st_ctime_ns,
+    )
+
+
+def _assert_lock_only_build(paths: RepoPaths) -> Path:
+    lock_path = paths.build / LOCK_NAME
+    assert sorted(path.name for path in paths.build.iterdir()) == [LOCK_NAME]
+    metadata = os.lstat(lock_path)
+    assert stat.S_ISREG(metadata.st_mode)
+    assert stat.S_IMODE(metadata.st_mode) == 0o644
+    assert metadata.st_uid == os.getuid()
+    assert metadata.st_nlink == 1
+    return lock_path
+
+
 def _single_staging_residue(paths: RepoPaths) -> Path:
     residues = list(paths.build.glob(".evidence-candidates.tmp-*"))
     assert len(residues) == 1
@@ -240,6 +268,14 @@ def test_writer_atomically_publishes_exact_candidate_tree(tmp_path: Path) -> Non
     assert root.stat().st_mode & 0o777 == 0o755
     assert all(path.stat().st_mode & 0o777 == 0o755 for path in root.rglob("*") if path.is_dir())
     assert all(path.stat().st_mode & 0o777 == 0o644 for path in root.rglob("*") if path.is_file())
+    lock_path = paths.build / LOCK_NAME
+    lock_metadata = os.lstat(lock_path)
+    assert stat.S_ISREG(lock_metadata.st_mode)
+    assert stat.S_IMODE(lock_metadata.st_mode) == 0o644
+    assert lock_metadata.st_uid == os.getuid()
+    assert lock_metadata.st_nlink == 1
+    assert lock_metadata.st_size == 0
+    assert sorted(path.name for path in paths.build.iterdir()) == [LOCK_NAME, root.name]
     assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
 
 
@@ -250,13 +286,14 @@ def test_writer_identical_existing_tree_is_untouched(
     result = _result()
     paths = _repository(tmp_path)
     first = write_evidence_candidate_tree(result, paths)
+    lock_path = paths.build / LOCK_NAME
     before = {
-        path.relative_to(first.root).as_posix(): (
+        path.relative_to(paths.root).as_posix(): (
             os.lstat(path).st_ino,
             os.lstat(path).st_mtime_ns,
             os.lstat(path).st_ctime_ns,
         )
-        for path in (first.root, *first.root.rglob("*"))
+        for path in (paths.build, lock_path, first.root, *first.root.rglob("*"))
     }
 
     def forbidden(*_args: Any, **_kwargs: Any) -> Any:
@@ -269,12 +306,12 @@ def test_writer_identical_existing_tree_is_untouched(
     second = write_evidence_candidate_tree(result, paths)
 
     after = {
-        path.relative_to(first.root).as_posix(): (
+        path.relative_to(paths.root).as_posix(): (
             os.lstat(path).st_ino,
             os.lstat(path).st_mtime_ns,
             os.lstat(path).st_ctime_ns,
         )
-        for path in (first.root, *first.root.rglob("*"))
+        for path in (paths.build, lock_path, first.root, *first.root.rglob("*"))
     }
     assert second == EvidenceCandidateWriteResult(
         root=first.root,
@@ -284,6 +321,426 @@ def test_writer_identical_existing_tree_is_untouched(
     )
     assert after == before
     assert not list(paths.build.glob(".evidence-candidates.tmp-*"))
+
+
+def test_writer_documents_cooperative_lock_threat_boundary() -> None:
+    documentation = "\n".join(
+        (writer_module.__doc__ or "", write_evidence_candidate_tree.__doc__ or "")
+    ).lower()
+
+    assert "all official" in documentation
+    assert "cooperate" in documentation
+    assert "same-uid" in documentation
+    assert "out of scope" in documentation
+
+
+def test_writer_creates_lock_atomically_and_durably_before_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    real_open = writer_module.os.open
+    real_fsync = writer_module._fsync_fd
+    lock_creations: list[tuple[int, int | None]] = []
+    fsync_targets_before_staging: list[str] = []
+    staging_started = False
+
+    def observe_open(*args: Any, **kwargs: Any) -> int:
+        if args[0] == LOCK_NAME:
+            lock_creations.append((args[1], args[2] if len(args) > 2 else None))
+        return real_open(*args, **kwargs)
+
+    def observe_fsync(fd: int) -> None:
+        if not staging_started:
+            fsync_targets_before_staging.append(os.readlink(f"/proc/self/fd/{fd}"))
+        real_fsync(fd)
+
+    real_create_staging = writer_module._create_staging_directory
+
+    def observe_staging(build_fd: int) -> tuple[str, int]:
+        nonlocal staging_started
+        staging_started = True
+        return real_create_staging(build_fd)
+
+    monkeypatch.setattr(writer_module.os, "open", observe_open)
+    monkeypatch.setattr(writer_module, "_fsync_fd", observe_fsync)
+    monkeypatch.setattr(writer_module, "_create_staging_directory", observe_staging)
+
+    write_evidence_candidate_tree(_result(), paths)
+
+    assert len(lock_creations) == 1
+    flags, mode = lock_creations[0]
+    assert flags & os.O_CREAT
+    assert flags & os.O_EXCL
+    assert flags & os.O_NOFOLLOW
+    assert mode == 0o644
+    assert fsync_targets_before_staging == [
+        str(paths.build / LOCK_NAME),
+        str(paths.build),
+    ]
+
+
+def test_writer_lock_contention_fails_before_staging_without_mutation(
+    tmp_path: Path,
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    lock_path.write_bytes(b"")
+    lock_path.chmod(0o644)
+    before = _metadata_signature(lock_path)
+    held_fd = os.open(lock_path, os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW)
+    fcntl.flock(held_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    try:
+        with pytest.raises(
+            SafetyError,
+            match="^Evidence candidate writer lock is already held$",
+        ):
+            write_evidence_candidate_tree(_result(), paths)
+    finally:
+        os.close(held_fd)
+
+    assert _metadata_signature(lock_path) == before
+    assert _assert_lock_only_build(paths) == lock_path
+    assert not (paths.build / "evidence-candidates").exists()
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+
+
+@pytest.mark.parametrize("boundary", ["root", "child"])
+def test_writer_holds_cooperative_lock_at_every_staging_mkdir_boundary(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    boundary: str,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    real_mkdir = writer_module.os.mkdir
+    checked: list[str] = []
+
+    def observe_mkdir(
+        path: str | bytes,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> None:
+        is_root = type(path) is str and path.startswith(STAGING_PREFIX)
+        if (boundary == "root" and is_root) or (boundary == "child" and not is_root):
+            assert type(path) is str
+            checked.append(path)
+            if boundary == "root":
+                with pytest.raises(
+                    SafetyError,
+                    match="^Evidence candidate writer lock is already held$",
+                ):
+                    write_evidence_candidate_tree(result, paths)
+            else:
+                probe_fd = os.open(
+                    paths.build / LOCK_NAME,
+                    os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW,
+                )
+                try:
+                    with pytest.raises(BlockingIOError):
+                        fcntl.flock(probe_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                finally:
+                    os.close(probe_fd)
+        real_mkdir(path, mode, dir_fd=dir_fd)
+
+    monkeypatch.setattr(writer_module.os, "mkdir", observe_mkdir)
+
+    written = write_evidence_candidate_tree(result, paths)
+
+    assert written.changed is True
+    assert len(checked) == (1 if boundary == "root" else len(writer_module._DIRECTORY_PATHS) - 1)
+
+
+def test_writer_holds_lock_until_every_other_writer_fd_is_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    real_open = writer_module.os.open
+    real_close = writer_module.os.close
+    lock_fds: list[int] = []
+    close_order: list[int] = []
+    lock_checks = 0
+
+    def track_open(*args: Any, **kwargs: Any) -> int:
+        fd = real_open(*args, **kwargs)
+        if args[0] == LOCK_NAME:
+            lock_fds.append(fd)
+        return fd
+
+    def assert_lock_before_close(fd: int) -> None:
+        nonlocal lock_checks
+        if lock_fds and fd != lock_fds[0]:
+            try:
+                os.fstat(lock_fds[0])
+            except OSError:
+                pass
+            else:
+                probe_fd = real_open(
+                    paths.build / LOCK_NAME,
+                    os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW,
+                )
+                try:
+                    with pytest.raises(BlockingIOError):
+                        fcntl.flock(probe_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    lock_checks += 1
+                finally:
+                    real_close(probe_fd)
+        close_order.append(fd)
+        real_close(fd)
+
+    monkeypatch.setattr(writer_module.os, "open", track_open)
+    monkeypatch.setattr(writer_module.os, "close", assert_lock_before_close)
+
+    write_evidence_candidate_tree(_result(), paths)
+
+    assert len(lock_fds) == 1
+    assert lock_checks > 0
+    assert close_order[-1] == lock_fds[0]
+
+
+@pytest.mark.parametrize(
+    "unsafe_kind",
+    ["symlink", "hardlink", "wrong-mode", "fifo"],
+)
+def test_writer_rejects_unsafe_existing_lock_untouched(
+    tmp_path: Path,
+    unsafe_kind: str,
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    outside = tmp_path / "outside-lock"
+    outside.write_bytes(b"")
+    outside.chmod(0o644)
+    if unsafe_kind == "symlink":
+        lock_path.symlink_to(outside)
+    elif unsafe_kind == "hardlink":
+        lock_path.hardlink_to(outside)
+    elif unsafe_kind == "wrong-mode":
+        lock_path.write_bytes(b"")
+        lock_path.chmod(0o600)
+    else:
+        os.mkfifo(lock_path, mode=0o644)
+    before = _metadata_signature(lock_path)
+
+    with pytest.raises(SafetyError, match="lock|0644|regular|hard link"):
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert _metadata_signature(lock_path) == before
+    assert not (paths.build / "evidence-candidates").exists()
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+
+
+def test_writer_rejects_wrong_owner_lock_untouched(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    lock_path.write_bytes(b"")
+    lock_path.chmod(0o644)
+    before = _metadata_signature(lock_path)
+    real_stat = writer_module._safe_stat_at
+
+    def report_foreign_lock_owner(
+        parent_fd: int,
+        name: str,
+        *,
+        message: str,
+    ) -> os.stat_result:
+        metadata = real_stat(parent_fd, name, message=message)
+        if name != LOCK_NAME:
+            return metadata
+        return os.stat_result(
+            (
+                metadata.st_mode,
+                metadata.st_ino,
+                metadata.st_dev,
+                metadata.st_nlink,
+                metadata.st_uid + 1,
+                metadata.st_gid,
+                metadata.st_size,
+                metadata.st_atime,
+                metadata.st_mtime,
+                metadata.st_ctime,
+            )
+        )
+
+    monkeypatch.setattr(writer_module, "_safe_stat_at", report_foreign_lock_owner)
+
+    with pytest.raises(SafetyError, match="owned|lock"):
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert _metadata_signature(lock_path) == before
+    assert not (paths.build / "evidence-candidates").exists()
+
+
+@pytest.mark.parametrize("operation", ["open", "flock"])
+def test_writer_sanitizes_lock_oserror_without_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    operation: str,
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    lock_path.write_bytes(b"")
+    lock_path.chmod(0o644)
+    if operation == "open":
+        real_open = writer_module.os.open
+
+        def fail_lock_open(*args: Any, **kwargs: Any) -> int:
+            if args[0] == LOCK_NAME:
+                raise OSError(SENSITIVE_MARKER)
+            return real_open(*args, **kwargs)
+
+        monkeypatch.setattr(writer_module.os, "open", fail_lock_open)
+    else:
+
+        def fail_flock(_fd: int, _operation: int) -> None:
+            raise OSError(SENSITIVE_MARKER)
+
+        monkeypatch.setattr(fcntl, "flock", fail_flock)
+
+    with pytest.raises(SafetyError) as caught:
+        write_evidence_candidate_tree(_result(), paths)
+
+    _assert_sanitized(caught.value)
+    assert not (paths.build / "evidence-candidates").exists()
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+
+
+@pytest.mark.parametrize("exception_type", [MemoryError, KeyboardInterrupt, SystemExit])
+def test_writer_preserves_lock_base_exceptions_and_closes_fd(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    exception_type: type[BaseException],
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    lock_path.write_bytes(b"")
+    lock_path.chmod(0o644)
+    real_open = writer_module.os.open
+    lock_fds: list[int] = []
+
+    def track_lock_open(*args: Any, **kwargs: Any) -> int:
+        fd = real_open(*args, **kwargs)
+        if args[0] == LOCK_NAME:
+            lock_fds.append(fd)
+        return fd
+
+    def fail_flock(_fd: int, _operation: int) -> None:
+        raise exception_type(SENSITIVE_MARKER)
+
+    monkeypatch.setattr(writer_module.os, "open", track_lock_open)
+    monkeypatch.setattr(fcntl, "flock", fail_flock)
+
+    with pytest.raises(exception_type) as caught:
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert caught.value.args == (SENSITIVE_MARKER,)
+    assert lock_fds
+    for fd in lock_fds:
+        with pytest.raises(OSError):
+            os.fstat(fd)
+    assert not (paths.build / "evidence-candidates").exists()
+
+
+def test_writer_revalidates_lock_name_binding_after_acquisition(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    lock_path = paths.build / LOCK_NAME
+    lock_path.write_bytes(b"")
+    lock_path.chmod(0o644)
+    displaced = paths.build / "displaced-lock"
+    real_flock = fcntl.flock
+
+    def swap_after_lock(fd: int, operation: int) -> None:
+        real_flock(fd, operation)
+        lock_path.rename(displaced)
+        lock_path.write_bytes(b"")
+        lock_path.chmod(0o644)
+
+    monkeypatch.setattr(fcntl, "flock", swap_after_lock)
+
+    with pytest.raises(SafetyError, match="lock.*changed|lock.*binding"):
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert displaced.is_file()
+    assert lock_path.is_file()
+    assert not (paths.build / "evidence-candidates").exists()
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+
+
+@pytest.mark.parametrize(
+    ("kind", "suffix"),
+    [
+        ("directory", "directory"),
+        ("file", "file"),
+        ("symlink", "symlink"),
+        ("file", "%%%malformed"),
+    ],
+)
+def test_writer_blocks_every_staging_residue_kind_before_new_staging(
+    tmp_path: Path,
+    kind: str,
+    suffix: str,
+) -> None:
+    paths = _repository(tmp_path)
+    residue = paths.build / f"{STAGING_PREFIX}{suffix}"
+    if kind == "directory":
+        residue.mkdir(mode=0o755)
+    elif kind == "symlink":
+        target = tmp_path / "residue-target"
+        target.write_bytes(b"untouched")
+        residue.symlink_to(target)
+    else:
+        residue.write_bytes(b"untouched")
+        residue.chmod(0o644)
+    before = _metadata_signature(residue)
+
+    with pytest.raises(
+        SafetyError,
+        match="^Evidence candidate staging residue requires operator resolution$",
+    ):
+        write_evidence_candidate_tree(_result(), paths)
+
+    assert _metadata_signature(residue) == before
+    lock_metadata = os.lstat(paths.build / LOCK_NAME)
+    assert stat.S_ISREG(lock_metadata.st_mode)
+    assert stat.S_IMODE(lock_metadata.st_mode) == 0o644
+    assert lock_metadata.st_uid == os.getuid()
+    assert lock_metadata.st_nlink == 1
+    assert sorted(path.name for path in paths.build.iterdir()) == sorted([LOCK_NAME, residue.name])
+    assert not (paths.build / "evidence-candidates").exists()
+
+
+def test_writer_residue_gate_precedes_existing_candidate_validation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    published = write_evidence_candidate_tree(result, paths)
+    residue = paths.build / f"{STAGING_PREFIX}operator-review"
+    residue.mkdir(mode=0o755)
+    before = _metadata_signature(residue)
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> None:
+        raise AssertionError("residue gate must precede candidate validation")
+
+    monkeypatch.setattr(writer_module, "_validate_exact_tree", forbidden)
+
+    with pytest.raises(
+        SafetyError,
+        match="^Evidence candidate staging residue requires operator resolution$",
+    ):
+        write_evidence_candidate_tree(result, paths)
+
+    assert _metadata_signature(residue) == before
+    assert published.root.is_dir()
 
 
 def test_writer_uses_only_detached_manifest_result(tmp_path: Path) -> None:
@@ -1280,9 +1737,10 @@ def test_postrename_revalidation_preserves_complete_final_name_and_fails_closed(
     real_revalidate = writer_module._revalidate_published_candidate
 
     def replace_then_revalidate(*args: Any, **kwargs: Any) -> None:
-        root = paths.build / "evidence-candidates"
-        root.rename(displaced)
-        _write_tree_directly(paths, result, changed_path="candidate-manifest.json")
+        if not displaced.exists():
+            root = paths.build / "evidence-candidates"
+            root.rename(displaced)
+            _write_tree_directly(paths, result)
         real_revalidate(*args, **kwargs)
 
     monkeypatch.setattr(
@@ -1295,12 +1753,56 @@ def test_postrename_revalidation_preserves_complete_final_name_and_fails_closed(
         write_evidence_candidate_tree(result, paths)
 
     replacement = paths.build / "evidence-candidates"
-    assert (replacement / "candidate-manifest.json").read_bytes() == (
-        result.canonical_json_bytes + b"\n"
-    )
+    assert (replacement / "candidate-manifest.json").read_bytes() == result.canonical_json_bytes
     assert displaced.is_dir()
-    with pytest.raises(SafetyError):
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+
+    recovered = write_evidence_candidate_tree(result, paths)
+
+    assert recovered.changed is False
+    assert recovered.root == replacement
+
+
+def test_postrename_build_fsync_failure_preserves_complete_tree_and_primary(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _repository(tmp_path)
+    result = _result()
+    sentinel = OSError("synthetic post-rename build fsync failure")
+    real_open = writer_module.os.open
+    real_fsync = writer_module._fsync_fd
+    opened: list[int] = []
+
+    def tracking_open(*args: Any, **kwargs: Any) -> int:
+        fd = real_open(*args, **kwargs)
+        opened.append(fd)
+        return fd
+
+    def fail_postrename_build_fsync(fd: int) -> None:
+        target = os.readlink(f"/proc/self/fd/{fd}")
+        if target == str(paths.build) and (paths.build / "evidence-candidates").is_dir():
+            raise sentinel
+        real_fsync(fd)
+
+    monkeypatch.setattr(writer_module.os, "open", tracking_open)
+    monkeypatch.setattr(writer_module, "_fsync_fd", fail_postrename_build_fsync)
+
+    with pytest.raises(OSError) as caught:
         write_evidence_candidate_tree(result, paths)
+
+    assert caught.value is sentinel
+    published = paths.build / "evidence-candidates"
+    _assert_complete_staging(published, result)
+    assert not list(paths.build.glob(f"{STAGING_PREFIX}*"))
+    assert opened
+    for fd in opened:
+        with pytest.raises(OSError):
+            os.fstat(fd)
+
+    recovered = write_evidence_candidate_tree(result, paths)
+
+    assert recovered.changed is False
 
 
 def test_failure_preserves_primary_and_foreign_staging_replacement(
