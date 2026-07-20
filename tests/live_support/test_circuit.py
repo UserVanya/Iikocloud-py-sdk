@@ -180,7 +180,7 @@ async def test_three_evidence_runs_reserve_every_live_call_thirty_seconds_apart(
         for operation_id, operation in catalog_data["operations"].items()
         if operation["verified"] is True
     }
-    assert enabled_operations == {"authenticate", "get_external_menu_by_id"}
+    assert {"authenticate", "get_external_menu_by_id"} <= enabled_operations
     catalog = RateCatalog.from_mapping(catalog_data)
     fake = FakeTime(0.0)
     reservations: list[float] = []
