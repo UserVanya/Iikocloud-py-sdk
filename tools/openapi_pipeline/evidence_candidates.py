@@ -125,57 +125,141 @@ def build_evidence_candidate_bundle(
 
 
 def _snapshot_pairs(pairs: Mapping[int, EvidencePair]) -> Mapping[int, EvidencePair]:
-    if not isinstance(pairs, Mapping):
-        raise SafetyError("Evidence candidate pairs must be a mapping")
-    mapping_failed = False
-    try:
-        keys = tuple(pairs)
-    except SafetyError:
-        raise
-    except Exception:
-        mapping_failed = True
-        keys = ()
-    if mapping_failed:
-        raise SafetyError("Evidence candidate pair mapping is invalid") from None
-    if (
-        len(keys) != len(_VERSIONS)
-        or any(type(version) is not int for version in keys)
-        or set(keys) != set(_VERSIONS)
-    ):
+    entries = _caller_mapping_entries(
+        pairs,
+        key_type=int,
+        message="Evidence candidate pair mapping is invalid",
+    )
+    if len(entries) != len(_VERSIONS) or {version for version, _pair in entries} != set(_VERSIONS):
         raise SafetyError("Evidence candidate requires exactly versions 2, 3, and 4")
+    pairs_by_version = dict(entries)
     copied: dict[int, EvidencePair] = {}
     for version in _VERSIONS:
+        pair = pairs_by_version[version]
+        if type(pair) is not EvidencePair:
+            raise SafetyError("Evidence candidate pair version is inconsistent")
+        pair_version = pair.version
+        if type(pair_version) is not int or pair_version != version:
+            raise SafetyError("Evidence candidate pair version is inconsistent")
+        request = _materialize_caller_json(
+            pair.request,
+            message="Evidence candidate pair cannot be safely snapshotted",
+        )
+        response = _materialize_caller_json(
+            pair.response,
+            message="Evidence candidate pair cannot be safely snapshotted",
+        )
+        if type(request) is not dict or type(response) is not dict:
+            raise SafetyError("Evidence candidate pair cannot be safely snapshotted")
+        copied[version] = EvidencePair(
+            version=pair_version,
+            request=request,
+            response=response,
+            request_sha256=pair.request_sha256,
+            response_sha256=pair.response_sha256,
+        )
+    return MappingProxyType(copied)
+
+
+def _caller_mapping_entries(
+    value: object,
+    *,
+    key_type: type,
+    message: str,
+) -> tuple[tuple[Any, Any], ...]:
+    if not isinstance(value, Mapping):
+        raise SafetyError(message)
+    traversal_failed = False
+    try:
+        keys = tuple(value)
+    except (SafetyError, MemoryError):
+        raise
+    except Exception:
+        traversal_failed = True
+        keys = ()
+    if traversal_failed:
+        raise SafetyError(message) from None
+    if any(type(key) is not key_type for key in keys) or len(set(keys)) != len(keys):
+        raise SafetyError(message)
+
+    entries: list[tuple[Any, Any]] = []
+    for key in keys:
         lookup_failed = False
         try:
-            pair = pairs[version]
-        except SafetyError:
+            child = value[key]
+        except (SafetyError, MemoryError):
             raise
         except Exception:
             lookup_failed = True
-            pair = None
+            child = None
         if lookup_failed:
-            raise SafetyError("Evidence candidate pair mapping changed during snapshot") from None
-        if type(pair) is not EvidencePair or pair.version != version:
-            raise SafetyError("Evidence candidate pair version is inconsistent")
-        reconstruction_failed = False
-        try:
-            copied_pair = EvidencePair(
-                version=pair.version,
-                request=pair.request,
-                response=pair.response,
-                request_sha256=pair.request_sha256,
-                response_sha256=pair.response_sha256,
+            raise SafetyError(message) from None
+        entries.append((key, child))
+    return tuple(entries)
+
+
+def _caller_sequence_values(
+    value: list[Any] | tuple[Any, ...], *, message: str
+) -> tuple[Any, ...]:
+    traversal_failed = False
+    try:
+        children: tuple[Any, ...] = tuple(value)
+    except (SafetyError, MemoryError):
+        raise
+    except Exception:
+        traversal_failed = True
+        children = ()
+    if traversal_failed:
+        raise SafetyError(message) from None
+    return children
+
+
+def _materialize_caller_json(
+    value: object,
+    *,
+    message: str,
+    depth: int = 0,
+    active: set[int] | None = None,
+) -> Any:
+    if depth > _MAX_DEPTH:
+        raise SafetyError(message)
+    if value is None or type(value) in {bool, int, str}:
+        return value
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise SafetyError(message)
+        return value
+    if not isinstance(value, (Mapping, list, tuple)):
+        raise SafetyError(message)
+
+    seen = active if active is not None else set()
+    identity = id(value)
+    if identity in seen:
+        raise SafetyError(message)
+    seen.add(identity)
+    try:
+        if isinstance(value, Mapping):
+            entries = _caller_mapping_entries(value, key_type=str, message=message)
+            return {
+                key: _materialize_caller_json(
+                    child,
+                    message=message,
+                    depth=depth + 1,
+                    active=seen,
+                )
+                for key, child in entries
+            }
+        return [
+            _materialize_caller_json(
+                child,
+                message=message,
+                depth=depth + 1,
+                active=seen,
             )
-        except SafetyError:
-            raise
-        except Exception:
-            reconstruction_failed = True
-            copied_pair = None
-        if reconstruction_failed:
-            raise SafetyError("Evidence candidate pair cannot be safely snapshotted") from None
-        assert copied_pair is not None
-        copied[version] = copied_pair
-    return MappingProxyType(copied)
+            for child in _caller_sequence_values(value, message=message)
+        ]
+    finally:
+        seen.remove(identity)
 
 
 def _build_operations_overlay(
@@ -565,56 +649,114 @@ def _schema_enum_strings(value: Any) -> frozenset[str]:
 def _analysis_bytes(value: MenuEvidenceAnalysis) -> bytes:
     if type(value) is not MenuEvidenceAnalysis:
         raise SafetyError("Evidence candidate requires an exact analysis result")
-    canonical: bytes | None = None
-    traversal_failed = False
-    try:
-        provenance: dict[str, Any] = {}
-        if set(value.provenance) != set(_VERSIONS):
-            raise SafetyError("Evidence candidate analysis provenance is incomplete")
-        for version in _VERSIONS:
-            provenance_item = value.provenance[version]
-            if type(provenance_item) is not EvidenceProvenance:
-                raise SafetyError("Evidence candidate analysis provenance is invalid")
-            provenance[str(version)] = {
-                "request": provenance_item.request_sha256,
-                "response": provenance_item.response_sha256,
-            }
-        fields: dict[str, Any] = {}
-        if set(value.combo_fields) != set(_EXACT_FIVE):
-            raise SafetyError("Evidence candidate analysis field scope is invalid")
-        for name in _EXACT_FIVE:
-            decision = value.combo_fields[name]
-            if type(decision) is not ComboFieldDecision or decision.field_name != name:
-                raise SafetyError("Evidence candidate combo decision is invalid")
-            fields[name] = {
-                "action": decision.required_action,
-                "count": decision.observation_count,
-                "reason": decision.reason_code,
-                "schema": (
-                    None
-                    if decision.property_schema is None
-                    else _thaw_json(decision.property_schema)
-                ),
-            }
-        semantic = {
-            "ambiguousCount": value.ambiguous_count,
-            "branchToLiteral": dict(value.branch_to_literal),
-            "comboFields": fields,
-            "comboObservationCount": value.combo_observation_count,
-            "literalToBranch": dict(value.literal_to_branch),
-            "provenance": provenance,
-            "totalItemCount": value.total_item_count,
-            "unambiguousCounts": dict(value.unambiguous_counts),
+    message = "Evidence candidate analysis cannot be canonicalized"
+    provenance_entries = _caller_mapping_entries(
+        value.provenance,
+        key_type=int,
+        message=message,
+    )
+    if len(provenance_entries) != len(_VERSIONS) or {
+        version for version, _item in provenance_entries
+    } != set(_VERSIONS):
+        raise SafetyError("Evidence candidate analysis provenance is incomplete")
+    provenance: dict[str, Any] = {}
+    for version, provenance_item in provenance_entries:
+        if type(provenance_item) is not EvidenceProvenance or (
+            type(provenance_item.request_sha256) is not str
+            or type(provenance_item.response_sha256) is not str
+        ):
+            raise SafetyError("Evidence candidate analysis provenance is invalid")
+        provenance[str(version)] = {
+            "request": provenance_item.request_sha256,
+            "response": provenance_item.response_sha256,
         }
-        canonical = canonical_json_bytes(semantic)
-    except SafetyError:
-        raise
-    except Exception:
-        traversal_failed = True
-    if traversal_failed:
-        raise SafetyError("Evidence candidate analysis cannot be canonicalized") from None
-    assert canonical is not None
-    return canonical
+
+    field_entries = _caller_mapping_entries(
+        value.combo_fields,
+        key_type=str,
+        message=message,
+    )
+    if len(field_entries) != len(_EXACT_FIVE) or {
+        name for name, _decision in field_entries
+    } != set(_EXACT_FIVE):
+        raise SafetyError("Evidence candidate analysis field scope is invalid")
+    decisions = dict(field_entries)
+    fields: dict[str, Any] = {}
+    for name in _EXACT_FIVE:
+        decision = decisions[name]
+        if (
+            type(decision) is not ComboFieldDecision
+            or type(decision.field_name) is not str
+            or decision.field_name != name
+            or type(decision.required_action) is not str
+            or type(decision.observation_count) is not int
+            or type(decision.reason_code) is not str
+        ):
+            raise SafetyError("Evidence candidate combo decision is invalid")
+        property_schema: Any = None
+        if decision.property_schema is not None:
+            materialized_schema = _materialize_caller_json(
+                decision.property_schema,
+                message=message,
+            )
+            if type(materialized_schema) is not dict:
+                raise SafetyError("Evidence candidate combo decision is invalid")
+            property_schema = _thaw_json(materialized_schema)
+        fields[name] = {
+            "action": decision.required_action,
+            "count": decision.observation_count,
+            "reason": decision.reason_code,
+            "schema": property_schema,
+        }
+
+    if any(
+        type(count) is not int
+        for count in (
+            value.ambiguous_count,
+            value.combo_observation_count,
+            value.total_item_count,
+        )
+    ):
+        raise SafetyError(message)
+    semantic = {
+        "ambiguousCount": value.ambiguous_count,
+        "branchToLiteral": _analysis_primitive_mapping(
+            value.branch_to_literal,
+            value_type=str,
+            message=message,
+        ),
+        "comboFields": fields,
+        "comboObservationCount": value.combo_observation_count,
+        "literalToBranch": _analysis_primitive_mapping(
+            value.literal_to_branch,
+            value_type=str,
+            message=message,
+        ),
+        "provenance": provenance,
+        "totalItemCount": value.total_item_count,
+        "unambiguousCounts": _analysis_primitive_mapping(
+            value.unambiguous_counts,
+            value_type=int,
+            message=message,
+        ),
+    }
+    return canonical_json_bytes(semantic)
+
+
+def _analysis_primitive_mapping(
+    value: object,
+    *,
+    value_type: type,
+    message: str,
+) -> dict[str, Any]:
+    entries = _caller_mapping_entries(
+        value,
+        key_type=str,
+        message=message,
+    )
+    if any(type(child) is not value_type for _key, child in entries):
+        raise SafetyError(message)
+    return dict(entries)
 
 
 def _required_with(value: Any, additions: tuple[str, ...]) -> list[str]:
@@ -674,17 +816,10 @@ def _yaml_bytes(value: Any) -> bytes:
 
 
 def _strict_document_copy(value: Any) -> dict[str, Any]:
-    copied: Any = None
-    traversal_failed = False
-    try:
-        body = canonical_json_bytes(value)
-        copied = json.loads(body)
-    except SafetyError:
-        raise
-    except Exception:
-        traversal_failed = True
-    if traversal_failed:
-        raise SafetyError("Evidence candidate schema is not strict canonical JSON") from None
+    message = "Evidence candidate schema is not strict canonical JSON"
+    materialized = _materialize_caller_json(value, message=message)
+    body = canonical_json_bytes(materialized)
+    copied = json.loads(body)
     if type(copied) is not dict:
         raise SafetyError("Evidence candidate schema must be an object")
     return copied

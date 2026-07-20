@@ -20,6 +20,8 @@ from test_evidence_analysis import (
 )
 from test_evidence_promotion_reader import _effective_schema
 
+import tools.openapi_pipeline.evidence_candidates as candidate_module
+import tools.openapi_pipeline.evidence_promotion as promotion_module
 from tools.openapi_pipeline.errors import SafetyError, StaleOverlayError
 from tools.openapi_pipeline.evidence_analysis import MenuEvidenceAnalysis, analyze_menu_evidence
 from tools.openapi_pipeline.evidence_candidates import (
@@ -537,6 +539,71 @@ def test_builder_preserves_intentional_safety_error_identity() -> None:
         )
 
     assert caught.value is intentional
+
+
+def test_builder_sanitizes_poisoned_exact_pair_version_without_comparing_it(
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = dict(_pairs(schema, _retained_items()))
+    analysis = analyze_menu_evidence(pairs, schema)
+
+    class PoisonedVersion:
+        def __ne__(self, other: Any) -> bool:
+            raise RuntimeError(SENSITIVE_MARKER)
+
+    object.__setattr__(pairs[2], "version", PoisonedVersion())
+
+    with pytest.raises(SafetyError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=pairs,
+            effective_schema=schema,
+        )
+
+    _assert_sanitized_error(
+        caught.value,
+        "Evidence candidate pair version is inconsistent",
+    )
+    assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.parametrize(
+    "trusted_boundary",
+    ["canonical-json", "json-loads", "analysis-thaw", "pair-freeze"],
+)
+def test_builder_propagates_trusted_internal_runtime_errors_unchanged(
+    trusted_boundary: str,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    schema = _reviewed_schema()
+    pairs = _pairs(schema, _retained_items())
+    analysis = analyze_menu_evidence(pairs, schema)
+    sentinel = RuntimeError(f"{SENSITIVE_MARKER}-{trusted_boundary}")
+
+    def fail(*args: Any, **kwargs: Any) -> Any:
+        raise sentinel
+
+    if trusted_boundary == "canonical-json":
+        monkeypatch.setattr(candidate_module, "canonical_json_bytes", fail)
+    elif trusted_boundary == "json-loads":
+        monkeypatch.setattr(candidate_module.json, "loads", fail)
+    elif trusted_boundary == "analysis-thaw":
+        monkeypatch.setattr(candidate_module, "_thaw_json", fail)
+    else:
+        monkeypatch.setattr(promotion_module, "_freeze_mapping", fail)
+
+    with pytest.raises(RuntimeError) as caught:
+        build_evidence_candidate_bundle(
+            analysis=analysis,
+            pairs=pairs,
+            effective_schema=schema,
+        )
+
+    assert caught.value is sentinel
+    assert SENSITIVE_MARKER in str(caught.value)
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_builder_rejects_a_secret_named_required_fixture_field() -> None:
