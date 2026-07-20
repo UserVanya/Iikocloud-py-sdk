@@ -18,6 +18,11 @@ from tools.openapi_pipeline.live.session import (
 
 _API_LOGIN = "synthetic-api-login"
 _TOKEN = "synthetic-active-token"
+_CORRELATION_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def _auth_response() -> dict[str, str]:
+    return {"correlationId": _CORRELATION_ID, "token": _TOKEN}
 
 
 class StubGuard:
@@ -111,7 +116,7 @@ async def test_safe_session_captures_only_complete_parsed_read_and_wires_secrets
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": _TOKEN})
+            return httpx.Response(200, json=_auth_response())
         return httpx.Response(
             200,
             json={"type": _TOKEN, "name": f"venue-{_API_LOGIN}"},
@@ -166,7 +171,7 @@ async def test_capture_rejects_unparsed_or_non_json_response_without_retry(
         nonlocal calls
         calls += 1
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": _TOKEN})
+            return httpx.Response(200, json=_auth_response())
         return httpx.Response(
             200,
             content=content,
@@ -200,7 +205,7 @@ async def test_capture_selection_mismatch_fails_before_rate_reservation_or_http(
 
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
-        return httpx.Response(200, json={"token": _TOKEN})
+        return httpx.Response(200, json=_auth_response())
 
     guard = StubGuard()
     async with SafeLiveSession(
@@ -228,7 +233,7 @@ async def test_capture_filesystem_failure_fails_receipt_and_never_retries(
         nonlocal calls
         calls += 1
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": _TOKEN})
+            return httpx.Response(200, json=_auth_response())
         return httpx.Response(200, json={"type": "ORGANIZATION"})
 
     root = tmp_path / "wide-captures"

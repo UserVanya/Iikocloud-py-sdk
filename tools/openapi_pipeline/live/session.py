@@ -9,6 +9,7 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Any
 from urllib.parse import unquote, urlsplit
+from uuid import UUID
 
 import httpx
 import yaml
@@ -314,9 +315,22 @@ class SafeLiveSession:
         except (UnicodeError, ValueError):
             self._unusable = True
             raise SafetyError("Live authentication response is invalid") from None
-        if not isinstance(value, dict) or set(value) != {"token"}:
+        if not isinstance(value, dict) or set(value) != {"correlationId", "token"}:
             self._unusable = True
             raise SafetyError("Live authentication response has an invalid shape")
+        correlation_id = value["correlationId"]
+        try:
+            parsed_correlation_id = (
+                UUID(correlation_id) if isinstance(correlation_id, str) else None
+            )
+        except ValueError:
+            parsed_correlation_id = None
+        if (
+            parsed_correlation_id is None
+            or str(parsed_correlation_id) != correlation_id.lower()
+        ):
+            self._unusable = True
+            raise SafetyError("Live authentication response contains an invalid correlation ID")
         token = value["token"]
         if (
             not isinstance(token, str)

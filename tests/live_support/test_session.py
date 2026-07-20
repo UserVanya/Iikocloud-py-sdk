@@ -14,6 +14,12 @@ from tools.openapi_pipeline.live.receipt import LiveReceipt
 from tools.openapi_pipeline.live.session import SafeLiveSession, load_operation_contract
 from tools.openapi_pipeline.live.state import LiveStateStore
 
+_CORRELATION_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def _auth_response(token: str) -> dict[str, str]:
+    return {"correlationId": _CORRELATION_ID, "token": token}
+
 
 class StubGuard:
     def __init__(self) -> None:
@@ -47,13 +53,32 @@ def _operation_contract():
 
 
 @pytest.mark.asyncio
+async def test_authentication_accepts_exact_schema_response_with_uuid_correlation() -> None:
+    async def handler(_request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json=_auth_response("test-token"),
+        )
+
+    async with SafeLiveSession(
+        profile=_profile(),
+        guard=StubGuard(),
+        transport=httpx.MockTransport(handler),
+        operation_contract=_operation_contract(),
+    ) as session:
+        await session.authenticate()
+        assert session.access_token == "test-token"
+        assert _CORRELATION_ID not in repr(session)
+
+
+@pytest.mark.asyncio
 async def test_session_never_retries_429_and_opens_circuit() -> None:
     calls: list[str] = []
 
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": "test-token"})
+            return httpx.Response(200, json=_auth_response("test-token"))
         return httpx.Response(429, json={"error": "too many"})
 
     guard = StubGuard()
@@ -116,7 +141,7 @@ async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
         nonlocal calls
         calls += 1
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": "token"})
+            return httpx.Response(200, json=_auth_response("token"))
         return httpx.Response(429, json={})
 
     with lock:
@@ -138,15 +163,34 @@ async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
 @pytest.mark.parametrize(
     ("content", "content_type"),
     [
-        (b'{"token":"one","extra":true}', "application/json"),
-        (b'{"token":"one","token":"two"}', "application/json"),
-        (b'{"token":1}', "application/json"),
-        (b'{"token":""}', "application/json"),
+        (
+            b'{"correlationId":"00000000-0000-0000-0000-000000000001",'
+            b'"token":"one","extra":true}',
+            "application/json",
+        ),
+        (b'{"token":"one"}', "application/json"),
+        (b'{"correlationId":"not-a-uuid","token":"one"}', "application/json"),
+        (
+            b'{"correlationId":"00000000-0000-0000-0000-000000000001",'
+            b'"token":"one","token":"two"}',
+            "application/json",
+        ),
+        (
+            b'{"correlationId":"00000000-0000-0000-0000-000000000001","token":1}',
+            "application/json",
+        ),
+        (
+            b'{"correlationId":"00000000-0000-0000-0000-000000000001","token":""}',
+            "application/json",
+        ),
         (b"not-json", "application/json"),
-        (b'{"token":"one"}', "text/plain"),
+        (
+            b'{"correlationId":"00000000-0000-0000-0000-000000000001","token":"one"}',
+            "text/plain",
+        ),
     ],
 )
-async def test_authentication_requires_one_strict_token_response(
+async def test_authentication_requires_one_strict_schema_response(
     content: bytes, content_type: str
 ) -> None:
     calls = 0
@@ -162,8 +206,9 @@ async def test_authentication_requires_one_strict_token_response(
         transport=httpx.MockTransport(handler),
         operation_contract=_operation_contract(),
     )
-    with pytest.raises(SafetyError, match="authentication response"):
+    with pytest.raises(SafetyError, match="authentication response") as caught:
         await session.authenticate()
+    assert "not-a-uuid" not in str(caught.value)
     with pytest.raises(SafetyError, match="unusable"):
         await session.authenticate()
     await session.close()
@@ -221,7 +266,7 @@ async def test_request_rejects_unknown_write_method_path_and_payload_before_acqu
     async def handler(request: httpx.Request) -> httpx.Response:
         nonlocal calls
         calls += 1
-        return httpx.Response(200, json={"token": "token"})
+        return httpx.Response(200, json=_auth_response("token"))
 
     guard = StubGuard()
     async with SafeLiveSession(
@@ -268,7 +313,7 @@ async def test_receipt_persists_reserved_operation_before_http(tmp_path) -> None
     async def handler(request: httpx.Request) -> httpx.Response:
         observed.append(LiveReceipt.load(receipt_path).operations)
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": "token"})
+            return httpx.Response(200, json=_auth_response("token"))
         return httpx.Response(200, json={})
 
     async with SafeLiveSession(
@@ -372,7 +417,7 @@ async def test_operation_endpoint_mismatch_fails_before_guard_receipt_or_http(
 
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
-        return httpx.Response(200, json={"token": "token"})
+        return httpx.Response(200, json=_auth_response("token"))
 
     receipt_path = tmp_path / "runs/20260716T180000Z-a1b2c3d4.json"
     receipt = LiveReceipt(

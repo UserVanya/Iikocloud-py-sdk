@@ -22,6 +22,11 @@ from tools.openapi_pipeline.live.state import LiveStateStore
 from tools.openapi_pipeline.paths import RepoPaths
 
 ROOT = Path(__file__).resolve().parents[2]
+_CORRELATION_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def _auth_response(token: str) -> dict[str, str]:
+    return {"correlationId": _CORRELATION_ID, "token": token}
 
 
 def _profile() -> ResolvedDiscoveryProfile:
@@ -95,7 +100,7 @@ async def test_discovery_makes_one_guarded_call_per_operation_and_sanitizes_outp
     async def handler(request: httpx.Request) -> httpx.Response:
         observed.append((clock[0], request.url.path, _payload(request)))
         responses = {
-            "/api/1/access_token": {"token": "private-token"},
+            "/api/1/access_token": _auth_response("private-token"),
             "/api/1/organizations": {
                 "correlationId": "must-not-escape",
                 "organizations": [
@@ -174,7 +179,13 @@ async def test_discovery_makes_one_guarded_call_per_operation_and_sanitizes_outp
         "externalMenus": [{"id": "menu-1", "name": "Основное меню"}],
     }
     rendered = json.dumps(result.to_dict(), ensure_ascii=False)
-    for forbidden in ("private-login", "private-token", "must-not-escape", "discarded"):
+    for forbidden in (
+        "private-login",
+        "private-token",
+        _CORRELATION_ID,
+        "must-not-escape",
+        "discarded",
+    ):
         assert forbidden not in rendered
 
 
@@ -186,7 +197,7 @@ async def test_discovery_stops_entire_run_on_429_without_retry(tmp_path: Path) -
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": "token"})
+            return httpx.Response(200, json=_auth_response("token"))
         return httpx.Response(429, json={"error": "too many"})
 
     with pytest.raises(SafetyError, match="429"):
@@ -207,7 +218,7 @@ async def test_discovery_rejects_unsafe_identity_before_followup_calls(tmp_path:
     async def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
         if request.url.path == "/api/1/access_token":
-            return httpx.Response(200, json={"token": "token"})
+            return httpx.Response(200, json=_auth_response("token"))
         return httpx.Response(
             200,
             json={"organizations": [{"id": "../unsafe", "name": "Bad\nName"}]},
