@@ -47,9 +47,13 @@ def _contract_snapshot(
         raise SafetyError(_PREFLIGHT_FAILURE)
     if not isinstance(value, Mapping):
         raise SafetyError(_PREFLIGHT_FAILURE)
+    snapshot_failed = False
+    items: tuple[tuple[object, object], ...] = ()
     try:
         items = tuple(value.items())
     except Exception:
+        snapshot_failed = True
+    if snapshot_failed:
         raise SafetyError(_PREFLIGHT_FAILURE) from None
 
     snapshot: dict[str, LiveOperation] = {}
@@ -490,9 +494,12 @@ async def run_read_plan(
         aborted=aborted,
         success=success,
     )
+    finalization_failed = False
     try:
         report.finish(success)
     except Exception:
+        finalization_failed = True
+    if finalization_failed:
         raise SafetyError("Read report finalization failed") from None
     return summary
 

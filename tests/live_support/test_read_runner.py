@@ -185,6 +185,7 @@ class _FakeReport:
         fail_next_append: bool = False,
         fail_appends: int = 0,
         append_error: BaseException | None = None,
+        finish_error: BaseException | None = None,
     ) -> None:
         self.events = events
         self.remaining_append_failures = max(
@@ -192,6 +193,7 @@ class _FakeReport:
             1 if fail_next_append else 0,
         )
         self.append_error = append_error or SafetyError("synthetic report failure")
+        self.finish_error = finish_error
         self.append_calls = 0
         self.outcomes: list[ReadOutcome] = []
         self.finished: list[bool] = []
@@ -208,6 +210,8 @@ class _FakeReport:
 
     def finish(self, success: bool) -> object:
         self.finished.append(success)
+        if self.finish_error is not None:
+            raise self.finish_error
         return object()
 
 
@@ -772,3 +776,60 @@ async def test_supplied_contract_must_equal_immutable_sdk_contract() -> None:
     assert sdk.calls == []
     assert report.outcomes == []
     assert report.finished == [False]
+
+
+def test_hostile_contract_snapshot_failure_detaches_source_context() -> None:
+    marker = "synthetic-private-snapshot-value"
+    rendered: list[str] = []
+
+    class OpaqueSnapshotFailure(Exception):
+        def __str__(self) -> str:
+            rendered.append("str")
+            return marker
+
+        def __repr__(self) -> str:
+            rendered.append("repr")
+            return marker
+
+    class HostileMapping(dict[str, LiveOperation]):
+        def items(self) -> object:
+            raise OpaqueSnapshotFailure()
+
+    with pytest.raises(SafetyError) as caught:
+        read_runner_module._contract_snapshot(
+            HostileMapping(),
+            require_immutable=False,
+        )
+
+    assert caught.value.__context__ is None
+    assert marker not in str(caught.value)
+    assert marker not in repr(caught.value)
+    assert rendered == []
+
+
+@pytest.mark.asyncio
+async def test_report_finalization_failure_detaches_source_context() -> None:
+    marker = "synthetic-private-finalization-value"
+    rendered: list[str] = []
+
+    class OpaqueFinalizationFailure(Exception):
+        def __str__(self) -> str:
+            rendered.append("str")
+            return marker
+
+        def __repr__(self) -> str:
+            rendered.append("repr")
+            return marker
+
+    plan = ReadPlan.build((_case("a_read"),))
+    report = _FakeReport(finish_error=OpaqueFinalizationFailure())
+
+    with pytest.raises(SafetyError) as caught:
+        await _run(plan, report=report)
+
+    assert str(caught.value) == "Read report finalization failed"
+    assert caught.value.__context__ is None
+    assert marker not in repr(caught.value)
+    assert rendered == []
+    assert len(report.outcomes) == 1
+    assert report.finished == [True]
