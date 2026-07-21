@@ -25,6 +25,7 @@ from .io import (
     write_bytes_atomic,
     write_json_atomic,
 )
+from .live.safety import OperationSafetyCatalog
 from .naming import (
     inject_operation_ids,
     normalize_generator_schema_names,
@@ -1106,6 +1107,11 @@ def _project_version(root: Path) -> str:
     return version
 
 
+def _validate_effective_for_pipeline(paths: RepoPaths, document: dict[str, Any]) -> None:
+    ensure_valid_effective_schema(document, require_iikocloud_contracts=True)
+    OperationSafetyCatalog.load(paths.operation_safety).assert_matches_openapi(document)
+
+
 def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> PipelineDependencies:
     repo_paths = paths or RepoPaths.discover()
 
@@ -1123,10 +1129,7 @@ def default_dependencies(*, offline: bool, paths: RepoPaths | None = None) -> Pi
         paths=repo_paths,
         fetch=fetch,
         apply_corrections=lambda document: _apply_committed_corrections(repo_paths, document),
-        validate=lambda document: ensure_valid_effective_schema(
-            document,
-            require_iikocloud_contracts=True,
-        ),
+        validate=lambda document: _validate_effective_for_pipeline(repo_paths, document),
         generate=lambda mappings: run_generator(
             repo_paths.root,
             toolchain,

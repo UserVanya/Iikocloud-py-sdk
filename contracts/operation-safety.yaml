@@ -1,0 +1,902 @@
+version: 1
+operations:
+  add_banquet_order_items:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add banquet order items and reviewed compensation."
+  add_banquet_order_payments:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add banquet order payments and reviewed compensation."
+  add_customer_category:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add customer category and reviewed compensation."
+  add_customer_magnet_card:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add customer magnet card and reviewed compensation."
+  add_customer_to_program:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add customer to program and reviewed compensation."
+  add_customer_to_table_order:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add customer to table order and reviewed compensation."
+  add_delivery_order_items:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add delivery order items and reviewed compensation."
+  add_delivery_order_payments:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add delivery order payments and reviewed compensation."
+  add_inventory_incoming_invoice_payment:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Incoming invoice payment is financial and has no safe automatic compensation."
+  add_inventory_outgoing_invoice_payment:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Outgoing invoice payment is financial and has no safe automatic compensation."
+  add_items_to_table_order:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add items to table order and reviewed compensation."
+  add_products_to_stop_list:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add products to stop list and reviewed compensation."
+  add_table_order_payments:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for add table order payments and reviewed compensation."
+  authenticate:
+    effect: auth
+    live_policy: automatic
+    reason: "Current single-session authentication endpoint."
+  authenticate_v2:
+    effect: auth
+    live_policy: blocked
+    reason: "Separate authentication contract has not been migrated."
+  awake_terminal_groups:
+    effect: action
+    live_policy: manual_only
+    reason: "Terminal activation has no safe automatic compensation."
+  calculate_combo_price:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating calculation for combo price."
+  calculate_inventory_cost_prices:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating calculation for inventory cost prices."
+  calculate_loyalty_checkin:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating calculation for loyalty checkin."
+  cancel_customer_balance_hold:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel customer balance hold and reviewed compensation."
+  cancel_delivery_confirmation:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel delivery confirmation and reviewed compensation."
+  cancel_delivery_order:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel delivery order and reviewed compensation."
+  cancel_finance_incoming_service:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel finance incoming service and reviewed compensation."
+  cancel_finance_outgoing_service:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel finance outgoing service and reviewed compensation."
+  cancel_inventory_disassemble_document:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory disassemble document and reviewed compensation."
+  cancel_inventory_incoming_invoice:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory incoming invoice and reviewed compensation."
+  cancel_inventory_incoming_returned_invoice:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory incoming returned invoice and reviewed compensation."
+  cancel_inventory_internal_transfer:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory internal transfer and reviewed compensation."
+  cancel_inventory_outgoing_invoice:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory outgoing invoice and reviewed compensation."
+  cancel_inventory_production_document:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory production document and reviewed compensation."
+  cancel_inventory_returned_invoice:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory returned invoice and reviewed compensation."
+  cancel_inventory_sales_document:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory sales document and reviewed compensation."
+  cancel_inventory_transformation_document:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory transformation document and reviewed compensation."
+  cancel_inventory_writeoff_document:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory writeoff document and reviewed compensation."
+  cancel_reserve:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel reserve and reviewed compensation."
+  cancel_table_order:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel table order and reviewed compensation."
+  change_banquet_order_items:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change banquet order items and reviewed compensation."
+  change_delivery_comment:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery comment and reviewed compensation."
+  change_delivery_complete_before:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery complete before and reviewed compensation."
+  change_delivery_driver_info:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery driver info and reviewed compensation."
+  change_delivery_external_data:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery external data and reviewed compensation."
+  change_delivery_operator:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery operator and reviewed compensation."
+  change_delivery_payments:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery payments and reviewed compensation."
+  change_delivery_point:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery point and reviewed compensation."
+  change_delivery_service_type:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change delivery service type and reviewed compensation."
+  change_reserve_estimated_start_time:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change reserve estimated start time and reviewed compensation."
+  change_reserve_tables:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change reserve tables and reviewed compensation."
+  change_table_order_external_data:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change table order external data and reviewed compensation."
+  change_table_order_payments:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for change table order payments and reviewed compensation."
+  check_products_in_stop_list:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating check for products in stop list."
+  check_sms_sending_possibility:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating check for sms sending possibility."
+  check_sms_status:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating check for sms status."
+  check_terminal_groups_availability:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating check for terminal groups availability."
+  clear_stop_list:
+    effect: irreversible
+    live_policy: blocked
+    reason: "Bulk stop-list deletion is destructive and remains blocked."
+  close_delivery_order:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Delivery finalization has no safe automatic compensation."
+  close_personal_session:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Personal session closing has no safe automatic compensation."
+  close_table_order:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Table order finalization has no safe automatic compensation."
+  commit_delivery_draft:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for commit delivery draft and reviewed compensation."
+  confirm_delivery:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for confirm delivery and reviewed compensation."
+  create_delivery_draft:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create delivery draft and reviewed compensation."
+  create_delivery_order:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create delivery order and reviewed compensation."
+  create_finance_incoming_service:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create finance incoming service and reviewed compensation."
+  create_finance_outgoing_service:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create finance outgoing service and reviewed compensation."
+  create_inventory_disassemble_document:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory disassemble document and reviewed compensation."
+  create_inventory_incoming_invoice:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory incoming invoice and reviewed compensation."
+  create_inventory_incoming_returned_invoice:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory incoming returned invoice and reviewed compensation."
+  create_inventory_internal_transfer:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory internal transfer and reviewed compensation."
+  create_inventory_outgoing_invoice:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory outgoing invoice and reviewed compensation."
+  create_inventory_production_document:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory production document and reviewed compensation."
+  create_inventory_returned_invoice:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory returned invoice and reviewed compensation."
+  create_inventory_sales_document:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory sales document and reviewed compensation."
+  create_inventory_transformation_document:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory transformation document and reviewed compensation."
+  create_inventory_writeoff_document:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory writeoff document and reviewed compensation."
+  create_or_update_customer:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create or update customer and reviewed compensation."
+  create_reserve:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create reserve and reviewed compensation."
+  create_table_order:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create table order and reviewed compensation."
+  delete_customers:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete customers and reviewed compensation."
+  delete_delivery_draft:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete delivery draft and reviewed compensation."
+  get_active_courier_locations:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get active courier locations."
+  get_active_courier_locations_by_terminal:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get active courier locations by terminal."
+  get_allowed_delivery_restrictions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get allowed delivery restrictions."
+  get_cancel_causes:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get cancel causes."
+  get_cities:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get cities."
+  get_combos_info:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get combos info."
+  get_command_status:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get command status."
+  get_coupon_info:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get coupon info."
+  get_coupon_series:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get coupon series."
+  get_courier_location_history:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get courier location history."
+  get_couriers:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get couriers."
+  get_couriers_by_role:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get couriers by role."
+  get_customer_categories:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get customer categories."
+  get_customer_info:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get customer info."
+  get_customer_transactions_by_date:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get customer transactions by date."
+  get_customer_transactions_by_revision:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get customer transactions by revision."
+  get_deliveries_by_delivery_date_and_phone:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get deliveries by delivery date and phone."
+  get_deliveries_by_delivery_date_and_status:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get deliveries by delivery date and status."
+  get_deliveries_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get deliveries by id."
+  get_deliveries_by_revision:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get deliveries by revision."
+  get_delivery_draft_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get delivery draft by id."
+  get_delivery_drafts_by_filter:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get delivery drafts by filter."
+  get_delivery_history_by_delivery_date_and_phone:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get delivery history by delivery date and phone."
+  get_delivery_order_types:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get delivery order types."
+  get_delivery_restrictions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get delivery restrictions."
+  get_discounts:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get discounts."
+  get_employee_info:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get employee info."
+  get_external_menu_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get external menu by id."
+  get_external_menus:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get external menus."
+  get_finance_incoming_service:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get finance incoming service."
+  get_finance_outgoing_service:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get finance outgoing service."
+  get_inventory_counteragents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory counteragents."
+  get_inventory_disassemble_document:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory disassemble document."
+  get_inventory_incoming_invoice:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory incoming invoice."
+  get_inventory_incoming_returned_invoice:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory incoming returned invoice."
+  get_inventory_internal_transfer:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory internal transfer."
+  get_inventory_outgoing_invoice:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory outgoing invoice."
+  get_inventory_production_document:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory production document."
+  get_inventory_returned_invoice:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory returned invoice."
+  get_inventory_sales_document:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory sales document."
+  get_inventory_transformation_document:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory transformation document."
+  get_inventory_writeoff_document:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get inventory writeoff document."
+  get_loyalty_counters:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get loyalty counters."
+  get_loyalty_manual_conditions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get loyalty manual conditions."
+  get_loyalty_programs:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get loyalty programs."
+  get_marketing_sources:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get marketing sources."
+  get_nomenclature:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get nomenclature."
+  get_non_activated_coupons_by_series:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get non activated coupons by series."
+  get_organization_settings:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get organization settings."
+  get_organizations:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get organizations."
+  get_payment_types:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get payment types."
+  get_personal_session_info:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get personal session info."
+  get_regions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get regions."
+  get_removal_types:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get removal types."
+  get_reserve_available_organizations:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get reserve available organizations."
+  get_reserve_restaurant_sections:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get reserve restaurant sections."
+  get_reserve_statuses_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get reserve statuses by id."
+  get_reserve_terminal_groups:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get reserve terminal groups."
+  get_restaurant_sections_workload:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get restaurant sections workload."
+  get_stop_lists:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get stop lists."
+  get_streets_by_city:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get streets by city."
+  get_streets_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get streets by id."
+  get_table_orders_by_id:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get table orders by id."
+  get_table_orders_by_table:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get table orders by table."
+  get_terminal_groups:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get terminal groups."
+  get_terminal_groups_of_employee:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get terminal groups of employee."
+  get_tips_types:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get tips types."
+  get_webhook_settings:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for get webhook settings."
+  hold_customer_balance:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for hold customer balance and reviewed compensation."
+  initialize_table_orders_by_pos_orders:
+    effect: action
+    live_policy: manual_only
+    reason: "POS order initialization has no safe automatic compensation."
+  initialize_table_orders_by_tables:
+    effect: action
+    live_policy: manual_only
+    reason: "Table initialization has no safe automatic compensation."
+  list_finance_account_transactions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list finance account transactions."
+  list_finance_document_transactions:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list finance document transactions."
+  list_finance_incoming_services:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list finance incoming services."
+  list_finance_outgoing_services:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list finance outgoing services."
+  list_inventory_disassemble_documents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory disassemble documents."
+  list_inventory_incoming_invoices:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory incoming invoices."
+  list_inventory_incoming_returned_invoices:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory incoming returned invoices."
+  list_inventory_internal_transfers:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory internal transfers."
+  list_inventory_outgoing_invoices:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory outgoing invoices."
+  list_inventory_production_documents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory production documents."
+  list_inventory_returned_invoices:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory returned invoices."
+  list_inventory_sales_documents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory sales documents."
+  list_inventory_transformation_documents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory transformation documents."
+  list_inventory_writeoff_documents:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list inventory writeoff documents."
+  list_organizations:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for list organizations."
+  lock_delivery_draft:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for lock delivery draft and reviewed compensation."
+  open_personal_session:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Personal session opening has no safe automatic compensation."
+  post_finance_incoming_service:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post finance incoming service and reviewed compensation."
+  post_finance_outgoing_service:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post finance outgoing service and reviewed compensation."
+  post_inventory_disassemble_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory disassemble document and reviewed compensation."
+  post_inventory_incoming_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory incoming invoice and reviewed compensation."
+  post_inventory_incoming_returned_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory incoming returned invoice and reviewed compensation."
+  post_inventory_internal_transfer:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory internal transfer and reviewed compensation."
+  post_inventory_outgoing_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory outgoing invoice and reviewed compensation."
+  post_inventory_production_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory production document and reviewed compensation."
+  post_inventory_returned_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory returned invoice and reviewed compensation."
+  post_inventory_sales_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory sales document and reviewed compensation."
+  post_inventory_transformation_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory transformation document and reviewed compensation."
+  post_inventory_writeoff_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory writeoff document and reviewed compensation."
+  print_delivery_bill:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Delivery bill printing has no safe automatic compensation."
+  print_table_order_bill:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Table bill printing has no safe automatic compensation."
+  remove_customer_category:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for remove customer category and reviewed compensation."
+  remove_customer_magnet_card:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for remove customer magnet card and reviewed compensation."
+  remove_products_from_stop_list:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for remove products from stop list and reviewed compensation."
+  restore_customers:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore customers and reviewed compensation."
+  save_delivery_draft:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for save delivery draft and reviewed compensation."
+  search_deliveries:
+    effect: read
+    live_policy: automatic
+    reason: "Reviewed non-mutating query for search deliveries."
+  send_loyalty_email:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Loyalty email messaging has no safe automatic compensation."
+  send_loyalty_sms:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Loyalty SMS messaging has no safe automatic compensation."
+  send_notification:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "External notification delivery has no safe automatic compensation."
+  set_inventory_incoming_invoice_payment_date:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for set inventory incoming invoice payment date and reviewed compensation."
+  set_inventory_outgoing_invoice_payment_date:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for set inventory outgoing invoice payment date and reviewed compensation."
+  top_up_customer_balance:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Customer balance top-up is financial and has no safe automatic compensation."
+  unlock_delivery_draft:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unlock delivery draft and reviewed compensation."
+  unpost_finance_incoming_service:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost finance incoming service and reviewed compensation."
+  unpost_finance_outgoing_service:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost finance outgoing service and reviewed compensation."
+  unpost_inventory_disassemble_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory disassemble document and reviewed compensation."
+  unpost_inventory_incoming_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory incoming invoice and reviewed compensation."
+  unpost_inventory_incoming_returned_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory incoming returned invoice and reviewed compensation."
+  unpost_inventory_internal_transfer:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory internal transfer and reviewed compensation."
+  unpost_inventory_outgoing_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory outgoing invoice and reviewed compensation."
+  unpost_inventory_production_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory production document and reviewed compensation."
+  unpost_inventory_returned_invoice:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory returned invoice and reviewed compensation."
+  unpost_inventory_sales_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory sales document and reviewed compensation."
+  unpost_inventory_transformation_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory transformation document and reviewed compensation."
+  unpost_inventory_writeoff_document:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory writeoff document and reviewed compensation."
+  update_delivery_order_courier:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update delivery order courier and reviewed compensation."
+  update_delivery_order_payments:
+    effect: update
+    live_policy: blocked
+    reason: "Deprecated payment mutation can expose secrets and remains blocked."
+  update_delivery_order_problem:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update delivery order problem and reviewed compensation."
+  update_delivery_order_status:
+    effect: update
+    live_policy: manual_only
+    reason: "Delivery status changes have no safe automatic compensation."
+  update_delivery_tracking_link:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update delivery tracking link and reviewed compensation."
+  update_finance_incoming_service:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update finance incoming service and reviewed compensation."
+  update_finance_outgoing_service:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update finance outgoing service and reviewed compensation."
+  update_inventory_disassemble_document:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory disassemble document and reviewed compensation."
+  update_inventory_incoming_invoice:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory incoming invoice and reviewed compensation."
+  update_inventory_incoming_returned_invoice:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory incoming returned invoice and reviewed compensation."
+  update_inventory_internal_transfer:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory internal transfer and reviewed compensation."
+  update_inventory_outgoing_invoice:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory outgoing invoice and reviewed compensation."
+  update_inventory_product_barcodes:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory product barcodes and reviewed compensation."
+  update_inventory_production_document:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory production document and reviewed compensation."
+  update_inventory_returned_invoice:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory returned invoice and reviewed compensation."
+  update_inventory_sales_document:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory sales document and reviewed compensation."
+  update_inventory_transformation_document:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory transformation document and reviewed compensation."
+  update_inventory_writeoff_document:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory writeoff document and reviewed compensation."
+  update_webhook_settings:
+    effect: update
+    live_policy: blocked
+    reason: "Webhook mutation can expose secrets and remains blocked."
+  withdraw_customer_balance:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Customer balance withdrawal is financial and has no safe automatic compensation."

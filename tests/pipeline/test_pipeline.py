@@ -1038,3 +1038,38 @@ def test_default_pipeline_enables_iikocloud_contract_lint(tmp_path: Path) -> Non
 
     with pytest.raises(ValidationError, match="iiko-root-server"):
         dependencies.validate(generic_document)
+
+
+def test_repo_paths_exposes_operation_safety_catalog(tmp_path: Path) -> None:
+    assert RepoPaths(tmp_path).operation_safety == tmp_path / "contracts/operation-safety.yaml"
+
+
+def test_default_pipeline_validation_gates_operation_safety_catalog(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "fixture"\nversion = "1.0.0"\n', encoding="utf-8"
+    )
+    generator = tmp_path / "generator"
+    generator.mkdir()
+    (generator / "toolchain.lock").write_text(
+        '{"image":"openapitools/openapi-generator-cli",'
+        '"version":"v7.22.0","digest":"sha256:' + "a" * 64 + '"}\n',
+        encoding="utf-8",
+    )
+    schema_validator = Mock()
+    catalog = Mock(spec=pipeline_module.OperationSafetyCatalog)
+    catalog_loader = Mock(return_value=catalog)
+    monkeypatch.setattr(pipeline_module, "ensure_valid_effective_schema", schema_validator)
+    monkeypatch.setattr(pipeline_module.OperationSafetyCatalog, "load", catalog_loader)
+    dependencies = default_dependencies(offline=True, paths=RepoPaths(tmp_path))
+    document: dict[str, object] = {"paths": {}}
+
+    dependencies.validate(document)
+
+    schema_validator.assert_called_once_with(
+        document,
+        require_iikocloud_contracts=True,
+    )
+    catalog_loader.assert_called_once_with(tmp_path / "contracts/operation-safety.yaml")
+    catalog.assert_matches_openapi.assert_called_once_with(document)

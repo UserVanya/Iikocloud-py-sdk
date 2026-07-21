@@ -31,6 +31,10 @@ class RepoPaths:
         return self.build / "openapi/effective.json"
 
     @property
+    def operation_safety(self) -> Path:
+        return self.root / "contracts/operation-safety.yaml"
+
+    @property
     def upstream(self) -> Path:
         return self.root / "openapi/upstream/iikocloud.openapi.json"
 
