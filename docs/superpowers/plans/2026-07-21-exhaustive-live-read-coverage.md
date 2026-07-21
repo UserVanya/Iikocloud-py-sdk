@@ -1320,7 +1320,8 @@ get_stop_lists:
 check_products_in_stop_list:
   depend on get_nomenclature and get_terminal_groups;
   require one product and validated terminal group;
-  send exactly one CheckStopListItem.
+  send exactly one generated DeliveryOrderCreateProductItem with the
+  `type="Product"` discriminator through CheckStopListRequest.items.
 
 get_external_menus:
   NO_REQUEST;
