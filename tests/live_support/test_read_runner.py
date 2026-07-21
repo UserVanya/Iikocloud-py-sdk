@@ -145,9 +145,16 @@ class _FakeSdk:
         self,
         actions: Mapping[str, GeneratedCallResult[object] | BaseException] | None = None,
         events: list[str] | None = None,
+        *,
+        operation_contract: Mapping[str, LiveOperation] | None = None,
     ) -> None:
         self.actions = dict(actions or {})
         self.events = events
+        self.operation_contract = (
+            None
+            if operation_contract is None
+            else MappingProxyType(dict(operation_contract))
+        )
         self.calls: list[tuple[str, object | None]] = []
 
     async def call_bound_read(
@@ -176,18 +183,26 @@ class _FakeReport:
         events: list[str] | None = None,
         *,
         fail_next_append: bool = False,
+        fail_appends: int = 0,
+        append_error: BaseException | None = None,
     ) -> None:
         self.events = events
-        self.fail_next_append = fail_next_append
+        self.remaining_append_failures = max(
+            fail_appends,
+            1 if fail_next_append else 0,
+        )
+        self.append_error = append_error or SafetyError("synthetic report failure")
+        self.append_calls = 0
         self.outcomes: list[ReadOutcome] = []
         self.finished: list[bool] = []
 
     def append(self, outcome: ReadOutcome) -> object:
+        self.append_calls += 1
         if self.events is not None:
             self.events.append("report")
-        if self.fail_next_append:
-            self.fail_next_append = False
-            raise SafetyError("synthetic report failure")
+        if self.remaining_append_failures > 0:
+            self.remaining_append_failures -= 1
+            raise self.append_error
         self.outcomes.append(outcome)
         return object()
 
@@ -205,13 +220,16 @@ async def _run(
     operation_contract: Mapping[str, LiveOperation] | None = None,
 ) -> tuple[ReadRunSummary, _FakeContext, _FakeSdk, _FakeReport]:
     selected_context = context or _FakeContext({})
-    selected_sdk = sdk or _FakeSdk()
     selected_report = report or _FakeReport()
+    selected_contract = operation_contract or _operation_contract(plan)
+    selected_sdk = sdk or _FakeSdk(operation_contract=selected_contract)
+    if selected_sdk.operation_contract is None:
+        selected_sdk.operation_contract = MappingProxyType(dict(selected_contract))
     summary = await run_read_plan(
         plan,
         context=cast(ReadContext, selected_context),
         sdk=cast(GeneratedLiveSdk, selected_sdk),
-        operation_contract=operation_contract or _operation_contract(plan),
+        operation_contract=selected_contract,
         report=cast(ReadReportWriter, selected_report),
     )
     return summary, selected_context, selected_sdk, selected_report
@@ -627,3 +645,98 @@ async def test_report_failure_replaces_the_current_outcome_and_aborts_the_rest()
     assert [operation_id for operation_id, _request in sdk.calls] == ["a_stops"]
     assert selected_report.outcomes == list(summary.outcomes)
     assert selected_report.finished == [False]
+
+
+@pytest.mark.asyncio
+async def test_invalid_later_operation_fails_preflight_before_any_case() -> None:
+    plan = ReadPlan.build((_case("a_first"), _case("b_missing")))
+    incomplete_contract = MappingProxyType(
+        {
+            "a_first": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="POST",
+                path="/synthetic/a_first",
+            )
+        }
+    )
+    sdk = _FakeSdk(operation_contract=incomplete_contract)
+    report = _FakeReport()
+
+    with pytest.raises(SafetyError, match="Live read preflight failed"):
+        await _run(
+            plan,
+            sdk=sdk,
+            report=report,
+            operation_contract=incomplete_contract,
+        )
+
+    assert sdk.calls == []
+    assert report.outcomes == []
+    assert report.finished == [False]
+
+
+@pytest.mark.asyncio
+async def test_second_terminal_append_failure_stops_without_false_summary() -> None:
+    rendered: list[str] = []
+
+    class OpaqueReportFailure(Exception):
+        def __str__(self) -> str:
+            rendered.append("str")
+            return "synthetic-private-exception"
+
+        def __repr__(self) -> str:
+            rendered.append("repr")
+            return "synthetic-private-exception"
+
+    plan = ReadPlan.build((_case("a_stops"), _case("b_unvisited")))
+    sdk = _FakeSdk()
+    report = _FakeReport(
+        fail_appends=2,
+        append_error=OpaqueReportFailure(),
+    )
+
+    with pytest.raises(
+        SafetyError,
+        match="Read report terminal outcome persistence failed",
+    ):
+        await _run(plan, sdk=sdk, report=report)
+
+    assert rendered == []
+    assert [operation_id for operation_id, _request in sdk.calls] == ["a_stops"]
+    assert report.append_calls == 2
+    assert report.outcomes == []
+    assert report.finished == []
+
+
+@pytest.mark.asyncio
+async def test_supplied_contract_must_equal_immutable_sdk_contract() -> None:
+    marker = "synthetic-private-contract-value"
+    plan = ReadPlan.build((_case("a_read"),))
+    supplied_contract = _operation_contract(plan)
+    sdk_contract = MappingProxyType(
+        {
+            "a_read": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="GET",
+                path=f"/{marker}",
+            )
+        }
+    )
+    sdk = _FakeSdk(operation_contract=sdk_contract)
+    report = _FakeReport()
+
+    with pytest.raises(SafetyError) as caught:
+        await _run(
+            plan,
+            sdk=sdk,
+            report=report,
+            operation_contract=supplied_contract,
+        )
+
+    assert str(caught.value) == "Live read preflight failed"
+    assert marker not in str(caught.value)
+    assert sdk.calls == []
+    assert report.outcomes == []
+    assert report.finished == [False]

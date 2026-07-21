@@ -6,6 +6,7 @@ import asyncio
 from collections.abc import Mapping
 from contextlib import suppress
 from dataclasses import dataclass
+from types import MappingProxyType
 
 from ..errors import SafetyError
 from .generated import GeneratedCallFailure, GeneratedCallResult, GeneratedLiveSdk
@@ -22,6 +23,10 @@ from .read_planner import ReadPlan
 from .read_report import ReadOutcome, ReadReportWriter, ReadStatus
 from .session import LiveOperation
 
+_PREFLIGHT_FAILURE = "Live read preflight failed"
+_REPORT_PERSISTENCE_FAILURE = "Read report terminal outcome persistence failed"
+_OPERATION_KINDS = frozenset({"auth", "read", "compensating", "cleanup"})
+
 
 @dataclass(frozen=True, slots=True)
 class ReadRunSummary:
@@ -33,17 +38,84 @@ class ReadRunSummary:
     success: bool
 
 
-def _operation_for(
-    case: ReadCase,
-    operation_contract: Mapping[str, LiveOperation],
-) -> LiveOperation:
+def _contract_snapshot(
+    value: object,
+    *,
+    require_immutable: bool,
+) -> dict[str, LiveOperation]:
+    if require_immutable and type(value) is not MappingProxyType:
+        raise SafetyError(_PREFLIGHT_FAILURE)
+    if not isinstance(value, Mapping):
+        raise SafetyError(_PREFLIGHT_FAILURE)
     try:
-        operation = operation_contract.get(case.operation_id)
+        items = tuple(value.items())
     except Exception:
-        raise SafetyError("Live read operation contract lookup failed") from None
-    if type(operation) is not LiveOperation or operation.kind != "read":
-        raise SafetyError("Live read operation is not approved")
-    return operation
+        raise SafetyError(_PREFLIGHT_FAILURE) from None
+
+    snapshot: dict[str, LiveOperation] = {}
+    for operation_id, operation in items:
+        if (
+            type(operation_id) is not str
+            or operation_id in snapshot
+            or type(operation) is not LiveOperation
+            or type(operation.kind) is not str
+            or operation.kind not in _OPERATION_KINDS
+            or (
+                operation.cleanup is not None
+                and type(operation.cleanup) is not str
+            )
+            or type(operation.method) is not str
+            or operation.method not in {"GET", "POST"}
+            or type(operation.path) is not str
+        ):
+            raise SafetyError(_PREFLIGHT_FAILURE)
+        snapshot[operation_id] = operation
+    return snapshot
+
+
+def _same_operation(left: LiveOperation, right: LiveOperation) -> bool:
+    return (
+        left.kind == right.kind
+        and left.cleanup == right.cleanup
+        and left.method == right.method
+        and left.path == right.path
+    )
+
+
+def _validated_plan_contract(
+    plan: ReadPlan,
+    operation_contract: Mapping[str, LiveOperation],
+    sdk: GeneratedLiveSdk,
+) -> Mapping[str, LiveOperation]:
+    try:
+        supplied = _contract_snapshot(
+            operation_contract,
+            require_immutable=False,
+        )
+        bound = _contract_snapshot(
+            sdk.operation_contract,
+            require_immutable=True,
+        )
+        if supplied.keys() != bound.keys() or any(
+            not _same_operation(operation, bound[operation_id])
+            for operation_id, operation in supplied.items()
+        ):
+            raise SafetyError(_PREFLIGHT_FAILURE)
+
+        validated: dict[str, LiveOperation] = {}
+        for case in plan.cases:
+            operation = bound[case.operation_id]
+            if operation.kind != "read":
+                raise SafetyError(_PREFLIGHT_FAILURE)
+            _aborted_outcome(
+                case,
+                operation,
+                ReadFailureCode.SAFETY_INVARIANT,
+            )
+            validated[case.operation_id] = operation
+        return MappingProxyType(validated)
+    except Exception:
+        raise SafetyError(_PREFLIGHT_FAILURE) from None
 
 
 def _outcome(
@@ -122,8 +194,10 @@ def _append_outcome(
         http_status=outcome.http_status,
         duration_ms=outcome.duration_ms,
     )
-    with suppress(BaseException):
+    try:
         report.append(replacement)
+    except BaseException:
+        raise SafetyError(_REPORT_PERSISTENCE_FAILURE) from None
     return replacement, code
 
 
@@ -336,12 +410,23 @@ async def run_read_plan(
     operation_contract: Mapping[str, LiveOperation],
     report: ReadReportWriter,
 ) -> ReadRunSummary:
+    try:
+        trusted_contract = _validated_plan_contract(
+            plan,
+            operation_contract,
+            sdk,
+        )
+    except Exception:
+        with suppress(BaseException):
+            report.finish(False)
+        raise SafetyError(_PREFLIGHT_FAILURE) from None
+
     outcomes: list[ReadOutcome] = []
     outcome_by_id: dict[str, ReadOutcome] = {}
     abort_code: ReadFailureCode | None = None
 
     for case in plan.cases:
-        operation = _operation_for(case, operation_contract)
+        operation = trusted_contract[case.operation_id]
         case_abort: ReadFailureCode | None = None
 
         if abort_code is not None:
