@@ -249,6 +249,16 @@ def test_catalog_rejects_unsafe_review_reason(tmp_path: Path, reason: str) -> No
         _load_mapping(tmp_path, value)
 
 
+def test_catalog_rejects_uuid_reason_adjacent_to_underscores(tmp_path: Path) -> None:
+    value = copy.deepcopy(VALID)
+    value["operations"]["get_organizations"]["reason"] = (
+        "review_123e4567-e89b-12d3-a456-426614174000_context"
+    )
+
+    with pytest.raises(SafetyError, match="reason"):
+        _load_mapping(tmp_path, value)
+
+
 @pytest.mark.parametrize("live_policy", ["automatic", "lifecycle_only", "manual_only"])
 def test_unknown_effect_must_be_blocked(tmp_path: Path, live_policy: str) -> None:
     value = copy.deepcopy(VALID)
