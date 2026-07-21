@@ -109,6 +109,32 @@ def _capture(root: Path) -> LiveCapture:
     )
 
 
+def test_capture_writer_redacts_login_and_token_added_after_authentication(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "captures"
+    writer = CaptureWriter(root, known_secrets=(_API_LOGIN,))
+    writer.add_known_secret(_TOKEN)
+
+    request_path, response_path = writer.write(
+        run_id="synthetic-run",
+        operation_id="get_organizations",
+        kind="read",
+        request_json={"value": _API_LOGIN},
+        response_json={"value": _TOKEN},
+        metadata={
+            "method": "POST",
+            "path": "/api/1/organizations",
+            "status": 200,
+        },
+        approved_path="/api/1/organizations",
+    )
+
+    serialized = request_path.read_text() + response_path.read_text()
+    assert _API_LOGIN not in serialized
+    assert _TOKEN not in serialized
+
+
 @pytest.mark.asyncio
 async def test_safe_session_captures_only_complete_parsed_read_and_wires_secrets(
     tmp_path: Path,

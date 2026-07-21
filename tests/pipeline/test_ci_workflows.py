@@ -144,6 +144,7 @@ def _assert_no_live_or_mutating_configuration(path: Path) -> None:
         "--capture-operation",
         "live_read_smoke",
         "live_read_full",
+        "live_read_selected",
         "live_write",
         "audit_residue",
     )

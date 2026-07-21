@@ -3,7 +3,9 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
+from collections.abc import Mapping
 from pathlib import Path
+from types import MappingProxyType
 
 import pytest
 
@@ -14,6 +16,7 @@ from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes, write_
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.pytest_support import (
+    assert_exact_live_read_invocation,
     assert_serial_live_invocation,
     explicit_env_path,
     finalize_live_receipt,
@@ -21,12 +24,22 @@ from tools.openapi_pipeline.live.pytest_support import (
     prepare_live_preflight,
     profile_path_for_name,
     resolve_locked_live_profile,
+    validate_live_read_plan,
 )
+from tools.openapi_pipeline.live.rates import RateCatalog
+from tools.openapi_pipeline.live.read_case import (
+    NO_REQUEST,
+    GeneratedReadBinding,
+    ReadCase,
+)
+from tools.openapi_pipeline.live.read_planner import ReadPlan
 from tools.openapi_pipeline.live.receipt import (
     LiveArtifactHashes,
     LiveReceipt,
     verify_live_artifacts,
 )
+from tools.openapi_pipeline.live.safety import OperationSafetyCatalog
+from tools.openapi_pipeline.live.session import LiveOperation
 from tools.openapi_pipeline.promotion import build_generated_manifest, load_generated_manifest
 
 
@@ -498,3 +511,391 @@ def test_pytest_options_and_offline_collection_do_not_need_private_files() -> No
     assert collection.returncode == 0, collection.stderr
     assert "test_canonical_json_bytes_sorts_keys_and_emits_utf8_newline" in collection.stdout
     assert set(Path("src/iikocloud_client").rglob("*.pyc")) == bytecode_before
+
+
+@pytest.mark.parametrize(
+    ("arguments", "mode", "message"),
+    [
+        (
+            ("-m", "live_read_full", "tests/integration/read/test_all_reads.py"),
+            "full",
+            "single-process",
+        ),
+        (
+            ("-m", "live_read_full", "-n0"),
+            "full",
+            "exact test path",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "tests/integration/read/test_all_reads.py",
+                "tests/pipeline/test_io.py",
+            ),
+            "full",
+            "exact test path",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full or live_write",
+                "-n0",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            "full",
+            "exact marker",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "--allow-live-write",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            "full",
+            "write options",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "--capture-http",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            "full",
+            "capture",
+        ),
+        (
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--capture-http",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            "selected",
+            "both capture",
+        ),
+        (
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--capture-operation",
+                "get_organizations",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            "selected",
+            "both capture",
+        ),
+    ],
+)
+def test_exact_live_read_invocation_rejects_unsafe_shapes(
+    arguments: tuple[str, ...],
+    mode: str,
+    message: str,
+) -> None:
+    with pytest.raises(SafetyError, match=message):
+        assert_exact_live_read_invocation(arguments, mode=mode)
+
+
+def test_exact_live_read_invocation_accepts_only_the_two_reviewed_shapes() -> None:
+    assert (
+        assert_exact_live_read_invocation(
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "--live-profile",
+                "test-server",
+                "--env-file",
+                ".env",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            mode="full",
+        )
+        is None
+    )
+    assert (
+        assert_exact_live_read_invocation(
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--live-profile",
+                "test-server",
+                "--env-file",
+                ".env",
+                "--capture-http",
+                "--capture-operation",
+                "get_organizations",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            mode="selected",
+        )
+        == "get_organizations"
+    )
+
+
+def test_exact_live_read_invocation_rejects_xdist_worker(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("PYTEST_XDIST_WORKER", "gw0")
+    with pytest.raises(SafetyError, match="xdist worker"):
+        assert_exact_live_read_invocation(
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            mode="full",
+        )
+
+
+def _read_case(operation_id: str) -> ReadCase:
+    return ReadCase(
+        operation_id=operation_id,
+        revision=1,
+        depends_on=(),
+        requires=(),
+        provides=(),
+        allowed_no_target_codes=frozenset(),
+        binding=GeneratedReadBinding(
+            api_module="iikocloud_client.api.synthetic_api",
+            api_class="SyntheticApi",
+            method_name=f"{operation_id}_with_http_info",
+            request_module=None,
+            request_class=None,
+            request_keyword=None,
+        ),
+        build_values=lambda _view: NO_REQUEST,
+        validate_response=lambda _data, _view: None,
+        extract=lambda _data, _view: MappingProxyType({}),
+    )
+
+
+def _read_contracts(
+    operation_ids: tuple[str, ...],
+) -> tuple[
+    OperationSafetyCatalog,
+    Mapping[str, LiveOperation],
+    RateCatalog,
+    dict[str, object],
+]:
+    safety = OperationSafetyCatalog.from_mapping(
+        {
+            "version": 1,
+            "operations": {
+                operation_id: {
+                    "effect": "read",
+                    "live_policy": "automatic",
+                    "reason": "reviewed synthetic read",
+                }
+                for operation_id in operation_ids
+            },
+        }
+    )
+    operations = MappingProxyType(
+        {
+            operation_id: LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="POST",
+                path=f"/synthetic/{operation_id}",
+            )
+            for operation_id in operation_ids
+        }
+    )
+    catalog = RateCatalog.from_mapping(
+        {
+            "version": 2,
+            "defaults": {
+                "utilization": 0.2,
+                "global_min_interval_seconds": 30,
+                "max_calls_per_operation_per_run": 1,
+            },
+            "operations": {
+                operation_id: {
+                    "test_budget": {
+                        "min_interval_seconds": 30,
+                        "source": "synthetic",
+                        "verified": True,
+                    },
+                    "server_limit": None,
+                }
+                for operation_id in operation_ids
+            },
+        }
+    )
+    effective: dict[str, object] = {
+        "paths": {
+            f"/synthetic/{operation_id}": {
+                "post": {"operationId": operation_id}
+            }
+            for operation_id in operation_ids
+        }
+    }
+    return safety, operations, catalog, effective
+
+
+def test_live_read_plan_preflight_returns_selected_closure_plus_canary(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    operation_ids = ("get_organizations", "get_nomenclature")
+    full_plan = ReadPlan.build(_read_case(value) for value in operation_ids)
+    safety, operations, catalog, effective = _read_contracts(operation_ids)
+    monkeypatch.setattr(GeneratedReadBinding, "resolve", lambda _self: object())
+
+    full = validate_live_read_plan(
+        full_plan,
+        mode="full",
+        selected_operation=None,
+        safety=safety,
+        operation_contract=operations,
+        catalog=catalog,
+        effective_schema=effective,
+    )
+    selected = validate_live_read_plan(
+        full_plan,
+        mode="selected",
+        selected_operation="get_nomenclature",
+        safety=safety,
+        operation_contract=operations,
+        catalog=catalog,
+        effective_schema=effective,
+    )
+
+    assert full is full_plan
+    assert selected.ordered_operation_ids == (
+        "get_organizations",
+        "get_nomenclature",
+    )
+
+
+def test_live_read_plan_preflight_rejects_any_four_way_parity_gap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    operation_ids = ("get_organizations", "get_nomenclature")
+    incomplete = ReadPlan.build((_read_case("get_organizations"),))
+    safety, operations, catalog, effective = _read_contracts(operation_ids)
+    monkeypatch.setattr(GeneratedReadBinding, "resolve", lambda _self: object())
+
+    with pytest.raises(SafetyError, match="exact parity"):
+        validate_live_read_plan(
+            incomplete,
+            mode="full",
+            selected_operation=None,
+            safety=safety,
+            operation_contract=operations,
+            catalog=catalog,
+            effective_schema=effective,
+        )
+
+
+@pytest.mark.parametrize(
+    ("arguments", "expected"),
+    [
+        (
+            (
+                "-m",
+                "live_read_full",
+                "--live-profile",
+                "test-server",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            "explicit single-process",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "--live-profile",
+                "test-server",
+                "tests/pipeline/test_io.py",
+            ),
+            "exact test path",
+        ),
+        (
+            (
+                "-m",
+                "live_read_full",
+                "-n0",
+                "--capture-http",
+                "--live-profile",
+                "test-server",
+                "tests/integration/read/test_all_reads.py",
+            ),
+            "refuses capture",
+        ),
+        (
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--capture-http",
+                "--live-profile",
+                "test-server",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            "both capture options",
+        ),
+        (
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--capture-http",
+                "--capture-operation",
+                "unknown_synthetic_operation",
+                "--live-profile",
+                "test-server",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            "operation is unknown",
+        ),
+        (
+            (
+                "-m",
+                "live_read_selected",
+                "-n0",
+                "--capture-http",
+                "--capture-operation",
+                "authenticate",
+                "--live-profile",
+                "test-server",
+                "tests/integration/read/test_selected_read.py",
+            ),
+            "refuses authentication",
+        ),
+    ],
+)
+def test_invalid_live_read_commands_fail_during_collection_without_private_access(
+    arguments: tuple[str, ...],
+    expected: str,
+) -> None:
+    environment = os.environ.copy()
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    environment.pop("PYTEST_XDIST_WORKER", None)
+    for name in ("IIKO_API_KEY", "IIKO_API_KEY_2"):
+        environment.pop(name, None)
+
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", *arguments],
+        cwd=Path.cwd(),
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    output = result.stdout + result.stderr
+    assert result.returncode == int(pytest.ExitCode.USAGE_ERROR)
+    assert expected in output
+    assert "IIKO_API_KEY" not in output
+    assert "private/profiles" not in output

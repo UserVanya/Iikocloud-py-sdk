@@ -113,9 +113,10 @@ markers = [
   "docker: requires the pinned OpenAPI Generator image",
   "live_read_smoke: minimal live read contract checks",
   "live_read_full: extended live read contract checks",
+  "live_read_selected: one explicit guarded live read plus dependency closure",
   "live_write: explicit mutating checks",
 ]
-addopts = "-m 'not docker and not live_read_smoke and not live_read_full and not live_write'"
+addopts = "-m 'not docker and not live_read_smoke and not live_read_full and not live_read_selected and not live_write'"
 
 [tool.ruff]
 target-version = "py310"
