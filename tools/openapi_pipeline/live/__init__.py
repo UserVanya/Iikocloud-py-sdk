@@ -23,6 +23,7 @@ from .read_case import (
     ReadFailureCode,
     build_generated_request,
 )
+from .read_planner import ReadPlan
 from .receipt import LiveReceipt
 from .session import SafeLiveSession
 from .state import LiveStateStore
@@ -48,6 +49,7 @@ __all__ = [
     "ReadContext",
     "ReadExtractorFailure",
     "ReadFailureCode",
+    "ReadPlan",
     "ResolvedLiveProfile",
     "ResolvedDiscoveryProfile",
     "SafeLiveSession",
