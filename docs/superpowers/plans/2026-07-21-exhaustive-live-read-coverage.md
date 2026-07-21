@@ -1271,7 +1271,7 @@ git commit -m "test: cover foundational iiko reads"
 
 **Interfaces:**
 - Consumes: `organization_id`, validated optional `terminal_group_id`, profile external-menu target, Appendix B bindings.
-- Produces: seven cases and keys `product_id`, `product_price`, `combo_items`, `external_menu_id`.
+- Produces: seven cases and keys `product_id`, `product_price`, the internal immutable `nomenclature_prices` lookup, `combo_items`, and `external_menu_id`.
 
 - [ ] **Step 1: Write the exact case-set and dependency tests**
 
@@ -1303,11 +1303,16 @@ Expected: menu case module does not exist.
 ```text
 get_nomenclature:
   request organizationId and startRevision=0;
-  extract the first non-deleted purchasable product UUID and its numeric price when present.
+  extract the first non-deleted purchasable product UUID and its numeric price
+  when present, plus an immutable lookup of every unambiguous purchasable
+  product-size price needed only for later combo construction.
 
 get_combos_info:
-  request organizationId;
-  extract one complete combo specification only when every required order item can be built.
+  depend on get_nomenclature and request organizationId;
+  extract the first active specification with a source action and non-empty
+  groups only when one product from every group has an exact response-derived
+  nomenclature price; build generated product order items with one shared fresh
+  client-side comboId, otherwise publish no combo_items.
 
 calculate_combo_price:
   depend on get_combos_info and get_nomenclature;
