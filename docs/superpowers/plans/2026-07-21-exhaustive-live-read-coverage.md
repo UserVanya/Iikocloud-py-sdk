@@ -1596,7 +1596,10 @@ LOYALTY_IDS = {
 }
 ```
 
-Test discriminator construction for `GetCustomerInfoByIdRequest`, coupon series with/without coupons, SMS ID absence, customer absence, generated report date aliases, and scans for synthetic phone/email/card/coupon/customer values.
+Test discriminator construction for `GetCustomerInfoByIdRequest`, coupon series
+with/without a non-empty series number, non-activated responses with/without a
+coupon number, SMS ID absence, customer absence, generated report aliases, and
+scans for synthetic phone/email/card/coupon/customer values.
 
 - [ ] **Step 2: Run and verify RED**
 
@@ -1619,11 +1622,24 @@ check_sms_status -> sms_unavailable because no read-only provider exists in this
 
 - [ ] **Step 4: Implement customer-dependent reads and pure calculation**
 
-Choose a response-derived customer UUID in the fixed order `search_delivery_customer_id`, `status_delivery_customer_id`, then a table-order customer key when present. Bind `get_customer_info` to `iikocloud_client.models.get_customer_info_by_id_request.GetCustomerInfoByIdRequest`, which is a generated subclass accepted by the API's base request annotation; values are `type="id"`, `id=<hidden customer>`, and `organizationId`.
+Choose a response-derived customer UUID in the fixed order `search_delivery_customer_id`, `status_delivery_customer_id`, then a table-order customer key when present. Bind `get_customer_info` to `iikocloud_client.models.get_customer_info_by_id_request.GetCustomerInfoByIdRequest`, which is a generated subclass accepted by the API's base request annotation; values are `type="id"`, `id=str(<hidden customer UUID>)`, and `organizationId` because the concrete generated `id` field is `StrictStr`.
 
-After a successful customer response, provide only `customer_id`. Use it for counters and both bounded transaction reports (`pageNumber=0`, `pageSize=1`, seeded period; revision starts from the response-provided value or zero only when the generated contract explicitly permits it).
+After a successful customer response, provide only `customer_id`. Use it for
+counters and both bounded transaction reports. The date report uses the seeded
+period with `pageNumber=0` and `pageSize=1`, and may publish the first
+non-negative transaction revision. The revision report has no date or page
+number fields; use `pageSize=1` and that response-derived revision when present,
+otherwise `revision=0`, which its generated optional `StrictInt` field permits.
 
-`calculate_loyalty_checkin` is a calculation-only call. Build its generated order from one nomenclature product plus the first available `search_delivery_phone`/`status_delivery_phone`, with one item, no payments, no customer mutation fields, empty campaign IDs, and loyalty tracing disabled. If either input is absent, return `product_unavailable` or `delivery_phone_unavailable` before HTTP.
+`calculate_loyalty_checkin` is a calculation-only call. Build its generated
+order from `product_id`, `product_price`, and the exact matching entry in
+`nomenclature_prices`, plus the first available
+`search_delivery_phone`/`status_delivery_phone`. Use one concrete generated
+`DeliveryOrderCreateProductItem` with `type="Product"`, `amount=1`, its price,
+and the matching `productSizeId` when non-null; use `payments=[]`, omit customer
+mutation fields, set top-level campaign IDs to `[]`, and disable loyalty
+tracing. If a complete product tuple or phone is absent, return
+`product_unavailable` or `delivery_phone_unavailable` before HTTP.
 
 - [ ] **Step 5: Verify and commit**
 
