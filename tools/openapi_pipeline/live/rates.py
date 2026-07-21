@@ -2,28 +2,18 @@ from __future__ import annotations
 
 import asyncio
 import math
-import re
 import time
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any
-
-import yaml
 
 from ..errors import SafetyError
+from .contract_io import exact_keys, load_yaml_mapping, safe_identifier, safe_source
 from .lock import LiveProcessLock
 from .state import LiveStateStore
 
-_SAFE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}\Z")
 _MAX_CATALOG_BYTES = 1024 * 1024
-
-
-def _safe_identifier(value: object, *, label: str) -> str:
-    if not isinstance(value, str) or _SAFE_ID.fullmatch(value) is None:
-        raise SafetyError(f"{label} must be a safe ASCII string of 1 to 128 characters")
-    return value
 
 
 def _finite_number(value: object, *, label: str) -> float:
@@ -35,53 +25,25 @@ def _finite_number(value: object, *, label: str) -> float:
     return result
 
 
-def _exact_keys(value: Mapping[object, object], expected: set[str], *, label: str) -> None:
-    keys = set(value)
-    if keys != expected or any(not isinstance(key, str) for key in keys):
-        wanted = ", ".join(sorted(expected))
-        raise SafetyError(f"{label} keys must be exactly: {wanted}")
-
-
-class _UniqueKeySafeLoader(yaml.SafeLoader):
-    pass
-
-
-def _construct_unique_mapping(
-    loader: _UniqueKeySafeLoader, node: yaml.nodes.MappingNode, deep: bool = False
-) -> dict[object, object]:
-    result: dict[object, object] = {}
-    for key_node, value_node in node.value:
-        key = loader.construct_object(key_node, deep=deep)
-        try:
-            duplicate = key in result
-        except TypeError as error:
-            raise yaml.constructor.ConstructorError(
-                "while constructing a mapping",
-                node.start_mark,
-                "found an unhashable key",
-                key_node.start_mark,
-            ) from error
-        if duplicate:
-            raise yaml.constructor.ConstructorError(
-                "while constructing a mapping",
-                node.start_mark,
-                f"found duplicate key {key!r}",
-                key_node.start_mark,
-            )
-        result[key] = loader.construct_object(value_node, deep=deep)
-    return result
-
-
-_UniqueKeySafeLoader.add_constructor(
-    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
-    _construct_unique_mapping,
-)
-
-
 @dataclass(frozen=True)
 class RateLimit:
     calls: int
     per_seconds: float
+
+
+@dataclass(frozen=True, slots=True)
+class TestBudget:
+    min_interval_seconds: float
+    source: str
+    verified: bool
+
+
+@dataclass(frozen=True, slots=True)
+class ServerLimit:
+    calls: int
+    per_seconds: float
+    source: str
+    verified: bool
 
 
 @dataclass(frozen=True)
@@ -112,37 +74,40 @@ class RatePolicy:
     def operation_budget(
         self,
         operation_id: str,
-        value: Mapping[str, Any],
+        test_budget: TestBudget,
+        server_limit: ServerLimit | None,
         *,
         max_calls_per_run: int = 1,
     ) -> OperationBudget:
-        operation_id = _safe_identifier(operation_id, label="operation ID")
-        if not isinstance(value, Mapping):
-            raise SafetyError(f"Rate entry for {operation_id!r} must be an object")
-        if value.get("verified") is not True:
-            raise SafetyError(f"Operation {operation_id!r} rate limit is not verified")
+        operation_id = safe_identifier(operation_id, label="operation ID")
+        if test_budget.verified is not True:
+            raise SafetyError(f"Operation {operation_id!r} test budget is not verified")
+        if server_limit is not None and server_limit.verified is not True:
+            raise SafetyError(f"Operation {operation_id!r} server limit is not verified")
         if type(max_calls_per_run) is not int or max_calls_per_run != 1:
             raise SafetyError("max calls per operation per run must be exactly 1")
-        limit = value.get("server_limit")
-        if not isinstance(limit, Mapping):
-            raise SafetyError(f"server_limit for {operation_id!r} must be an object")
-        _exact_keys(limit, {"calls", "per_seconds"}, label=f"server_limit for {operation_id!r}")
-        calls = limit["calls"]
-        if type(calls) is not int or calls <= 0:
-            raise SafetyError(
-                f"server limit calls for {operation_id!r} must be a positive integer"
+        try:
+            server_interval = (
+                math.ceil(
+                    server_limit.per_seconds
+                    / server_limit.calls
+                    / self.utilization
+                )
+                if server_limit is not None
+                else 0
             )
-        per_seconds = _finite_number(
-            limit["per_seconds"],
-            label=f"server limit per_seconds for {operation_id!r}",
+        except (OverflowError, ValueError) as error:
+            raise SafetyError(
+                f"Operation {operation_id!r} calculated server interval is not finite"
+            ) from error
+        safe_interval_seconds = max(
+            self.global_min_interval_seconds,
+            test_budget.min_interval_seconds,
+            server_interval,
         )
-        if per_seconds <= 0:
-            raise SafetyError(
-                f"server limit per_seconds for {operation_id!r} must be greater than 0"
-            )
         return OperationBudget(
             operation_id=operation_id,
-            safe_interval_seconds=self.safe_interval(RateLimit(calls, per_seconds)),
+            safe_interval_seconds=float(safe_interval_seconds),
             max_calls_per_run=max_calls_per_run,
         )
 
@@ -164,11 +129,10 @@ class RatePolicy:
         return float(max(self.global_min_interval_seconds, math.ceil(interval)))
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _CatalogOperation:
-    server_limit: RateLimit
-    source: str
-    verified: bool
+    test_budget: TestBudget
+    server_limit: ServerLimit | None
 
 
 @dataclass(frozen=True)
@@ -179,36 +143,26 @@ class RateCatalog:
 
     @classmethod
     def load(cls, path: Path) -> RateCatalog:
-        try:
-            body = path.read_bytes()
-        except OSError as error:
-            raise SafetyError(f"Cannot read rate catalog: {path}") from error
-        if len(body) > _MAX_CATALOG_BYTES:
-            raise SafetyError(f"Rate catalog is larger than {_MAX_CATALOG_BYTES} bytes: {path}")
-        try:
-            text = body.decode("utf-8")
-        except UnicodeDecodeError as error:
-            raise SafetyError(f"Rate catalog is not valid UTF-8: {path}") from error
-        try:
-            value = yaml.load(text, Loader=_UniqueKeySafeLoader)
-        except yaml.YAMLError as error:
-            detail = "duplicate key" if "duplicate key" in str(error) else "invalid YAML"
-            raise SafetyError(f"Rate catalog contains {detail}: {path}") from error
+        value = load_yaml_mapping(
+            path,
+            label="rate catalog",
+            maximum_bytes=_MAX_CATALOG_BYTES,
+        )
         return cls.from_mapping(value)
 
     @classmethod
     def from_mapping(cls, value: object) -> RateCatalog:
         if not isinstance(value, Mapping):
             raise SafetyError("Rate catalog root must be an object")
-        _exact_keys(value, {"version", "defaults", "operations"}, label="Rate catalog root")
+        exact_keys(value, {"version", "defaults", "operations"}, label="Rate catalog root")
 
         version = value["version"]
-        if type(version) is not int or version != 1:
-            raise SafetyError("Rate catalog version must be the integer 1")
+        if type(version) is not int or version != 2:
+            raise SafetyError("Rate catalog version must be the integer 2")
         defaults = value["defaults"]
         if not isinstance(defaults, Mapping):
             raise SafetyError("Rate catalog defaults must be an object")
-        _exact_keys(
+        exact_keys(
             defaults,
             {
                 "utilization",
@@ -232,58 +186,99 @@ class RateCatalog:
         for raw_operation_id, raw_entry in sorted(
             operations.items(), key=lambda item: str(item[0])
         ):
-            operation_id = _safe_identifier(raw_operation_id, label="operation ID")
+            operation_id = safe_identifier(raw_operation_id, label="operation ID")
             if not isinstance(raw_entry, Mapping):
                 raise SafetyError(f"Rate entry for {operation_id!r} must be an object")
-            _exact_keys(
+            exact_keys(
                 raw_entry,
-                {"server_limit", "source", "verified"},
+                {"test_budget", "server_limit"},
                 label=f"Rate entry for {operation_id!r}",
             )
-            source = raw_entry["source"]
-            if (
-                not isinstance(source, str)
-                or not source
-                or len(source) > 256
-                or any(ord(character) < 32 for character in source)
-            ):
+
+            raw_test_budget = raw_entry["test_budget"]
+            if not isinstance(raw_test_budget, Mapping):
                 raise SafetyError(
-                    f"source for {operation_id!r} must be a non-empty safe string "
-                    "up to 256 characters"
+                    f"test_budget for {operation_id!r} must be an object"
                 )
-            verified = raw_entry["verified"]
-            if type(verified) is not bool:
-                raise SafetyError(f"verified for {operation_id!r} must be a boolean")
-            limit = raw_entry["server_limit"]
-            if not isinstance(limit, Mapping):
-                raise SafetyError(f"server_limit for {operation_id!r} must be an object")
-            _exact_keys(
-                limit,
-                {"calls", "per_seconds"},
-                label=f"server_limit for {operation_id!r}",
+            exact_keys(
+                raw_test_budget,
+                {"min_interval_seconds", "source", "verified"},
+                label=f"test_budget for {operation_id!r}",
             )
-            calls = limit["calls"]
-            if type(calls) is not int or calls <= 0:
+            test_interval = _finite_number(
+                raw_test_budget["min_interval_seconds"],
+                label=f"test budget min_interval_seconds for {operation_id!r}",
+            )
+            if test_interval < 30:
                 raise SafetyError(
-                    f"server limit calls for {operation_id!r} must be a positive integer"
+                    f"test budget for {operation_id!r} must be at least 30 seconds"
                 )
-            per_seconds = _finite_number(
-                limit["per_seconds"],
-                label=f"server limit per_seconds for {operation_id!r}",
+            test_source = safe_source(
+                raw_test_budget["source"],
+                label=f"test budget source for {operation_id!r}",
             )
-            if per_seconds <= 0:
+            test_verified = raw_test_budget["verified"]
+            if type(test_verified) is not bool:
                 raise SafetyError(
-                    f"server limit per_seconds for {operation_id!r} must be greater than 0"
+                    f"test budget verified for {operation_id!r} must be a boolean"
+                )
+            test_budget = TestBudget(test_interval, test_source, test_verified)
+
+            raw_server_limit = raw_entry["server_limit"]
+            server_limit: ServerLimit | None
+            if raw_server_limit is None:
+                server_limit = None
+            elif not isinstance(raw_server_limit, Mapping):
+                raise SafetyError(
+                    f"server_limit for {operation_id!r} must be an object or null"
+                )
+            else:
+                exact_keys(
+                    raw_server_limit,
+                    {"calls", "per_seconds", "source", "verified"},
+                    label=f"server_limit for {operation_id!r}",
+                )
+                calls = raw_server_limit["calls"]
+                if type(calls) is not int or calls <= 0:
+                    raise SafetyError(
+                        f"server limit calls for {operation_id!r} must be a positive integer"
+                    )
+                per_seconds = _finite_number(
+                    raw_server_limit["per_seconds"],
+                    label=f"server limit per_seconds for {operation_id!r}",
+                )
+                if per_seconds <= 0:
+                    raise SafetyError(
+                        f"server limit per_seconds for {operation_id!r} "
+                        "must be greater than 0"
+                    )
+                server_source = safe_source(
+                    raw_server_limit["source"],
+                    label=f"server limit source for {operation_id!r}",
+                )
+                server_verified = raw_server_limit["verified"]
+                if type(server_verified) is not bool:
+                    raise SafetyError(
+                        f"server limit verified for {operation_id!r} must be a boolean"
+                    )
+                server_limit = ServerLimit(
+                    calls,
+                    per_seconds,
+                    server_source,
+                    server_verified,
                 )
             parsed[operation_id] = _CatalogOperation(
-                server_limit=RateLimit(calls, per_seconds),
-                source=source,
-                verified=verified,
+                test_budget=test_budget,
+                server_limit=server_limit,
             )
         return cls(policy, max_calls, MappingProxyType(parsed))
 
+    @property
+    def operation_ids(self) -> tuple[str, ...]:
+        return tuple(self._operations)
+
     def operation_budget(self, operation_id: str) -> OperationBudget:
-        operation_id = _safe_identifier(operation_id, label="operation ID")
+        operation_id = safe_identifier(operation_id, label="operation ID")
         entry = self._operations.get(operation_id)
         if entry is None:
             raise SafetyError(
@@ -291,13 +286,8 @@ class RateCatalog:
             )
         return self.policy.operation_budget(
             operation_id,
-            {
-                "verified": entry.verified,
-                "server_limit": {
-                    "calls": entry.server_limit.calls,
-                    "per_seconds": entry.server_limit.per_seconds,
-                },
-            },
+            entry.test_budget,
+            entry.server_limit,
             max_calls_per_run=self.max_calls_per_operation_per_run,
         )
 
@@ -316,7 +306,7 @@ class LiveRateGuard:
         monotonic_clock: Callable[[], float] = time.monotonic,
         sleeper: Callable[[float], Awaitable[None]] = asyncio.sleep,
     ) -> None:
-        self.profile_fingerprint = _safe_identifier(
+        self.profile_fingerprint = safe_identifier(
             profile_fingerprint,
             label="profile fingerprint",
         )

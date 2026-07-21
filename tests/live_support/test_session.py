@@ -103,7 +103,7 @@ async def test_session_never_retries_429_and_opens_circuit() -> None:
 async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
     catalog = RateCatalog.from_mapping(
         {
-            "version": 1,
+            "version": 2,
             "defaults": {
                 "utilization": 0.2,
                 "global_min_interval_seconds": 30,
@@ -111,9 +111,17 @@ async def test_actual_guard_opens_persistent_circuit_on_429(tmp_path) -> None:
             },
             "operations": {
                 operation: {
-                    "server_limit": {"calls": 100, "per_seconds": 60},
-                    "source": "test",
-                    "verified": True,
+                    "test_budget": {
+                        "min_interval_seconds": 30,
+                        "source": "test",
+                        "verified": True,
+                    },
+                    "server_limit": {
+                        "calls": 100,
+                        "per_seconds": 60,
+                        "source": "test",
+                        "verified": True,
+                    },
                 }
                 for operation in ("authenticate", "get_organizations")
             },

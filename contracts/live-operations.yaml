@@ -5,31 +5,461 @@ operations:
     cleanup: null
     method: POST
     path: /api/1/access_token
-  get_organizations:
+  calculate_combo_price:
     kind: read
     cleanup: null
     method: POST
-    path: /api/1/organizations
-  get_terminal_groups:
+    path: /api/1/combo/calculate
+  calculate_inventory_cost_prices:
     kind: read
     cleanup: null
     method: POST
-    path: /api/1/terminal_groups
-  get_external_menus:
+    path: /api/inventory/v1/costings/calculate
+  calculate_loyalty_checkin:
     kind: read
     cleanup: null
     method: POST
-    path: /api/2/menu
+    path: /api/1/loyalty/iiko/calculate
+  check_products_in_stop_list:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/stop_lists/check
+  check_sms_sending_possibility:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/check_sms_sending_possibility
+  check_sms_status:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/check_sms_status
+  check_terminal_groups_availability:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/terminal_groups/is_alive
+  get_active_courier_locations:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/couriers/active_location
+  get_active_courier_locations_by_terminal:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/couriers/active_location/by_terminal
+  get_allowed_delivery_restrictions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/delivery_restrictions/allowed
+  get_cancel_causes:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/cancel_causes
+  get_cities:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/cities
+  get_combos_info:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/combo
+  get_command_status:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/commands/status
+  get_coupon_info:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/coupons/info
+  get_coupon_series:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/coupons/series
+  get_courier_location_history:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/couriers/locations/by_time_offset
+  get_couriers:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/couriers
+  get_couriers_by_role:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/couriers/by_role
+  get_customer_categories:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/customer_category
+  get_customer_info:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/customer/info
+  get_customer_transactions_by_date:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/customer/transactions/by_date
+  get_customer_transactions_by_revision:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/customer/transactions/by_revision
+  get_deliveries_by_delivery_date_and_phone:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/by_delivery_date_and_phone
+  get_deliveries_by_delivery_date_and_status:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/by_delivery_date_and_status
+  get_deliveries_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/by_id
+  get_deliveries_by_revision:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/by_revision
+  get_delivery_draft_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/drafts/by_id
+  get_delivery_drafts_by_filter:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/drafts/by_filter
+  get_delivery_history_by_delivery_date_and_phone:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/history/by_delivery_date_and_phone
+  get_delivery_order_types:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/order_types
+  get_delivery_restrictions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/delivery_restrictions
+  get_discounts:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/discounts
+  get_employee_info:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/info
   get_external_menu_by_id:
     kind: read
     cleanup: null
     method: POST
     path: /api/2/menu/by_id
+  get_external_menus:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/2/menu
+  get_finance_incoming_service:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/incoming_service/get
+  get_finance_outgoing_service:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/outgoing_service/get
+  get_inventory_counteragents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/counteragents
+  get_inventory_disassemble_document:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/disassemble_document/get
+  get_inventory_incoming_invoice:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/incoming_invoice/get
+  get_inventory_incoming_returned_invoice:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/incoming_returned_invoice/get
+  get_inventory_internal_transfer:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/internal_transfer/get
+  get_inventory_outgoing_invoice:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/outgoing_invoice/get
+  get_inventory_production_document:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/production_document/get
+  get_inventory_returned_invoice:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/returned_invoice/get
+  get_inventory_sales_document:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/sales_document/get
+  get_inventory_transformation_document:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/transformation_document/get
+  get_inventory_writeoff_document:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/writeoff_document/get
+  get_loyalty_counters:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/get_counters
+  get_loyalty_manual_conditions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/manual_condition
+  get_loyalty_programs:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/program
+  get_marketing_sources:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/marketing_sources
+  get_nomenclature:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/nomenclature
+  get_non_activated_coupons_by_series:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/coupons/by_series
+  get_organization_settings:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/organizations/settings
+  get_organizations:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/organizations
+  get_payment_types:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/payment_types
+  get_personal_session_info:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/shift/is_open
+  get_regions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/regions
+  get_removal_types:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/removal_types
+  get_reserve_available_organizations:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/reserve/available_organizations
+  get_reserve_restaurant_sections:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/reserve/available_restaurant_sections
+  get_reserve_statuses_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/reserve/status_by_id
+  get_reserve_terminal_groups:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/reserve/available_terminal_groups
+  get_restaurant_sections_workload:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/reserve/restaurant_sections_workload
   get_stop_lists:
     kind: read
     cleanup: null
     method: POST
     path: /api/1/stop_lists
+  get_streets_by_city:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/streets/by_city
+  get_streets_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/streets/by_id
+  get_table_orders_by_id:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/order/by_id
+  get_table_orders_by_table:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/order/by_table
+  get_terminal_groups:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/terminal_groups
+  get_terminal_groups_of_employee:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/employees/shifts/by_courier
+  get_tips_types:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/tips_types
+  get_webhook_settings:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/webhooks/settings
+  list_finance_account_transactions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/account_transactions/list
+  list_finance_document_transactions:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/document_transactions/list
+  list_finance_incoming_services:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/incoming_service/list
+  list_finance_outgoing_services:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/finance/v1/outgoing_service/list
+  list_inventory_disassemble_documents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/disassemble_document/list
+  list_inventory_incoming_invoices:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/incoming_invoice/list
+  list_inventory_incoming_returned_invoices:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/incoming_returned_invoice/list
+  list_inventory_internal_transfers:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/internal_transfer/list
+  list_inventory_outgoing_invoices:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/outgoing_invoice/list
+  list_inventory_production_documents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/production_document/list
+  list_inventory_returned_invoices:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/returned_invoice/list
+  list_inventory_sales_documents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/sales_document/list
+  list_inventory_transformation_documents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/transformation_document/list
+  list_inventory_writeoff_documents:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/inventory/v1/writeoff_document/list
+  list_organizations:
+    kind: read
+    cleanup: null
+    method: GET
+    path: /api/1/organizations
+  search_deliveries:
+    kind: read
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/by_delivery_date_and_source_key_and_filter
   add_products_to_stop_list:
     kind: compensating
     cleanup: remove_products_from_stop_list

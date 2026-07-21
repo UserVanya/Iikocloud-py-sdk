@@ -64,7 +64,7 @@ def _profile(**overrides: Any) -> ResolvedLiveProfile:
 def _catalog(*, unverified: str | None = None) -> RateCatalog:
     return RateCatalog.from_mapping(
         {
-            "version": 1,
+            "version": 2,
             "defaults": {
                 "utilization": 0.20,
                 "global_min_interval_seconds": 30,
@@ -72,9 +72,17 @@ def _catalog(*, unverified: str | None = None) -> RateCatalog:
             },
             "operations": {
                 operation_id: {
-                    "server_limit": {"calls": 1, "per_seconds": 60},
-                    "source": "synthetic",
-                    "verified": operation_id != unverified,
+                    "test_budget": {
+                        "min_interval_seconds": 30,
+                        "source": "synthetic",
+                        "verified": operation_id != unverified,
+                    },
+                    "server_limit": {
+                        "calls": 1,
+                        "per_seconds": 60,
+                        "source": "synthetic",
+                        "verified": True,
+                    },
                 }
                 for operation_id in _WRITE_OPERATION_IDS
             },

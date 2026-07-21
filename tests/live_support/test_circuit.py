@@ -33,7 +33,7 @@ def test_429_opens_profile_circuit_until_manual_reset(tmp_path: Path) -> None:
 def _catalog(*, verified: bool = True) -> RateCatalog:
     return RateCatalog.from_mapping(
         {
-            "version": 1,
+            "version": 2,
             "defaults": {
                 "utilization": 0.20,
                 "global_min_interval_seconds": 30,
@@ -41,14 +41,30 @@ def _catalog(*, verified: bool = True) -> RateCatalog:
             },
             "operations": {
                 "slow": {
-                    "server_limit": {"calls": 1, "per_seconds": 60},
-                    "source": "test-fixture",
-                    "verified": verified,
+                    "test_budget": {
+                        "min_interval_seconds": 30,
+                        "source": "test-fixture",
+                        "verified": verified,
+                    },
+                    "server_limit": {
+                        "calls": 1,
+                        "per_seconds": 60,
+                        "source": "test-fixture",
+                        "verified": True,
+                    },
                 },
                 "fast": {
-                    "server_limit": {"calls": 100, "per_seconds": 60},
-                    "source": "test-fixture",
-                    "verified": True,
+                    "test_budget": {
+                        "min_interval_seconds": 30,
+                        "source": "test-fixture",
+                        "verified": True,
+                    },
+                    "server_limit": {
+                        "calls": 100,
+                        "per_seconds": 60,
+                        "source": "test-fixture",
+                        "verified": True,
+                    },
                 },
             },
         }
@@ -178,7 +194,11 @@ async def test_three_evidence_runs_reserve_every_live_call_thirty_seconds_apart(
     enabled_operations = {
         operation_id
         for operation_id, operation in catalog_data["operations"].items()
-        if operation["verified"] is True
+        if operation["test_budget"]["verified"] is True
+        and (
+            operation["server_limit"] is None
+            or operation["server_limit"]["verified"] is True
+        )
     }
     assert {"authenticate", "get_external_menu_by_id"} <= enabled_operations
     catalog = RateCatalog.from_mapping(catalog_data)

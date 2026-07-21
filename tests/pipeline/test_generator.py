@@ -90,6 +90,7 @@ def test_repository_hand_owned_contracts_are_seeded_and_canonical() -> None:
     assert isinstance(module.body[0].value.value, str)
     assert module.body[0].value.value
     assert contract_path.read_bytes() == canonical_contract.read_bytes()
+    assert yaml.safe_load(contract_path.read_text(encoding="utf-8"))["version"] == 2
     assert typing_marker.is_file()
     assert not typing_marker.is_symlink()
     assert typing_marker.read_bytes() == b""
