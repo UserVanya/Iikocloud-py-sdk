@@ -164,20 +164,51 @@ ReadCase registry: типизированный request и проверки от
 `contracts/live-operations.yaml` остаётся минимальным исполнительным
 allowlist. `contracts/rate-limits.yaml` должен содержать запись для каждой
 allowlisted операции и не может разрешить отсутствующую в allowlist операцию.
+Rate entry раздельно хранит обязательный verified test budget и необязательный
+документированный server limit:
+
+```yaml
+get_nomenclature:
+  test_budget:
+    min_interval_seconds: 30
+    source: user-approved-global-read-cadence-2026-07-21
+    verified: true
+  server_limit: null
+
+get_external_menus:
+  test_budget:
+    min_interval_seconds: 30
+    source: user-approved-global-read-cadence-2026-07-21
+    verified: true
+  server_limit:
+    calls: 1
+    per_seconds: 1800
+    source: existing-manager-configuration
+    verified: true
+```
+
+`test_budget.verified` означает reviewed разрешение на конкретную тестовую
+частоту, а не утверждение о серверном лимите. `server_limit` присутствует
+только при отдельном подтверждённом источнике. Effective interval равен
+максимуму из global minimum, operation test budget и 20%-ного бюджета
+документированного server limit.
 
 Глобальные правила остаются следующими:
 
-- utilization не выше 20% подтверждённого server limit;
+- utilization не выше 20% подтверждённого server limit, если он известен;
 - глобальный минимум между любыми запросами — 30 секунд;
+- test budget каждой исполнимой операции подтверждён и не меньше глобального
+  минимума;
 - максимум один вызов конкретной операции за run;
 - более строгий operation-specific interval имеет приоритет;
 - последний вызов и circuit сохраняются между процессами;
 - неподтверждённый rate budget запрещает HTTP до отправки запроса.
 
-Глобальные 30 секунд являются согласованным минимальным тестовым интервалом, но
-не выдуманным server limit. `verified: true` выставляется только после проверки
-авторитетного источника и существующих правил репозитория. Неизвестный лимит не
-проверяется учащением запросов.
+Глобальные 30 секунд являются согласованным владельцем минимальным тестовым
+интервалом, но не выдуманным server limit. `test_budget.verified: true`
+фиксирует это явное решение. `server_limit.verified: true` выставляется только
+после проверки отдельного авторитетного источника. Неизвестный server limit не
+проверяется учащением запросов и остаётся `null`.
 
 ## 7. ReadCase registry
 
