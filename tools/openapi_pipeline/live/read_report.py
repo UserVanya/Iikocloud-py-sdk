@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import ctypes
+import errno
 import json
 import os
 import re
+import secrets
 import stat
 from collections.abc import Mapping
 from contextlib import suppress
@@ -15,8 +18,9 @@ from typing import Any
 from urllib.parse import unquote, urlsplit
 
 from ..errors import SafetyError
-from ..io import canonical_json_bytes, write_json_atomic
+from ..io import canonical_json_bytes
 from .read_case import NoLiveTargetCode, ReadFailureCode
+from .session import LiveOperation
 
 _OPERATION_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}\Z")
 _RUN_ID = re.compile(r"[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8,32}\Z")
@@ -47,6 +51,7 @@ _OUTCOME_FIELDS = {
     "duration_ms",
 }
 _MAX_REPORT_BYTES = 1024 * 1024
+_RENAME_EXCHANGE = 2
 _DIRECTORY_FLAGS = (
     os.O_RDONLY | os.O_CLOEXEC | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
 )
@@ -138,6 +143,8 @@ def _validate_path(value: object) -> None:
 
 
 def _validate_reason(status: ReadStatus, reason: object) -> None:
+    if reason is not None and type(reason) is not str:
+        raise SafetyError("Read outcome reason is incompatible with its status")
     allowed: set[str | None]
     if status is ReadStatus.PASSED:
         allowed = {None}
@@ -158,7 +165,7 @@ def _validate_reason(status: ReadStatus, reason: object) -> None:
                 ReadFailureCode.EXTRACTOR_FAILED,
             }
         }
-    if reason not in allowed or (reason is not None and type(reason) is not str):
+    if reason not in allowed:
         raise SafetyError("Read outcome reason is incompatible with its status")
 
 
@@ -569,6 +576,134 @@ def _create_report_at(directory_fd: int, name: str, body: bytes) -> tuple[int, .
     return _file_metadata(metadata)
 
 
+def _create_staging_report_at(
+    directory_fd: int,
+    report_name: str,
+    body: bytes,
+) -> tuple[str, tuple[int, ...]]:
+    flags = (
+        os.O_WRONLY
+        | os.O_CREAT
+        | os.O_EXCL
+        | os.O_CLOEXEC
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    for _attempt in range(32):
+        name = f".{report_name}.tmp-{secrets.token_hex(12)}"
+        try:
+            fd = os.open(name, flags, 0o600, dir_fd=directory_fd)
+        except FileExistsError:
+            continue
+        except OSError as error:
+            raise SafetyError("Cannot create read report staging file safely") from error
+        try:
+            os.fchmod(fd, 0o600)
+            offset = 0
+            while offset < len(body):
+                written = os.write(fd, body[offset:])
+                if written <= 0:
+                    raise OSError("short read report staging write")
+                offset += written
+            os.fsync(fd)
+            metadata = os.fstat(fd)
+            _validate_private_file_metadata(
+                metadata,
+                label="Read report staging file",
+            )
+        except OSError as error:
+            raise SafetyError("Cannot create read report staging file safely") from error
+        finally:
+            os.close(fd)
+        os.fsync(directory_fd)
+        return name, _file_metadata(metadata)
+    raise SafetyError("Cannot allocate a unique read report staging file")
+
+
+def _load_renameat2() -> Any:
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise SafetyError("Atomic read report exchange is unavailable")
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    return renameat2
+
+
+def _rename_exchange(
+    directory_fd: int,
+    source: str,
+    destination: str,
+    *,
+    renameat2: Any,
+) -> None:
+    result = renameat2(
+        directory_fd,
+        os.fsencode(source),
+        directory_fd,
+        os.fsencode(destination),
+        _RENAME_EXCHANGE,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.ENOSYS, errno.EINVAL, errno.EOPNOTSUPP}:
+        raise SafetyError("Atomic read report exchange is unavailable") from OSError(
+            error_number,
+            os.strerror(error_number),
+        )
+    raise SafetyError("Atomic read report exchange failed") from OSError(
+        error_number,
+        os.strerror(error_number),
+    )
+
+
+def _exchange_report_entries(
+    directory_fd: int,
+    source: str,
+    destination: str,
+    *,
+    renameat2: Any,
+) -> None:
+    _rename_exchange(
+        directory_fd,
+        source,
+        destination,
+        renameat2=renameat2,
+    )
+
+
+def _entry_metadata_at(directory_fd: int, name: str) -> tuple[int, ...]:
+    try:
+        return _file_metadata(
+            os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+        )
+    except OSError as error:
+        raise SafetyError("Cannot inspect read report publication entry safely") from error
+
+
+def _unlink_matching_report_at(
+    directory_fd: int,
+    name: str,
+    *,
+    expected_body: bytes,
+    expected_metadata: tuple[int, ...],
+) -> None:
+    body, metadata = _read_report_at(directory_fd, name)
+    if body != expected_body or metadata != expected_metadata:
+        raise SafetyError("Refusing to remove an uncertain read report staging entry")
+    try:
+        os.unlink(name, dir_fd=directory_fd)
+        os.fsync(directory_fd)
+    except OSError as error:
+        raise SafetyError("Cannot remove verified read report staging entry") from error
+
+
 def _counts(outcomes: tuple[ReadOutcome, ...]) -> dict[str, int]:
     return {
         status.value: sum(outcome.status is status for outcome in outcomes)
@@ -578,6 +713,35 @@ def _counts(outcomes: tuple[ReadOutcome, ...]) -> dict[str, int]:
 
 def _utc_timestamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _validated_operation_contract(
+    value: object,
+) -> Mapping[str, LiveOperation]:
+    if type(value) is not MappingProxyType:
+        raise SafetyError("Read report operation contract must be immutable")
+    validated: dict[str, LiveOperation] = {}
+    for operation_id, operation in value.items():
+        if (
+            type(operation_id) is not str
+            or _OPERATION_ID.fullmatch(operation_id) is None
+            or type(operation) is not LiveOperation
+        ):
+            raise SafetyError("Read report operation contract is invalid")
+        if operation.kind not in {"auth", "read", "compensating", "cleanup"}:
+            raise SafetyError("Read report operation contract kind is invalid")
+        if operation.cleanup is not None and (
+            type(operation.cleanup) is not str
+            or _OPERATION_ID.fullmatch(operation.cleanup) is None
+        ):
+            raise SafetyError("Read report operation contract cleanup is invalid")
+        if type(operation.method) is not str or operation.method not in _METHODS:
+            raise SafetyError("Read report operation contract method is invalid")
+        _validate_path(operation.path)
+        validated[operation_id] = operation
+    if not any(operation.kind == "read" for operation in validated.values()):
+        raise SafetyError("Read report operation contract must contain a read operation")
+    return MappingProxyType(validated)
 
 
 class ReadReportWriter:
@@ -592,6 +756,7 @@ class ReadReportWriter:
         body: bytes,
         directory_metadata: tuple[int, ...],
         file_metadata: tuple[int, ...],
+        operation_contract: Mapping[str, LiveOperation],
     ) -> None:
         self.private_root = private_root
         self.path = path
@@ -599,12 +764,14 @@ class ReadReportWriter:
         self._last_body = body
         self._directory_metadata = directory_metadata
         self._file_metadata = file_metadata
+        self._operation_contract = operation_contract
 
     @classmethod
     def create(
         cls,
         private_root: Path,
         *,
+        operation_contract: Mapping[str, LiveOperation],
         run_id: str,
         profile_fingerprint: str,
         effective_schema_sha256: str,
@@ -613,6 +780,7 @@ class ReadReportWriter:
         registry_sha256: str,
         started_at: str | None = None,
     ) -> ReadReportWriter:
+        operations = _validated_operation_contract(operation_contract)
         root = _absolute_private_root(private_root)
         report = ReadReport(
             version=1,
@@ -666,6 +834,7 @@ class ReadReportWriter:
             body=body,
             directory_metadata=directory_metadata,
             file_metadata=file_metadata,
+            operation_contract=operations,
         )
 
     def _open_bound_directory(self) -> int:
@@ -700,7 +869,10 @@ class ReadReportWriter:
 
     def _publish(self, report: ReadReport) -> ReadReport:
         body = canonical_json_bytes(report.to_json())
+        renameat2 = _load_renameat2()
         directory_fd: int | None = None
+        staging_name: str | None = None
+        exchanged = False
         try:
             directory_fd = self._open_bound_directory()
             current_body, current_metadata = _read_report_at(
@@ -711,14 +883,112 @@ class ReadReportWriter:
                 raise SafetyError("Read report changed before update")
             if ReadReport.from_bytes(current_body) != self._report:
                 raise SafetyError("Read report does not match writer state")
-            bound_path = Path(f"/proc/self/fd/{directory_fd}") / self.path.name
-            write_json_atomic(bound_path, report.to_json(), mode=0o600)
+            staging_name, staging_metadata = _create_staging_report_at(
+                directory_fd,
+                self.path.name,
+                body,
+            )
+            staged_body, staged_metadata = _read_report_at(
+                directory_fd,
+                staging_name,
+            )
+            if staged_body != body or staged_metadata != staging_metadata:
+                raise SafetyError("Read report staging file changed before publication")
+
+            _exchange_report_entries(
+                directory_fd,
+                staging_name,
+                self.path.name,
+                renameat2=renameat2,
+            )
+            exchanged = True
+            swapped_metadata = _entry_metadata_at(directory_fd, staging_name)
+            swapped_matches = swapped_metadata == current_metadata
+            if swapped_matches:
+                swapped_body, verified_swapped_metadata = _read_report_at(
+                    directory_fd,
+                    staging_name,
+                )
+                swapped_matches = (
+                    swapped_body == current_body
+                    and verified_swapped_metadata == current_metadata
+                )
+            if not swapped_matches:
+                published_body, published_metadata = _read_report_at(
+                    directory_fd,
+                    self.path.name,
+                )
+                if (
+                    published_body != body
+                    or published_metadata != staging_metadata
+                ):
+                    raise SafetyError(
+                        "Concurrent read report replacement made rollback unsafe"
+                    )
+                _rename_exchange(
+                    directory_fd,
+                    staging_name,
+                    self.path.name,
+                    renameat2=renameat2,
+                )
+                exchanged = False
+                if (
+                    _entry_metadata_at(directory_fd, self.path.name)
+                    != swapped_metadata
+                ):
+                    raise SafetyError(
+                        "Concurrent read report replacement was not restored"
+                    )
+                restored_body, restored_metadata = _read_report_at(
+                    directory_fd,
+                    staging_name,
+                )
+                if (
+                    restored_body != body
+                    or restored_metadata != staging_metadata
+                ):
+                    raise SafetyError(
+                        "Read report staging file changed during rollback"
+                    )
+                _unlink_matching_report_at(
+                    directory_fd,
+                    staging_name,
+                    expected_body=body,
+                    expected_metadata=staging_metadata,
+                )
+                staging_name = None
+                raise SafetyError("Concurrent read report replacement was preserved")
+
             updated_body, updated_metadata = _read_report_at(
                 directory_fd,
                 self.path.name,
             )
-            if updated_body != body or ReadReport.from_bytes(updated_body) != report:
+            if (
+                updated_body != body
+                or updated_metadata != staging_metadata
+                or ReadReport.from_bytes(updated_body) != report
+            ):
                 raise SafetyError("Atomic read report update did not publish canonical content")
+            _unlink_matching_report_at(
+                directory_fd,
+                staging_name,
+                expected_body=current_body,
+                expected_metadata=current_metadata,
+            )
+            staging_name = None
+            os.fsync(directory_fd)
+        except BaseException as error:
+            if staging_name is not None and not exchanged and directory_fd is not None:
+                try:
+                    _unlink_matching_report_at(
+                        directory_fd,
+                        staging_name,
+                        expected_body=body,
+                        expected_metadata=staging_metadata,
+                    )
+                except SafetyError as cleanup_error:
+                    raise cleanup_error from error
+            raise
         finally:
             _close_fd(directory_fd)
 
@@ -745,6 +1015,15 @@ class ReadReportWriter:
             raise SafetyError("Read report append requires a ReadOutcome")
         if self._report.finished_at is not None:
             raise SafetyError("Cannot append to a finished read report")
+        operation = self._operation_contract.get(outcome.operation_id)
+        if operation is None:
+            raise SafetyError("Read outcome operation is unknown to the exact live contract")
+        if operation.kind != "read":
+            raise SafetyError("Read outcome operation is not an exact read operation")
+        if outcome.method != operation.method:
+            raise SafetyError("Read outcome method does not match the exact live contract")
+        if outcome.path != operation.path:
+            raise SafetyError("Read outcome path does not match the exact live contract")
         outcomes = (*self._report.outcomes, outcome)
         return self._publish(
             replace(

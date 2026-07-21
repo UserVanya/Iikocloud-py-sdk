@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import os
+from collections.abc import Mapping
 from pathlib import Path
+from types import MappingProxyType
 
 import pytest
 
@@ -15,6 +17,7 @@ from tools.openapi_pipeline.live.read_report import (
     ReadReportWriter,
     ReadStatus,
 )
+from tools.openapi_pipeline.live.session import LiveOperation
 
 
 def test_read_outcome_types_have_exact_status_values() -> None:
@@ -107,6 +110,17 @@ def test_read_outcome_rejects_unsafe_or_incompatible_values(
 ) -> None:
     with pytest.raises(SafetyError, match=message):
         _outcome(**overrides)
+
+
+@pytest.mark.parametrize("reason", [[], {}])
+def test_read_outcome_rejects_non_scalar_reason_with_fixed_safety_error(
+    reason: object,
+) -> None:
+    with pytest.raises(SafetyError, match="reason"):
+        _outcome(
+            status=ReadStatus.FAILED,
+            reason=reason,
+        )
 
 
 def _report(**overrides: object) -> ReadReport:
@@ -209,9 +223,41 @@ def _private_root(tmp_path: Path) -> Path:
     return private
 
 
+def _operation_contract() -> Mapping[str, LiveOperation]:
+    return MappingProxyType(
+        {
+            "authenticate": LiveOperation(
+                kind="auth",
+                cleanup=None,
+                method="POST",
+                path="/api/1/access_token",
+            ),
+            "get_organizations": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="POST",
+                path="/api/1/organizations",
+            ),
+            "add_products_to_stop_list": LiveOperation(
+                kind="compensating",
+                cleanup="remove_products_from_stop_list",
+                method="POST",
+                path="/api/1/stop_lists/add",
+            ),
+            "remove_products_from_stop_list": LiveOperation(
+                kind="cleanup",
+                cleanup=None,
+                method="POST",
+                path="/api/1/stop_lists/remove",
+            ),
+        }
+    )
+
+
 def _writer(private: Path) -> ReadReportWriter:
     return ReadReportWriter.create(
         private,
+        operation_contract=_operation_contract(),
         run_id="20260721T120000Z-a1b2c3d4",
         profile_fingerprint="a" * 64,
         effective_schema_sha256="b" * 64,
@@ -220,6 +266,76 @@ def _writer(private: Path) -> ReadReportWriter:
         registry_sha256="e" * 64,
         started_at="2026-07-21T12:00:00Z",
     )
+
+
+@pytest.mark.parametrize(
+    "sensitive_value",
+    [
+        "123e4567-e89b-12d3-a456-426614174000",
+        "person@example.invalid",
+        "+15551234567",
+    ],
+)
+def test_writer_exact_contract_blocks_sensitive_values_in_outcome_path(
+    tmp_path: Path,
+    sensitive_value: str,
+) -> None:
+    writer = _writer(_private_root(tmp_path))
+    before = writer.path.read_bytes()
+
+    with pytest.raises(SafetyError, match="contract|path"):
+        writer.append(
+            _outcome(path=f"/api/1/organizations/{sensitive_value}")
+        )
+
+    assert writer.path.read_bytes() == before
+    assert sensitive_value.encode() not in writer.path.read_bytes()
+
+
+@pytest.mark.parametrize(
+    "outcome",
+    [
+        pytest.param(_outcome(operation_id="unknown_read"), id="unknown"),
+        pytest.param(_outcome(method="GET"), id="method"),
+        pytest.param(_outcome(path="/api/1/other"), id="path"),
+        pytest.param(
+            _outcome(
+                operation_id="add_products_to_stop_list",
+                path="/api/1/stop_lists/add",
+            ),
+            id="non-read",
+        ),
+    ],
+)
+def test_writer_rejects_outcomes_not_bound_to_exact_read_operation(
+    tmp_path: Path,
+    outcome: ReadOutcome,
+) -> None:
+    writer = _writer(_private_root(tmp_path))
+    before = writer.path.read_bytes()
+    inode = writer.path.stat().st_ino
+
+    with pytest.raises(SafetyError, match="contract|read|method|path|unknown"):
+        writer.append(outcome)
+
+    assert writer.path.read_bytes() == before
+    assert writer.path.stat().st_ino == inode
+
+
+def test_writer_requires_immutable_operation_contract(tmp_path: Path) -> None:
+    private = _private_root(tmp_path)
+    with pytest.raises(SafetyError, match="immutable"):
+        ReadReportWriter.create(
+            private,
+            operation_contract=dict(_operation_contract()),
+            run_id="20260721T120000Z-a1b2c3d4",
+            profile_fingerprint="a" * 64,
+            effective_schema_sha256="b" * 64,
+            generated_tree_sha256="c" * 64,
+            live_contracts_sha256="d" * 64,
+            registry_sha256="e" * 64,
+            started_at="2026-07-21T12:00:00Z",
+        )
 
 
 def test_writer_creates_private_report_appends_atomically_and_finishes(
@@ -335,26 +451,44 @@ def test_writer_rejects_changed_or_unsafe_current_report(
         writer.append(_outcome())
 
 
-def test_writer_detects_concurrent_leaf_replacement_after_atomic_write(
+def test_writer_preserves_concurrent_leaf_replacement_before_publication(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from tools.openapi_pipeline import io as io_module
     from tools.openapi_pipeline.live import read_report as report_module
 
     writer = _writer(_private_root(tmp_path))
-    real_write = io_module.write_json_atomic
+    marker = b'{"unrelated":"marker"}\n'
 
-    def replace_after_write(path: Path, value: object, mode: int = 0o644) -> None:
-        real_write(path, value, mode)
-        replacement = writer.path.with_name("replacement")
-        replacement.write_bytes(b"{}\n")
+    def replace_before_exchange(
+        directory_fd: int,
+        source: str,
+        destination: str,
+        *,
+        renameat2: object,
+    ) -> None:
+        replacement = writer.path.with_name("unrelated-marker")
+        replacement.write_bytes(marker)
         replacement.chmod(0o600)
         replacement.replace(writer.path)
+        report_module._rename_exchange(
+            directory_fd,
+            source,
+            destination,
+            renameat2=renameat2,
+        )
 
-    monkeypatch.setattr(report_module, "write_json_atomic", replace_after_write)
+    monkeypatch.setattr(
+        report_module,
+        "_exchange_report_entries",
+        replace_before_exchange,
+        raising=False,
+    )
 
-    with pytest.raises(SafetyError, match="changed|canonical|match"):
+    with pytest.raises(SafetyError, match="[Cc]oncurrent|changed|replaced"):
         writer.append(_outcome())
+
+    assert writer.path.read_bytes() == marker
+    assert not any(path.name.startswith(".") for path in writer.path.parent.iterdir())
 
 
 def test_report_bytes_cannot_serialize_live_secrets_or_payloads(tmp_path: Path) -> None:
