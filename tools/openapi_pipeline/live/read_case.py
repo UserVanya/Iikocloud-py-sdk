@@ -6,7 +6,7 @@ import importlib
 import inspect
 import re
 from collections.abc import Callable, Iterator, Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 from types import MappingProxyType
 from typing import Final
@@ -222,9 +222,30 @@ class NoRequest:
 NO_REQUEST: Final[NoRequest] = NoRequest()
 
 
-@dataclass(frozen=True, slots=True)
 class ContextView(Mapping[str, object]):
-    _values: Mapping[str, object] = field(repr=False)
+    __slots__ = ("_values",)
+
+    _values: Mapping[str, object]
+
+    def __init__(self, values: Mapping[str, object]) -> None:
+        if not isinstance(values, Mapping):
+            raise TypeError("context view values must be a mapping")
+        copied: dict[str, object] = {}
+        for key, value in values.items():
+            safe_key = _require_safe_value_name(key, field_name="context view key")
+            copied[safe_key] = value
+        object.__setattr__(self, "_values", MappingProxyType(copied))
+
+    def __setattr__(self, name: str, value: object) -> None:
+        del name, value
+        raise AttributeError("ContextView is immutable")
+
+    def __delattr__(self, name: str) -> None:
+        del name
+        raise AttributeError("ContextView is immutable")
+
+    def __repr__(self) -> str:
+        return "ContextView()"
 
     def __getitem__(self, key: str) -> object:
         return self._values[key]
@@ -281,19 +302,34 @@ class ReadCase:
             raise TypeError("extract must be callable")
 
 
-@dataclass(frozen=True, slots=True)
 class ReadContext:
-    _values: dict[str, object] = field(repr=False)
+    __slots__ = ("_values",)
 
-    @classmethod
-    def seed(cls, values: Mapping[str, object]) -> ReadContext:
+    _values: dict[str, object]
+
+    def __init__(self, values: Mapping[str, object]) -> None:
         if not isinstance(values, Mapping):
-            raise TypeError("read context seed must be a mapping")
+            raise TypeError("read context values must be a mapping")
         copied: dict[str, object] = {}
         for key, value in values.items():
             safe_key = _require_safe_value_name(key, field_name="context key")
             copied[safe_key] = value
-        return cls(copied)
+        object.__setattr__(self, "_values", copied)
+
+    def __setattr__(self, name: str, value: object) -> None:
+        del name, value
+        raise AttributeError("ReadContext is immutable")
+
+    def __delattr__(self, name: str) -> None:
+        del name
+        raise AttributeError("ReadContext is immutable")
+
+    def __repr__(self) -> str:
+        return "ReadContext()"
+
+    @classmethod
+    def seed(cls, values: Mapping[str, object]) -> ReadContext:
+        return cls(values)
 
     def view(self, keys: tuple[str, ...]) -> ContextView:
         declared = _require_unique_names(keys, field_name="context view keys")
@@ -380,7 +416,8 @@ def build_generated_request(
     try:
         return request_class.model_validate(dict(values))  # type: ignore[attr-defined]
     except Exception:
-        raise SafetyError("Generated read request validation failed") from None
+        pass
+    raise SafetyError("Generated read request validation failed") from None
 
 
 __all__ = [

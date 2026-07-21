@@ -185,6 +185,54 @@ def test_context_view_is_declared_only_immutable_and_redacted() -> None:
     assert "object" not in repr(view)
 
 
+def test_direct_read_context_construction_owns_and_validates_mapping() -> None:
+    supplied_value = object()
+    backing = {"organization_id": supplied_value}
+    context = ReadContext(backing)
+
+    backing.clear()
+
+    assert context.view(("organization_id",))["organization_id"] is supplied_value
+    with pytest.raises(AttributeError):
+        cast(Any, context)._values = {}
+    with pytest.raises((TypeError, ValueError)):
+        ReadContext({"unsafe-key": supplied_value})
+    assert "object" not in repr(context)
+
+
+def test_direct_context_view_construction_is_proxied_and_validated() -> None:
+    supplied_value = object()
+    backing = {"organization_id": supplied_value}
+    view = ContextView(backing)
+
+    backing.clear()
+
+    assert tuple(view) == ("organization_id",)
+    assert view["organization_id"] is supplied_value
+    with pytest.raises(TypeError):
+        cast(Any, view)["organization_id"] = object()
+    with pytest.raises(AttributeError):
+        cast(Any, view)._values = {}
+    with pytest.raises((TypeError, ValueError)):
+        ContextView({"unsafe-key": supplied_value})
+    assert "object" not in repr(view)
+
+
+def test_context_types_cannot_be_traversed_by_dataclasses_asdict() -> None:
+    supplied_value = "supplied-live-value"
+    context = ReadContext({"organization_id": supplied_value})
+    view = ContextView({"organization_id": supplied_value})
+
+    assert not dataclasses.is_dataclass(context)
+    assert not dataclasses.is_dataclass(view)
+    with pytest.raises(TypeError):
+        dataclasses.asdict(context)
+    with pytest.raises(TypeError):
+        dataclasses.asdict(view)
+    assert supplied_value not in repr(context)
+    assert supplied_value not in repr(view)
+
+
 @pytest.mark.parametrize("key", ["", "unsafe-key", "with.dot", "_private", "UpperCase"])
 def test_context_rejects_unsafe_keys(key: str) -> None:
     with pytest.raises((TypeError, ValueError)):
@@ -469,3 +517,4 @@ def test_build_generated_request_redacts_all_validation_failures(
     assert type(raised.value).__name__ == "SafetyError"
     assert str(raised.value) == "Generated read request validation failed"
     assert raised.value.__cause__ is None
+    assert raised.value.__context__ is None
