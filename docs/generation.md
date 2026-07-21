@@ -4,6 +4,120 @@
 snapshot, review overlays, воспроизводимую генерацию SDK, строго ограниченные
 live checks, проверку секретов и allowlisted Git-публикацию.
 
+## Короткий сценарий: iiko изменила API
+
+Это основной рабочий маршрут. Подробные правила и аварийные процедуры
+приведены в следующих разделах.
+
+### 1. Создать отдельную ветку и получить diff
+
+```bash
+git switch -c chore/iiko-openapi-YYYY-MM-DD
+uv sync --frozen --group dev
+uv run --frozen python -m tools.openapi_pipeline upstream-check
+```
+
+Откройте `build/reports/upstream-diff.md`. Команда только скачивает публичную
+схему и показывает добавленные, удалённые и изменённые операции и модели. Она
+не меняет tracked snapshot и generated SDK. Scheduled GitHub workflow делает
+эту проверку автоматически и сигнализирует ненулевым статусом при drift.
+
+### 2. Решить, нужна ли correction
+
+| Изменение upstream | Действие |
+|---|---|
+| Добавлен корректно описанный метод или model | Дополнительная correction обычно не нужна |
+| У операции плохое или нестабильное имя | Добавить reviewed mapping в `openapi/operation-ids.yaml` |
+| Имя model конфликтует или не принимается генератором | Добавить mapping в `openapi/model-name-overrides.yaml` |
+| Ошибочны `type`, `required`, nullable, `oneOf` или discriminator | Добавить guarded action в `openapi/overlays/` и focused contract test |
+| iiko исправила дефект, который уже закрывал overlay | Удалить только ставшую ненужной correction и обновить её test |
+
+Для подсказок по новым именам, конфликтам и mechanical types можно выполнить:
+
+```bash
+uv run --frozen python -m tools.openapi_pipeline bootstrap
+```
+
+Результаты появятся под ignored `build/bootstrap/` и требуют review. Никогда
+не исправляйте `src/iikocloud_client` или raw upstream snapshot вручную. Если
+guard стал stale, сначала заново проверьте upstream fragment; не заменяйте его
+SHA-256 вслепую.
+
+### 3. Подготовить версию и сгенерировать SDK
+
+Если изменение будет новым release, задайте его версию в `pyproject.toml` до
+generation и live-check, затем обновите lock:
+
+```bash
+uv lock --offline --no-config
+```
+
+После review примите свежий upstream и атомарно соберите SDK:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen python -m tools.openapi_pipeline sync
+```
+
+`sync` применяет corrections, запускает закреплённый генератор, проверяет
+contracts, imports и wheel и только после полного успеха заменяет snapshot,
+manifest и generated package. При ошибке старое tracked состояние остаётся
+целым.
+
+### 4. Проверить результат офлайн
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen --offline python -m tools.openapi_pipeline verify
+
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen --offline python -m tools.openapi_pipeline verify-no-secrets
+```
+
+Полный pytest запускается через fresh-process split из
+`.github/workflows/python.yml`; не заменяйте его монолитным `pytest -q`.
+
+### 5. Выполнить один контролируемый live-read
+
+Минимальный release checkpoint после generation:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen --offline pytest -m live_read_smoke -n0 \
+  --live-profile test-server --env-file .env \
+  tests/integration/read/test_organizations.py
+```
+
+Затронутую операцию проверяйте дополнительно только через guarded entrypoint и
+только если её rate limit имеет `verified: true`. Не повторяйте discovery,
+если сохранённые targets всё ещё актуальны. При несовпадении реального JSON со
+схемой выполните один разрешённый capture, затем создайте и отдельно
+просмотрите synthetic candidate через `promote-evidence`.
+
+Любой `429` немедленно завершает весь live-run: без retry, продолжения других
+операций и переключения на `IIKO_API_KEY_2`.
+
+### 6. Опубликовать проверенный release
+
+Оставьте release diff unstaged: `publish` требует пустой Git index и сам
+создаёт commit и tag. После отдельного явного решения на публикацию выполните:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen --offline python -m tools.openapi_pipeline publish \
+  --version X.Y.Z --push
+```
+
+Замените `X.Y.Z` на версию, заранее записанную в `pyproject.toml`.
+
+Команда повторно проверит version, generated artifacts, live receipt, circuit,
+mutation journals, secrets и wheel; затем создаст один allowlisted commit, tag
+`vX.Y.Z` и выполнит non-force push. Без явного `--push` внешний Git не
+изменяется.
+
+Если обновление потребовало менять сам pipeline, CI или неразрешённые publish
+пути, оформите эти изменения отдельным обычным reviewed commit до release.
+
 ## Что является источником истины
 
 - `openapi/upstream/iikocloud.openapi.json` — точная tracked-копия upstream;
