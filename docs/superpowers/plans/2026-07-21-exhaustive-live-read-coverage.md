@@ -1512,7 +1512,9 @@ git commit -m "test: cover iiko reserve and table reads"
 
 **Interfaces:**
 - Consumes: `organization_id`, validated terminal group, Appendix B bindings.
-- Produces: eight cases and hidden keys `courier_employee_id`, `employee_role_id` when actually present.
+- Produces: eight cases, hidden `courier_employee_id`, and an optional hidden
+  `employee_role_code` only if a separately reviewed provider is added later.
+  The current generated courier response contains no role code.
 
 - [ ] **Step 1: Write the exact case-set test**
 
@@ -1544,7 +1546,7 @@ Expected: employee case module does not exist.
 
 `get_couriers`, `get_active_courier_locations`, and `get_courier_location_history` use exactly `[organization_id]`; location history uses `offsetInSeconds=0`. `get_active_courier_locations_by_terminal` requires the validated terminal group. Extract one courier employee ID from `get_couriers` without retaining names, phones, or coordinates.
 
-`get_employee_info`, `get_personal_session_info`, and `get_terminal_groups_of_employee` use only that response-derived employee ID. `get_couriers_by_role` runs only if a role ID is explicitly present in a reviewed courier response; otherwise it returns `employee_role_unavailable` before rate acquisition. Validators check generated response shape and request linkage, not PII values.
+`get_employee_info`, `get_personal_session_info`, and `get_terminal_groups_of_employee` use only that response-derived employee as their employee target. The generated employee-info request also requires the selected organization, while personal-session info requires both the selected organization and validated terminal; terminal-groups-of-employee takes only the employee ID. `get_couriers_by_role` requires a non-empty short role code because generated `rolesToCheck` is `List[str]`, not a role UUID. The current generated `get_couriers` response has no role field, and `EmployeeDirectoryEntry.code` is an employee code rather than a role code, so do not infer or publish a role target from it. Until a separate reviewed role-code provider exists, return `employee_role_unavailable` before rate acquisition. Validators check generated response shape and request linkage, not PII values.
 
 - [ ] **Step 4: Verify and commit**
 
