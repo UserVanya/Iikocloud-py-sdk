@@ -294,12 +294,26 @@ def _table_order_customer_id(order: object) -> UUID | None:
     return None
 
 
+def _is_order_for_table(order: object, table_id: UUID) -> bool:
+    try:
+        table_ids = cast(Any, order).order.table_ids
+    except Exception:
+        return False
+    if type(table_ids) is not list:
+        return False
+    return any(
+        type(candidate_table_id) is UUID and candidate_table_id == table_id
+        for candidate_table_id in table_ids
+    )
+
+
 def _extract_table_order(
     response: object,
     view: ContextView,
 ) -> Mapping[str, object]:
     organization_id = view.get("organization_id")
-    if type(organization_id) is not UUID:
+    table_id = view.get("table_id")
+    if type(organization_id) is not UUID or type(table_id) is not UUID:
         return {}
     try:
         orders = response.orders  # type: ignore[attr-defined]
@@ -314,7 +328,11 @@ def _extract_table_order(
             order_organization_id = generated_order.organization_id
         except Exception:
             continue
-        if type(order_id) is not UUID or order_organization_id != organization_id:
+        if (
+            type(order_id) is not UUID
+            or order_organization_id != organization_id
+            or not _is_order_for_table(generated_order, table_id)
+        ):
             continue
         extracted: dict[str, object] = {"table_order_id": order_id}
         customer_id = _table_order_customer_id(generated_order)

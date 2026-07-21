@@ -25,8 +25,10 @@ TERMINAL_GROUP_ID = UUID("33333333-3333-4333-8333-333333333333")
 FALLBACK_TERMINAL_GROUP_ID = UUID("44444444-4444-4444-8444-444444444444")
 SECTION_ID = UUID("55555555-5555-4555-8555-555555555555")
 TABLE_ID = UUID("66666666-6666-4666-8666-666666666666")
+OTHER_TABLE_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 RESERVE_ID = UUID("77777777-7777-4777-8777-777777777777")
 TABLE_ORDER_ID = UUID("88888888-8888-4888-8888-888888888888")
+OTHER_TABLE_ORDER_ID = UUID("bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb")
 CUSTOMER_ID = UUID("99999999-9999-4999-8999-999999999999")
 WINDOW_FROM = "2026-01-01 00:00:00.000"
 WINDOW_TO = "2026-01-02 00:00:00.000"
@@ -223,20 +225,21 @@ def _table_order(
     *,
     organization_id: UUID = ORGANIZATION_ID,
     customer_id: UUID | None = CUSTOMER_ID,
+    table_ids: tuple[UUID, ...] = (TABLE_ID,),
 ) -> object:
-    payload = None
+    customer = None
     if customer_id is not None:
         customer = _model(
             "delivery_order_response_regular_customer",
             "DeliveryOrderResponseRegularCustomer",
             id=customer_id,
         )
-        payload = _model(
-            "table_order_response_payload",
-            "TableOrderResponsePayload",
-            customer=customer,
-            table_ids=[TABLE_ID],
-        )
+    payload = _model(
+        "table_order_response_payload",
+        "TableOrderResponsePayload",
+        customer=customer,
+        table_ids=list(table_ids),
+    )
     return _model(
         "table_order_info",
         "TableOrderInfo",
@@ -451,6 +454,22 @@ def test_table_order_provider_is_org_scoped_and_keeps_optional_customer_hidden()
     assert repr(context) == "ReadContext()"
     assert repr(context.view(("table_order_customer_id",))) == "ContextView()"
     assert str(CUSTOMER_ID) not in repr(context)
+
+
+def test_table_order_provider_skips_same_org_orders_for_other_tables() -> None:
+    case = _case("get_table_orders_by_table")
+    wrong_table = _table_order(
+        OTHER_TABLE_ORDER_ID,
+        table_ids=(OTHER_TABLE_ID,),
+    )
+    matching = _table_order(TABLE_ORDER_ID)
+    assert case.extract(
+        _table_orders_response(wrong_table, matching),
+        _view(case),
+    ) == {
+        "table_order_id": TABLE_ORDER_ID,
+        "table_order_customer_id": CUSTOMER_ID,
+    }
 
 
 def test_table_order_provider_preserves_id_when_customer_is_absent() -> None:
