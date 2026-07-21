@@ -20,6 +20,7 @@ _FIELDS = {
     "profile_fingerprint",
     "effective_schema_sha256",
     "generated_tree_sha256",
+    "live_contracts_sha256",
     "operations",
     "had_429",
     "completed",
@@ -32,6 +33,16 @@ _REQUIRED_READ_CANARY = ("authenticate", "get_organizations")
 class LiveArtifactHashes:
     effective_schema_sha256: str
     generated_tree_sha256: str
+    live_contracts_sha256: str
+
+    def __post_init__(self) -> None:
+        for label, digest in (
+            ("effective schema hash", self.effective_schema_sha256),
+            ("generated tree hash", self.generated_tree_sha256),
+            ("live contracts hash", self.live_contracts_sha256),
+        ):
+            if type(digest) is not str or _SHA256.fullmatch(digest) is None:
+                raise SafetyError(f"Live artifact {label} is invalid")
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -56,6 +67,7 @@ class LiveReceipt:
     operations: tuple[str, ...]
     had_429: bool
     completed: bool
+    live_contracts_sha256: str = "0" * 64
 
     def __post_init__(self) -> None:
         if not isinstance(self.run_id, str) or _RUN_ID.fullmatch(self.run_id) is None:
@@ -64,6 +76,7 @@ class LiveReceipt:
             ("profile fingerprint", self.profile_fingerprint),
             ("effective schema hash", self.effective_schema_sha256),
             ("generated tree hash", self.generated_tree_sha256),
+            ("live contracts hash", self.live_contracts_sha256),
         ):
             if not isinstance(digest, str) or _SHA256.fullmatch(digest) is None:
                 raise SafetyError(f"Live receipt {label} is invalid")
@@ -128,6 +141,7 @@ class LiveReceipt:
             profile_fingerprint=value["profile_fingerprint"],
             effective_schema_sha256=value["effective_schema_sha256"],
             generated_tree_sha256=value["generated_tree_sha256"],
+            live_contracts_sha256=value["live_contracts_sha256"],
             operations=tuple(operations),
             had_429=value["had_429"],
             completed=value["completed"],
@@ -157,6 +171,7 @@ class LiveReceipt:
         profile_fingerprint: str,
         effective_schema_sha256: str,
         generated_tree_sha256: str,
+        live_contracts_sha256: str,
     ) -> bool:
         return (
             self.completed
@@ -165,6 +180,7 @@ class LiveReceipt:
             and self.profile_fingerprint == profile_fingerprint
             and self.effective_schema_sha256 == effective_schema_sha256
             and self.generated_tree_sha256 == generated_tree_sha256
+            and self.live_contracts_sha256 == live_contracts_sha256
         )
 
 
@@ -190,6 +206,9 @@ def verify_live_artifacts(root: Path) -> LiveArtifactHashes:
     from ..paths import RepoPaths
     from ..promotion import load_generated_manifest
     from ..validate import ensure_valid_effective_schema
+    from .rates import RateCatalog
+    from .safety import OperationSafetyCatalog
+    from .session import load_operation_contract
 
     paths = RepoPaths(root.resolve(strict=True))
     try:
@@ -226,6 +245,31 @@ def verify_live_artifacts(root: Path) -> LiveArtifactHashes:
                 )
             )
         published_files = dict(sorted(published_files.items()))
+
+        contract_loaders = {
+            "contracts/operation-safety.yaml": OperationSafetyCatalog.load,
+            "contracts/live-operations.yaml": load_operation_contract,
+            "contracts/rate-limits.yaml": RateCatalog.load,
+        }
+        contract_hashes: dict[str, str] = {}
+        for contract_relative, loader in contract_loaders.items():
+            contract_path = paths.root / contract_relative
+            before = _regular_bytes(
+                contract_path,
+                label=f"Live contract {contract_relative}",
+                maximum=1024 * 1024,
+            )
+            loader(contract_path)
+            after = _regular_bytes(
+                contract_path,
+                label=f"Live contract {contract_relative}",
+                maximum=1024 * 1024,
+            )
+            if after != before:
+                raise SafetyError(
+                    f"Live contract changed during validation: {contract_relative}"
+                )
+            contract_hashes[contract_relative] = sha256_bytes(before)
     except SafetyError:
         raise
     except PipelineError as error:
@@ -233,4 +277,5 @@ def verify_live_artifacts(root: Path) -> LiveArtifactHashes:
     return LiveArtifactHashes(
         effective_schema_sha256=effective_hash,
         generated_tree_sha256=sha256_bytes(canonical_json_bytes(published_files)),
+        live_contracts_sha256=sha256_bytes(canonical_json_bytes(contract_hashes)),
     )

@@ -67,6 +67,48 @@ def _synthetic_artifacts(
     manual = package / "_contracts/rate-limits.yaml"
     manual.parent.mkdir()
     manual.write_text("manual-v1\n", encoding="utf-8")
+    contracts = root / "contracts"
+    contracts.mkdir()
+    (contracts / "operation-safety.yaml").write_text(
+        "version: 1\n"
+        "operations:\n"
+        "  authenticate:\n"
+        "    effect: auth\n"
+        "    live_policy: automatic\n"
+        "    reason: reviewed synthetic authentication\n",
+        encoding="utf-8",
+    )
+    (contracts / "live-operations.yaml").write_text(
+        "version: 1\n"
+        "operations:\n"
+        "  authenticate:\n"
+        "    kind: auth\n"
+        "    cleanup: null\n"
+        "    method: POST\n"
+        "    path: /api/1/access_token\n",
+        encoding="utf-8",
+    )
+    rate_contract = contracts / "rate-limits.yaml"
+    rate_contract.write_text(
+        "version: 2\n"
+        "defaults:\n"
+        "  utilization: 0.20\n"
+        "  global_min_interval_seconds: 30\n"
+        "  max_calls_per_operation_per_run: 1\n"
+        "operations:\n"
+        "  authenticate:\n"
+        "    test_budget:\n"
+        "      min_interval_seconds: 30\n"
+        "      source: synthetic\n"
+        "      verified: true\n"
+        "    server_limit:\n"
+        "      calls: 1\n"
+        "      per_seconds: 5\n"
+        "      source: synthetic\n"
+        "      verified: true\n",
+        encoding="utf-8",
+    )
+    manual.write_bytes(rate_contract.read_bytes())
     monkeypatch.setattr(
         pipeline_module,
         "_load_document",
@@ -100,6 +142,17 @@ def test_live_artifact_hashes_recompute_effective_and_verify_exact_tree(
         canonical_json_bytes(dict(sorted(published_files.items())))
     )
     assert hashes.generated_tree_sha256 != sha256_bytes(manifest.read_bytes())
+    contract_hashes = {
+        relative: sha256_bytes((tmp_path / relative).read_bytes())
+        for relative in (
+            "contracts/operation-safety.yaml",
+            "contracts/live-operations.yaml",
+            "contracts/rate-limits.yaml",
+        )
+    }
+    assert hashes.live_contracts_sha256 == sha256_bytes(
+        canonical_json_bytes(contract_hashes)
+    )
 
 
 def test_manual_file_change_changes_logical_published_tree_hash(
@@ -112,12 +165,22 @@ def test_manual_file_change_changes_logical_published_tree_hash(
         profile_fingerprint="a" * 64,
         effective_schema_sha256=first.effective_schema_sha256,
         generated_tree_sha256=first.generated_tree_sha256,
+        live_contracts_sha256=first.live_contracts_sha256,
         operations=("authenticate", "get_organizations"),
         had_429=False,
         completed=True,
     )
 
-    (package / "_contracts/rate-limits.yaml").write_text("manual-v2\n", encoding="utf-8")
+    rate_contract = tmp_path / "contracts/rate-limits.yaml"
+    modified_rate_contract = rate_contract.read_text(encoding="utf-8").replace(
+        "source: synthetic",
+        "source: synthetic-v2",
+    )
+    rate_contract.write_text(modified_rate_contract, encoding="utf-8")
+    (package / "_contracts/rate-limits.yaml").write_text(
+        modified_rate_contract,
+        encoding="utf-8",
+    )
     second = verify_live_artifacts(tmp_path)
 
     assert second.generated_tree_sha256 != first.generated_tree_sha256
@@ -125,12 +188,34 @@ def test_manual_file_change_changes_logical_published_tree_hash(
         "a" * 64,
         second.effective_schema_sha256,
         second.generated_tree_sha256,
+        second.live_contracts_sha256,
     )
+
+
+def test_valid_raw_live_contract_change_changes_combined_contract_hash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _synthetic_artifacts(tmp_path, monkeypatch)
+    first = verify_live_artifacts(tmp_path)
+    safety_path = tmp_path / "contracts/operation-safety.yaml"
+    safety_path.write_text(
+        safety_path.read_text(encoding="utf-8").replace(
+            "reviewed synthetic authentication",
+            "reviewed synthetic authentication v2",
+        ),
+        encoding="utf-8",
+    )
+
+    second = verify_live_artifacts(tmp_path)
+
+    assert second.effective_schema_sha256 == first.effective_schema_sha256
+    assert second.generated_tree_sha256 == first.generated_tree_sha256
+    assert second.live_contracts_sha256 != first.live_contracts_sha256
 
 
 @pytest.mark.parametrize(
     "target",
-    ["effective", "tree", "manifest", "manual-missing", "manual-symlink"],
+    ["effective", "tree", "manifest", "manual-missing", "manual-symlink", "contract"],
 )
 def test_live_artifacts_fail_closed_when_missing_or_stale_before_http(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, target: str
@@ -144,12 +229,17 @@ def test_live_artifacts_fail_closed_when_missing_or_stale_before_http(
         (tmp_path / "generator/generated-manifest.json").unlink()
     elif target == "manual-missing":
         (package / "_contracts/rate-limits.yaml").unlink()
-    else:
+    elif target == "manual-symlink":
         manual = package / "_contracts/rate-limits.yaml"
         manual.unlink()
         manual.symlink_to(package / "__init__.py")
+    else:
+        (tmp_path / "contracts/operation-safety.yaml").write_text(
+            "version: invalid\n",
+            encoding="utf-8",
+        )
 
-    with pytest.raises(SafetyError, match="artifact|verification"):
+    with pytest.raises(SafetyError, match="artifact|verification|safety"):
         verify_live_artifacts(tmp_path)
 
 
@@ -190,16 +280,22 @@ def test_unverified_auth_catalog_fails_before_profile_or_artifact_access(tmp_pat
     contracts = tmp_path / "contracts"
     contracts.mkdir()
     (contracts / "rate-limits.yaml").write_text(
-        "version: 1\n"
+        "version: 2\n"
         "defaults:\n"
         "  utilization: 0.20\n"
         "  global_min_interval_seconds: 30\n"
         "  max_calls_per_operation_per_run: 1\n"
         "operations:\n"
         "  authenticate:\n"
-        "    server_limit: {calls: 1, per_seconds: 5}\n"
-        "    source: synthetic\n"
-        "    verified: false\n",
+        "    test_budget:\n"
+        "      min_interval_seconds: 30\n"
+        "      source: synthetic\n"
+        "      verified: false\n"
+        "    server_limit:\n"
+        "      calls: 1\n"
+        "      per_seconds: 5\n"
+        "      source: synthetic\n"
+        "      verified: true\n",
         encoding="utf-8",
     )
 
@@ -236,7 +332,7 @@ def test_receipt_completion_requires_every_teardown_gate(tmp_path: Path) -> None
             process_lock=lock,
             run_id="20260716T180000Z-a1b2c3d4",
             profile=_profile(),
-            artifacts=LiveArtifactHashes("b" * 64, "c" * 64),
+            artifacts=LiveArtifactHashes("b" * 64, "c" * 64, "d" * 64),
         )
     receipt = receipt.with_operation("authenticate")
     receipt.write(path)
@@ -274,6 +370,43 @@ def test_receipt_completion_requires_every_teardown_gate(tmp_path: Path) -> None
         mutation_journals_clean=True,
     )
     assert LiveReceipt.load(path).completed
+
+
+def test_receipt_completion_honors_required_verified_read_report_gate(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "receipt.json"
+    receipt = LiveReceipt(
+        run_id="20260716T180000Z-a1b2c3d4",
+        profile_fingerprint="a" * 64,
+        effective_schema_sha256="b" * 64,
+        generated_tree_sha256="c" * 64,
+        live_contracts_sha256="d" * 64,
+        operations=("authenticate", "get_organizations"),
+        had_429=False,
+        completed=False,
+    )
+    receipt.write(path)
+    gates = {
+        "live_reports_passed": True,
+        "circuit_closed": True,
+        "clients_closed": True,
+        "mutation_journals_clean": True,
+    }
+
+    assert not finalize_live_receipt(
+        receipt,
+        path,
+        read_report_completed=False,
+        **gates,
+    )
+    assert not LiveReceipt.load(path).completed
+    assert finalize_live_receipt(
+        receipt,
+        path,
+        read_report_completed=True,
+        **gates,
+    )
 
 
 def test_profile_env_and_receipt_require_held_canonical_lock(
@@ -318,7 +451,7 @@ def test_profile_env_and_receipt_require_held_canonical_lock(
             process_lock=lock,
             run_id="20260716T180000Z-a1b2c3d4",
             profile=profile,
-            artifacts=LiveArtifactHashes("b" * 64, "c" * 64),
+            artifacts=LiveArtifactHashes("b" * 64, "c" * 64, "d" * 64),
         )
     assert receipt.profile_fingerprint == profile.fingerprint
     assert path.exists()

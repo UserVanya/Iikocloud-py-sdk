@@ -16,6 +16,7 @@ def test_receipt_matches_only_exact_profile_and_artifact_hashes(tmp_path: Path) 
         profile_fingerprint="a" * 64,
         effective_schema_sha256="b" * 64,
         generated_tree_sha256="c" * 64,
+        live_contracts_sha256="d" * 64,
         operations=("authenticate", "get_organizations"),
         had_429=False,
         completed=True,
@@ -25,8 +26,9 @@ def test_receipt_matches_only_exact_profile_and_artifact_hashes(tmp_path: Path) 
     receipt.write(path)
     loaded = LiveReceipt.load(path)
 
-    assert loaded.matches("a" * 64, "b" * 64, "c" * 64)
-    assert not loaded.matches("a" * 64, "d" * 64, "c" * 64)
+    assert loaded.matches("a" * 64, "b" * 64, "c" * 64, "d" * 64)
+    assert not loaded.matches("a" * 64, "e" * 64, "c" * 64, "d" * 64)
+    assert not loaded.matches("a" * 64, "b" * 64, "c" * 64, "e" * 64)
     assert path.stat().st_mode & 0o777 == 0o600
 
 
@@ -36,6 +38,7 @@ def _receipt(*, completed: bool = False, had_429: bool = False) -> LiveReceipt:
         profile_fingerprint="a" * 64,
         effective_schema_sha256="b" * 64,
         generated_tree_sha256="c" * 64,
+        live_contracts_sha256="d" * 64,
         operations=("authenticate", "get_organizations") if completed else (),
         had_429=had_429,
         completed=completed,
@@ -53,7 +56,7 @@ def test_receipt_records_operation_before_completion_and_429_is_terminal(tmp_pat
 
     receipt = receipt.with_operation("get_organizations")
     completed = receipt.as_completed()
-    assert completed.matches("a" * 64, "b" * 64, "c" * 64)
+    assert completed.matches("a" * 64, "b" * 64, "c" * 64, "d" * 64)
 
     blocked = receipt.with_429()
     with pytest.raises(SafetyError, match="429"):
@@ -67,6 +70,7 @@ def test_receipt_records_operation_before_completion_and_429_is_terminal(tmp_pat
         ("profile_fingerprint", "A" * 64, "fingerprint"),
         ("effective_schema_sha256", "x" * 64, "schema hash"),
         ("generated_tree_sha256", "0" * 63, "tree hash"),
+        ("live_contracts_sha256", "0" * 63, "contracts hash"),
         ("operations", ["authenticate"], "operations"),
         ("had_429", 0, "flags"),
         ("completed", 1, "flags"),
@@ -80,6 +84,7 @@ def test_receipt_rejects_wrong_types_and_identifiers(
         "profile_fingerprint": "a" * 64,
         "effective_schema_sha256": "b" * 64,
         "generated_tree_sha256": "c" * 64,
+        "live_contracts_sha256": "d" * 64,
         "operations": (),
         "had_429": False,
         "completed": False,
@@ -108,6 +113,19 @@ def test_receipt_load_rejects_unknown_duplicate_and_noncanonical_json(
     path.chmod(0o600)
 
     with pytest.raises(SafetyError, match="fields|strict JSON|canonical"):
+        LiveReceipt.load(path)
+
+
+def test_receipt_load_rejects_legacy_document_without_live_contract_hash(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "receipt.json"
+    value = _receipt().to_json()
+    del value["live_contracts_sha256"]
+    path.write_bytes(canonical_json_bytes(value))
+    path.chmod(0o600)
+
+    with pytest.raises(SafetyError, match="fields"):
         LiveReceipt.load(path)
 
 

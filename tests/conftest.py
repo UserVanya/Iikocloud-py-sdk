@@ -48,6 +48,8 @@ _WRITE_OPERATION_IDS = (
 class _LiveRunContext:
     receipt: LiveReceipt
     receipt_path: Path
+    read_report_path: Path | None = None
+    read_report_completed: bool | None = None
     live_calls: int = 0
     live_calls_passed: int = 0
     live_failed: bool = False
@@ -207,6 +209,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     if live_profile is not None and not is_safe_profile_name(live_profile):
         raise pytest.UsageError("--live-profile must be a safe lowercase profile name")
     live_write_selected = False
+    live_read_report_required = False
     for item in items:
         if _is_live_item(item) and not live_profile:
             item.add_marker(pytest.mark.skip(reason="live tests require --live-profile"))
@@ -216,7 +219,10 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             _assert_live_write_cli_gates(config, audit_residue=audit_residue)
             item.add_marker(pytest.mark.usefixtures("_live_environment"))
             live_write_selected = True
+        if item.get_closest_marker("live_read_full") is not None:
+            live_read_report_required = True
     config._iiko_live_write_selected = live_write_selected  # type: ignore[attr-defined]
+    config._iiko_live_read_report_required = live_read_report_required  # type: ignore[attr-defined]
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -273,7 +279,15 @@ def _live_environment(request: pytest.FixtureRequest) -> Iterator[_LiveEnvironme
             profile=profile,
             artifacts=preflight.artifacts,
         )
-        context = _LiveRunContext(receipt=receipt, receipt_path=receipt_path)
+        context = _LiveRunContext(
+            receipt=receipt,
+            receipt_path=receipt_path,
+            read_report_completed=(
+                False
+                if getattr(request.config, "_iiko_live_read_report_required", False)
+                else None
+            ),
+        )
         request.config._iiko_live_run_context = context  # type: ignore[attr-defined]
         yield _LiveEnvironment(preflight, profile, lock, state, context)
 
@@ -428,6 +442,7 @@ def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
                 circuit_closed=context.circuit_closed,
                 clients_closed=context.clients_closed,
                 mutation_journals_clean=context.mutation_journals_clean,
+                read_report_completed=context.read_report_completed,
             )
     except SafetyError:
         finalized = False

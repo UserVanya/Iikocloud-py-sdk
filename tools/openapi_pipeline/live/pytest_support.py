@@ -173,12 +173,14 @@ def finalize_live_receipt(
     circuit_closed: bool,
     clients_closed: bool,
     mutation_journals_clean: bool,
+    read_report_completed: bool | None = None,
 ) -> bool:
     if not (
         live_reports_passed
         and circuit_closed
         and clients_closed
         and mutation_journals_clean
+        and (read_report_completed is None or read_report_completed is True)
         and not receipt.had_429
         and receipt.has_required_read_canary
     ):
@@ -207,6 +209,7 @@ def initialize_receipt(
         profile_fingerprint=profile.fingerprint,
         effective_schema_sha256=artifacts.effective_schema_sha256,
         generated_tree_sha256=artifacts.generated_tree_sha256,
+        live_contracts_sha256=artifacts.live_contracts_sha256,
         operations=(),
         had_429=False,
         completed=False,

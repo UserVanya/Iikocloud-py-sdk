@@ -373,6 +373,7 @@ def select_matching_live_receipt(
             and receipt.has_required_read_canary
             and receipt.effective_schema_sha256 == artifacts.effective_schema_sha256
             and receipt.generated_tree_sha256 == artifacts.generated_tree_sha256
+            and receipt.live_contracts_sha256 == artifacts.live_contracts_sha256
         ):
             matching.append(receipt)
     if not matching:

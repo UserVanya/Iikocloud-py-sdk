@@ -436,6 +436,7 @@ def _receipt(
         profile_fingerprint="a" * 64,
         effective_schema_sha256=artifacts.effective_schema_sha256,
         generated_tree_sha256=artifacts.generated_tree_sha256,
+        live_contracts_sha256=artifacts.live_contracts_sha256,
         operations=("authenticate", "get_organizations") if completed else (),
         had_429=False,
         completed=completed,
@@ -447,14 +448,20 @@ def test_matching_receipt_gate_strictly_loads_all_residue_and_selects_latest(
 ) -> None:
     from tools.openapi_pipeline.publish import select_matching_live_receipt
 
-    artifacts = LiveArtifactHashes("b" * 64, "c" * 64)
+    artifacts = LiveArtifactHashes("b" * 64, "c" * 64, "d" * 64)
     runs = tmp_path / ".state/live-runs"
     older = _receipt("20260720T100000Z-a1b2c3d4", artifacts, completed=True)
     newer = _receipt("20260721T100000Z-a1b2c3d4", artifacts, completed=True)
     incomplete = _receipt("20260722T100000Z-a1b2c3d4", artifacts, completed=False)
+    stale_contract = _receipt(
+        "20260723T100000Z-a1b2c3d4",
+        LiveArtifactHashes("b" * 64, "c" * 64, "e" * 64),
+        completed=True,
+    )
     older.write(runs / f"{older.run_id}.json")
     newer.write(runs / f"{newer.run_id}.json")
     incomplete.write(runs / f"{incomplete.run_id}.json")
+    stale_contract.write(runs / f"{stale_contract.run_id}.json")
 
     selected = select_matching_live_receipt(tmp_path, artifacts)
 
