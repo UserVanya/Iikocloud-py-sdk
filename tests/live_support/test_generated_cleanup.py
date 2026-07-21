@@ -5,6 +5,7 @@ import traceback
 from collections.abc import Mapping
 from dataclasses import replace
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, cast
 
 import pytest
@@ -17,10 +18,12 @@ from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
 )
 from tools.openapi_pipeline.errors import SafetyError
-from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
+from tools.openapi_pipeline.live.generated import GeneratedCallFailure, GeneratedLiveSdk
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.rates import LiveRateGuard
+from tools.openapi_pipeline.live.read_case import ReadFailureCode
 from tools.openapi_pipeline.live.receipt import LiveReceipt
+from tools.openapi_pipeline.live.session import LiveOperation
 from tools.openapi_pipeline.live.state import LiveStateStore
 
 _ORGANIZATION_ID = "11111111-1111-4111-8111-111111111111"
@@ -122,6 +125,16 @@ def _adapter(
         profile=profile or _profile(),
         guard=cast(LiveRateGuard, guard),
         state=cast(LiveStateStore, state),
+        operation_contract=MappingProxyType(
+            {
+                "remove_products_from_stop_list": LiveOperation(
+                    kind="cleanup",
+                    cleanup=None,
+                    method="POST",
+                    path="/api/1/stop_lists/remove_products",
+                )
+            }
+        ),
         receipt=receipt,
         receipt_path=receipt_path,
     )
@@ -217,9 +230,14 @@ async def test_execute_cleanup_preserves_429_terminal_semantics_without_retry(
         fail_with_429,
     )
 
-    with pytest.raises(SafetyError, match="circuit opened"):
+    with pytest.raises(GeneratedCallFailure) as caught:
         await adapter.execute_cleanup("remove_products_from_stop_list", _payload())
 
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 429
+    assert str(caught.value) == "http_error"
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert invocations == 1
     assert guard.acquired == ["remove_products_from_stop_list"]
     assert guard.statuses == [("remove_products_from_stop_list", 429)]

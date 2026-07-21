@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+import dataclasses
 import socket
+import sys
 import traceback
-from collections.abc import Mapping
+from collections.abc import Awaitable, Callable, Mapping
 from pathlib import Path
+from types import MappingProxyType, ModuleType
 from typing import Any, cast
 
 import pytest
@@ -14,11 +17,117 @@ from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
 from tools.openapi_pipeline.capture import LiveCapture
 from tools.openapi_pipeline.errors import SafetyError
-from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
+from tools.openapi_pipeline.live.generated import (
+    GeneratedCallFailure,
+    GeneratedCallResult,
+    GeneratedLiveSdk,
+)
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.rates import LiveRateGuard
+from tools.openapi_pipeline.live.read_case import (
+    GeneratedReadBinding,
+    ReadFailureCode,
+)
 from tools.openapi_pipeline.live.receipt import LiveReceipt
+from tools.openapi_pipeline.live.session import LiveOperation
 from tools.openapi_pipeline.live.state import LiveStateStore
+
+
+class SyntheticRequest:
+    def __init__(self, value: object) -> None:
+        self.value = value
+
+    @classmethod
+    def model_validate(cls, value: object) -> SyntheticRequest:
+        return cls(value)
+
+
+class OtherSyntheticRequest:
+    pass
+
+
+class SyntheticApi:
+    handlers: dict[str, Callable[[], Awaitable[ApiResponse[object]]]] = {}
+    approved_calls: list[tuple[str, object | None, tuple[float, float]]] = []
+    wrong_calls = 0
+    clients: list[object] = []
+
+    def __init__(self, api_client: object) -> None:
+        self.clients.append(api_client)
+
+    async def get_organizations_with_http_info(
+        self,
+        *,
+        get_organizations_request: SyntheticRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        self.approved_calls.append(
+            ("get_organizations", get_organizations_request, _request_timeout)
+        )
+        return await self.handlers["get_organizations"]()
+
+    async def get_external_menu_by_id_with_http_info(
+        self,
+        *,
+        get_external_menu_by_id_request: SyntheticRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        self.approved_calls.append(
+            (
+                "get_external_menu_by_id",
+                get_external_menu_by_id_request,
+                _request_timeout,
+            )
+        )
+        return await self.handlers["get_external_menu_by_id"]()
+
+    async def no_body_read_with_http_info(
+        self,
+        *,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        self.approved_calls.append(("no_body_read", None, _request_timeout))
+        return await self.handlers["no_body_read"]()
+
+    async def wrong_read_with_http_info(
+        self,
+        *,
+        wrong_read_request: SyntheticRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        del wrong_read_request, _request_timeout
+        type(self).wrong_calls += 1
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+
+class InheritedApiBase:
+    async def get_organizations_with_http_info(
+        self,
+        *,
+        get_organizations_request: SyntheticRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        del get_organizations_request, _request_timeout
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+
+class InheritedApi(InheritedApiBase):
+    def __init__(self, api_client: object) -> None:
+        del api_client
+
+
+class WrongKeywordApi:
+    def __init__(self, api_client: object) -> None:
+        del api_client
+
+    async def get_organizations_with_http_info(
+        self,
+        *,
+        other_request: SyntheticRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[object]:
+        del other_request, _request_timeout
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
 
 
 class StubState:
@@ -67,7 +176,14 @@ class StubCapture:
         self.write_attempts: list[tuple[str, object, object, Mapping[str, Any]]] = []
         self.pairs: list[tuple[str, object, object, Mapping[str, Any]]] = []
 
-    def assert_selected(self, operation_id: str) -> None:
+    def assert_selected(
+        self,
+        operation_id: str,
+        *,
+        method: str | None = None,
+        path: str | None = None,
+    ) -> None:
+        del method, path
         self.selections.append(operation_id)
         if operation_id != self.selected_operation:
             raise SafetyError("Live capture operation was not explicitly selected")
@@ -79,6 +195,9 @@ class StubCapture:
         response_model: object,
         metadata: Mapping[str, Any],
     ) -> None:
+        self.assert_selected(operation_id)
+        if isinstance(request_model, SyntheticRequest):
+            request_model = request_model.value
         pair = (operation_id, request_model, response_model, metadata)
         self.write_attempts.append(pair)
         if self.write_error is not None:
@@ -124,6 +243,18 @@ def _forbid_network(monkeypatch: pytest.MonkeyPatch) -> None:
         return real_socket(*args, **kwargs)
 
     monkeypatch.setattr(socket, "socket", guarded_socket)
+    api_module = ModuleType("iikocloud_client.api.synthetic_api")
+    api_module.SyntheticApi = SyntheticApi  # type: ignore[attr-defined]
+    api_module.InheritedApi = InheritedApi  # type: ignore[attr-defined]
+    api_module.WrongKeywordApi = WrongKeywordApi  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, api_module.__name__, api_module)
+    request_module = ModuleType("iikocloud_client.models.synthetic_request")
+    request_module.SyntheticRequest = SyntheticRequest  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, request_module.__name__, request_module)
+    SyntheticApi.handlers = {}
+    SyntheticApi.approved_calls = []
+    SyntheticApi.wrong_calls = 0
+    SyntheticApi.clients = []
 
 
 def _profile() -> ResolvedLiveProfile:
@@ -141,6 +272,63 @@ def _profile() -> ResolvedLiveProfile:
     )
 
 
+def _operation_contract(
+    *,
+    get_organizations_kind: str = "read",
+) -> Mapping[str, LiveOperation]:
+    return MappingProxyType(
+        {
+            "get_organizations": LiveOperation(
+                kind=get_organizations_kind,
+                cleanup=None,
+                method="POST",
+                path="/api/1/organizations",
+            ),
+            "get_external_menu_by_id": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="POST",
+                path="/api/2/menu/by_id",
+            ),
+            "no_body_read": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="GET",
+                path="/api/1/no-body",
+            ),
+        }
+    )
+
+
+def _binding(
+    operation_id: str = "get_organizations",
+    *,
+    api_class: str = "SyntheticApi",
+    method_name: str | None = None,
+    request_keyword: str | None = None,
+) -> GeneratedReadBinding:
+    keyword = request_keyword or f"{operation_id}_request"
+    return GeneratedReadBinding(
+        api_module="iikocloud_client.api.synthetic_api",
+        api_class=api_class,
+        method_name=method_name or f"{operation_id}_with_http_info",
+        request_module="iikocloud_client.models.synthetic_request",
+        request_class="SyntheticRequest",
+        request_keyword=keyword,
+    )
+
+
+def _no_body_binding() -> GeneratedReadBinding:
+    return GeneratedReadBinding(
+        api_module="iikocloud_client.api.synthetic_api",
+        api_class="SyntheticApi",
+        method_name="no_body_read_with_http_info",
+        request_module=None,
+        request_class=None,
+        request_keyword=None,
+    )
+
+
 def _adapter(
     *,
     guard: StubGuard,
@@ -148,12 +336,14 @@ def _adapter(
     capture: StubCapture | None = None,
     receipt: LiveReceipt | None = None,
     receipt_path: Path | None = None,
+    operation_contract: Mapping[str, LiveOperation] | None = None,
 ) -> GeneratedLiveSdk:
     return GeneratedLiveSdk(
         api_client=cast(ApiClient, object()),
         profile=_profile(),
         guard=cast(LiveRateGuard, guard),
         state=cast(LiveStateStore, state),
+        operation_contract=operation_contract or _operation_contract(),
         capture=cast(LiveCapture, capture) if capture is not None else None,
         receipt=receipt,
         receipt_path=receipt_path,
@@ -174,6 +364,220 @@ def _auth_receipt(path: Path) -> LiveReceipt:
     return receipt
 
 
+def test_generated_adapter_does_not_expose_arbitrary_read_callback() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    adapter = _adapter(guard=guard, state=state)
+
+    assert not hasattr(adapter, "call_generated")
+
+
+def test_constructor_copies_and_freezes_operation_contract() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    operations = {
+        "get_organizations": LiveOperation(
+            kind="read",
+            cleanup=None,
+            method="POST",
+            path="/api/1/organizations",
+        )
+    }
+    adapter = _adapter(
+        guard=guard,
+        state=state,
+        operation_contract=operations,
+    )
+
+    operations.clear()
+
+    assert tuple(adapter.operation_contract) == ("get_organizations",)
+    with pytest.raises(TypeError):
+        cast(Any, adapter.operation_contract)["other"] = LiveOperation(
+            kind="read",
+            cleanup=None,
+            method="GET",
+            path="/api/1/other",
+        )
+
+
+def test_generated_call_failure_has_only_fixed_code_message() -> None:
+    failure = GeneratedCallFailure(ReadFailureCode.HTTP_ERROR, 400)
+
+    assert failure.code is ReadFailureCode.HTTP_ERROR
+    assert failure.status_code == 400
+    assert str(failure) == "http_error"
+    with pytest.raises(TypeError):
+        GeneratedCallFailure(cast(Any, "private-error-detail"), 400)
+
+
+async def _call_bound(
+    adapter: GeneratedLiveSdk,
+    operation_id: str,
+    request_model: object,
+    invoke: Callable[[], Awaitable[ApiResponse[Any]]],
+) -> Any:
+    SyntheticApi.handlers[operation_id] = cast(
+        Callable[[], Awaitable[ApiResponse[object]]],
+        invoke,
+    )
+    result = await adapter.call_bound_read(
+        operation_id,
+        _binding(operation_id),
+        SyntheticRequest(request_model),
+    )
+    return result.data
+
+
+@pytest.mark.asyncio
+async def test_bound_success_uses_only_resolved_method_and_returns_metadata() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    adapter = _adapter(guard=guard, state=state)
+    request = SyntheticRequest({"organizationIds": ["organization-id"]})
+    response_model = {"organizations": []}
+
+    async def invoke() -> ApiResponse[object]:
+        return ApiResponse(
+            status_code=201,
+            headers=None,
+            data=response_model,
+            raw_data=b"{}",
+        )
+
+    SyntheticApi.handlers["get_organizations"] = invoke
+
+    result = await adapter.call_bound_read(
+        "get_organizations",
+        _binding(),
+        request,
+    )
+
+    assert isinstance(result, GeneratedCallResult)
+    assert result.data is response_model
+    assert result.status_code == 201
+    assert type(result.duration_ms) is int and result.duration_ms >= 0
+    assert SyntheticApi.approved_calls == [
+        ("get_organizations", request, (10.0, 30.0))
+    ]
+    assert SyntheticApi.wrong_calls == 0
+    assert SyntheticApi.clients == [adapter.api_client]
+    assert guard.acquired == ["get_organizations"]
+    assert guard.statuses == [("get_organizations", 201)]
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        cast(Any, result).status_code = 200
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("operation_id", "binding", "request_model", "contract", "message"),
+    [
+        (
+            "get_organizations",
+            _binding(
+                operation_id="wrong_read",
+                method_name="wrong_read_with_http_info",
+                request_keyword="wrong_read_request",
+            ),
+            SyntheticRequest({}),
+            _operation_contract(),
+            "Generated read binding does not match operation ID",
+        ),
+        (
+            "get_organizations",
+            _binding(api_class="InheritedApi"),
+            SyntheticRequest({}),
+            _operation_contract(),
+            "Generated read API class does not own bound method",
+        ),
+        (
+            "get_organizations",
+            _binding(api_class="WrongKeywordApi"),
+            SyntheticRequest({}),
+            _operation_contract(),
+            "Generated read binding resolution failed",
+        ),
+        (
+            "absent_read",
+            _binding(operation_id="absent_read"),
+            SyntheticRequest({}),
+            _operation_contract(),
+            "Generated read operation is not allowlisted",
+        ),
+        (
+            "get_organizations",
+            _binding(),
+            SyntheticRequest({}),
+            _operation_contract(get_organizations_kind="cleanup"),
+            "Generated read operation is not allowlisted",
+        ),
+        (
+            "get_organizations",
+            _binding(),
+            OtherSyntheticRequest(),
+            _operation_contract(),
+            "Generated read request model does not match binding",
+        ),
+    ],
+    ids=[
+        "operation-id",
+        "method-owner",
+        "request-keyword",
+        "allowlist",
+        "read-kind",
+        "request-type",
+    ],
+)
+async def test_bound_substitution_is_rejected_before_guard_acquisition(
+    operation_id: str,
+    binding: GeneratedReadBinding,
+    request_model: object,
+    contract: Mapping[str, LiveOperation],
+    message: str,
+) -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    adapter = _adapter(
+        guard=guard,
+        state=state,
+        operation_contract=contract,
+    )
+
+    with pytest.raises(SafetyError) as caught:
+        await adapter.call_bound_read(operation_id, binding, request_model)
+
+    assert str(caught.value) == message
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
+    assert guard.acquired == []
+    assert guard.statuses == []
+    assert SyntheticApi.approved_calls == []
+    assert SyntheticApi.wrong_calls == 0
+
+
+@pytest.mark.asyncio
+async def test_bound_no_body_request_requires_none() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    adapter = _adapter(guard=guard, state=state)
+
+    async def invoke() -> ApiResponse[object]:
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+    SyntheticApi.handlers["no_body_read"] = invoke
+
+    with pytest.raises(SafetyError, match="request model"):
+        await adapter.call_bound_read("no_body_read", _no_body_binding(), object())
+    assert guard.acquired == []
+
+    result = await adapter.call_bound_read("no_body_read", _no_body_binding(), None)
+
+    assert result.status_code == 200
+    assert SyntheticApi.approved_calls == [
+        ("no_body_read", None, (10.0, 30.0))
+    ]
+
+
 async def _assert_next_call_is_blocked_before_work(
     adapter: GeneratedLiveSdk,
     guard: StubGuard,
@@ -190,7 +594,7 @@ async def _assert_next_call_is_blocked_before_work(
         return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
 
     with pytest.raises(SafetyError, match="unusable"):
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert guard.acquired == acquired_before
     assert guard.statuses == statuses_before
@@ -218,8 +622,8 @@ async def test_success_acquires_invokes_records_and_returns_data_once() -> None:
             raw_data=b'{"organizations":[]}',
         )
 
-    result: dict[str, object] = await adapter.call_generated(
-        "get_organizations", request_model, invoke
+    result: dict[str, object] = await _call_bound(
+        adapter, "get_organizations", request_model, invoke
     )
 
     assert result is response_model
@@ -254,7 +658,7 @@ async def test_success_persists_generated_operation_in_live_receipt(tmp_path: Pa
             raw_data=b'{"organizations":[]}',
         )
 
-    await adapter.call_generated("get_organizations", {}, invoke)
+    await _call_bound(adapter, "get_organizations", {}, invoke)
 
     recorded = adapter.receipt
     assert recorded is not None
@@ -280,9 +684,14 @@ async def test_429_persists_failed_generated_operation_and_receipt_flag(
     async def invoke() -> ApiResponse[object]:
         raise ApiException(status=429, reason="synthetic")
 
-    with pytest.raises(SafetyError, match="circuit opened"):
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 429
+    assert str(caught.value) == "http_error"
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     recorded = adapter.receipt
     assert recorded is not None
     assert recorded.operations == ("authenticate", "get_organizations")
@@ -318,7 +727,7 @@ async def test_429_still_opens_circuit_when_receipt_flag_write_fails(
         raise ApiException(status=429, reason="synthetic")
 
     with pytest.raises(SafetyError, match="429 receipt recording failed"):
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert guard.statuses == [("get_organizations", 429)]
     assert state.circuit_open
@@ -378,23 +787,24 @@ async def test_success_captures_completed_model_pair_with_status() -> None:
             raw_data=b'{"formatVersion":4}',
         )
 
-    result: dict[str, object] = await adapter.call_generated(
-        "get_external_menu_by_id", request_model, invoke
+    result: dict[str, object] = await _call_bound(
+        adapter, "get_external_menu_by_id", request_model, invoke
     )
 
     assert result is response_model
-    assert capture.pairs == [
-        (
-            "get_external_menu_by_id",
-            request_model,
-            response_model,
-            {"status": 201},
-        )
-    ]
+    assert len(capture.pairs) == 1
+    operation_id, captured_request, captured_response, metadata = capture.pairs[0]
+    assert operation_id == "get_external_menu_by_id"
+    assert captured_request is request_model
+    assert captured_response is response_model
+    assert metadata["method"] == "POST"
+    assert metadata["path"] == "/api/2/menu/by_id"
+    assert metadata["status"] == 201
+    assert type(metadata["duration_ms"]) is int
 
 
 @pytest.mark.asyncio
-async def test_non_429_api_exception_is_recorded_then_propagated() -> None:
+async def test_non_429_api_exception_is_sanitized_and_poison_adapter() -> None:
     state = StubState()
     guard = StubGuard(state)
     capture = StubCapture("get_organizations")
@@ -407,16 +817,21 @@ async def test_non_429_api_exception_is_recorded_then_propagated() -> None:
         invocations += 1
         raise error
 
-    with pytest.raises(ApiException) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert caught.value is error
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 503
+    assert str(caught.value) == "http_error"
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert guard.acquired == ["get_organizations"]
     assert guard.statuses == [("get_organizations", 503)]
     assert invocations == 1
     assert state.statuses == [("f" * 64, "get_organizations", 503)]
     assert not state.circuit_open
     assert capture.pairs == []
+    await _assert_next_call_is_blocked_before_work(adapter, guard, capture)
 
 
 @pytest.mark.asyncio
@@ -434,12 +849,15 @@ async def test_429_opens_circuit_and_raises_sanitized_error_without_retry() -> N
         invocations += 1
         raise error
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_external_menu_by_id", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_external_menu_by_id", {}, invoke)
 
-    assert str(caught.value) == "iiko returned 429; live circuit opened"
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 429
+    assert str(caught.value) == "http_error"
     assert private_detail not in str(caught.value)
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert guard.acquired == ["get_external_menu_by_id"]
@@ -460,7 +878,7 @@ def test_constructor_rejects_a_state_not_bound_to_the_guard() -> None:
 
 
 @pytest.mark.asyncio
-async def test_capture_selection_mismatch_fails_before_acquire_or_invoke() -> None:
+async def test_non_selected_dependency_read_skips_capture() -> None:
     state = StubState()
     guard = StubGuard(state)
     capture = StubCapture("get_external_menu_by_id")
@@ -472,14 +890,51 @@ async def test_capture_selection_mismatch_fails_before_acquire_or_invoke() -> No
         invocations += 1
         return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
 
-    with pytest.raises(SafetyError, match="explicitly selected"):
-        await adapter.call_generated("get_organizations", {}, invoke)
+    result = await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert capture.selections == ["get_organizations"]
+    assert result == {}
+    assert capture.selections == []
     assert capture.pairs == []
-    assert guard.acquired == []
-    assert guard.statuses == []
-    assert invocations == 0
+    assert guard.acquired == ["get_organizations"]
+    assert guard.statuses == [("get_organizations", 200)]
+    assert invocations == 1
+
+
+@pytest.mark.asyncio
+async def test_non_success_response_is_sanitized_and_poison_adapter() -> None:
+    state = StubState()
+    guard = StubGuard(state)
+    capture = StubCapture("get_organizations")
+    adapter = _adapter(guard=guard, state=state, capture=capture)
+    private_markers = (
+        "private-response-body",
+        "https://private.example.invalid/path",
+        "private-token-value",
+        "11111111-2222-4333-8444-555555555555",
+    )
+
+    async def invoke() -> ApiResponse[object]:
+        return ApiResponse(
+            status_code=400,
+            headers={"x-private": private_markers[2]},
+            data={"detail": list(private_markers)},
+            raw_data=private_markers[0].encode(),
+        )
+
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
+
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 400
+    assert str(caught.value) == "http_error"
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
+    formatted = "".join(traceback.format_exception(caught.value))
+    assert all(marker not in formatted for marker in private_markers)
+    assert guard.statuses == [("get_organizations", 400)]
+    assert capture.selections == []
+    assert capture.pairs == []
+    await _assert_next_call_is_blocked_before_work(adapter, guard, capture)
 
 
 @pytest.mark.asyncio
@@ -500,12 +955,16 @@ async def test_response_429_records_opens_circuit_and_poison_adapter_without_ret
             raw_data=b'{"private":"response-marker"}',
         )
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_external_menu_by_id", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_external_menu_by_id", {}, invoke)
 
-    assert str(caught.value) == "iiko returned 429; live circuit opened"
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 429
+    assert str(caught.value) == "http_error"
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
-    assert capture.selections == ["get_external_menu_by_id"]
+    assert capture.selections == []
     assert capture.pairs == []
     assert guard.acquired == ["get_external_menu_by_id"]
     assert guard.statuses == [("get_external_menu_by_id", 429)]
@@ -527,7 +986,7 @@ async def test_cancelled_invoke_is_reraised_and_poison_adapter() -> None:
         raise asyncio.CancelledError
 
     with pytest.raises(asyncio.CancelledError):
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert guard.acquired == ["get_organizations"]
     assert guard.statuses == []
@@ -548,11 +1007,14 @@ async def test_unknown_invoke_error_is_sanitized_and_poison_adapter_without_retr
         invocations += 1
         raise RuntimeError(private_detail)
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert str(caught.value) == "Generated SDK invocation failed without a retry"
+    assert caught.value.code is ReadFailureCode.TRANSPORT_ERROR
+    assert caught.value.status_code is None
+    assert str(caught.value) == "transport_error"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert guard.acquired == ["get_organizations"]
@@ -575,10 +1037,11 @@ async def test_response_status_recording_failure_is_sanitized_and_poison_adapter
         return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
 
     with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert str(caught.value) == "Generated SDK status recording failed without a retry"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert guard.acquired == ["get_organizations"]
@@ -603,10 +1066,11 @@ async def test_api_exception_status_recording_failure_is_sanitized_and_poison_ad
         raise api_error
 
     with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert str(caught.value) == "Generated SDK status recording failed without a retry"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     formatted = "".join(traceback.format_exception(caught.value))
     assert private_detail not in formatted
@@ -642,11 +1106,14 @@ async def test_capture_failure_after_response_is_sanitized_and_poison_adapter() 
             raw_data=b'{"formatVersion":4}',
         )
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_external_menu_by_id", request_model, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_external_menu_by_id", request_model, invoke)
 
-    assert str(caught.value) == "Generated SDK capture failed after response without a retry"
+    assert caught.value.code is ReadFailureCode.CAPTURE_FAILED
+    assert caught.value.status_code == 200
+    assert str(caught.value) == "capture_failed"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert capture.selections == ["get_external_menu_by_id"]
@@ -672,11 +1139,14 @@ async def test_ascii_string_429_is_normalized_and_opens_persistent_circuit() -> 
         invocations += 1
         raise api_error
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert str(caught.value) == "iiko returned 429; live circuit opened"
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 429
+    assert str(caught.value) == "http_error"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert guard.acquired == ["get_organizations"]
@@ -718,10 +1188,11 @@ async def test_malformed_api_exception_status_is_safely_rejected(
         raise api_error
 
     with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
     assert str(caught.value) == "Generated SDK exception has an invalid HTTP status"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert guard.acquired == ["get_organizations"]
@@ -749,14 +1220,17 @@ async def test_statusless_api_exception_records_zero_then_poison_adapter(
         invocations += 1
         raise api_error
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert str(caught.value) == "Generated SDK exception has no usable HTTP status"
+    assert caught.value.code is ReadFailureCode.HTTP_ERROR
+    assert caught.value.status_code == 0
+    assert str(caught.value) == "http_error"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
-    assert capture.selections == ["get_organizations"]
+    assert capture.selections == []
     assert capture.write_attempts == []
     assert capture.pairs == []
     assert guard.acquired == ["get_organizations"]
@@ -781,15 +1255,18 @@ async def test_non_api_response_is_rejected_before_status_capture_or_data_access
         invocations += 1
         return cast(ApiResponse[object], invalid_response)
 
-    with pytest.raises(SafetyError) as caught:
-        await adapter.call_generated("get_organizations", {}, invoke)
+    with pytest.raises(GeneratedCallFailure) as caught:
+        await _call_bound(adapter, "get_organizations", {}, invoke)
 
-    assert str(caught.value) == "Generated SDK invocation returned an invalid response"
+    assert caught.value.code is ReadFailureCode.INVOCATION_FAILED
+    assert caught.value.status_code is None
+    assert str(caught.value) == "invocation_failed"
     assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
     assert caught.value.__suppress_context__
     assert private_detail not in "".join(traceback.format_exception(caught.value))
     assert invalid_response.accessed == []
-    assert capture.selections == ["get_organizations"]
+    assert capture.selections == []
     assert capture.write_attempts == []
     assert capture.pairs == []
     assert guard.acquired == ["get_organizations"]
