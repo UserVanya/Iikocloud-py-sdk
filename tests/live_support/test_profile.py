@@ -32,6 +32,7 @@ def test_profile_resolves_secrets_without_storing_them(
     monkeypatch.setenv("IIKO_API_KEY", "secret-login")
     monkeypatch.setenv("IIKO_ORG", "00000000-0000-0000-0000-000000000001")
     monkeypatch.setenv("IIKO_MENU", "menu-1")
+    monkeypatch.setenv("IIKO_TERMINAL", "terminal-1")
 
     resolved = load_profile(profile)
 
@@ -54,6 +55,7 @@ def test_profile_reads_primary_key_from_explicit_env_file_without_fallback(
     env_file.chmod(0o600)
     monkeypatch.setenv("IIKO_ORG", "00000000-0000-0000-0000-000000000001")
     monkeypatch.setenv("IIKO_MENU", "menu-1")
+    monkeypatch.setenv("IIKO_TERMINAL", "terminal-1")
 
     assert load_profile(profile, env_file=env_file).api_login == "primary-login"
 
@@ -79,6 +81,122 @@ def _set_read_environment(monkeypatch: pytest.MonkeyPatch, *, login: str = "logi
     monkeypatch.setenv("IIKO_API_KEY", login)
     monkeypatch.setenv("IIKO_ORG", "00000000-0000-0000-0000-000000000001")
     monkeypatch.setenv("IIKO_MENU", "menu-1")
+    monkeypatch.setenv("IIKO_TERMINAL", "terminal-1")
+
+
+def test_read_only_profile_resolves_terminal_without_write_product(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace(
+            'write_product_id_env = "IIKO_PRODUCT"\n', ""
+        ),
+        encoding="utf-8",
+    )
+    _set_read_environment(monkeypatch)
+
+    resolved = load_profile(profile)
+
+    assert resolved.terminal_group_id == "terminal-1"
+    assert resolved.write_product_id is None
+
+
+def test_read_only_profile_ignores_configured_write_product_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _set_read_environment(monkeypatch)
+    monkeypatch.setenv("IIKO_PRODUCT", "")
+
+    resolved = load_profile(profile)
+
+    assert resolved.terminal_group_id == "terminal-1"
+    assert resolved.write_product_id is None
+
+
+def test_read_only_profile_rejects_write_product_without_terminal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace(
+            'terminal_group_id_env = "IIKO_TERMINAL"\n', ""
+        ),
+        encoding="utf-8",
+    )
+    _set_read_environment(monkeypatch)
+
+    with pytest.raises(SafetyError, match="write product requires a terminal group field"):
+        load_profile(profile)
+
+
+def test_write_profile_resolves_terminal_and_product(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile, allow_write=True)
+    _set_read_environment(monkeypatch)
+    monkeypatch.setenv("IIKO_PRODUCT", "product-1")
+
+    resolved = load_profile(profile)
+
+    assert resolved.terminal_group_id == "terminal-1"
+    assert resolved.write_product_id == "product-1"
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    ["terminal_group_id_env", "write_product_id_env"],
+)
+def test_write_profile_rejects_either_missing_target_field(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    missing_field: str,
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile, allow_write=True)
+    profile.write_text(
+        "\n".join(
+            line
+            for line in profile.read_text(encoding="utf-8").splitlines()
+            if not line.startswith(f"{missing_field} =")
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    _set_read_environment(monkeypatch)
+    monkeypatch.setenv("IIKO_PRODUCT", "product-1")
+
+    with pytest.raises(SafetyError):
+        load_profile(profile)
+
+
+def test_discovery_profile_validates_terminal_name_without_loading_value(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace(
+            'write_product_id_env = "IIKO_PRODUCT"\n', ""
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("IIKO_API_KEY", "discovery-login")
+    monkeypatch.delenv("IIKO_TERMINAL", raising=False)
+
+    assert load_discovery_profile(profile).api_login == "discovery-login"
+
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace("IIKO_TERMINAL", "lowercase"),
+        encoding="utf-8",
+    )
+    with pytest.raises(SafetyError, match="uppercase"):
+        load_discovery_profile(profile)
 
 
 @pytest.mark.parametrize(
@@ -197,6 +315,7 @@ def test_process_environment_has_precedence_and_empty_value_never_falls_back(
     monkeypatch.setenv("IIKO_API_KEY", "process-login")
     monkeypatch.setenv("IIKO_ORG", "process-org")
     monkeypatch.setenv("IIKO_MENU", "process-menu")
+    monkeypatch.setenv("IIKO_TERMINAL", "process-terminal")
     assert load_profile(profile, env_file=env_file).api_login == "process-login"
 
     monkeypatch.setenv("IIKO_API_KEY", "")
@@ -209,7 +328,10 @@ def test_dotenv_interpolation_is_disabled(tmp_path: Path, monkeypatch: pytest.Mo
     _write_profile(profile)
     env_file = tmp_path / ".env"
     env_file.write_text(
-        "IIKO_API_KEY=${IIKO_API_KEY_2}\nIIKO_ORG=org\nIIKO_MENU=menu\n",
+        "IIKO_API_KEY=${IIKO_API_KEY_2}\n"
+        "IIKO_ORG=org\n"
+        "IIKO_MENU=menu\n"
+        "IIKO_TERMINAL=terminal\n",
         encoding="utf-8",
     )
     env_file.chmod(0o600)

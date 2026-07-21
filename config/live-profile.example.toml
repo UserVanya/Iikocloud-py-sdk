@@ -3,7 +3,9 @@ base_url = "https://api-ru.iiko.services"
 api_login_env = "IIKO_API_KEY"
 organization_id_env = "IIKO_TEST_ORGANIZATION_ID"
 external_menu_id_env = "IIKO_TEST_EXTERNAL_MENU_ID"
+# Read target for terminal, stop-list, and employee checks, including read-only runs.
 terminal_group_id_env = "IIKO_TEST_TERMINAL_GROUP_ID"
+# Dedicated write-only target; its environment value is ignored when writes are disabled.
 write_product_id_env = "IIKO_TEST_WRITE_PRODUCT_ID"
 allow_write = false
 allowed_organization_ids = []

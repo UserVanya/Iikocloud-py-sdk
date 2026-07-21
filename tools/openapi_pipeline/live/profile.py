@@ -164,8 +164,8 @@ def _load_toml(path: Path) -> dict[str, Any]:
     ):
         wanted = ", ".join(sorted(_REQUIRED_FIELDS | _OPTIONAL_FIELDS))
         raise SafetyError(f"Live profile fields must be the documented fields: {wanted}")
-    if ("terminal_group_id_env" in value) != ("write_product_id_env" in value):
-        raise SafetyError("Live profile write environment fields must appear together")
+    if "write_product_id_env" in value and "terminal_group_id_env" not in value:
+        raise SafetyError("Live profile write product requires a terminal group field")
     return value
 
 
@@ -235,6 +235,7 @@ def load_discovery_profile(
     _env_name(data["external_menu_id_env"], label="external_menu_id_env")
     if "terminal_group_id_env" in data:
         _env_name(data["terminal_group_id_env"], label="terminal_group_id_env")
+    if "write_product_id_env" in data:
         _env_name(data["write_product_id_env"], label="write_product_id_env")
 
     api_login = _required_env(api_login_env, _load_env_file(env_file))
@@ -286,13 +287,13 @@ def load_profile(
     api_login = _required_env(api_login_env, file_values)
     organization_id = _required_env(organization_id_env, file_values)
     external_menu_id = _required_env(external_menu_id_env, file_values)
+    terminal_group_id = (
+        _required_env(terminal_env, file_values) if terminal_env is not None else None
+    )
     if allow_write:
-        assert terminal_env is not None
         assert product_env is not None
-        terminal_group_id = _required_env(terminal_env, file_values)
         write_product_id = _required_env(product_env, file_values)
     else:
-        terminal_group_id = None
         write_product_id = None
 
     fingerprint = _profile_fingerprint(name, base_url)
