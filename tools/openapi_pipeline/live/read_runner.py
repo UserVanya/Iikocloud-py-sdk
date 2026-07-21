@@ -87,6 +87,8 @@ def _validated_plan_contract(
     operation_contract: Mapping[str, LiveOperation],
     sdk: GeneratedLiveSdk,
 ) -> Mapping[str, LiveOperation]:
+    validation_failed = False
+    validated: dict[str, LiveOperation] = {}
     try:
         supplied = _contract_snapshot(
             operation_contract,
@@ -102,7 +104,6 @@ def _validated_plan_contract(
         ):
             raise SafetyError(_PREFLIGHT_FAILURE)
 
-        validated: dict[str, LiveOperation] = {}
         for case in plan.cases:
             operation = bound[case.operation_id]
             if operation.kind != "read":
@@ -113,9 +114,12 @@ def _validated_plan_contract(
                 ReadFailureCode.SAFETY_INVARIANT,
             )
             validated[case.operation_id] = operation
-        return MappingProxyType(validated)
     except Exception:
+        validation_failed = True
+
+    if validation_failed:
         raise SafetyError(_PREFLIGHT_FAILURE) from None
+    return MappingProxyType(validated)
 
 
 def _outcome(
@@ -194,9 +198,12 @@ def _append_outcome(
         http_status=outcome.http_status,
         duration_ms=outcome.duration_ms,
     )
+    append_failed = False
     try:
         report.append(replacement)
     except BaseException:
+        append_failed = True
+    if append_failed:
         raise SafetyError(_REPORT_PERSISTENCE_FAILURE) from None
     return replacement, code
 
@@ -410,6 +417,8 @@ async def run_read_plan(
     operation_contract: Mapping[str, LiveOperation],
     report: ReadReportWriter,
 ) -> ReadRunSummary:
+    preflight_failed = False
+    trusted_contract: Mapping[str, LiveOperation] = MappingProxyType({})
     try:
         trusted_contract = _validated_plan_contract(
             plan,
@@ -417,6 +426,9 @@ async def run_read_plan(
             sdk,
         )
     except Exception:
+        preflight_failed = True
+
+    if preflight_failed:
         with suppress(BaseException):
             report.finish(False)
         raise SafetyError(_PREFLIGHT_FAILURE) from None

@@ -699,14 +699,44 @@ async def test_second_terminal_append_failure_stops_without_false_summary() -> N
     with pytest.raises(
         SafetyError,
         match="Read report terminal outcome persistence failed",
-    ):
+    ) as caught:
         await _run(plan, sdk=sdk, report=report)
 
+    assert caught.value.__context__ is None
+    assert "synthetic-private-exception" not in repr(caught.value)
     assert rendered == []
     assert [operation_id for operation_id, _request in sdk.calls] == ["a_stops"]
     assert report.append_calls == 2
     assert report.outcomes == []
     assert report.finished == []
+
+
+def test_contract_validation_failure_detaches_safety_error_context() -> None:
+    marker = "synthetic-private-validation-value"
+    plan = ReadPlan.build((_case("a_read"),))
+    supplied_contract = _operation_contract(plan)
+    sdk_contract = MappingProxyType(
+        {
+            "a_read": LiveOperation(
+                kind="read",
+                cleanup=None,
+                method="GET",
+                path=f"/{marker}",
+            )
+        }
+    )
+    sdk = _FakeSdk(operation_contract=sdk_contract)
+
+    with pytest.raises(SafetyError) as caught:
+        read_runner_module._validated_plan_contract(
+            plan,
+            supplied_contract,
+            cast(GeneratedLiveSdk, sdk),
+        )
+
+    assert caught.value.__context__ is None
+    assert marker not in str(caught.value)
+    assert marker not in repr(caught.value)
 
 
 @pytest.mark.asyncio
@@ -736,7 +766,9 @@ async def test_supplied_contract_must_equal_immutable_sdk_contract() -> None:
         )
 
     assert str(caught.value) == "Live read preflight failed"
+    assert caught.value.__context__ is None
     assert marker not in str(caught.value)
+    assert marker not in repr(caught.value)
     assert sdk.calls == []
     assert report.outcomes == []
     assert report.finished == [False]
