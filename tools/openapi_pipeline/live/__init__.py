@@ -24,6 +24,7 @@ from .read_case import (
     build_generated_request,
 )
 from .read_planner import ReadPlan
+from .read_runner import ReadRunSummary, run_read_plan
 from .receipt import LiveReceipt
 from .session import SafeLiveSession
 from .state import LiveStateStore
@@ -50,10 +51,12 @@ __all__ = [
     "ReadExtractorFailure",
     "ReadFailureCode",
     "ReadPlan",
+    "ReadRunSummary",
     "ResolvedLiveProfile",
     "ResolvedDiscoveryProfile",
     "SafeLiveSession",
     "build_generated_request",
     "load_discovery_profile",
     "load_profile",
+    "run_read_plan",
 ]
