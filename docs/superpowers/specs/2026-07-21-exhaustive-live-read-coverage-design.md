@@ -124,7 +124,11 @@ Catalog не является разрешением на HTTP. Он не дуб
 - множество operation ID должно точно совпадать с effective OpenAPI;
 - каждая операция встречается ровно один раз;
 - неизвестные поля, дубликаты ключей и неизвестные enum запрещены;
-- единственная `auth`-операция — `authenticate`;
+- все token endpoints классифицируются как `auth`, включая
+  `authenticate_v2`;
+- единственная `auth`-операция с `automatic` на этом этапе — уже используемая
+  `authenticate`; остальные auth-варианты остаются `blocked` до отдельной
+  миграции session/profile contract;
 - `unknown` всегда сочетается только с `blocked`;
 - `create`, `update`, `delete`, `action` и `irreversible` не могут иметь
   `automatic`;
