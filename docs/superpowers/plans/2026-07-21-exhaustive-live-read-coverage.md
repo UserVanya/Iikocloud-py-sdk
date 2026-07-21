@@ -1395,7 +1395,15 @@ Expected: delivery case module does not exist.
 
 - [ ] **Step 3: Implement bounded foundation queries**
 
-`search_deliveries` uses exactly one organization, the seeded 48-hour local window, `rowsCount=1`, ascending stable sorting, and no free-text filter. `get_deliveries_by_delivery_date_and_status` uses the same bounded window and no status expansion. Each provider uses its own `search_*` or `status_*` keys for order ID, phone, customer ID, and revision; only response-provided values are copied into hidden context.
+`search_deliveries` uses exactly one organization, the exact seeded bounded local
+window, `rowsCount=1`, schema-supported `CompleteBefore` plus `Ascending`
+ordering, and no free-text filter. Equal `CompleteBefore` values remain
+server-ordered because the schema exposes no stable tie-break field.
+`get_deliveries_by_delivery_date_and_status` uses the same exact seeded window
+and no status expansion; its generated request exposes neither a row limit nor
+sorting fields. Each provider uses its own `search_*` or `status_*` keys for
+order ID, phone, customer ID, and revision; only response-provided values are
+copied into hidden context.
 
 `get_delivery_drafts_by_filter` uses the same organization/window with `offset=0`, `limit=1`; it provides `draft_id` only when present. `get_delivery_restrictions` uses exactly one organization. `get_allowed_delivery_restrictions` sends the smallest generated request accepted by the effective schema: `organizationId`, `isCourierDelivery=False`, `deliverySum=0`, `discountSum=0`, and an empty generated order-item list.
 
