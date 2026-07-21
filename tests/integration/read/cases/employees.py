@@ -232,7 +232,7 @@ def _extract_courier(response: object, view: ContextView) -> Mapping[str, object
                 is_deleted = generated_employee.is_deleted
             except Exception:
                 continue
-            if type(employee_id) is UUID and is_deleted is not True:
+            if type(employee_id) is UUID and is_deleted is False:
                 return {"courier_employee_id": employee_id}
     return {}
 

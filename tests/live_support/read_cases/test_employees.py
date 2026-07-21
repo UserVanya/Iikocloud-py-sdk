@@ -328,6 +328,7 @@ def test_courier_provider_selects_one_live_target_employee_without_pii() -> None
     response = _employees_response(
         _employee_group(
             _employee(OTHER_EMPLOYEE_ID, is_deleted=True),
+            _employee(OTHER_EMPLOYEE_ID, is_deleted=None),
             _employee(EMPLOYEE_ID),
         )
     )
