@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update iikoCloud SDK"
+  short_description: "Review and apply iikoCloud OpenAPI changes"
+  default_prompt: "Use $updating-iikocloud-sdk to review the latest iiko Cloud OpenAPI drift and prepare a safe SDK update."
