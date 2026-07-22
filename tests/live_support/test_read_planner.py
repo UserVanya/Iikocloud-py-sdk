@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import dataclasses
 import hashlib
+import inspect
 import json
 from itertools import permutations
-from typing import Any, cast
+from typing import Any, cast, get_args, get_type_hints
 
 import pytest
 
+from iikocloud_client import api as generated_api
 from tests.integration.read.cases import ALL_READ_CASES, FULL_READ_PLAN
 from tests.integration.read.cases.addresses import ADDRESS_CASES
 from tests.integration.read.cases.deliveries import DELIVERY_CASES
@@ -25,6 +27,72 @@ from tools.openapi_pipeline.live.read_case import (
     ReadCase,
 )
 from tools.openapi_pipeline.live.read_planner import ReadPlan
+
+_POLYMORPHIC_REQUEST_MODELS = {
+    "get_customer_info_with_http_info": (
+        "iikocloud_client.models.get_customer_info_by_id_request",
+        "GetCustomerInfoByIdRequest",
+    ),
+}
+
+
+def _assert_binding_matches_generated_declaration(
+    binding: GeneratedReadBinding,
+) -> None:
+    matches = tuple(
+        api_class
+        for _, api_class in inspect.getmembers(generated_api, inspect.isclass)
+        if api_class.__module__.startswith("iikocloud_client.api.")
+        and binding.method_name in vars(api_class)
+    )
+    assert len(matches) == 1
+    api_class = matches[0]
+    assert (binding.api_module, binding.api_class) == (
+        api_class.__module__,
+        api_class.__name__,
+    )
+
+    method = getattr(api_class, binding.method_name)
+    request_parameters = tuple(
+        parameter
+        for parameter in inspect.signature(method).parameters.values()
+        if parameter.name not in {"self", "timeout"} and not parameter.name.startswith("_")
+    )
+    assert len(request_parameters) <= 1
+    expected_request: tuple[str | None, str | None, str | None]
+    if not request_parameters:
+        expected_request = (None, None, None)
+    else:
+        request_parameter = request_parameters[0]
+        pending_annotations = [get_type_hints(method)[request_parameter.name]]
+        request_models: set[type[object]] = set()
+        while pending_annotations:
+            annotation = pending_annotations.pop()
+            if inspect.isclass(annotation) and annotation.__module__.startswith(
+                "iikocloud_client.models."
+            ):
+                request_models.add(annotation)
+            pending_annotations.extend(get_args(annotation))
+        assert len(request_models) == 1
+        annotated_request_model = request_models.pop()
+        request_module, request_class = _POLYMORPHIC_REQUEST_MODELS.get(
+            binding.method_name,
+            (annotated_request_model.__module__, annotated_request_model.__name__),
+        )
+        expected_request = (
+            request_module,
+            request_class,
+            request_parameter.name,
+        )
+    assert (
+        binding.request_module,
+        binding.request_class,
+        binding.request_keyword,
+    ) == expected_request
+    resolved = binding.resolve()
+    if binding.method_name in _POLYMORPHIC_REQUEST_MODELS:
+        assert resolved.request_class is not None
+        assert issubclass(resolved.request_class, annotated_request_model)
 
 
 def _case(
@@ -302,6 +370,7 @@ def test_real_read_registry_has_exact_domain_order_and_count() -> None:
 def test_every_real_generated_binding_resolves_its_exact_request_contract() -> None:
     for case in ALL_READ_CASES:
         binding = case.binding
+        _assert_binding_matches_generated_declaration(binding)
         resolved = binding.resolve()
         assert binding.method_name == f"{case.operation_id}_with_http_info"
         assert resolved.method.__name__ == binding.method_name
@@ -318,6 +387,21 @@ def test_every_real_generated_binding_resolves_its_exact_request_contract() -> N
             assert all(type(value) is str and value for value in request_fields)
             assert resolved.request_class is not None
             assert resolved.request_class.__name__ == binding.request_class
+
+
+def test_generated_declaration_check_rejects_a_dropped_request_triple() -> None:
+    binding = next(
+        case.binding for case in ALL_READ_CASES if case.binding.request_module is not None
+    )
+    broken = dataclasses.replace(
+        binding,
+        request_module=None,
+        request_class=None,
+        request_keyword=None,
+    )
+
+    with pytest.raises(AssertionError):
+        _assert_binding_matches_generated_declaration(broken)
 
 
 def test_real_registry_declares_every_expected_no_target_code() -> None:
