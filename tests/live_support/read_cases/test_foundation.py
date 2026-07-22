@@ -261,7 +261,10 @@ def test_every_request_has_the_exact_bounded_generated_json_shape() -> None:
         "get_delivery_order_types": {"organizationIds": [organization]},
         "get_discounts": {"organizationIds": [organization]},
         "get_marketing_sources": {"organizationIds": [organization]},
-        "get_organization_settings": {"organizationIds": [organization]},
+        "get_organization_settings": {
+            "organizationIds": [organization],
+            "parameters": ["AddressFormatType"],
+        },
         "get_organizations": {
             "includeDisabled": False,
             "organizationIds": [organization],
@@ -292,6 +295,8 @@ def test_every_request_has_the_exact_bounded_generated_json_shape() -> None:
 
     for operation_id, expected_json in expected.items():
         case = _case(operation_id)
+        expected_revision = 2 if operation_id == "get_organization_settings" else 1
+        assert case.revision == expected_revision
         values = case.build_values(_view(case, with_terminal=True))
         request = build_generated_request(case.binding, values)
         assert request is not None

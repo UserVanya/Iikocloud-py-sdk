@@ -70,6 +70,13 @@ def _organization_ids(view: ContextView) -> Mapping[str, object]:
     return {"organization_ids": [view["organization_id"]]}
 
 
+def _build_organization_settings(view: ContextView) -> Mapping[str, object]:
+    return {
+        "organization_ids": [view["organization_id"]],
+        "parameters": ["AddressFormatType"],
+    }
+
+
 def _build_get_organizations(view: ContextView) -> Mapping[str, object]:
     return {
         "include_disabled": False,
@@ -233,6 +240,7 @@ def _case(
     request_module: str | None,
     request_class: str | None,
     request_keyword: str | None,
+    revision: int = 1,
     depends_on: tuple[str, ...] = ("get_organizations",),
     requires: tuple[str, ...] = ("organization_id",),
     provides: tuple[str, ...] = (),
@@ -250,7 +258,7 @@ def _case(
     validator = validate_response or _typed_validator(response_module, response_class)
     return ReadCase(
         operation_id=operation_id,
-        revision=1,
+        revision=revision,
         depends_on=depends_on,
         requires=requires,
         provides=provides,
@@ -361,6 +369,8 @@ FOUNDATION_CASES = (
         request_module="organizations_settings_request",
         request_class="OrganizationsSettingsRequest",
         request_keyword="organizations_settings_request",
+        revision=2,
+        build_values=_build_organization_settings,
     ),
     _case(
         "get_payment_types",
