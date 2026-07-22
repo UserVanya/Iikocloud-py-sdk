@@ -19,6 +19,7 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTarget,
     NoLiveTargetCode,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
 )
 
@@ -34,6 +35,8 @@ INVENTORY_LIST_OPERATION_IDS = (
     "list_inventory_transformation_documents",
     "list_inventory_writeoff_documents",
 )
+_INVOICE_PROCESSING_CAPABILITY = ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+_INVOICE_PROCESSING_NO_TARGET = NoLiveTargetCode.INVOICE_PROCESSING
 
 STORE_TARGET_KEYS = (
     "inventory_disassemble_document_store_from_id",
@@ -558,7 +561,9 @@ _COUNTERAGENTS = ReadCase(
     depends_on=("get_organizations",),
     requires=("organization_id",),
     provides=(),
-    allowed_no_target_codes=frozenset({NoLiveTargetCode.ENDPOINT}),
+    allowed_no_target_codes=frozenset(
+        {NoLiveTargetCode.ENDPOINT, _INVOICE_PROCESSING_NO_TARGET}
+    ),
     binding=_binding(
         "get_inventory_counteragents",
         "public_api_invoice_processing_counteragents_api",
@@ -573,6 +578,7 @@ _COUNTERAGENTS = ReadCase(
         "GetCounteragentsResponse",
     ),
     extract=_empty_extract,
+    capability=_INVOICE_PROCESSING_CAPABILITY,
 )
 
 _COST_PRICES = ReadCase(
@@ -586,7 +592,13 @@ _COST_PRICES = ReadCase(
         *STORE_TARGET_KEYS,
     ),
     provides=(),
-    allowed_no_target_codes=frozenset({NoLiveTargetCode.PRODUCT, NoLiveTargetCode.STORE}),
+    allowed_no_target_codes=frozenset(
+        {
+            NoLiveTargetCode.PRODUCT,
+            NoLiveTargetCode.STORE,
+            _INVOICE_PROCESSING_NO_TARGET,
+        }
+    ),
     binding=_binding(
         "calculate_inventory_cost_prices",
         "public_api_invoice_processing_outgoing_invoices_api",
@@ -601,6 +613,7 @@ _COST_PRICES = ReadCase(
         "GetCostPricesResponse",
     ),
     extract=_empty_extract,
+    capability=_INVOICE_PROCESSING_CAPABILITY,
 )
 
 INVENTORY_CASES = (*_DOCUMENT_CASES, _COUNTERAGENTS, _COST_PRICES)

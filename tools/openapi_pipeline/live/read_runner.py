@@ -13,11 +13,13 @@ from .generated import GeneratedCallFailure, GeneratedCallResult, GeneratedLiveS
 from .read_case import (
     NoLiveTarget,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
     ReadContext,
     ReadExtractorFailure,
     ReadFailureCode,
     build_generated_request,
+    no_target_code_for_read_capability,
 )
 from .read_planner import ReadPlan
 from .read_report import ReadOutcome, ReadReportWriter, ReadStatus
@@ -219,6 +221,34 @@ async def _run_case(
     context: ReadContext,
     sdk: GeneratedLiveSdk,
 ) -> tuple[ReadOutcome, ReadFailureCode | None]:
+    try:
+        capability = case.capability
+        if capability is not None:
+            disabled = sdk.profile.disabled_read_capabilities
+            if type(disabled) is not frozenset or any(
+                type(item) is not ReadCapability for item in disabled
+            ):
+                raise TypeError("invalid disabled read capabilities")
+            if capability in disabled:
+                no_target_code = no_target_code_for_read_capability(capability)
+                if no_target_code not in case.allowed_no_target_codes:
+                    raise ValueError("capability no-target code is not allowed")
+                return (
+                    _outcome(
+                        case,
+                        operation,
+                        ReadStatus.NO_LIVE_TARGET,
+                        no_target_code.value,
+                    ),
+                    None,
+                )
+    except asyncio.CancelledError:
+        code = ReadFailureCode.CANCELLED
+        return _aborted_outcome(case, operation, code), code
+    except Exception:
+        code = ReadFailureCode.SAFETY_INVARIANT
+        return _aborted_outcome(case, operation, code), code
+
     try:
         view = context.view(case.requires)
     except asyncio.CancelledError:

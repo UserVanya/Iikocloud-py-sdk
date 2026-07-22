@@ -18,6 +18,7 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTarget,
     NoLiveTargetCode,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
     ReadContext,
     build_generated_request,
@@ -215,6 +216,13 @@ def test_finance_registry_is_exact() -> None:
     assert len(FINANCE_CASES) == len(FINANCE_IDS)
 
 
+def test_all_finance_cases_declare_invoice_processing_capability() -> None:
+    assert len(FINANCE_CASES) == 6
+    for case in FINANCE_CASES:
+        assert case.capability is ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+        assert NoLiveTargetCode.INVOICE_PROCESSING in case.allowed_no_target_codes
+
+
 def test_target_orders_and_transaction_contracts_are_exact() -> None:
     assert DOCUMENT_TARGET_KEYS == EXPECTED_DOCUMENT_KEYS
     assert DOCUMENT_PROVIDER_OPERATION_IDS == EXPECTED_PROVIDER_OPERATIONS
@@ -228,7 +236,7 @@ def test_target_orders_and_transaction_contracts_are_exact() -> None:
         "finance_document_transaction_to_account_id",
     )
     assert document.allowed_no_target_codes == frozenset(
-        {NoLiveTargetCode.DOCUMENT}
+        {NoLiveTargetCode.DOCUMENT, NoLiveTargetCode.INVOICE_PROCESSING}
     )
 
     account = _case("list_finance_account_transactions")
@@ -243,7 +251,7 @@ def test_target_orders_and_transaction_contracts_are_exact() -> None:
         *EXPECTED_ACCOUNT_KEYS,
     )
     assert account.allowed_no_target_codes == frozenset(
-        {NoLiveTargetCode.ACCOUNT}
+        {NoLiveTargetCode.ACCOUNT, NoLiveTargetCode.INVOICE_PROCESSING}
     )
 
 
@@ -277,7 +285,7 @@ def test_list_and_get_dependencies_and_provider_keys_are_exact() -> None:
         assert get_case.requires == ("organization_id", document_key)
         assert get_case.provides == ()
         assert get_case.allowed_no_target_codes == frozenset(
-            {NoLiveTargetCode.DOCUMENT}
+            {NoLiveTargetCode.DOCUMENT, NoLiveTargetCode.INVOICE_PROCESSING}
         )
 
 

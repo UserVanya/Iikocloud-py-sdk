@@ -14,6 +14,10 @@ from typing import Final
 from tools.openapi_pipeline.errors import SafetyError
 
 
+class ReadCapability(str, Enum):
+    PUBLIC_API_INVOICE_PROCESSING = "public_api_invoice_processing"
+
+
 class NoLiveTargetCode(str, Enum):
     ENDPOINT = "endpoint_unavailable"
     CITY = "city_unavailable"
@@ -39,6 +43,26 @@ class NoLiveTargetCode(str, Enum):
     DOCUMENT = "document_unavailable"
     ACCOUNT = "account_unavailable"
     STORE = "store_unavailable"
+    INVOICE_PROCESSING = "invoice_processing_unavailable"
+
+
+_CAPABILITY_NO_TARGET_CODES: Final[Mapping[ReadCapability, NoLiveTargetCode]] = (
+    MappingProxyType(
+        {
+            ReadCapability.PUBLIC_API_INVOICE_PROCESSING: (
+                NoLiveTargetCode.INVOICE_PROCESSING
+            ),
+        }
+    )
+)
+
+
+def no_target_code_for_read_capability(
+    capability: ReadCapability,
+) -> NoLiveTargetCode:
+    if type(capability) is not ReadCapability:
+        raise TypeError("capability must be a ReadCapability")
+    return _CAPABILITY_NO_TARGET_CODES[capability]
 
 
 class ReadFailureCode(str, Enum):
@@ -270,6 +294,7 @@ class ReadCase:
     build_values: Callable[[ContextView], Mapping[str, object] | NoRequest]
     validate_response: Callable[[object, ContextView], None]
     extract: Callable[[object, ContextView], Mapping[str, object]]
+    capability: ReadCapability | None = None
 
     def __post_init__(self) -> None:
         operation_id = _require_safe_value_name(
@@ -290,6 +315,14 @@ class ReadCase:
             for code in self.allowed_no_target_codes
         ):
             raise TypeError("allowed_no_target_codes contains an invalid code")
+        if self.capability is not None:
+            if type(self.capability) is not ReadCapability:
+                raise TypeError("capability must be a ReadCapability or None")
+            capability_code = no_target_code_for_read_capability(self.capability)
+            if capability_code not in self.allowed_no_target_codes:
+                raise ValueError(
+                    "capability requires its matching allowed no-target code"
+                )
         if type(self.binding) is not GeneratedReadBinding:
             raise TypeError("binding must be a GeneratedReadBinding")
         expected_method_name = f"{operation_id}_with_http_info"
@@ -430,9 +463,11 @@ __all__ = [
     "NoLiveTargetCode",
     "NoRequest",
     "ReadAssertionFailure",
+    "ReadCapability",
     "ReadCase",
     "ReadContext",
     "ReadExtractorFailure",
     "ReadFailureCode",
     "build_generated_request",
+    "no_target_code_for_read_capability",
 ]

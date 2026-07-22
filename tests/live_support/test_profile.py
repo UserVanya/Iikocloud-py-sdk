@@ -6,6 +6,7 @@ import pytest
 
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.profile import load_discovery_profile, load_profile
+from tools.openapi_pipeline.live.read_case import ReadCapability
 
 
 def _write_profile(path: Path, *, allow_write: bool = False) -> None:
@@ -24,6 +25,10 @@ def _write_profile(path: Path, *, allow_write: bool = False) -> None:
     path.chmod(0o600)
 
 
+def _append_profile_line(path: Path, line: str) -> None:
+    path.write_text(path.read_text(encoding="utf-8") + line + "\n", encoding="utf-8")
+
+
 def test_profile_resolves_secrets_without_storing_them(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -40,6 +45,98 @@ def test_profile_resolves_secrets_without_storing_them(
     assert "secret-login" not in resolved.fingerprint
     assert "secret-login" not in repr(resolved)
     assert len(resolved.fingerprint) == 64
+
+
+def test_profile_defaults_disabled_read_capabilities_to_an_empty_immutable_set(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _set_read_environment(monkeypatch)
+
+    resolved = load_profile(profile)
+
+    assert resolved.disabled_read_capabilities == frozenset()
+    assert type(resolved.disabled_read_capabilities) is frozenset
+
+
+def test_profile_accepts_only_the_exact_known_disabled_read_capability(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(
+        profile,
+        'disabled_read_capabilities = ["public_api_invoice_processing"]',
+    )
+    _set_read_environment(monkeypatch)
+
+    resolved = load_profile(profile)
+
+    assert resolved.disabled_read_capabilities == frozenset(
+        {ReadCapability.PUBLIC_API_INVOICE_PROCESSING}
+    )
+
+
+@pytest.mark.parametrize(
+    "declaration",
+    [
+        'disabled_read_capabilities = "public_api_invoice_processing"',
+        "disabled_read_capabilities = [1]",
+        'disabled_read_capabilities = ["unsupported-private-marker"]',
+        (
+            'disabled_read_capabilities = ["public_api_invoice_processing", '
+            '"public_api_invoice_processing"]'
+        ),
+    ],
+)
+def test_profile_rejects_invalid_disabled_read_capabilities_without_echoing_values(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    declaration: str,
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(profile, declaration)
+    _set_read_environment(monkeypatch)
+
+    with pytest.raises(SafetyError) as caught:
+        load_profile(profile)
+
+    assert str(caught.value) == (
+        "disabled_read_capabilities must be a duplicate-free array of known "
+        "capability strings"
+    )
+    assert "unsupported-private-marker" not in str(caught.value)
+    assert "unsupported-private-marker" not in repr(caught.value)
+
+
+def test_discovery_validates_and_ignores_disabled_read_capabilities(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    monkeypatch.setenv("IIKO_API_KEY", "discovery-login")
+
+    _append_profile_line(
+        profile,
+        'disabled_read_capabilities = ["public_api_invoice_processing"]',
+    )
+    assert load_discovery_profile(profile).api_login == "discovery-login"
+
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace(
+            '"public_api_invoice_processing"', '"unsupported-private-marker"'
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(SafetyError) as caught:
+        load_discovery_profile(profile)
+    assert str(caught.value) == (
+        "disabled_read_capabilities must be a duplicate-free array of known "
+        "capability strings"
+    )
+    assert "unsupported-private-marker" not in repr(caught.value)
 
 
 def test_profile_reads_primary_key_from_explicit_env_file_without_fallback(

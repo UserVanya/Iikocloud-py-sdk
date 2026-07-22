@@ -13,10 +13,13 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTarget,
     NoLiveTargetCode,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
 )
 
 FieldSpec = tuple[str, str]
+_INVOICE_PROCESSING_CAPABILITY = ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+_INVOICE_PROCESSING_NO_TARGET = NoLiveTargetCode.INVOICE_PROCESSING
 
 DOCUMENT_TARGET_KEYS = (
     "finance_incoming_service_document_id",
@@ -244,7 +247,7 @@ def make_period_list_case(
             *(key for key, _attribute in account_keys),
             *(key for key, _attribute in store_keys),
         ),
-        allowed_no_target_codes=frozenset(),
+        allowed_no_target_codes=frozenset({_INVOICE_PROCESSING_NO_TARGET}),
         binding=binding,
         build_values=_build_period_list,
         validate_response=_raw_list_validator(item_module, item_class),
@@ -257,6 +260,7 @@ def make_period_list_case(
             active_attribute=active_attribute,
             active_values=active_values,
         ),
+        capability=_INVOICE_PROCESSING_CAPABILITY,
     )
 
 
@@ -326,7 +330,9 @@ def make_document_get_case(
         depends_on=(provider_operation_id,),
         requires=("organization_id", document_key),
         provides=(),
-        allowed_no_target_codes=frozenset({NoLiveTargetCode.DOCUMENT}),
+        allowed_no_target_codes=frozenset(
+            {NoLiveTargetCode.DOCUMENT, _INVOICE_PROCESSING_NO_TARGET}
+        ),
         binding=binding,
         build_values=_document_builder(document_key),
         validate_response=_document_get_validator(
@@ -335,6 +341,7 @@ def make_document_get_case(
             document_key,
         ),
         extract=_empty_extract,
+        capability=_INVOICE_PROCESSING_CAPABILITY,
     )
 
 
@@ -537,7 +544,9 @@ _DOCUMENT_TRANSACTIONS = ReadCase(
     depends_on=DOCUMENT_PROVIDER_OPERATION_IDS,
     requires=("organization_id", *DOCUMENT_TARGET_KEYS),
     provides=_DOCUMENT_TRANSACTION_ACCOUNT_KEYS,
-    allowed_no_target_codes=frozenset({NoLiveTargetCode.DOCUMENT}),
+    allowed_no_target_codes=frozenset(
+        {NoLiveTargetCode.DOCUMENT, _INVOICE_PROCESSING_NO_TARGET}
+    ),
     binding=_binding(
         "list_finance_document_transactions",
         "public_api_invoice_processing_document_transactions_api",
@@ -549,6 +558,7 @@ _DOCUMENT_TRANSACTIONS = ReadCase(
     build_values=_build_document_transactions,
     validate_response=_validate_document_transactions,
     extract=_extract_document_transaction_accounts,
+    capability=_INVOICE_PROCESSING_CAPABILITY,
 )
 
 _ACCOUNT_TRANSACTIONS = ReadCase(
@@ -565,7 +575,9 @@ _ACCOUNT_TRANSACTIONS = ReadCase(
         *ACCOUNT_TARGET_KEYS,
     ),
     provides=(),
-    allowed_no_target_codes=frozenset({NoLiveTargetCode.ACCOUNT}),
+    allowed_no_target_codes=frozenset(
+        {NoLiveTargetCode.ACCOUNT, _INVOICE_PROCESSING_NO_TARGET}
+    ),
     binding=_binding(
         "list_finance_account_transactions",
         "public_api_invoice_processing_account_transactions_api",
@@ -580,6 +592,7 @@ _ACCOUNT_TRANSACTIONS = ReadCase(
         "AccountTransactionsResponse",
     ),
     extract=_empty_extract,
+    capability=_INVOICE_PROCESSING_CAPABILITY,
 )
 
 FINANCE_CASES = (

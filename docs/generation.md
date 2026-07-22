@@ -284,6 +284,21 @@ settings. Значения API login и IDs находятся в process enviro
 явно переданном `.env`; их нельзя печатать, копировать в docs или коммитить.
 Полные правила находятся в `private/README.md`.
 
+Если для конкретного environment подтверждено отсутствие entitlement
+`PublicApiInvoiceProcessing`, добавьте в его private profile:
+
+```toml
+disabled_read_capabilities = ["public_api_invoice_processing"]
+```
+
+Тогда все 6 finance и 22 inventory cases остаются в полном плане со своими
+настоящими builders и bindings, но получают
+`no_live_target/invoice_processing_unavailable` до создания context view,
+request model, получения rate budget и HTTP-вызова. Без поля (или с пустым
+массивом) эти cases выполняются как обычно. Это декларация entitlement именно
+выбранного environment, а не перехват любого HTTP 403, retry-механизм или
+разрешение переключить API login.
+
 Live entrypoints принимают только точный корневой `--env-file .env` и не
 подхватывают файл неявно. Process environment имеет приоритет над этим файлом.
 Для API login профиль обязан ссылаться на основной `IIKO_API_KEY`; наличие

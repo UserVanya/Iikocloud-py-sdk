@@ -20,6 +20,7 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTarget,
     NoLiveTargetCode,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
     ReadContext,
     build_generated_request,
@@ -457,6 +458,13 @@ def test_inventory_registry_and_combined_plan_are_exact() -> None:
     assert set(plan.ordered_operation_ids) >= INVENTORY_IDS
 
 
+def test_all_inventory_cases_declare_invoice_processing_capability() -> None:
+    assert len(INVENTORY_CASES) == 22
+    for case in INVENTORY_CASES:
+        assert case.capability is ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+        assert NoLiveTargetCode.INVOICE_PROCESSING in case.allowed_no_target_codes
+
+
 def test_inventory_list_and_store_orders_are_exact() -> None:
     assert tuple(spec.list_id for spec in FAMILY_SPECS) == (INVENTORY_LIST_OPERATION_IDS)
     assert STORE_TARGET_KEYS == EXPECTED_STORE_KEYS
@@ -491,7 +499,9 @@ def test_document_family_bindings_dependencies_and_keys_are_exact(
     assert get_case.binding.request_keyword == "get_by_id_request"
     assert get_case.depends_on == (spec.list_id,)
     assert get_case.requires == ("organization_id", spec.document_key)
-    assert get_case.allowed_no_target_codes == frozenset({NoLiveTargetCode.DOCUMENT})
+    assert get_case.allowed_no_target_codes == frozenset(
+        {NoLiveTargetCode.DOCUMENT, NoLiveTargetCode.INVOICE_PROCESSING}
+    )
 
 
 @pytest.mark.parametrize("spec", FAMILY_SPECS, ids=lambda spec: spec.family)
@@ -570,7 +580,9 @@ def test_counteragent_live_read_is_temporarily_skipped_before_request_constructi
         case.build_values(_view(case))
 
     assert unavailable.value.code.value == "endpoint_unavailable"
-    assert case.allowed_no_target_codes == frozenset({unavailable.value.code})
+    assert case.allowed_no_target_codes == frozenset(
+        {unavailable.value.code, NoLiveTargetCode.INVOICE_PROCESSING}
+    )
     assert case.revision == 2
 
 
@@ -584,7 +596,11 @@ def test_cost_price_request_is_one_product_store_at_utc_midnight() -> None:
         *STORE_TARGET_KEYS,
     )
     assert case.allowed_no_target_codes == frozenset(
-        {NoLiveTargetCode.PRODUCT, NoLiveTargetCode.STORE}
+        {
+            NoLiveTargetCode.PRODUCT,
+            NoLiveTargetCode.STORE,
+            NoLiveTargetCode.INVOICE_PROCESSING,
+        }
     )
     assert _request_json(case) == {
         "dateIncoming": "2026-01-01T00:00:00.000+00:00",

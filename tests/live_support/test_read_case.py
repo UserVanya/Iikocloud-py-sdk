@@ -18,11 +18,13 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTargetCode,
     NoRequest,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
     ReadContext,
     ReadExtractorFailure,
     ReadFailureCode,
     build_generated_request,
+    no_target_code_for_read_capability,
 )
 
 EXPECTED_NO_TARGET_CODES = {
@@ -50,6 +52,11 @@ EXPECTED_NO_TARGET_CODES = {
     "DOCUMENT": "document_unavailable",
     "ACCOUNT": "account_unavailable",
     "STORE": "store_unavailable",
+    "INVOICE_PROCESSING": "invoice_processing_unavailable",
+}
+
+EXPECTED_READ_CAPABILITIES = {
+    "PUBLIC_API_INVOICE_PROCESSING": "public_api_invoice_processing",
 }
 
 EXPECTED_FAILURE_CODES = {
@@ -141,7 +148,7 @@ def _install_synthetic_generated_modules(
     )
     for package_name in package_names:
         package = ModuleType(package_name)
-        package.__path__ = []  # type: ignore[attr-defined]
+        package.__path__ = []
         monkeypatch.setitem(sys.modules, package_name, package)
 
     api_module = ModuleType("iikocloud_client.api.synthetic_api")
@@ -154,11 +161,33 @@ def _install_synthetic_generated_modules(
 
 
 def test_exact_enums_and_seed_keys() -> None:
+    assert issubclass(ReadCapability, str)
     assert issubclass(NoLiveTargetCode, str)
     assert issubclass(ReadFailureCode, str)
+    assert _enum_values(ReadCapability) == EXPECTED_READ_CAPABILITIES
     assert _enum_values(NoLiveTargetCode) == EXPECTED_NO_TARGET_CODES
     assert _enum_values(ReadFailureCode) == EXPECTED_FAILURE_CODES
     assert READ_SEED_KEYS == EXPECTED_SEED_KEYS
+
+
+def test_read_case_capability_requires_its_explicit_no_target_code() -> None:
+    capability = ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+
+    with pytest.raises((TypeError, ValueError)):
+        _case(capability=capability)
+
+    case = _case(
+        capability=capability,
+        allowed_no_target_codes=frozenset({NoLiveTargetCode.INVOICE_PROCESSING}),
+    )
+
+    assert case.capability is capability
+    assert (
+        no_target_code_for_read_capability(capability)
+        is NoLiveTargetCode.INVOICE_PROCESSING
+    )
+    with pytest.raises(TypeError):
+        no_target_code_for_read_capability(cast(Any, "public_api_invoice_processing"))
 
 
 def test_context_view_is_declared_only_immutable_and_redacted() -> None:
@@ -227,9 +256,9 @@ def test_context_types_cannot_be_traversed_by_dataclasses_asdict() -> None:
     assert not dataclasses.is_dataclass(context)
     assert not dataclasses.is_dataclass(view)
     with pytest.raises(TypeError):
-        dataclasses.asdict(context)
+        dataclasses.asdict(cast(Any, context))
     with pytest.raises(TypeError):
-        dataclasses.asdict(view)
+        dataclasses.asdict(cast(Any, view))
     assert supplied_value not in repr(context)
     assert supplied_value not in repr(view)
 
@@ -381,9 +410,9 @@ def test_fixed_code_exceptions_reject_free_form_live_values() -> None:
     with pytest.raises(TypeError):
         NoLiveTarget(cast(Any, "supplied-live-value"))
     with pytest.raises(TypeError):
-        ReadAssertionFailure(cast(Any, "supplied-live-value"))
+        cast(Any, ReadAssertionFailure)("supplied-live-value")
     with pytest.raises(TypeError):
-        ReadExtractorFailure(cast(Any, "supplied-live-value"))
+        cast(Any, ReadExtractorFailure)("supplied-live-value")
 
 
 def test_generated_binding_resolves_classes_and_request_keyword_lazily(

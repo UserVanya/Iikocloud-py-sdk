@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Callable, Mapping
-from types import MappingProxyType
-from typing import cast
+from types import MappingProxyType, SimpleNamespace
+from typing import Any, cast
 
 import pytest
 
@@ -22,6 +22,7 @@ from tools.openapi_pipeline.live.read_case import (
     NoLiveTargetCode,
     NoRequest,
     ReadAssertionFailure,
+    ReadCapability,
     ReadCase,
     ReadContext,
     ReadExtractorFailure,
@@ -76,6 +77,7 @@ def _case(
     ),
     validate_response: Callable[[object, ContextView], None] = _validate_ok,
     extract: Callable[[object, ContextView], Mapping[str, object]] = _extract_empty,
+    capability: ReadCapability | None = None,
 ) -> ReadCase:
     return ReadCase(
         operation_id=operation_id,
@@ -95,6 +97,7 @@ def _case(
         build_values=build_values,
         validate_response=validate_response,
         extract=extract,
+        capability=capability,
     )
 
 
@@ -147,6 +150,7 @@ class _FakeSdk:
         events: list[str] | None = None,
         *,
         operation_contract: Mapping[str, LiveOperation] | None = None,
+        disabled_read_capabilities: frozenset[ReadCapability] = frozenset(),
     ) -> None:
         self.actions = dict(actions or {})
         self.events = events
@@ -154,6 +158,9 @@ class _FakeSdk:
             None
             if operation_contract is None
             else MappingProxyType(dict(operation_contract))
+        )
+        self.profile = SimpleNamespace(
+            disabled_read_capabilities=disabled_read_capabilities
         )
         self.calls: list[tuple[str, object | None]] = []
 
@@ -241,6 +248,82 @@ async def _run(
 
 def _outcome_by_id(summary: ReadRunSummary) -> dict[str, ReadOutcome]:
     return {outcome.operation_id: outcome for outcome in summary.outcomes}
+
+
+@pytest.mark.asyncio
+async def test_disabled_read_capability_skips_before_context_builder_and_sdk_call() -> None:
+    events: list[str] = []
+    capability = ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+
+    def blocked_builder(_view: ContextView) -> NoRequest:
+        events.append("blocked-builder")
+        return NO_REQUEST
+
+    def independent_builder(_view: ContextView) -> NoRequest:
+        events.append("independent-builder")
+        return NO_REQUEST
+
+    plan = ReadPlan.build(
+        (
+            _case(
+                "a_disabled",
+                requires=("profile_organization_id",),
+                allowed_no_target_codes=frozenset(
+                    {NoLiveTargetCode.INVOICE_PROCESSING}
+                ),
+                build_values=blocked_builder,
+                capability=capability,
+            ),
+            _case("b_independent", build_values=independent_builder),
+        )
+    )
+    context = _FakeContext({"profile_organization_id": object()}, events)
+    sdk = _FakeSdk(disabled_read_capabilities=frozenset({capability}))
+
+    summary, _context, selected_sdk, _report = await _run(
+        plan,
+        context=context,
+        sdk=sdk,
+    )
+    outcomes = _outcome_by_id(summary)
+
+    assert outcomes["a_disabled"].status is ReadStatus.NO_LIVE_TARGET
+    assert outcomes["a_disabled"].reason == "invoice_processing_unavailable"
+    assert outcomes["b_independent"].status is ReadStatus.PASSED
+    assert events == ["view", "independent-builder", "apply"]
+    assert selected_sdk.calls == [("b_independent", None)]
+
+
+@pytest.mark.asyncio
+async def test_enabled_read_capability_executes_the_real_builder_and_sdk() -> None:
+    built: list[str] = []
+    capability = ReadCapability.PUBLIC_API_INVOICE_PROCESSING
+
+    def real_builder(_view: ContextView) -> NoRequest:
+        built.append("real-builder")
+        return NO_REQUEST
+
+    plan = ReadPlan.build(
+        (
+            _case(
+                "a_enabled",
+                allowed_no_target_codes=frozenset(
+                    {NoLiveTargetCode.INVOICE_PROCESSING}
+                ),
+                build_values=real_builder,
+                capability=capability,
+            ),
+        )
+    )
+
+    summary, _context, sdk, _report = await _run(
+        plan,
+        sdk=_FakeSdk(disabled_read_capabilities=frozenset()),
+    )
+
+    assert summary.outcomes[0].status is ReadStatus.PASSED
+    assert built == ["real-builder"]
+    assert sdk.calls == [("a_enabled", None)]
 
 
 @pytest.mark.asyncio
@@ -792,7 +875,7 @@ def test_hostile_contract_snapshot_failure_detaches_source_context() -> None:
             return marker
 
     class HostileMapping(dict[str, LiveOperation]):
-        def items(self) -> object:
+        def items(self) -> Any:
             raise OpaqueSnapshotFailure()
 
     with pytest.raises(SafetyError) as caught:

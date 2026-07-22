@@ -20,6 +20,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 compatibility
 from ..errors import SafetyError
 from ..io import canonical_json_bytes
 from .lock import validate_private_regular_file
+from .read_case import ReadCapability
 
 _ENV_NAME = re.compile(r"[A-Z_][A-Z0-9_]{0,127}\Z")
 _PROFILE_NAME = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
@@ -35,7 +36,15 @@ _REQUIRED_FIELDS = {
     "allow_write",
     "allowed_organization_ids",
 }
-_OPTIONAL_FIELDS = {"terminal_group_id_env", "write_product_id_env"}
+_OPTIONAL_FIELDS = {
+    "disabled_read_capabilities",
+    "terminal_group_id_env",
+    "write_product_id_env",
+}
+_INVALID_DISABLED_CAPABILITIES = (
+    "disabled_read_capabilities must be a duplicate-free array of known "
+    "capability strings"
+)
 
 
 @dataclass(frozen=True)
@@ -50,6 +59,7 @@ class ResolvedLiveProfile:
     allow_write: bool
     allowed_organization_ids: tuple[str, ...]
     fingerprint: str
+    disabled_read_capabilities: frozenset[ReadCapability] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -205,6 +215,23 @@ def _string_list(value: object, *, label: str) -> tuple[str, ...]:
     return result
 
 
+def _disabled_read_capabilities(value: object) -> frozenset[ReadCapability]:
+    if type(value) is not list:
+        raise SafetyError(_INVALID_DISABLED_CAPABILITIES)
+    known = {capability.value: capability for capability in ReadCapability}
+    resolved: list[ReadCapability] = []
+    invalid = False
+    for item in value:
+        capability = known.get(item) if type(item) is str else None
+        if capability is None:
+            invalid = True
+        else:
+            resolved.append(capability)
+    if invalid or len(set(resolved)) != len(resolved):
+        raise SafetyError(_INVALID_DISABLED_CAPABILITIES)
+    return frozenset(resolved)
+
+
 def _profile_fingerprint(name: str, base_url: str) -> str:
     return hashlib.sha256(
         canonical_json_bytes({"base_url": base_url, "name": name})
@@ -227,6 +254,8 @@ def load_discovery_profile(
     if data["allow_write"] is not False:
         raise SafetyError("Discovery live profile must set allow_write=false")
     _string_list(data["allowed_organization_ids"], label="allowed_organization_ids")
+    if "disabled_read_capabilities" in data:
+        _disabled_read_capabilities(data["disabled_read_capabilities"])
 
     api_login_env = _env_name(data["api_login_env"], label="api_login_env")
     if required_api_login_env is not None and api_login_env != required_api_login_env:
@@ -263,6 +292,9 @@ def load_profile(
     allow_write = data["allow_write"]
     allowed_organization_ids = _string_list(
         data["allowed_organization_ids"], label="allowed_organization_ids"
+    )
+    disabled_read_capabilities = _disabled_read_capabilities(
+        data.get("disabled_read_capabilities", [])
     )
 
     api_login_env = _env_name(data["api_login_env"], label="api_login_env")
@@ -308,4 +340,5 @@ def load_profile(
         allow_write=allow_write,
         allowed_organization_ids=allowed_organization_ids,
         fingerprint=fingerprint,
+        disabled_read_capabilities=disabled_read_capabilities,
     )
