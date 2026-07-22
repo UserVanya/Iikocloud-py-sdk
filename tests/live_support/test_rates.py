@@ -21,9 +21,9 @@ from tools.openapi_pipeline.live.rates import (
 )
 from tools.openapi_pipeline.live.safety import OperationSafetyCatalog
 
-_REVIEWED_READ_TEST_BUDGET = {
+_REVIEWED_GLOBAL_TEST_BUDGET = {
     "min_interval_seconds": 30,
-    "source": "user-approved-global-read-cadence-2026-07-21",
+    "source": "user-approved-global-cadence-2026-07-22",
     "verified": True,
 }
 
@@ -513,51 +513,26 @@ def test_catalog_load_rejects_yaml_anchors_and_aliases(tmp_path: Path) -> None:
 
 
 def _expected_committed_rate_operations() -> dict[str, Any]:
-    server_limits = {
-        "authenticate": (1, 5),
-        "get_organizations": (1, 10),
-        "get_terminal_groups": (10, 60),
-        "get_external_menus": (1, 1800),
-        "get_external_menu_by_id": (5, 60),
-    }
-    operations = {
+    return {
         operation_id: {
-            "test_budget": copy.deepcopy(_REVIEWED_READ_TEST_BUDGET),
-            "server_limit": (
-                {
-                    "calls": server_limits[operation_id][0],
-                    "per_seconds": server_limits[operation_id][1],
-                    "source": "existing-manager-configuration",
-                    "verified": True,
-                }
-                if operation_id in server_limits
-                else None
-            ),
+            "test_budget": copy.deepcopy(_REVIEWED_GLOBAL_TEST_BUDGET),
+            "server_limit": None,
         }
-        for operation_id in ("authenticate", *_READ_ENDPOINTS)
+        for operation_id in (
+            "authenticate",
+            *_READ_ENDPOINTS,
+            "add_products_to_stop_list",
+            "remove_products_from_stop_list",
+        )
     }
-    for operation_id in ("add_products_to_stop_list", "remove_products_from_stop_list"):
-        operations[operation_id] = {
-            "test_budget": {
-                "min_interval_seconds": 30,
-                "source": "conservative-unverified",
-                "verified": False,
-            },
-            "server_limit": {
-                "calls": 1,
-                "per_seconds": 60,
-                "source": "conservative-unverified",
-                "verified": False,
-            },
-        }
-    return operations
 
 
-def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_read() -> None:
+def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -> None:
     path = Path("contracts/rate-limits.yaml")
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
+    assert len(expected_operations) == 94
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -571,16 +546,8 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_read() -> Non
 
     catalog = RateCatalog.load(path)
     assert catalog.operation_ids == tuple(sorted(expected_operations))
-    assert catalog.operation_budget("authenticate").safe_interval_seconds == 30
-    assert catalog.operation_budget("get_organizations").safe_interval_seconds == 50
-    assert catalog.operation_budget("get_terminal_groups").safe_interval_seconds == 30
-    assert catalog.operation_budget("get_external_menus").safe_interval_seconds == 9000
-    assert catalog.operation_budget("get_external_menu_by_id").safe_interval_seconds == 60
-    for operation_id in _READ_ENDPOINTS:
-        assert catalog.operation_budget(operation_id).safe_interval_seconds >= 30
-    for operation_id in ("add_products_to_stop_list", "remove_products_from_stop_list"):
-        with pytest.raises(SafetyError, match="test budget.*not verified"):
-            catalog.operation_budget(operation_id)
+    for operation_id in expected_operations:
+        assert catalog.operation_budget(operation_id).safe_interval_seconds == 30.0
 
 
 def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist() -> None:

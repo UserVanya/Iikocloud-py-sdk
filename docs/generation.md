@@ -340,12 +340,14 @@ PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest \
 
 План содержит 91 read case и одну authentication, то есть до 92 HTTP requests.
 Если каждый case доходит до HTTP, 91 межзапросный интервал по 30 секунд задаёт
-минимум 45 минут 30 секунд только на cadence. Это не верхняя граница:
-persistent rate state переживает процессы и может потребовать более строгого
-ожидания; для `get_external_menus` effective interval может достигать 9000
-секунд. Не сокращайте ожидание удалением state, ручным `sleep` или сменой API
-login. Если обязательного target нет, case получает `no_live_target` до
-получения rate budget и до HTTP, поэтому реальный run может быть короче.
+минимум 45 минут 30 секунд только на cadence. Текущий tracked rate contract
+задаёт ровно 30 секунд для каждой guarded operation: authentication, всех reads
+и обеих write operations; operation-specific server-limit multiplier сейчас
+отсутствует. Persistent rate state переживает процессы и сохраняет оставшуюся
+часть того же 30-секундного интервала. Никогда не удаляйте и не обходите state,
+не заменяйте guard ручным `sleep` и не меняйте API login. Если обязательного
+target нет, case получает `no_live_target` до получения rate budget и до HTTP,
+поэтому реальный run может быть короче.
 
 ### Выборочный read с capture
 
@@ -408,10 +410,13 @@ manually reset later. Второй ключ включает `IIKO_API_KEY_2`: �
 
 ### Как подтвердить rate limit
 
-Не меняйте `verified: false` экспериментом с учащением запросов. Сначала
-подтвердите server limit по авторитетному источнику или отдельно согласованному
-наблюдению, сохраните его безопасное описание в поле `source` и оставьте test
-budget не выше 20% server limit при глобальном минимуме 30 секунд. Затем:
+Сейчас у всех production entries `server_limit: null`, а единый подтверждённый
+test budget задаёт ровно 30 секунд. Реализация сохраняет поддержку будущего
+явного server limit. Не подтверждайте такой limit экспериментом с учащением
+запросов: сначала проверьте его по авторитетному источнику или отдельно
+согласованному наблюдению, сохраните безопасное описание в поле `source` и
+оставьте test budget не выше 20% server limit при глобальном минимуме 30 секунд.
+Затем:
 
 1. добавьте или обновите offline tests каталога и убедитесь, что неизвестная
    operation и неподтверждённый budget продолжают fail closed;
@@ -444,10 +449,11 @@ uv run --frozen --offline python -m tools.openapi_pipeline capture-evidence \
   --operation get_external_menu_by_id --menu-version 4
 ```
 
-Guard использует не только глобальный минимум 30 секунд, но и более строгий
-интервал конкретной operation из tracked rate catalog. Он хранит время
-последнего вызова между процессами; оператор не должен заменять его ручным
-`sleep` или повторным API login.
+Текущий tracked rate catalog задаёт этой operation тот же точный интервал 30
+секунд, что и всем остальным guarded operations. Guard хранит время последнего
+вызова между процессами; оператор не должен заменять его ручным `sleep` или
+повторным API login. Если в будущем появится явный `server_limit`, guard по-
+прежнему сможет применить его математику поверх глобального минимума.
 
 Capture writer сохраняет sanitized request/response JSON только под ignored
 `private/captures/` с закрытыми permissions. Даже sanitized capture остаётся
@@ -504,10 +510,10 @@ uv run --frozen --offline pytest -m live_write -n0 \
 `--allow-audit-residue`, точный `--target-organization`, write-enabled private
 profile, allowlist, отдельные terminal group/product и `-n0`. Перед
 authentication проверяются rate budgets операций `get`, `add` и `remove`.
-Сейчас эти три stop-list записи в `contracts/rate-limits.yaml` намеренно имеют
-`verified: false`, поэтому live write останавливается до HTTP. Не меняйте этот
-флаг без проверенного server limit и отдельного решения на контролируемый
-запуск.
+Сейчас эти три stop-list записи в `contracts/rate-limits.yaml` имеют единый
+подтверждённый budget ровно 30 секунд. Это подтверждает только cadence и не
+разрешает live write: без всех перечисленных write gates команда
+останавливается до HTTP.
 
 ### Запрещённый шаблон реального write-запуска
 
@@ -527,9 +533,6 @@ PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest -m live_write -n0 \
 
 Шаблон остаётся запрещённым, пока одновременно не выполнены все условия:
 
-- для `get_stop_lists`, `add_products_to_stop_list` и
-  `remove_products_from_stop_list` проверены реальные server rates и выставлен
-  `verified: true`;
 - в write-enabled private profile и allowlist настроены выделенные целевые
   organization, terminal group и единственный test product;
 - получена отдельная явная авторизация именно на этот live-write запуск.
@@ -662,11 +665,11 @@ list и `git diff --stat`, выполняет `git add --` только для �
 non-force push тега.
 
 Publish gates не разрешают live write. Записи stop-list операций `get`, `add`
-и `remove` в `contracts/rate-limits.yaml` всё ещё имеют `verified: false`;
-write-тесты можно только собирать, но нельзя запускать live до отдельной
-проверки server limits и явного контролируемого решения. CLI-имя
-`reset-circuit` также остаётся зарезервированным и не должно использоваться как
-фиктивный способ обойти открытый circuit.
+и `remove` в `contracts/rate-limits.yaml` имеют подтверждённый 30-секундный
+budget, но write-тесты можно только собирать: live-запуск по-прежнему требует
+отдельной явной авторизации и всех write gates. CLI-имя `reset-circuit` также
+остаётся зарезервированным и не должно использоваться как фиктивный способ
+обойти открытый circuit.
 
 ## Проверка Git tag в downstream без изменения manager
 

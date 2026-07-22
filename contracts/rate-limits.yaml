@@ -5,284 +5,284 @@ defaults:
   max_calls_per_operation_per_run: 1
 operations:
   authenticate:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
-    server_limit: {calls: 1, per_seconds: 5, source: existing-manager-configuration, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   calculate_combo_price:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   calculate_inventory_cost_prices:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   calculate_loyalty_checkin:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   check_products_in_stop_list:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   check_sms_sending_possibility:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   check_sms_status:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   check_terminal_groups_availability:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_active_courier_locations:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_active_courier_locations_by_terminal:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_allowed_delivery_restrictions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_cancel_causes:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_cities:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_combos_info:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_command_status:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_coupon_info:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_coupon_series:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_courier_location_history:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_couriers:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_couriers_by_role:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_customer_categories:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_customer_info:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_customer_transactions_by_date:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_customer_transactions_by_revision:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_deliveries_by_delivery_date_and_phone:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_deliveries_by_delivery_date_and_status:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_deliveries_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_deliveries_by_revision:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_delivery_draft_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_delivery_drafts_by_filter:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_delivery_history_by_delivery_date_and_phone:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_delivery_order_types:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_delivery_restrictions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_discounts:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_employee_info:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_external_menu_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
-    server_limit: {calls: 5, per_seconds: 60, source: existing-manager-configuration, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   get_external_menus:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
-    server_limit: {calls: 1, per_seconds: 1800, source: existing-manager-configuration, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   get_finance_incoming_service:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_finance_outgoing_service:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_counteragents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_disassemble_document:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_incoming_invoice:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_incoming_returned_invoice:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_internal_transfer:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_outgoing_invoice:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_production_document:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_returned_invoice:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_sales_document:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_transformation_document:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_inventory_writeoff_document:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_loyalty_counters:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_loyalty_manual_conditions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_loyalty_programs:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_marketing_sources:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_nomenclature:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_non_activated_coupons_by_series:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_organization_settings:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_organizations:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
-    server_limit: {calls: 1, per_seconds: 10, source: existing-manager-configuration, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   get_payment_types:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_personal_session_info:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_regions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_removal_types:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_reserve_available_organizations:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_reserve_restaurant_sections:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_reserve_statuses_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_reserve_terminal_groups:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_restaurant_sections_workload:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_stop_lists:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_streets_by_city:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_streets_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_table_orders_by_id:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_table_orders_by_table:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_terminal_groups:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
-    server_limit: {calls: 10, per_seconds: 60, source: existing-manager-configuration, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   get_terminal_groups_of_employee:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_tips_types:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   get_webhook_settings:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_finance_account_transactions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_finance_document_transactions:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_finance_incoming_services:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_finance_outgoing_services:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_disassemble_documents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_incoming_invoices:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_incoming_returned_invoices:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_internal_transfers:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_outgoing_invoices:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_production_documents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_returned_invoices:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_sales_documents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_transformation_documents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_inventory_writeoff_documents:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   list_organizations:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   search_deliveries:
-    test_budget: {min_interval_seconds: 30, source: user-approved-global-read-cadence-2026-07-21, verified: true}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
   add_products_to_stop_list:
-    test_budget: {min_interval_seconds: 30, source: conservative-unverified, verified: false}
-    server_limit: {calls: 1, per_seconds: 60, source: conservative-unverified, verified: false}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   remove_products_from_stop_list:
-    test_budget: {min_interval_seconds: 30, source: conservative-unverified, verified: false}
-    server_limit: {calls: 1, per_seconds: 60, source: conservative-unverified, verified: false}
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
