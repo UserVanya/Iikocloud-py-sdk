@@ -311,6 +311,101 @@ uv run --frozen --offline pytest -m live_read_smoke -n0 \
 аутентифицируются один раз и не делают retry HTTP-вызова. Один live process
 может выполнить не больше одного вызова конкретной operation за run.
 
+### Полный guarded live-read
+
+Полную проверку всех reviewed read cases запускайте только этой командой из
+корня repository:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest \
+  -m live_read_full -n0 \
+  --live-profile amato --env-file .env \
+  tests/integration/read/test_all_reads.py
+```
+
+Каждая часть команды является частью safety contract:
+
+- `PYTHONDONTWRITEBYTECODE=1` запрещает создавать `__pycache__` в
+  manifest-controlled generated tree;
+- `uv run` использует project environment, `--frozen` запрещает менять
+  `uv.lock`, а `--offline` запрещает `uv` обращаться к package indexes;
+- `uv --offline` **не отключает HTTP к iiko**: выбранный pytest entrypoint
+  остаётся live-командой и выполняет guarded iiko requests;
+- `pytest` запускает live harness, `-m live_read_full` выбирает только точный
+  full marker, а `-n0` запрещает параллельных pytest workers;
+- `--live-profile amato` выбирает закрытый профиль `amato`, а
+  `--env-file .env` разрешает только явно указанный корневой `.env`;
+- `tests/integration/read/test_all_reads.py` ограничивает collection точным
+  full-runner файлом.
+
+План содержит 91 read case и одну authentication, то есть до 92 HTTP requests.
+Если каждый case доходит до HTTP, 91 межзапросный интервал по 30 секунд задаёт
+минимум 45 минут 30 секунд только на cadence. Это не верхняя граница:
+persistent rate state переживает процессы и может потребовать более строгого
+ожидания; для `get_external_menus` effective interval может достигать 9000
+секунд. Не сокращайте ожидание удалением state, ручным `sleep` или сменой API
+login. Если обязательного target нет, case получает `no_live_target` до
+получения rate budget и до HTTP, поэтому реальный run может быть короче.
+
+### Выборочный read с capture
+
+Для одного явно выбранного capture используйте точную selected-команду:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest \
+  -m live_read_selected -n0 \
+  --live-profile amato --env-file .env \
+  --capture-http --capture-operation get_nomenclature \
+  tests/integration/read/test_selected_read.py
+```
+
+`PYTHONDONTWRITEBYTECODE`, `uv run --frozen --offline`, `pytest`, `-n0`,
+`--live-profile` и `--env-file` имеют те же значения и ограничения, что в
+полной команде. `-m live_read_selected` выбирает только selected marker;
+`--capture-http` включает sanitized capture, а
+`--capture-operation get_nomenclature` одновременно задаёт единственную
+capture operation. Последний аргумент ограничивает collection точным
+`test_selected_read.py`.
+
+Selected runner выполняет canary и dependency closure выбранной operation, но
+capture записывает только `get_nomenclature`. Authentication никогда не
+попадает в capture. Sanitized файлы сохраняются с закрытыми permissions только
+под ignored `private/captures/`, остаются private и не добавляются в Git.
+Capture options нельзя передавать full runner; full и selected режимы нельзя
+объединять в одном запуске.
+
+### Как читать результат full/selected run
+
+- `passed` — operation вернула успешный HTTP response, а validation,
+  extraction и обновление безопасного context завершились успешно;
+- `no_live_target` — разрешённый target или context отсутствует; rate budget
+  не расходуется, HTTP не отправляется, и runner продолжает план;
+- `failed` — полученный response не прошёл assertion или extraction; итоговый
+  run неуспешен, зависимые cases получают `aborted`, но независимые cases
+  продолжаются;
+- `aborted` — case остановлен из-за failed dependency или safety/transport/
+  HTTP/rate/cancellation/report failure. Ошибка, создающая глобальный abort,
+  прекращает новые HTTP-вызовы, а все оставшиеся cases записываются как
+  `aborted`.
+
+Успешный итог требует хотя бы одного `passed` и отсутствия `failed` и
+`aborted`; одни только `no_live_target` успехом не считаются.
+
+Для подтверждённого upstream schema defect не сохраняйте private response или
+capture в Git. Добавьте минимальную публичную synthetic fixture, внесите
+исправление в соответствующий слой: `openapi/overlays/` для schema contract,
+`openapi/operation-ids.yaml` для operation name или
+`openapi/model-name-overrides.yaml` для model name. Затем перегенерируйте SDK,
+повторите все offline gates и только после их успеха планируйте новый guarded
+live call. Подробный fail-closed порядок приведён в разделе
+[«Как исправлять дефекты upstream»](#как-исправлять-дефекты-upstream).
+
+**429 rule:** stop the entire run; no retry; no second key; investigate and
+manually reset later. Второй ключ включает `IIKO_API_KEY_2`: не продолжайте
+следующую operation, не удаляйте state и не пытайтесь обойти circuit. Сначала
+расследуйте причину; более поздний ручной reset требует отдельного решения, а
+зарезервированное CLI-имя `reset-circuit` сейчас не реализовано.
+
 ### Как подтвердить rate limit
 
 Не меняйте `verified: false` экспериментом с учащением запросов. Сначала
