@@ -1760,7 +1760,7 @@ INVENTORY_IDS = {
 }
 ```
 
-For each of the ten list/get pairs, parameterize exact operation ID, API class, request keyword, response document field, and family context key. Test empty lists and ID linkage. Separately test counteragent pagination and cost-price product/store absence.
+For each of the ten list/get pairs, parameterize exact operation ID, API class, request keyword, exact bare-list item and get-response model, activity field, response document field, and family context key. Test empty lists, same-item extraction, and ID linkage. Separately test counteragent pagination, cost-price product/store absence, the fixed store priority, and exact wrapper response models.
 
 - [ ] **Step 2: Run and verify RED**
 
@@ -1773,7 +1773,7 @@ Expected: inventory case module does not exist.
 
 - [ ] **Step 3: Implement all ten explicit list/get pairs**
 
-Use `ListRequest(var_from, organization_id, to)` for each list and `GetByIDRequest(document_id, organization_id)` for each get. The ten families are:
+Use keyword-only `ListRequest(var_from, organization_id=str(organization_id), to)` for each list and `GetByIDRequest(document_id, organization_id=str(organization_id))` for each get because all generated inventory GUID request fields are `StrictStr`. The ten families are:
 
 ```text
 disassemble_document
@@ -1788,11 +1788,30 @@ transformation_document
 writeoff_document
 ```
 
-Factories may share value and validation logic, but every `GeneratedReadBinding` remains explicit. Extract only document/store/account UUIDs needed by later reads; discard products, counteragent names, comments, amounts, and all other document content.
+Factories may share value and validation logic, but every `GeneratedReadBinding` remains explicit. All list responses are bare lists; incoming/outgoing invoice list and get operations both use the same `IncomingInvoice`/`OutgoingInvoice` model, while the other eight families have distinct list-item/get-response models. Select the other eight families only when `deleted is False`; select incoming/outgoing invoices only when `status` is exactly `NEW` or `PROCESSED`. Extract only canonical document/store/account GUID strings from the same selected list item; discard products, counteragent names, comments, amounts, and all other document content.
 
 - [ ] **Step 4: Implement counteragent and cost-price cases**
 
-`get_inventory_counteragents` uses `organizationId`, `offset=0`, `limit=1`, with no unbounded type expansion. `calculate_inventory_cost_prices` is bound to `PublicApiInvoiceProcessingOutgoingInvoicesApi` exactly as generated, not inferred from its costings path. It requires one nomenclature product and one store ID derived from explicit `storeFrom`, `storeTo`, `defaultStore`, or `assignedStores` fields in prior document responses; request one `PriceItem(amountFactor=1, productId, storeId)` for the seeded incoming date. Missing values return `product_unavailable`/`store_unavailable` before HTTP.
+`get_inventory_counteragents` uses `organizationId=str(organization_id)`, `offset=0`, `limit=1`, with no unbounded type expansion, and validates the exact `GetCounteragentsResponse` wrapper. `calculate_inventory_cost_prices` is bound to `PublicApiInvoiceProcessingOutgoingInvoicesApi` exactly as generated, not inferred from its costings path, and validates the exact `GetCostPricesResponse` wrapper. It requires one nomenclature product and one store ID derived from explicit `storeFrom`, `storeTo`, `defaultStore`, or `assignedStores` fields in prior list responses; request one generated `PriceItem(amountFactor=1, productId=str(product_id), storeId=<canonical string>)`. Convert the UTC-derived `date_yyyy_mm_dd` seed to the full timestamp `YYYY-MM-DDT00:00:00.000+00:00` required by the documented API shape. Missing values return `product_unavailable`/`store_unavailable` before HTTP.
+
+Choose cost-price stores in this fixed family/field order:
+
+```text
+inventory_disassemble_document_store_from_id
+inventory_disassemble_document_store_to_id
+inventory_incoming_invoice_default_store_id
+inventory_incoming_returned_invoice_assigned_store_id
+inventory_internal_transfer_store_from_id
+inventory_internal_transfer_store_to_id
+inventory_outgoing_invoice_default_store_id
+inventory_production_document_store_from_id
+inventory_production_document_store_to_id
+inventory_returned_invoice_assigned_store_id
+inventory_sales_document_assigned_store_id
+inventory_transformation_document_store_from_id
+inventory_transformation_document_store_to_id
+inventory_writeoff_document_store_from_id
+```
 
 - [ ] **Step 5: Verify and commit**
 
