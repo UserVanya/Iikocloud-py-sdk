@@ -30,7 +30,7 @@ jobs:
       - name: Install frozen development environment
         run: uv sync --frozen --group dev
       - name: Lint hand-written code and tests
-        run: uv run --frozen --offline ruff check tools tests
+        run: uv run --frozen --offline ruff check --no-cache tools tests
       - name: Test evidence candidate writer in a fresh process
         run: uv run --frozen --offline pytest -q tests/pipeline/test_evidence_candidate_writer.py
       - name: Test evidence candidate contracts in a fresh process

@@ -218,7 +218,10 @@ def test_offline_workflow_runs_required_checks_and_pinned_generator() -> None:
     run_steps = _run_steps(steps)
 
     _command_step(run_steps, "uv sync --frozen --group dev")
-    _command_step(run_steps, "uv run --frozen --offline ruff check tools tests")
+    _command_step(
+        run_steps,
+        "uv run --frozen --offline ruff check --no-cache tools tests",
+    )
     _command_step(
         run_steps,
         "uv run --frozen --offline python -m tools.openapi_pipeline verify-no-secrets",
@@ -245,7 +248,7 @@ def test_offline_workflow_runs_required_checks_and_pinned_generator() -> None:
     non_pytest_commands = {run for _, _, run in run_steps} - pytest_commands
     assert non_pytest_commands == {
         "uv sync --frozen --group dev",
-        "uv run --frozen --offline ruff check tools tests",
+        "uv run --frozen --offline ruff check --no-cache tools tests",
         "uv run --frozen --offline python -m tools.openapi_pipeline verify-no-secrets",
         "uv build --offline",
         "uv run --frozen --offline mypy tools/openapi_pipeline",

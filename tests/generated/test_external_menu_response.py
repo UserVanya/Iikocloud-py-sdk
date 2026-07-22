@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+
 from iikocloud_client.models.external_menu_response import ExternalMenuResponse
 
 
