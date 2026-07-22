@@ -1695,13 +1695,13 @@ Expected: finance case module does not exist.
 
 - [ ] **Step 3: Implement period-list and document-get factories**
 
-Implement `make_period_list_case(operation_id, binding, document_key, account_keys, store_keys)` with `ListRequest(var_from, organization_id, to)` and `make_document_get_case(operation_id, binding, provider_operation_id, document_key)` with `GetByIDRequest(document_id, organization_id)`. Keep generated API class/method/keyword explicit per Appendix B; do not infer the class from the URL or operation prefix.
+Implement `make_period_list_case(operation_id, binding, document_key, account_keys, store_keys)` with `ListRequest(var_from, organization_id=str(organization_id), to)` and `make_document_get_case(operation_id, binding, provider_operation_id, document_key)` with `GetByIDRequest(document_id, organization_id=str(organization_id))`. The shared context stores the organization as `UUID`, while every generated finance request declares its GUID fields as `StrictStr`. Keep generated API class/method/keyword explicit per Appendix B; do not infer the class from the URL or operation prefix.
 
-Incoming/outgoing list cases each provide their own document/account keys. Corresponding gets require exactly their family document ID and validate that the returned document identifier matches the request.
+Incoming/outgoing list responses are bare generated-model lists. Each list case chooses a non-deleted item with a non-empty GUID-shaped document string, then provides its own document and revenue-account keys from that same item; these schemas expose no expense-account or store field. Corresponding gets require exactly their family document ID and validate that the exact generated response model contains the requested string identifier.
 
 - [ ] **Step 4: Implement transaction target selection**
 
-`list_finance_document_transactions` may read the declared document keys from all 12 finance/inventory list providers and chooses the first non-null value in a fixed tuple order. `list_finance_account_transactions` similarly chooses a response-derived revenue/expense/from/to account ID. If absent, return `document_unavailable` or `account_unavailable` before SDK/rate access. Both use the seeded bounded date period where their request models expose dates.
+`list_finance_document_transactions` may read the declared document keys from all 12 finance/inventory list providers and chooses the first valid value in a fixed tuple order. Its generated request exposes only `documentId` and `organizationId`, so it must not receive date fields. `list_finance_account_transactions` similarly chooses a response-derived revenue/expense/from/to account ID and is the only transaction request that consumes the seeded bounded date period. If a target is absent, return `document_unavailable` or `account_unavailable` before SDK/rate access. Validate the document-transactions response as a bare list of exact `DocumentTransactionItem` models and the account response as the exact `AccountTransactionsResponse` model.
 
 - [ ] **Step 5: Verify and commit**
 
