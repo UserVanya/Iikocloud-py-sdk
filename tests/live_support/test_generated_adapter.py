@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import dataclasses
+import json
 import socket
 import sys
 import traceback
@@ -15,7 +16,7 @@ import pytest
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
-from tools.openapi_pipeline.capture import LiveCapture
+from tools.openapi_pipeline.capture import CaptureWriter, LiveCapture, RedactionHints
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.generated import (
     GeneratedCallFailure,
@@ -333,7 +334,7 @@ def _adapter(
     *,
     guard: StubGuard,
     state: StubState,
-    capture: StubCapture | None = None,
+    capture: LiveCapture | StubCapture | None = None,
     receipt: LiveReceipt | None = None,
     receipt_path: Path | None = None,
     operation_contract: Mapping[str, LiveOperation] | None = None,
@@ -435,7 +436,7 @@ async def test_bound_success_uses_only_resolved_method_and_returns_metadata() ->
     guard = StubGuard(state)
     adapter = _adapter(guard=guard, state=state)
     request = SyntheticRequest({"organizationIds": ["organization-id"]})
-    response_model = {"organizations": []}
+    response_model: dict[str, object] = {"organizations": []}
 
     async def invoke() -> ApiResponse[object]:
         return ApiResponse(
@@ -800,7 +801,69 @@ async def test_success_captures_completed_model_pair_with_status() -> None:
     assert metadata["method"] == "POST"
     assert metadata["path"] == "/api/2/menu/by_id"
     assert metadata["status"] == 201
-    assert type(metadata["duration_ms"]) is int
+    assert type(metadata["duration"]) in {int, float}
+    assert metadata["duration"] >= 0
+    assert "duration_ms" not in metadata
+
+
+@pytest.mark.asyncio
+async def test_successful_generated_read_publishes_real_writer_duration_metadata(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monotonic_values = iter((1_000_000_000, 1_125_000_000))
+    monkeypatch.setattr(
+        "tools.openapi_pipeline.live.generated.time.monotonic_ns",
+        monotonic_values.__next__,
+    )
+    state = StubState()
+    guard = StubGuard(state)
+    capture_root = tmp_path / "captures"
+    capture = LiveCapture(
+        writer=CaptureWriter(capture_root),
+        run_id="synthetic-run",
+        selected_operation="no_body_read",
+        operation_catalog=_operation_contract(),
+        hints=RedactionHints(
+            "no_body_read",
+            {},
+            {201: {}},
+        ),
+    )
+    adapter = _adapter(guard=guard, state=state, capture=capture)
+    response_model: dict[str, object] = {"formatVersion": 4}
+
+    async def invoke() -> ApiResponse[object]:
+        return ApiResponse(
+            status_code=201,
+            headers=None,
+            data=response_model,
+            raw_data=b'{"formatVersion":4}',
+        )
+
+    SyntheticApi.handlers["no_body_read"] = invoke
+
+    result = await adapter.call_bound_read(
+        "no_body_read",
+        _no_body_binding(),
+        None,
+    )
+
+    assert result.data is response_model
+    assert result.status_code == 201
+    assert result.duration_ms == 125
+    response_path = (
+        capture_root
+        / "synthetic-run"
+        / "no_body_read"
+        / "response.json"
+    )
+    metadata = json.loads(response_path.read_text(encoding="utf-8"))["metadata"]
+    assert metadata["duration"] == 0.125
+    assert "duration_ms" not in metadata
+    assert metadata["method"] == "GET"
+    assert metadata["path"] == "/api/1/no-body"
+    assert metadata["status"] == 201
 
 
 @pytest.mark.asyncio

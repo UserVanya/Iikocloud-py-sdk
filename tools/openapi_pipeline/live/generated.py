@@ -376,7 +376,7 @@ class GeneratedLiveSdk:
                         "method": operation.method,
                         "path": operation.path,
                         "status": status_code,
-                        "duration_ms": duration_ms,
+                        "duration": duration_ms / 1000,
                     },
                 )
             except Exception:
