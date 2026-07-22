@@ -560,7 +560,7 @@ def test_document_get_request_and_response_are_linked(spec: FamilySpec) -> None:
     assert missing.value.code is NoLiveTargetCode.DOCUMENT
 
 
-def test_counteragent_request_is_one_bounded_page_without_type_filter() -> None:
+def test_counteragent_request_is_one_bounded_page_with_supplier_filter() -> None:
     case = _case("get_inventory_counteragents")
     assert case.depends_on == ("get_organizations",)
     assert case.requires == ("organization_id",)
@@ -568,6 +568,7 @@ def test_counteragent_request_is_one_bounded_page_without_type_filter() -> None:
         "limit": 1,
         "offset": 0,
         "organizationId": str(ORGANIZATION_ID),
+        "type": ["supplier"],
     }
     case.validate_response(_minimal_response(case), _view(case))
 

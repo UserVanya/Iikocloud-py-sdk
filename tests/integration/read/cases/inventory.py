@@ -151,6 +151,7 @@ def _build_counteragents(view: ContextView) -> Mapping[str, object]:
         "limit": 1,
         "offset": 0,
         "organization_id": _organization_text(view),
+        "type": ["supplier"],
     }
 
 
