@@ -146,13 +146,8 @@ def _incoming_timestamp(view: ContextView) -> str:
     return f"{raw_date}T00:00:00.000+00:00"
 
 
-def _build_counteragents(view: ContextView) -> Mapping[str, object]:
-    return {
-        "limit": 1,
-        "offset": 0,
-        "organization_id": _organization_text(view),
-        "type": ["supplier"],
-    }
+def _counteragents_unavailable(_view: ContextView) -> Mapping[str, object]:
+    raise NoLiveTarget(NoLiveTargetCode.ENDPOINT)
 
 
 def _build_cost_prices(view: ContextView) -> Mapping[str, object]:
@@ -559,11 +554,11 @@ _DOCUMENT_CASES = tuple(case for family in _DOCUMENT_FAMILIES for case in family
 
 _COUNTERAGENTS = ReadCase(
     operation_id="get_inventory_counteragents",
-    revision=1,
+    revision=2,
     depends_on=("get_organizations",),
     requires=("organization_id",),
     provides=(),
-    allowed_no_target_codes=frozenset(),
+    allowed_no_target_codes=frozenset({NoLiveTargetCode.ENDPOINT}),
     binding=_binding(
         "get_inventory_counteragents",
         "public_api_invoice_processing_counteragents_api",
@@ -572,7 +567,7 @@ _COUNTERAGENTS = ReadCase(
         "GetCounteragentsRequest",
         "get_counteragents_request",
     ),
-    build_values=_build_counteragents,
+    build_values=_counteragents_unavailable,
     validate_response=_typed_validator(
         "get_counteragents_response",
         "GetCounteragentsResponse",

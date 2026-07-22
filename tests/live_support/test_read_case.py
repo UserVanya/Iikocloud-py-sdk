@@ -26,6 +26,7 @@ from tools.openapi_pipeline.live.read_case import (
 )
 
 EXPECTED_NO_TARGET_CODES = {
+    "ENDPOINT": "endpoint_unavailable",
     "CITY": "city_unavailable",
     "STREET": "street_unavailable",
     "TERMINAL_GROUP": "terminal_group_unavailable",

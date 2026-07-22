@@ -560,17 +560,18 @@ def test_document_get_request_and_response_are_linked(spec: FamilySpec) -> None:
     assert missing.value.code is NoLiveTargetCode.DOCUMENT
 
 
-def test_counteragent_request_is_one_bounded_page_with_supplier_filter() -> None:
+def test_counteragent_live_read_is_temporarily_skipped_before_request_construction() -> None:
     case = _case("get_inventory_counteragents")
     assert case.depends_on == ("get_organizations",)
     assert case.requires == ("organization_id",)
-    assert _request_json(case) == {
-        "limit": 1,
-        "offset": 0,
-        "organizationId": str(ORGANIZATION_ID),
-        "type": ["supplier"],
-    }
-    case.validate_response(_minimal_response(case), _view(case))
+    assert case.provides == ()
+
+    with pytest.raises(NoLiveTarget) as unavailable:
+        case.build_values(_view(case))
+
+    assert unavailable.value.code.value == "endpoint_unavailable"
+    assert case.allowed_no_target_codes == frozenset({unavailable.value.code})
+    assert case.revision == 2
 
 
 def test_cost_price_request_is_one_product_store_at_utc_midnight() -> None:

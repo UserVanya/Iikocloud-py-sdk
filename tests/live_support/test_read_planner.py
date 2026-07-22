@@ -406,7 +406,7 @@ def test_generated_declaration_check_rejects_a_dropped_request_triple() -> None:
 
 def test_real_registry_declares_every_expected_no_target_code() -> None:
     context_dependent = tuple(case for case in ALL_READ_CASES if case.allowed_no_target_codes)
-    assert len(context_dependent) == 44
+    assert len(context_dependent) == 45
     assert all(case.depends_on and case.requires for case in context_dependent)
     assert frozenset(
         code for case in context_dependent for code in case.allowed_no_target_codes

@@ -15,6 +15,7 @@ from tools.openapi_pipeline.errors import SafetyError
 
 
 class NoLiveTargetCode(str, Enum):
+    ENDPOINT = "endpoint_unavailable"
     CITY = "city_unavailable"
     STREET = "street_unavailable"
     TERMINAL_GROUP = "terminal_group_unavailable"
