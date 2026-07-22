@@ -236,7 +236,7 @@ def test_catalog_rejects_invalid_enum(
         "v7 01890f6c-7b5d-7cc0-98c4-dc0c0c07398f",
         "contact person@example.com",
         "Bearer secret-value",
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.signature",
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.signature",  # pragma: allowlist secret
         "api_key=secret-value",
         "token: secret-value",
     ],
