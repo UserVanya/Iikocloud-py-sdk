@@ -165,11 +165,18 @@ def _note_process_lock_cleanup_failures(
     failures: tuple[BaseException, ...],
 ) -> None:
     add_note = getattr(primary, "add_note", None)
-    if not callable(add_note):
-        return
     for failure in failures:
+        note = f"Additional process-lock cleanup failure: {type(failure).__name__}"
+        if callable(add_note):
+            with suppress(BaseException):
+                add_note(note)
+            continue
         with suppress(BaseException):
-            add_note(f"Additional process-lock cleanup failure: {type(failure).__name__}")
+            notes = getattr(primary, "__notes__", None)
+            if notes is None:
+                primary.__notes__ = [note]
+            elif type(notes) is list and all(type(item) is str for item in notes):
+                notes.append(note)
 
 
 def _raise_process_lock_cleanup_failure(failures: tuple[BaseException, ...]) -> None:

@@ -675,6 +675,19 @@ def test_public_process_lock_release_base_exception_drains_lock_last(
                 real_close(descriptor)
 
 
+def test_process_lock_cleanup_note_supports_python_without_add_note() -> None:
+    primary = RuntimeError("body-primary")
+    primary.add_note = None  # type: ignore[method-assign]
+    cleanup_error = KeyboardInterrupt(SENSITIVE_MARKER)
+
+    writer_module._note_process_lock_cleanup_failures(primary, (cleanup_error,))
+
+    assert primary.__notes__ == [
+        "Additional process-lock cleanup failure: KeyboardInterrupt"
+    ]
+    assert all(SENSITIVE_MARKER not in note for note in primary.__notes__)
+
+
 def test_process_lock_context_preserves_body_exception_over_release_failure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

@@ -497,6 +497,13 @@ def _apply_committed_corrections(
     return _apply_model_name_registry(effective, models)
 
 
+def compose_committed_effective_schema(paths: RepoPaths) -> dict[str, Any]:
+    """Compose the effective schema from committed inputs without writing build artifacts."""
+    document = _load_document(paths.upstream, label="committed upstream snapshot")
+    effective, _model_mappings = _apply_committed_corrections(paths, document)
+    return effective
+
+
 def _load_committed_for_report(paths: RepoPaths) -> dict[str, Any] | None:
     if not paths.upstream.exists():
         return None

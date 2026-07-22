@@ -21,6 +21,7 @@ from tools.openapi_pipeline.pipeline import (
     PipelineDependencies,
     _apply_committed_corrections,
     bootstrap,
+    compose_committed_effective_schema,
     default_dependencies,
     sync,
     upstream_check,
@@ -583,6 +584,33 @@ def _write_valid_empty_registries(root: Path) -> None:
     openapi.mkdir(parents=True, exist_ok=True)
     (openapi / "operation-ids.yaml").write_text("operations: {}\n", encoding="utf-8")
     (openapi / "model-name-overrides.yaml").write_text("models: {}\n", encoding="utf-8")
+
+
+def test_compose_committed_effective_schema_does_not_require_build_artifact(
+    tmp_path: Path,
+) -> None:
+    paths = RepoPaths(tmp_path)
+    document = {
+        "openapi": "3.0.1",
+        "info": {},
+        "paths": {},
+        "components": {"schemas": {"BooleanValue": {"type": "bool"}}},
+    }
+    _write_valid_empty_registries(tmp_path)
+    overlay_path = tmp_path / "openapi/overlays/types.overlay.yaml"
+    overlay_path.parent.mkdir()
+    overlay_path.write_text(
+        yaml.safe_dump(pipeline_module.build_types_overlay(document), sort_keys=True),
+        encoding="utf-8",
+    )
+    write_json_atomic(paths.upstream, document)
+
+    assert not paths.effective.exists()
+
+    effective = compose_committed_effective_schema(paths)
+
+    assert effective["components"]["schemas"]["BooleanValue"]["type"] == "boolean"
+    assert not paths.effective.exists()
 
 
 _GENERATOR_INVALID_SCHEMA = "Namespace.Wrapper`1[[Namespace.Item, Assembly]]"

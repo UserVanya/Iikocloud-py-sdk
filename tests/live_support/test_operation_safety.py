@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import copy
-import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -12,6 +11,8 @@ import yaml
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.live.safety import OperationSafetyCatalog
+from tools.openapi_pipeline.paths import RepoPaths
+from tools.openapi_pipeline.pipeline import compose_committed_effective_schema
 
 VALID: dict[str, Any] = {
     "version": 1,
@@ -345,9 +346,7 @@ def test_openapi_parity_rejects_extra_openapi_operation(tmp_path: Path) -> None:
 
 
 def test_committed_catalog_is_exhaustive_and_matches_effective_openapi() -> None:
-    document = json.loads(
-        Path("build/openapi/effective.json").read_text(encoding="utf-8")
-    )
+    document = compose_committed_effective_schema(RepoPaths(Path.cwd()))
     catalog = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
 
     catalog.assert_matches_openapi(document)

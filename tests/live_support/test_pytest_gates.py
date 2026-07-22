@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import os
 import subprocess
 import sys
@@ -42,6 +41,8 @@ from tools.openapi_pipeline.live.receipt import (
 )
 from tools.openapi_pipeline.live.safety import OperationSafetyCatalog
 from tools.openapi_pipeline.live.session import LiveOperation, load_operation_contract
+from tools.openapi_pipeline.paths import RepoPaths
+from tools.openapi_pipeline.pipeline import compose_committed_effective_schema
 from tools.openapi_pipeline.promotion import build_generated_manifest, load_generated_manifest
 
 
@@ -800,7 +801,7 @@ def test_real_repository_has_exact_executable_read_parity() -> None:
     safety = OperationSafetyCatalog.load(root / "contracts/operation-safety.yaml")
     operations = load_operation_contract(root / "contracts/live-operations.yaml")
     catalog = RateCatalog.load(root / "contracts/rate-limits.yaml")
-    effective = json.loads((root / "build/openapi/effective.json").read_text(encoding="utf-8"))
+    effective = compose_committed_effective_schema(RepoPaths(root))
 
     validated = validate_live_read_plan(
         FULL_READ_PLAN,
