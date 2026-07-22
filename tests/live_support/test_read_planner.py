@@ -24,6 +24,7 @@ from tools.openapi_pipeline.live.read_case import (
     NO_REQUEST,
     GeneratedReadBinding,
     NoLiveTargetCode,
+    ReadCapability,
     ReadCase,
 )
 from tools.openapi_pipeline.live.read_planner import ReadPlan
@@ -103,6 +104,7 @@ def _case(
     requires: tuple[str, ...] = (),
     provides: tuple[str, ...] = (),
     allowed_no_target_codes: frozenset[NoLiveTargetCode] = frozenset(),
+    capability: ReadCapability | None = None,
 ) -> ReadCase:
     return ReadCase(
         operation_id=operation_id,
@@ -122,6 +124,7 @@ def _case(
         build_values=lambda _view: NO_REQUEST,
         validate_response=lambda _response, _view: None,
         extract=lambda _response, _view: {},
+        capability=capability,
     )
 
 
@@ -149,7 +152,7 @@ def _dag_cases() -> tuple[ReadCase, ...]:
 
 def _expected_registry_sha256(cases: tuple[ReadCase, ...]) -> str:
     descriptor = {
-        "version": 1,
+        "version": 2,
         "cases": [
             {
                 "operation_id": case.operation_id,
@@ -157,6 +160,9 @@ def _expected_registry_sha256(cases: tuple[ReadCase, ...]) -> str:
                 "depends_on": list(case.depends_on),
                 "requires": list(case.requires),
                 "provides": list(case.provides),
+                "capability": (
+                    case.capability.value if case.capability is not None else None
+                ),
                 "allowed_no_target_codes": sorted(
                     code.value for code in case.allowed_no_target_codes
                 ),
@@ -223,6 +229,23 @@ def test_registry_hash_uses_exact_canonical_operation_sorted_descriptor() -> Non
     assert plan.registry_sha256 == _expected_registry_sha256(cases)
     assert len(plan.registry_sha256) == 64
     assert plan.registry_sha256 != _expected_registry_sha256((root, alpha, beta, leaf))
+
+
+def test_registry_hash_changes_when_only_read_capability_changes() -> None:
+    allowed = frozenset({NoLiveTargetCode.INVOICE_PROCESSING})
+    without_capability = _case(
+        "synthetic_read",
+        allowed_no_target_codes=allowed,
+    )
+    with_capability = _case(
+        "synthetic_read",
+        allowed_no_target_codes=allowed,
+        capability=ReadCapability.PUBLIC_API_INVOICE_PROCESSING,
+    )
+
+    assert ReadPlan.build((without_capability,)).registry_sha256 != ReadPlan.build(
+        (with_capability,)
+    ).registry_sha256
 
 
 def test_plan_and_case_lookup_are_immutable() -> None:

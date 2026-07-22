@@ -169,6 +169,9 @@ def _registry_sha256(cases: tuple[ReadCase, ...]) -> str:
                 "depends_on": list(case.depends_on),
                 "requires": list(case.requires),
                 "provides": list(case.provides),
+                "capability": (
+                    case.capability.value if case.capability is not None else None
+                ),
                 "allowed_no_target_codes": sorted(
                     code.value for code in case.allowed_no_target_codes
                 ),
@@ -176,7 +179,7 @@ def _registry_sha256(cases: tuple[ReadCase, ...]) -> str:
             }
         )
     descriptor: dict[str, object] = {
-        "version": 1,
+        "version": 2,
         "cases": descriptors,
     }
     return sha256_bytes(canonical_json_bytes(descriptor))
