@@ -66,6 +66,17 @@ manifest и generated package. При ошибке старое tracked сост
 
 ### 4. Проверить результат офлайн
 
+После первого `uv sync` для нового `UV_CACHE_DIR` один раз заполните resolver
+metadata для точного runtime closure. Это setup-шаг с доступом только к package
+index; он сверяет результат с `uv.lock`, не вызывает iiko и не входит в саму
+offline-проверку:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 \
+uv run --frozen --no-sync python -m tools.openapi_pipeline \
+  prime-package-check-cache
+```
+
 ```bash
 PYTHONDONTWRITEBYTECODE=1 \
 uv run --frozen --offline python -m tools.openapi_pipeline verify
@@ -217,6 +228,9 @@ wheel. Snapshot, manifest и generated package продвигаются одно
 только после успешных проверок.
 
 ### Проверить воспроизводимость
+
+Для совершенно нового uv cache сначала выполните описанный выше
+`prime-package-check-cache` после `uv sync`.
 
 ```bash
 uv run --frozen --offline python -m tools.openapi_pipeline verify

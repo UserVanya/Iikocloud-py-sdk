@@ -30,6 +30,7 @@ def test_cli_exposes_only_explicit_pipeline_commands() -> None:
         "promote-evidence",
         "cleanup-orphans",
         "reset-circuit",
+        "prime-package-check-cache",
         "verify-no-secrets",
         "publish",
     }
@@ -43,6 +44,9 @@ def test_cli_pipeline_arguments_are_exact() -> None:
     assert parser.parse_args(["sync"]).offline is False
     assert parser.parse_args(["sync", "--offline"]).offline is True
     assert parser.parse_args(["verify"]).command == "verify"
+    assert parser.parse_args(["prime-package-check-cache"]).command == (
+        "prime-package-check-cache"
+    )
     assert vars(parser.parse_args(["upstream-check"])) == {
         "command": "upstream-check",
         "fail_on_drift": False,
@@ -675,6 +679,28 @@ def test_main_dispatches_secret_verification_and_baseline_creation(
     assert main(["verify-no-secrets", "--create-baseline"]) == 0
     assert calls == [("baseline", tmp_path)]
     assert capsys.readouterr().out == "secret baseline created; audit it before use\n"
+
+
+def test_main_dispatches_package_check_cache_prime(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from tools.openapi_pipeline import package_checks
+
+    paths = RepoPaths(tmp_path)
+    calls: list[Path] = []
+    monkeypatch.setattr(cli_module.RepoPaths, "discover", lambda: paths)
+    monkeypatch.setattr(
+        package_checks,
+        "prime_package_check_cache",
+        lambda root: calls.append(root),
+        raising=False,
+    )
+
+    assert main(["prime-package-check-cache"]) == 0
+    assert calls == [tmp_path]
+    assert capsys.readouterr().out == "package-check cache primed\n"
 
 
 def test_main_dispatches_publish_with_only_version_and_push(

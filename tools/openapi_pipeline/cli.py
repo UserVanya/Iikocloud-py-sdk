@@ -18,6 +18,7 @@ COMMANDS = (
     "promote-evidence",
     "cleanup-orphans",
     "reset-circuit",
+    "prime-package-check-cache",
     "verify-no-secrets",
     "publish",
 )
@@ -149,6 +150,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 known_secrets = secrets.load_known_secrets(root)
                 secrets.verify_no_secrets(root, known_secrets)
                 print("secret verification passed")
+        elif args.command == "prime-package-check-cache":
+            from . import package_checks
+
+            root = RepoPaths.discover().root
+            package_checks.prime_package_check_cache(root)
+            print("package-check cache primed")
         elif args.command == "publish":
             from . import publish as publish_module
 

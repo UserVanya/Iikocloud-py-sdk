@@ -7,8 +7,12 @@ from typing import Any
 from unittest.mock import Mock
 
 import pytest
-import tomllib
 from packaging.markers import default_environment
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:  # pragma: no cover - exercised in the Python 3.10 CI matrix
+    import tomli as tomllib
 
 from tools.openapi_pipeline import package_checks as package_checks_module
 from tools.openapi_pipeline.errors import PipelineError
@@ -95,7 +99,9 @@ def test_package_check_group_and_recursive_lock_match_runtime_closure() -> None:
     assert package_checks_module.locked_runtime_requirements(Path.cwd()) == (
         LOCKED_RUNTIME_REQUIREMENTS
     )
-    assert "exceptiongroup==1.3.1" not in LOCKED_RUNTIME_REQUIREMENTS
+    assert ("exceptiongroup==1.3.1" in LOCKED_RUNTIME_REQUIREMENTS) is (
+        sys.version_info < (3, 11)
+    )
 
 
 def test_recursive_lock_closure_evaluates_markers_for_simulated_python_310() -> None:
@@ -148,6 +154,66 @@ def test_recursive_lock_closure_rejects_dependency_cycles_actionably(tmp_path: P
 
     with pytest.raises(PipelineError, match=r"cycle.*root.*conditional.*root"):
         package_checks_module.locked_runtime_requirements(tmp_path)
+
+
+def test_package_check_cache_prime_compiles_exact_locked_runtime_requirements(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "uv.lock").write_bytes(Path("uv.lock").read_bytes())
+    calls: list[tuple[list[str], dict[str, Any]]] = []
+    monkeypatch.setenv("PIP_INDEX_URL", "https://credentials.invalid/simple")
+    monkeypatch.setenv("UV_INDEX_URL", "https://credentials.invalid/simple")
+    monkeypatch.setenv("UV_CONFIG_FILE", "/poisoned/uv.toml")
+    monkeypatch.setenv("UV_CACHE_DIR", str(tmp_path / "cache"))
+
+    def fake_run(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        calls.append((command, kwargs))
+        output = Path(command[command.index("--output-file") + 1])
+        source = Path(command[-1])
+        output.write_bytes(source.read_bytes())
+        return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+
+    package_checks_module.prime_package_check_cache(tmp_path, runner=fake_run)
+
+    assert len(calls) == 1
+    command, kwargs = calls[0]
+    assert command[:3] == ["uv", "pip", "compile"]
+    assert command[3:-2] == [
+        "--refresh",
+        "--no-config",
+        "--no-deps",
+        "--no-annotate",
+        "--no-header",
+        "--output-file",
+    ]
+    output = Path(command[-2])
+    source = Path(command[-1])
+    expected = "\n".join(LOCKED_RUNTIME_REQUIREMENTS) + "\n"
+    assert source.read_text(encoding="utf-8") == expected
+    assert output.read_text(encoding="utf-8") == expected
+    assert kwargs["cwd"] == tmp_path
+    assert kwargs["check"] is True
+    assert kwargs["capture_output"] is True
+    assert kwargs["text"] is True
+    assert "--offline" not in command
+    assert "PIP_INDEX_URL" not in kwargs["env"]
+    assert "UV_INDEX_URL" not in kwargs["env"]
+    assert "UV_CONFIG_FILE" not in kwargs["env"]
+    assert kwargs["env"]["UV_CACHE_DIR"] == str(tmp_path / "cache")
+    assert kwargs["env"]["PYTHONNOUSERSITE"] == "1"
+
+
+def test_package_check_cache_prime_rejects_changed_compiler_output(tmp_path: Path) -> None:
+    (tmp_path / "uv.lock").write_bytes(Path("uv.lock").read_bytes())
+
+    def fake_run(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        del kwargs
+        output = Path(command[command.index("--output-file") + 1])
+        output.write_text("httpx==0.0.0\n", encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+
+    with pytest.raises(PipelineError, match="compiled runtime pins differ"):
+        package_checks_module.prime_package_check_cache(tmp_path, runner=fake_run)
 
 
 def test_broken_generated_import_fails_before_wheel_build(

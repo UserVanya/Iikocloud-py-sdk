@@ -217,11 +217,17 @@ def test_offline_workflow_runs_required_checks_and_pinned_generator() -> None:
     steps = _steps(_only_job(workflow))
     run_steps = _run_steps(steps)
 
-    _command_step(run_steps, "uv sync --frozen --group dev")
-    _command_step(
+    install_index, _ = _command_step(run_steps, "uv sync --frozen --group dev")
+    prime_index, _ = _command_step(
+        run_steps,
+        "uv run --frozen --no-sync python -m tools.openapi_pipeline "
+        "prime-package-check-cache",
+    )
+    lint_index, _ = _command_step(
         run_steps,
         "uv run --frozen --offline ruff check --no-cache tools tests",
     )
+    assert install_index < prime_index < lint_index
     _command_step(
         run_steps,
         "uv run --frozen --offline python -m tools.openapi_pipeline verify-no-secrets",
@@ -248,6 +254,8 @@ def test_offline_workflow_runs_required_checks_and_pinned_generator() -> None:
     non_pytest_commands = {run for _, _, run in run_steps} - pytest_commands
     assert non_pytest_commands == {
         "uv sync --frozen --group dev",
+        "uv run --frozen --no-sync python -m tools.openapi_pipeline "
+        "prime-package-check-cache",
         "uv run --frozen --offline ruff check --no-cache tools tests",
         "uv run --frozen --offline python -m tools.openapi_pipeline verify-no-secrets",
         "uv build --offline",
@@ -299,7 +307,11 @@ def test_offline_workflow_uses_exact_fresh_process_pytest_partition() -> None:
 
 def test_offline_workflow_never_uses_live_or_mutating_pipeline_commands() -> None:
     _assert_no_live_or_mutating_configuration(OFFLINE_WORKFLOW)
-    assert _pipeline_commands(OFFLINE_WORKFLOW) == ["verify-no-secrets", "verify"]
+    assert _pipeline_commands(OFFLINE_WORKFLOW) == [
+        "prime-package-check-cache",
+        "verify-no-secrets",
+        "verify",
+    ]
 
 
 def test_scheduled_workflow_only_reports_public_upstream_drift() -> None:

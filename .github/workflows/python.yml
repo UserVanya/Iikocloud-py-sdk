@@ -29,6 +29,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install frozen development environment
         run: uv sync --frozen --group dev
+      - name: Prime locked package-check cache
+        run: >-
+          uv run --frozen --no-sync python -m tools.openapi_pipeline
+          prime-package-check-cache
       - name: Lint hand-written code and tests
         run: uv run --frozen --offline ruff check --no-cache tools tests
       - name: Test evidence candidate writer in a fresh process

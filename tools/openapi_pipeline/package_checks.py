@@ -357,6 +357,58 @@ def _assert_runtime_lock(root: Path) -> None:
         raise PipelineError("Package-check runtime pins differ from the recursive uv.lock closure")
 
 
+def prime_package_check_cache(
+    root: Path,
+    *,
+    runner: Runner | None = None,
+) -> None:
+    """Populate uv resolver metadata needed by later strictly offline wheel checks."""
+
+    resolved_root = root.resolve(strict=True)
+    _assert_runtime_lock(resolved_root)
+    build_root = resolved_root / "build"
+    if build_root.is_symlink():
+        raise PipelineError(f"Package-check build root must not be a symlink: {build_root}")
+    prime_root = build_root / "package-check-cache-prime"
+    _clean_directory(prime_root, controlled_root=build_root)
+    source = prime_root / "requirements.in"
+    output = prime_root / "requirements.txt"
+    write_bytes_atomic(
+        source,
+        ("\n".join(LOCKED_RUNTIME_REQUIREMENTS) + "\n").encode(),
+    )
+
+    _run(
+        [
+            "uv",
+            "pip",
+            "compile",
+            "--refresh",
+            "--no-config",
+            "--no-deps",
+            "--no-annotate",
+            "--no-header",
+            "--output-file",
+            str(output),
+            str(source),
+        ],
+        cwd=resolved_root,
+        purpose="Package-check cache priming",
+        runner=runner or subprocess.run,
+        env=_sanitized_environment(),
+    )
+    try:
+        if output.is_symlink() or not output.is_file():
+            raise PipelineError("Package-check cache prime produced no regular requirements file")
+        compiled = tuple(output.read_text(encoding="utf-8").splitlines())
+    except (OSError, UnicodeError) as error:
+        raise PipelineError("Cannot read package-check cache prime output") from error
+    if compiled != LOCKED_RUNTIME_REQUIREMENTS:
+        raise PipelineError(
+            "Package-check compiled runtime pins differ from the reviewed lock closure"
+        )
+
+
 def _install_and_verify_wheel(
     wheel: Path,
     *,

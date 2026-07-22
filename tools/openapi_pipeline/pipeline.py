@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import stat
+import sys
 from collections.abc import Callable
 from contextlib import suppress
 from dataclasses import dataclass
@@ -14,6 +15,11 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:  # pragma: no cover - exercised on supported Python 3.10
+    import tomli as tomllib
 
 from .errors import PipelineError
 from .fetch import FetchResult, fetch_candidate
@@ -1103,8 +1109,6 @@ def bootstrap(
 
 def _project_version(root: Path) -> str:
     try:
-        import tomllib
-
         document = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))
         version = document["project"]["version"]
     except (OSError, UnicodeError, ValueError, KeyError, TypeError) as error:
