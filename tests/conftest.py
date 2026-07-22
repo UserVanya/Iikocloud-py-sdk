@@ -154,14 +154,17 @@ class LiveReadHarness:
         )
         loaded = self._report.load_and_verify()
         artifacts = self._preflight.artifacts
-        self._run_context.read_report_completed = loaded.matches(
-            self._run_context.receipt.run_id,
-            self._profile_fingerprint,
-            artifacts.effective_schema_sha256,
-            artifacts.generated_tree_sha256,
-            artifacts.live_contracts_sha256,
-            self._plan.registry_sha256,
-        ) and summary.success
+        self._run_context.read_report_completed = (
+            loaded.matches(
+                self._run_context.receipt.run_id,
+                self._profile_fingerprint,
+                artifacts.effective_schema_sha256,
+                artifacts.generated_tree_sha256,
+                artifacts.live_contracts_sha256,
+                self._plan.registry_sha256,
+            )
+            and summary.success
+        )
         return summary
 
 
@@ -228,7 +231,7 @@ def _load_full_read_plan() -> ReadPlan:
         candidate = getattr(module, "FULL_READ_PLAN", None)
     except (ImportError, AttributeError):
         import_failed = True
-    if import_failed or type(candidate) is not ReadPlan:
+    if import_failed or type(candidate) is not ReadPlan or len(candidate.cases) != 91:
         raise SafetyError("The exhaustive live read registry is unavailable") from None
     return candidate
 
@@ -266,9 +269,7 @@ def _read_mode_from_items(
             explicit_markers.append(argument.partition("=")[2])
     explicit_expression = " ".join(explicit_markers)
     full = any(item.get_closest_marker("live_read_full") is not None for item in items)
-    selected = any(
-        item.get_closest_marker("live_read_selected") is not None for item in items
-    )
+    selected = any(item.get_closest_marker("live_read_selected") is not None for item in items)
     full = full or "live_read_full" in explicit_expression
     selected = selected or "live_read_selected" in explicit_expression
     if full and selected:
@@ -381,15 +382,12 @@ def pytest_configure(config: pytest.Config) -> None:
         if argument.startswith("tests/") or argument.endswith(".py")
     )
     explicit_marker = any(
-        argument in {"-m", "--markexpr"}
-        or argument.startswith(("-m=", "--markexpr="))
+        argument in {"-m", "--markexpr"} or argument.startswith(("-m=", "--markexpr="))
         for argument in arguments
     )
     collect_only = "--collect-only" in arguments or "--co" in arguments
     read_collection_only = (
-        collect_only
-        and not explicit_marker
-        and supplied_paths == _READ_COLLECTION_PATHS
+        collect_only and not explicit_marker and supplied_paths == _READ_COLLECTION_PATHS
     )
     if read_collection_only:
         config.option.markexpr = ""
@@ -497,9 +495,7 @@ def _live_environment(request: pytest.FixtureRequest) -> Iterator[_LiveEnvironme
         if read_mode is not None and (
             profile.organization_id not in profile.allowed_organization_ids
         ):
-            raise SafetyError(
-                "Live read profile organization is not in its exact allowlist"
-            )
+            raise SafetyError("Live read profile organization is not in its exact allowlist")
         if getattr(request.config, "_iiko_live_write_selected", False):
             write_preflight = _prepare_live_write_setup(
                 request.config,

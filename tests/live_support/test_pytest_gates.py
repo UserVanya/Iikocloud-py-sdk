@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
@@ -9,6 +10,7 @@ from types import MappingProxyType
 
 import pytest
 
+from tests.integration.read.cases import FULL_READ_PLAN
 from tools.openapi_pipeline import pipeline as pipeline_module
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.generator import Toolchain
@@ -39,7 +41,7 @@ from tools.openapi_pipeline.live.receipt import (
     verify_live_artifacts,
 )
 from tools.openapi_pipeline.live.safety import OperationSafetyCatalog
-from tools.openapi_pipeline.live.session import LiveOperation
+from tools.openapi_pipeline.live.session import LiveOperation, load_operation_contract
 from tools.openapi_pipeline.promotion import build_generated_manifest, load_generated_manifest
 
 
@@ -163,9 +165,7 @@ def test_live_artifact_hashes_recompute_effective_and_verify_exact_tree(
             "contracts/rate-limits.yaml",
         )
     }
-    assert hashes.live_contracts_sha256 == sha256_bytes(
-        canonical_json_bytes(contract_hashes)
-    )
+    assert hashes.live_contracts_sha256 == sha256_bytes(canonical_json_bytes(contract_hashes))
 
 
 def test_manual_file_change_changes_logical_published_tree_hash(
@@ -734,9 +734,7 @@ def _read_contracts(
     )
     effective: dict[str, object] = {
         "paths": {
-            f"/synthetic/{operation_id}": {
-                "post": {"operationId": operation_id}
-            }
+            f"/synthetic/{operation_id}": {"post": {"operationId": operation_id}}
             for operation_id in operation_ids
         }
     }
@@ -795,6 +793,39 @@ def test_live_read_plan_preflight_rejects_any_four_way_parity_gap(
             catalog=catalog,
             effective_schema=effective,
         )
+
+
+def test_real_repository_has_exact_executable_read_parity() -> None:
+    root = Path.cwd()
+    safety = OperationSafetyCatalog.load(root / "contracts/operation-safety.yaml")
+    operations = load_operation_contract(root / "contracts/live-operations.yaml")
+    catalog = RateCatalog.load(root / "contracts/rate-limits.yaml")
+    effective = json.loads((root / "build/openapi/effective.json").read_text(encoding="utf-8"))
+
+    validated = validate_live_read_plan(
+        FULL_READ_PLAN,
+        mode="full",
+        selected_operation=None,
+        safety=safety,
+        operation_contract=operations,
+        catalog=catalog,
+        effective_schema=effective,
+    )
+
+    automatic_read_ids = safety.automatic_read_ids
+    live_operation_ids = frozenset(operations)
+    live_contract_read_ids = frozenset(
+        operation_id for operation_id, operation in operations.items() if operation.kind == "read"
+    )
+    assert validated is FULL_READ_PLAN
+    assert len(FULL_READ_PLAN.cases) == 91
+    assert frozenset(FULL_READ_PLAN.ordered_operation_ids) == automatic_read_ids
+    assert automatic_read_ids == live_contract_read_ids
+    assert all(catalog.operation_budget(op) for op in automatic_read_ids)
+    assert frozenset(catalog.operation_ids) <= live_operation_ids
+    assert safety.operations["authenticate"].live_policy == "automatic"
+    assert safety.operations["authenticate_v2"].live_policy == "blocked"
+    assert "authenticate_v2" not in live_operation_ids
 
 
 @pytest.mark.parametrize(

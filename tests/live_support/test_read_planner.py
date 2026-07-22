@@ -8,6 +8,16 @@ from typing import Any, cast
 
 import pytest
 
+from tests.integration.read.cases import ALL_READ_CASES, FULL_READ_PLAN
+from tests.integration.read.cases.addresses import ADDRESS_CASES
+from tests.integration.read.cases.deliveries import DELIVERY_CASES
+from tests.integration.read.cases.employees import EMPLOYEE_CASES
+from tests.integration.read.cases.finance import FINANCE_CASES
+from tests.integration.read.cases.foundation import FOUNDATION_CASES
+from tests.integration.read.cases.inventory import INVENTORY_CASES
+from tests.integration.read.cases.loyalty import LOYALTY_CASES
+from tests.integration.read.cases.menu import MENU_CASES
+from tests.integration.read.cases.reserves_orders import RESERVE_ORDER_CASES
 from tools.openapi_pipeline.live.read_case import (
     NO_REQUEST,
     GeneratedReadBinding,
@@ -136,9 +146,7 @@ def test_registry_hash_uses_exact_canonical_operation_sorted_descriptor() -> Non
         depends_on=("root",),
         requires=("root_key",),
         provides=("beta_key",),
-        allowed_no_target_codes=frozenset(
-            {NoLiveTargetCode.PRODUCT, NoLiveTargetCode.CITY}
-        ),
+        allowed_no_target_codes=frozenset({NoLiveTargetCode.PRODUCT, NoLiveTargetCode.CITY}),
     )
     cases = (leaf, revised_beta, root, alpha)
 
@@ -146,9 +154,7 @@ def test_registry_hash_uses_exact_canonical_operation_sorted_descriptor() -> Non
 
     assert plan.registry_sha256 == _expected_registry_sha256(cases)
     assert len(plan.registry_sha256) == 64
-    assert plan.registry_sha256 != _expected_registry_sha256(
-        (root, alpha, beta, leaf)
-    )
+    assert plan.registry_sha256 != _expected_registry_sha256((root, alpha, beta, leaf))
 
 
 def test_plan_and_case_lookup_are_immutable() -> None:
@@ -257,9 +263,7 @@ def test_dependency_closure_keeps_only_transitive_dependencies_in_original_order
         "beta",
         "leaf",
     )
-    assert closure.registry_sha256 == _expected_registry_sha256(
-        (root, alpha, beta, leaf)
-    )
+    assert closure.registry_sha256 == _expected_registry_sha256((root, alpha, beta, leaf))
     assert closure.registry_sha256 != plan.registry_sha256
 
 
@@ -272,3 +276,54 @@ def test_dependency_closure_for_root_contains_only_root() -> None:
     assert closure.ordered_operation_ids == ("root",)
     assert closure.cases == (root,)
     assert closure.registry_sha256 == _expected_registry_sha256((root,))
+
+
+def test_real_read_registry_has_exact_domain_order_and_count() -> None:
+    expected = (
+        *FOUNDATION_CASES,
+        *ADDRESS_CASES,
+        *MENU_CASES,
+        *DELIVERY_CASES,
+        *RESERVE_ORDER_CASES,
+        *EMPLOYEE_CASES,
+        *LOYALTY_CASES,
+        *FINANCE_CASES,
+        *INVENTORY_CASES,
+    )
+    assert type(ALL_READ_CASES) is tuple
+    assert expected == ALL_READ_CASES
+    assert len(ALL_READ_CASES) == 91
+    assert len(FULL_READ_PLAN.cases) == 91
+    assert set(FULL_READ_PLAN.ordered_operation_ids) == {
+        case.operation_id for case in ALL_READ_CASES
+    }
+
+
+def test_every_real_generated_binding_resolves_its_exact_request_contract() -> None:
+    for case in ALL_READ_CASES:
+        binding = case.binding
+        resolved = binding.resolve()
+        assert binding.method_name == f"{case.operation_id}_with_http_info"
+        assert resolved.method.__name__ == binding.method_name
+        assert resolved.api_class.__name__ == binding.api_class
+        request_fields = (
+            binding.request_module,
+            binding.request_class,
+            binding.request_keyword,
+        )
+        if binding.request_module is None:
+            assert request_fields == (None, None, None)
+            assert resolved.request_class is None
+        else:
+            assert all(type(value) is str and value for value in request_fields)
+            assert resolved.request_class is not None
+            assert resolved.request_class.__name__ == binding.request_class
+
+
+def test_real_registry_declares_every_expected_no_target_code() -> None:
+    context_dependent = tuple(case for case in ALL_READ_CASES if case.allowed_no_target_codes)
+    assert len(context_dependent) == 44
+    assert all(case.depends_on and case.requires for case in context_dependent)
+    assert frozenset(
+        code for case in context_dependent for code in case.allowed_no_target_codes
+    ) == frozenset(NoLiveTargetCode)

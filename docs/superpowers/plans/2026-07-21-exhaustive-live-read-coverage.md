@@ -1872,8 +1872,8 @@ assert set(FULL_READ_PLAN.ordered_operation_ids) == set(safety.automatic_read_id
 assert set(safety.automatic_read_ids) == live_contract_read_ids
 assert all(rate_catalog.operation_budget(op) for op in safety.automatic_read_ids)
 assert set(rate_catalog.operation_ids) <= set(live_operation_ids)
-assert safety.operations["authenticate"].live_policy is LivePolicy.AUTOMATIC
-assert safety.operations["authenticate_v2"].live_policy is LivePolicy.BLOCKED
+assert safety.operations["authenticate"].live_policy == "automatic"
+assert safety.operations["authenticate_v2"].live_policy == "blocked"
 assert "authenticate_v2" not in live_operation_ids
 ```
 
