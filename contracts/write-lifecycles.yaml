@@ -25,7 +25,7 @@ scenarios:
       - {role: cleanup, operation: delete_customers, compensates: create_or_update_customer}
   delivery_draft:
     enabled: false
-    disabled_reason: "Drafts processing is disabled on the write stand; create_delivery_draft returns DRAFTS_DISABLED (live probe 2026-07-24)."
+    disabled_reason: "Drafts processing is disabled on the write stand; create_delivery_draft returns DRAFTS_DISABLED (live probes 2026-07-24, including after enabling delivery confirmation)."
     requires_profile_fields: [terminal_group_id, write_product_id]
     ownership_marker:
       source: literal
