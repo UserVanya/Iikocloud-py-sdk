@@ -12,6 +12,7 @@ from typing import Generic, NoReturn, TypeVar, cast
 from uuid import UUID
 
 from iikocloud_client.api.customers_api import CustomersApi
+from iikocloud_client.api.drafts_api import DraftsApi
 from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
@@ -19,10 +20,18 @@ from iikocloud_client.exceptions import ApiException
 from iikocloud_client.models.add_products_to_stop_list_request import (
     AddProductsToStopListRequest,
 )
+from iikocloud_client.models.create_draft_request import CreateDraftRequest
 from iikocloud_client.models.create_or_update_customer_request import (
     CreateOrUpdateCustomerRequest,
 )
 from iikocloud_client.models.delete_customers_request import DeleteCustomersRequest
+from iikocloud_client.models.delete_draft_request import DeleteDraftRequest
+from iikocloud_client.models.delivery_order_create_compound_item import (
+    DeliveryOrderCreateCompoundItem,
+)
+from iikocloud_client.models.delivery_order_create_product_item import (
+    DeliveryOrderCreateProductItem,
+)
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
 )
@@ -274,6 +283,102 @@ def validate_customer_delete_request(
     return request
 
 
+def validate_draft_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateDraftRequest:
+    """Validate one owned delivery-draft create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_delivery_draft":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateDraftRequest | None = None
+    with suppress(Exception):
+        request = CreateDraftRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    # The generated union base class silently drops subclass fields when
+    # parsing items, so repair them from the raw payload by discriminator.
+    raw_order = payload.get("order") if isinstance(payload, dict) else None
+    raw_items = raw_order.get("items") if isinstance(raw_order, dict) else None
+    if not isinstance(raw_items, list) or len(raw_items) != 1:
+        raise SafetyError("Generated compensating payload is invalid") from None
+    repaired_items: list[object] = []
+    for raw_item in raw_items:
+        if not isinstance(raw_item, dict):
+            raise SafetyError("Generated compensating payload is invalid") from None
+        item_kind = raw_item.get("type")
+        repaired: object | None = None
+        with suppress(Exception):
+            if item_kind == "Product":
+                repaired = DeliveryOrderCreateProductItem.model_validate(raw_item)
+            elif item_kind == "Compound":
+                repaired = DeliveryOrderCreateCompoundItem.model_validate(raw_item)
+        if repaired is None:
+            raise SafetyError("Generated compensating payload is invalid") from None
+        repaired_items.append(repaired)
+    order = request.order
+    with suppress(Exception):
+        order.items = repaired_items  # type: ignore[assignment]
+    if any(type(item).__name__ == "DeliveryOrderCreateItem" for item in order.items):
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    external_menu_id = profile.external_menu_id
+    if external_menu_id is None:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    items = order.items
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and (
+                request.terminal_group_id is None
+                or request.terminal_group_id == terminal_group_id
+            )
+            and order.menu_id == external_menu_id
+            and order.phone == CUSTOMER_MARKER_PHONE
+            and len(items) == 1
+            and getattr(items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_draft_delete_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> DeleteDraftRequest:
+    """Validate one owned delivery-draft delete request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "delete_delivery_draft":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+
+    request: DeleteDraftRequest | None = None
+    with suppress(Exception):
+        request = DeleteDraftRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated cleanup payload is invalid") from None
+
+    organization_id, allowed_organization_ids = _organization_boundary(profile)
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
 @dataclass(frozen=True)
 class _WriteExecutorSpec:
     api_class: type
@@ -307,6 +412,18 @@ _WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
             "delete_customers_with_http_info",
             "delete_customers_request",
             validate_customer_delete_request,
+        ),
+        "create_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "create_delivery_draft_with_http_info",
+            "create_draft_request",
+            validate_draft_create_request,
+        ),
+        "delete_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "delete_delivery_draft_with_http_info",
+            "delete_draft_request",
+            validate_draft_delete_request,
         ),
     }
 )

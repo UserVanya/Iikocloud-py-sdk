@@ -7,12 +7,15 @@ from typing import Any, cast
 import pytest
 
 from iikocloud_client.api.customers_api import CustomersApi
+from iikocloud_client.api.drafts_api import DraftsApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
+from iikocloud_client.models.create_draft_request import CreateDraftRequest
 from iikocloud_client.models.create_or_update_customer_request import (
     CreateOrUpdateCustomerRequest,
 )
 from iikocloud_client.models.delete_customers_request import DeleteCustomersRequest
+from iikocloud_client.models.delete_draft_request import DeleteDraftRequest
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.generated import (
     CUSTOMER_MARKER_PHONE,
@@ -183,7 +186,7 @@ async def test_execute_write_rejects_unknown_operation_before_live_work() -> Non
     adapter = _adapter(guard, state)
 
     with pytest.raises(SafetyError, match="approved write operation"):
-        await adapter.execute_write("create_delivery_draft", {})
+        await adapter.execute_write("create_delivery_order", {})
     with pytest.raises(SafetyError, match="approved write operation"):
         await adapter.execute_write("get_organizations", {})
     assert guard.acquired == []
@@ -291,4 +294,209 @@ async def test_execute_write_rejects_when_profile_disallows_write() -> None:
 
     with pytest.raises(SafetyError, match="outside the selected write profile"):
         await adapter.execute_write("create_or_update_customer", _create_payload())
+    assert guard.acquired == []
+
+
+_TERMINAL_GROUP_ID = "22222222-2222-4222-8222-222222222222"
+_PRODUCT_ID = "33333333-3333-4333-8333-333333333333"
+_MENU_ID = "external-menu-1"
+_DRAFT_ID = "66666666-6666-4666-8666-666666666666"
+
+
+def _draft_profile() -> ResolvedLiveProfile:
+    return ResolvedLiveProfile(
+        name="write-server",
+        base_url="https://api.example.invalid",
+        api_login="fixture-login",
+        organization_id=_ORGANIZATION_ID,
+        external_menu_id=_MENU_ID,
+        terminal_group_id=_TERMINAL_GROUP_ID,
+        write_product_id=_PRODUCT_ID,
+        allow_write=True,
+        allowed_organization_ids=(_ORGANIZATION_ID,),
+        fingerprint="f" * 64,
+    )
+
+
+def _draft_adapter(
+    guard: _StubGuard,
+    state: _StubState,
+    *,
+    contract: dict[str, LiveOperation] | None = None,
+) -> GeneratedLiveSdk:
+    return GeneratedLiveSdk(
+        api_client=cast(ApiClient, object()),
+        profile=_draft_profile(),
+        guard=cast(LiveRateGuard, guard),
+        state=cast(LiveStateStore, state),
+        operation_contract=MappingProxyType(
+            contract
+            or {
+                "create_delivery_draft": LiveOperation(
+                    kind="compensating",
+                    cleanup="delete_delivery_draft",
+                    method="POST",
+                    path="/api/1/deliveries/drafts/create",
+                ),
+                "delete_delivery_draft": LiveOperation(
+                    kind="cleanup",
+                    cleanup=None,
+                    method="POST",
+                    path="/api/1/deliveries/drafts/delete",
+                ),
+            }
+        ),
+    )
+
+
+def _draft_create_payload() -> dict[str, object]:
+    return {
+        "organizationId": _ORGANIZATION_ID,
+        "terminalGroupId": _TERMINAL_GROUP_ID,
+        "order": {
+            "menuId": _MENU_ID,
+            "phone": CUSTOMER_MARKER_PHONE,
+            "comment": "sdk-write-probe",
+            "items": [
+                {
+                    "type": "Product",
+                    "productId": _PRODUCT_ID,
+                    "price": 1.0,
+                    "amount": 1,
+                }
+            ],
+        },
+    }
+
+
+@pytest.mark.asyncio
+async def test_execute_write_draft_create_and_delete_dispatch_exactly_once(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _draft_adapter(guard, state)
+    created: list[CreateDraftRequest] = []
+    deleted: list[DeleteDraftRequest] = []
+
+    async def create(
+        _api: DraftsApi,
+        *,
+        create_draft_request: CreateDraftRequest,
+        **_kwargs: object,
+    ) -> ApiResponse[dict[str, str]]:
+        created.append(create_draft_request)
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+    async def delete(
+        _api: DraftsApi,
+        *,
+        delete_draft_request: DeleteDraftRequest,
+        **_kwargs: object,
+    ) -> ApiResponse[dict[str, str]]:
+        deleted.append(delete_draft_request)
+        return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+    monkeypatch.setattr(DraftsApi, "create_delivery_draft_with_http_info", create)
+    monkeypatch.setattr(DraftsApi, "delete_delivery_draft_with_http_info", delete)
+
+    await adapter.execute_write("create_delivery_draft", _draft_create_payload())
+    await adapter.execute_write(
+        "delete_delivery_draft",
+        {"organizationId": _ORGANIZATION_ID, "orderId": _DRAFT_ID},
+    )
+
+    assert len(created) == 1
+    assert created[0].order.menu_id == _MENU_ID
+    assert created[0].order.phone == CUSTOMER_MARKER_PHONE
+    assert len(deleted) == 1
+    assert str(deleted[0].order_id) == _DRAFT_ID
+    assert guard.acquired == ["create_delivery_draft", "delete_delivery_draft"]
+
+
+@pytest.mark.asyncio
+async def test_draft_create_rejects_foreign_values() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _draft_adapter(guard, state)
+
+    def with_order(**changes: object) -> dict[str, object]:
+        payload = _draft_create_payload()
+        order = dict(payload["order"])  # type: ignore[arg-type]
+        order.update(changes)
+        payload["order"] = order
+        return payload
+
+    for payload in (
+        with_order(phone="+79999999999"),
+        with_order(menuId="other-menu"),
+        {**_draft_create_payload(), "organizationId": _OTHER_ID},
+        {**_draft_create_payload(), "terminalGroupId": _OTHER_ID},
+    ):
+        with pytest.raises(SafetyError, match="outside the selected write profile"):
+            await adapter.execute_write("create_delivery_draft", payload)
+
+    foreign_product = with_order()
+    foreign_product["order"]["items"] = [  # type: ignore[index]
+        {"type": "Product", "productId": _OTHER_ID, "price": 1.0, "amount": 1}
+    ]
+    with pytest.raises(SafetyError, match="outside the selected write profile"):
+        await adapter.execute_write("create_delivery_draft", foreign_product)
+
+    with pytest.raises(SafetyError, match="compensating payload is invalid"):
+        await adapter.execute_write("create_delivery_draft", {"broken": True})
+    assert guard.acquired == []
+
+
+@pytest.mark.asyncio
+async def test_draft_create_requires_external_menu_in_profile() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    profile = ResolvedLiveProfile(
+        name="write-server",
+        base_url="https://api.example.invalid",
+        api_login="fixture-login",
+        organization_id=_ORGANIZATION_ID,
+        external_menu_id=None,
+        terminal_group_id=_TERMINAL_GROUP_ID,
+        write_product_id=_PRODUCT_ID,
+        allow_write=True,
+        allowed_organization_ids=(_ORGANIZATION_ID,),
+        fingerprint="f" * 64,
+    )
+    adapter = GeneratedLiveSdk(
+        api_client=cast(ApiClient, object()),
+        profile=profile,
+        guard=cast(LiveRateGuard, guard),
+        state=cast(LiveStateStore, state),
+        operation_contract=MappingProxyType(
+            {
+                "create_delivery_draft": LiveOperation(
+                    kind="compensating",
+                    cleanup="delete_delivery_draft",
+                    method="POST",
+                    path="/api/1/deliveries/drafts/create",
+                )
+            }
+        ),
+    )
+
+    with pytest.raises(SafetyError, match="outside the selected write profile"):
+        await adapter.execute_write("create_delivery_draft", _draft_create_payload())
+    assert guard.acquired == []
+
+
+@pytest.mark.asyncio
+async def test_draft_delete_rejects_foreign_organization_and_invalid_payload() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _draft_adapter(guard, state)
+
+    with pytest.raises(SafetyError, match="outside the selected write profile"):
+        await adapter.execute_write(
+            "delete_delivery_draft",
+            {"organizationId": _OTHER_ID, "orderId": _DRAFT_ID},
+        )
+    with pytest.raises(SafetyError, match="cleanup payload is invalid"):
+        await adapter.execute_write("delete_delivery_draft", {"broken": True})
     assert guard.acquired == []

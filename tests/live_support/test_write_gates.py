@@ -280,7 +280,9 @@ def test_write_collect_with_profile_rejects_missing_audit_approval_before_privat
     assert "Private" not in result.stderr
 
 
-def test_write_scenario_marker_rejects_unknown_disabled_and_missing() -> None:
+def test_write_scenario_marker_rejects_unknown_disabled_and_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     def _item(marker_arg: str) -> Any:
         return SimpleNamespace(
             get_closest_marker=lambda name: (
@@ -291,13 +293,29 @@ def test_write_scenario_marker_rejects_unknown_disabled_and_missing() -> None:
     root = Path.cwd()
     with pytest.raises(pytest.UsageError, match="Unknown write lifecycle scenario"):
         project_conftest._write_scenario_ids(root, [_item("nope")])  # noqa: SLF001
+    assert project_conftest._write_scenario_ids(root, [_item("customer")]) == (  # noqa: SLF001
+        "customer",
+    )
+    disabled = SimpleNamespace(
+        get_closest_marker=lambda name: (
+            SimpleNamespace(args=("customer",)) if name == "write_scenario" else None
+        )
+    )
+    monkeypatch.setattr(
+        project_conftest,
+        "_load_write_lifecycle_registry",
+        lambda _root: SimpleNamespace(
+            scenarios={
+                "customer": SimpleNamespace(
+                    enabled=False, disabled_reason="synthetic reason"
+                )
+            }
+        ),
+    )
     with pytest.raises(pytest.UsageError, match="disabled"):
-        project_conftest._write_scenario_ids(root, [_item("delivery_draft")])  # noqa: SLF001
+        project_conftest._write_scenario_ids(root, [disabled])  # noqa: SLF001
     with pytest.raises(pytest.UsageError, match="write_scenario"):
         project_conftest._write_scenario_ids(  # noqa: SLF001
             root,
             [SimpleNamespace(get_closest_marker=lambda name: None)],
         )
-    assert project_conftest._write_scenario_ids(root, [_item("customer")]) == (  # noqa: SLF001
-        "customer",
-    )
