@@ -48,15 +48,43 @@ _LIVE_MARKERS = (
     "live_read_selected",
     "live_write",
 )
-_WRITE_OPERATION_IDS = (
-    "get_stop_lists",
-    "add_products_to_stop_list",
-    "remove_products_from_stop_list",
-)
 _READ_COLLECTION_PATHS = (
     "tests/integration/read/test_all_reads.py",
     "tests/integration/read/test_selected_read.py",
 )
+
+
+def _load_write_lifecycle_registry(root: Path) -> Any:
+    from tools.openapi_pipeline.live.write_lifecycle import WriteLifecycleRegistry
+
+    registry = WriteLifecycleRegistry.load(root / "contracts/write-lifecycles.yaml")
+    if type(registry) is not WriteLifecycleRegistry:
+        raise SafetyError("Write lifecycle registry is unavailable")
+    return registry
+
+
+def _write_scenario_ids(root: Path, items: list[pytest.Item]) -> tuple[str, ...]:
+    registry = _load_write_lifecycle_registry(root)
+    scenario_ids: set[str] = set()
+    for item in items:
+        marker = item.get_closest_marker("write_scenario")
+        if marker is None or len(marker.args) != 1 or type(marker.args[0]) is not str:
+            raise pytest.UsageError(
+                "live_write tests require exactly one write_scenario marker value"
+            )
+        scenario_id = marker.args[0]
+        scenario = registry.scenarios.get(scenario_id)
+        if scenario is None:
+            raise pytest.UsageError(f"Unknown write lifecycle scenario {scenario_id!r}")
+        if not scenario.enabled:
+            reason = scenario.disabled_reason or "no reason recorded"
+            raise pytest.UsageError(
+                f"Write lifecycle scenario {scenario_id!r} is disabled: {reason}"
+            )
+        scenario_ids.add(scenario_id)
+    if not scenario_ids:
+        raise pytest.UsageError("live_write requires at least one write_scenario marker")
+    return tuple(sorted(scenario_ids))
 
 
 @dataclass
@@ -320,15 +348,27 @@ def _prepare_live_write_setup(
         raise SafetyError("Target organization does not match the selected live profile")
     if profile.organization_id not in profile.allowed_organization_ids:
         raise SafetyError("Target organization is not in the live profile allowlist")
-    if profile.terminal_group_id is None:
+    scenario_ids = getattr(config, "_iiko_write_scenario_ids", None)
+    if not scenario_ids:
+        raise SafetyError("live_write requires at least one reviewed write scenario")
+    registry = _load_write_lifecycle_registry(RepoPaths.discover().root)
+    operation_ids: set[str] = set()
+    required_fields: set[str] = set()
+    for scenario_id in scenario_ids:
+        scenario = registry.scenarios.get(scenario_id)
+        if scenario is None or not scenario.enabled:
+            raise SafetyError(f"Write lifecycle scenario {scenario_id!r} is not enabled")
+        operation_ids.update(scenario.operation_ids)
+        required_fields.update(scenario.requires_profile_fields)
+    if "terminal_group_id" in required_fields and profile.terminal_group_id is None:
         raise SafetyError("Live write profile requires a terminal group")
-    if profile.write_product_id is None:
+    if "write_product_id" in required_fields and profile.write_product_id is None:
         raise SafetyError("Live write profile requires a dedicated write product")
     assert_serial_live_invocation(config.invocation_params.args)
-    for operation_id in _WRITE_OPERATION_IDS:
+    for operation_id in sorted(operation_ids):
         catalog.operation_budget(operation_id)
     return _LiveWritePreflight(
-        operation_ids=_WRITE_OPERATION_IDS,
+        operation_ids=tuple(sorted(operation_ids)),
         target_organization_fingerprint=hashlib.sha256(
             profile.organization_id.encode("utf-8")
         ).hexdigest(),
@@ -376,6 +416,10 @@ def pytest_configure(config: pytest.Config) -> None:
         "markers",
         "audit_residue: write test whose compensating cleanup can leave an audit trail",
     )
+    config.addinivalue_line(
+        "markers",
+        "write_scenario(id): bind a live_write test to a reviewed write lifecycle scenario",
+    )
     arguments = tuple(config.invocation_params.args)
     supplied_paths = tuple(
         argument
@@ -402,6 +446,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
         raise pytest.UsageError("--live-profile must be a safe lowercase profile name")
     if getattr(config, "_iiko_read_collection_only", False):
         config._iiko_live_write_selected = False  # type: ignore[attr-defined]
+        config._iiko_write_scenario_ids = ()  # type: ignore[attr-defined]
         config._iiko_live_read_report_required = False  # type: ignore[attr-defined]
         config._iiko_live_read_mode = None  # type: ignore[attr-defined]
         config._iiko_live_read_selected_operation = None  # type: ignore[attr-defined]
@@ -430,6 +475,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
 
     live_write_selected = False
     live_read_report_required = read_mode is not None
+    write_items: list[pytest.Item] = []
     for item in items:
         if _is_live_item(item) and not live_profile:
             item.add_marker(pytest.mark.skip(reason="live tests require --live-profile"))
@@ -439,7 +485,12 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             _assert_live_write_cli_gates(config, audit_residue=audit_residue)
             item.add_marker(pytest.mark.usefixtures("_live_environment"))
             live_write_selected = True
+            write_items.append(item)
+    write_scenario_ids: tuple[str, ...] = ()
+    if live_write_selected:
+        write_scenario_ids = _write_scenario_ids(RepoPaths.discover().root, write_items)
     config._iiko_live_write_selected = live_write_selected  # type: ignore[attr-defined]
+    config._iiko_write_scenario_ids = write_scenario_ids  # type: ignore[attr-defined]
     config._iiko_live_read_report_required = live_read_report_required  # type: ignore[attr-defined]
     config._iiko_live_read_mode = read_mode  # type: ignore[attr-defined]
     config._iiko_live_read_selected_operation = selected_operation  # type: ignore[attr-defined]

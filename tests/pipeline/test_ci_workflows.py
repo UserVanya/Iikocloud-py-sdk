@@ -165,7 +165,7 @@ def _pipeline_commands(path: Path) -> list[str]:
 def test_generation_doc_forbidden_live_write_template_has_every_gate() -> None:
     text = GENERATION_DOC.read_text(encoding="utf-8")
     match = re.search(
-        r"### Запрещённый шаблон реального write-запуска\n.*?```bash\n(?P<command>.*?)\n```",
+        r"### Точная команда write-прогона\n.*?```bash\n(?P<command>.*?)\n```",
         text,
         flags=re.DOTALL,
     )
@@ -185,11 +185,11 @@ def test_generation_doc_forbidden_live_write_template_has_every_gate() -> None:
         "-n0",
         LIVE_WRITE_NODE,
         "--live-profile",
-        "test-server",
+        "write-server",
         "--env-file",
         ".env",
         "--target-organization",
-        "${IIKO_TEST_ORGANIZATION_ID:?required}",
+        "${IIKO_WRITE_ORGANIZATION_ID:?required}",
         "--allow-live-write",
         "--allow-audit-residue",
     )

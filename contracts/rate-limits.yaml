@@ -31,6 +31,18 @@ operations:
   check_terminal_groups_availability:
     test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
+  create_delivery_draft:
+    test_budget: {min_interval_seconds: 30, source: user-approved-write-lifecycles-2026-07-24, verified: true}
+    server_limit: null
+  create_or_update_customer:
+    test_budget: {min_interval_seconds: 30, source: user-approved-write-lifecycles-2026-07-24, verified: true}
+    server_limit: null
+  delete_customers:
+    test_budget: {min_interval_seconds: 30, source: user-approved-write-lifecycles-2026-07-24, verified: true}
+    server_limit: null
+  delete_delivery_draft:
+    test_budget: {min_interval_seconds: 30, source: user-approved-write-lifecycles-2026-07-24, verified: true}
+    server_limit: null
   get_active_courier_locations:
     test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null

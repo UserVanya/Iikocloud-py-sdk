@@ -19,10 +19,15 @@ from tools.openapi_pipeline.live.rates import RateCatalog
 _ORGANIZATION_ID = "00000000-0000-0000-0000-000000000001"
 _TERMINAL_GROUP_ID = "00000000-0000-0000-0000-000000000002"
 _PRODUCT_ID = "00000000-0000-0000-0000-000000000003"
-_WRITE_OPERATION_IDS = (
-    "get_stop_lists",
-    "add_products_to_stop_list",
-    "remove_products_from_stop_list",
+_STOP_LIST_SCENARIO_OPERATION_IDS = tuple(
+    sorted(
+        (
+            "get_organizations",
+            "get_stop_lists",
+            "add_products_to_stop_list",
+            "remove_products_from_stop_list",
+        )
+    )
 )
 
 
@@ -40,6 +45,7 @@ class _Config:
             **(options or {}),
         }
         self.invocation_params = SimpleNamespace(args=arguments)
+        self._iiko_write_scenario_ids = ("stop_list_product",)
 
     def getoption(self, name: str) -> object:
         return self._options[name]
@@ -84,7 +90,7 @@ def _catalog(*, unverified: str | None = None) -> RateCatalog:
                         "verified": True,
                     },
                 }
-                for operation_id in _WRITE_OPERATION_IDS
+                for operation_id in _STOP_LIST_SCENARIO_OPERATION_IDS
             },
         }
     )
@@ -141,7 +147,7 @@ def test_write_setup_checks_every_profile_and_target_boundary_before_budgets(
         )
 
 
-@pytest.mark.parametrize("unverified", _WRITE_OPERATION_IDS)
+@pytest.mark.parametrize("unverified", _STOP_LIST_SCENARIO_OPERATION_IDS)
 def test_write_setup_requires_every_distinct_operation_budget(unverified: str) -> None:
     with pytest.raises(SafetyError, match=unverified):
         project_conftest._prepare_live_write_setup(  # noqa: SLF001
@@ -158,7 +164,7 @@ def test_write_setup_returns_only_operation_ids_and_a_redacted_target_fingerprin
         _catalog(),
     )
 
-    assert preflight.operation_ids == _WRITE_OPERATION_IDS
+    assert preflight.operation_ids == _STOP_LIST_SCENARIO_OPERATION_IDS
     assert re.fullmatch(r"[0-9a-f]{64}", preflight.target_organization_fingerprint)
     assert _ORGANIZATION_ID not in repr(preflight)
 
@@ -272,3 +278,27 @@ def test_write_collect_with_profile_rejects_missing_audit_approval_before_privat
     assert result.returncode == int(pytest.ExitCode.USAGE_ERROR)
     assert "--allow-audit-residue" in result.stderr
     assert "Private" not in result.stderr
+
+
+def test_write_scenario_marker_rejects_unknown_disabled_and_missing() -> None:
+    def _item(marker_arg: str) -> Any:
+        return SimpleNamespace(
+            get_closest_marker=lambda name: (
+                SimpleNamespace(args=(marker_arg,)) if name == "write_scenario" else None
+            )
+        )
+
+    root = Path.cwd()
+    with pytest.raises(pytest.UsageError, match="Unknown write lifecycle scenario"):
+        project_conftest._write_scenario_ids(root, [_item("nope")])  # noqa: SLF001
+    with pytest.raises(pytest.UsageError, match="disabled"):
+        project_conftest._write_scenario_ids(root, [_item("delivery_draft")])  # noqa: SLF001
+    with pytest.raises(pytest.UsageError, match="write_scenario"):
+        project_conftest._write_scenario_ids(  # noqa: SLF001
+            root,
+            [SimpleNamespace(get_closest_marker=lambda name: None)],
+        )
+    assert project_conftest._write_scenario_ids(  # noqa: SLF001
+        root,
+        [_item("stop_list_product")],
+    ) == ("stop_list_product",)

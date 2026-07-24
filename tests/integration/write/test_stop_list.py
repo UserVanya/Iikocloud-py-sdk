@@ -24,6 +24,7 @@ def contains_product(value: Any, product_id: str) -> bool:
 
 
 @pytest.mark.live_write
+@pytest.mark.write_scenario("stop_list_product")
 @pytest.mark.audit_residue
 @pytest.mark.asyncio(loop_scope="session")
 async def test_stop_list_add_is_accepted_and_removed(

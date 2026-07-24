@@ -27,6 +27,19 @@ _REVIEWED_GLOBAL_TEST_BUDGET = {
     "verified": True,
 }
 
+_REVIEWED_WRITE_LIFECYCLE_BUDGET = {
+    "min_interval_seconds": 30,
+    "source": "user-approved-write-lifecycles-2026-07-24",
+    "verified": True,
+}
+
+_WRITE_LIFECYCLE_OPERATIONS = (
+    "create_delivery_draft",
+    "create_or_update_customer",
+    "delete_customers",
+    "delete_delivery_draft",
+)
+
 RATE_V2: dict[str, Any] = {
     "version": 2,
     "defaults": {
@@ -513,7 +526,7 @@ def test_catalog_load_rejects_yaml_anchors_and_aliases(tmp_path: Path) -> None:
 
 
 def _expected_committed_rate_operations() -> dict[str, Any]:
-    return {
+    operations = {
         operation_id: {
             "test_budget": copy.deepcopy(_REVIEWED_GLOBAL_TEST_BUDGET),
             "server_limit": None,
@@ -526,6 +539,16 @@ def _expected_committed_rate_operations() -> dict[str, Any]:
             "remove_products_from_stop_list",
         )
     }
+    operations.update(
+        {
+            operation_id: {
+                "test_budget": copy.deepcopy(_REVIEWED_WRITE_LIFECYCLE_BUDGET),
+                "server_limit": None,
+            }
+            for operation_id in _WRITE_LIFECYCLE_OPERATIONS
+        }
+    )
+    return dict(sorted(operations.items()))
 
 
 def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -> None:
@@ -533,7 +556,7 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
-    assert len(expected_operations) == 95
+    assert len(expected_operations) == 99
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -587,9 +610,33 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
             "method": "POST",
             "path": "/api/1/stop_lists/remove",
         },
+        "create_delivery_draft": {
+            "kind": "compensating",
+            "cleanup": "delete_delivery_draft",
+            "method": "POST",
+            "path": "/api/1/deliveries/drafts/create",
+        },
+        "create_or_update_customer": {
+            "kind": "compensating",
+            "cleanup": "delete_customers",
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/customer/create_or_update",
+        },
+        "delete_customers": {
+            "kind": "cleanup",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/delete_customers",
+        },
+        "delete_delivery_draft": {
+            "kind": "cleanup",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/1/deliveries/drafts/delete",
+        },
     }
     assert value == {"version": 1, "operations": expected_operations}
-    assert len(expected_operations) == 95
+    assert len(expected_operations) == 99
 
     safety = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
     assert safety.automatic_read_ids == frozenset(_READ_ENDPOINTS)

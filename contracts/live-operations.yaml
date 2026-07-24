@@ -45,6 +45,26 @@ operations:
     cleanup: null
     method: POST
     path: /api/1/terminal_groups/is_alive
+  create_delivery_draft:
+    kind: compensating
+    cleanup: delete_delivery_draft
+    method: POST
+    path: /api/1/deliveries/drafts/create
+  create_or_update_customer:
+    kind: compensating
+    cleanup: delete_customers
+    method: POST
+    path: /api/1/loyalty/iiko/customer/create_or_update
+  delete_customers:
+    kind: cleanup
+    cleanup: null
+    method: POST
+    path: /api/1/loyalty/iiko/delete_customers
+  delete_delivery_draft:
+    kind: cleanup
+    cleanup: null
+    method: POST
+    path: /api/1/deliveries/drafts/delete
   get_active_courier_locations:
     kind: read
     cleanup: null

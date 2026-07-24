@@ -1,0 +1,39 @@
+version: 1
+scenarios:
+  stop_list_product:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: profile_field
+      field: write_product_id
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_stop_lists}
+      - {role: create, operation: add_products_to_stop_list}
+      - {role: cleanup, operation: remove_products_from_stop_list, compensates: add_products_to_stop_list}
+  customer:
+    enabled: false
+    disabled_reason: "Loyalty backend is not provisioned for the write stand; get_customer_info returns Common_OrganizationNotFound (live probe 2026-07-24)."
+    requires_profile_fields: []
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: create, operation: create_or_update_customer}
+      - {role: check, operation: get_customer_info}
+      - {role: cleanup, operation: delete_customers, compensates: create_or_update_customer}
+  delivery_draft:
+    enabled: false
+    disabled_reason: "Write stand has no external menu; DeliveryOrderDraft requires menuId."
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: create, operation: create_delivery_draft}
+      - {role: check, operation: get_delivery_draft_by_id}
+      - {role: cleanup, operation: delete_delivery_draft, compensates: create_delivery_draft}

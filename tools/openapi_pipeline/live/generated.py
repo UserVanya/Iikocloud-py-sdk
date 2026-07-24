@@ -10,6 +10,7 @@ from types import MappingProxyType
 from typing import Generic, NoReturn, TypeVar, cast
 from uuid import UUID
 
+from iikocloud_client.api.customers_api import CustomersApi
 from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
@@ -17,6 +18,10 @@ from iikocloud_client.exceptions import ApiException
 from iikocloud_client.models.add_products_to_stop_list_request import (
     AddProductsToStopListRequest,
 )
+from iikocloud_client.models.create_or_update_customer_request import (
+    CreateOrUpdateCustomerRequest,
+)
+from iikocloud_client.models.delete_customers_request import DeleteCustomersRequest
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
 )
@@ -33,6 +38,7 @@ from .state import LiveStateStore
 T = TypeVar("T")
 _CLEANUP_OPERATION_ID = "remove_products_from_stop_list"
 _COMPENSATING_OPERATION_ID = "add_products_to_stop_list"
+CUSTOMER_MARKER_PHONE = "+70000000042"
 _PROFILE_BOUNDARY_ERROR = "Generated cleanup request is outside the selected write profile"
 _NO_API_EXCEPTION = object()
 _INVALID_API_EXCEPTION_STATUS = object()
@@ -146,6 +152,119 @@ def validate_generated_compensating_request(
     if not within_profile:
         raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
     return request
+
+
+def _organization_boundary(
+    profile: object,
+) -> tuple[UUID, frozenset[UUID]]:
+    ids: tuple[UUID, frozenset[UUID]] | None = None
+    allow_write = False
+    if isinstance(profile, ResolvedLiveProfile):
+        allow_write = profile.allow_write is True
+        with suppress(Exception):
+            ids = (
+                UUID(profile.organization_id),
+                frozenset(UUID(value) for value in profile.allowed_organization_ids),
+            )
+    if ids is None or not allow_write:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return ids
+
+
+def validate_customer_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateOrUpdateCustomerRequest:
+    """Validate one owned-customer create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_or_update_customer":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateOrUpdateCustomerRequest | None = None
+    with suppress(Exception):
+        request = CreateOrUpdateCustomerRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids = _organization_boundary(profile)
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and request.phone == CUSTOMER_MARKER_PHONE
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_customer_delete_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> DeleteCustomersRequest:
+    """Validate one owned-customer delete request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "delete_customers":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+
+    request: DeleteCustomersRequest | None = None
+    with suppress(Exception):
+        request = DeleteCustomersRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated cleanup payload is invalid") from None
+
+    organization_id, allowed_organization_ids = _organization_boundary(profile)
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and len(request.customer_ids) == 1
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+@dataclass(frozen=True)
+class _WriteExecutorSpec:
+    api_class: type
+    method_name: str
+    request_keyword: str
+    validator: Callable[[str, object, ResolvedLiveProfile], object]
+
+
+_WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
+    {
+        "add_products_to_stop_list": _WriteExecutorSpec(
+            MenuApi,
+            "add_products_to_stop_list_with_http_info",
+            "add_products_to_stop_list_request",
+            validate_generated_compensating_request,
+        ),
+        "remove_products_from_stop_list": _WriteExecutorSpec(
+            MenuApi,
+            "remove_products_from_stop_list_with_http_info",
+            "remove_products_from_stop_list_request",
+            validate_generated_cleanup_request,
+        ),
+        "create_or_update_customer": _WriteExecutorSpec(
+            CustomersApi,
+            "create_or_update_customer_with_http_info",
+            "create_or_update_customer_request",
+            validate_customer_create_request,
+        ),
+        "delete_customers": _WriteExecutorSpec(
+            CustomersApi,
+            "delete_customers_with_http_info",
+            "delete_customers_request",
+            validate_customer_delete_request,
+        ),
+    }
+)
 
 
 class GeneratedLiveSdk:
@@ -287,6 +406,37 @@ class GeneratedLiveSdk:
                 api,
                 add_products_to_stop_list_request=request,
                 _request_timeout=(10.0, 30.0),
+            )
+            return cast(ApiResponse[object], await pending)
+
+        await self._call_generated(
+            operation_id,
+            operation,
+            request,
+            invoke,
+        )
+
+    async def execute_write(self, operation_id: str, payload: object) -> None:
+        """Execute one reviewed write operation through its validated executor."""
+
+        self._assert_usable()
+        spec = _WRITE_EXECUTORS.get(operation_id)
+        if spec is None:
+            raise SafetyError("Operation is not an approved write operation")
+        request = spec.validator(operation_id, payload, self.profile)
+        operation = self.operation_contract.get(operation_id)
+        if operation is None or operation.kind not in {"compensating", "cleanup"}:
+            raise SafetyError("Operation is not an approved write operation")
+        api_type = spec.api_class
+        method = api_type.__dict__.get(spec.method_name)
+        if method is None:
+            raise SafetyError("Generated write API class does not own the bound method")
+        api = api_type(self.api_client)
+
+        async def invoke() -> ApiResponse[object]:
+            pending = method(
+                api,
+                **{spec.request_keyword: request, "_request_timeout": (10.0, 30.0)},
             )
             return cast(ApiResponse[object], await pending)
 
