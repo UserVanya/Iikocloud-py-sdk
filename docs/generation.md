@@ -576,51 +576,75 @@ synthetic fixtures.
 реализация не завершена; эта инструкция намеренно не предлагает фиктивную
 команду сброса.
 
-## Write-тест и восстановление cleanup
+## Write-сценарии (жизненные циклы записи)
 
-Reversible stop-list round-trip существует как отдельный `live_write` test,
-но не входит ни в один обычный test run. Безопасно проверить только его
-collection-контракт:
+Записи выполняются только внутри проверенных сценариев из реестра
+`contracts/write-lifecycles.yaml`. Сценарий — это цепочка «подготовка
+(чтение) → создание → проверка (чтение) → откат», привязанная к метке
+владения: адаптер (`execute_write`) отклоняет любой запрос вне границ
+write-профиля (организация из allowlist, разрешённые таргеты) и с чужим
+значением метки, поэтому тест физически не может изменить чужие данные.
+Журнал отката регистрирует компенсацию до мутации; незавершённый журнал
+блокирует «успех» до разбора (`cleanup-orphans`).
+
+Каждый live-write тест помечен `@pytest.mark.write_scenario("<id>")`; на
+collection гейт проверяет, что сценарий существует и включён, а поля профиля
+из `requires_profile_fields` заполнены. Состояние сценариев:
+
+| Сценарий | Состояние | Проверка |
+|---|---|---|
+| `stop_list_product` | enabled | live round-trip 2026-07-24 (write-server): add→remove стоп-листа, receipt completed, журнал чист |
+| `customer` | disabled | Бэкенд лояльности не provisioned для write-стенда: `get_customer_info` → `Common_OrganizationNotFound` (проба 2026-07-24) |
+| `delivery_draft` | disabled | На стенде нет внешнего меню, а `DeliveryOrderDraft` требует `menuId` |
+
+Безопасно проверить только collection-контракт:
 
 ```bash
 uv run --frozen --offline pytest -m live_write -n0 \
   tests/integration/write --collect-only -q
 ```
 
-Реальный запуск требует одновременно `--allow-live-write`,
-`--allow-audit-residue`, точный `--target-organization`, write-enabled private
-profile, allowlist, отдельные terminal group/product и `-n0`. Перед
-authentication проверяются rate budgets операций `get`, `add` и `remove`.
-Сейчас эти три stop-list записи в `contracts/rate-limits.yaml` имеют единый
-подтверждённый budget ровно 30 секунд. Это подтверждает только cadence и не
-разрешает live write: без всех перечисленных write gates команда
-останавливается до HTTP.
+Реальный запуск требует одновременно: включённый сценарий в реестре,
+`--allow-live-write`, `--allow-audit-residue` (если тест помечен
+`audit_residue`), точный `--target-organization`, write-enabled private
+profile с allowlist, поля из `requires_profile_fields`, `-n0` и отдельную
+явную авторизацию именно этого запуска. Rate budgets всех операций сценария
+проверяются до authentication; это подтверждает только cadence и не
+разрешает live write само по себе.
 
-### Запрещённый шаблон реального write-запуска
+### Как добавить новый write-сценарий
 
-Следующий блок является исполняемым шаблоном, но запускать его сейчас
-**запрещено**. Он предназначен только для будущего отдельно авторизованного
-контролируемого запуска; это не команда для текущей проверки документации.
+1. Добавить сценарий в `contracts/write-lifecycles.yaml` (`enabled: false` +
+   причина, пока не проверен live).
+2. Добавить операции в `contracts/live-operations.yaml` (create-шаги —
+   `kind: compensating` со ссылкой `cleanup`, шаги отката — `kind: cleanup`)
+   и в `contracts/rate-limits.yaml` (30 секунд; скопировать в
+   `src/iikocloud_client/_contracts/rate-limits.yaml`).
+3. Добавить executor в `_WRITE_EXECUTORS` (`live/generated.py`): модель
+   запроса, сгенерированный метод, валидатор границ профиля и метки владения.
+4. Написать offline-тесты (загрузчик, валидаторы, адаптер, гейты), затем
+   тест сценария в `tests/integration/write/` с маркерами `live_write`,
+   `write_scenario` и при необходимости `audit_residue`.
+5. После отдельной авторизации выполнить один live-прогон; только после
+   успешного — перевести сценарий в `enabled: true`.
+
+Запрещённый шаблон: любой запуск без перечисленных write gates останавливается
+до HTTP; «временно» убрать гейты или изменить чужой таргет нельзя.
+
+### Точная команда write-прогона
+
+Исполнять только после отдельной явной авторизации именно этого запуска и при
+включённом сценарии; это не команда для проверки документации.
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest -m live_write -n0 \
   tests/integration/write/test_stop_list.py::test_stop_list_add_is_accepted_and_removed \
-  --live-profile test-server \
+  --live-profile write-server \
   --env-file .env \
-  --target-organization "${IIKO_TEST_ORGANIZATION_ID:?required}" \
+  --target-organization "${IIKO_WRITE_ORGANIZATION_ID:?required}" \
   --allow-live-write \
   --allow-audit-residue
 ```
-
-Шаблон остаётся запрещённым, пока одновременно не выполнены все условия:
-
-- в write-enabled private profile и allowlist настроены выделенные целевые
-  organization, terminal group и единственный test product;
-- получена отдельная явная авторизация именно на этот live-write запуск.
-
-Даже после выполнения этих условий безопасный placeholder
-`IIKO_TEST_ORGANIZATION_ID` должен быть явно задан точным UUID выделенной
-organization; сам текст шаблона не содержит live identifier.
 
 До `add` test атомарно сохраняет cleanup payload в ignored
 `.state/mutations/<run-id>.json` с mode `0600`. Cleanup выполняется LIFO в
