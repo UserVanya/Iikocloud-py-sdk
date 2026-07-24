@@ -298,7 +298,6 @@ def test_write_scenario_marker_rejects_unknown_disabled_and_missing() -> None:
             root,
             [SimpleNamespace(get_closest_marker=lambda name: None)],
         )
-    assert project_conftest._write_scenario_ids(  # noqa: SLF001
-        root,
-        [_item("stop_list_product")],
-    ) == ("stop_list_product",)
+    assert project_conftest._write_scenario_ids(root, [_item("customer")]) == (  # noqa: SLF001
+        "customer",
+    )

@@ -64,9 +64,12 @@ def _validate_generated_cleanup_request(
     payload: object,
     profile: ResolvedLiveProfile,
 ) -> object:
-    from .live.generated import validate_generated_cleanup_request
+    from .live.generated import _WRITE_EXECUTORS
 
-    return validate_generated_cleanup_request(operation_id, payload, profile)
+    spec = _WRITE_EXECUTORS.get(operation_id)
+    if spec is None:
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return spec.validator(operation_id, payload, profile)
 
 
 def default_cleanup_orphans_dependencies(
@@ -169,7 +172,7 @@ class _LazyGeneratedCleanupExecutor:
             adapter = self._adapter
         if adapter is None:
             raise SafetyError("Generated cleanup client did not initialize")
-        await adapter.execute_cleanup(operation_id, validated_payload)
+        await adapter.execute_write(operation_id, validated_payload)
 
     async def close(self) -> None:
         try:

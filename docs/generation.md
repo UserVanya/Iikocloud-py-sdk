@@ -594,7 +594,7 @@ collection гейт проверяет, что сценарий существу
 | Сценарий | Состояние | Проверка |
 |---|---|---|
 | `stop_list_product` | enabled | live round-trip 2026-07-24 (write-server): add→remove стоп-листа, receipt completed, журнал чист |
-| `customer` | disabled | Бэкенд лояльности не provisioned для write-стенда: `get_customer_info` → `Common_OrganizationNotFound` (проба 2026-07-24) |
+| `customer` | enabled | live lifecycle 2026-07-24 (write-server): create→verify by id→delete, receipt completed, журнал чист. id назначает сервер: `create_or_update` с клиентским id означает «обновить существующего» и отклоняется |
 | `delivery_draft` | disabled | На стенде нет внешнего меню, а `DeliveryOrderDraft` требует `menuId` |
 
 Безопасно проверить только collection-контракт:

@@ -12,8 +12,7 @@ scenarios:
       - {role: create, operation: add_products_to_stop_list}
       - {role: cleanup, operation: remove_products_from_stop_list, compensates: add_products_to_stop_list}
   customer:
-    enabled: false
-    disabled_reason: "Loyalty backend is not provisioned for the write stand; get_customer_info returns Common_OrganizationNotFound (live probe 2026-07-24)."
+    enabled: true
     requires_profile_fields: []
     ownership_marker:
       source: literal

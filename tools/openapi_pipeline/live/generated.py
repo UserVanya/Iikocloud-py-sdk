@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import time
 from collections.abc import Awaitable, Callable, Mapping
 from contextlib import suppress
@@ -52,10 +53,24 @@ class GeneratedCallResult(Generic[T]):
 
 
 class GeneratedCallFailure(SafetyError):
+    _SAFE_ERROR_BODY_KEYS = frozenset(
+        {
+            "code",
+            "description",
+            "error",
+            "errorCode",
+            "errorDescription",
+            "httpStatusCode",
+            "isIntegrationError",
+            "message",
+        }
+    )
+
     def __init__(
         self,
         code: ReadFailureCode,
         status_code: int | None = None,
+        error_details: Mapping[str, object] | None = None,
     ) -> None:
         if type(code) is not ReadFailureCode:
             raise TypeError("code must be a ReadFailureCode")
@@ -63,9 +78,39 @@ class GeneratedCallFailure(SafetyError):
             type(status_code) is not int or not 0 <= status_code <= 599
         ):
             raise ValueError("status_code must be a normalized HTTP status")
+        if error_details is not None and (
+            not isinstance(error_details, Mapping)
+            or any(
+                type(key) is not str
+                or key not in GeneratedCallFailure._SAFE_ERROR_BODY_KEYS
+                or type(error_details[key]) not in {str, int, bool, float, type(None)}
+                for key in error_details
+            )
+        ):
+            raise ValueError("error details must use reviewed error-body keys")
         self.code = code
         self.status_code = status_code
+        self.error_details = (
+            MappingProxyType(dict(error_details)) if error_details is not None else None
+        )
         super().__init__(code.value)
+
+
+def _safe_api_error_details(body: object) -> dict[str, object] | None:
+    if isinstance(body, str):
+        try:
+            body = json.loads(body)
+        except ValueError:
+            return None
+    if not isinstance(body, dict):
+        return None
+    details = {
+        key: value
+        for key, value in body.items()
+        if key in GeneratedCallFailure._SAFE_ERROR_BODY_KEYS
+        and type(value) in {str, int, bool, float}
+    }
+    return details or None
 
 
 def _profile_boundary_ids(
@@ -416,7 +461,7 @@ class GeneratedLiveSdk:
             invoke,
         )
 
-    async def execute_write(self, operation_id: str, payload: object) -> None:
+    async def execute_write(self, operation_id: str, payload: object) -> object:
         """Execute one reviewed write operation through its validated executor."""
 
         self._assert_usable()
@@ -440,7 +485,7 @@ class GeneratedLiveSdk:
             )
             return cast(ApiResponse[object], await pending)
 
-        await self._call_generated(
+        return await self._call_generated(
             operation_id,
             operation,
             request,
@@ -534,6 +579,7 @@ class GeneratedLiveSdk:
         response: ApiResponse[object] | None = None
         cancelled: asyncio.CancelledError | None = None
         api_exception_status: object = _NO_API_EXCEPTION
+        api_error_details: dict[str, object] | None = None
         transport_failed = False
         try:
             response = await invoke()
@@ -544,6 +590,7 @@ class GeneratedLiveSdk:
                 api_exception_status = error.status
             except Exception:
                 api_exception_status = _INVALID_API_EXCEPTION_STATUS
+            api_error_details = _safe_api_error_details(getattr(error, "body", None))
         except Exception:
             transport_failed = True
         duration_ms = max(0, (time.monotonic_ns() - started_ns) // 1_000_000)
@@ -557,7 +604,9 @@ class GeneratedLiveSdk:
             if status == 429:
                 self._record_429()
             self._unusable = True
-            self._raise_call_failure(ReadFailureCode.HTTP_ERROR, status)
+            raise GeneratedCallFailure(
+                ReadFailureCode.HTTP_ERROR, status, api_error_details
+            ) from None
         if transport_failed:
             self._unusable = True
             self._raise_call_failure(ReadFailureCode.TRANSPORT_ERROR)

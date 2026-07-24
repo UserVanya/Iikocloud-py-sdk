@@ -221,7 +221,7 @@ def _harness(
             assert guard.state is kwargs["state"]
             events.append("generated-sdk:create")
 
-        async def execute_cleanup(
+        async def execute_write(
             self,
             operation_id: str,
             payload: dict[str, Any],
