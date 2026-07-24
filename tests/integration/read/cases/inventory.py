@@ -150,6 +150,9 @@ def _incoming_timestamp(view: ContextView) -> str:
 
 
 def _counteragents_unavailable(_view: ContextView) -> Mapping[str, object]:
+    # 2026-07-22 (v1 token): HTTP 403 entitlement abort; 2026-07-23 (v2 token):
+    # entitlement passed, but the backend returned EXTERNAL_SYSTEM_TIMEOUT.
+    # The endpoint stays unusable on this environment under either contract.
     raise NoLiveTarget(NoLiveTargetCode.ENDPOINT)
 
 
@@ -557,7 +560,7 @@ _DOCUMENT_CASES = tuple(case for family in _DOCUMENT_FAMILIES for case in family
 
 _COUNTERAGENTS = ReadCase(
     operation_id="get_inventory_counteragents",
-    revision=2,
+    revision=3,
     depends_on=("get_organizations",),
     requires=("organization_id",),
     provides=(),

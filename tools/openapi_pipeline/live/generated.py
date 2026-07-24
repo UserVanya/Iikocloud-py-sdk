@@ -14,6 +14,9 @@ from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
+from iikocloud_client.models.add_products_to_stop_list_request import (
+    AddProductsToStopListRequest,
+)
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
 )
@@ -29,6 +32,7 @@ from .state import LiveStateStore
 
 T = TypeVar("T")
 _CLEANUP_OPERATION_ID = "remove_products_from_stop_list"
+_COMPENSATING_OPERATION_ID = "add_products_to_stop_list"
 _PROFILE_BOUNDARY_ERROR = "Generated cleanup request is outside the selected write profile"
 _NO_API_EXCEPTION = object()
 _INVALID_API_EXCEPTION_STATUS = object()
@@ -58,6 +62,26 @@ class GeneratedCallFailure(SafetyError):
         super().__init__(code.value)
 
 
+def _profile_boundary_ids(
+    profile: object,
+) -> tuple[UUID, frozenset[UUID], UUID, UUID]:
+    expected_ids: tuple[UUID, frozenset[UUID], UUID, UUID] | None = None
+    allow_write = False
+    if isinstance(profile, ResolvedLiveProfile):
+        allow_write = profile.allow_write is True
+        with suppress(Exception):
+            if profile.terminal_group_id is not None and profile.write_product_id is not None:
+                expected_ids = (
+                    UUID(profile.organization_id),
+                    frozenset(UUID(value) for value in profile.allowed_organization_ids),
+                    UUID(profile.terminal_group_id),
+                    UUID(profile.write_product_id),
+                )
+    if expected_ids is None or not allow_write:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return expected_ids
+
+
 def validate_generated_cleanup_request(
     operation_id: str,
     payload: object,
@@ -74,25 +98,46 @@ def validate_generated_cleanup_request(
     if request is None:
         raise SafetyError("Generated cleanup payload is invalid") from None
 
-    expected_ids: tuple[UUID, frozenset[UUID], UUID, UUID] | None = None
-    if isinstance(profile, ResolvedLiveProfile):
-        with suppress(Exception):
-            if profile.terminal_group_id is not None and profile.write_product_id is not None:
-                expected_ids = (
-                    UUID(profile.organization_id),
-                    frozenset(UUID(value) for value in profile.allowed_organization_ids),
-                    UUID(profile.terminal_group_id),
-                    UUID(profile.write_product_id),
-                )
-    if expected_ids is None:
-        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
-
-    organization_id, allowed_organization_ids, terminal_group_id, product_id = expected_ids
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
     within_profile = False
     with suppress(Exception):
         within_profile = (
-            profile.allow_write is True
-            and request.organization_id == organization_id
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and request.terminal_group_id == terminal_group_id
+            and len(request.items) == 1
+            and request.items[0].product_id == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_generated_compensating_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> AddProductsToStopListRequest:
+    """Validate one generated compensating write request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != _COMPENSATING_OPERATION_ID:
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: AddProductsToStopListRequest | None = None
+    with suppress(Exception):
+        request = AddProductsToStopListRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
             and request.organization_id in allowed_organization_ids
             and request.terminal_group_id == terminal_group_id
             and len(request.items) == 1
@@ -215,6 +260,32 @@ class GeneratedLiveSdk:
             pending = method(
                 api,
                 remove_products_from_stop_list_request=request,
+                _request_timeout=(10.0, 30.0),
+            )
+            return cast(ApiResponse[object], await pending)
+
+        await self._call_generated(
+            operation_id,
+            operation,
+            request,
+            invoke,
+        )
+
+    async def execute_compensating(self, operation_id: str, payload: object) -> None:
+        self._assert_usable()
+        request = validate_generated_compensating_request(
+            operation_id, payload, self.profile
+        )
+        operation = self.operation_contract.get(operation_id)
+        if operation is None or operation.kind != "compensating":
+            raise SafetyError("Operation is not an approved compensating operation")
+        api = MenuApi(self.api_client)
+        method = MenuApi.add_products_to_stop_list_with_http_info
+
+        async def invoke() -> ApiResponse[object]:
+            pending = method(
+                api,
+                add_products_to_stop_list_request=request,
                 _request_timeout=(10.0, 30.0),
             )
             return cast(ApiResponse[object], await pending)

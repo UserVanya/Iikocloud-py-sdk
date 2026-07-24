@@ -345,13 +345,14 @@ def _seed_live_read_context(
     tomorrow = today + timedelta(days=1)
     seed: dict[str, object] = {
         "profile_organization_id": profile.organization_id,
-        "profile_external_menu_id": profile.external_menu_id,
         "date_yyyy_mm_dd": today.isoformat(),
         "period_from_yyyy_mm_dd": today.isoformat(),
         "period_to_yyyy_mm_dd": tomorrow.isoformat(),
         "window_from_local": f"{today.isoformat()} 00:00:00.000",
         "window_to_local": f"{tomorrow.isoformat()} 00:00:00.000",
     }
+    if profile.external_menu_id is not None:
+        seed["profile_external_menu_id"] = profile.external_menu_id
     if profile.terminal_group_id is not None:
         seed["profile_terminal_group_id"] = profile.terminal_group_id
     return ReadContext.seed(seed)

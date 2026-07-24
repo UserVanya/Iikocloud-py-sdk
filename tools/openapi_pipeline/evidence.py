@@ -449,6 +449,8 @@ async def capture_evidence(
             operation_contract=operation_catalog,
             capture=capture,
         )
+        if profile.external_menu_id is None:
+            raise SafetyError("Evidence capture requires an external menu in the live profile")
         try:
             await session.authenticate()
             await session.request_json(

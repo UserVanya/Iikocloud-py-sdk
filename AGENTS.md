@@ -17,3 +17,14 @@ current symptom.
 - When a deterministic failure pattern recurs and a workaround is verified,
   add a sanitized entry to `docs/troubleshooting.md` in the same change set.
   Do not record speculation or secret-bearing output.
+
+# Communication Style (owner's standing request)
+
+Write to the repository owner in plain language, in Russian, so that a person
+with an average technical background can follow. Do not use slang, buzzwords,
+or ambiguous wording. Any unavoidable technical term (an identifier, a
+mechanism name, an English word like "receipt" or "cleanup") must be explained
+in the same sentence or immediately after it — what it is and what it does in
+this repository. Do not leave ambiguous or double-meaning statements
+unexplained. This applies to chat replies, reports, and status summaries.
+

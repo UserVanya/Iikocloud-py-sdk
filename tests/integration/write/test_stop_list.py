@@ -37,16 +37,16 @@ async def test_stop_list_add_is_accepted_and_removed(
     from iikocloud_client import (
         AddProductsToStopListItem,
         AddProductsToStopListRequest,
-        MenuApi,
+        GetOrganizationsRequest,
         RemoveProductsFromStopListItem,
         RemoveProductsFromStopListRequest,
         StopListsRequest,
     )
+    from tools.openapi_pipeline.live.read_case import GeneratedReadBinding
 
     organization_id = UUID(live_profile.organization_id)
     terminal_group_id = UUID(live_profile.terminal_group_id)
     product_id = UUID(live_profile.write_product_id)
-    api = MenuApi(live_sdk.api_client)
     add = AddProductsToStopListRequest(
         organizationId=organization_id,
         terminalGroupId=terminal_group_id,
@@ -59,20 +59,43 @@ async def test_stop_list_add_is_accepted_and_removed(
     )
 
     try:
+        # The completed-receipt canary requires get_organizations in every run.
+        canary_request = GetOrganizationsRequest(
+            organizationIds=[organization_id],
+            returnAdditionalInfo=False,
+            includeDisabled=False,
+        )
+        await live_sdk.call_bound_read(
+            "get_organizations",
+            GeneratedReadBinding(
+                api_module="iikocloud_client.api.organizations_api",
+                api_class="OrganizationsApi",
+                method_name="get_organizations_with_http_info",
+                request_module="iikocloud_client.models.get_organizations_request",
+                request_class="GetOrganizationsRequest",
+                request_keyword="get_organizations_request",
+            ),
+            canary_request,
+        )
+
         preflight_request = StopListsRequest(
             organizationIds=[organization_id],
             terminalGroupsIds=[terminal_group_id],
         )
-        before = await live_sdk.call_generated(
+        preflight = await live_sdk.call_bound_read(
             "get_stop_lists",
-            preflight_request,
-            lambda: api.get_stop_lists_with_http_info(
-                stop_lists_request=preflight_request,
-                _request_timeout=(10.0, 30.0),
+            GeneratedReadBinding(
+                api_module="iikocloud_client.api.menu_api",
+                api_class="MenuApi",
+                method_name="get_stop_lists_with_http_info",
+                request_module="iikocloud_client.models.stop_lists_request",
+                request_class="StopListsRequest",
+                request_keyword="stop_lists_request",
             ),
+            preflight_request,
         )
         assert not contains_product(
-            before.model_dump(mode="json", by_alias=True),
+            preflight.data.model_dump(mode="json", by_alias=True),
             live_profile.write_product_id,
         ), "dedicated test product is already in the stop list"
 
@@ -80,14 +103,9 @@ async def test_stop_list_add_is_accepted_and_removed(
             "remove_products_from_stop_list",
             remove.model_dump(mode="json", by_alias=True),
         )
-        added = await live_sdk.call_generated(
+        await live_sdk.execute_compensating(
             "add_products_to_stop_list",
-            add,
-            lambda: api.add_products_to_stop_list_with_http_info(
-                add_products_to_stop_list_request=add,
-                _request_timeout=(10.0, 30.0),
-            ),
+            add.model_dump(mode="json", by_alias=True),
         )
-        assert added.correlation_id
     finally:
         await mutation_journal.cleanup(live_sdk.execute_cleanup)

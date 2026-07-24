@@ -162,7 +162,11 @@ async def test_discovery_makes_one_guarded_call_per_operation_and_sanitizes_outp
     assert observed == [
         (0.0, "/api/1/access_token", {"apiLogin": "private-login"}),
         (30.0, "/api/1/organizations", {}),
-        (60.0, "/api/1/terminal_groups", {"organizationIds": ["org-1"]}),
+        (
+            60.0,
+            "/api/1/terminal_groups",
+            {"organizationIds": ["org-1"], "includeDisabled": True},
+        ),
         (90.0, "/api/2/menu", None),
     ]
     assert result.to_dict() == {

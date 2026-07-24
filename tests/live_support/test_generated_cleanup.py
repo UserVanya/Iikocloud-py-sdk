@@ -14,6 +14,9 @@ from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
+from iikocloud_client.models.add_products_to_stop_list_request import (
+    AddProductsToStopListRequest,
+)
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
 )
@@ -406,3 +409,144 @@ async def test_execute_cleanup_rejects_payload_outside_selected_write_profile_be
     assert guard.statuses == []
     assert state.statuses == []
     assert invocations == 0
+
+
+def _add_payload() -> dict[str, object]:
+    return {
+        "items": [{"productId": _PRODUCT_ID, "balance": 0}],
+        "organizationId": _ORGANIZATION_ID,
+        "terminalGroupId": _TERMINAL_GROUP_ID,
+    }
+
+
+def _compensating_adapter(
+    guard: _StubGuard,
+    state: _StubState,
+    *,
+    contract: Mapping[str, LiveOperation] | None = None,
+) -> GeneratedLiveSdk:
+    return GeneratedLiveSdk(
+        api_client=cast(ApiClient, object()),
+        profile=_profile(),
+        guard=cast(LiveRateGuard, guard),
+        state=cast(LiveStateStore, state),
+        operation_contract=MappingProxyType(
+            contract
+            or {
+                "add_products_to_stop_list": LiveOperation(
+                    kind="compensating",
+                    cleanup="remove_products_from_stop_list",
+                    method="POST",
+                    path="/api/1/stop_lists/add_products",
+                )
+            }
+        ),
+    )
+
+
+@pytest.mark.asyncio
+async def test_execute_compensating_rebuilds_request_and_dispatches_exactly_once(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _compensating_adapter(guard, state)
+    requests: list[AddProductsToStopListRequest] = []
+    request_timeouts: list[tuple[float, float]] = []
+
+    async def add_products(
+        _api: MenuApi,
+        *,
+        add_products_to_stop_list_request: AddProductsToStopListRequest,
+        _request_timeout: tuple[float, float],
+    ) -> ApiResponse[dict[str, str]]:
+        requests.append(add_products_to_stop_list_request)
+        request_timeouts.append(_request_timeout)
+        return ApiResponse(
+            status_code=200,
+            headers=None,
+            data={"correlationId": "44444444-4444-4444-8444-444444444444"},
+            raw_data=b"{}",
+        )
+
+    monkeypatch.setattr(
+        MenuApi,
+        "add_products_to_stop_list_with_http_info",
+        add_products,
+    )
+    payload = _add_payload()
+
+    await adapter.execute_compensating("add_products_to_stop_list", payload)
+
+    assert len(requests) == 1
+    assert requests[0].model_dump(mode="json", by_alias=True, exclude_none=True) == payload
+    assert request_timeouts == [(10.0, 30.0)]
+    assert guard.acquired == ["add_products_to_stop_list"]
+    assert guard.statuses == [("add_products_to_stop_list", 200)]
+
+
+@pytest.mark.asyncio
+async def test_execute_compensating_rejects_unapproved_operation_before_live_work() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _compensating_adapter(guard, state)
+
+    with pytest.raises(SafetyError, match="approved compensating operation"):
+        await adapter.execute_compensating(
+            "remove_products_from_stop_list", _add_payload()
+        )
+    with pytest.raises(SafetyError, match="approved compensating operation"):
+        await adapter.execute_compensating("get_stop_lists", _add_payload())
+
+    cleanup_kind = _compensating_adapter(
+        guard,
+        state,
+        contract={
+            "add_products_to_stop_list": LiveOperation(
+                kind="cleanup",
+                cleanup=None,
+                method="POST",
+                path="/api/1/stop_lists/add_products",
+            )
+        },
+    )
+    with pytest.raises(SafetyError, match="approved compensating operation"):
+        await cleanup_kind.execute_compensating(
+            "add_products_to_stop_list", _add_payload()
+        )
+    assert guard.acquired == []
+
+
+@pytest.mark.asyncio
+async def test_execute_compensating_sanitizes_invalid_payload_before_live_work() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _compensating_adapter(guard, state)
+
+    with pytest.raises(SafetyError, match="compensating payload is invalid"):
+        await adapter.execute_compensating(
+            "add_products_to_stop_list", {"unexpected": True}
+        )
+    assert guard.acquired == []
+
+
+@pytest.mark.asyncio
+async def test_execute_compensating_rejects_payload_outside_write_profile() -> None:
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _compensating_adapter(guard, state)
+
+    for field, value in (
+        ("organizationId", _OTHER_ID),
+        ("terminalGroupId", _OTHER_ID),
+    ):
+        payload = {**_add_payload(), field: value}
+        with pytest.raises(SafetyError, match="outside the selected write profile"):
+            await adapter.execute_compensating("add_products_to_stop_list", payload)
+
+    other_product = _add_payload()
+    other_product["items"] = [{"productId": _OTHER_ID, "balance": 0}]
+    with pytest.raises(SafetyError, match="outside the selected write profile"):
+        await adapter.execute_compensating("add_products_to_stop_list", other_product)
+
+    assert guard.acquired == []

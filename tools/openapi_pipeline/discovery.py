@@ -313,7 +313,7 @@ async def discover_read_targets(
                 "get_terminal_groups",
                 approved["get_terminal_groups"].method,
                 approved["get_terminal_groups"].path,
-                {"organizationIds": organization_ids},
+                {"organizationIds": organization_ids, "includeDisabled": True},
             )
             grouped = _terminal_groups(terminal_response, set(organization_ids))
             menu_response = await session.request_json(

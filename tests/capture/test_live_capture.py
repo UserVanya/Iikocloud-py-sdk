@@ -140,6 +140,25 @@ def test_live_capture_accepts_strict_json_values_for_safe_session(tmp_path: Path
     assert response_path.exists()
 
 
+def test_live_capture_dumps_top_level_list_of_pydantic_models(tmp_path: Path) -> None:
+    request_path, response_path = _capture(tmp_path).write_model_pair(
+        "get_organizations",
+        {"mode": "FULL"},
+        [ResponseModel(type="ORGANIZATION", name="Private venue", tokenEcho="echo")],
+        metadata={"status": 200},
+    )
+
+    response = json.loads(response_path.read_text(encoding="utf-8"))
+    assert response["body"] == [
+        {
+            "name": "<redacted:string>",
+            "tokenEcho": "<redacted:string>",
+            "type": "<redacted:string>",
+        }
+    ]
+    assert request_path.exists()
+
+
 def test_live_capture_preserves_only_the_exact_catalog_path(
     tmp_path: Path,
 ) -> None:

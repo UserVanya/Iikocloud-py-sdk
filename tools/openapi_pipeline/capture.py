@@ -626,7 +626,11 @@ class LiveCapture:
                 return value.model_dump(mode="json", by_alias=True)
             except Exception:
                 raise SafetyError("Cannot dump Pydantic capture model safely") from None
-        if value is None or type(value) in {bool, int, float, str, list, dict}:
+        if type(value) is list:
+            return [LiveCapture._json_value(item) for item in value]
+        if type(value) is dict:
+            return {key: LiveCapture._json_value(item) for key, item in value.items()}
+        if value is None or type(value) in {bool, int, float, str}:
             return value
         raise SafetyError("Capture models must be Pydantic or strict JSON values")
 

@@ -570,7 +570,7 @@ def test_document_get_request_and_response_are_linked(spec: FamilySpec) -> None:
     assert missing.value.code is NoLiveTargetCode.DOCUMENT
 
 
-def test_counteragent_live_read_is_temporarily_skipped_before_request_construction() -> None:
+def test_counteragent_live_read_is_skipped_before_request_construction() -> None:
     case = _case("get_inventory_counteragents")
     assert case.depends_on == ("get_organizations",)
     assert case.requires == ("organization_id",)
@@ -583,7 +583,7 @@ def test_counteragent_live_read_is_temporarily_skipped_before_request_constructi
     assert case.allowed_no_target_codes == frozenset(
         {unavailable.value.code, NoLiveTargetCode.INVOICE_PROCESSING}
     )
-    assert case.revision == 2
+    assert case.revision == 3
 
 
 def test_cost_price_request_is_one_product_store_at_utc_midnight() -> None:
