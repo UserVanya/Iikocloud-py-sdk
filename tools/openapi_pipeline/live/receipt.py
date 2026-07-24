@@ -26,7 +26,8 @@ _FIELDS = {
     "completed",
 }
 _MAX_RECEIPT_BYTES = 1024 * 1024
-_REQUIRED_READ_CANARY = ("authenticate", "get_organizations")
+AUTH_OPERATION_IDS = frozenset({"authenticate", "authenticate_v2"})
+_REQUIRED_READ_CANARY = ("get_organizations",)
 
 
 @dataclass(frozen=True)
@@ -87,18 +88,22 @@ class LiveReceipt:
             raise SafetyError("Live receipt operations are invalid")
         if len(set(self.operations)) != len(self.operations):
             raise SafetyError("Live receipt operations must not contain duplicates")
-        if self.operations and self.operations[0] != "authenticate":
-            raise SafetyError("Live receipt operations must start with authenticate")
+        if self.operations and self.operations[0] not in AUTH_OPERATION_IDS:
+            raise SafetyError(
+                "Live receipt operations must start with an authentication operation"
+            )
         if type(self.had_429) is not bool or type(self.completed) is not bool:
             raise SafetyError("Live receipt flags must be booleans")
         if self.completed and not self.has_required_read_canary:
             raise SafetyError(
-                "A completed live receipt requires authenticate and get_organizations"
+                "A completed live receipt requires authentication and get_organizations"
             )
 
     @property
     def has_required_read_canary(self) -> bool:
-        return all(operation_id in self.operations for operation_id in _REQUIRED_READ_CANARY)
+        return any(operation_id in self.operations for operation_id in AUTH_OPERATION_IDS) and all(
+            operation_id in self.operations for operation_id in _REQUIRED_READ_CANARY
+        )
 
     def to_json(self) -> dict[str, Any]:
         value = asdict(self)

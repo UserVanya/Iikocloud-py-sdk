@@ -10,6 +10,7 @@ from ..errors import SafetyError
 from ..inventory import HTTP_METHODS
 from ..io import canonical_json_bytes, sha256_bytes
 from .contract_io import exact_keys, load_yaml_mapping, safe_identifier, safe_review_reason
+from .receipt import AUTH_OPERATION_IDS
 
 _MAX_CATALOG_BYTES = 1024 * 1024
 _EFFECTS = frozenset(
@@ -97,8 +98,14 @@ class OperationSafetyCatalog:
                 raise SafetyError(
                     "automatic live policy is permitted only for reads and authenticate"
                 )
-            if effect == "auth" and live_policy == "automatic" and operation_id != "authenticate":
-                raise SafetyError("Only authenticate may use automatic auth policy")
+            if (
+                effect == "auth"
+                and live_policy == "automatic"
+                and operation_id not in AUTH_OPERATION_IDS
+            ):
+                raise SafetyError(
+                    "Only reviewed authentication operations may use automatic auth policy"
+                )
             if live_policy not in _ALLOWED_POLICIES[effect]:
                 raise SafetyError(
                     f"live_policy {live_policy!r} is not allowed for effect {effect!r}"

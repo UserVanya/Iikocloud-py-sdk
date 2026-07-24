@@ -58,8 +58,8 @@ operations:
     reason: "Current single-session authentication endpoint."
   authenticate_v2:
     effect: auth
-    live_policy: blocked
-    reason: "Separate authentication contract has not been migrated."
+    live_policy: automatic
+    reason: "Migrated application authentication endpoint using developer portal appId, clientSecret, and API key."
   awake_terminal_groups:
     effect: action
     live_policy: manual_only

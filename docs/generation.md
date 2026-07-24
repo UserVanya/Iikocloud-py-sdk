@@ -298,6 +298,56 @@ settings. Значения API login и IDs находятся в process enviro
 явно переданном `.env`; их нельзя печатать, копировать в docs или коммитить.
 Полные правила находятся в `private/README.md`.
 
+`.env` структурирован по окружениям (шаблон — `.env.example`): SHARED
+(приложение портала разработчика `IIKO_APP_ID`/`IIKO_CLIENT_SECRET`), READ
+(`IIKO_API_KEY` + `IIKO_TEST_*` для профиля amato) и WRITE (`IIKO_WRITE_*`
+для профиля write-server). Переменные без provisioned значений держатся
+закомментированными заглушками с пояснением — profile loader fail-closed
+требует непустое значение только когда оно реально нужно выбранному режиму
+(`allow_write`).
+
+### Версия live-авторизации (v1 → v2)
+
+iiko переводит Cloud API на новую схему авторизации: старый
+`POST /api/1/access_token` (тело `{apiLogin}`) отключается, замена —
+`POST /api/v2/access_token` (тело `{appId, clientSecret, apiKey}`, ответ в той
+же форме `{correlationId, token}`). По официальному FAQ меняется только способ
+получения токена; остальные endpoints не затронуты.
+
+Профиль выбирает контракт явно через `auth_version` (default `"v1"`). Для
+перехода на v2:
+
+1. Зарегистрируйте приложение на https://public-api.iikoweb.ru/portal и
+   получите `appId` и одноразовый `clientSecret` (новый API key в iikoWeb
+   получать не нужно — используется текущий `IIKO_API_KEY` как `apiKey`).
+2. Добавьте значения в `.env` (например, `IIKO_APP_ID` и
+   `IIKO_CLIENT_SECRET`) и поля `auth_version = "v2"`, `app_id_env`,
+   `client_secret_env` в private profile (см.
+   `config/live-profile.example.toml`).
+3. Выполните один guarded live-прогон для проверки нового auth-контракта.
+
+`SafeLiveSession` выбирает auth-операцию по `auth_version` профиля; обе
+операции (`authenticate`, `authenticate_v2`) имеют reviewed automatic policy и
+verified 30-секундный бюджет. Guarded capture/evidence/discovery/cleanup
+flows пока остаются привязанными к v1-контракту и требуют отдельного review
+перед миграцией.
+
+Проверено live 2026-07-23 (профиль amato, guarded smoke и selected runs):
+v2-токен принимается всеми проверенными read-endpoints, а ранее падавшие с
+HTTP 403 операции `PublicApiInvoiceProcessing` под v2-токеном зарегистрированного
+приложения возвращают 200 (исключение — `get_inventory_counteragents`, у
+которого backend отвечает `EXTERNAL_SYSTEM_TIMEOUT`; case остаётся
+`no_live_target/endpoint_unavailable`). Поэтому
+`disabled_read_capabilities = ["public_api_invoice_processing"]` для этого
+окружения больше не нужен под v2.
+
+Read и write окружения разведены по отдельным API keys одного зарегистрированного
+приложения: read использует `IIKO_API_KEY`, выделенный write-стенд —
+`IIKO_WRITE_API_KEY` (см. `REVIEWED_API_LOGIN_ENVS`). Целевые IDs write-стенда
+(organization, terminal group, write product, external menu) получают через
+`discover-read-targets` с write-профилем (`allow_write = false` на время
+discovery) и затем фиксируют в его private profile с `allow_write = true`.
+
 Если для конкретного environment подтверждено отсутствие entitlement
 `PublicApiInvoiceProcessing`, добавьте в его private profile:
 
@@ -315,10 +365,12 @@ request model, получения rate budget и HTTP-вызова. Без по�
 
 Live entrypoints принимают только точный корневой `--env-file .env` и не
 подхватывают файл неявно. Process environment имеет приоритет над этим файлом.
-Для API login профиль обязан ссылаться на основной `IIKO_API_KEY`; наличие
-`IIKO_API_KEY_2` не включает fallback. Перед каждым запуском заново проверьте,
-что `.env` и private profile принадлежат текущему пользователю и имеют mode
-`0600`.
+`api_login_env` профиля обязан входить в reviewed-набор
+`REVIEWED_API_LOGIN_ENVS` (`IIKO_API_KEY` — read-контур, `IIKO_WRITE_API_KEY` —
+выделенное write-окружение); `IIKO_API_KEY_2` в набор не входит, наличие
+альтернативного ключа не включает fallback. Перед каждым запуском заново
+проверьте, что `.env` и private profile принадлежат текущему пользователю и
+имеют mode `0600`.
 
 Получить guarded список доступных организаций, terminal groups и external
 menus с именами:

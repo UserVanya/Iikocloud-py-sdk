@@ -181,6 +181,126 @@ def _set_read_environment(monkeypatch: pytest.MonkeyPatch, *, login: str = "logi
     monkeypatch.setenv("IIKO_TERMINAL", "terminal-1")
 
 
+def test_profile_without_external_menu_loads_with_none(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    profile.write_text(
+        "\n".join(
+            line
+            for line in profile.read_text(encoding="utf-8").splitlines()
+            if not line.startswith("external_menu_id_env =")
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    _set_read_environment(monkeypatch)
+
+    resolved = load_profile(profile)
+
+    assert resolved.external_menu_id is None
+    assert resolved.organization_id == "00000000-0000-0000-0000-000000000001"
+
+    discovered = load_discovery_profile(profile)
+    assert discovered.api_login == "login"
+
+
+def test_profile_defaults_to_v1_authentication_without_application_credentials(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _set_read_environment(monkeypatch)
+
+    resolved = load_profile(profile)
+
+    assert resolved.auth_version == "v1"
+    assert resolved.app_id is None
+    assert resolved.client_secret is None
+
+
+def test_v2_profile_resolves_application_credentials_without_storing_them(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(profile, 'auth_version = "v2"')
+    _append_profile_line(profile, 'app_id_env = "IIKO_APP_ID"')
+    _append_profile_line(profile, 'client_secret_env = "IIKO_CLIENT_SECRET"')
+    _set_read_environment(monkeypatch)
+    monkeypatch.setenv("IIKO_APP_ID", "app-id-1")
+    monkeypatch.setenv("IIKO_CLIENT_SECRET", "client-secret-1")
+
+    resolved = load_profile(profile)
+
+    assert resolved.auth_version == "v2"
+    assert resolved.app_id == "app-id-1"
+    assert resolved.client_secret == "client-secret-1"
+    assert "client-secret-1" not in repr(resolved)
+    assert "app-id-1" not in repr(resolved)
+    assert "client-secret-1" not in resolved.fingerprint
+
+
+def test_v2_profile_requires_both_application_credential_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _set_read_environment(monkeypatch)
+    for extra in ('app_id_env = "IIKO_APP_ID"', 'client_secret_env = "IIKO_CLIENT_SECRET"'):
+        _write_profile(profile)
+        _append_profile_line(profile, 'auth_version = "v2"')
+        _append_profile_line(profile, extra)
+
+        with pytest.raises(SafetyError, match="app_id_env and client_secret_env"):
+            load_profile(profile)
+
+
+def test_v1_profile_rejects_application_credential_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(profile, 'app_id_env = "IIKO_APP_ID"')
+    _append_profile_line(profile, 'client_secret_env = "IIKO_CLIENT_SECRET"')
+    _set_read_environment(monkeypatch)
+
+    with pytest.raises(SafetyError, match="auth_version"):
+        load_profile(profile)
+
+
+def test_profile_rejects_unknown_auth_version(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(profile, 'auth_version = "v3"')
+    _set_read_environment(monkeypatch)
+
+    with pytest.raises(SafetyError, match="auth_version"):
+        load_profile(profile)
+
+
+def test_v2_discovery_profile_resolves_application_credentials(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    profile = tmp_path / "profile.toml"
+    _write_profile(profile)
+    _append_profile_line(profile, 'auth_version = "v2"')
+    _append_profile_line(profile, 'app_id_env = "IIKO_APP_ID"')
+    _append_profile_line(profile, 'client_secret_env = "IIKO_CLIENT_SECRET"')
+    _set_read_environment(monkeypatch)
+    monkeypatch.setenv("IIKO_APP_ID", "app-id-1")
+    monkeypatch.setenv("IIKO_CLIENT_SECRET", "client-secret-1")
+
+    resolved = load_discovery_profile(profile)
+
+    assert resolved.auth_version == "v2"
+    assert resolved.app_id == "app-id-1"
+    assert resolved.client_secret == "client-secret-1"
+    assert "client-secret-1" not in repr(resolved)
+
+
 def test_read_only_profile_resolves_terminal_without_write_product(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -490,7 +610,7 @@ def test_discovery_profile_requires_only_primary_login_and_refuses_write_profile
     resolved = load_discovery_profile(
         profile,
         env_file=env_file,
-        required_api_login_env="IIKO_API_KEY",
+        allowed_api_login_envs=frozenset({"IIKO_API_KEY"}),
     )
 
     assert resolved.name == "test"
@@ -503,7 +623,7 @@ def test_discovery_profile_requires_only_primary_login_and_refuses_write_profile
         load_discovery_profile(profile, env_file=env_file)
 
 
-def test_profile_can_require_the_production_primary_login_name(
+def test_profile_accepts_only_reviewed_login_environment_names(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     profile = tmp_path / "profile.toml"
@@ -515,5 +635,16 @@ def test_profile_can_require_the_production_primary_login_name(
     _set_read_environment(monkeypatch)
     monkeypatch.setenv("IIKO_API_KEY_2", "alternate")
 
-    with pytest.raises(SafetyError, match="IIKO_API_KEY"):
-        load_profile(profile, required_api_login_env="IIKO_API_KEY")
+    with pytest.raises(SafetyError, match="reviewed environment name"):
+        load_profile(profile, allowed_api_login_envs=frozenset({"IIKO_API_KEY"}))
+
+    monkeypatch.setenv("IIKO_WRITE_API_KEY", "write-login")
+    profile.write_text(
+        profile.read_text(encoding="utf-8").replace("IIKO_API_KEY_2", "IIKO_WRITE_API_KEY"),
+        encoding="utf-8",
+    )
+    resolved = load_profile(
+        profile,
+        allowed_api_login_envs=frozenset({"IIKO_API_KEY", "IIKO_WRITE_API_KEY"}),
+    )
+    assert resolved.api_login == "write-login"

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import httpx
@@ -69,6 +70,60 @@ async def test_authentication_accepts_exact_schema_response_with_uuid_correlatio
         await session.authenticate()
         assert session.access_token == "test-token"
         assert _CORRELATION_ID not in repr(session)
+
+
+@pytest.mark.asyncio
+async def test_v2_authentication_sends_application_credentials_once() -> None:
+    seen: list[tuple[str, dict[str, str]]] = []
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        seen.append((request.url.path, json.loads(request.content)))
+        return httpx.Response(200, json=_auth_response("test-token-v2"))
+
+    profile = ResolvedLiveProfile(
+        **{
+            **_profile().__dict__,
+            "auth_version": "v2",
+            "app_id": "test-app-id",
+            "client_secret": "test-client-secret",  # pragma: allowlist secret
+        }
+    )
+    guard = StubGuard()
+    async with SafeLiveSession(
+        profile=profile,
+        guard=guard,
+        transport=httpx.MockTransport(handler),
+        operation_contract=_operation_contract(),
+    ) as session:
+        await session.authenticate()
+        assert session.access_token == "test-token-v2"
+        assert "test-client-secret" not in repr(session)
+
+    assert seen == [
+        (
+            "/api/v2/access_token",
+            {
+                "appId": "test-app-id",
+                "clientSecret": "test-client-secret",  # pragma: allowlist secret
+                "apiKey": "test-login",
+            },
+        )
+    ]
+    assert guard.acquired == ["authenticate_v2"]
+    assert guard.statuses == [("authenticate_v2", 200)]
+
+
+@pytest.mark.asyncio
+async def test_v2_authentication_requires_application_credentials() -> None:
+    profile = ResolvedLiveProfile(**{**_profile().__dict__, "auth_version": "v2"})
+    async with SafeLiveSession(
+        profile=profile,
+        guard=StubGuard(),
+        transport=httpx.MockTransport(lambda request: httpx.Response(500)),
+        operation_contract=_operation_contract(),
+    ) as session:
+        with pytest.raises(SafetyError, match="application credentials"):
+            await session.authenticate()
 
 
 @pytest.mark.asyncio
@@ -367,8 +422,27 @@ def test_committed_operation_contract_binds_exact_methods_and_paths() -> None:
     operations = load_operation_contract(Path("contracts/live-operations.yaml"))
     assert operations["authenticate"].method == "POST"
     assert operations["authenticate"].path == "/api/1/access_token"
+    assert operations["authenticate_v2"].method == "POST"
+    assert operations["authenticate_v2"].path == "/api/v2/access_token"
     assert operations["get_organizations"].method == "POST"
     assert operations["get_organizations"].path == "/api/1/organizations"
+
+
+def test_operation_contract_rejects_unreviewed_authentication_operation(
+    tmp_path: Path,
+) -> None:
+    contract = yaml.safe_load(Path("contracts/live-operations.yaml").read_text(encoding="utf-8"))
+    contract["operations"]["custom_auth"] = {
+        "kind": "auth",
+        "cleanup": None,
+        "method": "POST",
+        "path": "/api/1/custom_auth",
+    }
+    path = tmp_path / "operations.yaml"
+    path.write_text(yaml.safe_dump(contract, sort_keys=False), encoding="utf-8")
+
+    with pytest.raises(SafetyError, match="authentication operations"):
+        load_operation_contract(path)
 
 
 @pytest.mark.parametrize(

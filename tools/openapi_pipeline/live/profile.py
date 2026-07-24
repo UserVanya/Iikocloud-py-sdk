@@ -32,15 +32,19 @@ _REQUIRED_FIELDS = {
     "base_url",
     "api_login_env",
     "organization_id_env",
-    "external_menu_id_env",
     "allow_write",
     "allowed_organization_ids",
 }
 _OPTIONAL_FIELDS = {
+    "app_id_env",
+    "auth_version",
+    "client_secret_env",
     "disabled_read_capabilities",
+    "external_menu_id_env",
     "terminal_group_id_env",
     "write_product_id_env",
 }
+_AUTH_VERSIONS = frozenset({"v1", "v2"})
 _INVALID_DISABLED_CAPABILITIES = (
     "disabled_read_capabilities must be a duplicate-free array of known "
     "capability strings"
@@ -53,13 +57,16 @@ class ResolvedLiveProfile:
     base_url: str
     api_login: str = field(repr=False)
     organization_id: str
-    external_menu_id: str
+    external_menu_id: str | None
     terminal_group_id: str | None
     write_product_id: str | None
     allow_write: bool
     allowed_organization_ids: tuple[str, ...]
     fingerprint: str
     disabled_read_capabilities: frozenset[ReadCapability] = frozenset()
+    auth_version: str = "v1"
+    app_id: str | None = field(repr=False, default=None)
+    client_secret: str | None = field(repr=False, default=None)
 
 
 @dataclass(frozen=True)
@@ -68,6 +75,9 @@ class ResolvedDiscoveryProfile:
     base_url: str
     api_login: str = field(repr=False)
     fingerprint: str
+    auth_version: str = "v1"
+    app_id: str | None = field(repr=False, default=None)
+    client_secret: str | None = field(repr=False, default=None)
 
 
 def is_safe_profile_name(value: object) -> bool:
@@ -176,6 +186,19 @@ def _load_toml(path: Path) -> dict[str, Any]:
         raise SafetyError(f"Live profile fields must be the documented fields: {wanted}")
     if "write_product_id_env" in value and "terminal_group_id_env" not in value:
         raise SafetyError("Live profile write product requires a terminal group field")
+    auth_version = value.get("auth_version", "v1")
+    if type(auth_version) is not str or auth_version not in _AUTH_VERSIONS:
+        raise SafetyError("Live profile auth_version must be 'v1' or 'v2'")
+    has_app_credentials = "app_id_env" in value or "client_secret_env" in value
+    if auth_version == "v2":
+        if "app_id_env" not in value or "client_secret_env" not in value:
+            raise SafetyError(
+                "Live profile auth_version v2 requires app_id_env and client_secret_env"
+            )
+    elif has_app_credentials:
+        raise SafetyError(
+            "Live profile application credentials require auth_version = 'v2'"
+        )
     return value
 
 
@@ -204,6 +227,22 @@ def _required_env(name: str, file_values: dict[str, str | None]) -> str:
         return _strict_string(raw, label=f"Environment variable {name}", maximum=4096)
     except SafetyError as error:
         raise SafetyError(f"Required environment variable is missing or unsafe: {name}") from error
+
+
+def _resolve_app_credentials(
+    data: dict[str, Any],
+    file_values: dict[str, str | None],
+) -> tuple[str, str | None, str | None]:
+    auth_version = data.get("auth_version", "v1")
+    if auth_version != "v2":
+        return "v1", None, None
+    app_id_env = _env_name(data["app_id_env"], label="app_id_env")
+    client_secret_env = _env_name(data["client_secret_env"], label="client_secret_env")
+    return (
+        "v2",
+        _required_env(app_id_env, file_values),
+        _required_env(client_secret_env, file_values),
+    )
 
 
 def _string_list(value: object, *, label: str) -> tuple[str, ...]:
@@ -242,7 +281,7 @@ def load_discovery_profile(
     path: Path,
     *,
     env_file: Path | None = None,
-    required_api_login_env: str | None = None,
+    allowed_api_login_envs: frozenset[str] | None = None,
 ) -> ResolvedDiscoveryProfile:
     """Resolve only the credentials needed to discover read-only target IDs."""
 
@@ -258,21 +297,27 @@ def load_discovery_profile(
         _disabled_read_capabilities(data["disabled_read_capabilities"])
 
     api_login_env = _env_name(data["api_login_env"], label="api_login_env")
-    if required_api_login_env is not None and api_login_env != required_api_login_env:
-        raise SafetyError(f"Live profile api_login_env must be exactly {required_api_login_env}")
+    if allowed_api_login_envs is not None and api_login_env not in allowed_api_login_envs:
+        raise SafetyError("Live profile api_login_env is not a reviewed environment name")
     _env_name(data["organization_id_env"], label="organization_id_env")
-    _env_name(data["external_menu_id_env"], label="external_menu_id_env")
+    if "external_menu_id_env" in data:
+        _env_name(data["external_menu_id_env"], label="external_menu_id_env")
     if "terminal_group_id_env" in data:
         _env_name(data["terminal_group_id_env"], label="terminal_group_id_env")
     if "write_product_id_env" in data:
         _env_name(data["write_product_id_env"], label="write_product_id_env")
 
-    api_login = _required_env(api_login_env, _load_env_file(env_file))
+    file_values = _load_env_file(env_file)
+    api_login = _required_env(api_login_env, file_values)
+    auth_version, app_id, client_secret = _resolve_app_credentials(data, file_values)
     return ResolvedDiscoveryProfile(
         name=name,
         base_url=base_url,
         api_login=api_login,
         fingerprint=_profile_fingerprint(name, base_url),
+        auth_version=auth_version,
+        app_id=app_id,
+        client_secret=client_secret,
     )
 
 
@@ -280,7 +325,7 @@ def load_profile(
     path: Path,
     *,
     env_file: Path | None = None,
-    required_api_login_env: str | None = None,
+    allowed_api_login_envs: frozenset[str] | None = None,
 ) -> ResolvedLiveProfile:
     data = _load_toml(path)
     name = data["name"]
@@ -298,10 +343,14 @@ def load_profile(
     )
 
     api_login_env = _env_name(data["api_login_env"], label="api_login_env")
-    if required_api_login_env is not None and api_login_env != required_api_login_env:
-        raise SafetyError(f"Live profile api_login_env must be exactly {required_api_login_env}")
+    if allowed_api_login_envs is not None and api_login_env not in allowed_api_login_envs:
+        raise SafetyError("Live profile api_login_env is not a reviewed environment name")
     organization_id_env = _env_name(data["organization_id_env"], label="organization_id_env")
-    external_menu_id_env = _env_name(data["external_menu_id_env"], label="external_menu_id_env")
+    external_menu_env = (
+        _env_name(data["external_menu_id_env"], label="external_menu_id_env")
+        if "external_menu_id_env" in data
+        else None
+    )
     terminal_env = (
         _env_name(data["terminal_group_id_env"], label="terminal_group_id_env")
         if "terminal_group_id_env" in data
@@ -318,7 +367,10 @@ def load_profile(
     file_values = _load_env_file(env_file)
     api_login = _required_env(api_login_env, file_values)
     organization_id = _required_env(organization_id_env, file_values)
-    external_menu_id = _required_env(external_menu_id_env, file_values)
+    auth_version, app_id, client_secret = _resolve_app_credentials(data, file_values)
+    external_menu_id = (
+        _required_env(external_menu_env, file_values) if external_menu_env is not None else None
+    )
     terminal_group_id = (
         _required_env(terminal_env, file_values) if terminal_env is not None else None
     )
@@ -341,4 +393,7 @@ def load_profile(
         allowed_organization_ids=allowed_organization_ids,
         fingerprint=fingerprint,
         disabled_read_capabilities=disabled_read_capabilities,
+        auth_version=auth_version,
+        app_id=app_id,
+        client_secret=client_secret,
     )

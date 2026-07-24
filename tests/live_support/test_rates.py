@@ -520,6 +520,7 @@ def _expected_committed_rate_operations() -> dict[str, Any]:
         }
         for operation_id in (
             "authenticate",
+            "authenticate_v2",
             *_READ_ENDPOINTS,
             "add_products_to_stop_list",
             "remove_products_from_stop_list",
@@ -532,7 +533,7 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
-    assert len(expected_operations) == 94
+    assert len(expected_operations) == 95
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -559,6 +560,12 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
             "method": "POST",
             "path": "/api/1/access_token",
         },
+        "authenticate_v2": {
+            "kind": "auth",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/v2/access_token",
+        },
         **{
             operation_id: {
                 "kind": "read",
@@ -582,8 +589,7 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
         },
     }
     assert value == {"version": 1, "operations": expected_operations}
-    assert len(expected_operations) == 94
-    assert "authenticate_v2" not in expected_operations
+    assert len(expected_operations) == 95
 
     safety = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
     assert safety.automatic_read_ids == frozenset(_READ_ENDPOINTS)

@@ -282,11 +282,21 @@ def test_automatic_policy_rejects_mutating_effects(tmp_path: Path, effect: str) 
         _load_mapping(tmp_path, value)
 
 
-def test_auth_automatic_is_reserved_for_authenticate(tmp_path: Path) -> None:
+def test_auth_automatic_is_reserved_for_reviewed_authentication_operations(
+    tmp_path: Path,
+) -> None:
     value = copy.deepcopy(VALID)
     value["operations"]["authenticate_v2"]["live_policy"] = "automatic"
+    _load_mapping(tmp_path, value)
 
-    with pytest.raises(SafetyError, match="authenticate"):
+    value = copy.deepcopy(VALID)
+    value["operations"]["custom_auth_operation"] = {
+        "effect": "auth",
+        "live_policy": "automatic",
+        "reason": "Unreviewed synthetic authentication operation.",
+    }
+
+    with pytest.raises(SafetyError, match="authentication operations"):
         _load_mapping(tmp_path, value)
 
 
@@ -357,8 +367,7 @@ def test_committed_catalog_is_exhaustive_and_matches_effective_openapi() -> None
         (entry.effect, entry.live_policy) for entry in catalog.operations.values()
     ) == Counter(
         {
-            ("auth", "automatic"): 1,
-            ("auth", "blocked"): 1,
+            ("auth", "automatic"): 2,
             ("read", "automatic"): 91,
             ("create", "lifecycle_only"): 17,
             ("update", "lifecycle_only"): 43,

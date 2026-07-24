@@ -63,6 +63,31 @@ def test_receipt_records_operation_before_completion_and_429_is_terminal(tmp_pat
         blocked.as_completed()
 
 
+def test_receipt_canary_accepts_v2_authentication_operation() -> None:
+    receipt = (
+        _receipt()
+        .with_operation("authenticate_v2")
+        .with_operation("get_organizations")
+        .as_completed()
+    )
+    assert receipt.has_required_read_canary
+    assert receipt.matches("a" * 64, "b" * 64, "c" * 64, "d" * 64)
+
+
+def test_receipt_operations_must_start_with_an_authentication_operation() -> None:
+    with pytest.raises(SafetyError, match="authentication operation"):
+        LiveReceipt(
+            run_id="20260716T180000Z-a1b2c3d4",
+            profile_fingerprint="a" * 64,
+            effective_schema_sha256="b" * 64,
+            generated_tree_sha256="c" * 64,
+            live_contracts_sha256="d" * 64,
+            operations=("get_organizations",),
+            had_429=False,
+            completed=False,
+        )
+
+
 @pytest.mark.parametrize(
     ("field", "value", "message"),
     [

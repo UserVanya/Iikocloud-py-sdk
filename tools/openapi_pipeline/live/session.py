@@ -17,7 +17,7 @@ import yaml
 from ..errors import SafetyError
 from ..paths import RepoPaths
 from .profile import ResolvedDiscoveryProfile, ResolvedLiveProfile
-from .receipt import LiveReceipt
+from .receipt import AUTH_OPERATION_IDS, LiveReceipt
 from .state import LiveStateStore
 
 if TYPE_CHECKING:
@@ -114,12 +114,16 @@ def load_operation_contract(path: Path) -> Mapping[str, LiveOperation]:
         except SafetyError as error:
             raise SafetyError(f"Live operation {operation_id!r} has an unsafe path") from error
         result[operation_id] = LiveOperation(kind, cleanup, method, safe_path)
-    auth = result.get("authenticate")
-    if auth is None or auth.kind != "auth":
-        raise SafetyError("Live operation contract must define authenticate as auth")
+    auth_ids = frozenset(
+        operation_id
+        for operation_id, operation in result.items()
+        if operation.kind == "auth"
+    )
+    if not auth_ids or auth_ids - AUTH_OPERATION_IDS:
+        raise SafetyError(
+            "Live operation contract must define only the reviewed authentication operations"
+        )
     for operation_id, operation in result.items():
-        if operation.kind == "auth" and operation_id != "authenticate":
-            raise SafetyError("Only authenticate may be classified as auth")
         if operation.cleanup is not None:
             cleanup = result.get(operation.cleanup)
             if cleanup is None or cleanup.kind != "cleanup":
@@ -206,6 +210,8 @@ class SafeLiveSession:
             if not isinstance(capture, LiveCapture):
                 raise SafetyError("Live session capture must be a LiveCapture")
             capture.add_known_secret(profile.api_login)
+            if profile.client_secret is not None:
+                capture.add_known_secret(profile.client_secret)
         self._capture = capture
         self._access_token: str | None = None
         self._auth_attempted = False
@@ -285,17 +291,36 @@ class SafeLiveSession:
         self._assert_usable()
         if self._auth_attempted:
             raise SafetyError("Live authentication may be attempted only once per session")
-        operation = self._operations.get("authenticate")
+        auth_version = self.profile.auth_version
+        if auth_version == "v2":
+            operation_id = "authenticate_v2"
+            app_id = self.profile.app_id
+            client_secret = self.profile.client_secret
+            if app_id is None or client_secret is None:
+                raise SafetyError(
+                    "Live v2 authentication requires application credentials in the profile"
+                )
+            payload: dict[str, str] = {
+                "appId": app_id,
+                "clientSecret": client_secret,
+                "apiKey": self.profile.api_login,
+            }
+        elif auth_version == "v1":
+            operation_id = "authenticate"
+            payload = {"apiLogin": self.profile.api_login}
+        else:
+            raise SafetyError("Live profile auth version is unsupported")
+        operation = self._operations.get(operation_id)
         if operation is None or operation.kind != "auth":
             raise SafetyError("Live authentication operation is not explicitly allowed")
         self._auth_attempted = True
-        await self._reserve("authenticate")
+        await self._reserve(operation_id)
         response = await self._request_once(
             operation.method,
             operation.path,
-            json={"apiLogin": self.profile.api_login},
+            json=payload,
         )
-        self._record_response("authenticate", response)
+        self._record_response(operation_id, response)
         if response.status_code != 200:
             self._unusable = True
             raise SafetyError(f"Live authentication failed with HTTP {response.status_code}")

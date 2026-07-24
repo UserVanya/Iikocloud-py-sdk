@@ -7,6 +7,9 @@ operations:
   authenticate:
     test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null
+  authenticate_v2:
+    test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
+    server_limit: null
   calculate_combo_price:
     test_budget: {min_interval_seconds: 30, source: user-approved-global-cadence-2026-07-22, verified: true}
     server_limit: null

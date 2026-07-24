@@ -5,6 +5,11 @@ operations:
     cleanup: null
     method: POST
     path: /api/1/access_token
+  authenticate_v2:
+    kind: auth
+    cleanup: null
+    method: POST
+    path: /api/v2/access_token
   calculate_combo_price:
     kind: read
     cleanup: null

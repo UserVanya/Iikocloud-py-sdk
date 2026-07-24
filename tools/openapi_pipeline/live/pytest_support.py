@@ -21,7 +21,7 @@ from .profile import (
 )
 from .rates import RateCatalog
 from .read_planner import ReadPlan
-from .receipt import LiveArtifactHashes, LiveReceipt, verify_live_artifacts
+from .receipt import AUTH_OPERATION_IDS, LiveArtifactHashes, LiveReceipt, verify_live_artifacts
 from .safety import OperationSafetyCatalog
 from .session import LiveOperation, load_operation_contract
 
@@ -36,6 +36,10 @@ _READ_PATHS = {
     "selected": "tests/integration/read/test_selected_read.py",
 }
 _SAFE_OPERATION_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}\Z")
+# Reviewed credential environments: IIKO_API_KEY serves the read-only contour,
+# IIKO_WRITE_API_KEY the dedicated write environment. IIKO_API_KEY_2 is
+# deliberately absent: switching logins after a 429 remains forbidden.
+REVIEWED_API_LOGIN_ENVS = frozenset({"IIKO_API_KEY", "IIKO_WRITE_API_KEY"})
 
 
 @dataclass(frozen=True)
@@ -306,7 +310,8 @@ def prepare_live_preflight(
         if selected_operation != selected_from_arguments:
             raise SafetyError("Live read selection does not match the reviewed command")
     catalog = RateCatalog.load(root / "contracts/rate-limits.yaml")
-    catalog.operation_budget("authenticate")
+    for auth_operation_id in sorted(AUTH_OPERATION_IDS):
+        catalog.operation_budget(auth_operation_id)
     artifacts = verify_live_artifacts(root)
     safety = OperationSafetyCatalog.load(root / "contracts/operation-safety.yaml")
     operation_contract = load_operation_contract(root / "contracts/live-operations.yaml")
@@ -361,7 +366,7 @@ def resolve_locked_live_profile(
     return load_profile(
         profile_path,
         env_file=env_file,
-        required_api_login_env="IIKO_API_KEY",
+        allowed_api_login_envs=REVIEWED_API_LOGIN_ENVS,
     )
 
 
@@ -379,7 +384,7 @@ def resolve_locked_discovery_profile(
     return load_discovery_profile(
         profile_path,
         env_file=env_file,
-        required_api_login_env="IIKO_API_KEY",
+        allowed_api_login_envs=REVIEWED_API_LOGIN_ENVS,
     )
 
 

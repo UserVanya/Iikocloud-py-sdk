@@ -1,6 +1,15 @@
 name = "test-server"
 base_url = "https://api-ru.iiko.services"
 api_login_env = "IIKO_API_KEY"
+# Authentication contract version. "v1" uses POST /api/1/access_token with
+# {apiLogin}. "v2" uses POST /api/v2/access_token with {appId, clientSecret,
+# apiKey}; the API key is the same login named by api_login_env. iiko retires
+# the v1 endpoint, so register an application at
+# https://public-api.iikoweb.ru/portal and switch to "v2".
+auth_version = "v1"
+# Required when auth_version = "v2"; forbidden otherwise.
+# app_id_env = "IIKO_APP_ID"
+# client_secret_env = "IIKO_CLIENT_SECRET"  # pragma: allowlist secret
 organization_id_env = "IIKO_TEST_ORGANIZATION_ID"
 external_menu_id_env = "IIKO_TEST_EXTERNAL_MENU_ID"
 # Read target for terminal, stop-list, and employee checks, including read-only runs.

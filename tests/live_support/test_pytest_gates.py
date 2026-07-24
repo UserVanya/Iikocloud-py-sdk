@@ -17,6 +17,7 @@ from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes, write_
 from tools.openapi_pipeline.live.lock import LiveProcessLock
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tools.openapi_pipeline.live.pytest_support import (
+    REVIEWED_API_LOGIN_ENVS,
     assert_exact_live_read_invocation,
     assert_serial_live_invocation,
     explicit_env_path,
@@ -825,8 +826,8 @@ def test_real_repository_has_exact_executable_read_parity() -> None:
     assert all(catalog.operation_budget(op) for op in automatic_read_ids)
     assert frozenset(catalog.operation_ids) <= live_operation_ids
     assert safety.operations["authenticate"].live_policy == "automatic"
-    assert safety.operations["authenticate_v2"].live_policy == "blocked"
-    assert "authenticate_v2" not in live_operation_ids
+    assert safety.operations["authenticate_v2"].live_policy == "automatic"
+    assert "authenticate_v2" in live_operation_ids
 
 
 @pytest.mark.parametrize(
@@ -931,3 +932,8 @@ def test_invalid_live_read_commands_fail_during_collection_without_private_acces
     assert expected in output
     assert "IIKO_API_KEY" not in output
     assert "private/profiles" not in output
+
+
+def test_reviewed_login_environments_exclude_the_alternate_key() -> None:
+    assert frozenset({"IIKO_API_KEY", "IIKO_WRITE_API_KEY"}) == REVIEWED_API_LOGIN_ENVS
+    assert "IIKO_API_KEY_2" not in REVIEWED_API_LOGIN_ENVS

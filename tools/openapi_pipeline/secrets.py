@@ -18,7 +18,12 @@ from .errors import SafetyError
 from .io import canonical_json_bytes
 
 _BASELINE_NAME = ".secrets.baseline"
-_KNOWN_SECRET_NAMES = ("IIKO_API_KEY", "IIKO_API_KEY_2")
+_KNOWN_SECRET_NAMES = (
+    "IIKO_API_KEY",
+    "IIKO_API_KEY_2",
+    "IIKO_WRITE_API_KEY",
+    "IIKO_CLIENT_SECRET",
+)
 _ALLOWED_PRIVATE_PATHS = frozenset({"private/.gitignore", "private/README.md"})
 _FORBIDDEN_ROOTS = frozenset({".state", "build", "dist"})
 _MAX_ENV_BYTES = 1024 * 1024
