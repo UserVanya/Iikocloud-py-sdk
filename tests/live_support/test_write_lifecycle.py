@@ -168,7 +168,7 @@ def test_committed_write_lifecycles_are_consistent_with_live_contracts() -> None
     assert stop_list.enabled
     assert stop_list.ownership_marker.source == "profile_field"
     assert registry.scenarios["customer"].enabled
-    assert not registry.scenarios["delivery_draft"].enabled
+    assert registry.scenarios["delivery_draft"].enabled
 
 
 def test_consistency_rejects_operation_outside_safety_catalog() -> None:

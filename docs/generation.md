@@ -595,7 +595,7 @@ collection гейт проверяет, что сценарий существу
 |---|---|---|
 | `stop_list_product` | enabled | live round-trip 2026-07-24 (write-server): add→remove стоп-листа, receipt completed, журнал чист |
 | `customer` | enabled | live lifecycle 2026-07-24 (write-server): create→verify by id→delete, receipt completed, журнал чист. id назначает сервер: `create_or_update` с клиентским id означает «обновить существующего» и отклоняется |
-| `delivery_draft` | disabled | На стенде нет внешнего меню, а `DeliveryOrderDraft` требует `menuId` |
+| `delivery_draft` | enabled | live lifecycle 2026-07-24 (write-server): create→verify by id→delete, receipt completed, журнал чист. Требует включённого режима черновиков в настройках Cloud API организации («Разрешить операторам колл-центра работать с черновиками заказов») |
 
 Безопасно проверить только collection-контракт:
 
