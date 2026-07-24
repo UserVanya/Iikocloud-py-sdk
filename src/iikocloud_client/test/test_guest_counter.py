@@ -36,8 +36,8 @@ class TestGuestCounter(unittest.TestCase):
         if include_optional:
             return GuestCounter(
                 guest_id = '',
-                metric = 0,
-                period = 0,
+                metric = 'OrdersCount',
+                period = 'AllTime',
                 value = 1.337
             )
         else:

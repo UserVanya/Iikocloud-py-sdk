@@ -279,9 +279,13 @@ def _customer_id(view: ContextView) -> UUID:
 
 
 def _build_counters(view: ContextView) -> Mapping[str, object]:
+    # The endpoint rejects integer enums and requests without metrics/periods;
+    # only the live-verified string values below are accepted (2026-07-23).
     return {
         "guest_ids": [_customer_id(view)],
         "organization_id": view["organization_id"],
+        "metrics": ["OrdersCount", "OrdersSum"],
+        "periods": ["AllTime"],
     }
 
 

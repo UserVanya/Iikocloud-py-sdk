@@ -388,6 +388,8 @@ def test_direct_coupon_customer_and_report_requests_are_exact() -> None:
         "get_loyalty_counters": {
             "guestIds": [str(SEARCH_CUSTOMER_ID)],
             "organizationId": str(ORGANIZATION_ID),
+            "metrics": ["OrdersCount", "OrdersSum"],
+            "periods": ["AllTime"],
         },
         "get_customer_transactions_by_date": {
             "customerId": str(SEARCH_CUSTOMER_ID),

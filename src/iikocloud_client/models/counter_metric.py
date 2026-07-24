@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class CounterMetric(int, Enum):
+class CounterMetric(str, Enum):
     """
     CounterMetric
     """
@@ -26,10 +26,8 @@ class CounterMetric(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
-    NUMBER_3 = 3
+    ORDERSCOUNT = 'OrdersCount'
+    ORDERSSUM = 'OrdersSum'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

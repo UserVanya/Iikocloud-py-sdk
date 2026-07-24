@@ -1016,6 +1016,60 @@ actions:
     expected-matches: 1
     expected-sha256: a95eacf0c4993e17bec1e1c3e78b43e856beac3ed2ac311042f8c4ea61dc1d97
     issue: normalize-pseudo-type-59-apply
+- description: Clear integer enum values of CounterMetric; the live get_counters endpoint accepts only the string names OrdersCount and OrdersSum
+  remove: true
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterMetric"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 4deebf97125560eeb61a52ca1179a80fd6a6c2d466f2cdabeb18b7b982c55400
+    issue: counter-enums-string-1-clear-enum
+- description: Clear integer format of CounterMetric
+  remove: true
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterMetric"]["format"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8a8d9e064265525c4b97e70ca986cd2e8cfb45e88c07b84575667aed7fdff297
+    issue: counter-enums-string-1-clear-format
+- description: Declare live-verified string values of CounterMetric
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterMetric"]
+  update:
+    enum:
+    - OrdersCount
+    - OrdersSum
+    type: string
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 7355dcf69f37937b8fcd539361ca3a8c8594da251f04d0e913057b2c6b22f25b
+    issue: counter-enums-string-1-apply
+- description: Clear integer enum values of CounterPeriod; the live get_counters endpoint accepts only the string names AllTime, Day, Week, Month, Quarter, and Year
+  remove: true
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterPeriod"]["enum"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: a6b4bcd961bdc398ceba135dd2c376168e53f84171019143fcb37734086f4f7c
+    issue: counter-enums-string-2-clear-enum
+- description: Clear integer format of CounterPeriod
+  remove: true
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterPeriod"]["format"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 8a8d9e064265525c4b97e70ca986cd2e8cfb45e88c07b84575667aed7fdff297
+    issue: counter-enums-string-2-clear-format
+- description: Declare live-verified string values of CounterPeriod
+  target: $["components"]["schemas"]["iikoNet.Common.Enums.CounterPeriod"]
+  update:
+    enum:
+    - AllTime
+    - Day
+    - Week
+    - Month
+    - Quarter
+    - Year
+    type: string
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 7355dcf69f37937b8fcd539361ca3a8c8594da251f04d0e913057b2c6b22f25b
+    issue: counter-enums-string-2-apply
 info:
   title: Normalize iiko pseudo types
   version: 1.0.0

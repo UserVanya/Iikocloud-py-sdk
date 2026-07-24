@@ -39,11 +39,11 @@ class TestGetCountersRequest(unittest.TestCase):
                     ''
                     ],
                 metrics = [
-                    0
+                    'OrdersCount'
                     ],
                 organization_id = '',
                 periods = [
-                    0
+                    'AllTime'
                     ]
             )
         else:
