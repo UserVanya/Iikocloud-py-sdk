@@ -39,7 +39,7 @@ async def test_delivery_order_full_lifecycle(
         DeliveryOrder,
         DeliveryOrderCreateExternalData,
         DeliveryOrderCreateProductItem,
-        DeliveryStatus,
+        DeliveryStatusForUpdate,
         MenuRequest,
         OrdersByIdRequest,
         OrderTypesRequest,
@@ -265,7 +265,7 @@ async def test_delivery_order_full_lifecycle(
             UpdateDeliveryStatusRequest(
                 organizationId=organization_id,
                 orderId=order_id,
-                deliveryStatus=DeliveryStatus.WAITCOOKING,
+                deliveryStatus=DeliveryStatusForUpdate.WAITING,
             ).model_dump(mode="json", by_alias=True),
         )
         await exec_write(
