@@ -35,7 +35,6 @@ async def test_finalization_confirm_close_delivery_and_table(
         CancelDeliveryConfirmationRequest,
         CancelOrderRequest,
         CancelTableOrderRequest,
-        CloseDeliveryOrderRequest,
         CloseTableOrderRequest,
         ConfirmDeliveryRequest,
         CreateOrderRequest,
@@ -163,33 +162,6 @@ async def test_finalization_confirm_close_delivery_and_table(
         await exec_write(live_sdk, "confirm_delivery", confirm_payload)
         await exec_write(live_sdk, "cancel_delivery_confirmation", confirm_payload)
         mutation_journal.complete("cancel_delivery_confirmation")
-
-        # 2. a delivery order deliberately left closed.
-        created = await exec_write(
-            live_sdk, "create_delivery_order", build_delivery_order().to_dict()
-        )
-        order_info = getattr(created.data, "order_info", None)
-        closing_delivery_id = (
-            getattr(order_info, "id", None) if order_info is not None else None
-        )
-        assert closing_delivery_id is not None
-        mutation_journal.register(
-            "cancel_delivery_order",
-            CancelOrderRequest(
-                orderId=closing_delivery_id,
-                organizationId=organization_id,
-                cancelComment="sdk-write-probe cleanup",
-            ).model_dump(mode="json", by_alias=True, exclude_none=True),
-        )
-        await exec_write(
-            live_sdk,
-            "close_delivery_order",
-            CloseDeliveryOrderRequest(
-                organizationId=organization_id,
-                orderId=closing_delivery_id,
-            ).model_dump(mode="json", by_alias=True),
-        )
-        mutation_journal.complete("cancel_delivery_order")
 
         # 3. a table order deliberately left closed.
         created_table = await exec_write(

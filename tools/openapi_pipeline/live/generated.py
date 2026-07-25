@@ -913,6 +913,37 @@ def validate_order_add_items_request(
     return request
 
 
+def validate_awake_terminal_groups_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> AwakeTerminalGroupsRequest:
+    """Validate one awake request against its write profile (dedicated group only)."""
+
+    if type(operation_id) is not str or operation_id != "awake_terminal_groups":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: AwakeTerminalGroupsRequest | None = None
+    with suppress(Exception):
+        request = AwakeTerminalGroupsRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids, terminal_group_id, _product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            list(request.organization_ids) == [organization_id]
+            and organization_id in allowed_organization_ids
+            and list(request.terminal_group_ids) == [terminal_group_id]
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
 def validate_product_barcodes_request(
     operation_id: str,
     payload: object,
@@ -1224,11 +1255,7 @@ _WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
             TerminalGroupsApi,
             "awake_terminal_groups_with_http_info",
             "awake_terminal_groups_request",
-            _single_target_validator(
-                "awake_terminal_groups",
-                model=AwakeTerminalGroupsRequest,
-                role="compensating",
-            ),
+            validate_awake_terminal_groups_request,
         ),
         "clear_stop_list": _WriteExecutorSpec(
             MenuApi,

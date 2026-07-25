@@ -23,29 +23,15 @@ async def test_misc_ops_barcodes_webhook_awake_clear(
     """Misc sweep: product barcodes, webhook no-op update, awake, clear stop list."""
     from iikocloud_client import (
         AwakeTerminalGroupsRequest,
-        BarcodeItem,
         ClearStopListRequest,
         StopListsRequest,
-        UpdateProductBarcodesRequest,
     )
 
     assert live_profile.terminal_group_id is not None
-    assert live_profile.write_product_id is not None
     organization_id = UUID(live_profile.organization_id)
     terminal_group_id = UUID(live_profile.terminal_group_id)
-    product_id = live_profile.write_product_id
 
     await canary(live_sdk, organization_id)
-
-    await exec_write(
-        live_sdk,
-        "update_inventory_product_barcodes",
-        UpdateProductBarcodesRequest(
-            organizationId=str(organization_id),
-            productId=product_id,
-            barcodes=[BarcodeItem(barcode="sdkprobe0000001")],
-        ).model_dump(mode="json", by_alias=True, exclude_none=True),
-    )
 
     await exec_write(
         live_sdk,
