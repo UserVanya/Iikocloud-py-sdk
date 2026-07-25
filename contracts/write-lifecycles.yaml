@@ -198,6 +198,8 @@ scenarios:
       - {role: prepare, operation: get_external_menu_by_id}
       - {role: prepare, operation: get_delivery_order_types}
       - {role: prepare, operation: get_couriers}
+      - {role: prepare, operation: get_cities}
+      - {role: prepare, operation: get_streets_by_city}
       - {role: create, operation: create_delivery_order}
       - {role: mutate, operation: update_delivery_order_courier}
       - {role: mutate, operation: change_delivery_driver_info}

@@ -30,6 +30,7 @@ async def test_delivery_order_courier_lifecycle(
         AddressLegacy,
         CancelOrderRequest,
         ChangeDriverInfoRequest,
+        CitiesRequest,
         CouriersRequest,
         CreateOrderRequest,
         DeliveryOrder,
@@ -39,6 +40,7 @@ async def test_delivery_order_courier_lifecycle(
         MenuRequest,
         OrdersByIdRequest,
         OrderTypesRequest,
+        StreetsByCityRequest,
         UpdateOrderCourierRequest,
     )
 
@@ -122,6 +124,56 @@ async def test_delivery_order_courier_lifecycle(
         assert employee_ids, "no employees on the write stand"
         employee_id = UUID(employee_ids[0])
 
+        city_id = None
+        cities = await call_read(
+            live_sdk,
+            "get_cities",
+            api_module="iikocloud_client.api.addresses_api",
+            api_class="AddressesApi",
+            request_module="cities_request",
+            request_class="CitiesRequest",
+            request_keyword="cities_request",
+            request=CitiesRequest(organizationIds=[organization_id]),
+        )
+        for wrapper in cities.data.cities:
+            for item in wrapper.items:
+                if isinstance(item.name, str) and "скол" in item.name.lower():
+                    city_id = item.id
+                    break
+            if city_id is not None:
+                break
+
+        street_id = None
+        street_name = "микрорайон Дубрава"
+        if city_id is not None:
+            streets = await call_read(
+                live_sdk,
+                "get_streets_by_city",
+                api_module="iikocloud_client.api.addresses_api",
+                api_class="AddressesApi",
+                request_module="streets_by_city_request",
+                request_class="StreetsByCityRequest",
+                request_keyword="streets_by_city_request",
+                request=StreetsByCityRequest(
+                    cityId=city_id,
+                    organizationId=organization_id,
+                ),
+            )
+            for wrapper in streets.data.streets:
+                for item in wrapper.items:
+                    if isinstance(item.name, str) and "дубрав" in item.name.lower():
+                        street_id = item.id
+                        street_name = item.name
+                        break
+                if street_id is not None:
+                    break
+
+        street = (
+            DeliveryOrderCreateStreet(id=street_id, name=street_name)
+            if street_id is not None
+            else DeliveryOrderCreateStreet(name=street_name, city="Старый Оскол")
+        )
+
         created = await exec_write(
             live_sdk,
             "create_delivery_order",
@@ -135,10 +187,7 @@ async def test_delivery_order_courier_lifecycle(
                     deliveryPoint=DeliveryOrderCreatePoint(
                         address=AddressLegacy(
                             type="legacy",
-                            street=DeliveryOrderCreateStreet(
-                                name="микрорайон Дубрава",
-                                city="Старый Оскол",
-                            ),
+                            street=street,
                             house="квартал 1",
                             flat="1",
                         ),
