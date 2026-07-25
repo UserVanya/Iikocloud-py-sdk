@@ -18,6 +18,7 @@ from iikocloud_client.api.deliveries_create_and_update_api import (
     DeliveriesCreateAndUpdateApi,
 )
 from iikocloud_client.api.drafts_api import DraftsApi
+from iikocloud_client.api.employees_api import EmployeesApi
 from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api.orders_api import OrdersApi
 from iikocloud_client.api.public_api_invoice_processing_nomenclature_api import (
@@ -28,6 +29,12 @@ from iikocloud_client.api.webhooks_api import WebhooksApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
+from iikocloud_client.models.add_customer_to_table_order_request import (
+    AddCustomerToTableOrderRequest,
+)
+from iikocloud_client.models.add_items_to_table_order_request import (
+    AddItemsToTableOrderRequest,
+)
 from iikocloud_client.models.add_magnet_card_request import AddMagnetCardRequest
 from iikocloud_client.models.add_order_items_request import AddOrderItemsRequest
 from iikocloud_client.models.add_order_payments_request import AddOrderPaymentsRequest
@@ -51,8 +58,13 @@ from iikocloud_client.models.change_delivery_operator_request import (
 )
 from iikocloud_client.models.change_driver_info_request import ChangeDriverInfoRequest
 from iikocloud_client.models.change_external_data_request import ChangeExternalDataRequest
+from iikocloud_client.models.change_payments_request import ChangePaymentsRequest
 from iikocloud_client.models.clear_stop_list_request import ClearStopListRequest
 from iikocloud_client.models.close_delivery_order_request import CloseDeliveryOrderRequest
+from iikocloud_client.models.close_personal_session_request import (
+    ClosePersonalSessionRequest,
+)
+from iikocloud_client.models.close_table_order_request import CloseTableOrderRequest
 from iikocloud_client.models.commit_draft_request import CommitDraftRequest
 from iikocloud_client.models.confirm_delivery_request import ConfirmDeliveryRequest
 from iikocloud_client.models.create_draft_request import CreateDraftRequest
@@ -71,7 +83,10 @@ from iikocloud_client.models.delivery_order_create_compound_item import (
 from iikocloud_client.models.delivery_order_create_product_item import (
     DeliveryOrderCreateProductItem,
 )
+from iikocloud_client.models.init_table_order_request import InitTableOrderRequest
 from iikocloud_client.models.lock_or_unlock_draft_request import LockOrUnlockDraftRequest
+from iikocloud_client.models.open_personal_session_request import OpenPersonalSessionRequest
+from iikocloud_client.models.print_bill_request import PrintBillRequest
 from iikocloud_client.models.print_delivery_bill_request import PrintDeliveryBillRequest
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
@@ -830,6 +845,39 @@ def _single_target_validator(
     return validate
 
 
+def validate_table_order_add_items_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> AddItemsToTableOrderRequest:
+    """Validate one table-order add-items write against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "add_items_to_table_order":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: AddItemsToTableOrderRequest | None = None
+    with suppress(Exception):
+        request = AddItemsToTableOrderRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    _repair_union_order_items(payload, request.items)
+    organization_id, allowed_organization_ids, _terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and len(request.items) == 1
+            and getattr(request.items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
 def validate_order_add_items_request(
     operation_id: str,
     payload: object,
@@ -1196,6 +1244,98 @@ _WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
                 "update_webhook_settings",
                 model=UpdateWebHookSettingsRequest,
                 role="compensating",
+            ),
+        ),
+        "add_items_to_table_order": _WriteExecutorSpec(
+            OrdersApi,
+            "add_items_to_table_order_with_http_info",
+            "add_items_to_table_order_request",
+            validate_table_order_add_items_request,
+        ),
+        "add_customer_to_table_order": _WriteExecutorSpec(
+            OrdersApi,
+            "add_customer_to_table_order_with_http_info",
+            "add_customer_to_table_order_request",
+            _single_target_validator(
+                "add_customer_to_table_order",
+                model=AddCustomerToTableOrderRequest,
+                role="compensating",
+            ),
+        ),
+        "add_table_order_payments": _WriteExecutorSpec(
+            OrdersApi,
+            "add_table_order_payments_with_http_info",
+            "add_order_payments_request",
+            _single_target_validator(
+                "add_table_order_payments",
+                model=AddOrderPaymentsRequest,
+                role="compensating",
+            ),
+        ),
+        "change_table_order_external_data": _WriteExecutorSpec(
+            OrdersApi,
+            "change_table_order_external_data_with_http_info",
+            "change_external_data_request",
+            _single_target_validator(
+                "change_table_order_external_data",
+                model=ChangeExternalDataRequest,
+                role="compensating",
+            ),
+        ),
+        "change_table_order_payments": _WriteExecutorSpec(
+            OrdersApi,
+            "change_table_order_payments_with_http_info",
+            "change_payments_request",
+            _single_target_validator(
+                "change_table_order_payments",
+                model=ChangePaymentsRequest,
+                role="compensating",
+            ),
+        ),
+        "print_table_order_bill": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "print_table_order_bill_with_http_info",
+            "print_bill_request",
+            _single_target_validator(
+                "print_table_order_bill", model=PrintBillRequest, role="compensating"
+            ),
+        ),
+        "close_table_order": _WriteExecutorSpec(
+            OrdersApi,
+            "close_table_order_with_http_info",
+            "close_table_order_request",
+            _single_target_validator(
+                "close_table_order", model=CloseTableOrderRequest, role="compensating"
+            ),
+        ),
+        "initialize_table_orders_by_tables": _WriteExecutorSpec(
+            OrdersApi,
+            "initialize_table_orders_by_tables_with_http_info",
+            "init_table_order_request",
+            _single_target_validator(
+                "initialize_table_orders_by_tables",
+                model=InitTableOrderRequest,
+                role="compensating",
+            ),
+        ),
+        "open_personal_session": _WriteExecutorSpec(
+            EmployeesApi,
+            "open_personal_session_with_http_info",
+            "open_personal_session_request",
+            _single_target_validator(
+                "open_personal_session",
+                model=OpenPersonalSessionRequest,
+                role="compensating",
+            ),
+        ),
+        "close_personal_session": _WriteExecutorSpec(
+            EmployeesApi,
+            "close_personal_session_with_http_info",
+            "close_personal_session_request",
+            _single_target_validator(
+                "close_personal_session",
+                model=ClosePersonalSessionRequest,
+                role="cleanup",
             ),
         ),
     }
