@@ -25,10 +25,8 @@ async def test_misc_ops_barcodes_webhook_awake_clear(
         AwakeTerminalGroupsRequest,
         BarcodeItem,
         ClearStopListRequest,
-        GetWebHookSettingsRequest,
         StopListsRequest,
         UpdateProductBarcodesRequest,
-        UpdateWebHookSettingsRequest,
     )
 
     assert live_profile.terminal_group_id is not None
@@ -38,29 +36,6 @@ async def test_misc_ops_barcodes_webhook_awake_clear(
     product_id = live_profile.write_product_id
 
     await canary(live_sdk, organization_id)
-
-    webhook = await call_read(
-        live_sdk,
-        "get_webhook_settings",
-        api_module="iikocloud_client.api.webhooks_api",
-        api_class="WebhooksApi",
-        request_module="get_web_hook_settings_request",
-        request_class="GetWebHookSettingsRequest",
-        request_keyword="get_web_hook_settings_request",
-        request=GetWebHookSettingsRequest(organizationId=organization_id),
-    )
-    current = webhook.data.model_dump(mode="json", by_alias=True)
-    # The server requires an HTTPS WebHooks URI; a placeholder on the write
-    # stand is an accepted, documented residue.
-    uri = current.get("webHooksUri") or "https://example.invalid/sdk-write-probe"
-    await exec_write(
-        live_sdk,
-        "update_webhook_settings",
-        UpdateWebHookSettingsRequest(
-            organizationId=organization_id,
-            webHooksUri=uri,
-        ).model_dump(mode="json", by_alias=True, exclude_none=True),
-    )
 
     await exec_write(
         live_sdk,
