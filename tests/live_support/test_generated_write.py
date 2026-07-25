@@ -18,6 +18,7 @@ from iikocloud_client.models.delete_customers_request import DeleteCustomersRequ
 from iikocloud_client.models.delete_draft_request import DeleteDraftRequest
 from tools.openapi_pipeline.errors import SafetyError
 from tools.openapi_pipeline.live.generated import (
+    CUSTOMER_MARKER_CARD,
     CUSTOMER_MARKER_PHONE,
     GeneratedLiveSdk,
 )
@@ -186,7 +187,7 @@ async def test_execute_write_rejects_unknown_operation_before_live_work() -> Non
     adapter = _adapter(guard, state)
 
     with pytest.raises(SafetyError, match="approved write operation"):
-        await adapter.execute_write("create_delivery_order", {})
+        await adapter.execute_write("create_inventory_incoming_invoice", {})
     with pytest.raises(SafetyError, match="approved write operation"):
         await adapter.execute_write("get_organizations", {})
     assert guard.acquired == []
@@ -500,3 +501,124 @@ async def test_draft_delete_rejects_foreign_organization_and_invalid_payload() -
     with pytest.raises(SafetyError, match="cleanup payload is invalid"):
         await adapter.execute_write("delete_delivery_draft", {"broken": True})
     assert guard.acquired == []
+
+
+_CATEGORY_ID = "77777777-7777-4777-8777-777777777777"
+
+
+def _loyalty_adapter(
+    guard: _StubGuard,
+    state: _StubState,
+    *,
+    contract: dict[str, LiveOperation] | None = None,
+) -> GeneratedLiveSdk:
+    return GeneratedLiveSdk(
+        api_client=cast(ApiClient, object()),
+        profile=_profile(),
+        guard=cast(LiveRateGuard, guard),
+        state=cast(LiveStateStore, state),
+        operation_contract=MappingProxyType(
+            contract
+            or {
+                "add_customer_category": LiveOperation(
+                    kind="compensating",
+                    cleanup="remove_customer_category",
+                    method="POST",
+                    path="/api/1/loyalty/iiko/customer_category/add",
+                ),
+                "remove_customer_category": LiveOperation(
+                    kind="cleanup",
+                    cleanup=None,
+                    method="POST",
+                    path="/api/1/loyalty/iiko/customer_category/remove",
+                ),
+                "add_customer_magnet_card": LiveOperation(
+                    kind="compensating",
+                    cleanup="remove_customer_magnet_card",
+                    method="POST",
+                    path="/api/1/loyalty/iiko/customer/card/add",
+                ),
+                "remove_customer_magnet_card": LiveOperation(
+                    kind="cleanup",
+                    cleanup=None,
+                    method="POST",
+                    path="/api/1/loyalty/iiko/customer/card/remove",
+                ),
+            }
+        ),
+    )
+
+
+@pytest.mark.asyncio
+async def test_category_and_card_writes_dispatch_and_enforce_boundaries(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from iikocloud_client.api.customer_categories_api import CustomerCategoriesApi
+    from iikocloud_client.api.customers_api import CustomersApi
+
+    state = _StubState()
+    guard = _StubGuard(state)
+    adapter = _loyalty_adapter(guard, state)
+    calls: list[str] = []
+
+    async def record(name: str) -> object:
+        async def handler(*_args: object, **_kwargs: object) -> ApiResponse[dict[str, str]]:
+            calls.append(name)
+            return ApiResponse(status_code=200, headers=None, data={}, raw_data=b"{}")
+
+        return handler
+
+    monkeypatch.setattr(
+        CustomerCategoriesApi,
+        "add_customer_category_with_http_info",
+        await record("add_category"),
+    )
+    monkeypatch.setattr(
+        CustomerCategoriesApi,
+        "remove_customer_category_with_http_info",
+        await record("remove_category"),
+    )
+    monkeypatch.setattr(
+        CustomersApi,
+        "add_customer_magnet_card_with_http_info",
+        await record("add_card"),
+    )
+    monkeypatch.setattr(
+        CustomersApi,
+        "remove_customer_magnet_card_with_http_info",
+        await record("remove_card"),
+    )
+
+    category_payload = {
+        "categoryId": _CATEGORY_ID,
+        "customerId": _CUSTOMER_ID,
+        "organizationId": _ORGANIZATION_ID,
+    }
+    card_payload = {
+        "cardNumber": CUSTOMER_MARKER_CARD,
+        "cardTrack": "sdk-probe-track",
+        "customerId": _CUSTOMER_ID,
+        "organizationId": _ORGANIZATION_ID,
+    }
+    remove_card_payload = {
+        "cardTrack": "sdk-probe-track",
+        "customerId": _CUSTOMER_ID,
+        "organizationId": _ORGANIZATION_ID,
+    }
+
+    await adapter.execute_write("add_customer_category", category_payload)
+    await adapter.execute_write("remove_customer_category", category_payload)
+    await adapter.execute_write("add_customer_magnet_card", card_payload)
+    await adapter.execute_write("remove_customer_magnet_card", remove_card_payload)
+    assert calls == ["add_category", "remove_category", "add_card", "remove_card"]
+
+    for operation_id, payload in (
+        ("add_customer_category", {**category_payload, "organizationId": _OTHER_ID}),
+        ("remove_customer_category", {**category_payload, "organizationId": _OTHER_ID}),
+        ("add_customer_magnet_card", {**card_payload, "cardNumber": "1"}),
+        ("remove_customer_magnet_card", {**remove_card_payload, "organizationId": _OTHER_ID}),
+        ("add_customer_magnet_card", {"broken": True}),
+    ):
+        with pytest.raises(SafetyError):
+            await adapter.execute_write(operation_id, payload)
+    assert calls == ["add_category", "remove_category", "add_card", "remove_card"]

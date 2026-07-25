@@ -337,6 +337,23 @@ class MutationJournal:
             entries.pop()
             raise
 
+    def complete(self, operation_id: str) -> None:
+        """Mark one pending compensation as done without executing it.
+
+        Only for compensations the caller has just proved moot — for example,
+        a draft delete after the draft was committed into an order inside the
+        same reviewed scenario.
+        """
+        if self._closed or self.completed:
+            raise SafetyError("Cannot complete cleanup on a closed mutation journal")
+        safe_operation_id = _safe_id(operation_id, label="operation ID")
+        for entry in reversed(self._document["cleanup"]):
+            if entry["operation_id"] == safe_operation_id and not entry["done"]:
+                entry["done"] = True
+                self._persist()
+                return
+        raise SafetyError(f"No pending cleanup entry for {safe_operation_id!r}")
+
     async def cleanup(self, execute: CleanupExecutor) -> None:
         if self._closed:
             raise SafetyError("Mutation journal is already closed")

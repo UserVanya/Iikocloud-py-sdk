@@ -16,7 +16,7 @@ from ..errors import SafetyError
 from .contract_io import exact_keys, load_yaml_mapping, safe_identifier, safe_review_reason
 
 _MAX_REGISTRY_BYTES = 256 * 1024
-_ROLES = frozenset({"prepare", "create", "check", "cleanup"})
+_ROLES = frozenset({"prepare", "create", "mutate", "check", "cleanup"})
 _MARKER_SOURCES = frozenset({"literal", "profile_field"})
 _PROFILE_MARKER_FIELDS = frozenset(
     {"organization_id", "terminal_group_id", "write_product_id"}
@@ -25,13 +25,15 @@ _PROFILE_REQUIREMENTS = frozenset({"terminal_group_id", "write_product_id"})
 _ROLE_EFFECTS = {
     "prepare": frozenset({"read"}),
     "check": frozenset({"read"}),
-    "create": frozenset({"create", "update"}),
-    "cleanup": frozenset({"delete", "update", "action"}),
+    "create": frozenset({"create", "update", "action", "irreversible"}),
+    "mutate": frozenset({"update", "action", "irreversible", "delete"}),
+    "cleanup": frozenset({"delete", "update", "action", "irreversible"}),
 }
 _ROLE_OPERATION_KINDS = {
     "prepare": "read",
     "check": "read",
     "create": "compensating",
+    "mutate": "compensating",
     "cleanup": "cleanup",
 }
 
@@ -198,7 +200,9 @@ def _parse_steps(label: str, raw: object) -> tuple[LifecycleStep, ...]:
             compensates = safe_identifier(compensates, label=f"{step_label} compensates")
         if role == "cleanup" and compensates is None:
             raise SafetyError(f"{step_label} cleanup must name its compensated operation")
-        if role != "cleanup" and compensates is not None:
+        if role == "mutate" and compensates is not None:
+            raise SafetyError(f"{step_label} mutate steps share their entity cleanup")
+        if role in {"prepare", "create", "check"} and compensates is not None:
             raise SafetyError(f"{step_label} only cleanup steps may compensate")
         steps.append(LifecycleStep(role=role, operation=operation, compensates=compensates))
 
@@ -206,8 +210,6 @@ def _parse_steps(label: str, raw: object) -> tuple[LifecycleStep, ...]:
     if len(set(operations)) != len(operations):
         raise SafetyError(f"{label} steps must not repeat an operation")
     create_ids = {step.operation for step in steps if step.role == "create"}
-    if not create_ids:
-        raise SafetyError(f"{label} requires at least one create step")
     compensated = {step.compensates for step in steps if step.role == "cleanup"}
     if compensated != create_ids:
         raise SafetyError(f"{label} every create step requires exactly one cleanup step")

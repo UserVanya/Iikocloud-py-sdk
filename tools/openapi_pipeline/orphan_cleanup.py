@@ -158,6 +158,7 @@ class _LazyGeneratedCleanupExecutor:
             profile=self._profile,
             guard=guard,
             state=state,
+            operation_contract=self._operations,
         )
 
     async def execute(self, operation_id: str, payload: dict[str, Any]) -> None:

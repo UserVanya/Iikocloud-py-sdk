@@ -23,6 +23,149 @@ scenarios:
       - {role: create, operation: create_or_update_customer}
       - {role: check, operation: get_customer_info}
       - {role: cleanup, operation: delete_customers, compensates: create_or_update_customer}
+  customer_category:
+    enabled: true
+    requires_profile_fields: []
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_customer_categories}
+      - {role: create, operation: create_or_update_customer}
+      - {role: create, operation: add_customer_category}
+      - {role: cleanup, operation: remove_customer_category, compensates: add_customer_category}
+      - {role: cleanup, operation: delete_customers, compensates: create_or_update_customer}
+  customer_magnet_card:
+    enabled: true
+    requires_profile_fields: []
+    ownership_marker:
+      source: literal
+      field: cardNumber
+      value: "7999000000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: create, operation: create_or_update_customer}
+      - {role: create, operation: add_customer_magnet_card}
+      - {role: cleanup, operation: remove_customer_magnet_card, compensates: add_customer_magnet_card}
+      - {role: cleanup, operation: delete_customers, compensates: create_or_update_customer}
+  delivery_order:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: prepare, operation: get_delivery_order_types}
+      - {role: create, operation: create_delivery_order}
+      - {role: check, operation: get_deliveries_by_id}
+      - {role: cleanup, operation: cancel_delivery_order, compensates: create_delivery_order}
+  draft_flow:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: prepare, operation: get_delivery_order_types}
+      - {role: prepare, operation: get_couriers}
+      - {role: create, operation: create_delivery_draft}
+      - {role: create, operation: lock_delivery_draft}
+      - {role: cleanup, operation: unlock_delivery_draft, compensates: lock_delivery_draft}
+      - {role: mutate, operation: save_delivery_draft}
+      - {role: create, operation: commit_delivery_draft}
+      - {role: check, operation: get_deliveries_by_id}
+      - {role: cleanup, operation: cancel_delivery_order, compensates: commit_delivery_draft}
+      - {role: cleanup, operation: delete_delivery_draft, compensates: create_delivery_draft}
+  reserve:
+    enabled: false
+    disabled_reason: "Async reserve creation never completes on the stand; get_command_status stays InProgress for 15+ minutes despite an alive front terminal (probes 2026-07-25)."
+    requires_profile_fields: [terminal_group_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_reserve_restaurant_sections}
+      - {role: create, operation: create_reserve}
+      - {role: check, operation: get_reserve_statuses_by_id}
+      - {role: cleanup, operation: cancel_reserve, compensates: create_reserve}
+  table_order:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_reserve_restaurant_sections}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: create, operation: create_table_order}
+      - {role: check, operation: get_table_orders_by_id}
+      - {role: cleanup, operation: cancel_table_order, compensates: create_table_order}
+  delivery_order_full:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: prepare, operation: get_delivery_order_types}
+      - {role: prepare, operation: get_couriers}
+      - {role: prepare, operation: get_payment_types}
+      - {role: create, operation: create_delivery_order}
+      - {role: mutate, operation: add_delivery_order_items}
+      - {role: mutate, operation: change_delivery_comment}
+      - {role: mutate, operation: change_delivery_complete_before}
+      - {role: mutate, operation: change_delivery_operator}
+      - {role: mutate, operation: update_delivery_order_problem}
+      - {role: mutate, operation: update_delivery_tracking_link}
+      - {role: mutate, operation: change_delivery_external_data}
+      - {role: mutate, operation: update_delivery_order_status}
+      - {role: mutate, operation: add_delivery_order_payments}
+      - {role: mutate, operation: print_delivery_bill}
+      - {role: check, operation: get_deliveries_by_id}
+      - {role: cleanup, operation: cancel_delivery_order, compensates: create_delivery_order}
+  misc_ops:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: sourceKey
+      value: "sdk-write-probe"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_webhook_settings}
+      - {role: prepare, operation: get_stop_lists}
+      - {role: mutate, operation: update_inventory_product_barcodes}
+      - {role: mutate, operation: update_webhook_settings}
+      - {role: mutate, operation: awake_terminal_groups}
+      - {role: mutate, operation: clear_stop_list}
+  session_ops:
+    enabled: true
+    requires_profile_fields: [terminal_group_id]
+    ownership_marker:
+      source: literal
+      field: sourceKey
+      value: "sdk-write-probe"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_couriers}
+      - {role: prepare, operation: get_personal_session_info}
+      - {role: create, operation: open_personal_session}
+      - {role: cleanup, operation: close_personal_session, compensates: open_personal_session}
   delivery_draft:
     enabled: true
     requires_profile_fields: [terminal_group_id, write_product_id]

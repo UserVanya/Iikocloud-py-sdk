@@ -518,3 +518,20 @@ async def _async_event(
     _payload: dict[str, Any],
 ) -> None:
     events.append(f"call:{operation_id}")
+
+
+def test_complete_marks_pending_entry_done_and_rejects_unknown(tmp_path: Path) -> None:
+    from tools.openapi_pipeline.mutations import MutationJournal
+
+    journal = MutationJournal.create(tmp_path, "20260724T000000Z-a1b2c3d4", "f" * 64)
+    journal.register("delete_delivery_draft", {"orderId": "synthetic"})
+    journal.complete("delete_delivery_draft")
+
+    assert journal.pending_count == 0
+    with pytest.raises(SafetyError, match="No pending cleanup entry"):
+        journal.complete("delete_delivery_draft")
+    with pytest.raises(SafetyError, match="No pending cleanup entry"):
+        journal.complete("cancel_delivery_order")
+
+    loaded = MutationJournal.load(journal.path, expected_profile_fingerprint="f" * 64)
+    assert loaded.pending_count == 0

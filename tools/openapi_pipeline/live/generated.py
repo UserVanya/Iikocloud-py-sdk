@@ -11,29 +11,81 @@ from types import MappingProxyType
 from typing import Generic, NoReturn, TypeVar, cast
 from uuid import UUID
 
+from iikocloud_client.api.banquets_reserves_api import BanquetsReservesApi
+from iikocloud_client.api.customer_categories_api import CustomerCategoriesApi
 from iikocloud_client.api.customers_api import CustomersApi
+from iikocloud_client.api.deliveries_create_and_update_api import (
+    DeliveriesCreateAndUpdateApi,
+)
 from iikocloud_client.api.drafts_api import DraftsApi
 from iikocloud_client.api.menu_api import MenuApi
+from iikocloud_client.api.orders_api import OrdersApi
+from iikocloud_client.api.public_api_invoice_processing_nomenclature_api import (
+    PublicApiInvoiceProcessingNomenclatureApi,
+)
+from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
+from iikocloud_client.api.webhooks_api import WebhooksApi
 from iikocloud_client.api_client import ApiClient
 from iikocloud_client.api_response import ApiResponse
 from iikocloud_client.exceptions import ApiException
+from iikocloud_client.models.add_magnet_card_request import AddMagnetCardRequest
+from iikocloud_client.models.add_order_items_request import AddOrderItemsRequest
+from iikocloud_client.models.add_order_payments_request import AddOrderPaymentsRequest
 from iikocloud_client.models.add_products_to_stop_list_request import (
     AddProductsToStopListRequest,
 )
+from iikocloud_client.models.awake_terminal_groups_request import AwakeTerminalGroupsRequest
+from iikocloud_client.models.cancel_delivery_confirmation_request import (
+    CancelDeliveryConfirmationRequest,
+)
+from iikocloud_client.models.cancel_order_request import CancelOrderRequest
+from iikocloud_client.models.cancel_reserve_request import CancelReserveRequest
+from iikocloud_client.models.cancel_table_order_request import CancelTableOrderRequest
+from iikocloud_client.models.change_category_for_customer_request import (
+    ChangeCategoryForCustomerRequest,
+)
+from iikocloud_client.models.change_complete_before_request import ChangeCompleteBeforeRequest
+from iikocloud_client.models.change_delivery_comment_request import ChangeDeliveryCommentRequest
+from iikocloud_client.models.change_delivery_operator_request import (
+    ChangeDeliveryOperatorRequest,
+)
+from iikocloud_client.models.change_driver_info_request import ChangeDriverInfoRequest
+from iikocloud_client.models.change_external_data_request import ChangeExternalDataRequest
+from iikocloud_client.models.clear_stop_list_request import ClearStopListRequest
+from iikocloud_client.models.close_delivery_order_request import CloseDeliveryOrderRequest
+from iikocloud_client.models.commit_draft_request import CommitDraftRequest
+from iikocloud_client.models.confirm_delivery_request import ConfirmDeliveryRequest
 from iikocloud_client.models.create_draft_request import CreateDraftRequest
 from iikocloud_client.models.create_or_update_customer_request import (
     CreateOrUpdateCustomerRequest,
 )
+from iikocloud_client.models.create_order_request import CreateOrderRequest
+from iikocloud_client.models.create_reserve_request import CreateReserveRequest
+from iikocloud_client.models.create_table_order_request import CreateTableOrderRequest
 from iikocloud_client.models.delete_customers_request import DeleteCustomersRequest
 from iikocloud_client.models.delete_draft_request import DeleteDraftRequest
+from iikocloud_client.models.delete_magnet_card_request import DeleteMagnetCardRequest
 from iikocloud_client.models.delivery_order_create_compound_item import (
     DeliveryOrderCreateCompoundItem,
 )
 from iikocloud_client.models.delivery_order_create_product_item import (
     DeliveryOrderCreateProductItem,
 )
+from iikocloud_client.models.lock_or_unlock_draft_request import LockOrUnlockDraftRequest
+from iikocloud_client.models.print_delivery_bill_request import PrintDeliveryBillRequest
 from iikocloud_client.models.remove_products_from_stop_list_request import (
     RemoveProductsFromStopListRequest,
+)
+from iikocloud_client.models.save_draft_request import SaveDraftRequest
+from iikocloud_client.models.update_delivery_status_request import UpdateDeliveryStatusRequest
+from iikocloud_client.models.update_order_courier_request import UpdateOrderCourierRequest
+from iikocloud_client.models.update_order_problem_request import UpdateOrderProblemRequest
+from iikocloud_client.models.update_product_barcodes_request import (
+    UpdateProductBarcodesRequest,
+)
+from iikocloud_client.models.update_tracking_link_request import UpdateTrackingLinkRequest
+from iikocloud_client.models.update_web_hook_settings_request import (
+    UpdateWebHookSettingsRequest,
 )
 
 from ..capture import LiveCapture
@@ -49,6 +101,7 @@ T = TypeVar("T")
 _CLEANUP_OPERATION_ID = "remove_products_from_stop_list"
 _COMPENSATING_OPERATION_ID = "add_products_to_stop_list"
 CUSTOMER_MARKER_PHONE = "+70000000042"
+CUSTOMER_MARKER_CARD = "7999000000000042"
 _PROFILE_BOUNDARY_ERROR = "Generated cleanup request is outside the selected write profile"
 _NO_API_EXCEPTION = object()
 _INVALID_API_EXCEPTION_STATUS = object()
@@ -283,26 +336,19 @@ def validate_customer_delete_request(
     return request
 
 
-def validate_draft_create_request(
-    operation_id: str,
-    payload: object,
-    profile: ResolvedLiveProfile,
-) -> CreateDraftRequest:
-    """Validate one owned delivery-draft create request against its write profile."""
+def _repair_union_order_items(payload: object, items: list[object]) -> None:
+    """Replace base-parsed union items with discriminator-parsed subclass ones.
 
-    if type(operation_id) is not str or operation_id != "create_delivery_draft":
-        raise SafetyError("Operation is not an approved compensating operation") from None
-
-    request: CreateDraftRequest | None = None
-    with suppress(Exception):
-        request = CreateDraftRequest.model_validate(payload)
-    if request is None:
-        raise SafetyError("Generated compensating payload is invalid") from None
-
-    # The generated union base class silently drops subclass fields when
-    # parsing items, so repair them from the raw payload by discriminator.
-    raw_order = payload.get("order") if isinstance(payload, dict) else None
-    raw_items = raw_order.get("items") if isinstance(raw_order, dict) else None
+    The generated union base class silently drops subclass fields when parsing
+    and dumping through the parent model, so every create payload carrying
+    order items must be repaired from the raw payload before it is sent.
+    """
+    raw_items: object = None
+    if isinstance(payload, dict):
+        if isinstance(payload.get("items"), list):
+            raw_items = payload["items"]
+        elif isinstance(payload.get("order"), dict):
+            raw_items = payload["order"].get("items")
     if not isinstance(raw_items, list) or len(raw_items) != 1:
         raise SafetyError("Generated compensating payload is invalid") from None
     repaired_items: list[object] = []
@@ -319,12 +365,29 @@ def validate_draft_create_request(
         if repaired is None:
             raise SafetyError("Generated compensating payload is invalid") from None
         repaired_items.append(repaired)
-    order = request.order
+    if any(type(item).__name__ == "DeliveryOrderCreateItem" for item in repaired_items):
+        raise SafetyError("Generated compensating payload is invalid") from None
+    items[:] = repaired_items
+
+
+def validate_draft_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateDraftRequest:
+    """Validate one owned delivery-draft create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_delivery_draft":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateDraftRequest | None = None
     with suppress(Exception):
-        order.items = repaired_items  # type: ignore[assignment]
-    if any(type(item).__name__ == "DeliveryOrderCreateItem" for item in order.items):
+        request = CreateDraftRequest.model_validate(payload)
+    if request is None:
         raise SafetyError("Generated compensating payload is invalid") from None
 
+    order = request.order
+    _repair_union_order_items(payload, order.items)
     organization_id, allowed_organization_ids, terminal_group_id, product_id = (
         _profile_boundary_ids(profile)
     )
@@ -379,6 +442,458 @@ def validate_draft_delete_request(
     return request
 
 
+def _validate_single_target_write(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+    *,
+    model: type,
+    role: str,
+) -> object:
+    """Shared boundary validation for single-target writes on owned entities."""
+
+    if type(operation_id) is not str:
+        raise SafetyError(f"Operation is not an approved {role} operation") from None
+    request: object | None = None
+    with suppress(Exception):
+        request = model.model_validate(payload)
+    if request is None:
+        raise SafetyError(f"Generated {role} payload is invalid") from None
+    organization_id, allowed_organization_ids = _organization_boundary(profile)
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id  # type: ignore[attr-defined]
+            and request.organization_id in allowed_organization_ids  # type: ignore[attr-defined]
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_category_add_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "add_customer_category":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=ChangeCategoryForCustomerRequest,
+        role="compensating",
+    )
+
+
+def validate_category_remove_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "remove_customer_category":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=ChangeCategoryForCustomerRequest,
+        role="cleanup",
+    )
+
+
+def validate_magnet_card_add_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "add_customer_magnet_card":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+    request = _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=AddMagnetCardRequest,
+        role="compensating",
+    )
+    if request.card_number != CUSTOMER_MARKER_CARD:  # type: ignore[attr-defined]
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_magnet_card_remove_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "remove_customer_magnet_card":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=DeleteMagnetCardRequest,
+        role="cleanup",
+    )
+
+
+def validate_delivery_order_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateOrderRequest:
+    """Validate one owned delivery-order create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_delivery_order":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateOrderRequest | None = None
+    with suppress(Exception):
+        request = CreateOrderRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    order = request.order
+    _repair_union_order_items(payload, order.items)
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and (
+                request.terminal_group_id is None
+                or request.terminal_group_id == terminal_group_id
+            )
+            and getattr(order, "phone", None) == CUSTOMER_MARKER_PHONE
+            and getattr(order.items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_delivery_order_cancel_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CancelOrderRequest:
+    """Validate one owned delivery-order cancel request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "cancel_delivery_order":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=CancelOrderRequest,
+        role="cleanup",
+    )  # type: ignore[return-value]
+
+
+def validate_draft_lock_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "lock_delivery_draft":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=LockOrUnlockDraftRequest,
+        role="compensating",
+    )
+
+
+def validate_draft_unlock_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "unlock_delivery_draft":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=LockOrUnlockDraftRequest,
+        role="cleanup",
+    )
+
+
+def validate_draft_save_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> SaveDraftRequest:
+    """Validate one owned delivery-draft save request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "save_delivery_draft":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: SaveDraftRequest | None = None
+    with suppress(Exception):
+        request = SaveDraftRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    order = request.order
+    _repair_union_order_items(payload, order.items)
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    external_menu_id = profile.external_menu_id
+    if external_menu_id is None:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    items = order.items
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and (
+                request.terminal_group_id is None
+                or request.terminal_group_id == terminal_group_id
+            )
+            and order.menu_id == external_menu_id
+            and order.phone == CUSTOMER_MARKER_PHONE
+            and len(items) == 1
+            and getattr(items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_draft_commit_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CommitDraftRequest:
+    """Validate one owned delivery-draft commit request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "commit_delivery_draft":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CommitDraftRequest | None = None
+    with suppress(Exception):
+        request = CommitDraftRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids, terminal_group_id, _product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and (
+                request.terminal_group_id is None
+                or request.terminal_group_id == terminal_group_id
+            )
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_reserve_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateReserveRequest:
+    """Validate one owned reserve create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_reserve":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateReserveRequest | None = None
+    with suppress(Exception):
+        request = CreateReserveRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids = _organization_boundary(profile)
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and request.phone == CUSTOMER_MARKER_PHONE
+            and len(request.table_ids) >= 1
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_reserve_cancel_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "cancel_reserve":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=CancelReserveRequest,
+        role="cleanup",
+    )
+
+
+def validate_table_order_create_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> CreateTableOrderRequest:
+    """Validate one owned table-order create request against its write profile."""
+
+    if type(operation_id) is not str or operation_id != "create_table_order":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: CreateTableOrderRequest | None = None
+    with suppress(Exception):
+        request = CreateTableOrderRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    order = request.order
+    if order is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+    _repair_union_order_items(payload, order.items)
+    organization_id, allowed_organization_ids, terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and request.terminal_group_id == terminal_group_id
+            and getattr(order, "phone", None) == CUSTOMER_MARKER_PHONE
+            and len(order.items) == 1
+            and getattr(order.items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_table_order_cancel_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> object:
+    if operation_id != "cancel_table_order":
+        raise SafetyError("Operation is not an approved cleanup operation") from None
+    return _validate_single_target_write(
+        operation_id,
+        payload,
+        profile,
+        model=CancelTableOrderRequest,
+        role="cleanup",
+    )
+
+
+def _single_target_validator(
+    operation_id: str,
+    *,
+    model: type,
+    role: str,
+) -> Callable[[str, object, ResolvedLiveProfile], object]:
+    """Build a boundary validator for single-target writes on owned entities."""
+
+    def validate(
+        requested_operation_id: str,
+        payload: object,
+        profile: ResolvedLiveProfile,
+    ) -> object:
+        if requested_operation_id != operation_id:
+            raise SafetyError(f"Operation is not an approved {role} operation") from None
+        return _validate_single_target_write(
+            requested_operation_id,
+            payload,
+            profile,
+            model=model,
+            role=role,
+        )
+
+    return validate
+
+
+def validate_order_add_items_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> AddOrderItemsRequest:
+    """Validate one add-items write against its write profile (dedicated product only)."""
+
+    if type(operation_id) is not str or operation_id != "add_delivery_order_items":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: AddOrderItemsRequest | None = None
+    with suppress(Exception):
+        request = AddOrderItemsRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    _repair_union_order_items(payload, request.items)
+    organization_id, allowed_organization_ids, _terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == organization_id
+            and request.organization_id in allowed_organization_ids
+            and len(request.items) == 1
+            and getattr(request.items[0], "product_id", None) == product_id
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
+def validate_product_barcodes_request(
+    operation_id: str,
+    payload: object,
+    profile: ResolvedLiveProfile,
+) -> UpdateProductBarcodesRequest:
+    """Validate one barcode update against its write profile (dedicated product only)."""
+
+    if type(operation_id) is not str or operation_id != "update_inventory_product_barcodes":
+        raise SafetyError("Operation is not an approved compensating operation") from None
+
+    request: UpdateProductBarcodesRequest | None = None
+    with suppress(Exception):
+        request = UpdateProductBarcodesRequest.model_validate(payload)
+    if request is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+
+    organization_id, allowed_organization_ids, _terminal_group_id, product_id = (
+        _profile_boundary_ids(profile)
+    )
+    within_profile = False
+    with suppress(Exception):
+        within_profile = (
+            request.organization_id == str(organization_id)
+            and request.organization_id in {str(value) for value in allowed_organization_ids}
+            and request.product_id == str(product_id)
+        )
+    if not within_profile:
+        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
+    return request
+
+
 @dataclass(frozen=True)
 class _WriteExecutorSpec:
     api_class: type
@@ -424,6 +939,264 @@ _WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
             "delete_delivery_draft_with_http_info",
             "delete_draft_request",
             validate_draft_delete_request,
+        ),
+        "add_customer_category": _WriteExecutorSpec(
+            CustomerCategoriesApi,
+            "add_customer_category_with_http_info",
+            "change_category_for_customer_request",
+            validate_category_add_request,
+        ),
+        "remove_customer_category": _WriteExecutorSpec(
+            CustomerCategoriesApi,
+            "remove_customer_category_with_http_info",
+            "change_category_for_customer_request",
+            validate_category_remove_request,
+        ),
+        "add_customer_magnet_card": _WriteExecutorSpec(
+            CustomersApi,
+            "add_customer_magnet_card_with_http_info",
+            "add_magnet_card_request",
+            validate_magnet_card_add_request,
+        ),
+        "remove_customer_magnet_card": _WriteExecutorSpec(
+            CustomersApi,
+            "remove_customer_magnet_card_with_http_info",
+            "delete_magnet_card_request",
+            validate_magnet_card_remove_request,
+        ),
+        "create_delivery_order": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "create_delivery_order_with_http_info",
+            "create_order_request",
+            validate_delivery_order_create_request,
+        ),
+        "cancel_delivery_order": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "cancel_delivery_order_with_http_info",
+            "cancel_order_request",
+            validate_delivery_order_cancel_request,
+        ),
+        "lock_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "lock_delivery_draft_with_http_info",
+            "lock_or_unlock_draft_request",
+            validate_draft_lock_request,
+        ),
+        "unlock_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "unlock_delivery_draft_with_http_info",
+            "lock_or_unlock_draft_request",
+            validate_draft_unlock_request,
+        ),
+        "save_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "save_delivery_draft_with_http_info",
+            "save_draft_request",
+            validate_draft_save_request,
+        ),
+        "commit_delivery_draft": _WriteExecutorSpec(
+            DraftsApi,
+            "commit_delivery_draft_with_http_info",
+            "commit_draft_request",
+            validate_draft_commit_request,
+        ),
+        "create_reserve": _WriteExecutorSpec(
+            BanquetsReservesApi,
+            "create_reserve_with_http_info",
+            "create_reserve_request",
+            validate_reserve_create_request,
+        ),
+        "cancel_reserve": _WriteExecutorSpec(
+            BanquetsReservesApi,
+            "cancel_reserve_with_http_info",
+            "cancel_reserve_request",
+            validate_reserve_cancel_request,
+        ),
+        "create_table_order": _WriteExecutorSpec(
+            OrdersApi,
+            "create_table_order_with_http_info",
+            "create_table_order_request",
+            validate_table_order_create_request,
+        ),
+        "cancel_table_order": _WriteExecutorSpec(
+            OrdersApi,
+            "cancel_table_order_with_http_info",
+            "cancel_table_order_request",
+            validate_table_order_cancel_request,
+        ),
+        "add_delivery_order_items": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "add_delivery_order_items_with_http_info",
+            "add_order_items_request",
+            validate_order_add_items_request,
+        ),
+        "add_delivery_order_payments": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "add_delivery_order_payments_with_http_info",
+            "add_order_payments_request",
+            _single_target_validator(
+                "add_delivery_order_payments",
+                model=AddOrderPaymentsRequest,
+                role="compensating",
+            ),
+        ),
+        "change_delivery_comment": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "change_delivery_comment_with_http_info",
+            "change_delivery_comment_request",
+            _single_target_validator(
+                "change_delivery_comment",
+                model=ChangeDeliveryCommentRequest,
+                role="compensating",
+            ),
+        ),
+        "change_delivery_complete_before": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "change_delivery_complete_before_with_http_info",
+            "change_complete_before_request",
+            _single_target_validator(
+                "change_delivery_complete_before",
+                model=ChangeCompleteBeforeRequest,
+                role="compensating",
+            ),
+        ),
+        "change_delivery_driver_info": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "change_delivery_driver_info_with_http_info",
+            "change_driver_info_request",
+            _single_target_validator(
+                "change_delivery_driver_info",
+                model=ChangeDriverInfoRequest,
+                role="compensating",
+            ),
+        ),
+        "change_delivery_external_data": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "change_delivery_external_data_with_http_info",
+            "change_external_data_request",
+            _single_target_validator(
+                "change_delivery_external_data",
+                model=ChangeExternalDataRequest,
+                role="compensating",
+            ),
+        ),
+        "change_delivery_operator": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "change_delivery_operator_with_http_info",
+            "change_delivery_operator_request",
+            _single_target_validator(
+                "change_delivery_operator",
+                model=ChangeDeliveryOperatorRequest,
+                role="compensating",
+            ),
+        ),
+        "close_delivery_order": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "close_delivery_order_with_http_info",
+            "close_delivery_order_request",
+            _single_target_validator(
+                "close_delivery_order", model=CloseDeliveryOrderRequest, role="compensating"
+            ),
+        ),
+        "confirm_delivery": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "confirm_delivery_with_http_info",
+            "confirm_delivery_request",
+            _single_target_validator(
+                "confirm_delivery", model=ConfirmDeliveryRequest, role="compensating"
+            ),
+        ),
+        "cancel_delivery_confirmation": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "cancel_delivery_confirmation_with_http_info",
+            "cancel_delivery_confirmation_request",
+            _single_target_validator(
+                "cancel_delivery_confirmation",
+                model=CancelDeliveryConfirmationRequest,
+                role="cleanup",
+            ),
+        ),
+        "print_delivery_bill": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "print_delivery_bill_with_http_info",
+            "print_delivery_bill_request",
+            _single_target_validator(
+                "print_delivery_bill", model=PrintDeliveryBillRequest, role="compensating"
+            ),
+        ),
+        "update_delivery_order_courier": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "update_delivery_order_courier_with_http_info",
+            "update_order_courier_request",
+            _single_target_validator(
+                "update_delivery_order_courier",
+                model=UpdateOrderCourierRequest,
+                role="compensating",
+            ),
+        ),
+        "update_delivery_order_problem": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "update_delivery_order_problem_with_http_info",
+            "update_order_problem_request",
+            _single_target_validator(
+                "update_delivery_order_problem",
+                model=UpdateOrderProblemRequest,
+                role="compensating",
+            ),
+        ),
+        "update_delivery_order_status": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "update_delivery_order_status_with_http_info",
+            "update_delivery_status_request",
+            _single_target_validator(
+                "update_delivery_order_status",
+                model=UpdateDeliveryStatusRequest,
+                role="compensating",
+            ),
+        ),
+        "update_delivery_tracking_link": _WriteExecutorSpec(
+            DeliveriesCreateAndUpdateApi,
+            "update_delivery_tracking_link_with_http_info",
+            "update_tracking_link_request",
+            _single_target_validator(
+                "update_delivery_tracking_link",
+                model=UpdateTrackingLinkRequest,
+                role="compensating",
+            ),
+        ),
+        "update_inventory_product_barcodes": _WriteExecutorSpec(
+            PublicApiInvoiceProcessingNomenclatureApi,
+            "update_inventory_product_barcodes_with_http_info",
+            "update_product_barcodes_request",
+            validate_product_barcodes_request,
+        ),
+        "awake_terminal_groups": _WriteExecutorSpec(
+            TerminalGroupsApi,
+            "awake_terminal_groups_with_http_info",
+            "awake_terminal_groups_request",
+            _single_target_validator(
+                "awake_terminal_groups",
+                model=AwakeTerminalGroupsRequest,
+                role="compensating",
+            ),
+        ),
+        "clear_stop_list": _WriteExecutorSpec(
+            MenuApi,
+            "clear_stop_list_with_http_info",
+            "clear_stop_list_request",
+            _single_target_validator(
+                "clear_stop_list", model=ClearStopListRequest, role="cleanup"
+            ),
+        ),
+        "update_webhook_settings": _WriteExecutorSpec(
+            WebhooksApi,
+            "update_webhook_settings_with_http_info",
+            "update_web_hook_settings_request",
+            _single_target_validator(
+                "update_webhook_settings",
+                model=UpdateWebHookSettingsRequest,
+                role="compensating",
+            ),
         ),
     }
 )

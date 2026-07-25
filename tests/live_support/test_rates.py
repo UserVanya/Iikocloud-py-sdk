@@ -34,11 +34,89 @@ _REVIEWED_WRITE_LIFECYCLE_BUDGET = {
 }
 
 _WRITE_LIFECYCLE_OPERATIONS = (
+    "add_customer_category",
+    "add_customer_magnet_card",
+    "cancel_delivery_order",
     "create_delivery_draft",
+    "create_delivery_order",
     "create_or_update_customer",
     "delete_customers",
     "delete_delivery_draft",
+    "remove_customer_category",
+    "remove_customer_magnet_card",
 )
+
+_EXTENDED_WRITE_OPERATIONS: dict[str, tuple[str, str | None, str]] = {
+    "add_delivery_order_items": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/add_items"
+    ),
+    "add_delivery_order_payments": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/add_payments"
+    ),
+    "awake_terminal_groups": ("compensating", None, "/api/1/terminal_groups/awake"),
+    "cancel_delivery_confirmation": ("cleanup", None, "/api/1/deliveries/cancel_confirmation"),
+    "change_delivery_comment": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/change_comment"
+    ),
+    "change_delivery_complete_before": (
+        "compensating",
+        "cancel_delivery_order",
+        "/api/1/deliveries/change_complete_before",
+    ),
+    "change_delivery_driver_info": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/change_driver_info"
+    ),
+    "change_delivery_external_data": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/change_external_data"
+    ),
+    "change_delivery_operator": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/change_operator"
+    ),
+    "clear_stop_list": ("compensating", None, "/api/1/stop_lists/clear"),
+    "close_delivery_order": ("compensating", None, "/api/1/deliveries/close"),
+    "close_personal_session": ("cleanup", None, "/api/1/employees/shift/clockout"),
+    "confirm_delivery": (
+        "compensating", "cancel_delivery_confirmation", "/api/1/deliveries/confirm"
+    ),
+    "open_personal_session": (
+        "compensating", "close_personal_session", "/api/1/employees/shift/clockin"
+    ),
+    "print_delivery_bill": ("compensating", None, "/api/1/deliveries/print_delivery_bill"),
+    "update_delivery_order_courier": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/update_order_courier"
+    ),
+    "update_delivery_order_problem": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/update_order_problem"
+    ),
+    "update_delivery_order_status": (
+        "compensating",
+        "cancel_delivery_order",
+        "/api/1/deliveries/update_order_delivery_status",
+    ),
+    "update_delivery_tracking_link": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/update_tracking_link"
+    ),
+    "update_inventory_product_barcodes": (
+        "compensating", None, "/api/inventory/v1/nomenclature/update_barcodes"
+    ),
+    "update_webhook_settings": ("compensating", None, "/api/1/webhooks/update_settings"),
+    "cancel_reserve": ("cleanup", None, "/api/1/reserve/cancel"),
+    "cancel_table_order": ("cleanup", None, "/api/1/order/cancel"),
+    "commit_delivery_draft": (
+        "compensating", "cancel_delivery_order", "/api/1/deliveries/drafts/commit"
+    ),
+    "create_reserve": ("compensating", "cancel_reserve", "/api/1/reserve/create"),
+    "create_table_order": ("compensating", "cancel_table_order", "/api/1/order/create"),
+    "lock_delivery_draft": (
+        "compensating", "unlock_delivery_draft", "/api/1/deliveries/drafts/lock"
+    ),
+    "save_delivery_draft": (
+        "compensating", "delete_delivery_draft", "/api/1/deliveries/drafts/save"
+    ),
+    "unlock_delivery_draft": ("cleanup", None, "/api/1/deliveries/drafts/unlock"),
+}
+
+_EXTENDED_RATE_OPERATIONS = tuple(sorted(_EXTENDED_WRITE_OPERATIONS))
 
 RATE_V2: dict[str, Any] = {
     "version": 2,
@@ -545,7 +623,7 @@ def _expected_committed_rate_operations() -> dict[str, Any]:
                 "test_budget": copy.deepcopy(_REVIEWED_WRITE_LIFECYCLE_BUDGET),
                 "server_limit": None,
             }
-            for operation_id in _WRITE_LIFECYCLE_OPERATIONS
+            for operation_id in _WRITE_LIFECYCLE_OPERATIONS + _EXTENDED_RATE_OPERATIONS
         }
     )
     return dict(sorted(operations.items()))
@@ -556,7 +634,7 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
-    assert len(expected_operations) == 99
+    assert len(expected_operations) == 134
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -634,9 +712,54 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
             "method": "POST",
             "path": "/api/1/deliveries/drafts/delete",
         },
+        "cancel_delivery_order": {
+            "kind": "cleanup",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/1/deliveries/cancel",
+        },
+        "create_delivery_order": {
+            "kind": "compensating",
+            "cleanup": "cancel_delivery_order",
+            "method": "POST",
+            "path": "/api/1/deliveries/create",
+        },
+        "add_customer_category": {
+            "kind": "compensating",
+            "cleanup": "remove_customer_category",
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/customer_category/add",
+        },
+        "add_customer_magnet_card": {
+            "kind": "compensating",
+            "cleanup": "remove_customer_magnet_card",
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/customer/card/add",
+        },
+        "remove_customer_category": {
+            "kind": "cleanup",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/customer_category/remove",
+        },
+        "remove_customer_magnet_card": {
+            "kind": "cleanup",
+            "cleanup": None,
+            "method": "POST",
+            "path": "/api/1/loyalty/iiko/customer/card/remove",
+        },
+        **{
+            operation_id: {
+                "kind": kind,
+                "cleanup": cleanup,
+                "method": "POST",
+                "path": path,
+            }
+            for operation_id, (kind, cleanup, path) in _EXTENDED_WRITE_OPERATIONS.items()
+        },
     }
     assert value == {"version": 1, "operations": expected_operations}
-    assert len(expected_operations) == 99
+    assert len(expected_operations) == 134
 
     safety = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
     assert safety.automatic_read_ids == frozenset(_READ_ENDPOINTS)
