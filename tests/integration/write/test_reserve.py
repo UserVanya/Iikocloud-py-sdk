@@ -66,8 +66,10 @@ async def test_reserve_create_and_cancel(
         table_id = table_ids[0]
 
         estimated_start = (
-            datetime.now(timezone.utc) + timedelta(days=1)
-        ).strftime("%Y-%m-%d %H:%M:%S.000")
+            (datetime.now(timezone.utc) + timedelta(days=1))
+            .replace(hour=12, minute=0, second=0, microsecond=0)
+            .strftime("%Y-%m-%d %H:%M:%S.000")
+        )
         created = await exec_write(
             live_sdk,
             "create_reserve",

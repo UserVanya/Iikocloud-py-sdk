@@ -86,7 +86,7 @@ scenarios:
       - {role: cleanup, operation: delete_delivery_draft, compensates: create_delivery_draft}
   reserve:
     enabled: false
-    disabled_reason: "Async reserve creation never completes on the stand; get_command_status stays InProgress and the reserve never appears in the section workload. Re-probed 2026-07-25 after a full POS terminal reinstall and again after a hall scheme was added in iikoWeb: still InProgress both times, so neither terminal-local state nor a missing hall scheme is the cause."
+    disabled_reason: "Async reserve creation never completes on the stand; get_command_status stays InProgress and the reserve never appears in the section workload. Re-probed 2026-07-25 after a full POS terminal reinstall, after a hall scheme was added in iikoWeb, after the Cloud API plugin update, with the front confirmed alive via check_terminal_groups_availability, and with a daytime estimated start: still InProgress every time. The front accepts the command but never executes it; check the iikoFront logs on the stand for the reserve command."
     requires_profile_fields: [terminal_group_id]
     ownership_marker:
       source: literal
