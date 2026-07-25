@@ -114,6 +114,24 @@ _EXTENDED_WRITE_OPERATIONS: dict[str, tuple[str, str | None, str]] = {
         "compensating", "delete_delivery_draft", "/api/1/deliveries/drafts/save"
     ),
     "unlock_delivery_draft": ("cleanup", None, "/api/1/deliveries/drafts/unlock"),
+    "add_customer_to_table_order": (
+        "compensating", "cancel_table_order", "/api/1/order/add_customer"
+    ),
+    "add_items_to_table_order": (
+        "compensating", "cancel_table_order", "/api/1/order/add_items"
+    ),
+    "add_table_order_payments": (
+        "compensating", "cancel_table_order", "/api/1/order/add_payments"
+    ),
+    "change_table_order_external_data": (
+        "compensating", "cancel_table_order", "/api/1/order/change_external_data"
+    ),
+    "change_table_order_payments": (
+        "compensating", "cancel_table_order", "/api/1/order/change_payments"
+    ),
+    "close_table_order": ("compensating", None, "/api/1/order/close"),
+    "initialize_table_orders_by_tables": ("compensating", None, "/api/1/order/init_by_table"),
+    "print_table_order_bill": ("compensating", None, "/api/1/order/print_bill"),
 }
 
 _EXTENDED_RATE_OPERATIONS = tuple(sorted(_EXTENDED_WRITE_OPERATIONS))
@@ -634,7 +652,7 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
-    assert len(expected_operations) == 134
+    assert len(expected_operations) == 142
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -759,7 +777,7 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
         },
     }
     assert value == {"version": 1, "operations": expected_operations}
-    assert len(expected_operations) == 134
+    assert len(expected_operations) == 142
 
     safety = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
     assert safety.automatic_read_ids == frozenset(_READ_ENDPOINTS)

@@ -50,7 +50,9 @@ async def test_misc_ops_barcodes_webhook_awake_clear(
         request=GetWebHookSettingsRequest(organizationId=organization_id),
     )
     current = webhook.data.model_dump(mode="json", by_alias=True)
-    uri = current.get("webHooksUri") or "http://localhost:1/"
+    # The server requires an HTTPS WebHooks URI; a placeholder on the write
+    # stand is an accepted, documented residue.
+    uri = current.get("webHooksUri") or "https://example.invalid/sdk-write-probe"
     await exec_write(
         live_sdk,
         "update_webhook_settings",

@@ -130,16 +130,16 @@ class GeneratedCallResult(Generic[T]):
 
 
 class GeneratedCallFailure(SafetyError):
+    # Only classification fields: free-text error messages can embed live
+    # identifiers or credentials echoed by the server.
     _SAFE_ERROR_BODY_KEYS = frozenset(
         {
             "code",
             "description",
             "error",
             "errorCode",
-            "errorDescription",
             "httpStatusCode",
             "isIntegrationError",
-            "message",
         }
     )
 

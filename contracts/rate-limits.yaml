@@ -16,6 +16,12 @@ operations:
       source: user-approved-write-lifecycles-2026-07-24
       verified: true
     server_limit: null
+  add_customer_to_table_order:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
   add_delivery_order_items:
     test_budget:
       min_interval_seconds: 30
@@ -28,10 +34,22 @@ operations:
       source: user-approved-write-lifecycles-2026-07-24
       verified: true
     server_limit: null
+  add_items_to_table_order:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
   add_products_to_stop_list:
     test_budget:
       min_interval_seconds: 30
       source: user-approved-global-cadence-2026-07-22
+      verified: true
+    server_limit: null
+  add_table_order_payments:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
       verified: true
     server_limit: null
   authenticate:
@@ -124,6 +142,18 @@ operations:
       source: user-approved-write-lifecycles-2026-07-24
       verified: true
     server_limit: null
+  change_table_order_external_data:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
+  change_table_order_payments:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
   check_products_in_stop_list:
     test_budget:
       min_interval_seconds: 30
@@ -161,6 +191,12 @@ operations:
       verified: true
     server_limit: null
   close_personal_session:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
+  close_table_order:
     test_budget:
       min_interval_seconds: 30
       source: user-approved-write-lifecycles-2026-07-24
@@ -628,6 +664,12 @@ operations:
       source: user-approved-global-cadence-2026-07-22
       verified: true
     server_limit: null
+  initialize_table_orders_by_tables:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
   list_finance_account_transactions:
     test_budget:
       min_interval_seconds: 30
@@ -731,6 +773,12 @@ operations:
       verified: true
     server_limit: null
   print_delivery_bill:
+    test_budget:
+      min_interval_seconds: 30
+      source: user-approved-write-lifecycles-2026-07-24
+      verified: true
+    server_limit: null
+  print_table_order_bill:
     test_budget:
       min_interval_seconds: 30
       source: user-approved-write-lifecycles-2026-07-24

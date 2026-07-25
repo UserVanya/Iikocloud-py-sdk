@@ -166,6 +166,26 @@ scenarios:
       - {role: prepare, operation: get_personal_session_info}
       - {role: create, operation: open_personal_session}
       - {role: cleanup, operation: close_personal_session, compensates: open_personal_session}
+  finalization:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: prepare, operation: get_delivery_order_types}
+      - {role: prepare, operation: get_reserve_restaurant_sections}
+      - {role: create, operation: create_delivery_order}
+      - {role: create, operation: confirm_delivery}
+      - {role: cleanup, operation: cancel_delivery_confirmation, compensates: confirm_delivery}
+      - {role: mutate, operation: close_delivery_order}
+      - {role: cleanup, operation: cancel_delivery_order, compensates: create_delivery_order}
+      - {role: create, operation: create_table_order}
+      - {role: mutate, operation: close_table_order}
+      - {role: cleanup, operation: cancel_table_order, compensates: create_table_order}
   delivery_draft:
     enabled: true
     requires_profile_fields: [terminal_group_id, write_product_id]
