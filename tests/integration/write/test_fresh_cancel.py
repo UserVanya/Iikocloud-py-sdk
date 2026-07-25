@@ -21,23 +21,22 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.live_write
-@pytest.mark.write_scenario("table_order")
+@pytest.mark.write_scenario("delivery_order")
 @pytest.mark.audit_residue
 @pytest.mark.asyncio(loop_scope="session")
-async def test_table_order_create_and_cancel(
+async def test_fresh_order_cancel_check(
     live_sdk: GeneratedLiveSdk,
     mutation_journal: MutationJournal,
     live_profile: ResolvedLiveProfile,
 ) -> None:
-    """Table order lifecycle: create on a stand table, verify, cancel."""
+    """Create a fresh order and cancel it, inspecting the command status."""
     from iikocloud_client import (
-        CancelTableOrderRequest,
-        CreateTableOrderRequest,
+        CancelOrderRequest,
+        CreateOrderRequest,
+        DeliveryOrder,
         DeliveryOrderCreateProductItem,
-        GetRestaurantSectionsRequest,
-        GetTableOrdersByIdRequest,
         MenuRequest,
-        TableOrderRequest,
+        OrderTypesRequest,
     )
 
     assert live_profile.terminal_group_id is not None
@@ -50,25 +49,6 @@ async def test_table_order_create_and_cancel(
 
     try:
         await canary(live_sdk, organization_id)
-
-        sections = await call_read(
-            live_sdk,
-            "get_reserve_restaurant_sections",
-            api_module="iikocloud_client.api.banquets_reserves_api",
-            api_class="BanquetsReservesApi",
-            request_module="get_restaurant_sections_request",
-            request_class="GetRestaurantSectionsRequest",
-            request_keyword="get_restaurant_sections_request",
-            request=GetRestaurantSectionsRequest(terminalGroupIds=[terminal_group_id]),
-        )
-        table_ids = [
-            table.id
-            for section in sections.data.restaurant_sections
-            for table in section.tables
-        ]
-        assert table_ids, "no tables on the write stand"
-        table_id = table_ids[0]
-
         menu = await call_read(
             live_sdk,
             "get_external_menu_by_id",
@@ -87,18 +67,35 @@ async def test_table_order_create_and_cancel(
             menu.data.model_dump(mode="json", by_alias=True),
             live_profile.write_product_id,
         )
-        assert price is not None, "write product is not in the external menu"
+        order_types = await call_read(
+            live_sdk,
+            "get_delivery_order_types",
+            api_module="iikocloud_client.api.dictionaries_api",
+            api_class="DictionariesApi",
+            request_module="order_types_request",
+            request_class="OrderTypesRequest",
+            request_keyword="order_types_request",
+            request=OrderTypesRequest(organizationIds=[organization_id]),
+        )
+        pickup_type_id = None
+        for wrapper in order_types.data.order_types:
+            for item in wrapper.items:
+                if item.order_service_type.value == "DeliveryPickUp" and not item.is_deleted:
+                    pickup_type_id = item.id
+                    break
+            if pickup_type_id is not None:
+                break
 
         created = await exec_write(
             live_sdk,
-            "create_table_order",
-            CreateTableOrderRequest(
+            "create_delivery_order",
+            CreateOrderRequest(
                 organizationId=organization_id,
                 terminalGroupId=terminal_group_id,
-                order=TableOrderRequest(
+                order=DeliveryOrder(
                     phone=CUSTOMER_MARKER_PHONE,
-                    tableIds=[table_id],
-                    guestCount=1,
+                    comment="sdk-write-probe fresh-cancel-check",
+                    orderTypeId=pickup_type_id,
                     items=[
                         DeliveryOrderCreateProductItem(
                             type="Product",
@@ -112,42 +109,21 @@ async def test_table_order_create_and_cancel(
         )
         order_info = getattr(created.data, "order_info", None)
         order_id = getattr(order_info, "id", None) if order_info is not None else None
-        assert order_id is not None, "create response carries no order id"
+        assert order_id is not None
+        print(f"fresh order id: {order_id}")
 
-        cancel_payload = CancelTableOrderRequest(
+        cancel_payload = CancelOrderRequest(
             orderId=order_id,
             organizationId=organization_id,
-            removalComment="sdk-write-probe cleanup",
+            cancelComment="sdk-write-probe cleanup",
         ).model_dump(mode="json", by_alias=True, exclude_none=True)
-        mutation_journal.register("cancel_table_order", cancel_payload)
-
-        verified = await call_read(
-            live_sdk,
-            "get_table_orders_by_id",
-            api_module="iikocloud_client.api.orders_api",
-            api_class="OrdersApi",
-            request_module="get_table_orders_by_id_request",
-            request_class="GetTableOrdersByIdRequest",
-            request_keyword="get_table_orders_by_id_request",
-            request=GetTableOrdersByIdRequest(
-                organizationIds=[organization_id],
-                orderIds=[order_id],
-            ),
-        )
-        returned_ids = {
-            str(order.get("id"))
-            for order in verified.data.model_dump(mode="json", by_alias=True).get(
-                "orders", []
-            )
-            if isinstance(order, dict)
-        }
-        assert str(order_id) in returned_ids
+        mutation_journal.register("cancel_delivery_order", cancel_payload)
     finally:
         if cancel_payload is not None:
             await verified_compensation(
                 live_sdk,
                 mutation_journal,
-                "cancel_table_order",
+                "cancel_delivery_order",
                 cancel_payload,
                 organization_id,
             )

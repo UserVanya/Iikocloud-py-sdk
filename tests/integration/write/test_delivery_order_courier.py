@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from uuid import UUID
 
 import pytest
 
-from tests.integration.write._support import call_read, canary, exec_write
+from tests.integration.write._support import (
+    call_read,
+    canary,
+    exec_write,
+    verified_compensation,
+)
 from tests.integration.write.test_delivery_order import _find_product_price
 from tools.openapi_pipeline.live.generated import CUSTOMER_MARKER_PHONE
 from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
@@ -50,6 +55,7 @@ async def test_delivery_order_courier_lifecycle(
     organization_id = UUID(live_profile.organization_id)
     terminal_group_id = UUID(live_profile.terminal_group_id)
     product_id = UUID(live_profile.write_product_id)
+    cancel_payload: dict[str, Any] | None = None
 
     try:
         await canary(live_sdk, organization_id)
@@ -207,14 +213,12 @@ async def test_delivery_order_courier_lifecycle(
         order_info = getattr(created.data, "order_info", None)
         order_id = getattr(order_info, "id", None) if order_info is not None else None
         assert order_id is not None, "create response carries no order id"
-        mutation_journal.register(
-            "cancel_delivery_order",
-            CancelOrderRequest(
-                orderId=order_id,
-                organizationId=organization_id,
-                cancelComment="sdk-write-probe cleanup",
-            ).model_dump(mode="json", by_alias=True, exclude_none=True),
-        )
+        cancel_payload = CancelOrderRequest(
+            orderId=order_id,
+            organizationId=organization_id,
+            cancelComment="sdk-write-probe cleanup",
+        ).model_dump(mode="json", by_alias=True, exclude_none=True)
+        mutation_journal.register("cancel_delivery_order", cancel_payload)
 
         await exec_write(
             live_sdk,
@@ -261,4 +265,12 @@ async def test_delivery_order_courier_lifecycle(
         }
         assert str(order_id) in returned_ids
     finally:
+        if cancel_payload is not None:
+            await verified_compensation(
+                live_sdk,
+                mutation_journal,
+                "cancel_delivery_order",
+                cancel_payload,
+                organization_id,
+            )
         await mutation_journal.cleanup(live_sdk.execute_write)
