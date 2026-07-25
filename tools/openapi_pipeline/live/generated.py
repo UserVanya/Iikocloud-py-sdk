@@ -8,8 +8,10 @@ from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
-from typing import Generic, NoReturn, TypeVar, cast
+from typing import Any, Generic, NoReturn, TypeVar, cast
 from uuid import UUID
+
+from pydantic import BaseModel
 
 from iikocloud_client.api.banquets_reserves_api import BanquetsReservesApi
 from iikocloud_client.api.customer_categories_api import CustomerCategoriesApi
@@ -351,7 +353,7 @@ def validate_customer_delete_request(
     return request
 
 
-def _repair_union_order_items(payload: object, items: list[object]) -> None:
+def _repair_union_order_items(payload: object, items: list[Any]) -> None:
     """Replace base-parsed union items with discriminator-parsed subclass ones.
 
     The generated union base class silently drops subclass fields when parsing
@@ -462,7 +464,7 @@ def _validate_single_target_write(
     payload: object,
     profile: ResolvedLiveProfile,
     *,
-    model: type,
+    model: type[BaseModel],
     role: str,
 ) -> object:
     """Shared boundary validation for single-target writes on owned entities."""
@@ -822,7 +824,7 @@ def validate_table_order_cancel_request(
 def _single_target_validator(
     operation_id: str,
     *,
-    model: type,
+    model: type[BaseModel],
     role: str,
 ) -> Callable[[str, object, ResolvedLiveProfile], object]:
     """Build a boundary validator for single-target writes on owned entities."""
