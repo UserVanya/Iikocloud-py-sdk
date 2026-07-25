@@ -120,6 +120,26 @@ async def test_reserve_create_and_cancel(
             and reserve.duration_in_minutes == 60
             and reserve.guests_count == 1
         ]
+        if len(candidates) != 1:
+            from iikocloud_client import GetCommandStatusRequest
+
+            command_status = await call_read(
+                live_sdk,
+                "get_command_status",
+                api_module="iikocloud_client.api.operations_api",
+                api_class="OperationsApi",
+                request_module="get_command_status_request",
+                request_class="GetCommandStatusRequest",
+                request_keyword="get_command_status_request",
+                request=GetCommandStatusRequest(
+                    correlationId=correlation,
+                    organizationId=organization_id,
+                ),
+            )
+            print(
+                "create_reserve command status: "
+                f"{command_status.data.model_dump(mode='json', by_alias=True)!r}"
+            )
         assert len(candidates) == 1, (
             f"expected exactly one created reserve, got {len(candidates)}"
         )
