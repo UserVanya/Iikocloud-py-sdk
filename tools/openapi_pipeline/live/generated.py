@@ -132,16 +132,18 @@ class GeneratedCallResult(Generic[T]):
 
 
 class GeneratedCallFailure(SafetyError):
-    # Only classification fields: free-text error messages can embed live
-    # identifiers or credentials echoed by the server.
+    # Classification fields plus free text, redacted with profile secrets:
+    # free-text error messages can embed credentials echoed by the server.
     _SAFE_ERROR_BODY_KEYS = frozenset(
         {
             "code",
             "description",
             "error",
             "errorCode",
+            "errorDescription",
             "httpStatusCode",
             "isIntegrationError",
+            "message",
         }
     )
 
@@ -175,7 +177,11 @@ class GeneratedCallFailure(SafetyError):
         super().__init__(code.value)
 
 
-def _safe_api_error_details(body: object) -> dict[str, object] | None:
+def _safe_api_error_details(
+    body: object,
+    *,
+    known_secrets: tuple[str, ...] = (),
+) -> dict[str, object] | None:
     if isinstance(body, str):
         try:
             body = json.loads(body)
@@ -183,8 +189,18 @@ def _safe_api_error_details(body: object) -> dict[str, object] | None:
             return None
     if not isinstance(body, dict):
         return None
+
+    def _redact(value: object) -> object:
+        if type(value) is not str:
+            return value
+        text = value
+        for secret in known_secrets:
+            if secret:
+                text = text.replace(secret, "<redacted>")
+        return text
+
     details = {
-        key: value
+        key: _redact(value)
         for key, value in body.items()
         if key in GeneratedCallFailure._SAFE_ERROR_BODY_KEYS
         and type(value) in {str, int, bool, float}
@@ -555,6 +571,37 @@ def validate_magnet_card_remove_request(
     )
 
 
+def _repair_delivery_point(payload: object, order: object) -> None:
+    """Re-parse the delivery point address union from the raw payload.
+
+    The address base class loses subclass fields (street, house) when parsed
+    through the parent model, so courier orders must be repaired like items.
+    """
+    from iikocloud_client.models.address_city import AddressCity
+    from iikocloud_client.models.address_legacy import AddressLegacy
+
+    raw_order = payload.get("order") if isinstance(payload, dict) else None
+    raw_point = raw_order.get("deliveryPoint") if isinstance(raw_order, dict) else None
+    raw_address = raw_point.get("address") if isinstance(raw_point, dict) else None
+    if raw_address is None:
+        return
+    if not isinstance(raw_address, dict):
+        raise SafetyError("Generated compensating payload is invalid") from None
+    address_type = raw_address.get("type")
+    repaired: object | None = None
+    with suppress(Exception):
+        if address_type == "legacy":
+            repaired = AddressLegacy.model_validate(raw_address)
+        elif address_type == "city":
+            repaired = AddressCity.model_validate(raw_address)
+    if repaired is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+    point = getattr(order, "delivery_point", None)
+    if point is None:
+        raise SafetyError("Generated compensating payload is invalid") from None
+    point.address = repaired
+
+
 def validate_delivery_order_create_request(
     operation_id: str,
     payload: object,
@@ -573,6 +620,7 @@ def validate_delivery_order_create_request(
 
     order = request.order
     _repair_union_order_items(payload, order.items)
+    _repair_delivery_point(payload, order)
     organization_id, allowed_organization_ids, terminal_group_id, product_id = (
         _profile_boundary_ids(profile)
     )
@@ -1410,6 +1458,12 @@ class GeneratedLiveSdk:
     def receipt(self) -> LiveReceipt | None:
         return self._receipt
 
+    def _known_secrets(self) -> tuple[str, ...]:
+        secrets: list[str] = [self.profile.api_login]
+        if self.profile.client_secret is not None:
+            secrets.append(self.profile.client_secret)
+        return tuple(secrets)
+
     def _assert_usable(self) -> None:
         if self._unusable:
             raise SafetyError("Generated live SDK is unusable after a failed live call")
@@ -1649,7 +1703,10 @@ class GeneratedLiveSdk:
                 api_exception_status = error.status
             except Exception:
                 api_exception_status = _INVALID_API_EXCEPTION_STATUS
-            api_error_details = _safe_api_error_details(getattr(error, "body", None))
+            api_error_details = _safe_api_error_details(
+                getattr(error, "body", None),
+                known_secrets=self._known_secrets(),
+            )
         except Exception:
             transport_failed = True
         duration_ms = max(0, (time.monotonic_ns() - started_ns) // 1_000_000)

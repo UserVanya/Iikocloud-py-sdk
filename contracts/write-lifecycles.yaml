@@ -186,6 +186,23 @@ scenarios:
       - {role: create, operation: create_table_order}
       - {role: mutate, operation: close_table_order}
       - {role: cleanup, operation: cancel_table_order, compensates: create_table_order}
+  delivery_order_courier:
+    enabled: true
+    requires_profile_fields: [terminal_group_id, write_product_id]
+    ownership_marker:
+      source: literal
+      field: phone
+      value: "+70000000042"
+    steps:
+      - {role: prepare, operation: get_organizations}
+      - {role: prepare, operation: get_external_menu_by_id}
+      - {role: prepare, operation: get_delivery_order_types}
+      - {role: prepare, operation: get_couriers}
+      - {role: create, operation: create_delivery_order}
+      - {role: mutate, operation: update_delivery_order_courier}
+      - {role: mutate, operation: change_delivery_driver_info}
+      - {role: check, operation: get_deliveries_by_id}
+      - {role: cleanup, operation: cancel_delivery_order, compensates: create_delivery_order}
   delivery_draft:
     enabled: true
     requires_profile_fields: [terminal_group_id, write_product_id]
