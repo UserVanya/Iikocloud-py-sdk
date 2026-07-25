@@ -5,10 +5,10 @@ from uuid import UUID
 
 import pytest
 
-from tools.openapi_pipeline.live.generated import CUSTOMER_MARKER_PHONE
-from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 from tests.integration.write._support import call_read, canary, exec_write
 from tests.integration.write.test_delivery_order import _find_product_price
+from tools.openapi_pipeline.live.generated import CUSTOMER_MARKER_PHONE
+from tools.openapi_pipeline.live.profile import ResolvedLiveProfile
 
 if TYPE_CHECKING:
     from tools.openapi_pipeline.live.generated import GeneratedLiveSdk
