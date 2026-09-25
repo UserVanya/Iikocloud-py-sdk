@@ -148,16 +148,26 @@ actions:
     expected-matches: 1
     expected-sha256: ec8f68e7e40c14332968fd694583c3c988ba773d226330132af274ba6d33b08f
     issue: external-menu-schema-ExternalMenuV3-properties-overrideTaxCategories-items-remove
-- target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]
-  update:
-    additionalProperties:
-      items:
-        $ref: '#/components/schemas/OverrideTaxesDto'
-      type: array
-    type: object
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]["type"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 45ad7315b2ab36ceb8ca0b3af11d5f93345fb1f3fd4471bcaf7b0278869439d2
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuV3-properties-overrideTaxCategories-type-remove
+- target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]
+  update:
+    oneOf:
+    - additionalProperties:
+        items:
+          $ref: '#/components/schemas/OverrideTaxesDto'
+        type: array
+      type: object
+    - items:
+        $ref: '#/components/schemas/OverrideTaxesDto'
+      type: array
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 5e072ccdb5c863b9c35aeac74a13db31e255dc2af419710daab6e25d6ab1eb1d
     issue: external-menu-schema-ExternalMenuV3-properties-overrideTaxCategories
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]["items"]
@@ -165,16 +175,26 @@ actions:
     expected-matches: 1
     expected-sha256: ec8f68e7e40c14332968fd694583c3c988ba773d226330132af274ba6d33b08f
     issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories-items-remove
-- target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]
-  update:
-    additionalProperties:
-      items:
-        $ref: '#/components/schemas/OverrideTaxesDto'
-      type: array
-    type: object
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]["type"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 45ad7315b2ab36ceb8ca0b3af11d5f93345fb1f3fd4471bcaf7b0278869439d2
+    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
+    issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories-type-remove
+- target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]
+  update:
+    oneOf:
+    - additionalProperties:
+        items:
+          $ref: '#/components/schemas/OverrideTaxesDto'
+        type: array
+      type: object
+    - items:
+        $ref: '#/components/schemas/OverrideTaxesDto'
+      type: array
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 5e072ccdb5c863b9c35aeac74a13db31e255dc2af419710daab6e25d6ab1eb1d
     issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["type"]["enum"]
@@ -293,7 +313,7 @@ actions:
     - formatVersion
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: a79ba1515c093e7f4cafe3674cef1bbdbff221dc873ca3569465604d2c82c29d
+    expected-sha256: 180a8ea3eb686d6ebe73064dac4796a1169c8a6ae979ef2e32f707bf84fb2422
     issue: external-menu-v3-required
 - target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["formatVersion"]
   update:
@@ -319,7 +339,7 @@ actions:
     - formatVersion
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 574219e198c4bcfc6cb3aed62bb9f5e2b8300da7b137441f73a73c3feb4d754d
+    expected-sha256: 660f94161277cc3001a087e80bed41fb0e526e5829f8b219fd99ba422b686b9a
     issue: external-menu-v4-required
 - target: $["components"]["schemas"]["ExternalMenuCategory3"]["properties"]["items"]["items"]
   update:

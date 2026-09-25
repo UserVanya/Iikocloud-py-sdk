@@ -23,8 +23,8 @@ from iikocloud_client.models.allergen_group_dto import AllergenGroupDto
 from iikocloud_client.models.combo_category_dto import ComboCategoryDto
 from iikocloud_client.models.customer_tag_group import CustomerTagGroup
 from iikocloud_client.models.external_menu_category3 import ExternalMenuCategory3
+from iikocloud_client.models.external_menu_v3_override_tax_categories import ExternalMenuV3OverrideTaxCategories
 from iikocloud_client.models.interval_dto import IntervalDto
-from iikocloud_client.models.override_taxes_dto import OverrideTaxesDto
 from iikocloud_client.models.product_category_dto import ProductCategoryDto
 from iikocloud_client.models.tax_category_dto import TaxCategoryDto
 from typing import Optional, Set
@@ -45,7 +45,7 @@ class ExternalMenuV4(BaseModel):
     intervals: Optional[List[IntervalDto]] = Field(default=None, description="Menu availability time intervals")
     item_groups: List[ExternalMenuCategory3] = Field(alias="itemGroups")
     name: Optional[StrictStr] = Field(default='', description="External menu name")
-    override_tax_categories: Optional[Dict[str, List[OverrideTaxesDto]]] = Field(default=None, description="Tax benefits", alias="overrideTaxCategories")
+    override_tax_categories: Optional[ExternalMenuV3OverrideTaxCategories] = Field(default=None, alias="overrideTaxCategories")
     product_categories: Optional[List[ProductCategoryDto]] = Field(default=None, description="Product categories", alias="productCategories")
     revision: Optional[StrictInt] = Field(default=None, description="Menu revision")
     tax_categories: Optional[List[TaxCategoryDto]] = Field(default=None, description="Tax Categories", alias="taxCategories")
@@ -135,15 +135,9 @@ class ExternalMenuV4(BaseModel):
                 if _item_item_groups:
                     _items.append(_item_item_groups.to_dict())
             _dict['itemGroups'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each value in override_tax_categories (dict of array)
-        _field_dict_of_array = {}
+        # override the default output from pydantic by calling `to_dict()` of override_tax_categories
         if self.override_tax_categories:
-            for _key_override_tax_categories in self.override_tax_categories:
-                if self.override_tax_categories[_key_override_tax_categories] is not None:
-                    _field_dict_of_array[_key_override_tax_categories] = [
-                        _item.to_dict() for _item in self.override_tax_categories[_key_override_tax_categories]
-                    ]
-            _dict['overrideTaxCategories'] = _field_dict_of_array
+            _dict['overrideTaxCategories'] = self.override_tax_categories.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in product_categories (list)
         _items = []
         if self.product_categories:
@@ -200,12 +194,7 @@ class ExternalMenuV4(BaseModel):
             "intervals": [IntervalDto.from_dict(_item) for _item in obj["intervals"]] if obj.get("intervals") is not None else None,
             "itemGroups": [ExternalMenuCategory3.from_dict(_item) for _item in obj["itemGroups"]] if obj.get("itemGroups") is not None else None,
             "name": obj.get("name") if obj.get("name") is not None else '',
-            "overrideTaxCategories": {
-                _k: [OverrideTaxesDto.from_dict(_item) for _item in _v] if _v is not None else None
-                for _k, _v in obj["overrideTaxCategories"].items()
-            }
-            if obj.get("overrideTaxCategories") is not None
-            else None,
+            "overrideTaxCategories": ExternalMenuV3OverrideTaxCategories.from_dict(obj["overrideTaxCategories"]) if obj.get("overrideTaxCategories") is not None else None,
             "productCategories": [ProductCategoryDto.from_dict(_item) for _item in obj["productCategories"]] if obj.get("productCategories") is not None else None,
             "revision": obj.get("revision"),
             "taxCategories": [TaxCategoryDto.from_dict(_item) for _item in obj["taxCategories"]] if obj.get("taxCategories") is not None else None

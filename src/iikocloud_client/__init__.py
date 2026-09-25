@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 # Define package exports
 __all__ = [
@@ -452,6 +452,7 @@ __all__ = [
     "ExternalMenuResponse",
     "ExternalMenuV2",
     "ExternalMenuV3",
+    "ExternalMenuV3OverrideTaxCategories",
     "ExternalMenuV4",
     "ExternalPayment",
     "ExternalPaymentAdditionalData",
@@ -1459,6 +1460,7 @@ from iikocloud_client.models.external_menu_price_by_departments_dto import Exter
 from iikocloud_client.models.external_menu_response import ExternalMenuResponse as ExternalMenuResponse
 from iikocloud_client.models.external_menu_v2 import ExternalMenuV2 as ExternalMenuV2
 from iikocloud_client.models.external_menu_v3 import ExternalMenuV3 as ExternalMenuV3
+from iikocloud_client.models.external_menu_v3_override_tax_categories import ExternalMenuV3OverrideTaxCategories as ExternalMenuV3OverrideTaxCategories
 from iikocloud_client.models.external_menu_v4 import ExternalMenuV4 as ExternalMenuV4
 from iikocloud_client.models.external_payment import ExternalPayment as ExternalPayment
 from iikocloud_client.models.external_payment_additional_data import ExternalPaymentAdditionalData as ExternalPaymentAdditionalData

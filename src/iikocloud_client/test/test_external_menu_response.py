@@ -327,14 +327,7 @@ class TestExternalMenuResponse(unittest.TestCase):
                             ''
                             ], )
                     ],
-                override_tax_categories = {
-                    'key' : [
-                        iikocloud_client.models.override_taxes_dto.OverrideTaxesDto(
-                            base_tax_category = '', 
-                            new_tax_category = '', 
-                            order_type = '', )
-                        ]
-                    },
+                override_tax_categories = None,
                 tax_categories = [
                     iikocloud_client.models.tax_category_dto.TaxCategoryDto(
                         id = '', 

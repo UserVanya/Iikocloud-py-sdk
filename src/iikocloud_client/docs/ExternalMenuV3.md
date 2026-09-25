@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **intervals** | [**List[IntervalDto]**](IntervalDto.md) | Menu availability time intervals | [optional] 
 **item_groups** | [**List[ExternalMenuCategory2]**](ExternalMenuCategory2.md) |  | 
 **name** | **str** | External menu name | [optional] [default to '']
-**override_tax_categories** | **Dict[str, List[OverrideTaxesDto]]** | Tax benefits | [optional] 
+**override_tax_categories** | [**ExternalMenuV3OverrideTaxCategories**](ExternalMenuV3OverrideTaxCategories.md) |  | [optional] 
 **product_categories** | [**List[ProductCategoryDto]**](ProductCategoryDto.md) | Product categories | [optional] 
 **revision** | **int** | Menu revision | [optional] 
 **tax_categories** | [**List[TaxCategoryDto]**](TaxCategoryDto.md) | Tax Categories | [optional] 
