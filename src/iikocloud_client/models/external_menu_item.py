@@ -75,8 +75,8 @@ class ExternalMenuItem(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['DISH', 'COMBO', 'SERVICE']):
-            raise ValueError("must be one of enum values ('DISH', 'COMBO', 'SERVICE')")
+        if value not in set(['DISH', 'COMBO', 'SERVICE', 'GOODS', 'PREPARED']):
+            raise ValueError("must be one of enum values ('DISH', 'COMBO', 'SERVICE', 'GOODS', 'PREPARED')")
         return value
 
     model_config = ConfigDict(

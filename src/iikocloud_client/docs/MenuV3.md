@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **items_groups** | [**List[ItemsGroup]**](ItemsGroup.md) | Item groups. | [optional] 
 **modifiers** | [**List[MenuV3Modifier]**](MenuV3Modifier.md) | Modifiers. | [optional] 
 **name** | **str** | Menu name. | 
+**override_tax_categories** | [**List[MenuV3OverrideTaxCategory]**](MenuV3OverrideTaxCategory.md) | Tax category overrides by order type. | [optional] 
 **product_categories** | [**List[ProductCategory]**](ProductCategory.md) | Product categories. | [optional] 
 **products** | [**List[MenuV3Product]**](MenuV3Product.md) | Products. | [optional] 
 **schedules** | [**List[Schedule]**](Schedule.md) | Schedules. | [optional] 

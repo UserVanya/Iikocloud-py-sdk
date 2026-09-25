@@ -91,7 +91,7 @@ branch для каждой synthetic fixture.
 | `external-menu-schema-ExternalMenuModifierItem{,2}-properties-restrictions{,-items-remove,-type-remove}` | `ExternalMenuModifierItem{,2}.properties.restrictions`: object ошибочно описан как array | Nullable `oneOf` к `ModifierRestrictionsDto` (V2) или `ModifierRestrictionsDto2` (V3/V4) | `external-menu-v2.json`, `external-menu-v3.json`, `external-menu-v4.json` | 2026-07-20 | Все соответствующие upstream branches исправлены |
 | `external-menu-schema-ExternalMenuModifierGroup{,2}-properties-restrictions{,-oneOf-remove}` | `ExternalMenuModifierGroup{,2}.properties.restrictions`: рядом с nullable ref появилась ветка «любой object», поэтому каждый объект ограничений подходит под обе ветки `oneOf` и сгенерированный union не может его разобрать | Nullable `oneOf` с единственной ссылкой на `ModifierRestrictionsDto` (V2) или `ModifierRestrictionsDto2` (V3/V4) | `test_modifier_group_restrictions_are_one_nullable_reference`, `tests/generated/test_external_menu_response.py` | 2026-09-25 (upstream 9.8.6.1) | Upstream убирает свободную object-ветку |
 | `external-menu-schema-ExternalMenuV{3,4}-properties-overrideTaxCategories{,-items-remove}` | `ExternalMenuV3/V4.properties.overrideTaxCategories`: UUID-keyed map ошибочно описан как array | `oneOf`: object с `additionalProperties` (array `OverrideTaxesDto`, с upstream 9.8.6.1 общий для V3 и V4) **или** array — точка без своих налогов присылает пустой список `[]`, а не пустой объект (стенд, V4, 2026-09-25) | `external-menu-v3.json`, `external-menu-v4.json`, `tests/generated/test_external_menu_override_taxes.py` | 2026-07-20, список — 2026-09-25 | Upstream описывает и map, и пустой список |
-| `external-menu-schema-ExternalMenuItem{,2}-properties-type{,-enum-remove}` | `ExternalMenuItem{,2}.properties.type`: enum не содержит публичный literal `SERVICE` | Enum `DISH`, `COMBO`, `SERVICE` до V4 branch specialization | Versioned fixtures, schema-aware hints и analyzer regressions | 2026-07-20 | Upstream содержит полный enum |
+| `external-menu-schema-ExternalMenuItem{,2}-properties-type{,-enum-remove}` | `ExternalMenuItem{,2}.properties.type`: enum не содержит публичные literals `SERVICE`, `GOODS`, `PREPARED` | Enum `DISH`, `COMBO`, `SERVICE`, `GOODS`, `PREPARED` (как upstream `NomenclatureV3.ProductType`) до V4 branch specialization | Versioned fixtures, schema-aware hints, analyzer и generated regressions; рабочее меню iiko с позициями `PREPARED` | 2026-07-20; `PREPARED` — 2026-09-25 | Upstream содержит полный enum |
 | `external-menu-schema-ExternalMenuItem{,2}-properties-modifierSchemaId` | `ExternalMenuItem{,2}.properties.modifierSchemaId`: реальный `null` запрещён | Добавить `nullable: true` | `external-menu-v2.json`, `external-menu-v3.json`, `external-menu-v4.json` | 2026-07-20 | Upstream выражает nullability |
 | `external-menu-schema-ExternalMenuItemSize-properties-sizeId`, `external-menu-schema-ExternalMenuItemSize2-properties-id` | Default/единственный size может иметь `null` ID | Добавить `nullable: true` | Versioned external-menu fixtures | 2026-07-20 | Upstream выражает nullability |
 | `external-menu-schema-ExternalMenuPriceByDepartmentsDto-properties-price` | Недоступный для продажи size может иметь `null` price | Добавить `nullable: true` | Versioned external-menu fixtures | 2026-07-20 | Upstream выражает nullability |
@@ -104,13 +104,13 @@ Validator также имеет узкое reviewed исключение для 
 ### V4 item discriminator и `ExternalMenuComboItem`
 
 С upstream 9.8.6.1 dish branch V4 — та же схема `ExternalMenuItem2`, что у позиций V3.
-Поэтому ограничение `type` до `DISH`/`SERVICE` и обязательный `type` действуют и на V3;
+Поэтому ограничение `type` до `DISH`/`SERVICE`/`GOODS`/`PREPARED` и обязательный `type` действуют и на V3;
 V3 capture проверяется той же исправленной схемой и прошёл её при переносе.
 
 | Issue | Fragment | Correction | Evidence / fixture | Наблюдалось | Условие удаления |
 |---|---|---|---|---|---|
-| `external-menu-v4-discriminator` | `ExternalMenuCategory3.properties.items.items` | Discriminator `type`: `DISH` и `SERVICE` → `ExternalMenuItem2`, `COMBO` → `ExternalMenuComboItem` | `tests/fixtures/contracts/external-menu-v4.json`; analyzer проверяет literal-to-branch consistency | 2026-07-20 | Upstream содержит эквивалентный discriminator и branches остаются disjoint |
-| `external-menu-item2-type-enum-remove`, `external-menu-item2-type` | `ExternalMenuItem2.properties.type` | Ограничить dish branch literals до `DISH`/`SERVICE`, default `DISH` | V4 fixture, analyzer и generated union regressions | 2026-07-20 | Upstream item branch имеет тот же enum |
+| `external-menu-v4-discriminator` | `ExternalMenuCategory3.properties.items.items` | Discriminator `type`: `DISH`, `SERVICE`, `GOODS`, `PREPARED` → `ExternalMenuItem2`, `COMBO` → `ExternalMenuComboItem` | `tests/fixtures/contracts/external-menu-v4.json`; analyzer проверяет literal-to-branch consistency | 2026-07-20 | Upstream содержит эквивалентный discriminator и branches остаются disjoint |
+| `external-menu-item2-type-enum-remove`, `external-menu-item2-type` | `ExternalMenuItem2.properties.type` | Ограничить dish branch literals до `DISH`/`GOODS`/`PREPARED`/`SERVICE`, default `DISH` | V4 fixture, analyzer и generated union regressions | 2026-07-20 | Upstream item branch имеет тот же enum |
 | `external-menu-item2-required-remove`, `external-menu-item2-required` | `ExternalMenuItem2.required` | Добавить `type` к реально обязательным dish fields | V4 fixture и structural matching tests | 2026-07-20 | Upstream required-list эквивалентен |
 | `external-menu-combo-item-type` | `ExternalMenuComboItem.properties.type` | Ограничить поле единственным literal `COMBO`, default `COMBO` | V4 fixture принят только после matching combo evidence | 2026-07-20 | Upstream combo type имеет `enum: [COMBO]` |
 | `external-menu-combo-required-remove`, `external-menu-combo-required` | `ExternalMenuComboItem.required` | Заменить список на `sizes`, `type`, `id` | V4 fixture, reviewed fragment hash и combo contract tests | 2026-07-20 | Upstream удаляет undefined required names и live/synthetic contract tests подтверждают новый список |
@@ -122,6 +122,17 @@ V3 capture проверяется той же исправленной схем�
 обычный `oneOf` не может надёжно выбрать branch. Текущая correction делает
 branches disjoint и проверяется до promotion; private payload при этом не
 становится частью репозитория.
+
+## Menu V3: `/api/menu/v3/by_id`
+
+Схема `NomenclatureV3.MenuV3` закрыта (`additionalProperties: false`) и не
+описывает `overrideTaxCategories`, хотя рабочий iiko его присылает. Без
+correction клиент молча терял налоговые льготы точки. Форма отличается от
+`OverrideTaxesDto` старого меню: список записей с суффиксом `Id` у полей.
+
+| Issue | Fragment | Correction | Evidence / fixture | Наблюдалось | Условие удаления |
+|---|---|---|---|---|---|
+| `menu-v3-override-tax-categories` | `NomenclatureV3.MenuV3.properties` | Добавить nullable array `overrideTaxCategories` из объектов `MenuV3OverrideTaxCategory` (`baseTaxCategoryId`, `newTaxCategoryId`, `orderTypeId` — строки) | `tests/generated/test_menu_v3_override_taxes.py`; 27 ответов рабочего iiko разобраны без потерянных полей | 2026-09-25 | Upstream описывает поле в `MenuV3` |
 
 ## Процедура удаления correction
 

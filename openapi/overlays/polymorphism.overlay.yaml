@@ -208,6 +208,8 @@ actions:
     - DISH
     - COMBO
     - SERVICE
+    - GOODS
+    - PREPARED
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
@@ -224,6 +226,8 @@ actions:
     - DISH
     - COMBO
     - SERVICE
+    - GOODS
+    - PREPARED
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
@@ -347,6 +351,8 @@ actions:
       mapping:
         COMBO: '#/components/schemas/ExternalMenuComboItem'
         DISH: '#/components/schemas/ExternalMenuItem2'
+        GOODS: '#/components/schemas/ExternalMenuItem2'
+        PREPARED: '#/components/schemas/ExternalMenuItem2'
         SERVICE: '#/components/schemas/ExternalMenuItem2'
       propertyName: type
   x-iiko-sdk-guard:
@@ -357,13 +363,15 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]["enum"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: f2084de6bb9db3dac016a52c6b99839595803fc08ea4c1fe357dcd6980928a05
+    expected-sha256: 7492824b49befcf75d7815bb2b77487c75c7c2fe24919678aa655668721e77df
     issue: external-menu-item2-type-enum-remove
 - target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]
   update:
     default: DISH
     enum:
     - DISH
+    - GOODS
+    - PREPARED
     - SERVICE
   x-iiko-sdk-guard:
     expected-matches: 1
@@ -396,7 +404,7 @@ actions:
     - type
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: f2a3543b7b429cd23e3b6f0b0b4bfce977105fb50a4ca08bf2cf2800bb5f9f3e
+    expected-sha256: 48061929e663d075e4d52dd6c0ca7edb5f3e47951d1bed75ed0249249dfd93b0
     issue: external-menu-item2-required
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuComboItem"]["required"]

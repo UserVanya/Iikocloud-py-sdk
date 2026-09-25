@@ -200,6 +200,12 @@ class TestMenuV3(unittest.TestCase):
                         tax_category_id = '', )
                     ],
                 name = '',
+                override_tax_categories = [
+                    iikocloud_client.models.menu_v3_override_tax_category.MenuV3OverrideTaxCategory(
+                        base_tax_category_id = '', 
+                        new_tax_category_id = '', 
+                        order_type_id = '', )
+                    ],
                 product_categories = [
                     iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/product_category.iikoTransport.PublicApi.Contracts.NomenclatureV3.ProductCategory(
                         id = '', 

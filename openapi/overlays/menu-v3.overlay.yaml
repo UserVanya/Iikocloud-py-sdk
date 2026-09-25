@@ -1,0 +1,30 @@
+actions:
+- description: iiko's MenuV3 omits overrideTaxCategories and forbids extra properties,
+    yet production /api/menu/v3/by_id sends it (2026-09-25)
+  target: $["components"]["schemas"]["iikoTransport.PublicApi.Contracts.NomenclatureV3.MenuV3"]["properties"]
+  update:
+    overrideTaxCategories:
+      description: Tax category overrides by order type.
+      items:
+        properties:
+          baseTaxCategoryId:
+            description: Base tax category ID.
+            type: string
+          newTaxCategoryId:
+            description: Tax category ID applied instead.
+            type: string
+          orderTypeId:
+            description: Order type ID.
+            type: string
+        title: MenuV3OverrideTaxCategory
+        type: object
+      nullable: true
+      type: array
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 29411150ed051d2d2dd5c7398736d34b8d9924f878733dc762982752c51353a5
+    issue: menu-v3-override-tax-categories
+info:
+  title: iiko Cloud menu v3 contract
+  version: 1.0.0
+overlay: 1.1.0

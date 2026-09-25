@@ -25,6 +25,7 @@ from iikocloud_client.models.menu_v3_allergen_group import MenuV3AllergenGroup
 from iikocloud_client.models.menu_v3_combo import MenuV3Combo
 from iikocloud_client.models.menu_v3_customer_tag_group import MenuV3CustomerTagGroup
 from iikocloud_client.models.menu_v3_modifier import MenuV3Modifier
+from iikocloud_client.models.menu_v3_override_tax_category import MenuV3OverrideTaxCategory
 from iikocloud_client.models.menu_v3_product import MenuV3Product
 from iikocloud_client.models.menu_v3_tax_category import MenuV3TaxCategory
 from iikocloud_client.models.product_category import ProductCategory
@@ -47,11 +48,12 @@ class MenuV3(BaseModel):
     items_groups: Optional[List[ItemsGroup]] = Field(default=None, description="Item groups.", alias="itemsGroups")
     modifiers: Optional[List[MenuV3Modifier]] = Field(default=None, description="Modifiers.")
     name: StrictStr = Field(description="Menu name.")
+    override_tax_categories: Optional[List[MenuV3OverrideTaxCategory]] = Field(default=None, description="Tax category overrides by order type.", alias="overrideTaxCategories")
     product_categories: Optional[List[ProductCategory]] = Field(default=None, description="Product categories.", alias="productCategories")
     products: Optional[List[MenuV3Product]] = Field(default=None, description="Products.")
     schedules: Optional[List[Schedule]] = Field(default=None, description="Schedules.")
     tax_categories: Optional[List[MenuV3TaxCategory]] = Field(default=None, description="Tax categories.", alias="taxCategories")
-    __properties: ClassVar[List[str]] = ["allergenGroups", "buttonImageUrl", "combos", "customerTagGroups", "description", "id", "image", "itemsGroups", "modifiers", "name", "productCategories", "products", "schedules", "taxCategories"]
+    __properties: ClassVar[List[str]] = ["allergenGroups", "buttonImageUrl", "combos", "customerTagGroups", "description", "id", "image", "itemsGroups", "modifiers", "name", "overrideTaxCategories", "productCategories", "products", "schedules", "taxCategories"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -130,6 +132,13 @@ class MenuV3(BaseModel):
                 if _item_modifiers:
                     _items.append(_item_modifiers.to_dict())
             _dict['modifiers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in override_tax_categories (list)
+        _items = []
+        if self.override_tax_categories:
+            for _item_override_tax_categories in self.override_tax_categories:
+                if _item_override_tax_categories:
+                    _items.append(_item_override_tax_categories.to_dict())
+            _dict['overrideTaxCategories'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in product_categories (list)
         _items = []
         if self.product_categories:
@@ -198,6 +207,11 @@ class MenuV3(BaseModel):
         if self.modifiers is None and "modifiers" in self.model_fields_set:
             _dict['modifiers'] = None
 
+        # set to None if override_tax_categories (nullable) is None
+        # and model_fields_set contains the field
+        if self.override_tax_categories is None and "override_tax_categories" in self.model_fields_set:
+            _dict['overrideTaxCategories'] = None
+
         # set to None if product_categories (nullable) is None
         # and model_fields_set contains the field
         if self.product_categories is None and "product_categories" in self.model_fields_set:
@@ -240,6 +254,7 @@ class MenuV3(BaseModel):
             "itemsGroups": [ItemsGroup.from_dict(_item) for _item in obj["itemsGroups"]] if obj.get("itemsGroups") is not None else None,
             "modifiers": [MenuV3Modifier.from_dict(_item) for _item in obj["modifiers"]] if obj.get("modifiers") is not None else None,
             "name": obj.get("name"),
+            "overrideTaxCategories": [MenuV3OverrideTaxCategory.from_dict(_item) for _item in obj["overrideTaxCategories"]] if obj.get("overrideTaxCategories") is not None else None,
             "productCategories": [ProductCategory.from_dict(_item) for _item in obj["productCategories"]] if obj.get("productCategories") is not None else None,
             "products": [MenuV3Product.from_dict(_item) for _item in obj["products"]] if obj.get("products") is not None else None,
             "schedules": [Schedule.from_dict(_item) for _item in obj["schedules"]] if obj.get("schedules") is not None else None,

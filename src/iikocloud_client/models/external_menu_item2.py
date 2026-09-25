@@ -68,8 +68,8 @@ class ExternalMenuItem2(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['DISH', 'SERVICE']):
-            raise ValueError("must be one of enum values ('DISH', 'SERVICE')")
+        if value not in set(['DISH', 'GOODS', 'PREPARED', 'SERVICE']):
+            raise ValueError("must be one of enum values ('DISH', 'GOODS', 'PREPARED', 'SERVICE')")
         return value
 
     model_config = ConfigDict(

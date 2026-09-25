@@ -556,6 +556,7 @@ from iikocloud_client.models.menu_v3_combo import MenuV3Combo
 from iikocloud_client.models.menu_v3_customer_tag_group import MenuV3CustomerTagGroup
 from iikocloud_client.models.menu_v3_modifier import MenuV3Modifier
 from iikocloud_client.models.menu_v3_order_item_type import MenuV3OrderItemType
+from iikocloud_client.models.menu_v3_override_tax_category import MenuV3OverrideTaxCategory
 from iikocloud_client.models.menu_v3_product import MenuV3Product
 from iikocloud_client.models.menu_v3_size_price import MenuV3SizePrice
 from iikocloud_client.models.menu_v3_tax_category import MenuV3TaxCategory
