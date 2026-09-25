@@ -7,16 +7,16 @@ models:
   iikoTransport.PublicApi.Contracts.CancelCauses.CancelCause: CancelCauseDefinition
   iikoTransport.PublicApi.Contracts.Common.ExternalData: CommonExternalData
   iikoTransport.PublicApi.Contracts.Common.PriceCategory: CommonPriceCategory
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsCityItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsRegionItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsDiscountCardTypeItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsActiveCourierLocationItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsCourierLocationsItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeWithCheckedRoleItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsOrderTypeItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupStopListItemsResponse
-  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.7.5.2, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsCityItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsRegionItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsDiscountCardTypeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsActiveCourierLocationItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsCourierLocationsItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsEmployeeWithCheckedRoleItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsOrderTypeItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupStopListItemsResponse
+  'iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]': RmsTerminalGroupItemsResponse
   iikoTransport.PublicApi.Contracts.Deliveries.Common.Coordinates: DeliveryCoordinates
   iikoTransport.PublicApi.Contracts.Deliveries.Common.OrderServiceType: DeliveryServiceType
   iikoTransport.PublicApi.Contracts.Deliveries.Common.PaymentTypeKind: DeliveryPaymentTypeKind
@@ -80,3 +80,33 @@ models:
   iikoTransport.PublicApi.Contracts.TableOrders.Request.TableOrder: TableOrderRequest
   iikoTransport.PublicApi.Contracts.TableOrders.Response.TableOrder: TableOrderResponsePayload
   iikoTransport.PublicApi.Contracts.TipsTypes.TipsType: TipsTypeDefinition
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.AllergenGroup: MenuV3AllergenGroup
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.Combo: MenuV3Combo
+  Conception: InventoryConception
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.CustomerTagGroup: MenuV3CustomerTagGroup
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.Modifier: MenuV3Modifier
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.OrderItemType: MenuV3OrderItemType
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.Product: MenuV3Product
+  ProductSize: NomenclatureProductSize
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.SizePrice: MenuV3SizePrice
+  iikoTransport.PublicApi.Contracts.NomenclatureV3.TaxCategory: MenuV3TaxCategory
+  internal_document_assembly_chart_v1.SaveRequest: AssemblyChartV1SaveRequest
+  internal_document_assembly_chart_v2.SaveRequest: AssemblyChartV2SaveRequest
+  internal_document_nomenclature_group_v1.Filter: NomenclatureGroupV1Filter
+  internal_document_nomenclature_group_v2.Filter: NomenclatureGroupV2Filter
+  internal_document_nomenclature_product_v1.Filter: NomenclatureProductV1Filter
+  internal_document_nomenclature_product_v2.Filter: NomenclatureProductV2Filter
+  internal_document_product_scale.Filter: ProductScaleFilter
+  internal_employees.Filter: EmployeesFilter
+  internal_entities_allergen_group.Filter: AllergenGroupFilter
+  internal_entities_amount_unit.Filter: AmountUnitFilter
+  internal_entities_container.Filter: ContainerFilter
+  internal_entities_custom_category.Filter: CustomCategoryFilter
+  internal_entities_menu_section.Filter: MenuSectionFilter
+  internal_entities_modifier_schema.Filter: ModifierSchemaFilter
+  internal_entities_place_type.Filter: PlaceTypeFilter
+  internal_entities_producer.Filter: ProducerFilter
+  internal_entities_product_size.Filter: ProductSizeFilter
+  internal_entities_product_tag.Filter: ProductTagFilter
+  internal_finance_accounts.Filter: FinanceAccountsFilter
+  internal_finance_cashflowcategories.Filter: CashFlowCategoriesFilter

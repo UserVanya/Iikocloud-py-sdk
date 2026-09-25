@@ -36,7 +36,7 @@ class IncomingReturnedInvoiceCreateRequest(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[IncomingReturnedInvoiceCreateItem] = Field(description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

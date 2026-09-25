@@ -38,7 +38,7 @@ class OutgoingInvoiceRequest(BaseModel):
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     internal_incoming_invoice_id: Optional[StrictStr] = Field(default=None, description="Associated incoming invoice identifier (GUID)", alias="internalIncomingInvoiceId")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[OutgoingInvoiceRequestItem] = Field(description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

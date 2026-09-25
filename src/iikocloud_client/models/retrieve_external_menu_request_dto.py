@@ -29,10 +29,10 @@ class RetrieveExternalMenuRequestDto(BaseModel):
     RetrieveExternalMenuRequestDto
     """ # noqa: E501
     async_mode: Optional[StrictBool] = Field(default=False, description="Async Mode.", alias="asyncMode")
-    external_menu_id: StrictStr = Field(description="External menu id                Can be obtained by `api/2/menu` operation.", alias="externalMenuId")
+    external_menu_id: StrictStr = Field(description="External menu id  Can be obtained by `api/2/menu` operation.", alias="externalMenuId")
     language: Optional[StrictStr] = Field(default=None, description="Language of the external menu.")
-    organization_ids: List[UUID] = Field(description="Organization IDs.                Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
-    price_category_id: Optional[StrictStr] = Field(default=None, description="Price category id.                Can be obtained by `api/2/menu` operation.", alias="priceCategoryId")
+    organization_ids: List[UUID] = Field(description="Organization IDs.  Can be obtained by `/api/1/organizations` operation.", alias="organizationIds")
+    price_category_id: Optional[StrictStr] = Field(default=None, description="Price category id.  Can be obtained by `api/2/menu` operation.", alias="priceCategoryId")
     start_revision: Optional[StrictInt] = Field(default=None, description="Start revision.", alias="startRevision")
     version: Optional[StrictInt] = Field(default=None, description="Version of the result data model.")
     additional_properties: Dict[str, Any] = {}

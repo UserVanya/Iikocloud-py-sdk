@@ -38,7 +38,8 @@ class TestComboGroupItemSizeDto(unittest.TestCase):
                 combo_size_id = '',
                 name = '',
                 prices = [
-                    iikocloud_client.models.external_menu_price_by_departments_dto5.ExternalMenuPriceByDepartmentsDto5(
+                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                        organization_id = '', 
                         organizations = [
                             ''
                             ], 

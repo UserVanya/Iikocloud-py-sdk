@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **incoming_document_number** | **str** | Incoming external document number | [optional] 
 **invoice** | **str** | Invoice number | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[IncomingServiceGetItem]**](IncomingServiceGetItem.md) | List of document items | [optional] 
 **number** | **str** | Document number | [optional] 
 **revenue_account** | **str** | Revenue account identifier (GUID) | [optional] 

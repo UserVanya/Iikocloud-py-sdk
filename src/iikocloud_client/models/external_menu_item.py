@@ -19,13 +19,13 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from iikocloud_client.models.allergen_group_dto3 import AllergenGroupDto3
+from iikocloud_client.models.allergen_group_dto import AllergenGroupDto
 from iikocloud_client.models.barcode_dto import BarcodeDto
 from iikocloud_client.models.external_menu_item_size import ExternalMenuItemSize
-from iikocloud_client.models.label_dto2 import LabelDto2
+from iikocloud_client.models.label_dto import LabelDto
 from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag
-from iikocloud_client.models.tag_dto2 import TagDto2
-from iikocloud_client.models.tax_category_dto3 import TaxCategoryDto3
+from iikocloud_client.models.tag_dto import TagDto
+from iikocloud_client.models.tax_category_dto import TaxCategoryDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -34,7 +34,7 @@ class ExternalMenuItem(BaseModel):
     """
     ExternalMenuItem
     """ # noqa: E501
-    allergens: Optional[List[AllergenGroupDto3]] = Field(default=None, description="Allergens")
+    allergens: Optional[List[AllergenGroupDto]] = Field(default=None, description="Allergens")
     barcodes: Optional[List[BarcodeDto]] = None
     can_be_divided: Optional[StrictBool] = Field(default=False, alias="canBeDivided")
     can_set_open_price: Optional[StrictBool] = Field(default=False, description="Can set open price flag", alias="canSetOpenPrice")
@@ -44,7 +44,7 @@ class ExternalMenuItem(BaseModel):
     is_marked: Optional[StrictBool] = Field(default=False, description="Marking flag", alias="isMarked")
     item_id: Optional[StrictStr] = Field(default='', description="Product ID", alias="itemId")
     item_sizes: List[ExternalMenuItemSize] = Field(alias="itemSizes")
-    labels: Optional[List[LabelDto2]] = None
+    labels: Optional[List[LabelDto]] = None
     measure_unit: Optional[StrictStr] = Field(default='', description="Measure unit", alias="measureUnit")
     modifier_schema_id: Optional[StrictStr] = Field(description="Modifier schema ID", alias="modifierSchemaId")
     modifier_schema_name: Optional[StrictStr] = Field(default=None, description="Modifier schema name", alias="modifierSchemaName")
@@ -55,8 +55,8 @@ class ExternalMenuItem(BaseModel):
     payment_subject_code: Optional[StrictStr] = Field(default=None, alias="paymentSubjectCode")
     product_category_id: Optional[StrictStr] = Field(default=None, description="Product category GUID", alias="productCategoryId")
     sku: Optional[StrictStr] = Field(default='', description="Product code")
-    tags: Optional[List[TagDto2]] = None
-    tax_category: Optional[TaxCategoryDto3] = Field(description="Tax category", alias="taxCategory")
+    tags: Optional[List[TagDto]] = None
+    tax_category: Optional[TaxCategoryDto] = Field(description="Tax category", alias="taxCategory")
     type: Optional[StrictStr] = Field(default='DISH', description="Item type")
     use_balance_for_sell: Optional[StrictBool] = Field(default=False, alias="useBalanceForSell")
     additional_properties: Dict[str, Any] = {}
@@ -222,7 +222,7 @@ class ExternalMenuItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allergens": [AllergenGroupDto3.from_dict(_item) for _item in obj["allergens"]] if obj.get("allergens") is not None else None,
+            "allergens": [AllergenGroupDto.from_dict(_item) for _item in obj["allergens"]] if obj.get("allergens") is not None else None,
             "barcodes": [BarcodeDto.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
             "canBeDivided": obj.get("canBeDivided") if obj.get("canBeDivided") is not None else False,
             "canSetOpenPrice": obj.get("canSetOpenPrice") if obj.get("canSetOpenPrice") is not None else False,
@@ -232,7 +232,7 @@ class ExternalMenuItem(BaseModel):
             "isMarked": obj.get("isMarked") if obj.get("isMarked") is not None else False,
             "itemId": obj.get("itemId") if obj.get("itemId") is not None else '',
             "itemSizes": [ExternalMenuItemSize.from_dict(_item) for _item in obj["itemSizes"]] if obj.get("itemSizes") is not None else None,
-            "labels": [LabelDto2.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
+            "labels": [LabelDto.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
             "measureUnit": obj.get("measureUnit") if obj.get("measureUnit") is not None else '',
             "modifierSchemaId": obj.get("modifierSchemaId"),
             "modifierSchemaName": obj.get("modifierSchemaName"),
@@ -243,8 +243,8 @@ class ExternalMenuItem(BaseModel):
             "paymentSubjectCode": obj.get("paymentSubjectCode"),
             "productCategoryId": obj.get("productCategoryId"),
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
-            "tags": [TagDto2.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
-            "taxCategory": TaxCategoryDto3.from_dict(obj["taxCategory"]) if obj.get("taxCategory") is not None else None,
+            "tags": [TagDto.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
+            "taxCategory": TaxCategoryDto.from_dict(obj["taxCategory"]) if obj.get("taxCategory") is not None else None,
             "type": obj.get("type") if obj.get("type") is not None else 'DISH',
             "useBalanceForSell": obj.get("useBalanceForSell") if obj.get("useBalanceForSell") is not None else False
         })

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **internal_outgoing_invoice_id** | **str** | Associated outgoing invoice identifier (GUID) | [optional] 
 **invoice** | **str** | Invoice number | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[IncomingInvoiceRequestItem]**](IncomingInvoiceRequestItem.md) | List of document items | 
 **number** | **str** | Document number | [optional] 
 **organization_id** | **str** | Organization identifier (GUID) | 

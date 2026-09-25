@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Define package exports
 __all__ = [
@@ -31,31 +31,55 @@ __all__ = [
     "DiscountsAndPromotionsApi",
     "DraftsApi",
     "EmployeesApi",
+    "EmployeesAttendanceApi",
+    "EmployeesEmployeesApi",
+    "EmployeesPositionsApi",
+    "FinanceAccountApi",
+    "FinanceAccountPostingApi",
+    "FinanceAccountTransactionsApi",
+    "FinanceAccountTypeApi",
+    "FinanceBalanceSheetApi",
+    "FinanceCashFlowCategoryApi",
+    "FinanceChartOfAccountsApi",
+    "FinanceDirectoriesApi",
+    "FinanceDocumentTransactionsApi",
+    "FinanceIncomingServiceApi",
+    "FinanceOutgoingServiceApi",
+    "InventoryCatalogsApi",
+    "InventoryCounteragentsApi",
+    "InventoryDisassembleDocumentApi",
+    "InventoryIncomingInventoryApi",
+    "InventoryIncomingInvoicesApi",
+    "InventoryIncomingReturnedInvoiceApi",
+    "InventoryInternalTransferApi",
+    "InventoryOrganizationsApi",
+    "InventoryOutgoingInvoicesApi",
+    "InventoryProductionDocumentApi",
+    "InventoryReturnedInvoiceApi",
+    "InventorySalesDocumentApi",
+    "InventoryStockBalanceApi",
+    "InventoryTransformationDocumentApi",
+    "InventoryWriteoffDocumentApi",
+    "LicensesApi",
     "MarketingSourcesApi",
     "MenuApi",
     "MessagesApi",
+    "NomenclatureAssemblyChartApi",
+    "NomenclatureDirectoriesApi",
+    "NomenclatureNomenclatureCategoryApi",
+    "NomenclatureNomenclatureGroupApi",
+    "NomenclatureNomenclatureProductApi",
+    "NomenclatureNomenclatureProductScaleApi",
     "NotificationsApi",
     "OperationsApi",
     "OrdersApi",
     "OrganizationsApi",
-    "PublicApiInvoiceProcessingAccountTransactionsApi",
-    "PublicApiInvoiceProcessingCounteragentsApi",
-    "PublicApiInvoiceProcessingDisassembleDocumentApi",
-    "PublicApiInvoiceProcessingDocumentTransactionsApi",
-    "PublicApiInvoiceProcessingIncomingInvoicesApi",
-    "PublicApiInvoiceProcessingIncomingReturnedInvoiceApi",
-    "PublicApiInvoiceProcessingIncomingServiceApi",
-    "PublicApiInvoiceProcessingInternalTransferApi",
-    "PublicApiInvoiceProcessingNomenclatureApi",
-    "PublicApiInvoiceProcessingOutgoingInvoicesApi",
-    "PublicApiInvoiceProcessingOutgoingServiceApi",
-    "PublicApiInvoiceProcessingProductionDocumentApi",
-    "PublicApiInvoiceProcessingReturnedInvoiceApi",
-    "PublicApiInvoiceProcessingSalesDocumentApi",
-    "PublicApiInvoiceProcessingTransformationDocumentApi",
-    "PublicApiInvoiceProcessingWriteoffDocumentApi",
+    "PlatformEventsApi",
     "ReportApi",
+    "ReportingOlapApi",
     "TerminalGroupsApi",
+    "TerminalsCashRegistersApi",
+    "TerminalsTerminalsApi",
     "WebhooksApi",
     "ApiResponse",
     "ApiClient",
@@ -66,8 +90,26 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "Account",
+    "AccountCreateRequest",
+    "AccountDeleteRequest",
+    "AccountDeleteResponse",
+    "AccountGetRequest",
+    "AccountListRequest",
+    "AccountListResponse",
+    "AccountPostingListRequest",
+    "AccountPostingListResponse",
+    "AccountResponse",
+    "AccountRestoreRequest",
+    "AccountRestoreResponse",
     "AccountTransactionsListRequest",
     "AccountTransactionsResponse",
+    "AccountType",
+    "AccountUpdateRequest",
+    "AccountingCategory",
+    "AccountingCategoryGetByIDRequest",
+    "AccountingCategoryListRequest",
+    "AccountingCategoryListResponse",
     "AccountingTransactionUserResponse",
     "ActionOnValidationRejection",
     "ActionType",
@@ -93,27 +135,48 @@ __all__ = [
     "AddressLegacy",
     "AddressRegion",
     "AddressStreet",
+    "AllergenGroup",
     "AllergenGroupDto",
-    "AllergenGroupDto2",
-    "AllergenGroupDto3",
-    "AllergenGroupDto4",
+    "AllergenGroupFilter",
+    "AllergenGroupListRequest",
+    "AllergenGroupListResponse",
     "AllowedItemWithDuration",
+    "AmountUnit",
+    "AmountUnitFilter",
+    "AmountUnitListRequest",
+    "AmountUnitListResponse",
+    "AssembledRequest",
+    "AssemblyChartCommonResponse",
+    "AssemblyChartItem",
+    "AssemblyChartItemResponse",
+    "AssemblyChartListRequest",
+    "AssemblyChartListResponse",
+    "AssemblyChartResponse",
+    "AssemblyChartV1SaveRequest",
+    "AssemblyChartV2SaveRequest",
+    "AttendanceCreateRequest",
+    "AttendanceCreateResponse",
+    "AttendanceDeleteRequest",
+    "AttendanceDeleteResponse",
+    "AttendanceListRequest",
+    "AttendanceListResponse",
+    "AttendanceResponse",
+    "AttendanceTypeItem",
+    "AttendanceTypeListRequest",
+    "AttendanceTypeListResponse",
+    "AttendanceUpdateRequest",
+    "AttendanceUpdateResponse",
     "AvailableCombo",
     "AvailablePayment",
     "AwakeTerminalGroupsRequest",
     "AwakeTerminalGroupsResponse",
+    "BalanceItem",
+    "BalanceSheetListRequest",
+    "BalanceSheetListResponse",
     "BarcodeDto",
     "BarcodeDto2",
-    "BarcodeDto3",
-    "BarcodeDto4",
-    "BarcodeDto5",
-    "BarcodeDto6",
-    "BarcodeDto7",
-    "BarcodeDto8",
-    "BarcodeItem",
+    "BarcodeInfo",
     "ButtonImageDto",
-    "ButtonImageDto2",
-    "ButtonImageDto3",
     "CalculateCheckinRequest",
     "CalculateCheckinResponse",
     "CalculateComboPriceRequest",
@@ -132,7 +195,21 @@ __all__ = [
     "CardPayment",
     "CardPaymentAdditionalData",
     "CardTipsPayment",
+    "CashFlowCategoriesFilter",
+    "CashFlowCategory",
+    "CashFlowCategoryCascadeResponse",
+    "CashFlowCategoryCreateRequest",
+    "CashFlowCategoryDeleteRequest",
+    "CashFlowCategoryGetRequest",
+    "CashFlowCategoryListRequest",
+    "CashFlowCategoryListResponse",
+    "CashFlowCategoryResponse",
+    "CashFlowCategoryRestoreRequest",
+    "CashFlowCategoryUpdateRequest",
     "CashPayment",
+    "CashRegisterListItem",
+    "CashRegisterListRequest",
+    "CashRegisterListResponse",
     "CashTipsPayment",
     "CertificateCounteragentType",
     "ChangeBanquetOrderItemsRequest",
@@ -151,6 +228,10 @@ __all__ = [
     "ChangeServiceTypeDeliveryByCourier",
     "ChangeServiceTypeRequest",
     "ChangeUserBalanceRequest",
+    "ChartOfAccount",
+    "ChartOfAccountsListRequest",
+    "ChartOfAccountsListResponse",
+    "ChartTreeNodeDto",
     "CheckSmsStatusRequest",
     "CheckSmsStatusResponse",
     "CheckStopListRequest",
@@ -167,41 +248,36 @@ __all__ = [
     "Combo",
     "ComboCategory",
     "ComboCategoryDto",
-    "ComboCategoryDto2",
-    "ComboCategoryDto3",
+    "ComboComponentGroup",
+    "ComboComponentProduct",
     "ComboDto",
-    "ComboDto2",
-    "ComboDto2ImageInner",
-    "ComboDto3",
-    "ComboDto3ImageInner",
     "ComboDtoImageInner",
     "ComboGroup",
     "ComboGroupDto",
-    "ComboGroupDto2",
-    "ComboGroupDto3",
-    "ComboGroupDto4",
     "ComboGroupItemDto",
-    "ComboGroupItemDto2",
-    "ComboGroupItemDto3",
-    "ComboGroupItemDto4",
     "ComboGroupItemSizeDto",
-    "ComboGroupItemSizeDto2",
-    "ComboGroupItemSizeDto3",
-    "ComboGroupItemSizeDto4",
     "ComboGroupMapping",
     "ComboPriceModificationType",
     "ComboProduct",
+    "ComboSize",
     "ComboSizeDto",
-    "ComboSizeDto2",
-    "ComboSizeDto3",
+    "ComboSizePrice",
     "ComboSpecification",
     "CommitDraftRequest",
     "CommonExternalData",
     "CommonPriceCategory",
     "CompoundItemTemplate",
     "Conception",
+    "ConceptionGetByIDRequest",
+    "ConceptionListRequest",
+    "ConceptionListResponse",
     "ConfirmDeliveryRequest",
+    "Container",
+    "ContainerFilter",
+    "ContainerListRequest",
+    "ContainerListResponse",
     "CoordinateInfo",
+    "CorporationSettings",
     "CorrelationIdResponse",
     "CostPriceItem",
     "CounterMetric",
@@ -223,20 +299,23 @@ __all__ = [
     "CreateOrderRequest",
     "CreateOrderSettings",
     "CreateOrderSettingsBase",
+    "CreateRequest",
     "CreateReserveRequest",
     "CreateTableOrderRequest",
     "CreateTableOrderSettings",
     "CreationStatus",
+    "CustomCategory",
+    "CustomCategoryFilter",
+    "CustomCategoryListRequest",
+    "CustomCategoryListResponse",
     "CustomerTagGroup",
-    "CustomerTagGroup2",
-    "CustomerTagGroup3",
+    "CustomerTagGroupItem",
     "CustomerTagItem",
-    "CustomerTagItem2",
-    "CustomerTagItem3",
     "DeleteCustomersRequest",
     "DeleteCustomersResponse",
     "DeleteDraftRequest",
     "DeleteMagnetCardRequest",
+    "DeleteRequest",
     "DeletionMethod",
     "DeliveryAttentionNotificationRequest",
     "DeliveryCoordinates",
@@ -320,16 +399,36 @@ __all__ = [
     "DiscountsResponse",
     "DocumentTransactionItem",
     "DocumentTransactionsListRequest",
+    "EmployeeCreateRequest",
     "EmployeeDirectoryEntry",
+    "EmployeeFireRequest",
+    "EmployeeFireResponse",
+    "EmployeeGetRequest",
     "EmployeeInfo",
     "EmployeeInfoRequest",
     "EmployeeInfoResponse",
+    "EmployeeListRequest",
+    "EmployeePositionDTO",
+    "EmployeePositionFilterItem",
+    "EmployeePositionResponse",
+    "EmployeeResponse",
+    "EmployeeRestoreRequest",
+    "EmployeeRestoreResponse",
+    "EmployeeUpdateRequest",
     "EmployeeWithCheckedRole",
+    "EmployeesFilter",
     "EmployeesResponse",
     "EmployeesWithRoleSignResponse",
     "ErrorCode",
     "ErrorCommandStatus",
     "ErrorInfo",
+    "EventAttributeDoc",
+    "EventGroup",
+    "EventListItem",
+    "EventListRequest",
+    "EventListResponse",
+    "EventMetadataListResponse",
+    "EventType",
     "ExtendedOrganizationInfo",
     "ExternalCourierArrivedNotificationRequest",
     "ExternalCourierAssignedNotificationRequest",
@@ -343,27 +442,13 @@ __all__ = [
     "ExternalMenuComboItemSize",
     "ExternalMenuItem",
     "ExternalMenuItem2",
-    "ExternalMenuItem3",
     "ExternalMenuItemSize",
     "ExternalMenuItemSize2",
-    "ExternalMenuItemSize3",
-    "ExternalMenuItemSize4",
     "ExternalMenuModifierGroup",
     "ExternalMenuModifierGroup2",
-    "ExternalMenuModifierGroup3",
-    "ExternalMenuModifierGroup4",
     "ExternalMenuModifierItem",
     "ExternalMenuModifierItem2",
-    "ExternalMenuModifierItem3",
-    "ExternalMenuModifierItem4",
     "ExternalMenuPriceByDepartmentsDto",
-    "ExternalMenuPriceByDepartmentsDto2",
-    "ExternalMenuPriceByDepartmentsDto3",
-    "ExternalMenuPriceByDepartmentsDto4",
-    "ExternalMenuPriceByDepartmentsDto5",
-    "ExternalMenuPriceByDepartmentsDto6",
-    "ExternalMenuPriceByDepartmentsDto7",
-    "ExternalMenuPriceByDepartmentsDto8",
     "ExternalMenuResponse",
     "ExternalMenuV2",
     "ExternalMenuV3",
@@ -371,8 +456,10 @@ __all__ = [
     "ExternalPayment",
     "ExternalPaymentAdditionalData",
     "ExternalTipsPayment",
+    "FilterCondition",
     "FilterDraftsRequest",
     "FilterDraftsResponse",
+    "FinanceAccountsFilter",
     "Font",
     "FontStyle",
     "FreeProduct",
@@ -411,13 +498,23 @@ __all__ = [
     "GetDeliveryRestrictionsResponse",
     "GetDraftRequest",
     "GetDraftResponse",
+    "GetExternalMenuById402Response",
+    "GetLicenseListRequest",
+    "GetLicenseListResponse",
     "GetManualConditionsResponse",
+    "GetOlapColumnsRequest",
+    "GetOlapReportRequest",
+    "GetOlapReportResponse",
     "GetOrganizationsRequest",
     "GetOrganizationsResponse",
     "GetPersonalSessionInfoRequest",
     "GetPersonalSessionInfoResponse",
+    "GetPositionRequest",
+    "GetPriceListRequest",
+    "GetPriceListResponse",
     "GetProgramsRequest",
     "GetProgramsResponse",
+    "GetRequest",
     "GetRestaurantSectionsRequest",
     "GetRestaurantSectionsResponse",
     "GetRestaurantSectionsWorkloadRequest",
@@ -450,7 +547,17 @@ __all__ = [
     "IikoCardSearchScope",
     "IikoErrorResponse",
     "IikoNetUserSex",
+    "Image",
     "InProgressCommandStatus",
+    "IncomingInventoryCreateFirstStepItem",
+    "IncomingInventoryCreateItem",
+    "IncomingInventoryCreateRequest",
+    "IncomingInventoryGetFirstItem",
+    "IncomingInventoryGetItem",
+    "IncomingInventoryGetResponse",
+    "IncomingInventoryListItem",
+    "IncomingInventorySaveResponse",
+    "IncomingInventoryUpdateRequest",
     "IncomingInvoice",
     "IncomingInvoiceItem",
     "IncomingInvoiceRequest",
@@ -480,13 +587,21 @@ __all__ = [
     "InternalTransferSaveResponse",
     "InternalTransferUpdateRequest",
     "IntervalDto",
-    "IntervalDto2",
-    "IntervalDto3",
+    "InventoryConception",
+    "Item",
+    "ItemCategory",
+    "ItemCategoryListRequest",
+    "ItemCategoryListResponse",
     "ItemDeletedInfo",
+    "ItemsGroup",
+    "JurPerson",
+    "KindEnum",
     "LabelDto",
-    "LabelDto2",
-    "LabelDto3",
+    "LicenseItem",
+    "ListPositionsRequest",
+    "ListPositionsResponse",
     "ListRequest",
+    "ListResponse",
     "LockOrUnlockDraftRequest",
     "LoyaltyCardPayment",
     "LoyaltyCardPaymentAdditionalData",
@@ -500,18 +615,96 @@ __all__ = [
     "MarketingSourceDefinition",
     "MarketingSourcesRequest",
     "MarketingSourcesResponse",
+    "MeasureUnit",
+    "MeasureUnitGetByIDRequest",
+    "MeasureUnitListRequest",
+    "MeasureUnitListResponse",
+    "MeasureUnitType",
     "MenuRequest",
+    "MenuRequestV3",
+    "MenuSection",
+    "MenuSectionFilter",
+    "MenuSectionListRequest",
+    "MenuSectionListResponse",
+    "MenuV3",
+    "MenuV3AllergenGroup",
+    "MenuV3Combo",
+    "MenuV3CustomerTagGroup",
+    "MenuV3Modifier",
+    "MenuV3OrderItemType",
+    "MenuV3Product",
+    "MenuV3SizePrice",
+    "MenuV3TaxCategory",
     "MenusDataResponse",
     "Modifier",
+    "ModifierGroup",
+    "ModifierItem",
     "ModifierRestrictionsDto",
     "ModifierRestrictionsDto2",
-    "ModifierRestrictionsDto3",
-    "ModifierRestrictionsDto4",
-    "ModifierRestrictionsDto5",
-    "ModifierRestrictionsDto6",
-    "ModifierRestrictionsDto7",
-    "ModifierRestrictionsDto8",
+    "ModifierSchema",
+    "ModifierSchemaFilter",
+    "ModifierSchemaListRequest",
+    "ModifierSchemaListResponse",
+    "NomenclatureCategoryCreateRequest",
+    "NomenclatureCategoryDeleteRequest",
+    "NomenclatureCategoryListRequest",
+    "NomenclatureCategoryListResponse",
+    "NomenclatureCategoryResponse",
+    "NomenclatureCategoryRestoreRequest",
+    "NomenclatureCategoryUpdateRequest",
+    "NomenclatureCategoryWriteResponse",
+    "NomenclatureGroupCreateRequest",
+    "NomenclatureGroupCreateResponse",
+    "NomenclatureGroupCustomCategory",
+    "NomenclatureGroupDeleteRequest",
+    "NomenclatureGroupDeleteResponse",
+    "NomenclatureGroupDepartmentFilter",
+    "NomenclatureGroupListRequest",
+    "NomenclatureGroupListResponse",
+    "NomenclatureGroupMarkupSetting",
+    "NomenclatureGroupOrganizationFilter",
+    "NomenclatureGroupRGBColor",
+    "NomenclatureGroupResponse",
+    "NomenclatureGroupStoreBalanceLevel",
+    "NomenclatureGroupUndeleteRequest",
+    "NomenclatureGroupUndeleteResponse",
+    "NomenclatureGroupUpdateRequest",
+    "NomenclatureGroupUpdateResponse",
+    "NomenclatureGroupV1Filter",
+    "NomenclatureGroupV2Filter",
     "NomenclaturePriceCategory",
+    "NomenclatureProductBarcode",
+    "NomenclatureProductChildModifier",
+    "NomenclatureProductContainer",
+    "NomenclatureProductCreateRequest",
+    "NomenclatureProductCreateResponse",
+    "NomenclatureProductCustomCategory",
+    "NomenclatureProductDayTime",
+    "NomenclatureProductDeleteRequest",
+    "NomenclatureProductDeleteResponse",
+    "NomenclatureProductImage",
+    "NomenclatureProductListRequest",
+    "NomenclatureProductListResponse",
+    "NomenclatureProductMarkupSetting",
+    "NomenclatureProductModifier",
+    "NomenclatureProductModifierSchemaRedefinition",
+    "NomenclatureProductNutritionValue",
+    "NomenclatureProductRGBColor",
+    "NomenclatureProductRate",
+    "NomenclatureProductRateInterval",
+    "NomenclatureProductRateSchedule",
+    "NomenclatureProductResponse",
+    "NomenclatureProductSize",
+    "NomenclatureProductSizeFactors",
+    "NomenclatureProductStoreBalanceLevel",
+    "NomenclatureProductUndeleteRequest",
+    "NomenclatureProductUndeleteResponse",
+    "NomenclatureProductUpdateBarcodesRequest",
+    "NomenclatureProductUpdateBarcodesResponse",
+    "NomenclatureProductUpdateRequest",
+    "NomenclatureProductUpdateResponse",
+    "NomenclatureProductV1Filter",
+    "NomenclatureProductV2Filter",
     "NomenclatureRequest",
     "NomenclatureResponse",
     "NotActivatedCoupon",
@@ -519,13 +712,9 @@ __all__ = [
     "NotActivatedCouponResponse",
     "NotificationSendingCapabilityCheckStatus",
     "NutritionInfoDto",
-    "NutritionInfoDto2",
-    "NutritionInfoDto3",
-    "NutritionInfoDto4",
-    "NutritionInfoDto5",
-    "NutritionInfoDto6",
-    "NutritionInfoDto7",
-    "NutritionInfoDto8",
+    "Nutritions",
+    "OlapColumn",
+    "OlapFilterDoc",
     "OpenPersonalSessionRequest",
     "OperationCode",
     "OrderAttentionNotificationRequest",
@@ -555,7 +744,9 @@ __all__ = [
     "OrdersHistoryByDeliveryDateAndPhoneRequest",
     "OrdersResponse",
     "OrdersWithRevisionResponse",
+    "Organization",
     "OrganizationInfo",
+    "OrganizationLicenseInfo",
     "OrganizationSettings",
     "OrganizationSettingsParameters",
     "OrganizationsSettingsRequest",
@@ -573,40 +764,74 @@ __all__ = [
     "OutgoingServiceSaveResponse",
     "OutgoingServiceUpdateRequest",
     "OverrideTaxesDto",
-    "OverrideTaxesDto2",
     "PayOutgoingInvoiceRequest",
     "PayRequest",
     "Payment",
     "PaymentAdditionalData",
+    "PaymentDetails",
     "PaymentItem",
     "PaymentLink",
     "PaymentLinkStatus",
     "PaymentProcessingType",
+    "PaymentType",
     "PaymentTypeDefinition",
+    "PaymentTypeGetByIDRequest",
     "PaymentTypeKindDefinition",
+    "PaymentTypeListRequest",
+    "PaymentTypeListResponse",
     "PaymentTypesRequest",
     "PaymentTypesResponse",
+    "Period",
     "PeriodScheduleDto",
-    "PeriodScheduleDto2",
-    "PeriodScheduleDto3",
     "PersonalDataConsentStatus",
     "PersonalShift",
     "PersonalShiftWebHookEventInfo",
+    "PlaceType",
+    "PlaceTypeFilter",
+    "PlaceTypeListRequest",
+    "PlaceTypeListResponse",
     "PositionWithSum",
+    "Posting",
+    "PreparedChartDto",
+    "PreparedChartItemDto",
+    "PreparedRequest",
     "Price",
     "PriceItem",
+    "PriceListItem",
+    "PriceStrategy",
     "PrintBillRequest",
     "PrintDeliveryBillRequest",
     "Problem",
+    "Producer",
+    "ProducerFilter",
+    "ProducerListRequest",
+    "ProducerListResponse",
     "Product",
+    "ProductCategory",
     "ProductCategoryDiscount",
     "ProductCategoryDto",
-    "ProductCategoryDto2",
-    "ProductCategoryDto3",
     "ProductCategoryInfo",
     "ProductGroup",
     "ProductInfo",
+    "ProductScaleFilter",
+    "ProductScaleListResponse",
+    "ProductScaleResponse",
     "ProductSize",
+    "ProductSizeCreateFields",
+    "ProductSizeCreateRequest",
+    "ProductSizeDeleteRequest",
+    "ProductSizeFilter",
+    "ProductSizeGetRequest",
+    "ProductSizeListRequest",
+    "ProductSizeListResponse",
+    "ProductSizeResponse",
+    "ProductSizeUpdateFields",
+    "ProductSizeUpdateRequest",
+    "ProductTag",
+    "ProductTagFilter",
+    "ProductTagListRequest",
+    "ProductTagListResponse",
+    "ProductType",
     "ProductionDocumentCreateItem",
     "ProductionDocumentCreateRequest",
     "ProductionDocumentGetItem",
@@ -647,6 +872,7 @@ __all__ = [
     "RestaurantSectionTable",
     "RestoreCustomersRequest",
     "RestoreCustomersResponse",
+    "Restrictions",
     "RestrictionsAddress",
     "RestrictionsOrderItem",
     "RestrictionsOrderItemModifier",
@@ -678,15 +904,9 @@ __all__ = [
     "SalesDocumentSaveResponse",
     "SalesDocumentUpdateRequest",
     "SaveDraftRequest",
+    "Schedule",
     "SectionSchema",
     "SelectedCustomerTag",
-    "SelectedCustomerTag2",
-    "SelectedCustomerTag3",
-    "SelectedCustomerTag4",
-    "SelectedCustomerTag5",
-    "SelectedCustomerTag6",
-    "SelectedCustomerTag7",
-    "SelectedCustomerTag8",
     "SendEmailRequest",
     "SendNotificationRequest",
     "SendSmsRequest",
@@ -703,22 +923,32 @@ __all__ = [
     "SimpleOrganizationInfo",
     "Size",
     "SizePrice",
+    "SizePriceShort",
     "SmsSendingPossibilityRequest",
     "SmsSendingPossibilityResponse",
     "SmsSendingStatus",
     "SmsSendingStatusInfo",
     "SortDirection",
     "SplitOrderBetweenCashRegisters",
+    "StockBalanceDetails",
+    "StockBalanceItem",
+    "StockBalanceListRequest",
+    "StockBalanceListResponse",
     "StopListItem",
     "StopListUpdateWebHookEventInfo",
     "StopListsRequest",
     "StopListsResponse",
+    "Store",
+    "StoreListResponse",
+    "StoreSpecification",
+    "StoresListRequest",
     "StreetById",
     "StreetsByCityRequest",
     "StreetsByIdRequest",
     "StreetsByIdResponse",
     "StreetsResponse",
     "SuccessCommandStatus",
+    "SwaggerEmployeeListResponse",
     "Table",
     "TableOrderCustomer",
     "TableOrderErrorWebHookEventInfo",
@@ -731,11 +961,11 @@ __all__ = [
     "TableOrderWebHookFilter",
     "TableOrdersResponse",
     "TagDto",
-    "TagDto2",
-    "TagDto3",
+    "TagItem",
+    "TaxCategory",
     "TaxCategoryDto",
-    "TaxCategoryDto2",
-    "TaxCategoryDto3",
+    "TaxCategoryListRequest",
+    "TaxCategoryListResponse",
     "TemplateType",
     "TerminalGroup",
     "TerminalGroupAliveInfo",
@@ -745,6 +975,9 @@ __all__ = [
     "TerminalGroupsIsAliveResponse",
     "TerminalGroupsRequest",
     "TerminalGroupsResponse",
+    "TerminalListItem",
+    "TerminalListRequest",
+    "TerminalListResponse",
     "TipsPayment",
     "TipsPaymentItem",
     "TipsTypeDefinition",
@@ -762,12 +995,11 @@ __all__ = [
     "TransportTransactionsCertificateReportItem",
     "TransportTransactionsCouponReportItem",
     "TransportTransactionsReportItem",
+    "TreeRequest",
     "UpdateDeliveryStatusRequest",
     "UpdateOrderCourierRequest",
     "UpdateOrderPaymentsRequest",
     "UpdateOrderProblemRequest",
-    "UpdateProductBarcodesRequest",
-    "UpdateProductBarcodesResponse",
     "UpdateTrackingLinkRequest",
     "UpdateWebHookSettingsRequest",
     "Upsale",
@@ -778,6 +1010,7 @@ __all__ = [
     "WebHookOnStopListChangeData",
     "WebHookShortFilter",
     "WebHooksFilter",
+    "WeekDay",
     "WriteoffDocumentCreateItem",
     "WriteoffDocumentCreateRequest",
     "WriteoffDocumentGetItem",
@@ -801,31 +1034,55 @@ from iikocloud_client.api.dictionaries_api import DictionariesApi as Dictionarie
 from iikocloud_client.api.discounts_and_promotions_api import DiscountsAndPromotionsApi as DiscountsAndPromotionsApi
 from iikocloud_client.api.drafts_api import DraftsApi as DraftsApi
 from iikocloud_client.api.employees_api import EmployeesApi as EmployeesApi
+from iikocloud_client.api.employees_attendance_api import EmployeesAttendanceApi as EmployeesAttendanceApi
+from iikocloud_client.api.employees_employees_api import EmployeesEmployeesApi as EmployeesEmployeesApi
+from iikocloud_client.api.employees_positions_api import EmployeesPositionsApi as EmployeesPositionsApi
+from iikocloud_client.api.finance_account_api import FinanceAccountApi as FinanceAccountApi
+from iikocloud_client.api.finance_account_posting_api import FinanceAccountPostingApi as FinanceAccountPostingApi
+from iikocloud_client.api.finance_account_transactions_api import FinanceAccountTransactionsApi as FinanceAccountTransactionsApi
+from iikocloud_client.api.finance_account_type_api import FinanceAccountTypeApi as FinanceAccountTypeApi
+from iikocloud_client.api.finance_balance_sheet_api import FinanceBalanceSheetApi as FinanceBalanceSheetApi
+from iikocloud_client.api.finance_cash_flow_category_api import FinanceCashFlowCategoryApi as FinanceCashFlowCategoryApi
+from iikocloud_client.api.finance_chart_of_accounts_api import FinanceChartOfAccountsApi as FinanceChartOfAccountsApi
+from iikocloud_client.api.finance_directories_api import FinanceDirectoriesApi as FinanceDirectoriesApi
+from iikocloud_client.api.finance_document_transactions_api import FinanceDocumentTransactionsApi as FinanceDocumentTransactionsApi
+from iikocloud_client.api.finance_incoming_service_api import FinanceIncomingServiceApi as FinanceIncomingServiceApi
+from iikocloud_client.api.finance_outgoing_service_api import FinanceOutgoingServiceApi as FinanceOutgoingServiceApi
+from iikocloud_client.api.inventory_catalogs_api import InventoryCatalogsApi as InventoryCatalogsApi
+from iikocloud_client.api.inventory_counteragents_api import InventoryCounteragentsApi as InventoryCounteragentsApi
+from iikocloud_client.api.inventory_disassemble_document_api import InventoryDisassembleDocumentApi as InventoryDisassembleDocumentApi
+from iikocloud_client.api.inventory_incoming_inventory_api import InventoryIncomingInventoryApi as InventoryIncomingInventoryApi
+from iikocloud_client.api.inventory_incoming_invoices_api import InventoryIncomingInvoicesApi as InventoryIncomingInvoicesApi
+from iikocloud_client.api.inventory_incoming_returned_invoice_api import InventoryIncomingReturnedInvoiceApi as InventoryIncomingReturnedInvoiceApi
+from iikocloud_client.api.inventory_internal_transfer_api import InventoryInternalTransferApi as InventoryInternalTransferApi
+from iikocloud_client.api.inventory_organizations_api import InventoryOrganizationsApi as InventoryOrganizationsApi
+from iikocloud_client.api.inventory_outgoing_invoices_api import InventoryOutgoingInvoicesApi as InventoryOutgoingInvoicesApi
+from iikocloud_client.api.inventory_production_document_api import InventoryProductionDocumentApi as InventoryProductionDocumentApi
+from iikocloud_client.api.inventory_returned_invoice_api import InventoryReturnedInvoiceApi as InventoryReturnedInvoiceApi
+from iikocloud_client.api.inventory_sales_document_api import InventorySalesDocumentApi as InventorySalesDocumentApi
+from iikocloud_client.api.inventory_stock_balance_api import InventoryStockBalanceApi as InventoryStockBalanceApi
+from iikocloud_client.api.inventory_transformation_document_api import InventoryTransformationDocumentApi as InventoryTransformationDocumentApi
+from iikocloud_client.api.inventory_writeoff_document_api import InventoryWriteoffDocumentApi as InventoryWriteoffDocumentApi
+from iikocloud_client.api.licenses_api import LicensesApi as LicensesApi
 from iikocloud_client.api.marketing_sources_api import MarketingSourcesApi as MarketingSourcesApi
 from iikocloud_client.api.menu_api import MenuApi as MenuApi
 from iikocloud_client.api.messages_api import MessagesApi as MessagesApi
+from iikocloud_client.api.nomenclature_assembly_chart_api import NomenclatureAssemblyChartApi as NomenclatureAssemblyChartApi
+from iikocloud_client.api.nomenclature_directories_api import NomenclatureDirectoriesApi as NomenclatureDirectoriesApi
+from iikocloud_client.api.nomenclature_nomenclature_category_api import NomenclatureNomenclatureCategoryApi as NomenclatureNomenclatureCategoryApi
+from iikocloud_client.api.nomenclature_nomenclature_group_api import NomenclatureNomenclatureGroupApi as NomenclatureNomenclatureGroupApi
+from iikocloud_client.api.nomenclature_nomenclature_product_api import NomenclatureNomenclatureProductApi as NomenclatureNomenclatureProductApi
+from iikocloud_client.api.nomenclature_nomenclature_product_scale_api import NomenclatureNomenclatureProductScaleApi as NomenclatureNomenclatureProductScaleApi
 from iikocloud_client.api.notifications_api import NotificationsApi as NotificationsApi
 from iikocloud_client.api.operations_api import OperationsApi as OperationsApi
 from iikocloud_client.api.orders_api import OrdersApi as OrdersApi
 from iikocloud_client.api.organizations_api import OrganizationsApi as OrganizationsApi
-from iikocloud_client.api.public_api_invoice_processing_account_transactions_api import PublicApiInvoiceProcessingAccountTransactionsApi as PublicApiInvoiceProcessingAccountTransactionsApi
-from iikocloud_client.api.public_api_invoice_processing_counteragents_api import PublicApiInvoiceProcessingCounteragentsApi as PublicApiInvoiceProcessingCounteragentsApi
-from iikocloud_client.api.public_api_invoice_processing_disassemble_document_api import PublicApiInvoiceProcessingDisassembleDocumentApi as PublicApiInvoiceProcessingDisassembleDocumentApi
-from iikocloud_client.api.public_api_invoice_processing_document_transactions_api import PublicApiInvoiceProcessingDocumentTransactionsApi as PublicApiInvoiceProcessingDocumentTransactionsApi
-from iikocloud_client.api.public_api_invoice_processing_incoming_invoices_api import PublicApiInvoiceProcessingIncomingInvoicesApi as PublicApiInvoiceProcessingIncomingInvoicesApi
-from iikocloud_client.api.public_api_invoice_processing_incoming_returned_invoice_api import PublicApiInvoiceProcessingIncomingReturnedInvoiceApi as PublicApiInvoiceProcessingIncomingReturnedInvoiceApi
-from iikocloud_client.api.public_api_invoice_processing_incoming_service_api import PublicApiInvoiceProcessingIncomingServiceApi as PublicApiInvoiceProcessingIncomingServiceApi
-from iikocloud_client.api.public_api_invoice_processing_internal_transfer_api import PublicApiInvoiceProcessingInternalTransferApi as PublicApiInvoiceProcessingInternalTransferApi
-from iikocloud_client.api.public_api_invoice_processing_nomenclature_api import PublicApiInvoiceProcessingNomenclatureApi as PublicApiInvoiceProcessingNomenclatureApi
-from iikocloud_client.api.public_api_invoice_processing_outgoing_invoices_api import PublicApiInvoiceProcessingOutgoingInvoicesApi as PublicApiInvoiceProcessingOutgoingInvoicesApi
-from iikocloud_client.api.public_api_invoice_processing_outgoing_service_api import PublicApiInvoiceProcessingOutgoingServiceApi as PublicApiInvoiceProcessingOutgoingServiceApi
-from iikocloud_client.api.public_api_invoice_processing_production_document_api import PublicApiInvoiceProcessingProductionDocumentApi as PublicApiInvoiceProcessingProductionDocumentApi
-from iikocloud_client.api.public_api_invoice_processing_returned_invoice_api import PublicApiInvoiceProcessingReturnedInvoiceApi as PublicApiInvoiceProcessingReturnedInvoiceApi
-from iikocloud_client.api.public_api_invoice_processing_sales_document_api import PublicApiInvoiceProcessingSalesDocumentApi as PublicApiInvoiceProcessingSalesDocumentApi
-from iikocloud_client.api.public_api_invoice_processing_transformation_document_api import PublicApiInvoiceProcessingTransformationDocumentApi as PublicApiInvoiceProcessingTransformationDocumentApi
-from iikocloud_client.api.public_api_invoice_processing_writeoff_document_api import PublicApiInvoiceProcessingWriteoffDocumentApi as PublicApiInvoiceProcessingWriteoffDocumentApi
+from iikocloud_client.api.platform_events_api import PlatformEventsApi as PlatformEventsApi
 from iikocloud_client.api.report_api import ReportApi as ReportApi
+from iikocloud_client.api.reporting_olap_api import ReportingOlapApi as ReportingOlapApi
 from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi as TerminalGroupsApi
+from iikocloud_client.api.terminals_cash_registers_api import TerminalsCashRegistersApi as TerminalsCashRegistersApi
+from iikocloud_client.api.terminals_terminals_api import TerminalsTerminalsApi as TerminalsTerminalsApi
 from iikocloud_client.api.webhooks_api import WebhooksApi as WebhooksApi
 
 # import ApiClient
@@ -840,8 +1097,26 @@ from iikocloud_client.exceptions import ApiAttributeError as ApiAttributeError
 from iikocloud_client.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from iikocloud_client.models.account import Account as Account
+from iikocloud_client.models.account_create_request import AccountCreateRequest as AccountCreateRequest
+from iikocloud_client.models.account_delete_request import AccountDeleteRequest as AccountDeleteRequest
+from iikocloud_client.models.account_delete_response import AccountDeleteResponse as AccountDeleteResponse
+from iikocloud_client.models.account_get_request import AccountGetRequest as AccountGetRequest
+from iikocloud_client.models.account_list_request import AccountListRequest as AccountListRequest
+from iikocloud_client.models.account_list_response import AccountListResponse as AccountListResponse
+from iikocloud_client.models.account_posting_list_request import AccountPostingListRequest as AccountPostingListRequest
+from iikocloud_client.models.account_posting_list_response import AccountPostingListResponse as AccountPostingListResponse
+from iikocloud_client.models.account_response import AccountResponse as AccountResponse
+from iikocloud_client.models.account_restore_request import AccountRestoreRequest as AccountRestoreRequest
+from iikocloud_client.models.account_restore_response import AccountRestoreResponse as AccountRestoreResponse
 from iikocloud_client.models.account_transactions_list_request import AccountTransactionsListRequest as AccountTransactionsListRequest
 from iikocloud_client.models.account_transactions_response import AccountTransactionsResponse as AccountTransactionsResponse
+from iikocloud_client.models.account_type import AccountType as AccountType
+from iikocloud_client.models.account_update_request import AccountUpdateRequest as AccountUpdateRequest
+from iikocloud_client.models.accounting_category import AccountingCategory as AccountingCategory
+from iikocloud_client.models.accounting_category_get_by_id_request import AccountingCategoryGetByIDRequest as AccountingCategoryGetByIDRequest
+from iikocloud_client.models.accounting_category_list_request import AccountingCategoryListRequest as AccountingCategoryListRequest
+from iikocloud_client.models.accounting_category_list_response import AccountingCategoryListResponse as AccountingCategoryListResponse
 from iikocloud_client.models.accounting_transaction_user_response import AccountingTransactionUserResponse as AccountingTransactionUserResponse
 from iikocloud_client.models.action_on_validation_rejection import ActionOnValidationRejection as ActionOnValidationRejection
 from iikocloud_client.models.action_type import ActionType as ActionType
@@ -867,27 +1142,48 @@ from iikocloud_client.models.address_hints_service_type import AddressHintsServi
 from iikocloud_client.models.address_legacy import AddressLegacy as AddressLegacy
 from iikocloud_client.models.address_region import AddressRegion as AddressRegion
 from iikocloud_client.models.address_street import AddressStreet as AddressStreet
+from iikocloud_client.models.allergen_group import AllergenGroup as AllergenGroup
 from iikocloud_client.models.allergen_group_dto import AllergenGroupDto as AllergenGroupDto
-from iikocloud_client.models.allergen_group_dto2 import AllergenGroupDto2 as AllergenGroupDto2
-from iikocloud_client.models.allergen_group_dto3 import AllergenGroupDto3 as AllergenGroupDto3
-from iikocloud_client.models.allergen_group_dto4 import AllergenGroupDto4 as AllergenGroupDto4
+from iikocloud_client.models.allergen_group_filter import AllergenGroupFilter as AllergenGroupFilter
+from iikocloud_client.models.allergen_group_list_request import AllergenGroupListRequest as AllergenGroupListRequest
+from iikocloud_client.models.allergen_group_list_response import AllergenGroupListResponse as AllergenGroupListResponse
 from iikocloud_client.models.allowed_item_with_duration import AllowedItemWithDuration as AllowedItemWithDuration
+from iikocloud_client.models.amount_unit import AmountUnit as AmountUnit
+from iikocloud_client.models.amount_unit_filter import AmountUnitFilter as AmountUnitFilter
+from iikocloud_client.models.amount_unit_list_request import AmountUnitListRequest as AmountUnitListRequest
+from iikocloud_client.models.amount_unit_list_response import AmountUnitListResponse as AmountUnitListResponse
+from iikocloud_client.models.assembled_request import AssembledRequest as AssembledRequest
+from iikocloud_client.models.assembly_chart_common_response import AssemblyChartCommonResponse as AssemblyChartCommonResponse
+from iikocloud_client.models.assembly_chart_item import AssemblyChartItem as AssemblyChartItem
+from iikocloud_client.models.assembly_chart_item_response import AssemblyChartItemResponse as AssemblyChartItemResponse
+from iikocloud_client.models.assembly_chart_list_request import AssemblyChartListRequest as AssemblyChartListRequest
+from iikocloud_client.models.assembly_chart_list_response import AssemblyChartListResponse as AssemblyChartListResponse
+from iikocloud_client.models.assembly_chart_response import AssemblyChartResponse as AssemblyChartResponse
+from iikocloud_client.models.assembly_chart_v1_save_request import AssemblyChartV1SaveRequest as AssemblyChartV1SaveRequest
+from iikocloud_client.models.assembly_chart_v2_save_request import AssemblyChartV2SaveRequest as AssemblyChartV2SaveRequest
+from iikocloud_client.models.attendance_create_request import AttendanceCreateRequest as AttendanceCreateRequest
+from iikocloud_client.models.attendance_create_response import AttendanceCreateResponse as AttendanceCreateResponse
+from iikocloud_client.models.attendance_delete_request import AttendanceDeleteRequest as AttendanceDeleteRequest
+from iikocloud_client.models.attendance_delete_response import AttendanceDeleteResponse as AttendanceDeleteResponse
+from iikocloud_client.models.attendance_list_request import AttendanceListRequest as AttendanceListRequest
+from iikocloud_client.models.attendance_list_response import AttendanceListResponse as AttendanceListResponse
+from iikocloud_client.models.attendance_response import AttendanceResponse as AttendanceResponse
+from iikocloud_client.models.attendance_type_item import AttendanceTypeItem as AttendanceTypeItem
+from iikocloud_client.models.attendance_type_list_request import AttendanceTypeListRequest as AttendanceTypeListRequest
+from iikocloud_client.models.attendance_type_list_response import AttendanceTypeListResponse as AttendanceTypeListResponse
+from iikocloud_client.models.attendance_update_request import AttendanceUpdateRequest as AttendanceUpdateRequest
+from iikocloud_client.models.attendance_update_response import AttendanceUpdateResponse as AttendanceUpdateResponse
 from iikocloud_client.models.available_combo import AvailableCombo as AvailableCombo
 from iikocloud_client.models.available_payment import AvailablePayment as AvailablePayment
 from iikocloud_client.models.awake_terminal_groups_request import AwakeTerminalGroupsRequest as AwakeTerminalGroupsRequest
 from iikocloud_client.models.awake_terminal_groups_response import AwakeTerminalGroupsResponse as AwakeTerminalGroupsResponse
+from iikocloud_client.models.balance_item import BalanceItem as BalanceItem
+from iikocloud_client.models.balance_sheet_list_request import BalanceSheetListRequest as BalanceSheetListRequest
+from iikocloud_client.models.balance_sheet_list_response import BalanceSheetListResponse as BalanceSheetListResponse
 from iikocloud_client.models.barcode_dto import BarcodeDto as BarcodeDto
 from iikocloud_client.models.barcode_dto2 import BarcodeDto2 as BarcodeDto2
-from iikocloud_client.models.barcode_dto3 import BarcodeDto3 as BarcodeDto3
-from iikocloud_client.models.barcode_dto4 import BarcodeDto4 as BarcodeDto4
-from iikocloud_client.models.barcode_dto5 import BarcodeDto5 as BarcodeDto5
-from iikocloud_client.models.barcode_dto6 import BarcodeDto6 as BarcodeDto6
-from iikocloud_client.models.barcode_dto7 import BarcodeDto7 as BarcodeDto7
-from iikocloud_client.models.barcode_dto8 import BarcodeDto8 as BarcodeDto8
-from iikocloud_client.models.barcode_item import BarcodeItem as BarcodeItem
+from iikocloud_client.models.barcode_info import BarcodeInfo as BarcodeInfo
 from iikocloud_client.models.button_image_dto import ButtonImageDto as ButtonImageDto
-from iikocloud_client.models.button_image_dto2 import ButtonImageDto2 as ButtonImageDto2
-from iikocloud_client.models.button_image_dto3 import ButtonImageDto3 as ButtonImageDto3
 from iikocloud_client.models.calculate_checkin_request import CalculateCheckinRequest as CalculateCheckinRequest
 from iikocloud_client.models.calculate_checkin_response import CalculateCheckinResponse as CalculateCheckinResponse
 from iikocloud_client.models.calculate_combo_price_request import CalculateComboPriceRequest as CalculateComboPriceRequest
@@ -906,7 +1202,21 @@ from iikocloud_client.models.cancel_table_order_request import CancelTableOrderR
 from iikocloud_client.models.card_payment import CardPayment as CardPayment
 from iikocloud_client.models.card_payment_additional_data import CardPaymentAdditionalData as CardPaymentAdditionalData
 from iikocloud_client.models.card_tips_payment import CardTipsPayment as CardTipsPayment
+from iikocloud_client.models.cash_flow_categories_filter import CashFlowCategoriesFilter as CashFlowCategoriesFilter
+from iikocloud_client.models.cash_flow_category import CashFlowCategory as CashFlowCategory
+from iikocloud_client.models.cash_flow_category_cascade_response import CashFlowCategoryCascadeResponse as CashFlowCategoryCascadeResponse
+from iikocloud_client.models.cash_flow_category_create_request import CashFlowCategoryCreateRequest as CashFlowCategoryCreateRequest
+from iikocloud_client.models.cash_flow_category_delete_request import CashFlowCategoryDeleteRequest as CashFlowCategoryDeleteRequest
+from iikocloud_client.models.cash_flow_category_get_request import CashFlowCategoryGetRequest as CashFlowCategoryGetRequest
+from iikocloud_client.models.cash_flow_category_list_request import CashFlowCategoryListRequest as CashFlowCategoryListRequest
+from iikocloud_client.models.cash_flow_category_list_response import CashFlowCategoryListResponse as CashFlowCategoryListResponse
+from iikocloud_client.models.cash_flow_category_response import CashFlowCategoryResponse as CashFlowCategoryResponse
+from iikocloud_client.models.cash_flow_category_restore_request import CashFlowCategoryRestoreRequest as CashFlowCategoryRestoreRequest
+from iikocloud_client.models.cash_flow_category_update_request import CashFlowCategoryUpdateRequest as CashFlowCategoryUpdateRequest
 from iikocloud_client.models.cash_payment import CashPayment as CashPayment
+from iikocloud_client.models.cash_register_list_item import CashRegisterListItem as CashRegisterListItem
+from iikocloud_client.models.cash_register_list_request import CashRegisterListRequest as CashRegisterListRequest
+from iikocloud_client.models.cash_register_list_response import CashRegisterListResponse as CashRegisterListResponse
 from iikocloud_client.models.cash_tips_payment import CashTipsPayment as CashTipsPayment
 from iikocloud_client.models.certificate_counteragent_type import CertificateCounteragentType as CertificateCounteragentType
 from iikocloud_client.models.change_banquet_order_items_request import ChangeBanquetOrderItemsRequest as ChangeBanquetOrderItemsRequest
@@ -925,6 +1235,10 @@ from iikocloud_client.models.change_service_type_delivery_by_client import Chang
 from iikocloud_client.models.change_service_type_delivery_by_courier import ChangeServiceTypeDeliveryByCourier as ChangeServiceTypeDeliveryByCourier
 from iikocloud_client.models.change_service_type_request import ChangeServiceTypeRequest as ChangeServiceTypeRequest
 from iikocloud_client.models.change_user_balance_request import ChangeUserBalanceRequest as ChangeUserBalanceRequest
+from iikocloud_client.models.chart_of_account import ChartOfAccount as ChartOfAccount
+from iikocloud_client.models.chart_of_accounts_list_request import ChartOfAccountsListRequest as ChartOfAccountsListRequest
+from iikocloud_client.models.chart_of_accounts_list_response import ChartOfAccountsListResponse as ChartOfAccountsListResponse
+from iikocloud_client.models.chart_tree_node_dto import ChartTreeNodeDto as ChartTreeNodeDto
 from iikocloud_client.models.check_sms_status_request import CheckSmsStatusRequest as CheckSmsStatusRequest
 from iikocloud_client.models.check_sms_status_response import CheckSmsStatusResponse as CheckSmsStatusResponse
 from iikocloud_client.models.check_stop_list_request import CheckStopListRequest as CheckStopListRequest
@@ -941,41 +1255,36 @@ from iikocloud_client.models.color import Color as Color
 from iikocloud_client.models.combo import Combo as Combo
 from iikocloud_client.models.combo_category import ComboCategory as ComboCategory
 from iikocloud_client.models.combo_category_dto import ComboCategoryDto as ComboCategoryDto
-from iikocloud_client.models.combo_category_dto2 import ComboCategoryDto2 as ComboCategoryDto2
-from iikocloud_client.models.combo_category_dto3 import ComboCategoryDto3 as ComboCategoryDto3
+from iikocloud_client.models.combo_component_group import ComboComponentGroup as ComboComponentGroup
+from iikocloud_client.models.combo_component_product import ComboComponentProduct as ComboComponentProduct
 from iikocloud_client.models.combo_dto import ComboDto as ComboDto
-from iikocloud_client.models.combo_dto2 import ComboDto2 as ComboDto2
-from iikocloud_client.models.combo_dto2_image_inner import ComboDto2ImageInner as ComboDto2ImageInner
-from iikocloud_client.models.combo_dto3 import ComboDto3 as ComboDto3
-from iikocloud_client.models.combo_dto3_image_inner import ComboDto3ImageInner as ComboDto3ImageInner
 from iikocloud_client.models.combo_dto_image_inner import ComboDtoImageInner as ComboDtoImageInner
 from iikocloud_client.models.combo_group import ComboGroup as ComboGroup
 from iikocloud_client.models.combo_group_dto import ComboGroupDto as ComboGroupDto
-from iikocloud_client.models.combo_group_dto2 import ComboGroupDto2 as ComboGroupDto2
-from iikocloud_client.models.combo_group_dto3 import ComboGroupDto3 as ComboGroupDto3
-from iikocloud_client.models.combo_group_dto4 import ComboGroupDto4 as ComboGroupDto4
 from iikocloud_client.models.combo_group_item_dto import ComboGroupItemDto as ComboGroupItemDto
-from iikocloud_client.models.combo_group_item_dto2 import ComboGroupItemDto2 as ComboGroupItemDto2
-from iikocloud_client.models.combo_group_item_dto3 import ComboGroupItemDto3 as ComboGroupItemDto3
-from iikocloud_client.models.combo_group_item_dto4 import ComboGroupItemDto4 as ComboGroupItemDto4
 from iikocloud_client.models.combo_group_item_size_dto import ComboGroupItemSizeDto as ComboGroupItemSizeDto
-from iikocloud_client.models.combo_group_item_size_dto2 import ComboGroupItemSizeDto2 as ComboGroupItemSizeDto2
-from iikocloud_client.models.combo_group_item_size_dto3 import ComboGroupItemSizeDto3 as ComboGroupItemSizeDto3
-from iikocloud_client.models.combo_group_item_size_dto4 import ComboGroupItemSizeDto4 as ComboGroupItemSizeDto4
 from iikocloud_client.models.combo_group_mapping import ComboGroupMapping as ComboGroupMapping
 from iikocloud_client.models.combo_price_modification_type import ComboPriceModificationType as ComboPriceModificationType
 from iikocloud_client.models.combo_product import ComboProduct as ComboProduct
+from iikocloud_client.models.combo_size import ComboSize as ComboSize
 from iikocloud_client.models.combo_size_dto import ComboSizeDto as ComboSizeDto
-from iikocloud_client.models.combo_size_dto2 import ComboSizeDto2 as ComboSizeDto2
-from iikocloud_client.models.combo_size_dto3 import ComboSizeDto3 as ComboSizeDto3
+from iikocloud_client.models.combo_size_price import ComboSizePrice as ComboSizePrice
 from iikocloud_client.models.combo_specification import ComboSpecification as ComboSpecification
 from iikocloud_client.models.commit_draft_request import CommitDraftRequest as CommitDraftRequest
 from iikocloud_client.models.common_external_data import CommonExternalData as CommonExternalData
 from iikocloud_client.models.common_price_category import CommonPriceCategory as CommonPriceCategory
 from iikocloud_client.models.compound_item_template import CompoundItemTemplate as CompoundItemTemplate
 from iikocloud_client.models.conception import Conception as Conception
+from iikocloud_client.models.conception_get_by_id_request import ConceptionGetByIDRequest as ConceptionGetByIDRequest
+from iikocloud_client.models.conception_list_request import ConceptionListRequest as ConceptionListRequest
+from iikocloud_client.models.conception_list_response import ConceptionListResponse as ConceptionListResponse
 from iikocloud_client.models.confirm_delivery_request import ConfirmDeliveryRequest as ConfirmDeliveryRequest
+from iikocloud_client.models.container import Container as Container
+from iikocloud_client.models.container_filter import ContainerFilter as ContainerFilter
+from iikocloud_client.models.container_list_request import ContainerListRequest as ContainerListRequest
+from iikocloud_client.models.container_list_response import ContainerListResponse as ContainerListResponse
 from iikocloud_client.models.coordinate_info import CoordinateInfo as CoordinateInfo
+from iikocloud_client.models.corporation_settings import CorporationSettings as CorporationSettings
 from iikocloud_client.models.correlation_id_response import CorrelationIdResponse as CorrelationIdResponse
 from iikocloud_client.models.cost_price_item import CostPriceItem as CostPriceItem
 from iikocloud_client.models.counter_metric import CounterMetric as CounterMetric
@@ -997,20 +1306,23 @@ from iikocloud_client.models.create_or_update_customer_response import CreateOrU
 from iikocloud_client.models.create_order_request import CreateOrderRequest as CreateOrderRequest
 from iikocloud_client.models.create_order_settings import CreateOrderSettings as CreateOrderSettings
 from iikocloud_client.models.create_order_settings_base import CreateOrderSettingsBase as CreateOrderSettingsBase
+from iikocloud_client.models.create_request import CreateRequest as CreateRequest
 from iikocloud_client.models.create_reserve_request import CreateReserveRequest as CreateReserveRequest
 from iikocloud_client.models.create_table_order_request import CreateTableOrderRequest as CreateTableOrderRequest
 from iikocloud_client.models.create_table_order_settings import CreateTableOrderSettings as CreateTableOrderSettings
 from iikocloud_client.models.creation_status import CreationStatus as CreationStatus
+from iikocloud_client.models.custom_category import CustomCategory as CustomCategory
+from iikocloud_client.models.custom_category_filter import CustomCategoryFilter as CustomCategoryFilter
+from iikocloud_client.models.custom_category_list_request import CustomCategoryListRequest as CustomCategoryListRequest
+from iikocloud_client.models.custom_category_list_response import CustomCategoryListResponse as CustomCategoryListResponse
 from iikocloud_client.models.customer_tag_group import CustomerTagGroup as CustomerTagGroup
-from iikocloud_client.models.customer_tag_group2 import CustomerTagGroup2 as CustomerTagGroup2
-from iikocloud_client.models.customer_tag_group3 import CustomerTagGroup3 as CustomerTagGroup3
+from iikocloud_client.models.customer_tag_group_item import CustomerTagGroupItem as CustomerTagGroupItem
 from iikocloud_client.models.customer_tag_item import CustomerTagItem as CustomerTagItem
-from iikocloud_client.models.customer_tag_item2 import CustomerTagItem2 as CustomerTagItem2
-from iikocloud_client.models.customer_tag_item3 import CustomerTagItem3 as CustomerTagItem3
 from iikocloud_client.models.delete_customers_request import DeleteCustomersRequest as DeleteCustomersRequest
 from iikocloud_client.models.delete_customers_response import DeleteCustomersResponse as DeleteCustomersResponse
 from iikocloud_client.models.delete_draft_request import DeleteDraftRequest as DeleteDraftRequest
 from iikocloud_client.models.delete_magnet_card_request import DeleteMagnetCardRequest as DeleteMagnetCardRequest
+from iikocloud_client.models.delete_request import DeleteRequest as DeleteRequest
 from iikocloud_client.models.deletion_method import DeletionMethod as DeletionMethod
 from iikocloud_client.models.delivery_attention_notification_request import DeliveryAttentionNotificationRequest as DeliveryAttentionNotificationRequest
 from iikocloud_client.models.delivery_coordinates import DeliveryCoordinates as DeliveryCoordinates
@@ -1094,16 +1406,36 @@ from iikocloud_client.models.discounts_request import DiscountsRequest as Discou
 from iikocloud_client.models.discounts_response import DiscountsResponse as DiscountsResponse
 from iikocloud_client.models.document_transaction_item import DocumentTransactionItem as DocumentTransactionItem
 from iikocloud_client.models.document_transactions_list_request import DocumentTransactionsListRequest as DocumentTransactionsListRequest
+from iikocloud_client.models.employee_create_request import EmployeeCreateRequest as EmployeeCreateRequest
 from iikocloud_client.models.employee_directory_entry import EmployeeDirectoryEntry as EmployeeDirectoryEntry
+from iikocloud_client.models.employee_fire_request import EmployeeFireRequest as EmployeeFireRequest
+from iikocloud_client.models.employee_fire_response import EmployeeFireResponse as EmployeeFireResponse
+from iikocloud_client.models.employee_get_request import EmployeeGetRequest as EmployeeGetRequest
 from iikocloud_client.models.employee_info import EmployeeInfo as EmployeeInfo
 from iikocloud_client.models.employee_info_request import EmployeeInfoRequest as EmployeeInfoRequest
 from iikocloud_client.models.employee_info_response import EmployeeInfoResponse as EmployeeInfoResponse
+from iikocloud_client.models.employee_list_request import EmployeeListRequest as EmployeeListRequest
+from iikocloud_client.models.employee_position_dto import EmployeePositionDTO as EmployeePositionDTO
+from iikocloud_client.models.employee_position_filter_item import EmployeePositionFilterItem as EmployeePositionFilterItem
+from iikocloud_client.models.employee_position_response import EmployeePositionResponse as EmployeePositionResponse
+from iikocloud_client.models.employee_response import EmployeeResponse as EmployeeResponse
+from iikocloud_client.models.employee_restore_request import EmployeeRestoreRequest as EmployeeRestoreRequest
+from iikocloud_client.models.employee_restore_response import EmployeeRestoreResponse as EmployeeRestoreResponse
+from iikocloud_client.models.employee_update_request import EmployeeUpdateRequest as EmployeeUpdateRequest
 from iikocloud_client.models.employee_with_checked_role import EmployeeWithCheckedRole as EmployeeWithCheckedRole
+from iikocloud_client.models.employees_filter import EmployeesFilter as EmployeesFilter
 from iikocloud_client.models.employees_response import EmployeesResponse as EmployeesResponse
 from iikocloud_client.models.employees_with_role_sign_response import EmployeesWithRoleSignResponse as EmployeesWithRoleSignResponse
 from iikocloud_client.models.error_code import ErrorCode as ErrorCode
 from iikocloud_client.models.error_command_status import ErrorCommandStatus as ErrorCommandStatus
 from iikocloud_client.models.error_info import ErrorInfo as ErrorInfo
+from iikocloud_client.models.event_attribute_doc import EventAttributeDoc as EventAttributeDoc
+from iikocloud_client.models.event_group import EventGroup as EventGroup
+from iikocloud_client.models.event_list_item import EventListItem as EventListItem
+from iikocloud_client.models.event_list_request import EventListRequest as EventListRequest
+from iikocloud_client.models.event_list_response import EventListResponse as EventListResponse
+from iikocloud_client.models.event_metadata_list_response import EventMetadataListResponse as EventMetadataListResponse
+from iikocloud_client.models.event_type import EventType as EventType
 from iikocloud_client.models.extended_organization_info import ExtendedOrganizationInfo as ExtendedOrganizationInfo
 from iikocloud_client.models.external_courier_arrived_notification_request import ExternalCourierArrivedNotificationRequest as ExternalCourierArrivedNotificationRequest
 from iikocloud_client.models.external_courier_assigned_notification_request import ExternalCourierAssignedNotificationRequest as ExternalCourierAssignedNotificationRequest
@@ -1117,27 +1449,13 @@ from iikocloud_client.models.external_menu_combo_item import ExternalMenuComboIt
 from iikocloud_client.models.external_menu_combo_item_size import ExternalMenuComboItemSize as ExternalMenuComboItemSize
 from iikocloud_client.models.external_menu_item import ExternalMenuItem as ExternalMenuItem
 from iikocloud_client.models.external_menu_item2 import ExternalMenuItem2 as ExternalMenuItem2
-from iikocloud_client.models.external_menu_item3 import ExternalMenuItem3 as ExternalMenuItem3
 from iikocloud_client.models.external_menu_item_size import ExternalMenuItemSize as ExternalMenuItemSize
 from iikocloud_client.models.external_menu_item_size2 import ExternalMenuItemSize2 as ExternalMenuItemSize2
-from iikocloud_client.models.external_menu_item_size3 import ExternalMenuItemSize3 as ExternalMenuItemSize3
-from iikocloud_client.models.external_menu_item_size4 import ExternalMenuItemSize4 as ExternalMenuItemSize4
 from iikocloud_client.models.external_menu_modifier_group import ExternalMenuModifierGroup as ExternalMenuModifierGroup
 from iikocloud_client.models.external_menu_modifier_group2 import ExternalMenuModifierGroup2 as ExternalMenuModifierGroup2
-from iikocloud_client.models.external_menu_modifier_group3 import ExternalMenuModifierGroup3 as ExternalMenuModifierGroup3
-from iikocloud_client.models.external_menu_modifier_group4 import ExternalMenuModifierGroup4 as ExternalMenuModifierGroup4
 from iikocloud_client.models.external_menu_modifier_item import ExternalMenuModifierItem as ExternalMenuModifierItem
 from iikocloud_client.models.external_menu_modifier_item2 import ExternalMenuModifierItem2 as ExternalMenuModifierItem2
-from iikocloud_client.models.external_menu_modifier_item3 import ExternalMenuModifierItem3 as ExternalMenuModifierItem3
-from iikocloud_client.models.external_menu_modifier_item4 import ExternalMenuModifierItem4 as ExternalMenuModifierItem4
 from iikocloud_client.models.external_menu_price_by_departments_dto import ExternalMenuPriceByDepartmentsDto as ExternalMenuPriceByDepartmentsDto
-from iikocloud_client.models.external_menu_price_by_departments_dto2 import ExternalMenuPriceByDepartmentsDto2 as ExternalMenuPriceByDepartmentsDto2
-from iikocloud_client.models.external_menu_price_by_departments_dto3 import ExternalMenuPriceByDepartmentsDto3 as ExternalMenuPriceByDepartmentsDto3
-from iikocloud_client.models.external_menu_price_by_departments_dto4 import ExternalMenuPriceByDepartmentsDto4 as ExternalMenuPriceByDepartmentsDto4
-from iikocloud_client.models.external_menu_price_by_departments_dto5 import ExternalMenuPriceByDepartmentsDto5 as ExternalMenuPriceByDepartmentsDto5
-from iikocloud_client.models.external_menu_price_by_departments_dto6 import ExternalMenuPriceByDepartmentsDto6 as ExternalMenuPriceByDepartmentsDto6
-from iikocloud_client.models.external_menu_price_by_departments_dto7 import ExternalMenuPriceByDepartmentsDto7 as ExternalMenuPriceByDepartmentsDto7
-from iikocloud_client.models.external_menu_price_by_departments_dto8 import ExternalMenuPriceByDepartmentsDto8 as ExternalMenuPriceByDepartmentsDto8
 from iikocloud_client.models.external_menu_response import ExternalMenuResponse as ExternalMenuResponse
 from iikocloud_client.models.external_menu_v2 import ExternalMenuV2 as ExternalMenuV2
 from iikocloud_client.models.external_menu_v3 import ExternalMenuV3 as ExternalMenuV3
@@ -1145,8 +1463,10 @@ from iikocloud_client.models.external_menu_v4 import ExternalMenuV4 as ExternalM
 from iikocloud_client.models.external_payment import ExternalPayment as ExternalPayment
 from iikocloud_client.models.external_payment_additional_data import ExternalPaymentAdditionalData as ExternalPaymentAdditionalData
 from iikocloud_client.models.external_tips_payment import ExternalTipsPayment as ExternalTipsPayment
+from iikocloud_client.models.filter_condition import FilterCondition as FilterCondition
 from iikocloud_client.models.filter_drafts_request import FilterDraftsRequest as FilterDraftsRequest
 from iikocloud_client.models.filter_drafts_response import FilterDraftsResponse as FilterDraftsResponse
+from iikocloud_client.models.finance_accounts_filter import FinanceAccountsFilter as FinanceAccountsFilter
 from iikocloud_client.models.font import Font as Font
 from iikocloud_client.models.font_style import FontStyle as FontStyle
 from iikocloud_client.models.free_product import FreeProduct as FreeProduct
@@ -1185,13 +1505,23 @@ from iikocloud_client.models.get_delivery_restrictions_request import GetDeliver
 from iikocloud_client.models.get_delivery_restrictions_response import GetDeliveryRestrictionsResponse as GetDeliveryRestrictionsResponse
 from iikocloud_client.models.get_draft_request import GetDraftRequest as GetDraftRequest
 from iikocloud_client.models.get_draft_response import GetDraftResponse as GetDraftResponse
+from iikocloud_client.models.get_external_menu_by_id402_response import GetExternalMenuById402Response as GetExternalMenuById402Response
+from iikocloud_client.models.get_license_list_request import GetLicenseListRequest as GetLicenseListRequest
+from iikocloud_client.models.get_license_list_response import GetLicenseListResponse as GetLicenseListResponse
 from iikocloud_client.models.get_manual_conditions_response import GetManualConditionsResponse as GetManualConditionsResponse
+from iikocloud_client.models.get_olap_columns_request import GetOlapColumnsRequest as GetOlapColumnsRequest
+from iikocloud_client.models.get_olap_report_request import GetOlapReportRequest as GetOlapReportRequest
+from iikocloud_client.models.get_olap_report_response import GetOlapReportResponse as GetOlapReportResponse
 from iikocloud_client.models.get_organizations_request import GetOrganizationsRequest as GetOrganizationsRequest
 from iikocloud_client.models.get_organizations_response import GetOrganizationsResponse as GetOrganizationsResponse
 from iikocloud_client.models.get_personal_session_info_request import GetPersonalSessionInfoRequest as GetPersonalSessionInfoRequest
 from iikocloud_client.models.get_personal_session_info_response import GetPersonalSessionInfoResponse as GetPersonalSessionInfoResponse
+from iikocloud_client.models.get_position_request import GetPositionRequest as GetPositionRequest
+from iikocloud_client.models.get_price_list_request import GetPriceListRequest as GetPriceListRequest
+from iikocloud_client.models.get_price_list_response import GetPriceListResponse as GetPriceListResponse
 from iikocloud_client.models.get_programs_request import GetProgramsRequest as GetProgramsRequest
 from iikocloud_client.models.get_programs_response import GetProgramsResponse as GetProgramsResponse
+from iikocloud_client.models.get_request import GetRequest as GetRequest
 from iikocloud_client.models.get_restaurant_sections_request import GetRestaurantSectionsRequest as GetRestaurantSectionsRequest
 from iikocloud_client.models.get_restaurant_sections_response import GetRestaurantSectionsResponse as GetRestaurantSectionsResponse
 from iikocloud_client.models.get_restaurant_sections_workload_request import GetRestaurantSectionsWorkloadRequest as GetRestaurantSectionsWorkloadRequest
@@ -1224,7 +1554,17 @@ from iikocloud_client.models.iiko_card_discount_item import IikoCardDiscountItem
 from iikocloud_client.models.iiko_card_search_scope import IikoCardSearchScope as IikoCardSearchScope
 from iikocloud_client.models.iiko_error_response import IikoErrorResponse as IikoErrorResponse
 from iikocloud_client.models.iiko_net_user_sex import IikoNetUserSex as IikoNetUserSex
+from iikocloud_client.models.image import Image as Image
 from iikocloud_client.models.in_progress_command_status import InProgressCommandStatus as InProgressCommandStatus
+from iikocloud_client.models.incoming_inventory_create_first_step_item import IncomingInventoryCreateFirstStepItem as IncomingInventoryCreateFirstStepItem
+from iikocloud_client.models.incoming_inventory_create_item import IncomingInventoryCreateItem as IncomingInventoryCreateItem
+from iikocloud_client.models.incoming_inventory_create_request import IncomingInventoryCreateRequest as IncomingInventoryCreateRequest
+from iikocloud_client.models.incoming_inventory_get_first_item import IncomingInventoryGetFirstItem as IncomingInventoryGetFirstItem
+from iikocloud_client.models.incoming_inventory_get_item import IncomingInventoryGetItem as IncomingInventoryGetItem
+from iikocloud_client.models.incoming_inventory_get_response import IncomingInventoryGetResponse as IncomingInventoryGetResponse
+from iikocloud_client.models.incoming_inventory_list_item import IncomingInventoryListItem as IncomingInventoryListItem
+from iikocloud_client.models.incoming_inventory_save_response import IncomingInventorySaveResponse as IncomingInventorySaveResponse
+from iikocloud_client.models.incoming_inventory_update_request import IncomingInventoryUpdateRequest as IncomingInventoryUpdateRequest
 from iikocloud_client.models.incoming_invoice import IncomingInvoice as IncomingInvoice
 from iikocloud_client.models.incoming_invoice_item import IncomingInvoiceItem as IncomingInvoiceItem
 from iikocloud_client.models.incoming_invoice_request import IncomingInvoiceRequest as IncomingInvoiceRequest
@@ -1254,13 +1594,21 @@ from iikocloud_client.models.internal_transfer_list_item import InternalTransfer
 from iikocloud_client.models.internal_transfer_save_response import InternalTransferSaveResponse as InternalTransferSaveResponse
 from iikocloud_client.models.internal_transfer_update_request import InternalTransferUpdateRequest as InternalTransferUpdateRequest
 from iikocloud_client.models.interval_dto import IntervalDto as IntervalDto
-from iikocloud_client.models.interval_dto2 import IntervalDto2 as IntervalDto2
-from iikocloud_client.models.interval_dto3 import IntervalDto3 as IntervalDto3
+from iikocloud_client.models.inventory_conception import InventoryConception as InventoryConception
+from iikocloud_client.models.item import Item as Item
+from iikocloud_client.models.item_category import ItemCategory as ItemCategory
+from iikocloud_client.models.item_category_list_request import ItemCategoryListRequest as ItemCategoryListRequest
+from iikocloud_client.models.item_category_list_response import ItemCategoryListResponse as ItemCategoryListResponse
 from iikocloud_client.models.item_deleted_info import ItemDeletedInfo as ItemDeletedInfo
+from iikocloud_client.models.items_group import ItemsGroup as ItemsGroup
+from iikocloud_client.models.jur_person import JurPerson as JurPerson
+from iikocloud_client.models.kind_enum import KindEnum as KindEnum
 from iikocloud_client.models.label_dto import LabelDto as LabelDto
-from iikocloud_client.models.label_dto2 import LabelDto2 as LabelDto2
-from iikocloud_client.models.label_dto3 import LabelDto3 as LabelDto3
+from iikocloud_client.models.license_item import LicenseItem as LicenseItem
+from iikocloud_client.models.list_positions_request import ListPositionsRequest as ListPositionsRequest
+from iikocloud_client.models.list_positions_response import ListPositionsResponse as ListPositionsResponse
 from iikocloud_client.models.list_request import ListRequest as ListRequest
+from iikocloud_client.models.list_response import ListResponse as ListResponse
 from iikocloud_client.models.lock_or_unlock_draft_request import LockOrUnlockDraftRequest as LockOrUnlockDraftRequest
 from iikocloud_client.models.loyalty_card_payment import LoyaltyCardPayment as LoyaltyCardPayment
 from iikocloud_client.models.loyalty_card_payment_additional_data import LoyaltyCardPaymentAdditionalData as LoyaltyCardPaymentAdditionalData
@@ -1274,18 +1622,96 @@ from iikocloud_client.models.marketing_campaign_settings_info import MarketingCa
 from iikocloud_client.models.marketing_source_definition import MarketingSourceDefinition as MarketingSourceDefinition
 from iikocloud_client.models.marketing_sources_request import MarketingSourcesRequest as MarketingSourcesRequest
 from iikocloud_client.models.marketing_sources_response import MarketingSourcesResponse as MarketingSourcesResponse
+from iikocloud_client.models.measure_unit import MeasureUnit as MeasureUnit
+from iikocloud_client.models.measure_unit_get_by_id_request import MeasureUnitGetByIDRequest as MeasureUnitGetByIDRequest
+from iikocloud_client.models.measure_unit_list_request import MeasureUnitListRequest as MeasureUnitListRequest
+from iikocloud_client.models.measure_unit_list_response import MeasureUnitListResponse as MeasureUnitListResponse
+from iikocloud_client.models.measure_unit_type import MeasureUnitType as MeasureUnitType
 from iikocloud_client.models.menu_request import MenuRequest as MenuRequest
+from iikocloud_client.models.menu_request_v3 import MenuRequestV3 as MenuRequestV3
+from iikocloud_client.models.menu_section import MenuSection as MenuSection
+from iikocloud_client.models.menu_section_filter import MenuSectionFilter as MenuSectionFilter
+from iikocloud_client.models.menu_section_list_request import MenuSectionListRequest as MenuSectionListRequest
+from iikocloud_client.models.menu_section_list_response import MenuSectionListResponse as MenuSectionListResponse
+from iikocloud_client.models.menu_v3 import MenuV3 as MenuV3
+from iikocloud_client.models.menu_v3_allergen_group import MenuV3AllergenGroup as MenuV3AllergenGroup
+from iikocloud_client.models.menu_v3_combo import MenuV3Combo as MenuV3Combo
+from iikocloud_client.models.menu_v3_customer_tag_group import MenuV3CustomerTagGroup as MenuV3CustomerTagGroup
+from iikocloud_client.models.menu_v3_modifier import MenuV3Modifier as MenuV3Modifier
+from iikocloud_client.models.menu_v3_order_item_type import MenuV3OrderItemType as MenuV3OrderItemType
+from iikocloud_client.models.menu_v3_product import MenuV3Product as MenuV3Product
+from iikocloud_client.models.menu_v3_size_price import MenuV3SizePrice as MenuV3SizePrice
+from iikocloud_client.models.menu_v3_tax_category import MenuV3TaxCategory as MenuV3TaxCategory
 from iikocloud_client.models.menus_data_response import MenusDataResponse as MenusDataResponse
 from iikocloud_client.models.modifier import Modifier as Modifier
+from iikocloud_client.models.modifier_group import ModifierGroup as ModifierGroup
+from iikocloud_client.models.modifier_item import ModifierItem as ModifierItem
 from iikocloud_client.models.modifier_restrictions_dto import ModifierRestrictionsDto as ModifierRestrictionsDto
 from iikocloud_client.models.modifier_restrictions_dto2 import ModifierRestrictionsDto2 as ModifierRestrictionsDto2
-from iikocloud_client.models.modifier_restrictions_dto3 import ModifierRestrictionsDto3 as ModifierRestrictionsDto3
-from iikocloud_client.models.modifier_restrictions_dto4 import ModifierRestrictionsDto4 as ModifierRestrictionsDto4
-from iikocloud_client.models.modifier_restrictions_dto5 import ModifierRestrictionsDto5 as ModifierRestrictionsDto5
-from iikocloud_client.models.modifier_restrictions_dto6 import ModifierRestrictionsDto6 as ModifierRestrictionsDto6
-from iikocloud_client.models.modifier_restrictions_dto7 import ModifierRestrictionsDto7 as ModifierRestrictionsDto7
-from iikocloud_client.models.modifier_restrictions_dto8 import ModifierRestrictionsDto8 as ModifierRestrictionsDto8
+from iikocloud_client.models.modifier_schema import ModifierSchema as ModifierSchema
+from iikocloud_client.models.modifier_schema_filter import ModifierSchemaFilter as ModifierSchemaFilter
+from iikocloud_client.models.modifier_schema_list_request import ModifierSchemaListRequest as ModifierSchemaListRequest
+from iikocloud_client.models.modifier_schema_list_response import ModifierSchemaListResponse as ModifierSchemaListResponse
+from iikocloud_client.models.nomenclature_category_create_request import NomenclatureCategoryCreateRequest as NomenclatureCategoryCreateRequest
+from iikocloud_client.models.nomenclature_category_delete_request import NomenclatureCategoryDeleteRequest as NomenclatureCategoryDeleteRequest
+from iikocloud_client.models.nomenclature_category_list_request import NomenclatureCategoryListRequest as NomenclatureCategoryListRequest
+from iikocloud_client.models.nomenclature_category_list_response import NomenclatureCategoryListResponse as NomenclatureCategoryListResponse
+from iikocloud_client.models.nomenclature_category_response import NomenclatureCategoryResponse as NomenclatureCategoryResponse
+from iikocloud_client.models.nomenclature_category_restore_request import NomenclatureCategoryRestoreRequest as NomenclatureCategoryRestoreRequest
+from iikocloud_client.models.nomenclature_category_update_request import NomenclatureCategoryUpdateRequest as NomenclatureCategoryUpdateRequest
+from iikocloud_client.models.nomenclature_category_write_response import NomenclatureCategoryWriteResponse as NomenclatureCategoryWriteResponse
+from iikocloud_client.models.nomenclature_group_create_request import NomenclatureGroupCreateRequest as NomenclatureGroupCreateRequest
+from iikocloud_client.models.nomenclature_group_create_response import NomenclatureGroupCreateResponse as NomenclatureGroupCreateResponse
+from iikocloud_client.models.nomenclature_group_custom_category import NomenclatureGroupCustomCategory as NomenclatureGroupCustomCategory
+from iikocloud_client.models.nomenclature_group_delete_request import NomenclatureGroupDeleteRequest as NomenclatureGroupDeleteRequest
+from iikocloud_client.models.nomenclature_group_delete_response import NomenclatureGroupDeleteResponse as NomenclatureGroupDeleteResponse
+from iikocloud_client.models.nomenclature_group_department_filter import NomenclatureGroupDepartmentFilter as NomenclatureGroupDepartmentFilter
+from iikocloud_client.models.nomenclature_group_list_request import NomenclatureGroupListRequest as NomenclatureGroupListRequest
+from iikocloud_client.models.nomenclature_group_list_response import NomenclatureGroupListResponse as NomenclatureGroupListResponse
+from iikocloud_client.models.nomenclature_group_markup_setting import NomenclatureGroupMarkupSetting as NomenclatureGroupMarkupSetting
+from iikocloud_client.models.nomenclature_group_organization_filter import NomenclatureGroupOrganizationFilter as NomenclatureGroupOrganizationFilter
+from iikocloud_client.models.nomenclature_group_rgb_color import NomenclatureGroupRGBColor as NomenclatureGroupRGBColor
+from iikocloud_client.models.nomenclature_group_response import NomenclatureGroupResponse as NomenclatureGroupResponse
+from iikocloud_client.models.nomenclature_group_store_balance_level import NomenclatureGroupStoreBalanceLevel as NomenclatureGroupStoreBalanceLevel
+from iikocloud_client.models.nomenclature_group_undelete_request import NomenclatureGroupUndeleteRequest as NomenclatureGroupUndeleteRequest
+from iikocloud_client.models.nomenclature_group_undelete_response import NomenclatureGroupUndeleteResponse as NomenclatureGroupUndeleteResponse
+from iikocloud_client.models.nomenclature_group_update_request import NomenclatureGroupUpdateRequest as NomenclatureGroupUpdateRequest
+from iikocloud_client.models.nomenclature_group_update_response import NomenclatureGroupUpdateResponse as NomenclatureGroupUpdateResponse
+from iikocloud_client.models.nomenclature_group_v1_filter import NomenclatureGroupV1Filter as NomenclatureGroupV1Filter
+from iikocloud_client.models.nomenclature_group_v2_filter import NomenclatureGroupV2Filter as NomenclatureGroupV2Filter
 from iikocloud_client.models.nomenclature_price_category import NomenclaturePriceCategory as NomenclaturePriceCategory
+from iikocloud_client.models.nomenclature_product_barcode import NomenclatureProductBarcode as NomenclatureProductBarcode
+from iikocloud_client.models.nomenclature_product_child_modifier import NomenclatureProductChildModifier as NomenclatureProductChildModifier
+from iikocloud_client.models.nomenclature_product_container import NomenclatureProductContainer as NomenclatureProductContainer
+from iikocloud_client.models.nomenclature_product_create_request import NomenclatureProductCreateRequest as NomenclatureProductCreateRequest
+from iikocloud_client.models.nomenclature_product_create_response import NomenclatureProductCreateResponse as NomenclatureProductCreateResponse
+from iikocloud_client.models.nomenclature_product_custom_category import NomenclatureProductCustomCategory as NomenclatureProductCustomCategory
+from iikocloud_client.models.nomenclature_product_day_time import NomenclatureProductDayTime as NomenclatureProductDayTime
+from iikocloud_client.models.nomenclature_product_delete_request import NomenclatureProductDeleteRequest as NomenclatureProductDeleteRequest
+from iikocloud_client.models.nomenclature_product_delete_response import NomenclatureProductDeleteResponse as NomenclatureProductDeleteResponse
+from iikocloud_client.models.nomenclature_product_image import NomenclatureProductImage as NomenclatureProductImage
+from iikocloud_client.models.nomenclature_product_list_request import NomenclatureProductListRequest as NomenclatureProductListRequest
+from iikocloud_client.models.nomenclature_product_list_response import NomenclatureProductListResponse as NomenclatureProductListResponse
+from iikocloud_client.models.nomenclature_product_markup_setting import NomenclatureProductMarkupSetting as NomenclatureProductMarkupSetting
+from iikocloud_client.models.nomenclature_product_modifier import NomenclatureProductModifier as NomenclatureProductModifier
+from iikocloud_client.models.nomenclature_product_modifier_schema_redefinition import NomenclatureProductModifierSchemaRedefinition as NomenclatureProductModifierSchemaRedefinition
+from iikocloud_client.models.nomenclature_product_nutrition_value import NomenclatureProductNutritionValue as NomenclatureProductNutritionValue
+from iikocloud_client.models.nomenclature_product_rgb_color import NomenclatureProductRGBColor as NomenclatureProductRGBColor
+from iikocloud_client.models.nomenclature_product_rate import NomenclatureProductRate as NomenclatureProductRate
+from iikocloud_client.models.nomenclature_product_rate_interval import NomenclatureProductRateInterval as NomenclatureProductRateInterval
+from iikocloud_client.models.nomenclature_product_rate_schedule import NomenclatureProductRateSchedule as NomenclatureProductRateSchedule
+from iikocloud_client.models.nomenclature_product_response import NomenclatureProductResponse as NomenclatureProductResponse
+from iikocloud_client.models.nomenclature_product_size import NomenclatureProductSize as NomenclatureProductSize
+from iikocloud_client.models.nomenclature_product_size_factors import NomenclatureProductSizeFactors as NomenclatureProductSizeFactors
+from iikocloud_client.models.nomenclature_product_store_balance_level import NomenclatureProductStoreBalanceLevel as NomenclatureProductStoreBalanceLevel
+from iikocloud_client.models.nomenclature_product_undelete_request import NomenclatureProductUndeleteRequest as NomenclatureProductUndeleteRequest
+from iikocloud_client.models.nomenclature_product_undelete_response import NomenclatureProductUndeleteResponse as NomenclatureProductUndeleteResponse
+from iikocloud_client.models.nomenclature_product_update_barcodes_request import NomenclatureProductUpdateBarcodesRequest as NomenclatureProductUpdateBarcodesRequest
+from iikocloud_client.models.nomenclature_product_update_barcodes_response import NomenclatureProductUpdateBarcodesResponse as NomenclatureProductUpdateBarcodesResponse
+from iikocloud_client.models.nomenclature_product_update_request import NomenclatureProductUpdateRequest as NomenclatureProductUpdateRequest
+from iikocloud_client.models.nomenclature_product_update_response import NomenclatureProductUpdateResponse as NomenclatureProductUpdateResponse
+from iikocloud_client.models.nomenclature_product_v1_filter import NomenclatureProductV1Filter as NomenclatureProductV1Filter
+from iikocloud_client.models.nomenclature_product_v2_filter import NomenclatureProductV2Filter as NomenclatureProductV2Filter
 from iikocloud_client.models.nomenclature_request import NomenclatureRequest as NomenclatureRequest
 from iikocloud_client.models.nomenclature_response import NomenclatureResponse as NomenclatureResponse
 from iikocloud_client.models.not_activated_coupon import NotActivatedCoupon as NotActivatedCoupon
@@ -1293,13 +1719,9 @@ from iikocloud_client.models.not_activated_coupon_request import NotActivatedCou
 from iikocloud_client.models.not_activated_coupon_response import NotActivatedCouponResponse as NotActivatedCouponResponse
 from iikocloud_client.models.notification_sending_capability_check_status import NotificationSendingCapabilityCheckStatus as NotificationSendingCapabilityCheckStatus
 from iikocloud_client.models.nutrition_info_dto import NutritionInfoDto as NutritionInfoDto
-from iikocloud_client.models.nutrition_info_dto2 import NutritionInfoDto2 as NutritionInfoDto2
-from iikocloud_client.models.nutrition_info_dto3 import NutritionInfoDto3 as NutritionInfoDto3
-from iikocloud_client.models.nutrition_info_dto4 import NutritionInfoDto4 as NutritionInfoDto4
-from iikocloud_client.models.nutrition_info_dto5 import NutritionInfoDto5 as NutritionInfoDto5
-from iikocloud_client.models.nutrition_info_dto6 import NutritionInfoDto6 as NutritionInfoDto6
-from iikocloud_client.models.nutrition_info_dto7 import NutritionInfoDto7 as NutritionInfoDto7
-from iikocloud_client.models.nutrition_info_dto8 import NutritionInfoDto8 as NutritionInfoDto8
+from iikocloud_client.models.nutritions import Nutritions as Nutritions
+from iikocloud_client.models.olap_column import OlapColumn as OlapColumn
+from iikocloud_client.models.olap_filter_doc import OlapFilterDoc as OlapFilterDoc
 from iikocloud_client.models.open_personal_session_request import OpenPersonalSessionRequest as OpenPersonalSessionRequest
 from iikocloud_client.models.operation_code import OperationCode as OperationCode
 from iikocloud_client.models.order_attention_notification_request import OrderAttentionNotificationRequest as OrderAttentionNotificationRequest
@@ -1329,7 +1751,9 @@ from iikocloud_client.models.orders_by_revision_request import OrdersByRevisionR
 from iikocloud_client.models.orders_history_by_delivery_date_and_phone_request import OrdersHistoryByDeliveryDateAndPhoneRequest as OrdersHistoryByDeliveryDateAndPhoneRequest
 from iikocloud_client.models.orders_response import OrdersResponse as OrdersResponse
 from iikocloud_client.models.orders_with_revision_response import OrdersWithRevisionResponse as OrdersWithRevisionResponse
+from iikocloud_client.models.organization import Organization as Organization
 from iikocloud_client.models.organization_info import OrganizationInfo as OrganizationInfo
+from iikocloud_client.models.organization_license_info import OrganizationLicenseInfo as OrganizationLicenseInfo
 from iikocloud_client.models.organization_settings import OrganizationSettings as OrganizationSettings
 from iikocloud_client.models.organization_settings_parameters import OrganizationSettingsParameters as OrganizationSettingsParameters
 from iikocloud_client.models.organizations_settings_request import OrganizationsSettingsRequest as OrganizationsSettingsRequest
@@ -1347,40 +1771,74 @@ from iikocloud_client.models.outgoing_service_list_item import OutgoingServiceLi
 from iikocloud_client.models.outgoing_service_save_response import OutgoingServiceSaveResponse as OutgoingServiceSaveResponse
 from iikocloud_client.models.outgoing_service_update_request import OutgoingServiceUpdateRequest as OutgoingServiceUpdateRequest
 from iikocloud_client.models.override_taxes_dto import OverrideTaxesDto as OverrideTaxesDto
-from iikocloud_client.models.override_taxes_dto2 import OverrideTaxesDto2 as OverrideTaxesDto2
 from iikocloud_client.models.pay_outgoing_invoice_request import PayOutgoingInvoiceRequest as PayOutgoingInvoiceRequest
 from iikocloud_client.models.pay_request import PayRequest as PayRequest
 from iikocloud_client.models.payment import Payment as Payment
 from iikocloud_client.models.payment_additional_data import PaymentAdditionalData as PaymentAdditionalData
+from iikocloud_client.models.payment_details import PaymentDetails as PaymentDetails
 from iikocloud_client.models.payment_item import PaymentItem as PaymentItem
 from iikocloud_client.models.payment_link import PaymentLink as PaymentLink
 from iikocloud_client.models.payment_link_status import PaymentLinkStatus as PaymentLinkStatus
 from iikocloud_client.models.payment_processing_type import PaymentProcessingType as PaymentProcessingType
+from iikocloud_client.models.payment_type import PaymentType as PaymentType
 from iikocloud_client.models.payment_type_definition import PaymentTypeDefinition as PaymentTypeDefinition
+from iikocloud_client.models.payment_type_get_by_id_request import PaymentTypeGetByIDRequest as PaymentTypeGetByIDRequest
 from iikocloud_client.models.payment_type_kind_definition import PaymentTypeKindDefinition as PaymentTypeKindDefinition
+from iikocloud_client.models.payment_type_list_request import PaymentTypeListRequest as PaymentTypeListRequest
+from iikocloud_client.models.payment_type_list_response import PaymentTypeListResponse as PaymentTypeListResponse
 from iikocloud_client.models.payment_types_request import PaymentTypesRequest as PaymentTypesRequest
 from iikocloud_client.models.payment_types_response import PaymentTypesResponse as PaymentTypesResponse
+from iikocloud_client.models.period import Period as Period
 from iikocloud_client.models.period_schedule_dto import PeriodScheduleDto as PeriodScheduleDto
-from iikocloud_client.models.period_schedule_dto2 import PeriodScheduleDto2 as PeriodScheduleDto2
-from iikocloud_client.models.period_schedule_dto3 import PeriodScheduleDto3 as PeriodScheduleDto3
 from iikocloud_client.models.personal_data_consent_status import PersonalDataConsentStatus as PersonalDataConsentStatus
 from iikocloud_client.models.personal_shift import PersonalShift as PersonalShift
 from iikocloud_client.models.personal_shift_web_hook_event_info import PersonalShiftWebHookEventInfo as PersonalShiftWebHookEventInfo
+from iikocloud_client.models.place_type import PlaceType as PlaceType
+from iikocloud_client.models.place_type_filter import PlaceTypeFilter as PlaceTypeFilter
+from iikocloud_client.models.place_type_list_request import PlaceTypeListRequest as PlaceTypeListRequest
+from iikocloud_client.models.place_type_list_response import PlaceTypeListResponse as PlaceTypeListResponse
 from iikocloud_client.models.position_with_sum import PositionWithSum as PositionWithSum
+from iikocloud_client.models.posting import Posting as Posting
+from iikocloud_client.models.prepared_chart_dto import PreparedChartDto as PreparedChartDto
+from iikocloud_client.models.prepared_chart_item_dto import PreparedChartItemDto as PreparedChartItemDto
+from iikocloud_client.models.prepared_request import PreparedRequest as PreparedRequest
 from iikocloud_client.models.price import Price as Price
 from iikocloud_client.models.price_item import PriceItem as PriceItem
+from iikocloud_client.models.price_list_item import PriceListItem as PriceListItem
+from iikocloud_client.models.price_strategy import PriceStrategy as PriceStrategy
 from iikocloud_client.models.print_bill_request import PrintBillRequest as PrintBillRequest
 from iikocloud_client.models.print_delivery_bill_request import PrintDeliveryBillRequest as PrintDeliveryBillRequest
 from iikocloud_client.models.problem import Problem as Problem
+from iikocloud_client.models.producer import Producer as Producer
+from iikocloud_client.models.producer_filter import ProducerFilter as ProducerFilter
+from iikocloud_client.models.producer_list_request import ProducerListRequest as ProducerListRequest
+from iikocloud_client.models.producer_list_response import ProducerListResponse as ProducerListResponse
 from iikocloud_client.models.product import Product as Product
+from iikocloud_client.models.product_category import ProductCategory as ProductCategory
 from iikocloud_client.models.product_category_discount import ProductCategoryDiscount as ProductCategoryDiscount
 from iikocloud_client.models.product_category_dto import ProductCategoryDto as ProductCategoryDto
-from iikocloud_client.models.product_category_dto2 import ProductCategoryDto2 as ProductCategoryDto2
-from iikocloud_client.models.product_category_dto3 import ProductCategoryDto3 as ProductCategoryDto3
 from iikocloud_client.models.product_category_info import ProductCategoryInfo as ProductCategoryInfo
 from iikocloud_client.models.product_group import ProductGroup as ProductGroup
 from iikocloud_client.models.product_info import ProductInfo as ProductInfo
+from iikocloud_client.models.product_scale_filter import ProductScaleFilter as ProductScaleFilter
+from iikocloud_client.models.product_scale_list_response import ProductScaleListResponse as ProductScaleListResponse
+from iikocloud_client.models.product_scale_response import ProductScaleResponse as ProductScaleResponse
 from iikocloud_client.models.product_size import ProductSize as ProductSize
+from iikocloud_client.models.product_size_create_fields import ProductSizeCreateFields as ProductSizeCreateFields
+from iikocloud_client.models.product_size_create_request import ProductSizeCreateRequest as ProductSizeCreateRequest
+from iikocloud_client.models.product_size_delete_request import ProductSizeDeleteRequest as ProductSizeDeleteRequest
+from iikocloud_client.models.product_size_filter import ProductSizeFilter as ProductSizeFilter
+from iikocloud_client.models.product_size_get_request import ProductSizeGetRequest as ProductSizeGetRequest
+from iikocloud_client.models.product_size_list_request import ProductSizeListRequest as ProductSizeListRequest
+from iikocloud_client.models.product_size_list_response import ProductSizeListResponse as ProductSizeListResponse
+from iikocloud_client.models.product_size_response import ProductSizeResponse as ProductSizeResponse
+from iikocloud_client.models.product_size_update_fields import ProductSizeUpdateFields as ProductSizeUpdateFields
+from iikocloud_client.models.product_size_update_request import ProductSizeUpdateRequest as ProductSizeUpdateRequest
+from iikocloud_client.models.product_tag import ProductTag as ProductTag
+from iikocloud_client.models.product_tag_filter import ProductTagFilter as ProductTagFilter
+from iikocloud_client.models.product_tag_list_request import ProductTagListRequest as ProductTagListRequest
+from iikocloud_client.models.product_tag_list_response import ProductTagListResponse as ProductTagListResponse
+from iikocloud_client.models.product_type import ProductType as ProductType
 from iikocloud_client.models.production_document_create_item import ProductionDocumentCreateItem as ProductionDocumentCreateItem
 from iikocloud_client.models.production_document_create_request import ProductionDocumentCreateRequest as ProductionDocumentCreateRequest
 from iikocloud_client.models.production_document_get_item import ProductionDocumentGetItem as ProductionDocumentGetItem
@@ -1421,6 +1879,7 @@ from iikocloud_client.models.restaurant_section_rectangle import RestaurantSecti
 from iikocloud_client.models.restaurant_section_table import RestaurantSectionTable as RestaurantSectionTable
 from iikocloud_client.models.restore_customers_request import RestoreCustomersRequest as RestoreCustomersRequest
 from iikocloud_client.models.restore_customers_response import RestoreCustomersResponse as RestoreCustomersResponse
+from iikocloud_client.models.restrictions import Restrictions as Restrictions
 from iikocloud_client.models.restrictions_address import RestrictionsAddress as RestrictionsAddress
 from iikocloud_client.models.restrictions_order_item import RestrictionsOrderItem as RestrictionsOrderItem
 from iikocloud_client.models.restrictions_order_item_modifier import RestrictionsOrderItemModifier as RestrictionsOrderItemModifier
@@ -1452,15 +1911,9 @@ from iikocloud_client.models.sales_document_list_item import SalesDocumentListIt
 from iikocloud_client.models.sales_document_save_response import SalesDocumentSaveResponse as SalesDocumentSaveResponse
 from iikocloud_client.models.sales_document_update_request import SalesDocumentUpdateRequest as SalesDocumentUpdateRequest
 from iikocloud_client.models.save_draft_request import SaveDraftRequest as SaveDraftRequest
+from iikocloud_client.models.schedule import Schedule as Schedule
 from iikocloud_client.models.section_schema import SectionSchema as SectionSchema
 from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag as SelectedCustomerTag
-from iikocloud_client.models.selected_customer_tag2 import SelectedCustomerTag2 as SelectedCustomerTag2
-from iikocloud_client.models.selected_customer_tag3 import SelectedCustomerTag3 as SelectedCustomerTag3
-from iikocloud_client.models.selected_customer_tag4 import SelectedCustomerTag4 as SelectedCustomerTag4
-from iikocloud_client.models.selected_customer_tag5 import SelectedCustomerTag5 as SelectedCustomerTag5
-from iikocloud_client.models.selected_customer_tag6 import SelectedCustomerTag6 as SelectedCustomerTag6
-from iikocloud_client.models.selected_customer_tag7 import SelectedCustomerTag7 as SelectedCustomerTag7
-from iikocloud_client.models.selected_customer_tag8 import SelectedCustomerTag8 as SelectedCustomerTag8
 from iikocloud_client.models.send_email_request import SendEmailRequest as SendEmailRequest
 from iikocloud_client.models.send_notification_request import SendNotificationRequest as SendNotificationRequest
 from iikocloud_client.models.send_sms_request import SendSmsRequest as SendSmsRequest
@@ -1477,22 +1930,32 @@ from iikocloud_client.models.simple_modifier_info import SimpleModifierInfo as S
 from iikocloud_client.models.simple_organization_info import SimpleOrganizationInfo as SimpleOrganizationInfo
 from iikocloud_client.models.size import Size as Size
 from iikocloud_client.models.size_price import SizePrice as SizePrice
+from iikocloud_client.models.size_price_short import SizePriceShort as SizePriceShort
 from iikocloud_client.models.sms_sending_possibility_request import SmsSendingPossibilityRequest as SmsSendingPossibilityRequest
 from iikocloud_client.models.sms_sending_possibility_response import SmsSendingPossibilityResponse as SmsSendingPossibilityResponse
 from iikocloud_client.models.sms_sending_status import SmsSendingStatus as SmsSendingStatus
 from iikocloud_client.models.sms_sending_status_info import SmsSendingStatusInfo as SmsSendingStatusInfo
 from iikocloud_client.models.sort_direction import SortDirection as SortDirection
 from iikocloud_client.models.split_order_between_cash_registers import SplitOrderBetweenCashRegisters as SplitOrderBetweenCashRegisters
+from iikocloud_client.models.stock_balance_details import StockBalanceDetails as StockBalanceDetails
+from iikocloud_client.models.stock_balance_item import StockBalanceItem as StockBalanceItem
+from iikocloud_client.models.stock_balance_list_request import StockBalanceListRequest as StockBalanceListRequest
+from iikocloud_client.models.stock_balance_list_response import StockBalanceListResponse as StockBalanceListResponse
 from iikocloud_client.models.stop_list_item import StopListItem as StopListItem
 from iikocloud_client.models.stop_list_update_web_hook_event_info import StopListUpdateWebHookEventInfo as StopListUpdateWebHookEventInfo
 from iikocloud_client.models.stop_lists_request import StopListsRequest as StopListsRequest
 from iikocloud_client.models.stop_lists_response import StopListsResponse as StopListsResponse
+from iikocloud_client.models.store import Store as Store
+from iikocloud_client.models.store_list_response import StoreListResponse as StoreListResponse
+from iikocloud_client.models.store_specification import StoreSpecification as StoreSpecification
+from iikocloud_client.models.stores_list_request import StoresListRequest as StoresListRequest
 from iikocloud_client.models.street_by_id import StreetById as StreetById
 from iikocloud_client.models.streets_by_city_request import StreetsByCityRequest as StreetsByCityRequest
 from iikocloud_client.models.streets_by_id_request import StreetsByIdRequest as StreetsByIdRequest
 from iikocloud_client.models.streets_by_id_response import StreetsByIdResponse as StreetsByIdResponse
 from iikocloud_client.models.streets_response import StreetsResponse as StreetsResponse
 from iikocloud_client.models.success_command_status import SuccessCommandStatus as SuccessCommandStatus
+from iikocloud_client.models.swagger_employee_list_response import SwaggerEmployeeListResponse as SwaggerEmployeeListResponse
 from iikocloud_client.models.table import Table as Table
 from iikocloud_client.models.table_order_customer import TableOrderCustomer as TableOrderCustomer
 from iikocloud_client.models.table_order_error_web_hook_event_info import TableOrderErrorWebHookEventInfo as TableOrderErrorWebHookEventInfo
@@ -1505,11 +1968,11 @@ from iikocloud_client.models.table_order_update_web_hook_event_info import Table
 from iikocloud_client.models.table_order_web_hook_filter import TableOrderWebHookFilter as TableOrderWebHookFilter
 from iikocloud_client.models.table_orders_response import TableOrdersResponse as TableOrdersResponse
 from iikocloud_client.models.tag_dto import TagDto as TagDto
-from iikocloud_client.models.tag_dto2 import TagDto2 as TagDto2
-from iikocloud_client.models.tag_dto3 import TagDto3 as TagDto3
+from iikocloud_client.models.tag_item import TagItem as TagItem
+from iikocloud_client.models.tax_category import TaxCategory as TaxCategory
 from iikocloud_client.models.tax_category_dto import TaxCategoryDto as TaxCategoryDto
-from iikocloud_client.models.tax_category_dto2 import TaxCategoryDto2 as TaxCategoryDto2
-from iikocloud_client.models.tax_category_dto3 import TaxCategoryDto3 as TaxCategoryDto3
+from iikocloud_client.models.tax_category_list_request import TaxCategoryListRequest as TaxCategoryListRequest
+from iikocloud_client.models.tax_category_list_response import TaxCategoryListResponse as TaxCategoryListResponse
 from iikocloud_client.models.template_type import TemplateType as TemplateType
 from iikocloud_client.models.terminal_group import TerminalGroup as TerminalGroup
 from iikocloud_client.models.terminal_group_alive_info import TerminalGroupAliveInfo as TerminalGroupAliveInfo
@@ -1519,6 +1982,9 @@ from iikocloud_client.models.terminal_groups_is_alive_request import TerminalGro
 from iikocloud_client.models.terminal_groups_is_alive_response import TerminalGroupsIsAliveResponse as TerminalGroupsIsAliveResponse
 from iikocloud_client.models.terminal_groups_request import TerminalGroupsRequest as TerminalGroupsRequest
 from iikocloud_client.models.terminal_groups_response import TerminalGroupsResponse as TerminalGroupsResponse
+from iikocloud_client.models.terminal_list_item import TerminalListItem as TerminalListItem
+from iikocloud_client.models.terminal_list_request import TerminalListRequest as TerminalListRequest
+from iikocloud_client.models.terminal_list_response import TerminalListResponse as TerminalListResponse
 from iikocloud_client.models.tips_payment import TipsPayment as TipsPayment
 from iikocloud_client.models.tips_payment_item import TipsPaymentItem as TipsPaymentItem
 from iikocloud_client.models.tips_type_definition import TipsTypeDefinition as TipsTypeDefinition
@@ -1536,12 +2002,11 @@ from iikocloud_client.models.transformation_document_update_request import Trans
 from iikocloud_client.models.transport_transactions_certificate_report_item import TransportTransactionsCertificateReportItem as TransportTransactionsCertificateReportItem
 from iikocloud_client.models.transport_transactions_coupon_report_item import TransportTransactionsCouponReportItem as TransportTransactionsCouponReportItem
 from iikocloud_client.models.transport_transactions_report_item import TransportTransactionsReportItem as TransportTransactionsReportItem
+from iikocloud_client.models.tree_request import TreeRequest as TreeRequest
 from iikocloud_client.models.update_delivery_status_request import UpdateDeliveryStatusRequest as UpdateDeliveryStatusRequest
 from iikocloud_client.models.update_order_courier_request import UpdateOrderCourierRequest as UpdateOrderCourierRequest
 from iikocloud_client.models.update_order_payments_request import UpdateOrderPaymentsRequest as UpdateOrderPaymentsRequest
 from iikocloud_client.models.update_order_problem_request import UpdateOrderProblemRequest as UpdateOrderProblemRequest
-from iikocloud_client.models.update_product_barcodes_request import UpdateProductBarcodesRequest as UpdateProductBarcodesRequest
-from iikocloud_client.models.update_product_barcodes_response import UpdateProductBarcodesResponse as UpdateProductBarcodesResponse
 from iikocloud_client.models.update_tracking_link_request import UpdateTrackingLinkRequest as UpdateTrackingLinkRequest
 from iikocloud_client.models.update_web_hook_settings_request import UpdateWebHookSettingsRequest as UpdateWebHookSettingsRequest
 from iikocloud_client.models.upsale import Upsale as Upsale
@@ -1552,6 +2017,7 @@ from iikocloud_client.models.web_hook_event_type import WebHookEventType as WebH
 from iikocloud_client.models.web_hook_on_stop_list_change_data import WebHookOnStopListChangeData as WebHookOnStopListChangeData
 from iikocloud_client.models.web_hook_short_filter import WebHookShortFilter as WebHookShortFilter
 from iikocloud_client.models.web_hooks_filter import WebHooksFilter as WebHooksFilter
+from iikocloud_client.models.week_day import WeekDay as WeekDay
 from iikocloud_client.models.writeoff_document_create_item import WriteoffDocumentCreateItem as WriteoffDocumentCreateItem
 from iikocloud_client.models.writeoff_document_create_request import WriteoffDocumentCreateRequest as WriteoffDocumentCreateRequest
 from iikocloud_client.models.writeoff_document_get_item import WriteoffDocumentGetItem as WriteoffDocumentGetItem

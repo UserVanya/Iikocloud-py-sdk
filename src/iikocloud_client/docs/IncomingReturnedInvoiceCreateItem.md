@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **float** | Product quantity | 
-**amount_factor** | **float** | publicapi.model.incoming_returned_invoice_item.amountFactor | [optional] 
+**amount_factor** | **float** | Write-off factor | [optional] 
 **amount_unit** | **str** | Unit of measure identifier (GUID) | [optional] 
 **container_id** | **str** | Container identifier (GUID) | [optional] 
 **customs_declaration_number** | **str** | Customs declaration number | [optional] 

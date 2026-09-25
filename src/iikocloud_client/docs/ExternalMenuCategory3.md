@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **name** | **str** | Category name | [optional] [default to '']
 **schedule_id** | **str** | Category schedule GUID | [optional] 
 **schedule_name** | **str** | Category schedule name | [optional] 
-**schedules** | [**List[PeriodScheduleDto3]**](PeriodScheduleDto3.md) | Category schedule intervals | [optional] 
+**schedules** | [**List[PeriodScheduleDto]**](PeriodScheduleDto.md) | Category schedule intervals | [optional] 
 **tags** | **List[str]** | List of tags | [optional] 
 
 ## Example

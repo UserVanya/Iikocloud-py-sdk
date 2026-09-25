@@ -28,7 +28,7 @@ class SelectedCustomerTag(BaseModel):
     Customer tags
     """ # noqa: E501
     customer_tag_group_id: StrictStr = Field(description="Tag GUID", alias="customerTagGroupId")
-    selected_tag_ids: Optional[List[Any]] = Field(default=None, description="Tag name", alias="selectedTagIds")
+    selected_tag_ids: Optional[List[StrictStr]] = Field(default=None, description="Tag name", alias="selectedTagIds")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["customerTagGroupId", "selectedTagIds"]
 

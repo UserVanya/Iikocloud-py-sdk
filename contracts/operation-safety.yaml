@@ -100,6 +100,10 @@ operations:
     effect: delete
     live_policy: lifecycle_only
     reason: "Requires an owned entity for cancel inventory disassemble document and reviewed compensation."
+  cancel_inventory_incoming_inventory:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for cancel inventory incoming inventory and reviewed compensation."
   cancel_inventory_incoming_invoice:
     effect: delete
     live_policy: lifecycle_only
@@ -244,6 +248,22 @@ operations:
     effect: create
     live_policy: lifecycle_only
     reason: "Requires an owned entity for create delivery order and reviewed compensation."
+  create_employee:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create employee and reviewed compensation."
+  create_employee_attendance:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create employee attendance and reviewed compensation."
+  create_finance_account:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create finance account and reviewed compensation."
+  create_finance_cash_flow_category:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create finance cash flow category and reviewed compensation."
   create_finance_incoming_service:
     effect: create
     live_policy: lifecycle_only
@@ -256,6 +276,10 @@ operations:
     effect: create
     live_policy: lifecycle_only
     reason: "Requires an owned entity for create inventory disassemble document and reviewed compensation."
+  create_inventory_incoming_inventory:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create inventory incoming inventory and reviewed compensation."
   create_inventory_incoming_invoice:
     effect: create
     live_policy: lifecycle_only
@@ -292,6 +316,38 @@ operations:
     effect: create
     live_policy: lifecycle_only
     reason: "Requires an owned entity for create inventory writeoff document and reviewed compensation."
+  create_nomenclature_assembly_chart:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature assembly chart and reviewed compensation."
+  create_nomenclature_assembly_chart_v2:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature assembly chart v2 and reviewed compensation."
+  create_nomenclature_group:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature group and reviewed compensation."
+  create_nomenclature_group_v2:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature group v2 and reviewed compensation."
+  create_nomenclature_product:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature product and reviewed compensation."
+  create_nomenclature_product_category:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature product category and reviewed compensation."
+  create_nomenclature_product_scale:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature product scale and reviewed compensation."
+  create_nomenclature_product_v2:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature product v2 and reviewed compensation."
   create_or_update_customer:
     effect: create
     live_policy: lifecycle_only
@@ -312,6 +368,54 @@ operations:
     effect: delete
     live_policy: lifecycle_only
     reason: "Requires an owned entity for delete delivery draft and reviewed compensation."
+  delete_employee_attendance:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete employee attendance and reviewed compensation."
+  delete_finance_account:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete finance account and reviewed compensation."
+  delete_finance_cash_flow_category:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete finance cash flow category and reviewed compensation."
+  delete_nomenclature_assembly_chart:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature assembly chart and reviewed compensation."
+  delete_nomenclature_assembly_chart_v2:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature assembly chart v2 and reviewed compensation."
+  delete_nomenclature_groups:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature groups and reviewed compensation."
+  delete_nomenclature_groups_v2:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature groups v2 and reviewed compensation."
+  delete_nomenclature_product_category:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature product category and reviewed compensation."
+  delete_nomenclature_product_scale:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature product scale and reviewed compensation."
+  delete_nomenclature_products:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature products and reviewed compensation."
+  delete_nomenclature_products_v2:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature products v2 and reviewed compensation."
+  fire_employees:
+    effect: irreversible
+    live_policy: manual_only
+    reason: "Dismisses real employees; restore is not proven to revert the record completely."
   get_active_courier_locations:
     effect: read
     live_policy: automatic
@@ -416,18 +520,38 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get discounts."
+  get_employee:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_employee_info:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get employee info."
+  get_employee_position:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_external_menu_by_id:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get external menu by id."
+  get_external_menu_v3_by_id:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_external_menus:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get external menus."
+  get_finance_account:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_finance_cash_flow_category:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_finance_incoming_service:
     effect: read
     live_policy: automatic
@@ -436,14 +560,22 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get finance outgoing service."
-  get_inventory_counteragents:
+  get_inventory_accounting_category:
     effect: read
-    live_policy: automatic
-    reason: "Reviewed non-mutating query for get inventory counteragents."
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_inventory_conception:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_inventory_disassemble_document:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get inventory disassemble document."
+  get_inventory_incoming_inventory:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_inventory_incoming_invoice:
     effect: read
     live_policy: automatic
@@ -456,10 +588,22 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get inventory internal transfer."
+  get_inventory_measure_unit:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_inventory_organization_tree:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_inventory_outgoing_invoice:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get inventory outgoing invoice."
+  get_inventory_payment_type:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_inventory_production_document:
     effect: read
     live_policy: automatic
@@ -500,10 +644,42 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get nomenclature."
+  get_nomenclature_assembled_chart_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_assembly_chart:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_assembly_chart_tree_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_assembly_chart_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_prepared_chart_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_product_scale:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_non_activated_coupons_by_series:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get non activated coupons by series."
+  get_olap_report:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_olap_report_columns:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   get_organization_settings:
     effect: read
     live_policy: automatic
@@ -596,10 +772,50 @@ operations:
     effect: action
     live_policy: manual_only
     reason: "Table initialization has no safe automatic compensation."
+  list_employee_attendance_types:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_employee_attendances:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_employee_positions:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_employees:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_finance_account_postings:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_finance_account_transactions:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list finance account transactions."
+  list_finance_account_types:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_finance_accounts:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_finance_balance_sheet:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_finance_cash_flow_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_finance_chart_of_accounts:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_finance_document_transactions:
     effect: read
     live_policy: automatic
@@ -608,14 +824,42 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list finance incoming services."
+  list_finance_item_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_finance_outgoing_services:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list finance outgoing services."
+  list_finance_tax_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_accounting_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_conceptions:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_corporation_settings:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_counteragents:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_inventory_disassemble_documents:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list inventory disassemble documents."
+  list_inventory_incoming_inventories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_inventory_incoming_invoices:
     effect: read
     live_policy: automatic
@@ -628,10 +872,18 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list inventory internal transfers."
+  list_inventory_measure_units:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_inventory_outgoing_invoices:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list inventory outgoing invoices."
+  list_inventory_payment_types:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_inventory_production_documents:
     effect: read
     live_policy: automatic
@@ -644,6 +896,18 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list inventory sales documents."
+  list_inventory_stock_balances:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_stores:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_inventory_supplier_price_list:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_inventory_transformation_documents:
     effect: read
     live_policy: automatic
@@ -652,10 +916,102 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list inventory writeoff documents."
+  list_licenses:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_allergen_groups:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_amount_units:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_assembly_charts:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_assembly_charts_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_containers:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_custom_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_groups:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_groups_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_menu_sections:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_modifier_schemas:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_place_types:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_producers:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_product_categories:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_product_scales:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_product_sizes:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_product_tags:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_products:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_products_v2:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   list_organizations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for list organizations."
+  list_platform_event_metadata:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_platform_events:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_terminal_cash_registers:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_terminals:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
   lock_delivery_draft:
     effect: action
     live_policy: lifecycle_only
@@ -676,6 +1032,10 @@ operations:
     effect: action
     live_policy: lifecycle_only
     reason: "Requires an owned entity for post inventory disassemble document and reviewed compensation."
+  post_inventory_incoming_inventory:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for post inventory incoming inventory and reviewed compensation."
   post_inventory_incoming_invoice:
     effect: action
     live_policy: lifecycle_only
@@ -736,6 +1096,38 @@ operations:
     effect: action
     live_policy: lifecycle_only
     reason: "Requires an owned entity for restore customers and reviewed compensation."
+  restore_employee:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore employee and reviewed compensation."
+  restore_finance_account:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore finance account and reviewed compensation."
+  restore_finance_cash_flow_category:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore finance cash flow category and reviewed compensation."
+  restore_nomenclature_groups:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore nomenclature groups and reviewed compensation."
+  restore_nomenclature_groups_v2:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore nomenclature groups v2 and reviewed compensation."
+  restore_nomenclature_product_category:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore nomenclature product category and reviewed compensation."
+  restore_nomenclature_products:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore nomenclature products and reviewed compensation."
+  restore_nomenclature_products_v2:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for restore nomenclature products v2 and reviewed compensation."
   save_delivery_draft:
     effect: update
     live_policy: lifecycle_only
@@ -784,6 +1176,10 @@ operations:
     effect: action
     live_policy: lifecycle_only
     reason: "Requires an owned entity for unpost inventory disassemble document and reviewed compensation."
+  unpost_inventory_incoming_inventory:
+    effect: action
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for unpost inventory incoming inventory and reviewed compensation."
   unpost_inventory_incoming_invoice:
     effect: action
     live_policy: lifecycle_only
@@ -840,6 +1236,22 @@ operations:
     effect: update
     live_policy: lifecycle_only
     reason: "Requires an owned entity for update delivery tracking link and reviewed compensation."
+  update_employee:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update employee and reviewed compensation."
+  update_employee_attendance:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update employee attendance and reviewed compensation."
+  update_finance_account:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update finance account and reviewed compensation."
+  update_finance_cash_flow_category:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update finance cash flow category and reviewed compensation."
   update_finance_incoming_service:
     effect: update
     live_policy: lifecycle_only
@@ -852,6 +1264,10 @@ operations:
     effect: update
     live_policy: lifecycle_only
     reason: "Requires an owned entity for update inventory disassemble document and reviewed compensation."
+  update_inventory_incoming_inventory:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update inventory incoming inventory and reviewed compensation."
   update_inventory_incoming_invoice:
     effect: update
     live_policy: lifecycle_only
@@ -868,10 +1284,6 @@ operations:
     effect: update
     live_policy: lifecycle_only
     reason: "Requires an owned entity for update inventory outgoing invoice and reviewed compensation."
-  update_inventory_product_barcodes:
-    effect: update
-    live_policy: lifecycle_only
-    reason: "Requires an owned entity for update inventory product barcodes and reviewed compensation."
   update_inventory_production_document:
     effect: update
     live_policy: lifecycle_only
@@ -892,6 +1304,46 @@ operations:
     effect: update
     live_policy: lifecycle_only
     reason: "Requires an owned entity for update inventory writeoff document and reviewed compensation."
+  update_nomenclature_assembly_chart:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature assembly chart and reviewed compensation."
+  update_nomenclature_assembly_chart_v2:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature assembly chart v2 and reviewed compensation."
+  update_nomenclature_group:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature group and reviewed compensation."
+  update_nomenclature_group_v2:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature group v2 and reviewed compensation."
+  update_nomenclature_product:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product and reviewed compensation."
+  update_nomenclature_product_barcodes:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product barcodes and reviewed compensation."
+  update_nomenclature_product_barcodes_v2:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product barcodes v2 and reviewed compensation."
+  update_nomenclature_product_category:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product category and reviewed compensation."
+  update_nomenclature_product_scale:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product scale and reviewed compensation."
+  update_nomenclature_product_v2:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature product v2 and reviewed compensation."
   update_webhook_settings:
     effect: update
     live_policy: blocked

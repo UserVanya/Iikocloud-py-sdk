@@ -49,7 +49,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                         items = [
                                             iikocloud_client.models.combo_group_item_dto.ComboGroupItemDto(
                                                 forbidden_modifiers = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 item_id = '', 
                                                 price_modification_amount = 1.337, 
@@ -59,7 +59,8 @@ class TestExternalMenuV2(unittest.TestCase):
                                                         combo_size_id = '', 
                                                         name = '', 
                                                         prices = [
-                                                            iikocloud_client.models.external_menu_price_by_departments_dto5.ExternalMenuPriceByDepartmentsDto5(
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
                                                                 organizations = [
                                                                     ''
                                                                     ], 
@@ -123,7 +124,7 @@ class TestExternalMenuV2(unittest.TestCase):
                         items = [
                             iikocloud_client.models.external_menu_item.ExternalMenuItem(
                                 allergens = [
-                                    iikocloud_client.models.allergen_group_dto3.AllergenGroupDto3(
+                                    iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
                                         code = '', 
                                         id = '', 
                                         is_deleted = True, 
@@ -132,7 +133,8 @@ class TestExternalMenuV2(unittest.TestCase):
                                 barcodes = [
                                     iikocloud_client.models.barcode_dto.BarcodeDto(
                                         barcode = '', 
-                                        container = '', )
+                                        container = '', 
+                                        product_fiscal_code = '', )
                                     ], 
                                 can_be_divided = True, 
                                 can_set_open_price = True, 
@@ -140,7 +142,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                     iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                                         customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                                         selected_tag_ids = [
-                                            null
+                                            ''
                                             ], )
                                     ], 
                                 description = '', 
@@ -159,6 +161,52 @@ class TestExternalMenuV2(unittest.TestCase):
                                                 description = '', 
                                                 is_hidden = True, 
                                                 item_group_id = '00000000-0000-0000-0000-000000000000', 
+                                                items = [
+                                                    iikocloud_client.models.external_menu_modifier_item.ExternalMenuModifierItem(
+                                                        allergen_groups = [
+                                                            iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
+                                                                code = '', 
+                                                                id = '', 
+                                                                is_deleted = True, 
+                                                                name = '', )
+                                                            ], 
+                                                        button_image_url = '', 
+                                                        description = '', 
+                                                        independent_quantity = True, 
+                                                        is_hidden = True, 
+                                                        is_marked = True, 
+                                                        item_id = '', 
+                                                        labels = [
+                                                            iikocloud_client.models.label_dto.LabelDto(
+                                                                code = '', 
+                                                                name = '', )
+                                                            ], 
+                                                        measure_unit_type = 'GRAM', 
+                                                        name = '', 
+                                                        nutrition_per_hundred_grams = null, 
+                                                        outer_ean_code = '', 
+                                                        payment_subject = '', 
+                                                        payment_subject_code = '', 
+                                                        portion_weight_grams = 0.0, 
+                                                        position = 56, 
+                                                        prices = [
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
+                                                                organizations = [
+                                                                    ''
+                                                                    ], 
+                                                                price = 0, 
+                                                                tax_category_id = '', )
+                                                            ], 
+                                                        product_category_id = '', 
+                                                        restrictions = null, 
+                                                        sku = '', 
+                                                        tags = [
+                                                            iikocloud_client.models.tag_dto.TagDto(
+                                                                id = '', 
+                                                                name = '', )
+                                                            ], )
+                                                    ], 
                                                 name = '', 
                                                 restrictions = null, 
                                                 sku = '', )
@@ -168,9 +216,6 @@ class TestExternalMenuV2(unittest.TestCase):
                                             carbs = 1.337, 
                                             energy = 1.337, 
                                             fats = 1.337, 
-                                            organizations = [
-                                                ''
-                                                ], 
                                             proteins = 1.337, 
                                             salt = 1.337, 
                                             saturated_fatty_acid = 1.337, 
@@ -198,7 +243,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                         sku = '', )
                                     ], 
                                 labels = [
-                                    iikocloud_client.models.label_dto2.LabelDto2(
+                                    iikocloud_client.models.label_dto.LabelDto(
                                         code = '', 
                                         name = '', )
                                     ], 
@@ -213,7 +258,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 product_category_id = '00000000-0000-0000-0000-000000000000', 
                                 sku = '', 
                                 tags = [
-                                    iikocloud_client.models.tag_dto2.TagDto2(
+                                    iikocloud_client.models.tag_dto.TagDto(
                                         id = '', 
                                         name = '', )
                                     ], 
@@ -222,9 +267,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 use_balance_for_sell = True, )
                             ], 
                         labels = [
-                            iikocloud_client.models.label_dto.LabelDto(
-                                code = '', 
-                                name = '', )
+                            
                             ], 
                         name = '', 
                         schedule_id = '00000000-0000-0000-0000-000000000000', 
@@ -238,9 +281,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 end = '23:00', )
                             ], 
                         tags = [
-                            iikocloud_client.models.tag_dto.TagDto(
-                                id = '', 
-                                name = '', )
+                            
                             ], )
                     ],
                 name = '',
@@ -267,7 +308,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                         items = [
                                             iikocloud_client.models.combo_group_item_dto.ComboGroupItemDto(
                                                 forbidden_modifiers = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 item_id = '', 
                                                 price_modification_amount = 1.337, 
@@ -277,7 +318,8 @@ class TestExternalMenuV2(unittest.TestCase):
                                                         combo_size_id = '', 
                                                         name = '', 
                                                         prices = [
-                                                            iikocloud_client.models.external_menu_price_by_departments_dto5.ExternalMenuPriceByDepartmentsDto5(
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
                                                                 organizations = [
                                                                     ''
                                                                     ], 
@@ -323,7 +365,7 @@ class TestExternalMenuV2(unittest.TestCase):
                         items = [
                             iikocloud_client.models.external_menu_item.ExternalMenuItem(
                                 allergens = [
-                                    iikocloud_client.models.allergen_group_dto3.AllergenGroupDto3(
+                                    iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
                                         code = '', 
                                         id = '', 
                                         is_deleted = True, 
@@ -332,7 +374,8 @@ class TestExternalMenuV2(unittest.TestCase):
                                 barcodes = [
                                     iikocloud_client.models.barcode_dto.BarcodeDto(
                                         barcode = '', 
-                                        container = '', )
+                                        container = '', 
+                                        product_fiscal_code = '', )
                                     ], 
                                 can_be_divided = True, 
                                 can_set_open_price = True, 
@@ -340,7 +383,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                     iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                                         customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                                         selected_tag_ids = [
-                                            null
+                                            ''
                                             ], )
                                     ], 
                                 description = '', 
@@ -359,6 +402,52 @@ class TestExternalMenuV2(unittest.TestCase):
                                                 description = '', 
                                                 is_hidden = True, 
                                                 item_group_id = '00000000-0000-0000-0000-000000000000', 
+                                                items = [
+                                                    iikocloud_client.models.external_menu_modifier_item.ExternalMenuModifierItem(
+                                                        allergen_groups = [
+                                                            iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
+                                                                code = '', 
+                                                                id = '', 
+                                                                is_deleted = True, 
+                                                                name = '', )
+                                                            ], 
+                                                        button_image_url = '', 
+                                                        description = '', 
+                                                        independent_quantity = True, 
+                                                        is_hidden = True, 
+                                                        is_marked = True, 
+                                                        item_id = '', 
+                                                        labels = [
+                                                            iikocloud_client.models.label_dto.LabelDto(
+                                                                code = '', 
+                                                                name = '', )
+                                                            ], 
+                                                        measure_unit_type = 'GRAM', 
+                                                        name = '', 
+                                                        nutrition_per_hundred_grams = null, 
+                                                        outer_ean_code = '', 
+                                                        payment_subject = '', 
+                                                        payment_subject_code = '', 
+                                                        portion_weight_grams = 0.0, 
+                                                        position = 56, 
+                                                        prices = [
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
+                                                                organizations = [
+                                                                    ''
+                                                                    ], 
+                                                                price = 0, 
+                                                                tax_category_id = '', )
+                                                            ], 
+                                                        product_category_id = '', 
+                                                        restrictions = null, 
+                                                        sku = '', 
+                                                        tags = [
+                                                            iikocloud_client.models.tag_dto.TagDto(
+                                                                id = '', 
+                                                                name = '', )
+                                                            ], )
+                                                    ], 
                                                 name = '', 
                                                 restrictions = null, 
                                                 sku = '', )
@@ -368,9 +457,6 @@ class TestExternalMenuV2(unittest.TestCase):
                                             carbs = 1.337, 
                                             energy = 1.337, 
                                             fats = 1.337, 
-                                            organizations = [
-                                                ''
-                                                ], 
                                             proteins = 1.337, 
                                             salt = 1.337, 
                                             saturated_fatty_acid = 1.337, 
@@ -398,7 +484,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                         sku = '', )
                                     ], 
                                 labels = [
-                                    iikocloud_client.models.label_dto2.LabelDto2(
+                                    iikocloud_client.models.label_dto.LabelDto(
                                         code = '', 
                                         name = '', )
                                     ], 
@@ -413,7 +499,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 product_category_id = '00000000-0000-0000-0000-000000000000', 
                                 sku = '', 
                                 tags = [
-                                    iikocloud_client.models.tag_dto2.TagDto2(
+                                    iikocloud_client.models.tag_dto.TagDto(
                                         id = '', 
                                         name = '', )
                                     ], 
@@ -422,9 +508,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 use_balance_for_sell = True, )
                             ], 
                         labels = [
-                            iikocloud_client.models.label_dto.LabelDto(
-                                code = '', 
-                                name = '', )
+                            
                             ], 
                         name = '', 
                         schedule_id = '00000000-0000-0000-0000-000000000000', 
@@ -438,9 +522,7 @@ class TestExternalMenuV2(unittest.TestCase):
                                 end = '23:00', )
                             ], 
                         tags = [
-                            iikocloud_client.models.tag_dto.TagDto(
-                                id = '', 
-                                name = '', )
+                            
                             ], )
                     ],
         )

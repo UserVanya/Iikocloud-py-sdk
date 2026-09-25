@@ -21,7 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.barcode_dto2 import BarcodeDto2
 from iikocloud_client.models.external_menu_item_size2 import ExternalMenuItemSize2
-from iikocloud_client.models.selected_customer_tag2 import SelectedCustomerTag2
+from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -33,7 +33,7 @@ class ExternalMenuItem2(BaseModel):
     allergen_group_ids: List[Any] = Field(description="List of GUID groups of allergens", alias="allergenGroupIds")
     barcodes: Optional[List[BarcodeDto2]] = None
     can_set_open_price: Optional[StrictBool] = Field(default=False, description="Can set open price flag", alias="canSetOpenPrice")
-    customer_tag_groups: Optional[List[SelectedCustomerTag2]] = Field(default=None, alias="customerTagGroups")
+    customer_tag_groups: Optional[List[SelectedCustomerTag]] = Field(default=None, alias="customerTagGroups")
     description: Optional[StrictStr] = Field(default='', description="Product description")
     id: StrictStr = Field(description="Product ID")
     is_hidden: Optional[StrictBool] = Field(default=False, description="Visibility flag", alias="isHidden")
@@ -53,7 +53,7 @@ class ExternalMenuItem2(BaseModel):
     splittable: StrictBool
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags")
     tax_category_id: Optional[StrictStr] = Field(default=None, description="Tax category GUID", alias="taxCategoryId")
-    type: Optional[StrictStr] = Field(default='DISH', description="Item type")
+    type: StrictStr = Field(description="Item type")
     use_balance_for_sell: Optional[StrictBool] = Field(default=False, alias="useBalanceForSell")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["allergenGroupIds", "barcodes", "canSetOpenPrice", "customerTagGroups", "description", "id", "isHidden", "isMarked", "itemSizes", "labels", "measureUnit", "modifierSchemaId", "modifierSchemaName", "name", "orderItemType", "outerEanCode", "paymentSubject", "paymentSubjectCode", "productCategoryId", "sku", "splittable", "tags", "taxCategoryId", "type", "useBalanceForSell"]
@@ -68,11 +68,8 @@ class ExternalMenuItem2(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['DISH', 'COMBO', 'SERVICE']):
-            raise ValueError("must be one of enum values ('DISH', 'COMBO', 'SERVICE')")
+        if value not in set(['DISH', 'SERVICE']):
+            raise ValueError("must be one of enum values ('DISH', 'SERVICE')")
         return value
 
     model_config = ConfigDict(
@@ -197,7 +194,7 @@ class ExternalMenuItem2(BaseModel):
             "allergenGroupIds": obj.get("allergenGroupIds"),
             "barcodes": [BarcodeDto2.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
             "canSetOpenPrice": obj.get("canSetOpenPrice") if obj.get("canSetOpenPrice") is not None else False,
-            "customerTagGroups": [SelectedCustomerTag2.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
+            "customerTagGroups": [SelectedCustomerTag.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
             "id": obj.get("id"),
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,

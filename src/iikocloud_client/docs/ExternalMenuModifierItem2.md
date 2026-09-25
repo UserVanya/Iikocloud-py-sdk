@@ -5,27 +5,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allergen_group_ids** | **List[object]** |  | 
-**barcodes** | [**List[BarcodeDto6]**](BarcodeDto6.md) |  | [optional] 
+**allergen_group_ids** | **List[str]** |  | 
+**barcodes** | [**List[BarcodeDto2]**](BarcodeDto2.md) |  | [optional] 
 **button_image_url** | **str** |  | [optional] 
-**customer_tag_groups** | [**List[SelectedCustomerTag6]**](SelectedCustomerTag6.md) |  | [optional] 
+**customer_tag_groups** | [**List[SelectedCustomerTag]**](SelectedCustomerTag.md) |  | [optional] 
 **description** | **str** | Modifier&#39;s description | [optional] [default to '']
 **id** | **UUID** |  | 
 **independent_quantity** | **bool** |  | [optional] [default to False]
 **is_hidden** | **bool** |  | [optional] [default to False]
 **is_marked** | **bool** |  | [optional] [default to False]
-**labels** | **List[object]** | List of label names | 
+**labels** | **List[str]** | List of label names | 
 **measure_unit_type** | **str** |  | [optional] [default to 'GRAM']
 **name** | **str** | Modifier&#39;s name | [optional] [default to '']
-**nutritions** | [**List[NutritionInfoDto6]**](NutritionInfoDto6.md) | Nutrition per 100 g of product grouped by departments | [optional] 
+**nutritions** | [**List[NutritionInfoDto]**](NutritionInfoDto.md) | Nutrition per 100 g of product grouped by departments | [optional] 
 **outer_ean_code** | **str** |  | [optional] 
 **payment_subject** | **str** |  | [optional] 
 **payment_subject_code** | **str** |  | [optional] 
-**prices** | [**List[ExternalMenuPriceByDepartmentsDto2]**](ExternalMenuPriceByDepartmentsDto2.md) |  | [optional] 
+**prices** | [**List[ExternalMenuPriceByDepartmentsDto]**](ExternalMenuPriceByDepartmentsDto.md) |  | [optional] 
 **product_category_id** | **str** |  | [optional] 
-**restrictions** | [**ModifierRestrictionsDto6**](ModifierRestrictionsDto6.md) |  | [optional] 
+**restrictions** | [**ModifierRestrictionsDto2**](ModifierRestrictionsDto2.md) |  | [optional] 
 **sku** | **str** | Modifier&#39;s code | [optional] [default to '']
-**tags** | **List[object]** | List of tag names | 
+**tags** | **List[str]** | List of tag names | 
 **tax_category_id** | **str** |  | [optional] 
 **weight** | **float** |  | 
 

@@ -39,7 +39,7 @@ class OutgoingServiceGetResponse(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
     due_date: Optional[StrictStr] = Field(default=None, description="Payment due date", alias="dueDate")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: Optional[List[OutgoingServiceGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     revenue_account: Optional[StrictStr] = Field(default=None, description="Revenue account identifier (GUID)", alias="revenueAccount")

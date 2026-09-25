@@ -40,7 +40,7 @@ class OutgoingInvoice(BaseModel):
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     internal_incoming_invoice_id: Optional[StrictStr] = Field(default=None, description="Associated incoming invoice identifier (GUID)", alias="internalIncomingInvoiceId")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: Optional[List[OutgoingInvoiceItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     payment_date: Optional[StrictStr] = Field(default=None, description="Payment date (YYYY-MM-DD)", alias="paymentDate")

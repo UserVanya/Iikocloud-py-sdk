@@ -7,16 +7,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **allergen_groups** | [**List[AllergenGroupDto]**](AllergenGroupDto.md) | Allergen groups | [optional] 
 **button_image_url** | **str** | Link to image | [optional] 
-**combo_categories** | [**List[ComboCategoryDto2]**](ComboCategoryDto2.md) |  | 
-**customer_tag_groups** | [**List[CustomerTagGroup2]**](CustomerTagGroup2.md) | Customer tag groups | [optional] 
+**combo_categories** | [**List[ComboCategoryDto]**](ComboCategoryDto.md) |  | 
+**customer_tag_groups** | [**List[CustomerTagGroup]**](CustomerTagGroup.md) | Customer tag groups | [optional] 
 **description** | **str** | External menu description | [optional] [default to '']
 **format_version** | **int** | Menu version | [default to 3]
 **id** | **int** | ID of the external menu | 
-**intervals** | [**List[IntervalDto2]**](IntervalDto2.md) | Menu availability time intervals | [optional] 
+**intervals** | [**List[IntervalDto]**](IntervalDto.md) | Menu availability time intervals | [optional] 
 **item_groups** | [**List[ExternalMenuCategory2]**](ExternalMenuCategory2.md) |  | 
 **name** | **str** | External menu name | [optional] [default to '']
 **override_tax_categories** | **Dict[str, List[OverrideTaxesDto]]** | Tax benefits | [optional] 
-**product_categories** | [**List[ProductCategoryDto2]**](ProductCategoryDto2.md) | Product categories | [optional] 
+**product_categories** | [**List[ProductCategoryDto]**](ProductCategoryDto.md) | Product categories | [optional] 
 **revision** | **int** | Menu revision | [optional] 
 **tax_categories** | [**List[TaxCategoryDto]**](TaxCategoryDto.md) | Tax Categories | [optional] 
 

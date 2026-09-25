@@ -38,7 +38,7 @@ class IncomingReturnedInvoiceGetResponse(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: Optional[List[IncomingReturnedInvoiceGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     outgoing_invoice_id: Optional[StrictStr] = Field(default=None, description="Associated outgoing invoice identifier (GUID)", alias="outgoingInvoiceId")

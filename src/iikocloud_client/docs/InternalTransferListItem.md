@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **date_modified** | **str** | Document last modification date (ISO 8601 YYYY-MM-DDThh:mm:ss.sss±hh:mm) | [optional] 
 **deleted** | **bool** | Flag indicating that the document is deleted | [optional] 
 **document_id** | **str** | Document identifier (GUID) | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **number** | **str** | Document number | [optional] 
 **processed** | **bool** | Flag indicating that the document is processed | [optional] 
 **store_from** | **str** | Write-off store identifier (GUID) | [optional] 

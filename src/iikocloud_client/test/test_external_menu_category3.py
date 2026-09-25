@@ -50,7 +50,7 @@ class TestExternalMenuCategory3(unittest.TestCase):
                 schedule_id = '00000000-0000-0000-0000-000000000000',
                 schedule_name = '',
                 schedules = [
-                    iikocloud_client.models.period_schedule_dto3.PeriodScheduleDto3(
+                    iikocloud_client.models.period_schedule_dto.PeriodScheduleDto(
                         begin = '09:00', 
                         days_of_week = [
                             'monday'

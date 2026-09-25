@@ -21,14 +21,14 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from uuid import UUID
-from iikocloud_client.models.allergen_group_dto4 import AllergenGroupDto4
-from iikocloud_client.models.barcode_dto5 import BarcodeDto5
+from iikocloud_client.models.allergen_group_dto import AllergenGroupDto
+from iikocloud_client.models.barcode_dto2 import BarcodeDto2
 from iikocloud_client.models.external_menu_price_by_departments_dto import ExternalMenuPriceByDepartmentsDto
-from iikocloud_client.models.label_dto3 import LabelDto3
-from iikocloud_client.models.modifier_restrictions_dto5 import ModifierRestrictionsDto5
-from iikocloud_client.models.nutrition_info_dto5 import NutritionInfoDto5
-from iikocloud_client.models.selected_customer_tag5 import SelectedCustomerTag5
-from iikocloud_client.models.tag_dto3 import TagDto3
+from iikocloud_client.models.label_dto import LabelDto
+from iikocloud_client.models.modifier_restrictions_dto import ModifierRestrictionsDto
+from iikocloud_client.models.nutrition_info_dto import NutritionInfoDto
+from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag
+from iikocloud_client.models.tag_dto import TagDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -37,19 +37,19 @@ class ExternalMenuModifierItem(BaseModel):
     """
     ExternalMenuModifierItem
     """ # noqa: E501
-    allergen_groups: Optional[List[AllergenGroupDto4]] = Field(default=None, alias="allergenGroups")
-    barcodes: Optional[List[BarcodeDto5]] = None
+    allergen_groups: Optional[List[AllergenGroupDto]] = Field(default=None, alias="allergenGroups")
+    barcodes: Optional[List[BarcodeDto2]] = None
     button_image_url: Optional[StrictStr] = Field(default=None, alias="buttonImageUrl")
-    customer_tag_groups: Optional[List[SelectedCustomerTag5]] = Field(default=None, alias="customerTagGroups")
+    customer_tag_groups: Optional[List[SelectedCustomerTag]] = Field(default=None, alias="customerTagGroups")
     description: Optional[StrictStr] = Field(default='', description="Modifier's description")
     independent_quantity: Optional[StrictBool] = Field(default=False, alias="independentQuantity")
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     is_marked: Optional[StrictBool] = Field(default=False, alias="isMarked")
     item_id: Optional[UUID] = Field(default=None, description="Modifier's Id", alias="itemId")
-    labels: Optional[List[LabelDto3]] = Field(default=None, description="List of label names")
+    labels: Optional[List[LabelDto]] = Field(default=None, description="List of label names")
     measure_unit_type: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=30)]] = Field(default='GRAM', alias="measureUnitType")
     name: Optional[StrictStr] = Field(default='', description="Modifier's name")
-    nutrition_per_hundred_grams: Optional[NutritionInfoDto5] = Field(default=None, description="Nutrition per 100 g of modifier product", alias="nutritionPerHundredGrams")
+    nutrition_per_hundred_grams: Optional[NutritionInfoDto] = Field(default=None, description="Nutrition per 100 g of modifier product", alias="nutritionPerHundredGrams")
     outer_ean_code: Optional[StrictStr] = Field(default=None, alias="outerEanCode")
     payment_subject: Optional[StrictStr] = Field(default=None, alias="paymentSubject")
     payment_subject_code: Optional[StrictStr] = Field(default=None, alias="paymentSubjectCode")
@@ -57,9 +57,9 @@ class ExternalMenuModifierItem(BaseModel):
     position: Optional[StrictInt] = None
     prices: Optional[List[ExternalMenuPriceByDepartmentsDto]] = None
     product_category_id: Optional[StrictStr] = Field(default=None, alias="productCategoryId")
-    restrictions: Optional[ModifierRestrictionsDto5] = None
+    restrictions: Optional[ModifierRestrictionsDto] = None
     sku: Optional[StrictStr] = Field(default='', description="Modifier's code")
-    tags: Optional[List[TagDto3]] = Field(default=None, description="List of tag names")
+    tags: Optional[List[TagDto]] = Field(default=None, description="List of tag names")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["allergenGroups", "barcodes", "buttonImageUrl", "customerTagGroups", "description", "independentQuantity", "isHidden", "isMarked", "itemId", "labels", "measureUnitType", "name", "nutritionPerHundredGrams", "outerEanCode", "paymentSubject", "paymentSubjectCode", "portionWeightGrams", "position", "prices", "productCategoryId", "restrictions", "sku", "tags"]
 
@@ -214,19 +214,19 @@ class ExternalMenuModifierItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allergenGroups": [AllergenGroupDto4.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
-            "barcodes": [BarcodeDto5.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
+            "allergenGroups": [AllergenGroupDto.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
+            "barcodes": [BarcodeDto2.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
             "buttonImageUrl": obj.get("buttonImageUrl"),
-            "customerTagGroups": [SelectedCustomerTag5.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
+            "customerTagGroups": [SelectedCustomerTag.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
             "independentQuantity": obj.get("independentQuantity") if obj.get("independentQuantity") is not None else False,
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,
             "isMarked": obj.get("isMarked") if obj.get("isMarked") is not None else False,
             "itemId": obj.get("itemId"),
-            "labels": [LabelDto3.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
+            "labels": [LabelDto.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
             "measureUnitType": obj.get("measureUnitType") if obj.get("measureUnitType") is not None else 'GRAM',
             "name": obj.get("name") if obj.get("name") is not None else '',
-            "nutritionPerHundredGrams": NutritionInfoDto5.from_dict(obj["nutritionPerHundredGrams"]) if obj.get("nutritionPerHundredGrams") is not None else None,
+            "nutritionPerHundredGrams": NutritionInfoDto.from_dict(obj["nutritionPerHundredGrams"]) if obj.get("nutritionPerHundredGrams") is not None else None,
             "outerEanCode": obj.get("outerEanCode"),
             "paymentSubject": obj.get("paymentSubject"),
             "paymentSubjectCode": obj.get("paymentSubjectCode"),
@@ -234,9 +234,9 @@ class ExternalMenuModifierItem(BaseModel):
             "position": obj.get("position"),
             "prices": [ExternalMenuPriceByDepartmentsDto.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "productCategoryId": obj.get("productCategoryId"),
-            "restrictions": ModifierRestrictionsDto5.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
+            "restrictions": ModifierRestrictionsDto.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
-            "tags": [TagDto3.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
+            "tags": [TagDto.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

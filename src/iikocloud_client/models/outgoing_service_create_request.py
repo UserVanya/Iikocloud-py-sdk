@@ -37,7 +37,7 @@ class OutgoingServiceCreateRequest(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     due_date: Optional[StrictStr] = Field(default=None, description="Payment due date", alias="dueDate")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[OutgoingServiceCreateItem] = Field(description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

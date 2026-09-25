@@ -365,11 +365,6 @@ operations:
     cleanup: null
     method: POST
     path: /api/finance/v1/outgoing_service/get
-  get_inventory_counteragents:
-    kind: read
-    cleanup: null
-    method: POST
-    path: /api/inventory/v1/counteragents
   get_inventory_disassemble_document:
     kind: read
     cleanup: null
@@ -700,11 +695,6 @@ operations:
     cleanup: cancel_delivery_order
     method: POST
     path: /api/1/deliveries/update_tracking_link
-  update_inventory_product_barcodes:
-    kind: compensating
-    cleanup: null
-    method: POST
-    path: /api/inventory/v1/nomenclature/update_barcodes
   update_webhook_settings:
     kind: compensating
     cleanup: null

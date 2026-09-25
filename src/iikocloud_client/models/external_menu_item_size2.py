@@ -20,8 +20,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from iikocloud_client.models.external_menu_modifier_group2 import ExternalMenuModifierGroup2
-from iikocloud_client.models.external_menu_price_by_departments_dto2 import ExternalMenuPriceByDepartmentsDto2
-from iikocloud_client.models.nutrition_info_dto2 import NutritionInfoDto2
+from iikocloud_client.models.external_menu_price_by_departments_dto import ExternalMenuPriceByDepartmentsDto
+from iikocloud_client.models.nutrition_info_dto import NutritionInfoDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,8 +36,8 @@ class ExternalMenuItemSize2(BaseModel):
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     item_modifier_groups: List[ExternalMenuModifierGroup2] = Field(alias="itemModifierGroups")
     measure_unit_type: Optional[StrictStr] = Field(default='GRAM', alias="measureUnitType")
-    nutritions: Optional[List[NutritionInfoDto2]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
-    prices: Optional[List[ExternalMenuPriceByDepartmentsDto2]] = None
+    nutritions: Optional[List[NutritionInfoDto]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
+    prices: Optional[List[ExternalMenuPriceByDepartmentsDto]] = None
     size_code: Optional[StrictStr] = Field(default=None, alias="sizeCode")
     size_name: Optional[StrictStr] = Field(default=None, description="Name of the product size, the name can be empty if there is only one size in the list", alias="sizeName")
     sku: Optional[StrictStr] = Field(default='', description="Unique size code, consists of the product code and the name of the size, if the product has one size, then the size code will be equal to the product code")
@@ -150,8 +150,8 @@ class ExternalMenuItemSize2(BaseModel):
             "isHidden": obj.get("isHidden") if obj.get("isHidden") is not None else False,
             "itemModifierGroups": [ExternalMenuModifierGroup2.from_dict(_item) for _item in obj["itemModifierGroups"]] if obj.get("itemModifierGroups") is not None else None,
             "measureUnitType": obj.get("measureUnitType") if obj.get("measureUnitType") is not None else 'GRAM',
-            "nutritions": [NutritionInfoDto2.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
-            "prices": [ExternalMenuPriceByDepartmentsDto2.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
+            "nutritions": [NutritionInfoDto.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
+            "prices": [ExternalMenuPriceByDepartmentsDto.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "sizeCode": obj.get("sizeCode"),
             "sizeName": obj.get("sizeName"),
             "sku": obj.get("sku") if obj.get("sku") is not None else '',

@@ -34,7 +34,7 @@ class InternalTransferListItem(BaseModel):
     date_modified: Optional[StrictStr] = Field(default=None, description="Document last modification date (ISO 8601 YYYY-MM-DDThh:mm:ss.sss±hh:mm)", alias="dateModified")
     deleted: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is deleted")
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     processed: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is processed")
     store_from: Optional[StrictStr] = Field(default=None, description="Write-off store identifier (GUID)", alias="storeFrom")

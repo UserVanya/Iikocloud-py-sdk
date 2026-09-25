@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from iikocloud_client.models.external_menu_price_by_departments_dto5 import ExternalMenuPriceByDepartmentsDto5
+from iikocloud_client.models.external_menu_price_by_departments_dto import ExternalMenuPriceByDepartmentsDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,7 +31,7 @@ class ComboGroupItemSizeDto(BaseModel):
     """ # noqa: E501
     combo_size_id: UUID = Field(description="The size ID of the combo that is mapped to the size from the sizeId field", alias="comboSizeId")
     name: Optional[StrictStr] = Field(default='', description="The size name of the item")
-    prices: Optional[List[ExternalMenuPriceByDepartmentsDto5]] = None
+    prices: Optional[List[ExternalMenuPriceByDepartmentsDto]] = None
     short_name: Optional[StrictStr] = Field(default='', description="The size short name of the item", alias="shortName")
     size_id: Optional[UUID] = Field(default=None, description="The size ID of the item", alias="sizeId")
     additional_properties: Dict[str, Any] = {}
@@ -109,7 +109,7 @@ class ComboGroupItemSizeDto(BaseModel):
         _obj = cls.model_validate({
             "comboSizeId": obj.get("comboSizeId"),
             "name": obj.get("name") if obj.get("name") is not None else '',
-            "prices": [ExternalMenuPriceByDepartmentsDto5.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
+            "prices": [ExternalMenuPriceByDepartmentsDto.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "shortName": obj.get("shortName") if obj.get("shortName") is not None else '',
             "sizeId": obj.get("sizeId")
         })

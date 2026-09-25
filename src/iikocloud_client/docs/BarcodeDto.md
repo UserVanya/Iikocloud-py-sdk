@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **barcode** | **str** |  | 
 **container** | **str** |  | [optional] 
+**product_fiscal_code** | **str** |  | [optional] 
 
 ## Example
 

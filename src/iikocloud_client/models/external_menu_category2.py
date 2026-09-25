@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.external_menu_item2 import ExternalMenuItem2
-from iikocloud_client.models.period_schedule_dto2 import PeriodScheduleDto2
+from iikocloud_client.models.period_schedule_dto import PeriodScheduleDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -39,7 +39,7 @@ class ExternalMenuCategory2(BaseModel):
     name: Optional[StrictStr] = Field(default='', description="Category name")
     schedule_id: Optional[StrictStr] = Field(default=None, description="Category schedule GUID", alias="scheduleId")
     schedule_name: Optional[StrictStr] = Field(default=None, description="Category schedule name", alias="scheduleName")
-    schedules: Optional[List[PeriodScheduleDto2]] = Field(default=None, description="Category schedule intervals")
+    schedules: Optional[List[PeriodScheduleDto]] = Field(default=None, description="Category schedule intervals")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["buttonImageUrl", "description", "id", "iikoGroupId", "isHidden", "items", "labels", "name", "scheduleId", "scheduleName", "schedules", "tags"]
@@ -151,7 +151,7 @@ class ExternalMenuCategory2(BaseModel):
             "name": obj.get("name") if obj.get("name") is not None else '',
             "scheduleId": obj.get("scheduleId"),
             "scheduleName": obj.get("scheduleName"),
-            "schedules": [PeriodScheduleDto2.from_dict(_item) for _item in obj["schedules"]] if obj.get("schedules") is not None else None,
+            "schedules": [PeriodScheduleDto.from_dict(_item) for _item in obj["schedules"]] if obj.get("schedules") is not None else None,
             "tags": obj.get("tags")
         })
         # store additional fields in additional_properties

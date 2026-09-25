@@ -12,7 +12,7 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["taxCategory"]["items"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 8a0ae24ffc6f2f578ca7797b39b12fb09d470ee733a6dde1eba5accacd1589e0
+    expected-sha256: 44aac43acb147a689182c3e772c41a50491f3a1611d18b1ad26a69380c4d60dc
     issue: external-menu-schema-ExternalMenuItem-properties-taxCategory-items-remove
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["taxCategory"]["type"]
@@ -24,7 +24,7 @@ actions:
   update:
     nullable: true
     oneOf:
-    - $ref: '#/components/schemas/TaxCategoryDto3'
+    - $ref: '#/components/schemas/TaxCategoryDto'
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 75374a8e926d1ba9cfea917e95f0e85ec7cfc53df8e54717bbdc2cd312cad35f
@@ -58,7 +58,7 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]["items"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 3ba8df3cf8bc36e9ad2ada1ae175a040e85b9d5439921abb1c83ae946f4fb64a
+    expected-sha256: 5cb42a1328b3f5662b2c4f9aa087d474ed505d65b805630b5f6b48356a3501f6
     issue: external-menu-schema-ExternalMenuModifierItem-properties-nutritionPerHundredGrams-items-remove
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]["type"]
@@ -69,7 +69,7 @@ actions:
 - target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["nutritionPerHundredGrams"]
   update:
     oneOf:
-    - $ref: '#/components/schemas/NutritionInfoDto5'
+    - $ref: '#/components/schemas/NutritionInfoDto'
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 552f938c9b66965d8a4396c5009ef349e52a5eb24711301710c242d89cc59f7c
@@ -78,7 +78,7 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]["items"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: d525dfbb2ebf8fe823742366cfd49e82e9f4d4498330634f45cd31aef2914fe9
+    expected-sha256: 0c70d29f895425ef572b575d10257e69b7cee0e0f8d2ec7d3aca620445526ad3
     issue: external-menu-schema-ExternalMenuModifierItem-properties-restrictions-items-remove
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]["type"]
@@ -89,7 +89,7 @@ actions:
 - target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["restrictions"]
   update:
     oneOf:
-    - $ref: '#/components/schemas/ModifierRestrictionsDto5'
+    - $ref: '#/components/schemas/ModifierRestrictionsDto'
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
@@ -98,7 +98,7 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]["items"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 9d92bc628b201e25488de0cad2f33125e730f1f84184f08c80d769c37ec0ee20
+    expected-sha256: 3addf334da3cb16b724c9857936963cbbde753a84c758bd23ddcf64a355ca8bc
     issue: external-menu-schema-ExternalMenuModifierItem2-properties-restrictions-items-remove
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]["type"]
@@ -109,31 +109,39 @@ actions:
 - target: $["components"]["schemas"]["ExternalMenuModifierItem2"]["properties"]["restrictions"]
   update:
     oneOf:
-    - $ref: '#/components/schemas/ModifierRestrictionsDto6'
+    - $ref: '#/components/schemas/ModifierRestrictionsDto2'
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
     issue: external-menu-schema-ExternalMenuModifierItem2-properties-restrictions
 - remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]["items"]
+  target: $["components"]["schemas"]["ExternalMenuModifierGroup"]["properties"]["restrictions"]["oneOf"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: e9944a2858fa60898fdf024b8c8c780703f13f750f1982d7f5769942434a6e7d
-    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions-items-remove
-- remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 474728f5ad5e7f48c00def42b336fe29547903ac77d666c0a3b2546d3147d9f2
-    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions-type-remove
-- target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["restrictions"]
+    expected-sha256: 309551a7ddf3b5e51effee52a2e47290e22613be7fd035875b6f7a6f3420d151
+    issue: external-menu-schema-ExternalMenuModifierGroup-properties-restrictions-oneOf-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierGroup"]["properties"]["restrictions"]
   update:
     oneOf:
-    - $ref: '#/components/schemas/ModifierRestrictionsDto7'
+    - $ref: '#/components/schemas/ModifierRestrictionsDto'
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
-    issue: external-menu-schema-ExternalMenuModifierItem3-properties-restrictions
+    issue: external-menu-schema-ExternalMenuModifierGroup-properties-restrictions
+- remove: true
+  target: $["components"]["schemas"]["ExternalMenuModifierGroup2"]["properties"]["restrictions"]["oneOf"]
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 2f9c361098933a30952bd3f899d4c32b74d3e26a856b94b995b6aef3d4dfda0f
+    issue: external-menu-schema-ExternalMenuModifierGroup2-properties-restrictions-oneOf-remove
+- target: $["components"]["schemas"]["ExternalMenuModifierGroup2"]["properties"]["restrictions"]
+  update:
+    oneOf:
+    - $ref: '#/components/schemas/ModifierRestrictionsDto2'
+  x-iiko-sdk-guard:
+    expected-matches: 1
+    expected-sha256: 566157a907996615d193ec5588773c6b56b523cf4452d6deba2616f9e304a8d4
+    issue: external-menu-schema-ExternalMenuModifierGroup2-properties-restrictions
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuV3"]["properties"]["overrideTaxCategories"]["items"]
   x-iiko-sdk-guard:
@@ -155,13 +163,13 @@ actions:
   target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]["items"]
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 6aed45ee5a051bff1c429cde497d1b83019cc81d1cf386ce77d2eca8eaeebbc4
+    expected-sha256: ec8f68e7e40c14332968fd694583c3c988ba773d226330132af274ba6d33b08f
     issue: external-menu-schema-ExternalMenuV4-properties-overrideTaxCategories-items-remove
 - target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["overrideTaxCategories"]
   update:
     additionalProperties:
       items:
-        $ref: '#/components/schemas/OverrideTaxesDto2'
+        $ref: '#/components/schemas/OverrideTaxesDto'
       type: array
     type: object
   x-iiko-sdk-guard:
@@ -200,22 +208,6 @@ actions:
     expected-matches: 1
     expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
     issue: external-menu-schema-ExternalMenuItem2-properties-type
-- remove: true
-  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92980196b141f63b371b29cc7fa39c1f1b7567339ad674bdf8d5b7eaac64f8a3
-    issue: external-menu-schema-ExternalMenuItem3-properties-type-enum-remove
-- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
-  update:
-    enum:
-    - DISH
-    - COMBO
-    - SERVICE
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
-    issue: external-menu-schema-ExternalMenuItem3-properties-type
 - target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["modifierSchemaId"]
   update:
     nullable: true
@@ -230,13 +222,6 @@ actions:
     expected-matches: 1
     expected-sha256: 8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741
     issue: external-menu-schema-ExternalMenuItem2-properties-modifierSchemaId
-- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["modifierSchemaId"]
-  update:
-    nullable: true
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 8deb1e4116cacb97c6cc9a82e3c39fd9cdf7ff2a06c1827f1e055837d1c16741
-    issue: external-menu-schema-ExternalMenuItem3-properties-modifierSchemaId
 - target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["sizeId"]
   update:
     nullable: true
@@ -251,13 +236,6 @@ actions:
     expected-matches: 1
     expected-sha256: 621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d
     issue: external-menu-schema-ExternalMenuItemSize2-properties-id
-- target: $["components"]["schemas"]["ExternalMenuItemSize3"]["properties"]["id"]
-  update:
-    nullable: true
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d
-    issue: external-menu-schema-ExternalMenuItemSize3-properties-id
 - target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto"]["properties"]["price"]
   update:
     nullable: true
@@ -265,20 +243,6 @@ actions:
     expected-matches: 1
     expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
     issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto-properties-price
-- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto2"]["properties"]["price"]
-  update:
-    nullable: true
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
-    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto2-properties-price
-- target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto3"]["properties"]["price"]
-  update:
-    nullable: true
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031
-    issue: external-menu-schema-ExternalMenuPriceByDepartmentsDto3-properties-price
 - target: $["components"]["schemas"]["ExternalMenuV2"]["properties"]["formatVersion"]
   update:
     default: 2
@@ -329,7 +293,7 @@ actions:
     - formatVersion
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 9e2d31a249885956b3a7f1494c59350b87c267410436b1370013a10fba432d63
+    expected-sha256: a79ba1515c093e7f4cafe3674cef1bbdbff221dc873ca3569465604d2c82c29d
     issue: external-menu-v3-required
 - target: $["components"]["schemas"]["ExternalMenuV4"]["properties"]["formatVersion"]
   update:
@@ -355,27 +319,27 @@ actions:
     - formatVersion
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: e4c781076642998ec2bddf9631699ddc39d85b3caadb6bb6d6ebfb58e0327821
+    expected-sha256: 574219e198c4bcfc6cb3aed62bb9f5e2b8300da7b137441f73a73c3feb4d754d
     issue: external-menu-v4-required
 - target: $["components"]["schemas"]["ExternalMenuCategory3"]["properties"]["items"]["items"]
   update:
     discriminator:
       mapping:
         COMBO: '#/components/schemas/ExternalMenuComboItem'
-        DISH: '#/components/schemas/ExternalMenuItem3'
-        SERVICE: '#/components/schemas/ExternalMenuItem3'
+        DISH: '#/components/schemas/ExternalMenuItem2'
+        SERVICE: '#/components/schemas/ExternalMenuItem2'
       propertyName: type
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: a4bcd95a4d376a2e0d0cb7e7f19e2b97a48379cfea7219c79f5287eba3d32af0
+    expected-sha256: f7230fce83995c71e599b2b635ae0ecdb956b492fb1c5b69d37fa78009ffc5e8
     issue: external-menu-v4-discriminator
 - remove: true
-  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
+  target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]["enum"]
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: f2084de6bb9db3dac016a52c6b99839595803fc08ea4c1fe357dcd6980928a05
-    issue: external-menu-item3-type-enum-remove
-- target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
+    issue: external-menu-item2-type-enum-remove
+- target: $["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]
   update:
     default: DISH
     enum:
@@ -384,7 +348,7 @@ actions:
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 56688c77dd56000e56494a586f5fa07719723f1c0e3d678b15b48862b6d92361
-    issue: external-menu-item3-type
+    issue: external-menu-item2-type
 - target: $["components"]["schemas"]["ExternalMenuComboItem"]["properties"]["type"]
   update:
     default: COMBO
@@ -395,12 +359,12 @@ actions:
     expected-sha256: 85803e087e684bdab3e5d6c2dd1af627da83382db625be9a42aea3d4d06539be
     issue: external-menu-combo-item-type
 - remove: true
-  target: $["components"]["schemas"]["ExternalMenuItem3"]["required"]
+  target: $["components"]["schemas"]["ExternalMenuItem2"]["required"]
   x-iiko-sdk-guard:
     expected-matches: 1
     expected-sha256: 34903f8d418a836ee0e3a661f9cfa804546343a0db324c0ffa8113570ab7fd5e
-    issue: external-menu-item3-required-remove
-- target: $["components"]["schemas"]["ExternalMenuItem3"]
+    issue: external-menu-item2-required-remove
+- target: $["components"]["schemas"]["ExternalMenuItem2"]
   update:
     required:
     - itemSizes
@@ -412,8 +376,8 @@ actions:
     - type
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: ef3b4dfa6b1e1ce6324899c164cea4b385f67eab9d3c4f846b2905a0abeacb5d
-    issue: external-menu-item3-required
+    expected-sha256: f2a3543b7b429cd23e3b6f0b0b4bfce977105fb50a4ca08bf2cf2800bb5f9f3e
+    issue: external-menu-item2-required
 - remove: true
   target: $["components"]["schemas"]["ExternalMenuComboItem"]["required"]
   x-iiko-sdk-guard:
@@ -428,7 +392,7 @@ actions:
     - id
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: a085ca3d2faae22ccf7438f10f6417df1f9a8a5a3be2350ce469db3462ecb455
+    expected-sha256: 1d3697c0ad9b4de97f3bd59d8ef8a775f5ef8536674fcbe333c6229bea86b700
     issue: external-menu-combo-required
 info:
   title: iiko Cloud external menu polymorphism contract

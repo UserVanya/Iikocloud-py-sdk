@@ -36,23 +36,23 @@ class TestExternalMenuModifierItem(unittest.TestCase):
         if include_optional:
             return ExternalMenuModifierItem(
                 allergen_groups = [
-                    iikocloud_client.models.allergen_group_dto4.AllergenGroupDto4(
+                    iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
                         code = '', 
                         id = '', 
                         is_deleted = True, 
                         name = '', )
                     ],
                 barcodes = [
-                    iikocloud_client.models.barcode_dto5.BarcodeDto5(
+                    iikocloud_client.models.barcode_dto2.BarcodeDto2(
                         barcode = '', 
                         container = '', )
                     ],
                 button_image_url = '',
                 customer_tag_groups = [
-                    iikocloud_client.models.selected_customer_tag5.SelectedCustomerTag5(
+                    iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                         customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                         selected_tag_ids = [
-                            null
+                            ''
                             ], )
                     ],
                 description = '',
@@ -61,13 +61,13 @@ class TestExternalMenuModifierItem(unittest.TestCase):
                 is_marked = True,
                 item_id = '',
                 labels = [
-                    iikocloud_client.models.label_dto3.LabelDto3(
+                    iikocloud_client.models.label_dto.LabelDto(
                         code = '', 
                         name = '', )
                     ],
                 measure_unit_type = 'GRAM',
                 name = '',
-                nutrition_per_hundred_grams = iikocloud_client.models.nutrition_info_dto5.NutritionInfoDto5(
+                nutrition_per_hundred_grams = iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                     carbs = 1.337, 
                     energy = 1.337, 
                     fats = 1.337, 
@@ -93,7 +93,7 @@ class TestExternalMenuModifierItem(unittest.TestCase):
                         tax_category_id = '', )
                     ],
                 product_category_id = '',
-                restrictions = iikocloud_client.models.modifier_restrictions_dto5.ModifierRestrictionsDto5(
+                restrictions = iikocloud_client.models.modifier_restrictions_dto.ModifierRestrictionsDto(
                     by_default = 56, 
                     free_quantity = 56, 
                     hide_if_default_quantity = True, 
@@ -101,7 +101,7 @@ class TestExternalMenuModifierItem(unittest.TestCase):
                     min_quantity = 56, ),
                 sku = '',
                 tags = [
-                    iikocloud_client.models.tag_dto3.TagDto3(
+                    iikocloud_client.models.tag_dto.TagDto(
                         id = '', 
                         name = '', )
                     ]

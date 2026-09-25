@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **document_id** | **str** |  | [optional] 
 **expense_account** | **str** | Expense account identifier (GUID) | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[IncomingReturnedInvoiceCreateItem]**](IncomingReturnedInvoiceCreateItem.md) | List of document items | 
 **number** | **str** | Document number | [optional] 
 **organization_id** | **str** | Organization identifier (GUID) | 

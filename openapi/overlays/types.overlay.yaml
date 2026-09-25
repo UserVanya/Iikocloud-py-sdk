@@ -14,51 +14,6 @@ actions:
     expected-matches: 1
     expected-sha256: db91fb33c53c9a66d7f94d9d5ad48254e60198d1cfddbc56b5b853854484a01e
     issue: normalize-pseudo-type-1-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["AllergenGroupDto2"]["properties"]["isDeleted"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-2-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["AllergenGroupDto2"]["properties"]["isDeleted"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: db91fb33c53c9a66d7f94d9d5ad48254e60198d1cfddbc56b5b853854484a01e
-    issue: normalize-pseudo-type-2-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["AllergenGroupDto3"]["properties"]["isDeleted"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-3-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["AllergenGroupDto3"]["properties"]["isDeleted"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: db91fb33c53c9a66d7f94d9d5ad48254e60198d1cfddbc56b5b853854484a01e
-    issue: normalize-pseudo-type-3-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["AllergenGroupDto4"]["properties"]["isDeleted"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-4-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["AllergenGroupDto4"]["properties"]["isDeleted"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: db91fb33c53c9a66d7f94d9d5ad48254e60198d1cfddbc56b5b853854484a01e
-    issue: normalize-pseudo-type-4-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'uuid'
   remove: true
   target: $["components"]["schemas"]["ComboCategoryDto"]["properties"]["id"]["type"]
@@ -82,52 +37,6 @@ actions:
     expected-matches: 1
     expected-sha256: acc2890146e164d712bf7c8807f015c9da3a9c565f3795fd173368112cbeeaa1
     issue: normalize-pseudo-type-5-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboCategoryDto2"]["properties"]["id"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-6-clear-type
-- description: Clear 'format' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboCategoryDto2"]["properties"]["id"]["format"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-6-clear-format
-- description: Normalize iiko pseudo type 'uuid'
-  target: $["components"]["schemas"]["ComboCategoryDto2"]["properties"]["id"]
-  update:
-    format: uuid
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: acc2890146e164d712bf7c8807f015c9da3a9c565f3795fd173368112cbeeaa1
-    issue: normalize-pseudo-type-6-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboCategoryDto3"]["properties"]["id"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-7-clear-type
-- description: Clear 'format' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboCategoryDto3"]["properties"]["id"]["format"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-7-clear-format
-- description: Normalize iiko pseudo type 'uuid'
-  target: $["components"]["schemas"]["ComboCategoryDto3"]["properties"]["id"]
-  update:
-    format: uuid
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: acc2890146e164d712bf7c8807f015c9da3a9c565f3795fd173368112cbeeaa1
-    issue: normalize-pseudo-type-7-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'float'
   remove: true
   target: $["components"]["schemas"]["ComboDto"]["properties"]["price"]["type"]
@@ -159,68 +68,6 @@ actions:
     expected-matches: 1
     expected-sha256: ea1d8b80aceaffea4373ac5bf2955cf77775ffe59a63df854abe6a43f20cab8d
     issue: normalize-pseudo-type-9-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ComboDto2"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-10-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ComboDto2"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5a8a54e16717c9635ef4cbfb6c4247073146b6034029af215750e0d589fbd56e
-    issue: normalize-pseudo-type-10-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'enum'
-  remove: true
-  target: $["components"]["schemas"]["ComboDto2"]["properties"]["priceStrategy"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: f752cb5fc80ef69d1015c5cf7881db3f88fcaeabd262e9f0ecfaca0526a27978
-    issue: normalize-pseudo-type-11-clear-type
-- description: Normalize iiko pseudo type 'enum'
-  target: $["components"]["schemas"]["ComboDto2"]["properties"]["priceStrategy"]
-  update:
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ea1d8b80aceaffea4373ac5bf2955cf77775ffe59a63df854abe6a43f20cab8d
-    issue: normalize-pseudo-type-11-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ComboDto3"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-12-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ComboDto3"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5a8a54e16717c9635ef4cbfb6c4247073146b6034029af215750e0d589fbd56e
-    issue: normalize-pseudo-type-12-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'enum'
-  remove: true
-  target: $["components"]["schemas"]["ComboDto3"]["properties"]["priceStrategy"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: f752cb5fc80ef69d1015c5cf7881db3f88fcaeabd262e9f0ecfaca0526a27978
-    issue: normalize-pseudo-type-13-clear-type
-- description: Normalize iiko pseudo type 'enum'
-  target: $["components"]["schemas"]["ComboDto3"]["properties"]["priceStrategy"]
-  update:
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ea1d8b80aceaffea4373ac5bf2955cf77775ffe59a63df854abe6a43f20cab8d
-    issue: normalize-pseudo-type-13-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'uuid'
   remove: true
   target: $["components"]["schemas"]["ComboGroupDto"]["properties"]["id"]["type"]
@@ -237,54 +84,6 @@ actions:
     expected-matches: 1
     expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
     issue: normalize-pseudo-type-14-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboGroupDto2"]["properties"]["id"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-15-clear-type
-- description: Normalize iiko pseudo type 'uuid'
-  target: $["components"]["schemas"]["ComboGroupDto2"]["properties"]["id"]
-  update:
-    format: uuid
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-15-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboGroupDto3"]["properties"]["id"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-16-clear-type
-- description: Normalize iiko pseudo type 'uuid'
-  target: $["components"]["schemas"]["ComboGroupDto3"]["properties"]["id"]
-  update:
-    format: uuid
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-16-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'uuid'
-  remove: true
-  target: $["components"]["schemas"]["ComboGroupDto4"]["properties"]["id"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 92b48547284d04cb6fde1be2d042e0d93fd0eb5ba31c61faa4e0fdc501749558
-    issue: normalize-pseudo-type-17-clear-type
-- description: Normalize iiko pseudo type 'uuid'
-  target: $["components"]["schemas"]["ComboGroupDto4"]["properties"]["id"]
-  update:
-    format: uuid
-    type: string
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-17-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'bool'
   remove: true
   target: $["components"]["schemas"]["ExternalMenuItem"]["properties"]["canBeDivided"]["type"]
@@ -315,21 +114,6 @@ actions:
     expected-matches: 1
     expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
     issue: normalize-pseudo-type-19-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["splittable"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-20-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["ExternalMenuItem3"]["properties"]["splittable"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-20-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'float'
   remove: true
   target: $["components"]["schemas"]["ExternalMenuItemSize"]["properties"]["portionWeightGrams"]["type"]
@@ -362,38 +146,6 @@ actions:
     expected-matches: 1
     expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
     issue: normalize-pseudo-type-22-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuItemSize3"]["properties"]["weight"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-23-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuItemSize3"]["properties"]["weight"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-23-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuItemSize4"]["properties"]["weight"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-24-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuItemSize4"]["properties"]["weight"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-24-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'bool'
   remove: true
   target: $["components"]["schemas"]["ExternalMenuModifierGroup"]["properties"]["canBeDivided"]["type"]
@@ -424,36 +176,6 @@ actions:
     expected-matches: 1
     expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
     issue: normalize-pseudo-type-26-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierGroup3"]["properties"]["splittable"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-27-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["ExternalMenuModifierGroup3"]["properties"]["splittable"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-27-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'bool'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierGroup4"]["properties"]["splittable"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 2294867b19063c15a25bce818c37b185cd6e11f1eb22adad59ceea639e9421c2
-    issue: normalize-pseudo-type-28-clear-type
-- description: Normalize iiko pseudo type 'bool'
-  target: $["components"]["schemas"]["ExternalMenuModifierGroup4"]["properties"]["splittable"]
-  update:
-    type: boolean
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-28-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'float'
   remove: true
   target: $["components"]["schemas"]["ExternalMenuModifierItem"]["properties"]["portionWeightGrams"]["type"]
@@ -488,38 +210,6 @@ actions:
     issue: normalize-pseudo-type-30-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'float'
   remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["weight"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-31-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuModifierItem3"]["properties"]["weight"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-31-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuModifierItem4"]["properties"]["weight"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-32-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuModifierItem4"]["properties"]["weight"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356
-    issue: normalize-pseudo-type-32-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
   target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto"]["properties"]["price"]["type"]
   x-iiko-sdk-guard:
     expected-matches: 1
@@ -534,118 +224,6 @@ actions:
     expected-matches: 1
     expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
     issue: normalize-pseudo-type-33-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto2"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-34-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto2"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-34-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto3"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-35-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto3"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-35-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto4"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-36-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto4"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-36-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto5"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-37-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto5"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-37-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto6"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-38-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto6"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-38-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto7"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-39-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto7"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-39-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'float'
-  remove: true
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto8"]["properties"]["price"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9f7d2af208ad2abf09ccfea0b51f81895d026da8f870b07ce8b10ce6a68e98b6
-    issue: normalize-pseudo-type-40-clear-type
-- description: Normalize iiko pseudo type 'float'
-  target: $["components"]["schemas"]["ExternalMenuPriceByDepartmentsDto8"]["properties"]["price"]
-  update:
-    format: float
-    type: number
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 5de35cdf842d1ce5766bc8efd2884b9b24f6f505ea20730b2e2fabb545d11f0b
-    issue: normalize-pseudo-type-40-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'int'
   remove: true
   target: $["components"]["schemas"]["ModifierRestrictionsDto"]["properties"]["byDefault"]["type"]
@@ -676,96 +254,6 @@ actions:
     expected-matches: 1
     expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
     issue: normalize-pseudo-type-42-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto3"]["properties"]["defaultQuantity"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-43-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto3"]["properties"]["defaultQuantity"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
-    issue: normalize-pseudo-type-43-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto4"]["properties"]["defaultQuantity"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-44-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto4"]["properties"]["defaultQuantity"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
-    issue: normalize-pseudo-type-44-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto5"]["properties"]["byDefault"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-45-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto5"]["properties"]["byDefault"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 75f96df552c0dc3fa2011182717588e12f54596b97d99594b559917d4b824208
-    issue: normalize-pseudo-type-45-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto6"]["properties"]["defaultQuantity"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-46-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto6"]["properties"]["defaultQuantity"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
-    issue: normalize-pseudo-type-46-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto7"]["properties"]["defaultQuantity"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-47-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto7"]["properties"]["defaultQuantity"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
-    issue: normalize-pseudo-type-47-apply
-- description: Clear 'type' before normalizing iiko pseudo type 'int'
-  remove: true
-  target: $["components"]["schemas"]["ModifierRestrictionsDto8"]["properties"]["defaultQuantity"]["type"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 9243eed27d5783d91f073ff4efda2b92d131b78955828657441a4d2c03b26fb1
-    issue: normalize-pseudo-type-48-clear-type
-- description: Normalize iiko pseudo type 'int'
-  target: $["components"]["schemas"]["ModifierRestrictionsDto8"]["properties"]["defaultQuantity"]
-  update:
-    type: integer
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 95364c652e1d7795e9eb36cb79ddd7caf0261990df086bc77324f8cbcdd15f08
-    issue: normalize-pseudo-type-48-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'Array of strings
     <uuid>'
   remove: true
@@ -783,7 +271,7 @@ actions:
     type: array
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: 5baadcea5522f1d1074d5e6366877d13e2b862f03706437d54cd003dbadb2adc
+    expected-sha256: 8eda396a72c57cbfc8a3a471470f5d1370dd4166b3fd02be265d8dd188ae39c9
     issue: normalize-pseudo-type-49-apply
 - description: Clear 'type' before normalizing iiko pseudo type 'integer <int64>'
   remove: true
@@ -838,48 +326,6 @@ actions:
     expected-matches: 1
     expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
     issue: remove-malformed-scalar-required-3
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto2"]["properties"]["id"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-4
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto2"]["properties"]["name"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-5
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto2"]["properties"]["percentage"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-6
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto3"]["properties"]["id"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-7
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto3"]["properties"]["name"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-8
-- description: Remove malformed iiko scalar-schema required marker
-  remove: true
-  target: $["components"]["schemas"]["TaxCategoryDto3"]["properties"]["percentage"]["required"]
-  x-iiko-sdk-guard:
-    expected-matches: 1
-    expected-sha256: 3c7b69591d88a7e4f96132f25a0ff79434f7b63d0875f1d9ffc70e6ade6d77bc
-    issue: remove-malformed-scalar-required-9
 - description: Clear 'type' before normalizing iiko pseudo type "constant string 'DeliveryOrderError'"
   remove: true
   target: $["components"]["schemas"]["iikoTransport.PublicApi.Contracts.WebHooks.DeliveryOrderErrorWebHookEventInfo"]["properties"]["eventType"]["type"]

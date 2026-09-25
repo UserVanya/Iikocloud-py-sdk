@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **date_modified** | **str** | Document last modification date (ISO 8601 YYYY-MM-DDThh:mm:ss.sss±hh:mm) | [optional] 
 **document_id** | **str** | Document identifier (GUID) | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[TransformationDocumentGetItem]**](TransformationDocumentGetItem.md) | List of document items | [optional] 
 **number** | **str** | Document number | [optional] 
 **product** | **str** | Product identifier (GUID) | [optional] 

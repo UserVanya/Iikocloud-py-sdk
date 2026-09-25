@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **allergen_group_ids** | **List[object]** | List of GUID groups of allergens | 
 **barcodes** | [**List[BarcodeDto2]**](BarcodeDto2.md) |  | [optional] 
 **can_set_open_price** | **bool** | Can set open price flag | [optional] [default to False]
-**customer_tag_groups** | [**List[SelectedCustomerTag2]**](SelectedCustomerTag2.md) |  | [optional] 
+**customer_tag_groups** | [**List[SelectedCustomerTag]**](SelectedCustomerTag.md) |  | [optional] 
 **description** | **str** | Product description | [optional] [default to '']
 **id** | **str** | Product ID | 
 **is_hidden** | **bool** | Visibility flag | [optional] [default to False]
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **splittable** | **bool** |  | 
 **tags** | **List[str]** | List of tags | [optional] 
 **tax_category_id** | **str** | Tax category GUID | [optional] 
-**type** | **str** | Item type | [optional] [default to 'DISH']
+**type** | **str** | Item type | [default to 'DISH']
 **use_balance_for_sell** | **bool** |  | [optional] [default to False]
 
 ## Example

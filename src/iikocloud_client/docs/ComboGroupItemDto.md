@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**forbidden_modifiers** | **List[object]** | Id of the item&#39;s modifier that is forbidden to sell | [optional] 
+**forbidden_modifiers** | **List[str]** | Id of the item&#39;s modifier that is forbidden to sell | [optional] 
 **item_id** | **str** |  | 
 **price_modification_amount** | **float** |  | [optional] 
 **size_id** | **str** |  | [optional] 

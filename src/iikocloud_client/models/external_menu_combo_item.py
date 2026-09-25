@@ -19,8 +19,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from iikocloud_client.models.barcode_dto4 import BarcodeDto4
-from iikocloud_client.models.combo_group_dto4 import ComboGroupDto4
+from iikocloud_client.models.barcode_dto2 import BarcodeDto2
+from iikocloud_client.models.combo_group_dto import ComboGroupDto
 from iikocloud_client.models.external_menu_combo_item_size import ExternalMenuComboItemSize
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +30,9 @@ class ExternalMenuComboItem(BaseModel):
     """
     ExternalMenuComboItem
     """ # noqa: E501
-    barcodes: Optional[List[BarcodeDto4]] = None
+    barcodes: Optional[List[BarcodeDto2]] = None
     description: Optional[StrictStr] = Field(default='', description="Product description")
-    groups: Optional[List[ComboGroupDto4]] = None
+    groups: Optional[List[ComboGroupDto]] = None
     id: StrictStr = Field(description="Product ID")
     is_marked: Optional[StrictBool] = Field(default=False, description="Marking flag", alias="isMarked")
     name: Optional[StrictStr] = Field(default='', description="Product name")
@@ -144,9 +144,9 @@ class ExternalMenuComboItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "barcodes": [BarcodeDto4.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
+            "barcodes": [BarcodeDto2.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
-            "groups": [ComboGroupDto4.from_dict(_item) for _item in obj["groups"]] if obj.get("groups") is not None else None,
+            "groups": [ComboGroupDto.from_dict(_item) for _item in obj["groups"]] if obj.get("groups") is not None else None,
             "id": obj.get("id"),
             "isMarked": obj.get("isMarked") if obj.get("isMarked") is not None else False,
             "name": obj.get("name") if obj.get("name") is not None else '',

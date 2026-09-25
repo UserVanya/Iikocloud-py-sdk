@@ -36,29 +36,30 @@ class TestExternalMenuComboItem(unittest.TestCase):
         if include_optional:
             return ExternalMenuComboItem(
                 barcodes = [
-                    iikocloud_client.models.barcode_dto4.BarcodeDto4(
+                    iikocloud_client.models.barcode_dto2.BarcodeDto2(
                         barcode = '', 
                         container = '', )
                     ],
                 description = '',
                 groups = [
-                    iikocloud_client.models.combo_group_dto4.ComboGroupDto4(
+                    iikocloud_client.models.combo_group_dto.ComboGroupDto(
                         id = '', 
                         is_main_group = True, 
                         items = [
-                            iikocloud_client.models.combo_group_item_dto4.ComboGroupItemDto4(
+                            iikocloud_client.models.combo_group_item_dto.ComboGroupItemDto(
                                 forbidden_modifiers = [
-                                    null
+                                    ''
                                     ], 
                                 item_id = '', 
                                 price_modification_amount = 1.337, 
                                 size_id = '', 
                                 sizes = [
-                                    iikocloud_client.models.combo_group_item_size_dto4.ComboGroupItemSizeDto4(
+                                    iikocloud_client.models.combo_group_item_size_dto.ComboGroupItemSizeDto(
                                         combo_size_id = '', 
                                         name = '', 
                                         prices = [
-                                            iikocloud_client.models.external_menu_price_by_departments_dto8.ExternalMenuPriceByDepartmentsDto8(
+                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                organization_id = '', 
                                                 organizations = [
                                                     ''
                                                     ], 

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**barcodes** | [**List[BarcodeDto4]**](BarcodeDto4.md) |  | [optional] 
+**barcodes** | [**List[BarcodeDto2]**](BarcodeDto2.md) |  | [optional] 
 **description** | **str** | Product description | [optional] [default to '']
-**groups** | [**List[ComboGroupDto4]**](ComboGroupDto4.md) |  | [optional] 
+**groups** | [**List[ComboGroupDto]**](ComboGroupDto.md) |  | [optional] 
 **id** | **str** | Product ID | 
 **is_marked** | **bool** | Marking flag | [optional] [default to False]
 **name** | **str** | Product name | [optional] [default to '']

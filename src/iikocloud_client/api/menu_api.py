@@ -29,6 +29,8 @@ from iikocloud_client.models.external_menu_response import ExternalMenuResponse
 from iikocloud_client.models.get_combos_info_request import GetCombosInfoRequest
 from iikocloud_client.models.get_combos_info_response import GetCombosInfoResponse
 from iikocloud_client.models.menu_request import MenuRequest
+from iikocloud_client.models.menu_request_v3 import MenuRequestV3
+from iikocloud_client.models.menu_v3 import MenuV3
 from iikocloud_client.models.menus_data_response import MenusDataResponse
 from iikocloud_client.models.nomenclature_request import NomenclatureRequest
 from iikocloud_client.models.nomenclature_response import NomenclatureResponse
@@ -1577,9 +1579,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExternalMenuResponse:
-        """Retrieve external menu by ID.
+        """(Deprecated) Retrieve external menu by ID.
 
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1606,6 +1608,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/2/menu/by_id is deprecated.", DeprecationWarning)
 
         _param = self._get_external_menu_by_id_serialize(
             timeout=timeout,
@@ -1620,6 +1623,7 @@ class MenuApi:
             '200': "ExternalMenuResponse",
             '400': "IikoErrorResponse",
             '401': "IikoErrorResponse",
+            '402': "GetExternalMenuById402Response",
             '408': "IikoErrorResponse",
             '500': "IikoErrorResponse",
         }
@@ -1652,9 +1656,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExternalMenuResponse]:
-        """Retrieve external menu by ID.
+        """(Deprecated) Retrieve external menu by ID.
 
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1681,6 +1685,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/2/menu/by_id is deprecated.", DeprecationWarning)
 
         _param = self._get_external_menu_by_id_serialize(
             timeout=timeout,
@@ -1695,6 +1700,7 @@ class MenuApi:
             '200': "ExternalMenuResponse",
             '400': "IikoErrorResponse",
             '401': "IikoErrorResponse",
+            '402': "GetExternalMenuById402Response",
             '408': "IikoErrorResponse",
             '500': "IikoErrorResponse",
         }
@@ -1727,9 +1733,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieve external menu by ID.
+        """(Deprecated) Retrieve external menu by ID.
 
-        > Sourced from Web External menu.   > Restriction group: `Data: menu`.
+        > Sourced from Web External menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1756,6 +1762,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/2/menu/by_id is deprecated.", DeprecationWarning)
 
         _param = self._get_external_menu_by_id_serialize(
             timeout=timeout,
@@ -1770,6 +1777,7 @@ class MenuApi:
             '200': "ExternalMenuResponse",
             '400': "IikoErrorResponse",
             '401': "IikoErrorResponse",
+            '402': "GetExternalMenuById402Response",
             '408': "IikoErrorResponse",
             '500': "IikoErrorResponse",
         }
@@ -1845,6 +1853,307 @@ class MenuApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/2/menu/by_id',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_external_menu_v3_by_id(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        menu_request_v3: Optional[MenuRequestV3] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MenuV3:
+        """Retrieve external menu V3 by ID.
+
+        > Generated from Plain menu converter.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param menu_request_v3:
+        :type menu_request_v3: MenuRequestV3
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_menu_v3_by_id_serialize(
+            timeout=timeout,
+            menu_request_v3=menu_request_v3,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MenuV3",
+            '400': "IikoErrorResponse",
+            '401': "IikoErrorResponse",
+            '408': "IikoErrorResponse",
+            '500': "IikoErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_external_menu_v3_by_id_with_http_info(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        menu_request_v3: Optional[MenuRequestV3] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MenuV3]:
+        """Retrieve external menu V3 by ID.
+
+        > Generated from Plain menu converter.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param menu_request_v3:
+        :type menu_request_v3: MenuRequestV3
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_menu_v3_by_id_serialize(
+            timeout=timeout,
+            menu_request_v3=menu_request_v3,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MenuV3",
+            '400': "IikoErrorResponse",
+            '401': "IikoErrorResponse",
+            '408': "IikoErrorResponse",
+            '500': "IikoErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_external_menu_v3_by_id_without_preload_content(
+        self,
+        timeout: Annotated[Optional[StrictInt], Field(description="Timeout in seconds.")] = None,
+        menu_request_v3: Optional[MenuRequestV3] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Retrieve external menu V3 by ID.
+
+        > Generated from Plain menu converter.
+
+        :param timeout: Timeout in seconds.
+        :type timeout: int
+        :param menu_request_v3:
+        :type menu_request_v3: MenuRequestV3
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_menu_v3_by_id_serialize(
+            timeout=timeout,
+            menu_request_v3=menu_request_v3,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MenuV3",
+            '400': "IikoErrorResponse",
+            '401': "IikoErrorResponse",
+            '408': "IikoErrorResponse",
+            '500': "IikoErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_external_menu_v3_by_id_serialize(
+        self,
+        timeout,
+        menu_request_v3,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if menu_request_v3 is not None:
+            _body_params = menu_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/menu/v3/by_id',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2151,9 +2460,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NomenclatureResponse:
-        """Menu.
+        """(Deprecated) Menu.
 
-        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
+        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -2180,6 +2489,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/1/nomenclature is deprecated.", DeprecationWarning)
 
         _param = self._get_nomenclature_serialize(
             timeout=timeout,
@@ -2226,9 +2536,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NomenclatureResponse]:
-        """Menu.
+        """(Deprecated) Menu.
 
-        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
+        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -2255,6 +2565,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/1/nomenclature is deprecated.", DeprecationWarning)
 
         _param = self._get_nomenclature_serialize(
             timeout=timeout,
@@ -2301,9 +2612,9 @@ class MenuApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Menu.
+        """(Deprecated) Menu.
 
-        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.
+        > Sourced from RMS Data Exchange Export menu.   > Restriction group: `Data: menu`.  > Deprecated, use `api/menu/v3/by_id` method instead.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -2330,6 +2641,7 @@ class MenuApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/1/nomenclature is deprecated.", DeprecationWarning)
 
         _param = self._get_nomenclature_serialize(
             timeout=timeout,

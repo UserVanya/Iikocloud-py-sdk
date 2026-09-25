@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **document_id** | **str** | Document identifier (GUID) | 
 **expense_account** | **str** | Expense account identifier (GUID) | 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[WriteoffDocumentCreateItem]**](WriteoffDocumentCreateItem.md) | List of document items | 
 **number** | **str** | Document number | 
 **organization_id** | **str** | Organization identifier (GUID) | 

@@ -33,7 +33,7 @@ class InternalTransferCreateRequest(BaseModel):
     var_date: StrictStr = Field(description="Document date and time (ISO 8601 YYYY-MM-DDThh:mm:ss.sss±hh:mm)", alias="date")
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[InternalTransferCreateItem] = Field(description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

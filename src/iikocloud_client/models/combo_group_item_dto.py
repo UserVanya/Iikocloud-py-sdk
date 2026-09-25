@@ -28,7 +28,7 @@ class ComboGroupItemDto(BaseModel):
     """
     ComboGroupItemDto
     """ # noqa: E501
-    forbidden_modifiers: Optional[List[Any]] = Field(default=None, description="Id of the item's modifier that is forbidden to sell", alias="forbiddenModifiers")
+    forbidden_modifiers: Optional[List[StrictStr]] = Field(default=None, description="Id of the item's modifier that is forbidden to sell", alias="forbiddenModifiers")
     item_id: StrictStr = Field(alias="itemId")
     price_modification_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="priceModificationAmount")
     size_id: Optional[StrictStr] = Field(default=None, alias="sizeId")

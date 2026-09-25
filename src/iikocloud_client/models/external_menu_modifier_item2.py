@@ -21,11 +21,11 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from uuid import UUID
-from iikocloud_client.models.barcode_dto6 import BarcodeDto6
-from iikocloud_client.models.external_menu_price_by_departments_dto2 import ExternalMenuPriceByDepartmentsDto2
-from iikocloud_client.models.modifier_restrictions_dto6 import ModifierRestrictionsDto6
-from iikocloud_client.models.nutrition_info_dto6 import NutritionInfoDto6
-from iikocloud_client.models.selected_customer_tag6 import SelectedCustomerTag6
+from iikocloud_client.models.barcode_dto2 import BarcodeDto2
+from iikocloud_client.models.external_menu_price_by_departments_dto import ExternalMenuPriceByDepartmentsDto
+from iikocloud_client.models.modifier_restrictions_dto2 import ModifierRestrictionsDto2
+from iikocloud_client.models.nutrition_info_dto import NutritionInfoDto
+from iikocloud_client.models.selected_customer_tag import SelectedCustomerTag
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -34,27 +34,27 @@ class ExternalMenuModifierItem2(BaseModel):
     """
     ExternalMenuModifierItem2
     """ # noqa: E501
-    allergen_group_ids: List[Any] = Field(alias="allergenGroupIds")
-    barcodes: Optional[List[BarcodeDto6]] = None
+    allergen_group_ids: List[StrictStr] = Field(alias="allergenGroupIds")
+    barcodes: Optional[List[BarcodeDto2]] = None
     button_image_url: Optional[StrictStr] = Field(default=None, alias="buttonImageUrl")
-    customer_tag_groups: Optional[List[SelectedCustomerTag6]] = Field(default=None, alias="customerTagGroups")
+    customer_tag_groups: Optional[List[SelectedCustomerTag]] = Field(default=None, alias="customerTagGroups")
     description: Optional[StrictStr] = Field(default='', description="Modifier's description")
     id: UUID
     independent_quantity: Optional[StrictBool] = Field(default=False, alias="independentQuantity")
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     is_marked: Optional[StrictBool] = Field(default=False, alias="isMarked")
-    labels: List[Any] = Field(description="List of label names")
+    labels: List[StrictStr] = Field(description="List of label names")
     measure_unit_type: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=30)]] = Field(default='GRAM', alias="measureUnitType")
     name: Optional[StrictStr] = Field(default='', description="Modifier's name")
-    nutritions: Optional[List[NutritionInfoDto6]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
+    nutritions: Optional[List[NutritionInfoDto]] = Field(default=None, description="Nutrition per 100 g of product grouped by departments")
     outer_ean_code: Optional[StrictStr] = Field(default=None, alias="outerEanCode")
     payment_subject: Optional[StrictStr] = Field(default=None, alias="paymentSubject")
     payment_subject_code: Optional[StrictStr] = Field(default=None, alias="paymentSubjectCode")
-    prices: Optional[List[ExternalMenuPriceByDepartmentsDto2]] = None
+    prices: Optional[List[ExternalMenuPriceByDepartmentsDto]] = None
     product_category_id: Optional[StrictStr] = Field(default=None, alias="productCategoryId")
-    restrictions: Optional[ModifierRestrictionsDto6] = None
+    restrictions: Optional[ModifierRestrictionsDto2] = None
     sku: Optional[StrictStr] = Field(default='', description="Modifier's code")
-    tags: List[Any] = Field(description="List of tag names")
+    tags: List[StrictStr] = Field(description="List of tag names")
     tax_category_id: Optional[StrictStr] = Field(default=None, alias="taxCategoryId")
     weight: Union[StrictFloat, StrictInt]
     additional_properties: Dict[str, Any] = {}
@@ -190,9 +190,9 @@ class ExternalMenuModifierItem2(BaseModel):
 
         _obj = cls.model_validate({
             "allergenGroupIds": obj.get("allergenGroupIds"),
-            "barcodes": [BarcodeDto6.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
+            "barcodes": [BarcodeDto2.from_dict(_item) for _item in obj["barcodes"]] if obj.get("barcodes") is not None else None,
             "buttonImageUrl": obj.get("buttonImageUrl"),
-            "customerTagGroups": [SelectedCustomerTag6.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
+            "customerTagGroups": [SelectedCustomerTag.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
             "id": obj.get("id"),
             "independentQuantity": obj.get("independentQuantity") if obj.get("independentQuantity") is not None else False,
@@ -201,13 +201,13 @@ class ExternalMenuModifierItem2(BaseModel):
             "labels": obj.get("labels"),
             "measureUnitType": obj.get("measureUnitType") if obj.get("measureUnitType") is not None else 'GRAM',
             "name": obj.get("name") if obj.get("name") is not None else '',
-            "nutritions": [NutritionInfoDto6.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
+            "nutritions": [NutritionInfoDto.from_dict(_item) for _item in obj["nutritions"]] if obj.get("nutritions") is not None else None,
             "outerEanCode": obj.get("outerEanCode"),
             "paymentSubject": obj.get("paymentSubject"),
             "paymentSubjectCode": obj.get("paymentSubjectCode"),
-            "prices": [ExternalMenuPriceByDepartmentsDto2.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
+            "prices": [ExternalMenuPriceByDepartmentsDto.from_dict(_item) for _item in obj["prices"]] if obj.get("prices") is not None else None,
             "productCategoryId": obj.get("productCategoryId"),
-            "restrictions": ModifierRestrictionsDto6.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
+            "restrictions": ModifierRestrictionsDto2.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "sku": obj.get("sku") if obj.get("sku") is not None else '',
             "tags": obj.get("tags"),
             "taxCategoryId": obj.get("taxCategoryId"),

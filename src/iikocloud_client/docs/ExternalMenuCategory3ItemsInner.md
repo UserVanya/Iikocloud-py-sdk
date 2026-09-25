@@ -6,14 +6,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **allergen_group_ids** | **List[object]** | List of GUID groups of allergens | 
-**barcodes** | [**List[BarcodeDto4]**](BarcodeDto4.md) |  | [optional] 
+**barcodes** | [**List[BarcodeDto2]**](BarcodeDto2.md) |  | [optional] 
 **can_set_open_price** | **bool** | Can set open price flag | [optional] [default to False]
-**customer_tag_groups** | [**List[SelectedCustomerTag3]**](SelectedCustomerTag3.md) |  | [optional] 
+**customer_tag_groups** | [**List[SelectedCustomerTag]**](SelectedCustomerTag.md) |  | [optional] 
 **description** | **str** | Product description | [optional] [default to '']
 **id** | **str** | Product ID | 
 **is_hidden** | **bool** | Visibility flag | [optional] [default to False]
 **is_marked** | **bool** | Marking flag | [optional] [default to False]
-**item_sizes** | [**List[ExternalMenuItemSize3]**](ExternalMenuItemSize3.md) |  | 
+**item_sizes** | [**List[ExternalMenuItemSize2]**](ExternalMenuItemSize2.md) |  | 
 **labels** | **List[str]** | List of labels | [optional] 
 **measure_unit** | **str** | Measure unit | [optional] [default to '']
 **modifier_schema_id** | **str** | Modifier schema ID | 
@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **tax_category_id** | **str** | Tax category GUID | [optional] 
 **type** | **str** | Item type | [default to 'DISH']
 **use_balance_for_sell** | **bool** |  | [optional] [default to False]
-**groups** | [**List[ComboGroupDto4]**](ComboGroupDto4.md) |  | [optional] 
+**groups** | [**List[ComboGroupDto]**](ComboGroupDto.md) |  | [optional] 
 **price_strategy** | **str** | Price strategy | [optional] [default to 'BY_COMPONENT']
 **sizes** | [**List[ExternalMenuComboItemSize]**](ExternalMenuComboItemSize.md) |  | 
 

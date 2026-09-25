@@ -36,7 +36,7 @@ class TestExternalMenuV4(unittest.TestCase):
         if include_optional:
             return ExternalMenuV4(
                 allergen_groups = [
-                    iikocloud_client.models.allergen_group_dto2.AllergenGroupDto2(
+                    iikocloud_client.models.allergen_group_dto.AllergenGroupDto(
                         code = '', 
                         id = '', 
                         is_deleted = True, 
@@ -44,29 +44,30 @@ class TestExternalMenuV4(unittest.TestCase):
                     ],
                 button_image_url = '',
                 combo_categories = [
-                    iikocloud_client.models.combo_category_dto3.ComboCategoryDto3(
+                    iikocloud_client.models.combo_category_dto.ComboCategoryDto(
                         combos = [
-                            iikocloud_client.models.combo_dto3.ComboDto3(
+                            iikocloud_client.models.combo_dto.ComboDto(
                                 description = '', 
                                 expiration_date = '{"2018-01-01T00:00:00+00:00"}', 
                                 groups = [
-                                    iikocloud_client.models.combo_group_dto3.ComboGroupDto3(
+                                    iikocloud_client.models.combo_group_dto.ComboGroupDto(
                                         id = '', 
                                         is_main_group = True, 
                                         items = [
-                                            iikocloud_client.models.combo_group_item_dto3.ComboGroupItemDto3(
+                                            iikocloud_client.models.combo_group_item_dto.ComboGroupItemDto(
                                                 forbidden_modifiers = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 item_id = '', 
                                                 price_modification_amount = 1.337, 
                                                 size_id = '', 
                                                 sizes = [
-                                                    iikocloud_client.models.combo_group_item_size_dto3.ComboGroupItemSizeDto3(
+                                                    iikocloud_client.models.combo_group_item_size_dto.ComboGroupItemSizeDto(
                                                         combo_size_id = '', 
                                                         name = '', 
                                                         prices = [
-                                                            iikocloud_client.models.external_menu_price_by_departments_dto7.ExternalMenuPriceByDepartmentsDto7(
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
                                                                 organizations = [
                                                                     ''
                                                                     ], 
@@ -88,7 +89,7 @@ class TestExternalMenuV4(unittest.TestCase):
                                 price = 0, 
                                 price_strategy = '{"BY_COMPONENT", "FIXED", "CALCULATE"}', 
                                 sizes = [
-                                    iikocloud_client.models.combo_size_dto3.ComboSizeDto3(
+                                    iikocloud_client.models.combo_size_dto.ComboSizeDto(
                                         button_image = null, 
                                         id = '', 
                                         name = '', 
@@ -100,10 +101,10 @@ class TestExternalMenuV4(unittest.TestCase):
                         name = '', )
                     ],
                 customer_tag_groups = [
-                    iikocloud_client.models.customer_tag_group3.CustomerTagGroup3(
+                    iikocloud_client.models.customer_tag_group.CustomerTagGroup(
                         id = '', 
                         items = [
-                            iikocloud_client.models.customer_tag_item3.CustomerTagItem3(
+                            iikocloud_client.models.customer_tag_item.CustomerTagItem(
                                 id = '', 
                                 name = '', )
                             ], 
@@ -114,7 +115,7 @@ class TestExternalMenuV4(unittest.TestCase):
                 format_version = 4,
                 id = 56,
                 intervals = [
-                    iikocloud_client.models.interval_dto3.IntervalDto3(
+                    iikocloud_client.models.interval_dto.IntervalDto(
                         from_time = '09:00', 
                         organization_id = '00000000-0000-0000-0000-000000000000', 
                         to_time = '23:00', )
@@ -136,7 +137,7 @@ class TestExternalMenuV4(unittest.TestCase):
                         schedule_id = '00000000-0000-0000-0000-000000000000', 
                         schedule_name = '', 
                         schedules = [
-                            iikocloud_client.models.period_schedule_dto3.PeriodScheduleDto3(
+                            iikocloud_client.models.period_schedule_dto.PeriodScheduleDto(
                                 begin = '09:00', 
                                 days_of_week = [
                                     'monday'
@@ -150,21 +151,21 @@ class TestExternalMenuV4(unittest.TestCase):
                 name = '',
                 override_tax_categories = {
                     'key' : [
-                        iikocloud_client.models.override_taxes_dto2.OverrideTaxesDto2(
+                        iikocloud_client.models.override_taxes_dto.OverrideTaxesDto(
                             base_tax_category = '', 
                             new_tax_category = '', 
                             order_type = '', )
                         ]
                     },
                 product_categories = [
-                    iikocloud_client.models.product_category_dto3.ProductCategoryDto3(
+                    iikocloud_client.models.product_category_dto.ProductCategoryDto(
                         id = '', 
                         is_deleted = True, 
                         name = '', )
                     ],
                 revision = 56,
                 tax_categories = [
-                    iikocloud_client.models.tax_category_dto2.TaxCategoryDto2(
+                    iikocloud_client.models.tax_category_dto.TaxCategoryDto(
                         id = '', 
                         name = '', 
                         percentage = 1.337, )
@@ -173,29 +174,30 @@ class TestExternalMenuV4(unittest.TestCase):
         else:
             return ExternalMenuV4(
                 combo_categories = [
-                    iikocloud_client.models.combo_category_dto3.ComboCategoryDto3(
+                    iikocloud_client.models.combo_category_dto.ComboCategoryDto(
                         combos = [
-                            iikocloud_client.models.combo_dto3.ComboDto3(
+                            iikocloud_client.models.combo_dto.ComboDto(
                                 description = '', 
                                 expiration_date = '{"2018-01-01T00:00:00+00:00"}', 
                                 groups = [
-                                    iikocloud_client.models.combo_group_dto3.ComboGroupDto3(
+                                    iikocloud_client.models.combo_group_dto.ComboGroupDto(
                                         id = '', 
                                         is_main_group = True, 
                                         items = [
-                                            iikocloud_client.models.combo_group_item_dto3.ComboGroupItemDto3(
+                                            iikocloud_client.models.combo_group_item_dto.ComboGroupItemDto(
                                                 forbidden_modifiers = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 item_id = '', 
                                                 price_modification_amount = 1.337, 
                                                 size_id = '', 
                                                 sizes = [
-                                                    iikocloud_client.models.combo_group_item_size_dto3.ComboGroupItemSizeDto3(
+                                                    iikocloud_client.models.combo_group_item_size_dto.ComboGroupItemSizeDto(
                                                         combo_size_id = '', 
                                                         name = '', 
                                                         prices = [
-                                                            iikocloud_client.models.external_menu_price_by_departments_dto7.ExternalMenuPriceByDepartmentsDto7(
+                                                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                                organization_id = '', 
                                                                 organizations = [
                                                                     ''
                                                                     ], 
@@ -217,7 +219,7 @@ class TestExternalMenuV4(unittest.TestCase):
                                 price = 0, 
                                 price_strategy = '{"BY_COMPONENT", "FIXED", "CALCULATE"}', 
                                 sizes = [
-                                    iikocloud_client.models.combo_size_dto3.ComboSizeDto3(
+                                    iikocloud_client.models.combo_size_dto.ComboSizeDto(
                                         button_image = null, 
                                         id = '', 
                                         name = '', 
@@ -247,7 +249,7 @@ class TestExternalMenuV4(unittest.TestCase):
                         schedule_id = '00000000-0000-0000-0000-000000000000', 
                         schedule_name = '', 
                         schedules = [
-                            iikocloud_client.models.period_schedule_dto3.PeriodScheduleDto3(
+                            iikocloud_client.models.period_schedule_dto.PeriodScheduleDto(
                                 begin = '09:00', 
                                 days_of_week = [
                                     'monday'

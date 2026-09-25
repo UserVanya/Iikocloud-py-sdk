@@ -52,10 +52,10 @@ class TestExternalMenuCategory2(unittest.TestCase):
                             ], 
                         can_set_open_price = True, 
                         customer_tag_groups = [
-                            iikocloud_client.models.selected_customer_tag2.SelectedCustomerTag2(
+                            iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                                 customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                                 selected_tag_ids = [
-                                    null
+                                    ''
                                     ], )
                             ], 
                         description = '', 
@@ -77,7 +77,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                         items = [
                                             iikocloud_client.models.external_menu_modifier_item2.ExternalMenuModifierItem2(
                                                 allergen_group_ids = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 button_image_url = '', 
                                                 description = '', 
@@ -86,12 +86,12 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 is_hidden = True, 
                                                 is_marked = True, 
                                                 labels = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 measure_unit_type = 'GRAM', 
                                                 name = '', 
                                                 nutritions = [
-                                                    iikocloud_client.models.nutrition_info_dto6.NutritionInfoDto6(
+                                                    iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                                                         carbs = 1.337, 
                                                         energy = 1.337, 
                                                         fats = 1.337, 
@@ -107,7 +107,8 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 payment_subject = '', 
                                                 payment_subject_code = '', 
                                                 prices = [
-                                                    iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                                                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                        organization_id = '', 
                                                         price = 0, 
                                                         tax_category_id = '', )
                                                     ], 
@@ -115,7 +116,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 restrictions = null, 
                                                 sku = '', 
                                                 tags = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 tax_category_id = '', 
                                                 weight = 1.337, )
@@ -127,7 +128,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                     ], 
                                 measure_unit_type = 'GRAM', 
                                 nutritions = [
-                                    iikocloud_client.models.nutrition_info_dto2.NutritionInfoDto2(
+                                    iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                                         carbs = 1.337, 
                                         energy = 1.337, 
                                         fats = 1.337, 
@@ -137,7 +138,8 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                         sugar = 1.337, )
                                     ], 
                                 prices = [
-                                    iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                        organization_id = '', 
                                         price = 0, 
                                         tax_category_id = '', )
                                     ], 
@@ -174,7 +176,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                 schedule_id = '00000000-0000-0000-0000-000000000000',
                 schedule_name = '',
                 schedules = [
-                    iikocloud_client.models.period_schedule_dto2.PeriodScheduleDto2(
+                    iikocloud_client.models.period_schedule_dto.PeriodScheduleDto(
                         begin = '09:00', 
                         days_of_week = [
                             'monday'
@@ -199,10 +201,10 @@ class TestExternalMenuCategory2(unittest.TestCase):
                             ], 
                         can_set_open_price = True, 
                         customer_tag_groups = [
-                            iikocloud_client.models.selected_customer_tag2.SelectedCustomerTag2(
+                            iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                                 customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                                 selected_tag_ids = [
-                                    null
+                                    ''
                                     ], )
                             ], 
                         description = '', 
@@ -224,7 +226,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                         items = [
                                             iikocloud_client.models.external_menu_modifier_item2.ExternalMenuModifierItem2(
                                                 allergen_group_ids = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 button_image_url = '', 
                                                 description = '', 
@@ -233,12 +235,12 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 is_hidden = True, 
                                                 is_marked = True, 
                                                 labels = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 measure_unit_type = 'GRAM', 
                                                 name = '', 
                                                 nutritions = [
-                                                    iikocloud_client.models.nutrition_info_dto6.NutritionInfoDto6(
+                                                    iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                                                         carbs = 1.337, 
                                                         energy = 1.337, 
                                                         fats = 1.337, 
@@ -254,7 +256,8 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 payment_subject = '', 
                                                 payment_subject_code = '', 
                                                 prices = [
-                                                    iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                                                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                                        organization_id = '', 
                                                         price = 0, 
                                                         tax_category_id = '', )
                                                     ], 
@@ -262,7 +265,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                                 restrictions = null, 
                                                 sku = '', 
                                                 tags = [
-                                                    null
+                                                    ''
                                                     ], 
                                                 tax_category_id = '', 
                                                 weight = 1.337, )
@@ -274,7 +277,7 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                     ], 
                                 measure_unit_type = 'GRAM', 
                                 nutritions = [
-                                    iikocloud_client.models.nutrition_info_dto2.NutritionInfoDto2(
+                                    iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                                         carbs = 1.337, 
                                         energy = 1.337, 
                                         fats = 1.337, 
@@ -284,7 +287,8 @@ class TestExternalMenuCategory2(unittest.TestCase):
                                         sugar = 1.337, )
                                     ], 
                                 prices = [
-                                    iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                        organization_id = '', 
                                         price = 0, 
                                         tax_category_id = '', )
                                     ], 

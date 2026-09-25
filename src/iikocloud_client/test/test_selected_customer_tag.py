@@ -37,7 +37,7 @@ class TestSelectedCustomerTag(unittest.TestCase):
             return SelectedCustomerTag(
                 customer_tag_group_id = '00000000-0000-0000-0000-000000000000',
                 selected_tag_ids = [
-                    null
+                    ''
                     ]
             )
         else:

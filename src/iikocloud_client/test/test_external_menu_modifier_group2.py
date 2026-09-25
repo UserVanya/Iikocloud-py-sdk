@@ -42,19 +42,19 @@ class TestExternalMenuModifierGroup2(unittest.TestCase):
                 items = [
                     iikocloud_client.models.external_menu_modifier_item2.ExternalMenuModifierItem2(
                         allergen_group_ids = [
-                            null
+                            ''
                             ], 
                         barcodes = [
-                            iikocloud_client.models.barcode_dto6.BarcodeDto6(
+                            iikocloud_client.models.barcode_dto2.BarcodeDto2(
                                 barcode = '', 
                                 container = '', )
                             ], 
                         button_image_url = '', 
                         customer_tag_groups = [
-                            iikocloud_client.models.selected_customer_tag6.SelectedCustomerTag6(
+                            iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                                 customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                                 selected_tag_ids = [
-                                    null
+                                    ''
                                     ], )
                             ], 
                         description = '', 
@@ -63,12 +63,12 @@ class TestExternalMenuModifierGroup2(unittest.TestCase):
                         is_hidden = True, 
                         is_marked = True, 
                         labels = [
-                            null
+                            ''
                             ], 
                         measure_unit_type = 'GRAM', 
                         name = '', 
                         nutritions = [
-                            iikocloud_client.models.nutrition_info_dto6.NutritionInfoDto6(
+                            iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                                 carbs = 1.337, 
                                 energy = 1.337, 
                                 fats = 1.337, 
@@ -84,7 +84,8 @@ class TestExternalMenuModifierGroup2(unittest.TestCase):
                         payment_subject = '', 
                         payment_subject_code = '', 
                         prices = [
-                            iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                organization_id = '', 
                                 price = 0, 
                                 tax_category_id = '', )
                             ], 
@@ -92,7 +93,7 @@ class TestExternalMenuModifierGroup2(unittest.TestCase):
                         restrictions = null, 
                         sku = '', 
                         tags = [
-                            null
+                            ''
                             ], 
                         tax_category_id = '', 
                         weight = 1.337, )
@@ -109,6 +110,65 @@ class TestExternalMenuModifierGroup2(unittest.TestCase):
             )
         else:
             return ExternalMenuModifierGroup2(
+                items = [
+                    iikocloud_client.models.external_menu_modifier_item2.ExternalMenuModifierItem2(
+                        allergen_group_ids = [
+                            ''
+                            ], 
+                        barcodes = [
+                            iikocloud_client.models.barcode_dto2.BarcodeDto2(
+                                barcode = '', 
+                                container = '', )
+                            ], 
+                        button_image_url = '', 
+                        customer_tag_groups = [
+                            iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
+                                customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
+                                selected_tag_ids = [
+                                    ''
+                                    ], )
+                            ], 
+                        description = '', 
+                        id = '', 
+                        independent_quantity = True, 
+                        is_hidden = True, 
+                        is_marked = True, 
+                        labels = [
+                            ''
+                            ], 
+                        measure_unit_type = 'GRAM', 
+                        name = '', 
+                        nutritions = [
+                            iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
+                                carbs = 1.337, 
+                                energy = 1.337, 
+                                fats = 1.337, 
+                                organizations = [
+                                    ''
+                                    ], 
+                                proteins = 1.337, 
+                                salt = 1.337, 
+                                saturated_fatty_acid = 1.337, 
+                                sugar = 1.337, )
+                            ], 
+                        outer_ean_code = '', 
+                        payment_subject = '', 
+                        payment_subject_code = '', 
+                        prices = [
+                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                organization_id = '', 
+                                price = 0, 
+                                tax_category_id = '', )
+                            ], 
+                        product_category_id = '', 
+                        restrictions = null, 
+                        sku = '', 
+                        tags = [
+                            ''
+                            ], 
+                        tax_category_id = '', 
+                        weight = 1.337, )
+                    ],
                 splittable = True,
         )
         """

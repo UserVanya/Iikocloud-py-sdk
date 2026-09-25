@@ -36,7 +36,7 @@ class SalesDocumentUpdateRequest(BaseModel):
     document_id: StrictStr = Field(description="Document identifier (GUID)", alias="documentId")
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[SalesDocumentCreateItem] = Field(description="List of document items")
     number: StrictStr = Field(description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

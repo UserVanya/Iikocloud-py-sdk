@@ -7,7 +7,7 @@ Customer tags
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **customer_tag_group_id** | **str** | Tag GUID | 
-**selected_tag_ids** | **List[object]** | Tag name | [optional] 
+**selected_tag_ids** | **List[str]** | Tag name | [optional] 
 
 ## Example
 

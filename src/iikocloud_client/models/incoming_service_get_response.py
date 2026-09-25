@@ -43,7 +43,7 @@ class IncomingServiceGetResponse(BaseModel):
     incoming_document_number: Optional[StrictStr] = Field(default=None, description="Incoming external document number", alias="incomingDocumentNumber")
     invoice: Optional[StrictStr] = Field(default=None, description="Invoice number")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: Optional[List[IncomingServiceGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     revenue_account: Optional[StrictStr] = Field(default=None, description="Revenue account identifier (GUID)", alias="revenueAccount")

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **document_id** | **str** | Document identifier (GUID) | [optional] 
 **due_date** | **str** | Payment due date | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[OutgoingServiceGetItem]**](OutgoingServiceGetItem.md) | List of document items | [optional] 
 **number** | **str** | Document number | [optional] 
 **revenue_account** | **str** | Revenue account identifier (GUID) | [optional] 

@@ -41,7 +41,7 @@ class IncomingServiceCreateRequest(BaseModel):
     incoming_document_number: Optional[StrictStr] = Field(default=None, description="Incoming external document number", alias="incomingDocumentNumber")
     invoice: Optional[StrictStr] = Field(default=None, description="Invoice number")
     is_automatic: Optional[StrictBool] = Field(default=None, description="Automatic document creation flag", alias="isAutomatic")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[IncomingServiceCreateItem] = Field(description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **expense_account** | **str** | Expense account identifier (GUID) | [optional] 
 **internal_incoming_invoice_id** | **str** | Associated incoming invoice identifier (GUID) | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[OutgoingInvoiceRequestItem]**](OutgoingInvoiceRequestItem.md) | List of document items | 
 **number** | **str** | Document number | [optional] 
 **organization_id** | **str** | Organization identifier (GUID) | 

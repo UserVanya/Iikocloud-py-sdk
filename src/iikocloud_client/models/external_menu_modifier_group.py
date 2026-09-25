@@ -34,7 +34,7 @@ class ExternalMenuModifierGroup(BaseModel):
     description: Optional[StrictStr] = Field(default='', description="Modifiers group description")
     is_hidden: Optional[StrictBool] = Field(default=False, alias="isHidden")
     item_group_id: Optional[StrictStr] = Field(default=None, alias="itemGroupId")
-    items: Optional[List[ExternalMenuModifierItem]] = None
+    items: List[ExternalMenuModifierItem]
     name: Optional[StrictStr] = Field(default='', description="Modifiers group name")
     restrictions: Optional[ModifierRestrictionsDto] = None
     sku: Optional[StrictStr] = Field(default='', description="Modifiers group code")

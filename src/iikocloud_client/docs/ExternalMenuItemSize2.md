@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **is_hidden** | **bool** |  | [optional] [default to False]
 **item_modifier_groups** | [**List[ExternalMenuModifierGroup2]**](ExternalMenuModifierGroup2.md) |  | 
 **measure_unit_type** | **str** |  | [optional] [default to 'GRAM']
-**nutritions** | [**List[NutritionInfoDto2]**](NutritionInfoDto2.md) | Nutrition per 100 g of product grouped by departments | [optional] 
-**prices** | [**List[ExternalMenuPriceByDepartmentsDto2]**](ExternalMenuPriceByDepartmentsDto2.md) |  | [optional] 
+**nutritions** | [**List[NutritionInfoDto]**](NutritionInfoDto.md) | Nutrition per 100 g of product grouped by departments | [optional] 
+**prices** | [**List[ExternalMenuPriceByDepartmentsDto]**](ExternalMenuPriceByDepartmentsDto.md) |  | [optional] 
 **size_code** | **str** |  | [optional] 
 **size_name** | **str** | Name of the product size, the name can be empty if there is only one size in the list | [optional] 
 **sku** | **str** | Unique size code, consists of the product code and the name of the size, if the product has one size, then the size code will be equal to the product code | [optional] [default to '']

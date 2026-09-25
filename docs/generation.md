@@ -335,9 +335,9 @@ flows пока остаются привязанными к v1-контракт�
 Проверено live 2026-07-23 (профиль amato, guarded smoke и selected runs):
 v2-токен принимается всеми проверенными read-endpoints, а ранее падавшие с
 HTTP 403 операции `PublicApiInvoiceProcessing` под v2-токеном зарегистрированного
-приложения возвращают 200 (исключение — `get_inventory_counteragents`, у
-которого backend отвечает `EXTERNAL_SYSTEM_TIMEOUT`; case остаётся
-`no_live_target/endpoint_unavailable`). Поэтому
+приложения возвращают 200 (исключением был `get_inventory_counteragents`: backend отвечал
+`EXTERNAL_SYSTEM_TIMEOUT`; в upstream 9.8.6.1 iiko убрал этот метод, а новый
+`list_inventory_counteragents` заблокирован до отдельной live-проверки). Поэтому
 `disabled_read_capabilities = ["public_api_invoice_processing"]` для этого
 окружения больше не нужен под v2.
 
@@ -419,9 +419,9 @@ PYTHONDONTWRITEBYTECODE=1 uv run --frozen --offline pytest \
 - `tests/integration/read/test_all_reads.py` ограничивает collection точным
   full-runner файлом.
 
-План содержит 91 read case и одну authentication, то есть до 92 HTTP requests.
-Если каждый case доходит до HTTP, 91 межзапросный интервал по 30 секунд задаёт
-минимум 45 минут 30 секунд только на cadence. Текущий tracked rate contract
+План содержит 90 read cases и одну authentication, то есть до 91 HTTP request.
+Если каждый case доходит до HTTP, 90 межзапросных интервалов по 30 секунд задают
+минимум 45 минут только на cadence. Текущий tracked rate contract
 задаёт ровно 30 секунд для каждой guarded operation: authentication, всех reads
 и обеих write operations; operation-specific server-limit multiplier сейчас
 отсутствует. Persistent rate state переживает процессы и сохраняет оставшуюся

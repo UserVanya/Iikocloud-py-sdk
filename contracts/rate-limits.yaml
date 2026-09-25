@@ -442,12 +442,6 @@ operations:
       source: user-approved-global-cadence-2026-07-22
       verified: true
     server_limit: null
-  get_inventory_counteragents:
-    test_budget:
-      min_interval_seconds: 30
-      source: user-approved-global-cadence-2026-07-22
-      verified: true
-    server_limit: null
   get_inventory_disassemble_document:
     test_budget:
       min_interval_seconds: 30
@@ -839,12 +833,6 @@ operations:
       verified: true
     server_limit: null
   update_delivery_tracking_link:
-    test_budget:
-      min_interval_seconds: 30
-      source: user-approved-write-lifecycles-2026-07-24
-      verified: true
-    server_limit: null
-  update_inventory_product_barcodes:
     test_budget:
       min_interval_seconds: 30
       source: user-approved-write-lifecycles-2026-07-24

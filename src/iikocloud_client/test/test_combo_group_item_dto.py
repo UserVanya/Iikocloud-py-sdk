@@ -36,7 +36,7 @@ class TestComboGroupItemDto(unittest.TestCase):
         if include_optional:
             return ComboGroupItemDto(
                 forbidden_modifiers = [
-                    null
+                    ''
                     ],
                 item_id = '',
                 price_modification_amount = 1.337,
@@ -46,7 +46,8 @@ class TestComboGroupItemDto(unittest.TestCase):
                         combo_size_id = '', 
                         name = '', 
                         prices = [
-                            iikocloud_client.models.external_menu_price_by_departments_dto5.ExternalMenuPriceByDepartmentsDto5(
+                            iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                                organization_id = '', 
                                 organizations = [
                                     ''
                                     ], 

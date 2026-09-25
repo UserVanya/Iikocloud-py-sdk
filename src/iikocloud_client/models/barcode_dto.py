@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +29,9 @@ class BarcodeDto(BaseModel):
     """ # noqa: E501
     barcode: StrictStr
     container: Optional[StrictStr] = None
+    product_fiscal_code: Optional[StrictStr] = Field(default=None, alias="productFiscalCode")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["barcode", "container"]
+    __properties: ClassVar[List[str]] = ["barcode", "container", "productFiscalCode"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +84,11 @@ class BarcodeDto(BaseModel):
         if self.container is None and "container" in self.model_fields_set:
             _dict['container'] = None
 
+        # set to None if product_fiscal_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.product_fiscal_code is None and "product_fiscal_code" in self.model_fields_set:
+            _dict['productFiscalCode'] = None
+
         return _dict
 
     @classmethod
@@ -96,7 +102,8 @@ class BarcodeDto(BaseModel):
 
         _obj = cls.model_validate({
             "barcode": obj.get("barcode"),
-            "container": obj.get("container")
+            "container": obj.get("container"),
+            "productFiscalCode": obj.get("productFiscalCode")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

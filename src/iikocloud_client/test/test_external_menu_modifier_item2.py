@@ -36,19 +36,19 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
         if include_optional:
             return ExternalMenuModifierItem2(
                 allergen_group_ids = [
-                    null
+                    ''
                     ],
                 barcodes = [
-                    iikocloud_client.models.barcode_dto6.BarcodeDto6(
+                    iikocloud_client.models.barcode_dto2.BarcodeDto2(
                         barcode = '', 
                         container = '', )
                     ],
                 button_image_url = '',
                 customer_tag_groups = [
-                    iikocloud_client.models.selected_customer_tag6.SelectedCustomerTag6(
+                    iikocloud_client.models.selected_customer_tag.SelectedCustomerTag(
                         customer_tag_group_id = '00000000-0000-0000-0000-000000000000', 
                         selected_tag_ids = [
-                            null
+                            ''
                             ], )
                     ],
                 description = '',
@@ -57,12 +57,12 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
                 is_hidden = True,
                 is_marked = True,
                 labels = [
-                    null
+                    ''
                     ],
                 measure_unit_type = 'GRAM',
                 name = '',
                 nutritions = [
-                    iikocloud_client.models.nutrition_info_dto6.NutritionInfoDto6(
+                    iikocloud_client.models.nutrition_info_dto.NutritionInfoDto(
                         carbs = 1.337, 
                         energy = 1.337, 
                         fats = 1.337, 
@@ -78,7 +78,8 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
                 payment_subject = '',
                 payment_subject_code = '',
                 prices = [
-                    iikocloud_client.models.external_menu_price_by_departments_dto2.ExternalMenuPriceByDepartmentsDto2(
+                    iikocloud_client.models.external_menu_price_by_departments_dto.ExternalMenuPriceByDepartmentsDto(
+                        organization_id = '', 
                         organizations = [
                             ''
                             ], 
@@ -86,7 +87,7 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
                         tax_category_id = '', )
                     ],
                 product_category_id = '',
-                restrictions = iikocloud_client.models.modifier_restrictions_dto6.ModifierRestrictionsDto6(
+                restrictions = iikocloud_client.models.modifier_restrictions_dto2.ModifierRestrictionsDto2(
                     default_quantity = 56, 
                     free_quantity = 56, 
                     hide_if_default_quantity = True, 
@@ -94,7 +95,7 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
                     min_quantity = 56, ),
                 sku = '',
                 tags = [
-                    null
+                    ''
                     ],
                 tax_category_id = '',
                 weight = 1.337
@@ -102,14 +103,14 @@ class TestExternalMenuModifierItem2(unittest.TestCase):
         else:
             return ExternalMenuModifierItem2(
                 allergen_group_ids = [
-                    null
+                    ''
                     ],
                 id = '',
                 labels = [
-                    null
+                    ''
                     ],
                 tags = [
-                    null
+                    ''
                     ],
                 weight = 1.337,
         )

@@ -36,7 +36,8 @@ class TestBarcodeDto(unittest.TestCase):
         if include_optional:
             return BarcodeDto(
                 barcode = '',
-                container = ''
+                container = '',
+                product_fiscal_code = ''
             )
         else:
             return BarcodeDto(

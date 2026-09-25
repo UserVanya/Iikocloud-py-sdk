@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allergen_groups** | [**List[AllergenGroupDto4]**](AllergenGroupDto4.md) |  | [optional] 
-**barcodes** | [**List[BarcodeDto5]**](BarcodeDto5.md) |  | [optional] 
+**allergen_groups** | [**List[AllergenGroupDto]**](AllergenGroupDto.md) |  | [optional] 
+**barcodes** | [**List[BarcodeDto2]**](BarcodeDto2.md) |  | [optional] 
 **button_image_url** | **str** |  | [optional] 
-**customer_tag_groups** | [**List[SelectedCustomerTag5]**](SelectedCustomerTag5.md) |  | [optional] 
+**customer_tag_groups** | [**List[SelectedCustomerTag]**](SelectedCustomerTag.md) |  | [optional] 
 **description** | **str** | Modifier&#39;s description | [optional] [default to '']
 **independent_quantity** | **bool** |  | [optional] [default to False]
 **is_hidden** | **bool** |  | [optional] [default to False]
 **is_marked** | **bool** |  | [optional] [default to False]
 **item_id** | **UUID** | Modifier&#39;s Id | [optional] 
-**labels** | [**List[LabelDto3]**](LabelDto3.md) | List of label names | [optional] 
+**labels** | [**List[LabelDto]**](LabelDto.md) | List of label names | [optional] 
 **measure_unit_type** | **str** |  | [optional] [default to 'GRAM']
 **name** | **str** | Modifier&#39;s name | [optional] [default to '']
-**nutrition_per_hundred_grams** | [**NutritionInfoDto5**](NutritionInfoDto5.md) | Nutrition per 100 g of modifier product | [optional] 
+**nutrition_per_hundred_grams** | [**NutritionInfoDto**](NutritionInfoDto.md) | Nutrition per 100 g of modifier product | [optional] 
 **outer_ean_code** | **str** |  | [optional] 
 **payment_subject** | **str** |  | [optional] 
 **payment_subject_code** | **str** |  | [optional] 
@@ -25,9 +25,9 @@ Name | Type | Description | Notes
 **position** | **int** |  | [optional] 
 **prices** | [**List[ExternalMenuPriceByDepartmentsDto]**](ExternalMenuPriceByDepartmentsDto.md) |  | [optional] 
 **product_category_id** | **str** |  | [optional] 
-**restrictions** | [**ModifierRestrictionsDto5**](ModifierRestrictionsDto5.md) |  | [optional] 
+**restrictions** | [**ModifierRestrictionsDto**](ModifierRestrictionsDto.md) |  | [optional] 
 **sku** | **str** | Modifier&#39;s code | [optional] [default to '']
-**tags** | [**List[TagDto3]**](TagDto3.md) | List of tag names | [optional] 
+**tags** | [**List[TagDto]**](TagDto.md) | List of tag names | [optional] 
 
 ## Example
 

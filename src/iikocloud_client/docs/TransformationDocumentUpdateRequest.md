@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **var_date** | **str** | Document date and time (ISO 8601 YYYY-MM-DDThh:mm:ss.sss±hh:mm) | 
 **document_id** | **str** | Document identifier (GUID) | 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[TransformationDocumentCreateItem]**](TransformationDocumentCreateItem.md) | List of document items | 
 **number** | **str** | Document number | 
 **organization_id** | **str** | Organization identifier (GUID) | 

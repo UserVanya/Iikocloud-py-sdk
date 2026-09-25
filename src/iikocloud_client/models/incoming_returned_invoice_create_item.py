@@ -28,7 +28,7 @@ class IncomingReturnedInvoiceCreateItem(BaseModel):
     IncomingReturnedInvoiceCreateItem
     """ # noqa: E501
     amount: Union[StrictFloat, StrictInt] = Field(description="Product quantity")
-    amount_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="publicapi.model.incoming_returned_invoice_item.amountFactor", alias="amountFactor")
+    amount_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Write-off factor", alias="amountFactor")
     amount_unit: Optional[StrictStr] = Field(default=None, description="Unit of measure identifier (GUID)", alias="amountUnit")
     container_id: Optional[StrictStr] = Field(default=None, description="Container identifier (GUID)", alias="containerId")
     customs_declaration_number: Optional[StrictStr] = Field(default=None, description="Customs declaration number", alias="customsDeclarationNumber")

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **deleted** | **bool** | Flag indicating that the document is deleted | [optional] 
 **document_id** | **str** | Document identifier (GUID) | [optional] 
 **due_date** | **str** | Payment due date | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **number** | **str** | Document number | [optional] 
 **processed** | **bool** | Flag indicating that the document is processed | [optional] 
 **revenue_account** | **str** | Revenue account identifier (GUID) | [optional] 

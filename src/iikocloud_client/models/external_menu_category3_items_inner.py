@@ -18,23 +18,23 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from iikocloud_client.models.external_menu_combo_item import ExternalMenuComboItem
-from iikocloud_client.models.external_menu_item3 import ExternalMenuItem3
+from iikocloud_client.models.external_menu_item2 import ExternalMenuItem2
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-EXTERNALMENUCATEGORY3ITEMSINNER_ONE_OF_SCHEMAS = ["ExternalMenuComboItem", "ExternalMenuItem3"]
+EXTERNALMENUCATEGORY3ITEMSINNER_ONE_OF_SCHEMAS = ["ExternalMenuComboItem", "ExternalMenuItem2"]
 
 class ExternalMenuCategory3ItemsInner(BaseModel):
     """
     ExternalMenuCategory3ItemsInner
     """
-    # data type: ExternalMenuItem3
-    oneof_schema_1_validator: Optional[ExternalMenuItem3] = None
+    # data type: ExternalMenuItem2
+    oneof_schema_1_validator: Optional[ExternalMenuItem2] = None
     # data type: ExternalMenuComboItem
     oneof_schema_2_validator: Optional[ExternalMenuComboItem] = None
-    actual_instance: Optional[Union[ExternalMenuComboItem, ExternalMenuItem3]] = None
-    one_of_schemas: Set[str] = { "ExternalMenuComboItem", "ExternalMenuItem3" }
+    actual_instance: Optional[Union[ExternalMenuComboItem, ExternalMenuItem2]] = None
+    one_of_schemas: Set[str] = { "ExternalMenuComboItem", "ExternalMenuItem2" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,9 +60,9 @@ class ExternalMenuCategory3ItemsInner(BaseModel):
         instance = ExternalMenuCategory3ItemsInner.model_construct()
         error_messages = []
         match = 0
-        # validate data type: ExternalMenuItem3
-        if not isinstance(v, ExternalMenuItem3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ExternalMenuItem3`")
+        # validate data type: ExternalMenuItem2
+        if not isinstance(v, ExternalMenuItem2):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ExternalMenuItem2`")
         else:
             match += 1
         # validate data type: ExternalMenuComboItem
@@ -72,10 +72,10 @@ class ExternalMenuCategory3ItemsInner(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem3. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem2. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem3. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem2. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -90,9 +90,9 @@ class ExternalMenuCategory3ItemsInner(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into ExternalMenuItem3
+        # deserialize data into ExternalMenuItem2
         try:
-            instance.actual_instance = ExternalMenuItem3.from_json(json_str)
+            instance.actual_instance = ExternalMenuItem2.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -105,10 +105,10 @@ class ExternalMenuCategory3ItemsInner(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem3. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem2. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem3. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ExternalMenuCategory3ItemsInner with oneOf schemas: ExternalMenuComboItem, ExternalMenuItem2. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -122,7 +122,7 @@ class ExternalMenuCategory3ItemsInner(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ExternalMenuComboItem, ExternalMenuItem3]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ExternalMenuComboItem, ExternalMenuItem2]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

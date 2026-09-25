@@ -130,7 +130,36 @@ operations:
   POST /api/1/webhooks/update_settings: update_webhook_settings
   POST /api/2/menu: get_external_menus
   POST /api/2/menu/by_id: get_external_menu_by_id
+  POST /api/employees/v1/attendance-type/list: list_employee_attendance_types
+  POST /api/employees/v1/attendance/create: create_employee_attendance
+  POST /api/employees/v1/attendance/delete: delete_employee_attendance
+  POST /api/employees/v1/attendance/list: list_employee_attendances
+  POST /api/employees/v1/attendance/update: update_employee_attendance
+  POST /api/employees/v1/employee/create: create_employee
+  POST /api/employees/v1/employee/fire: fire_employees
+  POST /api/employees/v1/employee/get: get_employee
+  POST /api/employees/v1/employee/list: list_employees
+  POST /api/employees/v1/employee/restore: restore_employee
+  POST /api/employees/v1/employee/update: update_employee
+  POST /api/employees/v1/positions/get: get_employee_position
+  POST /api/employees/v1/positions/list: list_employee_positions
+  POST /api/finance/v1/account-posting/list: list_finance_account_postings
+  POST /api/finance/v1/account-type/list: list_finance_account_types
+  POST /api/finance/v1/account/create: create_finance_account
+  POST /api/finance/v1/account/delete: delete_finance_account
+  POST /api/finance/v1/account/get: get_finance_account
+  POST /api/finance/v1/account/list: list_finance_accounts
+  POST /api/finance/v1/account/restore: restore_finance_account
+  POST /api/finance/v1/account/update: update_finance_account
   POST /api/finance/v1/account_transactions/list: list_finance_account_transactions
+  POST /api/finance/v1/balance-sheet/list: list_finance_balance_sheet
+  POST /api/finance/v1/cash-flow-category/create: create_finance_cash_flow_category
+  POST /api/finance/v1/cash-flow-category/delete: delete_finance_cash_flow_category
+  POST /api/finance/v1/cash-flow-category/get: get_finance_cash_flow_category
+  POST /api/finance/v1/cash-flow-category/list: list_finance_cash_flow_categories
+  POST /api/finance/v1/cash-flow-category/restore: restore_finance_cash_flow_category
+  POST /api/finance/v1/cash-flow-category/update: update_finance_cash_flow_category
+  POST /api/finance/v1/chart-of-accounts/list: list_finance_chart_of_accounts
   POST /api/finance/v1/document_transactions/list: list_finance_document_transactions
   POST /api/finance/v1/incoming_service/cancel: cancel_finance_incoming_service
   POST /api/finance/v1/incoming_service/create: create_finance_incoming_service
@@ -139,6 +168,7 @@ operations:
   POST /api/finance/v1/incoming_service/post: post_finance_incoming_service
   POST /api/finance/v1/incoming_service/unpost: unpost_finance_incoming_service
   POST /api/finance/v1/incoming_service/update: update_finance_incoming_service
+  POST /api/finance/v1/item-category/list: list_finance_item_categories
   POST /api/finance/v1/outgoing_service/cancel: cancel_finance_outgoing_service
   POST /api/finance/v1/outgoing_service/create: create_finance_outgoing_service
   POST /api/finance/v1/outgoing_service/get: get_finance_outgoing_service
@@ -146,8 +176,14 @@ operations:
   POST /api/finance/v1/outgoing_service/post: post_finance_outgoing_service
   POST /api/finance/v1/outgoing_service/unpost: unpost_finance_outgoing_service
   POST /api/finance/v1/outgoing_service/update: update_finance_outgoing_service
+  POST /api/finance/v1/tax-category/list: list_finance_tax_categories
+  POST /api/inventory/v1/accounting_categories/get: get_inventory_accounting_category
+  POST /api/inventory/v1/accounting_categories/list: list_inventory_accounting_categories
+  POST /api/inventory/v1/conceptions/get: get_inventory_conception
+  POST /api/inventory/v1/conceptions/list: list_inventory_conceptions
   POST /api/inventory/v1/costings/calculate: calculate_inventory_cost_prices
-  POST /api/inventory/v1/counteragents: get_inventory_counteragents
+  POST /api/inventory/v1/counteragents/list: list_inventory_counteragents
+  POST /api/inventory/v1/counteragents/pricelist/list: list_inventory_supplier_price_list
   POST /api/inventory/v1/disassemble_document/cancel: cancel_inventory_disassemble_document
   POST /api/inventory/v1/disassemble_document/create: create_inventory_disassemble_document
   POST /api/inventory/v1/disassemble_document/get: get_inventory_disassemble_document
@@ -155,6 +191,13 @@ operations:
   POST /api/inventory/v1/disassemble_document/post: post_inventory_disassemble_document
   POST /api/inventory/v1/disassemble_document/unpost: unpost_inventory_disassemble_document
   POST /api/inventory/v1/disassemble_document/update: update_inventory_disassemble_document
+  POST /api/inventory/v1/incoming_inventory/cancel: cancel_inventory_incoming_inventory
+  POST /api/inventory/v1/incoming_inventory/create: create_inventory_incoming_inventory
+  POST /api/inventory/v1/incoming_inventory/get: get_inventory_incoming_inventory
+  POST /api/inventory/v1/incoming_inventory/list: list_inventory_incoming_inventories
+  POST /api/inventory/v1/incoming_inventory/post: post_inventory_incoming_inventory
+  POST /api/inventory/v1/incoming_inventory/unpost: unpost_inventory_incoming_inventory
+  POST /api/inventory/v1/incoming_inventory/update: update_inventory_incoming_inventory
   POST /api/inventory/v1/incoming_invoice/cancel: cancel_inventory_incoming_invoice
   POST /api/inventory/v1/incoming_invoice/create: create_inventory_incoming_invoice
   POST /api/inventory/v1/incoming_invoice/get: get_inventory_incoming_invoice
@@ -178,7 +221,10 @@ operations:
   POST /api/inventory/v1/internal_transfer/post: post_inventory_internal_transfer
   POST /api/inventory/v1/internal_transfer/unpost: unpost_inventory_internal_transfer
   POST /api/inventory/v1/internal_transfer/update: update_inventory_internal_transfer
-  POST /api/inventory/v1/nomenclature/update_barcodes: update_inventory_product_barcodes
+  POST /api/inventory/v1/measure_units/get: get_inventory_measure_unit
+  POST /api/inventory/v1/measure_units/list: list_inventory_measure_units
+  POST /api/inventory/v1/organizations/settings/list: list_inventory_corporation_settings
+  POST /api/inventory/v1/organizations/tree: get_inventory_organization_tree
   POST /api/inventory/v1/outgoing_invoice/cancel: cancel_inventory_outgoing_invoice
   POST /api/inventory/v1/outgoing_invoice/create: create_inventory_outgoing_invoice
   POST /api/inventory/v1/outgoing_invoice/get: get_inventory_outgoing_invoice
@@ -188,6 +234,8 @@ operations:
   POST /api/inventory/v1/outgoing_invoice/post: post_inventory_outgoing_invoice
   POST /api/inventory/v1/outgoing_invoice/unpost: unpost_inventory_outgoing_invoice
   POST /api/inventory/v1/outgoing_invoice/update: update_inventory_outgoing_invoice
+  POST /api/inventory/v1/payment_types/get: get_inventory_payment_type
+  POST /api/inventory/v1/payment_types/list: list_inventory_payment_types
   POST /api/inventory/v1/production_document/cancel: cancel_inventory_production_document
   POST /api/inventory/v1/production_document/create: create_inventory_production_document
   POST /api/inventory/v1/production_document/get: get_inventory_production_document
@@ -209,6 +257,8 @@ operations:
   POST /api/inventory/v1/sales_document/post: post_inventory_sales_document
   POST /api/inventory/v1/sales_document/unpost: unpost_inventory_sales_document
   POST /api/inventory/v1/sales_document/update: update_inventory_sales_document
+  POST /api/inventory/v1/stock_balance/list: list_inventory_stock_balances
+  POST /api/inventory/v1/stores/list: list_inventory_stores
   POST /api/inventory/v1/transformation_document/cancel: cancel_inventory_transformation_document
   POST /api/inventory/v1/transformation_document/create: create_inventory_transformation_document
   POST /api/inventory/v1/transformation_document/get: get_inventory_transformation_document
@@ -223,4 +273,67 @@ operations:
   POST /api/inventory/v1/writeoff_document/post: post_inventory_writeoff_document
   POST /api/inventory/v1/writeoff_document/unpost: unpost_inventory_writeoff_document
   POST /api/inventory/v1/writeoff_document/update: update_inventory_writeoff_document
+  POST /api/licenses/v2/list: list_licenses
+  POST /api/menu/v3/by_id: get_external_menu_v3_by_id
+  POST /api/nomenclature/v1/allergen-group/list: list_nomenclature_allergen_groups
+  POST /api/nomenclature/v1/amount-unit/list: list_nomenclature_amount_units
+  POST /api/nomenclature/v1/assembly-chart/create: create_nomenclature_assembly_chart
+  POST /api/nomenclature/v1/assembly-chart/delete: delete_nomenclature_assembly_chart
+  POST /api/nomenclature/v1/assembly-chart/get: get_nomenclature_assembly_chart
+  POST /api/nomenclature/v1/assembly-chart/list: list_nomenclature_assembly_charts
+  POST /api/nomenclature/v1/assembly-chart/update: update_nomenclature_assembly_chart
+  POST /api/nomenclature/v1/container/list: list_nomenclature_containers
+  POST /api/nomenclature/v1/custom-category/list: list_nomenclature_custom_categories
+  POST /api/nomenclature/v1/group/create: create_nomenclature_group
+  POST /api/nomenclature/v1/group/delete: delete_nomenclature_groups
+  POST /api/nomenclature/v1/group/list: list_nomenclature_groups
+  POST /api/nomenclature/v1/group/restore: restore_nomenclature_groups
+  POST /api/nomenclature/v1/group/update: update_nomenclature_group
+  POST /api/nomenclature/v1/menu/list: list_nomenclature_menu_sections
+  POST /api/nomenclature/v1/modifier-schema/list: list_nomenclature_modifier_schemas
+  POST /api/nomenclature/v1/nomenclature/category/create: create_nomenclature_product_category
+  POST /api/nomenclature/v1/nomenclature/category/delete: delete_nomenclature_product_category
+  POST /api/nomenclature/v1/nomenclature/category/list: list_nomenclature_product_categories
+  POST /api/nomenclature/v1/nomenclature/category/restore: restore_nomenclature_product_category
+  POST /api/nomenclature/v1/nomenclature/category/update: update_nomenclature_product_category
+  POST /api/nomenclature/v1/place-type/list: list_nomenclature_place_types
+  POST /api/nomenclature/v1/producer/list: list_nomenclature_producers
+  POST /api/nomenclature/v1/product-scale/create: create_nomenclature_product_scale
+  POST /api/nomenclature/v1/product-scale/delete: delete_nomenclature_product_scale
+  POST /api/nomenclature/v1/product-scale/get: get_nomenclature_product_scale
+  POST /api/nomenclature/v1/product-scale/list: list_nomenclature_product_scales
+  POST /api/nomenclature/v1/product-scale/update: update_nomenclature_product_scale
+  POST /api/nomenclature/v1/product-size/list: list_nomenclature_product_sizes
+  POST /api/nomenclature/v1/product-tag/list: list_nomenclature_product_tags
+  POST /api/nomenclature/v1/product/create: create_nomenclature_product
+  POST /api/nomenclature/v1/product/delete: delete_nomenclature_products
+  POST /api/nomenclature/v1/product/list: list_nomenclature_products
+  POST /api/nomenclature/v1/product/restore: restore_nomenclature_products
+  POST /api/nomenclature/v1/product/update: update_nomenclature_product
+  POST /api/nomenclature/v1/product/update_barcodes: update_nomenclature_product_barcodes
+  POST /api/nomenclature/v2/assembly-chart/assembled: get_nomenclature_assembled_chart_v2
+  POST /api/nomenclature/v2/assembly-chart/create: create_nomenclature_assembly_chart_v2
+  POST /api/nomenclature/v2/assembly-chart/delete: delete_nomenclature_assembly_chart_v2
+  POST /api/nomenclature/v2/assembly-chart/get: get_nomenclature_assembly_chart_v2
+  POST /api/nomenclature/v2/assembly-chart/list: list_nomenclature_assembly_charts_v2
+  POST /api/nomenclature/v2/assembly-chart/prepared: get_nomenclature_prepared_chart_v2
+  POST /api/nomenclature/v2/assembly-chart/tree: get_nomenclature_assembly_chart_tree_v2
+  POST /api/nomenclature/v2/assembly-chart/update: update_nomenclature_assembly_chart_v2
+  POST /api/nomenclature/v2/group/create: create_nomenclature_group_v2
+  POST /api/nomenclature/v2/group/delete: delete_nomenclature_groups_v2
+  POST /api/nomenclature/v2/group/list: list_nomenclature_groups_v2
+  POST /api/nomenclature/v2/group/restore: restore_nomenclature_groups_v2
+  POST /api/nomenclature/v2/group/update: update_nomenclature_group_v2
+  POST /api/nomenclature/v2/product/create: create_nomenclature_product_v2
+  POST /api/nomenclature/v2/product/delete: delete_nomenclature_products_v2
+  POST /api/nomenclature/v2/product/list: list_nomenclature_products_v2
+  POST /api/nomenclature/v2/product/restore: restore_nomenclature_products_v2
+  POST /api/nomenclature/v2/product/update: update_nomenclature_product_v2
+  POST /api/nomenclature/v2/product/update_barcodes: update_nomenclature_product_barcodes_v2
+  POST /api/platform/v1/events/list: list_platform_events
+  POST /api/platform/v1/events/metadata/list: list_platform_event_metadata
+  POST /api/reporting/v1/olap/columns/get: get_olap_report_columns
+  POST /api/reporting/v1/olap/get: get_olap_report
+  POST /api/terminals/v1/cash-registers/list: list_terminal_cash_registers
+  POST /api/terminals/v1/terminals/list: list_terminals
   POST /api/v2/access_token: authenticate_v2

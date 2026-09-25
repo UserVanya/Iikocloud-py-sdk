@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** | Modifiers group description | [optional] [default to '']
 **is_hidden** | **bool** |  | [optional] [default to False]
 **item_group_id** | **str** |  | [optional] 
-**items** | [**List[ExternalMenuModifierItem]**](ExternalMenuModifierItem.md) |  | [optional] 
+**items** | [**List[ExternalMenuModifierItem]**](ExternalMenuModifierItem.md) |  | 
 **name** | **str** | Modifiers group name | [optional] [default to '']
 **restrictions** | [**ModifierRestrictionsDto**](ModifierRestrictionsDto.md) |  | [optional] 
 **sku** | **str** | Modifiers group code | [optional] [default to '']

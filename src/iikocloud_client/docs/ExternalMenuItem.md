@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allergens** | [**List[AllergenGroupDto3]**](AllergenGroupDto3.md) | Allergens | [optional] 
+**allergens** | [**List[AllergenGroupDto]**](AllergenGroupDto.md) | Allergens | [optional] 
 **barcodes** | [**List[BarcodeDto]**](BarcodeDto.md) |  | [optional] 
 **can_be_divided** | **bool** |  | [optional] [default to False]
 **can_set_open_price** | **bool** | Can set open price flag | [optional] [default to False]
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **is_marked** | **bool** | Marking flag | [optional] [default to False]
 **item_id** | **str** | Product ID | [optional] [default to '']
 **item_sizes** | [**List[ExternalMenuItemSize]**](ExternalMenuItemSize.md) |  | 
-**labels** | [**List[LabelDto2]**](LabelDto2.md) |  | [optional] 
+**labels** | [**List[LabelDto]**](LabelDto.md) |  | [optional] 
 **measure_unit** | **str** | Measure unit | [optional] [default to '']
 **modifier_schema_id** | **str** | Modifier schema ID | 
 **modifier_schema_name** | **str** | Modifier schema name | [optional] 
@@ -26,8 +26,8 @@ Name | Type | Description | Notes
 **payment_subject_code** | **str** |  | [optional] 
 **product_category_id** | **str** | Product category GUID | [optional] 
 **sku** | **str** | Product code | [optional] [default to '']
-**tags** | [**List[TagDto2]**](TagDto2.md) |  | [optional] 
-**tax_category** | [**TaxCategoryDto3**](TaxCategoryDto3.md) | Tax category | 
+**tags** | [**List[TagDto]**](TagDto.md) |  | [optional] 
+**tax_category** | [**TaxCategoryDto**](TaxCategoryDto.md) | Tax category | 
 **type** | **str** | Item type | [optional] [default to 'DISH']
 **use_balance_for_sell** | **bool** |  | [optional] [default to False]
 

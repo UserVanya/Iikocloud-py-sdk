@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **incoming_document_number** | **str** | Incoming external document number | [optional] 
 **invoice** | **str** | Invoice number | [optional] 
 **is_automatic** | **bool** | Automatic document creation flag | [optional] 
-**is_editable** | **bool** | Editable flag. true — available for editing in RMS | [optional] 
+**is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[IncomingServiceCreateItem]**](IncomingServiceCreateItem.md) | List of document items | 
 **number** | **str** | Document number | 
 **organization_id** | **str** | Organization identifier (GUID) | 

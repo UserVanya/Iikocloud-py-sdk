@@ -36,7 +36,7 @@ class IncomingServiceListItem(BaseModel):
     deleted: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is deleted")
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
     due_date: Optional[StrictStr] = Field(default=None, description="Payment due date", alias="dueDate")
-    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing in RMS", alias="isEditable")
+    is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     processed: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is processed")
     revenue_account: Optional[StrictStr] = Field(default=None, description="Revenue account identifier (GUID)", alias="revenueAccount")

@@ -19,14 +19,14 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from iikocloud_client.models.allergen_group_dto2 import AllergenGroupDto2
-from iikocloud_client.models.combo_category_dto3 import ComboCategoryDto3
-from iikocloud_client.models.customer_tag_group3 import CustomerTagGroup3
+from iikocloud_client.models.allergen_group_dto import AllergenGroupDto
+from iikocloud_client.models.combo_category_dto import ComboCategoryDto
+from iikocloud_client.models.customer_tag_group import CustomerTagGroup
 from iikocloud_client.models.external_menu_category3 import ExternalMenuCategory3
-from iikocloud_client.models.interval_dto3 import IntervalDto3
-from iikocloud_client.models.override_taxes_dto2 import OverrideTaxesDto2
-from iikocloud_client.models.product_category_dto3 import ProductCategoryDto3
-from iikocloud_client.models.tax_category_dto2 import TaxCategoryDto2
+from iikocloud_client.models.interval_dto import IntervalDto
+from iikocloud_client.models.override_taxes_dto import OverrideTaxesDto
+from iikocloud_client.models.product_category_dto import ProductCategoryDto
+from iikocloud_client.models.tax_category_dto import TaxCategoryDto
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -35,20 +35,20 @@ class ExternalMenuV4(BaseModel):
     """
     ExternalMenuV4
     """ # noqa: E501
-    allergen_groups: Optional[List[AllergenGroupDto2]] = Field(default=None, description="Allergen groups", alias="allergenGroups")
+    allergen_groups: Optional[List[AllergenGroupDto]] = Field(default=None, description="Allergen groups", alias="allergenGroups")
     button_image_url: Optional[StrictStr] = Field(default=None, description="Link to image", alias="buttonImageUrl")
-    combo_categories: List[ComboCategoryDto3] = Field(alias="comboCategories")
-    customer_tag_groups: Optional[List[CustomerTagGroup3]] = Field(default=None, description="Customer tag groups", alias="customerTagGroups")
+    combo_categories: List[ComboCategoryDto] = Field(alias="comboCategories")
+    customer_tag_groups: Optional[List[CustomerTagGroup]] = Field(default=None, description="Customer tag groups", alias="customerTagGroups")
     description: Optional[StrictStr] = Field(default='', description="External menu description")
     format_version: StrictInt = Field(description="Menu version", alias="formatVersion")
     id: StrictInt = Field(description="ID of the external menu")
-    intervals: Optional[List[IntervalDto3]] = Field(default=None, description="Menu availability time intervals")
+    intervals: Optional[List[IntervalDto]] = Field(default=None, description="Menu availability time intervals")
     item_groups: List[ExternalMenuCategory3] = Field(alias="itemGroups")
     name: Optional[StrictStr] = Field(default='', description="External menu name")
-    override_tax_categories: Optional[Dict[str, List[OverrideTaxesDto2]]] = Field(default=None, description="Tax benefits", alias="overrideTaxCategories")
-    product_categories: Optional[List[ProductCategoryDto3]] = Field(default=None, description="Product categories", alias="productCategories")
+    override_tax_categories: Optional[Dict[str, List[OverrideTaxesDto]]] = Field(default=None, description="Tax benefits", alias="overrideTaxCategories")
+    product_categories: Optional[List[ProductCategoryDto]] = Field(default=None, description="Product categories", alias="productCategories")
     revision: Optional[StrictInt] = Field(default=None, description="Menu revision")
-    tax_categories: Optional[List[TaxCategoryDto2]] = Field(default=None, description="Tax Categories", alias="taxCategories")
+    tax_categories: Optional[List[TaxCategoryDto]] = Field(default=None, description="Tax Categories", alias="taxCategories")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["allergenGroups", "buttonImageUrl", "comboCategories", "customerTagGroups", "description", "formatVersion", "id", "intervals", "itemGroups", "name", "overrideTaxCategories", "productCategories", "revision", "taxCategories"]
 
@@ -190,25 +190,25 @@ class ExternalMenuV4(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allergenGroups": [AllergenGroupDto2.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
+            "allergenGroups": [AllergenGroupDto.from_dict(_item) for _item in obj["allergenGroups"]] if obj.get("allergenGroups") is not None else None,
             "buttonImageUrl": obj.get("buttonImageUrl"),
-            "comboCategories": [ComboCategoryDto3.from_dict(_item) for _item in obj["comboCategories"]] if obj.get("comboCategories") is not None else None,
-            "customerTagGroups": [CustomerTagGroup3.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
+            "comboCategories": [ComboCategoryDto.from_dict(_item) for _item in obj["comboCategories"]] if obj.get("comboCategories") is not None else None,
+            "customerTagGroups": [CustomerTagGroup.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
             "description": obj.get("description") if obj.get("description") is not None else '',
             "formatVersion": obj.get("formatVersion") if obj.get("formatVersion") is not None else 4,
             "id": obj.get("id"),
-            "intervals": [IntervalDto3.from_dict(_item) for _item in obj["intervals"]] if obj.get("intervals") is not None else None,
+            "intervals": [IntervalDto.from_dict(_item) for _item in obj["intervals"]] if obj.get("intervals") is not None else None,
             "itemGroups": [ExternalMenuCategory3.from_dict(_item) for _item in obj["itemGroups"]] if obj.get("itemGroups") is not None else None,
             "name": obj.get("name") if obj.get("name") is not None else '',
             "overrideTaxCategories": {
-                _k: [OverrideTaxesDto2.from_dict(_item) for _item in _v] if _v is not None else None
+                _k: [OverrideTaxesDto.from_dict(_item) for _item in _v] if _v is not None else None
                 for _k, _v in obj["overrideTaxCategories"].items()
             }
             if obj.get("overrideTaxCategories") is not None
             else None,
-            "productCategories": [ProductCategoryDto3.from_dict(_item) for _item in obj["productCategories"]] if obj.get("productCategories") is not None else None,
+            "productCategories": [ProductCategoryDto.from_dict(_item) for _item in obj["productCategories"]] if obj.get("productCategories") is not None else None,
             "revision": obj.get("revision"),
-            "taxCategories": [TaxCategoryDto2.from_dict(_item) for _item in obj["taxCategories"]] if obj.get("taxCategories") is not None else None
+            "taxCategories": [TaxCategoryDto.from_dict(_item) for _item in obj["taxCategories"]] if obj.get("taxCategories") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

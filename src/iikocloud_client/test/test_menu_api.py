@@ -68,6 +68,13 @@ class TestMenuApi(unittest.IsolatedAsyncioTestCase):
         """
         pass
 
+    async def test_get_external_menu_v3_by_id(self) -> None:
+        """Test case for get_external_menu_v3_by_id
+
+        Retrieve external menu V3 by ID.
+        """
+        pass
+
     async def test_get_external_menus(self) -> None:
         """Test case for get_external_menus
 
