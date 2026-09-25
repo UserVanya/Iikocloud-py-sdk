@@ -108,6 +108,8 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
             "DISH",
             "COMBO",
             "SERVICE",
+            "GOODS",
+            "PREPARED",
         ]
     assert _property(
         corrected,
@@ -167,7 +169,7 @@ def test_corrected_hints_preserve_historical_public_service_literal(
 
     response_values = hints.response_values_for_status(200)
     assert response_values[(groups_name, ARRAY_ITEM, "items", ARRAY_ITEM, "type")] == frozenset(
-        {"DISH", "COMBO", "SERVICE"}
+        {"DISH", "COMBO", "SERVICE", "GOODS", "PREPARED"}
     )
     sanitized = Sanitizer().sanitize(
         {

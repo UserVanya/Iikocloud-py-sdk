@@ -180,7 +180,9 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
             {
                 "default": "DISH",
                 "description": "Item type",
-                "enum": ["DISH", "COMBO", "SERVICE"],
+                # iiko's own NomenclatureV3.ProductType; production menus sell PREPARED
+                # items (2026-09-25), so a narrower list fails whole real menus.
+                "enum": ["DISH", "COMBO", "SERVICE", "GOODS", "PREPARED"],
                 "type": "string",
             },
             include_in_redaction_hints=True,
@@ -270,7 +272,8 @@ REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS: tuple[ReviewedNullOnlyPropertyException,
 )
 
 # Since upstream 9.8.6.1 the V4 dish branch is the item schema V3 also uses, so the
-# discriminator's DISH/SERVICE restriction and required ``type`` apply to V3 items too.
+# discriminator's non-combo literals (DISH, SERVICE, GOODS, PREPARED) and required ``type``
+# apply to V3 items too.
 # V3 captures are validated against the same patched schema, which keeps that fail-closed.
 REVIEWED_V4_DISCRIMINATOR_CONTRACT = ReviewedV4DiscriminatorContract(
     union_path=(
@@ -291,6 +294,8 @@ REVIEWED_V4_DISCRIMINATOR_CONTRACT = ReviewedV4DiscriminatorContract(
             "DISH": "ExternalMenuItem2",
             "COMBO": "ExternalMenuComboItem",
             "SERVICE": "ExternalMenuItem2",
+            "GOODS": "ExternalMenuItem2",
+            "PREPARED": "ExternalMenuItem2",
         }
     ),
 )

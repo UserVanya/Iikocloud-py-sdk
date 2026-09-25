@@ -215,10 +215,17 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
         "mapping": {
             "COMBO": "#/components/schemas/ExternalMenuComboItem",
             "DISH": "#/components/schemas/ExternalMenuItem2",
+            "GOODS": "#/components/schemas/ExternalMenuItem2",
+            "PREPARED": "#/components/schemas/ExternalMenuItem2",
             "SERVICE": "#/components/schemas/ExternalMenuItem2",
         },
     }
-    assert components[V4_ITEM]["properties"]["type"]["enum"] == ["DISH", "SERVICE"]
+    assert components[V4_ITEM]["properties"]["type"]["enum"] == [
+        "DISH",
+        "GOODS",
+        "PREPARED",
+        "SERVICE",
+    ]
     assert components[V4_ITEM]["properties"]["type"]["default"] == "DISH"
     assert components[V4_ITEM]["required"].count("type") == 1
     assert components[COMBO]["properties"]["type"]["enum"] == ["COMBO"]
@@ -280,6 +287,8 @@ def test_builder_uses_reviewed_mapping_and_all_remove_decisions() -> None:
     assert mapping == {
         "COMBO": "#/components/schemas/ExternalMenuComboItem",
         "DISH": "#/components/schemas/ExternalMenuItem2",
+        "GOODS": "#/components/schemas/ExternalMenuItem2",
+        "PREPARED": "#/components/schemas/ExternalMenuItem2",
         "SERVICE": "#/components/schemas/ExternalMenuItem2",
     }
     assert [item["type"] for item in bundle.fixtures[4]["itemGroups"][0]["items"]] == [
@@ -838,6 +847,8 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
         )
     assert patched["components"]["schemas"][V4_ITEM]["properties"]["type"]["enum"] == [
         "DISH",
+        "GOODS",
+        "PREPARED",
         "SERVICE",
     ]
     for missing_repair in REVIEWED_MISSING_EXTERNAL_MENU_PROPERTIES:
@@ -853,7 +864,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
                 "31314f53dbeccf67f14a0a33fd0fbe5912df04acb813b8bbe2dad10f02ed93b8"  # pragma: allowlist secret  # noqa: E501
             ),
             "openapi/overlays/polymorphism.overlay.yaml": (
-                "b71389d3e4690330842b385b860b3a29725f80f45d452b121538040a32915555"  # pragma: allowlist secret  # noqa: E501
+                "3145a07392471a8798fa59e5ee790ce7cd75c2e93f4e97a1f67c89bc037a42f5"  # pragma: allowlist secret  # noqa: E501
             ),
             "tests/fixtures/contracts/external-menu-v2.json": (
                 "b248e8d075e4d39ed1bed3824c686e32dc0b3b7438356ddd2eb8a590ab6252d8"  # pragma: allowlist secret  # noqa: E501

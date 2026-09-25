@@ -244,6 +244,8 @@ def test_analyzer_derives_normal_mapping_counts_and_sorted_provenance() -> None:
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
         "DISH": V4_ITEM,
+        "GOODS": V4_ITEM,
+        "PREPARED": V4_ITEM,
         "SERVICE": V4_ITEM,
     }
     assert dict(result.unambiguous_counts) == {COMBO: 1, V4_ITEM: 1}
@@ -274,9 +276,25 @@ def test_analyzer_routes_reviewed_service_to_v4_item_without_changing_primary_ma
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
         "DISH": V4_ITEM,
+        "GOODS": V4_ITEM,
+        "PREPARED": V4_ITEM,
         "SERVICE": V4_ITEM,
     }
     assert result.total_item_count == 3
+    assert result.combo_observation_count == 1
+
+
+def test_analyzer_routes_production_prepared_and_goods_items_to_v4_item() -> None:
+    # A production menu sells semi-prepared items as PREPARED (2026-09-25) and iiko's
+    # ProductType also names GOODS; both are plain items, never combos.
+    schema = _effective_schema()
+    items = [_dish(), _combo(), _dish("PREPARED"), _dish("GOODS")]
+
+    result = analyze_menu_evidence(_pairs(schema, items), schema)
+
+    assert result.literal_to_branch["PREPARED"] == V4_ITEM
+    assert result.literal_to_branch["GOODS"] == V4_ITEM
+    assert result.total_item_count == 4
     assert result.combo_observation_count == 1
 
 
@@ -289,6 +307,8 @@ def test_analyzer_uses_exact_reviewed_mapping_without_combo_observation() -> Non
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
         "DISH": V4_ITEM,
+        "GOODS": V4_ITEM,
+        "PREPARED": V4_ITEM,
         "SERVICE": V4_ITEM,
     }
     assert dict(result.unambiguous_counts) == {COMBO: 0, V4_ITEM: 2}
