@@ -18,7 +18,7 @@ from .evidence_validation import MenuEvidenceValidator
 from .io import canonical_json_bytes, sha256_bytes
 
 _VERSIONS = (2, 3, 4)
-_BRANCHES = ("ExternalMenuItem3", "ExternalMenuComboItem")
+_BRANCHES = ("ExternalMenuItem2", "ExternalMenuComboItem")
 _COMBO = "ExternalMenuComboItem"
 _EXACT_FIVE = (
     "allergenGroupIds",
@@ -250,7 +250,7 @@ def _analyze_combo_field(
     schemas: list[dict[str, Any]] = []
     for value in values:
         try:
-            schemas.append(validator.validate_v4_item3_property(field, value))
+            schemas.append(validator.validate_v4_item_property(field, value))
         except SafetyError:
             raise SafetyError(
                 "Evidence combo property does not match its reviewed sibling schema"

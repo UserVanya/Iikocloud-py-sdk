@@ -96,9 +96,6 @@ _EXTENDED_WRITE_OPERATIONS: dict[str, tuple[str, str | None, str]] = {
     "update_delivery_tracking_link": (
         "compensating", "cancel_delivery_order", "/api/1/deliveries/update_tracking_link"
     ),
-    "update_inventory_product_barcodes": (
-        "compensating", None, "/api/inventory/v1/nomenclature/update_barcodes"
-    ),
     "update_webhook_settings": ("compensating", None, "/api/1/webhooks/update_settings"),
     "cancel_reserve": ("cleanup", None, "/api/1/reserve/cancel"),
     "cancel_table_order": ("cleanup", None, "/api/1/order/cancel"),
@@ -231,7 +228,6 @@ _READ_ENDPOINTS = {
     "get_external_menus": ("POST", "/api/2/menu"),
     "get_finance_incoming_service": ("POST", "/api/finance/v1/incoming_service/get"),
     "get_finance_outgoing_service": ("POST", "/api/finance/v1/outgoing_service/get"),
-    "get_inventory_counteragents": ("POST", "/api/inventory/v1/counteragents"),
     "get_inventory_disassemble_document": (
         "POST",
         "/api/inventory/v1/disassemble_document/get",
@@ -652,7 +648,7 @@ def test_committed_rate_catalog_is_exact_and_budgets_every_guarded_operation() -
     packaged_path = Path("src/iikocloud_client/_contracts/rate-limits.yaml")
     assert path.read_bytes() == packaged_path.read_bytes()
     expected_operations = _expected_committed_rate_operations()
-    assert len(expected_operations) == 142
+    assert len(expected_operations) == 140
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert value == {
         "version": 2,
@@ -777,7 +773,7 @@ def test_committed_live_operation_contract_is_the_exact_reviewed_read_allowlist(
         },
     }
     assert value == {"version": 1, "operations": expected_operations}
-    assert len(expected_operations) == 142
+    assert len(expected_operations) == 140
 
     safety = OperationSafetyCatalog.load(Path("contracts/operation-safety.yaml"))
     assert safety.automatic_read_ids == frozenset(_READ_ENDPOINTS)

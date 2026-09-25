@@ -71,8 +71,8 @@ class FamilySpec:
 FAMILY_SPECS = (
     FamilySpec(
         "disassemble_document",
-        "public_api_invoice_processing_disassemble_document_api",
-        "PublicApiInvoiceProcessingDisassembleDocumentApi",
+        "inventory_disassemble_document_api",
+        "InventoryDisassembleDocumentApi",
         "disassemble_document_list_item",
         "DisassembleDocumentListItem",
         "disassemble_document_get_response",
@@ -95,8 +95,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "incoming_invoice",
-        "public_api_invoice_processing_incoming_invoices_api",
-        "PublicApiInvoiceProcessingIncomingInvoicesApi",
+        "inventory_incoming_invoices_api",
+        "InventoryIncomingInvoicesApi",
         "incoming_invoice",
         "IncomingInvoice",
         "incoming_invoice",
@@ -114,8 +114,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "incoming_returned_invoice",
-        "public_api_invoice_processing_incoming_returned_invoice_api",
-        "PublicApiInvoiceProcessingIncomingReturnedInvoiceApi",
+        "inventory_incoming_returned_invoice_api",
+        "InventoryIncomingReturnedInvoiceApi",
         "incoming_returned_invoice_list_item",
         "IncomingReturnedInvoiceListItem",
         "incoming_returned_invoice_get_response",
@@ -143,8 +143,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "internal_transfer",
-        "public_api_invoice_processing_internal_transfer_api",
-        "PublicApiInvoiceProcessingInternalTransferApi",
+        "inventory_internal_transfer_api",
+        "InventoryInternalTransferApi",
         "internal_transfer_list_item",
         "InternalTransferListItem",
         "internal_transfer_get_response",
@@ -167,8 +167,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "outgoing_invoice",
-        "public_api_invoice_processing_outgoing_invoices_api",
-        "PublicApiInvoiceProcessingOutgoingInvoicesApi",
+        "inventory_outgoing_invoices_api",
+        "InventoryOutgoingInvoicesApi",
         "outgoing_invoice",
         "OutgoingInvoice",
         "outgoing_invoice",
@@ -196,8 +196,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "production_document",
-        "public_api_invoice_processing_production_document_api",
-        "PublicApiInvoiceProcessingProductionDocumentApi",
+        "inventory_production_document_api",
+        "InventoryProductionDocumentApi",
         "production_document_list_item",
         "ProductionDocumentListItem",
         "production_document_get_response",
@@ -220,8 +220,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "returned_invoice",
-        "public_api_invoice_processing_returned_invoice_api",
-        "PublicApiInvoiceProcessingReturnedInvoiceApi",
+        "inventory_returned_invoice_api",
+        "InventoryReturnedInvoiceApi",
         "returned_invoice_list_item",
         "ReturnedInvoiceListItem",
         "returned_invoice_get_response",
@@ -244,8 +244,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "sales_document",
-        "public_api_invoice_processing_sales_document_api",
-        "PublicApiInvoiceProcessingSalesDocumentApi",
+        "inventory_sales_document_api",
+        "InventorySalesDocumentApi",
         "sales_document_list_item",
         "SalesDocumentListItem",
         "sales_document_get_response",
@@ -273,8 +273,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "transformation_document",
-        "public_api_invoice_processing_transformation_document_api",
-        "PublicApiInvoiceProcessingTransformationDocumentApi",
+        "inventory_transformation_document_api",
+        "InventoryTransformationDocumentApi",
         "transformation_document_list_item",
         "TransformationDocumentListItem",
         "transformation_document_get_response",
@@ -297,8 +297,8 @@ FAMILY_SPECS = (
     ),
     FamilySpec(
         "writeoff_document",
-        "public_api_invoice_processing_writeoff_document_api",
-        "PublicApiInvoiceProcessingWriteoffDocumentApi",
+        "inventory_writeoff_document_api",
+        "InventoryWriteoffDocumentApi",
         "writeoff_document_list_item",
         "WriteoffDocumentListItem",
         "writeoff_document_get_response",
@@ -323,7 +323,6 @@ FAMILY_SPECS = (
 
 INVENTORY_IDS = {
     "calculate_inventory_cost_prices",
-    "get_inventory_counteragents",
     *(spec.get_id for spec in FAMILY_SPECS),
     *(spec.list_id for spec in FAMILY_SPECS),
 }
@@ -424,13 +423,6 @@ def _request_json(case: ReadCase, view: ContextView | None = None) -> object:
 
 
 def _minimal_response(case: ReadCase) -> object:
-    if case.operation_id == "get_inventory_counteragents":
-        return _model(
-            "get_counteragents_response",
-            "GetCounteragentsResponse",
-            counteragents=[],
-            total_count=0,
-        )
     if case.operation_id == "calculate_inventory_cost_prices":
         return _model(
             "get_cost_prices_response",
@@ -453,13 +445,13 @@ def _minimal_response(case: ReadCase) -> object:
 def test_inventory_registry_and_combined_plan_are_exact() -> None:
     assert type(INVENTORY_CASES) is tuple
     assert {case.operation_id for case in INVENTORY_CASES} == INVENTORY_IDS
-    assert len(INVENTORY_CASES) == 22
+    assert len(INVENTORY_CASES) == 21
     plan = ReadPlan.build((*FOUNDATION_CASES, *MENU_CASES, *FINANCE_CASES, *INVENTORY_CASES))
     assert set(plan.ordered_operation_ids) >= INVENTORY_IDS
 
 
 def test_all_inventory_cases_declare_invoice_processing_capability() -> None:
-    assert len(INVENTORY_CASES) == 22
+    assert len(INVENTORY_CASES) == 21
     for case in INVENTORY_CASES:
         assert case.capability is ReadCapability.PUBLIC_API_INVOICE_PROCESSING
         assert NoLiveTargetCode.INVOICE_PROCESSING in case.allowed_no_target_codes
@@ -568,22 +560,6 @@ def test_document_get_request_and_response_are_linked(spec: FamilySpec) -> None:
     with pytest.raises(NoLiveTarget) as missing:
         case.build_values(_view(case, omit=frozenset({spec.document_key})))
     assert missing.value.code is NoLiveTargetCode.DOCUMENT
-
-
-def test_counteragent_live_read_is_skipped_before_request_construction() -> None:
-    case = _case("get_inventory_counteragents")
-    assert case.depends_on == ("get_organizations",)
-    assert case.requires == ("organization_id",)
-    assert case.provides == ()
-
-    with pytest.raises(NoLiveTarget) as unavailable:
-        case.build_values(_view(case))
-
-    assert unavailable.value.code.value == "endpoint_unavailable"
-    assert case.allowed_no_target_codes == frozenset(
-        {unavailable.value.code, NoLiveTargetCode.INVOICE_PROCESSING}
-    )
-    assert case.revision == 3
 
 
 def test_cost_price_request_is_one_product_store_at_utc_midnight() -> None:

@@ -83,11 +83,11 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
     _property_repair(
         "ExternalMenuItem",
         "taxCategory",
-        "a6c2ed498922acf7895d82d00d0c654959036c5dbd510d224180b01b5b154d84",
+        "424ca12108c350700e661813209ddd490069605b520a3d6e7df1a10978976aad",
         {
             "description": "Tax category",
             "nullable": True,
-            "oneOf": [{"$ref": "#/components/schemas/TaxCategoryDto3"}],
+            "oneOf": [{"$ref": "#/components/schemas/TaxCategoryDto"}],
         },
     ),
     _property_repair(
@@ -99,38 +99,49 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
     _property_repair(
         "ExternalMenuModifierItem",
         "nutritionPerHundredGrams",
-        "cb491b6a629f6f615828841d17dc5dc8a00a888c0a3e4f4964424ce16f8e1032",
+        "f2103c4fd5f799afc7d7fcf11c09d854e13adecd5ef6ebe00e8f6a781022347f",
         {
             "description": "Nutrition per 100 g of modifier product",
             "nullable": True,
-            "oneOf": [{"$ref": "#/components/schemas/NutritionInfoDto5"}],
+            "oneOf": [{"$ref": "#/components/schemas/NutritionInfoDto"}],
         },
     ),
     _property_repair(
         "ExternalMenuModifierItem",
         "restrictions",
-        "c22456d2dfe9478b27bd928468f8583642285cace822981365aaf73ddc29a4f5",
+        "1f9eae2a9030ee62bd773b5c066ce03d9cf7a56ff32abea15db11a475bafbb0f",
         {
             "nullable": True,
-            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto5"}],
+            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto"}],
         },
     ),
     _property_repair(
         "ExternalMenuModifierItem2",
         "restrictions",
-        "4ebef800bca89546db3b0a0ba07706c1909098df9310e6bc73f4b2c5b41c5a08",
+        "0e2cbeafbb6813b340b7c96f4e8bde486f8bf92640ae381ab6330b7b152f7183",
         {
             "nullable": True,
-            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto6"}],
+            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto2"}],
+        },
+    ),
+    # Upstream 9.8.6.1 adds a free-form object branch next to the restrictions reference,
+    # so every restrictions object matches both oneOf branches and cannot be decoded.
+    _property_repair(
+        "ExternalMenuModifierGroup",
+        "restrictions",
+        "1e458cf004b5d8af1d743e528b4b128c15e8e968e6534fed3b15b6b0cbf8cbfa",
+        {
+            "nullable": True,
+            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto"}],
         },
     ),
     _property_repair(
-        "ExternalMenuModifierItem3",
+        "ExternalMenuModifierGroup2",
         "restrictions",
-        "901b2af4e7a66c3c15a6f1c4ccf397ff16bfa29314142385fcb9f8a0e21783c8",
+        "30f0bc01dc78317984e7ed1dbbe87e68568f8ca325dce0c14caf2d28a0852fd2",
         {
             "nullable": True,
-            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto7"}],
+            "oneOf": [{"$ref": "#/components/schemas/ModifierRestrictionsDto2"}],
         },
     ),
     _property_repair(
@@ -149,10 +160,10 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
     _property_repair(
         "ExternalMenuV4",
         "overrideTaxCategories",
-        "7dead4771c3fbade7c4ffac116217a1c407769872b9fc351197f691cb2379154",
+        "157d6ffeb89717a5ff9f6509bd9611c10998c06125dda0aa3d07ab0288a305b5",
         {
             "additionalProperties": {
-                "items": {"$ref": "#/components/schemas/OverrideTaxesDto2"},
+                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
                 "type": "array",
             },
             "description": "Tax benefits",
@@ -172,7 +183,7 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
             },
             include_in_redaction_hints=True,
         )
-        for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3")
+        for component in ("ExternalMenuItem", "ExternalMenuItem2")
     ),
     *(
         _property_repair(
@@ -186,7 +197,7 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
                 "type": "string",
             },
         )
-        for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3")
+        for component in ("ExternalMenuItem", "ExternalMenuItem2")
     ),
     _property_repair(
         "ExternalMenuItemSize",
@@ -202,41 +213,31 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
             "type": "string",
         },
     ),
-    *(
-        _property_repair(
-            component,
-            "id",
-            "621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d",
-            {
-                "example": "00000000-0000-0000-0000-000000000000",
-                "nullable": True,
-                "type": "string",
-            },
-        )
-        for component in ("ExternalMenuItemSize2", "ExternalMenuItemSize3")
+    _property_repair(
+        "ExternalMenuItemSize2",
+        "id",
+        "621b69149bce53f74bfbec26d12555f72d856a52cf1bf17c8599b152b42e309d",
+        {
+            "example": "00000000-0000-0000-0000-000000000000",
+            "nullable": True,
+            "type": "string",
+        },
     ),
-    *(
-        _property_repair(
-            component,
-            "price",
-            "86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031",
-            {
-                "description": (
-                    "Product size prices for the organization, if the value is null, then the "
-                    "product/size is not for sale, the price always belongs to the price "
-                    "category that was selected at the time of the request"
-                ),
-                "example": "0",
-                "format": "float",
-                "nullable": True,
-                "type": "number",
-            },
-        )
-        for component in (
-            "ExternalMenuPriceByDepartmentsDto",
-            "ExternalMenuPriceByDepartmentsDto2",
-            "ExternalMenuPriceByDepartmentsDto3",
-        )
+    _property_repair(
+        "ExternalMenuPriceByDepartmentsDto",
+        "price",
+        "86897ffd706df644f6e31cd5d132c04c5b50111b22ce5c44254f142df9faa031",
+        {
+            "description": (
+                "Product size prices for the organization, if the value is null, then the "
+                "product/size is not for sale, the price always belongs to the price "
+                "category that was selected at the time of the request"
+            ),
+            "example": "0",
+            "format": "float",
+            "nullable": True,
+            "type": "number",
+        },
     ),
 )
 
@@ -262,10 +263,13 @@ REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS: tuple[ReviewedNullOnlyPropertyException,
                 "f00dac0f630fb4eb437debc2e71c866f7e0eac502c02ece2b753fc92e3ae8c64"
             ),
         )
-        for component in ("BarcodeDto", "BarcodeDto2", "BarcodeDto3")
+        for component in ("BarcodeDto", "BarcodeDto2")
     ),
 )
 
+# Since upstream 9.8.6.1 the V4 dish branch is the item schema V3 also uses, so the
+# discriminator's DISH/SERVICE restriction and required ``type`` apply to V3 items too.
+# V3 captures are validated against the same patched schema, which keeps that fail-closed.
 REVIEWED_V4_DISCRIMINATOR_CONTRACT = ReviewedV4DiscriminatorContract(
     union_path=(
         "components",
@@ -275,16 +279,16 @@ REVIEWED_V4_DISCRIMINATOR_CONTRACT = ReviewedV4DiscriminatorContract(
         "items",
         "items",
     ),
-    broken_union_sha256=("a4bcd95a4d376a2e0d0cb7e7f19e2b97a48379cfea7219c79f5287eba3d32af0"),
-    branches=("ExternalMenuItem3", "ExternalMenuComboItem"),
+    broken_union_sha256=("f7230fce83995c71e599b2b635ae0ecdb956b492fb1c5b69d37fa78009ffc5e8"),
+    branches=("ExternalMenuItem2", "ExternalMenuComboItem"),
     primary_literals_by_branch=MappingProxyType(
-        {"ExternalMenuItem3": "DISH", "ExternalMenuComboItem": "COMBO"}
+        {"ExternalMenuItem2": "DISH", "ExternalMenuComboItem": "COMBO"}
     ),
     literal_to_branch=MappingProxyType(
         {
-            "DISH": "ExternalMenuItem3",
+            "DISH": "ExternalMenuItem2",
             "COMBO": "ExternalMenuComboItem",
-            "SERVICE": "ExternalMenuItem3",
+            "SERVICE": "ExternalMenuItem2",
         }
     ),
 )
@@ -476,7 +480,7 @@ def reviewed_v4_discriminator_contract(
     item_type_path = (
         "components",
         "schemas",
-        "ExternalMenuItem3",
+        contract.branches[0],
         "properties",
         "type",
     )

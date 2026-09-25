@@ -42,9 +42,9 @@ from tools.openapi_pipeline.evidence_schema_repairs import (
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.overlay import apply_overlay
 from tools.openapi_pipeline.paths import RepoPaths
-from tools.openapi_pipeline.pipeline import compose_reviewed_bootstrap_candidate
+from tools.openapi_pipeline.pipeline import compose_reviewed_evidence_base_candidate
 
-ITEM3 = "ExternalMenuItem3"
+V4_ITEM = "ExternalMenuItem2"
 COMBO = "ExternalMenuComboItem"
 EXACT_FIVE = (
     "allergenGroupIds",
@@ -188,10 +188,10 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
     assert response_schema["title"] == "ExternalMenuResponse"
 
     components = patched["components"]["schemas"]
-    for version, item_component in ((3, "OverrideTaxesDto"), (4, "OverrideTaxesDto2")):
+    for version in (3, 4):
         assert components[f"ExternalMenuV{version}"]["properties"]["overrideTaxCategories"] == {
             "additionalProperties": {
-                "items": {"$ref": f"#/components/schemas/{item_component}"},
+                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
                 "type": "array",
             },
             "description": "Tax benefits",
@@ -208,13 +208,13 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
         "propertyName": "type",
         "mapping": {
             "COMBO": "#/components/schemas/ExternalMenuComboItem",
-            "DISH": "#/components/schemas/ExternalMenuItem3",
-            "SERVICE": "#/components/schemas/ExternalMenuItem3",
+            "DISH": "#/components/schemas/ExternalMenuItem2",
+            "SERVICE": "#/components/schemas/ExternalMenuItem2",
         },
     }
-    assert components[ITEM3]["properties"]["type"]["enum"] == ["DISH", "SERVICE"]
-    assert components[ITEM3]["properties"]["type"]["default"] == "DISH"
-    assert components[ITEM3]["required"].count("type") == 1
+    assert components[V4_ITEM]["properties"]["type"]["enum"] == ["DISH", "SERVICE"]
+    assert components[V4_ITEM]["properties"]["type"]["default"] == "DISH"
+    assert components[V4_ITEM]["required"].count("type") == 1
     assert components[COMBO]["properties"]["type"]["enum"] == ["COMBO"]
     assert components[COMBO]["properties"]["type"]["default"] == "COMBO"
 
@@ -231,7 +231,7 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
     ]
     for field in EXACT_FIVE:
         assert combo["properties"][field] == candidate_module._without_examples(  # noqa: SLF001
-            components[ITEM3]["properties"][field]
+            components[V4_ITEM]["properties"][field]
         )
 
     assert tuple(bundle.fixtures) == (2, 3, 4)
@@ -273,8 +273,8 @@ def test_builder_uses_reviewed_mapping_and_all_remove_decisions() -> None:
     ]
     assert mapping == {
         "COMBO": "#/components/schemas/ExternalMenuComboItem",
-        "DISH": "#/components/schemas/ExternalMenuItem3",
-        "SERVICE": "#/components/schemas/ExternalMenuItem3",
+        "DISH": "#/components/schemas/ExternalMenuItem2",
+        "SERVICE": "#/components/schemas/ExternalMenuItem2",
     }
     assert [item["type"] for item in bundle.fixtures[4]["itemGroups"][0]["items"]] == [
         "DISH",
@@ -323,8 +323,8 @@ def test_builder_replaces_existing_lists_without_duplicates() -> None:
         component = patched["components"]["schemas"][f"ExternalMenuV{version}"]
         assert component["properties"]["formatVersion"]["enum"] == [version]
         assert component["required"].count("formatVersion") == 1
-    assert len(patched["components"]["schemas"][ITEM3]["required"]) == len(
-        set(patched["components"]["schemas"][ITEM3]["required"])
+    assert len(patched["components"]["schemas"][V4_ITEM]["required"]) == len(
+        set(patched["components"]["schemas"][V4_ITEM]["required"])
     )
     assert len(patched["components"]["schemas"][COMBO]["required"]) == len(
         set(patched["components"]["schemas"][COMBO]["required"])
@@ -774,7 +774,7 @@ def test_fixtures_never_copy_capture_redactions_ids_or_schema_example_defaults()
     reason="complete ignored reviewed bootstrap candidate set is absent",
 )
 def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() -> None:
-    schema, _mappings = compose_reviewed_bootstrap_candidate(RepoPaths.discover())
+    schema, _mappings = compose_reviewed_evidence_base_candidate(RepoPaths.discover())
     components = schema["components"]["schemas"]
     request_schema = components["iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest"]
     pairs = {}
@@ -789,7 +789,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
         response_body["formatVersion"] = version
         if version == 4:
             category = _minimal_schema_value(schema, components["ExternalMenuCategory3"])
-            dish = _minimal_schema_value(schema, components[ITEM3])
+            dish = _minimal_schema_value(schema, components[V4_ITEM])
             combo = _minimal_schema_value(schema, components[COMBO])
             assert isinstance(category, dict)
             assert isinstance(dish, dict)
@@ -821,7 +821,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
         if repair.path == (
             "components",
             "schemas",
-            ITEM3,
+            V4_ITEM,
             "properties",
             "type",
         ):
@@ -830,7 +830,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
             corrected,
             repair.path,
         )
-    assert patched["components"]["schemas"][ITEM3]["properties"]["type"]["enum"] == [
+    assert patched["components"]["schemas"][V4_ITEM]["properties"]["type"]["enum"] == [
         "DISH",
         "SERVICE",
     ]
@@ -847,7 +847,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
                 "31314f53dbeccf67f14a0a33fd0fbe5912df04acb813b8bbe2dad10f02ed93b8"  # pragma: allowlist secret  # noqa: E501
             ),
             "openapi/overlays/polymorphism.overlay.yaml": (
-                "9425021d34feafe9837c75b11e38d5590e97d2947b8dae343c4bbac3075eceb8"  # pragma: allowlist secret  # noqa: E501
+                "c69fdcac71eec9b6a25566a0b3e668c72dd64cffb660ec875bc78753546ee890"  # pragma: allowlist secret  # noqa: E501
             ),
             "tests/fixtures/contracts/external-menu-v2.json": (
                 "b248e8d075e4d39ed1bed3824c686e32dc0b3b7438356ddd2eb8a590ab6252d8"  # pragma: allowlist secret  # noqa: E501

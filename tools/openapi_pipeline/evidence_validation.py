@@ -62,7 +62,7 @@ _UUID_FORMAT = re.compile(
     r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z"
 )
 _BROKEN_COMBO_COMPONENT = "ExternalMenuComboItem"
-_ITEM3_COMPONENT = "ExternalMenuItem3"
+_V4_ITEM_COMPONENT = "ExternalMenuItem2"
 _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     {
         "allergenGroupIds",
@@ -73,7 +73,7 @@ _BROKEN_COMBO_UNDEFINED_REQUIRED = frozenset(
     }
 )
 _MAX_SCHEMA_DEPTH = 256
-_REVIEWED_COMBO_SHA256 = "dcc5f6184a905905df5a1ba2818157da41603a9b488dc178bc8ae4401635d6b2"
+_REVIEWED_COMBO_SHA256 = "65d6de2d0d3f70f65a823d776fdde658d9700e2d841d9ec109fb39d6e8610774"
 
 
 class MenuEvidenceValidator:
@@ -216,7 +216,7 @@ class MenuEvidenceValidator:
 
         return self._discriminator_contract.primary_literals_by_branch
 
-    def validate_v4_item3_property(
+    def validate_v4_item_property(
         self,
         property_name: str,
         value: object,
@@ -225,7 +225,7 @@ class MenuEvidenceValidator:
 
         if property_name not in _BROKEN_COMBO_UNDEFINED_REQUIRED:
             raise SafetyError("Evidence combo inference property is outside the exact-five scope")
-        item = self._component(_ITEM3_COMPONENT)
+        item = self._component(_V4_ITEM_COMPONENT)
         properties = item.get("properties")
         schema = properties.get(property_name) if type(properties) is dict else None
         if type(schema) is not dict:
@@ -235,8 +235,8 @@ class MenuEvidenceValidator:
             copied_value,
             schema,
             path=f"response-v4.item.{property_name}",
-            schema_path=(f"components.schemas.{_ITEM3_COMPONENT}.properties.{property_name}"),
-            component_name=_ITEM3_COMPONENT,
+            schema_path=(f"components.schemas.{_V4_ITEM_COMPONENT}.properties.{property_name}"),
+            component_name=_V4_ITEM_COMPONENT,
         )
         return _mutable_json_copy(schema)
 

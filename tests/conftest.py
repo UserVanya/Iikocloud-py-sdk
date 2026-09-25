@@ -259,7 +259,7 @@ def _load_full_read_plan() -> ReadPlan:
         candidate = getattr(module, "FULL_READ_PLAN", None)
     except (ImportError, AttributeError):
         import_failed = True
-    if import_failed or type(candidate) is not ReadPlan or len(candidate.cases) != 91:
+    if import_failed or type(candidate) is not ReadPlan or len(candidate.cases) != 90:
         raise SafetyError("The exhaustive live read registry is unavailable") from None
     return candidate
 

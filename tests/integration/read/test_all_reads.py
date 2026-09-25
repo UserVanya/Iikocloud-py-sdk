@@ -15,7 +15,7 @@ async def test_all_reviewed_reads(
     live_read_plan: ReadPlan,
 ) -> None:
     assert live_read_plan is FULL_READ_PLAN
-    assert len(live_read_plan.cases) == 91
+    assert len(live_read_plan.cases) == 90
     summary = await live_read_harness.run()
     if not summary.success:
         pytest.fail(

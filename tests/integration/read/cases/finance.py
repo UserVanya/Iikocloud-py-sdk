@@ -473,16 +473,16 @@ def _typed_validator(
 
 _INCOMING_LIST_BINDING = _binding(
     "list_finance_incoming_services",
-    "public_api_invoice_processing_incoming_service_api",
-    "PublicApiInvoiceProcessingIncomingServiceApi",
+    "finance_incoming_service_api",
+    "FinanceIncomingServiceApi",
     "list_request",
     "ListRequest",
     "list_request",
 )
 _OUTGOING_LIST_BINDING = _binding(
     "list_finance_outgoing_services",
-    "public_api_invoice_processing_outgoing_service_api",
-    "PublicApiInvoiceProcessingOutgoingServiceApi",
+    "finance_outgoing_service_api",
+    "FinanceOutgoingServiceApi",
     "list_request",
     "ListRequest",
     "list_request",
@@ -511,8 +511,8 @@ _INCOMING_GET = make_document_get_case(
     "get_finance_incoming_service",
     _binding(
         "get_finance_incoming_service",
-        "public_api_invoice_processing_incoming_service_api",
-        "PublicApiInvoiceProcessingIncomingServiceApi",
+        "finance_incoming_service_api",
+        "FinanceIncomingServiceApi",
         "get_by_id_request",
         "GetByIDRequest",
         "get_by_id_request",
@@ -526,8 +526,8 @@ _OUTGOING_GET = make_document_get_case(
     "get_finance_outgoing_service",
     _binding(
         "get_finance_outgoing_service",
-        "public_api_invoice_processing_outgoing_service_api",
-        "PublicApiInvoiceProcessingOutgoingServiceApi",
+        "finance_outgoing_service_api",
+        "FinanceOutgoingServiceApi",
         "get_by_id_request",
         "GetByIDRequest",
         "get_by_id_request",
@@ -549,8 +549,8 @@ _DOCUMENT_TRANSACTIONS = ReadCase(
     ),
     binding=_binding(
         "list_finance_document_transactions",
-        "public_api_invoice_processing_document_transactions_api",
-        "PublicApiInvoiceProcessingDocumentTransactionsApi",
+        "finance_document_transactions_api",
+        "FinanceDocumentTransactionsApi",
         "document_transactions_list_request",
         "DocumentTransactionsListRequest",
         "document_transactions_list_request",
@@ -580,8 +580,8 @@ _ACCOUNT_TRANSACTIONS = ReadCase(
     ),
     binding=_binding(
         "list_finance_account_transactions",
-        "public_api_invoice_processing_account_transactions_api",
-        "PublicApiInvoiceProcessingAccountTransactionsApi",
+        "finance_account_transactions_api",
+        "FinanceAccountTransactionsApi",
         "account_transactions_list_request",
         "AccountTransactionsListRequest",
         "account_transactions_list_request",

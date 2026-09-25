@@ -99,7 +99,7 @@ def test_committed_contract_overlay_matches_and_applies_to_exact_raw_candidate()
     raw_path = Path("build/upstream/candidate.json")
     raw_bytes = raw_path.read_bytes()
     assert sha256_bytes(raw_bytes) == (
-        "e656ab889ac1968b95bac29e78f08f1c46cd2d2f5e1c370eadbc400da5bbe89a"
+        "2afcac8c8bde4de626223e7a658d8e81ddd42ba9a1fcd719b49e7f82001dfb42"
     )
     raw = json.loads(raw_bytes)
     expected = build_contracts_overlay(raw)

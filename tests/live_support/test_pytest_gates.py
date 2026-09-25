@@ -820,7 +820,7 @@ def test_real_repository_has_exact_executable_read_parity() -> None:
         operation_id for operation_id, operation in operations.items() if operation.kind == "read"
     )
     assert validated is FULL_READ_PLAN
-    assert len(FULL_READ_PLAN.cases) == 91
+    assert len(FULL_READ_PLAN.cases) == 90
     assert frozenset(FULL_READ_PLAN.ordered_operation_ids) == automatic_read_ids
     assert automatic_read_ids == live_contract_read_ids
     assert all(catalog.operation_budget(op) for op in automatic_read_ids)

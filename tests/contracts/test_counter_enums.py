@@ -6,32 +6,16 @@ Live-verified accepted sets (guarded probes, 2026-07-23):
 metrics: "All counter metrics must be in the set [OrdersCount, OrdersSum]";
 periods: "All counter periods must be in the set
 [AllTime, Day, Week, Month, Quarter, Year]".
+
+The effective-schema half lives in tests/pipeline/test_counter_enums_schema.py:
+this suite also runs inside ``sync`` before the new upstream snapshot is
+promoted, when the committed snapshot no longer matches the overlays.
 """
 
 from __future__ import annotations
 
-from tools.openapi_pipeline.paths import RepoPaths
-from tools.openapi_pipeline.pipeline import compose_committed_effective_schema
-
 _COUNTER_METRIC_VALUES = ("OrdersCount", "OrdersSum")
 _COUNTER_PERIOD_VALUES = ("AllTime", "Day", "Week", "Month", "Quarter", "Year")
-
-
-def test_counter_enums_are_string_enums_in_effective_schema() -> None:
-    effective = compose_committed_effective_schema(RepoPaths.discover())
-    schemas = effective["components"]["schemas"]
-    metric = schemas["iikoNet.Common.Enums.CounterMetric"]
-    period = schemas["iikoNet.Common.Enums.CounterPeriod"]
-    assert metric == {
-        "title": " ",
-        "type": "string",
-        "enum": list(_COUNTER_METRIC_VALUES),
-    }
-    assert period == {
-        "title": " ",
-        "type": "string",
-        "enum": list(_COUNTER_PERIOD_VALUES),
-    }
 
 
 def test_generated_counter_enums_serialize_as_strings() -> None:

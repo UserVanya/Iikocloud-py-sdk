@@ -73,14 +73,14 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
     assert _property(corrected, "ExternalMenuItem", "taxCategory") == {
         "description": "Tax category",
         "nullable": True,
-        "oneOf": [{"$ref": "#/components/schemas/TaxCategoryDto3"}],
+        "oneOf": [{"$ref": "#/components/schemas/TaxCategoryDto"}],
     }
     assert _property(corrected, "ExternalMenuItemSize", "nutritionPerHundredGrams") == {
         "$ref": "#/components/schemas/NutritionInfoDto"
     }
     for component, target in (
         ("ExternalMenuV3", "OverrideTaxesDto"),
-        ("ExternalMenuV4", "OverrideTaxesDto2"),
+        ("ExternalMenuV4", "OverrideTaxesDto"),
     ):
         assert _property(corrected, component, "overrideTaxCategories") == {
             "additionalProperties": {
@@ -93,16 +93,12 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
     for component, name in (
         ("ExternalMenuItem", "modifierSchemaId"),
         ("ExternalMenuItem2", "modifierSchemaId"),
-        ("ExternalMenuItem3", "modifierSchemaId"),
         ("ExternalMenuItemSize", "sizeId"),
         ("ExternalMenuItemSize2", "id"),
-        ("ExternalMenuItemSize3", "id"),
         ("ExternalMenuPriceByDepartmentsDto", "price"),
-        ("ExternalMenuPriceByDepartmentsDto2", "price"),
-        ("ExternalMenuPriceByDepartmentsDto3", "price"),
     ):
         assert _property(corrected, component, name)["nullable"] is True
-    for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3"):
+    for component in ("ExternalMenuItem", "ExternalMenuItem2"):
         assert _property(corrected, component, "type")["enum"] == [
             "DISH",
             "COMBO",
@@ -116,6 +112,38 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
 
     already_correct = build_reviewed_external_menu_validation_schema(corrected)
     assert canonical_json_bytes(already_correct) == canonical_json_bytes(corrected)
+
+
+@pytest.mark.parametrize(
+    ("component", "restrictions"),
+    (
+        ("ExternalMenuModifierGroup", "ModifierRestrictionsDto"),
+        ("ExternalMenuModifierGroup2", "ModifierRestrictionsDto2"),
+    ),
+)
+def test_modifier_group_restrictions_are_one_nullable_reference(
+    component: str,
+    restrictions: str,
+) -> None:
+    corrected = build_reviewed_external_menu_validation_schema(_schema())
+    union = _property(corrected, component, "restrictions")
+
+    assert union == {
+        "nullable": True,
+        "oneOf": [{"$ref": f"#/components/schemas/{restrictions}"}],
+    }
+    validator = MenuEvidenceValidator(_schema())
+    value = _minimal_schema_value(
+        validator._schema,  # noqa: SLF001
+        validator._component(restrictions),  # noqa: SLF001
+    )
+    validator._validate_instance(  # noqa: SLF001
+        value,
+        union,
+        path=f"components.schemas.{component}.properties.restrictions",
+        schema_path=f"components.schemas.{component}.properties.restrictions",
+        component_name=component,
+    )
 
 
 @pytest.mark.parametrize(
@@ -158,7 +186,7 @@ def test_corrected_hints_preserve_historical_public_service_literal(
 def test_redacted_string_marker_is_rejected_for_all_reviewed_item_type_enums() -> None:
     validator = MenuEvidenceValidator(_schema())
 
-    for component in ("ExternalMenuItem", "ExternalMenuItem2", "ExternalMenuItem3"):
+    for component in ("ExternalMenuItem", "ExternalMenuItem2"):
         type_schema = validator._component(component)["properties"]["type"]  # noqa: SLF001
         for marker in ("<redacted:string>", "<redacted:other>"):
             with pytest.raises(SafetyError, match="reviewed schema enum"):
@@ -185,7 +213,7 @@ def test_full_schema_entrypoints_require_every_reviewed_target(
 ) -> None:
     schema = _schema()
     schemas = schema["components"]["schemas"]
-    component = "ExternalMenuModifierItem3"
+    component = "ExternalMenuModifierItem2"
     if mutation == "delete":
         del schemas[component]
     else:
@@ -196,7 +224,7 @@ def test_full_schema_entrypoints_require_every_reviewed_target(
         SafetyError,
         match=(
             r"^Reviewed evidence schema repair drifted at components\.schemas\."
-            r"ExternalMenuModifierItem3\.properties\.restrictions$"
+            r"ExternalMenuModifierItem2\.properties\.restrictions$"
         ),
     ):
         builder(schema)
@@ -273,8 +301,8 @@ def test_barcode_null_only_exception_is_exact_and_component_scoped() -> None:
     assert {
         exception.component_name
         for exception in repair_module.REVIEWED_NULL_ONLY_PROPERTY_EXCEPTIONS
-    } == {"BarcodeDto", "BarcodeDto2", "BarcodeDto3"}
-    for component in ("BarcodeDto", "BarcodeDto2", "BarcodeDto3"):
+    } == {"BarcodeDto", "BarcodeDto2"}
+    for component in ("BarcodeDto", "BarcodeDto2"):
         assert repair_module.is_reviewed_null_only_property_hash(
             component_name=component,
             property_name_sha256=reviewed_hash,
@@ -286,7 +314,7 @@ def test_barcode_null_only_exception_is_exact_and_component_scoped() -> None:
             value="non-null",
         )
     assert not repair_module.is_reviewed_null_only_property_hash(
-        component_name="BarcodeDto4",
+        component_name="BarcodeDto3",
         property_name_sha256=reviewed_hash,
         value=None,
     )

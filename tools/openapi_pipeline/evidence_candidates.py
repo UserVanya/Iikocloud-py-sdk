@@ -46,7 +46,7 @@ __all__ = [
     "build_evidence_candidate_bundle",
 ]
 
-_ITEM3 = "ExternalMenuItem3"
+_V4_ITEM = "ExternalMenuItem2"
 _COMBO = "ExternalMenuComboItem"
 _CATEGORY3 = "ExternalMenuCategory3"
 _EXACT_FIVE = (
@@ -398,7 +398,7 @@ def _build_polymorphism_overlay(
         update={"discriminator": {"propertyName": "type", "mapping": mapping}},
     )
 
-    for component_name in (_ITEM3, _COMBO):
+    for component_name in (_V4_ITEM, _COMBO):
         literal = discriminator_contract.primary_literals_by_branch[component_name]
         additional_literals = tuple(
             sorted(
@@ -417,13 +417,13 @@ def _build_polymorphism_overlay(
             additional_literals=additional_literals,
         )
 
-    item_required = _required_with(_component(working, _ITEM3).get("required"), ("type",))
+    item_required = _required_with(_component(working, _V4_ITEM).get("required"), ("type",))
     working = _replace_required(
         actions,
         working,
-        _ITEM3,
+        _V4_ITEM,
         item_required,
-        issue="external-menu-item3-required",
+        issue=f"{_kebab(_V4_ITEM)}-required",
     )
 
     combo = _component(working, _COMBO)

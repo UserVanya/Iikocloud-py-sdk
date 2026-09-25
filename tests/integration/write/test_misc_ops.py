@@ -20,7 +20,12 @@ async def test_misc_ops_barcodes_webhook_awake_clear(
     live_sdk: GeneratedLiveSdk,
     live_profile: ResolvedLiveProfile,
 ) -> None:
-    """Misc sweep: product barcodes, webhook no-op update, awake, clear stop list."""
+    """Misc sweep: webhook no-op update, awake, clear stop list.
+
+    Product barcodes left the sweep with upstream 9.8.6.1 (2026-09-25): the inventory
+    barcode endpoint was removed upstream and its nomenclature replacement is not yet
+    reviewed live.
+    """
     from iikocloud_client import (
         AwakeTerminalGroupsRequest,
         ClearStopListRequest,

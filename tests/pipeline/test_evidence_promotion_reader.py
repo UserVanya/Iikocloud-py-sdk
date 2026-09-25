@@ -92,13 +92,9 @@ def _effective_schema() -> dict[str, Any]:
             "name": {"type": "string"},
         }
         if version in {3, 4}:
-            item_component = {
-                3: "OverrideTaxesDto",
-                4: "OverrideTaxesDto2",
-            }[version]
             properties["overrideTaxCategories"] = {
                 "description": "Tax benefits",
-                "items": {"$ref": f"#/components/schemas/{item_component}"},
+                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
                 "type": "array",
             }
         if version == 4:
@@ -168,7 +164,6 @@ def _effective_schema() -> dict[str, Any]:
                 "ExternalMenuV3": root_schema(3),
                 "ExternalMenuV4": root_schema(4),
                 "OverrideTaxesDto": {"type": "object"},
-                "OverrideTaxesDto2": {"type": "object"},
                 "ExternalMenuCategory3": {
                     "type": "object",
                     "required": ["items"],
@@ -177,14 +172,14 @@ def _effective_schema() -> dict[str, Any]:
                             "type": "array",
                             "items": {
                                 "oneOf": [
-                                    {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                                    {"$ref": "#/components/schemas/ExternalMenuItem2"},
                                     {"$ref": "#/components/schemas/ExternalMenuComboItem"},
                                 ]
                             },
                         }
                     },
                 },
-                "ExternalMenuItem3": {
+                "ExternalMenuItem2": {
                     "type": "object",
                     "required": [
                         "itemSizes",
@@ -226,7 +221,7 @@ def _effective_schema() -> dict[str, Any]:
                 "ExternalMenuComboItem": {
                     "properties": {
                         "barcodes": {
-                            "items": {"$ref": "#/components/schemas/BarcodeDto4"},
+                            "items": {"$ref": "#/components/schemas/BarcodeDto2"},
                             "nullable": True,
                             "type": "array",
                         },
@@ -240,7 +235,7 @@ def _effective_schema() -> dict[str, Any]:
                             "type": "string",
                         },
                         "groups": {
-                            "items": {"$ref": "#/components/schemas/ComboGroupDto4"},
+                            "items": {"$ref": "#/components/schemas/ComboGroupDto"},
                             "type": "array",
                         },
                         "id": {
@@ -297,8 +292,8 @@ def _effective_schema() -> dict[str, Any]:
                         "sizeId": {"type": "string"},
                     },
                 },
-                "BarcodeDto4": {},
-                "ComboGroupDto4": {},
+                "BarcodeDto2": {},
+                "ComboGroupDto": {},
             }
         },
     }
@@ -872,18 +867,10 @@ def test_reader_preserves_reviewed_override_tax_map_and_validates_its_items(
     assert response_path.read_bytes() == before
 
 
-@pytest.mark.parametrize(
-    ("version", "valid_marker", "invalid_marker"),
-    [
-        (3, "v3Marker", "v4Marker"),
-        (4, "v4Marker", "v3Marker"),
-    ],
-)
-def test_validator_uses_the_version_specific_override_tax_item_component(
+@pytest.mark.parametrize("version", [3, 4])
+def test_validator_uses_the_shared_override_tax_item_component(
     tmp_path: Path,
     version: int,
-    valid_marker: str,
-    invalid_marker: str,
 ) -> None:
     root = tmp_path / "repository"
     paths = _complete_tree(root)
@@ -892,21 +879,16 @@ def test_validator_uses_the_version_specific_override_tax_item_component(
     schema = _effective_schema()
     components = schema["components"]["schemas"]
     components["OverrideTaxesDto"] = {
-        "properties": {"v3Marker": {"type": "boolean"}},
-        "required": ["v3Marker"],
-        "type": "object",
-    }
-    components["OverrideTaxesDto2"] = {
-        "properties": {"v4Marker": {"type": "boolean"}},
-        "required": ["v4Marker"],
+        "properties": {"reviewedMarker": {"type": "boolean"}},
+        "required": ["reviewedMarker"],
         "type": "object",
     }
     validator = MenuEvidenceValidator(schema)
-    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{valid_marker: True}]}
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{"reviewedMarker": True}]}
 
     validator.validate(version, request, response)
 
-    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{invalid_marker: True}]}
+    response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{"otherMarker": True}]}
     with pytest.raises(SafetyError, match="required|undeclared|override"):
         validator.validate(version, request, response)
 
@@ -1530,7 +1512,7 @@ def test_category3_item_union_does_not_guess_branch_from_raw_discriminator(
     assert tuple(_read(root)) == (2, 3, 4)
 
 
-def test_category3_item_union_rejects_exact_redaction_marker_for_item3(
+def test_category3_item_union_rejects_exact_redaction_marker_for_v4_item(
     tmp_path: Path,
 ) -> None:
     root = tmp_path / "repository"

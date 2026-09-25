@@ -2,11 +2,17 @@ from __future__ import annotations
 
 import shutil
 import subprocess
+import sys
 import traceback
 from collections.abc import Iterable, Sequence
 from datetime import date
 from pathlib import Path
 from typing import Any
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:  # pragma: no cover - exercised in the Python 3.10 CI matrix
+    import tomli as tomllib
 
 import pytest
 
@@ -485,12 +491,10 @@ def test_default_lock_gate_rejects_project_version_drift(tmp_path: Path) -> None
 
     _default_lock_check(root)
     project = root / "pyproject.toml"
+    body = project.read_text(encoding="utf-8")
+    current = tomllib.loads(body)["project"]["version"]
     project.write_text(
-        project.read_text(encoding="utf-8").replace(
-            'version = "0.1.0"',
-            'version = "9.9.9"',
-            1,
-        ),
+        body.replace(f'version = "{current}"', 'version = "9.9.9"', 1),
         encoding="utf-8",
     )
 

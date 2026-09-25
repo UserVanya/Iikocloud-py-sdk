@@ -23,9 +23,6 @@ from iikocloud_client.api.drafts_api import DraftsApi
 from iikocloud_client.api.employees_api import EmployeesApi
 from iikocloud_client.api.menu_api import MenuApi
 from iikocloud_client.api.orders_api import OrdersApi
-from iikocloud_client.api.public_api_invoice_processing_nomenclature_api import (
-    PublicApiInvoiceProcessingNomenclatureApi,
-)
 from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
 from iikocloud_client.api.webhooks_api import WebhooksApi
 from iikocloud_client.api_client import ApiClient
@@ -97,9 +94,6 @@ from iikocloud_client.models.save_draft_request import SaveDraftRequest
 from iikocloud_client.models.update_delivery_status_request import UpdateDeliveryStatusRequest
 from iikocloud_client.models.update_order_courier_request import UpdateOrderCourierRequest
 from iikocloud_client.models.update_order_problem_request import UpdateOrderProblemRequest
-from iikocloud_client.models.update_product_barcodes_request import (
-    UpdateProductBarcodesRequest,
-)
 from iikocloud_client.models.update_tracking_link_request import UpdateTrackingLinkRequest
 from iikocloud_client.models.update_web_hook_settings_request import (
     UpdateWebHookSettingsRequest,
@@ -992,37 +986,6 @@ def validate_awake_terminal_groups_request(
     return request
 
 
-def validate_product_barcodes_request(
-    operation_id: str,
-    payload: object,
-    profile: ResolvedLiveProfile,
-) -> UpdateProductBarcodesRequest:
-    """Validate one barcode update against its write profile (dedicated product only)."""
-
-    if type(operation_id) is not str or operation_id != "update_inventory_product_barcodes":
-        raise SafetyError("Operation is not an approved compensating operation") from None
-
-    request: UpdateProductBarcodesRequest | None = None
-    with suppress(Exception):
-        request = UpdateProductBarcodesRequest.model_validate(payload)
-    if request is None:
-        raise SafetyError("Generated compensating payload is invalid") from None
-
-    organization_id, allowed_organization_ids, _terminal_group_id, product_id = (
-        _profile_boundary_ids(profile)
-    )
-    within_profile = False
-    with suppress(Exception):
-        within_profile = (
-            request.organization_id == str(organization_id)
-            and request.organization_id in {str(value) for value in allowed_organization_ids}
-            and request.product_id == str(product_id)
-        )
-    if not within_profile:
-        raise SafetyError(_PROFILE_BOUNDARY_ERROR) from None
-    return request
-
-
 @dataclass(frozen=True)
 class _WriteExecutorSpec:
     api_class: type
@@ -1292,12 +1255,6 @@ _WRITE_EXECUTORS: Mapping[str, _WriteExecutorSpec] = MappingProxyType(
                 model=UpdateTrackingLinkRequest,
                 role="compensating",
             ),
-        ),
-        "update_inventory_product_barcodes": _WriteExecutorSpec(
-            PublicApiInvoiceProcessingNomenclatureApi,
-            "update_inventory_product_barcodes_with_http_info",
-            "update_product_barcodes_request",
-            validate_product_barcodes_request,
         ),
         "awake_terminal_groups": _WriteExecutorSpec(
             TerminalGroupsApi,

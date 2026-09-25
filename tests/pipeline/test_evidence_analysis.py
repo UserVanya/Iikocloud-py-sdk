@@ -18,10 +18,10 @@ from tools.openapi_pipeline.evidence_promotion import EvidencePair
 from tools.openapi_pipeline.evidence_validation import MenuEvidenceValidator
 from tools.openapi_pipeline.io import canonical_json_bytes, sha256_bytes
 from tools.openapi_pipeline.paths import RepoPaths
-from tools.openapi_pipeline.pipeline import compose_reviewed_bootstrap_candidate
+from tools.openapi_pipeline.pipeline import compose_reviewed_evidence_base_candidate
 
 OPERATION = "get_external_menu_by_id"
-ITEM3 = "ExternalMenuItem3"
+V4_ITEM = "ExternalMenuItem2"
 COMBO = "ExternalMenuComboItem"
 EXACT_FIVE = (
     "allergenGroupIds",
@@ -131,8 +131,8 @@ def _pairs(
 
 def _ambiguous_schema() -> dict[str, Any]:
     schema = _effective_schema()
-    item3 = schema["components"]["schemas"][ITEM3]
-    item3["properties"]["sizes"] = {
+    v4_item = schema["components"]["schemas"][V4_ITEM]
+    v4_item["properties"]["sizes"] = {
         "type": "array",
         "items": {"$ref": "#/components/schemas/ExternalMenuComboItemSize"},
     }
@@ -240,13 +240,13 @@ def test_analyzer_derives_normal_mapping_counts_and_sorted_provenance() -> None:
     assert tuple(result.provenance) == (2, 3, 4)
     assert result.provenance[4].request_sha256 == pairs[4].request_sha256
     assert result.provenance[4].response_sha256 == pairs[4].response_sha256
-    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", V4_ITEM: "DISH"}
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
-        "DISH": ITEM3,
-        "SERVICE": ITEM3,
+        "DISH": V4_ITEM,
+        "SERVICE": V4_ITEM,
     }
-    assert dict(result.unambiguous_counts) == {COMBO: 1, ITEM3: 1}
+    assert dict(result.unambiguous_counts) == {COMBO: 1, V4_ITEM: 1}
     assert result.ambiguous_count == 0
     assert result.total_item_count == 2
     assert result.combo_observation_count == 1
@@ -260,7 +260,7 @@ def test_analyzer_rejects_observations_conflicting_with_reviewed_mapping() -> No
         analyze_menu_evidence(_pairs(schema, [_dish("COMBO"), _combo("DISH")]), schema)
 
 
-def test_analyzer_routes_reviewed_service_to_item3_without_changing_primary_mapping() -> None:
+def test_analyzer_routes_reviewed_service_to_v4_item_without_changing_primary_mapping() -> None:
     schema = _effective_schema()
     items = [
         _dish(),
@@ -270,11 +270,11 @@ def test_analyzer_routes_reviewed_service_to_item3_without_changing_primary_mapp
 
     result = analyze_menu_evidence(_pairs(schema, items), schema)
 
-    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", V4_ITEM: "DISH"}
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
-        "DISH": ITEM3,
-        "SERVICE": ITEM3,
+        "DISH": V4_ITEM,
+        "SERVICE": V4_ITEM,
     }
     assert result.total_item_count == 3
     assert result.combo_observation_count == 1
@@ -285,13 +285,13 @@ def test_analyzer_uses_exact_reviewed_mapping_without_combo_observation() -> Non
 
     result = analyze_menu_evidence(_pairs(schema, [_dish(), _dish("SERVICE")]), schema)
 
-    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", V4_ITEM: "DISH"}
     assert dict(result.literal_to_branch) == {
         "COMBO": COMBO,
-        "DISH": ITEM3,
-        "SERVICE": ITEM3,
+        "DISH": V4_ITEM,
+        "SERVICE": V4_ITEM,
     }
-    assert dict(result.unambiguous_counts) == {COMBO: 0, ITEM3: 2}
+    assert dict(result.unambiguous_counts) == {COMBO: 0, V4_ITEM: 2}
     assert result.combo_observation_count == 0
     assert {decision.reason_code for decision in result.combo_fields.values()} == {
         "missing-observation"
@@ -307,7 +307,7 @@ def test_analyzer_rejects_reviewed_discriminator_fragment_drift(mutation: str) -
         ]
         union["oneOf"].reverse()
     else:
-        schema["components"]["schemas"][ITEM3]["properties"]["type"]["enum"] = [
+        schema["components"]["schemas"][V4_ITEM]["properties"]["type"]["enum"] = [
             "DISH",
             "COMBO",
             "UNKNOWN",
@@ -357,7 +357,7 @@ def test_analyzer_resolves_ambiguous_only_evidence_with_reviewed_mapping() -> No
 
     assert result.ambiguous_count == 1
     assert result.combo_observation_count == 1
-    assert dict(result.unambiguous_counts) == {COMBO: 0, ITEM3: 0}
+    assert dict(result.unambiguous_counts) == {COMBO: 0, V4_ITEM: 0}
 
 
 def test_analyzer_resolves_ambiguous_items_after_mapping_regardless_of_item_order() -> None:
@@ -430,7 +430,7 @@ def test_analyzer_limits_combo_inference_to_exact_five_and_tracks_presence(
     assert decision.observation_count == (
         2 if presence == "all" else 1 if presence == "some" else 0
     )
-    sibling = schema["components"]["schemas"][ITEM3]["properties"][field]
+    sibling = schema["components"]["schemas"][V4_ITEM]["properties"][field]
     if expected_action == "retain-required":
         assert _plain(decision.property_schema) == sibling
     else:
@@ -529,7 +529,7 @@ def test_analyzer_outputs_are_deeply_immutable() -> None:
     with pytest.raises(dataclasses.FrozenInstanceError):
         result.ambiguous_count = 99  # type: ignore[misc]
     with pytest.raises(TypeError):
-        result.branch_to_literal[ITEM3] = "COMBO"  # type: ignore[index]
+        result.branch_to_literal[V4_ITEM] = "COMBO"  # type: ignore[index]
     with pytest.raises(TypeError):
         result.combo_fields["orderItemType"].property_schema["type"] = "number"  # type: ignore[index]
 
@@ -652,7 +652,7 @@ def test_analyzer_rejects_reviewed_schema_fragment_drift() -> None:
     reason="complete ignored reviewed bootstrap candidate set is absent",
 )
 def test_analyzer_smoke_uses_the_locally_composed_reviewed_schema_without_fetch() -> None:
-    schema, _mappings = compose_reviewed_bootstrap_candidate(RepoPaths.discover())
+    schema, _mappings = compose_reviewed_evidence_base_candidate(RepoPaths.discover())
     components = schema["components"]["schemas"]
     request_schema = components["iikoTransport.PublicApi.Contracts.Nomenclature.MenuRequest"]
     pairs: dict[int, EvidencePair] = {}
@@ -667,7 +667,7 @@ def test_analyzer_smoke_uses_the_locally_composed_reviewed_schema_without_fetch(
         response_body["formatVersion"] = version
         if version == 4:
             category = _minimal_schema_value(schema, components["ExternalMenuCategory3"])
-            dish = _minimal_schema_value(schema, components[ITEM3])
+            dish = _minimal_schema_value(schema, components[V4_ITEM])
             combo = _minimal_schema_value(schema, components[COMBO])
             assert isinstance(category, dict)
             assert isinstance(dish, dict)
@@ -685,5 +685,5 @@ def test_analyzer_smoke_uses_the_locally_composed_reviewed_schema_without_fetch(
 
     result = analyze_menu_evidence(pairs, schema)
 
-    assert dict(result.branch_to_literal) == {COMBO: "COMBO", ITEM3: "DISH"}
+    assert dict(result.branch_to_literal) == {COMBO: "COMBO", V4_ITEM: "DISH"}
     assert result.total_item_count == 2

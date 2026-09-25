@@ -10,7 +10,7 @@ from .evidence_analysis import MenuEvidenceAnalysis
 from .io import canonical_json_bytes
 
 _VERSIONS = (2, 3, 4)
-_ITEM3 = "ExternalMenuItem3"
+_V4_ITEM = "ExternalMenuItem2"
 _COMBO = "ExternalMenuComboItem"
 _CATEGORY3 = "ExternalMenuCategory3"
 _COMPONENT_PREFIX = "#/components/schemas/"
@@ -70,7 +70,7 @@ def build_and_validate_synthetic_fixtures(
             if analysis.total_item_count > analysis.combo_observation_count:
                 dish = _synthesize(
                     document,
-                    {"$ref": f"{_COMPONENT_PREFIX}{_ITEM3}"},
+                    {"$ref": f"{_COMPONENT_PREFIX}{_V4_ITEM}"},
                 )
                 if type(dish) is not dict:
                     raise SafetyError("Evidence synthetic V4 item branch is not an object")
@@ -328,7 +328,7 @@ def _validate_v4_items(
         matched_branches.add(matches[0])
     expected: set[str] = set()
     if analysis.total_item_count > analysis.combo_observation_count:
-        expected.add(f"{_COMPONENT_PREFIX}{_ITEM3}")
+        expected.add(f"{_COMPONENT_PREFIX}{_V4_ITEM}")
     if analysis.combo_observation_count > 0:
         expected.add(f"{_COMPONENT_PREFIX}{_COMBO}")
     if matched_branches != expected:

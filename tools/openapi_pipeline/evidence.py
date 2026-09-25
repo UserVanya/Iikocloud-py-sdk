@@ -92,7 +92,7 @@ def _assert_reviewed_override_tax_array_shape(
 ) -> None:
     component_name, item_component = {
         3: ("ExternalMenuV3", "OverrideTaxesDto"),
-        4: ("ExternalMenuV4", "OverrideTaxesDto2"),
+        4: ("ExternalMenuV4", "OverrideTaxesDto"),
     }[menu_version]
     component = _evidence_component(document, component_name)
     properties = component.get("properties")
@@ -161,7 +161,7 @@ def build_evidence_redaction_hints(
         "type": "array",
         "items": {
             "oneOf": [
-                {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                {"$ref": "#/components/schemas/ExternalMenuItem2"},
                 {"$ref": "#/components/schemas/ExternalMenuComboItem"},
             ]
         },
@@ -179,7 +179,7 @@ def build_evidence_redaction_hints(
     ):
         raise SafetyError("Evidence external-menu combo type shape has drifted")
 
-    item = _evidence_component(effective_schema, "ExternalMenuItem3")
+    item = _evidence_component(effective_schema, "ExternalMenuItem2")
     item_properties = item.get("properties")
     item_type = item_properties.get("type") if type(item_properties) is dict else None
     if type(item_type) is not dict or set(item_type) != {
@@ -221,7 +221,7 @@ def build_versioned_evidence_redaction_hints(
     if menu_version in {3, 4}:
         _assert_reviewed_override_tax_array_shape(effective_schema, menu_version)
     reviewed = build_evidence_redaction_hints(effective_schema, operation_id)
-    item = _evidence_component(effective_schema, "ExternalMenuItem3")
+    item = _evidence_component(effective_schema, "ExternalMenuItem2")
     combo = _evidence_component(effective_schema, "ExternalMenuComboItem")
     item_properties = item.get("properties")
     combo_properties = combo.get("properties")

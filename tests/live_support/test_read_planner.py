@@ -383,8 +383,8 @@ def test_real_read_registry_has_exact_domain_order_and_count() -> None:
     )
     assert type(ALL_READ_CASES) is tuple
     assert expected == ALL_READ_CASES
-    assert len(ALL_READ_CASES) == 91
-    assert len(FULL_READ_PLAN.cases) == 91
+    assert len(ALL_READ_CASES) == 90
+    assert len(FULL_READ_PLAN.cases) == 90
     assert set(FULL_READ_PLAN.ordered_operation_ids) == {
         case.operation_id for case in ALL_READ_CASES
     }
@@ -429,8 +429,10 @@ def test_generated_declaration_check_rejects_a_dropped_request_triple() -> None:
 
 def test_real_registry_declares_every_expected_no_target_code() -> None:
     context_dependent = tuple(case for case in ALL_READ_CASES if case.allowed_no_target_codes)
-    assert len(context_dependent) == 57
+    assert len(context_dependent) == 56
     assert all(case.depends_on and case.requires for case in context_dependent)
+    # ENDPOINT covered only the counteragents read that upstream 9.8.6.1 removed; the code
+    # stays declared because stored read reports from earlier live runs may carry it.
     assert frozenset(
         code for case in context_dependent for code in case.allowed_no_target_codes
-    ) == frozenset(NoLiveTargetCode)
+    ) == frozenset(NoLiveTargetCode) - {NoLiveTargetCode.ENDPOINT}

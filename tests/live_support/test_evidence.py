@@ -168,7 +168,7 @@ def _schema() -> dict[str, Any]:
                         "mode": {"type": "string", "enum": ["V4"]},
                         "overrideTaxCategories": {
                             "description": "Tax benefits",
-                            "items": {"$ref": "#/components/schemas/OverrideTaxesDto2"},
+                            "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
                             "type": "array",
                         },
                         "itemGroups": {
@@ -184,14 +184,14 @@ def _schema() -> dict[str, Any]:
                             "type": "array",
                             "items": {
                                 "oneOf": [
-                                    {"$ref": "#/components/schemas/ExternalMenuItem3"},
+                                    {"$ref": "#/components/schemas/ExternalMenuItem2"},
                                     {"$ref": "#/components/schemas/ExternalMenuComboItem"},
                                 ]
                             },
                         }
                     },
                 },
-                "ExternalMenuItem3": {
+                "ExternalMenuItem2": {
                     "type": "object",
                     "properties": {
                         "orderItemType": {
@@ -357,7 +357,7 @@ def test_evidence_hints_preserve_only_declared_item_types_at_exact_capture_path(
 
 def test_evidence_hints_derive_exact_values_from_upstream_enum() -> None:
     schema = _schema()
-    item_type = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]
+    item_type = schema["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]
     item_type["enum"] = ["MEAL", "SET"]
     item_type["default"] = "MEAL"
 
@@ -422,7 +422,7 @@ def test_versioned_override_tax_exception_fails_closed_on_broken_shape_drift(
     if mutation == "missing-description":
         del property_schema["description"]
     elif mutation == "wrong-ref":
-        alternate = {3: "OverrideTaxesDto2", 4: "OverrideTaxesDto"}[menu_version]
+        alternate = "OverrideTaxesDto2"
         property_schema["items"]["$ref"] = f"#/components/schemas/{alternate}"
     else:
         property_schema["nullable"] = True
@@ -466,7 +466,7 @@ def test_versioned_v4_hints_fail_closed_on_ambiguous_enum_schema(
     mutation: str,
 ) -> None:
     schema = _schema()
-    item_properties = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]
+    item_properties = schema["components"]["schemas"]["ExternalMenuItem2"]["properties"]
     combo_properties = schema["components"]["schemas"]["ExternalMenuComboItem"]["properties"]
     if mutation == "combo-defines-order-item-type":
         combo_properties["orderItemType"] = copy.deepcopy(item_properties["orderItemType"])
@@ -529,7 +529,7 @@ def test_evidence_hints_fail_closed_on_schema_chain_drift(mutation: str) -> None
             "type": "string",
         }
     else:
-        enum = schema["components"]["schemas"]["ExternalMenuItem3"]["properties"]["type"]["enum"]
+        enum = schema["components"]["schemas"]["ExternalMenuItem2"]["properties"]["type"]["enum"]
         if mutation == "empty-enum":
             enum.clear()
         elif mutation == "empty-enum-value":

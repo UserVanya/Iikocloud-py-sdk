@@ -149,13 +149,6 @@ def _incoming_timestamp(view: ContextView) -> str:
     return f"{raw_date}T00:00:00.000+00:00"
 
 
-def _counteragents_unavailable(_view: ContextView) -> Mapping[str, object]:
-    # 2026-07-22 (v1 token): HTTP 403 entitlement abort; 2026-07-23 (v2 token):
-    # entitlement passed, but the backend returned EXTERNAL_SYSTEM_TIMEOUT.
-    # The endpoint stays unusable on this environment under either contract.
-    raise NoLiveTarget(NoLiveTargetCode.ENDPOINT)
-
-
 def _build_cost_prices(view: ContextView) -> Mapping[str, object]:
     product_id = _product_text(view)
     store_id = _first_store(view)
@@ -217,16 +210,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_disassemble_document",
         _binding(
             "list_inventory_disassemble_documents",
-            "public_api_invoice_processing_disassemble_document_api",
-            "PublicApiInvoiceProcessingDisassembleDocumentApi",
+            "inventory_disassemble_document_api",
+            "InventoryDisassembleDocumentApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_disassemble_document",
-            "public_api_invoice_processing_disassemble_document_api",
-            "PublicApiInvoiceProcessingDisassembleDocumentApi",
+            "inventory_disassemble_document_api",
+            "InventoryDisassembleDocumentApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -249,16 +242,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_incoming_invoice",
         _binding(
             "list_inventory_incoming_invoices",
-            "public_api_invoice_processing_incoming_invoices_api",
-            "PublicApiInvoiceProcessingIncomingInvoicesApi",
+            "inventory_incoming_invoices_api",
+            "InventoryIncomingInvoicesApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_incoming_invoice",
-            "public_api_invoice_processing_incoming_invoices_api",
-            "PublicApiInvoiceProcessingIncomingInvoicesApi",
+            "inventory_incoming_invoices_api",
+            "InventoryIncomingInvoicesApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -277,16 +270,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_incoming_returned_invoice",
         _binding(
             "list_inventory_incoming_returned_invoices",
-            "public_api_invoice_processing_incoming_returned_invoice_api",
-            "PublicApiInvoiceProcessingIncomingReturnedInvoiceApi",
+            "inventory_incoming_returned_invoice_api",
+            "InventoryIncomingReturnedInvoiceApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_incoming_returned_invoice",
-            "public_api_invoice_processing_incoming_returned_invoice_api",
-            "PublicApiInvoiceProcessingIncomingReturnedInvoiceApi",
+            "inventory_incoming_returned_invoice_api",
+            "InventoryIncomingReturnedInvoiceApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -318,16 +311,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_internal_transfer",
         _binding(
             "list_inventory_internal_transfers",
-            "public_api_invoice_processing_internal_transfer_api",
-            "PublicApiInvoiceProcessingInternalTransferApi",
+            "inventory_internal_transfer_api",
+            "InventoryInternalTransferApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_internal_transfer",
-            "public_api_invoice_processing_internal_transfer_api",
-            "PublicApiInvoiceProcessingInternalTransferApi",
+            "inventory_internal_transfer_api",
+            "InventoryInternalTransferApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -347,16 +340,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_outgoing_invoice",
         _binding(
             "list_inventory_outgoing_invoices",
-            "public_api_invoice_processing_outgoing_invoices_api",
-            "PublicApiInvoiceProcessingOutgoingInvoicesApi",
+            "inventory_outgoing_invoices_api",
+            "InventoryOutgoingInvoicesApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_outgoing_invoice",
-            "public_api_invoice_processing_outgoing_invoices_api",
-            "PublicApiInvoiceProcessingOutgoingInvoicesApi",
+            "inventory_outgoing_invoices_api",
+            "InventoryOutgoingInvoicesApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -385,16 +378,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_production_document",
         _binding(
             "list_inventory_production_documents",
-            "public_api_invoice_processing_production_document_api",
-            "PublicApiInvoiceProcessingProductionDocumentApi",
+            "inventory_production_document_api",
+            "InventoryProductionDocumentApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_production_document",
-            "public_api_invoice_processing_production_document_api",
-            "PublicApiInvoiceProcessingProductionDocumentApi",
+            "inventory_production_document_api",
+            "InventoryProductionDocumentApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -414,16 +407,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_returned_invoice",
         _binding(
             "list_inventory_returned_invoices",
-            "public_api_invoice_processing_returned_invoice_api",
-            "PublicApiInvoiceProcessingReturnedInvoiceApi",
+            "inventory_returned_invoice_api",
+            "InventoryReturnedInvoiceApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_returned_invoice",
-            "public_api_invoice_processing_returned_invoice_api",
-            "PublicApiInvoiceProcessingReturnedInvoiceApi",
+            "inventory_returned_invoice_api",
+            "InventoryReturnedInvoiceApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -451,16 +444,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_sales_document",
         _binding(
             "list_inventory_sales_documents",
-            "public_api_invoice_processing_sales_document_api",
-            "PublicApiInvoiceProcessingSalesDocumentApi",
+            "inventory_sales_document_api",
+            "InventorySalesDocumentApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_sales_document",
-            "public_api_invoice_processing_sales_document_api",
-            "PublicApiInvoiceProcessingSalesDocumentApi",
+            "inventory_sales_document_api",
+            "InventorySalesDocumentApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -492,16 +485,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_transformation_document",
         _binding(
             "list_inventory_transformation_documents",
-            "public_api_invoice_processing_transformation_document_api",
-            "PublicApiInvoiceProcessingTransformationDocumentApi",
+            "inventory_transformation_document_api",
+            "InventoryTransformationDocumentApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_transformation_document",
-            "public_api_invoice_processing_transformation_document_api",
-            "PublicApiInvoiceProcessingTransformationDocumentApi",
+            "inventory_transformation_document_api",
+            "InventoryTransformationDocumentApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -527,16 +520,16 @@ _DOCUMENT_FAMILIES = (
         "get_inventory_writeoff_document",
         _binding(
             "list_inventory_writeoff_documents",
-            "public_api_invoice_processing_writeoff_document_api",
-            "PublicApiInvoiceProcessingWriteoffDocumentApi",
+            "inventory_writeoff_document_api",
+            "InventoryWriteoffDocumentApi",
             "list_request",
             "ListRequest",
             "list_request",
         ),
         _binding(
             "get_inventory_writeoff_document",
-            "public_api_invoice_processing_writeoff_document_api",
-            "PublicApiInvoiceProcessingWriteoffDocumentApi",
+            "inventory_writeoff_document_api",
+            "InventoryWriteoffDocumentApi",
             "get_by_id_request",
             "GetByIDRequest",
             "get_by_id_request",
@@ -558,32 +551,6 @@ _DOCUMENT_FAMILIES = (
 
 _DOCUMENT_CASES = tuple(case for family in _DOCUMENT_FAMILIES for case in family.cases())
 
-_COUNTERAGENTS = ReadCase(
-    operation_id="get_inventory_counteragents",
-    revision=3,
-    depends_on=("get_organizations",),
-    requires=("organization_id",),
-    provides=(),
-    allowed_no_target_codes=frozenset(
-        {NoLiveTargetCode.ENDPOINT, _INVOICE_PROCESSING_NO_TARGET}
-    ),
-    binding=_binding(
-        "get_inventory_counteragents",
-        "public_api_invoice_processing_counteragents_api",
-        "PublicApiInvoiceProcessingCounteragentsApi",
-        "get_counteragents_request",
-        "GetCounteragentsRequest",
-        "get_counteragents_request",
-    ),
-    build_values=_counteragents_unavailable,
-    validate_response=_typed_validator(
-        "get_counteragents_response",
-        "GetCounteragentsResponse",
-    ),
-    extract=_empty_extract,
-    capability=_INVOICE_PROCESSING_CAPABILITY,
-)
-
 _COST_PRICES = ReadCase(
     operation_id="calculate_inventory_cost_prices",
     revision=1,
@@ -604,8 +571,8 @@ _COST_PRICES = ReadCase(
     ),
     binding=_binding(
         "calculate_inventory_cost_prices",
-        "public_api_invoice_processing_outgoing_invoices_api",
-        "PublicApiInvoiceProcessingOutgoingInvoicesApi",
+        "inventory_outgoing_invoices_api",
+        "InventoryOutgoingInvoicesApi",
         "get_cost_prices_request",
         "GetCostPricesRequest",
         "get_cost_prices_request",
@@ -619,7 +586,7 @@ _COST_PRICES = ReadCase(
     capability=_INVOICE_PROCESSING_CAPABILITY,
 )
 
-INVENTORY_CASES = (*_DOCUMENT_CASES, _COUNTERAGENTS, _COST_PRICES)
+INVENTORY_CASES = (*_DOCUMENT_CASES, _COST_PRICES)
 
 __all__ = [
     "INVENTORY_CASES",
