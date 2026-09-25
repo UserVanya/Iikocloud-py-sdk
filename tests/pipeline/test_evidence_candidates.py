@@ -189,13 +189,19 @@ def test_builder_returns_in_memory_guarded_overlays_and_minimal_fixtures() -> No
 
     components = patched["components"]["schemas"]
     for version in (3, 4):
+        target = "OverrideTaxesDto"
         assert components[f"ExternalMenuV{version}"]["properties"]["overrideTaxCategories"] == {
-            "additionalProperties": {
-                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
-                "type": "array",
-            },
             "description": "Tax benefits",
-            "type": "object",
+            "oneOf": [
+                {
+                    "additionalProperties": {
+                        "items": {"$ref": f"#/components/schemas/{target}"},
+                        "type": "array",
+                    },
+                    "type": "object",
+                },
+                {"items": {"$ref": f"#/components/schemas/{target}"}, "type": "array"},
+            ],
         }
     for version in (2, 3, 4):
         component = components[f"ExternalMenuV{version}"]
@@ -847,7 +853,7 @@ def test_builder_smoke_uses_public_locally_composed_candidate_without_fetch() ->
                 "31314f53dbeccf67f14a0a33fd0fbe5912df04acb813b8bbe2dad10f02ed93b8"  # pragma: allowlist secret  # noqa: E501
             ),
             "openapi/overlays/polymorphism.overlay.yaml": (
-                "c69fdcac71eec9b6a25566a0b3e668c72dd64cffb660ec875bc78753546ee890"  # pragma: allowlist secret  # noqa: E501
+                "b71389d3e4690330842b385b860b3a29725f80f45d452b121538040a32915555"  # pragma: allowlist secret  # noqa: E501
             ),
             "tests/fixtures/contracts/external-menu-v2.json": (
                 "b248e8d075e4d39ed1bed3824c686e32dc0b3b7438356ddd2eb8a590ab6252d8"  # pragma: allowlist secret  # noqa: E501

@@ -83,12 +83,17 @@ def test_registry_builds_complete_corrected_view_without_mutating_caller() -> No
         ("ExternalMenuV4", "OverrideTaxesDto"),
     ):
         assert _property(corrected, component, "overrideTaxCategories") == {
-            "additionalProperties": {
-                "items": {"$ref": f"#/components/schemas/{target}"},
-                "type": "array",
-            },
             "description": "Tax benefits",
-            "type": "object",
+            "oneOf": [
+                {
+                    "additionalProperties": {
+                        "items": {"$ref": f"#/components/schemas/{target}"},
+                        "type": "array",
+                    },
+                    "type": "object",
+                },
+                {"items": {"$ref": f"#/components/schemas/{target}"}, "type": "array"},
+            ],
         }
     for component, name in (
         ("ExternalMenuItem", "modifierSchemaId"),
@@ -233,7 +238,9 @@ def test_full_schema_entrypoints_require_every_reviewed_target(
 def test_dynamic_map_approval_is_bound_to_its_exact_reviewed_property_path() -> None:
     schema = _schema()
     corrected = build_reviewed_external_menu_validation_schema(schema)
-    copied_map = copy.deepcopy(_property(corrected, "ExternalMenuV3", "overrideTaxCategories"))
+    copied_map = copy.deepcopy(
+        _property(corrected, "ExternalMenuV3", "overrideTaxCategories")["oneOf"][0]
+    )
     schema["components"]["schemas"]["ExternalMenuV2"]["properties"]["unrelatedDynamicMap"] = (
         copied_map
     )
@@ -284,7 +291,15 @@ def test_corrected_additional_properties_map_is_preflighted_and_validated() -> N
         schema_path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
         component_name="ExternalMenuV3",
     )
-    with pytest.raises(SafetyError, match="reviewed schema type") as caught:
+    # iiko sends an empty list, not an empty map, when a point overrides no taxes.
+    validator._validate_instance(  # noqa: SLF001
+        [],
+        map_schema,
+        path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
+        schema_path="components.schemas.ExternalMenuV3.properties.overrideTaxCategories",
+        component_name="ExternalMenuV3",
+    )
+    with pytest.raises(SafetyError, match="exactly one reviewed schema branch") as caught:
         validator._validate_instance(  # noqa: SLF001
             {"00000000-0000-4000-8000-000000000001": [None]},
             map_schema,

@@ -57,7 +57,7 @@ def test_root_project_uses_exact_task_11_src_packaging_metadata() -> None:
 
     assert project["project"] == {
         "name": "iikocloud-client",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "description": "Generated async Python SDK for iiko Cloud API",
         "readme": "README.md",
         "requires-python": ">=3.10",

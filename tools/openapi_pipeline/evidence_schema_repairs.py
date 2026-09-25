@@ -79,6 +79,22 @@ def _property_repair(
     )
 
 
+#: A point that overrides taxes gets a UUID-keyed map; a point that overrides none gets an
+#: empty list, not an empty map (write stand V4, 25.09.2026). Both must decode.
+_OVERRIDE_TAX_CATEGORIES: dict[str, Any] = {
+    "description": "Tax benefits",
+    "oneOf": [
+        {
+            "additionalProperties": {
+                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
+                "type": "array",
+            },
+            "type": "object",
+        },
+        {"items": {"$ref": "#/components/schemas/OverrideTaxesDto"}, "type": "array"},
+    ],
+}
+
 REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] = (
     _property_repair(
         "ExternalMenuItem",
@@ -148,27 +164,13 @@ REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS: tuple[ReviewedSchemaPropertyRepair, ...] 
         "ExternalMenuV3",
         "overrideTaxCategories",
         "157d6ffeb89717a5ff9f6509bd9611c10998c06125dda0aa3d07ab0288a305b5",
-        {
-            "additionalProperties": {
-                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
-                "type": "array",
-            },
-            "description": "Tax benefits",
-            "type": "object",
-        },
+        _OVERRIDE_TAX_CATEGORIES,
     ),
     _property_repair(
         "ExternalMenuV4",
         "overrideTaxCategories",
         "157d6ffeb89717a5ff9f6509bd9611c10998c06125dda0aa3d07ab0288a305b5",
-        {
-            "additionalProperties": {
-                "items": {"$ref": "#/components/schemas/OverrideTaxesDto"},
-                "type": "array",
-            },
-            "description": "Tax benefits",
-            "type": "object",
-        },
+        _OVERRIDE_TAX_CATEGORIES,
     ),
     *(
         _property_repair(
@@ -590,10 +592,17 @@ def _thaw(value: FrozenJson) -> Any:
     raise SafetyError("Reviewed evidence schema repair contains invalid JSON")
 
 
-_REVIEWED_DYNAMIC_MAP_HASHES_BY_PATH: Mapping[str, str] = MappingProxyType(
-    {
-        ".".join(repair.path): sha256_bytes(canonical_json_bytes(_thaw(repair.corrected)))
-        for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS
-        if repair.path[-1] == "overrideTaxCategories"
-    }
-)
+def _dynamic_map_hashes() -> dict[str, str]:
+    """The reviewed map branch at `….oneOf.0` and the whole map-or-list shape at the property."""
+    hashes: dict[str, str] = {}
+    for repair in REVIEWED_EXTERNAL_MENU_SCHEMA_REPAIRS:
+        if repair.path[-1] != "overrideTaxCategories":
+            continue
+        corrected = _thaw(repair.corrected)
+        path = ".".join(repair.path)
+        hashes[path] = sha256_bytes(canonical_json_bytes(corrected))
+        hashes[f"{path}.oneOf.0"] = sha256_bytes(canonical_json_bytes(corrected["oneOf"][0]))
+    return hashes
+
+
+_REVIEWED_DYNAMIC_MAP_HASHES_BY_PATH: Mapping[str, str] = MappingProxyType(_dynamic_map_hashes())

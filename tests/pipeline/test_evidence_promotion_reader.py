@@ -889,7 +889,7 @@ def test_validator_uses_the_shared_override_tax_item_component(
     validator.validate(version, request, response)
 
     response["body"]["overrideTaxCategories"] = {CAPTURE_UUID_ALIAS: [{"otherMarker": True}]}
-    with pytest.raises(SafetyError, match="required|undeclared|override"):
+    with pytest.raises(SafetyError, match="required|undeclared|override|reviewed schema branch"):
         validator.validate(version, request, response)
 
 
@@ -913,7 +913,9 @@ def test_validator_rejects_override_tax_maps_outside_reviewed_shape(
     response = _load(paths[version][1])
     response["body"]["overrideTaxCategories"] = invalid_map
 
-    with pytest.raises(SafetyError, match="type|alias|list|undeclared|property"):
+    with pytest.raises(
+        SafetyError, match="type|alias|list|undeclared|property|reviewed schema branch"
+    ):
         MenuEvidenceValidator(_effective_schema()).validate(version, request, response)
 
 
