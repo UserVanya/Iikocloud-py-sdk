@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[WriteoffDocumentGetItem]**](WriteoffDocumentGetItem.md) | List of document items | [optional] 
 **number** | **str** | Document number | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** | Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted) | [optional] 
 **store_from** | **str** | Write-off store identifier (GUID) | [optional] 
 **user_created** | **str** | User who created the document (GUID) | [optional] 

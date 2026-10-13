@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **cfo_item_id** | **str** | Cash flow item identifier (GUID) | [optional] 
 **document_id** | **str** | Outgoing invoice identifier (GUID) | 
 **organization_id** | **str** | Organization identifier (GUID) | 
-**payment_date** | **str** | Payment date (YYYY-MM-DD format) | 
+**payment_date** | **str** | Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00) | 
 
 ## Example
 

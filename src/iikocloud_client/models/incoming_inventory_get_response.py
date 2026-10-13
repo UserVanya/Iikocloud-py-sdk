@@ -44,12 +44,13 @@ class IncomingInventoryGetResponse(BaseModel):
     items_first_step: Optional[List[IncomingInventoryGetFirstItem]] = Field(default=None, description="First step items (dishes, preparations, modifiers). Can be an empty array", alias="itemsFirstStep")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     register_turnover: Optional[StrictBool] = Field(default=None, description="Flag for tracking product movement over the period. Read-only", alias="registerTurnover")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = Field(default=None, description="Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)")
     store: Optional[StrictStr] = Field(default=None, description="Inventory store identifier (GUID)")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["accountShortage", "accountSurplus", "comment", "conception", "currentStep", "date", "dateCreated", "dateModified", "documentId", "isAutomatic", "isEditable", "items", "itemsFirstStep", "number", "registerTurnover", "status", "store", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["accountShortage", "accountSurplus", "comment", "conception", "currentStep", "date", "dateCreated", "dateModified", "documentId", "isAutomatic", "isEditable", "items", "itemsFirstStep", "number", "registerTurnover", "revision", "status", "store", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -138,6 +139,7 @@ class IncomingInventoryGetResponse(BaseModel):
             "itemsFirstStep": [IncomingInventoryGetFirstItem.from_dict(_item) for _item in obj["itemsFirstStep"]] if obj.get("itemsFirstStep") is not None else None,
             "number": obj.get("number"),
             "registerTurnover": obj.get("registerTurnover"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "store": obj.get("store"),
             "userCreated": obj.get("userCreated"),

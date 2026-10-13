@@ -8,8 +8,11 @@ Name | Type | Description | Notes
 **children** | [**List[Organization]**](Organization.md) | Child organizations with the same recursive structure; an empty array is returned for a leaf node | [optional] 
 **code** | **str** | User-defined legal entity code; null if the code is not set | [optional] 
 **jur_person_id** | **str** | Legal entity identifier | [optional] 
+**legal_address** | [**LegalAddress**](LegalAddress.md) | Legal address of the legal entity; null if not provided by the source | [optional] 
 **name** | **str** | Display name of the legal entity; null if the name is not provided by the source | [optional] 
-**type** | **str** | Legal entity type. Always takes the value JUR_PERSON | [optional] 
+**responsible_persons** | [**List[ResponsiblePerson]**](ResponsiblePerson.md) | Responsible persons of the legal entity; an empty array if not provided by the source | [optional] 
+**taxpayer_id_number** | **str** | Taxpayer identification number (INN) of the legal entity; null if not provided by the source | [optional] 
+**type** | **str** | Legal entity node type. Always takes the value JURPERSON | [optional] 
 
 ## Example
 

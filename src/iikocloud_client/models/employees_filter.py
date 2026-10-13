@@ -27,7 +27,7 @@ class EmployeesFilter(BaseModel):
     """
     EmployeesFilter
     """ # noqa: E501
-    var_field: Optional[StrictStr] = Field(default=None, description="Field name to filter by. Possible values: `id`, `code`, `firstName`, `lastName`, `middleName`, `phone`, `email`, `mainRoleId`, `organizationId`, `isFired`", alias="field")
+    var_field: Optional[StrictStr] = Field(default=None, description="Field name to filter by. Possible values: `id`, `code`, `firstName`, `lastName`, `middleName`, `phone`, `email`, `mainRoleId`, `mainOrganizationId`, `isFired`", alias="field")
     value: Optional[StrictStr] = Field(default=None, description="Filter value")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["field", "value"]

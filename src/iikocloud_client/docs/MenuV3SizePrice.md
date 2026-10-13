@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 **is_default** | **bool** | Flag indicating whether this is the default size. | [optional] 
 **is_hidden** | **bool** | Flag indicating whether the size is hidden. | [optional] 
 **measure_unit_type** | [**MeasureUnitType**](MeasureUnitType.md) | Unit of measurement. | [optional] 
+**menu_item_size_id** | **UUID** | Unique key of the size.  Unlike SizeId, present even for non-sized items. | [optional] 
 **nutritions** | [**Nutritions**](Nutritions.md) | Nutritional value. | [optional] 
 **price** | **float** | Price. | [optional] 
 **size_code** | **str** | Size code. | [optional] 
 **size_id** | **str** | Size ID. | [optional] 
 **size_name** | **str** | Size name. | [optional] 
 **sku** | **str** | Predefined size SKU. | [optional] 
+**tax_category_id** | **str** | Tax category ID. | [optional] 
 **weight** | **float** | Weight. | [optional] 
 
 ## Example

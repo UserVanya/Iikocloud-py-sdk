@@ -302,6 +302,8 @@ Available only for banquets.
 
  > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
+ > Restriction group: `Orders: changing`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):
@@ -391,6 +393,8 @@ Change reserve/banquet estimated start time.
 
  > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
+ > Restriction group: `Orders: changing`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):
@@ -479,6 +483,8 @@ Change reserve/banquet tables.
  > Allowed from version `9.0.5`.
 
  > This method is a command. Use `api/1/commands/status` method to get the progress status.
+
+ > Restriction group: `Orders: changing`.
 
 ### Example
 

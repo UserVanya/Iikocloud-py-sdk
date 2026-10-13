@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **is_hidden** | **bool** | Flag indicating whether the item is hidden. | [optional] 
 **item_type** | **str** | Item type: \&quot;PRODUCT\&quot; (default), \&quot;COMBO\&quot;.  If not set (null), treated as PRODUCT for backward compatibility with the old menu schema. | [optional] 
 **labels** | **List[str]** | List of website tags associated with the item. | [optional] 
+**menu_item_id** | **UUID** | Unique key of the menu item. | [optional] 
 **modifier_groups** | [**List[ModifierGroup]**](ModifierGroup.md) | Modifier groups. | [optional] 
 **name** | **str** | Item name. | 
 **product_id** | **str** | Product ID.  REQUIRED for regular products (itemType &#x3D; null or \&quot;PRODUCT\&quot;).  NULL for combo meals (itemType &#x3D; \&quot;COMBO\&quot;). | [optional] 

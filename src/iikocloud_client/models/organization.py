@@ -36,7 +36,7 @@ class Organization(BaseModel):
     organization_id: Optional[StrictStr] = Field(default=None, description="UOC organization identifier", alias="organizationId")
     parent_id: Optional[StrictStr] = Field(default=None, description="UOC identifier of the parent organization; null for the root node", alias="parentId")
     rating: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Organization rating as represented by the source; null if the rating is absent")
-    type: Optional[StrictStr] = Field(default=None, description="Organization type. Confirmed values: Chain — a chain, Rms — an organization")
+    type: Optional[StrictStr] = Field(default=None, description="Organization node type. Confirmed values: DEPARTMENT — department, STORE — store, CENTRALSTORE — central store, CENTRALOFFICE — central office, MANUFACTURE — production, SALEPOINT — point of sale")
     version: Optional[StrictStr] = Field(default=None, description="internal API server version of the organization; null if the version is unknown")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["children", "code", "crmId", "iikoUid", "isCloud", "name", "organizationId", "parentId", "rating", "type", "version"]

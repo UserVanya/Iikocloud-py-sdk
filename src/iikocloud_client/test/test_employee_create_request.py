@@ -58,6 +58,7 @@ class TestEmployeeCreateRequest(unittest.TestCase):
             return EmployeeCreateRequest(
                 code = '',
                 main_organization_id = '',
+                name = '',
         )
         """
 

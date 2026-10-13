@@ -1,21 +1,21 @@
 # ModifierItem
 
-Modifier.
+Modifier item in a group.  All fields except Id are optional overrides: when a field is null,  its value must be taken from the reference Modifier (MenuV3.modifiers) with the same Id.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**button_image_url** | **str** | Button image URL. | [optional] 
-**description** | **str** | Modifier description. | [optional] 
+**button_image_url** | **str** | Button image URL.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**description** | **str** | Modifier description.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
 **id** | **str** | Modifier ID. | 
-**image** | [**Image**](Image.md) | Modifier image. Replaces ButtonImageUrl. | [optional] 
-**is_hidden** | **bool** | Flag indicating whether the modifier is hidden. | [optional] 
-**measure_unit_type** | [**MeasureUnitType**](MeasureUnitType.md) | Unit of measurement. | [optional] 
-**name** | **str** | Modifier name. | 
-**restrictions** | [**Restrictions**](Restrictions.md) | Modifier selection restrictions. | [optional] 
-**tags** | **List[str]** | List of tags associated with the element. | [optional] 
-**weight** | **float** | Weight. | [optional] 
+**image** | [**Image**](Image.md) | Modifier image. Replaces ButtonImageUrl.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**is_hidden** | **bool** | Flag indicating whether the modifier is hidden.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**measure_unit_type** | [**MeasureUnitType**](MeasureUnitType.md) | Unit of measurement.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**name** | **str** | Modifier name.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**restrictions** | [**Restrictions**](Restrictions.md) | Modifier selection restrictions.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**tags** | **List[str]** | List of tags associated with the element.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
+**weight** | **float** | Weight.  If null, the value is taken from the reference Modifier with the same Id. | [optional] 
 
 ## Example
 

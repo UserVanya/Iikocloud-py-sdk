@@ -44,8 +44,19 @@ class TestWriteoffDocumentListItem(unittest.TestCase):
                 document_id = '',
                 expense_account = '',
                 is_editable = True,
+                items = [
+                    iikocloud_client.models.writeoff_document_get_item.WriteoffDocumentGetItem(
+                        amount = 1.337, 
+                        amount_factor = 1.337, 
+                        amount_unit = '', 
+                        container_id = '', 
+                        num = 56, 
+                        product = '', 
+                        product_size = '', )
+                    ],
                 number = '',
                 processed = True,
+                revision = 56,
                 store_from = '',
                 sum = 1.337,
                 sum_without_vat = 1.337,

@@ -45,6 +45,7 @@ class TestItem(unittest.TestCase):
                 labels = [
                     ''
                     ],
+                menu_item_id = '',
                 modifier_groups = [
                     iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/modifier_group.iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierGroup(
                         child_modifiers_have_min_max_restrictions = True, 
@@ -79,12 +80,14 @@ class TestItem(unittest.TestCase):
                         is_default = True, 
                         is_hidden = True, 
                         measure_unit_type = null, 
+                        menu_item_size_id = '', 
                         nutritions = null, 
                         price = 1.337, 
                         size_code = '', 
                         size_id = '', 
                         size_name = '', 
                         sku = '', 
+                        tax_category_id = '', 
                         weight = 1.337, )
                     ],
                 sizes = [

@@ -90,6 +90,7 @@ class TestNomenclatureGroupCreateRequest(unittest.TestCase):
             )
         else:
             return NomenclatureGroupCreateRequest(
+                code = '',
                 name = '',
         )
         """

@@ -59,6 +59,7 @@ class LicensesApi:
     ) -> GetLicenseListResponse:
         """Get license list information for the API login.
 
+           > Restriction group: `Data: licenses`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -133,6 +134,7 @@ class LicensesApi:
     ) -> ApiResponse[GetLicenseListResponse]:
         """Get license list information for the API login.
 
+           > Restriction group: `Data: licenses`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -207,6 +209,7 @@ class LicensesApi:
     ) -> RESTResponseType:
         """Get license list information for the API login.
 
+           > Restriction group: `Data: licenses`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int

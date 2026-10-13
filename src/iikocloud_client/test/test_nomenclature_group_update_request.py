@@ -89,6 +89,7 @@ class TestNomenclatureGroupUpdateRequest(unittest.TestCase):
             )
         else:
             return NomenclatureGroupUpdateRequest(
+                code = '',
                 group_id = '',
                 name = '',
         )

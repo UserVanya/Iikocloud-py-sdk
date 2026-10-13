@@ -28,18 +28,18 @@ from pydantic_core import to_jsonable_python
 
 class ModifierItem(BaseModel):
     """
-    Modifier.
+    Modifier item in a group.  All fields except Id are optional overrides: when a field is null,  its value must be taken from the reference Modifier (MenuV3.modifiers) with the same Id.
     """ # noqa: E501
-    button_image_url: Optional[StrictStr] = Field(default=None, description="Button image URL.", alias="buttonImageUrl")
-    description: Optional[StrictStr] = Field(default=None, description="Modifier description.")
+    button_image_url: Optional[StrictStr] = Field(default=None, description="Button image URL.  If null, the value is taken from the reference Modifier with the same Id.", alias="buttonImageUrl")
+    description: Optional[StrictStr] = Field(default=None, description="Modifier description.  If null, the value is taken from the reference Modifier with the same Id.")
     id: StrictStr = Field(description="Modifier ID.")
-    image: Optional[Image] = Field(default=None, description="Modifier image. Replaces ButtonImageUrl.")
-    is_hidden: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the modifier is hidden.", alias="isHidden")
-    measure_unit_type: Optional[MeasureUnitType] = Field(default=None, description="Unit of measurement.", alias="measureUnitType")
-    name: StrictStr = Field(description="Modifier name.")
-    restrictions: Optional[Restrictions] = Field(default=None, description="Modifier selection restrictions.")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags associated with the element.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weight.")
+    image: Optional[Image] = Field(default=None, description="Modifier image. Replaces ButtonImageUrl.  If null, the value is taken from the reference Modifier with the same Id.")
+    is_hidden: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the modifier is hidden.  If null, the value is taken from the reference Modifier with the same Id.", alias="isHidden")
+    measure_unit_type: Optional[MeasureUnitType] = Field(default=None, description="Unit of measurement.  If null, the value is taken from the reference Modifier with the same Id.", alias="measureUnitType")
+    name: Optional[StrictStr] = Field(default=None, description="Modifier name.  If null, the value is taken from the reference Modifier with the same Id.")
+    restrictions: Optional[Restrictions] = Field(default=None, description="Modifier selection restrictions.  If null, the value is taken from the reference Modifier with the same Id.")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags associated with the element.  If null, the value is taken from the reference Modifier with the same Id.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weight.  If null, the value is taken from the reference Modifier with the same Id.")
     __properties: ClassVar[List[str]] = ["buttonImageUrl", "description", "id", "image", "isHidden", "measureUnitType", "name", "restrictions", "tags", "weight"]
 
     model_config = ConfigDict(
@@ -102,6 +102,21 @@ class ModifierItem(BaseModel):
         if self.image is None and "image" in self.model_fields_set:
             _dict['image'] = None
 
+        # set to None if is_hidden (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_hidden is None and "is_hidden" in self.model_fields_set:
+            _dict['isHidden'] = None
+
+        # set to None if measure_unit_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.measure_unit_type is None and "measure_unit_type" in self.model_fields_set:
+            _dict['measureUnitType'] = None
+
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
         # set to None if restrictions (nullable) is None
         # and model_fields_set contains the field
         if self.restrictions is None and "restrictions" in self.model_fields_set:
@@ -111,6 +126,11 @@ class ModifierItem(BaseModel):
         # and model_fields_set contains the field
         if self.tags is None and "tags" in self.model_fields_set:
             _dict['tags'] = None
+
+        # set to None if weight (nullable) is None
+        # and model_fields_set contains the field
+        if self.weight is None and "weight" in self.model_fields_set:
+            _dict['weight'] = None
 
         return _dict
 

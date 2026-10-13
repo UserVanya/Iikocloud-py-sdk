@@ -54,6 +54,7 @@ class TestProductionDocumentGetResponse(unittest.TestCase):
                         product_size = '', )
                     ],
                 number = '',
+                revision = 56,
                 status = '',
                 store_from = '',
                 store_to = '',

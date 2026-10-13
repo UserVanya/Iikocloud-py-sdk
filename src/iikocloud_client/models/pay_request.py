@@ -27,14 +27,14 @@ class PayRequest(BaseModel):
     """
     PayRequest
     """ # noqa: E501
-    account_from: StrictStr = Field(description="Debit account identifier (GUID)", alias="accountFrom")
-    account_to: Optional[StrictStr] = Field(default=None, description="Credit account identifier (GUID)", alias="accountTo")
-    var_date: StrictStr = Field(description="Payment date (YYYY-MM-DD format)", alias="date")
+    account_id: StrictStr = Field(description="Account identifier (GUID)", alias="accountId")
+    amount: Union[StrictFloat, StrictInt] = Field(description="Payment amount")
+    cfo_item_id: Optional[StrictStr] = Field(default=None, description="Cash flow item identifier (GUID)", alias="cfoItemId")
     document_id: StrictStr = Field(description="Incoming invoice identifier (GUID)", alias="documentId")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")
-    sum: Union[StrictFloat, StrictInt] = Field(description="Payment amount")
+    payment_date: StrictStr = Field(description="Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)", alias="paymentDate")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["accountFrom", "accountTo", "date", "documentId", "organizationId", "sum"]
+    __properties: ClassVar[List[str]] = ["accountId", "amount", "cfoItemId", "documentId", "organizationId", "paymentDate"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -94,12 +94,12 @@ class PayRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "accountFrom": obj.get("accountFrom"),
-            "accountTo": obj.get("accountTo"),
-            "date": obj.get("date"),
+            "accountId": obj.get("accountId"),
+            "amount": obj.get("amount"),
+            "cfoItemId": obj.get("cfoItemId"),
             "documentId": obj.get("documentId"),
             "organizationId": obj.get("organizationId"),
-            "sum": obj.get("sum")
+            "paymentDate": obj.get("paymentDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

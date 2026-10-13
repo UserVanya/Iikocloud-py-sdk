@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **can_set_open_price** | **bool** | An open price can be set manually | [optional] 
 **category_id** | **UUID** | UUID of the product (custom) category. The list of values can be retrieved via the \&quot;Get a list of product categories\&quot; method in the \&quot;Product categories\&quot; category | [optional] 
 **cheque_printable** | **bool** | Print on the cheque | [optional] 
-**code** | **str** | Product code: 0–8 digits. Used for quick search on the order editing screen. If null or not provided, it will be assigned automatically | [optional] 
+**code** | **str** | Product code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a product | 
 **cold_loss_percent** | **float** | Weight loss percentage during cold processing | [optional] 
 **color** | [**NomenclatureProductRGBColor**](NomenclatureProductRGBColor.md) | Background button colour for POS | [optional] 
 **containers** | [**List[NomenclatureProductContainer]**](NomenclatureProductContainer.md) | Product containers/packagings | [optional] 

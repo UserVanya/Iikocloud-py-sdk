@@ -29,7 +29,8 @@ class SizePriceShort(BaseModel):
     """ # noqa: E501
     price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Price.")
     size_id: Optional[StrictStr] = Field(default=None, description="Size ID.", alias="sizeId")
-    __properties: ClassVar[List[str]] = ["price", "sizeId"]
+    tax_category_id: Optional[StrictStr] = Field(default=None, description="Tax category ID.", alias="taxCategoryId")
+    __properties: ClassVar[List[str]] = ["price", "sizeId", "taxCategoryId"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +81,11 @@ class SizePriceShort(BaseModel):
         if self.size_id is None and "size_id" in self.model_fields_set:
             _dict['sizeId'] = None
 
+        # set to None if tax_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.tax_category_id is None and "tax_category_id" in self.model_fields_set:
+            _dict['taxCategoryId'] = None
+
         return _dict
 
     @classmethod
@@ -93,7 +99,8 @@ class SizePriceShort(BaseModel):
 
         _obj = cls.model_validate({
             "price": obj.get("price"),
-            "sizeId": obj.get("sizeId")
+            "sizeId": obj.get("sizeId"),
+            "taxCategoryId": obj.get("taxCategoryId")
         })
         return _obj
 

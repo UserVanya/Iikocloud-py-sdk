@@ -324,6 +324,10 @@ operations:
     effect: create
     live_policy: lifecycle_only
     reason: "Requires an owned entity for create nomenclature assembly chart v2 and reviewed compensation."
+  create_nomenclature_assembly_chart_v3:
+    effect: create
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for create nomenclature assembly chart v3 and reviewed compensation."
   create_nomenclature_group:
     effect: create
     live_policy: lifecycle_only
@@ -388,6 +392,10 @@ operations:
     effect: delete
     live_policy: lifecycle_only
     reason: "Requires an owned entity for delete nomenclature assembly chart v2 and reviewed compensation."
+  delete_nomenclature_assembly_chart_v3:
+    effect: delete
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for delete nomenclature assembly chart v3 and reviewed compensation."
   delete_nomenclature_groups:
     effect: delete
     live_policy: lifecycle_only
@@ -560,6 +568,10 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get finance outgoing service."
+  get_income_plan:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   get_inventory_accounting_category:
     effect: read
     live_policy: blocked
@@ -660,6 +672,14 @@ operations:
     effect: read
     live_policy: blocked
     reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_assembly_chart_v3:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
+  get_nomenclature_outer_economic_activity_code:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   get_nomenclature_prepared_chart_v2:
     effect: read
     live_policy: blocked
@@ -672,6 +692,10 @@ operations:
     effect: read
     live_policy: automatic
     reason: "Reviewed non-mutating query for get non activated coupons by series."
+  get_olap_preset_report:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   get_olap_report:
     effect: read
     live_policy: blocked
@@ -936,6 +960,10 @@ operations:
     effect: read
     live_policy: blocked
     reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_assembly_charts_v3:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   list_nomenclature_containers:
     effect: read
     live_policy: blocked
@@ -944,6 +972,10 @@ operations:
     effect: read
     live_policy: blocked
     reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_discount_types:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   list_nomenclature_groups:
     effect: read
     live_policy: blocked
@@ -960,6 +992,10 @@ operations:
     effect: read
     live_policy: blocked
     reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_nomenclature_outer_economic_activity_codes:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   list_nomenclature_place_types:
     effect: read
     live_policy: blocked
@@ -992,6 +1028,10 @@ operations:
     effect: read
     live_policy: blocked
     reason: "New in upstream OpenAPI 9.8.6.1 (reviewed 2026-09-25); no reviewed live read case and no verified rate budget yet."
+  list_olap_presets:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   list_organizations:
     effect: read
     live_policy: automatic
@@ -1092,6 +1132,10 @@ operations:
     effect: delete
     live_policy: lifecycle_only
     reason: "Requires an owned entity for remove products from stop list and reviewed compensation."
+  resolve_nomenclature_assembly_chart_v3:
+    effect: read
+    live_policy: blocked
+    reason: "New in upstream OpenAPI 9.8.6.3 (reviewed 2026-10-13); no reviewed live read case and no verified rate budget yet."
   restore_customers:
     effect: action
     live_policy: lifecycle_only
@@ -1312,6 +1356,10 @@ operations:
     effect: update
     live_policy: lifecycle_only
     reason: "Requires an owned entity for update nomenclature assembly chart v2 and reviewed compensation."
+  update_nomenclature_assembly_chart_v3:
+    effect: update
+    live_policy: lifecycle_only
+    reason: "Requires an owned entity for update nomenclature assembly chart v3 and reviewed compensation."
   update_nomenclature_group:
     effect: update
     live_policy: lifecycle_only

@@ -43,6 +43,7 @@ class TestMenuV3SizePrice(unittest.TestCase):
                 is_default = True,
                 is_hidden = True,
                 measure_unit_type = 'GRAM',
+                menu_item_size_id = '',
                 nutritions = iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/nutritions.iikoTransport.PublicApi.Contracts.NomenclatureV3.Nutritions(
                     carbs = 1.337, 
                     energy = 1.337, 
@@ -56,6 +57,7 @@ class TestMenuV3SizePrice(unittest.TestCase):
                 size_id = '',
                 size_name = '',
                 sku = '',
+                tax_category_id = '',
                 weight = 1.337
             )
         else:

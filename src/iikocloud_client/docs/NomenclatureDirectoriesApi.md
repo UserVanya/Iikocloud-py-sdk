@@ -4,17 +4,110 @@ All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_nomenclature_outer_economic_activity_code**](NomenclatureDirectoriesApi.md#get_nomenclature_outer_economic_activity_code) | **POST** /api/nomenclature/v1/outer_economic_activity_nomenclature_codes/get | Get a foreign economic activity commodity code by ID
 [**list_nomenclature_allergen_groups**](NomenclatureDirectoriesApi.md#list_nomenclature_allergen_groups) | **POST** /api/nomenclature/v1/allergen-group/list | Get a list of allergen groups
 [**list_nomenclature_amount_units**](NomenclatureDirectoriesApi.md#list_nomenclature_amount_units) | **POST** /api/nomenclature/v1/amount-unit/list | Get a list of amount units
 [**list_nomenclature_containers**](NomenclatureDirectoriesApi.md#list_nomenclature_containers) | **POST** /api/nomenclature/v1/container/list | Get a list of containers
 [**list_nomenclature_custom_categories**](NomenclatureDirectoriesApi.md#list_nomenclature_custom_categories) | **POST** /api/nomenclature/v1/custom-category/list | Get a list of custom categories
+[**list_nomenclature_discount_types**](NomenclatureDirectoriesApi.md#list_nomenclature_discount_types) | **POST** /api/nomenclature/v1/discount-type/list | Get a list of discount types
 [**list_nomenclature_menu_sections**](NomenclatureDirectoriesApi.md#list_nomenclature_menu_sections) | **POST** /api/nomenclature/v1/menu/list | Get a list of menu sections
 [**list_nomenclature_modifier_schemas**](NomenclatureDirectoriesApi.md#list_nomenclature_modifier_schemas) | **POST** /api/nomenclature/v1/modifier-schema/list | Get a list of modifier schemas
+[**list_nomenclature_outer_economic_activity_codes**](NomenclatureDirectoriesApi.md#list_nomenclature_outer_economic_activity_codes) | **POST** /api/nomenclature/v1/outer_economic_activity_nomenclature_codes/list | Get the foreign economic activity commodity code directory
 [**list_nomenclature_place_types**](NomenclatureDirectoriesApi.md#list_nomenclature_place_types) | **POST** /api/nomenclature/v1/place-type/list | Get a list of preparation place types
 [**list_nomenclature_producers**](NomenclatureDirectoriesApi.md#list_nomenclature_producers) | **POST** /api/nomenclature/v1/producer/list | Get a list of producers
 [**list_nomenclature_product_sizes**](NomenclatureDirectoriesApi.md#list_nomenclature_product_sizes) | **POST** /api/nomenclature/v1/product-size/list | Get a list of product sizes
 [**list_nomenclature_product_tags**](NomenclatureDirectoriesApi.md#list_nomenclature_product_tags) | **POST** /api/nomenclature/v1/product-tag/list | Get a list of product tags
 
+
+# **get_nomenclature_outer_economic_activity_code**
+> OuterEconomicActivityNomenclatureCode get_nomenclature_outer_economic_activity_code(outer_economic_activity_nomenclature_code_get_request, timeout=timeout)
+
+Get a foreign economic activity commodity code by ID
+
+Returns a foreign economic activity commodity code by UUID. The `id` field is required.
+If no code with the given identifier exists, a 404 error is returned.
+
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.outer_economic_activity_nomenclature_code import OuterEconomicActivityNomenclatureCode
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_get_request import OuterEconomicActivityNomenclatureCodeGetRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.NomenclatureDirectoriesApi(api_client)
+    outer_economic_activity_nomenclature_code_get_request = iikocloud_client.OuterEconomicActivityNomenclatureCodeGetRequest() # OuterEconomicActivityNomenclatureCodeGetRequest | Request body for retrieving a foreign economic activity commodity code by ID
+    timeout = 56 # int | Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds.  (optional)
+
+    try:
+        # Get a foreign economic activity commodity code by ID
+        api_response = await api_instance.get_nomenclature_outer_economic_activity_code(outer_economic_activity_nomenclature_code_get_request, timeout=timeout)
+        print("The response of NomenclatureDirectoriesApi->get_nomenclature_outer_economic_activity_code:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NomenclatureDirectoriesApi->get_nomenclature_outer_economic_activity_code: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **outer_economic_activity_nomenclature_code_get_request** | [**OuterEconomicActivityNomenclatureCodeGetRequest**](OuterEconomicActivityNomenclatureCodeGetRequest.md)| Request body for retrieving a foreign economic activity commodity code by ID | 
+ **timeout** | **int**| Default: &lt;code&gt;15&lt;/code&gt;&lt;/br&gt; Example: &lt;code&gt;10&lt;/code&gt;&lt;/br&gt; Timeout in seconds.  | [optional] 
+
+### Return type
+
+[**OuterEconomicActivityNomenclatureCode**](OuterEconomicActivityNomenclatureCode.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Foreign economic activity commodity code |  -  |
+**400** | Bad request |  -  |
+**401** | Authorisation required |  -  |
+**403** | Access denied |  -  |
+**404** | Not found |  -  |
+**429** | Too many requests |  -  |
+**500** | Internal server error |  -  |
+**502** | Internal API Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_nomenclature_allergen_groups**
 > AllergenGroupListResponse list_nomenclature_allergen_groups(allergen_group_list_request, timeout=timeout)
@@ -376,6 +469,96 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_nomenclature_discount_types**
+> DiscountTypeListResponse list_nomenclature_discount_types(discount_type_list_request, timeout=timeout)
+
+Get a list of discount types
+
+Returns a list of discount types with filtering and pagination support.
+Filter fields: `id`, `name`, `isDeleted`.
+Allowed operators: `id` — eq, in; `name` — eq, ne, in, nin, like, blank, notblank; `isDeleted` — eq (boolean).
+All filters are combined with AND. Pagination via `limit`/`offset`.
+
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.discount_type_list_request import DiscountTypeListRequest
+from iikocloud_client.models.discount_type_list_response import DiscountTypeListResponse
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.NomenclatureDirectoriesApi(api_client)
+    discount_type_list_request = iikocloud_client.DiscountTypeListRequest() # DiscountTypeListRequest | Parameters for the discount type list request
+    timeout = 56 # int | Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds.  (optional)
+
+    try:
+        # Get a list of discount types
+        api_response = await api_instance.list_nomenclature_discount_types(discount_type_list_request, timeout=timeout)
+        print("The response of NomenclatureDirectoriesApi->list_nomenclature_discount_types:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NomenclatureDirectoriesApi->list_nomenclature_discount_types: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **discount_type_list_request** | [**DiscountTypeListRequest**](DiscountTypeListRequest.md)| Parameters for the discount type list request | 
+ **timeout** | **int**| Default: &lt;code&gt;15&lt;/code&gt;&lt;/br&gt; Example: &lt;code&gt;10&lt;/code&gt;&lt;/br&gt; Timeout in seconds.  | [optional] 
+
+### Return type
+
+[**DiscountTypeListResponse**](DiscountTypeListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of discount types |  -  |
+**400** | Bad request |  -  |
+**401** | Authorisation required |  -  |
+**403** | Access denied |  -  |
+**429** | Too many requests |  -  |
+**500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_nomenclature_menu_sections**
 > MenuSectionListResponse list_nomenclature_menu_sections(menu_section_list_request, timeout=timeout)
 
@@ -553,6 +736,95 @@ Name | Type | Description  | Notes
 **403** | Access denied |  -  |
 **429** | Too many requests |  -  |
 **500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_nomenclature_outer_economic_activity_codes**
+> OuterEconomicActivityNomenclatureCodeListResponse list_nomenclature_outer_economic_activity_codes(outer_economic_activity_nomenclature_code_list_request, timeout=timeout)
+
+Get the foreign economic activity commodity code directory
+
+Returns the entire foreign economic activity commodity code directory.
+To include soft-deleted codes, pass `includeDeleted: true` (default false).
+
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_list_request import OuterEconomicActivityNomenclatureCodeListRequest
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_list_response import OuterEconomicActivityNomenclatureCodeListResponse
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.NomenclatureDirectoriesApi(api_client)
+    outer_economic_activity_nomenclature_code_list_request = iikocloud_client.OuterEconomicActivityNomenclatureCodeListRequest() # OuterEconomicActivityNomenclatureCodeListRequest | Request body for retrieving the foreign economic activity commodity code directory
+    timeout = 56 # int | Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds.  (optional)
+
+    try:
+        # Get the foreign economic activity commodity code directory
+        api_response = await api_instance.list_nomenclature_outer_economic_activity_codes(outer_economic_activity_nomenclature_code_list_request, timeout=timeout)
+        print("The response of NomenclatureDirectoriesApi->list_nomenclature_outer_economic_activity_codes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NomenclatureDirectoriesApi->list_nomenclature_outer_economic_activity_codes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **outer_economic_activity_nomenclature_code_list_request** | [**OuterEconomicActivityNomenclatureCodeListRequest**](OuterEconomicActivityNomenclatureCodeListRequest.md)| Request body for retrieving the foreign economic activity commodity code directory | 
+ **timeout** | **int**| Default: &lt;code&gt;15&lt;/code&gt;&lt;/br&gt; Example: &lt;code&gt;10&lt;/code&gt;&lt;/br&gt; Timeout in seconds.  | [optional] 
+
+### Return type
+
+[**OuterEconomicActivityNomenclatureCodeListResponse**](OuterEconomicActivityNomenclatureCodeListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Foreign economic activity commodity code directory |  -  |
+**400** | Bad request |  -  |
+**401** | Authorisation required |  -  |
+**403** | Access denied |  -  |
+**429** | Too many requests |  -  |
+**500** | Internal server error |  -  |
+**502** | Internal API Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

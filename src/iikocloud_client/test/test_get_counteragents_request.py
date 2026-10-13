@@ -35,9 +35,10 @@ class TestGetCounteragentsRequest(unittest.TestCase):
         model = GetCounteragentsRequest()
         if include_optional:
             return GetCounteragentsRequest(
+                is_deleted = True,
                 limit = 56,
                 offset = 56,
-                organization_id = '',
+                revision = 56,
                 type = [
                     ''
                     ]

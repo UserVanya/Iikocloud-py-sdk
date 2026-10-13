@@ -302,6 +302,8 @@ Cancel the table order.
 
  > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
+ > Restriction group: `Order status: changing`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):

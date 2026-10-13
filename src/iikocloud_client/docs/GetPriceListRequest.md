@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**counteragent_id** | **str** | Supplier identifier (GUID) | [optional] 
+**counteragent_id** | **str** | Counteragent identifier (GUID). The counteragent must be a supplier | 
 
 ## Example
 

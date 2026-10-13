@@ -35,7 +35,7 @@ class NomenclatureGroupUpdateRequest(BaseModel):
     """ # noqa: E501
     accounting_category_id: Optional[UUID] = Field(default=None, description="UUID of the accounting category (as configured in the accounting settings)", alias="accountingCategoryId")
     category_id: Optional[UUID] = Field(default=None, description="UUID of the product (custom) category. The list of values can be retrieved via the \"Get a list of product categories\" method in the \"Product categories\" category", alias="categoryId")
-    code: Optional[StrictStr] = Field(default=None, description="Group code: 0–8 digits. Used for quick search on the order editing screen")
+    code: StrictStr = Field(description="Group code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a group")
     color: Optional[NomenclatureGroupRGBColor] = Field(default=None, description="Background button colour for POS")
     custom_categories: Optional[List[NomenclatureGroupCustomCategory]] = Field(default=None, description="Custom nomenclature categories. Empty array or null - no categories set", alias="customCategories")
     default_course: Optional[StrictInt] = Field(default=None, description="Default serving course. null - not set; 0 - VIP course; otherwise - course number", alias="defaultCourse")

@@ -43,8 +43,18 @@ class TestTransformationDocumentListItem(unittest.TestCase):
                 deleted = True,
                 document_id = '',
                 is_editable = True,
+                items = [
+                    iikocloud_client.models.transformation_document_get_item.TransformationDocumentGetItem(
+                        amount = 1.337, 
+                        amount_factor = 1.337, 
+                        amount_unit = '', 
+                        num = 56, 
+                        product = '', 
+                        product_size = '', )
+                    ],
                 number = '',
                 processed = True,
+                revision = 56,
                 store_from = '',
                 store_to = '',
                 sum = 1.337,

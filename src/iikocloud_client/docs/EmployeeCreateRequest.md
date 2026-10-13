@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **main_organization_id** | **str** | Identifier (organizationId) of the employee&#39;s main organization | 
 **main_role_id** | **str** | Position identifier | [optional] 
 **middle_name** | **str** | Middle name | [optional] 
-**name** | **str** | Employee name in the system | [optional] 
+**name** | **str** | Employee name in the system | 
 **note** | **str** | Notes | [optional] 
 **organization_ids** | **List[str]** | Identifiers (organizationId) of the employee&#39;s organizations | [optional] 
 **phone** | **str** | Phone | [optional] 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.returned_invoice_get_item import ReturnedInvoiceGetItem
 from typing import Optional, Set
@@ -40,11 +40,12 @@ class ReturnedInvoiceGetResponse(BaseModel):
     incoming_invoice_id: Optional[StrictStr] = Field(default=None, description="Associated incoming invoice identifier (GUID)", alias="incomingInvoiceId")
     items: Optional[List[ReturnedInvoiceGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = Field(default=None, description="Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "expenseAccount", "incomingInvoiceId", "items", "number", "status", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "expenseAccount", "incomingInvoiceId", "items", "number", "revision", "status", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -123,6 +124,7 @@ class ReturnedInvoiceGetResponse(BaseModel):
             "incomingInvoiceId": obj.get("incomingInvoiceId"),
             "items": [ReturnedInvoiceGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "userCreated": obj.get("userCreated"),
             "userModified": obj.get("userModified")

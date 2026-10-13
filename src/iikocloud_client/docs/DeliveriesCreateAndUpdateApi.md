@@ -1490,6 +1490,8 @@ Print bill.
 
  > This method is a command. Use `api/1/commands/status` method to get the progress status.
 
+ > Restriction group: `Orders: changing`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):
@@ -1930,6 +1932,10 @@ Name | Type | Description  | Notes
 > update_delivery_tracking_link(timeout=timeout, update_tracking_link_request=update_tracking_link_request)
 
 Update tracking link of an order.
+
+
+
+ > Restriction group: `Order driver: changing`.
 
 ### Example
 

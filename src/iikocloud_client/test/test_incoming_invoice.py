@@ -75,6 +75,7 @@ class TestIncomingInvoice(unittest.TestCase):
                 matches_to_the_order = True,
                 number = '',
                 payment_date = '',
+                revision = 56,
                 status = '',
                 transport_invoice_number = '',
                 user_created = '',

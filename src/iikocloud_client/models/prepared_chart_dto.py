@@ -31,8 +31,8 @@ class PreparedChartDto(BaseModel):
     PreparedChartDto
     """ # noqa: E501
     assembled_quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Assembled quantity (bookmark rate). Must be greater than 0", alias="assembledQuantity")
-    date_from: Optional[StrictStr] = Field(default=None, description="Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)", alias="dateFrom")
-    date_to: Optional[StrictStr] = Field(default=None, description="End date of the validity period; null for an open-ended chart", alias="dateTo")
+    date_from: Optional[StrictStr] = Field(default=None, description="Start date of the validity period (YYYY-MM-DD)", alias="dateFrom")
+    date_to: Optional[StrictStr] = Field(default=None, description="End date of the validity period (YYYY-MM-DD)", alias="dateTo")
     direct_writeoff_store_specification: Optional[StoreSpecification] = Field(default=None, description="Organization (structural unit) filter for DIRECT write-off strategy. null — applies to all organizations", alias="directWriteoffStoreSpecification")
     id: Optional[UUID] = Field(default=None, description="UUID of the assembly chart")
     items: Optional[List[PreparedChartItemDto]] = Field(default=None, description="Ingredient lines of the assembly chart")

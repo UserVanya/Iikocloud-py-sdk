@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,15 +36,17 @@ class Counteragent(BaseModel):
     employee: Optional[StrictBool] = Field(default=None, description="Is employee")
     first_name: Optional[StrictStr] = Field(default=None, description="First name", alias="firstName")
     id: Optional[StrictStr] = Field(default=None, description="Counteragent identifier (GUID)")
+    is_deleted: Optional[StrictBool] = Field(default=None, description="Counteragent deletion flag", alias="isDeleted")
     last_name: Optional[StrictStr] = Field(default=None, description="Last name", alias="lastName")
     middle_name: Optional[StrictStr] = Field(default=None, description="Middle name", alias="middleName")
     name: Optional[StrictStr] = Field(default=None, description="Counteragent name")
     phone: Optional[StrictStr] = Field(default=None, description="Phone")
+    revision: Optional[StrictInt] = Field(default=None, description="Counteragent revision number")
     supplier: Optional[StrictBool] = Field(default=None, description="Is supplier")
     supplier_type: Optional[StrictStr] = Field(default=None, description="Supplier type", alias="supplierType")
     taxpayer_id_number: Optional[StrictStr] = Field(default=None, description="Taxpayer ID number", alias="taxpayerIdNumber")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["cardNumber", "cellPhone", "client", "code", "company", "email", "employee", "firstName", "id", "lastName", "middleName", "name", "phone", "supplier", "supplierType", "taxpayerIdNumber"]
+    __properties: ClassVar[List[str]] = ["cardNumber", "cellPhone", "client", "code", "company", "email", "employee", "firstName", "id", "isDeleted", "lastName", "middleName", "name", "phone", "revision", "supplier", "supplierType", "taxpayerIdNumber"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -113,10 +115,12 @@ class Counteragent(BaseModel):
             "employee": obj.get("employee"),
             "firstName": obj.get("firstName"),
             "id": obj.get("id"),
+            "isDeleted": obj.get("isDeleted"),
             "lastName": obj.get("lastName"),
             "middleName": obj.get("middleName"),
             "name": obj.get("name"),
             "phone": obj.get("phone"),
+            "revision": obj.get("revision"),
             "supplier": obj.get("supplier"),
             "supplierType": obj.get("supplierType"),
             "taxpayerIdNumber": obj.get("taxpayerIdNumber")

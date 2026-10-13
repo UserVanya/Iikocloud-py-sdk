@@ -553,6 +553,8 @@ Retrieve external menu V3 by ID.
 
 > Generated from Plain menu converter.
 
+ > Restriction group: `Data: menu`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):

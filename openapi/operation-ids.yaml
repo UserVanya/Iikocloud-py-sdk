@@ -284,6 +284,7 @@ operations:
   POST /api/nomenclature/v1/assembly-chart/update: update_nomenclature_assembly_chart
   POST /api/nomenclature/v1/container/list: list_nomenclature_containers
   POST /api/nomenclature/v1/custom-category/list: list_nomenclature_custom_categories
+  POST /api/nomenclature/v1/discount-type/list: list_nomenclature_discount_types
   POST /api/nomenclature/v1/group/create: create_nomenclature_group
   POST /api/nomenclature/v1/group/delete: delete_nomenclature_groups
   POST /api/nomenclature/v1/group/list: list_nomenclature_groups
@@ -296,6 +297,8 @@ operations:
   POST /api/nomenclature/v1/nomenclature/category/list: list_nomenclature_product_categories
   POST /api/nomenclature/v1/nomenclature/category/restore: restore_nomenclature_product_category
   POST /api/nomenclature/v1/nomenclature/category/update: update_nomenclature_product_category
+  POST /api/nomenclature/v1/outer_economic_activity_nomenclature_codes/get: get_nomenclature_outer_economic_activity_code
+  POST /api/nomenclature/v1/outer_economic_activity_nomenclature_codes/list: list_nomenclature_outer_economic_activity_codes
   POST /api/nomenclature/v1/place-type/list: list_nomenclature_place_types
   POST /api/nomenclature/v1/producer/list: list_nomenclature_producers
   POST /api/nomenclature/v1/product-scale/create: create_nomenclature_product_scale
@@ -330,10 +333,19 @@ operations:
   POST /api/nomenclature/v2/product/restore: restore_nomenclature_products_v2
   POST /api/nomenclature/v2/product/update: update_nomenclature_product_v2
   POST /api/nomenclature/v2/product/update_barcodes: update_nomenclature_product_barcodes_v2
+  POST /api/nomenclature/v3/assembly-chart/create: create_nomenclature_assembly_chart_v3
+  POST /api/nomenclature/v3/assembly-chart/delete: delete_nomenclature_assembly_chart_v3
+  POST /api/nomenclature/v3/assembly-chart/get: get_nomenclature_assembly_chart_v3
+  POST /api/nomenclature/v3/assembly-chart/list: list_nomenclature_assembly_charts_v3
+  POST /api/nomenclature/v3/assembly-chart/resolve: resolve_nomenclature_assembly_chart_v3
+  POST /api/nomenclature/v3/assembly-chart/update: update_nomenclature_assembly_chart_v3
   POST /api/platform/v1/events/list: list_platform_events
   POST /api/platform/v1/events/metadata/list: list_platform_event_metadata
+  POST /api/reporting/v1/income-plan/list: get_income_plan
   POST /api/reporting/v1/olap/columns/get: get_olap_report_columns
   POST /api/reporting/v1/olap/get: get_olap_report
+  POST /api/reporting/v1/olap/presets/get: get_olap_preset_report
+  POST /api/reporting/v1/olap/presets/list: list_olap_presets
   POST /api/terminals/v1/cash-registers/list: list_terminal_cash_registers
   POST /api/terminals/v1/terminals/list: list_terminals
   POST /api/v2/access_token: authenticate_v2

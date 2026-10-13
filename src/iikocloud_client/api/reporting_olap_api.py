@@ -16,12 +16,14 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.get_olap_columns_request import GetOlapColumnsRequest
 from iikocloud_client.models.get_olap_report_request import GetOlapReportRequest
 from iikocloud_client.models.get_olap_report_response import GetOlapReportResponse
 from iikocloud_client.models.olap_column import OlapColumn
+from iikocloud_client.models.olap_preset import OlapPreset
+from iikocloud_client.models.olap_preset_report_request import OlapPresetReportRequest
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
 from iikocloud_client.api_response import ApiResponse
@@ -39,6 +41,319 @@ class ReportingOlapApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    async def get_olap_preset_report(
+        self,
+        olap_preset_report_request: Annotated[OlapPresetReportRequest, Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetOlapReportResponse:
+        """Get saved OLAP preset data
+
+        Returns the data of a saved OLAP preset by its identifier (`presetId`) for a given period (`dateFrom` — start, `dateTo` — end). A preset is a ready-made report configuration (groupings, aggregates, filters) saved by the restaurant owner; the method lets retrieve a report by that configuration. 
+
+        :param olap_preset_report_request: Request parameters (required)
+        :type olap_preset_report_request: OlapPresetReportRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_olap_preset_report_serialize(
+            olap_preset_report_request=olap_preset_report_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOlapReportResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_olap_preset_report_with_http_info(
+        self,
+        olap_preset_report_request: Annotated[OlapPresetReportRequest, Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetOlapReportResponse]:
+        """Get saved OLAP preset data
+
+        Returns the data of a saved OLAP preset by its identifier (`presetId`) for a given period (`dateFrom` — start, `dateTo` — end). A preset is a ready-made report configuration (groupings, aggregates, filters) saved by the restaurant owner; the method lets retrieve a report by that configuration. 
+
+        :param olap_preset_report_request: Request parameters (required)
+        :type olap_preset_report_request: OlapPresetReportRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_olap_preset_report_serialize(
+            olap_preset_report_request=olap_preset_report_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOlapReportResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_olap_preset_report_without_preload_content(
+        self,
+        olap_preset_report_request: Annotated[OlapPresetReportRequest, Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get saved OLAP preset data
+
+        Returns the data of a saved OLAP preset by its identifier (`presetId`) for a given period (`dateFrom` — start, `dateTo` — end). A preset is a ready-made report configuration (groupings, aggregates, filters) saved by the restaurant owner; the method lets retrieve a report by that configuration. 
+
+        :param olap_preset_report_request: Request parameters (required)
+        :type olap_preset_report_request: OlapPresetReportRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_olap_preset_report_serialize(
+            olap_preset_report_request=olap_preset_report_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOlapReportResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_olap_preset_report_serialize(
+        self,
+        olap_preset_report_request,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if olap_preset_report_request is not None:
+            _body_params = olap_preset_report_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/reporting/v1/olap/presets/get',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -61,7 +376,7 @@ class ReportingOlapApi:
     ) -> GetOlapReportResponse:
         """Run OLAP report
 
-        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
+        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Dates must use the `yyyy-MM-dd` format. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
 
         :param get_olap_report_request: Request parameters (required)
         :type get_olap_report_request: GetOlapReportRequest
@@ -139,7 +454,7 @@ class ReportingOlapApi:
     ) -> ApiResponse[GetOlapReportResponse]:
         """Run OLAP report
 
-        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
+        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Dates must use the `yyyy-MM-dd` format. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
 
         :param get_olap_report_request: Request parameters (required)
         :type get_olap_report_request: GetOlapReportRequest
@@ -217,7 +532,7 @@ class ReportingOlapApi:
     ) -> RESTResponseType:
         """Run OLAP report
 
-        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
+        Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters. Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report. Every request must contain a date filter. Dates must use the `yyyy-MM-dd` format. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS. <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP. 
 
         :param get_olap_report_request: Request parameters (required)
         :type get_olap_report_request: GetOlapReportRequest
@@ -646,6 +961,316 @@ class ReportingOlapApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/reporting/v1/olap/columns/get',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_olap_presets(
+        self,
+        body: Annotated[Dict[str, Any], Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[OlapPreset]:
+        """Get saved OLAP presets
+
+        Returns the list of OLAP presets saved in iikoOffice — ready-made report configurations set up by the restaurant owner. Each item contains an identifier (`presetId`) and the preset name. The method returns all saved presets. 
+
+        :param body: Request parameters (required)
+        :type body: object
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_olap_presets_serialize(
+            body=body,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[OlapPreset]",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_olap_presets_with_http_info(
+        self,
+        body: Annotated[Dict[str, Any], Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[OlapPreset]]:
+        """Get saved OLAP presets
+
+        Returns the list of OLAP presets saved in iikoOffice — ready-made report configurations set up by the restaurant owner. Each item contains an identifier (`presetId`) and the preset name. The method returns all saved presets. 
+
+        :param body: Request parameters (required)
+        :type body: object
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_olap_presets_serialize(
+            body=body,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[OlapPreset]",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_olap_presets_without_preload_content(
+        self,
+        body: Annotated[Dict[str, Any], Field(description="Request parameters")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get saved OLAP presets
+
+        Returns the list of OLAP presets saved in iikoOffice — ready-made report configurations set up by the restaurant owner. Each item contains an identifier (`presetId`) and the preset name. The method returns all saved presets. 
+
+        :param body: Request parameters (required)
+        :type body: object
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_olap_presets_serialize(
+            body=body,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[OlapPreset]",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+            '504': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_olap_presets_serialize(
+        self,
+        body,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if body is not None:
+            _body_params = body
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/reporting/v1/olap/presets/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

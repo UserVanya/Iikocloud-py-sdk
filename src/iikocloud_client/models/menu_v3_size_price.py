@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, Optional, Union
+from uuid import UUID
 from iikocloud_client.models.image import Image
 from iikocloud_client.models.measure_unit_type import MeasureUnitType
 from iikocloud_client.models.nutritions import Nutritions
@@ -35,14 +36,16 @@ class MenuV3SizePrice(BaseModel):
     is_default: Optional[StrictBool] = Field(default=None, description="Flag indicating whether this is the default size.", alias="isDefault")
     is_hidden: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the size is hidden.", alias="isHidden")
     measure_unit_type: Optional[MeasureUnitType] = Field(default=None, description="Unit of measurement.", alias="measureUnitType")
+    menu_item_size_id: Optional[UUID] = Field(default=None, description="Unique key of the size.  Unlike SizeId, present even for non-sized items.", alias="menuItemSizeId")
     nutritions: Optional[Nutritions] = Field(default=None, description="Nutritional value.")
     price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Price.")
     size_code: Optional[StrictStr] = Field(default=None, description="Size code.", alias="sizeCode")
     size_id: Optional[StrictStr] = Field(default=None, description="Size ID.", alias="sizeId")
     size_name: Optional[StrictStr] = Field(default=None, description="Size name.", alias="sizeName")
     sku: Optional[StrictStr] = Field(default=None, description="Predefined size SKU.")
+    tax_category_id: Optional[StrictStr] = Field(default=None, description="Tax category ID.", alias="taxCategoryId")
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weight.")
-    __properties: ClassVar[List[str]] = ["buttonImageUrl", "image", "isDefault", "isHidden", "measureUnitType", "nutritions", "price", "sizeCode", "sizeId", "sizeName", "sku", "weight"]
+    __properties: ClassVar[List[str]] = ["buttonImageUrl", "image", "isDefault", "isHidden", "measureUnitType", "menuItemSizeId", "nutritions", "price", "sizeCode", "sizeId", "sizeName", "sku", "taxCategoryId", "weight"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -99,6 +102,11 @@ class MenuV3SizePrice(BaseModel):
         if self.image is None and "image" in self.model_fields_set:
             _dict['image'] = None
 
+        # set to None if menu_item_size_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.menu_item_size_id is None and "menu_item_size_id" in self.model_fields_set:
+            _dict['menuItemSizeId'] = None
+
         # set to None if nutritions (nullable) is None
         # and model_fields_set contains the field
         if self.nutritions is None and "nutritions" in self.model_fields_set:
@@ -129,6 +137,11 @@ class MenuV3SizePrice(BaseModel):
         if self.sku is None and "sku" in self.model_fields_set:
             _dict['sku'] = None
 
+        # set to None if tax_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.tax_category_id is None and "tax_category_id" in self.model_fields_set:
+            _dict['taxCategoryId'] = None
+
         return _dict
 
     @classmethod
@@ -146,12 +159,14 @@ class MenuV3SizePrice(BaseModel):
             "isDefault": obj.get("isDefault"),
             "isHidden": obj.get("isHidden"),
             "measureUnitType": obj.get("measureUnitType"),
+            "menuItemSizeId": obj.get("menuItemSizeId"),
             "nutritions": Nutritions.from_dict(obj["nutritions"]) if obj.get("nutritions") is not None else None,
             "price": obj.get("price"),
             "sizeCode": obj.get("sizeCode"),
             "sizeId": obj.get("sizeId"),
             "sizeName": obj.get("sizeName"),
             "sku": obj.get("sku"),
+            "taxCategoryId": obj.get("taxCategoryId"),
             "weight": obj.get("weight")
         })
         return _obj

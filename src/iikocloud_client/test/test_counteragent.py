@@ -44,10 +44,12 @@ class TestCounteragent(unittest.TestCase):
                 employee = True,
                 first_name = '',
                 id = '',
+                is_deleted = True,
                 last_name = '',
                 middle_name = '',
                 name = '',
                 phone = '',
+                revision = 56,
                 supplier = True,
                 supplier_type = '',
                 taxpayer_id_number = ''

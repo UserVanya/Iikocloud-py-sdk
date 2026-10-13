@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from iikocloud_client.models.writeoff_document_get_item import WriteoffDocumentGetItem
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,15 +37,17 @@ class WriteoffDocumentListItem(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     expense_account: Optional[StrictStr] = Field(default=None, alias="expenseAccount")
     is_editable: Optional[StrictBool] = Field(default=None, alias="isEditable")
+    items: Optional[List[WriteoffDocumentGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = None
     processed: Optional[StrictBool] = None
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     store_from: Optional[StrictStr] = Field(default=None, alias="storeFrom")
     sum: Optional[Union[StrictFloat, StrictInt]] = None
     sum_without_vat: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="sumWithoutVat")
     user_created: Optional[StrictStr] = Field(default=None, alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["comment", "conception", "date", "dateCreated", "dateModified", "deleted", "documentId", "expenseAccount", "isEditable", "number", "processed", "storeFrom", "sum", "sumWithoutVat", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["comment", "conception", "date", "dateCreated", "dateModified", "deleted", "documentId", "expenseAccount", "isEditable", "items", "number", "processed", "revision", "storeFrom", "sum", "sumWithoutVat", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +90,13 @@ class WriteoffDocumentListItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item_items in self.items:
+                if _item_items:
+                    _items.append(_item_items.to_dict())
+            _dict['items'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -113,8 +123,10 @@ class WriteoffDocumentListItem(BaseModel):
             "documentId": obj.get("documentId"),
             "expenseAccount": obj.get("expenseAccount"),
             "isEditable": obj.get("isEditable"),
+            "items": [WriteoffDocumentGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
             "processed": obj.get("processed"),
+            "revision": obj.get("revision"),
             "storeFrom": obj.get("storeFrom"),
             "sum": obj.get("sum"),
             "sumWithoutVat": obj.get("sumWithoutVat"),

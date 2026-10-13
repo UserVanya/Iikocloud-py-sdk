@@ -36,7 +36,7 @@ class EmployeeCreateRequest(BaseModel):
     main_organization_id: StrictStr = Field(description="Identifier (organizationId) of the employee's main organization", alias="mainOrganizationId")
     main_role_id: Optional[StrictStr] = Field(default=None, description="Position identifier", alias="mainRoleId")
     middle_name: Optional[StrictStr] = Field(default=None, description="Middle name", alias="middleName")
-    name: Optional[StrictStr] = Field(default=None, description="Employee name in the system")
+    name: StrictStr = Field(description="Employee name in the system")
     note: Optional[StrictStr] = Field(default=None, description="Notes")
     organization_ids: Optional[List[StrictStr]] = Field(default=None, description="Identifiers (organizationId) of the employee's organizations", alias="organizationIds")
     phone: Optional[StrictStr] = Field(default=None, description="Phone")

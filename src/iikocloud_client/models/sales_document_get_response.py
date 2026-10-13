@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.sales_document_get_item import SalesDocumentGetItem
 from typing import Optional, Set
@@ -42,11 +42,12 @@ class SalesDocumentGetResponse(BaseModel):
     items: Optional[List[SalesDocumentGetItem]] = None
     number: Optional[StrictStr] = None
     revenue_account: Optional[StrictStr] = Field(default=None, alias="revenueAccount")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = None
     user_created: Optional[StrictStr] = Field(default=None, alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["banquet", "comment", "conception", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "expenseAccount", "isAutomatic", "isEditable", "items", "number", "revenueAccount", "status", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["banquet", "comment", "conception", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "expenseAccount", "isAutomatic", "isEditable", "items", "number", "revenueAccount", "revision", "status", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -127,6 +128,7 @@ class SalesDocumentGetResponse(BaseModel):
             "items": [SalesDocumentGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
             "revenueAccount": obj.get("revenueAccount"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "userCreated": obj.get("userCreated"),
             "userModified": obj.get("userModified")

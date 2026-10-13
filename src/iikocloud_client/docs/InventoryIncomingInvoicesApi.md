@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_inventory_incoming_invoices**
-> List[IncomingInvoice] list_inventory_incoming_invoices(list_request, timeout=timeout)
+> List[IncomingInvoiceListItem] list_inventory_incoming_invoices(list_request, timeout=timeout)
 
 Export incoming invoices
 
@@ -371,7 +371,7 @@ Exports incoming invoices for the specified period
 
 ```python
 import iikocloud_client
-from iikocloud_client.models.incoming_invoice import IncomingInvoice
+from iikocloud_client.models.incoming_invoice_list_item import IncomingInvoiceListItem
 from iikocloud_client.models.list_request import ListRequest
 from iikocloud_client.rest import ApiException
 from pprint import pprint
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[IncomingInvoice]**](IncomingInvoice.md)
+[**List[IncomingInvoiceListItem]**](IncomingInvoiceListItem.md)
 
 ### Authorization
 

@@ -91,6 +91,7 @@ class TestIncomingInventoryUpdateRequest(unittest.TestCase):
                         product = '', 
                         product_size = '', )
                     ],
+                number = '',
                 organization_id = '',
                 store = '',
         )

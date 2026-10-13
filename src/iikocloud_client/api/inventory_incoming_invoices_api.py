@@ -21,6 +21,7 @@ from typing_extensions import Annotated
 from iikocloud_client.models.accounting_transaction_user_response import AccountingTransactionUserResponse
 from iikocloud_client.models.get_by_id_request import GetByIDRequest
 from iikocloud_client.models.incoming_invoice import IncomingInvoice
+from iikocloud_client.models.incoming_invoice_list_item import IncomingInvoiceListItem
 from iikocloud_client.models.incoming_invoice_request import IncomingInvoiceRequest
 from iikocloud_client.models.incoming_invoice_save_response import IncomingInvoiceSaveResponse
 from iikocloud_client.models.list_request import ListRequest
@@ -1276,7 +1277,7 @@ class InventoryIncomingInvoicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IncomingInvoice]:
+    ) -> List[IncomingInvoiceListItem]:
         """Export incoming invoices
 
         Exports incoming invoices for the specified period
@@ -1317,7 +1318,7 @@ class InventoryIncomingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[IncomingInvoice]",
+            '200': "List[IncomingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",
@@ -1351,7 +1352,7 @@ class InventoryIncomingInvoicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[IncomingInvoice]]:
+    ) -> ApiResponse[List[IncomingInvoiceListItem]]:
         """Export incoming invoices
 
         Exports incoming invoices for the specified period
@@ -1392,7 +1393,7 @@ class InventoryIncomingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[IncomingInvoice]",
+            '200': "List[IncomingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",
@@ -1467,7 +1468,7 @@ class InventoryIncomingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[IncomingInvoice]",
+            '200': "List[IncomingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",

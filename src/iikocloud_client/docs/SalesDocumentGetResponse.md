@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **items** | [**List[SalesDocumentGetItem]**](SalesDocumentGetItem.md) |  | [optional] 
 **number** | **str** |  | [optional] 
 **revenue_account** | **str** |  | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** |  | [optional] 
 **user_created** | **str** |  | [optional] 
 **user_modified** | **str** |  | [optional] 

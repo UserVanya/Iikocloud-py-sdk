@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **barcode** | **str** | Barcode value | 
 **container_id** | **UUID** | Container ID represents a specific type of packaging or container for an item (e.g., a barrel, box, or bottle). Specify the container using its ID. Leave this field blank or pass null to automatically use the default container. | [optional] 
-**type** | **str** | Barcode type | 
+**type** | **str** | Barcode type. Required. Allowed values: NTIN, GTIN, UNKNOWN | 
 
 ## Example
 

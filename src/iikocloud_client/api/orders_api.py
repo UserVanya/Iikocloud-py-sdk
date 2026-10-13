@@ -975,7 +975,7 @@ class OrdersApi:
     ) -> CorrelationIdResponse:
         """Cancel the table order.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1050,7 +1050,7 @@ class OrdersApi:
     ) -> ApiResponse[CorrelationIdResponse]:
         """Cancel the table order.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1125,7 +1125,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Cancel the table order.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Order status: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int

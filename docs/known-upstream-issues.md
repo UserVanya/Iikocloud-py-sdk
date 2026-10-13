@@ -125,14 +125,23 @@ branches disjoint и проверяется до promotion; private payload пр
 
 ## Menu V3: `/api/menu/v3/by_id`
 
-Схема `NomenclatureV3.MenuV3` закрыта (`additionalProperties: false`) и не
-описывает `overrideTaxCategories`, хотя рабочий iiko его присылает. Без
-correction клиент молча терял налоговые льготы точки. Форма отличается от
-`OverrideTaxesDto` старого меню: список записей с суффиксом `Id` у полей.
+Correction `menu-v3-override-tax-categories` (2026-09-25) удалена 2026-10-13:
+с upstream 9.8.6.3 схема `NomenclatureV3.MenuV3` сама описывает
+`overrideTaxCategories` — nullable array `NomenclatureV3.TaxCategoryOverride`
+(`baseTaxCategoryId`, `newTaxCategoryId`, `orderTypeId`). Старый guard стал
+stale, как и ожидалось. Публичное имя модели сохранено reviewed-записью
+`TaxCategoryOverride: MenuV3OverrideTaxCategory` в
+`openapi/model-name-overrides.yaml`; поля теперь `UUID | None` вместо строк
+(`orderTypeId: null` — замена для всех типов заказа). Проверка:
+`tests/generated/test_menu_v3_override_taxes.py` и
+`tests/generated/test_menu_v3_modifier_item_overrides.py`.
 
-| Issue | Fragment | Correction | Evidence / fixture | Наблюдалось | Условие удаления |
-|---|---|---|---|---|---|
-| `menu-v3-override-tax-categories` | `NomenclatureV3.MenuV3.properties` | Добавить nullable array `overrideTaxCategories` из объектов `MenuV3OverrideTaxCategory` (`baseTaxCategoryId`, `newTaxCategoryId`, `orderTypeId` — строки) | `tests/generated/test_menu_v3_override_taxes.py`; 27 ответов рабочего iiko разобраны без потерянных полей | 2026-09-25 | Upstream описывает поле в `MenuV3` |
+Там же в 9.8.6.3 iiko изменила смысл `NomenclatureV3.ModifierItem`: все поля,
+кроме `id`, стали необязательными переопределениями — `null` значит «взять
+значение из `MenuV3.modifiers` с тем же `id`» (у `MenuV3Modifier` появились
+`name`, `image`, `isHidden`, `measureUnitType`, `restrictions`, `weight`).
+Это не correction, а новый контракт upstream; потребитель, читающий вариант
+модификатора, должен подставлять пустые поля из справочника `modifiers`.
 
 ## Процедура удаления correction
 

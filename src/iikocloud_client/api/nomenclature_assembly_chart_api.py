@@ -20,19 +20,29 @@ from typing import Optional
 from typing_extensions import Annotated
 from iikocloud_client.models.assembled_request import AssembledRequest
 from iikocloud_client.models.assembly_chart_common_response import AssemblyChartCommonResponse
+from iikocloud_client.models.assembly_chart_common_response_v3 import AssemblyChartCommonResponseV3
 from iikocloud_client.models.assembly_chart_list_request import AssemblyChartListRequest
+from iikocloud_client.models.assembly_chart_list_request_v3 import AssemblyChartListRequestV3
 from iikocloud_client.models.assembly_chart_list_response import AssemblyChartListResponse
+from iikocloud_client.models.assembly_chart_list_response_v3 import AssemblyChartListResponseV3
 from iikocloud_client.models.assembly_chart_response import AssemblyChartResponse
+from iikocloud_client.models.assembly_chart_response_v3 import AssemblyChartResponseV3
 from iikocloud_client.models.assembly_chart_v1_save_request import AssemblyChartV1SaveRequest
 from iikocloud_client.models.assembly_chart_v2_save_request import AssemblyChartV2SaveRequest
+from iikocloud_client.models.assembly_chart_v3_save_request import AssemblyChartV3SaveRequest
 from iikocloud_client.models.chart_tree_node_dto import ChartTreeNodeDto
 from iikocloud_client.models.create_request import CreateRequest
+from iikocloud_client.models.create_request_v3 import CreateRequestV3
 from iikocloud_client.models.delete_request import DeleteRequest
+from iikocloud_client.models.delete_request_v3 import DeleteRequestV3
 from iikocloud_client.models.get_request import GetRequest
+from iikocloud_client.models.get_request_v3 import GetRequestV3
 from iikocloud_client.models.list_request import ListRequest
 from iikocloud_client.models.list_response import ListResponse
 from iikocloud_client.models.prepared_chart_dto import PreparedChartDto
 from iikocloud_client.models.prepared_request import PreparedRequest
+from iikocloud_client.models.resolve_request_v3 import ResolveRequestV3
+from iikocloud_client.models.resolve_response_v3 import ResolveResponseV3
 from iikocloud_client.models.tree_request import TreeRequest
 
 from iikocloud_client.api_client import ApiClient, RequestSerialized
@@ -73,7 +83,7 @@ class NomenclatureAssemblyChartApi:
     ) -> AssemblyChartCommonResponse:
         """(Deprecated) Create an assembly chart
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -151,7 +161,7 @@ class NomenclatureAssemblyChartApi:
     ) -> ApiResponse[AssemblyChartCommonResponse]:
         """(Deprecated) Create an assembly chart
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -229,7 +239,7 @@ class NomenclatureAssemblyChartApi:
     ) -> RESTResponseType:
         """(Deprecated) Create an assembly chart
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -383,7 +393,7 @@ class NomenclatureAssemblyChartApi:
     ) -> AssemblyChartCommonResponse:
         """Create an assembly chart (v2)
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -460,7 +470,7 @@ class NomenclatureAssemblyChartApi:
     ) -> ApiResponse[AssemblyChartCommonResponse]:
         """Create an assembly chart (v2)
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -537,7 +547,7 @@ class NomenclatureAssemblyChartApi:
     ) -> RESTResponseType:
         """Create an assembly chart (v2)
 
-        Saves a new assembly chart for a product. 
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
 
         :param create_request: Request body for creating an assembly chart (required)
         :type create_request: CreateRequest
@@ -655,6 +665,313 @@ class NomenclatureAssemblyChartApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/nomenclature/v2/assembly-chart/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_nomenclature_assembly_chart_v3(
+        self,
+        create_request_v3: Annotated[CreateRequestV3, Field(description="Request body for creating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AssemblyChartCommonResponseV3:
+        """Create an assembly chart (v3)
+
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
+
+        :param create_request_v3: Request body for creating an assembly chart (required)
+        :type create_request_v3: CreateRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_nomenclature_assembly_chart_v3_serialize(
+            create_request_v3=create_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_nomenclature_assembly_chart_v3_with_http_info(
+        self,
+        create_request_v3: Annotated[CreateRequestV3, Field(description="Request body for creating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AssemblyChartCommonResponseV3]:
+        """Create an assembly chart (v3)
+
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
+
+        :param create_request_v3: Request body for creating an assembly chart (required)
+        :type create_request_v3: CreateRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_nomenclature_assembly_chart_v3_serialize(
+            create_request_v3=create_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_nomenclature_assembly_chart_v3_without_preload_content(
+        self,
+        create_request_v3: Annotated[CreateRequestV3, Field(description="Request body for creating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create an assembly chart (v3)
+
+        Saves a new assembly chart for a product. If the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it. 
+
+        :param create_request_v3: Request body for creating an assembly chart (required)
+        :type create_request_v3: CreateRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_nomenclature_assembly_chart_v3_serialize(
+            create_request_v3=create_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_nomenclature_assembly_chart_v3_serialize(
+        self,
+        create_request_v3,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if create_request_v3 is not None:
+            _body_params = create_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1272,6 +1589,313 @@ class NomenclatureAssemblyChartApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/nomenclature/v2/assembly-chart/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def delete_nomenclature_assembly_chart_v3(
+        self,
+        delete_request_v3: Annotated[DeleteRequestV3, Field(description="Request body for deleting an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AssemblyChartCommonResponseV3:
+        """Delete an assembly chart (v3)
+
+        Deletes an assembly chart by UUID. 
+
+        :param delete_request_v3: Request body for deleting an assembly chart (required)
+        :type delete_request_v3: DeleteRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_nomenclature_assembly_chart_v3_serialize(
+            delete_request_v3=delete_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_nomenclature_assembly_chart_v3_with_http_info(
+        self,
+        delete_request_v3: Annotated[DeleteRequestV3, Field(description="Request body for deleting an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AssemblyChartCommonResponseV3]:
+        """Delete an assembly chart (v3)
+
+        Deletes an assembly chart by UUID. 
+
+        :param delete_request_v3: Request body for deleting an assembly chart (required)
+        :type delete_request_v3: DeleteRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_nomenclature_assembly_chart_v3_serialize(
+            delete_request_v3=delete_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_nomenclature_assembly_chart_v3_without_preload_content(
+        self,
+        delete_request_v3: Annotated[DeleteRequestV3, Field(description="Request body for deleting an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete an assembly chart (v3)
+
+        Deletes an assembly chart by UUID. 
+
+        :param delete_request_v3: Request body for deleting an assembly chart (required)
+        :type delete_request_v3: DeleteRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_nomenclature_assembly_chart_v3_serialize(
+            delete_request_v3=delete_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_nomenclature_assembly_chart_v3_serialize(
+        self,
+        delete_request_v3,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if delete_request_v3 is not None:
+            _body_params = delete_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2519,6 +3143,313 @@ class NomenclatureAssemblyChartApi:
 
 
     @validate_call
+    async def get_nomenclature_assembly_chart_v3(
+        self,
+        get_request_v3: Annotated[GetRequestV3, Field(description="Request body for getting an assembly chart by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AssemblyChartResponseV3:
+        """Get an assembly chart by ID (v3)
+
+        Returns a single assembly chart by its UUID. 
+
+        :param get_request_v3: Request body for getting an assembly chart by ID (required)
+        :type get_request_v3: GetRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_assembly_chart_v3_serialize(
+            get_request_v3=get_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_nomenclature_assembly_chart_v3_with_http_info(
+        self,
+        get_request_v3: Annotated[GetRequestV3, Field(description="Request body for getting an assembly chart by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AssemblyChartResponseV3]:
+        """Get an assembly chart by ID (v3)
+
+        Returns a single assembly chart by its UUID. 
+
+        :param get_request_v3: Request body for getting an assembly chart by ID (required)
+        :type get_request_v3: GetRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_assembly_chart_v3_serialize(
+            get_request_v3=get_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_nomenclature_assembly_chart_v3_without_preload_content(
+        self,
+        get_request_v3: Annotated[GetRequestV3, Field(description="Request body for getting an assembly chart by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get an assembly chart by ID (v3)
+
+        Returns a single assembly chart by its UUID. 
+
+        :param get_request_v3: Request body for getting an assembly chart by ID (required)
+        :type get_request_v3: GetRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_assembly_chart_v3_serialize(
+            get_request_v3=get_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_nomenclature_assembly_chart_v3_serialize(
+        self,
+        get_request_v3,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if get_request_v3 is not None:
+            _body_params = get_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/get',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def get_nomenclature_prepared_chart_v2(
         self,
         prepared_request: Annotated[PreparedRequest, Field(description="Request body for getting a prepared chart")],
@@ -2845,7 +3776,7 @@ class NomenclatureAssemblyChartApi:
     ) -> ListResponse:
         """(Deprecated) Get a list of assembly charts by product
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param list_request: Parameters for the assembly chart list request (required)
         :type list_request: ListRequest
@@ -2923,7 +3854,7 @@ class NomenclatureAssemblyChartApi:
     ) -> ApiResponse[ListResponse]:
         """(Deprecated) Get a list of assembly charts by product
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param list_request: Parameters for the assembly chart list request (required)
         :type list_request: ListRequest
@@ -3001,7 +3932,7 @@ class NomenclatureAssemblyChartApi:
     ) -> RESTResponseType:
         """(Deprecated) Get a list of assembly charts by product
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param list_request: Parameters for the assembly chart list request (required)
         :type list_request: ListRequest
@@ -3155,7 +4086,7 @@ class NomenclatureAssemblyChartApi:
     ) -> AssemblyChartListResponse:
         """Get a list of assembly charts by product (v2)
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param assembly_chart_list_request: Parameters for the assembly chart list request (required)
         :type assembly_chart_list_request: AssemblyChartListRequest
@@ -3232,7 +4163,7 @@ class NomenclatureAssemblyChartApi:
     ) -> ApiResponse[AssemblyChartListResponse]:
         """Get a list of assembly charts by product (v2)
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param assembly_chart_list_request: Parameters for the assembly chart list request (required)
         :type assembly_chart_list_request: AssemblyChartListRequest
@@ -3309,7 +4240,7 @@ class NomenclatureAssemblyChartApi:
     ) -> RESTResponseType:
         """Get a list of assembly charts by product (v2)
 
-        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. 
+        Returns the history of assembly charts for a product. The filter `product eq` is required. The optional `department eq` filter restricts results to a specific department. Pagination (limit / offset) is applied client-side. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
 
         :param assembly_chart_list_request: Parameters for the assembly chart list request (required)
         :type assembly_chart_list_request: AssemblyChartListRequest
@@ -3427,6 +4358,623 @@ class NomenclatureAssemblyChartApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/nomenclature/v2/assembly-chart/list',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_nomenclature_assembly_charts_v3(
+        self,
+        assembly_chart_list_request_v3: Annotated[AssemblyChartListRequestV3, Field(description="Parameters for the assembly chart list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AssemblyChartListResponseV3:
+        """Get a list of assembly charts (v3)
+
+        Returns assembly charts in one of three modes derived from the request parameters: a `product` filter is set — the product's chart history; `knownRevision` is set — only the changes since that revision; otherwise — all charts for the period. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
+
+        :param assembly_chart_list_request_v3: Parameters for the assembly chart list request (required)
+        :type assembly_chart_list_request_v3: AssemblyChartListRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_assembly_charts_v3_serialize(
+            assembly_chart_list_request_v3=assembly_chart_list_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartListResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_nomenclature_assembly_charts_v3_with_http_info(
+        self,
+        assembly_chart_list_request_v3: Annotated[AssemblyChartListRequestV3, Field(description="Parameters for the assembly chart list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AssemblyChartListResponseV3]:
+        """Get a list of assembly charts (v3)
+
+        Returns assembly charts in one of three modes derived from the request parameters: a `product` filter is set — the product's chart history; `knownRevision` is set — only the changes since that revision; otherwise — all charts for the period. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
+
+        :param assembly_chart_list_request_v3: Parameters for the assembly chart list request (required)
+        :type assembly_chart_list_request_v3: AssemblyChartListRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_assembly_charts_v3_serialize(
+            assembly_chart_list_request_v3=assembly_chart_list_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartListResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_nomenclature_assembly_charts_v3_without_preload_content(
+        self,
+        assembly_chart_list_request_v3: Annotated[AssemblyChartListRequestV3, Field(description="Parameters for the assembly chart list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get a list of assembly charts (v3)
+
+        Returns assembly charts in one of three modes derived from the request parameters: a `product` filter is set — the product's chart history; `knownRevision` is set — only the changes since that revision; otherwise — all charts for the period. Data is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time. 
+
+        :param assembly_chart_list_request_v3: Parameters for the assembly chart list request (required)
+        :type assembly_chart_list_request_v3: AssemblyChartListRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_assembly_charts_v3_serialize(
+            assembly_chart_list_request_v3=assembly_chart_list_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartListResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_nomenclature_assembly_charts_v3_serialize(
+        self,
+        assembly_chart_list_request_v3,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if assembly_chart_list_request_v3 is not None:
+            _body_params = assembly_chart_list_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/list',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def resolve_nomenclature_assembly_chart_v3(
+        self,
+        resolve_request_v3: Annotated[ResolveRequestV3, Field(description="Request body for resolving an assembly chart representation")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ResolveResponseV3:
+        """Resolve an assembly chart representation
+
+        Returns a computed representation of the product's assembly chart for the given date. The representation is selected by `view`: assembled — the top-level chart (without resolving nested ingredient charts); prepared — the breakdown down to elementary store items (ingredients written off from stock); tree — the recipe tree, where every ingredient with its own assembly chart is recursively expanded. If there is no chart for the date, returns 200 with an empty representation; if the product is not found, returns 404. 
+
+        :param resolve_request_v3: Request body for resolving an assembly chart representation (required)
+        :type resolve_request_v3: ResolveRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._resolve_nomenclature_assembly_chart_v3_serialize(
+            resolve_request_v3=resolve_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResolveResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def resolve_nomenclature_assembly_chart_v3_with_http_info(
+        self,
+        resolve_request_v3: Annotated[ResolveRequestV3, Field(description="Request body for resolving an assembly chart representation")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ResolveResponseV3]:
+        """Resolve an assembly chart representation
+
+        Returns a computed representation of the product's assembly chart for the given date. The representation is selected by `view`: assembled — the top-level chart (without resolving nested ingredient charts); prepared — the breakdown down to elementary store items (ingredients written off from stock); tree — the recipe tree, where every ingredient with its own assembly chart is recursively expanded. If there is no chart for the date, returns 200 with an empty representation; if the product is not found, returns 404. 
+
+        :param resolve_request_v3: Request body for resolving an assembly chart representation (required)
+        :type resolve_request_v3: ResolveRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._resolve_nomenclature_assembly_chart_v3_serialize(
+            resolve_request_v3=resolve_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResolveResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def resolve_nomenclature_assembly_chart_v3_without_preload_content(
+        self,
+        resolve_request_v3: Annotated[ResolveRequestV3, Field(description="Request body for resolving an assembly chart representation")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Resolve an assembly chart representation
+
+        Returns a computed representation of the product's assembly chart for the given date. The representation is selected by `view`: assembled — the top-level chart (without resolving nested ingredient charts); prepared — the breakdown down to elementary store items (ingredients written off from stock); tree — the recipe tree, where every ingredient with its own assembly chart is recursively expanded. If there is no chart for the date, returns 200 with an empty representation; if the product is not found, returns 404. 
+
+        :param resolve_request_v3: Request body for resolving an assembly chart representation (required)
+        :type resolve_request_v3: ResolveRequestV3
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._resolve_nomenclature_assembly_chart_v3_serialize(
+            resolve_request_v3=resolve_request_v3,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResolveResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _resolve_nomenclature_assembly_chart_v3_serialize(
+        self,
+        resolve_request_v3,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if resolve_request_v3 is not None:
+            _body_params = resolve_request_v3
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/resolve',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4044,6 +5592,313 @@ class NomenclatureAssemblyChartApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/nomenclature/v2/assembly-chart/update',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_nomenclature_assembly_chart_v3(
+        self,
+        assembly_chart_v3_save_request: Annotated[AssemblyChartV3SaveRequest, Field(description="Request body for updating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AssemblyChartCommonResponseV3:
+        """Update an assembly chart (v3)
+
+        Updates an existing assembly chart. 
+
+        :param assembly_chart_v3_save_request: Request body for updating an assembly chart (required)
+        :type assembly_chart_v3_save_request: AssemblyChartV3SaveRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_nomenclature_assembly_chart_v3_serialize(
+            assembly_chart_v3_save_request=assembly_chart_v3_save_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_nomenclature_assembly_chart_v3_with_http_info(
+        self,
+        assembly_chart_v3_save_request: Annotated[AssemblyChartV3SaveRequest, Field(description="Request body for updating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AssemblyChartCommonResponseV3]:
+        """Update an assembly chart (v3)
+
+        Updates an existing assembly chart. 
+
+        :param assembly_chart_v3_save_request: Request body for updating an assembly chart (required)
+        :type assembly_chart_v3_save_request: AssemblyChartV3SaveRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_nomenclature_assembly_chart_v3_serialize(
+            assembly_chart_v3_save_request=assembly_chart_v3_save_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_nomenclature_assembly_chart_v3_without_preload_content(
+        self,
+        assembly_chart_v3_save_request: Annotated[AssemblyChartV3SaveRequest, Field(description="Request body for updating an assembly chart")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update an assembly chart (v3)
+
+        Updates an existing assembly chart. 
+
+        :param assembly_chart_v3_save_request: Request body for updating an assembly chart (required)
+        :type assembly_chart_v3_save_request: AssemblyChartV3SaveRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_nomenclature_assembly_chart_v3_serialize(
+            assembly_chart_v3_save_request=assembly_chart_v3_save_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AssemblyChartCommonResponseV3",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_nomenclature_assembly_chart_v3_serialize(
+        self,
+        assembly_chart_v3_save_request,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if assembly_chart_v3_save_request is not None:
+            _body_params = assembly_chart_v3_save_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v3/assembly-chart/update',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

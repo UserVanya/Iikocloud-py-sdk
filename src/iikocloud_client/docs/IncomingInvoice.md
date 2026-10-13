@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **matches_to_the_order** | **bool** | Matches the order | [optional] 
 **number** | **str** | Document number | [optional] 
 **payment_date** | **str** | Payment date (YYYY-MM-DD) | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** | Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted) | [optional] 
 **transport_invoice_number** | **str** | Transport invoice number | [optional] 
 **user_created** | **str** | User who created the document (GUID) | [optional] 

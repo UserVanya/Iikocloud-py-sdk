@@ -43,8 +43,17 @@ class TestDisassembleDocumentListItem(unittest.TestCase):
                 deleted = True,
                 document_id = '',
                 is_editable = True,
+                items = [
+                    iikocloud_client.models.disassemble_document_get_item.DisassembleDocumentGetItem(
+                        amount = 1.337, 
+                        amount_unit = '', 
+                        main_product_amount_percent = 1.337, 
+                        num = 56, 
+                        product = '', )
+                    ],
                 number = '',
                 processed = True,
+                revision = 56,
                 store_from = '',
                 store_to = '',
                 sum = 1.337,

@@ -1376,7 +1376,7 @@
           "Banquets/reserves"
         ],
         "summary": "Change reserve/banquet tables.",
-        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
+        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -1468,7 +1468,7 @@
           "Banquets/reserves"
         ],
         "summary": "Change order items.",
-        "description": "Available only for banquets.\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
+        "description": "Available only for banquets.\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -1560,7 +1560,7 @@
           "Banquets/reserves"
         ],
         "summary": "Change reserve/banquet estimated start time.",
-        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
+        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -3495,6 +3495,7 @@
           "Deliveries: Create and update"
         ],
         "summary": "Update tracking link of an order.",
+        "description": "\n\n > Restriction group: `Order driver: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -3579,7 +3580,7 @@
           "Deliveries: Create and update"
         ],
         "summary": "Print bill.",
-        "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
+        "description": "\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Orders: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -6780,6 +6781,7 @@
           "Licenses"
         ],
         "summary": "Get license list information for the API login.",
+        "description": "\n\n > Restriction group: `Data: licenses`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -7306,7 +7308,7 @@
           "Menu"
         ],
         "summary": "Retrieve external menu V3 by ID.",
-        "description": "> Generated from Plain menu converter.",
+        "description": "> Generated from Plain menu converter.\n\n > Restriction group: `Data: menu`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -8512,7 +8514,7 @@
           "Orders"
         ],
         "summary": "Cancel the table order.",
-        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.",
+        "description": "\n\n > Allowed from version `9.0.5`.\n\n > This method is a command. Use `api/1/commands/status` method to get the progress status.\n\n > Restriction group: `Order status: changing`.",
         "parameters": [
           {
             "name": "Authorization",
@@ -9810,7 +9812,7 @@
           "Inventory.Counteragents"
         ],
         "summary": "Get supplier price list",
-        "description": "Gets a supplier's full price list. Returns the currently active price list",
+        "description": "Gets a supplier's full price list. The counteragent must be a supplier. Returns the currently active price list",
         "parameters": [
           {
             "name": "Authorization",
@@ -9932,7 +9934,7 @@
           "Inventory.Counteragents"
         ],
         "summary": "Get counteragents list",
-        "description": "Gets a list of counteragents with pagination and type filtering support",
+        "description": "Gets a list of counteragents with pagination and optional filtering by type, deletion flag and revision",
         "parameters": [
           {
             "name": "Authorization",
@@ -14870,7 +14872,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/IncomingInvoice"
+                    "$ref": "#/components/schemas/IncomingInvoiceListItem"
                   }
                 }
               }
@@ -17516,7 +17518,7 @@
           "Inventory.OutgoingInvoices"
         ],
         "summary": "Export outgoing invoices",
-        "description": "Exports outgoing invoices for the specified period",
+        "description": "Exports outgoing invoices for the specified period. Supports incremental synchronization: when revision is provided, only documents with a revision strictly greater than the given value are returned (revision > value). With returnFullDetails=true, document items and the revision are added to every list element. Incremental export example: {\"organizationId\": \"<uuid>\", \"from\": \"2026-08-01\", \"to\": \"2026-08-31\", \"revision\": 123456}. Without revision no revision filter is applied; without returnFullDetails only document headers are returned. The revision of every document is returned in the revision field.",
         "parameters": [
           {
             "name": "Authorization",
@@ -17556,7 +17558,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OutgoingInvoice"
+                    "$ref": "#/components/schemas/OutgoingInvoiceListItem"
                   }
                 }
               }
@@ -26128,7 +26130,7 @@
           "Nomenclature.AssemblyChart"
         ],
         "summary": "Create an assembly chart",
-        "description": "Saves a new assembly chart for a product.\n",
+        "description": "Saves a new assembly chart for a product.\nIf the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -26467,7 +26469,7 @@
           "Nomenclature.AssemblyChart"
         ],
         "summary": "Get a list of assembly charts by product",
-        "description": "Returns the history of assembly charts for a product.\nThe filter `product eq` is required. The optional `department eq` filter restricts results to a specific department.\nPagination (limit / offset) is applied client-side.\n",
+        "description": "Returns the history of assembly charts for a product.\nThe filter `product eq` is required. The optional `department eq` filter restricts results to a specific department.\nPagination (limit / offset) is applied client-side.\nData is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -26834,6 +26836,108 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CustomCategoryListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v1/discount-type/list": {
+      "post": {
+        "tags": [
+          "Nomenclature.Directories"
+        ],
+        "summary": "Get a list of discount types",
+        "description": "Returns a list of discount types with filtering and pagination support.\nFilter fields: `id`, `name`, `isDeleted`.\nAllowed operators: `id` — eq, in; `name` — eq, ne, in, nin, like, blank, notblank; `isDeleted` — eq (boolean).\nAll filters are combined with AND. Pagination via `limit`/`offset`.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for the discount type list request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscountTypeListRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "List of discount types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscountTypeListResponse"
                 }
               }
             }
@@ -28210,6 +28314,240 @@
         }
       }
     },
+    "/api/nomenclature/v1/outer_economic_activity_nomenclature_codes/get": {
+      "post": {
+        "tags": [
+          "Nomenclature.Directories"
+        ],
+        "summary": "Get a foreign economic activity commodity code by ID",
+        "description": "Returns a foreign economic activity commodity code by UUID. The `id` field is required.\nIf no code with the given identifier exists, a 404 error is returned.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for retrieving a foreign economic activity commodity code by ID",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OuterEconomicActivityNomenclatureCodeGetRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Foreign economic activity commodity code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OuterEconomicActivityNomenclatureCode"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v1/outer_economic_activity_nomenclature_codes/list": {
+      "post": {
+        "tags": [
+          "Nomenclature.Directories"
+        ],
+        "summary": "Get the foreign economic activity commodity code directory",
+        "description": "Returns the entire foreign economic activity commodity code directory.\nTo include soft-deleted codes, pass `includeDeleted: true` (default false).\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for retrieving the foreign economic activity commodity code directory",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OuterEconomicActivityNomenclatureCodeListRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Foreign economic activity commodity code directory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OuterEconomicActivityNomenclatureCodeListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/nomenclature/v1/place-type/list": {
       "post": {
         "tags": [
@@ -29214,7 +29552,7 @@
           "Nomenclature.NomenclatureProduct"
         ],
         "summary": "Create a product",
-        "description": "Creates a new nomenclature product.\nThe `name`, `type` and `amountUnit` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.\nIf `code` or `productArticle` are not provided explicitly, API server assigns them automatically.\n",
+        "description": "Creates a new nomenclature product.\nThe `name`, `type` and `amountUnit` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.\nIf `code` or `productArticle` are not provided explicitly, API server assigns them automatically.\nThe write is synchronous, while reads through the list method use an asynchronously updated catalogue snapshot (eventual consistency): a created item does not appear in the list immediately. Before using the product (for example, creating an assembly chart for it), wait until it appears — poll the list with a filter by the returned `productId` or `code`.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -29440,7 +29778,7 @@
           "Nomenclature.NomenclatureProduct"
         ],
         "summary": "Get a list of products",
-        "description": "Returns the organisation's nomenclature — the catalogue of items used to build the menu, run warehouse accounting and generate sales reports. Supports filtering and pagination, which speeds up menu and reference synchronisation on the partner side.\nBy default (when no type filter is set) the method returns nomenclature items of all types available in the organisation's nomenclature. The following base nomenclature types are supported: GOODS (goods/ingredients), DISH (dishes), PREPARED (semi-prepared items), SERVICE (services), MODIFIER (modifiers). To narrow the result to specific types, apply a filter on the type field (for example op: \"in\").\nNomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.\n",
+        "description": "Returns the organisation's nomenclature — the catalogue of items used to build the menu, run warehouse accounting and generate sales reports. Supports filtering and pagination, which speeds up menu and reference synchronisation on the partner side.\nBy default (when no type filter is set) the method returns nomenclature items of all types available in the organisation's nomenclature. The following base nomenclature types are supported: GOODS (goods/ingredients), DISH (dishes), PREPARED (semi-prepared items), SERVICE (services), MODIFIER (modifiers). To narrow the result to specific types, apply a filter on the type field (for example op: \"in\").\nNomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.\nThe list is read from an asynchronously updated snapshot of the catalogue (eventual consistency): newly created or modified items may be missing from the response for a short time.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -30024,7 +30362,7 @@
           "Nomenclature.AssemblyChart"
         ],
         "summary": "Create an assembly chart (v2)",
-        "description": "Saves a new assembly chart for a product.\n",
+        "description": "Saves a new assembly chart for a product.\nIf the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -30360,7 +30698,7 @@
           "Nomenclature.AssemblyChart"
         ],
         "summary": "Get a list of assembly charts by product (v2)",
-        "description": "Returns the history of assembly charts for a product.\nThe filter `product eq` is required. The optional `department eq` filter restricts results to a specific department.\nPagination (limit / offset) is applied client-side.\n",
+        "description": "Returns the history of assembly charts for a product.\nThe filter `product eq` is required. The optional `department eq` filter restricts results to a specific department.\nPagination (limit / offset) is applied client-side.\nData is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -31358,7 +31696,7 @@
           "Nomenclature.NomenclatureProduct"
         ],
         "summary": "Create a product (v2)",
-        "description": "Creates a new nomenclature product.\nThe `name`, `type` and `amountUnitId` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.\nIf `code` or `productArticle` are not provided explicitly, API server assigns them automatically.\n",
+        "description": "Creates a new nomenclature product.\nThe `name`, `type` and `amountUnitId` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.\nIf `code` or `productArticle` are not provided explicitly, API server assigns them automatically.\nThe write is synchronous, while reads through the list method use an asynchronously updated catalogue snapshot (eventual consistency): a created item does not appear in the list immediately. Before using the product (for example, creating an assembly chart for it), wait until it appears — poll the list with a filter by the returned `productId` or `code`.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -31582,7 +31920,7 @@
           "Nomenclature.NomenclatureProduct"
         ],
         "summary": "Get a list of products (v2)",
-        "description": "Returns the organisation's nomenclature — the catalogue of items used to build the menu, run warehouse accounting and generate sales reports. Supports filtering and pagination, which speeds up menu and reference synchronisation on the partner side.\nBy default (when no type filter is set) the method returns nomenclature items of all types available in the organisation's nomenclature. The following base nomenclature types are supported: GOODS (goods/ingredients), DISH (dishes), PREPARED (semi-prepared items), SERVICE (services), MODIFIER (modifiers). To narrow the result to specific types, apply a filter on the type field (for example op: \"in\").\nFilter fields: `id` / `productId`, `type`, `name`, `code`, `productArticle`, `description`, `parentId`,\n`categoryId`, `accountingCategoryId`, `taxCategoryId`, `isDeleted`, `system`, `revision`, `deletedAt`,\n`createdAt`, `updatedAt`, `lastModifyNode`, `franchiseUniqueId`, `franchiseMasterId`.\nAllowed operators: `id` / `productId`, `parentId`, `categoryId`, `accountingCategoryId`, `taxCategoryId`,\n`franchiseUniqueId`, `franchiseMasterId` — eq, in; `type` — eq, ne, in, nin; `name`, `code`, `productArticle`,\n`description` — eq, ne, in, nin, like, blank, notblank; `isDeleted`, `system` — eq (boolean); `revision`,\n`createdAt`, `updatedAt` — eq, ne, gt, gte, lt, lte; `deletedAt` — eq, ne, gt, gte, lt, lte, blank, notblank;\n`lastModifyNode` — eq, in, blank, notblank.\nAll filters are combined with AND. Pagination via `limit`/`offset`.\nNomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.\n",
+        "description": "Returns the organisation's nomenclature — the catalogue of items used to build the menu, run warehouse accounting and generate sales reports. Supports filtering and pagination, which speeds up menu and reference synchronisation on the partner side.\nBy default (when no type filter is set) the method returns nomenclature items of all types available in the organisation's nomenclature. The following base nomenclature types are supported: GOODS (goods/ingredients), DISH (dishes), PREPARED (semi-prepared items), SERVICE (services), MODIFIER (modifiers). To narrow the result to specific types, apply a filter on the type field (for example op: \"in\").\nFilter fields: `id` / `productId`, `type`, `name`, `code`, `productArticle`, `description`, `parentId`,\n`categoryId`, `accountingCategoryId`, `taxCategoryId`, `isDeleted`, `system`, `revision`, `deletedAt`,\n`createdAt`, `updatedAt`, `lastModifyNode`, `franchiseUniqueId`, `franchiseMasterId`.\nAllowed operators: `id` / `productId`, `parentId`, `categoryId`, `accountingCategoryId`, `taxCategoryId`,\n`franchiseUniqueId`, `franchiseMasterId` — eq, in; `type` — eq, ne, in, nin; `name`, `code`, `productArticle`,\n`description` — eq, ne, in, nin, like, blank, notblank; `isDeleted`, `system` — eq (boolean); `revision`,\n`createdAt`, `updatedAt` — eq, ne, gt, gte, lt, lte; `deletedAt` — eq, ne, gt, gte, lt, lte, blank, notblank;\n`lastModifyNode` — eq, in, blank, notblank.\nAll filters are combined with AND. Pagination via `limit`/`offset`.\nNomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.\nThe list is read from an asynchronously updated snapshot of the catalogue (eventual consistency): newly created or modified items may be missing from the response for a short time. \n",
         "parameters": [
           {
             "name": "Authorization",
@@ -32044,6 +32382,688 @@
         }
       }
     },
+    "/api/nomenclature/v3/assembly-chart/create": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Create an assembly chart (v3)",
+        "description": "Saves a new assembly chart for a product.\nIf the product was created recently and has not yet appeared in the nomenclature list (eventual consistency), the method may fail with a 502 error. Wait until the product appears in the nomenclature list before creating an assembly chart for it.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for creating an assembly chart",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "201": {
+            "description": "Assembly chart created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssemblyChartCommonResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v3/assembly-chart/delete": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Delete an assembly chart (v3)",
+        "description": "Deletes an assembly chart by UUID.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for deleting an assembly chart",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Assembly chart deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssemblyChartCommonResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v3/assembly-chart/get": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Get an assembly chart by ID (v3)",
+        "description": "Returns a single assembly chart by its UUID.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for getting an assembly chart by ID",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Assembly chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssemblyChartResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v3/assembly-chart/list": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Get a list of assembly charts (v3)",
+        "description": "Returns assembly charts in one of three modes derived from the request parameters:\na `product` filter is set — the product's chart history; `knownRevision` is set — only the changes since that revision; otherwise — all charts for the period.\nData is returned from an asynchronously updated snapshot (eventual consistency): recently created or modified assembly charts may be missing from the response for a short time.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for the assembly chart list request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssemblyChartListRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "List of assembly charts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssemblyChartListResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v3/assembly-chart/resolve": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Resolve an assembly chart representation",
+        "description": "Returns a computed representation of the product's assembly chart for the given date.\nThe representation is selected by `view`: assembled — the top-level chart (without resolving nested\ningredient charts); prepared — the breakdown down to elementary store items (ingredients written off\nfrom stock); tree — the recipe tree, where every ingredient with its own assembly chart is recursively\nexpanded. If there is no chart for the date, returns 200 with an empty representation; if the product\nis not found, returns 404.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for resolving an assembly chart representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Computed assembly chart representation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolveResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nomenclature/v3/assembly-chart/update": {
+      "post": {
+        "tags": [
+          "Nomenclature.AssemblyChart"
+        ],
+        "summary": "Update an assembly chart (v3)",
+        "description": "Updates an existing assembly chart.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for updating an assembly chart",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/internal_document_assembly_chart_v3.SaveRequestV3"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Assembly chart updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssemblyChartCommonResponseV3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorisation required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Internal API Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/employees/v1/attendance-type/list": {
       "post": {
         "tags": [
@@ -32172,7 +33192,7 @@
           "Employees.Attendance"
         ],
         "summary": "Create employee attendance",
-        "description": "Creates a closed employee attendance and returns the creation result",
+        "description": "Creates a closed employee attendance and returns the creation result. Creating an open attendance (`endAt` omitted or `null`) is not supported.",
         "parameters": [
           {
             "name": "Authorization",
@@ -33144,7 +34164,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/employees.SwaggerEmployeeListResponse"
+                  "$ref": "#/components/schemas/internal_employees.SwaggerEmployeeListResponse"
                 }
               }
             }
@@ -33700,6 +34720,128 @@
         }
       }
     },
+    "/api/reporting/v1/income-plan/list": {
+      "post": {
+        "tags": [
+          "Reporting.IncomePlan"
+        ],
+        "summary": "Get income plan",
+        "description": "Returns daily planned income values for an organization over the requested period.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetIncomePlanRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIncomePlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "RMS returned a technical error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "RMS did not respond in time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/reporting/v1/olap/columns/get": {
       "post": {
         "tags": [
@@ -33831,7 +34973,7 @@
           "Reporting.Olap"
         ],
         "summary": "Run OLAP report",
-        "description": "Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters.\nField names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report.\nEvery request must contain a date filter. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS.\n<b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP.\n",
+        "description": "Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters.\nField names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report.\nEvery request must contain a date filter. Dates must use the `yyyy-MM-dd` format. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS.\n<b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP.\n",
         "parameters": [
           {
             "name": "Authorization",
@@ -33870,6 +35012,263 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetOlapReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "RMS returned a technical error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "RMS did not respond in time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reporting/v1/olap/presets/get": {
+      "post": {
+        "tags": [
+          "Reporting.Olap"
+        ],
+        "summary": "Get saved OLAP preset data",
+        "description": "Returns the data of a saved OLAP preset by its identifier (`presetId`) for a given period (`dateFrom` — start, `dateTo` — end). A preset is a ready-made report configuration (groupings, aggregates, filters) saved by the restaurant owner; the method lets retrieve a report by that configuration.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OlapPresetReportRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOlapReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Preset not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "RMS returned a technical error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "RMS did not respond in time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reporting/v1/olap/presets/list": {
+      "post": {
+        "tags": [
+          "Reporting.Olap"
+        ],
+        "summary": "Get saved OLAP presets",
+        "description": "Returns the list of OLAP presets saved in iikoOffice — ready-made report configurations set up by the restaurant owner. Each item contains an identifier (`presetId`) and the preset name. The method returns all saved presets.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Example: <code>Bearer nRzIn0dJu1LpbGMbVfnCFDjKM4iwPhDV8tMlh7X5eWBR64iw</code></br>\nAuthorization token.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Timeout",
+            "in": "header",
+            "description": "Default: <code>15</code></br>\nExample: <code>10</code></br>\nTimeout in seconds.\n",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OlapPresetsListRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-bodyName": "payload"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OlapPreset"
+                  }
                 }
               }
             }
@@ -34177,7 +35576,7 @@
           "Platform.Events"
         ],
         "summary": "List of events",
-        "description": "Returns a list of events for a period or starting from a given revision",
+        "description": "Returns a list of events for a period or starting from a given revision. Exactly one mode is required: fromRevision, or both fromTime and toTime. fromRevision cannot be combined with fromTime or toTime.",
         "parameters": [
           {
             "name": "Authorization",
@@ -34755,6 +36154,17 @@
           }
         }
       },
+      "AssemblyChartCommonResponseV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          }
+        }
+      },
       "AssemblyChartItem": {
         "title": " ",
         "type": "object",
@@ -34911,6 +36321,162 @@
           }
         }
       },
+      "AssemblyChartItemResponseV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the ingredient line",
+            "format": "uuid"
+          },
+          "packageCount": {
+            "type": "number",
+            "description": "Package count"
+          },
+          "packageTypeId": {
+            "type": "string",
+            "description": "UUID of the package type",
+            "format": "uuid"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the ingredient product",
+            "format": "uuid"
+          },
+          "productSizeId": {
+            "type": "string",
+            "description": "UUID of the product size this line applies to. null — applies to all sizes",
+            "format": "uuid"
+          },
+          "quantityIn": {
+            "type": "number",
+            "description": "Gross quantity (brutto)"
+          },
+          "quantityIn1": {
+            "type": "number",
+            "description": "Additional gross quantity #1"
+          },
+          "quantityIn2": {
+            "type": "number",
+            "description": "Additional gross quantity #2"
+          },
+          "quantityIn3": {
+            "type": "number",
+            "description": "Additional gross quantity #3"
+          },
+          "quantityMiddle": {
+            "type": "number",
+            "description": "Semi-processed quantity (netto)"
+          },
+          "quantityOut": {
+            "type": "number",
+            "description": "Finished quantity (yield)"
+          },
+          "quantityOut1": {
+            "type": "number",
+            "description": "Additional yield quantity #1"
+          },
+          "quantityOut2": {
+            "type": "number",
+            "description": "Additional yield quantity #2"
+          },
+          "quantityOut3": {
+            "type": "number",
+            "description": "Additional yield quantity #3"
+          },
+          "sortWeight": {
+            "type": "number",
+            "description": "Display order weight"
+          },
+          "storeSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Department applicability filter for the ingredient line"
+          }
+        }
+      },
+      "AssemblyChartItemV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the ingredient line",
+            "format": "uuid"
+          },
+          "packageCount": {
+            "type": "number",
+            "description": "Package count"
+          },
+          "packageTypeId": {
+            "type": "string",
+            "description": "UUID of the package type",
+            "format": "uuid"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the ingredient product",
+            "format": "uuid"
+          },
+          "productSizeId": {
+            "type": "string",
+            "description": "UUID of the product size this line applies to. null — applies to all sizes",
+            "format": "uuid"
+          },
+          "quantityIn": {
+            "type": "number",
+            "description": "Gross quantity (brutto)"
+          },
+          "quantityIn1": {
+            "type": "number",
+            "description": "Additional gross quantity #1"
+          },
+          "quantityIn2": {
+            "type": "number",
+            "description": "Additional gross quantity #2"
+          },
+          "quantityIn3": {
+            "type": "number",
+            "description": "Additional gross quantity #3"
+          },
+          "quantityMiddle": {
+            "type": "number",
+            "description": "Semi-processed quantity (netto)"
+          },
+          "quantityOut": {
+            "type": "number",
+            "description": "Finished quantity (yield)"
+          },
+          "quantityOut1": {
+            "type": "number",
+            "description": "Additional yield quantity #1"
+          },
+          "quantityOut2": {
+            "type": "number",
+            "description": "Additional yield quantity #2"
+          },
+          "quantityOut3": {
+            "type": "number",
+            "description": "Additional yield quantity #3"
+          },
+          "sortWeight": {
+            "type": "integer",
+            "description": "Display order weight"
+          },
+          "storeSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Organization (structural unit) applicability filter for the ingredient line"
+          }
+        }
+      },
       "AssemblyChartListRequest": {
         "title": " ",
         "type": "object",
@@ -34939,6 +36505,47 @@
             "type": "string",
             "description": "UUID of the product to retrieve assembly charts for",
             "format": "uuid"
+          }
+        }
+      },
+      "AssemblyChartListRequestV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "dateFrom": {
+            "type": "string",
+            "description": "Start of the sample period (YYYY-MM-DD). Required when the product filter is not set"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End of the sample period (YYYY-MM-DD). Optional"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/internal_document_assembly_chart_v3.Filter"
+            },
+            "description": "List filters. Supported fields are product (eq/in) and department (eq/in); without a product filter all charts for the period are returned"
+          },
+          "includeDeletedProducts": {
+            "type": "boolean",
+            "description": "Whether to include assembly charts of deleted products. Defaults to true"
+          },
+          "includePreparedCharts": {
+            "type": "boolean",
+            "description": "Whether to include the breakdown to store items (preparedCharts) in the response. Defaults to false"
+          },
+          "knownRevision": {
+            "type": "integer",
+            "description": "Known revision for incremental synchronization. Cannot be combined with the product filter"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Page size. Not set or <= 0 — no limit"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset from the start of the list. Defaults to 0"
           }
         }
       },
@@ -34984,6 +36591,41 @@
           }
         }
       },
+      "AssemblyChartListResponseV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Total number of records before limit/offset is applied"
+          },
+          "deletedAssemblyChartIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "UUIDs of assembly charts deleted since the last synchronization (relevant with knownRevision)"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssemblyChartResponseV3"
+            },
+            "description": "Ingredient lines of the assembly chart"
+          },
+          "knownRevision": {
+            "type": "integer",
+            "description": "Known revision for incremental synchronization (getAllUpdate). Cannot be combined with productId"
+          },
+          "preparedCharts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PreparedChartDtoV3"
+            },
+            "description": "Breakdown of assembly charts to store items (populated when includePreparedCharts: true)"
+          }
+        }
+      },
       "AssemblyChartResponse": {
         "title": " ",
         "type": "object",
@@ -34998,11 +36640,11 @@
           },
           "dateFrom": {
             "type": "string",
-            "description": "Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)"
+            "description": "Start date of the validity period (YYYY-MM-DD)"
           },
           "dateTo": {
             "type": "string",
-            "description": "End date of the validity period; null for an open-ended chart"
+            "description": "End date of the validity period (YYYY-MM-DD)"
           },
           "description": {
             "type": "string",
@@ -35025,6 +36667,77 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssemblyChartItemResponse"
+            },
+            "description": "Ingredient lines of the assembly chart"
+          },
+          "organoleptic": {
+            "type": "string",
+            "description": "Organoleptic quality indicators (up to 2000 characters)"
+          },
+          "outputComment": {
+            "type": "string",
+            "description": "Output comment / yield note (up to 2000 characters)"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the product this assembly chart belongs to",
+            "format": "uuid"
+          },
+          "productSizeAssemblyStrategy": {
+            "type": "string",
+            "description": "Size strategy: COMMON (one chart for all sizes) or SPECIFIC (per-size ingredients)"
+          },
+          "technologyDescription": {
+            "type": "string",
+            "description": "Preparation technology description (up to 2000 characters)"
+          },
+          "writeoffStrategy": {
+            "type": "string",
+            "description": "Write-off strategy: ASSEMBLE (write off ingredients) or DIRECT (write off the product itself)"
+          }
+        }
+      },
+      "AssemblyChartResponseV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "appearance": {
+            "type": "string",
+            "description": "Presentation and serving requirements (up to 2000 characters)"
+          },
+          "assembledQuantity": {
+            "type": "number",
+            "description": "Assembled quantity (bookmark rate). Must be greater than 0"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Start date of the validity period (YYYY-MM-DD)"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End date of the validity period (YYYY-MM-DD)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Free-text description field (up to 2000 characters)"
+          },
+          "directWriteoffStoreSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Organization (structural unit) filter for DIRECT write-off strategy. null — applies to all organizations"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssemblyChartItemResponseV3"
             },
             "description": "Ingredient lines of the assembly chart"
           },
@@ -35334,6 +37047,37 @@
           "writeoffStrategy": {
             "type": "string",
             "description": "Write-off strategy: ASSEMBLE (write off ingredients) or DIRECT (write off the product itself)"
+          }
+        }
+      },
+      "ChartTreeNodeDtoV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount of the ingredient in the parent node's composition"
+          },
+          "assembledAmount": {
+            "type": "number",
+            "description": "Bookmark rate of the semi-finished product that has its own assembly chart"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartTreeNodeDtoV3"
+            },
+            "description": "Child nodes of the tree — ingredients of the assembly chart, each recursively expanded with its own composition (if it has an assembly chart)"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the ingredient or semi-finished product",
+            "format": "uuid"
+          },
+          "productSizeSpecification": {
+            "type": "string",
+            "description": "UUID of the product size this ingredient applies to. null — applies to all sizes",
+            "format": "uuid"
           }
         }
       },
@@ -35849,6 +37593,10 @@
             "type": "string",
             "description": "Counteragent identifier (GUID)"
           },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Counteragent deletion flag"
+          },
           "lastName": {
             "type": "string",
             "description": "Last name"
@@ -35864,6 +37612,10 @@
           "phone": {
             "type": "string",
             "description": "Phone"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Counteragent revision number"
           },
           "supplier": {
             "type": "boolean",
@@ -35881,6 +37633,9 @@
       },
       "CreateRequest": {
         "title": " ",
+        "required": [
+          "dateTo"
+        ],
         "type": "object",
         "properties": {
           "appearance": {
@@ -35893,11 +37648,11 @@
           },
           "dateFrom": {
             "type": "string",
-            "description": "Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)"
+            "description": "Start date of the validity period (YYYY-MM-DD)"
           },
           "dateTo": {
             "type": "string",
-            "description": "End date of the validity period; null for an open-ended chart"
+            "description": "End date of the validity period (YYYY-MM-DD)"
           },
           "description": {
             "type": "string",
@@ -35935,6 +37690,103 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssemblyChartItem"
+            },
+            "description": "Ingredient lines of the assembly chart"
+          },
+          "organoleptic": {
+            "type": "string",
+            "description": "Organoleptic quality indicators (up to 2000 characters)"
+          },
+          "outputComment": {
+            "type": "string",
+            "description": "Output comment / yield note (up to 2000 characters)"
+          },
+          "picture": {
+            "type": "string",
+            "description": "UUID of the technology image. null — no image"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the product this assembly chart belongs to",
+            "format": "uuid"
+          },
+          "productSizeAssemblyStrategy": {
+            "type": "string",
+            "description": "Size strategy: COMMON (one chart for all sizes) or SPECIFIC (per-size ingredients)"
+          },
+          "technologyDescription": {
+            "type": "string",
+            "description": "Preparation technology description (up to 2000 characters)"
+          },
+          "versionCompatibility": {
+            "type": "string",
+            "description": "Version compatibility tag. Only V_7_0 is currently accepted"
+          },
+          "writeoffStrategy": {
+            "type": "string",
+            "description": "Write-off strategy: ASSEMBLE (write off ingredients) or DIRECT (write off the product itself)"
+          }
+        }
+      },
+      "CreateRequestV3": {
+        "title": " ",
+        "required": [
+          "dateTo"
+        ],
+        "type": "object",
+        "properties": {
+          "appearance": {
+            "type": "string",
+            "description": "Presentation and serving requirements (up to 2000 characters)"
+          },
+          "assembledQuantity": {
+            "type": "number",
+            "description": "Assembled quantity (bookmark rate). Must be greater than 0"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Start date of the validity period (YYYY-MM-DD)"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End date of the validity period (YYYY-MM-DD)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Free-text description field (up to 2000 characters)"
+          },
+          "directWriteoffStoreSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Organization (structural unit) filter for DIRECT write-off strategy. null — applies to all organizations"
+          },
+          "franchiseMasterId": {
+            "type": "string",
+            "description": "Franchise master UUID. null — not a franchise object",
+            "format": "uuid"
+          },
+          "franchiseOriginalId": {
+            "type": "string",
+            "description": "Franchise original UUID. null — not a franchise object",
+            "format": "uuid"
+          },
+          "franchiseUniqueId": {
+            "type": "string",
+            "description": "Franchise unique UUID. Required when franchiseMasterId is set",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssemblyChartItemV3"
             },
             "description": "Ingredient lines of the assembly chart"
           },
@@ -36079,6 +37931,17 @@
         }
       },
       "DeleteRequest": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          }
+        }
+      },
+      "DeleteRequestV3": {
         "title": " ",
         "type": "object",
         "properties": {
@@ -36263,6 +38126,10 @@
             "type": "string",
             "description": "Product identifier (GUID)"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -36313,11 +38180,22 @@
           "isEditable": {
             "type": "boolean"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisassembleDocumentGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string"
           },
           "processed": {
             "type": "boolean"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "storeFrom": {
             "type": "string"
@@ -36422,6 +38300,146 @@
           "storeTo": {
             "type": "string",
             "description": "Receipt store identifier (GUID)"
+          }
+        }
+      },
+      "DiscountType": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "activated": {
+            "type": "boolean",
+            "description": "Whether the discount type is active"
+          },
+          "applyBeforeExcludedVat": {
+            "type": "boolean",
+            "description": "Apply the discount before VAT is excluded"
+          },
+          "applyOnlyInPeriod": {
+            "type": "boolean",
+            "description": "Apply only within the configured validity period"
+          },
+          "canApplyByCardNumber": {
+            "type": "boolean",
+            "description": "Whether the discount can be applied by card number"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date and time when the discount type was created. ISO 8601",
+            "format": "date-time"
+          },
+          "deletedDate": {
+            "type": "string",
+            "description": "Date and time when the discount type was deleted. null if the type is not deleted. ISO 8601",
+            "format": "date-time"
+          },
+          "discountPeriod": {
+            "type": "string",
+            "description": "Validity period of the discount/surcharge"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the directory entry",
+            "format": "uuid"
+          },
+          "isAutomatic": {
+            "type": "boolean",
+            "description": "Whether the discount/surcharge is applied automatically"
+          },
+          "isCard": {
+            "type": "boolean",
+            "description": "Whether the discount/surcharge is card-based"
+          },
+          "isCombinable": {
+            "type": "boolean",
+            "description": "Whether the discount can be combined with other discounts"
+          },
+          "isConfirmationRequired": {
+            "type": "boolean",
+            "description": "Whether confirmation is required to apply the discount/surcharge"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether the directory entry is deleted"
+          },
+          "isManual": {
+            "type": "boolean",
+            "description": "Whether the discount/surcharge is applied manually"
+          },
+          "lastModifyNode": {
+            "type": "string",
+            "description": "Node where the discount type was last modified"
+          },
+          "localId": {
+            "type": "integer",
+            "description": "Local identifier of the discount type in RMS"
+          },
+          "matchPeriodForEachDish": {
+            "type": "boolean",
+            "description": "Whether the validity period is matched for each dish separately"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "description": "Date and time of the last modification. ISO 8601",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the directory entry"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Discount type revision"
+          },
+          "shortName": {
+            "type": "string",
+            "description": "Short name of the discount type"
+          }
+        }
+      },
+      "DiscountTypeListRequest": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/internal_entities_discount_type.Filter"
+            },
+            "description": "Request filters. All filters are applied simultaneously (AND). See the method description for the list of supported filter fields"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of records in the response. Allowed values: 1 to 1000"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of records to skip from the beginning of the list (0-based). Use together with limit for pagination"
+          }
+        }
+      },
+      "DiscountTypeListResponse": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountType"
+            },
+            "description": "List of directory entries"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of records in the response. Allowed values: 1 to 1000"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of records to skip from the beginning of the list (0-based). Use together with limit for pagination"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of directory entries"
           }
         }
       },
@@ -36627,31 +38645,6 @@
           }
         }
       },
-      "employees.SwaggerEmployeeListResponse": {
-        "title": " ",
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/internal_employees.EmployeeResponse"
-            },
-            "description": "Employees"
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Maximum number of records in the response."
-          },
-          "offset": {
-            "type": "integer",
-            "description": "Number of records to skip from the beginning."
-          },
-          "totalCount": {
-            "type": "integer",
-            "description": "Total number of employees"
-          }
-        }
-      },
       "ErrorResponse": {
         "title": " ",
         "type": "object",
@@ -36741,12 +38734,14 @@
             "description": "Event codes to filter by. If omitted or empty, all events are returned"
           },
           "fromRevision": {
+            "minimum": 0,
             "type": "integer",
-            "description": "Revision to request events from (incremental mode). Cannot be combined with fromTime/toTime"
+            "description": "Revision to request events from (incremental mode), must be zero or greater. Required unless both fromTime and toTime are provided. Cannot be combined with fromTime/toTime"
           },
           "fromTime": {
             "type": "string",
-            "description": "Period start, inclusive, date-time format. Must be provided together with toTime"
+            "description": "Period start, inclusive, date-time format. Required together with toTime when fromRevision is not provided",
+            "format": "date-time"
           },
           "organizationId": {
             "type": "string",
@@ -36755,7 +38750,8 @@
           },
           "toTime": {
             "type": "string",
-            "description": "Period end, exclusive, date-time format. Must be provided together with fromTime"
+            "description": "Period end, exclusive, date-time format. Required together with fromTime when fromRevision is not provided",
+            "format": "date-time"
           }
         }
       },
@@ -38386,6 +40382,10 @@
         "title": " ",
         "type": "object",
         "properties": {
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Filter by deletion flag: true — deleted only, false — non-deleted only, omit — all"
+          },
           "limit": {
             "type": "integer",
             "description": "Number of records to return (1-500)"
@@ -38394,9 +40394,9 @@
             "type": "integer",
             "description": "Pagination offset"
           },
-          "organizationId": {
-            "type": "string",
-            "description": "Organization identifier (GUID)"
+          "revision": {
+            "type": "integer",
+            "description": "Return only records with revision greater than or equal to the given value (revision >= value)"
           },
           "type": {
             "type": "array",
@@ -38421,6 +40421,47 @@
           "totalCount": {
             "type": "integer",
             "description": "Total number of counteragents"
+          }
+        }
+      },
+      "GetIncomePlanRequest": {
+        "title": " ",
+        "required": [
+          "dateFrom",
+          "dateTo",
+          "organizationId"
+        ],
+        "type": "object",
+        "properties": {
+          "dateFrom": {
+            "type": "string",
+            "description": "Period start date (inclusive)",
+            "format": "date",
+            "example": "2026-01-01T00:00:00.0000000"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "Period end date (inclusive)",
+            "format": "date",
+            "example": "2026-01-31T00:00:00.0000000"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Organization (department) identifier; used to resolve the plan",
+            "format": "uuid"
+          }
+        }
+      },
+      "GetIncomePlanResponse": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncomePlanItem"
+            },
+            "description": "Daily planned values"
           }
         }
       },
@@ -38452,7 +40493,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Fields to aggregate by (`FieldName` names from `columns/get`)"
+            "description": "Non-empty list of fields to aggregate by (`FieldName` names from `columns/get`)"
           },
           "buildSummary": {
             "type": "boolean",
@@ -38519,11 +40560,14 @@
       },
       "GetPriceListRequest": {
         "title": " ",
+        "required": [
+          "counteragentId"
+        ],
         "type": "object",
         "properties": {
           "counteragentId": {
             "type": "string",
-            "description": "Supplier identifier (GUID)"
+            "description": "Counteragent identifier (GUID). The counteragent must be a supplier"
           }
         }
       },
@@ -38541,6 +40585,17 @@
         }
       },
       "GetRequest": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          }
+        }
+      },
+      "GetRequestV3": {
         "title": " ",
         "type": "object",
         "properties": {
@@ -41591,7 +43646,7 @@
           "cities": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of cities."
           }
@@ -41708,7 +43763,7 @@
           "regions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of districts."
           }
@@ -42205,7 +44260,7 @@
         "additionalProperties": false,
         "description": "Price category of the order."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.City, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42229,7 +44284,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Address.Region, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42253,7 +44308,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42277,7 +44332,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42301,7 +44356,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42325,7 +44380,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42349,7 +44404,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42373,7 +44428,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42397,7 +44452,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -42421,7 +44476,7 @@
         "additionalProperties": false,
         "description": "RMS pair wrapping - list of response items that belong to this RMS."
       },
-      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]": {
+      "iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]": {
         "title": " ",
         "required": [
           "organizationId",
@@ -49182,7 +51237,7 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Discounts.DiscountCardTypeInfo, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of discounts/surcharges."
           }
@@ -49288,7 +51343,7 @@
           "activeCourierLocations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.ActiveCourierLocation, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of courier's locations."
           }
@@ -49438,7 +51493,7 @@
           "courierLocations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.CourierLocations, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of drivers' coordinates broken down by organizations."
           }
@@ -49651,7 +51706,7 @@
           "employees": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.Employee, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of drivers."
           }
@@ -49675,7 +51730,7 @@
           "employeesWithCheckRoles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Employees.EmployeeWithCheckedRole, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of drivers."
           }
@@ -51743,6 +53798,12 @@
             },
             "description": "Combo sizes with visual information (images, visibility).\r\nUsed only when itemType = \"COMBO\".\r\nIgnored for PRODUCT (sizePrices[] is used instead).\r\nContains information specific to placement in a group.",
             "nullable": true
+          },
+          "menuItemId": {
+            "type": "string",
+            "description": "Unique key of the menu item.",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -51895,14 +53956,6 @@
             "description": "Menu image. Replaces ButtonImageUrl.",
             "nullable": true
           },
-          "itemsGroups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.ItemsGroup"
-            },
-            "description": "Item groups.",
-            "nullable": true
-          },
           "products": {
             "type": "array",
             "items": {
@@ -51966,6 +54019,22 @@
             },
             "description": "Schedules.",
             "nullable": true
+          },
+          "overrideTaxCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.TaxCategoryOverride"
+            },
+            "description": "Tax category overrides of the organization.",
+            "nullable": true
+          },
+          "itemsGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.ItemsGroup"
+            },
+            "description": "Item groups. Placed after the reference dictionaries (products, modifiers, etc.)\r\nso that dictionaries are deserialized first.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -51991,6 +54060,49 @@
           "id": {
             "type": "string",
             "description": "Modifier ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "Modifier name. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Name.",
+            "nullable": true
+          },
+          "restrictions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.Restrictions"
+              }
+            ],
+            "description": "Modifier selection restrictions. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Restrictions.",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Flag indicating whether the modifier is hidden.\r\nMay be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.IsHidden.",
+            "nullable": true
+          },
+          "image": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.Image"
+              }
+            ],
+            "description": "Modifier image. Replaces ButtonImageUrl.\r\nMay be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Image.",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "description": "Weight. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Weight.",
+            "format": "double",
+            "nullable": true
+          },
+          "measureUnitType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.MeasureUnitType"
+              }
+            ],
+            "description": "Unit of measurement. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.MeasureUnitType.",
+            "nullable": true
           },
           "sizePrices": {
             "type": "array",
@@ -52151,8 +54263,7 @@
       "iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem": {
         "title": " ",
         "required": [
-          "id",
-          "name"
+          "id"
         ],
         "type": "object",
         "properties": {
@@ -52162,11 +54273,12 @@
           },
           "name": {
             "type": "string",
-            "description": "Modifier name."
+            "description": "Modifier name.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
+            "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "Modifier description.",
+            "description": "Modifier description.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
             "nullable": true
           },
           "restrictions": {
@@ -52175,16 +54287,17 @@
                 "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.Restrictions"
               }
             ],
-            "description": "Modifier selection restrictions.",
+            "description": "Modifier selection restrictions.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
             "nullable": true
           },
           "isHidden": {
             "type": "boolean",
-            "description": "Flag indicating whether the modifier is hidden."
+            "description": "Flag indicating whether the modifier is hidden.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
+            "nullable": true
           },
           "buttonImageUrl": {
             "type": "string",
-            "description": "Button image URL.",
+            "description": "Button image URL.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
             "nullable": true,
             "deprecated": true
           },
@@ -52194,13 +54307,14 @@
                 "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.Image"
               }
             ],
-            "description": "Modifier image. Replaces ButtonImageUrl.",
+            "description": "Modifier image. Replaces ButtonImageUrl.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
             "nullable": true
           },
           "weight": {
             "type": "number",
-            "description": "Weight.",
-            "format": "double"
+            "description": "Weight.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
+            "format": "double",
+            "nullable": true
           },
           "measureUnitType": {
             "allOf": [
@@ -52208,19 +54322,20 @@
                 "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.NomenclatureV3.MeasureUnitType"
               }
             ],
-            "description": "Unit of measurement."
+            "description": "Unit of measurement.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
+            "nullable": true
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "List of tags associated with the element.",
+            "description": "List of tags associated with the element.\r\nIf null, the value is taken from the reference Modifier with the same Id.",
             "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "Modifier."
+        "description": "Modifier item in a group.\r\nAll fields except Id are optional overrides: when a field is null,\r\nits value must be taken from the reference Modifier (MenuV3.modifiers) with the same Id."
       },
       "iikoTransport.PublicApi.Contracts.NomenclatureV3.Nutritions": {
         "title": " ",
@@ -52588,6 +54703,17 @@
             "type": "string",
             "description": "Predefined size SKU.",
             "nullable": true
+          },
+          "menuItemSizeId": {
+            "type": "string",
+            "description": "Unique key of the size.\r\nUnlike SizeId, present even for non-sized items.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "taxCategoryId": {
+            "type": "string",
+            "description": "Tax category ID.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -52606,6 +54732,11 @@
             "type": "number",
             "description": "Price.",
             "format": "double",
+            "nullable": true
+          },
+          "taxCategoryId": {
+            "type": "string",
+            "description": "Tax category ID.",
             "nullable": true
           }
         },
@@ -52661,6 +54792,32 @@
         },
         "additionalProperties": false,
         "description": "Tax category."
+      },
+      "iikoTransport.PublicApi.Contracts.NomenclatureV3.TaxCategoryOverride": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "orderTypeId": {
+            "type": "string",
+            "description": "Order type ID. If null, the override is applied to all order types.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "baseTaxCategoryId": {
+            "type": "string",
+            "description": "Base tax category ID.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "newTaxCategoryId": {
+            "type": "string",
+            "description": "New tax category ID to use instead of the base one.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Tax category override."
       },
       "iikoTransport.PublicApi.Contracts.NomenclatureV3.WeekDay": {
         "title": " ",
@@ -53025,7 +55182,7 @@
           "orderTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.OrderTypes.OrderType, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of order types."
           }
@@ -55682,7 +57839,7 @@
           "terminalGroupStopLists": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.StopLists.TerminalGroupStopList, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "Set of out-of-stock lists"
           }
@@ -56918,14 +59075,14 @@
           "terminalGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "List of terminal groups broken down by organizations."
           },
           "terminalGroupsInSleep": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.1, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/iikoTransport.PublicApi.Contracts.Common.RmsItemsResponseWrapper`1[[iikoTransport.PublicApi.Contracts.Terminals.TerminalGroup, iikoTransport.PublicApi.Contracts, Version=9.8.6.3, Culture=neutral, PublicKeyToken=null]]"
             },
             "description": "Terminal groups are in sleep mode because they are not active.\r\n\r\nCan be awakened by `/api/1/terminal_groups/awake` operation."
           }
@@ -57411,6 +59568,25 @@
         "type": "string",
         "description": "Types of events which can be notified by a webhook."
       },
+      "IncomePlanItem": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date for which the plan is set",
+            "format": "date"
+          },
+          "planValue": {
+            "type": "number",
+            "description": "Planned value: amount for ABSOLUTE, percentage for PERCENT, or automatically calculated value for AUTOMATIC"
+          },
+          "valueType": {
+            "type": "string",
+            "description": "Value type: ABSOLUTE — amount, PERCENT — percentage, AUTOMATIC — automatic calculation"
+          }
+        }
+      },
       "IncomingInventoryCreateFirstStepItem": {
         "title": " ",
         "required": [
@@ -57734,6 +59910,10 @@
             "type": "boolean",
             "description": "Flag for tracking product movement over the period. Read-only"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -57796,6 +59976,20 @@
             "type": "boolean",
             "description": "Editable flag. true — available for editing"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncomingInventoryGetItem"
+            },
+            "description": "Main inventory items (second step / all products). Must contain at least one element"
+          },
+          "itemsFirstStep": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncomingInventoryGetFirstItem"
+            },
+            "description": "First step items (dishes, preparations, modifiers). Can be an empty array"
+          },
           "number": {
             "type": "string",
             "description": "Document number"
@@ -57803,6 +59997,10 @@
           "processed": {
             "type": "boolean",
             "description": "Flag indicating that the document is processed"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "shortageSum": {
             "type": "number",
@@ -57855,6 +60053,7 @@
           "documentId",
           "items",
           "itemsFirstStep",
+          "number",
           "organizationId",
           "store"
         ],
@@ -58011,6 +60210,10 @@
             "type": "string",
             "description": "Payment date (YYYY-MM-DD)"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -58100,6 +60303,77 @@
           "vatPercent": {
             "type": "number",
             "description": "VAT percentage"
+          }
+        }
+      },
+      "IncomingInvoiceListItem": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "assignedStores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comment": {
+            "type": "string"
+          },
+          "conception": {
+            "type": "string"
+          },
+          "counteragent": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "dateCreated": {
+            "type": "string"
+          },
+          "dateModified": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "isEditable": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncomingInvoiceItem"
+            },
+            "description": "List of document items"
+          },
+          "number": {
+            "type": "string"
+          },
+          "processed": {
+            "type": "boolean"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
+          "sum": {
+            "type": "number"
+          },
+          "sumWithoutVat": {
+            "type": "number"
+          },
+          "userCreated": {
+            "type": "string"
+          },
+          "userModified": {
+            "type": "string"
           }
         }
       },
@@ -58584,6 +60858,10 @@
             "type": "string",
             "description": "Revenue account identifier (GUID)"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -58649,6 +60927,13 @@
             "type": "boolean",
             "description": "Editable flag. true — available for editing"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncomingReturnedInvoiceGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string",
             "description": "Document number"
@@ -58660,6 +60945,10 @@
           "revenueAccount": {
             "type": "string",
             "description": "Revenue account identifier (GUID)"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "sum": {
             "type": "number",
@@ -59269,11 +61558,11 @@
           },
           "endAt": {
             "type": "string",
-            "description": "Date and time of the confirmed attendance end. If the value is `null`, the attendance is considered open. Existing attendances may be open."
+            "description": "Date and time of the confirmed attendance end. Required field: creating an open attendance (`null`) is not supported."
           },
           "isConfirmedManually": {
             "type": "boolean",
-            "description": "Manually confirmed flag; may be absent for legacy data."
+            "description": "Manually confirmed flag; may be absent for legacy data"
           },
           "organizationId": {
             "type": "string",
@@ -59614,6 +61903,9 @@
       },
       "internal_document_assembly_chart_v1.SaveRequest": {
         "title": " ",
+        "required": [
+          "dateTo"
+        ],
         "type": "object",
         "properties": {
           "appearance": {
@@ -59626,11 +61918,11 @@
           },
           "dateFrom": {
             "type": "string",
-            "description": "Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)"
+            "description": "Start date of the validity period (YYYY-MM-DD)"
           },
           "dateTo": {
             "type": "string",
-            "description": "End date of the validity period; null for an open-ended chart"
+            "description": "End date of the validity period (YYYY-MM-DD)"
           },
           "description": {
             "type": "string",
@@ -59703,6 +61995,9 @@
       },
       "internal_document_assembly_chart_v2.SaveRequest": {
         "title": " ",
+        "required": [
+          "dateTo"
+        ],
         "type": "object",
         "properties": {
           "appearance": {
@@ -59715,11 +62010,11 @@
           },
           "dateFrom": {
             "type": "string",
-            "description": "Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)"
+            "description": "Start date of the validity period (YYYY-MM-DD)"
           },
           "dateTo": {
             "type": "string",
-            "description": "End date of the validity period; null for an open-ended chart"
+            "description": "End date of the validity period (YYYY-MM-DD)"
           },
           "description": {
             "type": "string",
@@ -59757,6 +62052,125 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssemblyChartItem"
+            },
+            "description": "Ingredient lines of the assembly chart"
+          },
+          "organoleptic": {
+            "type": "string",
+            "description": "Organoleptic quality indicators (up to 2000 characters)"
+          },
+          "outputComment": {
+            "type": "string",
+            "description": "Output comment / yield note (up to 2000 characters)"
+          },
+          "picture": {
+            "type": "string",
+            "description": "UUID of the technology image. null — no image"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the product this assembly chart belongs to",
+            "format": "uuid"
+          },
+          "productSizeAssemblyStrategy": {
+            "type": "string",
+            "description": "Size strategy: COMMON (one chart for all sizes) or SPECIFIC (per-size ingredients)"
+          },
+          "technologyDescription": {
+            "type": "string",
+            "description": "Preparation technology description (up to 2000 characters)"
+          },
+          "versionCompatibility": {
+            "type": "string",
+            "description": "Version compatibility tag. Only V_7_0 is currently accepted"
+          },
+          "writeoffStrategy": {
+            "type": "string",
+            "description": "Write-off strategy: ASSEMBLE (write off ingredients) or DIRECT (write off the product itself)"
+          }
+        }
+      },
+      "internal_document_assembly_chart_v3.Filter": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Field name for filtering"
+          },
+          "op": {
+            "type": "string",
+            "description": "Comparison operator: \"eq\" (equal), \"ne\" (not equal), \"gt\" (greater than), \"gte\" (greater than or equal), \"lt\" (less than), \"lte\" (less than or equal), \"in\" (value in list — uses values[]), \"nin\" (value not in list — uses values[]), \"like\" (case-insensitive substring), \"blank\" (null or empty string), \"notblank\" (not null and not empty string)"
+          },
+          "value": {
+            "description": "Scalar value for filtering (used with eq, ne, gt, gte, lt, lte, like)"
+          },
+          "values": {
+            "type": "array",
+            "items": { },
+            "description": "Array of values for multi-value filtering (used with \"in\", \"nin\")"
+          }
+        }
+      },
+      "internal_document_assembly_chart_v3.SaveRequestV3": {
+        "title": " ",
+        "required": [
+          "dateTo"
+        ],
+        "type": "object",
+        "properties": {
+          "appearance": {
+            "type": "string",
+            "description": "Presentation and serving requirements (up to 2000 characters)"
+          },
+          "assembledQuantity": {
+            "type": "number",
+            "description": "Assembled quantity (bookmark rate). Must be greater than 0"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Start date of the validity period (YYYY-MM-DD)"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End date of the validity period (YYYY-MM-DD)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Free-text description field (up to 2000 characters)"
+          },
+          "directWriteoffStoreSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Organization (structural unit) filter for DIRECT write-off strategy. null — applies to all organizations"
+          },
+          "franchiseMasterId": {
+            "type": "string",
+            "description": "Franchise master UUID. null — not a franchise object",
+            "format": "uuid"
+          },
+          "franchiseOriginalId": {
+            "type": "string",
+            "description": "Franchise original UUID. null — not a franchise object",
+            "format": "uuid"
+          },
+          "franchiseUniqueId": {
+            "type": "string",
+            "description": "Franchise unique UUID. Required when franchiseMasterId is set",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssemblyChartItemV3"
             },
             "description": "Ingredient lines of the assembly chart"
           },
@@ -59912,7 +62326,8 @@
         "title": " ",
         "required": [
           "code",
-          "mainOrganizationId"
+          "mainOrganizationId",
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -60251,11 +62666,36 @@
         "properties": {
           "field": {
             "type": "string",
-            "description": "Field name to filter by. Possible values: `id`, `code`, `firstName`, `lastName`, `middleName`, `phone`, `email`, `mainRoleId`, `organizationId`, `isFired`"
+            "description": "Field name to filter by. Possible values: `id`, `code`, `firstName`, `lastName`, `middleName`, `phone`, `email`, `mainRoleId`, `mainOrganizationId`, `isFired`"
           },
           "value": {
             "type": "string",
             "description": "Filter value"
+          }
+        }
+      },
+      "internal_employees.SwaggerEmployeeListResponse": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/internal_employees.EmployeeResponse"
+            },
+            "description": "Employees"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of records in the response."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of records to skip from the beginning."
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of employees"
           }
         }
       },
@@ -60326,6 +62766,28 @@
         }
       },
       "internal_entities_custom_category.Filter": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Field name for filtering"
+          },
+          "op": {
+            "type": "string",
+            "description": "Comparison operator: \"eq\" (equal), \"ne\" (not equal), \"gt\" (greater than), \"gte\" (greater than or equal), \"lt\" (less than), \"lte\" (less than or equal), \"in\" (value in list — uses values[]), \"nin\" (value not in list — uses values[]), \"like\" (case-insensitive substring), \"blank\" (null or empty string), \"notblank\" (not null and not empty string)"
+          },
+          "value": {
+            "description": "Scalar value for filtering (used with eq, ne, gt, gte, lt, lte, like)"
+          },
+          "values": {
+            "type": "array",
+            "items": { },
+            "description": "Array of values for multi-value filtering (used with \"in\", \"nin\")"
+          }
+        }
+      },
+      "internal_entities_discount_type.Filter": {
         "title": " ",
         "type": "object",
         "properties": {
@@ -61576,6 +64038,10 @@
             "type": "string",
             "description": "Document number"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -61634,6 +64100,13 @@
             "type": "boolean",
             "description": "Editable flag. true — available for editing"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InternalTransferGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string",
             "description": "Document number"
@@ -61641,6 +64114,10 @@
           "processed": {
             "type": "boolean",
             "description": "Flag indicating that the document is processed"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "storeFrom": {
             "type": "string",
@@ -61862,13 +64339,32 @@
             "type": "string",
             "description": "Legal entity identifier"
           },
+          "legalAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegalAddress"
+              }
+            ],
+            "description": "Legal address of the legal entity; null if not provided by the source"
+          },
           "name": {
             "type": "string",
             "description": "Display name of the legal entity; null if the name is not provided by the source"
           },
+          "responsiblePersons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponsiblePerson"
+            },
+            "description": "Responsible persons of the legal entity; an empty array if not provided by the source"
+          },
+          "taxpayerIdNumber": {
+            "type": "string",
+            "description": "Taxpayer identification number (INN) of the legal entity; null if not provided by the source"
+          },
           "type": {
             "type": "string",
-            "description": "Legal entity type. Always takes the value JUR_PERSON"
+            "description": "Legal entity node type. Always takes the value JURPERSON"
           }
         }
       },
@@ -61898,6 +64394,56 @@
           }
         },
         "description": "Labels can be added to items to reflect a category (e.g. Vegan, Alcohol, Spicy, etc.)"
+      },
+      "LegalAddress": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Legal address as a single string provided by the source; null if not provided"
+          },
+          "building": {
+            "type": "string",
+            "description": "Building; null if not provided"
+          },
+          "city": {
+            "type": "string",
+            "description": "City; null if not provided"
+          },
+          "community": {
+            "type": "string",
+            "description": "Community; null if not provided"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country; null if not provided"
+          },
+          "district": {
+            "type": "string",
+            "description": "District; null if not provided"
+          },
+          "house": {
+            "type": "string",
+            "description": "House; null if not provided"
+          },
+          "office": {
+            "type": "string",
+            "description": "Office; null if not provided"
+          },
+          "region": {
+            "type": "string",
+            "description": "Region; null if not provided"
+          },
+          "street": {
+            "type": "string",
+            "description": "Street; null if not provided"
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "Postal code; null if not provided"
+          }
+        }
       },
       "ListPositionsRequest": {
         "title": " ",
@@ -61965,6 +64511,22 @@
           "organizationId": {
             "type": "string",
             "description": "Organization identifier (GUID)"
+          },
+          "returnFullDetails": {
+            "type": "boolean",
+            "description": "Return full document details: when true, document items and the document revision are added to every list element. Defaults to false — only document headers are returned"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Revision for incremental synchronization: only documents with a revision strictly greater than the given value are returned (revision > value). Accepts both a number and a numeric string. Omit to return all documents of the period. Revision is available only in the full document, so when this parameter is set the method additionally requests the documents; if a document revision is unavailable, the document is not returned. The revision of every document is returned in the revision field"
+          },
+          "storeIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Store identifiers (GUID) to filter the list: only documents having at least one of the given stores (storeFrom/storeTo) are returned. An empty set or an omitted field means no store filtering"
           },
           "to": {
             "type": "string",
@@ -62393,6 +64955,7 @@
       "NomenclatureGroupCreateRequest": {
         "title": " ",
         "required": [
+          "code",
           "name"
         ],
         "type": "object",
@@ -62409,7 +64972,7 @@
           },
           "code": {
             "type": "string",
-            "description": "Group code: 0–8 digits. Used for quick search on the order editing screen"
+            "description": "Group code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a group"
           },
           "color": {
             "allOf": [
@@ -62934,6 +65497,7 @@
       "NomenclatureGroupUpdateRequest": {
         "title": " ",
         "required": [
+          "code",
           "groupId",
           "name"
         ],
@@ -62951,7 +65515,7 @@
           },
           "code": {
             "type": "string",
-            "description": "Group code: 0–8 digits. Used for quick search on the order editing screen"
+            "description": "Group code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a group"
           },
           "color": {
             "allOf": [
@@ -63097,7 +65661,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Barcode type"
+            "description": "Barcode type. Required. Allowed values: NTIN, GTIN, UNKNOWN"
           }
         }
       },
@@ -63212,6 +65776,7 @@
         "title": " ",
         "required": [
           "amountUnitId",
+          "code",
           "name",
           "type"
         ],
@@ -63273,7 +65838,7 @@
           },
           "code": {
             "type": "string",
-            "description": "Product code: 0–8 digits. Used for quick search on the order editing screen. If null or not provided, it will be assigned automatically"
+            "description": "Product code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a product"
           },
           "coldLossPercent": {
             "type": "number",
@@ -64629,6 +67194,7 @@
         "title": " ",
         "required": [
           "amountUnitId",
+          "code",
           "name",
           "productId",
           "type"
@@ -64691,7 +67257,7 @@
           },
           "code": {
             "type": "string",
-            "description": "Product code: 0–8 digits. Used for quick search on the order editing screen. If null or not provided, it will be assigned automatically"
+            "description": "Product code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a product"
           },
           "coldLossPercent": {
             "type": "number",
@@ -65199,7 +67765,7 @@
             "description": "Filter type: `IncludeValues`/`ExcludeValues` — by values, `Range` — by numeric range, `DateRange` — by date range"
           },
           "from": {
-            "description": "Lower range bound: a number (`Range`) or a date (`DateRange`) in one of `yyyy-MM-dd`, `yyyy-MM-ddTHH:mm`, `yyyy-MM-ddTHH:mm:ss` formats. For periodType = CUSTOM the period is limited to 31 days inclusive."
+            "description": "Lower range bound: a number (`Range`) or a date (`DateRange`) in `yyyy-MM-dd` format. For periodType = CUSTOM the period is limited to 31 days inclusive."
           },
           "includeHigh": {
             "type": "boolean",
@@ -65218,7 +67784,7 @@
             "description": "Period type (for `DateRange`): `CUSTOM`, `OPEN_PERIOD`, `TODAY`, `YESTERDAY`, `CURRENT_WEEK`, `CURRENT_MONTH`, `CURRENT_YEAR`, `LAST_WEEK`, `LAST_MONTH`, `LAST_YEAR`"
           },
           "to": {
-            "description": "Upper range bound: a number (`Range`) or a date (`DateRange`) in one of `yyyy-MM-dd`, `yyyy-MM-ddTHH:mm`, `yyyy-MM-ddTHH:mm:ss` formats; required for `Range` and for `DateRange` with `periodType=CUSTOM`. For periodType = CUSTOM the period is limited to 31 days inclusive."
+            "description": "Upper range bound: a number (`Range`) or a date (`DateRange`) in `yyyy-MM-dd` format; required for `Range` and for `DateRange` with `periodType=CUSTOM`. For periodType = CUSTOM the period is limited to 31 days inclusive."
           },
           "values": {
             "type": "array",
@@ -65228,7 +67794,48 @@
             "description": "Field values to filter by; required for `IncludeValues`/`ExcludeValues` `filterType`"
           }
         },
-        "description": "One item of the filters array. Which fields are actually present depends on `filterType`: name and `filterType` are always present; `values` — for IncludeValues/ExcludeValues; `from`/`to` — a number for `Range` or a date/time string (ISO 8601) for `DateRange`; `periodType` — for `DateRange`; `includeLow`/`includeHigh` — for `Range` and `DateRange`"
+        "description": "One item of the filters array. Which fields are actually present depends on `filterType`: name and `filterType` are always present; `values` — for IncludeValues/ExcludeValues; `from`/`to` — a number for `Range` or a date string in `yyyy-MM-dd` format for `DateRange`; `periodType` — for `DateRange`; `includeLow`/`includeHigh` — for `Range` and `DateRange`"
+      },
+      "OlapPreset": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the saved OLAP preset set by the restaurant owner"
+          },
+          "presetId": {
+            "type": "string",
+            "description": "Identifier of the saved OLAP preset; used in the `olap/presets/get` method to retrieve its data"
+          }
+        }
+      },
+      "OlapPresetReportRequest": {
+        "title": " ",
+        "required": [
+          "dateFrom",
+          "dateTo",
+          "presetId"
+        ],
+        "type": "object",
+        "properties": {
+          "dateFrom": {
+            "type": "string",
+            "description": "Start of the report period (inclusive) in `yyyy-MM-dd` format"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End of the report period (exclusive) in `yyyy-MM-dd` format"
+          },
+          "presetId": {
+            "type": "string",
+            "description": "Identifier of the saved OLAP preset (from `olap/presets/list`)"
+          }
+        }
+      },
+      "OlapPresetsListRequest": {
+        "title": " ",
+        "type": "object"
       },
       "Organization": {
         "title": " ",
@@ -65275,7 +67882,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Organization type. Confirmed values: Chain — a chain, Rms — an organization"
+            "description": "Organization node type. Confirmed values: DEPARTMENT — department, STORE — store, CENTRALSTORE — central store, CENTRALOFFICE — central office, MANUFACTURE — production, SALEPOINT — point of sale"
           },
           "version": {
             "type": "string",
@@ -65286,6 +67893,67 @@
       "OrganizationRequest": {
         "title": " ",
         "type": "object"
+      },
+      "OuterEconomicActivityNomenclatureCode": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the foreign economic activity commodity code",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether the code is soft-deleted"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the foreign economic activity commodity code"
+          },
+          "outerEanCode": {
+            "type": "string",
+            "description": "Code per the EAEU FEACN (TN VED) classification"
+          }
+        }
+      },
+      "OuterEconomicActivityNomenclatureCodeGetRequest": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the requested foreign economic activity commodity code",
+            "format": "uuid"
+          }
+        }
+      },
+      "OuterEconomicActivityNomenclatureCodeListRequest": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "includeDeleted": {
+            "type": "boolean",
+            "description": "Include deleted codes in the response. Default false"
+          }
+        }
+      },
+      "OuterEconomicActivityNomenclatureCodeListResponse": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OuterEconomicActivityNomenclatureCode"
+            },
+            "description": "List of foreign economic activity commodity codes"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of foreign economic activity commodity codes matching the request"
+          }
+        }
       },
       "OutgoingInvoice": {
         "title": " ",
@@ -65361,6 +68029,10 @@
           "revenueAccount": {
             "type": "string",
             "description": "Revenue account identifier (GUID)"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "status": {
             "type": "string",
@@ -65439,6 +68111,77 @@
           "vatPercent": {
             "type": "number",
             "description": "VAT percentage"
+          }
+        }
+      },
+      "OutgoingInvoiceListItem": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "assignedStores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comment": {
+            "type": "string"
+          },
+          "conception": {
+            "type": "string"
+          },
+          "counteragent": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "dateCreated": {
+            "type": "string"
+          },
+          "dateModified": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "isEditable": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutgoingInvoiceItem"
+            },
+            "description": "List of document items"
+          },
+          "number": {
+            "type": "string"
+          },
+          "processed": {
+            "type": "boolean"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
+          "sum": {
+            "type": "number"
+          },
+          "sumWithoutVat": {
+            "type": "number"
+          },
+          "userCreated": {
+            "type": "string"
+          },
+          "userModified": {
+            "type": "string"
           }
         }
       },
@@ -66154,32 +68897,32 @@
           },
           "paymentDate": {
             "type": "string",
-            "description": "Payment date (YYYY-MM-DD format)"
+            "description": "Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)"
           }
         }
       },
       "PayRequest": {
         "title": " ",
         "required": [
-          "accountFrom",
-          "date",
+          "accountId",
+          "amount",
           "documentId",
           "organizationId",
-          "sum"
+          "paymentDate"
         ],
         "type": "object",
         "properties": {
-          "accountFrom": {
+          "accountId": {
             "type": "string",
-            "description": "Debit account identifier (GUID)"
+            "description": "Account identifier (GUID)"
           },
-          "accountTo": {
-            "type": "string",
-            "description": "Credit account identifier (GUID)"
+          "amount": {
+            "type": "number",
+            "description": "Payment amount"
           },
-          "date": {
+          "cfoItemId": {
             "type": "string",
-            "description": "Payment date (YYYY-MM-DD format)"
+            "description": "Cash flow item identifier (GUID)"
           },
           "documentId": {
             "type": "string",
@@ -66190,9 +68933,9 @@
             "type": "string",
             "description": "Organization identifier (GUID)"
           },
-          "sum": {
-            "type": "number",
-            "description": "Payment amount"
+          "paymentDate": {
+            "type": "string",
+            "description": "Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)"
           }
         }
       },
@@ -66308,11 +69051,11 @@
           },
           "dateFrom": {
             "type": "string",
-            "description": "Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)"
+            "description": "Start date of the validity period (YYYY-MM-DD)"
           },
           "dateTo": {
             "type": "string",
-            "description": "End date of the validity period; null for an open-ended chart"
+            "description": "End date of the validity period (YYYY-MM-DD)"
           },
           "directWriteoffStoreSpecification": {
             "allOf": [
@@ -66337,6 +69080,45 @@
           "productId": {
             "type": "string",
             "description": "UUID of the product this assembly chart belongs to",
+            "format": "uuid"
+          },
+          "productSizeAssemblyStrategy": {
+            "type": "string",
+            "description": "Size strategy: COMMON (one chart for all sizes) or SPECIFIC (per-size ingredients)"
+          }
+        }
+      },
+      "PreparedChartDtoV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "assembledAmount": {
+            "type": "number",
+            "description": "Bookmark rate of the prepared dish"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Start date of the validity period (YYYY-MM-DD)"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "End date of the validity period (YYYY-MM-DD)"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the assembly chart",
+            "format": "uuid"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PreparedChartItemDtoV3"
+            },
+            "description": "Ingredient lines of the assembly chart"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the product this breakdown belongs to",
             "format": "uuid"
           },
           "productSizeAssemblyStrategy": {
@@ -66379,6 +69161,43 @@
               }
             ],
             "description": "Department applicability filter for the ingredient line"
+          }
+        }
+      },
+      "PreparedChartItemDtoV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount of the ingredient written off from stock"
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID of the ingredient line",
+            "format": "uuid"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the ingredient product written off from stock",
+            "format": "uuid"
+          },
+          "productSizeSpecification": {
+            "type": "string",
+            "description": "UUID of the product size this line applies to. null — applies to all sizes",
+            "format": "uuid"
+          },
+          "sortWeight": {
+            "type": "number",
+            "description": "Display order weight"
+          },
+          "storeSpecification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoreSpecificationV3"
+              }
+            ],
+            "description": "Departments (organizations) where the ingredient line applies"
           }
         }
       },
@@ -66738,6 +69557,10 @@
             "type": "string",
             "description": "Document number"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -66796,6 +69619,13 @@
             "type": "boolean",
             "description": "Editable flag. true — available for editing"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductionDocumentGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string",
             "description": "Document number"
@@ -66803,6 +69633,10 @@
           "processed": {
             "type": "boolean",
             "description": "Flag indicating that the document is processed"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "storeFrom": {
             "type": "string",
@@ -67232,6 +70066,78 @@
           }
         }
       },
+      "ResolveRequestV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date to resolve the chart representation for (YYYY-MM-DD)"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "UUID of the organization (department) to build the representation in the context of. Optional",
+            "format": "uuid"
+          },
+          "productId": {
+            "type": "string",
+            "description": "UUID of the product (dish, modifier, semi-finished product) to resolve the chart representation for",
+            "format": "uuid"
+          },
+          "view": {
+            "type": "string",
+            "description": "Chart representation: assembled — top-level chart, prepared — breakdown to store items, tree — recipe tree"
+          }
+        }
+      },
+      "ResolveResponseV3": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "assembled": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssemblyChartResponseV3"
+              }
+            ],
+            "description": "Top-level assembly chart (view: assembled)"
+          },
+          "prepared": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PreparedChartDtoV3"
+              }
+            ],
+            "description": "Breakdown of the assembly chart to store items (view: prepared)"
+          },
+          "tree": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartTreeNodeDtoV3"
+              }
+            ],
+            "description": "Recipe tree (view: tree)"
+          },
+          "view": {
+            "type": "string",
+            "description": "Chart representation: assembled — top-level chart, prepared — breakdown to store items, tree — recipe tree"
+          }
+        }
+      },
+      "ResponsiblePerson": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the responsible person; null if the name is not set"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of the responsible person. Confirmed values: ACCOUNTANT — accountant, LEADER — leader, TECHNOLOGIST — technologist, WORKS_MANAGER — works manager; null if the role is not set"
+          }
+        }
+      },
       "RetrieveExternalMenuRequestDto": {
         "required": [
           "externalMenuId",
@@ -67522,6 +70428,10 @@
             "type": "string",
             "description": "Document number"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -67587,6 +70497,13 @@
             "type": "boolean",
             "description": "Editable flag. true — available for editing"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReturnedInvoiceGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string",
             "description": "Document number"
@@ -67594,6 +70511,10 @@
           "processed": {
             "type": "boolean",
             "description": "Flag indicating that the document is processed"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "sum": {
             "type": "number",
@@ -67912,6 +70833,10 @@
           "revenueAccount": {
             "type": "string"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string"
           },
@@ -67960,6 +70885,13 @@
           "isEditable": {
             "type": "boolean"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SalesDocumentGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string"
           },
@@ -67968,6 +70900,10 @@
           },
           "revenueAccount": {
             "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "sum": {
             "type": "number"
@@ -68110,7 +71046,7 @@
           },
           "paymentDate": {
             "type": "string",
-            "description": "Payment date (YYYY-MM-DD format)"
+            "description": "Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)"
           }
         }
       },
@@ -68144,7 +71080,7 @@
           },
           "paymentDate": {
             "type": "string",
-            "description": "Payment date (YYYY-MM-DD format)"
+            "description": "Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)"
           }
         }
       },
@@ -68448,6 +71384,24 @@
         }
       },
       "StoreSpecification": {
+        "title": " ",
+        "type": "object",
+        "properties": {
+          "inverse": {
+            "type": "boolean",
+            "description": "true — specification applies to all departments EXCEPT the listed ones"
+          },
+          "organizationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "UUIDs of organizations (structural units) the specification applies to"
+          }
+        }
+      },
+      "StoreSpecificationV3": {
         "title": " ",
         "type": "object",
         "properties": {
@@ -68963,6 +71917,10 @@
             "type": "string",
             "description": "Product identifier (GUID)"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -69013,11 +71971,22 @@
           "isEditable": {
             "type": "boolean"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransformationDocumentGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string"
           },
           "processed": {
             "type": "boolean"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "storeFrom": {
             "type": "string"
@@ -69338,6 +72307,10 @@
             "type": "string",
             "description": "Document number"
           },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
+          },
           "status": {
             "type": "string",
             "description": "Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)"
@@ -69387,11 +72360,22 @@
           "isEditable": {
             "type": "boolean"
           },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WriteoffDocumentGetItem"
+            },
+            "description": "List of document items"
+          },
           "number": {
             "type": "string"
           },
           "processed": {
             "type": "boolean"
+          },
+          "revision": {
+            "type": "integer",
+            "description": "Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested"
           },
           "storeFrom": {
             "type": "string"
@@ -69748,6 +72732,10 @@
       "x-displayName": "Positions"
     },
     {
+      "name": "Reporting.IncomePlan",
+      "x-displayName": "Income plan"
+    },
+    {
       "name": "Reporting.Olap",
       "x-displayName": "OLAP reports"
     },
@@ -69884,7 +72872,8 @@
     {
       "name": "Reports",
       "tags": [
-        "Reporting.Olap"
+        "Reporting.Olap",
+        "Reporting.IncomePlan"
       ]
     },
     {

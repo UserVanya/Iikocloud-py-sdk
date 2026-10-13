@@ -26,6 +26,13 @@ class TestReportingOlapApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
+    async def test_get_olap_preset_report(self) -> None:
+        """Test case for get_olap_preset_report
+
+        Get saved OLAP preset data
+        """
+        pass
+
     async def test_get_olap_report(self) -> None:
         """Test case for get_olap_report
 
@@ -37,6 +44,13 @@ class TestReportingOlapApi(unittest.IsolatedAsyncioTestCase):
         """Test case for get_olap_report_columns
 
         Get OLAP report columns
+        """
+        pass
+
+    async def test_list_olap_presets(self) -> None:
+        """Test case for list_olap_presets
+
+        Get saved OLAP presets
         """
         pass
 

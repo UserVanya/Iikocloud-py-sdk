@@ -1888,7 +1888,7 @@ class MenuApi:
     ) -> MenuV3:
         """Retrieve external menu V3 by ID.
 
-        > Generated from Plain menu converter.
+        > Generated from Plain menu converter.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1963,7 +1963,7 @@ class MenuApi:
     ) -> ApiResponse[MenuV3]:
         """Retrieve external menu V3 by ID.
 
-        > Generated from Plain menu converter.
+        > Generated from Plain menu converter.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -2038,7 +2038,7 @@ class MenuApi:
     ) -> RESTResponseType:
         """Retrieve external menu V3 by ID.
 
-        > Generated from Plain menu converter.
+        > Generated from Plain menu converter.   > Restriction group: `Data: menu`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int

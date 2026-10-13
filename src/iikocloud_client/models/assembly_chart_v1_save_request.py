@@ -31,8 +31,8 @@ class AssemblyChartV1SaveRequest(BaseModel):
     """ # noqa: E501
     appearance: Optional[StrictStr] = Field(default=None, description="Presentation and serving requirements (up to 2000 characters)")
     assembled_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Assembled amount (bookmark rate). Must be greater than 0", alias="assembledAmount")
-    date_from: Optional[StrictStr] = Field(default=None, description="Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime)", alias="dateFrom")
-    date_to: Optional[StrictStr] = Field(default=None, description="End date of the validity period; null for an open-ended chart", alias="dateTo")
+    date_from: Optional[StrictStr] = Field(default=None, description="Start date of the validity period (YYYY-MM-DD)", alias="dateFrom")
+    date_to: StrictStr = Field(description="End date of the validity period (YYYY-MM-DD)", alias="dateTo")
     description: Optional[StrictStr] = Field(default=None, description="Free-text description field (up to 2000 characters)")
     direct_writeoff_store_specification: Optional[StoreSpecification] = Field(default=None, description="Department filter for DIRECT write-off strategy. null — applies to all departments", alias="directWriteoffStoreSpecification")
     franchise_master_id: Optional[StrictStr] = Field(default=None, description="Franchise master UUID. null — not a franchise object", alias="franchiseMasterId")

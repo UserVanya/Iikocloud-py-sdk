@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 List of events
 
-Returns a list of events for a period or starting from a given revision
+Returns a list of events for a period or starting from a given revision. Exactly one mode is required: fromRevision, or both fromTime and toTime. fromRevision cannot be combined with fromTime or toTime.
 
 ### Example
 

@@ -52,6 +52,7 @@ class TestInternalTransferGetResponse(unittest.TestCase):
                         product = '', )
                     ],
                 number = '',
+                revision = 56,
                 status = '',
                 store_from = '',
                 store_to = '',

@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **event_types** | **List[str]** | Event codes to filter by. If omitted or empty, all events are returned | [optional] 
-**from_revision** | **int** | Revision to request events from (incremental mode). Cannot be combined with fromTime/toTime | [optional] 
-**from_time** | **str** | Period start, inclusive, date-time format. Must be provided together with toTime | [optional] 
+**from_revision** | **int** | Revision to request events from (incremental mode), must be zero or greater. Required unless both fromTime and toTime are provided. Cannot be combined with fromTime/toTime | [optional] 
+**from_time** | **datetime** | Period start, inclusive, date-time format. Required together with toTime when fromRevision is not provided | [optional] 
 **organization_id** | **UUID** | Organization identifier (GUID). If provided, the request goes to the RMS API; otherwise to the Chain API by userContext.uocId | [optional] 
-**to_time** | **str** | Period end, exclusive, date-time format. Must be provided together with fromTime | [optional] 
+**to_time** | **datetime** | Period end, exclusive, date-time format. Required together with fromTime when fromRevision is not provided | [optional] 
 
 ## Example
 

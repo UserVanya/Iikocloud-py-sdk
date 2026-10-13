@@ -39,6 +39,7 @@ class TestGetPriceListRequest(unittest.TestCase):
             )
         else:
             return GetPriceListRequest(
+                counteragent_id = '',
         )
         """
 

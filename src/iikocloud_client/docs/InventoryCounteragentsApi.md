@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Get counteragents list
 
-Gets a list of counteragents with pagination and type filtering support
+Gets a list of counteragents with pagination and optional filtering by type, deletion flag and revision
 
 ### Example
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 Get supplier price list
 
-Gets a supplier's full price list. Returns the currently active price list
+Gets a supplier's full price list. The counteragent must be a supplier. Returns the currently active price list
 
 ### Example
 

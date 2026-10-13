@@ -35,20 +35,20 @@ class TestPayRequest(unittest.TestCase):
         model = PayRequest()
         if include_optional:
             return PayRequest(
-                account_from = '',
-                account_to = '',
-                var_date = '',
+                account_id = '',
+                amount = 1.337,
+                cfo_item_id = '',
                 document_id = '',
                 organization_id = '',
-                sum = 1.337
+                payment_date = ''
             )
         else:
             return PayRequest(
-                account_from = '',
-                var_date = '',
+                account_id = '',
+                amount = 1.337,
                 document_id = '',
                 organization_id = '',
-                sum = 1.337,
+                payment_date = '',
         )
         """
 

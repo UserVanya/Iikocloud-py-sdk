@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **attendance_type_id** | **UUID** | Attendance type UUID | [optional] 
 **comment** | **str** | Comment | [optional] 
 **employee_id** | **UUID** | Employee UUID | 
-**end_at** | **str** | Date and time of the confirmed attendance end. If the value is &#x60;null&#x60;, the attendance is considered open. Existing attendances may be open. | 
-**is_confirmed_manually** | **bool** | Manually confirmed flag; may be absent for legacy data. | [optional] 
+**end_at** | **str** | Date and time of the confirmed attendance end. Required field: creating an open attendance (&#x60;null&#x60;) is not supported. | 
+**is_confirmed_manually** | **bool** | Manually confirmed flag; may be absent for legacy data | [optional] 
 **organization_id** | **UUID** | Organization UUID | 
 **personal_end_at** | **str** | Date and time of the registered attendance end from POS | [optional] 
 **personal_start_at** | **str** | Date and time of the registered attendance start from POS | [optional] 

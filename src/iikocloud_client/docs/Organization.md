@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **organization_id** | **str** | UOC organization identifier | [optional] 
 **parent_id** | **str** | UOC identifier of the parent organization; null for the root node | [optional] 
 **rating** | **float** | Organization rating as represented by the source; null if the rating is absent | [optional] 
-**type** | **str** | Organization type. Confirmed values: Chain — a chain, Rms — an organization | [optional] 
+**type** | **str** | Organization node type. Confirmed values: DEPARTMENT — department, STORE — store, CENTRALSTORE — central store, CENTRALOFFICE — central office, MANUFACTURE — production, SALEPOINT — point of sale | [optional] 
 **version** | **str** | internal API server version of the organization; null if the version is unknown | [optional] 
 
 ## Example

@@ -29,7 +29,7 @@ class SetPaymentDateOutgoingRequest(BaseModel):
     """ # noqa: E501
     document_id: StrictStr = Field(description="Incoming invoice identifier (GUID)", alias="documentId")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")
-    payment_date: StrictStr = Field(description="Payment date (YYYY-MM-DD format)", alias="paymentDate")
+    payment_date: StrictStr = Field(description="Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)", alias="paymentDate")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["documentId", "organizationId", "paymentDate"]
 

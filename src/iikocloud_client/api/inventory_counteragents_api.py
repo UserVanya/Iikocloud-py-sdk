@@ -61,7 +61,7 @@ class InventoryCounteragentsApi:
     ) -> GetCounteragentsResponse:
         """Get counteragents list
 
-        Gets a list of counteragents with pagination and type filtering support
+        Gets a list of counteragents with pagination and optional filtering by type, deletion flag and revision
 
         :param get_counteragents_request: Request parameters (required)
         :type get_counteragents_request: GetCounteragentsRequest
@@ -138,7 +138,7 @@ class InventoryCounteragentsApi:
     ) -> ApiResponse[GetCounteragentsResponse]:
         """Get counteragents list
 
-        Gets a list of counteragents with pagination and type filtering support
+        Gets a list of counteragents with pagination and optional filtering by type, deletion flag and revision
 
         :param get_counteragents_request: Request parameters (required)
         :type get_counteragents_request: GetCounteragentsRequest
@@ -215,7 +215,7 @@ class InventoryCounteragentsApi:
     ) -> RESTResponseType:
         """Get counteragents list
 
-        Gets a list of counteragents with pagination and type filtering support
+        Gets a list of counteragents with pagination and optional filtering by type, deletion flag and revision
 
         :param get_counteragents_request: Request parameters (required)
         :type get_counteragents_request: GetCounteragentsRequest
@@ -368,7 +368,7 @@ class InventoryCounteragentsApi:
     ) -> GetPriceListResponse:
         """Get supplier price list
 
-        Gets a supplier's full price list. Returns the currently active price list
+        Gets a supplier's full price list. The counteragent must be a supplier. Returns the currently active price list
 
         :param get_price_list_request: Request parameters (required)
         :type get_price_list_request: GetPriceListRequest
@@ -446,7 +446,7 @@ class InventoryCounteragentsApi:
     ) -> ApiResponse[GetPriceListResponse]:
         """Get supplier price list
 
-        Gets a supplier's full price list. Returns the currently active price list
+        Gets a supplier's full price list. The counteragent must be a supplier. Returns the currently active price list
 
         :param get_price_list_request: Request parameters (required)
         :type get_price_list_request: GetPriceListRequest
@@ -524,7 +524,7 @@ class InventoryCounteragentsApi:
     ) -> RESTResponseType:
         """Get supplier price list
 
-        Gets a supplier's full price list. Returns the currently active price list
+        Gets a supplier's full price list. The counteragent must be a supplier. Returns the currently active price list
 
         :param get_price_list_request: Request parameters (required)
         :type get_price_list_request: GetPriceListRequest

@@ -4,9 +4,101 @@ All URIs are relative to *https://api-ru.iiko.services*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_olap_preset_report**](ReportingOlapApi.md#get_olap_preset_report) | **POST** /api/reporting/v1/olap/presets/get | Get saved OLAP preset data
 [**get_olap_report**](ReportingOlapApi.md#get_olap_report) | **POST** /api/reporting/v1/olap/get | Run OLAP report
 [**get_olap_report_columns**](ReportingOlapApi.md#get_olap_report_columns) | **POST** /api/reporting/v1/olap/columns/get | Get OLAP report columns
+[**list_olap_presets**](ReportingOlapApi.md#list_olap_presets) | **POST** /api/reporting/v1/olap/presets/list | Get saved OLAP presets
 
+
+# **get_olap_preset_report**
+> GetOlapReportResponse get_olap_preset_report(olap_preset_report_request, timeout=timeout)
+
+Get saved OLAP preset data
+
+Returns the data of a saved OLAP preset by its identifier (`presetId`) for a given period (`dateFrom` — start, `dateTo` — end). A preset is a ready-made report configuration (groupings, aggregates, filters) saved by the restaurant owner; the method lets retrieve a report by that configuration.
+
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.get_olap_report_response import GetOlapReportResponse
+from iikocloud_client.models.olap_preset_report_request import OlapPresetReportRequest
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.ReportingOlapApi(api_client)
+    olap_preset_report_request = iikocloud_client.OlapPresetReportRequest() # OlapPresetReportRequest | Request parameters
+    timeout = 56 # int | Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds.  (optional)
+
+    try:
+        # Get saved OLAP preset data
+        api_response = await api_instance.get_olap_preset_report(olap_preset_report_request, timeout=timeout)
+        print("The response of ReportingOlapApi->get_olap_preset_report:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportingOlapApi->get_olap_preset_report: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **olap_preset_report_request** | [**OlapPresetReportRequest**](OlapPresetReportRequest.md)| Request parameters | 
+ **timeout** | **int**| Default: &lt;code&gt;15&lt;/code&gt;&lt;/br&gt; Example: &lt;code&gt;10&lt;/code&gt;&lt;/br&gt; Timeout in seconds.  | [optional] 
+
+### Return type
+
+[**GetOlapReportResponse**](GetOlapReportResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+**400** | Invalid input data |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Preset not found |  -  |
+**429** | Too many requests |  -  |
+**500** | Internal server error |  -  |
+**502** | RMS returned a technical error |  -  |
+**504** | RMS did not respond in time |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_olap_report**
 > GetOlapReportResponse get_olap_report(get_olap_report_request, timeout=timeout)
@@ -15,7 +107,7 @@ Run OLAP report
 
 Builds an OLAP report on sales, transactions or deliveries with an arbitrary configuration and returns its data (`data`) and totals (`summary`). This is the main way for an integrator to build analytical data marts and management reporting: the client defines the row and column grouping fields, aggregate fields and filters.
 Field names (`groupByRowFields`, `groupByColFields`, `aggregateFields`, `filters`) are taken from the metadata of the `olap/columns/get` method. The set of available fields changes between versions of the server's internal API, so request the current metadata before building a report.
-Every request must contain a date filter. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS.
+Every request must contain a date filter. Dates must use the `yyyy-MM-dd` format. Recommended date fields: `OpenDate.Typed` for SALES and DELIVERIES, `DateTime.DateTyped` (or `DateTime.Typed`) for TRANSACTIONS.
 <b>Caution!</> A query that is too broad: a long period, a large number of restaurants or fields/groupings, as well as balance fields (`StartBalance.*`, `FinalBalance.*`), which are calculated over the entire transaction history, may take a long time to run or return no result. Split large queries into smaller sequential queries with a narrow period. To get balances, use specialized methods instead of OLAP.
 
 
@@ -163,6 +255,94 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List[OlapColumn]**](OlapColumn.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+**400** | Invalid input data |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**429** | Too many requests |  -  |
+**500** | Internal server error |  -  |
+**502** | RMS returned a technical error |  -  |
+**504** | RMS did not respond in time |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_olap_presets**
+> List[OlapPreset] list_olap_presets(body, timeout=timeout)
+
+Get saved OLAP presets
+
+Returns the list of OLAP presets saved in iikoOffice — ready-made report configurations set up by the restaurant owner. Each item contains an identifier (`presetId`) and the preset name. The method returns all saved presets.
+
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import iikocloud_client
+from iikocloud_client.models.olap_preset import OlapPreset
+from iikocloud_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-ru.iiko.services
+# See configuration.py for a list of all supported configuration parameters.
+configuration = iikocloud_client.Configuration(
+    host = "https://api-ru.iiko.services"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = iikocloud_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with iikocloud_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = iikocloud_client.ReportingOlapApi(api_client)
+    body = None # object | Request parameters
+    timeout = 56 # int | Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds.  (optional)
+
+    try:
+        # Get saved OLAP presets
+        api_response = await api_instance.list_olap_presets(body, timeout=timeout)
+        print("The response of ReportingOlapApi->list_olap_presets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportingOlapApi->list_olap_presets: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **object**| Request parameters | 
+ **timeout** | **int**| Default: &lt;code&gt;15&lt;/code&gt;&lt;/br&gt; Example: &lt;code&gt;10&lt;/code&gt;&lt;/br&gt; Timeout in seconds.  | [optional] 
+
+### Return type
+
+[**List[OlapPreset]**](OlapPreset.md)
 
 ### Authorization
 

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from iikocloud_client.models.internal_transfer_get_item import InternalTransferGetItem
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -35,8 +36,10 @@ class InternalTransferListItem(BaseModel):
     deleted: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is deleted")
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
     is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
+    items: Optional[List[InternalTransferGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     processed: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is processed")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     store_from: Optional[StrictStr] = Field(default=None, description="Write-off store identifier (GUID)", alias="storeFrom")
     store_to: Optional[StrictStr] = Field(default=None, description="Receipt store identifier (GUID)", alias="storeTo")
     sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount including VAT. Required if price is not specified")
@@ -44,7 +47,7 @@ class InternalTransferListItem(BaseModel):
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["comment", "conception", "date", "dateCreated", "dateModified", "deleted", "documentId", "isEditable", "number", "processed", "storeFrom", "storeTo", "sum", "sumWithoutVat", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["comment", "conception", "date", "dateCreated", "dateModified", "deleted", "documentId", "isEditable", "items", "number", "processed", "revision", "storeFrom", "storeTo", "sum", "sumWithoutVat", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +90,13 @@ class InternalTransferListItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item_items in self.items:
+                if _item_items:
+                    _items.append(_item_items.to_dict())
+            _dict['items'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -112,8 +122,10 @@ class InternalTransferListItem(BaseModel):
             "deleted": obj.get("deleted"),
             "documentId": obj.get("documentId"),
             "isEditable": obj.get("isEditable"),
+            "items": [InternalTransferGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
             "processed": obj.get("processed"),
+            "revision": obj.get("revision"),
             "storeFrom": obj.get("storeFrom"),
             "storeTo": obj.get("storeTo"),
             "sum": obj.get("sum"),

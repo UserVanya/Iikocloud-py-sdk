@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **assembled_quantity** | **float** | Assembled quantity (bookmark rate). Must be greater than 0 | [optional] 
-**date_from** | **str** | Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime) | [optional] 
-**date_to** | **str** | End date of the validity period; null for an open-ended chart | [optional] 
+**date_from** | **str** | Start date of the validity period (YYYY-MM-DD) | [optional] 
+**date_to** | **str** | End date of the validity period (YYYY-MM-DD) | [optional] 
 **direct_writeoff_store_specification** | [**StoreSpecification**](StoreSpecification.md) | Organization (structural unit) filter for DIRECT write-off strategy. null — applies to all organizations | [optional] 
 **id** | **UUID** | UUID of the assembly chart | [optional] 
 **items** | [**List[PreparedChartItemDto]**](PreparedChartItemDto.md) | Ingredient lines of the assembly chart | [optional] 

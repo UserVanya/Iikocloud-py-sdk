@@ -26,10 +26,16 @@ from iikocloud_client.models.container_list_request import ContainerListRequest
 from iikocloud_client.models.container_list_response import ContainerListResponse
 from iikocloud_client.models.custom_category_list_request import CustomCategoryListRequest
 from iikocloud_client.models.custom_category_list_response import CustomCategoryListResponse
+from iikocloud_client.models.discount_type_list_request import DiscountTypeListRequest
+from iikocloud_client.models.discount_type_list_response import DiscountTypeListResponse
 from iikocloud_client.models.menu_section_list_request import MenuSectionListRequest
 from iikocloud_client.models.menu_section_list_response import MenuSectionListResponse
 from iikocloud_client.models.modifier_schema_list_request import ModifierSchemaListRequest
 from iikocloud_client.models.modifier_schema_list_response import ModifierSchemaListResponse
+from iikocloud_client.models.outer_economic_activity_nomenclature_code import OuterEconomicActivityNomenclatureCode
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_get_request import OuterEconomicActivityNomenclatureCodeGetRequest
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_list_request import OuterEconomicActivityNomenclatureCodeListRequest
+from iikocloud_client.models.outer_economic_activity_nomenclature_code_list_response import OuterEconomicActivityNomenclatureCodeListResponse
 from iikocloud_client.models.place_type_list_request import PlaceTypeListRequest
 from iikocloud_client.models.place_type_list_response import PlaceTypeListResponse
 from iikocloud_client.models.producer_list_request import ProducerListRequest
@@ -55,6 +61,316 @@ class NomenclatureDirectoriesApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    async def get_nomenclature_outer_economic_activity_code(
+        self,
+        outer_economic_activity_nomenclature_code_get_request: Annotated[OuterEconomicActivityNomenclatureCodeGetRequest, Field(description="Request body for retrieving a foreign economic activity commodity code by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OuterEconomicActivityNomenclatureCode:
+        """Get a foreign economic activity commodity code by ID
+
+        Returns a foreign economic activity commodity code by UUID. The `id` field is required. If no code with the given identifier exists, a 404 error is returned. 
+
+        :param outer_economic_activity_nomenclature_code_get_request: Request body for retrieving a foreign economic activity commodity code by ID (required)
+        :type outer_economic_activity_nomenclature_code_get_request: OuterEconomicActivityNomenclatureCodeGetRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_outer_economic_activity_code_serialize(
+            outer_economic_activity_nomenclature_code_get_request=outer_economic_activity_nomenclature_code_get_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCode",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_nomenclature_outer_economic_activity_code_with_http_info(
+        self,
+        outer_economic_activity_nomenclature_code_get_request: Annotated[OuterEconomicActivityNomenclatureCodeGetRequest, Field(description="Request body for retrieving a foreign economic activity commodity code by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OuterEconomicActivityNomenclatureCode]:
+        """Get a foreign economic activity commodity code by ID
+
+        Returns a foreign economic activity commodity code by UUID. The `id` field is required. If no code with the given identifier exists, a 404 error is returned. 
+
+        :param outer_economic_activity_nomenclature_code_get_request: Request body for retrieving a foreign economic activity commodity code by ID (required)
+        :type outer_economic_activity_nomenclature_code_get_request: OuterEconomicActivityNomenclatureCodeGetRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_outer_economic_activity_code_serialize(
+            outer_economic_activity_nomenclature_code_get_request=outer_economic_activity_nomenclature_code_get_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCode",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_nomenclature_outer_economic_activity_code_without_preload_content(
+        self,
+        outer_economic_activity_nomenclature_code_get_request: Annotated[OuterEconomicActivityNomenclatureCodeGetRequest, Field(description="Request body for retrieving a foreign economic activity commodity code by ID")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get a foreign economic activity commodity code by ID
+
+        Returns a foreign economic activity commodity code by UUID. The `id` field is required. If no code with the given identifier exists, a 404 error is returned. 
+
+        :param outer_economic_activity_nomenclature_code_get_request: Request body for retrieving a foreign economic activity commodity code by ID (required)
+        :type outer_economic_activity_nomenclature_code_get_request: OuterEconomicActivityNomenclatureCodeGetRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_nomenclature_outer_economic_activity_code_serialize(
+            outer_economic_activity_nomenclature_code_get_request=outer_economic_activity_nomenclature_code_get_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCode",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '404': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_nomenclature_outer_economic_activity_code_serialize(
+        self,
+        outer_economic_activity_nomenclature_code_get_request,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if outer_economic_activity_nomenclature_code_get_request is not None:
+            _body_params = outer_economic_activity_nomenclature_code_get_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v1/outer_economic_activity_nomenclature_codes/get',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -1274,6 +1590,310 @@ class NomenclatureDirectoriesApi:
 
 
     @validate_call
+    async def list_nomenclature_discount_types(
+        self,
+        discount_type_list_request: Annotated[DiscountTypeListRequest, Field(description="Parameters for the discount type list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DiscountTypeListResponse:
+        """Get a list of discount types
+
+        Returns a list of discount types with filtering and pagination support. Filter fields: `id`, `name`, `isDeleted`. Allowed operators: `id` — eq, in; `name` — eq, ne, in, nin, like, blank, notblank; `isDeleted` — eq (boolean). All filters are combined with AND. Pagination via `limit`/`offset`. 
+
+        :param discount_type_list_request: Parameters for the discount type list request (required)
+        :type discount_type_list_request: DiscountTypeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_discount_types_serialize(
+            discount_type_list_request=discount_type_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiscountTypeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_nomenclature_discount_types_with_http_info(
+        self,
+        discount_type_list_request: Annotated[DiscountTypeListRequest, Field(description="Parameters for the discount type list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DiscountTypeListResponse]:
+        """Get a list of discount types
+
+        Returns a list of discount types with filtering and pagination support. Filter fields: `id`, `name`, `isDeleted`. Allowed operators: `id` — eq, in; `name` — eq, ne, in, nin, like, blank, notblank; `isDeleted` — eq (boolean). All filters are combined with AND. Pagination via `limit`/`offset`. 
+
+        :param discount_type_list_request: Parameters for the discount type list request (required)
+        :type discount_type_list_request: DiscountTypeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_discount_types_serialize(
+            discount_type_list_request=discount_type_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiscountTypeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_nomenclature_discount_types_without_preload_content(
+        self,
+        discount_type_list_request: Annotated[DiscountTypeListRequest, Field(description="Parameters for the discount type list request")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get a list of discount types
+
+        Returns a list of discount types with filtering and pagination support. Filter fields: `id`, `name`, `isDeleted`. Allowed operators: `id` — eq, in; `name` — eq, ne, in, nin, like, blank, notblank; `isDeleted` — eq (boolean). All filters are combined with AND. Pagination via `limit`/`offset`. 
+
+        :param discount_type_list_request: Parameters for the discount type list request (required)
+        :type discount_type_list_request: DiscountTypeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_discount_types_serialize(
+            discount_type_list_request=discount_type_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiscountTypeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_nomenclature_discount_types_serialize(
+        self,
+        discount_type_list_request,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if discount_type_list_request is not None:
+            _body_params = discount_type_list_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v1/discount-type/list',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def list_nomenclature_menu_sections(
         self,
         menu_section_list_request: Annotated[MenuSectionListRequest, Field(description="Parameters for the menu section list request")],
@@ -1866,6 +2486,313 @@ class NomenclatureDirectoriesApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/nomenclature/v1/modifier-schema/list',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_nomenclature_outer_economic_activity_codes(
+        self,
+        outer_economic_activity_nomenclature_code_list_request: Annotated[OuterEconomicActivityNomenclatureCodeListRequest, Field(description="Request body for retrieving the foreign economic activity commodity code directory")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OuterEconomicActivityNomenclatureCodeListResponse:
+        """Get the foreign economic activity commodity code directory
+
+        Returns the entire foreign economic activity commodity code directory. To include soft-deleted codes, pass `includeDeleted: true` (default false). 
+
+        :param outer_economic_activity_nomenclature_code_list_request: Request body for retrieving the foreign economic activity commodity code directory (required)
+        :type outer_economic_activity_nomenclature_code_list_request: OuterEconomicActivityNomenclatureCodeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_outer_economic_activity_codes_serialize(
+            outer_economic_activity_nomenclature_code_list_request=outer_economic_activity_nomenclature_code_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCodeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_nomenclature_outer_economic_activity_codes_with_http_info(
+        self,
+        outer_economic_activity_nomenclature_code_list_request: Annotated[OuterEconomicActivityNomenclatureCodeListRequest, Field(description="Request body for retrieving the foreign economic activity commodity code directory")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OuterEconomicActivityNomenclatureCodeListResponse]:
+        """Get the foreign economic activity commodity code directory
+
+        Returns the entire foreign economic activity commodity code directory. To include soft-deleted codes, pass `includeDeleted: true` (default false). 
+
+        :param outer_economic_activity_nomenclature_code_list_request: Request body for retrieving the foreign economic activity commodity code directory (required)
+        :type outer_economic_activity_nomenclature_code_list_request: OuterEconomicActivityNomenclatureCodeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_outer_economic_activity_codes_serialize(
+            outer_economic_activity_nomenclature_code_list_request=outer_economic_activity_nomenclature_code_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCodeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_nomenclature_outer_economic_activity_codes_without_preload_content(
+        self,
+        outer_economic_activity_nomenclature_code_list_request: Annotated[OuterEconomicActivityNomenclatureCodeListRequest, Field(description="Request body for retrieving the foreign economic activity commodity code directory")],
+        timeout: Annotated[Optional[StrictInt], Field(description="Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the foreign economic activity commodity code directory
+
+        Returns the entire foreign economic activity commodity code directory. To include soft-deleted codes, pass `includeDeleted: true` (default false). 
+
+        :param outer_economic_activity_nomenclature_code_list_request: Request body for retrieving the foreign economic activity commodity code directory (required)
+        :type outer_economic_activity_nomenclature_code_list_request: OuterEconomicActivityNomenclatureCodeListRequest
+        :param timeout: Default: <code>15</code></br> Example: <code>10</code></br> Timeout in seconds. 
+        :type timeout: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_nomenclature_outer_economic_activity_codes_serialize(
+            outer_economic_activity_nomenclature_code_list_request=outer_economic_activity_nomenclature_code_list_request,
+            timeout=timeout,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OuterEconomicActivityNomenclatureCodeListResponse",
+            '400': "GenericErrorResponse",
+            '401': "GenericErrorResponse",
+            '403': "GenericErrorResponse",
+            '429': "GenericErrorResponse",
+            '500': "GenericErrorResponse",
+            '502': "GenericErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_nomenclature_outer_economic_activity_codes_serialize(
+        self,
+        outer_economic_activity_nomenclature_code_list_request,
+        timeout,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if timeout is not None:
+            _header_params['Timeout'] = timeout
+        # process the form parameters
+        # process the body parameter
+        if outer_economic_activity_nomenclature_code_list_request is not None:
+            _body_params = outer_economic_activity_nomenclature_code_list_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/nomenclature/v1/outer_economic_activity_nomenclature_codes/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.incoming_invoice_item import IncomingInvoiceItem
 from typing import Optional, Set
@@ -49,12 +49,13 @@ class IncomingInvoice(BaseModel):
     matches_to_the_order: Optional[StrictBool] = Field(default=None, description="Matches the order", alias="matchesToTheOrder")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     payment_date: Optional[StrictStr] = Field(default=None, description="Payment date (YYYY-MM-DD)", alias="paymentDate")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = Field(default=None, description="Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)")
     transport_invoice_number: Optional[StrictStr] = Field(default=None, description="Transport invoice number", alias="transportInvoiceNumber")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "deliveryOnTime", "documentId", "dueDate", "employeePassToAccount", "incomingDate", "incomingDocumentNumber", "internalOutgoingInvoiceId", "invoice", "isAutomatic", "isEditable", "items", "matchesToTheOrder", "number", "paymentDate", "status", "transportInvoiceNumber", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "deliveryOnTime", "documentId", "dueDate", "employeePassToAccount", "incomingDate", "incomingDocumentNumber", "internalOutgoingInvoiceId", "invoice", "isAutomatic", "isEditable", "items", "matchesToTheOrder", "number", "paymentDate", "revision", "status", "transportInvoiceNumber", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -142,6 +143,7 @@ class IncomingInvoice(BaseModel):
             "matchesToTheOrder": obj.get("matchesToTheOrder"),
             "number": obj.get("number"),
             "paymentDate": obj.get("paymentDate"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "transportInvoiceNumber": obj.get("transportInvoiceNumber"),
             "userCreated": obj.get("userCreated"),

@@ -66,6 +66,7 @@ class TestReturnedInvoiceGetResponse(unittest.TestCase):
                         vat_percent = 1.337, )
                     ],
                 number = '',
+                revision = 56,
                 status = '',
                 user_created = '',
                 user_modified = ''

@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **description** | **str** | Menu description. | [optional] 
 **id** | **str** | Menu ID. | 
 **image** | [**Image**](Image.md) | Menu image. Replaces ButtonImageUrl. | [optional] 
-**items_groups** | [**List[ItemsGroup]**](ItemsGroup.md) | Item groups. | [optional] 
+**items_groups** | [**List[ItemsGroup]**](ItemsGroup.md) | Item groups. Placed after the reference dictionaries (products, modifiers, etc.)  so that dictionaries are deserialized first. | [optional] 
 **modifiers** | [**List[MenuV3Modifier]**](MenuV3Modifier.md) | Modifiers. | [optional] 
 **name** | **str** | Menu name. | 
-**override_tax_categories** | [**List[MenuV3OverrideTaxCategory]**](MenuV3OverrideTaxCategory.md) | Tax category overrides by order type. | [optional] 
+**override_tax_categories** | [**List[MenuV3OverrideTaxCategory]**](MenuV3OverrideTaxCategory.md) | Tax category overrides of the organization. | [optional] 
 **product_categories** | [**List[ProductCategory]**](ProductCategory.md) | Product categories. | [optional] 
 **products** | [**List[MenuV3Product]**](MenuV3Product.md) | Products. | [optional] 
 **schedules** | [**List[Schedule]**](Schedule.md) | Schedules. | [optional] 

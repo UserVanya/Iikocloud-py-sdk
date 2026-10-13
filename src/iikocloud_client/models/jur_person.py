@@ -19,7 +19,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from iikocloud_client.models.legal_address import LegalAddress
 from iikocloud_client.models.organization import Organization
+from iikocloud_client.models.responsible_person import ResponsiblePerson
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,10 +33,13 @@ class JurPerson(BaseModel):
     children: Optional[List[Organization]] = Field(default=None, description="Child organizations with the same recursive structure; an empty array is returned for a leaf node")
     code: Optional[StrictStr] = Field(default=None, description="User-defined legal entity code; null if the code is not set")
     jur_person_id: Optional[StrictStr] = Field(default=None, description="Legal entity identifier", alias="jurPersonId")
+    legal_address: Optional[LegalAddress] = Field(default=None, description="Legal address of the legal entity; null if not provided by the source", alias="legalAddress")
     name: Optional[StrictStr] = Field(default=None, description="Display name of the legal entity; null if the name is not provided by the source")
-    type: Optional[StrictStr] = Field(default=None, description="Legal entity type. Always takes the value JUR_PERSON")
+    responsible_persons: Optional[List[ResponsiblePerson]] = Field(default=None, description="Responsible persons of the legal entity; an empty array if not provided by the source", alias="responsiblePersons")
+    taxpayer_id_number: Optional[StrictStr] = Field(default=None, description="Taxpayer identification number (INN) of the legal entity; null if not provided by the source", alias="taxpayerIdNumber")
+    type: Optional[StrictStr] = Field(default=None, description="Legal entity node type. Always takes the value JURPERSON")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["children", "code", "jurPersonId", "name", "type"]
+    __properties: ClassVar[List[str]] = ["children", "code", "jurPersonId", "legalAddress", "name", "responsiblePersons", "taxpayerIdNumber", "type"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,6 +89,16 @@ class JurPerson(BaseModel):
                 if _item_children:
                     _items.append(_item_children.to_dict())
             _dict['children'] = _items
+        # override the default output from pydantic by calling `to_dict()` of legal_address
+        if self.legal_address:
+            _dict['legalAddress'] = self.legal_address.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in responsible_persons (list)
+        _items = []
+        if self.responsible_persons:
+            for _item_responsible_persons in self.responsible_persons:
+                if _item_responsible_persons:
+                    _items.append(_item_responsible_persons.to_dict())
+            _dict['responsiblePersons'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -104,7 +119,10 @@ class JurPerson(BaseModel):
             "children": [Organization.from_dict(_item) for _item in obj["children"]] if obj.get("children") is not None else None,
             "code": obj.get("code"),
             "jurPersonId": obj.get("jurPersonId"),
+            "legalAddress": LegalAddress.from_dict(obj["legalAddress"]) if obj.get("legalAddress") is not None else None,
             "name": obj.get("name"),
+            "responsiblePersons": [ResponsiblePerson.from_dict(_item) for _item in obj["responsiblePersons"]] if obj.get("responsiblePersons") is not None else None,
+            "taxpayerIdNumber": obj.get("taxpayerIdNumber"),
             "type": obj.get("type")
         })
         # store additional fields in additional_properties

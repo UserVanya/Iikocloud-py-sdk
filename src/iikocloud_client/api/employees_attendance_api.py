@@ -67,7 +67,7 @@ class EmployeesAttendanceApi:
     ) -> AttendanceCreateResponse:
         """Create employee attendance
 
-        Creates a closed employee attendance and returns the creation result
+        Creates a closed employee attendance and returns the creation result. Creating an open attendance (`endAt` omitted or `null`) is not supported.
 
         :param attendance_create_request: Request parameters (required)
         :type attendance_create_request: AttendanceCreateRequest
@@ -147,7 +147,7 @@ class EmployeesAttendanceApi:
     ) -> ApiResponse[AttendanceCreateResponse]:
         """Create employee attendance
 
-        Creates a closed employee attendance and returns the creation result
+        Creates a closed employee attendance and returns the creation result. Creating an open attendance (`endAt` omitted or `null`) is not supported.
 
         :param attendance_create_request: Request parameters (required)
         :type attendance_create_request: AttendanceCreateRequest
@@ -227,7 +227,7 @@ class EmployeesAttendanceApi:
     ) -> RESTResponseType:
         """Create employee attendance
 
-        Creates a closed employee attendance and returns the creation result
+        Creates a closed employee attendance and returns the creation result. Creating an open attendance (`endAt` omitted or `null`) is not supported.
 
         :param attendance_create_request: Request parameters (required)
         :type attendance_create_request: AttendanceCreateRequest

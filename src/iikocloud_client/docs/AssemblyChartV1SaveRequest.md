@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **appearance** | **str** | Presentation and serving requirements (up to 2000 characters) | [optional] 
 **assembled_amount** | **float** | Assembled amount (bookmark rate). Must be greater than 0 | [optional] 
-**date_from** | **str** | Start date of the validity period (YYYY-MM-DD or ISO 8601 datetime) | [optional] 
-**date_to** | **str** | End date of the validity period; null for an open-ended chart | [optional] 
+**date_from** | **str** | Start date of the validity period (YYYY-MM-DD) | [optional] 
+**date_to** | **str** | End date of the validity period (YYYY-MM-DD) | 
 **description** | **str** | Free-text description field (up to 2000 characters) | [optional] 
 **direct_writeoff_store_specification** | [**StoreSpecification**](StoreSpecification.md) | Department filter for DIRECT write-off strategy. null — applies to all departments | [optional] 
 **franchise_master_id** | **str** | Franchise master UUID. null — not a franchise object | [optional] 

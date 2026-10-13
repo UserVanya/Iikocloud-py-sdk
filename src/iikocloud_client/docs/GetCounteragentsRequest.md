@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**is_deleted** | **bool** | Filter by deletion flag: true — deleted only, false — non-deleted only, omit — all | [optional] 
 **limit** | **int** | Number of records to return (1-500) | [optional] 
 **offset** | **int** | Pagination offset | [optional] 
-**organization_id** | **str** | Organization identifier (GUID) | [optional] 
+**revision** | **int** | Return only records with revision greater than or equal to the given value (revision &gt;&#x3D; value) | [optional] 
 **type** | **List[str]** | Counteragent type (supplier, employee, client) | [optional] 
 
 ## Example

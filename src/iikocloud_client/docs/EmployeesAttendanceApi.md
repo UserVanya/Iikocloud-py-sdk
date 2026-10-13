@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create employee attendance
 
-Creates a closed employee attendance and returns the creation result
+Creates a closed employee attendance and returns the creation result. Creating an open attendance (`endAt` omitted or `null`) is not supported.
 
 ### Example
 

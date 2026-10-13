@@ -4897,7 +4897,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> CorrelationIdResponse:
         """Print bill.
 
-           > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -4972,7 +4972,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> ApiResponse[CorrelationIdResponse]:
         """Print bill.
 
-           > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -5047,7 +5047,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> RESTResponseType:
         """Print bill.
 
-           > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -6408,6 +6408,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> None:
         """Update tracking link of an order.
 
+           > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -6482,6 +6483,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> ApiResponse[None]:
         """Update tracking link of an order.
 
+           > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -6556,6 +6558,7 @@ class DeliveriesCreateAndUpdateApi:
     ) -> RESTResponseType:
         """Update tracking link of an order.
 
+           > Restriction group: `Order driver: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int

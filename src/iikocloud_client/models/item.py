@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from iikocloud_client.models.combo_size import ComboSize
 from iikocloud_client.models.menu_v3_size_price import MenuV3SizePrice
 from iikocloud_client.models.modifier_group import ModifierGroup
@@ -36,6 +37,7 @@ class Item(BaseModel):
     is_hidden: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the item is hidden.", alias="isHidden")
     item_type: Optional[StrictStr] = Field(default=None, description="Item type: \"PRODUCT\" (default), \"COMBO\".  If not set (null), treated as PRODUCT for backward compatibility with the old menu schema.", alias="itemType")
     labels: Optional[List[StrictStr]] = Field(default=None, description="List of website tags associated with the item.")
+    menu_item_id: Optional[UUID] = Field(default=None, description="Unique key of the menu item.", alias="menuItemId")
     modifier_groups: Optional[List[ModifierGroup]] = Field(default=None, description="Modifier groups.", alias="modifierGroups")
     name: StrictStr = Field(description="Item name.")
     product_id: Optional[StrictStr] = Field(default=None, description="Product ID.  REQUIRED for regular products (itemType = null or \"PRODUCT\").  NULL for combo meals (itemType = \"COMBO\").", alias="productId")
@@ -43,7 +45,7 @@ class Item(BaseModel):
     sizes: Optional[List[ComboSize]] = Field(default=None, description="Combo sizes with visual information (images, visibility).  Used only when itemType = \"COMBO\".  Ignored for PRODUCT (sizePrices[] is used instead).  Contains information specific to placement in a group.")
     sort_order: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Sort order of the item in a group (starting from 0).  Optional — for explicit sorting in the UI.", alias="sortOrder")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of internal tags associated with the item.")
-    __properties: ClassVar[List[str]] = ["allergenGroupIds", "comboId", "description", "isHidden", "itemType", "labels", "modifierGroups", "name", "productId", "sizePrices", "sizes", "sortOrder", "tags"]
+    __properties: ClassVar[List[str]] = ["allergenGroupIds", "comboId", "description", "isHidden", "itemType", "labels", "menuItemId", "modifierGroups", "name", "productId", "sizePrices", "sizes", "sortOrder", "tags"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -130,6 +132,11 @@ class Item(BaseModel):
         if self.labels is None and "labels" in self.model_fields_set:
             _dict['labels'] = None
 
+        # set to None if menu_item_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.menu_item_id is None and "menu_item_id" in self.model_fields_set:
+            _dict['menuItemId'] = None
+
         # set to None if modifier_groups (nullable) is None
         # and model_fields_set contains the field
         if self.modifier_groups is None and "modifier_groups" in self.model_fields_set:
@@ -178,6 +185,7 @@ class Item(BaseModel):
             "isHidden": obj.get("isHidden"),
             "itemType": obj.get("itemType"),
             "labels": obj.get("labels"),
+            "menuItemId": obj.get("menuItemId"),
             "modifierGroups": [ModifierGroup.from_dict(_item) for _item in obj["modifierGroups"]] if obj.get("modifierGroups") is not None else None,
             "name": obj.get("name"),
             "productId": obj.get("productId"),

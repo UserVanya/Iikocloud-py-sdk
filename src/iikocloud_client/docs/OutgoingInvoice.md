@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **number** | **str** | Document number | [optional] 
 **payment_date** | **str** | Payment date (YYYY-MM-DD) | [optional] 
 **revenue_account** | **str** | Revenue account identifier (GUID) | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** | Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted) | [optional] 
 **user_created** | **str** | User who created the document (GUID) | [optional] 
 **user_modified** | **str** | User who last modified the document (GUID) | [optional] 

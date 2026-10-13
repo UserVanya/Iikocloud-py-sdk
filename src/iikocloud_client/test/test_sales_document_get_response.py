@@ -66,6 +66,7 @@ class TestSalesDocumentGetResponse(unittest.TestCase):
                     ],
                 number = '',
                 revenue_account = '',
+                revision = 56,
                 status = '',
                 user_created = '',
                 user_modified = ''

@@ -979,7 +979,7 @@ class BanquetsReservesApi:
     ) -> CorrelationIdResponse:
         """Change order items.
 
-        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1054,7 +1054,7 @@ class BanquetsReservesApi:
     ) -> ApiResponse[CorrelationIdResponse]:
         """Change order items.
 
-        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1129,7 +1129,7 @@ class BanquetsReservesApi:
     ) -> RESTResponseType:
         """Change order items.
 
-        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+        Available only for banquets.   > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1280,7 +1280,7 @@ class BanquetsReservesApi:
     ) -> CorrelationIdResponse:
         """Change reserve/banquet estimated start time.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1355,7 +1355,7 @@ class BanquetsReservesApi:
     ) -> ApiResponse[CorrelationIdResponse]:
         """Change reserve/banquet estimated start time.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1430,7 +1430,7 @@ class BanquetsReservesApi:
     ) -> RESTResponseType:
         """Change reserve/banquet estimated start time.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1581,7 +1581,7 @@ class BanquetsReservesApi:
     ) -> CorrelationIdResponse:
         """Change reserve/banquet tables.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1656,7 +1656,7 @@ class BanquetsReservesApi:
     ) -> ApiResponse[CorrelationIdResponse]:
         """Change reserve/banquet tables.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int
@@ -1731,7 +1731,7 @@ class BanquetsReservesApi:
     ) -> RESTResponseType:
         """Change reserve/banquet tables.
 
-           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.
+           > Allowed from version `9.0.5`.   > This method is a command. Use `api/1/commands/status` method to get the progress status.   > Restriction group: `Orders: changing`.
 
         :param timeout: Timeout in seconds.
         :type timeout: int

@@ -79,6 +79,7 @@ class TestAssemblyChartV2SaveRequest(unittest.TestCase):
             )
         else:
             return AssemblyChartV2SaveRequest(
+                date_to = '',
         )
         """
 

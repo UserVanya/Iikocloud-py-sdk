@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **accounting_category_id** | **UUID** | UUID of the accounting category (as configured in the accounting settings) | [optional] 
 **category_id** | **UUID** | UUID of the product (custom) category. The list of values can be retrieved via the \&quot;Get a list of product categories\&quot; method in the \&quot;Product categories\&quot; category | [optional] 
-**code** | **str** | Group code: 0–8 digits. Used for quick search on the order editing screen | [optional] 
+**code** | **str** | Group code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a group | 
 **color** | [**NomenclatureGroupRGBColor**](NomenclatureGroupRGBColor.md) | Background button colour for POS | [optional] 
 **custom_categories** | [**List[NomenclatureGroupCustomCategory]**](NomenclatureGroupCustomCategory.md) | Custom nomenclature categories. Empty array or null - no categories set | [optional] 
 **default_course** | **int** | Default serving course. null - not set; 0 - VIP course; otherwise - course number | [optional] 

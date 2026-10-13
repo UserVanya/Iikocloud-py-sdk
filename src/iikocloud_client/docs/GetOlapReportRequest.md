@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**aggregate_fields** | **List[str]** | Fields to aggregate by (&#x60;FieldName&#x60; names from &#x60;columns/get&#x60;) | 
+**aggregate_fields** | **List[str]** | Non-empty list of fields to aggregate by (&#x60;FieldName&#x60; names from &#x60;columns/get&#x60;) | 
 **build_summary** | **bool** | Whether to build totals | [optional] 
 **filters** | [**List[OlapFilterDoc]**](OlapFilterDoc.md) | Report filters: an array of filter structures; each contains name (&#x60;FieldName&#x60; from &#x60;columns/get&#x60;) and &#x60;filterType&#x60;, remaining fields depend on filterType (see filter models); at least one &#x60;DateRange&#x60; filter by the &#x60;OpenDate.Typed&#x60; field is required. For periodType &#x3D; CUSTOM the period is limited to 31 days inclusive. | 
 **group_by_col_fields** | **List[str]** | Fields to group columns by (&#x60;FieldName&#x60; names from &#x60;columns/get&#x60;) | [optional] 

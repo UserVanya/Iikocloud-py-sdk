@@ -45,8 +45,38 @@ class TestIncomingInventoryListItem(unittest.TestCase):
                 deleted = True,
                 document_id = '',
                 is_editable = True,
+                items = [
+                    iikocloud_client.models.incoming_inventory_get_item.IncomingInventoryGetItem(
+                        amount = 1.337, 
+                        amount_unit = '', 
+                        comment = '', 
+                        container_count = 1.337, 
+                        container_id = '', 
+                        container_name = '', 
+                        count = 1.337, 
+                        count_gross = 1.337, 
+                        current_actual_amount = 1.337, 
+                        is_disassembled = True, 
+                        num = 56, 
+                        product = '', 
+                        recalculation_date = '', 
+                        recalculation_number = 56, 
+                        status = '', 
+                        turnover = 1.337, )
+                    ],
+                items_first_step = [
+                    iikocloud_client.models.incoming_inventory_get_first_item.IncomingInventoryGetFirstItem(
+                        amount = 1.337, 
+                        amount_unit = '', 
+                        comment = '', 
+                        num = 56, 
+                        product = '', 
+                        product_size = '', 
+                        turnover = 1.337, )
+                    ],
                 number = '',
                 processed = True,
+                revision = 56,
                 shortage_sum = 1.337,
                 store_from = '',
                 sum = 1.337,

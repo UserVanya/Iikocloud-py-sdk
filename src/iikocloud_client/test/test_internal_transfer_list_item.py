@@ -43,8 +43,17 @@ class TestInternalTransferListItem(unittest.TestCase):
                 deleted = True,
                 document_id = '',
                 is_editable = True,
+                items = [
+                    iikocloud_client.models.internal_transfer_get_item.InternalTransferGetItem(
+                        amount = 1.337, 
+                        amount_unit = '', 
+                        container_id = '', 
+                        num = 56, 
+                        product = '', )
+                    ],
                 number = '',
                 processed = True,
+                revision = 56,
                 store_from = '',
                 store_to = '',
                 sum = 1.337,

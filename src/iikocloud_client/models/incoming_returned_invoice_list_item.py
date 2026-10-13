@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from iikocloud_client.models.incoming_returned_invoice_get_item import IncomingReturnedInvoiceGetItem
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -38,15 +39,17 @@ class IncomingReturnedInvoiceListItem(BaseModel):
     document_id: Optional[StrictStr] = Field(default=None, description="Document identifier (GUID)", alias="documentId")
     expense_account: Optional[StrictStr] = Field(default=None, description="Expense account identifier (GUID)", alias="expenseAccount")
     is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
+    items: Optional[List[IncomingReturnedInvoiceGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     processed: Optional[StrictBool] = Field(default=None, description="Flag indicating that the document is processed")
     revenue_account: Optional[StrictStr] = Field(default=None, description="Revenue account identifier (GUID)", alias="revenueAccount")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount including VAT")
     sum_without_vat: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount excluding VAT", alias="sumWithoutVat")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["assignedStores", "comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "deleted", "documentId", "expenseAccount", "isEditable", "number", "processed", "revenueAccount", "sum", "sumWithoutVat", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["assignedStores", "comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "deleted", "documentId", "expenseAccount", "isEditable", "items", "number", "processed", "revenueAccount", "revision", "sum", "sumWithoutVat", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,6 +92,13 @@ class IncomingReturnedInvoiceListItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item_items in self.items:
+                if _item_items:
+                    _items.append(_item_items.to_dict())
+            _dict['items'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -117,9 +127,11 @@ class IncomingReturnedInvoiceListItem(BaseModel):
             "documentId": obj.get("documentId"),
             "expenseAccount": obj.get("expenseAccount"),
             "isEditable": obj.get("isEditable"),
+            "items": [IncomingReturnedInvoiceGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
             "processed": obj.get("processed"),
             "revenueAccount": obj.get("revenueAccount"),
+            "revision": obj.get("revision"),
             "sum": obj.get("sum"),
             "sumWithoutVat": obj.get("sumWithoutVat"),
             "userCreated": obj.get("userCreated"),

@@ -17,8 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +31,10 @@ class EventListRequest(BaseModel):
     EventListRequest
     """ # noqa: E501
     event_types: Optional[List[StrictStr]] = Field(default=None, description="Event codes to filter by. If omitted or empty, all events are returned", alias="eventTypes")
-    from_revision: Optional[StrictInt] = Field(default=None, description="Revision to request events from (incremental mode). Cannot be combined with fromTime/toTime", alias="fromRevision")
-    from_time: Optional[StrictStr] = Field(default=None, description="Period start, inclusive, date-time format. Must be provided together with toTime", alias="fromTime")
+    from_revision: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Revision to request events from (incremental mode), must be zero or greater. Required unless both fromTime and toTime are provided. Cannot be combined with fromTime/toTime", alias="fromRevision")
+    from_time: Optional[datetime] = Field(default=None, description="Period start, inclusive, date-time format. Required together with toTime when fromRevision is not provided", alias="fromTime")
     organization_id: Optional[UUID] = Field(default=None, description="Organization identifier (GUID). If provided, the request goes to the RMS API; otherwise to the Chain API by userContext.uocId", alias="organizationId")
-    to_time: Optional[StrictStr] = Field(default=None, description="Period end, exclusive, date-time format. Must be provided together with fromTime", alias="toTime")
+    to_time: Optional[datetime] = Field(default=None, description="Period end, exclusive, date-time format. Required together with fromTime when fromRevision is not provided", alias="toTime")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["eventTypes", "fromRevision", "fromTime", "organizationId", "toTime"]
 

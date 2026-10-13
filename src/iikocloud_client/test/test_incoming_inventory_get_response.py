@@ -77,6 +77,7 @@ class TestIncomingInventoryGetResponse(unittest.TestCase):
                     ],
                 number = '',
                 register_turnover = True,
+                revision = 56,
                 status = '',
                 store = '',
                 user_created = '',

@@ -30,7 +30,7 @@ class NomenclatureProductBarcode(BaseModel):
     """ # noqa: E501
     barcode: StrictStr = Field(description="Barcode value")
     container_id: Optional[UUID] = Field(default=None, description="Container ID represents a specific type of packaging or container for an item (e.g., a barrel, box, or bottle). Specify the container using its ID. Leave this field blank or pass null to automatically use the default container.", alias="containerId")
-    type: StrictStr = Field(description="Barcode type")
+    type: StrictStr = Field(description="Barcode type. Required. Allowed values: NTIN, GTIN, UNKNOWN")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["barcode", "containerId", "type"]
 

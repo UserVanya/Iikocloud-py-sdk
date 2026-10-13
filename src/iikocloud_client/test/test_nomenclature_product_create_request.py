@@ -258,6 +258,7 @@ class TestNomenclatureProductCreateRequest(unittest.TestCase):
         else:
             return NomenclatureProductCreateRequest(
                 amount_unit_id = '',
+                code = '',
                 name = '',
                 type = '',
         )

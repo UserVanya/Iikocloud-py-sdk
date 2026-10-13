@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **is_editable** | **bool** | Editable flag. true — available for editing | [optional] 
 **items** | [**List[IncomingInventoryCreateItem]**](IncomingInventoryCreateItem.md) | Main inventory items (second step / all products). Must contain at least one element | 
 **items_first_step** | [**List[IncomingInventoryCreateFirstStepItem]**](IncomingInventoryCreateFirstStepItem.md) | First step items (dishes, preparations, modifiers). Can be an empty array | 
-**number** | **str** | Document number | [optional] 
+**number** | **str** | Document number | 
 **organization_id** | **str** | Organization identifier (GUID) | 
 **store** | **str** | Inventory store identifier (GUID) | 
 

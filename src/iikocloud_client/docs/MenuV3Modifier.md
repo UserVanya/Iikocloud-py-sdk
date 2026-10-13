@@ -12,17 +12,23 @@ Name | Type | Description | Notes
 **customer_tag_groups** | [**List[CustomerTagGroupItem]**](CustomerTagGroupItem.md) | Customer tag groups. | [optional] 
 **description** | **str** | Description. | [optional] 
 **id** | **str** | Modifier ID. | 
+**image** | [**Image**](Image.md) | Modifier image. Replaces ButtonImageUrl.  May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Image. | [optional] 
 **independent_quantity** | **bool** | Independent quantity. | [optional] 
+**is_hidden** | **bool** | Flag indicating whether the modifier is hidden.  May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.IsHidden. | [optional] 
 **is_marked** | **bool** | Flag indicating whether the product is marked. | [optional] 
 **labels** | **List[str]** | List of website tags associated with the element. May be empty or absent. | [optional] 
+**measure_unit_type** | [**MeasureUnitType**](MeasureUnitType.md) | Unit of measurement. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.MeasureUnitType. | [optional] 
+**name** | **str** | Modifier name. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Name. | [optional] 
 **nutritions** | [**Nutritions**](Nutritions.md) | Nutritional value. | [optional] 
 **outer_ean_code** | **str** | External EAN code. | [optional] 
 **payment_subject_code** | **str** | Payment subject code. | [optional] 
 **product_category_id** | **str** | Product category ID. | [optional] 
+**restrictions** | [**Restrictions**](Restrictions.md) | Modifier selection restrictions. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Restrictions. | [optional] 
 **size_prices** | [**List[SizePriceShort]**](SizePriceShort.md) | Prices by size. | [optional] 
 **sku** | **str** | SKU. | 
 **tags** | **List[str]** | List of tags associated with the element. May be empty or absent. | [optional] 
 **tax_category_id** | **str** | Tax category ID. | [optional] 
+**weight** | **float** | Weight. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Weight. | [optional] 
 
 ## Example
 

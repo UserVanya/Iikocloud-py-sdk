@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from iikocloud_client.models.outgoing_invoice_item import OutgoingInvoiceItem
 from typing import Optional, Set
@@ -45,11 +45,12 @@ class OutgoingInvoice(BaseModel):
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     payment_date: Optional[StrictStr] = Field(default=None, description="Payment date (YYYY-MM-DD)", alias="paymentDate")
     revenue_account: Optional[StrictStr] = Field(default=None, description="Revenue account identifier (GUID)", alias="revenueAccount")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = Field(default=None, description="Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "dueDate", "expenseAccount", "internalIncomingInvoiceId", "isAutomatic", "isEditable", "items", "number", "paymentDate", "revenueAccount", "status", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["comment", "conception", "counteragent", "date", "dateCreated", "dateModified", "defaultStore", "documentId", "dueDate", "expenseAccount", "internalIncomingInvoiceId", "isAutomatic", "isEditable", "items", "number", "paymentDate", "revenueAccount", "revision", "status", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -133,6 +134,7 @@ class OutgoingInvoice(BaseModel):
             "number": obj.get("number"),
             "paymentDate": obj.get("paymentDate"),
             "revenueAccount": obj.get("revenueAccount"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "userCreated": obj.get("userCreated"),
             "userModified": obj.get("userModified")

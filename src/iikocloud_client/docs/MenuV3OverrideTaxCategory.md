@@ -1,13 +1,14 @@
 # MenuV3OverrideTaxCategory
 
+Tax category override.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**base_tax_category_id** | **str** | Base tax category ID. | [optional] 
-**new_tax_category_id** | **str** | Tax category ID applied instead. | [optional] 
-**order_type_id** | **str** | Order type ID. | [optional] 
+**base_tax_category_id** | **UUID** | Base tax category ID. | [optional] 
+**new_tax_category_id** | **UUID** | New tax category ID to use instead of the base one. | [optional] 
+**order_type_id** | **UUID** | Order type ID. If null, the override is applied to all order types. | [optional] 
 
 ## Example
 

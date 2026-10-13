@@ -54,9 +54,16 @@ class TestMenuV3Modifier(unittest.TestCase):
                     ],
                 description = '',
                 id = '',
+                image = iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/image.iikoTransport.PublicApi.Contracts.NomenclatureV3.Image(
+                    hash = '', 
+                    updated_at = '2019-08-24 14:15:22.123', 
+                    url = '', ),
                 independent_quantity = True,
+                is_hidden = True,
                 is_marked = True,
                 labels = ["hot","new"],
+                measure_unit_type = 'GRAM',
+                name = '',
                 nutritions = iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/nutritions.iikoTransport.PublicApi.Contracts.NomenclatureV3.Nutritions(
                     carbs = 1.337, 
                     energy = 1.337, 
@@ -68,14 +75,22 @@ class TestMenuV3Modifier(unittest.TestCase):
                 outer_ean_code = '',
                 payment_subject_code = '',
                 product_category_id = '',
+                restrictions = iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/restrictions.iikoTransport.PublicApi.Contracts.NomenclatureV3.Restrictions(
+                    default_quantity = 1.337, 
+                    free_quantity = 1.337, 
+                    hide_if_default_quantity = True, 
+                    max_quantity = 1.337, 
+                    min_quantity = 1.337, ),
                 size_prices = [
                     iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/size_price_short.iikoTransport.PublicApi.Contracts.NomenclatureV3.SizePriceShort(
                         price = 1.337, 
-                        size_id = '', )
+                        size_id = '', 
+                        tax_category_id = '', )
                     ],
                 sku = '',
                 tags = ["hot","new"],
-                tax_category_id = ''
+                tax_category_id = '',
+                weight = 1.337
             )
         else:
             return MenuV3Modifier(

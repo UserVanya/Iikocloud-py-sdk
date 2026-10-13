@@ -40,6 +40,13 @@ class TestNomenclatureAssemblyChartApi(unittest.IsolatedAsyncioTestCase):
         """
         pass
 
+    async def test_create_nomenclature_assembly_chart_v3(self) -> None:
+        """Test case for create_nomenclature_assembly_chart_v3
+
+        Create an assembly chart (v3)
+        """
+        pass
+
     async def test_delete_nomenclature_assembly_chart(self) -> None:
         """Test case for delete_nomenclature_assembly_chart
 
@@ -51,6 +58,13 @@ class TestNomenclatureAssemblyChartApi(unittest.IsolatedAsyncioTestCase):
         """Test case for delete_nomenclature_assembly_chart_v2
 
         Delete an assembly chart (v2)
+        """
+        pass
+
+    async def test_delete_nomenclature_assembly_chart_v3(self) -> None:
+        """Test case for delete_nomenclature_assembly_chart_v3
+
+        Delete an assembly chart (v3)
         """
         pass
 
@@ -82,6 +96,13 @@ class TestNomenclatureAssemblyChartApi(unittest.IsolatedAsyncioTestCase):
         """
         pass
 
+    async def test_get_nomenclature_assembly_chart_v3(self) -> None:
+        """Test case for get_nomenclature_assembly_chart_v3
+
+        Get an assembly chart by ID (v3)
+        """
+        pass
+
     async def test_get_nomenclature_prepared_chart_v2(self) -> None:
         """Test case for get_nomenclature_prepared_chart_v2
 
@@ -103,6 +124,20 @@ class TestNomenclatureAssemblyChartApi(unittest.IsolatedAsyncioTestCase):
         """
         pass
 
+    async def test_list_nomenclature_assembly_charts_v3(self) -> None:
+        """Test case for list_nomenclature_assembly_charts_v3
+
+        Get a list of assembly charts (v3)
+        """
+        pass
+
+    async def test_resolve_nomenclature_assembly_chart_v3(self) -> None:
+        """Test case for resolve_nomenclature_assembly_chart_v3
+
+        Resolve an assembly chart representation
+        """
+        pass
+
     async def test_update_nomenclature_assembly_chart(self) -> None:
         """Test case for update_nomenclature_assembly_chart
 
@@ -114,6 +149,13 @@ class TestNomenclatureAssemblyChartApi(unittest.IsolatedAsyncioTestCase):
         """Test case for update_nomenclature_assembly_chart_v2
 
         Update an assembly chart (v2)
+        """
+        pass
+
+    async def test_update_nomenclature_assembly_chart_v3(self) -> None:
+        """Test case for update_nomenclature_assembly_chart_v3
+
+        Update an assembly chart (v3)
         """
         pass
 

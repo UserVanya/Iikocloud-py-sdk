@@ -37,6 +37,11 @@ class TestListRequest(unittest.TestCase):
             return ListRequest(
                 var_from = '',
                 organization_id = '',
+                return_full_details = True,
+                revision = 56,
+                store_ids = [
+                    ''
+                    ],
                 to = ''
             )
         else:

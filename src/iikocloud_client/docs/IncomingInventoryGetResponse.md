@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **items_first_step** | [**List[IncomingInventoryGetFirstItem]**](IncomingInventoryGetFirstItem.md) | First step items (dishes, preparations, modifiers). Can be an empty array | [optional] 
 **number** | **str** | Document number | [optional] 
 **register_turnover** | **bool** | Flag for tracking product movement over the period. Read-only | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** | Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted) | [optional] 
 **store** | **str** | Inventory store identifier (GUID) | [optional] 
 **user_created** | **str** | User who created the document (GUID) | [optional] 

@@ -79,6 +79,7 @@ class TestCreateRequest(unittest.TestCase):
             )
         else:
             return CreateRequest(
+                date_to = '',
         )
         """
 

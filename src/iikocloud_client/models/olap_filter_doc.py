@@ -25,15 +25,15 @@ from pydantic_core import to_jsonable_python
 
 class OlapFilterDoc(BaseModel):
     """
-    One item of the filters array. Which fields are actually present depends on `filterType`: name and `filterType` are always present; `values` — for IncludeValues/ExcludeValues; `from`/`to` — a number for `Range` or a date/time string (ISO 8601) for `DateRange`; `periodType` — for `DateRange`; `includeLow`/`includeHigh` — for `Range` and `DateRange`
+    One item of the filters array. Which fields are actually present depends on `filterType`: name and `filterType` are always present; `values` — for IncludeValues/ExcludeValues; `from`/`to` — a number for `Range` or a date string in `yyyy-MM-dd` format for `DateRange`; `periodType` — for `DateRange`; `includeLow`/`includeHigh` — for `Range` and `DateRange`
     """ # noqa: E501
     filter_type: StrictStr = Field(description="Filter type: `IncludeValues`/`ExcludeValues` — by values, `Range` — by numeric range, `DateRange` — by date range", alias="filterType")
-    var_from: Optional[Any] = Field(default=None, description="Lower range bound: a number (`Range`) or a date (`DateRange`) in one of `yyyy-MM-dd`, `yyyy-MM-ddTHH:mm`, `yyyy-MM-ddTHH:mm:ss` formats. For periodType = CUSTOM the period is limited to 31 days inclusive.", alias="from")
+    var_from: Optional[Any] = Field(default=None, description="Lower range bound: a number (`Range`) or a date (`DateRange`) in `yyyy-MM-dd` format. For periodType = CUSTOM the period is limited to 31 days inclusive.", alias="from")
     include_high: Optional[StrictBool] = Field(default=None, description="Whether to include the upper range bound; defaults to `false`", alias="includeHigh")
     include_low: Optional[StrictBool] = Field(default=None, description="Whether to include the lower range bound; defaults to `true`", alias="includeLow")
     name: StrictStr = Field(description="Field name to filter by (`FieldName` from `columns/get`)")
     period_type: Optional[StrictStr] = Field(default=None, description="Period type (for `DateRange`): `CUSTOM`, `OPEN_PERIOD`, `TODAY`, `YESTERDAY`, `CURRENT_WEEK`, `CURRENT_MONTH`, `CURRENT_YEAR`, `LAST_WEEK`, `LAST_MONTH`, `LAST_YEAR`", alias="periodType")
-    to: Optional[Any] = Field(default=None, description="Upper range bound: a number (`Range`) or a date (`DateRange`) in one of `yyyy-MM-dd`, `yyyy-MM-ddTHH:mm`, `yyyy-MM-ddTHH:mm:ss` formats; required for `Range` and for `DateRange` with `periodType=CUSTOM`. For periodType = CUSTOM the period is limited to 31 days inclusive.")
+    to: Optional[Any] = Field(default=None, description="Upper range bound: a number (`Range`) or a date (`DateRange`) in `yyyy-MM-dd` format; required for `Range` and for `DateRange` with `periodType=CUSTOM`. For periodType = CUSTOM the period is limited to 31 days inclusive.")
     values: Optional[List[StrictStr]] = Field(default=None, description="Field values to filter by; required for `IncludeValues`/`ExcludeValues` `filterType`")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["filterType", "from", "includeHigh", "includeLow", "name", "periodType", "to", "values"]

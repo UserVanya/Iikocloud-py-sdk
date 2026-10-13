@@ -51,7 +51,7 @@ class NomenclatureProductCreateRequest(BaseModel):
     can_set_open_price: Optional[StrictBool] = Field(default=None, description="An open price can be set manually", alias="canSetOpenPrice")
     category_id: Optional[UUID] = Field(default=None, description="UUID of the product (custom) category. The list of values can be retrieved via the \"Get a list of product categories\" method in the \"Product categories\" category", alias="categoryId")
     cheque_printable: Optional[StrictBool] = Field(default=None, description="Print on the cheque", alias="chequePrintable")
-    code: Optional[StrictStr] = Field(default=None, description="Product code: 0–8 digits. Used for quick search on the order editing screen. If null or not provided, it will be assigned automatically")
+    code: StrictStr = Field(description="Product code: 0–8 digits. Used for quick search on the order editing screen. Required when creating or updating a product")
     cold_loss_percent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weight loss percentage during cold processing", alias="coldLossPercent")
     color: Optional[NomenclatureProductRGBColor] = Field(default=None, description="Background button colour for POS")
     containers: Optional[List[NomenclatureProductContainer]] = Field(default=None, description="Product containers/packagings")

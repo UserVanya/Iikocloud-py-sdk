@@ -38,10 +38,10 @@ class TestEventListRequest(unittest.TestCase):
                 event_types = [
                     ''
                     ],
-                from_revision = 56,
-                from_time = '',
+                from_revision = 0,
+                from_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 organization_id = '',
-                to_time = ''
+                to_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return EventListRequest(

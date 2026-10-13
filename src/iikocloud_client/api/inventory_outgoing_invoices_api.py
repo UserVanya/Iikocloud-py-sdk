@@ -24,6 +24,7 @@ from iikocloud_client.models.get_cost_prices_request import GetCostPricesRequest
 from iikocloud_client.models.get_cost_prices_response import GetCostPricesResponse
 from iikocloud_client.models.list_request import ListRequest
 from iikocloud_client.models.outgoing_invoice import OutgoingInvoice
+from iikocloud_client.models.outgoing_invoice_list_item import OutgoingInvoiceListItem
 from iikocloud_client.models.outgoing_invoice_request import OutgoingInvoiceRequest
 from iikocloud_client.models.outgoing_invoice_save_response import OutgoingInvoiceSaveResponse
 from iikocloud_client.models.pay_outgoing_invoice_request import PayOutgoingInvoiceRequest
@@ -1585,10 +1586,10 @@ class InventoryOutgoingInvoicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[OutgoingInvoice]:
+    ) -> List[OutgoingInvoiceListItem]:
         """Export outgoing invoices
 
-        Exports outgoing invoices for the specified period
+        Exports outgoing invoices for the specified period. Supports incremental synchronization: when revision is provided, only documents with a revision strictly greater than the given value are returned (revision > value). With returnFullDetails=true, document items and the revision are added to every list element. Incremental export example: {\"organizationId\": \"<uuid>\", \"from\": \"2026-08-01\", \"to\": \"2026-08-31\", \"revision\": 123456}. Without revision no revision filter is applied; without returnFullDetails only document headers are returned. The revision of every document is returned in the revision field.
 
         :param list_request: Document list retrieval request body (required)
         :type list_request: ListRequest
@@ -1626,7 +1627,7 @@ class InventoryOutgoingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[OutgoingInvoice]",
+            '200': "List[OutgoingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",
@@ -1660,10 +1661,10 @@ class InventoryOutgoingInvoicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[OutgoingInvoice]]:
+    ) -> ApiResponse[List[OutgoingInvoiceListItem]]:
         """Export outgoing invoices
 
-        Exports outgoing invoices for the specified period
+        Exports outgoing invoices for the specified period. Supports incremental synchronization: when revision is provided, only documents with a revision strictly greater than the given value are returned (revision > value). With returnFullDetails=true, document items and the revision are added to every list element. Incremental export example: {\"organizationId\": \"<uuid>\", \"from\": \"2026-08-01\", \"to\": \"2026-08-31\", \"revision\": 123456}. Without revision no revision filter is applied; without returnFullDetails only document headers are returned. The revision of every document is returned in the revision field.
 
         :param list_request: Document list retrieval request body (required)
         :type list_request: ListRequest
@@ -1701,7 +1702,7 @@ class InventoryOutgoingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[OutgoingInvoice]",
+            '200': "List[OutgoingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",
@@ -1738,7 +1739,7 @@ class InventoryOutgoingInvoicesApi:
     ) -> RESTResponseType:
         """Export outgoing invoices
 
-        Exports outgoing invoices for the specified period
+        Exports outgoing invoices for the specified period. Supports incremental synchronization: when revision is provided, only documents with a revision strictly greater than the given value are returned (revision > value). With returnFullDetails=true, document items and the revision are added to every list element. Incremental export example: {\"organizationId\": \"<uuid>\", \"from\": \"2026-08-01\", \"to\": \"2026-08-31\", \"revision\": 123456}. Without revision no revision filter is applied; without returnFullDetails only document headers are returned. The revision of every document is returned in the revision field.
 
         :param list_request: Document list retrieval request body (required)
         :type list_request: ListRequest
@@ -1776,7 +1777,7 @@ class InventoryOutgoingInvoicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[OutgoingInvoice]",
+            '200': "List[OutgoingInvoiceListItem]",
             '400': "GenericErrorResponse",
             '401': "GenericErrorResponse",
             '429': "GenericErrorResponse",

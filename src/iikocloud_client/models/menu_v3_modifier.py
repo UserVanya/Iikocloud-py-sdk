@@ -17,11 +17,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from iikocloud_client.models.barcode_info import BarcodeInfo
 from iikocloud_client.models.customer_tag_group_item import CustomerTagGroupItem
+from iikocloud_client.models.image import Image
+from iikocloud_client.models.measure_unit_type import MeasureUnitType
 from iikocloud_client.models.nutritions import Nutritions
+from iikocloud_client.models.restrictions import Restrictions
 from iikocloud_client.models.size_price_short import SizePriceShort
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,18 +40,24 @@ class MenuV3Modifier(BaseModel):
     customer_tag_groups: Optional[List[CustomerTagGroupItem]] = Field(default=None, description="Customer tag groups.", alias="customerTagGroups")
     description: Optional[StrictStr] = Field(default=None, description="Description.")
     id: StrictStr = Field(description="Modifier ID.")
+    image: Optional[Image] = Field(default=None, description="Modifier image. Replaces ButtonImageUrl.  May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Image.")
     independent_quantity: Optional[StrictBool] = Field(default=None, description="Independent quantity.", alias="independentQuantity")
+    is_hidden: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the modifier is hidden.  May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.IsHidden.", alias="isHidden")
     is_marked: Optional[StrictBool] = Field(default=None, description="Flag indicating whether the product is marked.", alias="isMarked")
     labels: Optional[List[StrictStr]] = Field(default=None, description="List of website tags associated with the element. May be empty or absent.")
+    measure_unit_type: Optional[MeasureUnitType] = Field(default=None, description="Unit of measurement. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.MeasureUnitType.", alias="measureUnitType")
+    name: Optional[StrictStr] = Field(default=None, description="Modifier name. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Name.")
     nutritions: Optional[Nutritions] = Field(default=None, description="Nutritional value.")
     outer_ean_code: Optional[StrictStr] = Field(default=None, description="External EAN code.", alias="outerEanCode")
     payment_subject_code: Optional[StrictStr] = Field(default=None, description="Payment subject code.", alias="paymentSubjectCode")
     product_category_id: Optional[StrictStr] = Field(default=None, description="Product category ID.", alias="productCategoryId")
+    restrictions: Optional[Restrictions] = Field(default=None, description="Modifier selection restrictions. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Restrictions.")
     size_prices: Optional[List[SizePriceShort]] = Field(default=None, description="Prices by size.", alias="sizePrices")
     sku: StrictStr = Field(description="SKU.")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags associated with the element. May be empty or absent.")
     tax_category_id: Optional[StrictStr] = Field(default=None, description="Tax category ID.", alias="taxCategoryId")
-    __properties: ClassVar[List[str]] = ["allergenGroupIds", "barcodes", "buttonImageUrl", "customerTagGroups", "description", "id", "independentQuantity", "isMarked", "labels", "nutritions", "outerEanCode", "paymentSubjectCode", "productCategoryId", "sizePrices", "sku", "tags", "taxCategoryId"]
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weight. May be overridden by iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierItem.Weight.")
+    __properties: ClassVar[List[str]] = ["allergenGroupIds", "barcodes", "buttonImageUrl", "customerTagGroups", "description", "id", "image", "independentQuantity", "isHidden", "isMarked", "labels", "measureUnitType", "name", "nutritions", "outerEanCode", "paymentSubjectCode", "productCategoryId", "restrictions", "sizePrices", "sku", "tags", "taxCategoryId", "weight"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -103,9 +112,15 @@ class MenuV3Modifier(BaseModel):
                 if _item_customer_tag_groups:
                     _items.append(_item_customer_tag_groups.to_dict())
             _dict['customerTagGroups'] = _items
+        # override the default output from pydantic by calling `to_dict()` of image
+        if self.image:
+            _dict['image'] = self.image.to_dict()
         # override the default output from pydantic by calling `to_dict()` of nutritions
         if self.nutritions:
             _dict['nutritions'] = self.nutritions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of restrictions
+        if self.restrictions:
+            _dict['restrictions'] = self.restrictions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in size_prices (list)
         _items = []
         if self.size_prices:
@@ -138,10 +153,30 @@ class MenuV3Modifier(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if image (nullable) is None
+        # and model_fields_set contains the field
+        if self.image is None and "image" in self.model_fields_set:
+            _dict['image'] = None
+
+        # set to None if is_hidden (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_hidden is None and "is_hidden" in self.model_fields_set:
+            _dict['isHidden'] = None
+
         # set to None if labels (nullable) is None
         # and model_fields_set contains the field
         if self.labels is None and "labels" in self.model_fields_set:
             _dict['labels'] = None
+
+        # set to None if measure_unit_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.measure_unit_type is None and "measure_unit_type" in self.model_fields_set:
+            _dict['measureUnitType'] = None
+
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
 
         # set to None if nutritions (nullable) is None
         # and model_fields_set contains the field
@@ -163,6 +198,11 @@ class MenuV3Modifier(BaseModel):
         if self.product_category_id is None and "product_category_id" in self.model_fields_set:
             _dict['productCategoryId'] = None
 
+        # set to None if restrictions (nullable) is None
+        # and model_fields_set contains the field
+        if self.restrictions is None and "restrictions" in self.model_fields_set:
+            _dict['restrictions'] = None
+
         # set to None if size_prices (nullable) is None
         # and model_fields_set contains the field
         if self.size_prices is None and "size_prices" in self.model_fields_set:
@@ -177,6 +217,11 @@ class MenuV3Modifier(BaseModel):
         # and model_fields_set contains the field
         if self.tax_category_id is None and "tax_category_id" in self.model_fields_set:
             _dict['taxCategoryId'] = None
+
+        # set to None if weight (nullable) is None
+        # and model_fields_set contains the field
+        if self.weight is None and "weight" in self.model_fields_set:
+            _dict['weight'] = None
 
         return _dict
 
@@ -196,17 +241,23 @@ class MenuV3Modifier(BaseModel):
             "customerTagGroups": [CustomerTagGroupItem.from_dict(_item) for _item in obj["customerTagGroups"]] if obj.get("customerTagGroups") is not None else None,
             "description": obj.get("description"),
             "id": obj.get("id"),
+            "image": Image.from_dict(obj["image"]) if obj.get("image") is not None else None,
             "independentQuantity": obj.get("independentQuantity"),
+            "isHidden": obj.get("isHidden"),
             "isMarked": obj.get("isMarked"),
             "labels": obj.get("labels"),
+            "measureUnitType": obj.get("measureUnitType"),
+            "name": obj.get("name"),
             "nutritions": Nutritions.from_dict(obj["nutritions"]) if obj.get("nutritions") is not None else None,
             "outerEanCode": obj.get("outerEanCode"),
             "paymentSubjectCode": obj.get("paymentSubjectCode"),
             "productCategoryId": obj.get("productCategoryId"),
+            "restrictions": Restrictions.from_dict(obj["restrictions"]) if obj.get("restrictions") is not None else None,
             "sizePrices": [SizePriceShort.from_dict(_item) for _item in obj["sizePrices"]] if obj.get("sizePrices") is not None else None,
             "sku": obj.get("sku"),
             "tags": obj.get("tags"),
-            "taxCategoryId": obj.get("taxCategoryId")
+            "taxCategoryId": obj.get("taxCategoryId"),
+            "weight": obj.get("weight")
         })
         return _obj
 

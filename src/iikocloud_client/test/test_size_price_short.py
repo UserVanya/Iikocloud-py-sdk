@@ -36,7 +36,8 @@ class TestSizePriceShort(unittest.TestCase):
         if include_optional:
             return SizePriceShort(
                 price = 1.337,
-                size_id = ''
+                size_id = '',
+                tax_category_id = ''
             )
         else:
             return SizePriceShort(

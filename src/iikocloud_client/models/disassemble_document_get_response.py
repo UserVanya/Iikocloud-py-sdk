@@ -39,13 +39,14 @@ class DisassembleDocumentGetResponse(BaseModel):
     items: Optional[List[DisassembleDocumentGetItem]] = Field(default=None, description="List of document items")
     number: Optional[StrictStr] = Field(default=None, description="Document number")
     product: Optional[StrictStr] = Field(default=None, description="Product identifier (GUID)")
+    revision: Optional[StrictInt] = Field(default=None, description="Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested")
     status: Optional[StrictStr] = Field(default=None, description="Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted)")
     store_from: Optional[StrictStr] = Field(default=None, description="Write-off store identifier (GUID)", alias="storeFrom")
     store_to: Optional[StrictStr] = Field(default=None, description="Receipt store identifier (GUID)", alias="storeTo")
     user_created: Optional[StrictStr] = Field(default=None, description="User who created the document (GUID)", alias="userCreated")
     user_modified: Optional[StrictStr] = Field(default=None, description="User who last modified the document (GUID)", alias="userModified")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["amount", "amountUnit", "comment", "conception", "date", "dateCreated", "dateModified", "documentId", "items", "number", "product", "status", "storeFrom", "storeTo", "userCreated", "userModified"]
+    __properties: ClassVar[List[str]] = ["amount", "amountUnit", "comment", "conception", "date", "dateCreated", "dateModified", "documentId", "items", "number", "product", "revision", "status", "storeFrom", "storeTo", "userCreated", "userModified"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -123,6 +124,7 @@ class DisassembleDocumentGetResponse(BaseModel):
             "items": [DisassembleDocumentGetItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "number": obj.get("number"),
             "product": obj.get("product"),
+            "revision": obj.get("revision"),
             "status": obj.get("status"),
             "storeFrom": obj.get("storeFrom"),
             "storeTo": obj.get("storeTo"),

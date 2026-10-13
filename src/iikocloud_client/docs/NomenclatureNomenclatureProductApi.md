@@ -26,6 +26,7 @@ Create a product
 Creates a new nomenclature product.
 The `name`, `type` and `amountUnit` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.
 If `code` or `productArticle` are not provided explicitly, API server assigns them automatically.
+The write is synchronous, while reads through the list method use an asynchronously updated catalogue snapshot (eventual consistency): a created item does not appear in the list immediately. Before using the product (for example, creating an assembly chart for it), wait until it appears — poll the list with a filter by the returned `productId` or `code`.
 
 
 ### Example
@@ -116,6 +117,7 @@ Create a product (v2)
 Creates a new nomenclature product.
 The `name`, `type` and `amountUnitId` fields are required. All other fields are optional - if not provided or sent as `null`, default values are applied.
 If `code` or `productArticle` are not provided explicitly, API server assigns them automatically.
+The write is synchronous, while reads through the list method use an asynchronously updated catalogue snapshot (eventual consistency): a created item does not appear in the list immediately. Before using the product (for example, creating an assembly chart for it), wait until it appears — poll the list with a filter by the returned `productId` or `code`.
 
 
 ### Example
@@ -382,6 +384,7 @@ Get a list of products
 Returns the organisation's nomenclature — the catalogue of items used to build the menu, run warehouse accounting and generate sales reports. Supports filtering and pagination, which speeds up menu and reference synchronisation on the partner side.
 By default (when no type filter is set) the method returns nomenclature items of all types available in the organisation's nomenclature. The following base nomenclature types are supported: GOODS (goods/ingredients), DISH (dishes), PREPARED (semi-prepared items), SERVICE (services), MODIFIER (modifiers). To narrow the result to specific types, apply a filter on the type field (for example op: "in").
 Nomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.
+The list is read from an asynchronously updated snapshot of the catalogue (eventual consistency): newly created or modified items may be missing from the response for a short time.
 
 
 ### Example
@@ -480,6 +483,7 @@ Allowed operators: `id` / `productId`, `parentId`, `categoryId`, `accountingCate
 `lastModifyNode` — eq, in, blank, notblank.
 All filters are combined with AND. Pagination via `limit`/`offset`.
 Nomenclature groups are returned by a separate method /api/nomenclature/v1/group/list.
+The list is read from an asynchronously updated snapshot of the catalogue (eventual consistency): newly created or modified items may be missing from the response for a short time. 
 
 
 ### Example

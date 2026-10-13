@@ -63,7 +63,25 @@ class TestJurPerson(unittest.TestCase):
                     ],
                 code = '',
                 jur_person_id = '',
+                legal_address = iikocloud_client.models.legal_address.LegalAddress(
+                    address = '', 
+                    building = '', 
+                    city = '', 
+                    community = '', 
+                    country = '', 
+                    district = '', 
+                    house = '', 
+                    office = '', 
+                    region = '', 
+                    street = '', 
+                    zip_code = '', ),
                 name = '',
+                responsible_persons = [
+                    iikocloud_client.models.responsible_person.ResponsiblePerson(
+                        name = '', 
+                        role = '', )
+                    ],
+                taxpayer_id_number = '',
                 type = ''
             )
         else:

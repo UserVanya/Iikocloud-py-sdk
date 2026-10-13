@@ -55,6 +55,7 @@ class TestWriteoffDocumentGetResponse(unittest.TestCase):
                         product_size = '', )
                     ],
                 number = '',
+                revision = 56,
                 status = '',
                 store_from = '',
                 user_created = '',

@@ -59,7 +59,6 @@ class TestModifierItem(unittest.TestCase):
         else:
             return ModifierItem(
                 id = '',
-                name = '',
         )
         """
 

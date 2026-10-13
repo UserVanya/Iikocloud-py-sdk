@@ -28,7 +28,7 @@ class GetOlapReportRequest(BaseModel):
     """
     GetOlapReportRequest
     """ # noqa: E501
-    aggregate_fields: List[StrictStr] = Field(description="Fields to aggregate by (`FieldName` names from `columns/get`)", alias="aggregateFields")
+    aggregate_fields: List[StrictStr] = Field(description="Non-empty list of fields to aggregate by (`FieldName` names from `columns/get`)", alias="aggregateFields")
     build_summary: Optional[StrictBool] = Field(default=None, description="Whether to build totals", alias="buildSummary")
     filters: List[OlapFilterDoc] = Field(description="Report filters: an array of filter structures; each contains name (`FieldName` from `columns/get`) and `filterType`, remaining fields depend on filterType (see filter models); at least one `DateRange` filter by the `OpenDate.Typed` field is required. For periodType = CUSTOM the period is limited to 31 days inclusive.")
     group_by_col_fields: Optional[List[StrictStr]] = Field(default=None, description="Fields to group columns by (`FieldName` names from `columns/get`)", alias="groupByColFields")

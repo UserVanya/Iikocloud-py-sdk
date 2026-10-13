@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,13 @@ class GetCounteragentsRequest(BaseModel):
     """
     GetCounteragentsRequest
     """ # noqa: E501
+    is_deleted: Optional[StrictBool] = Field(default=None, description="Filter by deletion flag: true — deleted only, false — non-deleted only, omit — all", alias="isDeleted")
     limit: Optional[StrictInt] = Field(default=None, description="Number of records to return (1-500)")
     offset: Optional[StrictInt] = Field(default=None, description="Pagination offset")
-    organization_id: Optional[StrictStr] = Field(default=None, description="Organization identifier (GUID)", alias="organizationId")
+    revision: Optional[StrictInt] = Field(default=None, description="Return only records with revision greater than or equal to the given value (revision >= value)")
     type: Optional[List[StrictStr]] = Field(default=None, description="Counteragent type (supplier, employee, client)")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["limit", "offset", "organizationId", "type"]
+    __properties: ClassVar[List[str]] = ["isDeleted", "limit", "offset", "revision", "type"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,9 +93,10 @@ class GetCounteragentsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "isDeleted": obj.get("isDeleted"),
             "limit": obj.get("limit"),
             "offset": obj.get("offset"),
-            "organizationId": obj.get("organizationId"),
+            "revision": obj.get("revision"),
             "type": obj.get("type")
         })
         # store additional fields in additional_properties

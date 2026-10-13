@@ -73,6 +73,7 @@ class TestIncomingReturnedInvoiceGetResponse(unittest.TestCase):
                 outgoing_invoice_id = '',
                 processing_mode = '',
                 revenue_account = '',
+                revision = 56,
                 status = '',
                 user_created = '',
                 user_modified = ''

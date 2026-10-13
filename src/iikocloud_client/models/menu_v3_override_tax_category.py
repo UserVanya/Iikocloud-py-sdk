@@ -17,20 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
 class MenuV3OverrideTaxCategory(BaseModel):
     """
-    MenuV3OverrideTaxCategory
+    Tax category override.
     """ # noqa: E501
-    base_tax_category_id: Optional[StrictStr] = Field(default=None, description="Base tax category ID.", alias="baseTaxCategoryId")
-    new_tax_category_id: Optional[StrictStr] = Field(default=None, description="Tax category ID applied instead.", alias="newTaxCategoryId")
-    order_type_id: Optional[StrictStr] = Field(default=None, description="Order type ID.", alias="orderTypeId")
-    additional_properties: Dict[str, Any] = {}
+    base_tax_category_id: Optional[UUID] = Field(default=None, description="Base tax category ID.", alias="baseTaxCategoryId")
+    new_tax_category_id: Optional[UUID] = Field(default=None, description="New tax category ID to use instead of the base one.", alias="newTaxCategoryId")
+    order_type_id: Optional[UUID] = Field(default=None, description="Order type ID. If null, the override is applied to all order types.", alias="orderTypeId")
     __properties: ClassVar[List[str]] = ["baseTaxCategoryId", "newTaxCategoryId", "orderTypeId"]
 
     model_config = ConfigDict(
@@ -63,10 +63,8 @@ class MenuV3OverrideTaxCategory(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -74,10 +72,20 @@ class MenuV3OverrideTaxCategory(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
+        # set to None if base_tax_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.base_tax_category_id is None and "base_tax_category_id" in self.model_fields_set:
+            _dict['baseTaxCategoryId'] = None
+
+        # set to None if new_tax_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_tax_category_id is None and "new_tax_category_id" in self.model_fields_set:
+            _dict['newTaxCategoryId'] = None
+
+        # set to None if order_type_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.order_type_id is None and "order_type_id" in self.model_fields_set:
+            _dict['orderTypeId'] = None
 
         return _dict
 
@@ -95,11 +103,6 @@ class MenuV3OverrideTaxCategory(BaseModel):
             "newTaxCategoryId": obj.get("newTaxCategoryId"),
             "orderTypeId": obj.get("orderTypeId")
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

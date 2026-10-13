@@ -112,6 +112,7 @@ class TestMenuV3(unittest.TestCase):
                                 labels = [
                                     ''
                                     ], 
+                                menu_item_id = '', 
                                 modifier_groups = [
                                     iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/modifier_group.iikoTransport.PublicApi.Contracts.NomenclatureV3.ModifierGroup(
                                         child_modifiers_have_min_max_restrictions = True, 
@@ -131,12 +132,14 @@ class TestMenuV3(unittest.TestCase):
                                         is_default = True, 
                                         is_hidden = True, 
                                         measure_unit_type = null, 
+                                        menu_item_size_id = '', 
                                         nutritions = null, 
                                         price = 1.337, 
                                         size_code = '', 
                                         size_id = '', 
                                         size_name = '', 
                                         sku = '', 
+                                        tax_category_id = '', 
                                         weight = 1.337, )
                                     ], 
                                 sizes = [
@@ -183,25 +186,32 @@ class TestMenuV3(unittest.TestCase):
                             ], 
                         description = '', 
                         id = '', 
+                        image = null, 
                         independent_quantity = True, 
+                        is_hidden = True, 
                         is_marked = True, 
                         labels = ["hot","new"], 
+                        measure_unit_type = null, 
+                        name = '', 
                         nutritions = null, 
                         outer_ean_code = '', 
                         payment_subject_code = '', 
                         product_category_id = '', 
+                        restrictions = null, 
                         size_prices = [
                             iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/size_price_short.iikoTransport.PublicApi.Contracts.NomenclatureV3.SizePriceShort(
                                 price = 1.337, 
-                                size_id = '', )
+                                size_id = '', 
+                                tax_category_id = '', )
                             ], 
                         sku = '', 
                         tags = ["hot","new"], 
-                        tax_category_id = '', )
+                        tax_category_id = '', 
+                        weight = 1.337, )
                     ],
                 name = '',
                 override_tax_categories = [
-                    iikocloud_client.models.menu_v3_override_tax_category.MenuV3OverrideTaxCategory(
+                    iikocloud_client.models.iiko_transport/public_api/contracts/nomenclature_v3/tax_category_override.iikoTransport.PublicApi.Contracts.NomenclatureV3.TaxCategoryOverride(
                         base_tax_category_id = '', 
                         new_tax_category_id = '', 
                         order_type_id = '', )

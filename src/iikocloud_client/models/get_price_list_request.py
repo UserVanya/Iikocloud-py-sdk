@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,7 +27,7 @@ class GetPriceListRequest(BaseModel):
     """
     GetPriceListRequest
     """ # noqa: E501
-    counteragent_id: Optional[StrictStr] = Field(default=None, description="Supplier identifier (GUID)", alias="counteragentId")
+    counteragent_id: StrictStr = Field(description="Counteragent identifier (GUID). The counteragent must be a supplier", alias="counteragentId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["counteragentId"]
 

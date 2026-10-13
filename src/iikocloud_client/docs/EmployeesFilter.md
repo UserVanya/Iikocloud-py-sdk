@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_field** | **str** | Field name to filter by. Possible values: &#x60;id&#x60;, &#x60;code&#x60;, &#x60;firstName&#x60;, &#x60;lastName&#x60;, &#x60;middleName&#x60;, &#x60;phone&#x60;, &#x60;email&#x60;, &#x60;mainRoleId&#x60;, &#x60;organizationId&#x60;, &#x60;isFired&#x60; | [optional] 
+**var_field** | **str** | Field name to filter by. Possible values: &#x60;id&#x60;, &#x60;code&#x60;, &#x60;firstName&#x60;, &#x60;lastName&#x60;, &#x60;middleName&#x60;, &#x60;phone&#x60;, &#x60;email&#x60;, &#x60;mainRoleId&#x60;, &#x60;mainOrganizationId&#x60;, &#x60;isFired&#x60; | [optional] 
 **value** | **str** | Filter value | [optional] 
 
 ## Example

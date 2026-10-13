@@ -59,6 +59,7 @@ from iikocloud_client.api.orders_api import OrdersApi
 from iikocloud_client.api.organizations_api import OrganizationsApi
 from iikocloud_client.api.platform_events_api import PlatformEventsApi
 from iikocloud_client.api.report_api import ReportApi
+from iikocloud_client.api.reporting_income_plan_api import ReportingIncomePlanApi
 from iikocloud_client.api.reporting_olap_api import ReportingOlapApi
 from iikocloud_client.api.terminal_groups_api import TerminalGroupsApi
 from iikocloud_client.api.terminals_cash_registers_api import TerminalsCashRegistersApi

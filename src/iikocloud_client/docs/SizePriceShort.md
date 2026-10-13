@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **price** | **float** | Price. | [optional] 
 **size_id** | **str** | Size ID. | [optional] 
+**tax_category_id** | **str** | Tax category ID. | [optional] 
 
 ## Example
 

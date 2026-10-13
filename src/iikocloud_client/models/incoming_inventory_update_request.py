@@ -39,7 +39,7 @@ class IncomingInventoryUpdateRequest(BaseModel):
     is_editable: Optional[StrictBool] = Field(default=None, description="Editable flag. true — available for editing", alias="isEditable")
     items: List[IncomingInventoryCreateItem] = Field(description="Main inventory items (second step / all products). Must contain at least one element")
     items_first_step: List[IncomingInventoryCreateFirstStepItem] = Field(description="First step items (dishes, preparations, modifiers). Can be an empty array", alias="itemsFirstStep")
-    number: Optional[StrictStr] = Field(default=None, description="Document number")
+    number: StrictStr = Field(description="Document number")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")
     store: StrictStr = Field(description="Inventory store identifier (GUID)")
     additional_properties: Dict[str, Any] = {}

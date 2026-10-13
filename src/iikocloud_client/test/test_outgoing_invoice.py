@@ -69,6 +69,7 @@ class TestOutgoingInvoice(unittest.TestCase):
                 number = '',
                 payment_date = '',
                 revenue_account = '',
+                revision = 56,
                 status = '',
                 user_created = '',
                 user_modified = ''

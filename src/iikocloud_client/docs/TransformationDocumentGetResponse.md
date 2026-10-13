@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **items** | [**List[TransformationDocumentGetItem]**](TransformationDocumentGetItem.md) | List of document items | [optional] 
 **number** | **str** | Document number | [optional] 
 **product** | **str** | Product identifier (GUID) | [optional] 
+**revision** | **int** | Document revision — a monotonically increasing version number that grows on every change. In the list response it appears only when changed documents (revision) or full details (returnFullDetails) are requested | [optional] 
 **status** | **str** | Document status (NEW — not processed, PROCESSED — processed, DELETED — deleted) | [optional] 
 **store_from** | **str** | Write-off store identifier (GUID) | [optional] 
 **store_to** | **str** | Receipt store identifier (GUID) | [optional] 

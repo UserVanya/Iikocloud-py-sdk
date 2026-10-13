@@ -5,7 +5,7 @@ actions:
     - url: https://api-ru.iiko.services
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: e039f589fb391ff28504d72e1c1322484f4f1bb6c13793913cc31faabaabf259
+    expected-sha256: c4c80a874f3476fbe49a03a57fe534b526348d0654c0fba9859aede16c7167e7
     issue: iiko-root-server
 - target: $.components
   update:
@@ -15,21 +15,21 @@ actions:
         type: http
   x-iiko-sdk-guard:
     expected-matches: 1
-    expected-sha256: c61a87c2cc6ba26818c36fea8b953caa40ead40d6a1d872aa5a4a19212efd012
+    expected-sha256: b84b6e51c7bb57845b375a1aa0393202abeef5287606a18566bb54735a43947e
     issue: iiko-bearer-scheme
 - remove: true
   target: $.paths.*.*.parameters[?@.in == "header" && @.name == "Authorization"]
   x-iiko-sdk-guard:
-    expected-matches: 336
-    expected-sha256: f7c8e116d624d9b09997151e6b72c1833a6254205d328620fe686eec02f1021f
+    expected-matches: 348
+    expected-sha256: 753306bad58814baae395bcd897fdf96faf242b5a79b5e0ad5efb1facb23a41e
     issue: remove-raw-authorization-parameters
 - target: $.paths.*["delete","get","head","options","patch","post","put","trace"]
   update:
     security:
     - BearerAuth: []
   x-iiko-sdk-guard:
-    expected-matches: 338
-    expected-sha256: 730232d4a7751177b3b46a440640491d74cbfa97806846e9b4ec648e4180df94
+    expected-matches: 350
+    expected-sha256: 9034b953154ccd7b03d001ff12843ee0b11f98a40504273bee91348e329afb9c
     issue: require-bearer-authentication
 - remove: true
   target: $.paths["/api/1/access_token"].post.security

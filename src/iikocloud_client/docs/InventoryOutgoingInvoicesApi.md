@@ -447,11 +447,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_inventory_outgoing_invoices**
-> List[OutgoingInvoice] list_inventory_outgoing_invoices(list_request, timeout=timeout)
+> List[OutgoingInvoiceListItem] list_inventory_outgoing_invoices(list_request, timeout=timeout)
 
 Export outgoing invoices
 
-Exports outgoing invoices for the specified period
+Exports outgoing invoices for the specified period. Supports incremental synchronization: when revision is provided, only documents with a revision strictly greater than the given value are returned (revision > value). With returnFullDetails=true, document items and the revision are added to every list element. Incremental export example: {"organizationId": "<uuid>", "from": "2026-08-01", "to": "2026-08-31", "revision": 123456}. Without revision no revision filter is applied; without returnFullDetails only document headers are returned. The revision of every document is returned in the revision field.
 
 ### Example
 
@@ -460,7 +460,7 @@ Exports outgoing invoices for the specified period
 ```python
 import iikocloud_client
 from iikocloud_client.models.list_request import ListRequest
-from iikocloud_client.models.outgoing_invoice import OutgoingInvoice
+from iikocloud_client.models.outgoing_invoice_list_item import OutgoingInvoiceListItem
 from iikocloud_client.rest import ApiException
 from pprint import pprint
 
@@ -508,7 +508,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[OutgoingInvoice]**](OutgoingInvoice.md)
+[**List[OutgoingInvoiceListItem]**](OutgoingInvoiceListItem.md)
 
 ### Authorization
 

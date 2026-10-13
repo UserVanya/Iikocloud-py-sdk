@@ -12,6 +12,10 @@ Method | HTTP request | Description
 
 Get license list information for the API login.
 
+
+
+ > Restriction group: `Data: licenses`.
+
 ### Example
 
 * Bearer Authentication (BearerAuth):

@@ -53,6 +53,7 @@ class TestDisassembleDocumentGetResponse(unittest.TestCase):
                     ],
                 number = '',
                 product = '',
+                revision = 56,
                 status = '',
                 store_from = '',
                 store_to = '',

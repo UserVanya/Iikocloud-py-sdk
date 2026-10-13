@@ -26,6 +26,13 @@ class TestNomenclatureDirectoriesApi(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self) -> None:
         await self.api.api_client.close()
 
+    async def test_get_nomenclature_outer_economic_activity_code(self) -> None:
+        """Test case for get_nomenclature_outer_economic_activity_code
+
+        Get a foreign economic activity commodity code by ID
+        """
+        pass
+
     async def test_list_nomenclature_allergen_groups(self) -> None:
         """Test case for list_nomenclature_allergen_groups
 
@@ -54,6 +61,13 @@ class TestNomenclatureDirectoriesApi(unittest.IsolatedAsyncioTestCase):
         """
         pass
 
+    async def test_list_nomenclature_discount_types(self) -> None:
+        """Test case for list_nomenclature_discount_types
+
+        Get a list of discount types
+        """
+        pass
+
     async def test_list_nomenclature_menu_sections(self) -> None:
         """Test case for list_nomenclature_menu_sections
 
@@ -65,6 +79,13 @@ class TestNomenclatureDirectoriesApi(unittest.IsolatedAsyncioTestCase):
         """Test case for list_nomenclature_modifier_schemas
 
         Get a list of modifier schemas
+        """
+        pass
+
+    async def test_list_nomenclature_outer_economic_activity_codes(self) -> None:
+        """Test case for list_nomenclature_outer_economic_activity_codes
+
+        Get the foreign economic activity commodity code directory
         """
         pass
 

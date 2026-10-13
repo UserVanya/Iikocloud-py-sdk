@@ -32,7 +32,7 @@ class PayOutgoingInvoiceRequest(BaseModel):
     cfo_item_id: Optional[StrictStr] = Field(default=None, description="Cash flow item identifier (GUID)", alias="cfoItemId")
     document_id: StrictStr = Field(description="Outgoing invoice identifier (GUID)", alias="documentId")
     organization_id: StrictStr = Field(description="Organization identifier (GUID)", alias="organizationId")
-    payment_date: StrictStr = Field(description="Payment date (YYYY-MM-DD format)", alias="paymentDate")
+    payment_date: StrictStr = Field(description="Payment date (ISO 8601, e.g. 2026-08-15T12:00:00.00+00:00)", alias="paymentDate")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["accountId", "amount", "cfoItemId", "documentId", "organizationId", "paymentDate"]
 
