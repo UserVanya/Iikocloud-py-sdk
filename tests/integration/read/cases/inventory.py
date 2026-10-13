@@ -256,14 +256,14 @@ _DOCUMENT_FAMILIES = (
             "GetByIDRequest",
             "get_by_id_request",
         ),
-        "incoming_invoice",
-        "IncomingInvoice",
+        # Upstream 9.8.6.3: the list answers IncomingInvoiceListItem (deleted flag and
+        # assigned stores), while get still answers the full IncomingInvoice.
+        "incoming_invoice_list_item",
+        "IncomingInvoiceListItem",
         "incoming_invoice",
         "IncomingInvoice",
         "inventory_incoming_invoice_document_id",
-        store_keys=(("inventory_incoming_invoice_default_store_id", "default_store"),),
-        active_attribute="status",
-        active_values=("NEW", "PROCESSED"),
+        store_keys=(("inventory_incoming_invoice_default_store_id", "assigned_stores"),),
     ),
     _DocumentFamily(
         "list_inventory_incoming_returned_invoices",
@@ -354,24 +354,14 @@ _DOCUMENT_FAMILIES = (
             "GetByIDRequest",
             "get_by_id_request",
         ),
-        "outgoing_invoice",
-        "OutgoingInvoice",
+        # Upstream 9.8.6.3: the list answers OutgoingInvoiceListItem (deleted flag and
+        # assigned stores, no accounts), while get still answers the full OutgoingInvoice.
+        "outgoing_invoice_list_item",
+        "OutgoingInvoiceListItem",
         "outgoing_invoice",
         "OutgoingInvoice",
         "inventory_outgoing_invoice_document_id",
-        account_keys=(
-            (
-                "inventory_outgoing_invoice_expense_account_id",
-                "expense_account",
-            ),
-            (
-                "inventory_outgoing_invoice_revenue_account_id",
-                "revenue_account",
-            ),
-        ),
-        store_keys=(("inventory_outgoing_invoice_default_store_id", "default_store"),),
-        active_attribute="status",
-        active_values=("NEW", "PROCESSED"),
+        store_keys=(("inventory_outgoing_invoice_default_store_id", "assigned_stores"),),
     ),
     _DocumentFamily(
         "list_inventory_production_documents",

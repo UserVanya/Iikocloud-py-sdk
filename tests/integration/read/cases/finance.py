@@ -56,8 +56,6 @@ ACCOUNT_TARGET_KEYS = (
     "finance_outgoing_service_revenue_account_id",
     "inventory_incoming_returned_invoice_expense_account_id",
     "inventory_incoming_returned_invoice_revenue_account_id",
-    "inventory_outgoing_invoice_expense_account_id",
-    "inventory_outgoing_invoice_revenue_account_id",
     "inventory_returned_invoice_expense_account_id",
     "inventory_sales_document_expense_account_id",
     "inventory_sales_document_revenue_account_id",
