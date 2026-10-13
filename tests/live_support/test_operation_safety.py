@@ -361,7 +361,7 @@ def test_committed_catalog_is_exhaustive_and_matches_effective_openapi() -> None
 
     catalog.assert_matches_openapi(document)
 
-    assert len(catalog.operations) == 338
+    assert len(catalog.operations) == 350
     assert len(catalog.automatic_read_ids) == 90
     assert Counter(
         (entry.effect, entry.live_policy) for entry in catalog.operations.values()
@@ -369,12 +369,12 @@ def test_committed_catalog_is_exhaustive_and_matches_effective_openapi() -> None
         {
             ("auth", "automatic"): 2,
             ("read", "automatic"): 90,
-            ("read", "blocked"): 64,
-            ("create", "lifecycle_only"): 30,
-            ("update", "lifecycle_only"): 57,
+            ("read", "blocked"): 73,
+            ("create", "lifecycle_only"): 31,
+            ("update", "lifecycle_only"): 58,
             ("update", "manual_only"): 1,
             ("update", "blocked"): 2,
-            ("delete", "lifecycle_only"): 32,
+            ("delete", "lifecycle_only"): 33,
             ("action", "lifecycle_only"): 42,
             ("action", "manual_only"): 3,
             ("irreversible", "manual_only"): 14,
